@@ -183,7 +183,7 @@ public class TextToSpeech {
         // construct REST request
         let path = "/v1/voices/\(voice)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -238,7 +238,7 @@ public class TextToSpeech {
         // construct body
         let synthesizeRequest = Text(text: text)
         guard let body = try? JSONEncoder().encode(synthesizeRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -409,7 +409,7 @@ public class TextToSpeech {
         // construct body
         let createVoiceModelRequest = CreateVoiceModel(name: name, language: language, description: description)
         guard let body = try? JSONEncoder().encode(createVoiceModelRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -529,7 +529,7 @@ public class TextToSpeech {
         // construct body
         let updateVoiceModelRequest = UpdateVoiceModel(name: name, description: description, words: words)
         guard let body = try? JSONEncoder().encode(updateVoiceModelRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -544,7 +544,7 @@ public class TextToSpeech {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -591,7 +591,7 @@ public class TextToSpeech {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -635,7 +635,7 @@ public class TextToSpeech {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -691,7 +691,7 @@ public class TextToSpeech {
         // construct body
         let addWordsRequest = Words(words: words)
         guard let body = try? JSONEncoder().encode(addWordsRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -706,7 +706,7 @@ public class TextToSpeech {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -753,7 +753,7 @@ public class TextToSpeech {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -815,7 +815,7 @@ public class TextToSpeech {
         // construct body
         let addWordRequest = Translation(translation: translation, partOfSpeech: partOfSpeech)
         guard let body = try? JSONEncoder().encode(addWordRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -829,7 +829,7 @@ public class TextToSpeech {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words/\(word)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -877,7 +877,7 @@ public class TextToSpeech {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words/\(word)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -923,7 +923,7 @@ public class TextToSpeech {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words/\(word)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(

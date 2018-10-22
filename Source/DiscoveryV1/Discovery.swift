@@ -136,7 +136,7 @@ public class Discovery {
         // construct body
         let createEnvironmentRequest = CreateEnvironmentRequest(name: name, description: description, size: size)
         guard let body = try? JSONEncoder().encode(createEnvironmentRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -238,7 +238,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -280,7 +280,7 @@ public class Discovery {
         // construct body
         let updateEnvironmentRequest = UpdateEnvironmentRequest(name: name, description: description, size: size)
         guard let body = try? JSONEncoder().encode(updateEnvironmentRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -299,7 +299,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -343,7 +343,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -391,7 +391,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/fields"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -444,7 +444,7 @@ public class Discovery {
         // construct body
         let createConfigurationRequest = Configuration(name: name, description: description, conversions: conversions, enrichments: enrichments, normalizations: normalizations, source: source)
         guard let body = try? JSONEncoder().encode(createConfigurationRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -463,7 +463,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/configurations"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -515,7 +515,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/configurations"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -560,7 +560,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/configurations/\(configurationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -615,7 +615,7 @@ public class Discovery {
         // construct body
         let updateConfigurationRequest = Configuration(name: name, description: description, conversions: conversions, enrichments: enrichments, normalizations: normalizations, source: source)
         guard let body = try? JSONEncoder().encode(updateConfigurationRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -634,7 +634,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/configurations/\(configurationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -685,7 +685,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/configurations/\(configurationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -753,7 +753,7 @@ public class Discovery {
             do {
                 try multipartFormData.append(file: file, withName: "file")
             } catch {
-                completionHandler(nil, RestError.serializationError)
+                completionHandler(nil, RestError.serialization(values: "file \(file.path)"))
                 return
             }
         }
@@ -763,7 +763,7 @@ public class Discovery {
             }
         }
         guard let body = try? multipartFormData.toData() else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
             return
         }
 
@@ -790,7 +790,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/preview"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -832,7 +832,7 @@ public class Discovery {
         // construct body
         let createCollectionRequest = CreateCollectionRequest(name: name, description: description, configurationID: configurationID, language: language)
         guard let body = try? JSONEncoder().encode(createCollectionRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -851,7 +851,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -903,7 +903,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -948,7 +948,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -988,7 +988,7 @@ public class Discovery {
         // construct body
         let updateCollectionRequest = UpdateCollectionRequest(name: name, description: description, configurationID: configurationID)
         guard let body = try? JSONEncoder().encodeIfPresent(updateCollectionRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -1007,7 +1007,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1053,7 +1053,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1100,7 +1100,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/fields"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1148,7 +1148,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/expansions"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1197,7 +1197,7 @@ public class Discovery {
         // construct body
         let createExpansionsRequest = Expansions(expansions: expansions)
         guard let body = try? JSONEncoder().encode(createExpansionsRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -1216,7 +1216,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/expansions"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1265,7 +1265,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/expansions"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1328,7 +1328,7 @@ public class Discovery {
             do {
                 try multipartFormData.append(file: file, withName: "file")
             } catch {
-                completionHandler(nil, RestError.serializationError)
+                completionHandler(nil, RestError.serialization(values: "file \(file.path)"))
                 return
             }
         }
@@ -1338,7 +1338,7 @@ public class Discovery {
             }
         }
         guard let body = try? multipartFormData.toData() else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
             return
         }
 
@@ -1357,7 +1357,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/documents"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1409,7 +1409,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/documents/\(documentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1463,7 +1463,7 @@ public class Discovery {
             do {
                 try multipartFormData.append(file: file, withName: "file")
             } catch {
-                completionHandler(nil, RestError.serializationError)
+                completionHandler(nil, RestError.serialization(values: "file \(file.path)"))
                 return
             }
         }
@@ -1473,7 +1473,7 @@ public class Discovery {
             }
         }
         guard let body = try? multipartFormData.toData() else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
             return
         }
 
@@ -1492,7 +1492,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/documents/\(documentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1543,7 +1543,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/documents/\(documentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1673,7 +1673,7 @@ public class Discovery {
             similarFields: similarFieldsJoined,
             bias: bias)
         guard let body = try? JSONEncoder().encode(queryLong) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -1695,7 +1695,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/query"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1868,7 +1868,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/notices"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2000,7 +2000,7 @@ public class Discovery {
             similarFields: similarFieldsJoined,
             bias: bias)
         guard let body = try? JSONEncoder().encode(queryLong) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -2022,7 +2022,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/query"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2170,7 +2170,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/notices"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2221,7 +2221,7 @@ public class Discovery {
         // construct body
         let queryEntitiesRequest = QueryEntities(feature: feature, entity: entity, context: context, count: count, evidenceCount: evidenceCount)
         guard let body = try? JSONEncoder().encode(queryEntitiesRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -2240,7 +2240,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/query_entities"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2294,7 +2294,7 @@ public class Discovery {
         // construct body
         let queryRelationsRequest = QueryRelations(entities: entities, context: context, sort: sort, filter: filter, count: count, evidenceCount: evidenceCount)
         guard let body = try? JSONEncoder().encode(queryRelationsRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -2313,7 +2313,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/query_relations"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2361,7 +2361,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2403,7 +2403,7 @@ public class Discovery {
         // construct body
         let addTrainingDataRequest = NewTrainingQuery(naturalLanguageQuery: naturalLanguageQuery, filter: filter, examples: examples)
         guard let body = try? JSONEncoder().encode(addTrainingDataRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -2422,7 +2422,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2470,7 +2470,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2519,7 +2519,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2568,7 +2568,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2617,7 +2617,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2661,7 +2661,7 @@ public class Discovery {
         // construct body
         let createTrainingExampleRequest = TrainingExample(documentID: documentID, crossReference: crossReference, relevance: relevance)
         guard let body = try? JSONEncoder().encode(createTrainingExampleRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -2680,7 +2680,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2732,7 +2732,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples/\(exampleID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2776,7 +2776,7 @@ public class Discovery {
         // construct body
         let updateTrainingExampleRequest = TrainingExamplePatch(crossReference: crossReference, relevance: relevance)
         guard let body = try? JSONEncoder().encode(updateTrainingExampleRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -2795,7 +2795,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples/\(exampleID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2847,7 +2847,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples/\(exampleID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2929,7 +2929,7 @@ public class Discovery {
         // construct body
         let createEventRequest = CreateEventObject(type: type, data: data)
         guard let body = try? JSONEncoder().encode(createEventRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -3348,7 +3348,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/credentials"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -3392,7 +3392,7 @@ public class Discovery {
         // construct body
         let createCredentialsRequest = Credentials(sourceType: sourceType, credentialDetails: credentialDetails)
         guard let body = try? JSONEncoder().encode(createCredentialsRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -3411,7 +3411,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/credentials"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -3461,7 +3461,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/credentials/\(credentialID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -3506,7 +3506,7 @@ public class Discovery {
         // construct body
         let updateCredentialsRequest = Credentials(sourceType: sourceType, credentialDetails: credentialDetails)
         guard let body = try? JSONEncoder().encode(updateCredentialsRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -3525,7 +3525,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/credentials/\(credentialID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -3573,7 +3573,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/credentials/\(credentialID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(

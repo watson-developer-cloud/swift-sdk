@@ -187,7 +187,7 @@ public class VisualRecognition {
             do {
                 try multipartFormData.append(file: imagesFile, withName: "images_file")
             } catch {
-                completionHandler(nil, RestError.serializationError)
+                completionHandler(nil, RestError.serialization(values: "file \(imagesFile.path)"))
                 return
             }
         }
@@ -212,7 +212,7 @@ public class VisualRecognition {
             }
         }
         guard let body = try? multipartFormData.toData() else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
             return
         }
 
@@ -285,7 +285,7 @@ public class VisualRecognition {
             do {
                 try multipartFormData.append(file: imagesFile, withName: "images_file")
             } catch {
-                completionHandler(nil, RestError.serializationError)
+                completionHandler(nil, RestError.serialization(values: "file \(imagesFile.path)"))
                 return
             }
         }
@@ -295,7 +295,7 @@ public class VisualRecognition {
             }
         }
         guard let body = try? multipartFormData.toData() else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
             return
         }
 
@@ -365,7 +365,7 @@ public class VisualRecognition {
             do {
                 try multipartFormData.append(file: example.examples, withName: example.name + "_positive_examples")
             } catch {
-                completionHandler(nil, RestError.serializationError)
+                completionHandler(nil, RestError.serialization(values: "file \(example.examples)"))
                 return
             }
         }
@@ -373,12 +373,12 @@ public class VisualRecognition {
             do {
                 try multipartFormData.append(file: negativeExamples, withName: "negative_examples")
             } catch {
-                completionHandler(nil, RestError.serializationError)
+                completionHandler(nil, RestError.serialization(values: "file \(negativeExamples.path)"))
                 return
             }
         }
         guard let body = try? multipartFormData.toData() else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
             return
         }
 
@@ -483,7 +483,7 @@ public class VisualRecognition {
         // construct REST request
         let path = "/v3/classifiers/\(classifierID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -540,7 +540,7 @@ public class VisualRecognition {
                 do {
                     try multipartFormData.append(file: example.examples, withName: example.name + "_positive_examples")
                 } catch {
-                    completionHandler(nil, RestError.serializationError)
+                    completionHandler(nil, RestError.serialization(values: "file \(example.examples)"))
                     return
                 }
             }
@@ -549,12 +549,12 @@ public class VisualRecognition {
             do {
                 try multipartFormData.append(file: negativeExamples, withName: "negative_examples")
             } catch {
-                completionHandler(nil, RestError.serializationError)
+                completionHandler(nil, RestError.serialization(values: "file \(negativeExamples.path)"))
                 return
             }
         }
         guard let body = try? multipartFormData.toData() else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
             return
         }
 
@@ -573,7 +573,7 @@ public class VisualRecognition {
         // construct REST request
         let path = "/v3/classifiers/\(classifierID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -617,7 +617,7 @@ public class VisualRecognition {
         // construct REST request
         let path = "/v3/classifiers/\(classifierID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -663,7 +663,7 @@ public class VisualRecognition {
         // construct REST request
         let path = "/v3/classifiers/\(classifierID)/core_ml_model"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(

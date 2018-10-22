@@ -162,7 +162,7 @@ public class ToneAnalyzer {
     {
         // construct body
         guard let body = toneContent.content else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -246,7 +246,7 @@ public class ToneAnalyzer {
         // construct body
         let toneChatRequest = ToneChatInput(utterances: utterances)
         guard let body = try? JSONEncoder().encode(toneChatRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 

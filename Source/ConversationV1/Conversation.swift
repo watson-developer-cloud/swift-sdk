@@ -146,7 +146,7 @@ public class Conversation {
         // construct body
         let messageRequest = MessageRequest(input: input, alternateIntents: alternateIntents, context: context, entities: entities, intents: intents, output: output)
         guard let body = try? JSONEncoder().encodeIfPresent(messageRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -169,7 +169,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/message"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -309,7 +309,7 @@ public class Conversation {
             learningOptOut: learningOptOut,
             systemSettings: systemSettings)
         guard let body = try? JSONEncoder().encodeIfPresent(createWorkspaceRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -386,7 +386,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -463,7 +463,7 @@ public class Conversation {
             learningOptOut: learningOptOut,
             systemSettings: systemSettings)
         guard let body = try? JSONEncoder().encodeIfPresent(updateWorkspaceRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -486,7 +486,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -533,7 +533,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -620,7 +620,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -665,7 +665,7 @@ public class Conversation {
         // construct body
         let createIntentRequest = CreateIntent(intent: intent, description: description, examples: examples)
         guard let body = try? JSONEncoder().encode(createIntentRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -684,7 +684,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -749,7 +749,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -796,7 +796,7 @@ public class Conversation {
         // construct body
         let updateIntentRequest = UpdateIntent(intent: newIntent, description: newDescription, examples: newExamples)
         guard let body = try? JSONEncoder().encode(updateIntentRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -815,7 +815,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -864,7 +864,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -944,7 +944,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -988,7 +988,7 @@ public class Conversation {
         // construct body
         let createExampleRequest = CreateExample(text: text, mentions: mentions)
         guard let body = try? JSONEncoder().encode(createExampleRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -1007,7 +1007,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1065,7 +1065,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1111,7 +1111,7 @@ public class Conversation {
         // construct body
         let updateExampleRequest = UpdateExample(text: newText, mentions: newMentions)
         guard let body = try? JSONEncoder().encode(updateExampleRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -1130,7 +1130,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1181,7 +1181,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1259,7 +1259,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/counterexamples"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1300,7 +1300,7 @@ public class Conversation {
         // construct body
         let createCounterexampleRequest = CreateCounterexample(text: text)
         guard let body = try? JSONEncoder().encode(createCounterexampleRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -1319,7 +1319,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/counterexamples"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1375,7 +1375,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/counterexamples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1414,7 +1414,7 @@ public class Conversation {
         // construct body
         let updateCounterexampleRequest = UpdateCounterexample(text: newText)
         guard let body = try? JSONEncoder().encode(updateCounterexampleRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -1433,7 +1433,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/counterexamples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1482,7 +1482,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/counterexamples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1569,7 +1569,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1618,7 +1618,7 @@ public class Conversation {
         // construct body
         let createEntityRequest = CreateEntity(entity: entity, description: description, metadata: metadata, values: values, fuzzyMatch: fuzzyMatch)
         guard let body = try? JSONEncoder().encode(createEntityRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -1637,7 +1637,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1702,7 +1702,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1754,7 +1754,7 @@ public class Conversation {
         // construct body
         let updateEntityRequest = UpdateEntity(entity: newEntity, description: newDescription, metadata: newMetadata, fuzzyMatch: newFuzzyMatch, values: newValues)
         guard let body = try? JSONEncoder().encode(updateEntityRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -1773,7 +1773,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1822,7 +1822,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1886,7 +1886,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/mentions"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1974,7 +1974,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2031,7 +2031,7 @@ public class Conversation {
         // construct body
         let createValueRequest = CreateValue(value: value, metadata: metadata, synonyms: synonyms, patterns: patterns, valueType: valueType)
         guard let body = try? JSONEncoder().encode(createValueRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -2050,7 +2050,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2116,7 +2116,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2176,7 +2176,7 @@ public class Conversation {
         // construct body
         let updateValueRequest = UpdateValue(value: newValue, metadata: newMetadata, valueType: newType, synonyms: newSynonyms, patterns: newPatterns)
         guard let body = try? JSONEncoder().encode(updateValueRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -2195,7 +2195,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2246,7 +2246,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2328,7 +2328,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2372,7 +2372,7 @@ public class Conversation {
         // construct body
         let createSynonymRequest = CreateSynonym(synonym: synonym)
         guard let body = try? JSONEncoder().encode(createSynonymRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -2391,7 +2391,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2451,7 +2451,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms/\(synonym)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2497,7 +2497,7 @@ public class Conversation {
         // construct body
         let updateSynonymRequest = UpdateSynonym(synonym: newSynonym)
         guard let body = try? JSONEncoder().encode(updateSynonymRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -2516,7 +2516,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms/\(synonym)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2569,7 +2569,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms/\(synonym)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2647,7 +2647,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/dialog_nodes"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2744,7 +2744,7 @@ public class Conversation {
             digressOutSlots: digressOutSlots,
             userLabel: userLabel)
         guard let body = try? JSONEncoder().encode(createDialogNodeRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -2763,7 +2763,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/dialog_nodes"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2819,7 +2819,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/dialog_nodes/\(dialogNode)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2919,7 +2919,7 @@ public class Conversation {
             digressOutSlots: newDigressOutSlots,
             userLabel: newUserLabel)
         guard let body = try? JSONEncoder().encode(updateDialogNodeRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -2938,7 +2938,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/dialog_nodes/\(dialogNode)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2987,7 +2987,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/dialog_nodes/\(dialogNode)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -3061,7 +3061,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/logs"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(

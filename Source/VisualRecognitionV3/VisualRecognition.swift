@@ -85,45 +85,54 @@ public class VisualRecognition {
     }
 
     /**
-     If the response or data represents an error returned by the Visual Recognition service,
-     then return NSError with information about the error that occured. Otherwise, return nil.
+     Use the HTTP response and data received by the Visual Recognition service to extract
+     information about the error that occurred.
 
-     - parameter data: Raw data returned from the service that may represent an error.
-     - parameter response: the URL response returned from the service.
+     - parameter data: Raw data returned by the service that may represent an error.
+     - parameter response: the URL response returned by the service.
      */
-    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> Error {
+    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> RestError {
 
-        let code = response.statusCode
+        let statusCode = response.statusCode
+        var errorMessage: String?
+        var metadata = [String: JSON]()
+
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
-            var userInfo: [String: Any] = [:]
-            if code == 403 {
+            switch statusCode {
+            case 403:
                 // ErrorAuthentication
                 if case let .some(.string(status)) = json["status"],
                     case let .some(.string(statusInfo)) = json["statusInfo"] {
-                    userInfo[NSLocalizedDescriptionKey] = "\(status): \(statusInfo)"
+                    errorMessage = statusInfo
+                    metadata["status"] = JSON.string(status)
+                    metadata["statusInfo"] = JSON.string(statusInfo)
                 }
-            } else if code == 404 {
+            case 404:
                 // "error": ErrorInfo
                 if case let .some(.object(errorObj)) = json["error"],
                     case let .some(.string(message)) = errorObj["description"],
                     case let .some(.string(errorID)) = errorObj["error_id"] {
-                    userInfo[NSLocalizedDescriptionKey] = "\(message) (error_id = \(errorID))"
+                    errorMessage = message
+                    metadata["description"] = JSON.string(message)
+                    metadata["errorID"] = JSON.string(errorID)
                 }
-            } else if code == 413 {
+            case 413:
                 // ErrorHTML
                 if case let .some(.string(message)) = json["Error"] {
-                    userInfo[NSLocalizedDescriptionKey] = message
+                    errorMessage = message
+                    metadata["error"] = JSON.string(message)
                 }
-            } else {
+            default:
                 // ErrorResponse
                 if case let .some(.string(message)) = json["error"] {
-                    userInfo[NSLocalizedDescriptionKey] = message
+                    errorMessage = message
+                    metadata["error"] = JSON.string(message)
                 }
             }
-            return NSError(domain: domain, code: code, userInfo: userInfo)
+            return RestError.http(statusCode: statusCode, message: errorMessage, metadata: metadata)
         } catch {
-            return NSError(domain: domain, code: code, userInfo: nil)
+            return RestError.http(statusCode: statusCode, message: nil, metadata: nil)
         }
     }
 

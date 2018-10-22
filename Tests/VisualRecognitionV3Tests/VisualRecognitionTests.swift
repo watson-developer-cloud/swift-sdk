@@ -556,8 +556,17 @@ class VisualRecognitionTests: XCTestCase {
     /** Get the Core ML model for a trained classifier. */
     func testGetCoreMlModel() {
         let expectation = self.expectation(description: "Get the Core ML model for a trained classifier.")
-        visualRecognition.getCoreMlModel(classifierID: classifierID, failure: failWithError) {
-            coreMLModel in
+        visualRecognition.getCoreMlModel(classifierID: classifierID) {
+            response, error in
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let coreMLModel = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
             XCTAssertNotNil(coreMLModel)
             expectation.fulfill()
         }

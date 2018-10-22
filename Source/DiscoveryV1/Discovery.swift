@@ -85,27 +85,30 @@ public class Discovery {
     }
 
     /**
-     If the response or data represents an error returned by the Discovery service,
-     then return NSError with information about the error that occured. Otherwise, return nil.
+     Use the HTTP response and data received by the Discovery service to extract
+     information about the error that occurred.
 
-     - parameter data: Raw data returned from the service that may represent an error.
-     - parameter response: the URL response returned from the service.
+     - parameter data: Raw data returned by the service that may represent an error.
+     - parameter response: the URL response returned by the service.
      */
-    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> Error {
+    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> RestError {
 
-        let code = response.statusCode
+        let statusCode = response.statusCode
+        var errorMessage: String?
+        var metadata = [String: JSON]()
+
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
-            var userInfo: [String: Any] = [:]
             if case let .some(.string(message)) = json["error"] {
-                userInfo[NSLocalizedDescriptionKey] = message
+                errorMessage = message
+                metadata["error"] = JSON.string(message)
             }
             if case let .some(.string(description)) = json["description"] {
-                userInfo[NSLocalizedRecoverySuggestionErrorKey] = description
+                metadata["description"] = JSON.string(description)
             }
-            return NSError(domain: domain, code: code, userInfo: userInfo)
+            return RestError.http(statusCode: statusCode, message: errorMessage, metadata: metadata)
         } catch {
-            return NSError(domain: domain, code: code, userInfo: nil)
+            return RestError.http(statusCode: statusCode, message: nil, metadata: nil)
         }
     }
 

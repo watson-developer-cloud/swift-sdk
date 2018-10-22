@@ -121,7 +121,7 @@ public class NaturalLanguageClassifier {
         // construct body
         let classifyRequest = ClassifyInput(text: text)
         guard let body = try? JSONEncoder().encode(classifyRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -136,7 +136,7 @@ public class NaturalLanguageClassifier {
         // construct REST request
         let path = "/v1/classifiers/\(classifierID)/classify"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -174,7 +174,7 @@ public class NaturalLanguageClassifier {
         // construct body
         let classifyCollectionRequest = ClassifyCollectionInput(collection: collection)
         guard let body = try? JSONEncoder().encode(classifyCollectionRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -189,7 +189,7 @@ public class NaturalLanguageClassifier {
         // construct REST request
         let path = "/v1/classifiers/\(classifierID)/classify_collection"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -233,17 +233,17 @@ public class NaturalLanguageClassifier {
         do {
             try multipartFormData.append(file: metadata, withName: "training_metadata")
         } catch {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "file \(metadata.path)"))
             return
         }
         do {
             try multipartFormData.append(file: trainingData, withName: "training_data")
         } catch {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "file \(trainingData.path)"))
             return
         }
         guard let body = try? multipartFormData.toData() else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
             return
         }
 
@@ -327,7 +327,7 @@ public class NaturalLanguageClassifier {
         // construct REST request
         let path = "/v1/classifiers/\(classifierID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -365,7 +365,7 @@ public class NaturalLanguageClassifier {
         // construct REST request
         let path = "/v1/classifiers/\(classifierID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(

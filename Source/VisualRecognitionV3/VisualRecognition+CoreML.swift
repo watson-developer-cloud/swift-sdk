@@ -313,7 +313,7 @@ extension VisualRecognition {
         let json = """
             { "images": [{ "classifiers": [ \(classifiers.joined(separator: ",")) ] }] }
         """
-        guard let data = json.data(using: .utf8) else { throw RestError.serializationError }
+        guard let data = json.data(using: .utf8) else { throw RestError.serialization(values: "Core ML classification") }
         return try JSONDecoder().decode(ClassifiedImages.self, from: data)
     }
 

@@ -138,7 +138,7 @@ public class LanguageTranslator {
         // construct body
         let translateRequest = TranslateRequest(text: text, modelID: modelID, source: source, target: target)
         guard let body = try? JSONEncoder().encode(translateRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -361,7 +361,7 @@ public class LanguageTranslator {
             do {
                 try multipartFormData.append(file: forcedGlossary, withName: "forced_glossary")
             } catch {
-                completionHandler(nil, RestError.serializationError)
+                completionHandler(nil, RestError.serialization(values: "file \(forcedGlossary.path)"))
                 return
             }
         }
@@ -369,12 +369,12 @@ public class LanguageTranslator {
             do {
                 try multipartFormData.append(file: parallelCorpus, withName: "parallel_corpus")
             } catch {
-                completionHandler(nil, RestError.serializationError)
+                completionHandler(nil, RestError.serialization(values: "file \(parallelCorpus.path)"))
                 return
             }
         }
         guard let body = try? multipartFormData.toData() else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
             return
         }
 
@@ -439,7 +439,7 @@ public class LanguageTranslator {
         // construct REST request
         let path = "/v3/models/\(modelID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -485,7 +485,7 @@ public class LanguageTranslator {
         // construct REST request
         let path = "/v3/models/\(modelID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(

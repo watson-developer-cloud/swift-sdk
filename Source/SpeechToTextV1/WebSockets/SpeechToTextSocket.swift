@@ -95,7 +95,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
                 self.socket.delegate = self
                 self.socket.connect()
             } else {
-                self.onError?(error ?? RestError.failure(400, "Token Manager error"))
+                self.onError?(error ?? RestError.http(statusCode: 400, message: "Token Manager error", metadata: nil))
             }
         }
     }
@@ -192,7 +192,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
     }
 
     private func onErrorMessage(error: String) {
-        let error = RestError.failure(0, error)
+        let error = RestError.http(statusCode: nil, message: error, metadata: nil)
         onError?(error)
     }
 

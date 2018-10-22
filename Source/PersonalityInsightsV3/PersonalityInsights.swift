@@ -174,7 +174,7 @@ public class PersonalityInsights {
     {
         // construct body
         guard let body = profileContent.content else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -276,7 +276,7 @@ public class PersonalityInsights {
     {
         // construct body
         guard let body = profileContent.content else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 

@@ -140,7 +140,7 @@ public class Assistant {
         // construct REST request
         let path = "/v2/assistants/\(assistantID)/sessions"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -190,7 +190,7 @@ public class Assistant {
         // construct REST request
         let path = "/v2/assistants/\(assistantID)/sessions/\(sessionID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(
@@ -233,7 +233,7 @@ public class Assistant {
         // construct body
         let messageRequest = MessageRequest(input: input, context: context)
         guard let body = try? JSONEncoder().encodeIfPresent(messageRequest) else {
-            completionHandler(nil, RestError.serializationError)
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
@@ -252,7 +252,7 @@ public class Assistant {
         // construct REST request
         let path = "/v2/assistants/\(assistantID)/sessions/\(sessionID)/message"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encodingError)
+            completionHandler(nil, RestError.encoding(path: path))
             return
         }
         let request = RestRequest(

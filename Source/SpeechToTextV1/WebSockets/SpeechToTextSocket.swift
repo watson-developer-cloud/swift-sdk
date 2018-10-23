@@ -72,9 +72,8 @@ internal class SpeechToTextSocket: WebSocketDelegate {
 
         // restrict the number of retries
         guard connectAttempts <= maxConnectAttempts else {
-            let failureReason = "Invalid HTTP upgrade. Check credentials?"
-            let userInfo = [NSLocalizedDescriptionKey: failureReason]
-            let error = NSError(domain: "WebSocket", code: 400, userInfo: userInfo)
+            let failureReason = "Invalid HTTP upgrade. Check credentials."
+            let error = RestError.http(statusCode: 400, message: failureReason, metadata: ["type": "Websocket"])
             onError?(error)
             return
         }
@@ -192,22 +191,17 @@ internal class SpeechToTextSocket: WebSocketDelegate {
     }
 
     private func onErrorMessage(error: String) {
-        let error = RestError.http(statusCode: nil, message: error, metadata: nil)
+        let error = RestError.other(message: error)
         onError?(error)
     }
 
     private func isAuthenticationFailure(error: Error) -> Bool {
         if let error = error as? WSError {
             let matchesCode = (error.code == 400)
-            let matchesDescription = (error.message == "Invalid HTTP upgrade")
-            return matchesCode && matchesDescription
+            let matchesType = (error.type == .upgradeError)
+            return matchesCode && matchesType
         }
-
-        let error = error as NSError
-        let matchesDomain = (error.domain == "WebSocket")
-        let matchesCode = (error.code == 400)
-        let matchesDescription = (error.localizedDescription == "Invalid HTTP upgrade")
-        return matchesDomain && matchesCode && matchesDescription
+        return false
     }
 
     private func isNormalDisconnect(error: Error) -> Bool {

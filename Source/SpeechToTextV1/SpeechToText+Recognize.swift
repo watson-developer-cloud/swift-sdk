@@ -59,9 +59,7 @@ extension SpeechToText {
                 completionHandler: completionHandler
             )
         } catch {
-            let failureReason = "Could not load audio data from \(audio)."
-            let userInfo = [NSLocalizedDescriptionKey: failureReason]
-            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
+            let error = RestError.serialization(values: "audio data from \(audio)")
             completionHandler(nil, error)
             return
         }
@@ -183,8 +181,7 @@ extension SpeechToText {
             try audioSession.setActive(true)
         } catch {
             let failureReason = "Failed to setup the AVAudioSession sharedInstance properly."
-            let userInfo = [NSLocalizedDescriptionKey: failureReason]
-            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            let error = RestError.other(message: failureReason)
             completionHandler(nil, error)
             return
         }
@@ -196,8 +193,7 @@ extension SpeechToText {
         // extract authMethod
         guard let basicAuth = authMethod as? BasicAuthentication else {
             let failureReason = "Invalid authenticaion method format."
-            let userInfo = [NSLocalizedDescriptionKey: failureReason]
-            let error = NSError(domain: domain, code: 0, userInfo: userInfo)
+            let error = RestError.other(message: failureReason)
             completionHandler(nil, error)
             return
         }

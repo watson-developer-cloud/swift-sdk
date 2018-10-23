@@ -287,9 +287,7 @@ public class TextToSpeech {
                 // repair the WAV header
                 var wav = data
                 guard WAVRepair.isWAVFile(data: wav) else {
-                    let failureReason = "Returned audio is in an unexpected format."
-                    let userInfo = [NSLocalizedDescriptionKey: failureReason]
-                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                    let error = RestError.other(message: "Expected returned audio to be in WAV format")
                     completionHandler(nil, error)
                     return
                 }
@@ -302,9 +300,7 @@ public class TextToSpeech {
                     response?.result = decodedAudio.pcmDataWithHeaders
                     completionHandler(response, nil)
                 } catch {
-                    let failureReason = "Returned audio is in an unexpected format."
-                    let userInfo = [NSLocalizedDescriptionKey: failureReason]
-                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                    let error = RestError.serialization(values: "returned audio")
                     completionHandler(nil, error)
                     return
                 }

@@ -146,9 +146,7 @@ extension VisualRecognition {
     {
         // ensure a classifier id was provided
         guard !classifierIDs.isEmpty else {
-            let description = "Please provide at least one classifierID."
-            let userInfo = [NSLocalizedDescriptionKey: description]
-            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            let error = RestError.other(message: "Please provide at least one classifierID.")
             completionHandler(nil, error)
             return
         }
@@ -168,9 +166,7 @@ extension VisualRecognition {
                     model = try self.loadModelFromDisk(classifierID: classifierID)
                 } catch {
                     dispatchGroup.leave()
-                    let description = "Failed to load model for classifier \(classifierID): \(error.localizedDescription)"
-                    let userInfo = [NSLocalizedDescriptionKey: description]
-                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                    let error = RestError.other(message: "Failed to load model for classifier \(classifierID): \(error.localizedDescription)")
                     completionHandler(nil, error)
                     return
                 }
@@ -181,9 +177,7 @@ extension VisualRecognition {
                     classifier = try VNCoreMLModel(for: model)
                 } catch {
                     dispatchGroup.leave()
-                    let description = "Failed to convert model for classifier \(classifierID): \(error.localizedDescription)"
-                    let userInfo = [NSLocalizedDescriptionKey: description]
-                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                    let error = RestError.other(message: "Failed to convert model for classifier \(classifierID): \(error.localizedDescription)")
                     completionHandler(nil, error)
                     return
                 }
@@ -192,17 +186,13 @@ extension VisualRecognition {
                 let request = VNCoreMLRequest(model: classifier) { request, error in
                     if let error = error {
                         dispatchGroup.leave()
-                        let description = "Classifier \(classifierID) failed with error: \(error)"
-                        let userInfo = [NSLocalizedDescriptionKey: description]
-                        let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                        let error = RestError.other(message: "Classifier \(classifierID) failed with error: \(error)")
                         completionHandler(nil, error)
                         return
                     }
                     guard let observations = request.results as? [VNClassificationObservation] else {
                         dispatchGroup.leave()
-                        let description = "Failed to parse results for classifier \(classifierID)"
-                        let userInfo = [NSLocalizedDescriptionKey: description]
-                        let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                        let error = RestError.other(message: "Failed to parse results for classifier \(classifierID)")
                         completionHandler(nil, error)
                         return
                     }
@@ -219,9 +209,7 @@ extension VisualRecognition {
                     try requestHandler.perform([request])
                 } catch {
                     dispatchGroup.leave()
-                    let description = "Failed to process classification request: \(error.localizedDescription)"
-                    let userInfo = [NSLocalizedDescriptionKey: description]
-                    let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                    let error = RestError.other(message: "Failed to process classification request: \(error.localizedDescription)")
                     completionHandler(nil, error)
                     return
                 }
@@ -235,9 +223,7 @@ extension VisualRecognition {
             do {
                 classifiedImages = try self.convert(results: results, threshold: threshold)
             } catch {
-                let description = "Failed to represent results as JSON: \(error.localizedDescription)"
-                let userInfo = [NSLocalizedDescriptionKey: description]
-                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                let error = RestError.other(message: "Failed to represent results as JSON: \(error.localizedDescription)")
                 completionHandler(nil, error)
                 return
             }
@@ -269,9 +255,7 @@ extension VisualRecognition {
         }
 
         // model not found -> throw an error
-        let description = "Failed to locate a Core ML model on disk for classifier \(classifierID)."
-        let userInfo = [NSLocalizedDescriptionKey: description]
-        let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+        let error = RestError.other(message: "Failed to locate a Core ML model on disk for classifier \(classifierID).")
         throw error
     }
 
@@ -361,9 +345,7 @@ extension VisualRecognition {
                 create: true
             )
         } catch {
-            let description = "Failed to create temporary downloads directory: \(error.localizedDescription)"
-            let userInfo = [NSLocalizedDescriptionKey: description]
-            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            let error = RestError.other(message: "Failed to create temporary downloads directory: \(error.localizedDescription)")
             completionHandler(nil, error)
             return
         }
@@ -378,9 +360,7 @@ extension VisualRecognition {
                 create: true
             )
         } catch {
-            let description = "Failed to locate application support directory: \(error.localizedDescription)"
-            let userInfo = [NSLocalizedDescriptionKey: description]
-            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            let error = RestError.other(message: "Failed to locate application support directory: \(error.localizedDescription)")
             completionHandler(nil, error)
             return
         }
@@ -399,17 +379,13 @@ extension VisualRecognition {
             }
 
             guard let statusCode = response?.statusCode else {
-                let description = "Did not receive response."
-                let userInfo = [NSLocalizedDescriptionKey: description]
-                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                let error = RestError.noResponse
                 completionHandler(nil, error)
                 return
             }
 
             guard (200..<300).contains(statusCode) else {
-                let description = "Status code was not acceptable: \(statusCode)."
-                let userInfo = [NSLocalizedDescriptionKey: description]
-                let error = NSError(domain: self.domain, code: statusCode, userInfo: userInfo)
+                let error = RestError.http(statusCode: statusCode, message: nil, metadata: nil)
                 completionHandler(nil, error)
                 return
             }
@@ -419,9 +395,7 @@ extension VisualRecognition {
             do {
                 compiledModelTemporaryURL = try MLModel.compileModel(at: sourceModelURL)
             } catch {
-                let description = "Could not compile Core ML model from source: \(error.localizedDescription)"
-                let userInfo = [NSLocalizedDescriptionKey: description]
-                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                let error = RestError.other(message: "Could not compile Core ML model from source: \(error.localizedDescription)")
                 completionHandler(nil, error)
                 return
             }
@@ -435,9 +409,7 @@ extension VisualRecognition {
                     try fileManager.copyItem(at: compiledModelTemporaryURL, to: compiledModelURL)
                 }
             } catch {
-                let description = "Failed to move compiled model: \(error.localizedDescription)"
-                let userInfo = [NSLocalizedDescriptionKey: description]
-                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                let error = RestError.other(message: "Failed to move compiled model: \(error.localizedDescription)")
                 completionHandler(nil, error)
                 return
             }
@@ -448,9 +420,7 @@ extension VisualRecognition {
             do {
                 try compiledModelURL.setResourceValues(urlResourceValues)
             } catch {
-                let description = "Could not exclude compiled model from backup: \(error.localizedDescription)"
-                let userInfo = [NSLocalizedDescriptionKey: description]
-                let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+                let error = RestError.other(message: "Could not exclude compiled model from backup: \(error.localizedDescription)")
                 completionHandler(nil, error)
             }
 

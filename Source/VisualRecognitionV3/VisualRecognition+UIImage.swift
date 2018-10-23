@@ -155,9 +155,7 @@ extension VisualRecognition {
     {
         // convert UIImage to Data
         guard let imageData = UIImagePNGRepresentation(image) else {
-            let description = "Failed to convert image from UIImage to Data."
-            let userInfo = [NSLocalizedDescriptionKey: description]
-            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            let error = RestError.serialization(values: "image to data")
             completionHandler(nil, error)
             return
         }

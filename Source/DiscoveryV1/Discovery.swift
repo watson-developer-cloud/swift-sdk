@@ -95,18 +95,19 @@ public class Discovery {
 
         let statusCode = response.statusCode
         var errorMessage: String?
-        var metadata = [String: JSON]()
+        var metadata = [String: Any]()
 
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
+            metadata = [:]
             if case let .some(.string(message)) = json["error"] {
                 errorMessage = message
-                metadata["error"] = JSON.string(message)
             }
             if case let .some(.string(description)) = json["description"] {
-                metadata["description"] = JSON.string(description)
+                metadata["description"] = description
             }
-            return RestError.http(statusCode: statusCode, message: errorMessage, metadata: metadata)
+            // If metadata is empty, it should show up as nil in the RestError
+            return RestError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
         } catch {
             return RestError.http(statusCode: statusCode, message: nil, metadata: nil)
         }
@@ -238,7 +239,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -299,7 +300,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -343,7 +344,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -391,7 +392,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/fields"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -463,7 +464,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/configurations"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -515,7 +516,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/configurations"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -560,7 +561,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/configurations/\(configurationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -634,7 +635,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/configurations/\(configurationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -685,7 +686,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/configurations/\(configurationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -790,7 +791,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/preview"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -851,7 +852,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -903,7 +904,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -948,7 +949,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1007,7 +1008,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1053,7 +1054,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1100,7 +1101,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/fields"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1148,7 +1149,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/expansions"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1216,7 +1217,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/expansions"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1265,7 +1266,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/expansions"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1357,7 +1358,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/documents"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1409,7 +1410,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/documents/\(documentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1492,7 +1493,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/documents/\(documentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1543,7 +1544,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/documents/\(documentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1695,7 +1696,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/query"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1868,7 +1869,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/notices"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2022,7 +2023,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/query"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2170,7 +2171,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/notices"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2240,7 +2241,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/query_entities"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2313,7 +2314,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/query_relations"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2361,7 +2362,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2422,7 +2423,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2470,7 +2471,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2519,7 +2520,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2568,7 +2569,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2617,7 +2618,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2680,7 +2681,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2732,7 +2733,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples/\(exampleID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2795,7 +2796,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples/\(exampleID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2847,7 +2848,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples/\(exampleID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -3348,7 +3349,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/credentials"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -3411,7 +3412,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/credentials"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -3461,7 +3462,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/credentials/\(credentialID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -3525,7 +3526,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/credentials/\(credentialID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -3573,7 +3574,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/credentials/\(credentialID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(

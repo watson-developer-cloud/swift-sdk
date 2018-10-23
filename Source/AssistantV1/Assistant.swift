@@ -93,15 +93,16 @@ public class Assistant {
 
         let statusCode = response.statusCode
         var errorMessage: String?
-        var metadata = [String: JSON]()
+        var metadata = [String: Any]()
 
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
+            metadata = [:]
             if case let .some(.string(message)) = json["error"] {
                 errorMessage = message
-                metadata["error"] = JSON.string(message)
             }
-            return RestError.http(statusCode: statusCode, message: errorMessage, metadata: metadata)
+            // If metadata is empty, it should show up as nil in the RestError
+            return RestError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
         } catch {
             return RestError.http(statusCode: statusCode, message: nil, metadata: nil)
         }
@@ -168,7 +169,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/message"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -385,7 +386,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -485,7 +486,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -532,7 +533,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -619,7 +620,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -683,7 +684,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -748,7 +749,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -814,7 +815,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -863,7 +864,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -943,7 +944,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1006,7 +1007,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1064,7 +1065,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1129,7 +1130,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1180,7 +1181,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1258,7 +1259,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/counterexamples"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1318,7 +1319,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/counterexamples"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1374,7 +1375,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/counterexamples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1432,7 +1433,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/counterexamples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1481,7 +1482,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/counterexamples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1568,7 +1569,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1636,7 +1637,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1701,7 +1702,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1772,7 +1773,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1821,7 +1822,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1885,7 +1886,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/mentions"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1973,7 +1974,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2049,7 +2050,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2115,7 +2116,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2194,7 +2195,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2245,7 +2246,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2327,7 +2328,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2390,7 +2391,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2450,7 +2451,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms/\(synonym)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2515,7 +2516,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms/\(synonym)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2568,7 +2569,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms/\(synonym)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2646,7 +2647,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/dialog_nodes"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2762,7 +2763,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/dialog_nodes"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2818,7 +2819,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/dialog_nodes/\(dialogNode)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2937,7 +2938,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/dialog_nodes/\(dialogNode)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2986,7 +2987,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/dialog_nodes/\(dialogNode)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -3060,7 +3061,7 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/logs"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(

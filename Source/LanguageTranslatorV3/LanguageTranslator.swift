@@ -134,7 +134,7 @@ public class LanguageTranslator {
         source: String? = nil,
         target: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<TranslationResult>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TranslationResult>?, RestError?) -> Void)
     {
         // construct body
         let translateRequest = TranslateRequest(text: text, modelID: modelID, source: source, target: target)
@@ -182,7 +182,7 @@ public class LanguageTranslator {
      */
     public func listIdentifiableLanguages(
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<IdentifiableLanguages>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<IdentifiableLanguages>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -222,7 +222,7 @@ public class LanguageTranslator {
     public func identify(
         text: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<IdentifiedLanguages>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<IdentifiedLanguages>?, RestError?) -> Void)
     {
         // construct body
         // convert body parameter to Data with UTF-8 encoding
@@ -279,7 +279,7 @@ public class LanguageTranslator {
         target: String? = nil,
         defaultModels: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<TranslationModels>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TranslationModels>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -354,7 +354,7 @@ public class LanguageTranslator {
         forcedGlossary: URL? = nil,
         parallelCorpus: URL? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<TranslationModel>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TranslationModel>?, RestError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -424,7 +424,7 @@ public class LanguageTranslator {
     public func deleteModel(
         modelID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DeleteModelResult>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DeleteModelResult>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -470,7 +470,7 @@ public class LanguageTranslator {
     public func getModel(
         modelID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<TranslationModel>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TranslationModel>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders

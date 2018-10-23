@@ -132,7 +132,7 @@ public class Discovery {
         description: String? = nil,
         size: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Environment>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Environment>?, RestError?) -> Void)
     {
         // construct body
         let createEnvironmentRequest = CreateEnvironmentRequest(name: name, description: description, size: size)
@@ -181,7 +181,7 @@ public class Discovery {
     public func listEnvironments(
         name: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ListEnvironmentsResponse>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<ListEnvironmentsResponse>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -223,7 +223,7 @@ public class Discovery {
     public func getEnvironment(
         environmentID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Environment>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Environment>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -276,7 +276,7 @@ public class Discovery {
         description: String? = nil,
         size: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Environment>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Environment>?, RestError?) -> Void)
     {
         // construct body
         let updateEnvironmentRequest = UpdateEnvironmentRequest(name: name, description: description, size: size)
@@ -328,7 +328,7 @@ public class Discovery {
     public func deleteEnvironment(
         environmentID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DeleteEnvironmentResponse>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DeleteEnvironmentResponse>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -375,7 +375,7 @@ public class Discovery {
         environmentID: String,
         collectionIds: [String],
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ListCollectionFieldsResponse>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<ListCollectionFieldsResponse>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -440,7 +440,7 @@ public class Discovery {
         normalizations: [NormalizationOperation]? = nil,
         source: Source? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Configuration>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Configuration>?, RestError?) -> Void)
     {
         // construct body
         let createConfigurationRequest = Configuration(name: name, description: description, conversions: conversions, enrichments: enrichments, normalizations: normalizations, source: source)
@@ -496,7 +496,7 @@ public class Discovery {
         environmentID: String,
         name: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ListConfigurationsResponse>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<ListConfigurationsResponse>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -545,7 +545,7 @@ public class Discovery {
         environmentID: String,
         configurationID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Configuration>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Configuration>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -611,7 +611,7 @@ public class Discovery {
         normalizations: [NormalizationOperation]? = nil,
         source: Source? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Configuration>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Configuration>?, RestError?) -> Void)
     {
         // construct body
         let updateConfigurationRequest = Configuration(name: name, description: description, conversions: conversions, enrichments: enrichments, normalizations: normalizations, source: source)
@@ -670,7 +670,7 @@ public class Discovery {
         environmentID: String,
         configurationID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DeleteConfigurationResponse>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DeleteConfigurationResponse>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -741,7 +741,7 @@ public class Discovery {
         metadata: String? = nil,
         fileContentType: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<TestDocument>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TestDocument>?, RestError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -828,7 +828,7 @@ public class Discovery {
         configurationID: String? = nil,
         language: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Collection>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Collection>?, RestError?) -> Void)
     {
         // construct body
         let createCollectionRequest = CreateCollectionRequest(name: name, description: description, configurationID: configurationID, language: language)
@@ -884,7 +884,7 @@ public class Discovery {
         environmentID: String,
         name: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ListCollectionsResponse>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<ListCollectionsResponse>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -933,7 +933,7 @@ public class Discovery {
         environmentID: String,
         collectionID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Collection>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Collection>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -984,7 +984,7 @@ public class Discovery {
         description: String? = nil,
         configurationID: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Collection>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Collection>?, RestError?) -> Void)
     {
         // construct body
         let updateCollectionRequest = UpdateCollectionRequest(name: name, description: description, configurationID: configurationID)
@@ -1038,7 +1038,7 @@ public class Discovery {
         environmentID: String,
         collectionID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DeleteCollectionResponse>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DeleteCollectionResponse>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1085,7 +1085,7 @@ public class Discovery {
         environmentID: String,
         collectionID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ListCollectionFieldsResponse>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<ListCollectionFieldsResponse>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1133,7 +1133,7 @@ public class Discovery {
         environmentID: String,
         collectionID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Expansions>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Expansions>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1193,7 +1193,7 @@ public class Discovery {
         collectionID: String,
         expansions: [Expansion],
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Expansions>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Expansions>?, RestError?) -> Void)
     {
         // construct body
         let createExpansionsRequest = Expansions(expansions: expansions)
@@ -1250,7 +1250,7 @@ public class Discovery {
         environmentID: String,
         collectionID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1321,7 +1321,7 @@ public class Discovery {
         metadata: String? = nil,
         fileContentType: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DocumentAccepted>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DocumentAccepted>?, RestError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -1394,7 +1394,7 @@ public class Discovery {
         collectionID: String,
         documentID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DocumentStatus>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DocumentStatus>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1456,7 +1456,7 @@ public class Discovery {
         metadata: String? = nil,
         fileContentType: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DocumentAccepted>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DocumentAccepted>?, RestError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -1528,7 +1528,7 @@ public class Discovery {
         collectionID: String,
         documentID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DeleteDocumentResponse>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DeleteDocumentResponse>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1645,7 +1645,7 @@ public class Discovery {
         bias: String? = nil,
         loggingOptOut: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<QueryResponse>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<QueryResponse>?, RestError?) -> Void)
     {
         // construct body
         let returnFieldsJoined = returnFields?.joined(separator: ",")
@@ -1785,7 +1785,7 @@ public class Discovery {
         similarDocumentIds: [String]? = nil,
         similarFields: [String]? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<QueryNoticesResponse>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<QueryNoticesResponse>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1970,7 +1970,7 @@ public class Discovery {
         bias: String? = nil,
         loggingOptOut: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<QueryResponse>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<QueryResponse>?, RestError?) -> Void)
     {
         // construct body
         let returnFieldsJoined = returnFields?.joined(separator: ",")
@@ -2102,7 +2102,7 @@ public class Discovery {
         similarDocumentIds: [String]? = nil,
         similarFields: [String]? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<QueryNoticesResponse>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<QueryNoticesResponse>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2217,7 +2217,7 @@ public class Discovery {
         count: Int? = nil,
         evidenceCount: Int? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<QueryEntitiesResponse>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<QueryEntitiesResponse>?, RestError?) -> Void)
     {
         // construct body
         let queryEntitiesRequest = QueryEntities(feature: feature, entity: entity, context: context, count: count, evidenceCount: evidenceCount)
@@ -2290,7 +2290,7 @@ public class Discovery {
         count: Int? = nil,
         evidenceCount: Int? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<QueryRelationsResponse>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<QueryRelationsResponse>?, RestError?) -> Void)
     {
         // construct body
         let queryRelationsRequest = QueryRelations(entities: entities, context: context, sort: sort, filter: filter, count: count, evidenceCount: evidenceCount)
@@ -2346,7 +2346,7 @@ public class Discovery {
         environmentID: String,
         collectionID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<TrainingDataSet>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TrainingDataSet>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2399,7 +2399,7 @@ public class Discovery {
         filter: String? = nil,
         examples: [TrainingExample]? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<TrainingQuery>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TrainingQuery>?, RestError?) -> Void)
     {
         // construct body
         let addTrainingDataRequest = NewTrainingQuery(naturalLanguageQuery: naturalLanguageQuery, filter: filter, examples: examples)
@@ -2455,7 +2455,7 @@ public class Discovery {
         environmentID: String,
         collectionID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2504,7 +2504,7 @@ public class Discovery {
         collectionID: String,
         queryID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<TrainingQuery>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TrainingQuery>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2553,7 +2553,7 @@ public class Discovery {
         collectionID: String,
         queryID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2602,7 +2602,7 @@ public class Discovery {
         collectionID: String,
         queryID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<TrainingExampleList>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TrainingExampleList>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2657,7 +2657,7 @@ public class Discovery {
         crossReference: String? = nil,
         relevance: Int? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<TrainingExample>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TrainingExample>?, RestError?) -> Void)
     {
         // construct body
         let createTrainingExampleRequest = TrainingExample(documentID: documentID, crossReference: crossReference, relevance: relevance)
@@ -2717,7 +2717,7 @@ public class Discovery {
         queryID: String,
         exampleID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2772,7 +2772,7 @@ public class Discovery {
         crossReference: String? = nil,
         relevance: Int? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<TrainingExample>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TrainingExample>?, RestError?) -> Void)
     {
         // construct body
         let updateTrainingExampleRequest = TrainingExamplePatch(crossReference: crossReference, relevance: relevance)
@@ -2832,7 +2832,7 @@ public class Discovery {
         queryID: String,
         exampleID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<TrainingExample>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TrainingExample>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2881,7 +2881,7 @@ public class Discovery {
     public func deleteUserData(
         customerID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2925,7 +2925,7 @@ public class Discovery {
         type: String,
         data: EventData,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<CreateEventResponse>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<CreateEventResponse>?, RestError?) -> Void)
     {
         // construct body
         let createEventRequest = CreateEventObject(type: type, data: data)
@@ -2989,7 +2989,7 @@ public class Discovery {
         offset: Int? = nil,
         sort: [String]? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<LogQueryResponse>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<LogQueryResponse>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3055,7 +3055,7 @@ public class Discovery {
         endTime: String? = nil,
         resultType: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<MetricResponse>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<MetricResponse>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3115,7 +3115,7 @@ public class Discovery {
         endTime: String? = nil,
         resultType: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<MetricResponse>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<MetricResponse>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3174,7 +3174,7 @@ public class Discovery {
         endTime: String? = nil,
         resultType: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<MetricResponse>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<MetricResponse>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3234,7 +3234,7 @@ public class Discovery {
         endTime: String? = nil,
         resultType: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<MetricResponse>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<MetricResponse>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3288,7 +3288,7 @@ public class Discovery {
     public func getMetricsQueryTokenEvent(
         count: Int? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<MetricTokenResponse>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<MetricTokenResponse>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3333,7 +3333,7 @@ public class Discovery {
     public func listCredentials(
         environmentID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<CredentialsList>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<CredentialsList>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3388,7 +3388,7 @@ public class Discovery {
         sourceType: String? = nil,
         credentialDetails: CredentialDetails? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Credentials>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Credentials>?, RestError?) -> Void)
     {
         // construct body
         let createCredentialsRequest = Credentials(sourceType: sourceType, credentialDetails: credentialDetails)
@@ -3446,7 +3446,7 @@ public class Discovery {
         environmentID: String,
         credentialID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Credentials>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Credentials>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3502,7 +3502,7 @@ public class Discovery {
         sourceType: String? = nil,
         credentialDetails: CredentialDetails? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Credentials>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Credentials>?, RestError?) -> Void)
     {
         // construct body
         let updateCredentialsRequest = Credentials(sourceType: sourceType, credentialDetails: credentialDetails)
@@ -3558,7 +3558,7 @@ public class Discovery {
         environmentID: String,
         credentialID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DeleteCredentials>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DeleteCredentials>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders

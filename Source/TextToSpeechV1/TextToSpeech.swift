@@ -123,7 +123,7 @@ public class TextToSpeech {
      */
     public func listVoices(
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Voices>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Voices>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -165,7 +165,7 @@ public class TextToSpeech {
         voice: String,
         customizationID: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Voice>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Voice>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -234,7 +234,7 @@ public class TextToSpeech {
         voice: String? = nil,
         customizationID: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Data>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Data>?, RestError?) -> Void)
     {
         // construct body
         let synthesizeRequest = Text(text: text)
@@ -277,7 +277,7 @@ public class TextToSpeech {
         )
 
         // execute REST request
-        request.response { (response: WatsonResponse<Data>?, error: Error?) in
+        request.response { (response: WatsonResponse<Data>?, error: RestError?) in
             var response = response
             guard let data = response?.result else {
                 completionHandler(response, error)
@@ -339,7 +339,7 @@ public class TextToSpeech {
         format: String? = nil,
         customizationID: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Pronunciation>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Pronunciation>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -401,7 +401,7 @@ public class TextToSpeech {
         language: String? = nil,
         description: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<VoiceModel>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<VoiceModel>?, RestError?) -> Void)
     {
         // construct body
         let createVoiceModelRequest = CreateVoiceModel(name: name, language: language, description: description)
@@ -453,7 +453,7 @@ public class TextToSpeech {
     public func listVoiceModels(
         language: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<VoiceModels>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<VoiceModels>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -521,7 +521,7 @@ public class TextToSpeech {
         description: String? = nil,
         words: [Word]? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
     {
         // construct body
         let updateVoiceModelRequest = UpdateVoiceModel(name: name, description: description, words: words)
@@ -576,7 +576,7 @@ public class TextToSpeech {
     public func getVoiceModel(
         customizationID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<VoiceModel>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<VoiceModel>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -621,7 +621,7 @@ public class TextToSpeech {
     public func deleteVoiceModel(
         customizationID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -683,7 +683,7 @@ public class TextToSpeech {
         customizationID: String,
         words: [Word],
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
     {
         // construct body
         let addWordsRequest = Words(words: words)
@@ -738,7 +738,7 @@ public class TextToSpeech {
     public func listWords(
         customizationID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Words>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Words>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -807,7 +807,7 @@ public class TextToSpeech {
         translation: String,
         partOfSpeech: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
     {
         // construct body
         let addWordRequest = Translation(translation: translation, partOfSpeech: partOfSpeech)
@@ -862,7 +862,7 @@ public class TextToSpeech {
         customizationID: String,
         word: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Translation>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Translation>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -909,7 +909,7 @@ public class TextToSpeech {
         customizationID: String,
         word: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -955,7 +955,7 @@ public class TextToSpeech {
     public func deleteUserData(
         customerID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders

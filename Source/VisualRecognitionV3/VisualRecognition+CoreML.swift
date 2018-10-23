@@ -47,7 +47,7 @@ extension VisualRecognition {
      */
     public func updateLocalModel(
         classifierID: String,
-        completionHandler: @escaping (WatsonResponse<Classifier>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Classifier>?, RestError?) -> Void)
     {
         // setup date formatter '2017-12-04T19:44:27.419Z'
         let dateFormatter = DateFormatter()
@@ -142,7 +142,7 @@ extension VisualRecognition {
         imageData: Data,
         classifierIDs: [String] = ["default"],
         threshold: Double? = nil,
-        completionHandler: @escaping (ClassifiedImages?, Error?) -> Void)
+        completionHandler: @escaping (ClassifiedImages?, RestError?) -> Void)
     {
         // ensure a classifier id was provided
         guard !classifierIDs.isEmpty else {
@@ -313,7 +313,7 @@ extension VisualRecognition {
      */
     private func downloadClassifier(
         classifierID: String,
-        completionHandler: @escaping (WatsonResponse<Classifier>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Classifier>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders

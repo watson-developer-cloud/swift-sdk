@@ -26,7 +26,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
     internal var onConnect: (() -> Void)?
     internal var onListening: (() -> Void)?
     internal var onResults: ((SpeechRecognitionResults) -> Void)?
-    internal var onError: ((Error) -> Void)?
+    internal var onError: ((RestError) -> Void)?
     internal var onDisconnect: (() -> Void)?
 
     private let url: URL
@@ -198,7 +198,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
     private func isAuthenticationFailure(error: Error) -> Bool {
         if let error = error as? WSError {
             let matchesCode = (error.code == 400)
-            let matchesType = (error.type == .upgradeError)
+            let matchesType     = (error.type == .upgradeError)
             return matchesCode && matchesType
         }
         return false
@@ -255,7 +255,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
             self.connect()
             return
         }
-        onError?(error)
+        onError?(RestError.other(message: String(describing: error)))
         onDisconnect?()
     }
 }

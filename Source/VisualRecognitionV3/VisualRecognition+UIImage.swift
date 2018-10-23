@@ -67,13 +67,14 @@ extension VisualRecognition {
         owners: [String]? = nil,
         classifierIDs: [String]? = nil,
         acceptLanguage: String? = nil,
-        completionHandler: @escaping (WatsonResponse<ClassifiedImages>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<ClassifiedImages>?, RestError?) -> Void)
     {
         // save image to disk
         let file: URL
         do {
             file = try saveToDisk(image: image)
         } catch {
+            let error = RestError.saveData
             completionHandler(nil, error)
             return
         }
@@ -81,7 +82,7 @@ extension VisualRecognition {
         // delete image after service call
         let deleteFile = { try? FileManager.default.removeItem(at: file) }
         let completion = {
-            (response: WatsonResponse<ClassifiedImages>?, error: Error?) in
+            (response: WatsonResponse<ClassifiedImages>?, error: RestError?) in
             deleteFile()
             completionHandler(response, error)
         }
@@ -114,13 +115,14 @@ extension VisualRecognition {
      */
     public func detectFaces(
         image: UIImage,
-        completionHandler: @escaping (WatsonResponse<DetectedFaces>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DetectedFaces>?, RestError?) -> Void)
     {
         // save image to disk
         let file: URL
         do {
             file = try saveToDisk(image: image)
         } catch {
+            let error = RestError.saveData
             completionHandler(nil, error)
             return
         }
@@ -128,7 +130,7 @@ extension VisualRecognition {
         // delete image after service call
         let deleteFile = { try? FileManager.default.removeItem(at: file) }
         let completion = {
-            (response: WatsonResponse<DetectedFaces>?, error: Error?) in
+            (response: WatsonResponse<DetectedFaces>?, error: RestError?) in
             deleteFile()
             completionHandler(response, error)
         }
@@ -151,7 +153,7 @@ extension VisualRecognition {
         image: UIImage,
         classifierIDs: [String] = ["default"],
         threshold: Double? = nil,
-        completionHandler: @escaping (ClassifiedImages?, Error?) -> Void)
+        completionHandler: @escaping (ClassifiedImages?, RestError?) -> Void)
     {
         // convert UIImage to Data
         guard let imageData = UIImagePNGRepresentation(image) else {

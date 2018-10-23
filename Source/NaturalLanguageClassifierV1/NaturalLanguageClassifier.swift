@@ -117,7 +117,7 @@ public class NaturalLanguageClassifier {
         classifierID: String,
         text: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Classification>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Classification>?, RestError?) -> Void)
     {
         // construct body
         let classifyRequest = ClassifyInput(text: text)
@@ -170,7 +170,7 @@ public class NaturalLanguageClassifier {
         classifierID: String,
         collection: [ClassifyInput],
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ClassificationCollection>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<ClassificationCollection>?, RestError?) -> Void)
     {
         // construct body
         let classifyCollectionRequest = ClassifyCollectionInput(collection: collection)
@@ -227,7 +227,7 @@ public class NaturalLanguageClassifier {
         metadata: URL,
         trainingData: URL,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Classifier>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Classifier>?, RestError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -281,7 +281,7 @@ public class NaturalLanguageClassifier {
      */
     public func listClassifiers(
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ClassifierList>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<ClassifierList>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -316,7 +316,7 @@ public class NaturalLanguageClassifier {
     public func getClassifier(
         classifierID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Classifier>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Classifier>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -354,7 +354,7 @@ public class NaturalLanguageClassifier {
     public func deleteClassifier(
         classifierID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders

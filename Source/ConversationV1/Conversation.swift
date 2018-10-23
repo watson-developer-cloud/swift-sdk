@@ -142,7 +142,7 @@ public class Conversation {
         output: OutputData? = nil,
         nodesVisitedDetails: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<MessageResponse>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<MessageResponse>?, RestError?) -> Void)
     {
         // construct body
         let messageRequest = MessageRequest(input: input, alternateIntents: alternateIntents, context: context, entities: entities, intents: intents, output: output)
@@ -211,7 +211,7 @@ public class Conversation {
         cursor: String? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<WorkspaceCollection>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<WorkspaceCollection>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -295,7 +295,7 @@ public class Conversation {
         learningOptOut: Bool? = nil,
         systemSettings: WorkspaceSystemSettings? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Workspace>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Workspace>?, RestError?) -> Void)
     {
         // construct body
         let createWorkspaceRequest = CreateWorkspace(
@@ -363,7 +363,7 @@ public class Conversation {
         export: Bool? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<WorkspaceExport>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<WorkspaceExport>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -449,7 +449,7 @@ public class Conversation {
         systemSettings: WorkspaceSystemSettings? = nil,
         append: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Workspace>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Workspace>?, RestError?) -> Void)
     {
         // construct body
         let updateWorkspaceRequest = UpdateWorkspace(
@@ -518,7 +518,7 @@ public class Conversation {
     public func deleteWorkspace(
         workspaceID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -581,7 +581,7 @@ public class Conversation {
         cursor: String? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<IntentCollection>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<IntentCollection>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -661,7 +661,7 @@ public class Conversation {
         description: String? = nil,
         examples: [CreateExample]? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Intent>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Intent>?, RestError?) -> Void)
     {
         // construct body
         let createIntentRequest = CreateIntent(intent: intent, description: description, examples: examples)
@@ -726,7 +726,7 @@ public class Conversation {
         export: Bool? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<IntentExport>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<IntentExport>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -792,7 +792,7 @@ public class Conversation {
         newDescription: String? = nil,
         newExamples: [CreateExample]? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Intent>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Intent>?, RestError?) -> Void)
     {
         // construct body
         let updateIntentRequest = UpdateIntent(intent: newIntent, description: newDescription, examples: newExamples)
@@ -849,7 +849,7 @@ public class Conversation {
         workspaceID: String,
         intent: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -909,7 +909,7 @@ public class Conversation {
         cursor: String? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ExampleCollection>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<ExampleCollection>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -984,7 +984,7 @@ public class Conversation {
         text: String,
         mentions: [Mentions]? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Example>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Example>?, RestError?) -> Void)
     {
         // construct body
         let createExampleRequest = CreateExample(text: text, mentions: mentions)
@@ -1046,7 +1046,7 @@ public class Conversation {
         text: String,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Example>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Example>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1107,7 +1107,7 @@ public class Conversation {
         newText: String? = nil,
         newMentions: [Mentions]? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Example>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Example>?, RestError?) -> Void)
     {
         // construct body
         let updateExampleRequest = UpdateExample(text: newText, mentions: newMentions)
@@ -1166,7 +1166,7 @@ public class Conversation {
         intent: String,
         text: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1224,7 +1224,7 @@ public class Conversation {
         cursor: String? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<CounterexampleCollection>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<CounterexampleCollection>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1296,7 +1296,7 @@ public class Conversation {
         workspaceID: String,
         text: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Counterexample>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Counterexample>?, RestError?) -> Void)
     {
         // construct body
         let createCounterexampleRequest = CreateCounterexample(text: text)
@@ -1356,7 +1356,7 @@ public class Conversation {
         text: String,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Counterexample>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Counterexample>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1410,7 +1410,7 @@ public class Conversation {
         text: String,
         newText: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Counterexample>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Counterexample>?, RestError?) -> Void)
     {
         // construct body
         let updateCounterexampleRequest = UpdateCounterexample(text: newText)
@@ -1467,7 +1467,7 @@ public class Conversation {
         workspaceID: String,
         text: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1530,7 +1530,7 @@ public class Conversation {
         cursor: String? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<EntityCollection>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<EntityCollection>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1614,7 +1614,7 @@ public class Conversation {
         values: [CreateValue]? = nil,
         fuzzyMatch: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Entity>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Entity>?, RestError?) -> Void)
     {
         // construct body
         let createEntityRequest = CreateEntity(entity: entity, description: description, metadata: metadata, values: values, fuzzyMatch: fuzzyMatch)
@@ -1679,7 +1679,7 @@ public class Conversation {
         export: Bool? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<EntityExport>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<EntityExport>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1750,7 +1750,7 @@ public class Conversation {
         newFuzzyMatch: Bool? = nil,
         newValues: [CreateValue]? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Entity>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Entity>?, RestError?) -> Void)
     {
         // construct body
         let updateEntityRequest = UpdateEntity(entity: newEntity, description: newDescription, metadata: newMetadata, fuzzyMatch: newFuzzyMatch, values: newValues)
@@ -1807,7 +1807,7 @@ public class Conversation {
         workspaceID: String,
         entity: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1863,7 +1863,7 @@ public class Conversation {
         export: Bool? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<EntityMentionCollection>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<EntityMentionCollection>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1935,7 +1935,7 @@ public class Conversation {
         cursor: String? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ValueCollection>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<ValueCollection>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2027,7 +2027,7 @@ public class Conversation {
         patterns: [String]? = nil,
         valueType: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Value>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Value>?, RestError?) -> Void)
     {
         // construct body
         let createValueRequest = CreateValue(value: value, metadata: metadata, synonyms: synonyms, patterns: patterns, valueType: valueType)
@@ -2093,7 +2093,7 @@ public class Conversation {
         export: Bool? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ValueExport>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<ValueExport>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2172,7 +2172,7 @@ public class Conversation {
         newSynonyms: [String]? = nil,
         newPatterns: [String]? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Value>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Value>?, RestError?) -> Void)
     {
         // construct body
         let updateValueRequest = UpdateValue(value: newValue, metadata: newMetadata, valueType: newType, synonyms: newSynonyms, patterns: newPatterns)
@@ -2231,7 +2231,7 @@ public class Conversation {
         entity: String,
         value: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2293,7 +2293,7 @@ public class Conversation {
         cursor: String? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<SynonymCollection>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<SynonymCollection>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2368,7 +2368,7 @@ public class Conversation {
         value: String,
         synonym: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Synonym>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Synonym>?, RestError?) -> Void)
     {
         // construct body
         let createSynonymRequest = CreateSynonym(synonym: synonym)
@@ -2432,7 +2432,7 @@ public class Conversation {
         synonym: String,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Synonym>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Synonym>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2493,7 +2493,7 @@ public class Conversation {
         synonym: String,
         newSynonym: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Synonym>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Synonym>?, RestError?) -> Void)
     {
         // construct body
         let updateSynonymRequest = UpdateSynonym(synonym: newSynonym)
@@ -2554,7 +2554,7 @@ public class Conversation {
         value: String,
         synonym: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2612,7 +2612,7 @@ public class Conversation {
         cursor: String? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DialogNodeCollection>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DialogNodeCollection>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2722,7 +2722,7 @@ public class Conversation {
         digressOutSlots: String? = nil,
         userLabel: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DialogNode>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DialogNode>?, RestError?) -> Void)
     {
         // construct body
         let createDialogNodeRequest = CreateDialogNode(
@@ -2800,7 +2800,7 @@ public class Conversation {
         dialogNode: String,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DialogNode>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DialogNode>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2897,7 +2897,7 @@ public class Conversation {
         newDigressOutSlots: String? = nil,
         newUserLabel: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DialogNode>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DialogNode>?, RestError?) -> Void)
     {
         // construct body
         let updateDialogNodeRequest = UpdateDialogNode(
@@ -2972,7 +2972,7 @@ public class Conversation {
         workspaceID: String,
         dialogNode: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3030,7 +3030,7 @@ public class Conversation {
         pageLimit: Int? = nil,
         cursor: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<LogCollection>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<LogCollection>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3103,7 +3103,7 @@ public class Conversation {
         pageLimit: Int? = nil,
         cursor: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<LogCollection>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<LogCollection>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3160,7 +3160,7 @@ public class Conversation {
     public func deleteUserData(
         customerID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders

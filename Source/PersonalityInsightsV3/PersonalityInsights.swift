@@ -171,7 +171,7 @@ public class PersonalityInsights {
         rawScores: Bool? = nil,
         consumptionPreferences: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Profile>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Profile>?, RestError?) -> Void)
     {
         // construct body
         guard let body = profileContent.content else {
@@ -273,7 +273,7 @@ public class PersonalityInsights {
         csvHeaders: Bool? = nil,
         consumptionPreferences: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<String>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<String>?, RestError?) -> Void)
     {
         // construct body
         guard let body = profileContent.content else {

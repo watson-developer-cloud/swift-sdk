@@ -124,7 +124,7 @@ public class Assistant {
     public func createSession(
         assistantID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<SessionResponse>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<SessionResponse>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -175,7 +175,7 @@ public class Assistant {
         assistantID: String,
         sessionID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -229,7 +229,7 @@ public class Assistant {
         input: MessageInput? = nil,
         context: MessageContext? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<MessageResponse>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<MessageResponse>?, RestError?) -> Void)
     {
         // construct body
         let messageRequest = MessageRequest(input: input, context: context)

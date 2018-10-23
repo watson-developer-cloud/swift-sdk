@@ -179,7 +179,7 @@ public class VisualRecognition {
         classifierIDs: [String]? = nil,
         acceptLanguage: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ClassifiedImages>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<ClassifiedImages>?, RestError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -277,7 +277,7 @@ public class VisualRecognition {
         imagesFile: URL? = nil,
         url: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DetectedFaces>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DetectedFaces>?, RestError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -354,7 +354,7 @@ public class VisualRecognition {
         positiveExamples: [PositiveExample],
         negativeExamples: URL? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Classifier>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Classifier>?, RestError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -423,7 +423,7 @@ public class VisualRecognition {
         owners: [String]? = nil,
         verbose: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Classifiers>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Classifiers>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -467,7 +467,7 @@ public class VisualRecognition {
     public func getClassifier(
         classifierID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Classifier>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Classifier>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -531,7 +531,7 @@ public class VisualRecognition {
         positiveExamples: [PositiveExample]? = nil,
         negativeExamples: URL? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Classifier>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Classifier>?, RestError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -601,7 +601,7 @@ public class VisualRecognition {
     public func deleteClassifier(
         classifierID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -647,7 +647,7 @@ public class VisualRecognition {
     public func getCoreMlModel(
         classifierID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Data>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Data>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -696,7 +696,7 @@ public class VisualRecognition {
     public func deleteUserData(
         customerID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders

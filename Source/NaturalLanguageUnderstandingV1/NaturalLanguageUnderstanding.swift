@@ -173,7 +173,7 @@ public class NaturalLanguageUnderstanding {
         language: String? = nil,
         limitTextCharacters: Int? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<AnalysisResults>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<AnalysisResults>?, RestError?) -> Void)
     {
         // construct body
         let analyzeRequest = Parameters(
@@ -231,7 +231,7 @@ public class NaturalLanguageUnderstanding {
      */
     public func listModels(
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ListModelsResults>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<ListModelsResults>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -271,7 +271,7 @@ public class NaturalLanguageUnderstanding {
     public func deleteModel(
         modelID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DeleteModelResults>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DeleteModelResults>?, RestError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders

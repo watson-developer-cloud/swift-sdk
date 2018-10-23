@@ -74,7 +74,7 @@ public class SpeechToTextSession {
     }
 
     /// Invoked when an error or warning occurs.
-    public var onError: ((Error) -> Void)? {
+    public var onError: ((RestError) -> Void)? {
         get { return socket.onError }
         set { socket.onError = newValue }
     }

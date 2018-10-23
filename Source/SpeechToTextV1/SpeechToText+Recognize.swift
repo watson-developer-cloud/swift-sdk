@@ -46,7 +46,7 @@ extension SpeechToText {
         model: String? = nil,
         customizationID: String? = nil,
         learningOptOut: Bool? = nil,
-        completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, RestError?) -> Void)
     {
         do {
             let data = try Data(contentsOf: audio)
@@ -93,7 +93,7 @@ extension SpeechToText {
         acousticCustomizationID: String? = nil,
         learningOptOut: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, RestError?) -> Void)
     {
         // create SpeechToTextSession
         let session = SpeechToTextSession(
@@ -172,7 +172,7 @@ extension SpeechToText {
         learningOptOut: Bool? = nil,
         compress: Bool = true,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, RestError?) -> Void)
     {
         // make sure the AVAudioSession shared instance is properly configured
         do {
@@ -262,7 +262,7 @@ extension SpeechToText {
         model: String? = nil,
         customizationID: String? = nil,
         learningOptOut: Bool? = nil,
-        completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, Error?) -> Void)
+        completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, RestError?) -> Void)
     {
         recognizeUsingWebSocket(audio: audio, settings: settings, model: model, customizationID: customizationID,
                                 learningOptOut: learningOptOut, completionHandler: completionHandler)

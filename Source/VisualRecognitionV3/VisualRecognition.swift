@@ -95,18 +95,19 @@ public class VisualRecognition {
 
         let statusCode = response.statusCode
         var errorMessage: String?
-        var metadata = [String: JSON]()
+        var metadata = [String: Any]()
 
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
+            metadata = [:]
             switch statusCode {
             case 403:
                 // ErrorAuthentication
                 if case let .some(.string(status)) = json["status"],
                     case let .some(.string(statusInfo)) = json["statusInfo"] {
                     errorMessage = statusInfo
-                    metadata["status"] = JSON.string(status)
-                    metadata["statusInfo"] = JSON.string(statusInfo)
+                    metadata["status"] = status
+                    metadata["statusInfo"] = statusInfo
                 }
             case 404:
                 // "error": ErrorInfo
@@ -114,23 +115,22 @@ public class VisualRecognition {
                     case let .some(.string(message)) = errorObj["description"],
                     case let .some(.string(errorID)) = errorObj["error_id"] {
                     errorMessage = message
-                    metadata["description"] = JSON.string(message)
-                    metadata["errorID"] = JSON.string(errorID)
+                    metadata["description"] = message
+                    metadata["errorID"] = errorID
                 }
             case 413:
                 // ErrorHTML
                 if case let .some(.string(message)) = json["Error"] {
                     errorMessage = message
-                    metadata["error"] = JSON.string(message)
                 }
             default:
                 // ErrorResponse
                 if case let .some(.string(message)) = json["error"] {
                     errorMessage = message
-                    metadata["error"] = JSON.string(message)
                 }
             }
-            return RestError.http(statusCode: statusCode, message: errorMessage, metadata: metadata)
+            // If metadata is empty, it should show up as nil in the RestError
+            return RestError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
         } catch {
             return RestError.http(statusCode: statusCode, message: nil, metadata: nil)
         }
@@ -483,7 +483,7 @@ public class VisualRecognition {
         // construct REST request
         let path = "/v3/classifiers/\(classifierID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -573,7 +573,7 @@ public class VisualRecognition {
         // construct REST request
         let path = "/v3/classifiers/\(classifierID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -617,7 +617,7 @@ public class VisualRecognition {
         // construct REST request
         let path = "/v3/classifiers/\(classifierID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -663,7 +663,7 @@ public class VisualRecognition {
         // construct REST request
         let path = "/v3/classifiers/\(classifierID)/core_ml_model"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(

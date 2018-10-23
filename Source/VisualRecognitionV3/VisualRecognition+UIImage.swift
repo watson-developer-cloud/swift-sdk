@@ -172,7 +172,7 @@ extension VisualRecognition {
     private func saveToDisk(image: UIImage) throws -> URL {
         let filename = UUID().uuidString + ".jpg"
         let directory = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-        guard let file = directory.appendingPathComponent(filename) else { throw RestError.encoding(path: filename) }
+        guard let file = directory.appendingPathComponent(filename) else { throw RestError.urlEncoding(path: filename) }
         guard let data = UIImageJPEGRepresentation(image, 0.75) else { throw RestError.serialization(values: "classify image") }
         try data.write(to: file)
         return file

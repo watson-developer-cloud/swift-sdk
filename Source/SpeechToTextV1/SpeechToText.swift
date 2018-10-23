@@ -99,18 +99,19 @@ public class SpeechToText {
 
         let statusCode = response.statusCode
         var errorMessage: String?
-        var metadata = [String: JSON]()
+        var metadata = [String: Any]()
 
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
+            metadata = [:]
             if case let .some(.string(message)) = json["error"] {
                 errorMessage = message
-                metadata["error"] = JSON.string(message)
             }
             if case let .some(.string(description)) = json["code_description"] {
-                metadata["codeDescription"] = JSON.string(description)
+                metadata["codeDescription"] = description
             }
-            return RestError.http(statusCode: statusCode, message: errorMessage, metadata: metadata)
+            // If metadata is empty, it should show up as nil in the RestError
+            return RestError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
         } catch {
             return RestError.http(statusCode: statusCode, message: nil, metadata: nil)
         }
@@ -178,7 +179,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/models/\(modelID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -900,7 +901,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/recognitions/\(id)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -943,7 +944,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/recognitions/\(id)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1105,7 +1106,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1150,7 +1151,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1237,7 +1238,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/train"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1284,7 +1285,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/reset"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1336,7 +1337,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/upgrade_model"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1381,7 +1382,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/corpora"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1488,7 +1489,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/corpora/\(corpusName)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1537,7 +1538,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/corpora/\(corpusName)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1586,7 +1587,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/corpora/\(corpusName)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1655,7 +1656,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1743,7 +1744,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1839,7 +1840,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words/\(wordName)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1888,7 +1889,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words/\(wordName)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1939,7 +1940,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words/\(wordName)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2092,7 +2093,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/acoustic_customizations/\(customizationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2137,7 +2138,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/acoustic_customizations/\(customizationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2215,7 +2216,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/acoustic_customizations/\(customizationID)/train"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2262,7 +2263,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/acoustic_customizations/\(customizationID)/reset"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2330,7 +2331,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/acoustic_customizations/\(customizationID)/upgrade_model"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2378,7 +2379,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/acoustic_customizations/\(customizationID)/audio"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2516,7 +2517,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/acoustic_customizations/\(customizationID)/audio/\(audioName)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2575,7 +2576,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/acoustic_customizations/\(customizationID)/audio/\(audioName)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2624,7 +2625,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/acoustic_customizations/\(customizationID)/audio/\(audioName)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.encoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(

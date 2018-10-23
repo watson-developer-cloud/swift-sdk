@@ -104,18 +104,19 @@ public class PersonalityInsights {
 
         let statusCode = response.statusCode
         var errorMessage: String?
-        var metadata = [String: JSON]()
+        var metadata = [String: Any]()
 
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
+            metadata = [:]
             if case let .some(.string(message)) = json["error"] {
                 errorMessage = message
-                metadata["error"] = JSON.string(message)
             }
             if case let .some(.string(help)) = json["help"] {
-                metadata["help"] = JSON.string(help)
+                metadata["help"] = help
             }
-            return RestError.http(statusCode: statusCode, message: errorMessage, metadata: metadata)
+            // If metadata is empty, it should show up as nil in the RestError
+            return RestError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
         } catch {
             return RestError.http(statusCode: statusCode, message: nil, metadata: nil)
         }

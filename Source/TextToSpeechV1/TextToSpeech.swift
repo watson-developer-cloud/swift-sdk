@@ -89,7 +89,7 @@ public class TextToSpeech {
      - parameter data: Raw data returned by the service that may represent an error.
      - parameter response: the URL response returned by the service.
      */
-    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> RestError {
+    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> WatsonError {
 
         let statusCode = response.statusCode
         var errorMessage: String?
@@ -104,10 +104,10 @@ public class TextToSpeech {
             if case let .some(.string(description)) = json["code_description"] {
                 metadata["codeDescription"] = description
             }
-            // If metadata is empty, it should show up as nil in the RestError
-            return RestError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
+            // If metadata is empty, it should show up as nil in the WatsonError
+            return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
         } catch {
-            return RestError.http(statusCode: statusCode, message: nil, metadata: nil)
+            return WatsonError.http(statusCode: statusCode, message: nil, metadata: nil)
         }
     }
 
@@ -123,7 +123,7 @@ public class TextToSpeech {
      */
     public func listVoices(
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Voices>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Voices>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -165,7 +165,7 @@ public class TextToSpeech {
         voice: String,
         customizationID: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Voice>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Voice>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -184,7 +184,7 @@ public class TextToSpeech {
         // construct REST request
         let path = "/v1/voices/\(voice)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -234,12 +234,12 @@ public class TextToSpeech {
         voice: String? = nil,
         customizationID: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Data>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Data>?, WatsonError?) -> Void)
     {
         // construct body
         let synthesizeRequest = Text(text: text)
         guard let body = try? JSONEncoder().encode(synthesizeRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -277,7 +277,7 @@ public class TextToSpeech {
         )
 
         // execute REST request
-        request.response { (response: WatsonResponse<Data>?, error: RestError?) in
+        request.response { (response: WatsonResponse<Data>?, error: WatsonError?) in
             var response = response
             guard let data = response?.result else {
                 completionHandler(response, error)
@@ -287,7 +287,7 @@ public class TextToSpeech {
                 // repair the WAV header
                 var wav = data
                 guard WAVRepair.isWAVFile(data: wav) else {
-                    let error = RestError.other(message: "Expected returned audio to be in WAV format")
+                    let error = WatsonError.other(message: "Expected returned audio to be in WAV format")
                     completionHandler(nil, error)
                     return
                 }
@@ -300,7 +300,7 @@ public class TextToSpeech {
                     response?.result = decodedAudio.pcmDataWithHeaders
                     completionHandler(response, nil)
                 } catch {
-                    let error = RestError.serialization(values: "returned audio")
+                    let error = WatsonError.serialization(values: "returned audio")
                     completionHandler(nil, error)
                     return
                 }
@@ -339,7 +339,7 @@ public class TextToSpeech {
         format: String? = nil,
         customizationID: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Pronunciation>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Pronunciation>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -401,12 +401,12 @@ public class TextToSpeech {
         language: String? = nil,
         description: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<VoiceModel>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<VoiceModel>?, WatsonError?) -> Void)
     {
         // construct body
         let createVoiceModelRequest = CreateVoiceModel(name: name, language: language, description: description)
         guard let body = try? JSONEncoder().encode(createVoiceModelRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -453,7 +453,7 @@ public class TextToSpeech {
     public func listVoiceModels(
         language: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<VoiceModels>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<VoiceModels>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -521,12 +521,12 @@ public class TextToSpeech {
         description: String? = nil,
         words: [Word]? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct body
         let updateVoiceModelRequest = UpdateVoiceModel(name: name, description: description, words: words)
         guard let body = try? JSONEncoder().encode(updateVoiceModelRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -541,7 +541,7 @@ public class TextToSpeech {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -576,7 +576,7 @@ public class TextToSpeech {
     public func getVoiceModel(
         customizationID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<VoiceModel>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<VoiceModel>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -588,7 +588,7 @@ public class TextToSpeech {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -621,7 +621,7 @@ public class TextToSpeech {
     public func deleteVoiceModel(
         customizationID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -632,7 +632,7 @@ public class TextToSpeech {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -683,12 +683,12 @@ public class TextToSpeech {
         customizationID: String,
         words: [Word],
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct body
         let addWordsRequest = Words(words: words)
         guard let body = try? JSONEncoder().encode(addWordsRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -703,7 +703,7 @@ public class TextToSpeech {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -738,7 +738,7 @@ public class TextToSpeech {
     public func listWords(
         customizationID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Words>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Words>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -750,7 +750,7 @@ public class TextToSpeech {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -807,12 +807,12 @@ public class TextToSpeech {
         translation: String,
         partOfSpeech: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct body
         let addWordRequest = Translation(translation: translation, partOfSpeech: partOfSpeech)
         guard let body = try? JSONEncoder().encode(addWordRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -826,7 +826,7 @@ public class TextToSpeech {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words/\(word)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -862,7 +862,7 @@ public class TextToSpeech {
         customizationID: String,
         word: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Translation>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Translation>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -874,7 +874,7 @@ public class TextToSpeech {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words/\(word)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -909,7 +909,7 @@ public class TextToSpeech {
         customizationID: String,
         word: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -920,7 +920,7 @@ public class TextToSpeech {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words/\(word)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -955,7 +955,7 @@ public class TextToSpeech {
     public func deleteUserData(
         customerID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders

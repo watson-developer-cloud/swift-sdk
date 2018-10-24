@@ -17,6 +17,9 @@
 import Foundation
 import RestKit
 
+public typealias WatsonResponse = RestResponse
+public typealias WatsonError = RestError
+
 /// Contains functionality and information common to all of the services
 internal struct Shared {
 

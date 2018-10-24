@@ -90,7 +90,7 @@ public class Conversation {
      - parameter data: Raw data returned by the service that may represent an error.
      - parameter response: the URL response returned by the service.
      */
-    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> RestError {
+    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> WatsonError {
 
         let statusCode = response.statusCode
         var errorMessage: String?
@@ -102,10 +102,10 @@ public class Conversation {
             if case let .some(.string(message)) = json["error"] {
                 errorMessage = message
             }
-            // If metadata is empty, it should show up as nil in the RestError
-            return RestError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
+            // If metadata is empty, it should show up as nil in the WatsonError
+            return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
         } catch {
-            return RestError.http(statusCode: statusCode, message: nil, metadata: nil)
+            return WatsonError.http(statusCode: statusCode, message: nil, metadata: nil)
         }
     }
 
@@ -142,12 +142,12 @@ public class Conversation {
         output: OutputData? = nil,
         nodesVisitedDetails: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<MessageResponse>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<MessageResponse>?, WatsonError?) -> Void)
     {
         // construct body
         let messageRequest = MessageRequest(input: input, alternateIntents: alternateIntents, context: context, entities: entities, intents: intents, output: output)
         guard let body = try? JSONEncoder().encodeIfPresent(messageRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -170,7 +170,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/message"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -211,7 +211,7 @@ public class Conversation {
         cursor: String? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<WorkspaceCollection>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<WorkspaceCollection>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -295,7 +295,7 @@ public class Conversation {
         learningOptOut: Bool? = nil,
         systemSettings: WorkspaceSystemSettings? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Workspace>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Workspace>?, WatsonError?) -> Void)
     {
         // construct body
         let createWorkspaceRequest = CreateWorkspace(
@@ -310,7 +310,7 @@ public class Conversation {
             learningOptOut: learningOptOut,
             systemSettings: systemSettings)
         guard let body = try? JSONEncoder().encodeIfPresent(createWorkspaceRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -363,7 +363,7 @@ public class Conversation {
         export: Bool? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<WorkspaceExport>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<WorkspaceExport>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -387,7 +387,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -449,7 +449,7 @@ public class Conversation {
         systemSettings: WorkspaceSystemSettings? = nil,
         append: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Workspace>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Workspace>?, WatsonError?) -> Void)
     {
         // construct body
         let updateWorkspaceRequest = UpdateWorkspace(
@@ -464,7 +464,7 @@ public class Conversation {
             learningOptOut: learningOptOut,
             systemSettings: systemSettings)
         guard let body = try? JSONEncoder().encodeIfPresent(updateWorkspaceRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -487,7 +487,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -518,7 +518,7 @@ public class Conversation {
     public func deleteWorkspace(
         workspaceID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -534,7 +534,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -581,7 +581,7 @@ public class Conversation {
         cursor: String? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<IntentCollection>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<IntentCollection>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -621,7 +621,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -661,12 +661,12 @@ public class Conversation {
         description: String? = nil,
         examples: [CreateExample]? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Intent>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Intent>?, WatsonError?) -> Void)
     {
         // construct body
         let createIntentRequest = CreateIntent(intent: intent, description: description, examples: examples)
         guard let body = try? JSONEncoder().encode(createIntentRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -685,7 +685,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -726,7 +726,7 @@ public class Conversation {
         export: Bool? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<IntentExport>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<IntentExport>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -750,7 +750,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -792,12 +792,12 @@ public class Conversation {
         newDescription: String? = nil,
         newExamples: [CreateExample]? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Intent>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Intent>?, WatsonError?) -> Void)
     {
         // construct body
         let updateIntentRequest = UpdateIntent(intent: newIntent, description: newDescription, examples: newExamples)
         guard let body = try? JSONEncoder().encode(updateIntentRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -816,7 +816,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -849,7 +849,7 @@ public class Conversation {
         workspaceID: String,
         intent: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -865,7 +865,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -909,7 +909,7 @@ public class Conversation {
         cursor: String? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ExampleCollection>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<ExampleCollection>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -945,7 +945,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -984,12 +984,12 @@ public class Conversation {
         text: String,
         mentions: [Mentions]? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Example>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Example>?, WatsonError?) -> Void)
     {
         // construct body
         let createExampleRequest = CreateExample(text: text, mentions: mentions)
         guard let body = try? JSONEncoder().encode(createExampleRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -1008,7 +1008,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1046,7 +1046,7 @@ public class Conversation {
         text: String,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Example>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Example>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1066,7 +1066,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1107,12 +1107,12 @@ public class Conversation {
         newText: String? = nil,
         newMentions: [Mentions]? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Example>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Example>?, WatsonError?) -> Void)
     {
         // construct body
         let updateExampleRequest = UpdateExample(text: newText, mentions: newMentions)
         guard let body = try? JSONEncoder().encode(updateExampleRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -1131,7 +1131,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1166,7 +1166,7 @@ public class Conversation {
         intent: String,
         text: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1182,7 +1182,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1224,7 +1224,7 @@ public class Conversation {
         cursor: String? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<CounterexampleCollection>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<CounterexampleCollection>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1260,7 +1260,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/counterexamples"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1296,12 +1296,12 @@ public class Conversation {
         workspaceID: String,
         text: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Counterexample>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Counterexample>?, WatsonError?) -> Void)
     {
         // construct body
         let createCounterexampleRequest = CreateCounterexample(text: text)
         guard let body = try? JSONEncoder().encode(createCounterexampleRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -1320,7 +1320,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/counterexamples"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1356,7 +1356,7 @@ public class Conversation {
         text: String,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Counterexample>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Counterexample>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1376,7 +1376,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/counterexamples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1410,12 +1410,12 @@ public class Conversation {
         text: String,
         newText: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Counterexample>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Counterexample>?, WatsonError?) -> Void)
     {
         // construct body
         let updateCounterexampleRequest = UpdateCounterexample(text: newText)
         guard let body = try? JSONEncoder().encode(updateCounterexampleRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -1434,7 +1434,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/counterexamples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1467,7 +1467,7 @@ public class Conversation {
         workspaceID: String,
         text: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1483,7 +1483,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/counterexamples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1530,7 +1530,7 @@ public class Conversation {
         cursor: String? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<EntityCollection>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<EntityCollection>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1570,7 +1570,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1614,12 +1614,12 @@ public class Conversation {
         values: [CreateValue]? = nil,
         fuzzyMatch: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Entity>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Entity>?, WatsonError?) -> Void)
     {
         // construct body
         let createEntityRequest = CreateEntity(entity: entity, description: description, metadata: metadata, values: values, fuzzyMatch: fuzzyMatch)
         guard let body = try? JSONEncoder().encode(createEntityRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -1638,7 +1638,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1679,7 +1679,7 @@ public class Conversation {
         export: Bool? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<EntityExport>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<EntityExport>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1703,7 +1703,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1750,12 +1750,12 @@ public class Conversation {
         newFuzzyMatch: Bool? = nil,
         newValues: [CreateValue]? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Entity>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Entity>?, WatsonError?) -> Void)
     {
         // construct body
         let updateEntityRequest = UpdateEntity(entity: newEntity, description: newDescription, metadata: newMetadata, fuzzyMatch: newFuzzyMatch, values: newValues)
         guard let body = try? JSONEncoder().encode(updateEntityRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -1774,7 +1774,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1807,7 +1807,7 @@ public class Conversation {
         workspaceID: String,
         entity: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1823,7 +1823,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1863,7 +1863,7 @@ public class Conversation {
         export: Bool? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<EntityMentionCollection>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<EntityMentionCollection>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1887,7 +1887,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/mentions"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1935,7 +1935,7 @@ public class Conversation {
         cursor: String? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ValueCollection>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<ValueCollection>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1975,7 +1975,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2027,12 +2027,12 @@ public class Conversation {
         patterns: [String]? = nil,
         valueType: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Value>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Value>?, WatsonError?) -> Void)
     {
         // construct body
         let createValueRequest = CreateValue(value: value, metadata: metadata, synonyms: synonyms, patterns: patterns, valueType: valueType)
         guard let body = try? JSONEncoder().encode(createValueRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -2051,7 +2051,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2093,7 +2093,7 @@ public class Conversation {
         export: Bool? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ValueExport>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<ValueExport>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2117,7 +2117,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2172,12 +2172,12 @@ public class Conversation {
         newSynonyms: [String]? = nil,
         newPatterns: [String]? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Value>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Value>?, WatsonError?) -> Void)
     {
         // construct body
         let updateValueRequest = UpdateValue(value: newValue, metadata: newMetadata, valueType: newType, synonyms: newSynonyms, patterns: newPatterns)
         guard let body = try? JSONEncoder().encode(updateValueRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -2196,7 +2196,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2231,7 +2231,7 @@ public class Conversation {
         entity: String,
         value: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2247,7 +2247,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2293,7 +2293,7 @@ public class Conversation {
         cursor: String? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<SynonymCollection>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<SynonymCollection>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2329,7 +2329,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2368,12 +2368,12 @@ public class Conversation {
         value: String,
         synonym: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Synonym>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Synonym>?, WatsonError?) -> Void)
     {
         // construct body
         let createSynonymRequest = CreateSynonym(synonym: synonym)
         guard let body = try? JSONEncoder().encode(createSynonymRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -2392,7 +2392,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2432,7 +2432,7 @@ public class Conversation {
         synonym: String,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Synonym>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Synonym>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2452,7 +2452,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms/\(synonym)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2493,12 +2493,12 @@ public class Conversation {
         synonym: String,
         newSynonym: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Synonym>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Synonym>?, WatsonError?) -> Void)
     {
         // construct body
         let updateSynonymRequest = UpdateSynonym(synonym: newSynonym)
         guard let body = try? JSONEncoder().encode(updateSynonymRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -2517,7 +2517,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms/\(synonym)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2554,7 +2554,7 @@ public class Conversation {
         value: String,
         synonym: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2570,7 +2570,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms/\(synonym)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2612,7 +2612,7 @@ public class Conversation {
         cursor: String? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DialogNodeCollection>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DialogNodeCollection>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2648,7 +2648,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/dialog_nodes"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2722,7 +2722,7 @@ public class Conversation {
         digressOutSlots: String? = nil,
         userLabel: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DialogNode>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DialogNode>?, WatsonError?) -> Void)
     {
         // construct body
         let createDialogNodeRequest = CreateDialogNode(
@@ -2745,7 +2745,7 @@ public class Conversation {
             digressOutSlots: digressOutSlots,
             userLabel: userLabel)
         guard let body = try? JSONEncoder().encode(createDialogNodeRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -2764,7 +2764,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/dialog_nodes"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2800,7 +2800,7 @@ public class Conversation {
         dialogNode: String,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DialogNode>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DialogNode>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2820,7 +2820,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/dialog_nodes/\(dialogNode)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2897,7 +2897,7 @@ public class Conversation {
         newDigressOutSlots: String? = nil,
         newUserLabel: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DialogNode>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DialogNode>?, WatsonError?) -> Void)
     {
         // construct body
         let updateDialogNodeRequest = UpdateDialogNode(
@@ -2920,7 +2920,7 @@ public class Conversation {
             digressOutSlots: newDigressOutSlots,
             userLabel: newUserLabel)
         guard let body = try? JSONEncoder().encode(updateDialogNodeRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -2939,7 +2939,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/dialog_nodes/\(dialogNode)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2972,7 +2972,7 @@ public class Conversation {
         workspaceID: String,
         dialogNode: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2988,7 +2988,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/dialog_nodes/\(dialogNode)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -3030,7 +3030,7 @@ public class Conversation {
         pageLimit: Int? = nil,
         cursor: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<LogCollection>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<LogCollection>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3062,7 +3062,7 @@ public class Conversation {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/logs"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -3103,7 +3103,7 @@ public class Conversation {
         pageLimit: Int? = nil,
         cursor: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<LogCollection>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<LogCollection>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3160,7 +3160,7 @@ public class Conversation {
     public func deleteUserData(
         customerID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders

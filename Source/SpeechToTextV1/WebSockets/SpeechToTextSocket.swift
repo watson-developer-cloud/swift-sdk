@@ -26,7 +26,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
     internal var onConnect: (() -> Void)?
     internal var onListening: (() -> Void)?
     internal var onResults: ((SpeechRecognitionResults) -> Void)?
-    internal var onError: ((RestError) -> Void)?
+    internal var onError: ((WatsonError) -> Void)?
     internal var onDisconnect: (() -> Void)?
 
     private let url: URL
@@ -73,7 +73,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         // restrict the number of retries
         guard connectAttempts <= maxConnectAttempts else {
             let failureReason = "Invalid HTTP upgrade. Check credentials."
-            let error = RestError.http(statusCode: 400, message: failureReason, metadata: ["type": "Websocket"])
+            let error = WatsonError.http(statusCode: 400, message: failureReason, metadata: ["type": "Websocket"])
             onError?(error)
             return
         }
@@ -94,7 +94,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
                 self.socket.delegate = self
                 self.socket.connect()
             } else {
-                self.onError?(error ?? RestError.http(statusCode: 400, message: "Token Manager error", metadata: nil))
+                self.onError?(error ?? WatsonError.http(statusCode: 400, message: "Token Manager error", metadata: nil))
             }
         }
     }
@@ -191,7 +191,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
     }
 
     private func onErrorMessage(error: String) {
-        let error = RestError.other(message: error)
+        let error = WatsonError.other(message: error)
         onError?(error)
     }
 
@@ -255,7 +255,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
             self.connect()
             return
         }
-        onError?(RestError.other(message: String(describing: error)))
+        onError?(WatsonError.other(message: String(describing: error)))
         onDisconnect?()
     }
 }

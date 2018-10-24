@@ -91,7 +91,7 @@ public class LanguageTranslator {
      - parameter data: Raw data returned by the service that may represent an error.
      - parameter response: the URL response returned by the service.
      */
-    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> RestError {
+    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> WatsonError {
 
         let statusCode = response.statusCode
         var errorMessage: String?
@@ -103,10 +103,10 @@ public class LanguageTranslator {
             if case let .some(.string(message)) = json["error"] {
                 errorMessage = message
             }
-            // If metadata is empty, it should show up as nil in the RestError
-            return RestError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
+            // If metadata is empty, it should show up as nil in the WatsonError
+            return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
         } catch {
-            return RestError.http(statusCode: statusCode, message: nil, metadata: nil)
+            return WatsonError.http(statusCode: statusCode, message: nil, metadata: nil)
         }
     }
 
@@ -134,12 +134,12 @@ public class LanguageTranslator {
         source: String? = nil,
         target: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<TranslationResult>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TranslationResult>?, WatsonError?) -> Void)
     {
         // construct body
         let translateRequest = TranslateRequest(text: text, modelID: modelID, source: source, target: target)
         guard let body = try? JSONEncoder().encode(translateRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -182,7 +182,7 @@ public class LanguageTranslator {
      */
     public func listIdentifiableLanguages(
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<IdentifiableLanguages>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<IdentifiableLanguages>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -222,12 +222,12 @@ public class LanguageTranslator {
     public func identify(
         text: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<IdentifiedLanguages>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<IdentifiedLanguages>?, WatsonError?) -> Void)
     {
         // construct body
         // convert body parameter to Data with UTF-8 encoding
         guard let body = text.data(using: .utf8) else {
-            let error = RestError.serialization(values: "text could not be encoded with UTF8.")
+            let error = WatsonError.serialization(values: "text could not be encoded with UTF8.")
             completionHandler(nil, error)
             return
         }
@@ -279,7 +279,7 @@ public class LanguageTranslator {
         target: String? = nil,
         defaultModels: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<TranslationModels>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TranslationModels>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -354,7 +354,7 @@ public class LanguageTranslator {
         forcedGlossary: URL? = nil,
         parallelCorpus: URL? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<TranslationModel>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TranslationModel>?, WatsonError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -362,7 +362,7 @@ public class LanguageTranslator {
             do {
                 try multipartFormData.append(file: forcedGlossary, withName: "forced_glossary")
             } catch {
-                completionHandler(nil, RestError.serialization(values: "file \(forcedGlossary.path)"))
+                completionHandler(nil, WatsonError.serialization(values: "file \(forcedGlossary.path)"))
                 return
             }
         }
@@ -370,12 +370,12 @@ public class LanguageTranslator {
             do {
                 try multipartFormData.append(file: parallelCorpus, withName: "parallel_corpus")
             } catch {
-                completionHandler(nil, RestError.serialization(values: "file \(parallelCorpus.path)"))
+                completionHandler(nil, WatsonError.serialization(values: "file \(parallelCorpus.path)"))
                 return
             }
         }
         guard let body = try? multipartFormData.toData() else {
-            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
+            completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
             return
         }
 
@@ -424,7 +424,7 @@ public class LanguageTranslator {
     public func deleteModel(
         modelID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DeleteModelResult>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DeleteModelResult>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -440,7 +440,7 @@ public class LanguageTranslator {
         // construct REST request
         let path = "/v3/models/\(modelID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -470,7 +470,7 @@ public class LanguageTranslator {
     public func getModel(
         modelID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<TranslationModel>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TranslationModel>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -486,7 +486,7 @@ public class LanguageTranslator {
         // construct REST request
         let path = "/v3/models/\(modelID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(

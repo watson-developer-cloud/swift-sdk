@@ -100,7 +100,7 @@ public class PersonalityInsights {
      - parameter data: Raw data returned by the service that may represent an error.
      - parameter response: the URL response returned by the service.
      */
-    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> RestError {
+    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> WatsonError {
 
         let statusCode = response.statusCode
         var errorMessage: String?
@@ -115,10 +115,10 @@ public class PersonalityInsights {
             if case let .some(.string(help)) = json["help"] {
                 metadata["help"] = help
             }
-            // If metadata is empty, it should show up as nil in the RestError
-            return RestError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
+            // If metadata is empty, it should show up as nil in the WatsonError
+            return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
         } catch {
-            return RestError.http(statusCode: statusCode, message: nil, metadata: nil)
+            return WatsonError.http(statusCode: statusCode, message: nil, metadata: nil)
         }
     }
 
@@ -171,11 +171,11 @@ public class PersonalityInsights {
         rawScores: Bool? = nil,
         consumptionPreferences: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Profile>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Profile>?, WatsonError?) -> Void)
     {
         // construct body
         guard let body = profileContent.content else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -273,11 +273,11 @@ public class PersonalityInsights {
         csvHeaders: Bool? = nil,
         consumptionPreferences: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<String>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<String>?, WatsonError?) -> Void)
     {
         // construct body
         guard let body = profileContent.content else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 

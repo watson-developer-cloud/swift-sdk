@@ -91,7 +91,7 @@ public class VisualRecognition {
      - parameter data: Raw data returned by the service that may represent an error.
      - parameter response: the URL response returned by the service.
      */
-    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> RestError {
+    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> WatsonError {
 
         let statusCode = response.statusCode
         var errorMessage: String?
@@ -129,10 +129,10 @@ public class VisualRecognition {
                     errorMessage = message
                 }
             }
-            // If metadata is empty, it should show up as nil in the RestError
-            return RestError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
+            // If metadata is empty, it should show up as nil in the WatsonError
+            return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
         } catch {
-            return RestError.http(statusCode: statusCode, message: nil, metadata: nil)
+            return WatsonError.http(statusCode: statusCode, message: nil, metadata: nil)
         }
     }
 
@@ -179,7 +179,7 @@ public class VisualRecognition {
         classifierIDs: [String]? = nil,
         acceptLanguage: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ClassifiedImages>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<ClassifiedImages>?, WatsonError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -187,7 +187,7 @@ public class VisualRecognition {
             do {
                 try multipartFormData.append(file: imagesFile, withName: "images_file")
             } catch {
-                completionHandler(nil, RestError.serialization(values: "file \(imagesFile.path)"))
+                completionHandler(nil, WatsonError.serialization(values: "file \(imagesFile.path)"))
                 return
             }
         }
@@ -212,7 +212,7 @@ public class VisualRecognition {
             }
         }
         guard let body = try? multipartFormData.toData() else {
-            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
+            completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
             return
         }
 
@@ -277,7 +277,7 @@ public class VisualRecognition {
         imagesFile: URL? = nil,
         url: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DetectedFaces>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DetectedFaces>?, WatsonError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -285,7 +285,7 @@ public class VisualRecognition {
             do {
                 try multipartFormData.append(file: imagesFile, withName: "images_file")
             } catch {
-                completionHandler(nil, RestError.serialization(values: "file \(imagesFile.path)"))
+                completionHandler(nil, WatsonError.serialization(values: "file \(imagesFile.path)"))
                 return
             }
         }
@@ -295,7 +295,7 @@ public class VisualRecognition {
             }
         }
         guard let body = try? multipartFormData.toData() else {
-            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
+            completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
             return
         }
 
@@ -354,7 +354,7 @@ public class VisualRecognition {
         positiveExamples: [PositiveExample],
         negativeExamples: URL? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Classifier>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Classifier>?, WatsonError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -365,7 +365,7 @@ public class VisualRecognition {
             do {
                 try multipartFormData.append(file: example.examples, withName: example.name + "_positive_examples")
             } catch {
-                completionHandler(nil, RestError.serialization(values: "file \(example.examples)"))
+                completionHandler(nil, WatsonError.serialization(values: "file \(example.examples)"))
                 return
             }
         }
@@ -373,12 +373,12 @@ public class VisualRecognition {
             do {
                 try multipartFormData.append(file: negativeExamples, withName: "negative_examples")
             } catch {
-                completionHandler(nil, RestError.serialization(values: "file \(negativeExamples.path)"))
+                completionHandler(nil, WatsonError.serialization(values: "file \(negativeExamples.path)"))
                 return
             }
         }
         guard let body = try? multipartFormData.toData() else {
-            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
+            completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
             return
         }
 
@@ -423,7 +423,7 @@ public class VisualRecognition {
         owners: [String]? = nil,
         verbose: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Classifiers>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Classifiers>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -467,7 +467,7 @@ public class VisualRecognition {
     public func getClassifier(
         classifierID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Classifier>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Classifier>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -483,7 +483,7 @@ public class VisualRecognition {
         // construct REST request
         let path = "/v3/classifiers/\(classifierID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -531,7 +531,7 @@ public class VisualRecognition {
         positiveExamples: [PositiveExample]? = nil,
         negativeExamples: URL? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Classifier>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Classifier>?, WatsonError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -540,7 +540,7 @@ public class VisualRecognition {
                 do {
                     try multipartFormData.append(file: example.examples, withName: example.name + "_positive_examples")
                 } catch {
-                    completionHandler(nil, RestError.serialization(values: "file \(example.examples)"))
+                    completionHandler(nil, WatsonError.serialization(values: "file \(example.examples)"))
                     return
                 }
             }
@@ -549,12 +549,12 @@ public class VisualRecognition {
             do {
                 try multipartFormData.append(file: negativeExamples, withName: "negative_examples")
             } catch {
-                completionHandler(nil, RestError.serialization(values: "file \(negativeExamples.path)"))
+                completionHandler(nil, WatsonError.serialization(values: "file \(negativeExamples.path)"))
                 return
             }
         }
         guard let body = try? multipartFormData.toData() else {
-            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
+            completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
             return
         }
 
@@ -573,7 +573,7 @@ public class VisualRecognition {
         // construct REST request
         let path = "/v3/classifiers/\(classifierID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -601,7 +601,7 @@ public class VisualRecognition {
     public func deleteClassifier(
         classifierID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -617,7 +617,7 @@ public class VisualRecognition {
         // construct REST request
         let path = "/v3/classifiers/\(classifierID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -647,7 +647,7 @@ public class VisualRecognition {
     public func getCoreMlModel(
         classifierID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Data>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Data>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -663,7 +663,7 @@ public class VisualRecognition {
         // construct REST request
         let path = "/v3/classifiers/\(classifierID)/core_ml_model"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -696,7 +696,7 @@ public class VisualRecognition {
     public func deleteUserData(
         customerID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders

@@ -89,7 +89,7 @@ public class Assistant {
      - parameter data: Raw data returned by the service that may represent an error.
      - parameter response: the URL response returned by the service.
      */
-    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> RestError {
+    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> WatsonError {
 
         let statusCode = response.statusCode
         var errorMessage: String?
@@ -101,10 +101,10 @@ public class Assistant {
             if case let .some(.string(message)) = json["error"] {
                 errorMessage = message
             }
-            // If metadata is empty, it should show up as nil in the RestError
-            return RestError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
+            // If metadata is empty, it should show up as nil in the WatsonError
+            return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
         } catch {
-            return RestError.http(statusCode: statusCode, message: nil, metadata: nil)
+            return WatsonError.http(statusCode: statusCode, message: nil, metadata: nil)
         }
     }
 
@@ -124,7 +124,7 @@ public class Assistant {
     public func createSession(
         assistantID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<SessionResponse>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<SessionResponse>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -141,7 +141,7 @@ public class Assistant {
         // construct REST request
         let path = "/v2/assistants/\(assistantID)/sessions"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -175,7 +175,7 @@ public class Assistant {
         assistantID: String,
         sessionID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -191,7 +191,7 @@ public class Assistant {
         // construct REST request
         let path = "/v2/assistants/\(assistantID)/sessions/\(sessionID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -229,12 +229,12 @@ public class Assistant {
         input: MessageInput? = nil,
         context: MessageContext? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<MessageResponse>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<MessageResponse>?, WatsonError?) -> Void)
     {
         // construct body
         let messageRequest = MessageRequest(input: input, context: context)
         guard let body = try? JSONEncoder().encodeIfPresent(messageRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -253,7 +253,7 @@ public class Assistant {
         // construct REST request
         let path = "/v2/assistants/\(assistantID)/sessions/\(sessionID)/message"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(

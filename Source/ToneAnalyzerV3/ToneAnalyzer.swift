@@ -94,7 +94,7 @@ public class ToneAnalyzer {
      - parameter data: Raw data returned by the service that may represent an error.
      - parameter response: the URL response returned by the service.
      */
-    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> RestError {
+    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> WatsonError {
 
         let statusCode = response.statusCode
         var errorMessage: String?
@@ -106,10 +106,10 @@ public class ToneAnalyzer {
             if case let .some(.string(message)) = json["error"] {
                 errorMessage = message
             }
-            // If metadata is empty, it should show up as nil in the RestError
-            return RestError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
+            // If metadata is empty, it should show up as nil in the WatsonError
+            return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
         } catch {
-            return RestError.http(statusCode: statusCode, message: nil, metadata: nil)
+            return WatsonError.http(statusCode: statusCode, message: nil, metadata: nil)
         }
     }
 
@@ -159,11 +159,11 @@ public class ToneAnalyzer {
         contentLanguage: String? = nil,
         acceptLanguage: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ToneAnalysis>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<ToneAnalysis>?, WatsonError?) -> Void)
     {
         // construct body
         guard let body = toneContent.content else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -242,12 +242,12 @@ public class ToneAnalyzer {
         contentLanguage: String? = nil,
         acceptLanguage: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<UtteranceAnalyses>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<UtteranceAnalyses>?, WatsonError?) -> Void)
     {
         // construct body
         let toneChatRequest = ToneChatInput(utterances: utterances)
         guard let body = try? JSONEncoder().encode(toneChatRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 

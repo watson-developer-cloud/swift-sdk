@@ -94,7 +94,7 @@ public class NaturalLanguageUnderstanding {
      - parameter data: Raw data returned by the service that may represent an error.
      - parameter response: the URL response returned by the service.
      */
-    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> RestError {
+    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> WatsonError {
 
         let statusCode = response.statusCode
         var errorMessage: String?
@@ -109,10 +109,10 @@ public class NaturalLanguageUnderstanding {
             if case let .some(.string(description)) = json["description"] {
                 metadata["description"] = description
             }
-            // If metadata is empty, it should show up as nil in the RestError
-            return RestError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
+            // If metadata is empty, it should show up as nil in the WatsonError
+            return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
         } catch {
-            return RestError.http(statusCode: statusCode, message: nil, metadata: nil)
+            return WatsonError.http(statusCode: statusCode, message: nil, metadata: nil)
         }
     }
 
@@ -173,7 +173,7 @@ public class NaturalLanguageUnderstanding {
         language: String? = nil,
         limitTextCharacters: Int? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<AnalysisResults>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<AnalysisResults>?, WatsonError?) -> Void)
     {
         // construct body
         let analyzeRequest = Parameters(
@@ -188,7 +188,7 @@ public class NaturalLanguageUnderstanding {
             language: language,
             limitTextCharacters: limitTextCharacters)
         guard let body = try? JSONEncoder().encode(analyzeRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -231,7 +231,7 @@ public class NaturalLanguageUnderstanding {
      */
     public func listModels(
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ListModelsResults>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<ListModelsResults>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -271,7 +271,7 @@ public class NaturalLanguageUnderstanding {
     public func deleteModel(
         modelID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DeleteModelResults>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DeleteModelResults>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -287,7 +287,7 @@ public class NaturalLanguageUnderstanding {
         // construct REST request
         let path = "/v1/models/\(modelID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(

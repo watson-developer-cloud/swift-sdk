@@ -47,7 +47,7 @@ extension VisualRecognition {
      */
     public func updateLocalModel(
         classifierID: String,
-        completionHandler: @escaping (WatsonResponse<Classifier>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Classifier>?, WatsonError?) -> Void)
     {
         // setup date formatter '2017-12-04T19:44:27.419Z'
         let dateFormatter = DateFormatter()
@@ -142,11 +142,11 @@ extension VisualRecognition {
         imageData: Data,
         classifierIDs: [String] = ["default"],
         threshold: Double? = nil,
-        completionHandler: @escaping (ClassifiedImages?, RestError?) -> Void)
+        completionHandler: @escaping (ClassifiedImages?, WatsonError?) -> Void)
     {
         // ensure a classifier id was provided
         guard !classifierIDs.isEmpty else {
-            let error = RestError.other(message: "Please provide at least one classifierID.")
+            let error = WatsonError.other(message: "Please provide at least one classifierID.")
             completionHandler(nil, error)
             return
         }
@@ -166,7 +166,7 @@ extension VisualRecognition {
                     model = try self.loadModelFromDisk(classifierID: classifierID)
                 } catch {
                     dispatchGroup.leave()
-                    let error = RestError.other(message: "Failed to load model for classifier \(classifierID): \(error.localizedDescription)")
+                    let error = WatsonError.other(message: "Failed to load model for classifier \(classifierID): \(error.localizedDescription)")
                     completionHandler(nil, error)
                     return
                 }
@@ -177,7 +177,7 @@ extension VisualRecognition {
                     classifier = try VNCoreMLModel(for: model)
                 } catch {
                     dispatchGroup.leave()
-                    let error = RestError.other(message: "Failed to convert model for classifier \(classifierID): \(error.localizedDescription)")
+                    let error = WatsonError.other(message: "Failed to convert model for classifier \(classifierID): \(error.localizedDescription)")
                     completionHandler(nil, error)
                     return
                 }
@@ -186,13 +186,13 @@ extension VisualRecognition {
                 let request = VNCoreMLRequest(model: classifier) { request, error in
                     if let error = error {
                         dispatchGroup.leave()
-                        let error = RestError.other(message: "Classifier \(classifierID) failed with error: \(error)")
+                        let error = WatsonError.other(message: "Classifier \(classifierID) failed with error: \(error)")
                         completionHandler(nil, error)
                         return
                     }
                     guard let observations = request.results as? [VNClassificationObservation] else {
                         dispatchGroup.leave()
-                        let error = RestError.other(message: "Failed to parse results for classifier \(classifierID)")
+                        let error = WatsonError.other(message: "Failed to parse results for classifier \(classifierID)")
                         completionHandler(nil, error)
                         return
                     }
@@ -209,7 +209,7 @@ extension VisualRecognition {
                     try requestHandler.perform([request])
                 } catch {
                     dispatchGroup.leave()
-                    let error = RestError.other(message: "Failed to process classification request: \(error.localizedDescription)")
+                    let error = WatsonError.other(message: "Failed to process classification request: \(error.localizedDescription)")
                     completionHandler(nil, error)
                     return
                 }
@@ -223,7 +223,7 @@ extension VisualRecognition {
             do {
                 classifiedImages = try self.convert(results: results, threshold: threshold)
             } catch {
-                let error = RestError.other(message: "Failed to represent results as JSON: \(error.localizedDescription)")
+                let error = WatsonError.other(message: "Failed to represent results as JSON: \(error.localizedDescription)")
                 completionHandler(nil, error)
                 return
             }
@@ -255,7 +255,7 @@ extension VisualRecognition {
         }
 
         // model not found -> throw an error
-        let error = RestError.other(message: "Failed to locate a Core ML model on disk for classifier \(classifierID).")
+        let error = WatsonError.other(message: "Failed to locate a Core ML model on disk for classifier \(classifierID).")
         throw error
     }
 
@@ -297,7 +297,7 @@ extension VisualRecognition {
         let json = """
             { "images": [{ "classifiers": [ \(classifiers.joined(separator: ",")) ] }] }
         """
-        guard let data = json.data(using: .utf8) else { throw RestError.serialization(values: "Core ML classification") }
+        guard let data = json.data(using: .utf8) else { throw WatsonError.serialization(values: "Core ML classification") }
         return try JSONDecoder().decode(ClassifiedImages.self, from: data)
     }
 
@@ -313,7 +313,7 @@ extension VisualRecognition {
      */
     private func downloadClassifier(
         classifierID: String,
-        completionHandler: @escaping (WatsonResponse<Classifier>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Classifier>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -345,7 +345,7 @@ extension VisualRecognition {
                 create: true
             )
         } catch {
-            let error = RestError.other(message: "Failed to create temporary downloads directory: \(error.localizedDescription)")
+            let error = WatsonError.other(message: "Failed to create temporary downloads directory: \(error.localizedDescription)")
             completionHandler(nil, error)
             return
         }
@@ -360,7 +360,7 @@ extension VisualRecognition {
                 create: true
             )
         } catch {
-            let error = RestError.other(message: "Failed to locate application support directory: \(error.localizedDescription)")
+            let error = WatsonError.other(message: "Failed to locate application support directory: \(error.localizedDescription)")
             completionHandler(nil, error)
             return
         }
@@ -379,13 +379,13 @@ extension VisualRecognition {
             }
 
             guard let statusCode = response?.statusCode else {
-                let error = RestError.noResponse
+                let error = WatsonError.noResponse
                 completionHandler(nil, error)
                 return
             }
 
             guard (200..<300).contains(statusCode) else {
-                let error = RestError.http(statusCode: statusCode, message: nil, metadata: nil)
+                let error = WatsonError.http(statusCode: statusCode, message: nil, metadata: nil)
                 completionHandler(nil, error)
                 return
             }
@@ -395,7 +395,7 @@ extension VisualRecognition {
             do {
                 compiledModelTemporaryURL = try MLModel.compileModel(at: sourceModelURL)
             } catch {
-                let error = RestError.other(message: "Could not compile Core ML model from source: \(error.localizedDescription)")
+                let error = WatsonError.other(message: "Could not compile Core ML model from source: \(error.localizedDescription)")
                 completionHandler(nil, error)
                 return
             }
@@ -409,7 +409,7 @@ extension VisualRecognition {
                     try fileManager.copyItem(at: compiledModelTemporaryURL, to: compiledModelURL)
                 }
             } catch {
-                let error = RestError.other(message: "Failed to move compiled model: \(error.localizedDescription)")
+                let error = WatsonError.other(message: "Failed to move compiled model: \(error.localizedDescription)")
                 completionHandler(nil, error)
                 return
             }
@@ -420,7 +420,7 @@ extension VisualRecognition {
             do {
                 try compiledModelURL.setResourceValues(urlResourceValues)
             } catch {
-                let error = RestError.other(message: "Could not exclude compiled model from backup: \(error.localizedDescription)")
+                let error = WatsonError.other(message: "Could not exclude compiled model from backup: \(error.localizedDescription)")
                 completionHandler(nil, error)
             }
 

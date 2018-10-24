@@ -80,7 +80,7 @@ public class NaturalLanguageClassifier {
      - parameter data: Raw data returned by the service that may represent an error.
      - parameter response: the URL response returned by the service.
      */
-    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> RestError {
+    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> WatsonError {
 
         let statusCode = response.statusCode
         var errorMessage: String?
@@ -95,10 +95,10 @@ public class NaturalLanguageClassifier {
             if case let .some(.string(description)) = json["description"] {
                 metadata["description"] = description
             }
-            // If metadata is empty, it should show up as nil in the RestError
-            return RestError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
+            // If metadata is empty, it should show up as nil in the WatsonError
+            return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
         } catch {
-            return RestError.http(statusCode: statusCode, message: nil, metadata: nil)
+            return WatsonError.http(statusCode: statusCode, message: nil, metadata: nil)
         }
     }
 
@@ -117,12 +117,12 @@ public class NaturalLanguageClassifier {
         classifierID: String,
         text: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Classification>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Classification>?, WatsonError?) -> Void)
     {
         // construct body
         let classifyRequest = ClassifyInput(text: text)
         guard let body = try? JSONEncoder().encode(classifyRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -137,7 +137,7 @@ public class NaturalLanguageClassifier {
         // construct REST request
         let path = "/v1/classifiers/\(classifierID)/classify"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -170,12 +170,12 @@ public class NaturalLanguageClassifier {
         classifierID: String,
         collection: [ClassifyInput],
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ClassificationCollection>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<ClassificationCollection>?, WatsonError?) -> Void)
     {
         // construct body
         let classifyCollectionRequest = ClassifyCollectionInput(collection: collection)
         guard let body = try? JSONEncoder().encode(classifyCollectionRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -190,7 +190,7 @@ public class NaturalLanguageClassifier {
         // construct REST request
         let path = "/v1/classifiers/\(classifierID)/classify_collection"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -227,24 +227,24 @@ public class NaturalLanguageClassifier {
         metadata: URL,
         trainingData: URL,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Classifier>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Classifier>?, WatsonError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
         do {
             try multipartFormData.append(file: metadata, withName: "training_metadata")
         } catch {
-            completionHandler(nil, RestError.serialization(values: "file \(metadata.path)"))
+            completionHandler(nil, WatsonError.serialization(values: "file \(metadata.path)"))
             return
         }
         do {
             try multipartFormData.append(file: trainingData, withName: "training_data")
         } catch {
-            completionHandler(nil, RestError.serialization(values: "file \(trainingData.path)"))
+            completionHandler(nil, WatsonError.serialization(values: "file \(trainingData.path)"))
             return
         }
         guard let body = try? multipartFormData.toData() else {
-            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
+            completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
             return
         }
 
@@ -281,7 +281,7 @@ public class NaturalLanguageClassifier {
      */
     public func listClassifiers(
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ClassifierList>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<ClassifierList>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -316,7 +316,7 @@ public class NaturalLanguageClassifier {
     public func getClassifier(
         classifierID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Classifier>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Classifier>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -328,7 +328,7 @@ public class NaturalLanguageClassifier {
         // construct REST request
         let path = "/v1/classifiers/\(classifierID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -354,7 +354,7 @@ public class NaturalLanguageClassifier {
     public func deleteClassifier(
         classifierID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -366,7 +366,7 @@ public class NaturalLanguageClassifier {
         // construct REST request
         let path = "/v1/classifiers/\(classifierID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(

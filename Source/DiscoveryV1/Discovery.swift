@@ -91,7 +91,7 @@ public class Discovery {
      - parameter data: Raw data returned by the service that may represent an error.
      - parameter response: the URL response returned by the service.
      */
-    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> RestError {
+    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> WatsonError {
 
         let statusCode = response.statusCode
         var errorMessage: String?
@@ -106,10 +106,10 @@ public class Discovery {
             if case let .some(.string(description)) = json["description"] {
                 metadata["description"] = description
             }
-            // If metadata is empty, it should show up as nil in the RestError
-            return RestError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
+            // If metadata is empty, it should show up as nil in the WatsonError
+            return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
         } catch {
-            return RestError.http(statusCode: statusCode, message: nil, metadata: nil)
+            return WatsonError.http(statusCode: statusCode, message: nil, metadata: nil)
         }
     }
 
@@ -132,12 +132,12 @@ public class Discovery {
         description: String? = nil,
         size: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Environment>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Environment>?, WatsonError?) -> Void)
     {
         // construct body
         let createEnvironmentRequest = CreateEnvironmentRequest(name: name, description: description, size: size)
         guard let body = try? JSONEncoder().encode(createEnvironmentRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -181,7 +181,7 @@ public class Discovery {
     public func listEnvironments(
         name: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ListEnvironmentsResponse>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<ListEnvironmentsResponse>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -223,7 +223,7 @@ public class Discovery {
     public func getEnvironment(
         environmentID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Environment>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Environment>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -239,7 +239,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -276,12 +276,12 @@ public class Discovery {
         description: String? = nil,
         size: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Environment>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Environment>?, WatsonError?) -> Void)
     {
         // construct body
         let updateEnvironmentRequest = UpdateEnvironmentRequest(name: name, description: description, size: size)
         guard let body = try? JSONEncoder().encode(updateEnvironmentRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -300,7 +300,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -328,7 +328,7 @@ public class Discovery {
     public func deleteEnvironment(
         environmentID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DeleteEnvironmentResponse>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DeleteEnvironmentResponse>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -344,7 +344,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -375,7 +375,7 @@ public class Discovery {
         environmentID: String,
         collectionIds: [String],
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ListCollectionFieldsResponse>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<ListCollectionFieldsResponse>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -392,7 +392,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/fields"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -440,12 +440,12 @@ public class Discovery {
         normalizations: [NormalizationOperation]? = nil,
         source: Source? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Configuration>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Configuration>?, WatsonError?) -> Void)
     {
         // construct body
         let createConfigurationRequest = Configuration(name: name, description: description, conversions: conversions, enrichments: enrichments, normalizations: normalizations, source: source)
         guard let body = try? JSONEncoder().encode(createConfigurationRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -464,7 +464,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/configurations"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -496,7 +496,7 @@ public class Discovery {
         environmentID: String,
         name: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ListConfigurationsResponse>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<ListConfigurationsResponse>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -516,7 +516,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/configurations"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -545,7 +545,7 @@ public class Discovery {
         environmentID: String,
         configurationID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Configuration>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Configuration>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -561,7 +561,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/configurations/\(configurationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -611,12 +611,12 @@ public class Discovery {
         normalizations: [NormalizationOperation]? = nil,
         source: Source? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Configuration>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Configuration>?, WatsonError?) -> Void)
     {
         // construct body
         let updateConfigurationRequest = Configuration(name: name, description: description, conversions: conversions, enrichments: enrichments, normalizations: normalizations, source: source)
         guard let body = try? JSONEncoder().encode(updateConfigurationRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -635,7 +635,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/configurations/\(configurationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -670,7 +670,7 @@ public class Discovery {
         environmentID: String,
         configurationID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DeleteConfigurationResponse>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DeleteConfigurationResponse>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -686,7 +686,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/configurations/\(configurationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -741,7 +741,7 @@ public class Discovery {
         metadata: String? = nil,
         fileContentType: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<TestDocument>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TestDocument>?, WatsonError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -754,7 +754,7 @@ public class Discovery {
             do {
                 try multipartFormData.append(file: file, withName: "file")
             } catch {
-                completionHandler(nil, RestError.serialization(values: "file \(file.path)"))
+                completionHandler(nil, WatsonError.serialization(values: "file \(file.path)"))
                 return
             }
         }
@@ -764,7 +764,7 @@ public class Discovery {
             }
         }
         guard let body = try? multipartFormData.toData() else {
-            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
+            completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
             return
         }
 
@@ -791,7 +791,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/preview"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -828,12 +828,12 @@ public class Discovery {
         configurationID: String? = nil,
         language: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Collection>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Collection>?, WatsonError?) -> Void)
     {
         // construct body
         let createCollectionRequest = CreateCollectionRequest(name: name, description: description, configurationID: configurationID, language: language)
         guard let body = try? JSONEncoder().encode(createCollectionRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -852,7 +852,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -884,7 +884,7 @@ public class Discovery {
         environmentID: String,
         name: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ListCollectionsResponse>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<ListCollectionsResponse>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -904,7 +904,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -933,7 +933,7 @@ public class Discovery {
         environmentID: String,
         collectionID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Collection>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Collection>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -949,7 +949,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -984,12 +984,12 @@ public class Discovery {
         description: String? = nil,
         configurationID: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Collection>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Collection>?, WatsonError?) -> Void)
     {
         // construct body
         let updateCollectionRequest = UpdateCollectionRequest(name: name, description: description, configurationID: configurationID)
         guard let body = try? JSONEncoder().encodeIfPresent(updateCollectionRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -1008,7 +1008,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1038,7 +1038,7 @@ public class Discovery {
         environmentID: String,
         collectionID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DeleteCollectionResponse>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DeleteCollectionResponse>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1054,7 +1054,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1085,7 +1085,7 @@ public class Discovery {
         environmentID: String,
         collectionID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ListCollectionFieldsResponse>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<ListCollectionFieldsResponse>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1101,7 +1101,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/fields"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1133,7 +1133,7 @@ public class Discovery {
         environmentID: String,
         collectionID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Expansions>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Expansions>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1149,7 +1149,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/expansions"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1193,12 +1193,12 @@ public class Discovery {
         collectionID: String,
         expansions: [Expansion],
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Expansions>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Expansions>?, WatsonError?) -> Void)
     {
         // construct body
         let createExpansionsRequest = Expansions(expansions: expansions)
         guard let body = try? JSONEncoder().encode(createExpansionsRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -1217,7 +1217,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/expansions"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1250,7 +1250,7 @@ public class Discovery {
         environmentID: String,
         collectionID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1266,7 +1266,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/expansions"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1321,7 +1321,7 @@ public class Discovery {
         metadata: String? = nil,
         fileContentType: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DocumentAccepted>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DocumentAccepted>?, WatsonError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -1329,7 +1329,7 @@ public class Discovery {
             do {
                 try multipartFormData.append(file: file, withName: "file")
             } catch {
-                completionHandler(nil, RestError.serialization(values: "file \(file.path)"))
+                completionHandler(nil, WatsonError.serialization(values: "file \(file.path)"))
                 return
             }
         }
@@ -1339,7 +1339,7 @@ public class Discovery {
             }
         }
         guard let body = try? multipartFormData.toData() else {
-            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
+            completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
             return
         }
 
@@ -1358,7 +1358,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/documents"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1394,7 +1394,7 @@ public class Discovery {
         collectionID: String,
         documentID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DocumentStatus>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DocumentStatus>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1410,7 +1410,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/documents/\(documentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1456,7 +1456,7 @@ public class Discovery {
         metadata: String? = nil,
         fileContentType: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DocumentAccepted>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DocumentAccepted>?, WatsonError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
@@ -1464,7 +1464,7 @@ public class Discovery {
             do {
                 try multipartFormData.append(file: file, withName: "file")
             } catch {
-                completionHandler(nil, RestError.serialization(values: "file \(file.path)"))
+                completionHandler(nil, WatsonError.serialization(values: "file \(file.path)"))
                 return
             }
         }
@@ -1474,7 +1474,7 @@ public class Discovery {
             }
         }
         guard let body = try? multipartFormData.toData() else {
-            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
+            completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
             return
         }
 
@@ -1493,7 +1493,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/documents/\(documentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1528,7 +1528,7 @@ public class Discovery {
         collectionID: String,
         documentID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DeleteDocumentResponse>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DeleteDocumentResponse>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1544,7 +1544,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/documents/\(documentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1645,7 +1645,7 @@ public class Discovery {
         bias: String? = nil,
         loggingOptOut: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<QueryResponse>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<QueryResponse>?, WatsonError?) -> Void)
     {
         // construct body
         let returnFieldsJoined = returnFields?.joined(separator: ",")
@@ -1674,7 +1674,7 @@ public class Discovery {
             similarFields: similarFieldsJoined,
             bias: bias)
         guard let body = try? JSONEncoder().encode(queryLong) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -1696,7 +1696,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/query"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1785,7 +1785,7 @@ public class Discovery {
         similarDocumentIds: [String]? = nil,
         similarFields: [String]? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<QueryNoticesResponse>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<QueryNoticesResponse>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1869,7 +1869,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/notices"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1970,7 +1970,7 @@ public class Discovery {
         bias: String? = nil,
         loggingOptOut: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<QueryResponse>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<QueryResponse>?, WatsonError?) -> Void)
     {
         // construct body
         let returnFieldsJoined = returnFields?.joined(separator: ",")
@@ -2001,7 +2001,7 @@ public class Discovery {
             similarFields: similarFieldsJoined,
             bias: bias)
         guard let body = try? JSONEncoder().encode(queryLong) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -2023,7 +2023,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/query"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2102,7 +2102,7 @@ public class Discovery {
         similarDocumentIds: [String]? = nil,
         similarFields: [String]? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<QueryNoticesResponse>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<QueryNoticesResponse>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2171,7 +2171,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/notices"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2217,12 +2217,12 @@ public class Discovery {
         count: Int? = nil,
         evidenceCount: Int? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<QueryEntitiesResponse>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<QueryEntitiesResponse>?, WatsonError?) -> Void)
     {
         // construct body
         let queryEntitiesRequest = QueryEntities(feature: feature, entity: entity, context: context, count: count, evidenceCount: evidenceCount)
         guard let body = try? JSONEncoder().encode(queryEntitiesRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -2241,7 +2241,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/query_entities"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2290,12 +2290,12 @@ public class Discovery {
         count: Int? = nil,
         evidenceCount: Int? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<QueryRelationsResponse>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<QueryRelationsResponse>?, WatsonError?) -> Void)
     {
         // construct body
         let queryRelationsRequest = QueryRelations(entities: entities, context: context, sort: sort, filter: filter, count: count, evidenceCount: evidenceCount)
         guard let body = try? JSONEncoder().encode(queryRelationsRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -2314,7 +2314,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/query_relations"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2346,7 +2346,7 @@ public class Discovery {
         environmentID: String,
         collectionID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<TrainingDataSet>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TrainingDataSet>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2362,7 +2362,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2399,12 +2399,12 @@ public class Discovery {
         filter: String? = nil,
         examples: [TrainingExample]? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<TrainingQuery>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TrainingQuery>?, WatsonError?) -> Void)
     {
         // construct body
         let addTrainingDataRequest = NewTrainingQuery(naturalLanguageQuery: naturalLanguageQuery, filter: filter, examples: examples)
         guard let body = try? JSONEncoder().encode(addTrainingDataRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -2423,7 +2423,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2455,7 +2455,7 @@ public class Discovery {
         environmentID: String,
         collectionID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2471,7 +2471,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2504,7 +2504,7 @@ public class Discovery {
         collectionID: String,
         queryID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<TrainingQuery>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TrainingQuery>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2520,7 +2520,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2553,7 +2553,7 @@ public class Discovery {
         collectionID: String,
         queryID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2569,7 +2569,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2602,7 +2602,7 @@ public class Discovery {
         collectionID: String,
         queryID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<TrainingExampleList>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TrainingExampleList>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2618,7 +2618,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2657,12 +2657,12 @@ public class Discovery {
         crossReference: String? = nil,
         relevance: Int? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<TrainingExample>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TrainingExample>?, WatsonError?) -> Void)
     {
         // construct body
         let createTrainingExampleRequest = TrainingExample(documentID: documentID, crossReference: crossReference, relevance: relevance)
         guard let body = try? JSONEncoder().encode(createTrainingExampleRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -2681,7 +2681,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2717,7 +2717,7 @@ public class Discovery {
         queryID: String,
         exampleID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2733,7 +2733,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples/\(exampleID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2772,12 +2772,12 @@ public class Discovery {
         crossReference: String? = nil,
         relevance: Int? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<TrainingExample>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TrainingExample>?, WatsonError?) -> Void)
     {
         // construct body
         let updateTrainingExampleRequest = TrainingExamplePatch(crossReference: crossReference, relevance: relevance)
         guard let body = try? JSONEncoder().encode(updateTrainingExampleRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -2796,7 +2796,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples/\(exampleID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2832,7 +2832,7 @@ public class Discovery {
         queryID: String,
         exampleID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<TrainingExample>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TrainingExample>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2848,7 +2848,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/training_data/\(queryID)/examples/\(exampleID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2881,7 +2881,7 @@ public class Discovery {
     public func deleteUserData(
         customerID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2925,12 +2925,12 @@ public class Discovery {
         type: String,
         data: EventData,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<CreateEventResponse>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<CreateEventResponse>?, WatsonError?) -> Void)
     {
         // construct body
         let createEventRequest = CreateEventObject(type: type, data: data)
         guard let body = try? JSONEncoder().encode(createEventRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -2989,7 +2989,7 @@ public class Discovery {
         offset: Int? = nil,
         sort: [String]? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<LogQueryResponse>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<LogQueryResponse>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3055,7 +3055,7 @@ public class Discovery {
         endTime: String? = nil,
         resultType: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<MetricResponse>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<MetricResponse>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3115,7 +3115,7 @@ public class Discovery {
         endTime: String? = nil,
         resultType: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<MetricResponse>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<MetricResponse>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3174,7 +3174,7 @@ public class Discovery {
         endTime: String? = nil,
         resultType: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<MetricResponse>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<MetricResponse>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3234,7 +3234,7 @@ public class Discovery {
         endTime: String? = nil,
         resultType: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<MetricResponse>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<MetricResponse>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3288,7 +3288,7 @@ public class Discovery {
     public func getMetricsQueryTokenEvent(
         count: Int? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<MetricTokenResponse>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<MetricTokenResponse>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3333,7 +3333,7 @@ public class Discovery {
     public func listCredentials(
         environmentID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<CredentialsList>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<CredentialsList>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3349,7 +3349,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/credentials"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -3388,12 +3388,12 @@ public class Discovery {
         sourceType: String? = nil,
         credentialDetails: CredentialDetails? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Credentials>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Credentials>?, WatsonError?) -> Void)
     {
         // construct body
         let createCredentialsRequest = Credentials(sourceType: sourceType, credentialDetails: credentialDetails)
         guard let body = try? JSONEncoder().encode(createCredentialsRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -3412,7 +3412,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/credentials"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -3446,7 +3446,7 @@ public class Discovery {
         environmentID: String,
         credentialID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Credentials>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Credentials>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3462,7 +3462,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/credentials/\(credentialID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -3502,12 +3502,12 @@ public class Discovery {
         sourceType: String? = nil,
         credentialDetails: CredentialDetails? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Credentials>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Credentials>?, WatsonError?) -> Void)
     {
         // construct body
         let updateCredentialsRequest = Credentials(sourceType: sourceType, credentialDetails: credentialDetails)
         guard let body = try? JSONEncoder().encode(updateCredentialsRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -3526,7 +3526,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/credentials/\(credentialID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -3558,7 +3558,7 @@ public class Discovery {
         environmentID: String,
         credentialID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DeleteCredentials>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DeleteCredentials>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3574,7 +3574,7 @@ public class Discovery {
         // construct REST request
         let path = "/v1/environments/\(environmentID)/credentials/\(credentialID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(

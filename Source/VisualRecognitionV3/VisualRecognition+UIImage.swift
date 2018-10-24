@@ -67,14 +67,14 @@ extension VisualRecognition {
         owners: [String]? = nil,
         classifierIDs: [String]? = nil,
         acceptLanguage: String? = nil,
-        completionHandler: @escaping (WatsonResponse<ClassifiedImages>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<ClassifiedImages>?, WatsonError?) -> Void)
     {
         // save image to disk
         let file: URL
         do {
             file = try saveToDisk(image: image)
         } catch {
-            let error = RestError.saveData
+            let error = WatsonError.saveData
             completionHandler(nil, error)
             return
         }
@@ -82,7 +82,7 @@ extension VisualRecognition {
         // delete image after service call
         let deleteFile = { try? FileManager.default.removeItem(at: file) }
         let completion = {
-            (response: WatsonResponse<ClassifiedImages>?, error: RestError?) in
+            (response: WatsonResponse<ClassifiedImages>?, error: WatsonError?) in
             deleteFile()
             completionHandler(response, error)
         }
@@ -115,14 +115,14 @@ extension VisualRecognition {
      */
     public func detectFaces(
         image: UIImage,
-        completionHandler: @escaping (WatsonResponse<DetectedFaces>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<DetectedFaces>?, WatsonError?) -> Void)
     {
         // save image to disk
         let file: URL
         do {
             file = try saveToDisk(image: image)
         } catch {
-            let error = RestError.saveData
+            let error = WatsonError.saveData
             completionHandler(nil, error)
             return
         }
@@ -130,7 +130,7 @@ extension VisualRecognition {
         // delete image after service call
         let deleteFile = { try? FileManager.default.removeItem(at: file) }
         let completion = {
-            (response: WatsonResponse<DetectedFaces>?, error: RestError?) in
+            (response: WatsonResponse<DetectedFaces>?, error: WatsonError?) in
             deleteFile()
             completionHandler(response, error)
         }
@@ -153,11 +153,11 @@ extension VisualRecognition {
         image: UIImage,
         classifierIDs: [String] = ["default"],
         threshold: Double? = nil,
-        completionHandler: @escaping (ClassifiedImages?, RestError?) -> Void)
+        completionHandler: @escaping (ClassifiedImages?, WatsonError?) -> Void)
     {
         // convert UIImage to Data
         guard let imageData = UIImagePNGRepresentation(image) else {
-            let error = RestError.serialization(values: "image to data")
+            let error = WatsonError.serialization(values: "image to data")
             completionHandler(nil, error)
             return
         }
@@ -172,8 +172,8 @@ extension VisualRecognition {
     private func saveToDisk(image: UIImage) throws -> URL {
         let filename = UUID().uuidString + ".jpg"
         let directory = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-        guard let file = directory.appendingPathComponent(filename) else { throw RestError.urlEncoding(path: filename) }
-        guard let data = UIImageJPEGRepresentation(image, 0.75) else { throw RestError.serialization(values: "classify image") }
+        guard let file = directory.appendingPathComponent(filename) else { throw WatsonError.urlEncoding(path: filename) }
+        guard let data = UIImageJPEGRepresentation(image, 0.75) else { throw WatsonError.serialization(values: "classify image") }
         try data.write(to: file)
         return file
     }

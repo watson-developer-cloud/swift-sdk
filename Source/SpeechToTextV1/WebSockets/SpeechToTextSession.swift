@@ -74,7 +74,7 @@ public class SpeechToTextSession {
     }
 
     /// Invoked when an error or warning occurs.
-    public var onError: ((RestError) -> Void)? {
+    public var onError: ((WatsonError) -> Void)? {
         get { return socket.onError }
         set { socket.onError = newValue }
     }
@@ -211,7 +211,7 @@ public class SpeechToTextSession {
             let data = try Data(contentsOf: audio)
             recognize(audio: data)
         } catch {
-            let error = RestError.serialization(values: "audio data from \(audio)")
+            let error = WatsonError.serialization(values: "audio data from \(audio)")
             onError?(error)
             return
         }
@@ -258,7 +258,7 @@ public class SpeechToTextSession {
         recorder.session.requestRecordPermission { granted in
             guard granted else {
                 let failureReason = "Permission was not granted to access the microphone."
-                let error = RestError.other(message: failureReason)
+                let error = WatsonError.other(message: failureReason)
                 self.onError?(error)
                 return
             }
@@ -295,7 +295,7 @@ public class SpeechToTextSession {
                 try self.recorder.startRecording()
             } catch {
                 let failureReason = "Failed to start recording."
-                let error = RestError.other(message: failureReason)
+                let error = WatsonError.other(message: failureReason)
                 self.onError?(error)
                 return
             }
@@ -310,7 +310,7 @@ public class SpeechToTextSession {
             try recorder.stopRecording()
         } catch {
             let failureReason = "Failed to stop recording."
-            let error = RestError.other(message: failureReason)
+            let error = WatsonError.other(message: failureReason)
             self.onError?(error)
             return
         }

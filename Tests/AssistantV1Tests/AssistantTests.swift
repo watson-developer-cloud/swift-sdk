@@ -2401,13 +2401,13 @@ class AssistantTests: XCTestCase {
         let expectation = self.expectation(description: description)
         assistant.serviceURL = "this is broken"
         assistant.listWorkspaces { (_, error) in
-            guard let error = error as? RestError else {
+            guard let error = error as? WatsonError else {
                 XCTFail(missingErrorMessage)
                 return
             }
 
             switch error {
-            case RestError.badURL:
+            case WatsonError.badURL:
                 break
             default:
                 XCTFail("Unexpected error: \(error)")

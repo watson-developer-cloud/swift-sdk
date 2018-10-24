@@ -46,7 +46,7 @@ extension SpeechToText {
         model: String? = nil,
         customizationID: String? = nil,
         learningOptOut: Bool? = nil,
-        completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, WatsonError?) -> Void)
     {
         do {
             let data = try Data(contentsOf: audio)
@@ -59,7 +59,7 @@ extension SpeechToText {
                 completionHandler: completionHandler
             )
         } catch {
-            let error = RestError.serialization(values: "audio data from \(audio)")
+            let error = WatsonError.serialization(values: "audio data from \(audio)")
             completionHandler(nil, error)
             return
         }
@@ -93,7 +93,7 @@ extension SpeechToText {
         acousticCustomizationID: String? = nil,
         learningOptOut: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, WatsonError?) -> Void)
     {
         // create SpeechToTextSession
         let session = SpeechToTextSession(
@@ -172,7 +172,7 @@ extension SpeechToText {
         learningOptOut: Bool? = nil,
         compress: Bool = true,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, WatsonError?) -> Void)
     {
         // make sure the AVAudioSession shared instance is properly configured
         do {
@@ -181,7 +181,7 @@ extension SpeechToText {
             try audioSession.setActive(true)
         } catch {
             let failureReason = "Failed to setup the AVAudioSession sharedInstance properly."
-            let error = RestError.other(message: failureReason)
+            let error = WatsonError.other(message: failureReason)
             completionHandler(nil, error)
             return
         }
@@ -193,7 +193,7 @@ extension SpeechToText {
         // extract authMethod
         guard let basicAuth = authMethod as? BasicAuthentication else {
             let failureReason = "Invalid authenticaion method format."
-            let error = RestError.other(message: failureReason)
+            let error = WatsonError.other(message: failureReason)
             completionHandler(nil, error)
             return
         }
@@ -262,7 +262,7 @@ extension SpeechToText {
         model: String? = nil,
         customizationID: String? = nil,
         learningOptOut: Bool? = nil,
-        completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, RestError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, WatsonError?) -> Void)
     {
         recognizeUsingWebSocket(audio: audio, settings: settings, model: model, customizationID: customizationID,
                                 learningOptOut: learningOptOut, completionHandler: completionHandler)

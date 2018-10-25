@@ -79,7 +79,6 @@ use_frameworks!
 target 'MyApp' do
     pod 'IBMWatsonAssistantV1', '~> 0.36.0'
     pod 'IBMWatsonAssistantV2', '~> 0.36.0'
-    pod 'IBMWatsonConversationV1', '~> 0.36.0'
     pod 'IBMWatsonDiscoveryV1', '~> 0.36.0'
     pod 'IBMWatsonLanguageTranslatorV3', '~> 0.36.0'
     pod 'IBMWatsonNaturalLanguageClassifierV1', '~> 0.36.0'

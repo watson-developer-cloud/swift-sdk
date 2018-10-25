@@ -32,7 +32,7 @@ class SharedTests: XCTestCase {
 
     func testConfigureRestRequest() {
         Shared.configureRestRequest()
-        let userAgent = RestRequest.userAgent
+        let userAgent = RestRequest.userAgent!
         XCTAssert(userAgent.contains(Shared.sdkVersion))
 
         #if os(iOS)

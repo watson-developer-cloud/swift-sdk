@@ -83,7 +83,7 @@ public class Assistant {
     }
 
     /**
-     If the response or data represents an error returned by the Watson Assistant service,
+     If the response or data represents an error returned by the Watson Assistant v1 service,
      then return NSError with information about the error that occured. Otherwise, return nil.
 
      - parameter data: Raw data returned from the service that may represent an error.

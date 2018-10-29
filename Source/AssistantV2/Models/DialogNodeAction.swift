@@ -26,6 +26,8 @@ public struct DialogNodeAction: Decodable {
     public enum ActionType: String {
         case client = "client"
         case server = "server"
+        case webAction = "web-action"
+        case cloudFunction = "cloud-function"
     }
 
     /**

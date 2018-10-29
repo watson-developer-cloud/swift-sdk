@@ -22,48 +22,65 @@ import Foundation
 public struct Features: Encodable {
 
     /**
-     Whether or not to return the concepts that are mentioned in the analyzed text.
+     Returns high-level concepts in the content. For example, a research paper about deep learning might return the
+     concept, "Artificial Intelligence" although the term is not mentioned.
+     Supported languages: English, French, German, Japanese, Korean, Portuguese, Spanish.
      */
     public var concepts: ConceptsOptions?
 
     /**
-     Whether or not to extract the emotions implied in the analyzed text.
+     Detects anger, disgust, fear, joy, or sadness that is conveyed in the content or by the context around target
+     phrases specified in the targets parameter. You can analyze emotion for detected entities with `entities.emotion`
+     and for keywords with `keywords.emotion`.
+     Supported languages: English
      */
     public var emotion: EmotionOptions?
 
     /**
-     Whether or not to extract detected entity objects from the analyzed text.
+     Identifies people, cities, organizations, and other entities in the content. See [Entity types and
+     subtypes](/docs/services/natural-language-understanding/entity-types.html).
+     Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
+     Arabic, Chinese, and Dutch custom models are also supported.
      */
     public var entities: EntitiesOptions?
 
     /**
-     Whether or not to return the keywords in the analyzed text.
+     Returns important keywords in the content.
+     Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
      */
     public var keywords: KeywordsOptions?
 
     /**
-     Whether or not the author, publication date, and title of the analyzed text should be returned. This parameter is
-     only available for URL and HTML input.
+     Returns information from the document, including author name, title, RSS/ATOM feeds, prominent page image, and
+     publication date. Supports URL and HTML input types only.
      */
     public var metadata: MetadataOptions?
 
     /**
-     Whether or not to return the relationships between detected entities in the analyzed text.
+     Recognizes when two entities are related and identifies the type of relation. For example, an `awardedTo` relation
+     might connect the entities "Nobel Prize" and "Albert Einstein". See [Relation
+     types](/docs/services/natural-language-understanding/relations.html).
+     Supported languages: Arabic, English, German, Japanese, Korean, Spanish. Chinese, Dutch, French, Italian, and
+     Portuguese custom models are also supported.
      */
     public var relations: RelationsOptions?
 
     /**
-     Whether or not to return the subject-action-object relations from the analyzed text.
+     Parses sentences into subject, action, and object form.
+     Supported languages: English, German, Japanese, Korean, Spanish.
      */
     public var semanticRoles: SemanticRolesOptions?
 
     /**
-     Whether or not to return the overall sentiment of the analyzed text.
+     Analyzes the general sentiment of your content or the sentiment toward specific target phrases. You can analyze
+     sentiment for detected entities with `entities.sentiment` and for keywords with `keywords.sentiment`.
+      Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish
      */
     public var sentiment: SentimentOptions?
 
     /**
-     Whether or not to return the high level category the content is categorized as (i.e. news, art).
+     Returns a five-level taxonomy of the content. The top three categories are returned.
+     Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
      */
     public var categories: CategoriesOptions?
 
@@ -83,18 +100,34 @@ public struct Features: Encodable {
     /**
      Initialize a `Features` with member variables.
 
-     - parameter concepts: Whether or not to return the concepts that are mentioned in the analyzed text.
-     - parameter emotion: Whether or not to extract the emotions implied in the analyzed text.
-     - parameter entities: Whether or not to extract detected entity objects from the analyzed text.
-     - parameter keywords: Whether or not to return the keywords in the analyzed text.
-     - parameter metadata: Whether or not the author, publication date, and title of the analyzed text should be
-       returned. This parameter is only available for URL and HTML input.
-     - parameter relations: Whether or not to return the relationships between detected entities in the analyzed
-       text.
-     - parameter semanticRoles: Whether or not to return the subject-action-object relations from the analyzed text.
-     - parameter sentiment: Whether or not to return the overall sentiment of the analyzed text.
-     - parameter categories: Whether or not to return the high level category the content is categorized as (i.e.
-       news, art).
+     - parameter concepts: Returns high-level concepts in the content. For example, a research paper about deep
+       learning might return the concept, "Artificial Intelligence" although the term is not mentioned.
+       Supported languages: English, French, German, Japanese, Korean, Portuguese, Spanish.
+     - parameter emotion: Detects anger, disgust, fear, joy, or sadness that is conveyed in the content or by the
+       context around target phrases specified in the targets parameter. You can analyze emotion for detected entities
+       with `entities.emotion` and for keywords with `keywords.emotion`.
+       Supported languages: English
+     - parameter entities: Identifies people, cities, organizations, and other entities in the content. See [Entity
+       types and subtypes](/docs/services/natural-language-understanding/entity-types.html).
+       Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
+       Arabic, Chinese, and Dutch custom models are also supported.
+     - parameter keywords: Returns important keywords in the content.
+       Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
+     - parameter metadata: Returns information from the document, including author name, title, RSS/ATOM feeds,
+       prominent page image, and publication date. Supports URL and HTML input types only.
+     - parameter relations: Recognizes when two entities are related and identifies the type of relation. For
+       example, an `awardedTo` relation might connect the entities "Nobel Prize" and "Albert Einstein". See [Relation
+       types](/docs/services/natural-language-understanding/relations.html).
+       Supported languages: Arabic, English, German, Japanese, Korean, Spanish. Chinese, Dutch, French, Italian, and
+       Portuguese custom models are also supported.
+     - parameter semanticRoles: Parses sentences into subject, action, and object form.
+       Supported languages: English, German, Japanese, Korean, Spanish.
+     - parameter sentiment: Analyzes the general sentiment of your content or the sentiment toward specific target
+       phrases. You can analyze sentiment for detected entities with `entities.sentiment` and for keywords with
+       `keywords.sentiment`.
+        Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish
+     - parameter categories: Returns a five-level taxonomy of the content. The top three categories are returned.
+       Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
 
      - returns: An initialized `Features`.
     */

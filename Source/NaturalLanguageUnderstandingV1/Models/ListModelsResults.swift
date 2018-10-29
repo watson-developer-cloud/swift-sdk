@@ -21,6 +21,9 @@ import Foundation
  */
 public struct ListModelsResults: Decodable {
 
+    /**
+     An array of available models.
+     */
     public var models: [Model]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

@@ -20,10 +20,10 @@ import Foundation
 public struct SpeechRecognitionResults: Decodable {
 
     /**
-     An array that can include interim and final results (interim results are returned only if supported by the method).
-     Final results are guaranteed not to change; interim results might be replaced by further interim results and final
-     results. The service periodically sends updates to the results list; the `result_index` is set to the lowest index
-     in the array that has changed; it is incremented for new results.
+     An array of `SpeechRecognitionResult` objects that can include interim and final results (interim results are
+     returned only if supported by the method). Final results are guaranteed not to change; interim results might be
+     replaced by further interim results and final results. The service periodically sends updates to the results list;
+     the `result_index` is set to the lowest index in the array that has changed; it is incremented for new results.
      */
     public var results: [SpeechRecognitionResult]?
 
@@ -34,9 +34,10 @@ public struct SpeechRecognitionResults: Decodable {
     public var resultIndex: Int?
 
     /**
-     An array that identifies which words were spoken by which speakers in a multi-person exchange. Returned in the
-     response only if `speaker_labels` is `true`. When interim results are also requested for methods that support them,
-     it is possible for a `SpeechRecognitionResults` object to include only the `speaker_labels` field.
+     An array of `SpeakerLabelsResult` objects that identifies which words were spoken by which speakers in a
+     multi-person exchange. The array is returned only if the `speaker_labels` parameter is `true`. When interim results
+     are also requested for methods that support them, it is possible for a `SpeechRecognitionResults` object to include
+     only the `speaker_labels` field.
      */
     public var speakerLabels: [SpeakerLabelsResult]?
 

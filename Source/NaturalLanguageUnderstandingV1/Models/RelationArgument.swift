@@ -19,6 +19,9 @@ import Foundation
 /** RelationArgument. */
 public struct RelationArgument: Decodable {
 
+    /**
+     An array of extracted entities.
+     */
     public var entities: [RelationEntity]?
 
     /**

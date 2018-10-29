@@ -256,11 +256,12 @@ public class SpeechToText {
      - parameter audio: The audio to transcribe in the format specified by the `Content-Type` header.
      - parameter contentType: The type of the input.
      - parameter model: The identifier of the model that is to be used for the recognition request.
-     - parameter customizationID: The customization ID (GUID) of a custom language model that is to be used with the
-       recognition request. The base model of the specified custom language model must match the model specified with
-       the `model` parameter. You must make the request with service credentials created for the instance of the service
-       that owns the custom model. By default, no custom language model is used. See [Custom
+     - parameter languageCustomizationID: The customization ID (GUID) of a custom language model that is to be used
+       with the recognition request. The base model of the specified custom language model must match the model
+       specified with the `model` parameter. You must make the request with service credentials created for the instance
+       of the service that owns the custom model. By default, no custom language model is used. See [Custom
        models](https://console.bluemix.net/docs/services/speech-to-text/input.html#custom).
+       **Note:** Use this parameter instead of the deprecated `customization_id` parameter.
      - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model that is to be used
        with the recognition request. The base model of the specified custom acoustic model must match the model
        specified with the `model` parameter. You must make the request with service credentials created for the instance
@@ -325,6 +326,9 @@ public class SpeechToText {
        parameter. To determine whether a language model supports speaker labels, use the **Get models** method and check
        that the attribute `speaker_labels` is set to `true`. See [Speaker
        labels](https://console.bluemix.net/docs/services/speech-to-text/output.html#speaker_labels).
+     - parameter customizationID: **Deprecated.** Use the `language_customization_id` parameter to specify the
+       customization ID (GUID) of a custom language model that is to be used with the recognition request. Do not
+       specify both parameters with a request.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -332,6 +336,7 @@ public class SpeechToText {
     public func recognize(
         model: String? = nil,
         customizationID: String? = nil,
+        languageCustomizationID: String? = nil,
         acousticCustomizationID: String? = nil,
         baseModelVersion: String? = nil,
         customizationWeight: Double? = nil,
@@ -368,8 +373,8 @@ public class SpeechToText {
             let queryParameter = URLQueryItem(name: "model", value: model)
             queryParameters.append(queryParameter)
         }
-        if let customizationID = customizationID {
-            let queryParameter = URLQueryItem(name: "customization_id", value: customizationID)
+        if let languageCustomizationID = languageCustomizationID {
+            let queryParameter = URLQueryItem(name: "language_customization_id", value: languageCustomizationID)
             queryParameters.append(queryParameter)
         }
         if let acousticCustomizationID = acousticCustomizationID {
@@ -422,6 +427,10 @@ public class SpeechToText {
         }
         if let speakerLabels = speakerLabels {
             let queryParameter = URLQueryItem(name: "speaker_labels", value: "\(speakerLabels)")
+            queryParameters.append(queryParameter)
+        }
+        if let customizationID = customizationID {
+            let queryParameter = URLQueryItem(name: "customization_id", value: customizationID)
             queryParameters.append(queryParameter)
         }
 
@@ -662,11 +671,12 @@ public class SpeechToText {
      - parameter resultsTtl: The number of minutes for which the results are to be available after the job has
        finished. If not delivered via a callback, the results must be retrieved within this time. Omit the parameter to
        use a time to live of one week. The parameter is valid with or without a callback URL.
-     - parameter customizationID: The customization ID (GUID) of a custom language model that is to be used with the
-       recognition request. The base model of the specified custom language model must match the model specified with
-       the `model` parameter. You must make the request with service credentials created for the instance of the service
-       that owns the custom model. By default, no custom language model is used. See [Custom
+     - parameter languageCustomizationID: The customization ID (GUID) of a custom language model that is to be used
+       with the recognition request. The base model of the specified custom language model must match the model
+       specified with the `model` parameter. You must make the request with service credentials created for the instance
+       of the service that owns the custom model. By default, no custom language model is used. See [Custom
        models](https://console.bluemix.net/docs/services/speech-to-text/input.html#custom).
+       **Note:** Use this parameter instead of the deprecated `customization_id` parameter.
      - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model that is to be used
        with the recognition request. The base model of the specified custom acoustic model must match the model
        specified with the `model` parameter. You must make the request with service credentials created for the instance
@@ -731,6 +741,9 @@ public class SpeechToText {
        parameter. To determine whether a language model supports speaker labels, use the **Get models** method and check
        that the attribute `speaker_labels` is set to `true`. See [Speaker
        labels](https://console.bluemix.net/docs/services/speech-to-text/output.html#speaker_labels).
+     - parameter customizationID: **Deprecated.** Use the `language_customization_id` parameter to specify the
+       customization ID (GUID) of a custom language model that is to be used with the recognition request. Do not
+       specify both parameters with a request.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -744,6 +757,7 @@ public class SpeechToText {
         userToken: String? = nil,
         resultsTtl: Int? = nil,
         customizationID: String? = nil,
+        languageCustomizationID: String? = nil,
         acousticCustomizationID: String? = nil,
         baseModelVersion: String? = nil,
         customizationWeight: Double? = nil,
@@ -794,8 +808,8 @@ public class SpeechToText {
             let queryParameter = URLQueryItem(name: "results_ttl", value: "\(resultsTtl)")
             queryParameters.append(queryParameter)
         }
-        if let customizationID = customizationID {
-            let queryParameter = URLQueryItem(name: "customization_id", value: customizationID)
+        if let languageCustomizationID = languageCustomizationID {
+            let queryParameter = URLQueryItem(name: "language_customization_id", value: languageCustomizationID)
             queryParameters.append(queryParameter)
         }
         if let acousticCustomizationID = acousticCustomizationID {
@@ -848,6 +862,10 @@ public class SpeechToText {
         }
         if let speakerLabels = speakerLabels {
             let queryParameter = URLQueryItem(name: "speaker_labels", value: "\(speakerLabels)")
+            queryParameters.append(queryParameter)
+        }
+        if let customizationID = customizationID {
+            let queryParameter = URLQueryItem(name: "customization_id", value: customizationID)
             queryParameters.append(queryParameter)
         }
 

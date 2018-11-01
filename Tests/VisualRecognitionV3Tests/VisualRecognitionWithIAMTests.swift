@@ -77,7 +77,7 @@ class VisualRecognitionWithIAMTests: XCTestCase {
 
     /** Access service using IAM API Key credentials  */
     func testAccessWithAPIKey() {
-        let version = "2018-10-10"
+        let version = "2018-11-01"
         let visualRecognition = VisualRecognition(version: version, apiKey: WatsonCredentials.VisualRecognitionAPIKey)
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
@@ -121,7 +121,7 @@ class VisualRecognitionWithIAMTests: XCTestCase {
 
         // Pass the access token as the credentials when instantiating the service
 
-        let version = "2018-10-10"
+        let version = "2018-11-01"
         let visualRecognition = VisualRecognition(version: version, accessToken: accessToken)
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"

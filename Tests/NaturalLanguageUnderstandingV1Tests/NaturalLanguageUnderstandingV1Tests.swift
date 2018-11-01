@@ -59,7 +59,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
 
     /** Instantiate Natural Language Understanding instance. */
     func instantiateNaturalLanguageUnderstanding() {
-        let version = "2018-10-10"
+        let version = "2018-11-01"
         if let apiKey = WatsonCredentials.NaturalLanguageUnderstandingAPIKey {
             naturalLanguageUnderstanding = NaturalLanguageUnderstanding(version: version, apiKey: apiKey)
         } else {

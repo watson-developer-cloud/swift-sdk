@@ -182,14 +182,14 @@ class DiscoveryTests: XCTestCase {
         return collection ?? self.createTestCollection(environmentID: environmentID, configurationID: configurationID)
     }
 
-    func createTestCollection(environmentID: String, configurationID: String) -> DiscoveryV1.Collection {
+    func createTestCollection(environmentID: String, configurationID: String, language: String = "en") -> DiscoveryV1.Collection {
         var collection: DiscoveryV1.Collection!
         let expectation = self.expectation(description: "createCollection")
         let properties = CreateCollectionRequest(
             name: "swift-sdk-test-" + UUID().uuidString,
             description: "A collection created while testing the Swift SDK. Safe to delete.",
             configurationID: configurationID,
-            language: "en"
+            language: language
         )
         discovery.createCollection(environmentID: environmentID, properties: properties, failure: failWithError) {
             response in
@@ -664,6 +664,64 @@ class DiscoveryTests: XCTestCase {
         discovery.deleteExpansions(environmentID: environmentID, collectionID: collectionID, failure: failWithError) {
             expectation3.fulfill()
         }
+        waitForExpectations(timeout: timeout)
+    }
+
+    func testTokenizationDictionaryCRD() {
+        // Need to make sure the new collection gets deleted even after a test failure
+        continueAfterFailure = true
+
+        let environmentID = environment.environmentID!
+        let configuration = lookupOrCreateTestConfiguration(environmentID: environmentID)
+        let collection = createTestCollection(environmentID: environmentID, configurationID: configuration.configurationID!, language: "ja")
+        let collectionID = collection.collectionID!
+
+        // Need to remove the Japanese collection created specifically for this test
+        defer {
+            continueAfterFailure = false
+
+            let expectation4 = self.expectation(description: "Delete Japanese collection")
+            discovery.deleteCollection(environmentID: environmentID, collectionID: collectionID, failure: failWithError) {
+                response in
+
+                XCTAssertEqual(response.status, "deleted")
+                expectation4.fulfill()
+            }
+
+            waitForExpectations(timeout: timeout)
+        }
+
+        let expectation = self.expectation(description: "createTokenizationDictionary")
+        let tokenizationRule1 = TokenDictRule(text: "すしネコ", tokens: ["すし", "ネコ"], readings: ["寿司", "ネコ"], partOfSpeech: "カスタム名詞")
+        let tokenizationRule2 = TokenDictRule(text: "すしネコ", tokens: ["すし", "ネコ"], readings: ["寿司", "ネコ"], partOfSpeech: "カスタム名詞")
+        discovery.createTokenizationDictionary(environmentID: environmentID, collectionID: collectionID, tokenizationRules: [tokenizationRule1, tokenizationRule2], failure: failWithError) {
+            response in
+
+            XCTAssert(response.type == "tokenization_dictionary")
+            XCTAssert(response.status == "pending")
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: timeout)
+
+        let expectation2 = self.expectation(description: "getTokenizationDictionaryStatus")
+        discovery.getTokenizationDictionaryStatus(environmentID: environmentID, collectionID: collectionID, failure: failWithError) {
+            response in
+
+            XCTAssert(response.type == "tokenization_dictionary")
+            XCTAssert(response.status == "active" || response.status == "pending")
+
+            expectation2.fulfill()
+        }
+
+        waitForExpectations(timeout: timeout)
+
+        let expectation3 = self.expectation(description: "deleteTokenizationDictionary")
+        discovery.deleteTokenizationDictionary(environmentID: environmentID, collectionID: collectionID, failure: failWithError) {
+            expectation3.fulfill()
+        }
+
         waitForExpectations(timeout: timeout)
     }
 

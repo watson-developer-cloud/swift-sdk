@@ -36,7 +36,7 @@ class DiscoveryTests: XCTestCase {
         super.setUp()
         continueAfterFailure = false
         instantiateDiscovery()
-        environment = lookupOrCreateTestEnvironment()
+        environment = getTestEnvironment()
         documentURL = loadDocument(name: "KennedySpeech", ext: "html")
     }
 
@@ -127,29 +127,13 @@ class DiscoveryTests: XCTestCase {
 
     // MARK: - State Management
 
-    func lookupOrCreateTestEnvironment() -> Environment {
+    func getTestEnvironment() -> Environment {
         var environment: Environment!
         let expectation = self.expectation(description: "listEnvironments")
         let failure = { (error: Error) in XCTFail("Failed to lookup environment: \(error.localizedDescription)") }
         discovery.listEnvironments(failure: failure) {
             response in
             environment = response.environments?.first { !($0.readOnly ?? true) }
-            expectation.fulfill()
-        }
-        waitForExpectations(timeout: timeout)
-        return environment ?? createTestEnvironment()
-
-    }
-
-    func createTestEnvironment() -> Environment {
-        var environment: Environment!
-        let expectation = self.expectation(description: "createEnvironment")
-        let name = "swift-sdk-test-" + UUID().uuidString
-        let description = "An environment created while testing the Swift SDK. Safe to delete."
-        let failure = { (error: Error) in XCTFail("Failed to create an environment: \(error.localizedDescription)") }
-        discovery.createEnvironment(name: name, description: description, size: Environment.Size.xl.rawValue, failure: failure) {
-            response in
-            environment = response
             expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)

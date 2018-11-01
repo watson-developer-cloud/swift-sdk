@@ -47,7 +47,7 @@ class VisualRecognitionUIImageTests: XCTestCase {
     }
 
     func instantiateVisualRecognition() {
-        let version = "2018-10-10"
+        let version = "2018-11-01"
         visualRecognition = VisualRecognition(version: version, apiKey: WatsonCredentials.VisualRecognitionAPIKey)
         if let url = WatsonCredentials.VisualRecognitionURL {
             visualRecognition.serviceURL = url

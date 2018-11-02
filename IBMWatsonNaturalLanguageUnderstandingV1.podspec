@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                  = 'IBMWatsonNaturalLanguageUnderstandingV1'
-  s.version               = '0.36.0'
+  s.version               = '0.37.0'
   s.summary               = 'Client framework for the IBM Watson Natural Language Understanding service'
   s.description           = <<-DESC
 IBM Watson™ Natural Language Understanding can analyze semantic features of text input, 

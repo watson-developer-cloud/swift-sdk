@@ -81,7 +81,9 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         // create request with headers
         var request = URLRequest(url: url)
         request.timeoutInterval = 5
-        request.addValue(RestRequest.userAgent, forHTTPHeaderField: "User-Agent")
+        if let userAgentHeader = RestRequest.userAgent {
+            request.setValue(userAgentHeader, forHTTPHeaderField: "User-Agent")
+        }
         for (key, value) in defaultHeaders {
             request.addValue(value, forHTTPHeaderField: key)
         }

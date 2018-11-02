@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Structures  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Section/Structures" class="dashAnchor"></a>
+    <a title="Structures  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">AssistantV2 Docs</a></p>
+        <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">AssistantV2 Reference</a>
+        <img id="carat" src="img/carat.png" />
+        Structures  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="readme.html">README</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/Assistant.html">Assistant</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/CaptureGroup.html">CaptureGroup</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogLogMessage.html">DialogLogMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogLogMessage/Level.html">– Level</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeAction.html">DialogNodeAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeAction/ActionType.html">– ActionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeOutputOptionsElement.html">DialogNodeOutputOptionsElement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeOutputOptionsElementValue.html">DialogNodeOutputOptionsElementValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodesVisited.html">DialogNodesVisited</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogRuntimeResponseGeneric.html">DialogRuntimeResponseGeneric</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogRuntimeResponseGeneric/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogRuntimeResponseGeneric/Preference.html">– Preference</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogSuggestion.html">DialogSuggestion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogSuggestionValue.html">DialogSuggestionValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageContext.html">MessageContext</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageContextGlobal.html">MessageContextGlobal</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageContextGlobalSystem.html">MessageContextGlobalSystem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageContextSkills.html">MessageContextSkills</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageInput.html">MessageInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageInput/MessageType.html">– MessageType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageInputOptions.html">MessageInputOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageOutput.html">MessageOutput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageOutputDebug.html">MessageOutputDebug</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageOutputDebug/BranchExitedReason.html">– BranchExitedReason</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageResponse.html">MessageResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeEntity.html">RuntimeEntity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeIntent.html">RuntimeIntent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SessionResponse.html">SessionResponse</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Structures</h1>
+            <p>The following structures are available globally.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV212CaptureGroupV"></a>
+                    <a name="//apple_ref/swift/Struct/CaptureGroup" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV212CaptureGroupV">CaptureGroup</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>CaptureGroup.</p>
+
+                        <a href="Structs/CaptureGroup.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CaptureGroup</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV216DialogLogMessageV"></a>
+                    <a name="//apple_ref/swift/Struct/DialogLogMessage" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV216DialogLogMessageV">DialogLogMessage</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Dialog log message details.</p>
+
+                        <a href="Structs/DialogLogMessage.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DialogLogMessage</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV216DialogNodeActionV"></a>
+                    <a name="//apple_ref/swift/Struct/DialogNodeAction" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV216DialogNodeActionV">DialogNodeAction</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>DialogNodeAction.</p>
+
+                        <a href="Structs/DialogNodeAction.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DialogNodeAction</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV230DialogNodeOutputOptionsElementV"></a>
+                    <a name="//apple_ref/swift/Struct/DialogNodeOutputOptionsElement" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV230DialogNodeOutputOptionsElementV">DialogNodeOutputOptionsElement</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>DialogNodeOutputOptionsElement.</p>
+
+                        <a href="Structs/DialogNodeOutputOptionsElement.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DialogNodeOutputOptionsElement</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV235DialogNodeOutputOptionsElementValueV"></a>
+                    <a name="//apple_ref/swift/Struct/DialogNodeOutputOptionsElementValue" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV235DialogNodeOutputOptionsElementValueV">DialogNodeOutputOptionsElementValue</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An object defining the message input to be sent to the assistant if the user selects the corresponding option.</p>
+
+                        <a href="Structs/DialogNodeOutputOptionsElementValue.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DialogNodeOutputOptionsElementValue</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV218DialogNodesVisitedV"></a>
+                    <a name="//apple_ref/swift/Struct/DialogNodesVisited" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV218DialogNodesVisitedV">DialogNodesVisited</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>DialogNodesVisited.</p>
+
+                        <a href="Structs/DialogNodesVisited.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DialogNodesVisited</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV228DialogRuntimeResponseGenericV"></a>
+                    <a name="//apple_ref/swift/Struct/DialogRuntimeResponseGeneric" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV228DialogRuntimeResponseGenericV">DialogRuntimeResponseGeneric</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>DialogRuntimeResponseGeneric.</p>
+
+                        <a href="Structs/DialogRuntimeResponseGeneric.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DialogRuntimeResponseGeneric</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV216DialogSuggestionV"></a>
+                    <a name="//apple_ref/swift/Struct/DialogSuggestion" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV216DialogSuggestionV">DialogSuggestion</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>DialogSuggestion.</p>
+
+                        <a href="Structs/DialogSuggestion.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DialogSuggestion</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV221DialogSuggestionValueV"></a>
+                    <a name="//apple_ref/swift/Struct/DialogSuggestionValue" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV221DialogSuggestionValueV">DialogSuggestionValue</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An object defining the message input to be sent to the assistant if the user selects the corresponding disambiguation
+option.</p>
+
+                        <a href="Structs/DialogSuggestionValue.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DialogSuggestionValue</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV214MessageContextV"></a>
+                    <a name="//apple_ref/swift/Struct/MessageContext" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV214MessageContextV">MessageContext</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>State information for the conversation.</p>
+
+                        <a href="Structs/MessageContext.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MessageContext</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV220MessageContextGlobalV"></a>
+                    <a name="//apple_ref/swift/Struct/MessageContextGlobal" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV220MessageContextGlobalV">MessageContextGlobal</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Contains information that can be shared by all skills within the Assistant.</p>
+
+                        <a href="Structs/MessageContextGlobal.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MessageContextGlobal</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV226MessageContextGlobalSystemV"></a>
+                    <a name="//apple_ref/swift/Struct/MessageContextGlobalSystem" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV226MessageContextGlobalSystemV">MessageContextGlobalSystem</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Properties that are shared by all skills used by the assistant.</p>
+
+                        <a href="Structs/MessageContextGlobalSystem.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MessageContextGlobalSystem</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV220MessageContextSkillsV"></a>
+                    <a name="//apple_ref/swift/Struct/MessageContextSkills" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV220MessageContextSkillsV">MessageContextSkills</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Contains information specific to particular skills within the Assistant.</p>
+
+                        <a href="Structs/MessageContextSkills.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MessageContextSkills</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV212MessageInputV"></a>
+                    <a name="//apple_ref/swift/Struct/MessageInput" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV212MessageInputV">MessageInput</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The user input.</p>
+
+                        <a href="Structs/MessageInput.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MessageInput</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV219MessageInputOptionsV"></a>
+                    <a name="//apple_ref/swift/Struct/MessageInputOptions" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV219MessageInputOptionsV">MessageInputOptions</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Optional properties that control how the assistant responds.</p>
+
+                        <a href="Structs/MessageInputOptions.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MessageInputOptions</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV213MessageOutputV"></a>
+                    <a name="//apple_ref/swift/Struct/MessageOutput" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV213MessageOutputV">MessageOutput</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Assistant output to be rendered or processed by the client.</p>
+
+                        <a href="Structs/MessageOutput.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MessageOutput</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV218MessageOutputDebugV"></a>
+                    <a name="//apple_ref/swift/Struct/MessageOutputDebug" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV218MessageOutputDebugV">MessageOutputDebug</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Additional detailed information about a message response and how it was generated.</p>
+
+                        <a href="Structs/MessageOutputDebug.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MessageOutputDebug</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV215MessageResponseV"></a>
+                    <a name="//apple_ref/swift/Struct/MessageResponse" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV215MessageResponseV">MessageResponse</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A response from the Watson Assistant service.</p>
+
+                        <a href="Structs/MessageResponse.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MessageResponse</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV213RuntimeEntityV"></a>
+                    <a name="//apple_ref/swift/Struct/RuntimeEntity" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV213RuntimeEntityV">RuntimeEntity</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A term from the request that was identified as an entity.</p>
+
+                        <a href="Structs/RuntimeEntity.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RuntimeEntity</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV213RuntimeIntentV"></a>
+                    <a name="//apple_ref/swift/Struct/RuntimeIntent" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV213RuntimeIntentV">RuntimeIntent</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An intent identified in the user input.</p>
+
+                        <a href="Structs/RuntimeIntent.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RuntimeIntent</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV215SessionResponseV"></a>
+                    <a name="//apple_ref/swift/Struct/SessionResponse" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV215SessionResponseV">SessionResponse</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>SessionResponse.</p>
+
+                        <a href="Structs/SessionResponse.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SessionResponse</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-11-02)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

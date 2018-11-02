@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Assistant Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/Assistant" class="dashAnchor"></a>
+    <a title="Assistant Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">AssistantV2 Docs</a></p>
+        <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">AssistantV2 Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        Assistant Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../readme.html">README</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/Assistant.html">Assistant</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/CaptureGroup.html">CaptureGroup</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogLogMessage.html">DialogLogMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogLogMessage/Level.html">– Level</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeAction.html">DialogNodeAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeAction/ActionType.html">– ActionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeOutputOptionsElement.html">DialogNodeOutputOptionsElement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeOutputOptionsElementValue.html">DialogNodeOutputOptionsElementValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodesVisited.html">DialogNodesVisited</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogRuntimeResponseGeneric.html">DialogRuntimeResponseGeneric</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogRuntimeResponseGeneric/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogRuntimeResponseGeneric/Preference.html">– Preference</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogSuggestion.html">DialogSuggestion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogSuggestionValue.html">DialogSuggestionValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MessageContext.html">MessageContext</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MessageContextGlobal.html">MessageContextGlobal</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MessageContextGlobalSystem.html">MessageContextGlobalSystem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MessageContextSkills.html">MessageContextSkills</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MessageInput.html">MessageInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MessageInput/MessageType.html">– MessageType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MessageInputOptions.html">MessageInputOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MessageOutput.html">MessageOutput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MessageOutputDebug.html">MessageOutputDebug</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MessageOutputDebug/BranchExitedReason.html">– BranchExitedReason</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MessageResponse.html">MessageResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeEntity.html">RuntimeEntity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeIntent.html">RuntimeIntent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SessionResponse.html">SessionResponse</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Assistant</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Assistant</span></code></pre>
+
+                </div>
+              </div>
+            <p>The IBM Watson&trade; Assistant service combines machine learning, natural language understanding, and integrated
+dialog tools to create conversation flows between your apps and your users.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV20A0C10serviceURLSSvp"></a>
+                    <a name="//apple_ref/swift/Property/serviceURL" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV20A0C10serviceURLSSvp">serviceURL</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The base URL to use when contacting the service.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV20A0C14defaultHeadersSDyS2SGvp"></a>
+                    <a name="//apple_ref/swift/Property/defaultHeaders" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV20A0C14defaultHeadersSDyS2SGvp">defaultHeaders</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The default HTTP headers for all requests to the service.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultHeaders</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">String</span><span class="p">]</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV20A0C8username8password7versionACSS_S2Stcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(username:password:version:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV20A0C8username8password7versionACSS_S2Stcfc">init(username:password:version:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a <code>Assistant</code> object.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>username</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The username used to authenticate with the service.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>password</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The password used to authenticate with the service.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>version</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The release date of the version of the API to use. Specify the date
+in <q>YYYY-MM-DD</q> format.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV20A0C7version6apiKey6iamUrlACSS_S2SSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(version:apiKey:iamUrl:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV20A0C7version6apiKey6iamUrlACSS_S2SSgtcfc">init(version:apiKey:iamUrl:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a <code>Assistant</code> object.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">version</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">apiKey</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">iamUrl</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>version</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The release date of the version of the API to use. Specify the date
+in <q>YYYY-MM-DD</q> format.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>apiKey</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An API key for IAM that can be used to obtain access tokens for the service.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>iamUrl</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The URL for the IAM service.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV20A0C7version11accessTokenACSS_SStcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(version:accessToken:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV20A0C7version11accessTokenACSS_SStcfc">init(version:accessToken:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a <code>Assistant</code> object.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">version</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">accessToken</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>version</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The release date of the version of the API to use. Specify the date
+in <q>YYYY-MM-DD</q> format.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>accessToken</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An access token for the service.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV20A0C11accessTokenyySSF"></a>
+                    <a name="//apple_ref/swift/Method/accessToken(_:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV20A0C11accessTokenyySSF">accessToken(_:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">accessToken</span><span class="p">(</span><span class="n">_</span> <span class="nv">newToken</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV20A0C13createSession11assistantID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyAA0D8ResponseVctF"></a>
+                    <a name="//apple_ref/swift/Method/createSession(assistantID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV20A0C13createSession11assistantID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyAA0D8ResponseVctF">createSession(assistantID:headers:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a session.</p>
+
+<p>Create a new session. A session is used to send user input to a skill and receive responses. It also maintains the
+state of the conversation.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createSession</span><span class="p">(</span>
+    <span class="nv">assistantID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/SessionResponse.html">SessionResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>assistantID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Unique identifier of the assistant. You can find the assistant ID of an assistant on the
+<strong>Assistants</strong> tab of the Watson Assistant tool. For information about creating assistants, see the
+<a href="https://console.bluemix.net/docs/services/assistant/create-assistant.html#creating-assistants">documentation</a>.
+<strong>Note:</strong> Currently, the v2 API does not support creating assistants.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV20A0C13deleteSession11assistantID07sessionF07headers7failure7successySS_SSSDyS2SGSgys5Error_pcSgyyctF"></a>
+                    <a name="//apple_ref/swift/Method/deleteSession(assistantID:sessionID:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV20A0C13deleteSession11assistantID07sessionF07headers7failure7successySS_SSSDyS2SGSgys5Error_pcSgyyctF">deleteSession(assistantID:sessionID:headers:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete session.</p>
+
+<p>Deletes a session explicitly before it times out.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteSession</span><span class="p">(</span>
+    <span class="nv">assistantID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">sessionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>assistantID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Unique identifier of the assistant. You can find the assistant ID of an assistant on the
+<strong>Assistants</strong> tab of the Watson Assistant tool. For information about creating assistants, see the
+<a href="https://console.bluemix.net/docs/services/assistant/create-assistant.html#creating-assistants">documentation</a>.
+<strong>Note:</strong> Currently, the v2 API does not support creating assistants.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sessionID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Unique identifier of the session.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV20A0C7message11assistantID07sessionE05input7context7headers7failure7successySS_SSAA12MessageInputVSgAA0L7ContextVSgSDyS2SGSgys5Error_pcSgyAA0L8ResponseVctF"></a>
+                    <a name="//apple_ref/swift/Method/message(assistantID:sessionID:input:context:headers:failure:success:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV20A0C7message11assistantID07sessionE05input7context7headers7failure7successySS_SSAA12MessageInputVSgAA0L7ContextVSgSDyS2SGSgys5Error_pcSgyAA0L8ResponseVctF">message(assistantID:sessionID:input:context:headers:failure:success:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Send user input to assistant.</p>
+
+<p>Send user input to an assistant and receive a response.
+There is no rate limit for this operation.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">message</span><span class="p">(</span>
+    <span class="nv">assistantID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">sessionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">input</span><span class="p">:</span> <span class="kt"><a href="../Structs/MessageInput.html">MessageInput</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">context</span><span class="p">:</span> <span class="kt"><a href="../Structs/MessageContext.html">MessageContext</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/MessageResponse.html">MessageResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>assistantID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Unique identifier of the assistant. You can find the assistant ID of an assistant on the
+<strong>Assistants</strong> tab of the Watson Assistant tool. For information about creating assistants, see the
+<a href="https://console.bluemix.net/docs/services/assistant/create-assistant.html#creating-assistants">documentation</a>.
+<strong>Note:</strong> Currently, the v2 API does not support creating assistants.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sessionID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Unique identifier of the session.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>input</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An input object that includes the input text.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>context</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>State information for the conversation.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>failure</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed if an error occurs.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>success</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed with the successful result.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-11-02)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

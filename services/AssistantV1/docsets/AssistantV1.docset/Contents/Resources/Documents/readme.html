@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>README  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="README  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">AssistantV1 Docs</a></p>
+        <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">AssistantV1 Reference</a>
+        <img id="carat" src="img/carat.png" />
+        README  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="readme.html">README</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/Assistant.html">Assistant</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/CaptureGroup.html">CaptureGroup</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Context.html">Context</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Counterexample.html">Counterexample</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CounterexampleCollection.html">CounterexampleCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateCounterexample.html">CreateCounterexample</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateDialogNode.html">CreateDialogNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateDialogNode/NodeType.html">– NodeType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateDialogNode/EventName.html">– EventName</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateDialogNode/DigressIn.html">– DigressIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateDialogNode/DigressOut.html">– DigressOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateDialogNode/DigressOutSlots.html">– DigressOutSlots</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateEntity.html">CreateEntity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateExample.html">CreateExample</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateIntent.html">CreateIntent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateValue.html">CreateValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateValue/ValueType.html">– ValueType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateWorkspace.html">CreateWorkspace</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNode.html">DialogNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNode/NodeType.html">– NodeType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNode/EventName.html">– EventName</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNode/DigressIn.html">– DigressIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNode/DigressOut.html">– DigressOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNode/DigressOutSlots.html">– DigressOutSlots</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeAction.html">DialogNodeAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeAction/ActionType.html">– ActionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeCollection.html">DialogNodeCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeNextStep.html">DialogNodeNextStep</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeNextStep/Behavior.html">– Behavior</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeNextStep/Selector.html">– Selector</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeOutput.html">DialogNodeOutput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeOutputGeneric.html">DialogNodeOutputGeneric</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeOutputGeneric/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeOutputGeneric/SelectionPolicy.html">– SelectionPolicy</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeOutputGeneric/Preference.html">– Preference</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeOutputModifiers.html">DialogNodeOutputModifiers</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeOutputOptionsElement.html">DialogNodeOutputOptionsElement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeOutputOptionsElementValue.html">DialogNodeOutputOptionsElementValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeOutputTextValuesElement.html">DialogNodeOutputTextValuesElement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeVisitedDetails.html">DialogNodeVisitedDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogRuntimeResponseGeneric.html">DialogRuntimeResponseGeneric</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogRuntimeResponseGeneric/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogRuntimeResponseGeneric/Preference.html">– Preference</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogSuggestion.html">DialogSuggestion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogSuggestionValue.html">DialogSuggestionValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Entity.html">Entity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/EntityCollection.html">EntityCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/EntityExport.html">EntityExport</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/EntityMention.html">EntityMention</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/EntityMentionCollection.html">EntityMentionCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Example.html">Example</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ExampleCollection.html">ExampleCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/InputData.html">InputData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Intent.html">Intent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/IntentCollection.html">IntentCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/IntentExport.html">IntentExport</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LogCollection.html">LogCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LogExport.html">LogExport</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LogMessage.html">LogMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LogMessage/Level.html">– Level</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LogPagination.html">LogPagination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Mentions.html">Mentions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageInput.html">MessageInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageRequest.html">MessageRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageResponse.html">MessageResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/OutputData.html">OutputData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Pagination.html">Pagination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeEntity.html">RuntimeEntity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeIntent.html">RuntimeIntent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Synonym.html">Synonym</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SynonymCollection.html">SynonymCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SystemResponse.html">SystemResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/UpdateDialogNode.html">UpdateDialogNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/UpdateDialogNode/NodeType.html">– NodeType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/UpdateDialogNode/EventName.html">– EventName</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/UpdateDialogNode/DigressIn.html">– DigressIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/UpdateDialogNode/DigressOut.html">– DigressOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/UpdateDialogNode/DigressOutSlots.html">– DigressOutSlots</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/UpdateEntity.html">UpdateEntity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/UpdateValue.html">UpdateValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/UpdateValue/ValueType.html">– ValueType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/UpdateWorkspace.html">UpdateWorkspace</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Value.html">Value</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Value/ValueType.html">– ValueType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ValueCollection.html">ValueCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ValueExport.html">ValueExport</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ValueExport/ValueType.html">– ValueType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Workspace.html">Workspace</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/WorkspaceCollection.html">WorkspaceCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/WorkspaceExport.html">WorkspaceExport</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/WorkspaceExport/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/WorkspaceSystemSettings.html">WorkspaceSystemSettings</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/WorkspaceSystemSettingsDisambiguation.html">WorkspaceSystemSettingsDisambiguation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/WorkspaceSystemSettingsDisambiguation/Sensitivity.html">– Sensitivity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/WorkspaceSystemSettingsTooling.html">WorkspaceSystemSettingsTooling</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <h1 id='watson-developer-cloud-swift-sdk' class='heading'>Watson Developer Cloud Swift SDK</h1>
+
+<p><a href="https://travis-ci.org/watson-developer-cloud/swift-sdk"><img src="https://travis-ci.org/watson-developer-cloud/swift-sdk.svg?branch=master" alt="Build Status"></a>
+<img src="https://img.shields.io/badge/platform-iOS,%20Linux-blue.svg?style=flat" alt="">
+<a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage Compatible"></a>
+<a href="http://watson-developer-cloud.github.io/swift-sdk"><img src="https://img.shields.io/badge/Documentation-API-blue.svg" alt="Documentation"></a>
+<a href="https://cla-assistant.io/watson-developer-cloud/swift-sdk"><img src="https://cla-assistant.io/readme/badge/watson-developer-cloud/swift-sdk" alt="CLA assistant"></a></p>
+<h2 id='overview' class='heading'>Overview</h2>
+
+<p>The Watson Developer Cloud Swift SDK makes it easy for mobile developers to build Watson-powered applications. With the Swift SDK you can leverage the power of Watson&rsquo;s advanced artificial intelligence, machine learning, and deep learning techniques to understand unstructured data and engage with mobile users in new ways.</p>
+
+<p>There are many resources to help you build your first cognitive application with the Swift SDK:</p>
+
+<ul>
+<li>Follow the <a href="https://watson-developer-cloud.github.io/swift-sdk/docs/quickstart">QuickStart Guide</a></li>
+<li>Review a <a href="#sample-applications">Sample Application</a></li>
+<li>Browse the <a href="https://watson-developer-cloud.github.io/swift-sdk/">Documentation</a></li>
+</ul>
+<h2 id='contents' class='heading'>Contents</h2>
+<h3 id='general' class='heading'>General</h3>
+
+<ul>
+<li><a href="#before-you-begin">Before you begin</a></li>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#authentication">Authentication</a></li>
+<li><a href="#custom-service-urls">Custom Service URLs</a></li>
+<li><a href="#custom-headers">Custom Headers</a></li>
+<li><a href="#sample-applications">Sample Applications</a></li>
+<li><a href="#synchronous-execution">Synchronous Execution</a></li>
+<li><a href="#objective-c-compatibility">Objective-C Compatibility</a></li>
+<li><a href="#linux-compatibility">Linux Compatibility</a></li>
+<li><a href="#contributing">Contributing</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+<h3 id='services' class='heading'>Services</h3>
+
+<p>This SDK provides classes and methods to access the following Watson services.</p>
+
+<ul>
+<li><a href="https://www.ibm.com/watson/services/conversation">Assistant</a></li>
+<li><a href="https://www.ibm.com/watson/services/discovery">Discovery</a></li>
+<li><a href="https://www.ibm.com/watson/services/language-translator">Language Translator V3</a></li>
+<li><a href="https://www.ibm.com/watson/services/natural-language-classifier">Natural Language Classifier</a></li>
+<li><a href="https://www.ibm.com/watson/services/natural-language-understanding">Natural Language Understanding</a></li>
+<li><a href="https://www.ibm.com/watson/services/personality-insights">Personality Insights</a></li>
+<li><a href="https://www.ibm.com/watson/services/speech-to-text">Speech to Text</a></li>
+<li><a href="https://www.ibm.com/watson/services/text-to-speech">Text to Speech</a></li>
+<li><a href="https://www.ibm.com/watson/services/tone-analyzer">Tone Analyzer</a></li>
+<li><a href="https://www.ibm.com/watson/services/visual-recognition">Visual Recognition</a></li>
+</ul>
+<h2 id='before-you-begin' class='heading'>Before you begin</h2>
+
+<ul>
+<li>You need an <a href="http://console.bluemix.net/registration?target=/developer/watson&cm_sp=WatsonPlatform-WatsonServices-_-OnPageNavLink-IBMWatson_SDKs-_-Swift">IBM Cloud</a> account.</li>
+</ul>
+<h2 id='requirements' class='heading'>Requirements</h2>
+
+<ul>
+<li>Xcode 9.3+</li>
+<li>Swift 4.1+</li>
+<li>iOS 10.0+</li>
+</ul>
+<h2 id='installation' class='heading'>Installation</h2>
+
+<p>The IBM Watson Swift SDK can be installed with <a href="http://cocoapods.org/">Cocoapods</a>, <a href="https://github.com/Carthage/Carthage">Carthage</a>, or <a href="https://swift.org/package-manager/">Swift Package Manager</a>.</p>
+<h3 id='cocoapods' class='heading'>Cocoapods</h3>
+
+<p>You can install Cocoapods with <a href="https://rubygems.org/">RubyGems</a>:</p>
+<pre class="highlight shell"><code><span class="nv">$ </span><span class="nb">sudo </span>gem <span class="nb">install </span>cocoapods
+</code></pre>
+
+<p>If your project does not yet have a Podfile, use the <code>pod init</code> command in the root directory of your project. To install the Swift SDK using Cocoapods, add the services you will be using to your Podfile as demonstrated below (substituting <code>MyApp</code> with the name of your app). The example below shows all of the currently available services; your Podfile should only include the services that your app will use.</p>
+<pre class="highlight ruby"><code><span class="n">use_frameworks!</span>
+
+<span class="n">target</span> <span class="s1">'MyApp'</span> <span class="k">do</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonAssistantV1'</span><span class="p">,</span> <span class="s1">'~&gt; 0.37.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonAssistantV2'</span><span class="p">,</span> <span class="s1">'~&gt; 0.37.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonConversationV1'</span><span class="p">,</span> <span class="s1">'~&gt; 0.37.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonDiscoveryV1'</span><span class="p">,</span> <span class="s1">'~&gt; 0.37.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonLanguageTranslatorV3'</span><span class="p">,</span> <span class="s1">'~&gt; 0.37.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonNaturalLanguageClassifierV1'</span><span class="p">,</span> <span class="s1">'~&gt; 0.37.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonNaturalLanguageUnderstandingV1'</span><span class="p">,</span> <span class="s1">'~&gt; 0.37.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonPersonalityInsightsV3'</span><span class="p">,</span> <span class="s1">'~&gt; 0.37.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonSpeechToTextV1'</span><span class="p">,</span> <span class="s1">'~&gt; 0.37.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonTextToSpeechV1'</span><span class="p">,</span> <span class="s1">'~&gt; 0.37.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonToneAnalyzerV3'</span><span class="p">,</span> <span class="s1">'~&gt; 0.37.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonVisualRecognitionV3'</span><span class="p">,</span> <span class="s1">'~&gt; 0.37.0'</span>
+<span class="k">end</span>
+</code></pre>
+
+<p>Run the <code>pod install</code> command, and open the generated <code>.xcworkspace</code> file. To update to newer releases, use <code>pod update</code>.</p>
+
+<p>When importing the frameworks in source files, exclude the <code>IBMWatson</code> prefix and the version suffix. For example, after installing <code>IBMWatsonAssistantV1</code>, import it in your source files as <code>import Assistant</code>.</p>
+
+<p>For more information on using Cocoapods, refer to the <a href="https://guides.cocoapods.org/using/index.html">Cocoapods Guides</a>.</p>
+<h3 id='carthage' class='heading'>Carthage</h3>
+
+<p>You can install Carthage with <a href="http://brew.sh/">Homebrew</a>:</p>
+<pre class="highlight shell"><code><span class="nv">$ </span>brew update
+<span class="nv">$ </span>brew <span class="nb">install </span>carthage
+</code></pre>
+
+<p>If your project does not have a Cartfile yet, use the <code>touch Cartfile</code> command in the root directory of your project. To install the IBM Watson Swift SDK using Carthage, add the following to your Cartfile. </p>
+<pre class="highlight plaintext"><code>github "watson-developer-cloud/swift-sdk" ~&gt; 0.37.0
+</code></pre>
+
+<p>Then run the following command to build the dependencies and frameworks:</p>
+<pre class="highlight shell"><code><span class="nv">$ </span>carthage update <span class="nt">--platform</span> iOS
+</code></pre>
+
+<p>Follow the remaining Carthage installation instructions <a href="https://github.com/Carthage/Carthage#getting-started">here</a>. Note that the above command will download and build all of the services in the IBM Watson Swift SDK. Make sure to drag-and-drop the built frameworks (only for the services your app requires) into your Xcode project and import them in the source files that require them. The following frameworks need to be added to your app:</p>
+
+<ol>
+<li><code>RestKit.framework</code></li>
+<li>Whichever services your app will be using (<code>AssistantV1.framework</code>, <code>DiscoveryV1.framework</code>, etc.)</li>
+<li>(<strong>Speech to Text only</strong>) <code>Starscream.framework</code></li>
+</ol>
+<h3 id='swift-package-manager' class='heading'>Swift Package Manager</h3>
+
+<p>Add the following to your <code>Package.swift</code> file to identify the IBM Watson Swift SDK as a dependency. The package manager will clone the Swift SDK when you build your project with <code>swift build</code>.</p>
+<pre class="highlight swift"><code><span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
+    <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/watson-developer-cloud/swift-sdk"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"0.37.0"</span><span class="p">)</span>
+<span class="p">]</span>
+</code></pre>
+<h2 id='authentication' class='heading'>Authentication</h2>
+
+<p>Watson services are migrating to token-based Identity and Access Management (IAM) authentication.</p>
+
+<ul>
+<li>With some service instances, you authenticate to the API by using <strong><a href="#iam">IAM</a></strong>.</li>
+<li>In other instances, you authenticate by providing the <strong><a href="#username-and-password">username and password</a></strong> for the service instance.</li>
+<li>Visual Recognition uses a form of <a href="#api-key">API key</a> only with instances created before May 23, 2018. Newer instances of Visual Recognition use <a href="#iam">IAM</a>.</li>
+</ul>
+<h3 id='getting-credentials' class='heading'>Getting credentials</h3>
+
+<p>To find out which authentication to use, view the service credentials. You find the service credentials for authentication the same way for all Watson services:</p>
+
+<ol>
+<li>Go to the IBM Cloud <a href="https://console.bluemix.net/dashboard/apps?category=ai">Dashboard</a> page.</li>
+<li>Either click an existing Watson service instance or click <a href="https://console.bluemix.net/catalog/?category=ai"><strong>Create resource &gt; AI</strong></a> and create a service instance.</li>
+<li>Click <strong>Show</strong> to view your service credentials.</li>
+<li>Copy the <code>url</code> and either <code>apikey</code> or <code>username</code> and <code>password</code>.</li>
+</ol>
+<h3 id='iam' class='heading'>IAM</h3>
+
+<p>Some services use token-based Identity and Access Management (IAM) authentication. IAM authentication uses a service API key to get an access token that is passed with the call. Access tokens are valid for approximately one hour and must be regenerated.</p>
+
+<p>You supply either an IAM service <strong>API key</strong> or an <strong>access token</strong>:</p>
+
+<ul>
+<li>Use the API key to have the SDK manage the lifecycle of the access token. The SDK requests an access token, ensures that the access token is valid, and refreshes it if necessary.</li>
+<li>Use the access token if you want to manage the lifecycle yourself. For details, see <a href="https://console.bluemix.net/docs/services/watson/getting-started-iam.html">Authenticating with IAM tokens</a>. If you want to switch to API key, override your stored IAM credentials with an IAM API key.</li>
+</ul>
+<h4 id='supplying-the-iam-api-key' class='heading'>Supplying the IAM API key</h4>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">discovery</span> <span class="o">=</span> <span class="kt">Discovery</span><span class="p">(</span><span class="nv">version</span><span class="p">:</span> <span class="s">"your-version-here"</span><span class="p">,</span> <span class="nv">apiKey</span><span class="p">:</span> <span class="s">"your-apikey-here"</span><span class="p">)</span>
+</code></pre>
+
+<p>If you are supplying an API key for IBM Cloud Private (ICP), use basic authentication instead, with <code>&quot;apikey&quot;</code> for the <code>username</code> and the api key (prefixed with <code>icp-</code>) for the <code>password</code>. See the <a href="#username-and-password">Username and Password</a> section.</p>
+<h4 id='supplying-the-accesstoken' class='heading'>Supplying the accessToken</h4>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">discovery</span> <span class="o">=</span> <span class="kt">Discovery</span><span class="p">(</span><span class="nv">version</span><span class="p">:</span> <span class="s">"your-version-here"</span><span class="p">,</span> <span class="nv">accessToken</span><span class="p">:</span> <span class="s">"your-accessToken-here"</span><span class="p">)</span>
+</code></pre>
+<h4 id='updating-the-accesstoken' class='heading'>Updating the accessToken</h4>
+<pre class="highlight swift"><code><span class="n">discovery</span><span class="o">.</span><span class="nf">accessToken</span><span class="p">(</span><span class="s">"new-accessToken-here"</span><span class="p">)</span>
+</code></pre>
+<h3 id='username-and-password' class='heading'>Username and Password</h3>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">discovery</span> <span class="o">=</span> <span class="kt">Discovery</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="s">"your-username-here"</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="s">"your-password-here"</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="s">"your-version-here"</span><span class="p">)</span>
+</code></pre>
+<h3 id='api-key' class='heading'>API Key</h3>
+
+<p><em>Note: This type of authentication only works with Visual Recognition, and for instances created before May 23, 2018. Newer instances of Visual Recognition use IAM.</em></p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">visualRecognition</span> <span class="o">=</span> <span class="kt">VisualRecognition</span><span class="p">(</span><span class="nv">apiKey</span><span class="p">:</span> <span class="s">"your-apiKey-here"</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="s">"your-version-here"</span><span class="p">)</span>
+</code></pre>
+<h2 id='custom-service-urls' class='heading'>Custom Service URLs</h2>
+
+<p>You can set a custom service URL by modifying the <code>serviceURL</code> property. A custom service URL may be required when running an  instance in a particular region or connecting through a proxy.</p>
+
+<p>For example, here is how to connect to a Tone Analyzer instance that is hosted in Germany:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">toneAnalyzer</span> <span class="o">=</span> <span class="kt">ToneAnalyzer</span><span class="p">(</span>
+    <span class="nv">username</span><span class="p">:</span> <span class="s">"your-username-here"</span><span class="p">,</span>
+    <span class="nv">password</span><span class="p">:</span> <span class="s">"your-password-here"</span><span class="p">,</span>
+    <span class="nv">version</span><span class="p">:</span> <span class="s">"yyyy-mm-dd"</span>
+<span class="p">)</span>
+<span class="n">toneAnalyzer</span><span class="o">.</span><span class="n">serviceURL</span> <span class="o">=</span> <span class="s">"https://gateway-fra.watsonplatform.net/tone-analyzer/api"</span>
+</code></pre>
+<h2 id='custom-headers' class='heading'>Custom Headers</h2>
+
+<p>There are different headers that can be sent to the Watson services. For example, Watson services log requests and their results for the purpose of improving the services, but you can include the <code>X-Watson-Learning-Opt-Out</code> header to opt out of this.</p>
+
+<p>We have exposed a <code>defaultHeaders</code> public property in each class to allow users to easily customize their headers:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">naturalLanguageClassifier</span> <span class="o">=</span> <span class="kt">NaturalLanguageClassifier</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">)</span>
+<span class="n">naturalLanguageClassifier</span><span class="o">.</span><span class="n">defaultHeaders</span> <span class="o">=</span> <span class="p">[</span><span class="s">"X-Watson-Learning-Opt-Out"</span><span class="p">:</span> <span class="s">"true"</span><span class="p">]</span>
+</code></pre>
+
+<p>Each service method also accepts an optional <code>headers</code> parameter which is a dictionary of request headers to be sent with the request.</p>
+<h2 id='sample-applications' class='heading'>Sample Applications</h2>
+
+<ul>
+<li><a href="https://github.com/watson-developer-cloud/simple-chat-swift">Simple Chat (Swift)</a></li>
+<li><a href="https://github.com/watson-developer-cloud/simple-chat-objective-c">Simple Chat (Objective-C)</a></li>
+<li><a href="https://github.com/watson-developer-cloud/visual-recognition-coreml">Visual Recognition with Core ML</a></li>
+<li><a href="https://github.com/watson-developer-cloud/visual-recognition-with-discovery-coreml">Visual Recognition and Discovery with Core ML</a></li>
+<li><a href="https://github.com/watson-developer-cloud/speech-to-text-swift">Speech to Text</a></li>
+<li><a href="https://github.com/watson-developer-cloud/text-to-speech-swift">Text to Speech</a></li>
+<li><a href="https://github.com/IBM-MIL/CognitiveConcierge">Cognitive Concierge</a></li>
+</ul>
+<h2 id='synchronous-execution' class='heading'>Synchronous Execution</h2>
+
+<p>By default, the SDK executes all networking operations asynchronously. If your application requires synchronous execution, you can use a <code>DispatchGroup</code>. For example:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">dispatchGroup</span> <span class="o">=</span> <span class="kt">DispatchGroup</span><span class="p">()</span>
+<span class="n">dispatchGroup</span><span class="o">.</span><span class="nf">enter</span><span class="p">()</span>
+<span class="n">assistant</span><span class="o">.</span><span class="nf">message</span><span class="p">(</span><span class="nv">workspaceID</span><span class="p">:</span> <span class="n">workspaceID</span><span class="p">)</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">dispatchGroup</span><span class="o">.</span><span class="nf">leave</span><span class="p">()</span>
+<span class="p">}</span>
+<span class="n">dispatchGroup</span><span class="o">.</span><span class="nf">wait</span><span class="p">(</span><span class="nv">timeout</span><span class="p">:</span> <span class="o">.</span><span class="n">distantFuture</span><span class="p">)</span>
+</code></pre>
+<h2 id='objective-c-compatibility' class='heading'>Objective-C Compatibility</h2>
+
+<p>Please see <a href="https://watson-developer-cloud.github.io/swift-sdk/docs/objective-c">this tutorial</a> for more information about consuming the Watson Developer Cloud Swift SDK in an Objective-C application.</p>
+<h2 id='linux-compatibility' class='heading'>Linux Compatibility</h2>
+
+<p>To use the Watson SDK in your Linux project, please follow the <a href="#swift-package-manager">Swift Package Manager instructions.</a>. Note that Speech to Text and Text to Speech are not supported because they rely on frameworks that are unavailable on Linux.</p>
+<h2 id='contributing' class='heading'>Contributing</h2>
+
+<p>We would love any and all help! If you would like to contribute, please read our <a href="https://github.com/watson-developer-cloud/swift-sdk/blob/master/.github/CONTRIBUTING.md">CONTRIBUTING</a> documentation with information on getting started.</p>
+<h2 id='license' class='heading'>License</h2>
+
+<p>This library is licensed under Apache 2.0. Full license text is
+available in <a href="https://github.com/watson-developer-cloud/swift-sdk/blob/master/LICENSE">LICENSE</a>.</p>
+
+<p>This SDK is intended for use with an Apple iOS product and intended to be used in conjunction with officially licensed Apple development tools.</p>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-11-02)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

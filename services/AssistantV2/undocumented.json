@@ -1,0 +1,138 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/AssistantV2/Assistant.swift",
+      "line": 79,
+      "symbol": "Assistant.accessToken(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/AssistantV2/Models/DialogLogMessage.swift",
+      "line": 28,
+      "symbol": "DialogLogMessage.Level.info",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/AssistantV2/Models/DialogLogMessage.swift",
+      "line": 29,
+      "symbol": "DialogLogMessage.Level.error",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/AssistantV2/Models/DialogLogMessage.swift",
+      "line": 30,
+      "symbol": "DialogLogMessage.Level.warn",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/AssistantV2/Models/DialogNodeAction.swift",
+      "line": 27,
+      "symbol": "DialogNodeAction.ActionType.client",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/AssistantV2/Models/DialogNodeAction.swift",
+      "line": 28,
+      "symbol": "DialogNodeAction.ActionType.server",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/AssistantV2/Models/DialogNodeAction.swift",
+      "line": 29,
+      "symbol": "DialogNodeAction.ActionType.webAction",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/AssistantV2/Models/DialogNodeAction.swift",
+      "line": 30,
+      "symbol": "DialogNodeAction.ActionType.cloudFunction",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/AssistantV2/Models/DialogRuntimeResponseGeneric.swift",
+      "line": 29,
+      "symbol": "DialogRuntimeResponseGeneric.ResponseType.text",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/AssistantV2/Models/DialogRuntimeResponseGeneric.swift",
+      "line": 30,
+      "symbol": "DialogRuntimeResponseGeneric.ResponseType.pause",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/AssistantV2/Models/DialogRuntimeResponseGeneric.swift",
+      "line": 31,
+      "symbol": "DialogRuntimeResponseGeneric.ResponseType.image",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/AssistantV2/Models/DialogRuntimeResponseGeneric.swift",
+      "line": 32,
+      "symbol": "DialogRuntimeResponseGeneric.ResponseType.option",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/AssistantV2/Models/DialogRuntimeResponseGeneric.swift",
+      "line": 33,
+      "symbol": "DialogRuntimeResponseGeneric.ResponseType.connectToAgent",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/AssistantV2/Models/DialogRuntimeResponseGeneric.swift",
+      "line": 34,
+      "symbol": "DialogRuntimeResponseGeneric.ResponseType.suggestion",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/AssistantV2/Models/DialogRuntimeResponseGeneric.swift",
+      "line": 41,
+      "symbol": "DialogRuntimeResponseGeneric.Preference.dropdown",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/AssistantV2/Models/DialogRuntimeResponseGeneric.swift",
+      "line": 42,
+      "symbol": "DialogRuntimeResponseGeneric.Preference.button",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/AssistantV2/Models/MessageInput.swift",
+      "line": 28,
+      "symbol": "MessageInput.MessageType.text",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/AssistantV2/Models/MessageOutputDebug.swift",
+      "line": 29,
+      "symbol": "MessageOutputDebug.BranchExitedReason.completed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/AssistantV2/Models/MessageOutputDebug.swift",
+      "line": 30,
+      "symbol": "MessageOutputDebug.BranchExitedReason.fallback",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/anthony/Development/Watson-SDKs/swift-sdk"
+}

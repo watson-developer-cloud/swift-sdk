@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>AssistantV2  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a title="AssistantV2  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">AssistantV2 Docs</a></p>
+        <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">AssistantV2 Reference</a>
+        <img id="carat" src="img/carat.png" />
+        AssistantV2  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="readme.html">README</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/Assistant.html">Assistant</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/CaptureGroup.html">CaptureGroup</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogLogMessage.html">DialogLogMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogLogMessage/Level.html">– Level</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeAction.html">DialogNodeAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeAction/ActionType.html">– ActionType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeOutputOptionsElement.html">DialogNodeOutputOptionsElement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeOutputOptionsElementValue.html">DialogNodeOutputOptionsElementValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodesVisited.html">DialogNodesVisited</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogRuntimeResponseGeneric.html">DialogRuntimeResponseGeneric</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogRuntimeResponseGeneric/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogRuntimeResponseGeneric/Preference.html">– Preference</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogSuggestion.html">DialogSuggestion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogSuggestionValue.html">DialogSuggestionValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageContext.html">MessageContext</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageContextGlobal.html">MessageContextGlobal</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageContextGlobalSystem.html">MessageContextGlobalSystem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageContextSkills.html">MessageContextSkills</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageInput.html">MessageInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageInput/MessageType.html">– MessageType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageInputOptions.html">MessageInputOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageOutput.html">MessageOutput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageOutputDebug.html">MessageOutputDebug</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageOutputDebug/BranchExitedReason.html">– BranchExitedReason</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/MessageResponse.html">MessageResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeEntity.html">RuntimeEntity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeIntent.html">RuntimeIntent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SessionResponse.html">SessionResponse</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            
+            <h1 id='watson-assistant' class='heading'>Watson Assistant</h1>
+
+<p>With the IBM Watson Assistant service you can create cognitive agents: virtual agents 
+that combine machine learning, natural language understanding, and integrated dialog scripting tools 
+to provide conversation flows between your apps and your users.</p>
+<h3 id='starting-a-conversation' class='heading'>Starting a conversation</h3>
+
+<p>The following example shows how to start a conversation with the Assistant service:</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
+<span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
+<span class="k">let</span> <span class="nv">version</span> <span class="o">=</span> <span class="s">"YYYY-MM-DD"</span> <span class="c1">// use today's date for the most recent version</span>
+<span class="k">let</span> <span class="nv">assistant</span> <span class="o">=</span> <span class="kt">Assistant</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="n">version</span><span class="p">)</span>
+
+<span class="k">let</span> <span class="nv">assistantID</span> <span class="o">=</span> <span class="s">"your-assistant-id-here"</span>
+<span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
+<span class="k">var</span> <span class="nv">context</span><span class="p">:</span> <span class="kt">MessageContext</span><span class="p">?</span> <span class="c1">// save context to continue the conversation</span>
+
+<span class="c1">// First, create the session for a new conversation</span>
+<span class="n">assistant</span><span class="o">.</span><span class="nf">createSession</span><span class="p">(</span><span class="nv">assistantID</span><span class="p">:</span> <span class="n">assistantID</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">response</span> <span class="k">in</span>
+
+    <span class="nf">beginConversation</span><span class="p">(</span><span class="nv">sessionID</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">sessionID</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Start a conversation with the Assistant service</span>
+<span class="kd">func</span> <span class="nf">beginConversation</span><span class="p">(</span><span class="nv">sessionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="n">assistant</span><span class="o">.</span><span class="nf">message</span><span class="p">(</span><span class="nv">assistantID</span><span class="p">:</span> <span class="n">assistantID</span><span class="p">,</span> <span class="nv">sessionID</span><span class="p">:</span> <span class="n">sessionID</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">response</span> <span class="k">in</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">context</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">generic</span><span class="p">?</span><span class="o">.</span><span class="nf">forEach</span><span class="p">({</span>
+            <span class="n">response</span> <span class="k">in</span>
+            <span class="nf">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span> <span class="p">??</span> <span class="s">"No response"</span><span class="p">)</span>
+        <span class="p">})</span>
+        <span class="nf">respond</span><span class="p">(</span><span class="nv">sessionID</span><span class="p">:</span> <span class="n">sessionID</span><span class="p">)</span> <span class="c1">// See the next code snippet</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>The following example shows how to continue an existing conversation with the Assistant service:</p>
+<pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">respond</span><span class="p">(</span><span class="nv">sessionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">let</span> <span class="nv">messageInput</span> <span class="o">=</span> <span class="kt">MessageInput</span><span class="p">(</span><span class="nv">messageType</span><span class="p">:</span> <span class="kt">MessageInput</span><span class="o">.</span><span class="kt">MessageType</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">rawValue</span><span class="p">,</span> <span class="nv">text</span><span class="p">:</span> <span class="s">"Turn on the radio."</span><span class="p">)</span>
+    <span class="n">assistant</span><span class="o">.</span><span class="nf">message</span><span class="p">(</span>
+        <span class="nv">assistantID</span><span class="p">:</span> <span class="n">assistantID</span><span class="p">,</span>
+        <span class="nv">sessionID</span><span class="p">:</span> <span class="n">sessionID</span><span class="p">,</span> 
+        <span class="nv">input</span><span class="p">:</span> <span class="n">messageInput</span><span class="p">,</span> 
+        <span class="nv">context</span><span class="p">:</span> <span class="n">context</span><span class="p">,</span> 
+        <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> 
+    <span class="p">{</span>
+        <span class="n">response</span> <span class="k">in</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">context</span>
+        <span class="n">response</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">generic</span><span class="p">?</span><span class="o">.</span><span class="nf">forEach</span><span class="p">({</span>
+            <span class="n">response</span> <span class="k">in</span>
+            <span class="nf">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span> <span class="p">??</span> <span class="s">"No response"</span><span class="p">)</span>
+        <span class="p">})</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<h3 id='skills' class='heading'>Skills</h3>
+
+<p>The Assistant service allows users to configure <q>skills</q> in their application&rsquo;s payload, like ordering a pizza.
+For example, a session that guides users through a pizza order might include a property for pizza size: <code>&quot;pizza_size&quot;: &quot;large&quot;</code>.</p>
+
+<p>The following example shows how to get and set a user-defined <code>pizza_size</code> property:</p>
+<pre class="highlight swift"><code><span class="c1">// Get the `pizza_size` property</span>
+<span class="k">let</span> <span class="nv">messageInput</span> <span class="o">=</span> <span class="kt">MessageInput</span><span class="p">(</span><span class="nv">messageType</span><span class="p">:</span> <span class="kt">MessageInput</span><span class="o">.</span><span class="kt">MessageType</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">rawValue</span><span class="p">,</span> <span class="nv">text</span><span class="p">:</span> <span class="s">"Order a pizza"</span><span class="p">)</span>
+<span class="n">assistant</span><span class="o">.</span><span class="nf">message</span><span class="p">(</span>
+    <span class="nv">assistantID</span><span class="p">:</span> <span class="n">assistantID</span><span class="p">,</span>
+    <span class="nv">sessionID</span><span class="p">:</span> <span class="s">"sessionID"</span><span class="p">,</span>
+    <span class="nv">input</span><span class="p">:</span> <span class="n">messageInput</span><span class="p">,</span>
+    <span class="nv">context</span><span class="p">:</span> <span class="n">context</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">response</span> <span class="k">in</span>
+    <span class="k">if</span> <span class="k">case</span> <span class="kd">let</span> <span class="o">.</span><span class="nf">string</span><span class="p">(</span><span class="n">size</span><span class="p">)?</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">context</span><span class="p">?</span><span class="o">.</span><span class="n">skills</span><span class="p">?</span><span class="o">.</span><span class="n">additionalProperties</span><span class="p">[</span><span class="s">"pizza_size"</span><span class="p">]</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Set the `pizza_size` property</span>
+<span class="n">assistant</span><span class="o">.</span><span class="nf">message</span><span class="p">(</span>
+    <span class="nv">assistantID</span><span class="p">:</span> <span class="n">assistantID</span><span class="p">,</span>
+    <span class="nv">sessionID</span><span class="p">:</span> <span class="s">"sessionID"</span><span class="p">,</span>
+    <span class="nv">input</span><span class="p">:</span> <span class="n">messageInput</span><span class="p">,</span>
+    <span class="nv">context</span><span class="p">:</span> <span class="n">context</span><span class="p">,</span>
+    <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">response</span> <span class="k">in</span>
+    <span class="k">var</span> <span class="nv">context</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">context</span>
+    <span class="n">context</span><span class="p">?</span><span class="o">.</span><span class="n">skills</span><span class="p">?</span><span class="o">.</span><span class="n">additionalProperties</span><span class="p">[</span><span class="s">"pizza_size"</span><span class="p">]</span> <span class="o">=</span> <span class="o">.</span><span class="nf">string</span><span class="p">(</span><span class="s">"large"</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>For reference, the <code>JSON</code> type is defined as:</p>
+<pre class="highlight swift"><code><span class="c1">/// A JSON value (one of string, number, object, array, true, false, or null).</span>
+<span class="kd">public</span> <span class="kd">enum</span> <span class="kt">JSON</span><span class="p">:</span> <span class="kt">Equatable</span><span class="p">,</span> <span class="kt">Codable</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">null</span>
+    <span class="k">case</span> <span class="nf">boolean</span><span class="p">(</span><span class="kt">Bool</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nf">string</span><span class="p">(</span><span class="kt">String</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nf">int</span><span class="p">(</span><span class="kt">Int</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nf">double</span><span class="p">(</span><span class="kt">Double</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nf">date</span><span class="p">(</span><span class="kt">Date</span><span class="p">)</span>
+    <span class="k">case</span> <span class="nf">array</span><span class="p">([</span><span class="kt">JSON</span><span class="p">])</span>
+    <span class="k">case</span> <span class="nf">object</span><span class="p">([</span><span class="kt">String</span><span class="p">:</span> <span class="kt">JSON</span><span class="p">])</span>
+<span class="p">}</span>
+</code></pre>
+<h3 id='additional-resources' class='heading'>Additional resources</h3>
+
+<p>The following links provide more information about the IBM Watson Assistant service:</p>
+
+<ul>
+<li><a href="https://www.ibm.com/watson/services/conversation/">IBM Watson Assistant - Service Page</a></li>
+<li><a href="https://console.bluemix.net/docs/services/conversation/index.html">IBM Watson Assistant - Documentation</a></li>
+</ul>
+
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-11-02)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

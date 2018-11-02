@@ -1,103 +1,103 @@
 {
   "warnings": [
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ToneAnalyzerV3/Models/ToneChatScore.swift",
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ToneAnalyzerV3/Models/ToneChatScore.swift",
       "line": 27,
       "symbol": "ToneChatScore.ToneID.excited",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ToneAnalyzerV3/Models/ToneChatScore.swift",
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ToneAnalyzerV3/Models/ToneChatScore.swift",
       "line": 28,
       "symbol": "ToneChatScore.ToneID.frustrated",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ToneAnalyzerV3/Models/ToneChatScore.swift",
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ToneAnalyzerV3/Models/ToneChatScore.swift",
       "line": 29,
       "symbol": "ToneChatScore.ToneID.impolite",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ToneAnalyzerV3/Models/ToneChatScore.swift",
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ToneAnalyzerV3/Models/ToneChatScore.swift",
       "line": 30,
       "symbol": "ToneChatScore.ToneID.polite",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ToneAnalyzerV3/Models/ToneChatScore.swift",
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ToneAnalyzerV3/Models/ToneChatScore.swift",
       "line": 31,
       "symbol": "ToneChatScore.ToneID.sad",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ToneAnalyzerV3/Models/ToneChatScore.swift",
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ToneAnalyzerV3/Models/ToneChatScore.swift",
       "line": 32,
       "symbol": "ToneChatScore.ToneID.satisfied",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ToneAnalyzerV3/Models/ToneChatScore.swift",
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ToneAnalyzerV3/Models/ToneChatScore.swift",
       "line": 33,
       "symbol": "ToneChatScore.ToneID.sympathetic",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ToneAnalyzerV3/Models/ToneContent.swift",
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ToneAnalyzerV3/Models/ToneContent.swift",
       "line": 25,
-      "symbol": "ToneContent.toneInput",
+      "symbol": "ToneContent.toneInput(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ToneAnalyzerV3/Models/ToneContent.swift",
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ToneAnalyzerV3/Models/ToneContent.swift",
       "line": 26,
-      "symbol": "ToneContent.text",
+      "symbol": "ToneContent.text(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ToneAnalyzerV3/Models/ToneContent.swift",
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ToneAnalyzerV3/Models/ToneContent.swift",
       "line": 27,
-      "symbol": "ToneContent.html",
+      "symbol": "ToneContent.html(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ToneAnalyzerV3/ToneAnalyzer.swift",
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ToneAnalyzerV3/ToneAnalyzer.swift",
       "line": 84,
       "symbol": "ToneAnalyzer.accessToken(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ToneAnalyzerV3/ToneAnalyzer.swift",
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ToneAnalyzerV3/ToneAnalyzer.swift",
       "line": 305,
       "symbol": "ToneAnalyzer.tone(toneInput:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ToneAnalyzerV3/ToneAnalyzer.swift",
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ToneAnalyzerV3/ToneAnalyzer.swift",
       "line": 320,
       "symbol": "ToneAnalyzer.tone(text:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ToneAnalyzerV3/ToneAnalyzer.swift",
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/ToneAnalyzerV3/ToneAnalyzer.swift",
       "line": 335,
       "symbol": "ToneAnalyzer.tone(html:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     }
   ],
-  "source_directory": "/Users/travis/build/watson-developer-cloud/swift-sdk"
+  "source_directory": "/Users/anthony/Development/Watson-SDKs/swift-sdk"
 }

@@ -1,3 +1,12 @@
+# [0.37.0](https://github.com/watson-developer-cloud/swift-sdk/compare/0.36.0...0.37.0) (2018-11-02)
+
+
+### Features
+
+* **AssistantV1, AssistantV2:** Add cloudFunction and webAction to DialogNodeAction.ActionType ([16d3fc9](https://github.com/watson-developer-cloud/swift-sdk/commit/16d3fc9))
+* **DiscoveryV1:** Tokenization dictionaries for collections ([d274371](https://github.com/watson-developer-cloud/swift-sdk/commit/d274371))
+* **SpeechToTextV1:** Add languageCustomizationID parameter to createJob() and recognize() ([0137964](https://github.com/watson-developer-cloud/swift-sdk/commit/0137964))
+
 # [0.36.0](https://github.com/watson-developer-cloud/swift-sdk/compare/0.35.0...0.36.0) (2018-10-19)
 
 

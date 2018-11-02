@@ -17,8 +17,8 @@
 // swiftlint:disable function_body_length force_try force_unwrapping file_length
 
 import XCTest
-@testable
-import VisualRecognitionV3
+import RestKit
+@testable import VisualRecognitionV3
 
 class VisualRecognitionUnitTests: XCTestCase {
 
@@ -81,6 +81,81 @@ class VisualRecognitionUnitTests: XCTestCase {
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1)
+    }
+
+    // MARK: errorResponseDecoder
+
+    func testErrorResponseDecoder403() {
+        let testJSON: [String: JSON] = [
+            "status": JSON.string("403"),
+            "statusInfo": JSON.string("forbidden"),
+        ]
+        let testData = try! JSONEncoder().encode(testJSON)
+        let testResponse = HTTPURLResponse(url: URL(string: "http://example.com")!, statusCode: 403, httpVersion: nil, headerFields: nil)!
+
+        let error = visualRecognition.errorResponseDecoder(data: testData, response: testResponse)
+        if case let .http(statusCode, message, metadata) = error {
+            XCTAssertEqual(statusCode, 403)
+            XCTAssertNotNil(message)
+            XCTAssertNotNil(metadata)
+            XCTAssertNotNil(metadata!["status"])
+            XCTAssertNotNil(metadata!["statusInfo"])
+        }
+    }
+
+    func testErrorResponseDecoder404() {
+        let testJSON: [String: JSON] = [
+            "error": JSON.object([
+                "description": JSON.string("not found"),
+                "error_id": JSON.string("42"),
+            ]),
+        ]
+        let testData = try! JSONEncoder().encode(testJSON)
+        let testResponse = HTTPURLResponse(url: URL(string: "http://example.com")!, statusCode: 404, httpVersion: nil, headerFields: nil)!
+
+        let error = visualRecognition.errorResponseDecoder(data: testData, response: testResponse)
+        if case let .http(statusCode, message, metadata) = error {
+            XCTAssertEqual(statusCode, 404)
+            XCTAssertNotNil(message)
+            XCTAssertNotNil(metadata?["description"])
+            XCTAssertNotNil(metadata?["errorID"])
+        }
+    }
+
+    func testErrorResponseDecoder413() {
+        let testJSON: [String: JSON] = ["Error": JSON.string("failed")]
+        let testData = try! JSONEncoder().encode(testJSON)
+        let testResponse = HTTPURLResponse(url: URL(string: "http://example.com")!, statusCode: 413, httpVersion: nil, headerFields: nil)!
+
+        let error = visualRecognition.errorResponseDecoder(data: testData, response: testResponse)
+        if case let .http(statusCode, message, _) = error {
+            XCTAssertEqual(statusCode, 413)
+            XCTAssertNotNil(message)
+        }
+    }
+
+    func testErrorResponseDecoderDefault() {
+        let testJSON: [String: JSON] = ["error": JSON.string("failed")]
+        let testData = try! JSONEncoder().encode(testJSON)
+        let testResponse = HTTPURLResponse(url: URL(string: "http://example.com")!, statusCode: 500, httpVersion: nil, headerFields: nil)!
+
+        let error = visualRecognition.errorResponseDecoder(data: testData, response: testResponse)
+        if case let .http(statusCode, message, _) = error {
+            XCTAssertEqual(statusCode, 500)
+            XCTAssertNotNil(message)
+        }
+    }
+
+    func testErrorResponseDecoderBadJSON() {
+        let testData = Data()
+        let testResponse = HTTPURLResponse(url: URL(string: "http://example.com")!, statusCode: 500, httpVersion: nil, headerFields: nil)!
+
+        let error = visualRecognition.errorResponseDecoder(data: testData, response: testResponse)
+        if case let .http(statusCode, message, metadata) = error {
+            XCTAssertEqual(statusCode, 500)
+            XCTAssertNil(message)
+            XCTAssertNil(metadata)
+        }
     }
 
     func testClassifyReturns413() throws {

@@ -19,7 +19,7 @@ import Foundation
 /**
  A list of HTML conversion settings.
  */
-public struct HtmlSettings: Codable {
+public struct HTMLSettings: Codable {
 
     public var excludeTagsCompletely: [String]?
 
@@ -44,7 +44,7 @@ public struct HtmlSettings: Codable {
     }
 
     /**
-     Initialize a `HtmlSettings` with member variables.
+     Initialize a `HTMLSettings` with member variables.
 
      - parameter excludeTagsCompletely:
      - parameter excludeTagsKeepContent:
@@ -53,7 +53,7 @@ public struct HtmlSettings: Codable {
      - parameter keepTagAttributes:
      - parameter excludeTagAttributes:
 
-     - returns: An initialized `HtmlSettings`.
+     - returns: An initialized `HTMLSettings`.
     */
     public init(
         excludeTagsCompletely: [String]? = nil,

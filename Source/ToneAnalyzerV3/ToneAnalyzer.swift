@@ -35,10 +35,9 @@ public class ToneAnalyzer {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    private let session = URLSession(configuration: URLSessionConfiguration.default)
-    private var authMethod: AuthenticationMethod
-    private let domain = "com.ibm.watson.developer-cloud.ToneAnalyzerV3"
-    private let version: String
+    var session = URLSession(configuration: URLSessionConfiguration.default)
+    var authMethod: AuthenticationMethod
+    let version: String
 
     /**
      Create a `ToneAnalyzer` object.
@@ -245,7 +244,8 @@ public class ToneAnalyzer {
         completionHandler: @escaping (WatsonResponse<UtteranceAnalyses>?, WatsonError?) -> Void)
     {
         // construct body
-        let toneChatRequest = ToneChatInput(utterances: utterances)
+        let toneChatRequest = ToneChatInput(
+            utterances: utterances)
         guard let body = try? JSONEncoder().encode(toneChatRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return

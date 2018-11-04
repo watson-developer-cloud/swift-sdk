@@ -24,7 +24,7 @@ public struct MetricAggregationResult: Decodable {
     /**
      Date in string form representing the start of this interval.
      */
-    public var keyAsString: String?
+    public var keyAsString: Date?
 
     /**
      Unix epoch time equivalent of the **key_as_string**, that represents the start of this interval.

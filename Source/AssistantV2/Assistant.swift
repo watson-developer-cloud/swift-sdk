@@ -30,10 +30,9 @@ public class Assistant {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    private let session = URLSession(configuration: URLSessionConfiguration.default)
-    private var authMethod: AuthenticationMethod
-    private let domain = "com.ibm.watson.developer-cloud.AssistantV2"
-    private let version: String
+    var session = URLSession(configuration: URLSessionConfiguration.default)
+    var authMethod: AuthenticationMethod
+    let version: String
 
     /**
      Create a `Assistant` object.
@@ -83,7 +82,7 @@ public class Assistant {
     }
 
     /**
-     Use the HTTP response and data received by the Watson Assistant service to extract
+     Use the HTTP response and data received by the Watson Assistant v2 service to extract
      information about the error that occurred.
 
      - parameter data: Raw data returned by the service that may represent an error.
@@ -132,7 +131,6 @@ public class Assistant {
             headerParameters.merge(headers) { (_, new) in new }
         }
         headerParameters["Accept"] = "application/json"
-        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -205,7 +203,7 @@ public class Assistant {
         )
 
         // execute REST request
-        request.responseVoid(completionHandler: completionHandler)
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -221,6 +219,7 @@ public class Assistant {
      - parameter sessionID: Unique identifier of the session.
      - parameter input: An input object that includes the input text.
      - parameter context: State information for the conversation.
+     - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func message(
@@ -232,7 +231,9 @@ public class Assistant {
         completionHandler: @escaping (WatsonResponse<MessageResponse>?, WatsonError?) -> Void)
     {
         // construct body
-        let messageRequest = MessageRequest(input: input, context: context)
+        let messageRequest = MessageRequest(
+            input: input,
+            context: context)
         guard let body = try? JSONEncoder().encodeIfPresent(messageRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return

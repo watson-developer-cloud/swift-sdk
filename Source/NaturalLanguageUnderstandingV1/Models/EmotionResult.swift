@@ -23,12 +23,12 @@ import Foundation
 public struct EmotionResult: Decodable {
 
     /**
-     The returned emotion results across the document.
+     Emotion results for the document as a whole.
      */
     public var document: DocumentEmotionResults?
 
     /**
-     The returned emotion results per specified target.
+     Emotion results for specified targets.
      */
     public var targets: [TargetedEmotionResults]?
 

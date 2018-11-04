@@ -31,9 +31,8 @@ public class NaturalLanguageClassifier {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    private let session = URLSession(configuration: URLSessionConfiguration.default)
-    private var authMethod: AuthenticationMethod
-    private let domain = "com.ibm.watson.developer-cloud.NaturalLanguageClassifierV1"
+    var session = URLSession(configuration: URLSessionConfiguration.default)
+    var authMethod: AuthenticationMethod
 
     /**
      Create a `NaturalLanguageClassifier` object.
@@ -92,9 +91,6 @@ public class NaturalLanguageClassifier {
             if case let .some(.string(message)) = json["error"] {
                 errorMessage = message
             }
-            if case let .some(.string(description)) = json["description"] {
-                metadata["description"] = description
-            }
             // If metadata is empty, it should show up as nil in the WatsonError
             return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
         } catch {
@@ -120,7 +116,8 @@ public class NaturalLanguageClassifier {
         completionHandler: @escaping (WatsonResponse<Classification>?, WatsonError?) -> Void)
     {
         // construct body
-        let classifyRequest = ClassifyInput(text: text)
+        let classifyRequest = ClassifyInput(
+            text: text)
         guard let body = try? JSONEncoder().encode(classifyRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -173,7 +170,8 @@ public class NaturalLanguageClassifier {
         completionHandler: @escaping (WatsonResponse<ClassificationCollection>?, WatsonError?) -> Void)
     {
         // construct body
-        let classifyCollectionRequest = ClassifyCollectionInput(collection: collection)
+        let classifyCollectionRequest = ClassifyCollectionInput(
+            collection: collection)
         guard let body = try? JSONEncoder().encode(classifyCollectionRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return

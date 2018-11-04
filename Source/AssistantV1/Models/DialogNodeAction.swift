@@ -26,6 +26,8 @@ public struct DialogNodeAction: Codable {
     public enum ActionType: String {
         case client = "client"
         case server = "server"
+        case cloudFunction = "cloud_function"
+        case webAction = "web_action"
     }
 
     /**

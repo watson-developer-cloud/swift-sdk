@@ -30,10 +30,9 @@ public class Assistant {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    private let session = URLSession(configuration: URLSessionConfiguration.default)
-    private var authMethod: AuthenticationMethod
-    private let domain = "com.ibm.watson.developer-cloud.AssistantV1"
-    private let version: String
+    var session = URLSession(configuration: URLSessionConfiguration.default)
+    var authMethod: AuthenticationMethod
+    let version: String
 
     /**
      Create a `Assistant` object.
@@ -83,7 +82,7 @@ public class Assistant {
     }
 
     /**
-     Use the HTTP response and data received by the Watson Assistant service to extract
+     Use the HTTP response and data received by the Watson Assistant v1 service to extract
      information about the error that occurred.
 
      - parameter data: Raw data returned by the service that may represent an error.
@@ -144,7 +143,13 @@ public class Assistant {
         completionHandler: @escaping (WatsonResponse<MessageResponse>?, WatsonError?) -> Void)
     {
         // construct body
-        let messageRequest = MessageRequest(input: input, alternateIntents: alternateIntents, context: context, entities: entities, intents: intents, output: output)
+        let messageRequest = MessageRequest(
+            input: input,
+            alternateIntents: alternateIntents,
+            context: context,
+            entities: entities,
+            intents: intents,
+            output: output)
         guard let body = try? JSONEncoder().encodeIfPresent(messageRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -663,7 +668,10 @@ public class Assistant {
         completionHandler: @escaping (WatsonResponse<Intent>?, WatsonError?) -> Void)
     {
         // construct body
-        let createIntentRequest = CreateIntent(intent: intent, description: description, examples: examples)
+        let createIntentRequest = CreateIntent(
+            intent: intent,
+            description: description,
+            examples: examples)
         guard let body = try? JSONEncoder().encode(createIntentRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -794,7 +802,10 @@ public class Assistant {
         completionHandler: @escaping (WatsonResponse<Intent>?, WatsonError?) -> Void)
     {
         // construct body
-        let updateIntentRequest = UpdateIntent(intent: newIntent, description: newDescription, examples: newExamples)
+        let updateIntentRequest = UpdateIntent(
+            intent: newIntent,
+            description: newDescription,
+            examples: newExamples)
         guard let body = try? JSONEncoder().encode(updateIntentRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -986,7 +997,9 @@ public class Assistant {
         completionHandler: @escaping (WatsonResponse<Example>?, WatsonError?) -> Void)
     {
         // construct body
-        let createExampleRequest = CreateExample(text: text, mentions: mentions)
+        let createExampleRequest = CreateExample(
+            text: text,
+            mentions: mentions)
         guard let body = try? JSONEncoder().encode(createExampleRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -1109,7 +1122,9 @@ public class Assistant {
         completionHandler: @escaping (WatsonResponse<Example>?, WatsonError?) -> Void)
     {
         // construct body
-        let updateExampleRequest = UpdateExample(text: newText, mentions: newMentions)
+        let updateExampleRequest = UpdateExample(
+            text: newText,
+            mentions: newMentions)
         guard let body = try? JSONEncoder().encode(updateExampleRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -1298,7 +1313,8 @@ public class Assistant {
         completionHandler: @escaping (WatsonResponse<Counterexample>?, WatsonError?) -> Void)
     {
         // construct body
-        let createCounterexampleRequest = CreateCounterexample(text: text)
+        let createCounterexampleRequest = CreateCounterexample(
+            text: text)
         guard let body = try? JSONEncoder().encode(createCounterexampleRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -1412,7 +1428,8 @@ public class Assistant {
         completionHandler: @escaping (WatsonResponse<Counterexample>?, WatsonError?) -> Void)
     {
         // construct body
-        let updateCounterexampleRequest = UpdateCounterexample(text: newText)
+        let updateCounterexampleRequest = UpdateCounterexample(
+            text: newText)
         guard let body = try? JSONEncoder().encode(updateCounterexampleRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -1616,7 +1633,12 @@ public class Assistant {
         completionHandler: @escaping (WatsonResponse<Entity>?, WatsonError?) -> Void)
     {
         // construct body
-        let createEntityRequest = CreateEntity(entity: entity, description: description, metadata: metadata, values: values, fuzzyMatch: fuzzyMatch)
+        let createEntityRequest = CreateEntity(
+            entity: entity,
+            description: description,
+            metadata: metadata,
+            values: values,
+            fuzzyMatch: fuzzyMatch)
         guard let body = try? JSONEncoder().encode(createEntityRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -1752,7 +1774,12 @@ public class Assistant {
         completionHandler: @escaping (WatsonResponse<Entity>?, WatsonError?) -> Void)
     {
         // construct body
-        let updateEntityRequest = UpdateEntity(entity: newEntity, description: newDescription, metadata: newMetadata, fuzzyMatch: newFuzzyMatch, values: newValues)
+        let updateEntityRequest = UpdateEntity(
+            entity: newEntity,
+            description: newDescription,
+            metadata: newMetadata,
+            fuzzyMatch: newFuzzyMatch,
+            values: newValues)
         guard let body = try? JSONEncoder().encode(updateEntityRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -2029,7 +2056,12 @@ public class Assistant {
         completionHandler: @escaping (WatsonResponse<Value>?, WatsonError?) -> Void)
     {
         // construct body
-        let createValueRequest = CreateValue(value: value, metadata: metadata, synonyms: synonyms, patterns: patterns, valueType: valueType)
+        let createValueRequest = CreateValue(
+            value: value,
+            metadata: metadata,
+            synonyms: synonyms,
+            patterns: patterns,
+            valueType: valueType)
         guard let body = try? JSONEncoder().encode(createValueRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -2174,7 +2206,12 @@ public class Assistant {
         completionHandler: @escaping (WatsonResponse<Value>?, WatsonError?) -> Void)
     {
         // construct body
-        let updateValueRequest = UpdateValue(value: newValue, metadata: newMetadata, valueType: newType, synonyms: newSynonyms, patterns: newPatterns)
+        let updateValueRequest = UpdateValue(
+            value: newValue,
+            metadata: newMetadata,
+            valueType: newType,
+            synonyms: newSynonyms,
+            patterns: newPatterns)
         guard let body = try? JSONEncoder().encode(updateValueRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -2370,7 +2407,8 @@ public class Assistant {
         completionHandler: @escaping (WatsonResponse<Synonym>?, WatsonError?) -> Void)
     {
         // construct body
-        let createSynonymRequest = CreateSynonym(synonym: synonym)
+        let createSynonymRequest = CreateSynonym(
+            synonym: synonym)
         guard let body = try? JSONEncoder().encode(createSynonymRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -2495,7 +2533,8 @@ public class Assistant {
         completionHandler: @escaping (WatsonResponse<Synonym>?, WatsonError?) -> Void)
     {
         // construct body
-        let updateSynonymRequest = UpdateSynonym(synonym: newSynonym)
+        let updateSynonymRequest = UpdateSynonym(
+            synonym: newSynonym)
         guard let body = try? JSONEncoder().encode(updateSynonymRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -2697,6 +2736,7 @@ public class Assistant {
      - parameter digressOut: Whether this dialog node can be returned to after a digression.
      - parameter digressOutSlots: Whether the user can digress to top-level nodes while filling out slots.
      - parameter userLabel: A label that can be displayed externally to describe the purpose of the node to users.
+       This string must be no longer than 512 characters.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -2871,6 +2911,7 @@ public class Assistant {
      - parameter newDigressOut: Whether this dialog node can be returned to after a digression.
      - parameter newDigressOutSlots: Whether the user can digress to top-level nodes while filling out slots.
      - parameter newUserLabel: A label that can be displayed externally to describe the purpose of the node to users.
+       This string must be no longer than 512 characters.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */

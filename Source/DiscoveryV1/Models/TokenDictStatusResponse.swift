@@ -17,18 +17,33 @@
 import Foundation
 
 /**
- Emotion results for the document as a whole.
+ Object describing the current status of the tokenization dictionary.
  */
-public struct DocumentEmotionResults: Decodable {
+public struct TokenDictStatusResponse: Decodable {
 
     /**
-     Emotion results for the document as a whole.
+     Current tokenization dictionary status for the specified collection.
      */
-    public var emotion: EmotionScores?
+    public enum Status: String {
+        case active = "active"
+        case pending = "pending"
+        case notFound = "not found"
+    }
+
+    /**
+     Current tokenization dictionary status for the specified collection.
+     */
+    public var status: String?
+
+    /**
+     The type for this dictionary. Always returns `tokenization_dictionary`.
+     */
+    public var type: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case emotion = "emotion"
+        case status = "status"
+        case type = "type"
     }
 
 }

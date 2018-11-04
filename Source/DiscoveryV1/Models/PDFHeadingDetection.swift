@@ -16,30 +16,28 @@
 
 import Foundation
 
-/**
- A list of PDF conversion settings.
- */
-public struct PdfSettings: Codable {
+/** PDFHeadingDetection. */
+public struct PDFHeadingDetection: Codable {
 
-    public var heading: PdfHeadingDetection?
+    public var fonts: [FontSetting]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case heading = "heading"
+        case fonts = "fonts"
     }
 
     /**
-     Initialize a `PdfSettings` with member variables.
+     Initialize a `PDFHeadingDetection` with member variables.
 
-     - parameter heading:
+     - parameter fonts:
 
-     - returns: An initialized `PdfSettings`.
+     - returns: An initialized `PDFHeadingDetection`.
     */
     public init(
-        heading: PdfHeadingDetection? = nil
+        fonts: [FontSetting]? = nil
     )
     {
-        self.heading = heading
+        self.fonts = fonts
     }
 
 }

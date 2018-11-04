@@ -32,10 +32,9 @@ public class Discovery {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    private let session = URLSession(configuration: URLSessionConfiguration.default)
-    private var authMethod: AuthenticationMethod
-    private let domain = "com.ibm.watson.developer-cloud.DiscoveryV1"
-    private let version: String
+    var session = URLSession(configuration: URLSessionConfiguration.default)
+    var authMethod: AuthenticationMethod
+    let version: String
 
     /**
      Create a `Discovery` object.
@@ -103,9 +102,6 @@ public class Discovery {
             if case let .some(.string(message)) = json["error"] {
                 errorMessage = message
             }
-            if case let .some(.string(description)) = json["description"] {
-                metadata["description"] = description
-            }
             // If metadata is empty, it should show up as nil in the WatsonError
             return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
         } catch {
@@ -135,7 +131,10 @@ public class Discovery {
         completionHandler: @escaping (WatsonResponse<Environment>?, WatsonError?) -> Void)
     {
         // construct body
-        let createEnvironmentRequest = CreateEnvironmentRequest(name: name, description: description, size: size)
+        let createEnvironmentRequest = CreateEnvironmentRequest(
+            name: name,
+            description: description,
+            size: size)
         guard let body = try? JSONEncoder().encode(createEnvironmentRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -279,7 +278,10 @@ public class Discovery {
         completionHandler: @escaping (WatsonResponse<Environment>?, WatsonError?) -> Void)
     {
         // construct body
-        let updateEnvironmentRequest = UpdateEnvironmentRequest(name: name, description: description, size: size)
+        let updateEnvironmentRequest = UpdateEnvironmentRequest(
+            name: name,
+            description: description,
+            size: size)
         guard let body = try? JSONEncoder().encode(updateEnvironmentRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -367,13 +369,13 @@ public class Discovery {
      Gets a list of the unique fields (and their types) stored in the indexes of the specified collections.
 
      - parameter environmentID: The ID of the environment.
-     - parameter collectionIds: A comma-separated list of collection IDs to be queried against.
+     - parameter collectionIDs: A comma-separated list of collection IDs to be queried against.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listFields(
         environmentID: String,
-        collectionIds: [String],
+        collectionIDs: [String],
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<ListCollectionFieldsResponse>?, WatsonError?) -> Void)
     {
@@ -387,7 +389,7 @@ public class Discovery {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        queryParameters.append(URLQueryItem(name: "collection_ids", value: collectionIds.joined(separator: ",")))
+        queryParameters.append(URLQueryItem(name: "collection_ids", value: collectionIDs.joined(separator: ",")))
 
         // construct REST request
         let path = "/v1/environments/\(environmentID)/fields"
@@ -443,7 +445,13 @@ public class Discovery {
         completionHandler: @escaping (WatsonResponse<Configuration>?, WatsonError?) -> Void)
     {
         // construct body
-        let createConfigurationRequest = Configuration(name: name, description: description, conversions: conversions, enrichments: enrichments, normalizations: normalizations, source: source)
+        let createConfigurationRequest = Configuration(
+            name: name,
+            description: description,
+            conversions: conversions,
+            enrichments: enrichments,
+            normalizations: normalizations,
+            source: source)
         guard let body = try? JSONEncoder().encode(createConfigurationRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -614,7 +622,13 @@ public class Discovery {
         completionHandler: @escaping (WatsonResponse<Configuration>?, WatsonError?) -> Void)
     {
         // construct body
-        let updateConfigurationRequest = Configuration(name: name, description: description, conversions: conversions, enrichments: enrichments, normalizations: normalizations, source: source)
+        let updateConfigurationRequest = Configuration(
+            name: name,
+            description: description,
+            conversions: conversions,
+            enrichments: enrichments,
+            normalizations: normalizations,
+            source: source)
         guard let body = try? JSONEncoder().encode(updateConfigurationRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -831,7 +845,11 @@ public class Discovery {
         completionHandler: @escaping (WatsonResponse<Collection>?, WatsonError?) -> Void)
     {
         // construct body
-        let createCollectionRequest = CreateCollectionRequest(name: name, description: description, configurationID: configurationID, language: language)
+        let createCollectionRequest = CreateCollectionRequest(
+            name: name,
+            description: description,
+            configurationID: configurationID,
+            language: language)
         guard let body = try? JSONEncoder().encode(createCollectionRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -987,7 +1005,10 @@ public class Discovery {
         completionHandler: @escaping (WatsonResponse<Collection>?, WatsonError?) -> Void)
     {
         // construct body
-        let updateCollectionRequest = UpdateCollectionRequest(name: name, description: description, configurationID: configurationID)
+        let updateCollectionRequest = UpdateCollectionRequest(
+            name: name,
+            description: description,
+            configurationID: configurationID)
         guard let body = try? JSONEncoder().encodeIfPresent(updateCollectionRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -1196,7 +1217,8 @@ public class Discovery {
         completionHandler: @escaping (WatsonResponse<Expansions>?, WatsonError?) -> Void)
     {
         // construct body
-        let createExpansionsRequest = Expansions(expansions: expansions)
+        let createExpansionsRequest = Expansions(
+            expansions: expansions)
         guard let body = try? JSONEncoder().encode(createExpansionsRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -1265,6 +1287,160 @@ public class Discovery {
 
         // construct REST request
         let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/expansions"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            return
+        }
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "DELETE",
+            url: serviceURL + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.response(completionHandler: completionHandler)
+    }
+
+    /**
+     Get tokenization dictionary status.
+
+     Returns the current status of the tokenization dictionary for the specified collection.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func getTokenizationDictionaryStatus(
+        environmentID: String,
+        collectionID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<TokenDictStatusResponse>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/word_lists/tokenization_dictionary"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            return
+        }
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceURL + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Create tokenization dictionary.
+
+     Upload a custom tokenization dictionary to use with the specified collection.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter tokenizationRules: An array of tokenization rules. Each rule contains, the original `text` string,
+       component `tokens`, any alternate character set `readings`, and which `part_of_speech` the text is from.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func createTokenizationDictionary(
+        environmentID: String,
+        collectionID: String,
+        tokenizationRules: [TokenDictRule]? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<TokenDictStatusResponse>?, WatsonError?) -> Void)
+    {
+        // construct body
+        let createTokenizationDictionaryRequest = TokenDict(
+            tokenizationRules: tokenizationRules)
+        guard let body = try? JSONEncoder().encodeIfPresent(createTokenizationDictionaryRequest) else {
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/word_lists/tokenization_dictionary"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            return
+        }
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "POST",
+            url: serviceURL + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Delete tokenization dictionary.
+
+     Delete the tokenization dictionary from the collection.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func deleteTokenizationDictionary(
+        environmentID: String,
+        collectionID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/word_lists/tokenization_dictionary"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
@@ -1570,9 +1746,8 @@ public class Discovery {
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
-     - parameter filter: A cacheable query that limits the documents returned to exclude any documents that don't
-       mention the query content. Filter searches are better for metadata type searches and when you are trying to get a
-       sense of concepts in the data set.
+     - parameter filter: A cacheable query that excludes documents that don't mention the query content. Filter
+       searches are better for metadata-type searches and for assessing the concepts in the data set.
      - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
        with the most relevant documents listed first. Use a query search when you want to find the most relevant search
        results. You cannot use **natural_language_query** and **query** at the same time.
@@ -1580,38 +1755,38 @@ public class Discovery {
        data and natural language understanding. You cannot use **natural_language_query** and **query** at the same
        time.
      - parameter passages: A passages query that returns the most relevant passages from the results.
-     - parameter aggregation: An aggregation search uses combinations of filters and query search to return an exact
-       answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and
-       time series. For a full list of possible aggregrations, see the Query reference.
+     - parameter aggregation: An aggregation search that returns an exact answer by combining query search with
+       filters. Useful for applications to build lists, tables, and time series. For a full list of possible
+       aggregations, see the Query reference.
      - parameter count: Number of results to return.
-     - parameter returnFields: A comma separated list of the portion of the document hierarchy to return.
+     - parameter returnFields: A comma-separated list of the portion of the document hierarchy to return.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
-       results that are returned is 10, and the offset is 8, it returns the last two results.
-     - parameter sort: A comma separated list of fields in the document to sort on. You can optionally specify a sort
+       results that are returned is 10 and the offset is 8, it returns the last two results.
+     - parameter sort: A comma-separated list of fields in the document to sort on. You can optionally specify a sort
        direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort
-       direction if no prefix is specified.
-     - parameter highlight: When true a highlight field is returned for each result which contains the fields that
-       match the query with `<em></em>` tags around the matching query terms. Defaults to false.
+       direction if no prefix is specified. This parameter cannot be used in the same query as the **bias** parameter.
+     - parameter highlight: When true, a highlight field is returned for each result which contains the fields which
+       match the query with `<em></em>` tags around the matching query terms.
      - parameter passagesFields: A comma-separated list of fields that passages are drawn from. If this parameter not
        specified, then all top-level fields are included.
      - parameter passagesCount: The maximum number of passages to return. The search returns fewer passages if the
        requested total is not found. The default is `10`. The maximum is `100`.
-     - parameter passagesCharacters: The approximate number of characters that any one passage will have. The default
-       is `400`. The minimum is `50`. The maximum is `2000`.
+     - parameter passagesCharacters: The approximate number of characters that any one passage will have.
      - parameter deduplicate: When `true` and used with a Watson Discovery News collection, duplicate results (based
        on the contents of the **title** field) are removed. Duplicate comparison is limited to the current query only;
        **offset** is not considered. This parameter is currently Beta functionality.
      - parameter deduplicateField: When specified, duplicate results based on the field specified are removed from the
        returned results. Duplicate comparison is limited to the current query only, **offset** is not considered. This
        parameter is currently Beta functionality.
+     - parameter collectionIDs: A comma-separated list of collection IDs to be queried against. Required when querying
+       multiple collections, invalid when performing a single collection query.
      - parameter similar: When `true`, results are returned based on their similarity to the document IDs specified in
        the **similar.document_ids** parameter.
-     - parameter similarDocumentIds: A comma-separated list of document IDs that will be used to find similar
-       documents.
-       **Note:** If the **natural_language_query** parameter is also specified, it will be used to expand the scope of
-       the document similarity search to include the natural language query. Other query parameters, such as **filter**
-       and **query** are subsequently applied and reduce the query scope.
-     - parameter similarFields: A comma-separated list of field names that will be used as a basis for comparison to
+     - parameter similarDocumentIDs: A comma-separated list of document IDs to find similar documents.
+       **Tip:** Include the **natural_language_query** parameter to expand the scope of the document similarity search
+       with the natural language query. Other query parameters, such as **filter** and **query**, are subsequently
+       applied and reduce the scope.
+     - parameter similarFields: A comma-separated list of field names that are used as a basis for comparison to
        identify similar documents. If not specified, the entire document is used for comparison.
      - parameter bias: Field which the returned results will be biased against. The specified field must be either a
        **date** or **number** format. When a **date** type field is specified returned results are biased towards field
@@ -1630,50 +1805,47 @@ public class Discovery {
         passages: Bool? = nil,
         aggregation: String? = nil,
         count: Int? = nil,
-        returnFields: [String]? = nil,
+        returnFields: String? = nil,
         offset: Int? = nil,
-        sort: [String]? = nil,
+        sort: String? = nil,
         highlight: Bool? = nil,
-        passagesFields: [String]? = nil,
+        passagesFields: String? = nil,
         passagesCount: Int? = nil,
         passagesCharacters: Int? = nil,
         deduplicate: Bool? = nil,
         deduplicateField: String? = nil,
+        collectionIDs: String? = nil,
         similar: Bool? = nil,
-        similarDocumentIds: [String]? = nil,
-        similarFields: [String]? = nil,
+        similarDocumentIDs: String? = nil,
+        similarFields: String? = nil,
         bias: String? = nil,
         loggingOptOut: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<QueryResponse>?, WatsonError?) -> Void)
     {
         // construct body
-        let returnFieldsJoined = returnFields?.joined(separator: ",")
-        let sortJoined = sort?.joined(separator: ",")
-        let passagesFieldsJoined = passagesFields?.joined(separator: ",")
-        let similarDocumentIdsJoined = similarDocumentIds?.joined(separator: ",")
-        let similarFieldsJoined = similarFields?.joined(separator: ",")
-        let queryLong = QueryLarge(
+        let queryRequest = QueryLarge(
             filter: filter,
             query: query,
             naturalLanguageQuery: naturalLanguageQuery,
             passages: passages,
             aggregation: aggregation,
             count: count,
-            returnFields: returnFieldsJoined,
+            returnFields: returnFields,
             offset: offset,
-            sort: sortJoined,
+            sort: sort,
             highlight: highlight,
-            passagesFields: passagesFieldsJoined,
+            passagesFields: passagesFields,
             passagesCount: passagesCount,
             passagesCharacters: passagesCharacters,
             deduplicate: deduplicate,
             deduplicateField: deduplicateField,
+            collectionIDs: collectionIDs,
             similar: similar,
-            similarDocumentIds: similarDocumentIdsJoined,
-            similarFields: similarFieldsJoined,
+            similarDocumentIDs: similarDocumentIDs,
+            similarFields: similarFields,
             bias: bias)
-        guard let body = try? JSONEncoder().encode(queryLong) else {
+        guard let body = try? JSONEncoder().encodeIfPresent(queryRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
@@ -1755,7 +1927,7 @@ public class Discovery {
        parameter is currently Beta functionality.
      - parameter similar: When `true`, results are returned based on their similarity to the document IDs specified in
        the **similar.document_ids** parameter.
-     - parameter similarDocumentIds: A comma-separated list of document IDs to find similar documents.
+     - parameter similarDocumentIDs: A comma-separated list of document IDs to find similar documents.
        **Tip:** Include the **natural_language_query** parameter to expand the scope of the document similarity search
        with the natural language query. Other query parameters, such as **filter** and **query**, are subsequently
        applied and reduce the scope.
@@ -1782,7 +1954,7 @@ public class Discovery {
         passagesCharacters: Int? = nil,
         deduplicateField: String? = nil,
         similar: Bool? = nil,
-        similarDocumentIds: [String]? = nil,
+        similarDocumentIDs: [String]? = nil,
         similarFields: [String]? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<QueryNoticesResponse>?, WatsonError?) -> Void)
@@ -1857,8 +2029,8 @@ public class Discovery {
             let queryParameter = URLQueryItem(name: "similar", value: "\(similar)")
             queryParameters.append(queryParameter)
         }
-        if let similarDocumentIds = similarDocumentIds {
-            let queryParameter = URLQueryItem(name: "similar.document_ids", value: similarDocumentIds.joined(separator: ","))
+        if let similarDocumentIDs = similarDocumentIDs {
+            let queryParameter = URLQueryItem(name: "similar.document_ids", value: similarDocumentIDs.joined(separator: ","))
             queryParameters.append(queryParameter)
         }
         if let similarFields = similarFields {
@@ -1894,50 +2066,48 @@ public class Discovery {
      [Discovery service documentation](https://console.bluemix.net/docs/services/discovery/using.html).
 
      - parameter environmentID: The ID of the environment.
-     - parameter collectionIds: A comma-separated list of collection IDs to be queried against.
-     - parameter filter: A cacheable query that limits the documents returned to exclude any documents that don't
-       mention the query content. Filter searches are better for metadata type searches and when you are trying to get a
-       sense of concepts in the data set.
+     - parameter filter: A cacheable query that excludes documents that don't mention the query content. Filter
+       searches are better for metadata-type searches and for assessing the concepts in the data set.
      - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
        with the most relevant documents listed first. Use a query search when you want to find the most relevant search
        results. You cannot use **natural_language_query** and **query** at the same time.
      - parameter naturalLanguageQuery: A natural language query that returns relevant documents by utilizing training
        data and natural language understanding. You cannot use **natural_language_query** and **query** at the same
        time.
-     - parameter aggregation: An aggregation search uses combinations of filters and query search to return an exact
-       answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and
-       time series. For a full list of possible aggregrations, see the Query reference.
+     - parameter passages: A passages query that returns the most relevant passages from the results.
+     - parameter aggregation: An aggregation search that returns an exact answer by combining query search with
+       filters. Useful for applications to build lists, tables, and time series. For a full list of possible
+       aggregations, see the Query reference.
      - parameter count: Number of results to return.
-     - parameter returnFields: A comma separated list of the portion of the document hierarchy to return.
+     - parameter returnFields: A comma-separated list of the portion of the document hierarchy to return.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
-       results that are returned is 10, and the offset is 8, it returns the last two results.
-     - parameter sort: A comma separated list of fields in the document to sort on. You can optionally specify a sort
+       results that are returned is 10 and the offset is 8, it returns the last two results.
+     - parameter sort: A comma-separated list of fields in the document to sort on. You can optionally specify a sort
        direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort
-       direction if no prefix is specified.
-     - parameter highlight: When true a highlight field is returned for each result which contains the fields that
-       match the query with `<em></em>` tags around the matching query terms. Defaults to false.
+       direction if no prefix is specified. This parameter cannot be used in the same query as the **bias** parameter.
+     - parameter highlight: When true, a highlight field is returned for each result which contains the fields which
+       match the query with `<em></em>` tags around the matching query terms.
+     - parameter passagesFields: A comma-separated list of fields that passages are drawn from. If this parameter not
+       specified, then all top-level fields are included.
+     - parameter passagesCount: The maximum number of passages to return. The search returns fewer passages if the
+       requested total is not found. The default is `10`. The maximum is `100`.
+     - parameter passagesCharacters: The approximate number of characters that any one passage will have.
      - parameter deduplicate: When `true` and used with a Watson Discovery News collection, duplicate results (based
        on the contents of the **title** field) are removed. Duplicate comparison is limited to the current query only;
        **offset** is not considered. This parameter is currently Beta functionality.
      - parameter deduplicateField: When specified, duplicate results based on the field specified are removed from the
        returned results. Duplicate comparison is limited to the current query only, **offset** is not considered. This
        parameter is currently Beta functionality.
+     - parameter collectionIDs: A comma-separated list of collection IDs to be queried against. Required when querying
+       multiple collections, invalid when performing a single collection query.
      - parameter similar: When `true`, results are returned based on their similarity to the document IDs specified in
        the **similar.document_ids** parameter.
-     - parameter similarDocumentIds: A comma-separated list of document IDs that will be used to find similar
-       documents.
-       **Note:** If the **natural_language_query** parameter is also specified, it will be used to expand the scope of
-       the document similarity search to include the natural language query. Other query parameters, such as **filter**
-       and **query** are subsequently applied and reduce the query scope.
-     - parameter similarFields: A comma-separated list of field names that will be used as a basis for comparison to
+     - parameter similarDocumentIDs: A comma-separated list of document IDs to find similar documents.
+       **Tip:** Include the **natural_language_query** parameter to expand the scope of the document similarity search
+       with the natural language query. Other query parameters, such as **filter** and **query**, are subsequently
+       applied and reduce the scope.
+     - parameter similarFields: A comma-separated list of field names that are used as a basis for comparison to
        identify similar documents. If not specified, the entire document is used for comparison.
-     - parameter passages: A passages query that returns the most relevant passages from the results.
-     - parameter passagesFields: A comma-separated list of fields that passages are drawn from. If this parameter not
-       specified, then all top-level fields are included.
-     - parameter passagesCount: The maximum number of passages to return. The search returns fewer passages if the
-       requested total is not found. The default is `10`. The maximum is `100`.
-     - parameter passagesCharacters: The approximate number of characters that any one passage will have. The default
-       is `400`. The minimum is `50`. The maximum is `2000`.
      - parameter bias: Field which the returned results will be biased against. The specified field must be either a
        **date** or **number** format. When a **date** type field is specified returned results are biased towards field
        values closer to the current date. When a **number** type field is specified, returned results are biased towards
@@ -1948,59 +2118,53 @@ public class Discovery {
      */
     public func federatedQuery(
         environmentID: String,
-        collectionIds: [String],
         filter: String? = nil,
         query: String? = nil,
         naturalLanguageQuery: String? = nil,
+        passages: Bool? = nil,
         aggregation: String? = nil,
         count: Int? = nil,
-        returnFields: [String]? = nil,
+        returnFields: String? = nil,
         offset: Int? = nil,
-        sort: [String]? = nil,
+        sort: String? = nil,
         highlight: Bool? = nil,
-        deduplicate: Bool? = nil,
-        deduplicateField: String? = nil,
-        similar: Bool? = nil,
-        similarDocumentIds: [String]? = nil,
-        similarFields: [String]? = nil,
-        passages: Bool? = nil,
-        passagesFields: [String]? = nil,
+        passagesFields: String? = nil,
         passagesCount: Int? = nil,
         passagesCharacters: Int? = nil,
+        deduplicate: Bool? = nil,
+        deduplicateField: String? = nil,
+        collectionIDs: String? = nil,
+        similar: Bool? = nil,
+        similarDocumentIDs: String? = nil,
+        similarFields: String? = nil,
         bias: String? = nil,
         loggingOptOut: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<QueryResponse>?, WatsonError?) -> Void)
     {
         // construct body
-        let returnFieldsJoined = returnFields?.joined(separator: ",")
-        let sortJoined = sort?.joined(separator: ",")
-        let passagesFieldsJoined = passagesFields?.joined(separator: ",")
-        let collectionIdsJoined = collectionIds.joined(separator: ",")
-        let similarDocumentIdsJoined = similarDocumentIds?.joined(separator: ",")
-        let similarFieldsJoined = similarFields?.joined(separator: ",")
-        let queryLong = QueryLarge(
+        let federatedQueryRequest = QueryLarge(
             filter: filter,
             query: query,
             naturalLanguageQuery: naturalLanguageQuery,
             passages: passages,
             aggregation: aggregation,
             count: count,
-            returnFields: returnFieldsJoined,
+            returnFields: returnFields,
             offset: offset,
-            sort: sortJoined,
+            sort: sort,
             highlight: highlight,
-            passagesFields: passagesFieldsJoined,
+            passagesFields: passagesFields,
             passagesCount: passagesCount,
             passagesCharacters: passagesCharacters,
             deduplicate: deduplicate,
             deduplicateField: deduplicateField,
-            collectionIds: collectionIdsJoined,
+            collectionIDs: collectionIDs,
             similar: similar,
-            similarDocumentIds: similarDocumentIdsJoined,
-            similarFields: similarFieldsJoined,
+            similarDocumentIDs: similarDocumentIDs,
+            similarFields: similarFields,
             bias: bias)
-        guard let body = try? JSONEncoder().encode(queryLong) else {
+        guard let body = try? JSONEncoder().encodeIfPresent(federatedQueryRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
@@ -2050,7 +2214,7 @@ public class Discovery {
      language.
 
      - parameter environmentID: The ID of the environment.
-     - parameter collectionIds: A comma-separated list of collection IDs to be queried against.
+     - parameter collectionIDs: A comma-separated list of collection IDs to be queried against.
      - parameter filter: A cacheable query that excludes documents that don't mention the query content. Filter
        searches are better for metadata-type searches and for assessing the concepts in the data set.
      - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
@@ -2076,7 +2240,7 @@ public class Discovery {
        parameter is currently Beta functionality.
      - parameter similar: When `true`, results are returned based on their similarity to the document IDs specified in
        the **similar.document_ids** parameter.
-     - parameter similarDocumentIds: A comma-separated list of document IDs to find similar documents.
+     - parameter similarDocumentIDs: A comma-separated list of document IDs to find similar documents.
        **Tip:** Include the **natural_language_query** parameter to expand the scope of the document similarity search
        with the natural language query. Other query parameters, such as **filter** and **query**, are subsequently
        applied and reduce the scope.
@@ -2087,7 +2251,7 @@ public class Discovery {
      */
     public func federatedQueryNotices(
         environmentID: String,
-        collectionIds: [String],
+        collectionIDs: [String],
         filter: String? = nil,
         query: String? = nil,
         naturalLanguageQuery: String? = nil,
@@ -2099,7 +2263,7 @@ public class Discovery {
         highlight: Bool? = nil,
         deduplicateField: String? = nil,
         similar: Bool? = nil,
-        similarDocumentIds: [String]? = nil,
+        similarDocumentIDs: [String]? = nil,
         similarFields: [String]? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<QueryNoticesResponse>?, WatsonError?) -> Void)
@@ -2114,7 +2278,7 @@ public class Discovery {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
-        queryParameters.append(URLQueryItem(name: "collection_ids", value: collectionIds.joined(separator: ",")))
+        queryParameters.append(URLQueryItem(name: "collection_ids", value: collectionIDs.joined(separator: ",")))
         if let filter = filter {
             let queryParameter = URLQueryItem(name: "filter", value: filter)
             queryParameters.append(queryParameter)
@@ -2159,8 +2323,8 @@ public class Discovery {
             let queryParameter = URLQueryItem(name: "similar", value: "\(similar)")
             queryParameters.append(queryParameter)
         }
-        if let similarDocumentIds = similarDocumentIds {
-            let queryParameter = URLQueryItem(name: "similar.document_ids", value: similarDocumentIds.joined(separator: ","))
+        if let similarDocumentIDs = similarDocumentIDs {
+            let queryParameter = URLQueryItem(name: "similar.document_ids", value: similarDocumentIDs.joined(separator: ","))
             queryParameters.append(queryParameter)
         }
         if let similarFields = similarFields {
@@ -2220,7 +2384,12 @@ public class Discovery {
         completionHandler: @escaping (WatsonResponse<QueryEntitiesResponse>?, WatsonError?) -> Void)
     {
         // construct body
-        let queryEntitiesRequest = QueryEntities(feature: feature, entity: entity, context: context, count: count, evidenceCount: evidenceCount)
+        let queryEntitiesRequest = QueryEntities(
+            feature: feature,
+            entity: entity,
+            context: context,
+            count: count,
+            evidenceCount: evidenceCount)
         guard let body = try? JSONEncoder().encode(queryEntitiesRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -2272,7 +2441,8 @@ public class Discovery {
        For example, if you wanted to query the city of London in England your query would look for `London` with the
        context of `England`.
      - parameter sort: The sorting method for the relationships, can be `score` or `frequency`. `frequency` is the
-       number of unique times each entity is identified. The default is `score`.
+       number of unique times each entity is identified. The default is `score`. This parameter cannot be used in the
+       same query as the **bias** parameter.
      - parameter filter: Filters to apply to the relationship query.
      - parameter count: The number of results to return. The default is `10`. The maximum is `1000`.
      - parameter evidenceCount: The number of evidence items to return for each result. The default is `0`. The
@@ -2293,7 +2463,13 @@ public class Discovery {
         completionHandler: @escaping (WatsonResponse<QueryRelationsResponse>?, WatsonError?) -> Void)
     {
         // construct body
-        let queryRelationsRequest = QueryRelations(entities: entities, context: context, sort: sort, filter: filter, count: count, evidenceCount: evidenceCount)
+        let queryRelationsRequest = QueryRelations(
+            entities: entities,
+            context: context,
+            sort: sort,
+            filter: filter,
+            count: count,
+            evidenceCount: evidenceCount)
         guard let body = try? JSONEncoder().encode(queryRelationsRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -2402,7 +2578,10 @@ public class Discovery {
         completionHandler: @escaping (WatsonResponse<TrainingQuery>?, WatsonError?) -> Void)
     {
         // construct body
-        let addTrainingDataRequest = NewTrainingQuery(naturalLanguageQuery: naturalLanguageQuery, filter: filter, examples: examples)
+        let addTrainingDataRequest = NewTrainingQuery(
+            naturalLanguageQuery: naturalLanguageQuery,
+            filter: filter,
+            examples: examples)
         guard let body = try? JSONEncoder().encode(addTrainingDataRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -2660,7 +2839,10 @@ public class Discovery {
         completionHandler: @escaping (WatsonResponse<TrainingExample>?, WatsonError?) -> Void)
     {
         // construct body
-        let createTrainingExampleRequest = TrainingExample(documentID: documentID, crossReference: crossReference, relevance: relevance)
+        let createTrainingExampleRequest = TrainingExample(
+            documentID: documentID,
+            crossReference: crossReference,
+            relevance: relevance)
         guard let body = try? JSONEncoder().encode(createTrainingExampleRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -2775,7 +2957,9 @@ public class Discovery {
         completionHandler: @escaping (WatsonResponse<TrainingExample>?, WatsonError?) -> Void)
     {
         // construct body
-        let updateTrainingExampleRequest = TrainingExamplePatch(crossReference: crossReference, relevance: relevance)
+        let updateTrainingExampleRequest = TrainingExamplePatch(
+            crossReference: crossReference,
+            relevance: relevance)
         guard let body = try? JSONEncoder().encode(updateTrainingExampleRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -2928,7 +3112,9 @@ public class Discovery {
         completionHandler: @escaping (WatsonResponse<CreateEventResponse>?, WatsonError?) -> Void)
     {
         // construct body
-        let createEventRequest = CreateEventObject(type: type, data: data)
+        let createEventRequest = CreateEventObject(
+            type: type,
+            data: data)
         guard let body = try? JSONEncoder().encode(createEventRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -3051,8 +3237,8 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getMetricsQuery(
-        startTime: String? = nil,
-        endTime: String? = nil,
+        startTime: Date? = nil,
+        endTime: Date? = nil,
         resultType: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<MetricResponse>?, WatsonError?) -> Void)
@@ -3068,11 +3254,11 @@ public class Discovery {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let startTime = startTime {
-            let queryParameter = URLQueryItem(name: "start_time", value: startTime)
+            let queryParameter = URLQueryItem(name: "start_time", value: "\(startTime)")
             queryParameters.append(queryParameter)
         }
         if let endTime = endTime {
-            let queryParameter = URLQueryItem(name: "end_time", value: endTime)
+            let queryParameter = URLQueryItem(name: "end_time", value: "\(endTime)")
             queryParameters.append(queryParameter)
         }
         if let resultType = resultType {
@@ -3111,8 +3297,8 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getMetricsQueryEvent(
-        startTime: String? = nil,
-        endTime: String? = nil,
+        startTime: Date? = nil,
+        endTime: Date? = nil,
         resultType: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<MetricResponse>?, WatsonError?) -> Void)
@@ -3128,11 +3314,11 @@ public class Discovery {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let startTime = startTime {
-            let queryParameter = URLQueryItem(name: "start_time", value: startTime)
+            let queryParameter = URLQueryItem(name: "start_time", value: "\(startTime)")
             queryParameters.append(queryParameter)
         }
         if let endTime = endTime {
-            let queryParameter = URLQueryItem(name: "end_time", value: endTime)
+            let queryParameter = URLQueryItem(name: "end_time", value: "\(endTime)")
             queryParameters.append(queryParameter)
         }
         if let resultType = resultType {
@@ -3170,8 +3356,8 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getMetricsQueryNoResults(
-        startTime: String? = nil,
-        endTime: String? = nil,
+        startTime: Date? = nil,
+        endTime: Date? = nil,
         resultType: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<MetricResponse>?, WatsonError?) -> Void)
@@ -3187,11 +3373,11 @@ public class Discovery {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let startTime = startTime {
-            let queryParameter = URLQueryItem(name: "start_time", value: startTime)
+            let queryParameter = URLQueryItem(name: "start_time", value: "\(startTime)")
             queryParameters.append(queryParameter)
         }
         if let endTime = endTime {
-            let queryParameter = URLQueryItem(name: "end_time", value: endTime)
+            let queryParameter = URLQueryItem(name: "end_time", value: "\(endTime)")
             queryParameters.append(queryParameter)
         }
         if let resultType = resultType {
@@ -3230,8 +3416,8 @@ public class Discovery {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getMetricsEventRate(
-        startTime: String? = nil,
-        endTime: String? = nil,
+        startTime: Date? = nil,
+        endTime: Date? = nil,
         resultType: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<MetricResponse>?, WatsonError?) -> Void)
@@ -3247,11 +3433,11 @@ public class Discovery {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let startTime = startTime {
-            let queryParameter = URLQueryItem(name: "start_time", value: startTime)
+            let queryParameter = URLQueryItem(name: "start_time", value: "\(startTime)")
             queryParameters.append(queryParameter)
         }
         if let endTime = endTime {
-            let queryParameter = URLQueryItem(name: "end_time", value: endTime)
+            let queryParameter = URLQueryItem(name: "end_time", value: "\(endTime)")
             queryParameters.append(queryParameter)
         }
         if let resultType = resultType {
@@ -3391,7 +3577,9 @@ public class Discovery {
         completionHandler: @escaping (WatsonResponse<Credentials>?, WatsonError?) -> Void)
     {
         // construct body
-        let createCredentialsRequest = Credentials(sourceType: sourceType, credentialDetails: credentialDetails)
+        let createCredentialsRequest = Credentials(
+            sourceType: sourceType,
+            credentialDetails: credentialDetails)
         guard let body = try? JSONEncoder().encode(createCredentialsRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -3505,7 +3693,9 @@ public class Discovery {
         completionHandler: @escaping (WatsonResponse<Credentials>?, WatsonError?) -> Void)
     {
         // construct body
-        let updateCredentialsRequest = Credentials(sourceType: sourceType, credentialDetails: credentialDetails)
+        let updateCredentialsRequest = Credentials(
+            sourceType: sourceType,
+            credentialDetails: credentialDetails)
         guard let body = try? JSONEncoder().encode(updateCredentialsRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return

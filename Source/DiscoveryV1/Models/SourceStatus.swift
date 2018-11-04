@@ -52,7 +52,7 @@ public struct SourceStatus: Decodable {
     /**
      Date in UTC format indicating when the last crawl was attempted. If `null`, no crawl was completed.
      */
-    public var lastUpdated: String?
+    public var lastUpdated: Date?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {

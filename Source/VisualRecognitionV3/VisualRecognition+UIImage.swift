@@ -89,11 +89,10 @@ extension VisualRecognition {
 
         self.classify(
             imagesFile: file,
-            url: nil,
+            acceptLanguage: acceptLanguage,
             threshold: threshold,
             owners: owners,
             classifierIDs: classifierIDs,
-            acceptLanguage: acceptLanguage,
             completionHandler: completion
         )
     }

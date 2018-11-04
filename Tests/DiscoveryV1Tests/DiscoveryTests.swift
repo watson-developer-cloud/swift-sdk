@@ -474,7 +474,7 @@ class DiscoveryTests: XCTestCase {
         sleep(10) // wait for document to be ingested
         let expectation = self.expectation(description: "listFields")
         let collectionIDs = [collection.collectionID!]
-        discovery.listFields(environmentID: environmentID, collectionIds: collectionIDs) {
+        discovery.listFields(environmentID: environmentID, collectionIDs: collectionIDs) {
             response, error in
 
             if let error = error {
@@ -1137,9 +1137,9 @@ class DiscoveryTests: XCTestCase {
             filter: "enriched_text.concepts.text:\"Technology\"",
             query: "enriched_text.concepts.text:\"Cloud computing\"",
             count: 5,
-            returnFields: ["enriched_text"],
+            returnFields: ["enriched_text"].joined(separator: ","),
             offset: 1,
-            sort: ["enriched_text.sentiment.document.score"],
+            sort: ["enriched_text.sentiment.document.score"].joined(separator: ","),
             highlight: true,
             deduplicate: true,
             deduplicateField: "title")
@@ -1209,7 +1209,7 @@ class DiscoveryTests: XCTestCase {
             collectionID: newsCollectionID,
             query: "enriched_text.concepts.text:\"Cloud computing\"",
             passages: true,
-            passagesFields: ["text"],
+            passagesFields: "text",
             passagesCount: 1,
             passagesCharacters: 400)
         {
@@ -1239,8 +1239,8 @@ class DiscoveryTests: XCTestCase {
             collectionID: newsCollectionID,
             query: "enriched_text.concepts.text:\"Cloud computing\"",
             similar: true,
-            similarDocumentIds: [],
-            similarFields: ["text"])
+            similarDocumentIDs: nil,
+            similarFields: "text")
         {
             response, error in
 
@@ -1709,7 +1709,7 @@ class DiscoveryTests: XCTestCase {
         let collectionID = collection.collectionID!
 
         let expectation = self.expectation(description: "federatedQuery")
-        discovery.federatedQuery(environmentID: environmentID, collectionIds: [collectionID]) {
+        discovery.federatedQuery(environmentID: environmentID, collectionIDs: [collectionID].joined(separator: ",")) {
             response, error in
 
             if let error = error {
@@ -1735,7 +1735,7 @@ class DiscoveryTests: XCTestCase {
         let collectionID = collection.collectionID!
 
         let expectation = self.expectation(description: "federatedQuery")
-        discovery.federatedQueryNotices(environmentID: environmentID, collectionIds: [collectionID]) {
+        discovery.federatedQueryNotices(environmentID: environmentID, collectionIDs: [collectionID]) {
             response, error in
 
             if let error = error {

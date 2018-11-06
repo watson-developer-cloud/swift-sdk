@@ -17,7 +17,7 @@
 import Foundation
 
 /** DocumentCounts. */
-public struct DocumentCounts: Decodable {
+public struct DocumentCounts: Codable {
 
     /**
      The total number of available documents in the collection.

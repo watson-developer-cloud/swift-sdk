@@ -21,7 +21,7 @@ import RestKit
  Returns information from the document, including author name, title, RSS/ATOM feeds, prominent page image, and
  publication date. Supports URL and HTML input types only.
  */
-public struct MetadataOptions: Encodable {
+public struct MetadataOptions: Codable {
 
     /// Additional properties associated with this model.
     public var additionalProperties: [String: JSON]
@@ -36,6 +36,11 @@ public struct MetadataOptions: Encodable {
     )
     {
         self.additionalProperties = additionalProperties
+    }
+
+    public init(from decoder: Decoder) throws {
+        let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
+        additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: [CodingKey]())
     }
 
     public func encode(to encoder: Encoder) throws {

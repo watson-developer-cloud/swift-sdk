@@ -17,7 +17,7 @@
 import Foundation
 
 /** Behavior. */
-public struct Behavior: Decodable {
+public struct Behavior: Codable {
 
     /**
      The unique, non-localized identifier of the characteristic to which the results pertain. IDs have the form

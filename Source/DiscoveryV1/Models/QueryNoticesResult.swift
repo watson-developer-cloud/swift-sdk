@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** QueryNoticesResult. */
-public struct QueryNoticesResult: Decodable {
+public struct QueryNoticesResult: Codable {
 
     /**
      The type of the original source file.
@@ -113,6 +113,22 @@ public struct QueryNoticesResult: Decodable {
         notices = try container.decodeIfPresent([Notice].self, forKey: .notices)
         let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
         additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: CodingKeys.allValues)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(score, forKey: .score)
+        try container.encodeIfPresent(metadata, forKey: .metadata)
+        try container.encodeIfPresent(collectionID, forKey: .collectionID)
+        try container.encodeIfPresent(resultMetadata, forKey: .resultMetadata)
+        try container.encodeIfPresent(code, forKey: .code)
+        try container.encodeIfPresent(filename, forKey: .filename)
+        try container.encodeIfPresent(fileType, forKey: .fileType)
+        try container.encodeIfPresent(sha1, forKey: .sha1)
+        try container.encodeIfPresent(notices, forKey: .notices)
+        var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
+        try dynamicContainer.encodeIfPresent(additionalProperties)
     }
 
 }

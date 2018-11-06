@@ -19,7 +19,7 @@ import Foundation
 /**
  Emotion results for the document as a whole.
  */
-public struct DocumentEmotionResults: Decodable {
+public struct DocumentEmotionResults: Codable {
 
     /**
      Emotion results for the document as a whole.

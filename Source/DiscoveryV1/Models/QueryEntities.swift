@@ -17,7 +17,7 @@
 import Foundation
 
 /** QueryEntities. */
-internal struct QueryEntities: Encodable {
+internal struct QueryEntities: Codable {
 
     /**
      The entity query feature to perform. Supported features are `disambiguate` and `similar_entities`.

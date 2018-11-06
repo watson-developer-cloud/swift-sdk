@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** CreateValue. */
-public struct CreateValue: Encodable {
+public struct CreateValue: Codable {
 
     /**
      Specifies the type of value.

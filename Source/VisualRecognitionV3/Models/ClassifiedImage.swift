@@ -19,7 +19,7 @@ import Foundation
 /**
  Results for one image.
  */
-public struct ClassifiedImage: Decodable {
+public struct ClassifiedImage: Codable {
 
     /**
      Source of the image before any redirects. Not returned when the image is uploaded.

@@ -17,7 +17,7 @@
 import Foundation
 
 /** ListCollectionsResponse. */
-public struct ListCollectionsResponse: Decodable {
+public struct ListCollectionsResponse: Codable {
 
     /**
      An array containing information about each collection in the environment.

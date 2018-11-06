@@ -17,7 +17,7 @@
 import Foundation
 
 /** Warning. */
-public struct Warning: Decodable {
+public struct Warning: Codable {
 
     /**
      The identifier of the warning message.

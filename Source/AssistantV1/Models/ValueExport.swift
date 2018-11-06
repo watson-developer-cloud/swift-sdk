@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** ValueExport. */
-public struct ValueExport: Decodable {
+public struct ValueExport: Codable {
 
     /**
      Specifies the type of value.

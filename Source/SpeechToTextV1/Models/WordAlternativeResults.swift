@@ -17,7 +17,7 @@
 import Foundation
 
 /** WordAlternativeResults. */
-public struct WordAlternativeResults: Decodable {
+public struct WordAlternativeResults: Codable {
 
     /**
      The start time in seconds of the word from the input audio that corresponds to the word alternatives.

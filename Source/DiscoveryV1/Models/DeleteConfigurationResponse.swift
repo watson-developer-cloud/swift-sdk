@@ -17,7 +17,7 @@
 import Foundation
 
 /** DeleteConfigurationResponse. */
-public struct DeleteConfigurationResponse: Decodable {
+public struct DeleteConfigurationResponse: Codable {
 
     /**
      Status of the configuration. A deleted configuration has the status deleted.

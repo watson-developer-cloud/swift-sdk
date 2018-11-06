@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** WorkspaceExport. */
-public struct WorkspaceExport: Decodable {
+public struct WorkspaceExport: Codable {
 
     /**
      The current status of the workspace.

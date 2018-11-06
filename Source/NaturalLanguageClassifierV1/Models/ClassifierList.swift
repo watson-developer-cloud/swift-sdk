@@ -19,7 +19,7 @@ import Foundation
 /**
  List of available classifiers.
  */
-public struct ClassifierList: Decodable {
+public struct ClassifierList: Codable {
 
     /**
      The classifiers available to the user. Returns an empty array if no classifiers are available.

@@ -17,7 +17,7 @@
 import Foundation
 
 /** IntentExport. */
-public struct IntentExport: Decodable {
+public struct IntentExport: Codable {
 
     /**
      The name of the intent.

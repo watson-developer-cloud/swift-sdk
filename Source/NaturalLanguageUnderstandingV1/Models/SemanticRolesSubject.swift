@@ -17,7 +17,7 @@
 import Foundation
 
 /** SemanticRolesSubject. */
-public struct SemanticRolesSubject: Decodable {
+public struct SemanticRolesSubject: Codable {
 
     /**
      Text that corresponds to the subject role.

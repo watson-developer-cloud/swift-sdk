@@ -19,7 +19,7 @@ import Foundation
 /**
  Aggregation result data for the requested metric.
  */
-public struct MetricAggregationResult: Decodable {
+public struct MetricAggregationResult: Codable {
 
     /**
      Date in string form representing the start of this interval.

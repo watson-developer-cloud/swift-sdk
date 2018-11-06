@@ -17,7 +17,7 @@
 import Foundation
 
 /** QueryRelationsResponse. */
-public struct QueryRelationsResponse: Decodable {
+public struct QueryRelationsResponse: Codable {
 
     public var relations: [QueryRelationsRelationship]?
 

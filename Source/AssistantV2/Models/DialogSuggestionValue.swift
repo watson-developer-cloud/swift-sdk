@@ -20,7 +20,7 @@ import Foundation
  An object defining the message input to be sent to the assistant if the user selects the corresponding disambiguation
  option.
  */
-public struct DialogSuggestionValue: Decodable {
+public struct DialogSuggestionValue: Codable {
 
     /**
      The user input.

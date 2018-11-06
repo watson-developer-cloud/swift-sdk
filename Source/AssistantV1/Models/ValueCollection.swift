@@ -17,7 +17,7 @@
 import Foundation
 
 /** ValueCollection. */
-public struct ValueCollection: Decodable {
+public struct ValueCollection: Codable {
 
     /**
      An array of entity values.

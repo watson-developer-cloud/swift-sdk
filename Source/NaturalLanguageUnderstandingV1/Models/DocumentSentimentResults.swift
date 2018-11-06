@@ -17,7 +17,7 @@
 import Foundation
 
 /** DocumentSentimentResults. */
-public struct DocumentSentimentResults: Decodable {
+public struct DocumentSentimentResults: Codable {
 
     /**
      Indicates whether the sentiment is positive, neutral, or negative.

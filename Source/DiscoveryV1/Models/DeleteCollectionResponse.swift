@@ -17,7 +17,7 @@
 import Foundation
 
 /** DeleteCollectionResponse. */
-public struct DeleteCollectionResponse: Decodable {
+public struct DeleteCollectionResponse: Codable {
 
     /**
      The status of the collection. The status of a successful deletion operation is `deleted`.

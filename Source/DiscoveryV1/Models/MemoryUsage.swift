@@ -19,7 +19,7 @@ import Foundation
 /**
  **Deprecated**: Summary of the memory usage statistics for this environment.
  */
-public struct MemoryUsage: Decodable {
+public struct MemoryUsage: Codable {
 
     /**
      **Deprecated**: Number of bytes used in the environment's memory capacity.

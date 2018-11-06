@@ -17,7 +17,7 @@
 import Foundation
 
 /** Histogram. */
-public struct Histogram: Decodable {
+public struct Histogram: Codable {
 
     /**
      The type of aggregation command used. For example: term, filter, max, min, etc.

@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** UpdateValue. */
-internal struct UpdateValue: Encodable {
+internal struct UpdateValue: Codable {
 
     /**
      Specifies the type of value.

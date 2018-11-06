@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** Value. */
-public struct Value: Decodable {
+public struct Value: Codable {
 
     /**
      Specifies the type of value.

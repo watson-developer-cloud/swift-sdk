@@ -20,7 +20,7 @@ import Foundation
  Returns important keywords in the content.
  Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
  */
-public struct KeywordsOptions: Encodable {
+public struct KeywordsOptions: Codable {
 
     /**
      Maximum number of keywords to return.

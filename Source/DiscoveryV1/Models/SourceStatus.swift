@@ -19,7 +19,7 @@ import Foundation
 /**
  Object containing source crawl status information.
  */
-public struct SourceStatus: Decodable {
+public struct SourceStatus: Codable {
 
     /**
      The current status of the source crawl for this collection. This field returns `not_configured` if the default

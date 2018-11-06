@@ -17,7 +17,7 @@
 import Foundation
 
 /** EmotionScores. */
-public struct EmotionScores: Decodable {
+public struct EmotionScores: Codable {
 
     /**
      Anger score from 0 to 1. A higher score means that the text is more likely to convey anger.

@@ -17,7 +17,7 @@
 import Foundation
 
 /** Counterexample. */
-public struct Counterexample: Decodable {
+public struct Counterexample: Codable {
 
     /**
      The text of the counterexample.

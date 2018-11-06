@@ -17,7 +17,7 @@
 import Foundation
 
 /** CustomWord. */
-public struct CustomWord: Encodable {
+public struct CustomWord: Codable {
 
     /**
      For the **Add custom words** method, you must specify the custom word that is to be added to or updated in the

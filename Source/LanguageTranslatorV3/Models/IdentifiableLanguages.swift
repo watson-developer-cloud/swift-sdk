@@ -17,7 +17,7 @@
 import Foundation
 
 /** IdentifiableLanguages. */
-public struct IdentifiableLanguages: Decodable {
+public struct IdentifiableLanguages: Codable {
 
     /**
      A list of all languages that the service can identify.

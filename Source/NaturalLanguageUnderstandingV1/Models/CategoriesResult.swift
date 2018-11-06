@@ -19,7 +19,7 @@ import Foundation
 /**
  A categorization of the analyzed text.
  */
-public struct CategoriesResult: Decodable {
+public struct CategoriesResult: Codable {
 
     /**
      The path to the category through the 5-level taxonomy hierarchy. For the complete list of categories, see the

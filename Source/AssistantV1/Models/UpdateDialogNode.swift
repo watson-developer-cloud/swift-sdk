@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** UpdateDialogNode. */
-internal struct UpdateDialogNode: Encodable {
+internal struct UpdateDialogNode: Codable {
 
     /**
      How the dialog node is processed.

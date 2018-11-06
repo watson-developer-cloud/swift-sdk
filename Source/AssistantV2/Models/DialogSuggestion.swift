@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** DialogSuggestion. */
-public struct DialogSuggestion: Decodable {
+public struct DialogSuggestion: Codable {
 
     /**
      The user-facing label for the disambiguation option. This label is taken from the **user_label** property of the

@@ -17,7 +17,7 @@
 import Foundation
 
 /** WordAlternativeResult. */
-public struct WordAlternativeResult: Decodable {
+public struct WordAlternativeResult: Codable {
 
     /**
      A confidence score for the word alternative hypothesis in the range of 0.0 to 1.0.

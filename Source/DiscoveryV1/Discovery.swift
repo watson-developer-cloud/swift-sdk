@@ -102,6 +102,9 @@ public class Discovery {
             if case let .some(.string(message)) = json["error"] {
                 errorMessage = message
             }
+            if case let .some(.string(description)) = json["description"] {
+                metadata["description"] = description
+            }
             // If metadata is empty, it should show up as nil in the WatsonError
             return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
         } catch {

@@ -37,6 +37,12 @@ public class SpeechToText {
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
 
+    /// The URL that shall be used to obtain a token.
+    public var tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
+
+    /// The URL that shall be used to stream audio for transcription.
+    public var websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
+
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
@@ -99,6 +105,9 @@ public class SpeechToText {
             metadata = [:]
             if case let .some(.string(message)) = json["error"] {
                 errorMessage = message
+            }
+            if case let .some(.string(description)) = json["code_description"] {
+                metadata["codeDescription"] = description
             }
             // If metadata is empty, it should show up as nil in the WatsonError
             return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)

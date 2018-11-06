@@ -455,6 +455,7 @@
 		928204D12124BC200013315B /* MetricAggregation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204C42124BC1F0013315B /* MetricAggregation.swift */; };
 		928204D22124BC200013315B /* MetricTokenAggregation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204C52124BC200013315B /* MetricTokenAggregation.swift */; };
 		928204D32124BC200013315B /* LogQueryResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204C62124BC200013315B /* LogQueryResponseResult.swift */; };
+		92866260219254460064C6FD /* VisualRecognitionTestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9286625F219254460064C6FD /* VisualRecognitionTestUtilities.swift */; };
 		929A23E621123E7E00E4C78A /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A23E521123E7E00E4C78A /* TestUtilities.swift */; };
 		929A23E821123E7E00E4C78A /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A23E521123E7E00E4C78A /* TestUtilities.swift */; };
 		929A23EA21123E7E00E4C78A /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A23E521123E7E00E4C78A /* TestUtilities.swift */; };
@@ -1107,6 +1108,7 @@
 		928204C42124BC1F0013315B /* MetricAggregation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricAggregation.swift; sourceTree = "<group>"; };
 		928204C52124BC200013315B /* MetricTokenAggregation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricTokenAggregation.swift; sourceTree = "<group>"; };
 		928204C62124BC200013315B /* LogQueryResponseResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogQueryResponseResult.swift; sourceTree = "<group>"; };
+		9286625F219254460064C6FD /* VisualRecognitionTestUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualRecognitionTestUtilities.swift; sourceTree = "<group>"; };
 		929A23E521123E7E00E4C78A /* TestUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TestUtilities.swift; path = Tests/TestUtilities.swift; sourceTree = "<group>"; };
 		92BF69AD213F129A00FE6325 /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Shared.swift; path = Source/SupportingFiles/Shared.swift; sourceTree = "<group>"; };
 		B1F21DF21CE2461800393146 /* SentenceAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentenceAnalysis.swift; sourceTree = "<group>"; };
@@ -2030,6 +2032,7 @@
 				7AAD66501DCA5D730010481E /* VisualRecognitionTests.swift */,
 				CAF9A5C920B753B7006C86B7 /* VisualRecognitionWithIAMTests.swift */,
 				CADC4B8D2141BC9A00C76DE6 /* VisualRecognitionUnitTests.swift */,
+				9286625F219254460064C6FD /* VisualRecognitionTestUtilities.swift */,
 			);
 			name = Tests;
 			path = ../../Tests/VisualRecognitionV3Tests;
@@ -3949,6 +3952,7 @@
 				68FBD8221FE0873900878788 /* VisualRecognition+CoreMLTests.swift in Sources */,
 				7AAD66581DCA5D730010481E /* VisualRecognitionTests.swift in Sources */,
 				689A16A3203C9337002CFC66 /* VisualRecognition+UIImageTests.swift in Sources */,
+				92866260219254460064C6FD /* VisualRecognitionTestUtilities.swift in Sources */,
 				CADC4B912148741900C76DE6 /* MockURLProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

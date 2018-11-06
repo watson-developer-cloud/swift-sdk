@@ -24,7 +24,7 @@ class VisualRecognitionUnitTests: XCTestCase {
 
     private var visualRecognition: VisualRecognition!
 
-    let testURL = "http://example.com"
+    lazy var exampleURL = URL(string: "http://example.com")!
 
     override func setUp() {
         super.setUp()
@@ -34,57 +34,30 @@ class VisualRecognitionUnitTests: XCTestCase {
         let configuration = URLSessionConfiguration.ephemeral
         configuration.protocolClasses = [MockURLProtocol.self]
         let mockSession = URLSession(configuration: configuration)
-        // Install mock session
         visualRecognition.session = mockSession
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-
-    func loadResource(name: String, ext: String) -> URL {
-        #if os(Linux)
-        return URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Resources/" + name + "." + ext)
-        #else
-        let bundle = Bundle(for: type(of: self))
-        guard let url = bundle.url(forResource: name, withExtension: ext) else {
-            XCTFail("Unable to locate sample image files.")
-            assert(false)
-        }
-        return url
-        #endif
     }
 
     func testHeaders() throws {
         // Configure mock
-        let mockResult: [String: Any] = ["custom_classes": 0, "images_processed": 0, "images": []]
         MockURLProtocol.requestHandler = { request in
             // Verify custom header is present
             XCTAssertNotNil(request.allHTTPHeaderFields)
             XCTAssertTrue(request.allHTTPHeaderFields?.keys.contains("x-foo") ?? false)
             XCTAssertEqual("bar", request.allHTTPHeaderFields?["x-foo"])
 
-            // Setup mock result
-            let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
-            let data = try JSONSerialization.data(withJSONObject: mockResult, options: [])
-            return (response, data)
+            return (HTTPURLResponse(), Data())
         }
 
         let expectation = self.expectation(description: "Classify an image with explicit headers.")
         let imageURL = "an-image-url"
         visualRecognition.classify(url: imageURL, headers: ["x-foo": "bar"]) {
-            _, error in
-            if error != nil {
-                XCTFail("error return")
-            } else {
-            }
+            _, _ in
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 1)
     }
 
-    // MARK: errorResponseDecoder
+    // MARK: - errorResponseDecoder
 
     func testErrorResponseDecoder403() {
         let testJSON: [String: JSON] = [
@@ -92,7 +65,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             "statusInfo": JSON.string("forbidden"),
         ]
         let testData = try! JSONEncoder().encode(testJSON)
-        let testResponse = HTTPURLResponse(url: URL(string: testURL)!, statusCode: 403, httpVersion: nil, headerFields: nil)!
+        let testResponse = HTTPURLResponse(url: exampleURL, statusCode: 403, httpVersion: nil, headerFields: nil)!
 
         let error = visualRecognition.errorResponseDecoder(data: testData, response: testResponse)
         if case let .http(statusCode, message, metadata) = error {
@@ -112,7 +85,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             ]),
         ]
         let testData = try! JSONEncoder().encode(testJSON)
-        let testResponse = HTTPURLResponse(url: URL(string: testURL)!, statusCode: 404, httpVersion: nil, headerFields: nil)!
+        let testResponse = HTTPURLResponse(url: exampleURL, statusCode: 404, httpVersion: nil, headerFields: nil)!
 
         let error = visualRecognition.errorResponseDecoder(data: testData, response: testResponse)
         if case let .http(statusCode, message, metadata) = error {
@@ -126,7 +99,7 @@ class VisualRecognitionUnitTests: XCTestCase {
     func testErrorResponseDecoder413() {
         let testJSON: [String: JSON] = ["Error": JSON.string("failed")]
         let testData = try! JSONEncoder().encode(testJSON)
-        let testResponse = HTTPURLResponse(url: URL(string: testURL)!, statusCode: 413, httpVersion: nil, headerFields: nil)!
+        let testResponse = HTTPURLResponse(url: exampleURL, statusCode: 413, httpVersion: nil, headerFields: nil)!
 
         let error = visualRecognition.errorResponseDecoder(data: testData, response: testResponse)
         if case let .http(statusCode, message, _) = error {
@@ -138,7 +111,7 @@ class VisualRecognitionUnitTests: XCTestCase {
     func testErrorResponseDecoderDefault() {
         let testJSON: [String: JSON] = ["error": JSON.string("failed")]
         let testData = try! JSONEncoder().encode(testJSON)
-        let testResponse = HTTPURLResponse(url: URL(string: testURL)!, statusCode: 500, httpVersion: nil, headerFields: nil)!
+        let testResponse = HTTPURLResponse(url: exampleURL, statusCode: 500, httpVersion: nil, headerFields: nil)!
 
         let error = visualRecognition.errorResponseDecoder(data: testData, response: testResponse)
         if case let .http(statusCode, message, _) = error {
@@ -149,7 +122,7 @@ class VisualRecognitionUnitTests: XCTestCase {
 
     func testErrorResponseDecoderBadJSON() {
         let testData = Data()
-        let testResponse = HTTPURLResponse(url: URL(string: testURL)!, statusCode: 500, httpVersion: nil, headerFields: nil)!
+        let testResponse = HTTPURLResponse(url: exampleURL, statusCode: 500, httpVersion: nil, headerFields: nil)!
 
         let error = visualRecognition.errorResponseDecoder(data: testData, response: testResponse)
         if case let .http(statusCode, message, metadata) = error {
@@ -159,12 +132,12 @@ class VisualRecognitionUnitTests: XCTestCase {
         }
     }
 
+    // MARK: - Classifiers
+
     func testClassify() {
-        let carz = loadResource(name: "carz", ext: "zip")
         let owners = ["Anthony", "Mike"]
         let classifierIDs = ["1", "2"]
 
-        // Configure mock
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
             let endIndex = request.url?.pathComponents.endIndex ?? 0
@@ -180,7 +153,30 @@ class VisualRecognitionUnitTests: XCTestCase {
         }
 
         let expectation = self.expectation(description: "classify")
-        visualRecognition.classify(imagesFile: carz, url: testURL, threshold: 1.0, owners: owners, classifierIDs: classifierIDs, acceptLanguage: "en") {
+        visualRecognition.classify(imagesFile: obama, url: "http://example.com", threshold: 1.0, owners: owners, classifierIDs: classifierIDs, acceptLanguage: "en") {
+            _, _ in
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 1.0)
+    }
+
+    func testCreateClassifier() {
+        MockURLProtocol.requestHandler = { request in
+            XCTAssertEqual(request.httpMethod, "POST")
+            let endIndex = request.url?.pathComponents.endIndex ?? 0
+            XCTAssertEqual("classifiers", request.url?.pathComponents[endIndex-1])
+            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertNotNil(request.httpBodyStream)
+            XCTAssertNotNil(request.allHTTPHeaderFields)
+
+            let bodyFieldsCount = parseMultiPartFormBody(request: request)
+            XCTAssertEqual(4, bodyFieldsCount)
+
+            return (HTTPURLResponse(), Data())
+        }
+
+        let expectation = self.expectation(description: "createClassifier")
+        visualRecognition.createClassifier(name: "test-classifier", positiveExamples: [carExamples, trucksExamples], negativeExamples: baseball) {
             _, _ in
             expectation.fulfill()
         }
@@ -189,13 +185,7 @@ class VisualRecognitionUnitTests: XCTestCase {
 
     func testUpdateClassifier() {
         let classifierID = "1234567890"
-        let classifierName = "swift-sdk-unit-test"
 
-        let cars = PositiveExample(name: "car", examples: loadResource(name: "cars", ext: "zip"))
-        let trucks = PositiveExample(name: "truck", examples: loadResource(name: "trucks", ext: "zip"))
-
-        // Configure mock
-        let mockResult: [String: Any] = ["classifier_id": classifierID, "name": classifierName, "classes": [["class": "car"], ["class": "truck"]]]
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
             let endIndex = request.url?.pathComponents.endIndex ?? 0
@@ -212,7 +202,7 @@ class VisualRecognitionUnitTests: XCTestCase {
         }
 
         let expectation = self.expectation(description: "updateClassifier")
-        visualRecognition.updateClassifier(classifierID: classifierID, positiveExamples: [cars, trucks]) {
+        visualRecognition.updateClassifier(classifierID: classifierID, positiveExamples: [carExamples, trucksExamples]) {
             _, _ in
             expectation.fulfill()
         }
@@ -222,8 +212,6 @@ class VisualRecognitionUnitTests: XCTestCase {
     func testDeleteClassifier() {
         let classifierID = "1234567890"
 
-        // Configure mock
-        let mockResult: [String: Any] = [:]
         MockURLProtocol.requestHandler = { request in
             XCTAssertNotNil(request.url)
             XCTAssertEqual(request.httpMethod, "DELETE")
@@ -244,9 +232,7 @@ class VisualRecognitionUnitTests: XCTestCase {
     func testDeleteUserData() {
         let customerID = "1234567890"
 
-        // Configure mock
-        let mockResult: [String: Any] = [:]
-         MockURLProtocol.requestHandler = { request in
+        MockURLProtocol.requestHandler = { request in
             XCTAssertNotNil(request.url)
             XCTAssertEqual(request.httpMethod, "DELETE")
             let endIndex = request.url?.pathComponents.endIndex ?? 0

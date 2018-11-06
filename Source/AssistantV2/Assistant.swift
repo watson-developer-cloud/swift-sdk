@@ -131,6 +131,7 @@ public class Assistant {
             headerParameters.merge(headers) { (_, new) in new }
         }
         headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()

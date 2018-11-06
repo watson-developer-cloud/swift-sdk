@@ -100,6 +100,9 @@ public class TextToSpeech {
             if case let .some(.string(message)) = json["error"] {
                 errorMessage = message
             }
+            if case let .some(.string(description)) = json["code_description"] {
+                metadata["codeDescription"] = description
+            }
             // If metadata is empty, it should show up as nil in the WatsonError
             return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
         } catch {
@@ -230,7 +233,7 @@ public class TextToSpeech {
         voice: String? = nil,
         customizationID: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<URL>?, WatsonError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Data>?, WatsonError?) -> Void)
     {
         // construct body
         let synthesizeRequest = Text(
@@ -274,7 +277,37 @@ public class TextToSpeech {
         )
 
         // execute REST request
-        request.responseObject(completionHandler: completionHandler)
+        request.response { (response: WatsonResponse<Data>?, error: WatsonError?) in
+            var response = response
+            guard let data = response?.result else {
+                completionHandler(response, error)
+                return
+            }
+            if accept?.lowercased().contains("audio/wav") == true {
+                // repair the WAV header
+                var wav = data
+                guard WAVRepair.isWAVFile(data: wav) else {
+                    let error = WatsonError.other(message: "Expected returned audio to be in WAV format")
+                    completionHandler(nil, error)
+                    return
+                }
+                WAVRepair.repairWAVHeader(data: &wav)
+                response?.result = wav
+                completionHandler(response, nil)
+            } else if accept?.lowercased().contains("ogg") == true && accept?.lowercased().contains("opus") == true {
+                do {
+                    let decodedAudio = try TextToSpeechDecoder(audioData: data)
+                    response?.result = decodedAudio.pcmDataWithHeaders
+                    completionHandler(response, nil)
+                } catch {
+                    let error = WatsonError.serialization(values: "returned audio")
+                    completionHandler(nil, error)
+                    return
+                }
+            } else {
+                completionHandler(response, nil)
+            }
+        }
     }
 
     /**

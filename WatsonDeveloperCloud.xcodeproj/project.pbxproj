@@ -534,6 +534,12 @@
 		928204D12124BC200013315B /* MetricAggregation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204C42124BC1F0013315B /* MetricAggregation.swift */; };
 		928204D22124BC200013315B /* MetricTokenAggregation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204C52124BC200013315B /* MetricTokenAggregation.swift */; };
 		928204D32124BC200013315B /* LogQueryResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204C62124BC200013315B /* LogQueryResponseResult.swift */; };
+		928661A22191104C0064C6FD /* CompareComplyV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92866191219110390064C6FD /* CompareComplyV1.framework */; };
+		928661A92191109D0064C6FD /* CompareComplyV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 928661A82191109C0064C6FD /* CompareComplyV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		92866203219111CA0064C6FD /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92048D8F212F7C16004FD822 /* RestKit.framework */; };
+		92866204219111E00064C6FD /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
+		92866205219111E00064C6FD /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
+		92866206219111E30064C6FD /* WatsonCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6C7B3C1D8C960300CD97FA /* WatsonCredentials.swift */; };
 		929DB99B212F7DF500356EDC /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92048D8F212F7C16004FD822 /* RestKit.framework */; };
 		929DB99C212F7DFB00356EDC /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92048D8F212F7C16004FD822 /* RestKit.framework */; };
 		929DB99D212F7E0100356EDC /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92048D8F212F7C16004FD822 /* RestKit.framework */; };
@@ -726,6 +732,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 924EE78021505D7A0048C0E5;
 			remoteInfo = AssistantV2;
+		};
+		928661A32191104C0064C6FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7A0F95AA1C23288E004C01C0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 92866190219110390064C6FD;
+			remoteInfo = CompareComplyV1;
 		};
 		CAD2685C20CAF28B002BA2C4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -1306,6 +1319,9 @@
 		928204C42124BC1F0013315B /* MetricAggregation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricAggregation.swift; sourceTree = "<group>"; };
 		928204C52124BC200013315B /* MetricTokenAggregation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricTokenAggregation.swift; sourceTree = "<group>"; };
 		928204C62124BC200013315B /* LogQueryResponseResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogQueryResponseResult.swift; sourceTree = "<group>"; };
+		92866191219110390064C6FD /* CompareComplyV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CompareComplyV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9286619D2191104C0064C6FD /* CompareComplyV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CompareComplyV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		928661A82191109C0064C6FD /* CompareComplyV1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CompareComplyV1.h; path = Source/SupportingFiles/CompareComplyV1.h; sourceTree = "<group>"; };
 		92BF69AD213F129A00FE6325 /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Shared.swift; path = Source/SupportingFiles/Shared.swift; sourceTree = "<group>"; };
 		92ED234A2187C57B00C049A2 /* TokenDict.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenDict.swift; sourceTree = "<group>"; };
 		92ED234B2187C57B00C049A2 /* TokenDictStatusResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenDictStatusResponse.swift; sourceTree = "<group>"; };
@@ -1599,6 +1615,22 @@
 			files = (
 				924EE7DF21505D810048C0E5 /* AssistantV1.framework in Frameworks */,
 				924EE7E021505D810048C0E5 /* RestKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9286618E219110390064C6FD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92866203219111CA0064C6FD /* RestKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9286619A2191104C0064C6FD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				928661A22191104C0064C6FD /* CompareComplyV1.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2039,6 +2071,7 @@
 			children = (
 				6800FC142056D6830078788A /* AssistantV1 */,
 				922077802152FC5900C8C7E4 /* AssistantV2 */,
+				92866207219112190064C6FD /* CompareComplyV1 */,
 				7AB445181D3E643B00E8748A /* ConversationV1 */,
 				12F800591DF71B6B006851D6 /* DiscoveryV1 */,
 				7A6117911CB6D3F2009A4DA1 /* LanguageTranslatorV2 */,
@@ -2088,6 +2121,8 @@
 				CAD2685A20CAF28A002BA2C4 /* LanguageTranslatorV3Tests.xctest */,
 				924EE7D321505D7A0048C0E5 /* AssistantV2.framework */,
 				924EE7E721505D810048C0E5 /* AssistantV2Tests.xctest */,
+				92866191219110390064C6FD /* CompareComplyV1.framework */,
+				9286619D2191104C0064C6FD /* CompareComplyV1Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2108,6 +2143,7 @@
 				920645F4212E2880004ACCC9 /* Dependencies */,
 				6800FC9C2056D7340078788A /* AssistantV1.h */,
 				924EE77D21505C2C0048C0E5 /* AssistantV2.h */,
+				928661A82191109C0064C6FD /* CompareComplyV1.h */,
 				7A1F486A1D47AF7E00971377 /* ConversationV1.h */,
 				12F800421DF71921006851D6 /* DiscoveryV1.h */,
 				7A0F95B81C23288E004C01C0 /* Info-Release.plist */,
@@ -2543,6 +2579,14 @@
 			path = Tests;
 			sourceTree = SOURCE_ROOT;
 		};
+		92866207219112190064C6FD /* CompareComplyV1 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CompareComplyV1;
+			path = Source/CompareComplyV1;
+			sourceTree = "<group>";
+		};
 		B1F21DEF1CE2461800393146 /* ToneAnalyzerV3 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2729,6 +2773,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				924EE7EA21505E430048C0E5 /* AssistantV2.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9286618C219110390064C6FD /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				928661A92191109D0064C6FD /* CompareComplyV1.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3220,6 +3272,42 @@
 			productReference = 924EE7E721505D810048C0E5 /* AssistantV2Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		92866190219110390064C6FD /* CompareComplyV1 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 92866198219110390064C6FD /* Build configuration list for PBXNativeTarget "CompareComplyV1" */;
+			buildPhases = (
+				9286618C219110390064C6FD /* Headers */,
+				9286618D219110390064C6FD /* Sources */,
+				9286618E219110390064C6FD /* Frameworks */,
+				9286618F219110390064C6FD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CompareComplyV1;
+			productName = CompareComplyV1;
+			productReference = 92866191219110390064C6FD /* CompareComplyV1.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		9286619C2191104C0064C6FD /* CompareComplyV1Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 928661A52191104C0064C6FD /* Build configuration list for PBXNativeTarget "CompareComplyV1Tests" */;
+			buildPhases = (
+				928661992191104C0064C6FD /* Sources */,
+				9286619A2191104C0064C6FD /* Frameworks */,
+				9286619B2191104C0064C6FD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				928661A42191104C0064C6FD /* PBXTargetDependency */,
+			);
+			name = CompareComplyV1Tests;
+			productName = CompareComplyV1Tests;
+			productReference = 9286619D2191104C0064C6FD /* CompareComplyV1Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		CAD2685120CAF28A002BA2C4 /* LanguageTranslatorV3 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CAD2686720CAF28B002BA2C4 /* Build configuration list for PBXNativeTarget "LanguageTranslatorV3" */;
@@ -3264,7 +3352,7 @@
 		7A0F95AA1C23288E004C01C0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0940;
+				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "IBM Corporation";
 				TargetAttributes = {
@@ -3369,6 +3457,14 @@
 						DevelopmentTeam = CDXLDASP22;
 						LastSwiftMigration = 1010;
 					};
+					92866190219110390064C6FD = {
+						CreatedOnToolsVersion = 10.1;
+						ProvisioningStyle = Automatic;
+					};
+					9286619C2191104C0064C6FD = {
+						CreatedOnToolsVersion = 10.1;
+						ProvisioningStyle = Automatic;
+					};
 					CAD2685120CAF28A002BA2C4 = {
 						CreatedOnToolsVersion = 9.4;
 						LastSwiftMigration = 1010;
@@ -3397,6 +3493,8 @@
 				6877FA9C2056D4F500383B25 /* AssistantV1Tests */,
 				924EE78021505D7A0048C0E5 /* AssistantV2 */,
 				924EE7D521505D810048C0E5 /* AssistantV2Tests */,
+				92866190219110390064C6FD /* CompareComplyV1 */,
+				9286619C2191104C0064C6FD /* CompareComplyV1Tests */,
 				7AB445231D3E647A00E8748A /* ConversationV1 */,
 				7AB4452C1D3E647A00E8748A /* ConversationV1Tests */,
 				12F8003F1DF71921006851D6 /* DiscoveryV1 */,
@@ -3616,6 +3714,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		924EE7E121505D810048C0E5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9286618F219110390064C6FD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9286619B2191104C0064C6FD /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -4869,6 +4981,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9286618D219110390064C6FD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92866205219111E00064C6FD /* Shared.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		928661992191104C0064C6FD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				92866206219111E30064C6FD /* WatsonCredentials.swift in Sources */,
+				92866204219111E00064C6FD /* Shared.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CAD2684D20CAF28A002BA2C4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -4961,6 +5090,11 @@
 			isa = PBXTargetDependency;
 			target = 924EE78021505D7A0048C0E5 /* AssistantV2 */;
 			targetProxy = 920C12ED217942F6006122AC /* PBXContainerItemProxy */;
+		};
+		928661A42191104C0064C6FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 92866190219110390064C6FD /* CompareComplyV1 */;
+			targetProxy = 928661A32191104C0064C6FD /* PBXContainerItemProxy */;
 		};
 		CAD2685D20CAF28B002BA2C4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -6138,6 +6272,124 @@
 			};
 			name = Release;
 		};
+		92866196219110390064C6FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.CompareComplyV1";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		92866197219110390064C6FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.CompareComplyV1";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		928661A62191104C0064C6FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = CompareComplyV1Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.CompareComplyV1Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		928661A72191104C0064C6FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = CompareComplyV1Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.CompareComplyV1Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		CAD2686320CAF28B002BA2C4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -6447,6 +6699,24 @@
 			buildConfigurations = (
 				924EE7E521505D810048C0E5 /* Debug */,
 				924EE7E621505D810048C0E5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		92866198219110390064C6FD /* Build configuration list for PBXNativeTarget "CompareComplyV1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				92866196219110390064C6FD /* Debug */,
+				92866197219110390064C6FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		928661A52191104C0064C6FD /* Build configuration list for PBXNativeTarget "CompareComplyV1Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				928661A62191104C0064C6FD /* Debug */,
+				928661A72191104C0064C6FD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

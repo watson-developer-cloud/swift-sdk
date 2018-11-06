@@ -17,7 +17,7 @@
 import Foundation
 
 /** Utterance. */
-public struct Utterance: Encodable {
+public struct Utterance: Codable {
 
     /**
      An utterance contributed by a user in the conversation that is to be analyzed. The utterance can contain multiple

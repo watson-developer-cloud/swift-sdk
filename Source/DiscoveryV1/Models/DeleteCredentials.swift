@@ -19,7 +19,7 @@ import Foundation
 /**
  Object returned after credentials are deleted.
  */
-public struct DeleteCredentials: Decodable {
+public struct DeleteCredentials: Codable {
 
     /**
      The status of the deletion request.

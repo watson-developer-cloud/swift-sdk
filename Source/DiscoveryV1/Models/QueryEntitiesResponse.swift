@@ -19,7 +19,7 @@ import Foundation
 /**
  An array of entities resulting from the query.
  */
-public struct QueryEntitiesResponse: Decodable {
+public struct QueryEntitiesResponse: Codable {
 
     public var entities: [QueryEntitiesResponseItem]?
 

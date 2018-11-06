@@ -23,7 +23,7 @@ import Foundation
  Supported languages: Arabic, English, German, Japanese, Korean, Spanish. Chinese, Dutch, French, Italian, and
  Portuguese custom models are also supported.
  */
-public struct RelationsOptions: Encodable {
+public struct RelationsOptions: Codable {
 
     /**
      Enter a [custom model](/docs/services/natural-language-understanding/customizing.html) ID to override the default

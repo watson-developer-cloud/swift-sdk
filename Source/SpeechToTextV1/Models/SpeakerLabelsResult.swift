@@ -17,7 +17,7 @@
 import Foundation
 
 /** SpeakerLabelsResult. */
-public struct SpeakerLabelsResult: Decodable {
+public struct SpeakerLabelsResult: Codable {
 
     /**
      The start time of a word from the transcript. The value matches the start time of a word from the `timestamps`

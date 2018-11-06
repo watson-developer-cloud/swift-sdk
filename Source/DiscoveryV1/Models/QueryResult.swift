@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** QueryResult. */
-public struct QueryResult: Decodable {
+public struct QueryResult: Codable {
 
     /**
      The unique identifier of the document.
@@ -67,6 +67,17 @@ public struct QueryResult: Decodable {
         resultMetadata = try container.decodeIfPresent(QueryResultMetadata.self, forKey: .resultMetadata)
         let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
         additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: CodingKeys.allValues)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(score, forKey: .score)
+        try container.encodeIfPresent(metadata, forKey: .metadata)
+        try container.encodeIfPresent(collectionID, forKey: .collectionID)
+        try container.encodeIfPresent(resultMetadata, forKey: .resultMetadata)
+        var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
+        try dynamicContainer.encodeIfPresent(additionalProperties)
     }
 
 }

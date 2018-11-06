@@ -19,7 +19,7 @@ import Foundation
 /**
  Results of the analysis, organized by feature.
  */
-public struct AnalysisResults: Decodable {
+public struct AnalysisResults: Codable {
 
     /**
      Language used to analyze the text.

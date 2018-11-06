@@ -19,7 +19,7 @@ import Foundation
 /**
  Results for all faces.
  */
-public struct DetectedFaces: Decodable {
+public struct DetectedFaces: Codable {
 
     /**
      Number of images processed for the API call.

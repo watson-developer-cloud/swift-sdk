@@ -19,7 +19,7 @@ import Foundation
 /**
  The sentiment of the content.
  */
-public struct SentimentResult: Decodable {
+public struct SentimentResult: Codable {
 
     /**
      The document level sentiment.

@@ -19,7 +19,7 @@ import Foundation
 /**
  Delete model results.
  */
-public struct DeleteModelResults: Decodable {
+public struct DeleteModelResults: Codable {
 
     /**
      model_id of the deleted model.

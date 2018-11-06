@@ -19,7 +19,7 @@ import Foundation
 /**
  Describes the additional service features that are supported with the voice.
  */
-public struct SupportedFeatures: Decodable {
+public struct SupportedFeatures: Codable {
 
     /**
      If `true`, the voice can be customized; if `false`, the voice cannot be customized. (Same as `customizable`.).

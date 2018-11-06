@@ -17,7 +17,7 @@
 import Foundation
 
 /** WordError. */
-public struct WordError: Decodable {
+public struct WordError: Codable {
 
     /**
      A key-value pair that describes an error associated with the definition of a word in the words resource. Each pair

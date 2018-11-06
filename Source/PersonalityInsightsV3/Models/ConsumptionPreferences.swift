@@ -17,7 +17,7 @@
 import Foundation
 
 /** ConsumptionPreferences. */
-public struct ConsumptionPreferences: Decodable {
+public struct ConsumptionPreferences: Codable {
 
     /**
      The unique, non-localized identifier of the consumption preference to which the results pertain. IDs have the form

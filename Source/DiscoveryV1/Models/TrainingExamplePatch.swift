@@ -17,7 +17,7 @@
 import Foundation
 
 /** TrainingExamplePatch. */
-internal struct TrainingExamplePatch: Encodable {
+internal struct TrainingExamplePatch: Codable {
 
     public var crossReference: String?
 

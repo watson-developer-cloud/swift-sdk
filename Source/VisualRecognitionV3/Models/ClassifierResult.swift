@@ -19,7 +19,7 @@ import Foundation
 /**
  Classifier and score combination.
  */
-public struct ClassifierResult: Decodable {
+public struct ClassifierResult: Codable {
 
     /**
      Name of the classifier.

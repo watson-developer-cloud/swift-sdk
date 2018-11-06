@@ -17,7 +17,7 @@
 import Foundation
 
 /** Corpora. */
-public struct Corpora: Decodable {
+public struct Corpora: Codable {
 
     /**
      An array of objects that provides information about the corpora for the custom model. The array is empty if the

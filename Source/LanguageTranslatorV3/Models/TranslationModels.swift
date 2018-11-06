@@ -19,7 +19,7 @@ import Foundation
 /**
  The response type for listing existing translation models.
  */
-public struct TranslationModels: Decodable {
+public struct TranslationModels: Codable {
 
     /**
      An array of available models.

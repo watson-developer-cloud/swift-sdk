@@ -19,7 +19,7 @@ import Foundation
 /**
  The response generated from a call to a **metrics** method.
  */
-public struct MetricResponse: Decodable {
+public struct MetricResponse: Codable {
 
     public var aggregations: [MetricAggregation]?
 

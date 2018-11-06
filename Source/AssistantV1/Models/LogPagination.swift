@@ -19,7 +19,7 @@ import Foundation
 /**
  The pagination data for the returned objects.
  */
-public struct LogPagination: Decodable {
+public struct LogPagination: Codable {
 
     /**
      The URL that will return the next page of results, if any.

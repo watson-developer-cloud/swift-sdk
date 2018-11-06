@@ -17,7 +17,7 @@
 import Foundation
 
 /** Trait. */
-public struct Trait: Decodable {
+public struct Trait: Codable {
 
     /**
      The category of the characteristic: `personality` for Big Five personality characteristics, `needs` for Needs, and

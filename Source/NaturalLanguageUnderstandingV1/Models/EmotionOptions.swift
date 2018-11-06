@@ -22,7 +22,7 @@ import Foundation
  keywords with `keywords.emotion`.
  Supported languages: English.
  */
-public struct EmotionOptions: Encodable {
+public struct EmotionOptions: Codable {
 
     /**
      Set this to `false` to hide document-level emotion results.

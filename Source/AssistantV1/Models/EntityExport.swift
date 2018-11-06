@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** EntityExport. */
-public struct EntityExport: Decodable {
+public struct EntityExport: Codable {
 
     /**
      The name of the entity.

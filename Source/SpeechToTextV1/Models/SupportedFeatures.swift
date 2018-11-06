@@ -19,7 +19,7 @@ import Foundation
 /**
  Describes the additional service features that are supported with the model.
  */
-public struct SupportedFeatures: Decodable {
+public struct SupportedFeatures: Codable {
 
     /**
      Indicates whether the customization interface can be used to create a custom language model based on the language

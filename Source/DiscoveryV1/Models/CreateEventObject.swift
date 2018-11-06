@@ -19,7 +19,7 @@ import Foundation
 /**
  An object defining the event being created.
  */
-internal struct CreateEventObject: Encodable {
+internal struct CreateEventObject: Codable {
 
     /**
      The event type to be created.

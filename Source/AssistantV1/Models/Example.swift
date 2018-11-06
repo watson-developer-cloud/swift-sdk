@@ -17,7 +17,7 @@
 import Foundation
 
 /** Example. */
-public struct Example: Decodable {
+public struct Example: Codable {
 
     /**
      The text of the user input example.

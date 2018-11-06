@@ -19,7 +19,7 @@ import Foundation
 /**
  Object describing the current status of the tokenization dictionary.
  */
-public struct TokenDictStatusResponse: Decodable {
+public struct TokenDictStatusResponse: Codable {
 
     /**
      Current tokenization dictionary status for the specified collection.

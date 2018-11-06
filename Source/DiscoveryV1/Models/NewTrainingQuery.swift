@@ -17,7 +17,7 @@
 import Foundation
 
 /** NewTrainingQuery. */
-internal struct NewTrainingQuery: Encodable {
+internal struct NewTrainingQuery: Codable {
 
     public var naturalLanguageQuery: String?
 

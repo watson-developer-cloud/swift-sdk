@@ -17,7 +17,7 @@
 import Foundation
 
 /** IdentifiedLanguage. */
-public struct IdentifiedLanguage: Decodable {
+public struct IdentifiedLanguage: Codable {
 
     /**
      The language code for an identified language.

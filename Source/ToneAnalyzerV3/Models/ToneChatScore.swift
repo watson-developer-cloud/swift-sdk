@@ -17,7 +17,7 @@
 import Foundation
 
 /** ToneChatScore. */
-public struct ToneChatScore: Decodable {
+public struct ToneChatScore: Codable {
 
     /**
      The unique, non-localized identifier of the tone for the results. The service returns results only for tones whose

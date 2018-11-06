@@ -19,7 +19,7 @@ import Foundation
 /**
  Request payload to classify.
  */
-internal struct ClassifyCollectionInput: Encodable {
+internal struct ClassifyCollectionInput: Codable {
 
     /**
      The submitted phrases.

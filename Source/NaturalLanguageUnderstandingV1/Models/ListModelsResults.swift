@@ -19,7 +19,7 @@ import Foundation
 /**
  Models available for Relations and Entities features.
  */
-public struct ListModelsResults: Decodable {
+public struct ListModelsResults: Codable {
 
     /**
      An array of available models.

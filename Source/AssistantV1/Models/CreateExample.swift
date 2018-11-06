@@ -17,7 +17,7 @@
 import Foundation
 
 /** CreateExample. */
-public struct CreateExample: Encodable {
+public struct CreateExample: Codable {
 
     /**
      The text of a user input example. This string must conform to the following restrictions:

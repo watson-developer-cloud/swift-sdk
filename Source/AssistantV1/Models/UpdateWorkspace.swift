@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** UpdateWorkspace. */
-internal struct UpdateWorkspace: Encodable {
+internal struct UpdateWorkspace: Codable {
 
     /**
      The name of the workspace. This string cannot contain carriage return, newline, or tab characters, and it must be

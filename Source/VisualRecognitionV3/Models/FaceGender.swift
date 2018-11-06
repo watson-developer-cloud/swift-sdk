@@ -19,7 +19,7 @@ import Foundation
 /**
  Information about the gender of the face.
  */
-public struct FaceGender: Decodable {
+public struct FaceGender: Codable {
 
     /**
      Gender identified by the face. For example, `MALE` or `FEMALE`.

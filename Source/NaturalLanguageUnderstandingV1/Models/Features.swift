@@ -19,7 +19,7 @@ import Foundation
 /**
  Analysis features and options.
  */
-public struct Features: Encodable {
+public struct Features: Codable {
 
     /**
      Returns high-level concepts in the content. For example, a research paper about deep learning might return the

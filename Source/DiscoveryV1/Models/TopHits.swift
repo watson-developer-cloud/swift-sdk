@@ -17,7 +17,7 @@
 import Foundation
 
 /** TopHits. */
-public struct TopHits: Decodable {
+public struct TopHits: Codable {
 
     /**
      The type of aggregation command used. For example: term, filter, max, min, etc.

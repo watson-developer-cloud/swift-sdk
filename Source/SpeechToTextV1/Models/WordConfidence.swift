@@ -17,7 +17,7 @@
 import Foundation
 
 /** The confidence of a word in a Speech to Text transcription. */
-public struct WordConfidence: Decodable {
+public struct WordConfidence: Codable {
 
     /// A particular word from the transcription.
     public let word: String

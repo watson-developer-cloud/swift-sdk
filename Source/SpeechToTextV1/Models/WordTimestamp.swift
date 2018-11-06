@@ -17,7 +17,7 @@
 import Foundation
 
 /** The timestamp of a word in a Speech to Text transcription. */
-public struct WordTimestamp: Decodable {
+public struct WordTimestamp: Codable {
 
     /// A particular word from the transcription.
     public let word: String

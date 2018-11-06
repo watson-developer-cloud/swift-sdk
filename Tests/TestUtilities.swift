@@ -13,10 +13,19 @@ import XCTest
 
 let missingResultMessage = "Missing result from response"
 let missingErrorMessage = "Expected error not received"
-
 func unexpectedErrorMessage(_ error: Error) -> String {
     return "Received an unexpected error: \(error)"
 }
+
+// MARK: - Service version
+
+let currentDate: String = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd"
+    return formatter.string(from: Date())
+}()
+
+// MARK: - Analyzing request bodies
 
 /**
  * Parse the body of a request as a multipart/form-data body and return a count of fields passed in the body

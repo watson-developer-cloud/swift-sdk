@@ -52,13 +52,12 @@ class LanguageTranslatorTests: XCTestCase {
 
     /** Instantiate Language Translator. */
     func instantiateLanguageTranslator() {
-        let version = "2018-10-10"
         if let apiKey = WatsonCredentials.LanguageTranslatorV3APIKey {
-            languageTranslator = LanguageTranslator(version: version, apiKey: apiKey)
+            languageTranslator = LanguageTranslator(version: currentDate, apiKey: apiKey)
         } else {
             let username = WatsonCredentials.LanguageTranslatorV3Username
             let password = WatsonCredentials.LanguageTranslatorV3Password
-            languageTranslator = LanguageTranslator(username: username, password: password, version: version)
+            languageTranslator = LanguageTranslator(username: username, password: password, version: currentDate)
         }
         if let url = WatsonCredentials.LanguageTranslatorV3URL {
             languageTranslator.serviceURL = url

@@ -22,7 +22,6 @@ import RestKit
 
 class VisualRecognitionUnitTests: XCTestCase {
 
-    let version = "2018-03-19"
     private var visualRecognition: VisualRecognition!
 
     let testURL = "http://example.com"
@@ -30,7 +29,7 @@ class VisualRecognitionUnitTests: XCTestCase {
     override func setUp() {
         super.setUp()
         let accessToken = "my_access_token"
-        visualRecognition = VisualRecognition(version: version, accessToken: accessToken)
+        visualRecognition = VisualRecognition(version: currentDate, accessToken: accessToken)
         // Create mock session
         let configuration = URLSessionConfiguration.ephemeral
         configuration.protocolClasses = [MockURLProtocol.self]
@@ -170,7 +169,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             XCTAssertEqual(request.httpMethod, "POST")
             let endIndex = request.url?.pathComponents.endIndex ?? 0
             XCTAssertEqual("classify", request.url?.pathComponents[endIndex-1])
-            XCTAssertTrue(request.url?.query?.contains("version=\(self.version)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
             XCTAssertNotNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
@@ -202,7 +201,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             let endIndex = request.url?.pathComponents.endIndex ?? 0
             XCTAssertEqual("classifiers", request.url?.pathComponents[endIndex-2])
             XCTAssertEqual(classifierID, request.url?.pathComponents[endIndex-1])
-            XCTAssertTrue(request.url?.query?.contains("version=\(self.version)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
             XCTAssertNotNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
@@ -252,7 +251,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             XCTAssertEqual(request.httpMethod, "DELETE")
             let endIndex = request.url?.pathComponents.endIndex ?? 0
             XCTAssertEqual("user_data", request.url?.pathComponents[endIndex-1])
-            XCTAssertTrue(request.url?.query?.contains("version=\(self.version)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
 
             return (HTTPURLResponse(), Data())
         }

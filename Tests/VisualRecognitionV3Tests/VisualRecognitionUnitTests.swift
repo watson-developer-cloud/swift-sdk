@@ -24,7 +24,8 @@ class VisualRecognitionUnitTests: XCTestCase {
 
     private var visualRecognition: VisualRecognition!
 
-    lazy var exampleURL = URL(string: "http://example.com")!
+    let exampleURL = URL(string: "http://example.com")!
+    private let timeout = 1.0
 
     override func setUp() {
         super.setUp()
@@ -54,10 +55,10 @@ class VisualRecognitionUnitTests: XCTestCase {
             _, _ in
             expectation.fulfill()
         }
-        wait(for: [expectation], timeout: 1)
+        waitForExpectations(timeout: timeout)
     }
 
-    // MARK: - errorResponseDecoder
+    // MARK: errorResponseDecoder
 
     func testErrorResponseDecoder403() {
         let testJSON: [String: JSON] = [
@@ -132,7 +133,7 @@ class VisualRecognitionUnitTests: XCTestCase {
         }
     }
 
-    // MARK: - Classifiers
+    // MARK: Classifiers
 
     func testClassify() {
         let owners = ["Anthony", "Mike"]
@@ -140,8 +141,7 @@ class VisualRecognitionUnitTests: XCTestCase {
 
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
-            let endIndex = request.url?.pathComponents.endIndex ?? 0
-            XCTAssertEqual("classify", request.url?.pathComponents[endIndex-1])
+            XCTAssertEqual("classify", request.url?.pathComponents.last)
             XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
             XCTAssertNotNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
@@ -157,14 +157,13 @@ class VisualRecognitionUnitTests: XCTestCase {
             _, _ in
             expectation.fulfill()
         }
-        waitForExpectations(timeout: 1.0)
+        waitForExpectations(timeout: timeout)
     }
 
     func testCreateClassifier() {
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
-            let endIndex = request.url?.pathComponents.endIndex ?? 0
-            XCTAssertEqual("classifiers", request.url?.pathComponents[endIndex-1])
+            XCTAssertEqual("classifiers", request.url?.pathComponents.last)
             XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
             XCTAssertNotNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
@@ -180,7 +179,48 @@ class VisualRecognitionUnitTests: XCTestCase {
             _, _ in
             expectation.fulfill()
         }
-        waitForExpectations(timeout: 1.0)
+        waitForExpectations(timeout: timeout)
+    }
+
+    func testListClassifiers() {
+        MockURLProtocol.requestHandler = { request in
+            XCTAssertEqual(request.httpMethod, "GET")
+            XCTAssertEqual("classifiers", request.url?.pathComponents.last)
+            XCTAssertTrue(request.url?.query?.contains("verbose=true") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertNotNil(request.allHTTPHeaderFields)
+
+            return (HTTPURLResponse(), Data())
+        }
+
+        let expectation = self.expectation(description: "listClassifiers")
+        visualRecognition.listClassifiers(owners: ["Anthony", "Mike"], verbose: true) {
+            _, _ in
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+    }
+
+    func testGetClassifier() {
+        let classifierID = "1234567890"
+
+        MockURLProtocol.requestHandler = { request in
+            XCTAssertEqual(request.httpMethod, "GET")
+            let endOfURL = request.url!.pathComponents.suffix(2)
+            XCTAssertEqual("classifiers", endOfURL.first)
+            XCTAssertEqual(classifierID, endOfURL.last)
+            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertNotNil(request.allHTTPHeaderFields)
+
+            return (HTTPURLResponse(), Data())
+        }
+
+        let expectation = self.expectation(description: "getClassifier")
+        visualRecognition.getClassifier(classifierID: classifierID) {
+            _, _ in
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
     }
 
     func testUpdateClassifier() {
@@ -188,9 +228,53 @@ class VisualRecognitionUnitTests: XCTestCase {
 
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
-            let endIndex = request.url?.pathComponents.endIndex ?? 0
-            XCTAssertEqual("classifiers", request.url?.pathComponents[endIndex-2])
-            XCTAssertEqual(classifierID, request.url?.pathComponents[endIndex-1])
+            let endOfURL = request.url!.pathComponents.suffix(2)
+            XCTAssertEqual("classifiers", endOfURL.first)
+            XCTAssertEqual(classifierID, endOfURL.last)
+            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertNotNil(request.httpBodyStream)
+            XCTAssertNotNil(request.allHTTPHeaderFields)
+
+            let bodyFieldsCount = parseMultiPartFormBody(request: request)
+            XCTAssertEqual(3, bodyFieldsCount)
+
+            return (HTTPURLResponse(), Data())
+        }
+
+        let expectation = self.expectation(description: "updateClassifier")
+        visualRecognition.updateClassifier(classifierID: classifierID, positiveExamples: [carExamples, trucksExamples], negativeExamples: baseball) {
+            _, _ in
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+    }
+
+    func testDeleteClassifier() {
+        let classifierID = "1234567890"
+
+        MockURLProtocol.requestHandler = { request in
+            XCTAssertEqual(request.httpMethod, "DELETE")
+            let endOfURL = request.url!.pathComponents.suffix(2)
+            XCTAssertEqual("classifiers", endOfURL.first)
+            XCTAssertEqual(classifierID, endOfURL.last)
+            XCTAssertNotNil(request.allHTTPHeaderFields)
+
+            return (HTTPURLResponse(), Data())
+        }
+        let expectation = self.expectation(description: "deleteClassifier.")
+        visualRecognition.deleteClassifier(classifierID: classifierID) {
+            _, _ in
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+    }
+
+    // MARK: Faces
+
+    func testDetectFaces() {
+        MockURLProtocol.requestHandler = { request in
+            XCTAssertEqual(request.httpMethod, "POST")
+            XCTAssertEqual("detect_faces", request.url?.pathComponents.last)
             XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
             XCTAssertNotNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
@@ -201,33 +285,40 @@ class VisualRecognitionUnitTests: XCTestCase {
             return (HTTPURLResponse(), Data())
         }
 
-        let expectation = self.expectation(description: "updateClassifier")
-        visualRecognition.updateClassifier(classifierID: classifierID, positiveExamples: [carExamples, trucksExamples]) {
+        let expectation = self.expectation(description: "detectFaces")
+        visualRecognition.detectFaces(imagesFile: faces, url: "http://example.com") {
             _, _ in
             expectation.fulfill()
         }
-        waitForExpectations(timeout: 1.0)
+        waitForExpectations(timeout: timeout)
     }
 
-    func testDeleteClassifier() {
+    // MARK: Core ML model
+
+    func testGetCoreMlModel() {
         let classifierID = "1234567890"
 
         MockURLProtocol.requestHandler = { request in
-            XCTAssertNotNil(request.url)
-            XCTAssertEqual(request.httpMethod, "DELETE")
-            let endIndex = request.url?.pathComponents.endIndex ?? 0
-            XCTAssertEqual("classifiers", request.url?.pathComponents[endIndex-2])
-            XCTAssertEqual(classifierID, request.url?.pathComponents[endIndex-1])
+            XCTAssertEqual(request.httpMethod, "GET")
+            let endOfURL = request.url!.pathComponents.suffix(3)
+            XCTAssertEqual("classifiers", endOfURL[endOfURL.startIndex])
+            XCTAssertEqual(classifierID, endOfURL[endOfURL.startIndex + 1])
+            XCTAssertEqual("core_ml_model", endOfURL[endOfURL.startIndex + 2])
+            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertNotNil(request.allHTTPHeaderFields)
 
             return (HTTPURLResponse(), Data())
         }
-        let expectation = self.expectation(description: "deleteClassifier.")
-        visualRecognition.deleteClassifier(classifierID: classifierID) {
+
+        let expectation = self.expectation(description: "getCoreMlModel")
+        visualRecognition.getCoreMlModel(classifierID: classifierID) {
             _, _ in
             expectation.fulfill()
         }
-        waitForExpectations(timeout: 1.0)
+        waitForExpectations(timeout: timeout)
     }
+
+    // MARK: User data
 
     func testDeleteUserData() {
         let customerID = "1234567890"
@@ -235,9 +326,9 @@ class VisualRecognitionUnitTests: XCTestCase {
         MockURLProtocol.requestHandler = { request in
             XCTAssertNotNil(request.url)
             XCTAssertEqual(request.httpMethod, "DELETE")
-            let endIndex = request.url?.pathComponents.endIndex ?? 0
-            XCTAssertEqual("user_data", request.url?.pathComponents[endIndex-1])
+            XCTAssertEqual("user_data", request.url?.pathComponents.last)
             XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertNotNil(request.allHTTPHeaderFields)
 
             return (HTTPURLResponse(), Data())
         }
@@ -246,6 +337,6 @@ class VisualRecognitionUnitTests: XCTestCase {
             _, _ in
             expectation.fulfill()
         }
-        waitForExpectations(timeout: 1.0)
+        waitForExpectations(timeout: timeout)
     }
 }

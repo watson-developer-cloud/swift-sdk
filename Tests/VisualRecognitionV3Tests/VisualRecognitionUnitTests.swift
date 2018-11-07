@@ -18,6 +18,7 @@
 
 import XCTest
 import RestKit
+import CoreML
 @testable import VisualRecognitionV3
 
 class VisualRecognitionUnitTests: XCTestCase {
@@ -27,35 +28,19 @@ class VisualRecognitionUnitTests: XCTestCase {
     let exampleURL = URL(string: "http://example.com")!
     private let timeout = 1.0
 
+    // MARK: Test Configuration
+
     override func setUp() {
         super.setUp()
+
         let accessToken = "my_access_token"
         visualRecognition = VisualRecognition(version: currentDate, accessToken: accessToken)
+
         // Create mock session
         let configuration = URLSessionConfiguration.ephemeral
         configuration.protocolClasses = [MockURLProtocol.self]
         let mockSession = URLSession(configuration: configuration)
         visualRecognition.session = mockSession
-    }
-
-    func testHeaders() throws {
-        // Configure mock
-        MockURLProtocol.requestHandler = { request in
-            // Verify custom header is present
-            XCTAssertNotNil(request.allHTTPHeaderFields)
-            XCTAssertTrue(request.allHTTPHeaderFields?.keys.contains("x-foo") ?? false)
-            XCTAssertEqual("bar", request.allHTTPHeaderFields?["x-foo"])
-
-            return (HTTPURLResponse(), Data())
-        }
-
-        let expectation = self.expectation(description: "Classify an image with explicit headers.")
-        let imageURL = "an-image-url"
-        visualRecognition.classify(url: imageURL, headers: ["x-foo": "bar"]) {
-            _, _ in
-            expectation.fulfill()
-        }
-        waitForExpectations(timeout: timeout)
     }
 
     // MARK: errorResponseDecoder
@@ -154,6 +139,25 @@ class VisualRecognitionUnitTests: XCTestCase {
 
         let expectation = self.expectation(description: "classify")
         visualRecognition.classify(imagesFile: obama, url: "http://example.com", threshold: 1.0, owners: owners, classifierIDs: classifierIDs, acceptLanguage: "en") {
+            _, _ in
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+    }
+
+    func testHeaders() throws {
+        MockURLProtocol.requestHandler = { request in
+            // Verify custom header is present
+            XCTAssertNotNil(request.allHTTPHeaderFields)
+            XCTAssertTrue(request.allHTTPHeaderFields?.keys.contains("x-foo") ?? false)
+            XCTAssertEqual("bar", request.allHTTPHeaderFields?["x-foo"])
+
+            return (HTTPURLResponse(), Data())
+        }
+
+        let expectation = self.expectation(description: "Classify an image with explicit headers.")
+        let imageURL = "an-image-url"
+        visualRecognition.classify(url: imageURL, headers: ["x-foo": "bar"]) {
             _, _ in
             expectation.fulfill()
         }
@@ -334,6 +338,98 @@ class VisualRecognitionUnitTests: XCTestCase {
         }
         let expectation = self.expectation(description: "deleteClassifier.")
         visualRecognition.deleteUserData(customerID: customerID) {
+            _, _ in
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+    }
+
+    // MARK: - VisualRecognition+CoreML
+
+    @available(iOS 11.0, *)
+    func testGetLocalModel() {
+        let classifierID = "123456789"
+
+        do {
+            let localModel = try visualRecognition.getLocalModel(classifierID: classifierID)
+            XCTAssertEqual(localModel.modelDescription.metadata[MLModelMetadataKey.author] as? String, "Apple")
+        } catch {
+            XCTFail(error.localizedDescription)
+        }
+    }
+
+    // MARK: - VisualRecognition+UIImage
+
+    func testClassifyWithImage() {
+        let owners = ["Anthony", "Mike"]
+        let classifierIDs = ["1", "2"]
+        let image = UIImage(contentsOfFile: car.path)!
+
+        MockURLProtocol.requestHandler = { request in
+            XCTAssertEqual(request.httpMethod, "POST")
+            XCTAssertEqual("classify", request.url?.pathComponents.last)
+            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertNotNil(request.httpBodyStream)
+            XCTAssertNotNil(request.allHTTPHeaderFields)
+
+            let bodyFieldsCount = parseMultiPartFormBody(request: request)
+            XCTAssertEqual(4, bodyFieldsCount)
+
+            return (HTTPURLResponse(), Data())
+        }
+
+        let expectation = self.expectation(description: "classifyWithImage")
+        visualRecognition.classify(image: image, threshold: 1.0, owners: owners, classifierIDs: classifierIDs, acceptLanguage: "en") {
+            _, _ in
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+    }
+
+    func testDetectFacesWithImage() {
+        let image = UIImage(contentsOfFile: obama.path)!
+
+        MockURLProtocol.requestHandler = { request in
+            XCTAssertEqual(request.httpMethod, "POST")
+            XCTAssertEqual("detect_faces", request.url?.pathComponents.last)
+            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertNotNil(request.httpBodyStream)
+            XCTAssertNotNil(request.allHTTPHeaderFields)
+
+            let bodyFieldsCount = parseMultiPartFormBody(request: request)
+            XCTAssertEqual(1, bodyFieldsCount)
+
+            return (HTTPURLResponse(), Data())
+        }
+
+        let expectation = self.expectation(description: "detectFacesWithImage")
+        visualRecognition.detectFaces(image: image) {
+            _, _ in
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+    }
+
+    @available(iOS 11.0, *)
+    func testClassifyWithLocalModel() {
+        let classifierIDs = ["1"]
+        let image = UIImage(contentsOfFile: car.path)!
+
+        MockURLProtocol.requestHandler = { request in
+            XCTAssertEqual(request.httpMethod, "POST")
+            XCTAssertEqual("classify", request.url?.pathComponents.last)
+            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertNotNil(request.httpBodyStream)
+            XCTAssertNotNil(request.allHTTPHeaderFields)
+
+            let bodyFieldsCount = parseMultiPartFormBody(request: request)
+            XCTAssertEqual(4, bodyFieldsCount)
+
+            return (HTTPURLResponse(), Data())
+        }
+
+        let expectation = self.expectation(description: "classifyWithLocalModel")
+        visualRecognition.classifyWithLocalModel(image: image, classifierIDs: classifierIDs, threshold: 1.0) {
             _, _ in
             expectation.fulfill()
         }

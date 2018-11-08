@@ -279,7 +279,15 @@ extension VisualRecognition {
      */
     private func loadModelFromDisk(classifierID: String) throws -> MLModel {
         let modelURL = try locateModelOnDisk(classifierID: classifierID)
-        return try MLModel(contentsOf: modelURL)
+
+        // temporary workaround for compatibility issue with new A12 based devices
+        if #available(iOS 12.0, *) {
+            let modelConfig = MLModelConfiguration()
+            modelConfig.computeUnits = .cpuAndGPU
+            return try MLModel(contentsOf: modelURL, configuration: modelConfig)
+        } else {
+            return try MLModel(contentsOf: modelURL)
+        }
     }
 
     /// Convert results from Core ML classification requests into a `ClassifiedImages` model.

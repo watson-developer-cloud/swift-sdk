@@ -484,6 +484,8 @@
 		929DB9AE212F7E6800356EDC /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92048D8F212F7C16004FD822 /* RestKit.framework */; };
 		929DB9AF212F7E6D00356EDC /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92048D8F212F7C16004FD822 /* RestKit.framework */; };
 		929DB9B0212F7E7100356EDC /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92048D8F212F7C16004FD822 /* RestKit.framework */; };
+		92B470652194C880006C3333 /* watson_sample.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 92F3F98E2194AFA300211747 /* watson_sample.mlmodel */; };
+		92B470662194C880006C3333 /* watson_tools.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 92F3F9882193AE7800211747 /* watson_tools.mlmodel */; };
 		92BF69AE213F129A00FE6325 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
 		92BF69B0213F129A00FE6325 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
 		92BF69B2213F129A00FE6325 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
@@ -1111,6 +1113,8 @@
 		9286625F219254460064C6FD /* VisualRecognitionTestUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualRecognitionTestUtilities.swift; sourceTree = "<group>"; };
 		929A23E521123E7E00E4C78A /* TestUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TestUtilities.swift; path = Tests/TestUtilities.swift; sourceTree = "<group>"; };
 		92BF69AD213F129A00FE6325 /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Shared.swift; path = Source/SupportingFiles/Shared.swift; sourceTree = "<group>"; };
+		92F3F9882193AE7800211747 /* watson_tools.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = watson_tools.mlmodel; sourceTree = "<group>"; };
+		92F3F98E2194AFA300211747 /* watson_sample.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = watson_sample.mlmodel; sourceTree = "<group>"; };
 		B1F21DF21CE2461800393146 /* SentenceAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentenceAnalysis.swift; sourceTree = "<group>"; };
 		B1F21DF31CE2461800393146 /* ToneAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneAnalysis.swift; sourceTree = "<group>"; };
 		B1F21DF41CE2461800393146 /* ToneCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneCategory.swift; sourceTree = "<group>"; };
@@ -2051,6 +2055,8 @@
 				7AAD664E1DCA5D730010481E /* obama.jpg */,
 				7AAD664F1DCA5D730010481E /* sign.jpg */,
 				7AAD664A1DCA5D730010481E /* trucks.zip */,
+				92F3F98E2194AFA300211747 /* watson_sample.mlmodel */,
+				92F3F9882193AE7800211747 /* watson_tools.mlmodel */,
 			);
 			name = Resources;
 			path = Tests/VisualRecognitionV3Tests/Resources;
@@ -3943,6 +3949,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92B470652194C880006C3333 /* watson_sample.mlmodel in Sources */,
+				92B470662194C880006C3333 /* watson_tools.mlmodel in Sources */,
 				929A23F121123E7E00E4C78A /* TestUtilities.swift in Sources */,
 				920A244A214B0E420077F10D /* Shared.swift in Sources */,
 				920A243E214ADFB20077F10D /* SharedTests.swift in Sources */,

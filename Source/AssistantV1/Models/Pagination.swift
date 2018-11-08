@@ -24,12 +24,12 @@ public struct Pagination: Decodable {
     /**
      The URL that will return the same page of results.
      */
-    public var refreshUrl: String
+    public var refreshURL: String
 
     /**
      The URL that will return the next page of results.
      */
-    public var nextUrl: String?
+    public var nextURL: String?
 
     /**
      Reserved for future use.
@@ -53,8 +53,8 @@ public struct Pagination: Decodable {
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case refreshUrl = "refresh_url"
-        case nextUrl = "next_url"
+        case refreshURL = "refresh_url"
+        case nextURL = "next_url"
         case total = "total"
         case matched = "matched"
         case refreshCursor = "refresh_cursor"

@@ -69,7 +69,11 @@ class VisualRecognitionTests: XCTestCase {
 
     /** Instantiate Visual Recognition. */
     func instantiateVisualRecognition() {
-        visualRecognition = VisualRecognition(version: currentDate, apiKey: WatsonCredentials.VisualRecognitionAPIKey)
+        guard let apiKey = WatsonCredentials.VisualRecognitionAPIKey else {
+            XCTFail("Missing credentials for Visual Recognition service")
+            return
+        }
+        visualRecognition = VisualRecognition(version: currentDate, apiKey: apiKey)
         if let url = WatsonCredentials.VisualRecognitionURL {
             visualRecognition.serviceURL = url
         }
@@ -517,7 +521,7 @@ class VisualRecognitionTests: XCTestCase {
     /** Get the Core ML model for a trained classifier. */
     func testGetCoreMlModel() {
         let expectation = self.expectation(description: "Get the Core ML model for a trained classifier.")
-        visualRecognition.getCoreMlModel(classifierID: classifierID) {
+        visualRecognition.getCoreMLModel(classifierID: classifierID) {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -560,8 +564,8 @@ class VisualRecognitionTests: XCTestCase {
 
             // verify the image's metadata
             let image = classifiedImages.images.first
-            XCTAssertEqual(image?.sourceUrl, obamaURL)
-            XCTAssertEqual(image?.resolvedUrl, obamaURL)
+            XCTAssertEqual(image?.sourceURL, obamaURL)
+            XCTAssertEqual(image?.resolvedURL, obamaURL)
             XCTAssertNil(image?.image)
             XCTAssertNil(image?.error)
             XCTAssertEqual(image?.classifiers.count, 1)
@@ -595,11 +599,11 @@ class VisualRecognitionTests: XCTestCase {
     func testClassifyByURL2() {
         let expectation = self.expectation(description: "Classify an image by URL using the default classifier.")
         visualRecognition.classify(
+            acceptLanguage: "en",
             url: obamaURL,
             threshold: 0.5,
             owners: ["IBM"],
-            classifierIDs: ["default"],
-            acceptLanguage: "en")
+            classifierIDs: ["default"])
         {
             response, error in
             if let error = error {
@@ -620,8 +624,8 @@ class VisualRecognitionTests: XCTestCase {
 
             // verify the image's metadata
             let image = classifiedImages.images.first
-            XCTAssertEqual(image?.sourceUrl, obamaURL)
-            XCTAssertEqual(image?.resolvedUrl, obamaURL)
+            XCTAssertEqual(image?.sourceURL, obamaURL)
+            XCTAssertEqual(image?.resolvedURL, obamaURL)
             XCTAssertNil(image?.image)
             XCTAssertNil(image?.error)
             XCTAssertEqual(image?.classifiers.count, 1)
@@ -670,8 +674,8 @@ class VisualRecognitionTests: XCTestCase {
 
             // verify the image's metadata
             let image = classifiedImages.images.first
-            XCTAssertEqual(image?.sourceUrl, carURL)
-            XCTAssertEqual(image?.resolvedUrl, carURL)
+            XCTAssertEqual(image?.sourceURL, carURL)
+            XCTAssertEqual(image?.resolvedURL, carURL)
             XCTAssertNil(image?.image)
             XCTAssertNil(image?.error)
             XCTAssertEqual(image?.classifiers.count, 1)
@@ -694,11 +698,11 @@ class VisualRecognitionTests: XCTestCase {
     func testClassifyByURL4() {
         let expectation = self.expectation(description: "Classify an image by URL using a custom classifier.")
         visualRecognition.classify(
+            acceptLanguage: "en",
             url: carURL,
             threshold: 0.5,
             owners: ["me"],
-            classifierIDs: [classifierID],
-            acceptLanguage: "en")
+            classifierIDs: [classifierID])
         {
             response, error in
             if let error = error {
@@ -716,8 +720,8 @@ class VisualRecognitionTests: XCTestCase {
 
             // verify the image's metadata
             let image = classifiedImages.images.first
-            XCTAssertEqual(image?.sourceUrl, carURL)
-            XCTAssertEqual(image?.resolvedUrl, carURL)
+            XCTAssertEqual(image?.sourceURL, carURL)
+            XCTAssertEqual(image?.resolvedURL, carURL)
             XCTAssertNil(image?.image)
             XCTAssertNil(image?.error)
             XCTAssertEqual(image?.classifiers.count, 1)
@@ -756,8 +760,8 @@ class VisualRecognitionTests: XCTestCase {
 
             // verify the image's metadata
             let image = classifiedImages.images.first
-            XCTAssertEqual(image?.sourceUrl, carURL)
-            XCTAssertEqual(image?.resolvedUrl, carURL)
+            XCTAssertEqual(image?.sourceURL, carURL)
+            XCTAssertEqual(image?.resolvedURL, carURL)
             XCTAssertNil(image?.image)
             XCTAssertNil(image?.error)
 
@@ -820,8 +824,8 @@ class VisualRecognitionTests: XCTestCase {
 
             // verify the image's metadata
             let image = classifiedImages.images.first
-            XCTAssertNil(image?.sourceUrl)
-            XCTAssertNil(image?.resolvedUrl)
+            XCTAssertNil(image?.sourceURL)
+            XCTAssertNil(image?.resolvedURL)
             XCTAssert(image?.image == "car.png")
             XCTAssertNil(image?.error)
             XCTAssertEqual(image?.classifiers.count, 1)
@@ -855,10 +859,10 @@ class VisualRecognitionTests: XCTestCase {
         let expectation = self.expectation(description: "Classify an uploaded image using the default classifier.")
         visualRecognition.classify(
             imagesFile: car,
+            acceptLanguage: "en",
             threshold: 0.5,
             owners: ["IBM"],
-            classifierIDs: ["default"],
-            acceptLanguage: "en")
+            classifierIDs: ["default"])
         {
             response, error in
             if let error = error {
@@ -879,8 +883,8 @@ class VisualRecognitionTests: XCTestCase {
 
             // verify the image's metadata
             let image = classifiedImages.images.first
-            XCTAssertNil(image?.sourceUrl)
-            XCTAssertNil(image?.resolvedUrl)
+            XCTAssertNil(image?.sourceURL)
+            XCTAssertNil(image?.resolvedURL)
             XCTAssert(image?.image == "car.png")
             XCTAssertNil(image?.error)
             XCTAssertEqual(image?.classifiers.count, 1)
@@ -928,8 +932,8 @@ class VisualRecognitionTests: XCTestCase {
 
             // verify the image's metadata
             let image = classifiedImages.images.first
-            XCTAssertNil(image?.sourceUrl)
-            XCTAssertNil(image?.resolvedUrl)
+            XCTAssertNil(image?.sourceURL)
+            XCTAssertNil(image?.resolvedURL)
             XCTAssert(image?.image == "car.png")
             XCTAssertNil(image?.error)
             XCTAssertEqual(image?.classifiers.count, 1)
@@ -953,10 +957,10 @@ class VisualRecognitionTests: XCTestCase {
         let expectation = self.expectation(description: "Classify an uploaded image using a custom classifier.")
         visualRecognition.classify(
             imagesFile: car,
+            acceptLanguage: "en",
             threshold: 0.5,
             owners: ["me"],
-            classifierIDs: [classifierID],
-            acceptLanguage: "en")
+            classifierIDs: [classifierID])
         {
             response, error in
             if let error = error {
@@ -974,8 +978,8 @@ class VisualRecognitionTests: XCTestCase {
 
             // verify the image's metadata
             let image = classifiedImages.images.first
-            XCTAssertNil(image?.sourceUrl)
-            XCTAssertNil(image?.resolvedUrl)
+            XCTAssertNil(image?.sourceURL)
+            XCTAssertNil(image?.resolvedURL)
             XCTAssert(image?.image == "car.png")
             XCTAssertNil(image?.error)
             XCTAssertEqual(image?.classifiers.count, 1)
@@ -1020,8 +1024,8 @@ class VisualRecognitionTests: XCTestCase {
 
             // verify the image's metadata
             let image = classifiedImages.images.first
-            XCTAssertNil(image?.sourceUrl)
-            XCTAssertNil(image?.resolvedUrl)
+            XCTAssertNil(image?.sourceURL)
+            XCTAssertNil(image?.resolvedURL)
             XCTAssert(image?.image == "car.png")
             XCTAssertNil(image?.error)
 
@@ -1084,8 +1088,8 @@ class VisualRecognitionTests: XCTestCase {
 
             for image in classifiedImages.images {
                 // verify the image's metadata
-                XCTAssertNil(image.sourceUrl)
-                XCTAssertNil(image.resolvedUrl)
+                XCTAssertNil(image.sourceURL)
+                XCTAssertNil(image.resolvedURL)
                 XCTAssert(image.image?.hasPrefix("car") == true)
                 XCTAssertNil(image.error)
                 XCTAssertEqual(image.classifiers.count, 2)
@@ -1147,8 +1151,8 @@ class VisualRecognitionTests: XCTestCase {
 
             // verify the face image object
             let face = faceImages.images.first
-            XCTAssertEqual(face?.sourceUrl, obamaURL)
-            XCTAssertEqual(face?.resolvedUrl, obamaURL)
+            XCTAssertEqual(face?.sourceURL, obamaURL)
+            XCTAssertEqual(face?.resolvedURL, obamaURL)
             XCTAssertNil(face?.image)
             XCTAssertNil(face?.error)
             XCTAssertEqual(face?.faces.count, 1)
@@ -1197,8 +1201,8 @@ class VisualRecognitionTests: XCTestCase {
 
             // verify the face image object
             let face = faceImages.images.first
-            XCTAssertNil(face?.sourceUrl)
-            XCTAssertNil(face?.resolvedUrl)
+            XCTAssertNil(face?.sourceURL)
+            XCTAssertNil(face?.resolvedURL)
             XCTAssertNotNil(face?.image)
             XCTAssertNil(face?.error)
             XCTAssertEqual(face?.faces.count, 1)
@@ -1247,8 +1251,8 @@ class VisualRecognitionTests: XCTestCase {
 
             for image in faceImages.images {
                 // verify the face image object
-                XCTAssertNil(image.sourceUrl)
-                XCTAssertNil(image.resolvedUrl)
+                XCTAssertNil(image.sourceURL)
+                XCTAssertNil(image.resolvedURL)
                 XCTAssert(image.image?.hasPrefix("faces.zip/faces/face") == true)
                 XCTAssertNil(image.error)
                 XCTAssertEqual(image.faces.count, 1)

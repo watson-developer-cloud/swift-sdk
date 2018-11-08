@@ -140,7 +140,7 @@ class VisualRecognitionUnitTests: XCTestCase {
         }
 
         let expectation = self.expectation(description: "classify")
-        visualRecognition.classify(imagesFile: obama, url: "http://example.com", threshold: 1.0, owners: owners, classifierIDs: classifierIDs, acceptLanguage: "en") {
+        visualRecognition.classify(imagesFile: obama, acceptLanguage: "en", url: "http://example.com", threshold: 1.0, owners: owners, classifierIDs: classifierIDs, imagesFileContentType: "png") {
             _, _ in
             expectation.fulfill()
         }
@@ -200,7 +200,7 @@ class VisualRecognitionUnitTests: XCTestCase {
         }
 
         let expectation = self.expectation(description: "listClassifiers")
-        visualRecognition.listClassifiers(owners: ["Anthony", "Mike"], verbose: true) {
+        visualRecognition.listClassifiers(verbose: true) {
             _, _ in
             expectation.fulfill()
         }
@@ -317,7 +317,7 @@ class VisualRecognitionUnitTests: XCTestCase {
         }
 
         let expectation = self.expectation(description: "getCoreMlModel")
-        visualRecognition.getCoreMlModel(classifierID: classifierID) {
+        visualRecognition.getCoreMLModel(classifierID: classifierID) {
             _, _ in
             expectation.fulfill()
         }
@@ -394,7 +394,7 @@ class VisualRecognitionUnitTests: XCTestCase {
                     name: classifierID,
                     owner: nil,
                     status: "ready",
-                    coreMlEnabled: true,
+                    coreMLEnabled: true,
                     explanation: nil,
                     created: nil,
                     classes: nil,
@@ -466,7 +466,7 @@ class VisualRecognitionUnitTests: XCTestCase {
                     name: classifierID,
                     owner: nil,
                     status: "ready",
-                    coreMlEnabled: true,
+                    coreMLEnabled: true,
                     explanation: nil,
                     created: nil,
                     classes: nil,

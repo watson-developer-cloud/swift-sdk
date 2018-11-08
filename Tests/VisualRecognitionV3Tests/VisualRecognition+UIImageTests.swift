@@ -47,7 +47,11 @@ class VisualRecognitionUIImageTests: XCTestCase {
     }
 
     func instantiateVisualRecognition() {
-        visualRecognition = VisualRecognition(version: currentDate, apiKey: WatsonCredentials.VisualRecognitionAPIKey)
+        guard let apiKey = WatsonCredentials.VisualRecognitionAPIKey else {
+            XCTFail("Missing credentials for Visual Recognition service")
+            return
+        }
+        visualRecognition = VisualRecognition(version: currentDate, apiKey: apiKey)
         if let url = WatsonCredentials.VisualRecognitionURL {
             visualRecognition.serviceURL = url
         }
@@ -81,8 +85,8 @@ class VisualRecognitionUIImageTests: XCTestCase {
 
             // verify the image's metadata
             let image = classifiedImages.images.first
-            XCTAssertNil(image?.sourceUrl)
-            XCTAssertNil(image?.resolvedUrl)
+            XCTAssertNil(image?.sourceURL)
+            XCTAssertNil(image?.resolvedURL)
             XCTAssertNil(image?.error)
             XCTAssertEqual(image?.classifiers.count, 1)
 
@@ -130,8 +134,8 @@ class VisualRecognitionUIImageTests: XCTestCase {
 
             // verify the face image object
             let face = faceImages.images.first
-            XCTAssertNil(face?.sourceUrl)
-            XCTAssertNil(face?.resolvedUrl)
+            XCTAssertNil(face?.sourceURL)
+            XCTAssertNil(face?.resolvedURL)
             XCTAssertNotNil(face?.image)
             XCTAssertNil(face?.error)
             XCTAssertEqual(face?.faces.count, 1)

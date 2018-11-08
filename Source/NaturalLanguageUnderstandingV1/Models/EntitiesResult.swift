@@ -47,12 +47,12 @@ public struct EntitiesResult: Decodable {
     public var count: Int?
 
     /**
-     Emotion analysis results for the entity, enabled with the "emotion" option.
+     Emotion analysis results for the entity, enabled with the `emotion` option.
      */
     public var emotion: EmotionScores?
 
     /**
-     Sentiment analysis results for the entity, enabled with the "sentiment" option.
+     Sentiment analysis results for the entity, enabled with the `sentiment` option.
      */
     public var sentiment: FeatureSentimentResults?
 

@@ -115,7 +115,7 @@ internal struct QueryLarge: Encodable {
      A comma-separated list of collection IDs to be queried against. Required when querying multiple collections,
      invalid when performing a single collection query.
      */
-    public var collectionIds: String?
+    public var collectionIDs: String?
 
     /**
      When `true`, results are returned based on their similarity to the document IDs specified in the
@@ -129,7 +129,7 @@ internal struct QueryLarge: Encodable {
      with the natural language query. Other query parameters, such as **filter** and **query**, are subsequently applied
      and reduce the scope.
      */
-    public var similarDocumentIds: String?
+    public var similarDocumentIDs: String?
 
     /**
      A comma-separated list of field names that are used as a basis for comparison to identify similar documents. If not
@@ -162,9 +162,9 @@ internal struct QueryLarge: Encodable {
         case passagesCharacters = "passages.characters"
         case deduplicate = "deduplicate"
         case deduplicateField = "deduplicate.field"
-        case collectionIds = "collection_ids"
+        case collectionIDs = "collection_ids"
         case similar = "similar"
-        case similarDocumentIds = "similar.document_ids"
+        case similarDocumentIDs = "similar.document_ids"
         case similarFields = "similar.fields"
         case bias = "bias"
     }
@@ -204,11 +204,11 @@ internal struct QueryLarge: Encodable {
      - parameter deduplicateField: When specified, duplicate results based on the field specified are removed from
        the returned results. Duplicate comparison is limited to the current query only, **offset** is not considered.
        This parameter is currently Beta functionality.
-     - parameter collectionIds: A comma-separated list of collection IDs to be queried against. Required when
+     - parameter collectionIDs: A comma-separated list of collection IDs to be queried against. Required when
        querying multiple collections, invalid when performing a single collection query.
      - parameter similar: When `true`, results are returned based on their similarity to the document IDs specified
        in the **similar.document_ids** parameter.
-     - parameter similarDocumentIds: A comma-separated list of document IDs to find similar documents.
+     - parameter similarDocumentIDs: A comma-separated list of document IDs to find similar documents.
        **Tip:** Include the **natural_language_query** parameter to expand the scope of the document similarity search
        with the natural language query. Other query parameters, such as **filter** and **query**, are subsequently
        applied and reduce the scope.
@@ -237,9 +237,9 @@ internal struct QueryLarge: Encodable {
         passagesCharacters: Int? = nil,
         deduplicate: Bool? = nil,
         deduplicateField: String? = nil,
-        collectionIds: String? = nil,
+        collectionIDs: String? = nil,
         similar: Bool? = nil,
-        similarDocumentIds: String? = nil,
+        similarDocumentIDs: String? = nil,
         similarFields: String? = nil,
         bias: String? = nil
     )
@@ -259,9 +259,9 @@ internal struct QueryLarge: Encodable {
         self.passagesCharacters = passagesCharacters
         self.deduplicate = deduplicate
         self.deduplicateField = deduplicateField
-        self.collectionIds = collectionIds
+        self.collectionIDs = collectionIDs
         self.similar = similar
-        self.similarDocumentIds = similarDocumentIds
+        self.similarDocumentIDs = similarDocumentIDs
         self.similarFields = similarFields
         self.bias = bias
     }

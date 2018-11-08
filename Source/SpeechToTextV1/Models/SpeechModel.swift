@@ -40,7 +40,7 @@ public struct SpeechModel: Decodable {
     public var url: String
 
     /**
-     Describes the additional service features supported with the model.
+     Describes the additional service features that are supported with the model.
      */
     public var supportedFeatures: SupportedFeatures
 

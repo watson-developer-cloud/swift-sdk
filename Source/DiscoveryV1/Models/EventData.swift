@@ -35,7 +35,7 @@ public struct EventData: Codable {
      The optional timestamp for the event that was created. If not provided, the time that the event was created in the
      log was used.
      */
-    public var clientTimestamp: String?
+    public var clientTimestamp: Date?
 
     /**
      The rank of the result item which the event is associated with.
@@ -90,7 +90,7 @@ public struct EventData: Codable {
         sessionToken: String,
         collectionID: String,
         documentID: String,
-        clientTimestamp: String? = nil,
+        clientTimestamp: Date? = nil,
         displayRank: Int? = nil,
         queryID: String? = nil
     )

@@ -24,12 +24,12 @@ public struct ClassifiedImage: Decodable {
     /**
      Source of the image before any redirects. Not returned when the image is uploaded.
      */
-    public var sourceUrl: String?
+    public var sourceURL: String?
 
     /**
      Fully resolved URL of the image after redirects are followed. Not returned when the image is uploaded.
      */
-    public var resolvedUrl: String?
+    public var resolvedURL: String?
 
     /**
      Relative path of the image file if uploaded directly. Not returned when the image is passed by URL.
@@ -49,8 +49,8 @@ public struct ClassifiedImage: Decodable {
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case sourceUrl = "source_url"
-        case resolvedUrl = "resolved_url"
+        case sourceURL = "source_url"
+        case resolvedURL = "resolved_url"
         case image = "image"
         case error = "error"
         case classifiers = "classifiers"

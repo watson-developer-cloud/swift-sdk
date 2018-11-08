@@ -20,7 +20,7 @@ import Foundation
 public struct Model: Decodable {
 
     /**
-     Shows as available if the model is ready for use.
+     When the status is `available`, the model is ready to use.
      */
     public var status: String?
 

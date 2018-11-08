@@ -487,7 +487,7 @@ class AssistantTests: XCTestCase {
                 XCTAssertNotNil(workspace.language)
                 XCTAssertNotNil(workspace.workspaceID)
             }
-            XCTAssertNotNil(workspaceResult.pagination.refreshUrl)
+            XCTAssertNotNil(workspaceResult.pagination.refreshURL)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -517,7 +517,7 @@ class AssistantTests: XCTestCase {
                 XCTAssertNotNil(workspace.language)
                 XCTAssertNotNil(workspace.workspaceID)
             }
-            XCTAssertNotNil(workspaceResult.pagination.refreshUrl)
+            XCTAssertNotNil(workspaceResult.pagination.refreshURL)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -546,7 +546,7 @@ class AssistantTests: XCTestCase {
                 XCTAssertNotNil(workspace.language)
                 XCTAssertNotNil(workspace.workspaceID)
             }
-            XCTAssertNotNil(workspaceResult.pagination.refreshUrl)
+            XCTAssertNotNil(workspaceResult.pagination.refreshURL)
             XCTAssertNotNil(workspaceResult.pagination.total)
             XCTAssertNotNil(workspaceResult.pagination.matched)
             XCTAssertGreaterThanOrEqual(workspaceResult.pagination.total!, workspaceResult.workspaces.count)
@@ -803,8 +803,8 @@ class AssistantTests: XCTestCase {
                 XCTAssertNotNil(intent.updated)
                 XCTAssertNil(intent.examples)
             }
-            XCTAssertNotNil(intents.pagination.refreshUrl)
-            XCTAssertNil(intents.pagination.nextUrl)
+            XCTAssertNotNil(intents.pagination.refreshURL)
+            XCTAssertNil(intents.pagination.nextURL)
             XCTAssertNil(intents.pagination.total)
             XCTAssertNil(intents.pagination.matched)
             expectation.fulfill()
@@ -834,8 +834,8 @@ class AssistantTests: XCTestCase {
                 XCTAssertNotNil(intent.updated)
                 XCTAssertNil(intent.examples)
             }
-            XCTAssertNotNil(intents.pagination.refreshUrl)
-            XCTAssertNil(intents.pagination.nextUrl)
+            XCTAssertNotNil(intents.pagination.refreshURL)
+            XCTAssertNil(intents.pagination.nextURL)
             XCTAssertNotNil(intents.pagination.total)
             XCTAssertNotNil(intents.pagination.matched)
             XCTAssertEqual(intents.pagination.total, intents.intents.count)
@@ -867,8 +867,8 @@ class AssistantTests: XCTestCase {
                 XCTAssertNotNil(intent.updated)
                 XCTAssertNil(intent.examples)
             }
-            XCTAssertNotNil(intents.pagination.refreshUrl)
-            XCTAssertNotNil(intents.pagination.nextUrl)
+            XCTAssertNotNil(intents.pagination.refreshURL)
+            XCTAssertNotNil(intents.pagination.nextURL)
             XCTAssertNil(intents.pagination.total)
             XCTAssertNil(intents.pagination.matched)
             expectation.fulfill()
@@ -903,8 +903,8 @@ class AssistantTests: XCTestCase {
                     XCTAssertNotNil(example.exampleText)
                 }
             }
-            XCTAssertNotNil(intents.pagination.refreshUrl)
-            XCTAssertNil(intents.pagination.nextUrl)
+            XCTAssertNotNil(intents.pagination.refreshURL)
+            XCTAssertNil(intents.pagination.nextURL)
             XCTAssertNil(intents.pagination.total)
             XCTAssertNil(intents.pagination.matched)
             expectation.fulfill()
@@ -1071,7 +1071,7 @@ class AssistantTests: XCTestCase {
                 XCTAssertNotNil(example.updated)
                 XCTAssertNotNil(example.exampleText)
             }
-            XCTAssertNotNil(examples.pagination.refreshUrl)
+            XCTAssertNotNil(examples.pagination.refreshURL)
             XCTAssertNil(examples.pagination.total)
             XCTAssertNil(examples.pagination.matched)
             expectation.fulfill()
@@ -1100,7 +1100,7 @@ class AssistantTests: XCTestCase {
                 XCTAssertNotNil(example.updated)
                 XCTAssertNotNil(example.exampleText)
             }
-            XCTAssertNotNil(examples.pagination.refreshUrl)
+            XCTAssertNotNil(examples.pagination.refreshURL)
             XCTAssertNotNil(examples.pagination.total)
             XCTAssertNotNil(examples.pagination.matched)
             XCTAssertGreaterThanOrEqual(examples.pagination.total!, examples.examples.count)
@@ -1131,8 +1131,8 @@ class AssistantTests: XCTestCase {
                 XCTAssertNotNil(example.updated)
                 XCTAssertNotNil(example.exampleText)
             }
-            XCTAssertNotNil(examples.pagination.refreshUrl)
-            XCTAssertNotNil(examples.pagination.nextUrl)
+            XCTAssertNotNil(examples.pagination.refreshURL)
+            XCTAssertNotNil(examples.pagination.nextURL)
             XCTAssertNil(examples.pagination.total)
             XCTAssertNil(examples.pagination.matched)
             expectation.fulfill()
@@ -1283,8 +1283,8 @@ class AssistantTests: XCTestCase {
                 XCTAssertNotNil(counterexample.updated)
                 XCTAssertNotNil(counterexample.text)
             }
-            XCTAssertNotNil(counterexamples.pagination.refreshUrl)
-            XCTAssertNil(counterexamples.pagination.nextUrl)
+            XCTAssertNotNil(counterexamples.pagination.refreshURL)
+            XCTAssertNil(counterexamples.pagination.nextURL)
             XCTAssertNil(counterexamples.pagination.total)
             XCTAssertNil(counterexamples.pagination.matched)
             expectation.fulfill()
@@ -1313,8 +1313,8 @@ class AssistantTests: XCTestCase {
                 XCTAssertNotNil(counterexample.updated)
                 XCTAssertNotNil(counterexample.text)
             }
-            XCTAssertNotNil(counterexamples.pagination.refreshUrl)
-            XCTAssertNil(counterexamples.pagination.nextUrl)
+            XCTAssertNotNil(counterexamples.pagination.refreshURL)
+            XCTAssertNil(counterexamples.pagination.nextURL)
             XCTAssertNotNil(counterexamples.pagination.total)
             XCTAssertNotNil(counterexamples.pagination.matched)
             XCTAssertEqual(counterexamples.pagination.total, counterexamples.counterexamples.count)
@@ -1344,7 +1344,7 @@ class AssistantTests: XCTestCase {
                 XCTAssertNotNil(counterexample.updated)
                 XCTAssertNotNil(counterexample.text)
             }
-            XCTAssertNotNil(counterexamples.pagination.refreshUrl)
+            XCTAssertNotNil(counterexamples.pagination.refreshURL)
             XCTAssertNil(counterexamples.pagination.total)
             XCTAssertNil(counterexamples.pagination.matched)
             XCTAssertEqual(counterexamples.counterexamples.count, 1)
@@ -1497,8 +1497,8 @@ class AssistantTests: XCTestCase {
                 XCTAssertNotNil(entity.updated)
             }
             XCTAssert(entities.entities.count > 0)
-            XCTAssertNotNil(entities.pagination.refreshUrl)
-            XCTAssertNil(entities.pagination.nextUrl)
+            XCTAssertNotNil(entities.pagination.refreshURL)
+            XCTAssertNil(entities.pagination.nextURL)
             XCTAssertNil(entities.pagination.total)
             XCTAssertNil(entities.pagination.matched)
             expectation.fulfill()
@@ -1527,8 +1527,8 @@ class AssistantTests: XCTestCase {
                 XCTAssertNotNil(entity.created)
                 XCTAssertNotNil(entity.updated)
             }
-            XCTAssertNotNil(entities.pagination.refreshUrl)
-            XCTAssertNil(entities.pagination.nextUrl)
+            XCTAssertNotNil(entities.pagination.refreshURL)
+            XCTAssertNil(entities.pagination.nextURL)
             XCTAssertNotNil(entities.pagination.total)
             XCTAssertNotNil(entities.pagination.matched)
             XCTAssertEqual(entities.pagination.total, entities.entities.count)
@@ -1558,8 +1558,8 @@ class AssistantTests: XCTestCase {
                 XCTAssertNotNil(entity.created)
                 XCTAssertNotNil(entity.updated)
             }
-            XCTAssertNotNil(entities.pagination.refreshUrl)
-            XCTAssertNotNil(entities.pagination.nextUrl)
+            XCTAssertNotNil(entities.pagination.refreshURL)
+            XCTAssertNotNil(entities.pagination.nextURL)
             XCTAssertNil(entities.pagination.total)
             XCTAssertNil(entities.pagination.matched)
 
@@ -1593,7 +1593,7 @@ class AssistantTests: XCTestCase {
             XCTAssertNotNil(entities.entities)
             XCTAssertNil(entities.pagination.total)
             XCTAssertNil(entities.pagination.matched)
-            XCTAssertNil(entities.pagination.nextUrl)
+            XCTAssertNil(entities.pagination.nextURL)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -1775,7 +1775,7 @@ class AssistantTests: XCTestCase {
                     XCTAssertNotNil(mention.location)
                     XCTAssert(mention.location.count == 2)
                 }
-                XCTAssertNotNil(mentionCollection.pagination.refreshUrl)
+                XCTAssertNotNil(mentionCollection.pagination.refreshURL)
                 expectation.fulfill()
         }
         waitForExpectations()
@@ -1809,7 +1809,7 @@ class AssistantTests: XCTestCase {
                     XCTAssertNotNil(value.created)
                     XCTAssertNotNil(value.updated)
                 }
-                XCTAssertNotNil(valueCollection.pagination.refreshUrl)
+                XCTAssertNotNil(valueCollection.pagination.refreshURL)
                 XCTAssertNotNil(valueCollection.pagination.total)
                 XCTAssertNotNil(valueCollection.pagination.matched)
                 expectation.fulfill()
@@ -1947,7 +1947,7 @@ class AssistantTests: XCTestCase {
                 XCTAssertNotNil(synonym.updated)
                 XCTAssertNotNil(synonym.synonymText)
             }
-            XCTAssertNotNil(synonyms.pagination.refreshUrl)
+            XCTAssertNotNil(synonyms.pagination.refreshURL)
             XCTAssertNil(synonyms.pagination.total)
             XCTAssertNil(synonyms.pagination.matched)
             expectation.fulfill()
@@ -1976,7 +1976,7 @@ class AssistantTests: XCTestCase {
                 XCTAssertNotNil(synonym.updated)
                 XCTAssertNotNil(synonym.synonymText)
             }
-            XCTAssertNotNil(synonyms.pagination.refreshUrl)
+            XCTAssertNotNil(synonyms.pagination.refreshURL)
             XCTAssertNotNil(synonyms.pagination.total)
             XCTAssertNotNil(synonyms.pagination.matched)
             XCTAssertEqual(synonyms.pagination.total, synonyms.synonyms.count)
@@ -2007,8 +2007,8 @@ class AssistantTests: XCTestCase {
                 XCTAssertNotNil(synonym.updated)
                 XCTAssertNotNil(synonym.synonymText)
             }
-            XCTAssertNotNil(synonyms.pagination.refreshUrl)
-            XCTAssertNotNil(synonyms.pagination.nextUrl)
+            XCTAssertNotNil(synonyms.pagination.refreshURL)
+            XCTAssertNotNil(synonyms.pagination.nextURL)
             XCTAssertNil(synonyms.pagination.total)
             XCTAssertNil(synonyms.pagination.matched)
             expectation.fulfill()
@@ -2158,7 +2158,7 @@ class AssistantTests: XCTestCase {
                 XCTAssertNotNil(node.dialogNodeID)
             }
             XCTAssertGreaterThan(nodes.dialogNodes.count, 0)
-            XCTAssertNotNil(nodes.pagination.refreshUrl)
+            XCTAssertNotNil(nodes.pagination.refreshURL)
             XCTAssertNotNil(nodes.pagination.total)
             XCTAssertNotNil(nodes.pagination.matched)
             expectation.fulfill()
@@ -2400,7 +2400,7 @@ class AssistantTests: XCTestCase {
         let expectation = self.expectation(description: description)
         assistant.serviceURL = "this is broken"
         assistant.listWorkspaces { (_, error) in
-            guard let error = error as? WatsonError else {
+            guard let error = error else {
                 XCTFail(missingErrorMessage)
                 return
             }

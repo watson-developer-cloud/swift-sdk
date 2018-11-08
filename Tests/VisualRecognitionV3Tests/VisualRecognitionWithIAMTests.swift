@@ -72,7 +72,11 @@ class VisualRecognitionWithIAMTests: XCTestCase {
 
     /** Access service using IAM API Key credentials  */
     func testAccessWithAPIKey() {
-        let visualRecognition = VisualRecognition(version: currentDate, apiKey: WatsonCredentials.VisualRecognitionAPIKey)
+        guard let apiKey = WatsonCredentials.VisualRecognitionAPIKey else {
+            XCTFail("Missing credentials for Visual Recognition service")
+            return
+        }
+        let visualRecognition = VisualRecognition(version: currentDate, apiKey: apiKey)
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
 
@@ -95,8 +99,8 @@ class VisualRecognitionWithIAMTests: XCTestCase {
 
             // verify the image's metadata
             let image = classifiedImages.images.first
-            XCTAssertEqual(image?.sourceUrl, self.ginniURL)
-            XCTAssertEqual(image?.resolvedUrl, self.ginniURL)
+            XCTAssertEqual(image?.sourceURL, self.ginniURL)
+            XCTAssertEqual(image?.resolvedURL, self.ginniURL)
             XCTAssertNil(image?.image)
             XCTAssertNil(image?.error)
             XCTAssertEqual(image?.classifiers.count, 1)
@@ -113,7 +117,10 @@ class VisualRecognitionWithIAMTests: XCTestCase {
 
     /** Access service using access token obtained using IAM API Key.  */
     func testAccessWithAccessToken() {
-        let apiKey = WatsonCredentials.VisualRecognitionAPIKey
+        guard let apiKey = WatsonCredentials.VisualRecognitionAPIKey else {
+            XCTFail("Missing credentials for Visual Recognition service")
+            return
+        }
         // Obtain an access token using the IAM API Key
         var tokenInfo = getTokenInfo(apiKey: apiKey)
         guard let accessToken = tokenInfo?["access_token"] as? String else {
@@ -147,8 +154,8 @@ class VisualRecognitionWithIAMTests: XCTestCase {
 
             // verify the image's metadata
             let image = classifiedImages.images.first
-            XCTAssertEqual(image?.sourceUrl, self.obamaURL)
-            XCTAssertEqual(image?.resolvedUrl, self.obamaURL)
+            XCTAssertEqual(image?.sourceURL, self.obamaURL)
+            XCTAssertEqual(image?.resolvedURL, self.obamaURL)
             XCTAssertNil(image?.image)
             XCTAssertNil(image?.error)
             XCTAssertEqual(image?.classifiers.count, 1)
@@ -194,8 +201,8 @@ class VisualRecognitionWithIAMTests: XCTestCase {
 
             // verify the image's metadata
             let image = classifiedImages.images.first
-            XCTAssertEqual(image?.sourceUrl, self.trumpURL)
-            XCTAssertEqual(image?.resolvedUrl, self.trumpURL)
+            XCTAssertEqual(image?.sourceURL, self.trumpURL)
+            XCTAssertEqual(image?.resolvedURL, self.trumpURL)
             XCTAssertNil(image?.image)
             XCTAssertNil(image?.error)
             XCTAssertEqual(image?.classifiers.count, 1)

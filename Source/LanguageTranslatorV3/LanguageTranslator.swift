@@ -32,10 +32,9 @@ public class LanguageTranslator {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    private let session = URLSession(configuration: URLSessionConfiguration.default)
-    private var authMethod: AuthenticationMethod
-    private let domain = "com.ibm.watson.developer-cloud.LanguageTranslatorV3"
-    private let version: String
+    var session = URLSession(configuration: URLSessionConfiguration.default)
+    var authMethod: AuthenticationMethod
+    let version: String
 
     /**
      Create a `LanguageTranslator` object.
@@ -137,7 +136,11 @@ public class LanguageTranslator {
         completionHandler: @escaping (WatsonResponse<TranslationResult>?, WatsonError?) -> Void)
     {
         // construct body
-        let translateRequest = TranslateRequest(text: text, modelID: modelID, source: source, target: target)
+        let translateRequest = TranslateRequest(
+            text: text,
+            modelID: modelID,
+            source: source,
+            target: target)
         guard let body = try? JSONEncoder().encode(translateRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return

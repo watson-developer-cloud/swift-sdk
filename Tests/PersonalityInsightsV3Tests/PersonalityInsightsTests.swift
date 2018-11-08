@@ -179,7 +179,7 @@ class PersonalityInsightsTests: XCTestCase {
 
     func testProfileAsCsvText() {
         let expectation = self.expectation(description: "profile(profileContent:)")
-        personalityInsights.profileAsCsv(profileContent: text) {
+        personalityInsights.profileAsCSV(profileContent: text) {
             response, error in
 
             if let error = error {
@@ -199,7 +199,7 @@ class PersonalityInsightsTests: XCTestCase {
 
     func testProfileAsCsvHTML() {
         let expectation = self.expectation(description: "profile(html:)")
-        personalityInsights.profileAsCsv(profileContent: html) {
+        personalityInsights.profileAsCSV(profileContent: html) {
             response, error in
 
             if let error = error {
@@ -231,7 +231,7 @@ class PersonalityInsightsTests: XCTestCase {
             forward: false
         )
         let content = ProfileContent.content(Content(contentItems: [contentItem]))
-        personalityInsights.profileAsCsv(profileContent: content) {
+        personalityInsights.profileAsCSV(profileContent: content) {
             response, error in
 
             if let error = error {

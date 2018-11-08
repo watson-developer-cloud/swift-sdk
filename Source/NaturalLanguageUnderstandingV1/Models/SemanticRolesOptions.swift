@@ -17,7 +17,8 @@
 import Foundation
 
 /**
- An option specifying whether or not to identify the subjects, actions, and verbs in the analyzed content.
+ Parses sentences into subject, action, and object form.
+ Supported languages: English, German, Japanese, Korean, Spanish.
  */
 public struct SemanticRolesOptions: Encodable {
 

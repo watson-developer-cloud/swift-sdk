@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- The most important keywords in the content, organized by relevance.
+ The important keywords in the content, organized by relevance.
  */
 public struct KeywordsResult: Decodable {
 
@@ -32,12 +32,12 @@ public struct KeywordsResult: Decodable {
     public var text: String?
 
     /**
-     Emotion analysis results for the keyword, enabled with the "emotion" option.
+     Emotion analysis results for the keyword, enabled with the `emotion` option.
      */
     public var emotion: EmotionScores?
 
     /**
-     Sentiment analysis results for the keyword, enabled with the "sentiment" option.
+     Sentiment analysis results for the keyword, enabled with the `sentiment` option.
      */
     public var sentiment: FeatureSentimentResults?
 

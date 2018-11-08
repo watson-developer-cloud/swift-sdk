@@ -36,7 +36,11 @@ class VisualRecognitionCoreMLTests: XCTestCase {
 
     /** Instantiate Visual Recognition */
     func instantiateVisualRecognition() {
-        visualRecognition = VisualRecognition(version: currentDate, apiKey: WatsonCredentials.VisualRecognitionAPIKey)
+        guard let apiKey = WatsonCredentials.VisualRecognitionAPIKey else {
+            XCTFail("Missing credentials for Visual Recognition service")
+            return
+        }
+        visualRecognition = VisualRecognition(version: currentDate, apiKey: apiKey)
         if let url = WatsonCredentials.VisualRecognitionURL {
             visualRecognition.serviceURL = url
         }

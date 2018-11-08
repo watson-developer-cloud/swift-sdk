@@ -55,7 +55,7 @@ public struct Classifier: Decodable {
     /**
      Whether the classifier can be downloaded as a Core ML model after the training status is `ready`.
      */
-    public var coreMlEnabled: Bool?
+    public var coreMLEnabled: Bool?
 
     /**
      If classifier training has failed, this field might explain why.
@@ -90,7 +90,7 @@ public struct Classifier: Decodable {
         case name = "name"
         case owner = "owner"
         case status = "status"
-        case coreMlEnabled = "core_ml_enabled"
+        case coreMLEnabled = "core_ml_enabled"
         case explanation = "explanation"
         case created = "created"
         case classes = "classes"

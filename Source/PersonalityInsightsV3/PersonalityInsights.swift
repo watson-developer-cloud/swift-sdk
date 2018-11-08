@@ -41,10 +41,9 @@ public class PersonalityInsights {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    private let session = URLSession(configuration: URLSessionConfiguration.default)
-    private var authMethod: AuthenticationMethod
-    private let domain = "com.ibm.watson.developer-cloud.PersonalityInsightsV3"
-    private let version: String
+    var session = URLSession(configuration: URLSessionConfiguration.default)
+    var authMethod: AuthenticationMethod
+    let version: String
 
     /**
      Create a `PersonalityInsights` object.
@@ -265,7 +264,7 @@ public class PersonalityInsights {
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
-    public func profileAsCsv(
+    public func profileAsCSV(
         profileContent: ProfileContent,
         contentLanguage: String? = nil,
         acceptLanguage: String? = nil,

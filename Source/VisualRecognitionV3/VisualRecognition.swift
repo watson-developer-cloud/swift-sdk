@@ -31,25 +31,9 @@ public class VisualRecognition {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    internal var session = URLSession(configuration: URLSessionConfiguration.default)
-    internal var authMethod: AuthenticationMethod
-    internal let domain = "com.ibm.watson.developer-cloud.VisualRecognitionV3"
-    internal let version: String
-
-    /**
-     Create a `VisualRecognition` object.
-
-     - parameter apiKey: The API key used to authenticate with the service.
-     - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
-     */
-    @available(*, deprecated, message: "This method has been deprecated. It will be removed in a future release.")
-    public init(apiKey: String, version: String) {
-        self.authMethod = APIKeyAuthentication(name: "api_key", key: apiKey, location: .query)
-        self.version = version
-        self.serviceURL = "https://gateway-a.watsonplatform.net/visual-recognition/api"
-        Shared.configureRestRequest()
-    }
+    var session = URLSession(configuration: URLSessionConfiguration.default)
+    var authMethod: AuthenticationMethod
+    let version: String
 
     /**
      Create a `VisualRecognition` object.
@@ -173,11 +157,12 @@ public class VisualRecognition {
      */
     public func classify(
         imagesFile: URL? = nil,
+        acceptLanguage: String? = nil,
         url: String? = nil,
         threshold: Double? = nil,
         owners: [String]? = nil,
         classifierIDs: [String]? = nil,
-        acceptLanguage: String? = nil,
+        imagesFileContentType: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<ClassifiedImages>?, WatsonError?) -> Void)
     {
@@ -276,6 +261,7 @@ public class VisualRecognition {
     public func detectFaces(
         imagesFile: URL? = nil,
         url: String? = nil,
+        imagesFileContentType: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<DetectedFaces>?, WatsonError?) -> Void)
     {
@@ -413,14 +399,12 @@ public class VisualRecognition {
     /**
      Retrieve a list of classifiers.
 
-     - parameter owners: Unused. This parameter will be removed in a future release.
      - parameter verbose: Specify `true` to return details about the classifiers. Omit this parameter to return a
        brief list of classifiers.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listClassifiers(
-        owners: [String]? = nil,
         verbose: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Classifiers>?, WatsonError?) -> Void)
@@ -644,7 +628,7 @@ public class VisualRecognition {
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
-    public func getCoreMlModel(
+    public func getCoreMLModel(
         classifierID: String,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Data>?, WatsonError?) -> Void)

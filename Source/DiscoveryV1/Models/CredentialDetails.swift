@@ -72,7 +72,7 @@ public struct CredentialDetails: Codable {
      The **organization_url** of the source that these credentials connect to. Only valid, and required, with a
      **credential_type** of `saml`.
      */
-    public var organizationUrl: String?
+    public var organizationURL: String?
 
     /**
      The **site_collection.path** of the source that these credentials connect to. Only valid, and required, with a
@@ -124,7 +124,7 @@ public struct CredentialDetails: Codable {
         case enterpriseID = "enterprise_id"
         case url = "url"
         case username = "username"
-        case organizationUrl = "organization_url"
+        case organizationURL = "organization_url"
         case siteCollectionPath = "site_collection.path"
         case clientSecret = "client_secret"
         case publicKeyID = "public_key_id"
@@ -149,7 +149,7 @@ public struct CredentialDetails: Codable {
        **credential_type** of `username_password`.
      - parameter username: The **username** of the source that these credentials connect to. Only valid, and
        required, with a **credential_type** of `saml` and `username_password`.
-     - parameter organizationUrl: The **organization_url** of the source that these credentials connect to. Only
+     - parameter organizationURL: The **organization_url** of the source that these credentials connect to. Only
        valid, and required, with a **credential_type** of `saml`.
      - parameter siteCollectionPath: The **site_collection.path** of the source that these credentials connect to.
        Only valid, and required, with a **source_type** of `sharepoint`.
@@ -179,7 +179,7 @@ public struct CredentialDetails: Codable {
         enterpriseID: String? = nil,
         url: String? = nil,
         username: String? = nil,
-        organizationUrl: String? = nil,
+        organizationURL: String? = nil,
         siteCollectionPath: String? = nil,
         clientSecret: String? = nil,
         publicKeyID: String? = nil,
@@ -193,7 +193,7 @@ public struct CredentialDetails: Codable {
         self.enterpriseID = enterpriseID
         self.url = url
         self.username = username
-        self.organizationUrl = organizationUrl
+        self.organizationURL = organizationURL
         self.siteCollectionPath = siteCollectionPath
         self.clientSecret = clientSecret
         self.publicKeyID = publicKeyID

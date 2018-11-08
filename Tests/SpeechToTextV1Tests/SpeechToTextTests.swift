@@ -330,7 +330,7 @@ class SpeechToTextTests: XCTestCase {
     func testRecognizeSessionless() {
         let expectation = self.expectation(description: "recognizeSessionless")
         let audio = try! Data(contentsOf: Bundle(for: type(of: self)).url(forResource: "SpeechSample", withExtension: "wav")!)
-        speechToText.recognize(model: "en-US_BroadbandModel", audio: audio, contentType: "audio/wav") {
+        speechToText.recognize(audio: audio, contentType: "audio/wav", model: "en-US_BroadbandModel") {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -410,7 +410,7 @@ class SpeechToTextTests: XCTestCase {
         // register a callback
         let expectation4 = self.expectation(description: "registerCallback")
         let url = "https://watson-test-resources.mybluemix.net/speech-to-text-async/secure/callback"
-        speechToText.registerCallback(callbackUrl: url, userSecret: "ThisIsMySecret") {
+        speechToText.registerCallback(callbackURL: url, userSecret: "ThisIsMySecret") {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -427,7 +427,7 @@ class SpeechToTextTests: XCTestCase {
 
         // unregister a callback
         let expectation5 = self.expectation(description: "unregisterCallback")
-        speechToText.unregisterCallback(callbackUrl: url) {
+        speechToText.unregisterCallback(callbackURL: url) {
             _, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))

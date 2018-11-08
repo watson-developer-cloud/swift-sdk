@@ -40,9 +40,8 @@ public class TextToSpeech {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    private let session = URLSession(configuration: URLSessionConfiguration.default)
-    private var authMethod: AuthenticationMethod
-    private let domain = "com.ibm.watson.developer-cloud.TextToSpeechV1"
+    var session = URLSession(configuration: URLSessionConfiguration.default)
+    var authMethod: AuthenticationMethod
 
     /**
      Create a `TextToSpeech` object.
@@ -237,7 +236,8 @@ public class TextToSpeech {
         completionHandler: @escaping (WatsonResponse<Data>?, WatsonError?) -> Void)
     {
         // construct body
-        let synthesizeRequest = Text(text: text)
+        let synthesizeRequest = Text(
+            text: text)
         guard let body = try? JSONEncoder().encode(synthesizeRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -404,7 +404,10 @@ public class TextToSpeech {
         completionHandler: @escaping (WatsonResponse<VoiceModel>?, WatsonError?) -> Void)
     {
         // construct body
-        let createVoiceModelRequest = CreateVoiceModel(name: name, language: language, description: description)
+        let createVoiceModelRequest = CreateVoiceModel(
+            name: name,
+            language: language,
+            description: description)
         guard let body = try? JSONEncoder().encode(createVoiceModelRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -524,7 +527,10 @@ public class TextToSpeech {
         completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct body
-        let updateVoiceModelRequest = UpdateVoiceModel(name: name, description: description, words: words)
+        let updateVoiceModelRequest = UpdateVoiceModel(
+            name: name,
+            description: description,
+            words: words)
         guard let body = try? JSONEncoder().encode(updateVoiceModelRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -686,7 +692,8 @@ public class TextToSpeech {
         completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct body
-        let addWordsRequest = Words(words: words)
+        let addWordsRequest = Words(
+            words: words)
         guard let body = try? JSONEncoder().encode(addWordsRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -810,7 +817,9 @@ public class TextToSpeech {
         completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct body
-        let addWordRequest = Translation(translation: translation, partOfSpeech: partOfSpeech)
+        let addWordRequest = Translation(
+            translation: translation,
+            partOfSpeech: partOfSpeech)
         guard let body = try? JSONEncoder().encode(addWordRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return

@@ -32,9 +32,9 @@ public struct AnalysisResults: Decodable {
     public var analyzedText: String?
 
     /**
-     URL that was used to retrieve HTML content.
+     URL of the webpage that was analyzed.
      */
-    public var retrievedUrl: String?
+    public var retrievedURL: String?
 
     /**
      API usage information for the request.
@@ -42,22 +42,22 @@ public struct AnalysisResults: Decodable {
     public var usage: Usage?
 
     /**
-     The general concepts referenced or alluded to in the specified content.
+     The general concepts referenced or alluded to in the analyzed text.
      */
     public var concepts: [ConceptsResult]?
 
     /**
-     The important entities in the specified content.
+     The entities detected in the analyzed text.
      */
     public var entities: [EntitiesResult]?
 
     /**
-     The important keywords in content organized by relevance.
+     The keywords from the analyzed text.
      */
     public var keywords: [KeywordsResult]?
 
     /**
-     The hierarchical 5-level taxonomy the content is categorized into.
+     The categories that the service assigned to the analyzed text.
      */
     public var categories: [CategoriesResult]?
 
@@ -67,7 +67,7 @@ public struct AnalysisResults: Decodable {
     public var emotion: EmotionResult?
 
     /**
-     The metadata holds author information, publication date and the title of the text/HTML content.
+     Webpage metadata, such as the author and the title of the page.
      */
     public var metadata: MetadataResult?
 
@@ -77,7 +77,7 @@ public struct AnalysisResults: Decodable {
     public var relations: [RelationsResult]?
 
     /**
-     The subjects of actions and the objects the actions act upon.
+     Sentences parsed into `subject`, `action`, and `object` form.
      */
     public var semanticRoles: [SemanticRolesResult]?
 
@@ -90,7 +90,7 @@ public struct AnalysisResults: Decodable {
     private enum CodingKeys: String, CodingKey {
         case language = "language"
         case analyzedText = "analyzed_text"
-        case retrievedUrl = "retrieved_url"
+        case retrievedURL = "retrieved_url"
         case usage = "usage"
         case concepts = "concepts"
         case entities = "entities"

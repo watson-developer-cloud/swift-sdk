@@ -22,7 +22,7 @@ import Foundation
  Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish. Arabic,
  Chinese, and Dutch custom models are also supported.
  */
-public struct EntitiesOptions: Encodable {
+public struct EntitiesOptions: Codable {
 
     /**
      Maximum number of entities to return.

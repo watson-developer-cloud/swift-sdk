@@ -17,7 +17,7 @@
 import Foundation
 
 /** WorkspaceCollection. */
-public struct WorkspaceCollection: Decodable {
+public struct WorkspaceCollection: Codable {
 
     /**
      An array of objects describing the workspaces associated with the service instance.

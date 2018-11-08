@@ -17,7 +17,7 @@
 import Foundation
 
 /** TrainingStatus. */
-public struct TrainingStatus: Decodable {
+public struct TrainingStatus: Codable {
 
     public var totalExamples: Int?
 

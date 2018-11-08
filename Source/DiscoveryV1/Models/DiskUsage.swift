@@ -19,7 +19,7 @@ import Foundation
 /**
  Summary of the disk usage statistics for the environment.
  */
-public struct DiskUsage: Decodable {
+public struct DiskUsage: Codable {
 
     /**
      Number of bytes within the environment's disk capacity that are currently used to store data.

@@ -17,7 +17,7 @@
 import Foundation
 
 /** TrainingExampleList. */
-public struct TrainingExampleList: Decodable {
+public struct TrainingExampleList: Codable {
 
     public var examples: [TrainingExample]?
 

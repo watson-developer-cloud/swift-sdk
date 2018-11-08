@@ -17,7 +17,7 @@
 import Foundation
 
 /** RecognitionJob. */
-public struct RecognitionJob: Decodable {
+public struct RecognitionJob: Codable {
 
     /**
      The current status of the job:

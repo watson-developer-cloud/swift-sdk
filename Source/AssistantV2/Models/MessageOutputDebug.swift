@@ -19,7 +19,7 @@ import Foundation
 /**
  Additional detailed information about a message response and how it was generated.
  */
-public struct MessageOutputDebug: Decodable {
+public struct MessageOutputDebug: Codable {
 
     /**
      When `branch_exited` is set to `true` by the Assistant, the `branch_exited_reason` specifies whether the dialog

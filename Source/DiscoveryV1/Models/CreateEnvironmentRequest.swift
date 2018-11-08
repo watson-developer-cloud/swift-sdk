@@ -17,7 +17,7 @@
 import Foundation
 
 /** CreateEnvironmentRequest. */
-internal struct CreateEnvironmentRequest: Encodable {
+internal struct CreateEnvironmentRequest: Codable {
 
     /**
      Size of the environment. In the Lite plan the default and only accepted value is `LT`, in all other plans the

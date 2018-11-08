@@ -17,7 +17,7 @@
 import Foundation
 
 /** LogExport. */
-public struct LogExport: Decodable {
+public struct LogExport: Codable {
 
     /**
      A request received by the workspace, including the user input and context.

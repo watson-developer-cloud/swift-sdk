@@ -19,7 +19,7 @@ import Foundation
 /**
  An object defining the event being created.
  */
-public struct CreateEventResponse: Decodable {
+public struct CreateEventResponse: Codable {
 
     /**
      The event type that was created.

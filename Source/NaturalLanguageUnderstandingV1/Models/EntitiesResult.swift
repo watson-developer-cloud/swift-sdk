@@ -19,7 +19,7 @@ import Foundation
 /**
  The important people, places, geopolitical entities and other types of entities in your content.
  */
-public struct EntitiesResult: Decodable {
+public struct EntitiesResult: Codable {
 
     /**
      Entity type.

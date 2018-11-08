@@ -19,7 +19,7 @@ import Foundation
 /**
  A notice produced for the collection.
  */
-public struct Notice: Decodable {
+public struct Notice: Codable {
 
     /**
      Severity level of the notice.

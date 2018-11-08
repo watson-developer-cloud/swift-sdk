@@ -17,7 +17,7 @@
 import Foundation
 
 /** SpeechModel. */
-public struct SpeechModel: Decodable {
+public struct SpeechModel: Codable {
 
     /**
      The name of the model for use as an identifier in calls to the service (for example, `en-US_BroadbandModel`).

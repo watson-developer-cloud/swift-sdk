@@ -17,7 +17,7 @@
 import Foundation
 
 /** DialogNodeOutputOptionsElement. */
-public struct DialogNodeOutputOptionsElement: Decodable {
+public struct DialogNodeOutputOptionsElement: Codable {
 
     /**
      The user-facing label for the option.

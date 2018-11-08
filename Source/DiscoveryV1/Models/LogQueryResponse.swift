@@ -19,7 +19,7 @@ import Foundation
 /**
  Object containing results that match the requested **logs** query.
  */
-public struct LogQueryResponse: Decodable {
+public struct LogQueryResponse: Codable {
 
     /**
      Number of matching results.

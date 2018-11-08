@@ -17,7 +17,7 @@
 import Foundation
 
 /** LogCollection. */
-public struct LogCollection: Decodable {
+public struct LogCollection: Codable {
 
     /**
      An array of objects describing log events.

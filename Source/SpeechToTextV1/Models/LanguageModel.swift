@@ -17,7 +17,7 @@
 import Foundation
 
 /** LanguageModel. */
-public struct LanguageModel: Decodable {
+public struct LanguageModel: Codable {
 
     /**
      The current status of the custom language model:

@@ -17,7 +17,7 @@
 import Foundation
 
 /** AggregationResult. */
-public struct AggregationResult: Decodable {
+public struct AggregationResult: Codable {
 
     /**
      Key that matched the aggregation type.

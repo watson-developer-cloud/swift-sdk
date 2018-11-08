@@ -17,7 +17,7 @@
 import Foundation
 
 /** SemanticRolesAction. */
-public struct SemanticRolesAction: Decodable {
+public struct SemanticRolesAction: Codable {
 
     /**
      Analyzed text that corresponds to the action.

@@ -17,7 +17,7 @@
 import Foundation
 
 /** TestDocument. */
-public struct TestDocument: Decodable {
+public struct TestDocument: Codable {
 
     /**
      The unique identifier for the configuration.

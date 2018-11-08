@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** CreateEntity. */
-public struct CreateEntity: Encodable {
+public struct CreateEntity: Codable {
 
     /**
      The name of the entity. This string must conform to the following restrictions:

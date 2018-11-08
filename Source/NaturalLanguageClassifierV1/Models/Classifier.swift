@@ -19,7 +19,7 @@ import Foundation
 /**
  A classifier for natural language phrases.
  */
-public struct Classifier: Decodable {
+public struct Classifier: Codable {
 
     /**
      The state of the classifier.

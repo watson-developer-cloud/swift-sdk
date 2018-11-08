@@ -17,7 +17,7 @@
 import Foundation
 
 /** DialogNodesVisited. */
-public struct DialogNodesVisited: Decodable {
+public struct DialogNodesVisited: Codable {
 
     /**
      A dialog node that was triggered during processing of the input message.

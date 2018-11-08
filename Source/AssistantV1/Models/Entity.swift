@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** Entity. */
-public struct Entity: Decodable {
+public struct Entity: Codable {
 
     /**
      The name of the entity.

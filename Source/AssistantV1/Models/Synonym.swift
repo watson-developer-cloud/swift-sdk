@@ -17,7 +17,7 @@
 import Foundation
 
 /** Synonym. */
-public struct Synonym: Decodable {
+public struct Synonym: Codable {
 
     /**
      The text of the synonym.

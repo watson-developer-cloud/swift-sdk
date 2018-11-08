@@ -17,7 +17,7 @@
 import Foundation
 
 /** Pronunciation. */
-public struct Pronunciation: Decodable {
+public struct Pronunciation: Codable {
 
     /**
      The pronunciation of the specified text in the requested voice and format. If a custom voice model is specified,

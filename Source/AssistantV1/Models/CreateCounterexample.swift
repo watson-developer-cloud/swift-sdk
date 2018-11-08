@@ -17,7 +17,7 @@
 import Foundation
 
 /** CreateCounterexample. */
-public struct CreateCounterexample: Encodable {
+public struct CreateCounterexample: Codable {
 
     /**
      The text of a user input marked as irrelevant input. This string must conform to the following restrictions:

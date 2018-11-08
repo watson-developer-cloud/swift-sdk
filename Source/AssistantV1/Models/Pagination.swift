@@ -19,7 +19,7 @@ import Foundation
 /**
  The pagination data for the returned objects.
  */
-public struct Pagination: Decodable {
+public struct Pagination: Codable {
 
     /**
      The URL that will return the same page of results.

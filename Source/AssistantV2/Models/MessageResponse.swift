@@ -19,7 +19,7 @@ import Foundation
 /**
  A response from the Watson Assistant service.
  */
-public struct MessageResponse: Decodable {
+public struct MessageResponse: Codable {
 
     /**
      Assistant output to be rendered or processed by the client.

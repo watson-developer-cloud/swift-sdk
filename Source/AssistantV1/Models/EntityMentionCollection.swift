@@ -17,7 +17,7 @@
 import Foundation
 
 /** EntityMentionCollection. */
-public struct EntityMentionCollection: Decodable {
+public struct EntityMentionCollection: Codable {
 
     /**
      An array of objects describing the entity mentions defined for an entity.

@@ -19,7 +19,7 @@ import Foundation
 /**
  Summary of the document usage statistics for the environment.
  */
-public struct EnvironmentDocuments: Decodable {
+public struct EnvironmentDocuments: Codable {
 
     /**
      Number of documents indexed for the environment.

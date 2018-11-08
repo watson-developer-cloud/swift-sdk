@@ -9,6 +9,8 @@
 import Foundation
 import XCTest
 
+let exampleURL = URL(string: "http://example.com")!
+
 // MARK: - Messages used in XCTFail
 
 let missingResultMessage = "Missing result from response"
@@ -17,8 +19,9 @@ func unexpectedErrorMessage(_ error: Error) -> String {
     return "Received an unexpected error: \(error)"
 }
 
-// MARK: - Service version
+// MARK: - Service instantiation
 
+let accessToken = "my_access_token"
 let currentDate: String = {
     let formatter = DateFormatter()
     formatter.dateFormat = "yyyy-MM-dd"

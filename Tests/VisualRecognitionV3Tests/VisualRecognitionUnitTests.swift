@@ -24,9 +24,6 @@ import CoreML
 class VisualRecognitionUnitTests: XCTestCase {
 
     private var visualRecognition: VisualRecognition!
-    let accessToken = "my_access_token"
-
-    let exampleURL = URL(string: "http://example.com")!
     private let timeout = 1.0
 
     // MARK: Test Configuration
@@ -128,13 +125,13 @@ class VisualRecognitionUnitTests: XCTestCase {
 
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
-            XCTAssertEqual("classify", request.url?.pathComponents.last)
+            XCTAssertEqual(request.url?.pathComponents.last, "classify")
             XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
             XCTAssertNotNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
             let bodyFieldsCount = parseMultiPartFormBody(request: request)
-            XCTAssertEqual(5, bodyFieldsCount)
+            XCTAssertEqual(bodyFieldsCount, 5)
 
             return (HTTPURLResponse(), Data())
         }
@@ -152,7 +149,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             // Verify custom header is present
             XCTAssertNotNil(request.allHTTPHeaderFields)
             XCTAssertTrue(request.allHTTPHeaderFields?.keys.contains("x-foo") ?? false)
-            XCTAssertEqual("bar", request.allHTTPHeaderFields?["x-foo"])
+            XCTAssertEqual(request.allHTTPHeaderFields?["x-foo"], "bar")
 
             return (HTTPURLResponse(), Data())
         }
@@ -169,13 +166,13 @@ class VisualRecognitionUnitTests: XCTestCase {
     func testCreateClassifier() {
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
-            XCTAssertEqual("classifiers", request.url?.pathComponents.last)
+            XCTAssertEqual(request.url?.pathComponents.last, "classifiers")
             XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
             XCTAssertNotNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
             let bodyFieldsCount = parseMultiPartFormBody(request: request)
-            XCTAssertEqual(4, bodyFieldsCount)
+            XCTAssertEqual(bodyFieldsCount, 4)
 
             return (HTTPURLResponse(), Data())
         }
@@ -191,9 +188,10 @@ class VisualRecognitionUnitTests: XCTestCase {
     func testListClassifiers() {
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "GET")
-            XCTAssertEqual("classifiers", request.url?.pathComponents.last)
+            XCTAssertEqual(request.url?.pathComponents.last, "classifiers")
             XCTAssertTrue(request.url?.query?.contains("verbose=true") ?? false)
             XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
             return (HTTPURLResponse(), Data())
@@ -213,9 +211,10 @@ class VisualRecognitionUnitTests: XCTestCase {
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "GET")
             let endOfURL = request.url!.pathComponents.suffix(2)
-            XCTAssertEqual("classifiers", endOfURL.first)
-            XCTAssertEqual(classifierID, endOfURL.last)
+            XCTAssertEqual(endOfURL.first, "classifiers")
+            XCTAssertEqual(endOfURL.last, classifierID)
             XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
             return (HTTPURLResponse(), Data())
@@ -235,14 +234,14 @@ class VisualRecognitionUnitTests: XCTestCase {
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
             let endOfURL = request.url!.pathComponents.suffix(2)
-            XCTAssertEqual("classifiers", endOfURL.first)
-            XCTAssertEqual(classifierID, endOfURL.last)
+            XCTAssertEqual(endOfURL.first, "classifiers")
+            XCTAssertEqual(endOfURL.last, classifierID)
             XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
             XCTAssertNotNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
             let bodyFieldsCount = parseMultiPartFormBody(request: request)
-            XCTAssertEqual(3, bodyFieldsCount)
+            XCTAssertEqual(bodyFieldsCount, 3)
 
             return (HTTPURLResponse(), Data())
         }
@@ -261,8 +260,9 @@ class VisualRecognitionUnitTests: XCTestCase {
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "DELETE")
             let endOfURL = request.url!.pathComponents.suffix(2)
-            XCTAssertEqual("classifiers", endOfURL.first)
-            XCTAssertEqual(classifierID, endOfURL.last)
+            XCTAssertEqual(endOfURL.first, "classifiers")
+            XCTAssertEqual(endOfURL.last, classifierID)
+            XCTAssertNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
             return (HTTPURLResponse(), Data())
@@ -280,13 +280,13 @@ class VisualRecognitionUnitTests: XCTestCase {
     func testDetectFaces() {
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
-            XCTAssertEqual("detect_faces", request.url?.pathComponents.last)
+            XCTAssertEqual(request.url?.pathComponents.last, "detect_faces")
             XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
             XCTAssertNotNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
             let bodyFieldsCount = parseMultiPartFormBody(request: request)
-            XCTAssertEqual(2, bodyFieldsCount)
+            XCTAssertEqual(bodyFieldsCount, 2)
 
             return (HTTPURLResponse(), Data())
         }
@@ -307,10 +307,11 @@ class VisualRecognitionUnitTests: XCTestCase {
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "GET")
             let endOfURL = request.url!.pathComponents.suffix(3)
-            XCTAssertEqual("classifiers", endOfURL[endOfURL.startIndex])
-            XCTAssertEqual(classifierID, endOfURL[endOfURL.startIndex + 1])
-            XCTAssertEqual("core_ml_model", endOfURL[endOfURL.startIndex + 2])
+            XCTAssertEqual(endOfURL[endOfURL.startIndex], "classifiers")
+            XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], classifierID)
+            XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "core_ml_model")
             XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
             return (HTTPURLResponse(), Data())
@@ -332,8 +333,9 @@ class VisualRecognitionUnitTests: XCTestCase {
         MockURLProtocol.requestHandler = { request in
             XCTAssertNotNil(request.url)
             XCTAssertEqual(request.httpMethod, "DELETE")
-            XCTAssertEqual("user_data", request.url?.pathComponents.last)
+            XCTAssertEqual(request.url?.pathComponents.last, "user_data")
             XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
             return (HTTPURLResponse(), Data())
@@ -408,13 +410,14 @@ class VisualRecognitionUnitTests: XCTestCase {
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "GET")
             let endOfURL = request.url!.pathComponents.suffix(3)
-            XCTAssertEqual("classifiers", endOfURL[endOfURL.startIndex])
-            XCTAssertEqual(classifierID, endOfURL[endOfURL.startIndex + 1])
-            XCTAssertEqual("core_ml_model", endOfURL[endOfURL.startIndex + 2])
+            XCTAssertEqual(endOfURL[endOfURL.startIndex], "classifiers")
+            XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], classifierID)
+            XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "core_ml_model")
             XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
-            let response = HTTPURLResponse(url: self.exampleURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
+            let response = HTTPURLResponse(url: exampleURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
             return (response, Data())
         }
 
@@ -534,13 +537,13 @@ class VisualRecognitionUnitTests: XCTestCase {
 
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
-            XCTAssertEqual("classify", request.url?.pathComponents.last)
+            XCTAssertEqual(request.url?.pathComponents.last, "classify")
             XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
             XCTAssertNotNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
             let bodyFieldsCount = parseMultiPartFormBody(request: request)
-            XCTAssertEqual(4, bodyFieldsCount)
+            XCTAssertEqual(bodyFieldsCount, 4)
 
             return (HTTPURLResponse(), Data())
         }
@@ -568,13 +571,14 @@ class VisualRecognitionUnitTests: XCTestCase {
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "GET")
             let endOfURL = request.url!.pathComponents.suffix(3)
-            XCTAssertEqual("classifiers", endOfURL[endOfURL.startIndex])
-            XCTAssertEqual(classifierID, endOfURL[endOfURL.startIndex + 1])
-            XCTAssertEqual("core_ml_model", endOfURL[endOfURL.startIndex + 2])
+            XCTAssertEqual(endOfURL[endOfURL.startIndex], "classifiers")
+            XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], classifierID)
+            XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "core_ml_model")
             XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
-            let response = HTTPURLResponse(url: self.exampleURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
+            let response = HTTPURLResponse(url: exampleURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
             // The download receives empty Data() instead of a CoreML model
             return (response, Data())
         }
@@ -633,13 +637,13 @@ class VisualRecognitionUnitTests: XCTestCase {
 
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
-            XCTAssertEqual("classify", request.url?.pathComponents.last)
+            XCTAssertEqual(request.url?.pathComponents.last, "classify")
             XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
             XCTAssertNotNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
             let bodyFieldsCount = parseMultiPartFormBody(request: request)
-            XCTAssertEqual(4, bodyFieldsCount)
+            XCTAssertEqual(bodyFieldsCount, 4)
 
             return (HTTPURLResponse(), Data())
         }
@@ -657,13 +661,13 @@ class VisualRecognitionUnitTests: XCTestCase {
 
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
-            XCTAssertEqual("detect_faces", request.url?.pathComponents.last)
+            XCTAssertEqual(request.url?.pathComponents.last, "detect_faces")
             XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
             XCTAssertNotNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
             let bodyFieldsCount = parseMultiPartFormBody(request: request)
-            XCTAssertEqual(1, bodyFieldsCount)
+            XCTAssertEqual(bodyFieldsCount, 1)
 
             return (HTTPURLResponse(), Data())
         }
@@ -683,13 +687,13 @@ class VisualRecognitionUnitTests: XCTestCase {
 
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
-            XCTAssertEqual("classify", request.url?.pathComponents.last)
+            XCTAssertEqual(request.url?.pathComponents.last, "classify")
             XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
             XCTAssertNotNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
             let bodyFieldsCount = parseMultiPartFormBody(request: request)
-            XCTAssertEqual(4, bodyFieldsCount)
+            XCTAssertEqual(bodyFieldsCount, 4)
 
             return (HTTPURLResponse(), Data())
         }

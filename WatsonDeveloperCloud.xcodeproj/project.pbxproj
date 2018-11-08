@@ -2378,7 +2378,6 @@
 			buildConfigurationList = 1241DFC21E380F0A00B8B33E /* Build configuration list for PBXNativeTarget "NaturalLanguageUnderstandingV1Tests" */;
 			buildPhases = (
 				1241DFB21E380F0A00B8B33E /* Sources */,
-				6833C80D20227ACE00FB41FE /* Run SwiftLint */,
 				1241DFB31E380F0A00B8B33E /* Frameworks */,
 				1241DFB41E380F0A00B8B33E /* Resources */,
 				929DB9B6212F7EB100356EDC /* ShellScript */,
@@ -2417,7 +2416,6 @@
 			buildConfigurationList = 124C2E031D19E29100D9F602 /* Build configuration list for PBXNativeTarget "TextToSpeechV1Tests" */;
 			buildPhases = (
 				124C2DF41D19E29100D9F602 /* Sources */,
-				6833C81120227B2A00FB41FE /* Run SwiftLint */,
 				124C2DF51D19E29100D9F602 /* Frameworks */,
 				124C2DF61D19E29100D9F602 /* Resources */,
 				124C2E291D19E3AE00D9F602 /* CopyFiles */,
@@ -2457,7 +2455,6 @@
 			buildConfigurationList = 12F800541DF71922006851D6 /* Build configuration list for PBXNativeTarget "DiscoveryV1Tests" */;
 			buildPhases = (
 				12F800441DF71921006851D6 /* Sources */,
-				6833C80920227A5B00FB41FE /* Run SwiftLint */,
 				12F800451DF71921006851D6 /* Frameworks */,
 				12F800461DF71921006851D6 /* Resources */,
 				929DB9B2212F7EA200356EDC /* ShellScript */,
@@ -2496,7 +2493,6 @@
 			buildConfigurationList = 6877FAA72056D4F500383B25 /* Build configuration list for PBXNativeTarget "AssistantV1Tests" */;
 			buildPhases = (
 				6877FA9F2056D4F500383B25 /* Sources */,
-				6877FAA22056D4F500383B25 /* Run SwiftLint */,
 				6877FAA32056D4F500383B25 /* Frameworks */,
 				6877FAA52056D4F500383B25 /* Resources */,
 				6877FAA62056D4F500383B25 /* CopyFiles */,
@@ -2536,7 +2532,6 @@
 			buildConfigurationList = 7A6711961DD0EEEB0070CA9D /* Build configuration list for PBXNativeTarget "PersonalityInsightsV3Tests" */;
 			buildPhases = (
 				7A6711841DD0EEEB0070CA9D /* Sources */,
-				6833C80E20227AE500FB41FE /* Run SwiftLint */,
 				7A6711851DD0EEEB0070CA9D /* Frameworks */,
 				7A6711861DD0EEEB0070CA9D /* Resources */,
 				929DB9B7212F7EB500356EDC /* ShellScript */,
@@ -2575,7 +2570,6 @@
 			buildConfigurationList = 7AAAF3D71CEE9A3700B74848 /* Build configuration list for PBXNativeTarget "VisualRecognitionV3Tests" */;
 			buildPhases = (
 				7AAAF3C81CEE9A3700B74848 /* Sources */,
-				6833C81420227B7600FB41FE /* Run SwiftLint */,
 				7AAAF3C91CEE9A3700B74848 /* Frameworks */,
 				7AAAF3CA1CEE9A3700B74848 /* Resources */,
 				7AAAF3EB1CEE9A7200B74848 /* CopyFiles */,
@@ -2615,7 +2609,6 @@
 			buildConfigurationList = 7AAAF40C1CEE9D1900B74848 /* Build configuration list for PBXNativeTarget "ToneAnalyzerV3Tests" */;
 			buildPhases = (
 				7AAAF3FD1CEE9D1900B74848 /* Sources */,
-				6833C81220227B4600FB41FE /* Run SwiftLint */,
 				7AAAF3FE1CEE9D1900B74848 /* Frameworks */,
 				7AAAF3FF1CEE9D1900B74848 /* Resources */,
 				7AAAF41B1CEE9E0300B74848 /* CopyFiles */,
@@ -2655,7 +2648,6 @@
 			buildConfigurationList = 7AAAF4621CEE9F8800B74848 /* Build configuration list for PBXNativeTarget "SpeechToTextV1Tests" */;
 			buildPhases = (
 				7AAAF4531CEE9F8800B74848 /* Sources */,
-				6833C81020227B1400FB41FE /* Run SwiftLint */,
 				7AAAF4541CEE9F8800B74848 /* Frameworks */,
 				7AAAF4551CEE9F8800B74848 /* Resources */,
 				68D8A8852009CF480090B84B /* CopyFiles */,
@@ -2695,7 +2687,6 @@
 			buildConfigurationList = 7AAAF4C31CEEA10700B74848 /* Build configuration list for PBXNativeTarget "NaturalLanguageClassifierV1Tests" */;
 			buildPhases = (
 				7AAAF4B41CEEA10700B74848 /* Sources */,
-				6833C80C20227AAB00FB41FE /* Run SwiftLint */,
 				7AAAF4B51CEEA10700B74848 /* Frameworks */,
 				7AAAF4B61CEEA10700B74848 /* Resources */,
 				7AAAF4D41CEEA13A00B74848 /* CopyFiles */,
@@ -2735,7 +2726,6 @@
 			buildConfigurationList = 924EE7E421505D810048C0E5 /* Build configuration list for PBXNativeTarget "AssistantV2Tests" */;
 			buildPhases = (
 				924EE7D821505D810048C0E5 /* Sources */,
-				924EE7DD21505D810048C0E5 /* Run SwiftLint */,
 				924EE7DE21505D810048C0E5 /* Frameworks */,
 				924EE7E121505D810048C0E5 /* Resources */,
 				924EE7E221505D810048C0E5 /* CopyFiles */,
@@ -3108,118 +3098,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6833C80920227A5B00FB41FE /* Run SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Run SwiftLint";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${PROJECT_DIR}/.swiftlint.yml\" --no-cache --path Tests/DiscoveryV1Tests\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
-		};
-		6833C80C20227AAB00FB41FE /* Run SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Run SwiftLint";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${PROJECT_DIR}/.swiftlint.yml\" --no-cache --path Tests/NaturalLanguageClassifierV1Tests\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
-		};
-		6833C80D20227ACE00FB41FE /* Run SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Run SwiftLint";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${PROJECT_DIR}/.swiftlint.yml\" --no-cache --path Tests/NaturalLanguageUnderstandingV1Tests\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
-		};
-		6833C80E20227AE500FB41FE /* Run SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Run SwiftLint";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${PROJECT_DIR}/.swiftlint.yml\" --no-cache --path Tests/PersonalityInsightsV3Tests\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
-		};
-		6833C81020227B1400FB41FE /* Run SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Run SwiftLint";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${PROJECT_DIR}/.swiftlint.yml\" --no-cache --path Tests/SpeechToTextV1Tests\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
-		};
-		6833C81120227B2A00FB41FE /* Run SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Run SwiftLint";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${PROJECT_DIR}/.swiftlint.yml\" --no-cache --path Tests/TextToSpeechV1Tests\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
-		};
-		6833C81220227B4600FB41FE /* Run SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Run SwiftLint";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${PROJECT_DIR}/.swiftlint.yml\" --no-cache --path Tests/ToneAnalyzerV3Tests\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
-		};
-		6833C81420227B7600FB41FE /* Run SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Run SwiftLint";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${PROJECT_DIR}/.swiftlint.yml\" --no-cache --path Tests/VisualRecognitionV3Tests\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
-		};
 		6877FA922056D4F100383B25 /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3234,20 +3112,6 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${PROJECT_DIR}/.swiftlint.yml\" --no-cache --path Source/AssistantV1\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi\n";
 		};
-		6877FAA22056D4F500383B25 /* Run SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Run SwiftLint";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${PROJECT_DIR}/.swiftlint.yml\" --no-cache --path Tests/AssistantV1Tests\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi\n";
-		};
 		924EE7C921505D7A0048C0E5 /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3261,20 +3125,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${PROJECT_DIR}/.swiftlint.yml\" --no-cache --path Source/AssistantV2\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-		924EE7DD21505D810048C0E5 /* Run SwiftLint */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Run SwiftLint";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${PROJECT_DIR}/.swiftlint.yml\" --no-cache --path Tests/AssistantV1Tests\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		924EE7E321505D810048C0E5 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;

@@ -486,6 +486,17 @@
 		929DB9B0212F7E7100356EDC /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92048D8F212F7C16004FD822 /* RestKit.framework */; };
 		92B470652194C880006C3333 /* watson_sample.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 92F3F98E2194AFA300211747 /* watson_sample.mlmodel */; };
 		92B470662194C880006C3333 /* watson_tools.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 92F3F9882193AE7800211747 /* watson_tools.mlmodel */; };
+		92B470682194F225006C3333 /* AssistantV1UnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B470672194F225006C3333 /* AssistantV1UnitTests.swift */; };
+		92B470692194F6A8006C3333 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADC4B902148741900C76DE6 /* MockURLProtocol.swift */; };
+		92B4706A2194F6A9006C3333 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADC4B902148741900C76DE6 /* MockURLProtocol.swift */; };
+		92B4706B2194F6AA006C3333 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADC4B902148741900C76DE6 /* MockURLProtocol.swift */; };
+		92B4706C2194F6AB006C3333 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADC4B902148741900C76DE6 /* MockURLProtocol.swift */; };
+		92B4706D2194F6AC006C3333 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADC4B902148741900C76DE6 /* MockURLProtocol.swift */; };
+		92B4706E2194F6AD006C3333 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADC4B902148741900C76DE6 /* MockURLProtocol.swift */; };
+		92B4706F2194F6AE006C3333 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADC4B902148741900C76DE6 /* MockURLProtocol.swift */; };
+		92B470702194F6AF006C3333 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADC4B902148741900C76DE6 /* MockURLProtocol.swift */; };
+		92B470712194F6B0006C3333 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADC4B902148741900C76DE6 /* MockURLProtocol.swift */; };
+		92B470722194F6B1006C3333 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADC4B902148741900C76DE6 /* MockURLProtocol.swift */; };
 		92BF69AE213F129A00FE6325 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
 		92BF69B0213F129A00FE6325 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
 		92BF69B2213F129A00FE6325 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
@@ -1115,6 +1126,7 @@
 		928204C62124BC200013315B /* LogQueryResponseResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogQueryResponseResult.swift; sourceTree = "<group>"; };
 		9286625F219254460064C6FD /* VisualRecognitionTestUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualRecognitionTestUtilities.swift; sourceTree = "<group>"; };
 		929A23E521123E7E00E4C78A /* TestUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TestUtilities.swift; path = Tests/TestUtilities.swift; sourceTree = "<group>"; };
+		92B470672194F225006C3333 /* AssistantV1UnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantV1UnitTests.swift; sourceTree = "<group>"; };
 		92BF69AD213F129A00FE6325 /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Shared.swift; path = Source/SupportingFiles/Shared.swift; sourceTree = "<group>"; };
 		92F3F9882193AE7800211747 /* watson_tools.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = watson_tools.mlmodel; sourceTree = "<group>"; };
 		92F3F98E2194AFA300211747 /* watson_sample.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = watson_sample.mlmodel; sourceTree = "<group>"; };
@@ -1652,6 +1664,7 @@
 			isa = PBXGroup;
 			children = (
 				6800FC962056D6AF0078788A /* AssistantTests.swift */,
+				92B470672194F225006C3333 /* AssistantV1UnitTests.swift */,
 			);
 			name = Tests;
 			path = Tests/AssistantV1Tests;
@@ -3479,6 +3492,7 @@
 				929A23EC21123E7E00E4C78A /* TestUtilities.swift in Sources */,
 				920A2439214ADFB20077F10D /* SharedTests.swift in Sources */,
 				1241DFCE1E38111500B8B33E /* WatsonCredentials.swift in Sources */,
+				92B4706E2194F6AD006C3333 /* MockURLProtocol.swift in Sources */,
 				920A2445214B0E3E0077F10D /* Shared.swift in Sources */,
 				1241DFCB1E38106F00B8B33E /* NaturalLanguageUnderstandingV1Tests.swift in Sources */,
 			);
@@ -3512,6 +3526,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92B470712194F6B0006C3333 /* MockURLProtocol.swift in Sources */,
 				920A2448214B0E400077F10D /* Shared.swift in Sources */,
 				7A6C7B4A1D8C960300CD97FA /* WatsonCredentials.swift in Sources */,
 				12819F6F1DCA8753004E8467 /* TextToSpeechPlaybackTests.swift in Sources */,
@@ -3655,6 +3670,7 @@
 				929A23E821123E7E00E4C78A /* TestUtilities.swift in Sources */,
 				920A2435214ADFB20077F10D /* SharedTests.swift in Sources */,
 				12F800581DF71AD9006851D6 /* WatsonCredentials.swift in Sources */,
+				92B4706B2194F6AA006C3333 /* MockURLProtocol.swift in Sources */,
 				920A2441214B0E390077F10D /* Shared.swift in Sources */,
 				12F8005E1DF71BED006851D6 /* DiscoveryTests.swift in Sources */,
 			);
@@ -3742,11 +3758,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92B470692194F6A8006C3333 /* MockURLProtocol.swift in Sources */,
 				929A23E621123E7E00E4C78A /* TestUtilities.swift in Sources */,
 				920A2433214ADFB20077F10D /* SharedTests.swift in Sources */,
 				6800FCD62056D8EC0078788A /* AssistantTests.swift in Sources */,
 				920A243F214B0E370077F10D /* Shared.swift in Sources */,
 				6877FAA02056D4F500383B25 /* WatsonCredentials.swift in Sources */,
+				92B470682194F225006C3333 /* AssistantV1UnitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3775,6 +3793,7 @@
 				929A23ED21123E7E00E4C78A /* TestUtilities.swift in Sources */,
 				920A243A214ADFB20077F10D /* SharedTests.swift in Sources */,
 				7A6711A81DD0F1CC0070CA9D /* WatsonCredentials.swift in Sources */,
+				92B4706F2194F6AE006C3333 /* MockURLProtocol.swift in Sources */,
 				920A2446214B0E3F0077F10D /* Shared.swift in Sources */,
 				7A6711A71DD0F1970070CA9D /* PersonalityInsightsTests.swift in Sources */,
 			);
@@ -3855,6 +3874,7 @@
 				929A23F021123E7E00E4C78A /* TestUtilities.swift in Sources */,
 				920A243D214ADFB20077F10D /* SharedTests.swift in Sources */,
 				7A6C7B4B1D8C960300CD97FA /* WatsonCredentials.swift in Sources */,
+				92B470722194F6B1006C3333 /* MockURLProtocol.swift in Sources */,
 				920A2449214B0E410077F10D /* Shared.swift in Sources */,
 				7AAAF4151CEE9D5A00B74848 /* ToneAnalyzerTests.swift in Sources */,
 			);
@@ -3915,6 +3935,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92B470702194F6AF006C3333 /* MockURLProtocol.swift in Sources */,
 				920A2447214B0E400077F10D /* Shared.swift in Sources */,
 				7A6C7B491D8C960300CD97FA /* WatsonCredentials.swift in Sources */,
 				7AF31BFB1D7A414D0040D944 /* SpeechToTextTests.swift in Sources */,
@@ -3948,6 +3969,7 @@
 				929A23EB21123E7E00E4C78A /* TestUtilities.swift in Sources */,
 				920A2438214ADFB20077F10D /* SharedTests.swift in Sources */,
 				7A6C7B451D8C960300CD97FA /* WatsonCredentials.swift in Sources */,
+				92B4706D2194F6AC006C3333 /* MockURLProtocol.swift in Sources */,
 				920A2444214B0E3D0077F10D /* Shared.swift in Sources */,
 				7AAAF4CA1CEEA11E00B74848 /* NaturalLanguageClassifierTests.swift in Sources */,
 			);
@@ -3991,6 +4013,7 @@
 				924EE7D921505D810048C0E5 /* SharedTests.swift in Sources */,
 				924EE7DB21505D810048C0E5 /* Shared.swift in Sources */,
 				924008B92152FD3E005EC1F1 /* AssistantV2Tests.swift in Sources */,
+				92B4706A2194F6A9006C3333 /* MockURLProtocol.swift in Sources */,
 				92547737216C0E70003C2829 /* TestUtilities.swift in Sources */,
 				924EE7DC21505D810048C0E5 /* WatsonCredentials.swift in Sources */,
 			);
@@ -4022,6 +4045,7 @@
 				929A23EA21123E7E00E4C78A /* TestUtilities.swift in Sources */,
 				920A2437214ADFB20077F10D /* SharedTests.swift in Sources */,
 				CA28815D20CB07D600FC992C /* WatsonCredentials.swift in Sources */,
+				92B4706C2194F6AB006C3333 /* MockURLProtocol.swift in Sources */,
 				920A2443214B0E3C0077F10D /* Shared.swift in Sources */,
 				CA28817720CB095100FC992C /* LanguageTranslatorTests.swift in Sources */,
 			);

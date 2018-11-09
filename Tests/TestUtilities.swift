@@ -18,6 +18,9 @@ let missingErrorMessage = "Expected error not received"
 func unexpectedErrorMessage(_ error: Error) -> String {
     return "Received an unexpected error: \(error)"
 }
+func missingBodyMessage(_ error: Error) -> String {
+    return "Missing or incorrect request body. \(error)"
+}
 
 // MARK: - Service instantiation
 
@@ -29,6 +32,27 @@ let currentDate: String = {
 }()
 
 // MARK: - Analyzing request bodies
+
+
+/**
+ * Used to convert request httpBodyStream to Data
+ */
+extension Data {
+    init(reading input: InputStream) {
+        self.init()
+        input.open()
+
+        let bufferSize = 1024
+        let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: bufferSize)
+        while input.hasBytesAvailable {
+            let read = input.read(buffer, maxLength: bufferSize)
+            self.append(buffer, count: read)
+        }
+        buffer.deallocate()
+
+        input.close()
+    }
+}
 
 /**
  * Parse the body of a request as a multipart/form-data body and return a count of fields passed in the body

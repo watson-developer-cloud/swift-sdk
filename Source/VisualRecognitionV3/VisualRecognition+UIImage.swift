@@ -154,6 +154,15 @@ extension VisualRecognition {
         success: @escaping (ClassifiedImages) -> Void)
     {
         // convert UIImage to Data
+        #if swift(>=4.2)
+        guard let imageData = image.pngData() else {
+            let description = "Failed to convert image from UIImage to Data."
+            let userInfo = [NSLocalizedDescriptionKey: description]
+            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
+            failure?(error)
+            return
+        }
+        #else
         guard let imageData = UIImagePNGRepresentation(image) else {
             let description = "Failed to convert image from UIImage to Data."
             let userInfo = [NSLocalizedDescriptionKey: description]
@@ -161,6 +170,7 @@ extension VisualRecognition {
             failure?(error)
             return
         }
+        #endif
 
         self.classifyWithLocalModel(imageData: imageData, classifierIDs: classifierIDs, threshold: threshold,
                                     failure: failure, success: success)
@@ -174,7 +184,11 @@ extension VisualRecognition {
         let filename = UUID().uuidString + ".jpg"
         let directory = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
         guard let file = directory.appendingPathComponent(filename) else { throw RestError.encodingError }
+        #if swift(>=4.2)
+        guard let data = image.jpegData(compressionQuality: 0.75) else { throw RestError.encodingError }
+        #else
         guard let data = UIImageJPEGRepresentation(image, 0.75) else { throw RestError.encodingError }
+        #endif
         try data.write(to: file)
         return file
     }

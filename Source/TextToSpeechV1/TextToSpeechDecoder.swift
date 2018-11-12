@@ -86,7 +86,7 @@ internal class TextToSpeechDecoder {
             ogg_sync_wrote(&syncState, bufferSize)
 
             // attempt to get a page from the data that we wrote
-            while (ogg_sync_pageout(&syncState, &page) == 1) {
+            while ogg_sync_pageout(&syncState, &page) == 1 {
                 if beginStream {
                     // assign stream's number with the page.
                     ogg_stream_init(&streamState, ogg_page_serialno(&page))
@@ -176,7 +176,7 @@ internal class TextToSpeechDecoder {
 
                 // deallocate pcmDataBuffer when the function ends, regardless if the function ended normally or with an error.
                 defer {
-                    pcmDataBuffer.deallocate(capacity: MemoryLayout<Float>.stride * Int(MAX_FRAME_SIZE) * Int(numChannels))
+                    pcmDataBuffer.deallocate()
                 }
             } else if packetCount == 1 {
                 hasTagsPacket = true
@@ -196,7 +196,7 @@ internal class TextToSpeechDecoder {
                 numberOfSamplesDecoded = opus_multistream_decode_float(decoder, packet.packet, Int32(packet.bytes), pcmDataBuffer, MAX_FRAME_SIZE, 0)
 
                 if numberOfSamplesDecoded < 0 {
-                    NSLog("Decoding error: \(opus_strerror(numberOfSamplesDecoded))")
+                    NSLog("Decoding error: \(String(describing: opus_strerror(numberOfSamplesDecoded)))")
                     throw OpusError.internalError
                 }
 

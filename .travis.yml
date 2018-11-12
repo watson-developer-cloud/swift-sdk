@@ -13,7 +13,7 @@ branches:
 env:
   global:
     - IOS_SDK="iphonesimulator"
-    - IOS_DESTINATION="OS=11.3,name=iPhone 7"
+    - IOS_DESTINATION="name=iPhone XS,OS=12.0"
 before_install:
   - sudo easy_install pip
   - nvm install node
@@ -39,7 +39,6 @@ before_script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export PATH=swift-4.1-RELEASE-ubuntu14.04/usr/bin:$PATH ; fi
 script:
   # - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./Scripts/run-tests.sh ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./Scripts/pod-lint.sh ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then swift build ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then swift test ; fi
 deploy:

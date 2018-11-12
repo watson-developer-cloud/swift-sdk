@@ -718,7 +718,7 @@
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/SpeechToTextV1/SpeechToText+Recognize.swift",
-      "line": 255,
+      "line": 259,
       "symbol": "SpeechToText.recognize(audio:settings:model:customizationID:learningOptOut:failure:success:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

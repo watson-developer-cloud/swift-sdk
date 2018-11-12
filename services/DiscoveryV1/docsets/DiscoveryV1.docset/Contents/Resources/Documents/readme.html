@@ -555,18 +555,18 @@
 <pre class="highlight ruby"><code><span class="n">use_frameworks!</span>
 
 <span class="n">target</span> <span class="s1">'MyApp'</span> <span class="k">do</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonAssistantV1'</span><span class="p">,</span> <span class="s1">'~&gt; 0.37.0'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonAssistantV2'</span><span class="p">,</span> <span class="s1">'~&gt; 0.37.0'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonConversationV1'</span><span class="p">,</span> <span class="s1">'~&gt; 0.37.0'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonDiscoveryV1'</span><span class="p">,</span> <span class="s1">'~&gt; 0.37.0'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonLanguageTranslatorV3'</span><span class="p">,</span> <span class="s1">'~&gt; 0.37.0'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonNaturalLanguageClassifierV1'</span><span class="p">,</span> <span class="s1">'~&gt; 0.37.0'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonNaturalLanguageUnderstandingV1'</span><span class="p">,</span> <span class="s1">'~&gt; 0.37.0'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonPersonalityInsightsV3'</span><span class="p">,</span> <span class="s1">'~&gt; 0.37.0'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonSpeechToTextV1'</span><span class="p">,</span> <span class="s1">'~&gt; 0.37.0'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonTextToSpeechV1'</span><span class="p">,</span> <span class="s1">'~&gt; 0.37.0'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonToneAnalyzerV3'</span><span class="p">,</span> <span class="s1">'~&gt; 0.37.0'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonVisualRecognitionV3'</span><span class="p">,</span> <span class="s1">'~&gt; 0.37.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonAssistantV1'</span><span class="p">,</span> <span class="s1">'~&gt; 0.38.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonAssistantV2'</span><span class="p">,</span> <span class="s1">'~&gt; 0.38.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonConversationV1'</span><span class="p">,</span> <span class="s1">'~&gt; 0.38.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonDiscoveryV1'</span><span class="p">,</span> <span class="s1">'~&gt; 0.38.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonLanguageTranslatorV3'</span><span class="p">,</span> <span class="s1">'~&gt; 0.38.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonNaturalLanguageClassifierV1'</span><span class="p">,</span> <span class="s1">'~&gt; 0.38.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonNaturalLanguageUnderstandingV1'</span><span class="p">,</span> <span class="s1">'~&gt; 0.38.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonPersonalityInsightsV3'</span><span class="p">,</span> <span class="s1">'~&gt; 0.38.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonSpeechToTextV1'</span><span class="p">,</span> <span class="s1">'~&gt; 0.38.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonTextToSpeechV1'</span><span class="p">,</span> <span class="s1">'~&gt; 0.38.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonToneAnalyzerV3'</span><span class="p">,</span> <span class="s1">'~&gt; 0.38.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonVisualRecognitionV3'</span><span class="p">,</span> <span class="s1">'~&gt; 0.38.0'</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -583,7 +583,7 @@
 </code></pre>
 
 <p>If your project does not have a Cartfile yet, use the <code>touch Cartfile</code> command in the root directory of your project. To install the IBM Watson Swift SDK using Carthage, add the following to your Cartfile. </p>
-<pre class="highlight plaintext"><code>github "watson-developer-cloud/swift-sdk" ~&gt; 0.37.0
+<pre class="highlight plaintext"><code>github "watson-developer-cloud/swift-sdk" ~&gt; 0.38.0
 </code></pre>
 
 <p>Then run the following command to build the dependencies and frameworks:</p>
@@ -601,7 +601,7 @@
 
 <p>Add the following to your <code>Package.swift</code> file to identify the IBM Watson Swift SDK as a dependency. The package manager will clone the Swift SDK when you build your project with <code>swift build</code>.</p>
 <pre class="highlight swift"><code><span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
-    <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/watson-developer-cloud/swift-sdk"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"0.37.0"</span><span class="p">)</span>
+    <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/watson-developer-cloud/swift-sdk"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"0.38.0"</span><span class="p">)</span>
 <span class="p">]</span>
 </code></pre>
 <h2 id='authentication' class='heading'>Authentication</h2>
@@ -715,7 +715,7 @@ available in <a href="https://github.com/watson-developer-cloud/swift-sdk/blob/m
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-11-02)</p>
+          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-11-12)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

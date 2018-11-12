@@ -127,7 +127,11 @@ internal class SpeechToTextRecorder {
             userInfo: nil,
             repeats: true
         )
+        #if swift(>=4.2)
+        RunLoop.current.add(powerTimer!, forMode: RunLoop.Mode.common)
+        #else
         RunLoop.current.add(powerTimer!, forMode: RunLoopMode.commonModes)
+        #endif
     }
 
     internal func startRecording() throws {

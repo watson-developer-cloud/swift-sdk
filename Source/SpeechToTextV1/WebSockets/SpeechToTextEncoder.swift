@@ -123,7 +123,7 @@ internal class SpeechToTextEncoder {
         }
 
         // deallocate header data buffer
-        packetData.deallocate(capacity: headerData.count)
+        packetData.deallocate()
 
         // assemble pages and add to ogg cache
         assemblePages(flush: true)
@@ -153,7 +153,7 @@ internal class SpeechToTextEncoder {
         }
 
         // deallocate header data buffer
-        packetData.deallocate(capacity: headerData.count)
+        packetData.deallocate()
 
         // assemble pages and add to ogg cache
         assemblePages(flush: true)

@@ -280,6 +280,9 @@ extension VisualRecognition {
     private func loadModelFromDisk(classifierID: String) throws -> MLModel {
         let modelURL = try locateModelOnDisk(classifierID: classifierID)
 
+        // must build with Xcode 10 or later in order to use `MLModelConfiguration`.
+        // use the version of Swift to infer the Xcode version since this can’t be checked explicitly.
+        #if swift(>=4.1.50) || (swift(>=3.4) && !swift(>=4.0))
         // temporary workaround for compatibility issue with new A12 based devices
         if #available(iOS 12.0, *) {
             let modelConfig = MLModelConfiguration()
@@ -288,6 +291,9 @@ extension VisualRecognition {
         } else {
             return try MLModel(contentsOf: modelURL)
         }
+        #else
+        return try MLModel(contentsOf: modelURL)
+        #endif
     }
 
     /// Convert results from Core ML classification requests into a `ClassifiedImages` model.

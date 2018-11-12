@@ -1,3 +1,16 @@
+# [0.38.0](https://github.com/watson-developer-cloud/swift-sdk/compare/0.37.0...0.38.0) (2018-11-12)
+
+
+### Bug Fixes
+
+* **VisualRecognitionV3:** temporary workaround for new A12 based devices ([62edd09](https://github.com/watson-developer-cloud/swift-sdk/commit/62edd09))
+* **VisualRecognitionV3:** temporary workaround to support A12 devices for Core ML inference ([fa212ec](https://github.com/watson-developer-cloud/swift-sdk/commit/fa212ec))
+
+
+### Features
+
+* **All:** Add support for Swift 4.2 ([4bbf42b](https://github.com/watson-developer-cloud/swift-sdk/commit/4bbf42b))
+
 # [0.37.0](https://github.com/watson-developer-cloud/swift-sdk/compare/0.36.0...0.37.0) (2018-11-02)
 
 

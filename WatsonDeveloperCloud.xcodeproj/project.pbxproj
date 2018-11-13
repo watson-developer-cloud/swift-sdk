@@ -25,6 +25,7 @@
 		12F800581DF71AD9006851D6 /* WatsonCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6C7B3C1D8C960300CD97FA /* WatsonCredentials.swift */; };
 		12F8005C1DF71BA1006851D6 /* Discovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F8005B1DF71BA1006851D6 /* Discovery.swift */; };
 		12F8005E1DF71BED006851D6 /* DiscoveryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F8005D1DF71BED006851D6 /* DiscoveryTests.swift */; };
+		28B296F1219B25FF00FA02B4 /* UpdateEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6823CE991F8EA0AC00A388EC /* UpdateEntity.swift */; };
 		6800FC9D2056D76F0078788A /* AssistantV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 6800FC9C2056D7340078788A /* AssistantV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6800FC9E2056D8360078788A /* AssistantV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6877FA9A2056D4F100383B25 /* AssistantV1.framework */; };
 		6800FC9F2056D8CB0078788A /* Assistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6800FC552056D6830078788A /* Assistant.swift */; };
@@ -70,7 +71,6 @@
 		6800FCC72056D8D50078788A /* SystemResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6800FC4C2056D6830078788A /* SystemResponse.swift */; };
 		6800FCC82056D8D50078788A /* UpdateCounterexample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6800FC322056D6830078788A /* UpdateCounterexample.swift */; };
 		6800FCC92056D8D50078788A /* UpdateDialogNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6800FC1F2056D6830078788A /* UpdateDialogNode.swift */; };
-		6800FCCA2056D8D50078788A /* UpdateEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6800FC2C2056D6830078788A /* UpdateEntity.swift */; };
 		6800FCCB2056D8D50078788A /* UpdateExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6800FC2B2056D6830078788A /* UpdateExample.swift */; };
 		6800FCCC2056D8D50078788A /* UpdateIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6800FC522056D6830078788A /* UpdateIntent.swift */; };
 		6800FCCD2056D8D50078788A /* UpdateSynonym.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6800FC3B2056D6830078788A /* UpdateSynonym.swift */; };
@@ -124,7 +124,6 @@
 		6823CEE51F8EA0F700A388EC /* SystemResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6823CE951F8EA0AC00A388EC /* SystemResponse.swift */; };
 		6823CEE61F8EA0F700A388EC /* UpdateCounterexample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6823CEAA1F8EA0B000A388EC /* UpdateCounterexample.swift */; };
 		6823CEE71F8EA0F700A388EC /* UpdateDialogNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6823CEA11F8EA0AE00A388EC /* UpdateDialogNode.swift */; };
-		6823CEE81F8EA0F700A388EC /* UpdateEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6823CE991F8EA0AC00A388EC /* UpdateEntity.swift */; };
 		6823CEE91F8EA0F700A388EC /* UpdateExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6823CEB21F8EA0B100A388EC /* UpdateExample.swift */; };
 		6823CEEA1F8EA0F700A388EC /* UpdateIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6823CEAB1F8EA0B000A388EC /* UpdateIntent.swift */; };
 		6823CEEB1F8EA0F700A388EC /* UpdateSynonym.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6823CEB01F8EA0B000A388EC /* UpdateSynonym.swift */; };
@@ -4430,7 +4429,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6800FCBF2056D8D50078788A /* MessageRequest.swift in Sources */,
-				6800FCCA2056D8D50078788A /* UpdateEntity.swift in Sources */,
 				6800FCA72056D8D50078788A /* CreateExample.swift in Sources */,
 				6800FCBD2056D8D50078788A /* LogPagination.swift in Sources */,
 				6800FCAA2056D8D50078788A /* CreateValue.swift in Sources */,
@@ -4464,6 +4462,7 @@
 				6800FCCB2056D8D50078788A /* UpdateExample.swift in Sources */,
 				CADA96912110ABB500B5BD84 /* DialogNodeOutput.swift in Sources */,
 				6800FCB42056D8D50078788A /* Example.swift in Sources */,
+				28B296F1219B25FF00FA02B4 /* UpdateEntity.swift in Sources */,
 				6800FCC32056D8D50078788A /* RuntimeEntity.swift in Sources */,
 				CADA96902110ABB500B5BD84 /* WorkspaceSystemSettingsTooling.swift in Sources */,
 				CADA969A2110ABB500B5BD84 /* EntityMention.swift in Sources */,
@@ -4778,7 +4777,6 @@
 				6823CEC41F8EA0F700A388EC /* CreateDialogNode.swift in Sources */,
 				6823CEC01F8EA0F700A388EC /* Context.swift in Sources */,
 				6823CEDB1F8EA0F700A388EC /* LogPagination.swift in Sources */,
-				6823CEE81F8EA0F700A388EC /* UpdateEntity.swift in Sources */,
 				CADA96B72110ABDE00B5BD84 /* EntityMention.swift in Sources */,
 				6823CEDE1F8EA0F700A388EC /* MessageResponse.swift in Sources */,
 				6823CEF31F8EA0F700A388EC /* WorkspaceExport.swift in Sources */,

@@ -20,7 +20,7 @@ import RestKit
 /**
  A response from the Watson Assistant service.
  */
-public struct MessageResponse: Decodable {
+public struct MessageResponse: Codable {
 
     /**
      The user input from the request.
@@ -84,5 +84,16 @@ public struct MessageResponse: Decodable {
         let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
         additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: CodingKeys.allValues)
     }
-
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(input, forKey: .input)
+        try container.encode(intents, forKey: .intents)
+        try container.encode(entities, forKey: .entities)
+        try container.encodeIfPresent(alternateIntents, forKey: .alternateIntents)
+        try container.encode(context, forKey: .context)
+        try container.encode(output, forKey: .output)
+        try container.encodeIfPresent(actions, forKey: .actions)
+        var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
+        try dynamicContainer.encodeIfPresent(additionalProperties)
+    }
 }

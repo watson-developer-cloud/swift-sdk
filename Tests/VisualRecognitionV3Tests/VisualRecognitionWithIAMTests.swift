@@ -76,7 +76,7 @@ class VisualRecognitionWithIAMTests: XCTestCase {
             XCTFail("Missing credentials for Visual Recognition service")
             return
         }
-        let visualRecognition = VisualRecognition(version: currentDate, apiKey: apiKey)
+        let visualRecognition = VisualRecognition(version: versionDate, apiKey: apiKey)
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
 
@@ -130,7 +130,7 @@ class VisualRecognitionWithIAMTests: XCTestCase {
 
         // Pass the access token as the credentials when instantiating the service
 
-        let visualRecognition = VisualRecognition(version: currentDate, accessToken: accessToken)
+        let visualRecognition = VisualRecognition(version: versionDate, accessToken: accessToken)
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
 

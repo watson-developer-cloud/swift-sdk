@@ -51,7 +51,7 @@ class VisualRecognitionUIImageTests: XCTestCase {
             XCTFail("Missing credentials for Visual Recognition service")
             return
         }
-        visualRecognition = VisualRecognition(version: currentDate, apiKey: apiKey)
+        visualRecognition = VisualRecognition(version: versionDate, apiKey: apiKey)
         if let url = WatsonCredentials.VisualRecognitionURL {
             visualRecognition.serviceURL = url
         }

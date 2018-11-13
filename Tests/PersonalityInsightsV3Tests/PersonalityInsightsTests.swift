@@ -52,11 +52,11 @@ class PersonalityInsightsTests: XCTestCase {
 
     func instantiatePersonalityInsights() {
         if let apiKey = WatsonCredentials.PersonalityInsightsV3APIKey {
-            personalityInsights = PersonalityInsights(version: currentDate, apiKey: apiKey)
+            personalityInsights = PersonalityInsights(version: versionDate, apiKey: apiKey)
         } else {
             let username = WatsonCredentials.PersonalityInsightsV3Username
             let password = WatsonCredentials.PersonalityInsightsV3Password
-            personalityInsights = PersonalityInsights(username: username, password: password, version: currentDate)
+            personalityInsights = PersonalityInsights(username: username, password: password, version: versionDate)
         }
         if let url = WatsonCredentials.PersonalityInsightsV3URL {
             personalityInsights.serviceURL = url

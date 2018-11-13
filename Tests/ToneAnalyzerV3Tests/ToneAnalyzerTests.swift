@@ -62,11 +62,11 @@ class ToneAnalyzerTests: XCTestCase {
     /** Instantiate Tone Analyzer. */
     func instantiateToneAnalyzer() {
         if let apiKey = WatsonCredentials.ToneAnalyzerAPIKey {
-            toneAnalyzer = ToneAnalyzer(version: currentDate, apiKey: apiKey)
+            toneAnalyzer = ToneAnalyzer(version: versionDate, apiKey: apiKey)
         } else {
             let username = WatsonCredentials.ToneAnalyzerUsername
             let password = WatsonCredentials.ToneAnalyzerPassword
-            toneAnalyzer = ToneAnalyzer(username: username, password: password, version: currentDate)
+            toneAnalyzer = ToneAnalyzer(username: username, password: password, version: versionDate)
         }
         if let url = WatsonCredentials.ToneAnalyzerURL {
             toneAnalyzer.serviceURL = url

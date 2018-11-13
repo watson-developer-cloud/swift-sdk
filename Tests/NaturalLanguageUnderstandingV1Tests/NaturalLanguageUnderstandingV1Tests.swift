@@ -60,11 +60,11 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
     /** Instantiate Natural Language Understanding instance. */
     func instantiateNaturalLanguageUnderstanding() {
         if let apiKey = WatsonCredentials.NaturalLanguageUnderstandingAPIKey {
-            naturalLanguageUnderstanding = NaturalLanguageUnderstanding(version: currentDate, apiKey: apiKey)
+            naturalLanguageUnderstanding = NaturalLanguageUnderstanding(version: versionDate, apiKey: apiKey)
         } else {
             let username = WatsonCredentials.NaturalLanguageUnderstandingUsername
             let password = WatsonCredentials.NaturalLanguageUnderstandingPassword
-            naturalLanguageUnderstanding = NaturalLanguageUnderstanding(username: username, password: password, version: currentDate)
+            naturalLanguageUnderstanding = NaturalLanguageUnderstanding(username: username, password: password, version: versionDate)
         }
         if let url = WatsonCredentials.NaturalLanguageUnderstandingURL {
             naturalLanguageUnderstanding.serviceURL = url

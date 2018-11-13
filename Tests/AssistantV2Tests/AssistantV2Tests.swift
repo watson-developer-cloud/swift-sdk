@@ -49,11 +49,11 @@ class AssistantV2Tests: XCTestCase {
     /** Instantiate Assistant. */
     func instantiateAssistant() {
         if let apiKey = WatsonCredentials.AssistantAPIKey {
-            assistant = Assistant(version: currentDate, apiKey: apiKey)
+            assistant = Assistant(version: versionDate, apiKey: apiKey)
         } else {
             let username = WatsonCredentials.AssistantV2Username
             let password = WatsonCredentials.AssistantV2Password
-            assistant = Assistant(username: username, password: password, version: currentDate)
+            assistant = Assistant(username: username, password: password, version: versionDate)
         }
         if let url = WatsonCredentials.AssistantV2URL {
             assistant.serviceURL = url

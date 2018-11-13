@@ -26,7 +26,7 @@ class AssistantV1UnitTests: XCTestCase {
     private let workspaceID = "test workspace"
 
     override func setUp() {
-        assistant = Assistant(version: currentDate, accessToken: accessToken)
+        assistant = Assistant(version: versionDate, accessToken: accessToken)
 
         let configuration = URLSessionConfiguration.ephemeral
         configuration.protocolClasses = [MockURLProtocol.self]
@@ -71,7 +71,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex], "workspaces")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], self.workspaceID)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "message")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
             do {
                 let body = Data(reading: request.httpBodyStream!)
@@ -121,7 +121,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertNil(request.httpBodyStream)
 
             XCTAssertEqual(request.url?.lastPathComponent, "workspaces")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertTrue(request.url?.query?.contains("page_limit=10") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_count=true") ?? false)
             XCTAssertTrue(request.url?.query?.contains("sort=alphabetical") ?? false)
@@ -150,7 +150,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
             XCTAssertEqual(request.url?.lastPathComponent, "workspaces")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
             do {
                 let body = Data(reading: request.httpBodyStream!)
@@ -206,7 +206,7 @@ class AssistantV1UnitTests: XCTestCase {
             let endOfURL = request.url!.pathComponents.suffix(2)
             XCTAssertEqual(endOfURL.first!, "workspaces")
             XCTAssertEqual(endOfURL.last!, self.workspaceID)
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertTrue(request.url?.query?.contains("export=true") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_audit=true") ?? false)
 
@@ -232,7 +232,7 @@ class AssistantV1UnitTests: XCTestCase {
             let endOfURL = request.url!.pathComponents.suffix(2)
             XCTAssertEqual(endOfURL.first!, "workspaces")
             XCTAssertEqual(endOfURL.last!, self.workspaceID)
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertTrue(request.url?.query?.contains("append=true") ?? false)
 
             do {
@@ -292,7 +292,7 @@ class AssistantV1UnitTests: XCTestCase {
             let endOfURL = request.url!.pathComponents.suffix(2)
             XCTAssertEqual(endOfURL.first!, "workspaces")
             XCTAssertEqual(endOfURL.last!, self.workspaceID)
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
             return (HTTPURLResponse(), Data())
         }
@@ -317,7 +317,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex], "workspaces")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], self.workspaceID)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "intents")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertTrue(request.url?.query?.contains("export=true") ?? false)
             XCTAssertTrue(request.url?.query?.contains("page_limit=10") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_count=true") ?? false)
@@ -352,7 +352,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex], "workspaces")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], self.workspaceID)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "intents")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
             do {
                 let body = Data(reading: request.httpBodyStream!)
@@ -394,7 +394,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], self.workspaceID)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "intents")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 3], intent)
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertTrue(request.url?.query?.contains("export=true") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_audit=true") ?? false)
 
@@ -425,7 +425,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], self.workspaceID)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "intents")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 3], intent)
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
             do {
                 let body = Data(reading: request.httpBodyStream!)
@@ -469,7 +469,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], self.workspaceID)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "intents")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 3], intent)
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
             return (HTTPURLResponse(), Data())
         }
@@ -498,7 +498,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "intents")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 3], intent)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 4], "examples")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertTrue(request.url?.query?.contains("page_limit=10") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_count=true") ?? false)
             XCTAssertTrue(request.url?.query?.contains("sort=alphabetical") ?? false)
@@ -537,7 +537,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "intents")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 3], intent)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 4], "examples")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
             do {
                 let body = Data(reading: request.httpBodyStream!)
@@ -582,7 +582,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 3], intent)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 4], "examples")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 5], text)
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_audit=true") ?? false)
 
             return (HTTPURLResponse(), Data())
@@ -616,7 +616,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 3], intent)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 4], "examples")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 5], text)
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
             do {
                 let body = Data(reading: request.httpBodyStream!)
@@ -662,7 +662,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 3], intent)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 4], "examples")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 5], text)
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
             return (HTTPURLResponse(), Data())
         }
@@ -690,7 +690,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex], "workspaces")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], self.workspaceID)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "counterexamples")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertTrue(request.url?.query?.contains("page_limit=10") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_count=true") ?? false)
             XCTAssertTrue(request.url?.query?.contains("sort=alphabetical") ?? false)
@@ -725,7 +725,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex], "workspaces")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], self.workspaceID)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "counterexamples")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
             do {
                 let body = Data(reading: request.httpBodyStream!)
@@ -762,7 +762,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], self.workspaceID)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "counterexamples")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 3], text)
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_audit=true") ?? false)
 
             return (HTTPURLResponse(), Data())
@@ -792,7 +792,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], self.workspaceID)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "counterexamples")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 3], text)
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
             do {
                 let body = Data(reading: request.httpBodyStream!)
@@ -830,7 +830,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], self.workspaceID)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "counterexamples")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 3], text)
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
             return (HTTPURLResponse(), Data())
         }
@@ -857,7 +857,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex], "workspaces")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], self.workspaceID)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "entities")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertTrue(request.url?.query?.contains("export=true") ?? false)
             XCTAssertTrue(request.url?.query?.contains("page_limit=10") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_count=true") ?? false)
@@ -894,7 +894,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex], "workspaces")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], self.workspaceID)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "entities")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
             do {
                 let body = Data(reading: request.httpBodyStream!)
@@ -942,7 +942,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], self.workspaceID)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "entities")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 3], entity)
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_audit=true") ?? false)
 
             return (HTTPURLResponse(), Data())
@@ -973,7 +973,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], self.workspaceID)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "entities")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 3], entity)
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
             do {
                 let body = Data(reading: request.httpBodyStream!)
@@ -1022,7 +1022,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], self.workspaceID)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "entities")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 3], entity)
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
             return (HTTPURLResponse(), Data())
         }
@@ -1053,7 +1053,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "entities")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 3], entity)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 4], "mentions")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertTrue(request.url?.query?.contains("export=true") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_audit=true") ?? false)
 
@@ -1088,7 +1088,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "entities")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 3], entity)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 4], "values")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertTrue(request.url?.query?.contains("export=true") ?? false)
             XCTAssertTrue(request.url?.query?.contains("page_limit=10") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_count=true") ?? false)
@@ -1129,7 +1129,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "entities")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 3], entity)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 4], "values")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
             do {
                 let body = Data(reading: request.httpBodyStream!)
@@ -1180,7 +1180,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 3], entity)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 4], "values")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 5], value)
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertTrue(request.url?.query?.contains("export=true") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_audit=true") ?? false)
 
@@ -1216,7 +1216,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 3], entity)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 4], "values")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 5], value)
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
             do {
                 let body = Data(reading: request.httpBodyStream!)
@@ -1268,7 +1268,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 3], entity)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 4], "values")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 5], value)
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
             return (HTTPURLResponse(), Data())
         }
@@ -1303,7 +1303,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 4], "values")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 5], value)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 6], "synonyms")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertTrue(request.url?.query?.contains("page_limit=10") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_count=true") ?? false)
             XCTAssertTrue(request.url?.query?.contains("sort=alphabetical") ?? false)
@@ -1346,7 +1346,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 4], "values")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 5], value)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 6], "synonyms")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
             do {
                 let body = Data(reading: request.httpBodyStream!)
@@ -1391,7 +1391,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 5], value)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 6], "synonyms")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 7], synonym)
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_audit=true") ?? false)
 
             return (HTTPURLResponse(), Data())
@@ -1429,7 +1429,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 5], value)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 6], "synonyms")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 7], synonym)
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
             do {
                 let body = Data(reading: request.httpBodyStream!)
@@ -1475,7 +1475,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 5], value)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 6], "synonyms")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 7], synonym)
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
             return (HTTPURLResponse(), Data())
         }
@@ -1504,7 +1504,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex], "workspaces")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], self.workspaceID)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "dialog_nodes")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertTrue(request.url?.query?.contains("page_limit=10") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_count=true") ?? false)
             XCTAssertTrue(request.url?.query?.contains("sort=alphabetical") ?? false)
@@ -1539,7 +1539,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex], "workspaces")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], self.workspaceID)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "dialog_nodes")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
             do {
                 let body = Data(reading: request.httpBodyStream!)
@@ -1618,7 +1618,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], self.workspaceID)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "dialog_nodes")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 3], dialogNode)
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_audit=true") ?? false)
 
             return (HTTPURLResponse(), Data())
@@ -1647,7 +1647,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], self.workspaceID)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "dialog_nodes")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 3], dialogNode)
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
             do {
                 let body = Data(reading: request.httpBodyStream!)
@@ -1727,7 +1727,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], self.workspaceID)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "dialog_nodes")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 3], dialogNode)
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
             return (HTTPURLResponse(), Data())
         }
@@ -1754,7 +1754,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex], "workspaces")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], self.workspaceID)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "logs")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertTrue(request.url?.query?.contains("page_limit=10") ?? false)
             XCTAssertTrue(request.url?.query?.contains("filter=ERROR") ?? false)
             XCTAssertTrue(request.url?.query?.contains("sort=alphabetical") ?? false)
@@ -1783,7 +1783,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertNil(request.httpBodyStream)
 
             XCTAssertEqual(request.url!.pathComponents.last!, "logs")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertTrue(request.url?.query?.contains("page_limit=10") ?? false)
             XCTAssertTrue(request.url?.query?.contains("filter=ERROR") ?? false)
             XCTAssertTrue(request.url?.query?.contains("sort=alphabetical") ?? false)
@@ -1815,7 +1815,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertNil(request.httpBodyStream)
 
             XCTAssertEqual(request.url!.pathComponents.last!, "user_data")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
             return (HTTPURLResponse(), Data())
         }

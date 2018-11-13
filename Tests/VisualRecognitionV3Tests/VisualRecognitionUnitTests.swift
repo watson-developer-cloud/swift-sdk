@@ -31,7 +31,7 @@ class VisualRecognitionUnitTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        visualRecognition = VisualRecognition(version: currentDate, accessToken: accessToken)
+        visualRecognition = VisualRecognition(version: versionDate, accessToken: accessToken)
         createMockSession(for: visualRecognition)
     }
 
@@ -126,7 +126,7 @@ class VisualRecognitionUnitTests: XCTestCase {
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
             XCTAssertEqual(request.url?.lastPathComponent, "classify")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertNotNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
@@ -167,7 +167,7 @@ class VisualRecognitionUnitTests: XCTestCase {
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
             XCTAssertEqual(request.url?.lastPathComponent, "classifiers")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertNotNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
@@ -190,7 +190,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             XCTAssertEqual(request.httpMethod, "GET")
             XCTAssertEqual(request.url?.lastPathComponent, "classifiers")
             XCTAssertTrue(request.url?.query?.contains("verbose=true") ?? false)
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
@@ -213,7 +213,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             let endOfURL = request.url!.pathComponents.suffix(2)
             XCTAssertEqual(endOfURL.first, "classifiers")
             XCTAssertEqual(endOfURL.last, classifierID)
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
@@ -236,7 +236,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             let endOfURL = request.url!.pathComponents.suffix(2)
             XCTAssertEqual(endOfURL.first, "classifiers")
             XCTAssertEqual(endOfURL.last, classifierID)
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertNotNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
@@ -281,7 +281,7 @@ class VisualRecognitionUnitTests: XCTestCase {
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
             XCTAssertEqual(request.url?.lastPathComponent, "detect_faces")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertNotNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
@@ -310,7 +310,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex], "classifiers")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], classifierID)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "core_ml_model")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
@@ -334,7 +334,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             XCTAssertNotNil(request.url)
             XCTAssertEqual(request.httpMethod, "DELETE")
             XCTAssertEqual(request.url?.lastPathComponent, "user_data")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
@@ -413,7 +413,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex], "classifiers")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], classifierID)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "core_ml_model")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
@@ -428,7 +428,7 @@ class VisualRecognitionUnitTests: XCTestCase {
         }
 
         let classifierExpectation = self.expectation(description: "getClassifier() should get called")
-        let visualRecognition = MockVisualRecognition(version: currentDate, accessToken: accessToken, expectation: classifierExpectation)
+        let visualRecognition = MockVisualRecognition(version: versionDate, accessToken: accessToken, expectation: classifierExpectation)
         createMockSession(for: visualRecognition)
 
         // If there is a newer version of the CoreML model available in the VisualRecognition service,
@@ -486,7 +486,7 @@ class VisualRecognitionUnitTests: XCTestCase {
         }
 
         let classifierExpectation = self.expectation(description: "getClassifier() should get called")
-        let visualRecognition = MockVisualRecognition(version: currentDate, accessToken: accessToken, expectation: classifierExpectation)
+        let visualRecognition = MockVisualRecognition(version: versionDate, accessToken: accessToken, expectation: classifierExpectation)
         createMockSession(for: visualRecognition)
 
         // If the local copy of the CoreML model is at least as updated as
@@ -538,7 +538,7 @@ class VisualRecognitionUnitTests: XCTestCase {
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
             XCTAssertEqual(request.url?.lastPathComponent, "classify")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertNotNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
@@ -574,7 +574,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex], "classifiers")
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], classifierID)
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "core_ml_model")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
@@ -638,7 +638,7 @@ class VisualRecognitionUnitTests: XCTestCase {
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
             XCTAssertEqual(request.url?.lastPathComponent, "classify")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertNotNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
@@ -662,7 +662,7 @@ class VisualRecognitionUnitTests: XCTestCase {
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
             XCTAssertEqual(request.url?.lastPathComponent, "detect_faces")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertNotNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
@@ -688,7 +688,7 @@ class VisualRecognitionUnitTests: XCTestCase {
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
             XCTAssertEqual(request.url?.lastPathComponent, "classify")
-            XCTAssertTrue(request.url?.query?.contains("version=\(currentDate)") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertNotNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 

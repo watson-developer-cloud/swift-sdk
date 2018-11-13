@@ -25,14 +25,9 @@ func missingBodyMessage(_ error: Error) -> String {
 // MARK: - Service instantiation
 
 let accessToken = "my_access_token"
-let currentDate: String = {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "yyyy-MM-dd"
-    return formatter.string(from: Date())
-}()
+let versionDate = "2018-11-13"
 
 // MARK: - Analyzing request bodies
-
 
 /**
  * Used to convert request httpBodyStream to Data

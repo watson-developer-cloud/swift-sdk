@@ -73,7 +73,7 @@ class VisualRecognitionTests: XCTestCase {
             XCTFail("Missing credentials for Visual Recognition service")
             return
         }
-        visualRecognition = VisualRecognition(version: currentDate, apiKey: apiKey)
+        visualRecognition = VisualRecognition(version: versionDate, apiKey: apiKey)
         if let url = WatsonCredentials.VisualRecognitionURL {
             visualRecognition.serviceURL = url
         }
@@ -1286,7 +1286,7 @@ class VisualRecognitionTests: XCTestCase {
     /** Invalid API Key. */
     func testAuthenticationError() {
         let apiKey = "let-me-in-let-me-in"
-        visualRecognition = VisualRecognition(version: currentDate, apiKey: apiKey)
+        visualRecognition = VisualRecognition(version: versionDate, apiKey: apiKey)
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
 

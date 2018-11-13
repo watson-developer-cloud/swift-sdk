@@ -130,7 +130,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             XCTAssertNotNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
-            let bodyFieldsCount = parseMultiPartFormBody(request: request)
+            let bodyFieldsCount = numberOfFieldsInMultiPartFormBody(request: request)
             XCTAssertEqual(bodyFieldsCount, 5)
 
             return (HTTPURLResponse(), Data())
@@ -171,7 +171,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             XCTAssertNotNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
-            let bodyFieldsCount = parseMultiPartFormBody(request: request)
+            let bodyFieldsCount = numberOfFieldsInMultiPartFormBody(request: request)
             XCTAssertEqual(bodyFieldsCount, 4)
 
             return (HTTPURLResponse(), Data())
@@ -240,7 +240,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             XCTAssertNotNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
-            let bodyFieldsCount = parseMultiPartFormBody(request: request)
+            let bodyFieldsCount = numberOfFieldsInMultiPartFormBody(request: request)
             XCTAssertEqual(bodyFieldsCount, 3)
 
             return (HTTPURLResponse(), Data())
@@ -285,7 +285,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             XCTAssertNotNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
-            let bodyFieldsCount = parseMultiPartFormBody(request: request)
+            let bodyFieldsCount = numberOfFieldsInMultiPartFormBody(request: request)
             XCTAssertEqual(bodyFieldsCount, 2)
 
             return (HTTPURLResponse(), Data())
@@ -542,7 +542,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             XCTAssertNotNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
-            let bodyFieldsCount = parseMultiPartFormBody(request: request)
+            let bodyFieldsCount = numberOfFieldsInMultiPartFormBody(request: request)
             XCTAssertEqual(bodyFieldsCount, 4)
 
             return (HTTPURLResponse(), Data())
@@ -642,7 +642,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             XCTAssertNotNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
-            let bodyFieldsCount = parseMultiPartFormBody(request: request)
+            let bodyFieldsCount = numberOfFieldsInMultiPartFormBody(request: request)
             XCTAssertEqual(bodyFieldsCount, 4)
 
             return (HTTPURLResponse(), Data())
@@ -666,7 +666,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             XCTAssertNotNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
-            let bodyFieldsCount = parseMultiPartFormBody(request: request)
+            let bodyFieldsCount = numberOfFieldsInMultiPartFormBody(request: request)
             XCTAssertEqual(bodyFieldsCount, 1)
 
             return (HTTPURLResponse(), Data())
@@ -692,7 +692,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             XCTAssertNotNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
-            let bodyFieldsCount = parseMultiPartFormBody(request: request)
+            let bodyFieldsCount = numberOfFieldsInMultiPartFormBody(request: request)
             XCTAssertEqual(bodyFieldsCount, 4)
 
             return (HTTPURLResponse(), Data())

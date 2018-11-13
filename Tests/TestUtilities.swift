@@ -60,7 +60,7 @@ extension Data {
 /**
  * Parse the body of a request as a multipart/form-data body and return a count of fields passed in the body
  */
-func parseMultiPartFormBody(request: URLRequest) -> Int? {
+func numberOfFieldsInMultiPartFormBody(request: URLRequest) -> Int? {
     guard let contentType = request.value(forHTTPHeaderField: "content-type") else {
         XCTFail("contentType header not present")
         return nil

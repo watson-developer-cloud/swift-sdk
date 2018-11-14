@@ -63,6 +63,13 @@ class AssistantV1UnitTests: XCTestCase {
     // MARK: - Message
 
     func testMessage() {
+        let input = InputData(text: "asdf")
+        let alternateIntents = true
+        let context = Context(conversationID: "Hi, how are you?")
+        let entities = [RuntimeEntity(entity: "entity", location: [0], value: "whatever")]
+        let intents = [RuntimeIntent(intent: "intent", confidence: 1.0)]
+        let output = OutputData(logMessages: [LogMessage(level: "SEVERE", msg: "shit's broken")], text: ["just kidding"])
+
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
             XCTAssertNotNil(request.allHTTPHeaderFields)
@@ -77,12 +84,12 @@ class AssistantV1UnitTests: XCTestCase {
                 let body = Data(reading: request.httpBodyStream!)
                 let decodedBody = try JSONDecoder().decode(MessageRequest.self, from: body)
 
-                XCTAssertNotNil(decodedBody.alternateIntents)
-                XCTAssertNotNil(decodedBody.context)
-                XCTAssertNotNil(decodedBody.entities)
-                XCTAssertNotNil(decodedBody.input)
-                XCTAssertNotNil(decodedBody.intents)
-                XCTAssertNotNil(decodedBody.output)
+                XCTAssertEqual(decodedBody.input, input)
+                XCTAssertEqual(decodedBody.alternateIntents, alternateIntents)
+                XCTAssertEqual(decodedBody.context, context)
+                XCTAssertEqual(decodedBody.entities, entities)
+                XCTAssertEqual(decodedBody.intents, intents)
+                XCTAssertEqual(decodedBody.output, output)
             } catch {
                 XCTFail(missingBodyMessage(error))
             }
@@ -90,17 +97,11 @@ class AssistantV1UnitTests: XCTestCase {
             return (HTTPURLResponse(), Data())
         }
 
-        let input = InputData(text: "asdf")
-        let context = Context(conversationID: "Hi, how are you?")
-        let entities = [RuntimeEntity(entity: "entity", location: [0], value: "whatever")]
-        let intents = [RuntimeIntent(intent: "intent", confidence: 1.0)]
-        let output = OutputData(logMessages: [LogMessage(level: "SEVERE", msg: "shit's broken")], text: ["just kidding"])
-
         let expectation = self.expectation(description: "message")
         assistant.message(
             workspaceID: self.workspaceID,
             input: input,
-            alternateIntents: true,
+            alternateIntents: alternateIntents,
             context: context,
             entities: entities,
             intents: intents,
@@ -145,6 +146,17 @@ class AssistantV1UnitTests: XCTestCase {
     }
 
     func testCreateWorkspace() {
+        let name = "Anthony's workspace"
+        let description = "The best workspace there ever was"
+        let language = "en"
+        let intents = [CreateIntent(intent: "intent")]
+        let entities = [CreateEntity(entity: "entity")]
+        let dialogNodes = [CreateDialogNode(dialogNode: "Best node")]
+        let counterExamples = [CreateCounterexample(text: "no u")]
+        let metadata: [String: JSON] = ["key": JSON.string("value")]
+        let learningOptOut = true
+        let systemSettings = WorkspaceSystemSettings(tooling: nil, disambiguation: nil, humanAgentAssist: nil)
+
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
             XCTAssertNotNil(request.allHTTPHeaderFields)
@@ -156,15 +168,16 @@ class AssistantV1UnitTests: XCTestCase {
                 let body = Data(reading: request.httpBodyStream!)
                 let decodedBody = try JSONDecoder().decode(CreateWorkspace.self, from: body)
 
-                XCTAssertNotNil(decodedBody.counterexamples)
-                XCTAssertNotNil(decodedBody.description)
-                XCTAssertNotNil(decodedBody.entities)
-                XCTAssertNotNil(decodedBody.intents)
-                XCTAssertNotNil(decodedBody.language)
-                XCTAssertNotNil(decodedBody.learningOptOut)
-                XCTAssertNotNil(decodedBody.metadata)
-                XCTAssertNotNil(decodedBody.name)
-                XCTAssertNotNil(decodedBody.systemSettings)
+                XCTAssertEqual(decodedBody.intents, intents)
+                XCTAssertEqual(decodedBody.entities, entities)
+                XCTAssertEqual(decodedBody.dialogNodes, dialogNodes)
+                XCTAssertEqual(decodedBody.counterexamples, counterExamples)
+                XCTAssertEqual(decodedBody.metadata, metadata)
+                XCTAssertEqual(decodedBody.systemSettings, systemSettings)
+                XCTAssertEqual(decodedBody.name, name)
+                XCTAssertEqual(decodedBody.description, description)
+                XCTAssertEqual(decodedBody.language, language)
+                XCTAssertEqual(decodedBody.learningOptOut, learningOptOut)
             } catch {
                 XCTFail(missingBodyMessage(error))
             }
@@ -172,24 +185,17 @@ class AssistantV1UnitTests: XCTestCase {
             return (HTTPURLResponse(), Data())
         }
 
-        let intents = [CreateIntent(intent: "intent")]
-        let entities = [CreateEntity(entity: "entity")]
-        let dialogNodes = [CreateDialogNode(dialogNode: "Best node")]
-        let counterExamples = [CreateCounterexample(text: "no u")]
-        let metadata: [String: JSON] = ["key": JSON.string("value")]
-        let systemSettings = WorkspaceSystemSettings(tooling: nil, disambiguation: nil, humanAgentAssist: nil)
-
         let expectation = self.expectation(description: "createWorkspace")
         assistant.createWorkspace(
-            name: "Anthony's workspace",
-            description: "The best workspace there ever was",
-            language: "en",
+            name: name,
+            description: description,
+            language: language,
             intents: intents,
             entities: entities,
             dialogNodes: dialogNodes,
             counterexamples: counterExamples,
             metadata: metadata,
-            learningOptOut: true,
+            learningOptOut: learningOptOut,
             systemSettings: systemSettings) {
                 _, _ in
                 expectation.fulfill()
@@ -225,6 +231,17 @@ class AssistantV1UnitTests: XCTestCase {
     }
 
     func testUpdateWorkspace() {
+        let name = "Anthony's workspace"
+        let description = "The best workspace there ever was"
+        let language = "en"
+        let intents = [CreateIntent(intent: "intent")]
+        let entities = [CreateEntity(entity: "entity")]
+        let dialogNodes = [CreateDialogNode(dialogNode: "Best node")]
+        let counterExamples = [CreateCounterexample(text: "no u")]
+        let metadata: [String: JSON] = ["key": JSON.string("value")]
+        let learningOptOut = true
+        let systemSettings = WorkspaceSystemSettings(tooling: nil, disambiguation: nil, humanAgentAssist: nil)
+
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
             XCTAssertNotNil(request.allHTTPHeaderFields)
@@ -239,16 +256,16 @@ class AssistantV1UnitTests: XCTestCase {
                 let body = Data(reading: request.httpBodyStream!)
                 let decodedBody = try JSONDecoder().decode(UpdateWorkspace.self, from: body)
 
-                XCTAssertNotNil(decodedBody.counterexamples)
-                XCTAssertNotNil(decodedBody.description)
-                XCTAssertNotNil(decodedBody.dialogNodes)
-                XCTAssertNotNil(decodedBody.entities)
-                XCTAssertNotNil(decodedBody.intents)
-                XCTAssertNotNil(decodedBody.language)
-                XCTAssertNotNil(decodedBody.learningOptOut)
-                XCTAssertNotNil(decodedBody.metadata)
-                XCTAssertNotNil(decodedBody.name)
-                XCTAssertNotNil(decodedBody.systemSettings)
+                XCTAssertEqual(decodedBody.intents, intents)
+                XCTAssertEqual(decodedBody.entities, entities)
+                XCTAssertEqual(decodedBody.dialogNodes, dialogNodes)
+                XCTAssertEqual(decodedBody.counterexamples, counterExamples)
+                XCTAssertEqual(decodedBody.metadata, metadata)
+                XCTAssertEqual(decodedBody.systemSettings, systemSettings)
+                XCTAssertEqual(decodedBody.name, name)
+                XCTAssertEqual(decodedBody.description, description)
+                XCTAssertEqual(decodedBody.language, language)
+                XCTAssertEqual(decodedBody.learningOptOut, learningOptOut)
             } catch {
                 XCTFail(missingBodyMessage(error))
             }
@@ -256,25 +273,18 @@ class AssistantV1UnitTests: XCTestCase {
             return (HTTPURLResponse(), Data())
         }
 
-        let intents = [CreateIntent(intent: "intent")]
-        let entities = [CreateEntity(entity: "entity")]
-        let dialogNodes = [CreateDialogNode(dialogNode: "Best node")]
-        let counterExamples = [CreateCounterexample(text: "no u")]
-        let metadata: [String: JSON] = ["key": JSON.string("value")]
-        let systemSettings = WorkspaceSystemSettings(tooling: nil, disambiguation: nil, humanAgentAssist: nil)
-
         let expectation = self.expectation(description: "updateWorkspace")
         assistant.updateWorkspace(
             workspaceID: self.workspaceID,
-            name: "Anthony's workspace",
-            description: "The best workspace there ever was",
-            language: "en",
+            name: name,
+            description: description,
+            language: language,
             intents: intents,
             entities: entities,
             dialogNodes: dialogNodes,
             counterexamples: counterExamples,
             metadata: metadata,
-            learningOptOut: true,
+            learningOptOut: learningOptOut,
             systemSettings: systemSettings,
             append: true) {
                 _, _ in
@@ -344,6 +354,9 @@ class AssistantV1UnitTests: XCTestCase {
     }
 
     func testCreateIntent() {
+        let description = "The best intent there ever was"
+        let examples = [CreateExample(text: "example")]
+
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
             XCTAssertNotNil(request.allHTTPHeaderFields)
@@ -358,8 +371,8 @@ class AssistantV1UnitTests: XCTestCase {
                 let body = Data(reading: request.httpBodyStream!)
                 let decodedBody = try JSONDecoder().decode(CreateIntent.self, from: body)
 
-                XCTAssertNotNil(decodedBody.description)
-                XCTAssertNotNil(decodedBody.examples)
+                XCTAssertEqual(decodedBody.description, description)
+                XCTAssertEqual(decodedBody.examples, examples)
             } catch {
                 XCTFail(missingBodyMessage(error))
             }
@@ -367,13 +380,11 @@ class AssistantV1UnitTests: XCTestCase {
             return (HTTPURLResponse(), Data())
         }
 
-        let examples = [CreateExample(text: "example")]
-
         let expectation = self.expectation(description: "createIntent")
         assistant.createIntent(
             workspaceID: self.workspaceID,
             intent: "intent",
-            description: "The best intent there ever was",
+            description: description,
             examples: examples) {
                 _, _ in
                 expectation.fulfill()
@@ -415,6 +426,9 @@ class AssistantV1UnitTests: XCTestCase {
 
     func testUpdateIntent() {
         let intent = "intent"
+        let newIntent = "my new intent"
+        let newDescription = "the best intent there ever was"
+        let newExamples = [CreateExample(text: "example")]
 
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
@@ -431,9 +445,9 @@ class AssistantV1UnitTests: XCTestCase {
                 let body = Data(reading: request.httpBodyStream!)
                 let decodedBody = try JSONDecoder().decode(UpdateIntent.self, from: body)
 
-                XCTAssertNotNil(decodedBody.intent)
-                XCTAssertNotNil(decodedBody.description)
-                XCTAssertNotNil(decodedBody.examples)
+                XCTAssertEqual(decodedBody.intent, newIntent)
+                XCTAssertEqual(decodedBody.description, newDescription)
+                XCTAssertEqual(decodedBody.examples, newExamples)
             } catch {
                 XCTFail(missingBodyMessage(error))
             }
@@ -441,14 +455,12 @@ class AssistantV1UnitTests: XCTestCase {
             return (HTTPURLResponse(), Data())
         }
 
-        let newExamples = [CreateExample(text: "example")]
-
         let expectation = self.expectation(description: "updateIntent")
         assistant.updateIntent(
             workspaceID: self.workspaceID,
             intent: intent,
-            newIntent: "my new intent",
-            newDescription: "the best intent ever",
+            newIntent: newIntent,
+            newDescription: newDescription,
             newExamples: newExamples) {
                 _, _ in
                 expectation.fulfill()
@@ -526,6 +538,7 @@ class AssistantV1UnitTests: XCTestCase {
     func testCreateExample() {
         let intent = "intent"
         let text = "text"
+        let mentions = [Mentions(entity: "entity", location: [0, 1])]
 
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
@@ -543,16 +556,14 @@ class AssistantV1UnitTests: XCTestCase {
                 let body = Data(reading: request.httpBodyStream!)
                 let decodedBody = try JSONDecoder().decode(CreateExample.self, from: body)
 
-                XCTAssertNotNil(decodedBody.mentions)
                 XCTAssertEqual(decodedBody.text, text)
+                XCTAssertEqual(decodedBody.mentions, mentions)
             } catch {
                 XCTFail(missingBodyMessage(error))
             }
 
             return (HTTPURLResponse(), Data())
         }
-
-        let mentions = [Mentions(entity: "entity", location: [0, 1])]
 
         let expectation = self.expectation(description: "createExample")
         assistant.createExample(
@@ -604,6 +615,7 @@ class AssistantV1UnitTests: XCTestCase {
         let intent = "intent"
         let text = "text"
         let newText = "new text"
+        let newMentions = [Mentions(entity: "entity", location: [0, 1])]
 
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
@@ -622,16 +634,14 @@ class AssistantV1UnitTests: XCTestCase {
                 let body = Data(reading: request.httpBodyStream!)
                 let decodedBody = try JSONDecoder().decode(UpdateExample.self, from: body)
 
-                XCTAssertNotNil(decodedBody.mentions)
-                XCTAssertNotNil(decodedBody.text)
+                XCTAssertEqual(decodedBody.text, newText)
+                XCTAssertEqual(decodedBody.mentions, newMentions)
             } catch {
                 XCTFail(missingBodyMessage(error))
             }
 
             return (HTTPURLResponse(), Data())
         }
-
-        let newMentions = [Mentions(entity: "entity", location: [0, 1])]
 
         let expectation = self.expectation(description: "updateExample")
         assistant.updateExample(
@@ -885,6 +895,10 @@ class AssistantV1UnitTests: XCTestCase {
 
     func testCreateEntity() {
         let entity = "entity"
+        let description = "The best entity there ever was"
+        let metadata = ["key": JSON.string("value")]
+        let values = [CreateValue(value: "value")]
+        let fuzzyMatch = true
 
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
@@ -901,10 +915,10 @@ class AssistantV1UnitTests: XCTestCase {
                 let decodedBody = try JSONDecoder().decode(CreateEntity.self, from: body)
 
                 XCTAssertEqual(decodedBody.entity, entity)
-                XCTAssertNotNil(decodedBody.description)
-                XCTAssertNotNil(decodedBody.fuzzyMatch)
-                XCTAssertNotNil(decodedBody.metadata)
-                XCTAssertNotNil(decodedBody.values)
+                XCTAssertEqual(decodedBody.description, description)
+                XCTAssertEqual(decodedBody.metadata, metadata)
+                XCTAssertEqual(decodedBody.values, values)
+                XCTAssertEqual(decodedBody.fuzzyMatch, fuzzyMatch)
             } catch {
                 XCTFail(missingBodyMessage(error))
             }
@@ -912,17 +926,14 @@ class AssistantV1UnitTests: XCTestCase {
             return (HTTPURLResponse(), Data())
         }
 
-        let metadata = ["key": JSON.string("value")]
-        let values = [CreateValue(value: "value")]
-
         let expectation = self.expectation(description: "createEntity")
         assistant.createEntity(
             workspaceID: self.workspaceID,
             entity: entity,
-            description: "The best entity there ever was",
+            description: description,
             metadata: metadata,
             values: values,
-            fuzzyMatch: true) {
+            fuzzyMatch: fuzzyMatch) {
                 _, _ in
                 expectation.fulfill()
         }
@@ -963,6 +974,10 @@ class AssistantV1UnitTests: XCTestCase {
     func testUpdateEntity() {
         let entity = "entity"
         let newEntity = "new entity"
+        let newDescription = "The best entity there ever was"
+        let newMetadata = ["key": JSON.string("value")]
+        let newValues = [CreateValue(value: "value")]
+        let newFuzzyMatch = true
 
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
@@ -980,10 +995,10 @@ class AssistantV1UnitTests: XCTestCase {
                 let decodedBody = try JSONDecoder().decode(UpdateEntity.self, from: body)
 
                 XCTAssertEqual(decodedBody.entity, newEntity)
-                XCTAssertNotNil(decodedBody.description)
-                XCTAssertNotNil(decodedBody.fuzzyMatch)
-                XCTAssertNotNil(decodedBody.metadata)
-                XCTAssertNotNil(decodedBody.values)
+                XCTAssertEqual(decodedBody.description, newDescription)
+                XCTAssertEqual(decodedBody.metadata, newMetadata)
+                XCTAssertEqual(decodedBody.fuzzyMatch, newFuzzyMatch)
+                XCTAssertEqual(decodedBody.values, newValues)
             } catch {
                 XCTFail(missingBodyMessage(error))
             }
@@ -991,17 +1006,14 @@ class AssistantV1UnitTests: XCTestCase {
             return (HTTPURLResponse(), Data())
         }
 
-        let metadata = ["key": JSON.string("value")]
-        let newValues = [CreateValue(value: "value")]
-
         let expectation = self.expectation(description: "updateEntity")
         assistant.updateEntity(
             workspaceID: self.workspaceID,
             entity: entity,
             newEntity: newEntity,
-            newDescription: "The best entity there ever was",
-            newMetadata: metadata,
-            newFuzzyMatch: true,
+            newDescription: newDescription,
+            newMetadata: newMetadata,
+            newFuzzyMatch: newFuzzyMatch,
             newValues: newValues) {
                 _, _ in
                 expectation.fulfill()
@@ -1118,6 +1130,10 @@ class AssistantV1UnitTests: XCTestCase {
     func testCreateValue() {
         let entity = "entity"
         let value = "value"
+        let metadata = ["key": JSON.string("value")]
+        let synonyms = ["synonym"]
+        let patterns = ["pattern"]
+        let valueType = "my value"
 
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
@@ -1136,10 +1152,10 @@ class AssistantV1UnitTests: XCTestCase {
                 let decodedBody = try JSONDecoder().decode(CreateValue.self, from: body)
 
                 XCTAssertEqual(decodedBody.value, value)
-                XCTAssertNotNil(decodedBody.metadata)
-                XCTAssertNotNil(decodedBody.patterns)
-                XCTAssertNotNil(decodedBody.synonyms)
-                XCTAssertNotNil(decodedBody.valueType)
+                XCTAssertEqual(decodedBody.metadata, metadata)
+                XCTAssertEqual(decodedBody.patterns, patterns)
+                XCTAssertEqual(decodedBody.synonyms, synonyms)
+                XCTAssertEqual(decodedBody.valueType, valueType)
             } catch {
                 XCTFail(missingBodyMessage(error))
             }
@@ -1147,17 +1163,15 @@ class AssistantV1UnitTests: XCTestCase {
             return (HTTPURLResponse(), Data())
         }
 
-        let metadata = ["key": JSON.string("value")]
-
         let expectation = self.expectation(description: "createValue")
         assistant.createValue(
             workspaceID: self.workspaceID,
             entity: entity,
             value: value,
             metadata: metadata,
-            synonyms: ["synonym"],
-            patterns: ["pattern"],
-            valueType: "my value") {
+            synonyms: synonyms,
+            patterns: patterns,
+            valueType: valueType) {
                 _, _ in
                 expectation.fulfill()
         }
@@ -1204,6 +1218,10 @@ class AssistantV1UnitTests: XCTestCase {
         let entity = "entity"
         let value = "value"
         let newValue = "new value"
+        let newMetadata = ["key": JSON.string("value")]
+        let newType = "new type"
+        let newSynonyms = ["new synonym"]
+        let newPatterns = ["new pattern"]
 
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
@@ -1223,18 +1241,16 @@ class AssistantV1UnitTests: XCTestCase {
                 let decodedBody = try JSONDecoder().decode(UpdateValue.self, from: body)
 
                 XCTAssertEqual(decodedBody.value, newValue)
-                XCTAssertNotNil(decodedBody.metadata)
-                XCTAssertNotNil(decodedBody.patterns)
-                XCTAssertNotNil(decodedBody.synonyms)
-                XCTAssertNotNil(decodedBody.valueType)
+                XCTAssertEqual(decodedBody.metadata, newMetadata)
+                XCTAssertEqual(decodedBody.valueType, newType)
+                XCTAssertEqual(decodedBody.synonyms, newSynonyms)
+                XCTAssertEqual(decodedBody.patterns, newPatterns)
             } catch {
                 XCTFail(missingBodyMessage(error))
             }
 
             return (HTTPURLResponse(), Data())
         }
-
-        let newMetadata = ["key": JSON.string("value")]
 
         let expectation = self.expectation(description: "updateValue")
         assistant.updateValue(
@@ -1243,9 +1259,9 @@ class AssistantV1UnitTests: XCTestCase {
             value: value,
             newValue: newValue,
             newMetadata: newMetadata,
-            newType: "new type",
-            newSynonyms: ["new synonym"],
-            newPatterns: ["new pattern"]) {
+            newType: newType,
+            newSynonyms: newSynonyms,
+            newPatterns: newPatterns) {
                 _, _ in
                 expectation.fulfill()
         }
@@ -1530,6 +1546,25 @@ class AssistantV1UnitTests: XCTestCase {
 
     func testCreateDialogNode() {
         let dialogNode = "dialogNode"
+        let description = "The best dialog node there ever was"
+        let conditions = "best"
+        let parent = "parent"
+        let previousSibling = "brother"
+        let generic = DialogNodeOutputGeneric(responseType: "json")
+        let additionalProperties = ["key": JSON.string("value")]
+        let output = DialogNodeOutput(generic: [generic], modifiers: nil, additionalProperties: additionalProperties)
+        let context = ["key1": JSON.string("value1")]
+        let metadata = ["key2": JSON.string("value2")]
+        let nextStep = DialogNodeNextStep(behavior: "jump")
+        let actions = [DialogNodeAction(name: "action", resultVariable: "nothing")]
+        let title = "title"
+        let nodeType = "nodeType"
+        let eventName = "eventName"
+        let variable = "variable"
+        let digressIn = "digressIn"
+        let digressOut = "digressOut"
+        let digressOutSlots = "digressOutSlot"
+        let userLabel = "my label"
 
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
@@ -1546,23 +1581,23 @@ class AssistantV1UnitTests: XCTestCase {
                 let decodedBody = try JSONDecoder().decode(CreateDialogNode.self, from: body)
 
                 XCTAssertEqual(decodedBody.dialogNode, dialogNode)
-                XCTAssertNotNil(decodedBody.actions)
-                XCTAssertNotNil(decodedBody.conditions)
-                XCTAssertNotNil(decodedBody.context)
-                XCTAssertNotNil(decodedBody.description)
-                XCTAssertNotNil(decodedBody.digressIn)
-                XCTAssertNotNil(decodedBody.digressOut)
-                XCTAssertNotNil(decodedBody.digressOutSlots)
-                XCTAssertNotNil(decodedBody.eventName)
-                XCTAssertNotNil(decodedBody.metadata)
-                XCTAssertNotNil(decodedBody.nextStep)
-                XCTAssertNotNil(decodedBody.nodeType)
-                XCTAssertNotNil(decodedBody.output)
-                XCTAssertNotNil(decodedBody.parent)
-                XCTAssertNotNil(decodedBody.previousSibling)
-                XCTAssertNotNil(decodedBody.title)
-                XCTAssertNotNil(decodedBody.userLabel)
-                XCTAssertNotNil(decodedBody.variable)
+                XCTAssertEqual(decodedBody.description, description)
+                XCTAssertEqual(decodedBody.conditions, conditions)
+                XCTAssertEqual(decodedBody.parent, parent)
+                XCTAssertEqual(decodedBody.previousSibling, previousSibling)
+                XCTAssertEqual(decodedBody.output, output)
+                XCTAssertEqual(decodedBody.context, context)
+                XCTAssertEqual(decodedBody.metadata, metadata)
+                XCTAssertEqual(decodedBody.nextStep, nextStep)
+                XCTAssertEqual(decodedBody.actions, actions)
+                XCTAssertEqual(decodedBody.title, title)
+                XCTAssertEqual(decodedBody.nodeType, nodeType)
+                XCTAssertEqual(decodedBody.eventName, eventName)
+                XCTAssertEqual(decodedBody.variable, variable)
+                XCTAssertEqual(decodedBody.digressIn, digressIn)
+                XCTAssertEqual(decodedBody.digressOut, digressOut)
+                XCTAssertEqual(decodedBody.digressOutSlots, digressOutSlots)
+                XCTAssertEqual(decodedBody.userLabel, userLabel)
             } catch {
                 XCTFail(missingBodyMessage(error))
             }
@@ -1570,35 +1605,27 @@ class AssistantV1UnitTests: XCTestCase {
             return (HTTPURLResponse(), Data())
         }
 
-        let generic = DialogNodeOutputGeneric(responseType: "json")
-        let additionalProperties = ["key": JSON.string("value")]
-        let output = DialogNodeOutput(generic: [generic], modifiers: nil, additionalProperties: additionalProperties)
-        let context = ["key1": JSON.string("value1")]
-        let metadata = ["key2": JSON.string("value2")]
-        let nextStep = DialogNodeNextStep(behavior: "jump")
-        let actions = [DialogNodeAction(name: "action", resultVariable: "nothing")]
-
         let expectation = self.expectation(description: "createDialogNode")
         assistant.createDialogNode(
             workspaceID: self.workspaceID,
             dialogNode: dialogNode,
-            description: "The best dialog node there ever was",
-            conditions: "best",
-            parent: "parent",
-            previousSibling: "brother",
+            description: description,
+            conditions: conditions,
+            parent: parent,
+            previousSibling: previousSibling,
             output: output,
             context: context,
             metadata: metadata,
             nextStep: nextStep,
             actions: actions,
-            title: "title",
-            nodeType: "nodeType",
-            eventName: "eventName",
-            variable: "variable",
-            digressIn: "digressIn",
-            digressOut: "digressOut",
-            digressOutSlots: "digressOutSlot",
-            userLabel: "my label") {
+            title: title,
+            nodeType: nodeType,
+            eventName: eventName,
+            variable: variable,
+            digressIn: digressIn,
+            digressOut: digressOut,
+            digressOutSlots: digressOutSlots,
+            userLabel: userLabel) {
                 _, _ in
                 expectation.fulfill()
         }
@@ -1637,6 +1664,26 @@ class AssistantV1UnitTests: XCTestCase {
 
     func testUpdateDialogNode() {
         let dialogNode = "dialogNode"
+        let newDialogNode = "newDialogNode"
+        let newDescription = "newDescription"
+        let newConditions = "newConditions"
+        let newParent = "newParent"
+        let newPreviousSibling = "newPreviousSibling"
+        let generic = DialogNodeOutputGeneric(responseType: "json")
+        let additionalProperties = ["key": JSON.string("value")]
+        let newOutput = DialogNodeOutput(generic: [generic], modifiers: nil, additionalProperties: additionalProperties)
+        let newContext = ["key1": JSON.string("value1")]
+        let newMetadata = ["key2": JSON.string("value2")]
+        let newNextStep = DialogNodeNextStep(behavior: "jump")
+        let newTitle = "newTitle"
+        let newType = "newType"
+        let newEventName = "newEventName"
+        let newVariable = "newVariable"
+        let newActions = [DialogNodeAction(name: "action", resultVariable: "nothing")]
+        let newDigressIn = "newDigressIn"
+        let newDigressOut = "newDigressOut"
+        let newDigressOutSlots = "newDigressOutSlots"
+        let newUserLabel = "newUserLabel"
 
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
@@ -1653,24 +1700,24 @@ class AssistantV1UnitTests: XCTestCase {
                 let body = Data(reading: request.httpBodyStream!)
                 let decodedBody = try JSONDecoder().decode(UpdateDialogNode.self, from: body)
 
-                XCTAssertNotNil(decodedBody.actions)
-                XCTAssertNotNil(decodedBody.conditions)
-                XCTAssertNotNil(decodedBody.context)
-                XCTAssertNotNil(decodedBody.description)
-                XCTAssertNotNil(decodedBody.dialogNode)
-                XCTAssertNotNil(decodedBody.digressIn)
-                XCTAssertNotNil(decodedBody.digressOut)
-                XCTAssertNotNil(decodedBody.digressOutSlots)
-                XCTAssertNotNil(decodedBody.eventName)
-                XCTAssertNotNil(decodedBody.metadata)
-                XCTAssertNotNil(decodedBody.nextStep)
-                XCTAssertNotNil(decodedBody.nodeType)
-                XCTAssertNotNil(decodedBody.output)
-                XCTAssertNotNil(decodedBody.parent)
-                XCTAssertNotNil(decodedBody.previousSibling)
-                XCTAssertNotNil(decodedBody.title)
-                XCTAssertNotNil(decodedBody.userLabel)
-                XCTAssertNotNil(decodedBody.variable)
+                XCTAssertEqual(decodedBody.dialogNode, newDialogNode)
+                XCTAssertEqual(decodedBody.description, newDescription)
+                XCTAssertEqual(decodedBody.conditions, newConditions)
+                XCTAssertEqual(decodedBody.parent, newParent)
+                XCTAssertEqual(decodedBody.previousSibling, newPreviousSibling)
+                XCTAssertEqual(decodedBody.output, newOutput)
+                XCTAssertEqual(decodedBody.context, newContext)
+                XCTAssertEqual(decodedBody.metadata, newMetadata)
+                XCTAssertEqual(decodedBody.nextStep, newNextStep)
+                XCTAssertEqual(decodedBody.title, newTitle)
+                XCTAssertEqual(decodedBody.nodeType, newType)
+                XCTAssertEqual(decodedBody.eventName, newEventName)
+                XCTAssertEqual(decodedBody.variable, newVariable)
+                XCTAssertEqual(decodedBody.actions, newActions)
+                XCTAssertEqual(decodedBody.digressIn, newDigressIn)
+                XCTAssertEqual(decodedBody.digressOut, newDigressOut)
+                XCTAssertEqual(decodedBody.digressOutSlots, newDigressOutSlots)
+                XCTAssertEqual(decodedBody.userLabel, newUserLabel)
             } catch {
                 XCTFail(missingBodyMessage(error))
             }
@@ -1678,36 +1725,28 @@ class AssistantV1UnitTests: XCTestCase {
             return (HTTPURLResponse(), Data())
         }
 
-        let generic = DialogNodeOutputGeneric(responseType: "json")
-        let additionalProperties = ["key": JSON.string("value")]
-        let newOutput = DialogNodeOutput(generic: [generic], modifiers: nil, additionalProperties: additionalProperties)
-        let newContext = ["key1": JSON.string("value1")]
-        let newMetadata = ["key2": JSON.string("value2")]
-        let newNextStep = DialogNodeNextStep(behavior: "jump")
-        let newActions = [DialogNodeAction(name: "action", resultVariable: "nothing")]
-
         let expectation = self.expectation(description: "updateDialogNode")
         assistant.updateDialogNode(
             workspaceID: self.workspaceID,
             dialogNode: dialogNode,
-            newDialogNode: "newDialogNode",
-            newDescription: "newDescription",
-            newConditions: "newConditions",
-            newParent: "newParent",
-            newPreviousSibling: "newPreviousSibling",
+            newDialogNode: newDialogNode,
+            newDescription: newDescription,
+            newConditions: newConditions,
+            newParent: newParent,
+            newPreviousSibling: newPreviousSibling,
             newOutput: newOutput,
             newContext: newContext,
             newMetadata: newMetadata,
             newNextStep: newNextStep,
-            newTitle: "newTitle",
-            newType: "newType",
-            newEventName: "newEventName",
-            newVariable: "newVariable",
+            newTitle: newTitle,
+            newType: newType,
+            newEventName: newEventName,
+            newVariable: newVariable,
             newActions: newActions,
-            newDigressIn: "newDigressIn",
-            newDigressOut: "newDigressOut",
-            newDigressOutSlots: "newDigressOutSlots",
-            newUserLabel: "newUserLabel") {
+            newDigressIn: newDigressIn,
+            newDigressOut: newDigressOut,
+            newDigressOutSlots: newDigressOutSlots,
+            newUserLabel: newUserLabel) {
                 _, _ in
                 expectation.fulfill()
         }

@@ -19,7 +19,7 @@ import Foundation
 /**
  Aggregation result data for the requested metric.
  */
-public struct MetricTokenAggregationResult: Codable {
+public struct MetricTokenAggregationResult: Codable, Equatable {
 
     /**
      The content of the **natural_language_query** parameter used in the query that this result represents.

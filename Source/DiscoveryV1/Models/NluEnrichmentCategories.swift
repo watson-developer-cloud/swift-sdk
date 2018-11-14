@@ -20,7 +20,7 @@ import RestKit
 /**
  An object that indicates the Categories enrichment will be applied to the specified field.
  */
-public struct NluEnrichmentCategories: Codable {
+public struct NluEnrichmentCategories: Codable, Equatable {
 
     /// Additional properties associated with this model.
     public var additionalProperties: [String: JSON]

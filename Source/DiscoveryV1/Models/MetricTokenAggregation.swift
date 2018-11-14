@@ -19,7 +19,7 @@ import Foundation
 /**
  An aggregation analyzing log information for queries and events.
  */
-public struct MetricTokenAggregation: Codable {
+public struct MetricTokenAggregation: Codable, Equatable {
 
     /**
      The event type associated with this metric result. This field, when present, will always be `click`.

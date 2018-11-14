@@ -17,7 +17,7 @@
 import Foundation
 
 /** NormalizationOperation. */
-public struct NormalizationOperation: Codable {
+public struct NormalizationOperation: Codable, Equatable {
 
     /**
      Identifies what type of operation to perform.

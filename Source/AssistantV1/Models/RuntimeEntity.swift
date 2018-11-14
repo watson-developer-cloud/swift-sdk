@@ -20,7 +20,7 @@ import RestKit
 /**
  A term from the request that was identified as an entity.
  */
-public struct RuntimeEntity: Codable {
+public struct RuntimeEntity: Codable, Equatable {
 
     /**
      An entity detected in the input.

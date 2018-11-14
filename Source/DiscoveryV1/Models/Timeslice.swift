@@ -17,7 +17,7 @@
 import Foundation
 
 /** Timeslice. */
-public struct Timeslice: Codable {
+public struct Timeslice: Codable, Equatable {
 
     /**
      The type of aggregation command used. For example: term, filter, max, min, etc.

@@ -19,7 +19,7 @@ import Foundation
 /**
  Document conversion settings.
  */
-public struct Conversions: Codable {
+public struct Conversions: Codable, Equatable {
 
     /**
      A list of PDF conversion settings.

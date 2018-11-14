@@ -17,7 +17,7 @@
 import Foundation
 
 /** Words. */
-public struct Words: Codable {
+public struct Words: Codable, Equatable {
 
     /**
      The **Add custom words** method accepts an array of `Word` objects. Each object provides a word that is to be added

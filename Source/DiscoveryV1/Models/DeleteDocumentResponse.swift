@@ -17,7 +17,7 @@
 import Foundation
 
 /** DeleteDocumentResponse. */
-public struct DeleteDocumentResponse: Codable {
+public struct DeleteDocumentResponse: Codable, Equatable {
 
     /**
      Status of the document. A deleted document has the status deleted.

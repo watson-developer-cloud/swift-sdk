@@ -19,7 +19,7 @@ import Foundation
 /**
  Information about a classifier.
  */
-public struct Classifier: Codable {
+public struct Classifier: Codable, Equatable {
 
     /**
      Training status of classifier.

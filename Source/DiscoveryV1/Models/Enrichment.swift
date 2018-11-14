@@ -17,7 +17,7 @@
 import Foundation
 
 /** Enrichment. */
-public struct Enrichment: Codable {
+public struct Enrichment: Codable, Equatable {
 
     /**
      Describes what the enrichment step does.

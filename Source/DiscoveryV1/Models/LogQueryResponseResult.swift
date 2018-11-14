@@ -20,7 +20,7 @@ import Foundation
  Individual result object for a **logs** query. Each object represents either a query to a Discovery collection or an
  event that is associated with a query.
  */
-public struct LogQueryResponseResult: Codable {
+public struct LogQueryResponseResult: Codable, Equatable {
 
     /**
      The type of log entry returned.

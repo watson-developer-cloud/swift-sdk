@@ -19,7 +19,7 @@ import Foundation
 /**
  Response from the classifier for multiple phrases.
  */
-public struct ClassificationCollection: Codable {
+public struct ClassificationCollection: Codable, Equatable {
 
     /**
      Unique identifier for this classifier.

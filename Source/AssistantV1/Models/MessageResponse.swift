@@ -20,7 +20,7 @@ import RestKit
 /**
  A response from the Watson Assistant service.
  */
-public struct MessageResponse: Codable {
+public struct MessageResponse: Codable, Equatable {
 
     /**
      The user input from the request.

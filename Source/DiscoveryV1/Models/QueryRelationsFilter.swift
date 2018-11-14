@@ -17,7 +17,7 @@
 import Foundation
 
 /** QueryRelationsFilter. */
-public struct QueryRelationsFilter: Codable {
+public struct QueryRelationsFilter: Codable, Equatable {
 
     /**
      A list of relation types to include or exclude from the query.

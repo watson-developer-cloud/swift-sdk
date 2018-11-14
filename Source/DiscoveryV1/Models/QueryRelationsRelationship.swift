@@ -17,7 +17,7 @@
 import Foundation
 
 /** QueryRelationsRelationship. */
-public struct QueryRelationsRelationship: Codable {
+public struct QueryRelationsRelationship: Codable, Equatable {
 
     /**
      The identified relationship type.

@@ -17,7 +17,7 @@
 import Foundation
 
 /** TargetedSentimentResults. */
-public struct TargetedSentimentResults: Codable {
+public struct TargetedSentimentResults: Codable, Equatable {
 
     /**
      Targeted text.

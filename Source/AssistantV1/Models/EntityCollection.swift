@@ -19,7 +19,7 @@ import Foundation
 /**
  An array of entities.
  */
-public struct EntityCollection: Codable {
+public struct EntityCollection: Codable, Equatable {
 
     /**
      An array of objects describing the entities defined for the workspace.

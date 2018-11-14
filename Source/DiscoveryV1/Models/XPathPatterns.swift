@@ -17,7 +17,7 @@
 import Foundation
 
 /** XPathPatterns. */
-public struct XPathPatterns: Codable {
+public struct XPathPatterns: Codable, Equatable {
 
     public var xpaths: [String]?
 

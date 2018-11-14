@@ -17,7 +17,7 @@
 import Foundation
 
 /** PDFHeadingDetection. */
-public struct PDFHeadingDetection: Codable {
+public struct PDFHeadingDetection: Codable, Equatable {
 
     public var fonts: [FontSetting]?
 

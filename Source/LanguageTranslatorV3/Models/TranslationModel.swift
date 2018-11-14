@@ -19,7 +19,7 @@ import Foundation
 /**
  Response payload for models.
  */
-public struct TranslationModel: Codable {
+public struct TranslationModel: Codable, Equatable {
 
     /**
      Availability of a model.

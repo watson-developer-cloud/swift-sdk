@@ -19,7 +19,7 @@ import Foundation
 /**
  Summary of the collection usage in the environment.
  */
-public struct CollectionUsage: Codable {
+public struct CollectionUsage: Codable, Equatable {
 
     /**
      Number of active collections in the environment.

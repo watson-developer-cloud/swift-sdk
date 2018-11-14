@@ -17,7 +17,7 @@
 import Foundation
 
 /** Content. */
-public struct Content: Codable {
+public struct Content: Codable, Equatable {
 
     /**
      An array of `ContentItem` objects that provides the text that is to be analyzed.

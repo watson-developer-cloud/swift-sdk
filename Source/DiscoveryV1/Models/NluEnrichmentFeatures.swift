@@ -17,7 +17,7 @@
 import Foundation
 
 /** NluEnrichmentFeatures. */
-public struct NluEnrichmentFeatures: Codable {
+public struct NluEnrichmentFeatures: Codable, Equatable {
 
     /**
      An object specifying the Keyword enrichment and related parameters.

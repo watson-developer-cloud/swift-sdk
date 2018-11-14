@@ -17,7 +17,7 @@
 import Foundation
 
 /** SemanticRolesObject. */
-public struct SemanticRolesObject: Codable {
+public struct SemanticRolesObject: Codable, Equatable {
 
     /**
      Object text.

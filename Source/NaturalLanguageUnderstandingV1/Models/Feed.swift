@@ -19,7 +19,7 @@ import Foundation
 /**
  RSS or ATOM feed found on the webpage.
  */
-public struct Feed: Codable {
+public struct Feed: Codable, Equatable {
 
     /**
      URL of the RSS or ATOM feed.

@@ -17,7 +17,7 @@
 import Foundation
 
 /** UpdateSynonym. */
-internal struct UpdateSynonym: Codable {
+internal struct UpdateSynonym: Codable, Equatable {
 
     /**
      The text of the synonym. This string must conform to the following restrictions:

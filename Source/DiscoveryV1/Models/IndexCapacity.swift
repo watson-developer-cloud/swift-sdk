@@ -19,7 +19,7 @@ import Foundation
 /**
  Details about the resource usage and capacity of the environment.
  */
-public struct IndexCapacity: Codable {
+public struct IndexCapacity: Codable, Equatable {
 
     /**
      Summary of the document usage statistics for the environment.

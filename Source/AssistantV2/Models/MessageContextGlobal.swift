@@ -19,7 +19,7 @@ import Foundation
 /**
  Contains information that can be shared by all skills within the Assistant.
  */
-public struct MessageContextGlobal: Codable {
+public struct MessageContextGlobal: Codable, Equatable {
 
     /**
      Properties interpreted by the Assistant that are shared across all skills within the Assistant.

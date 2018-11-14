@@ -17,7 +17,7 @@
 import Foundation
 
 /** IdentifiedLanguages. */
-public struct IdentifiedLanguages: Codable {
+public struct IdentifiedLanguages: Codable, Equatable {
 
     /**
      A ranking of identified languages with confidence scores.

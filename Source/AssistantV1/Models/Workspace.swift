@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** Workspace. */
-public struct Workspace: Codable {
+public struct Workspace: Codable, Equatable {
 
     /**
      The name of the workspace.

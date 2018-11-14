@@ -17,7 +17,7 @@
 import Foundation
 
 /** ToneInput. */
-public struct ToneInput: Codable {
+public struct ToneInput: Codable, Equatable {
 
     /**
      The input content that the service is to analyze.

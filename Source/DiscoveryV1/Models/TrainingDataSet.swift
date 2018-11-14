@@ -17,7 +17,7 @@
 import Foundation
 
 /** TrainingDataSet. */
-public struct TrainingDataSet: Codable {
+public struct TrainingDataSet: Codable, Equatable {
 
     public var environmentID: String?
 

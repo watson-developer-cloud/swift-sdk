@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** WorkspaceSystemSettings. */
-public struct WorkspaceSystemSettings: Codable {
+public struct WorkspaceSystemSettings: Codable, Equatable {
 
     /**
      Workspace settings related to the Watson Assistant tool.

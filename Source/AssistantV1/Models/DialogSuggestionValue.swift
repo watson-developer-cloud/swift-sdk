@@ -20,7 +20,7 @@ import Foundation
  An object defining the message input, intents, and entities to be sent to the Watson Assistant service if the user
  selects the corresponding disambiguation option.
  */
-public struct DialogSuggestionValue: Codable {
+public struct DialogSuggestionValue: Codable, Equatable {
 
     /**
      The user input.

@@ -17,7 +17,7 @@
 import Foundation
 
 /** CreateAcousticModel. */
-internal struct CreateAcousticModel: Codable {
+internal struct CreateAcousticModel: Codable, Equatable {
 
     /**
      The name of the base language model that is to be customized by the new custom acoustic model. The new custom model

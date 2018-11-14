@@ -17,7 +17,7 @@
 import Foundation
 
 /** AcousticModel. */
-public struct AcousticModel: Codable {
+public struct AcousticModel: Codable, Equatable {
 
     /**
      The current status of the custom acoustic model:

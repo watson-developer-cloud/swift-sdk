@@ -17,7 +17,7 @@
 import Foundation
 
 /** Text. */
-internal struct Text: Codable {
+internal struct Text: Codable, Equatable {
 
     /**
      The text to synthesize.

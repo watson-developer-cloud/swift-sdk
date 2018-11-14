@@ -17,7 +17,7 @@
 import Foundation
 
 /** Counterexample. */
-public struct Counterexample: Codable {
+public struct Counterexample: Codable, Equatable {
 
     /**
      The text of the counterexample.

@@ -17,7 +17,7 @@
 import Foundation
 
 /** RelationArgument. */
-public struct RelationArgument: Codable {
+public struct RelationArgument: Codable, Equatable {
 
     /**
      An array of extracted entities.

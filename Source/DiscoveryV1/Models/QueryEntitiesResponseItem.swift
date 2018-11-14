@@ -19,7 +19,7 @@ import Foundation
 /**
  Object containing Entity query response information.
  */
-public struct QueryEntitiesResponseItem: Codable {
+public struct QueryEntitiesResponseItem: Codable, Equatable {
 
     /**
      Entity text content.

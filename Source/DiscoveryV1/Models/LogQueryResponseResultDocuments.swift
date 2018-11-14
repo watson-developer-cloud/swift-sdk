@@ -20,7 +20,7 @@ import Foundation
  Object containing result information that was returned by the query used to create this log entry. Only returned with
  logs of type `query`.
  */
-public struct LogQueryResponseResultDocuments: Codable {
+public struct LogQueryResponseResultDocuments: Codable, Equatable {
 
     public var results: [LogQueryResponseResultDocumentsResult]?
 

@@ -17,7 +17,7 @@
 import Foundation
 
 /** CredentialsList. */
-public struct CredentialsList: Codable {
+public struct CredentialsList: Codable, Equatable {
 
     /**
      An array of credential definitions that were created for this instance.

@@ -17,7 +17,7 @@
 import Foundation
 
 /** UpdateExample. */
-internal struct UpdateExample: Codable {
+internal struct UpdateExample: Codable, Equatable {
 
     /**
      The text of the user input example. This string must conform to the following restrictions:

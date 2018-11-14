@@ -17,7 +17,7 @@
 import Foundation
 
 /** UpdateEnvironmentRequest. */
-internal struct UpdateEnvironmentRequest: Codable {
+internal struct UpdateEnvironmentRequest: Codable, Equatable {
 
     /**
      Size that the environment should be increased to. Environment size cannot be modified when using a Lite plan.

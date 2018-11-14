@@ -19,7 +19,7 @@ import Foundation
 /**
  An entity that corresponds with an argument in a relation.
  */
-public struct RelationEntity: Codable {
+public struct RelationEntity: Codable, Equatable {
 
     /**
      Text that corresponds to the entity.

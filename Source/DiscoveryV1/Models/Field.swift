@@ -17,7 +17,7 @@
 import Foundation
 
 /** Field. */
-public struct Field: Codable {
+public struct Field: Codable, Equatable {
 
     /**
      The type of the field.

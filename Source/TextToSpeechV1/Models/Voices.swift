@@ -17,7 +17,7 @@
 import Foundation
 
 /** Voices. */
-public struct Voices: Codable {
+public struct Voices: Codable, Equatable {
 
     /**
      A list of available voices.

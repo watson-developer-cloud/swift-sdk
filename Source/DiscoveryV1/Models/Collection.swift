@@ -19,7 +19,7 @@ import Foundation
 /**
  A collection for storing documents.
  */
-public struct Collection: Codable {
+public struct Collection: Codable, Equatable {
 
     /**
      The status of the collection.

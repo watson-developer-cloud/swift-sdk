@@ -19,7 +19,7 @@ import Foundation
 /**
  A request formatted for the Watson Assistant service.
  */
-internal struct MessageRequest: Codable {
+internal struct MessageRequest: Codable, Equatable {
 
     /**
      An input object that includes the input text.

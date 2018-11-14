@@ -17,7 +17,7 @@
 import Foundation
 
 /** UtteranceAnalyses. */
-public struct UtteranceAnalyses: Codable {
+public struct UtteranceAnalyses: Codable, Equatable {
 
     /**
      An array of `UtteranceAnalysis` objects that provides the results for each utterance of the input.

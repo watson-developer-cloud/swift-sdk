@@ -19,7 +19,7 @@ import Foundation
 /**
  A list of PDF conversion settings.
  */
-public struct PDFSettings: Codable {
+public struct PDFSettings: Codable, Equatable {
 
     public var heading: PDFHeadingDetection?
 

@@ -17,7 +17,7 @@
 import Foundation
 
 /** Model. */
-public struct Model: Codable {
+public struct Model: Codable, Equatable {
 
     /**
      When the status is `available`, the model is ready to use.

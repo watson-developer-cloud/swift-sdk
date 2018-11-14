@@ -19,7 +19,7 @@ import Foundation
 /**
  Object containing credential information.
  */
-public struct Credentials: Codable {
+public struct Credentials: Codable, Equatable {
 
     /**
      The source that this credentials object connects to.

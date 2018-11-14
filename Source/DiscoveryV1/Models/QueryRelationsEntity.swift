@@ -17,7 +17,7 @@
 import Foundation
 
 /** QueryRelationsEntity. */
-public struct QueryRelationsEntity: Codable {
+public struct QueryRelationsEntity: Codable, Equatable {
 
     /**
      Entity text content.

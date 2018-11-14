@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** QueryNoticesResult. */
-public struct QueryNoticesResult: Codable {
+public struct QueryNoticesResult: Codable, Equatable {
 
     /**
      The type of the original source file.

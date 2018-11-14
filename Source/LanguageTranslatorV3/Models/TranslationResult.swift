@@ -17,7 +17,7 @@
 import Foundation
 
 /** TranslationResult. */
-public struct TranslationResult: Codable {
+public struct TranslationResult: Codable, Equatable {
 
     /**
      Number of words in the input text.

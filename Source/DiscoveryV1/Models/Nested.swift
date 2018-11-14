@@ -17,7 +17,7 @@
 import Foundation
 
 /** Nested. */
-public struct Nested: Codable {
+public struct Nested: Codable, Equatable {
 
     /**
      The type of aggregation command used. For example: term, filter, max, min, etc.

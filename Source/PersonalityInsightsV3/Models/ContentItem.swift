@@ -17,7 +17,7 @@
 import Foundation
 
 /** ContentItem. */
-public struct ContentItem: Codable {
+public struct ContentItem: Codable, Equatable {
 
     /**
      The MIME type of the content. The default is plain text. The tags are stripped from HTML content before it is

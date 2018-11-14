@@ -19,7 +19,7 @@ import Foundation
 /**
  Tokenization dictionary describing how words are tokenized during ingestion and at query time.
  */
-internal struct TokenDict: Codable {
+internal struct TokenDict: Codable, Equatable {
 
     /**
      An array of tokenization rules. Each rule contains, the original `text` string, component `tokens`, any alternate

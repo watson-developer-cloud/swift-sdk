@@ -17,7 +17,7 @@
 import Foundation
 
 /** SpeechModels. */
-public struct SpeechModels: Codable {
+public struct SpeechModels: Codable, Equatable {
 
     /**
      An array of objects that provides information about each available model.

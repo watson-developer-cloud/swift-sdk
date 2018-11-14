@@ -19,7 +19,7 @@ import Foundation
 /**
  Result of a class within a classifier.
  */
-public struct ClassResult: Codable {
+public struct ClassResult: Codable, Equatable {
 
     /**
      Name of the class.

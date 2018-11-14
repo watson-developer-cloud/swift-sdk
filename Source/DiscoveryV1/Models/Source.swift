@@ -19,7 +19,7 @@ import Foundation
 /**
  Object containing source parameters for the configuration.
  */
-public struct Source: Codable {
+public struct Source: Codable, Equatable {
 
     /**
      The type of source to connect to.

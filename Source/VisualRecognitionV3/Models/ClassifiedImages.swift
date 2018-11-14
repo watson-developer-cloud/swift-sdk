@@ -19,7 +19,7 @@ import Foundation
 /**
  Results for all images.
  */
-public struct ClassifiedImages: Codable {
+public struct ClassifiedImages: Codable, Equatable {
 
     /**
      Number of custom classes identified in the images.

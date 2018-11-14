@@ -17,7 +17,7 @@
 import Foundation
 
 /** Word. */
-public struct Word: Codable {
+public struct Word: Codable, Equatable {
 
     /**
      A word from the custom model's words resource. The spelling of the word is used to train the model.

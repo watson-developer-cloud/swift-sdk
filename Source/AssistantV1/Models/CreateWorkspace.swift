@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** CreateWorkspace. */
-internal struct CreateWorkspace: Codable {
+internal struct CreateWorkspace: Codable, Equatable {
 
     /**
      The name of the workspace. This string cannot contain carriage return, newline, or tab characters, and it must be

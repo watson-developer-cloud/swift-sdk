@@ -17,7 +17,7 @@
 import Foundation
 
 /** ToneCategory. */
-public struct ToneCategory: Codable {
+public struct ToneCategory: Codable, Equatable {
 
     /**
      An array of `ToneScore` objects that provides the results for the tones of the category.

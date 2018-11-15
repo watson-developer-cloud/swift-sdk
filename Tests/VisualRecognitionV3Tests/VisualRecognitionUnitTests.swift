@@ -178,7 +178,7 @@ class VisualRecognitionUnitTests: XCTestCase {
         }
 
         let expectation = self.expectation(description: "createClassifier")
-        visualRecognition.createClassifier(name: "test-classifier", positiveExamples: [carExamples, trucksExamples], negativeExamples: baseball) {
+        visualRecognition.createClassifier(name: "test-classifier", positiveExamples: ["car": car, "trucks": trucks], negativeExamples: baseball) {
             _, _ in
             expectation.fulfill()
         }
@@ -247,7 +247,7 @@ class VisualRecognitionUnitTests: XCTestCase {
         }
 
         let expectation = self.expectation(description: "updateClassifier")
-        visualRecognition.updateClassifier(classifierID: classifierID, positiveExamples: [carExamples, trucksExamples], negativeExamples: baseball) {
+        visualRecognition.updateClassifier(classifierID: classifierID, positiveExamples: ["car": car, "trucks": trucks], negativeExamples: baseball) {
             _, _ in
             expectation.fulfill()
         }

@@ -138,7 +138,7 @@ class VisualRecognitionTests: XCTestCase {
     /** Train a classifier with only positive examples. */
     func testCreateDeleteClassifier1() {
         let name = "swift-sdk-unit-test-1"
-        let classes = [baseballExamples, carsExamples, trucksExamples]
+        let classes = ["baseball": baseball, "cars": cars, "trucks": trucks]
 
         var classifierID: String?
         let expectation1 = expectation(description: "Train a classifier with only positive examples.")
@@ -207,7 +207,7 @@ class VisualRecognitionTests: XCTestCase {
         let expectation1 = expectation(description: "Train a classifier with both positive and negative examples.")
         visualRecognition.createClassifier(
             name: name,
-            positiveExamples: [carsExamples],
+            positiveExamples: ["cars": cars],
             negativeExamples: trucks) {
                 response, error in
                 if let error = error {
@@ -294,7 +294,7 @@ class VisualRecognitionTests: XCTestCase {
         let expectation1 = expectation(description: "Train a new classifier with positive examples.")
         visualRecognition.createClassifier(
             name: name,
-            positiveExamples: [carsExamples],
+            positiveExamples: ["cars": cars],
             negativeExamples: baseball) {
                 response, error in
                 if let error = error {
@@ -354,7 +354,7 @@ class VisualRecognitionTests: XCTestCase {
 
         visualRecognition.updateClassifier(
             classifierID: newClassifierID,
-            positiveExamples: [trucksExamples]) {
+            positiveExamples: ["trucks": trucks]) {
                 response, error in
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
@@ -411,7 +411,7 @@ class VisualRecognitionTests: XCTestCase {
         var classifierID: String?
         visualRecognition.createClassifier(
             name: name,
-            positiveExamples: [carsExamples],
+            positiveExamples: ["cars": cars],
             negativeExamples: trucks) {
                 response, error in
                 if let error = error {
@@ -1305,8 +1305,7 @@ class VisualRecognitionTests: XCTestCase {
     func testCreateClassifierWithInvalidPositiveExamples() {
         let expectation = self.expectation(description: "Create classifier with invalid positive example.")
 
-        let invalidPositiveExample = PositiveExample(name: "obama", examples: obama)
-        visualRecognition.createClassifier(name: "invalidClassifier", positiveExamples: [invalidPositiveExample])
+        visualRecognition.createClassifier(name: "invalidClassifier", positiveExamples: ["obama": obama])
         {
             _, error in
             if error == nil {

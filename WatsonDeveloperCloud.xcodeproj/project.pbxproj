@@ -3457,9 +3457,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 92866198219110390064C6FD /* Build configuration list for PBXNativeTarget "CompareComplyV1" */;
 			buildPhases = (
-				9286618C219110390064C6FD /* Headers */,
 				9286618D219110390064C6FD /* Sources */,
+				927E1C19219CF24000E5D272 /* Run SwiftLint */,
 				9286618E219110390064C6FD /* Frameworks */,
+				9286618C219110390064C6FD /* Headers */,
 				9286618F219110390064C6FD /* Resources */,
 			);
 			buildRules = (
@@ -4143,6 +4144,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		927E1C19219CF24000E5D272 /* Run SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftLint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${PROJECT_DIR}/.swiftlint.yml\" --no-cache --path Source/CompareComplyV1\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		929DB99A212F7D8E00356EDC /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;

@@ -323,11 +323,13 @@ public class VisualRecognition {
      names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.
 
      - parameter name: The name of the new classifier. Encode special characters in UTF-8.
-     - parameter positiveExamples: An array of of positive examples, each with a name and a compressed (.zip) file
-       of images that depict the visual subject of a class in the new classifier. You can include more than one
-       positive example file in a call.
-       Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels.
-       The maximum number of images is 10,000 images or 100 MB per .zip file.
+     - parameter positiveExamples: A dictionary that contains the value for each classname. The value are a .zip file
+       of images that depict the visual subject of a class in the new classifier. You can include more than one positive
+       example file in a call.
+       Specify the parameter name by appending `_positive_examples` to the class name. For example,
+       `goldenretriever_positive_examples` creates the class **goldenretriever**.
+       Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The
+       maximum number of images is 10,000 images or 100 MB per .zip file.
        Encode special characters in the file name in UTF-8.
      - parameter negativeExamples: A .zip file of images that do not depict the visual subject of any of the classes
        of the new classifier. Must contain a minimum of 10 images.
@@ -337,7 +339,7 @@ public class VisualRecognition {
      */
     public func createClassifier(
         name: String,
-        positiveExamples: [PositiveExample],
+        positiveExamples: [String: URL],
         negativeExamples: URL? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Classifier>?, WatsonError?) -> Void)
@@ -347,11 +349,12 @@ public class VisualRecognition {
         if let nameData = name.data(using: .utf8) {
             multipartFormData.append(nameData, withName: "name")
         }
-        positiveExamples.forEach { example in
+        positiveExamples.forEach { (key, value) in
+            let partName = "\(key)_positive_examples"
             do {
-                try multipartFormData.append(file: example.examples, withName: example.name + "_positive_examples")
+                try multipartFormData.append(file: value, withName: partName)
             } catch {
-                completionHandler(nil, WatsonError.serialization(values: "file \(example.examples)"))
+                completionHandler(nil, WatsonError.serialization(values: "file \(value)"))
                 return
             }
         }
@@ -498,11 +501,13 @@ public class VisualRecognition {
      classifier retraining finished.
 
      - parameter classifierID: The ID of the classifier.
-     - parameter positiveExamples: An array of positive examples, each with a name and a compressed (.zip) file
-       of images that depict the visual subject of a class in the classifier. The positive examples create
-       or update classes in the classifier. You can include more than one positive example file in a call.
-       Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels.
-       The maximum number of images is 10,000 images or 100 MB per .zip file.
+     - parameter positiveExamples: A dictionary that contains the value for each classname. The value are a .zip file
+       of images that depict the visual subject of a class in the classifier. The positive examples create or update
+       classes in the classifier. You can include more than one positive example file in a call.
+       Specify the parameter name by appending `_positive_examples` to the class name. For example,
+       `goldenretriever_positive_examples` creates the class `goldenretriever`.
+       Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The
+       maximum number of images is 10,000 images or 100 MB per .zip file.
        Encode special characters in the file name in UTF-8.
      - parameter negativeExamples: A .zip file of images that do not depict the visual subject of any of the classes
        of the new classifier. Must contain a minimum of 10 images.
@@ -512,7 +517,7 @@ public class VisualRecognition {
      */
     public func updateClassifier(
         classifierID: String,
-        positiveExamples: [PositiveExample]? = nil,
+        positiveExamples: [String: URL]? = nil,
         negativeExamples: URL? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Classifier>?, WatsonError?) -> Void)
@@ -520,11 +525,12 @@ public class VisualRecognition {
         // construct body
         let multipartFormData = MultipartFormData()
         if let positiveExamples = positiveExamples {
-            positiveExamples.forEach { example in
+            positiveExamples.forEach { (key, value) in
+                let partName = "\(key)_positive_examples"
                 do {
-                    try multipartFormData.append(file: example.examples, withName: example.name + "_positive_examples")
+                    try multipartFormData.append(file: value, withName: partName)
                 } catch {
-                    completionHandler(nil, WatsonError.serialization(values: "file \(example.examples)"))
+                    completionHandler(nil, WatsonError.serialization(values: "file \(value)"))
                     return
                 }
             }

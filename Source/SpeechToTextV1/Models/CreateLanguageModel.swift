@@ -17,7 +17,7 @@
 import Foundation
 
 /** CreateLanguageModel. */
-internal struct CreateLanguageModel: Codable {
+internal struct CreateLanguageModel: Codable, Equatable {
 
     /**
      The name of the base language model that is to be customized by the new custom language model. The new custom model

@@ -17,7 +17,7 @@
 import Foundation
 
 /** AudioListing. */
-public struct AudioListing: Codable {
+public struct AudioListing: Codable, Equatable {
 
     /**
      **For an audio-type resource,** the status of the resource:

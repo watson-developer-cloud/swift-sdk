@@ -17,7 +17,7 @@
 import Foundation
 
 /** FontSetting. */
-public struct FontSetting: Codable {
+public struct FontSetting: Codable, Equatable {
 
     public var level: Int?
 

@@ -19,7 +19,7 @@ import Foundation
 /**
  Dialog log message details.
  */
-public struct DialogLogMessage: Codable {
+public struct DialogLogMessage: Codable, Equatable {
 
     /**
      The severity of the log message.

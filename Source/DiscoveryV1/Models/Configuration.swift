@@ -19,7 +19,7 @@ import Foundation
 /**
  A custom configuration for the environment.
  */
-public struct Configuration: Codable {
+public struct Configuration: Codable, Equatable {
 
     /**
      The unique identifier of the configuration.

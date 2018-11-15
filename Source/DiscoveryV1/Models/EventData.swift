@@ -19,7 +19,7 @@ import Foundation
 /**
  Query event data object.
  */
-public struct EventData: Codable {
+public struct EventData: Codable, Equatable {
 
     /**
      The **environment_id** associated with the query that the event is associated with.

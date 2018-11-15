@@ -17,7 +17,7 @@
 import Foundation
 
 /** Translation. */
-public struct Translation: Codable {
+public struct Translation: Codable, Equatable {
 
     /**
      Translation output in UTF-8.

@@ -19,7 +19,7 @@ import Foundation
 /**
  The object containing the actions and the objects the actions act upon.
  */
-public struct SemanticRolesResult: Codable {
+public struct SemanticRolesResult: Codable, Equatable {
 
     /**
      Sentence from the source that contains the subject, action, and object.

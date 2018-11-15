@@ -17,7 +17,7 @@
 import Foundation
 
 /** CreateVoiceModel. */
-internal struct CreateVoiceModel: Codable {
+internal struct CreateVoiceModel: Codable, Equatable {
 
     /**
      The language of the new custom voice model. Omit the parameter to use the the default language, `en-US`.

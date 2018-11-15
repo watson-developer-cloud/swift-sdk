@@ -19,7 +19,7 @@ import Foundation
 /**
  Age information about a face.
  */
-public struct FaceAge: Codable {
+public struct FaceAge: Codable, Equatable {
 
     /**
      Estimated minimum age.

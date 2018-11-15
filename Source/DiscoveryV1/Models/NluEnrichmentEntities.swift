@@ -19,7 +19,7 @@ import Foundation
 /**
  An object speficying the Entities enrichment and related parameters.
  */
-public struct NluEnrichmentEntities: Codable {
+public struct NluEnrichmentEntities: Codable, Equatable {
 
     /**
      When `true`, sentiment analysis of entities will be performed on the specified field.

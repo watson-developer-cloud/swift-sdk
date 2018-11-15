@@ -19,7 +19,7 @@ import Foundation
 /**
  Usage information.
  */
-public struct Usage: Codable {
+public struct Usage: Codable, Equatable {
 
     /**
      Number of features used in the API call.

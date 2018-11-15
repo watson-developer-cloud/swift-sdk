@@ -1,10 +1,18 @@
-//
-//  VisualRecognitionWithIAMTests.swift
-//  AssistantV1Tests
-//
-//  Created by Mike Kistler on 5/24/18.
-//  Copyright © 2018 IBM Corporation. All rights reserved.
-//
+/**
+ * Copyright IBM Corporation 2018
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ **/
 
 import XCTest
 import Foundation
@@ -72,12 +80,11 @@ class VisualRecognitionWithIAMTests: XCTestCase {
 
     /** Access service using IAM API Key credentials  */
     func testAccessWithAPIKey() {
-        let version = "2018-10-10"
         guard let apiKey = WatsonCredentials.VisualRecognitionAPIKey else {
             XCTFail("Missing credentials for Visual Recognition service")
             return
         }
-        let visualRecognition = VisualRecognition(version: version, apiKey: apiKey)
+        let visualRecognition = VisualRecognition(version: versionDate, apiKey: apiKey)
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
 
@@ -131,8 +138,7 @@ class VisualRecognitionWithIAMTests: XCTestCase {
 
         // Pass the access token as the credentials when instantiating the service
 
-        let version = "2018-10-10"
-        let visualRecognition = VisualRecognition(version: version, accessToken: accessToken)
+        let visualRecognition = VisualRecognition(version: versionDate, accessToken: accessToken)
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
 

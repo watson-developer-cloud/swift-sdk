@@ -17,7 +17,7 @@
 import Foundation
 
 /** TrainingStatus. */
-public struct TrainingStatus: Codable {
+public struct TrainingStatus: Codable, Equatable {
 
     public var totalExamples: Int?
 

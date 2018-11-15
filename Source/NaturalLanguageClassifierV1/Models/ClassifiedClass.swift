@@ -19,7 +19,7 @@ import Foundation
 /**
  Class and confidence.
  */
-public struct ClassifiedClass: Codable {
+public struct ClassifiedClass: Codable, Equatable {
 
     /**
      A decimal percentage that represents the confidence that Watson has in this class. Higher values represent higher

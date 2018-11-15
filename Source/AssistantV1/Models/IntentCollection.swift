@@ -17,7 +17,7 @@
 import Foundation
 
 /** IntentCollection. */
-public struct IntentCollection: Codable {
+public struct IntentCollection: Codable, Equatable {
 
     /**
      An array of objects describing the intents defined for the workspace.

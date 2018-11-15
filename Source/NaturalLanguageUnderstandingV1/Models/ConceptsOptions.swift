@@ -21,7 +21,7 @@ import Foundation
  "Artificial Intelligence" although the term is not mentioned.
  Supported languages: English, French, German, Japanese, Korean, Portuguese, Spanish.
  */
-public struct ConceptsOptions: Codable {
+public struct ConceptsOptions: Codable, Equatable {
 
     /**
      Maximum number of concepts to return.

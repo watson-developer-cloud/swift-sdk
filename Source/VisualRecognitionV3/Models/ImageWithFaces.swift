@@ -19,7 +19,7 @@ import Foundation
 /**
  Information about faces in the image.
  */
-public struct ImageWithFaces: Codable {
+public struct ImageWithFaces: Codable, Equatable {
 
     /**
      Faces detected in the images.

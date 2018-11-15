@@ -21,7 +21,7 @@ import RestKit
  Returns a five-level taxonomy of the content. The top three categories are returned.
  Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
  */
-public struct CategoriesOptions: Codable {
+public struct CategoriesOptions: Codable, Equatable {
 
     /// Additional properties associated with this model.
     public var additionalProperties: [String: JSON]

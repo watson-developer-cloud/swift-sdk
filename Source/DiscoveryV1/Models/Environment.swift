@@ -19,7 +19,7 @@ import Foundation
 /**
  Details about an environment.
  */
-public struct Environment: Codable {
+public struct Environment: Codable, Equatable {
 
     /**
      Current status of the environment. `resizing` is displayed when a request to increase the environment size has been

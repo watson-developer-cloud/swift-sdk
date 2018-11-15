@@ -19,7 +19,7 @@ import Foundation
 /**
  Object that defines a Microsoft SharePoint site collection to crawl with this configuration.
  */
-public struct SourceOptionsSiteColl: Codable {
+public struct SourceOptionsSiteColl: Codable, Equatable {
 
     /**
      The Microsoft SharePoint Online site collection path to crawl. The path must be be relative to the

@@ -17,7 +17,7 @@
 import Foundation
 
 /** SemanticRolesKeyword. */
-public struct SemanticRolesKeyword: Codable {
+public struct SemanticRolesKeyword: Codable, Equatable {
 
     /**
      The keyword text.

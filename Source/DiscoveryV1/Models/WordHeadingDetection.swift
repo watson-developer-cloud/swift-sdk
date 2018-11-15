@@ -17,7 +17,7 @@
 import Foundation
 
 /** WordHeadingDetection. */
-public struct WordHeadingDetection: Codable {
+public struct WordHeadingDetection: Codable, Equatable {
 
     public var fonts: [FontSetting]?
 

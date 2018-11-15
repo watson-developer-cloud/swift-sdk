@@ -19,7 +19,7 @@ import Foundation
 /**
  Response from the classifier for a phrase in a collection.
  */
-public struct CollectionItem: Codable {
+public struct CollectionItem: Codable, Equatable {
 
     /**
      The submitted phrase. The maximum length is 2048 characters.

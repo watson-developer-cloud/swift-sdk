@@ -17,7 +17,7 @@
 import Foundation
 
 /** SessionResponse. */
-public struct SessionResponse: Codable {
+public struct SessionResponse: Codable, Equatable {
 
     /**
      The session ID.

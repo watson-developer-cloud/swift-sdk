@@ -19,7 +19,7 @@ import Foundation
 /**
  The response generated from a call to a **metrics** method that evaluates tokens.
  */
-public struct MetricTokenResponse: Codable {
+public struct MetricTokenResponse: Codable, Equatable {
 
     public var aggregations: [MetricTokenAggregation]?
 

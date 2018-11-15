@@ -17,7 +17,7 @@
 import Foundation
 
 /** Voice. */
-public struct Voice: Codable {
+public struct Voice: Codable, Equatable {
 
     /**
      The URI of the voice.

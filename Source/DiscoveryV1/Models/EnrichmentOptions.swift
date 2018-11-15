@@ -19,7 +19,7 @@ import Foundation
 /**
  Options which are specific to a particular enrichment.
  */
-public struct EnrichmentOptions: Codable {
+public struct EnrichmentOptions: Codable, Equatable {
 
     /**
      ISO 639-1 code indicating the language to use for the analysis. This code overrides the automatic language

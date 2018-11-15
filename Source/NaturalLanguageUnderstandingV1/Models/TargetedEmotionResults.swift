@@ -19,7 +19,7 @@ import Foundation
 /**
  Emotion results for a specified target.
  */
-public struct TargetedEmotionResults: Codable {
+public struct TargetedEmotionResults: Codable, Equatable {
 
     /**
      Targeted text.

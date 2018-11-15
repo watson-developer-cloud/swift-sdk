@@ -19,7 +19,7 @@ import Foundation
 /**
  An array of dialog nodes.
  */
-public struct DialogNodeCollection: Codable {
+public struct DialogNodeCollection: Codable, Equatable {
 
     /**
      An array of objects describing the dialog nodes defined for the workspace.

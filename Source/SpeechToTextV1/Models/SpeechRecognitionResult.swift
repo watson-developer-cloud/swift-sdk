@@ -17,7 +17,7 @@
 import Foundation
 
 /** SpeechRecognitionResult. */
-public struct SpeechRecognitionResult: Codable {
+public struct SpeechRecognitionResult: Codable, Equatable {
 
     /**
      An indication of whether the transcription results are final. If `true`, the results for this utterance are not

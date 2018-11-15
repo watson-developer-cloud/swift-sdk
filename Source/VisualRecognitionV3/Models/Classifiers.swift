@@ -19,7 +19,7 @@ import Foundation
 /**
  A container for the list of classifiers.
  */
-public struct Classifiers: Codable {
+public struct Classifiers: Codable, Equatable {
 
     /**
      List of classifiers.

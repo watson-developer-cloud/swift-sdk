@@ -17,7 +17,7 @@
 import Foundation
 
 /** Words. */
-public struct Words: Codable {
+public struct Words: Codable, Equatable {
 
     /**
      An array of objects that provides information about each word in the custom model's words resource. The array is

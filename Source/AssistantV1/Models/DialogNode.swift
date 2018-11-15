@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** DialogNode. */
-public struct DialogNode: Codable {
+public struct DialogNode: Codable, Equatable {
 
     /**
      How the dialog node is processed.

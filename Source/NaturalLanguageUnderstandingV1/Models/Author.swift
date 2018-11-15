@@ -19,7 +19,7 @@ import Foundation
 /**
  The author of the analyzed content.
  */
-public struct Author: Codable {
+public struct Author: Codable, Equatable {
 
     /**
      Name of the author.

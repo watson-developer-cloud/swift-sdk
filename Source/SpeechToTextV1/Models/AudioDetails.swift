@@ -17,7 +17,7 @@
 import Foundation
 
 /** AudioDetails. */
-public struct AudioDetails: Codable {
+public struct AudioDetails: Codable, Equatable {
 
     /**
      The type of the audio resource:

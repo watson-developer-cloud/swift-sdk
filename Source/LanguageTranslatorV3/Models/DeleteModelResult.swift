@@ -17,7 +17,7 @@
 import Foundation
 
 /** DeleteModelResult. */
-public struct DeleteModelResult: Codable {
+public struct DeleteModelResult: Codable, Equatable {
 
     /**
      "OK" indicates that the model was successfully deleted.

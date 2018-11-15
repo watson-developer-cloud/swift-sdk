@@ -19,7 +19,7 @@ import Foundation
 /**
  An object describing a contextual entity mention.
  */
-public struct EntityMention: Codable {
+public struct EntityMention: Codable, Equatable {
 
     /**
      The text of the user input example.

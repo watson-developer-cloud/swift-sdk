@@ -19,7 +19,7 @@ import Foundation
 /**
  An object defining a single tokenizaion rule.
  */
-public struct TokenDictRule: Codable {
+public struct TokenDictRule: Codable, Equatable {
 
     /**
      The string to tokenize.

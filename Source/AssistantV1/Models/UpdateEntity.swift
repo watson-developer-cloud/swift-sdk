@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** UpdateEntity. */
-internal struct UpdateEntity: Codable {
+internal struct UpdateEntity: Codable, Equatable {
 
     /**
      The name of the entity. This string must conform to the following restrictions:

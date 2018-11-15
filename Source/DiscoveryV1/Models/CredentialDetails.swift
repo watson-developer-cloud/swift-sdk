@@ -20,7 +20,7 @@ import Foundation
  Object containing details of the stored credentials.
  Obtain credentials for your source from the administrator of the source.
  */
-public struct CredentialDetails: Codable {
+public struct CredentialDetails: Codable, Equatable {
 
     /**
      The authentication method for this credentials definition. The  **credential_type** specified must be supported by

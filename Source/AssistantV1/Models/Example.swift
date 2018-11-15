@@ -17,7 +17,7 @@
 import Foundation
 
 /** Example. */
-public struct Example: Codable {
+public struct Example: Codable, Equatable {
 
     /**
      The text of the user input example.

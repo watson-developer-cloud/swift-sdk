@@ -17,7 +17,7 @@
 import Foundation
 
 /** ExampleCollection. */
-public struct ExampleCollection: Codable {
+public struct ExampleCollection: Codable, Equatable {
 
     /**
      An array of objects describing the examples defined for the intent.

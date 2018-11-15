@@ -17,7 +17,7 @@
 import Foundation
 
 /** An aggregation produced by the Discovery service to analyze the input provided. */
-public enum QueryAggregation: Codable {
+public enum QueryAggregation: Codable, Equatable {
 
     // reference: https://console.bluemix.net/docs/services/discovery/query-reference.html#aggregations
 

@@ -19,7 +19,7 @@ import Foundation
 /**
  An object of type `DocumentAnalysis` that provides the results of the analysis for the full input document.
  */
-public struct DocumentAnalysis: Codable {
+public struct DocumentAnalysis: Codable, Equatable {
 
     /**
      **`2017-09-21`:** An array of `ToneScore` objects that provides the results of the analysis for each qualifying

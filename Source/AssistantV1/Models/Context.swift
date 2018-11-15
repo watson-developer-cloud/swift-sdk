@@ -20,7 +20,7 @@ import RestKit
 /**
  State information for the conversation. To maintain state, include the context from the previous response.
  */
-public struct Context: Codable {
+public struct Context: Codable, Equatable {
 
     /**
      The unique identifier of the conversation.

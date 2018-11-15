@@ -17,7 +17,7 @@
 import Foundation
 
 /** WorkspaceSystemSettingsTooling. */
-public struct WorkspaceSystemSettingsTooling: Codable {
+public struct WorkspaceSystemSettingsTooling: Codable, Equatable {
 
     /**
      Whether the dialog JSON editor displays text responses within the `output.generic` object.

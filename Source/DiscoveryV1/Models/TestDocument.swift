@@ -17,7 +17,7 @@
 import Foundation
 
 /** TestDocument. */
-public struct TestDocument: Codable {
+public struct TestDocument: Codable, Equatable {
 
     /**
      The unique identifier for the configuration.

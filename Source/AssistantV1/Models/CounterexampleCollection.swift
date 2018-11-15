@@ -17,7 +17,7 @@
 import Foundation
 
 /** CounterexampleCollection. */
-public struct CounterexampleCollection: Codable {
+public struct CounterexampleCollection: Codable, Equatable {
 
     /**
      An array of objects describing the examples marked as irrelevant input.

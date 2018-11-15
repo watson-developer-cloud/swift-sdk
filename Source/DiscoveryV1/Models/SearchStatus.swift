@@ -19,7 +19,7 @@ import Foundation
 /**
  Information about the Continuous Relevancy Training for this environment.
  */
-public struct SearchStatus: Codable {
+public struct SearchStatus: Codable, Equatable {
 
     /**
      The current status of Continuous Relevancy Training for this environment.

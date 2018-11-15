@@ -20,7 +20,7 @@ import Foundation
  The authors, publication date, title, prominent page image, and RSS/ATOM feeds of the webpage. Supports URL and HTML
  input types.
  */
-public struct MetadataResult: Codable {
+public struct MetadataResult: Codable, Equatable {
 
     /**
      The authors of the document.

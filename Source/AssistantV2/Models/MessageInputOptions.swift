@@ -19,7 +19,7 @@ import Foundation
 /**
  Optional properties that control how the assistant responds.
  */
-public struct MessageInputOptions: Codable {
+public struct MessageInputOptions: Codable, Equatable {
 
     /**
      Whether to return additional diagnostic information. Set to `true` to return additional information under the

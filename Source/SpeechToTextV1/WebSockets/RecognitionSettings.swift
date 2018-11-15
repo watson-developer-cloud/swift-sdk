@@ -23,7 +23,7 @@ import Foundation
  For more information about the Speech to Text service parameters, visit:
  https://console.bluemix.net/docs/services/speech-to-text/input.html
  */
-public struct RecognitionSettings: Codable {
+public struct RecognitionSettings: Codable, Equatable {
 
     /// The action to perform. Must be `start` to begin the request.
     private let action = "start"

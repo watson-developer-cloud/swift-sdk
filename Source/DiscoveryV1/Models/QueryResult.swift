@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** QueryResult. */
-public struct QueryResult: Codable {
+public struct QueryResult: Codable, Equatable {
 
     /**
      The unique identifier of the document.

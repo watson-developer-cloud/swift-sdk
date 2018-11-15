@@ -42,13 +42,12 @@ class DiscoveryTests: XCTestCase {
     }
 
     func instantiateDiscovery() {
-        let version = "2018-10-10"
         if let apiKey = WatsonCredentials.DiscoveryAPIKey {
-            discovery = Discovery(version: version, apiKey: apiKey)
+            discovery = Discovery(version: versionDate, apiKey: apiKey)
         } else {
             let username = WatsonCredentials.DiscoveryUsername
             let password = WatsonCredentials.DiscoveryPassword
-            discovery = Discovery(username: username, password: password, version: version)
+            discovery = Discovery(username: username, password: password, version: versionDate)
         }
         if let url = WatsonCredentials.DiscoveryURL {
             discovery.serviceURL = url

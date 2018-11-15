@@ -17,7 +17,7 @@
 import Foundation
 
 /** RecognitionJobs. */
-public struct RecognitionJobs: Codable {
+public struct RecognitionJobs: Codable, Equatable {
 
     /**
      An array of objects that provides the status for each of the user's current jobs. The array is empty if the user

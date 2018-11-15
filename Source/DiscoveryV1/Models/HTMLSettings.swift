@@ -19,7 +19,7 @@ import Foundation
 /**
  A list of HTML conversion settings.
  */
-public struct HTMLSettings: Codable {
+public struct HTMLSettings: Codable, Equatable {
 
     public var excludeTagsCompletely: [String]?
 

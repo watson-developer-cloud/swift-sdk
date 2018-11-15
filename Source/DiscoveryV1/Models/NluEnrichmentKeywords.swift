@@ -19,7 +19,7 @@ import Foundation
 /**
  An object specifying the Keyword enrichment and related parameters.
  */
-public struct NluEnrichmentKeywords: Codable {
+public struct NluEnrichmentKeywords: Codable, Equatable {
 
     /**
      When `true`, sentiment analysis of keywords will be performed on the specified field.

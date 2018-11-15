@@ -19,7 +19,7 @@ import Foundation
 /**
  Entity description and location within evidence field.
  */
-public struct QueryEvidenceEntity: Codable {
+public struct QueryEvidenceEntity: Codable, Equatable {
 
     /**
      The entity type for this entity. Possible types vary based on model used.

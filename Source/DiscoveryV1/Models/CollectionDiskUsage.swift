@@ -19,7 +19,7 @@ import Foundation
 /**
  Summary of the disk usage statistics for this collection.
  */
-public struct CollectionDiskUsage: Codable {
+public struct CollectionDiskUsage: Codable, Equatable {
 
     /**
      Number of bytes used by the collection.

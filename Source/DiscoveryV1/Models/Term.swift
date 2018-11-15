@@ -17,7 +17,7 @@
 import Foundation
 
 /** Term. */
-public struct Term: Codable {
+public struct Term: Codable, Equatable {
 
     /**
      The type of aggregation command used. For example: term, filter, max, min, etc.

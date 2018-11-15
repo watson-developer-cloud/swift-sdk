@@ -17,7 +17,7 @@
 import Foundation
 
 /** DialogNodeOutputTextValuesElement. */
-public struct DialogNodeOutputTextValuesElement: Codable {
+public struct DialogNodeOutputTextValuesElement: Codable, Equatable {
 
     /**
      The text of a response. This string can include newline characters (`

@@ -58,23 +58,6 @@ class VisualRecognitionTests: XCTestCase {
         ]
     }
 
-    lazy private var examplesBaseball: URL = loadResource(name: "baseball", ext: "zip")
-    lazy private var examplesCars: URL = loadResource(name: "cars", ext: "zip")
-    lazy private var examplesTrucks: URL = loadResource(name: "trucks", ext: "zip")
-    lazy private var faces: URL = loadResource(name: "faces", ext: "zip")
-    lazy private var face1: URL = loadResource(name: "face1", ext: "jpg")
-    lazy private var car: URL = loadResource(name: "car", ext: "png")
-    lazy private var carz: URL = loadResource(name: "carz", ext: "zip")
-    lazy private var obama: URL = loadResource(name: "obama", ext: "jpg")
-    lazy private var sign: URL = loadResource(name: "sign", ext: "jpg")
-
-    private let obamaURL = "https://www.whitehouse.gov/sites/whitehouse.gov/files/images/" +
-                           "Administration/People/president_official_portrait_lores.jpg"
-    private let carURL = "https://raw.githubusercontent.com/watson-developer-cloud/java-sdk" +
-                         "/master/visual-recognition/src/test/resources/visual_recognition/car.png"
-    private let signURL = "https://raw.githubusercontent.com/watson-developer-cloud/java-sdk/" +
-                          "master/visual-recognition/src/test/resources/visual_recognition/open.png"
-
     // MARK: - Test Configuration
 
     /** Set up for each test by instantiating the service. */
@@ -86,30 +69,16 @@ class VisualRecognitionTests: XCTestCase {
 
     /** Instantiate Visual Recognition. */
     func instantiateVisualRecognition() {
-        let version = "2018-10-10"
         guard let apiKey = WatsonCredentials.VisualRecognitionAPIKey else {
             XCTFail("Missing credentials for Visual Recognition service")
             return
         }
-        visualRecognition = VisualRecognition(version: version, apiKey: apiKey)
+        visualRecognition = VisualRecognition(version: versionDate, apiKey: apiKey)
         if let url = WatsonCredentials.VisualRecognitionURL {
             visualRecognition.serviceURL = url
         }
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
-    }
-
-    func loadResource(name: String, ext: String) -> URL {
-        #if os(Linux)
-        return URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Resources/" + name + "." + ext)
-        #else
-        let bundle = Bundle(for: type(of: self))
-        guard let url = bundle.url(forResource: name, withExtension: ext) else {
-            XCTFail("Unable to locate sample image files.")
-            assert(false)
-        }
-        return url
-        #endif
     }
 
     /** Wait for expectations. */
@@ -169,10 +138,7 @@ class VisualRecognitionTests: XCTestCase {
     /** Train a classifier with only positive examples. */
     func testCreateDeleteClassifier1() {
         let name = "swift-sdk-unit-test-1"
-        let baseball = PositiveExample(name: "baseball", examples: examplesBaseball)
-        let cars = PositiveExample(name: "car", examples: examplesCars)
-        let trucks = PositiveExample(name: "truck", examples: examplesTrucks)
-        let classes = [baseball, cars, trucks]
+        let classes = [baseballExamples, carsExamples, trucksExamples]
 
         var classifierID: String?
         let expectation1 = expectation(description: "Train a classifier with only positive examples.")
@@ -236,14 +202,13 @@ class VisualRecognitionTests: XCTestCase {
     /** Train a classifier with both positive and negative examples. */
     func testCreateDeleteClassifier2() {
         let name = "swift-sdk-unit-test-2"
-        let cars = PositiveExample(name: "car", examples: examplesCars)
 
         var classifierID: String?
         let expectation1 = expectation(description: "Train a classifier with both positive and negative examples.")
         visualRecognition.createClassifier(
             name: name,
-            positiveExamples: [cars],
-            negativeExamples: examplesTrucks) {
+            positiveExamples: [carsExamples],
+            negativeExamples: trucks) {
                 response, error in
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
@@ -324,15 +289,13 @@ class VisualRecognitionTests: XCTestCase {
     /** Update the classifier with a positive example. */
     func testUpdateClassifierWithPositiveExample() {
         let name = "swift-sdk-unit-test-positive-update"
-        let cars = PositiveExample(name: "car", examples: examplesCars)
-        let trucks = PositiveExample(name: "truck", examples: examplesTrucks)
 
         var classifierID: String?
         let expectation1 = expectation(description: "Train a new classifier with positive examples.")
         visualRecognition.createClassifier(
             name: name,
-            positiveExamples: [cars],
-            negativeExamples: examplesBaseball) {
+            positiveExamples: [carsExamples],
+            negativeExamples: baseball) {
                 response, error in
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
@@ -391,7 +354,7 @@ class VisualRecognitionTests: XCTestCase {
 
         visualRecognition.updateClassifier(
             classifierID: newClassifierID,
-            positiveExamples: [trucks]) {
+            positiveExamples: [trucksExamples]) {
                 response, error in
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
@@ -444,14 +407,12 @@ class VisualRecognitionTests: XCTestCase {
         let expectation1 = expectation(description: "Train a new classifier with positive examples.")
 
         let name = "swift-sdk-unit-test-negative-update"
-        let cars = PositiveExample(name: "car", examples: examplesCars)
-        let classes = [cars]
 
         var classifierID: String?
         visualRecognition.createClassifier(
             name: name,
-            positiveExamples: classes,
-            negativeExamples: examplesTrucks) {
+            positiveExamples: [carsExamples],
+            negativeExamples: trucks) {
                 response, error in
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
@@ -509,7 +470,7 @@ class VisualRecognitionTests: XCTestCase {
         let expectation2 = expectation(description: "Update the classifier with a negative example.")
         visualRecognition.updateClassifier(
             classifierID: newClassifierID,
-            negativeExamples: examplesBaseball) {
+            negativeExamples: baseball) {
                 response, error in
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
@@ -603,8 +564,8 @@ class VisualRecognitionTests: XCTestCase {
 
             // verify the image's metadata
             let image = classifiedImages.images.first
-            XCTAssertEqual(image?.sourceURL, self.obamaURL)
-            XCTAssertEqual(image?.resolvedURL, self.obamaURL)
+            XCTAssertEqual(image?.sourceURL, obamaURL)
+            XCTAssertEqual(image?.resolvedURL, obamaURL)
             XCTAssertNil(image?.image)
             XCTAssertNil(image?.error)
             XCTAssertEqual(image?.classifiers.count, 1)
@@ -663,8 +624,8 @@ class VisualRecognitionTests: XCTestCase {
 
             // verify the image's metadata
             let image = classifiedImages.images.first
-            XCTAssertEqual(image?.sourceURL, self.obamaURL)
-            XCTAssertEqual(image?.resolvedURL, self.obamaURL)
+            XCTAssertEqual(image?.sourceURL, obamaURL)
+            XCTAssertEqual(image?.resolvedURL, obamaURL)
             XCTAssertNil(image?.image)
             XCTAssertNil(image?.error)
             XCTAssertEqual(image?.classifiers.count, 1)
@@ -713,8 +674,8 @@ class VisualRecognitionTests: XCTestCase {
 
             // verify the image's metadata
             let image = classifiedImages.images.first
-            XCTAssertEqual(image?.sourceURL, self.carURL)
-            XCTAssertEqual(image?.resolvedURL, self.carURL)
+            XCTAssertEqual(image?.sourceURL, carURL)
+            XCTAssertEqual(image?.resolvedURL, carURL)
             XCTAssertNil(image?.image)
             XCTAssertNil(image?.error)
             XCTAssertEqual(image?.classifiers.count, 1)
@@ -759,8 +720,8 @@ class VisualRecognitionTests: XCTestCase {
 
             // verify the image's metadata
             let image = classifiedImages.images.first
-            XCTAssertEqual(image?.sourceURL, self.carURL)
-            XCTAssertEqual(image?.resolvedURL, self.carURL)
+            XCTAssertEqual(image?.sourceURL, carURL)
+            XCTAssertEqual(image?.resolvedURL, carURL)
             XCTAssertNil(image?.image)
             XCTAssertNil(image?.error)
             XCTAssertEqual(image?.classifiers.count, 1)
@@ -799,8 +760,8 @@ class VisualRecognitionTests: XCTestCase {
 
             // verify the image's metadata
             let image = classifiedImages.images.first
-            XCTAssertEqual(image?.sourceURL, self.carURL)
-            XCTAssertEqual(image?.resolvedURL, self.carURL)
+            XCTAssertEqual(image?.sourceURL, carURL)
+            XCTAssertEqual(image?.resolvedURL, carURL)
             XCTAssertNil(image?.image)
             XCTAssertNil(image?.error)
 
@@ -1190,8 +1151,8 @@ class VisualRecognitionTests: XCTestCase {
 
             // verify the face image object
             let face = faceImages.images.first
-            XCTAssertEqual(face?.sourceURL, self.obamaURL)
-            XCTAssertEqual(face?.resolvedURL, self.obamaURL)
+            XCTAssertEqual(face?.sourceURL, obamaURL)
+            XCTAssertEqual(face?.resolvedURL, obamaURL)
             XCTAssertNil(face?.image)
             XCTAssertNil(face?.error)
             XCTAssertEqual(face?.faces.count, 1)
@@ -1325,8 +1286,7 @@ class VisualRecognitionTests: XCTestCase {
     /** Invalid API Key. */
     func testAuthenticationError() {
         let apiKey = "let-me-in-let-me-in"
-        let version = "2018-10-10"
-        visualRecognition = VisualRecognition(version: version, apiKey: apiKey)
+        visualRecognition = VisualRecognition(version: versionDate, apiKey: apiKey)
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
 

@@ -17,7 +17,7 @@
 import Foundation
 
 /** VoiceModels. */
-public struct VoiceModels: Codable {
+public struct VoiceModels: Codable, Equatable {
 
     /**
      An array of `VoiceModel` objects that provides information about each available custom voice model. The array is

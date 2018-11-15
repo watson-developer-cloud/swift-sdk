@@ -17,7 +17,7 @@
 import Foundation
 
 /** TrainingQuery. */
-public struct TrainingQuery: Codable {
+public struct TrainingQuery: Codable, Equatable {
 
     public var queryID: String?
 

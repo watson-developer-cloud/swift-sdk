@@ -238,7 +238,7 @@ extension VisualRecognition {
      Locate a Core ML model on disk. The model must be named "[classifier-id].mlmodelc" and reside in the
      application support directory or main bundle.
      */
-    private func locateModelOnDisk(classifierID: String) throws -> URL {
+    internal func locateModelOnDisk(classifierID: String) throws -> URL {
 
         // search for model in application support directory
         let fileManager = FileManager.default
@@ -311,7 +311,7 @@ extension VisualRecognition {
      - parameter completionHandler: A function executed when the request completes with a successful result or error.
        If both the response and error are `nil`, then the Core ML model already exists locally.
      */
-    private func downloadClassifier(
+    internal func downloadClassifier(
         classifierID: String,
         completionHandler: @escaping (WatsonResponse<Classifier>?, WatsonError?) -> Void)
     {

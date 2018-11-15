@@ -19,7 +19,7 @@ import Foundation
 /**
  Status information about a submitted document.
  */
-public struct DocumentStatus: Codable {
+public struct DocumentStatus: Codable, Equatable {
 
     /**
      Status of the document in the ingestion process.

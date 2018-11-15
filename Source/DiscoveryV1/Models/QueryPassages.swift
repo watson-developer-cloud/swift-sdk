@@ -17,7 +17,7 @@
 import Foundation
 
 /** QueryPassages. */
-public struct QueryPassages: Codable {
+public struct QueryPassages: Codable, Equatable {
 
     /**
      The unique identifier of the document from which the passage has been extracted.

@@ -17,7 +17,7 @@
 import Foundation
 
 /** AcousticModels. */
-public struct AcousticModels: Codable {
+public struct AcousticModels: Codable, Equatable {
 
     /**
      An array of objects that provides information about each available custom acoustic model. The array is empty if the

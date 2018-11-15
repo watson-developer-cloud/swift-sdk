@@ -17,7 +17,7 @@
 import Foundation
 
 /** Word. */
-public struct Word: Codable {
+public struct Word: Codable, Equatable {
 
     /**
      **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation

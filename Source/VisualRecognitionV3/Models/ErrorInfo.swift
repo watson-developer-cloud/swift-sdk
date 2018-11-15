@@ -20,7 +20,7 @@ import Foundation
  Information about what might have caused a failure, such as an image that is too large. Not returned when there is no
  error.
  */
-public struct ErrorInfo: Codable {
+public struct ErrorInfo: Codable, Equatable {
 
     /**
      HTTP status code.

@@ -26,7 +26,7 @@ import Foundation
    * Fields returned from the News collection are prefixed with `v{N}-fullnews-t3-{YEAR}.mappings` (for example,
  `v5-fullnews-t3-2016.mappings.text.properties.author`).
  */
-public struct ListCollectionFieldsResponse: Codable {
+public struct ListCollectionFieldsResponse: Codable, Equatable {
 
     /**
      An array containing information about each field in the collections.

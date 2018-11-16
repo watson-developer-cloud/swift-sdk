@@ -349,8 +349,8 @@ public class VisualRecognition {
         if let nameData = name.data(using: .utf8) {
             multipartFormData.append(nameData, withName: "name")
         }
-        positiveExamples.forEach { (key, value) in
-            let partName = "\(key)_positive_examples"
+        positiveExamples.forEach { (classname, value) in
+            let partName = "\(classname)_positive_examples"
             do {
                 try multipartFormData.append(file: value, withName: partName)
             } catch {
@@ -525,8 +525,8 @@ public class VisualRecognition {
         // construct body
         let multipartFormData = MultipartFormData()
         if let positiveExamples = positiveExamples {
-            positiveExamples.forEach { (key, value) in
-                let partName = "\(key)_positive_examples"
+            positiveExamples.forEach { (classname, value) in
+                let partName = "\(classname)_positive_examples"
                 do {
                     try multipartFormData.append(file: value, withName: partName)
                 } catch {

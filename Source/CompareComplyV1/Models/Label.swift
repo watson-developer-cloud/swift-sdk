@@ -25,12 +25,12 @@ public struct Label: Codable {
     /**
      The identified `nature` of the element.
      */
-    public var nature: String?
+    public var nature: String
 
     /**
      The identified `party` of the element.
      */
-    public var party: String?
+    public var party: String
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
@@ -47,8 +47,8 @@ public struct Label: Codable {
      - returns: An initialized `Label`.
     */
     public init(
-        nature: String? = nil,
-        party: String? = nil
+        nature: String,
+        party: String
     )
     {
         self.nature = nature

@@ -95,7 +95,7 @@ public class CompareComply {
 
      Uploads an input file to the service instance, which returns an HTML version of the document.
 
-     - parameter file: The file to convert.
+     - parameter file: The input file to convert.
      - parameter modelID: The analysis model to be used by the service. For the `/v1/element_classification` and
        `/v1/comparison` methods, the default is `contracts`. For the `/v1/tables` method, the default is `tables`. These
        defaults apply to the standalone methods as well as to the methods' use in batch-processing requests.
@@ -169,10 +169,11 @@ public class CompareComply {
      Uploads a file to the service instance, which returns an analysis of the document's structural and semantic
      elements.
 
-     - parameter file: The PDF file to convert.
+     - parameter file: The input file to convert.
      - parameter modelID: The analysis model to be used by the service. For the `/v1/element_classification` and
        `/v1/comparison` methods, the default is `contracts`. For the `/v1/tables` method, the default is `tables`. These
        defaults apply to the standalone methods as well as to the methods' use in batch-processing requests.
+     - parameter fileContentType: The content type of file.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -180,6 +181,7 @@ public class CompareComply {
     public func classifyElements(
         file: URL,
         modelID: String? = nil,
+        fileContentType: String? = nil,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (ClassifyReturn) -> Void)
@@ -240,10 +242,11 @@ public class CompareComply {
 
      Uploads a document file to the service instance, which extracts the contents of the document's tables.
 
-     - parameter file: The PDF file on which to run table extraction.
+     - parameter file: The input file on which to run table extraction.
      - parameter modelID: The analysis model to be used by the service. For the `/v1/element_classification` and
        `/v1/comparison` methods, the default is `contracts`. For the `/v1/tables` method, the default is `tables`. These
        defaults apply to the standalone methods as well as to the methods' use in batch-processing requests.
+     - parameter fileContentType: The content type of file.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
@@ -251,6 +254,7 @@ public class CompareComply {
     public func extractTables(
         file: URL,
         modelID: String? = nil,
+        fileContentType: String? = nil,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (TableReturn) -> Void)
@@ -411,23 +415,23 @@ public class CompareComply {
      **Important:** Feedback is not immediately incorporated into the training model, nor is it guaranteed to be
      incorporated at a later date. Instead, submitted feedback is used to suggest future updates to the training model.
 
+     - parameter feedbackData: Feedback data for submission.
      - parameter userID: An optional string identifying the user.
      - parameter comment: An optional comment on or description of the feedback.
-     - parameter feedbackData: Feedback data for submission.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
     public func addFeedback(
+        feedbackData: FeedbackDataInput,
         userID: String? = nil,
         comment: String? = nil,
-        feedbackData: FeedbackDataInput? = nil,
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (FeedbackReturn) -> Void)
     {
         // construct body
-        let addFeedbackRequest = FeedbackInput(userID: userID, comment: comment, feedbackData: feedbackData)
+        let addFeedbackRequest = FeedbackInput(feedbackData: feedbackData, userID: userID, comment: comment)
         guard let body = try? JSONEncoder().encode(addFeedbackRequest) else {
             failure?(RestError.serializationError)
             return
@@ -870,7 +874,7 @@ public class CompareComply {
      - parameter failure: A function executed if an error occurs.
      - parameter success: A function executed with the successful result.
      */
-    public func getBatches(
+    public func listBatches(
         headers: [String: String]? = nil,
         failure: ((Error) -> Void)? = nil,
         success: @escaping (Batches) -> Void)

@@ -34,7 +34,7 @@ internal struct FeedbackInput: Encodable {
     /**
      Feedback data for submission.
      */
-    public var feedbackData: FeedbackDataInput?
+    public var feedbackData: FeedbackDataInput
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
@@ -46,21 +46,21 @@ internal struct FeedbackInput: Encodable {
     /**
      Initialize a `FeedbackInput` with member variables.
 
+     - parameter feedbackData: Feedback data for submission.
      - parameter userID: An optional string identifying the user.
      - parameter comment: An optional comment on or description of the feedback.
-     - parameter feedbackData: Feedback data for submission.
 
      - returns: An initialized `FeedbackInput`.
     */
     public init(
+        feedbackData: FeedbackDataInput,
         userID: String? = nil,
-        comment: String? = nil,
-        feedbackData: FeedbackDataInput? = nil
+        comment: String? = nil
     )
     {
+        self.feedbackData = feedbackData
         self.userID = userID
         self.comment = comment
-        self.feedbackData = feedbackData
     }
 
 }

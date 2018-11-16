@@ -22,19 +22,9 @@ import Foundation
 public struct FeedbackDataInput: Encodable {
 
     /**
-     An optional identifier of the user submitting feedback.
-     */
-    public var userID: String?
-
-    /**
-     An optional comment about the feedback.
-     */
-    public var comment: String?
-
-    /**
      The type of feedback. The only permitted value is `element_classification`.
      */
-    public var feedbackType: String?
+    public var feedbackType: String
 
     /**
      Brief information about the input document.
@@ -55,27 +45,25 @@ public struct FeedbackDataInput: Encodable {
      The numeric location of the identified element in the document, represented with two integers labeled `begin` and
      `end`.
      */
-    public var location: Location?
+    public var location: Location
 
     /**
      The text on which to submit feedback.
      */
-    public var text: String?
+    public var text: String
 
     /**
      The original labeling from the input document, without the submitted feedback.
      */
-    public var originalLabels: OriginalLabelsIn?
+    public var originalLabels: OriginalLabelsIn
 
     /**
      The updated labeling from the input document, accounting for the submitted feedback.
      */
-    public var updatedLabels: UpdatedLabelsIn?
+    public var updatedLabels: UpdatedLabelsIn
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case userID = "user_id"
-        case comment = "comment"
         case feedbackType = "feedback_type"
         case document = "document"
         case modelID = "model_id"
@@ -89,43 +77,37 @@ public struct FeedbackDataInput: Encodable {
     /**
      Initialize a `FeedbackDataInput` with member variables.
 
-     - parameter userID: An optional identifier of the user submitting feedback.
-     - parameter comment: An optional comment about the feedback.
      - parameter feedbackType: The type of feedback. The only permitted value is `element_classification`.
-     - parameter document: Brief information about the input document.
-     - parameter modelID: An optional string identifying the model ID. The only permitted value is `contracts`.
-     - parameter modelVersion: An optional string identifying the version of the model used.
      - parameter location: The numeric location of the identified element in the document, represented with two
        integers labeled `begin` and `end`.
      - parameter text: The text on which to submit feedback.
      - parameter originalLabels: The original labeling from the input document, without the submitted feedback.
      - parameter updatedLabels: The updated labeling from the input document, accounting for the submitted feedback.
+     - parameter document: Brief information about the input document.
+     - parameter modelID: An optional string identifying the model ID. The only permitted value is `contracts`.
+     - parameter modelVersion: An optional string identifying the version of the model used.
 
      - returns: An initialized `FeedbackDataInput`.
     */
     public init(
-        userID: String? = nil,
-        comment: String? = nil,
-        feedbackType: String? = nil,
+        feedbackType: String,
+        location: Location,
+        text: String,
+        originalLabels: OriginalLabelsIn,
+        updatedLabels: UpdatedLabelsIn,
         document: ShortDoc? = nil,
         modelID: String? = nil,
-        modelVersion: String? = nil,
-        location: Location? = nil,
-        text: String? = nil,
-        originalLabels: OriginalLabelsIn? = nil,
-        updatedLabels: UpdatedLabelsIn? = nil
+        modelVersion: String? = nil
     )
     {
-        self.userID = userID
-        self.comment = comment
         self.feedbackType = feedbackType
-        self.document = document
-        self.modelID = modelID
-        self.modelVersion = modelVersion
         self.location = location
         self.text = text
         self.originalLabels = originalLabels
         self.updatedLabels = updatedLabels
+        self.document = document
+        self.modelID = modelID
+        self.modelVersion = modelVersion
     }
 
 }

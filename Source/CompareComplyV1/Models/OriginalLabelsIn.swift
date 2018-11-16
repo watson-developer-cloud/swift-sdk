@@ -24,12 +24,12 @@ public struct OriginalLabelsIn: Encodable {
     /**
      Description of the action specified by the element and whom it affects.
      */
-    public var types: [TypeLabel]?
+    public var types: [TypeLabel]
 
     /**
      List of functional categories into which the element falls; in other words, the subject matter of the element.
      */
-    public var categories: [Category]?
+    public var categories: [Category]
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
@@ -47,8 +47,8 @@ public struct OriginalLabelsIn: Encodable {
      - returns: An initialized `OriginalLabelsIn`.
     */
     public init(
-        types: [TypeLabel]? = nil,
-        categories: [Category]? = nil
+        types: [TypeLabel],
+        categories: [Category]
     )
     {
         self.types = types

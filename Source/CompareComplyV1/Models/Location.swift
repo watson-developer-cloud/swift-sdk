@@ -25,12 +25,12 @@ public struct Location: Codable {
     /**
      The element's `begin` index.
      */
-    public var begin: Int?
+    public var begin: Int
 
     /**
      The element's `end` index.
      */
-    public var end: Int?
+    public var end: Int
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
@@ -47,8 +47,8 @@ public struct Location: Codable {
      - returns: An initialized `Location`.
     */
     public init(
-        begin: Int? = nil,
-        end: Int? = nil
+        begin: Int,
+        end: Int
     )
     {
         self.begin = begin

@@ -28,16 +28,6 @@ let face1: URL = loadResource(name: "face1", ext: "jpg")
 let obama: URL = loadResource(name: "obama", ext: "jpg")
 let sign: URL = loadResource(name: "sign", ext: "jpg")
 
-let carExamples = PositiveExample(name: "car", examples: car)
-let carsExamples = PositiveExample(name: "cars", examples: cars)
-let carzExamples = PositiveExample(name: "carz", examples: carz)
-let trucksExamples = PositiveExample(name: "trucks", examples: trucks)
-let baseballExamples = PositiveExample(name: "baseball", examples: baseball)
-let facesExamples = PositiveExample(name: "faces", examples: faces)
-let face1Examples = PositiveExample(name: "face1", examples: face1)
-let obamaExamples = PositiveExample(name: "obama", examples: obama)
-let signExamples = PositiveExample(name: "sign", examples: sign)
-
 let obamaURL = "https://www.whitehouse.gov/sites/whitehouse.gov/files/images/" +
 "Administration/People/president_official_portrait_lores.jpg"
 let carURL = "https://raw.githubusercontent.com/watson-developer-cloud/java-sdk" +

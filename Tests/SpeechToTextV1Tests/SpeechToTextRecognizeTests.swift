@@ -21,8 +21,8 @@
 
 import XCTest
 import Foundation
-import SpeechToTextV1
 import RestKit
+@testable import SpeechToTextV1
 
 class SpeechToTextRecognizeTests: XCTestCase {
 

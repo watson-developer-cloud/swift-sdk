@@ -321,9 +321,6 @@ public class SpeechToText {
        parameter. To determine whether a language model supports speaker labels, use the **Get models** method and check
        that the attribute `speaker_labels` is set to `true`. See [Speaker
        labels](https://console.bluemix.net/docs/services/speech-to-text/output.html#speaker_labels).
-     - parameter customizationID: **Deprecated.** Use the `language_customization_id` parameter to specify the
-       customization ID (GUID) of a custom language model that is to be used with the recognition request. Do not
-       specify both parameters with a request.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -420,10 +417,6 @@ public class SpeechToText {
         }
         if let speakerLabels = speakerLabels {
             let queryParameter = URLQueryItem(name: "speaker_labels", value: "\(speakerLabels)")
-            queryParameters.append(queryParameter)
-        }
-        if let customizationID = customizationID {
-            let queryParameter = URLQueryItem(name: "customization_id", value: customizationID)
             queryParameters.append(queryParameter)
         }
 
@@ -720,9 +713,6 @@ public class SpeechToText {
        parameter. To determine whether a language model supports speaker labels, use the **Get models** method and check
        that the attribute `speaker_labels` is set to `true`. See [Speaker
        labels](https://console.bluemix.net/docs/services/speech-to-text/output.html#speaker_labels).
-     - parameter customizationID: **Deprecated.** Use the `language_customization_id` parameter to specify the
-       customization ID (GUID) of a custom language model that is to be used with the recognition request. Do not
-       specify both parameters with a request.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -748,7 +738,6 @@ public class SpeechToText {
         profanityFilter: Bool? = nil,
         smartFormatting: Bool? = nil,
         speakerLabels: Bool? = nil,
-        customizationID: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<RecognitionJob>?, WatsonError?) -> Void)
     {
@@ -839,10 +828,6 @@ public class SpeechToText {
         }
         if let speakerLabels = speakerLabels {
             let queryParameter = URLQueryItem(name: "speaker_labels", value: "\(speakerLabels)")
-            queryParameters.append(queryParameter)
-        }
-        if let customizationID = customizationID {
-            let queryParameter = URLQueryItem(name: "customization_id", value: customizationID)
             queryParameters.append(queryParameter)
         }
 

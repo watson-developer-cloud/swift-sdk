@@ -114,18 +114,10 @@ public class NaturalLanguageUnderstanding {
     }
 
     /**
-     Analyze text.
+     Analyze text, HTML, or a public webpage.
 
-     Analyzes text, HTML, or a public webpage for the following features:
-     - Categories
-     - Concepts
-     - Emotion
-     - Entities
-     - Keywords
-     - Metadata
-     - Relations
-     - Semantic roles
-     - Sentiment.
+     Analyzes text, HTML, or a public webpage with one or more text analysis features, including categories, concepts,
+     emotion, entities, keywords, metadata, relations, semantic roles, and sentiment.
 
      - parameter features: Specific features to analyze the document for.
      - parameter text: The plain text to analyze. One of the `text`, `html`, or `url` parameters is required.

@@ -37,7 +37,7 @@ class DiscoveryTests: XCTestCase {
         super.setUp()
         continueAfterFailure = false
         instantiateDiscovery()
-        environment = lookupOrCreateTestEnvironment()
+        environment = getTestEnvironment()
         documentURL = loadDocument(name: "KennedySpeech", ext: "html")
     }
 
@@ -127,7 +127,7 @@ class DiscoveryTests: XCTestCase {
 
     // MARK: - State Management
 
-    func lookupOrCreateTestEnvironment() -> Environment {
+    func getTestEnvironment() -> Environment {
         var environment: Environment!
         let expectation = self.expectation(description: "listEnvironments")
 
@@ -247,7 +247,7 @@ class DiscoveryTests: XCTestCase {
         return collection ?? self.createTestCollection(environmentID: environmentID, configurationID: configurationID)
     }
 
-    func createTestCollection(environmentID: String, configurationID: String) -> DiscoveryV1.Collection {
+    func createTestCollection(environmentID: String, configurationID: String, language: String = "en") -> DiscoveryV1.Collection {
         var collection: DiscoveryV1.Collection!
         let expectation = self.expectation(description: "createCollection")
 
@@ -1005,6 +1005,97 @@ class DiscoveryTests: XCTestCase {
             }
             expectation3.fulfill()
         }
+        waitForExpectations(timeout: timeout)
+    }
+
+    func testTokenizationDictionaryCRD() {
+        // Need to make sure the new collection gets deleted even after a test failure
+        continueAfterFailure = true
+
+        let environmentID = environment.environmentID!
+        let configuration = lookupOrCreateTestConfiguration(environmentID: environmentID)
+        let collection = createTestCollection(environmentID: environmentID, configurationID: configuration.configurationID!, language: "ja")
+        let collectionID = collection.collectionID!
+
+        // Need to remove the Japanese collection created specifically for this test
+        defer {
+            continueAfterFailure = false
+
+            let expectation4 = self.expectation(description: "Delete Japanese collection")
+            discovery.deleteCollection(environmentID: environmentID, collectionID: collectionID) {
+                response, error in
+
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let result = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
+
+                XCTAssertEqual(result.status, "deleted")
+                expectation4.fulfill()
+            }
+
+            waitForExpectations(timeout: timeout)
+        }
+
+        let expectation = self.expectation(description: "createTokenizationDictionary")
+        let tokenizationRule1 = TokenDictRule(text: "すしネコ", tokens: ["すし", "ネコ"], readings: ["寿司", "ネコ"], partOfSpeech: "カスタム名詞")
+        let tokenizationRule2 = TokenDictRule(text: "すしネコ", tokens: ["すし", "ネコ"], readings: ["寿司", "ネコ"], partOfSpeech: "カスタム名詞")
+        discovery.createTokenizationDictionary(environmentID: environmentID, collectionID: collectionID, tokenizationRules: [tokenizationRule1, tokenizationRule2]) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssert(result.type == "tokenization_dictionary")
+            XCTAssert(result.status == "pending")
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: timeout)
+
+        let expectation2 = self.expectation(description: "getTokenizationDictionaryStatus")
+        discovery.getTokenizationDictionaryStatus(environmentID: environmentID, collectionID: collectionID) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssert(result.type == "tokenization_dictionary")
+            XCTAssert(result.status == "active" || result.status == "pending")
+
+            expectation2.fulfill()
+        }
+
+        waitForExpectations(timeout: timeout)
+
+        let expectation3 = self.expectation(description: "deleteTokenizationDictionary")
+        discovery.deleteTokenizationDictionary(environmentID: environmentID, collectionID: collectionID) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            expectation3.fulfill()
+        }
+
         waitForExpectations(timeout: timeout)
     }
 

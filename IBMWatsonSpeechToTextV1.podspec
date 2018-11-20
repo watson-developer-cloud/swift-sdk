@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                  = 'IBMWatsonSpeechToTextV1'
-  s.version               = '0.36.0'
+  s.version               = '0.38.1'
   s.summary               = 'Client framework for the IBM Watson Speech to Text service'
   s.description           = <<-DESC
 The IBM® Speech to Text leverages machine intelligence to transcribe the human voice accurately. 
@@ -26,7 +26,7 @@ of the audio signal. It continuously returns and retroactively updates a transcr
                             '**/opus_header.c'
 
   s.dependency              'IBMWatsonRestKit', '~> 1.3.0'
-  s.dependency              'Starscream', '~> 3.0'
+  s.dependency              'Starscream', '3.0.5'
   s.vendored_libraries    = 'Source/SupportingFiles/Dependencies/Libraries/*.a'
 
   # The renaming of libogg.a and libopus.a is done to avoid duplicate library name errors

@@ -1,3 +1,32 @@
+## [0.38.1](https://github.com/watson-developer-cloud/swift-sdk/compare/0.38.0...0.38.1) (2018-11-13)
+
+
+### Bug Fixes
+
+* **SpeechToTextV1:** Update recognizeMicrophone() to work with any authentication method ([5701ba6](https://github.com/watson-developer-cloud/swift-sdk/commit/5701ba6))
+
+# [0.38.0](https://github.com/watson-developer-cloud/swift-sdk/compare/0.37.0...0.38.0) (2018-11-12)
+
+
+### Bug Fixes
+
+* **VisualRecognitionV3:** temporary workaround for new A12 based devices ([62edd09](https://github.com/watson-developer-cloud/swift-sdk/commit/62edd09))
+* **VisualRecognitionV3:** temporary workaround to support A12 devices for Core ML inference ([fa212ec](https://github.com/watson-developer-cloud/swift-sdk/commit/fa212ec))
+
+
+### Features
+
+* **All:** Add support for Swift 4.2 ([4bbf42b](https://github.com/watson-developer-cloud/swift-sdk/commit/4bbf42b))
+
+# [0.37.0](https://github.com/watson-developer-cloud/swift-sdk/compare/0.36.0...0.37.0) (2018-11-02)
+
+
+### Features
+
+* **AssistantV1, AssistantV2:** Add cloudFunction and webAction to DialogNodeAction.ActionType ([16d3fc9](https://github.com/watson-developer-cloud/swift-sdk/commit/16d3fc9))
+* **DiscoveryV1:** Tokenization dictionaries for collections ([d274371](https://github.com/watson-developer-cloud/swift-sdk/commit/d274371))
+* **SpeechToTextV1:** Add languageCustomizationID parameter to createJob() and recognize() ([0137964](https://github.com/watson-developer-cloud/swift-sdk/commit/0137964))
+
 # [0.36.0](https://github.com/watson-developer-cloud/swift-sdk/compare/0.35.0...0.36.0) (2018-10-19)
 
 

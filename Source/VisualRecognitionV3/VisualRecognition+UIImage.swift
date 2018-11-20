@@ -155,11 +155,18 @@ extension VisualRecognition {
         completionHandler: @escaping (ClassifiedImages?, WatsonError?) -> Void)
     {
         // convert UIImage to Data
+        #if swift(>=4.2)
+        guard let imageData = image.pngData() else {
+            let error = WatsonError.serialization(values: "image to data")
+            return
+        }
+        #else
         guard let imageData = UIImagePNGRepresentation(image) else {
             let error = WatsonError.serialization(values: "image to data")
             completionHandler(nil, error)
             return
         }
+        #endif
 
         self.classifyWithLocalModel(imageData: imageData, classifierIDs: classifierIDs, threshold: threshold, completionHandler: completionHandler)
     }
@@ -172,7 +179,11 @@ extension VisualRecognition {
         let filename = UUID().uuidString + ".jpg"
         let directory = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
         guard let file = directory.appendingPathComponent(filename) else { throw WatsonError.urlEncoding(path: filename) }
+        #if swift(>=4.2)
+        guard let data = image.jpegData(compressionQuality: 0.75) else { throw WatsonError.serialization(values: "classify image") }
+        #else
         guard let data = UIImageJPEGRepresentation(image, 0.75) else { throw WatsonError.serialization(values: "classify image") }
+        #endif
         try data.write(to: file)
         return file
     }

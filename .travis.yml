@@ -4,7 +4,7 @@ matrix:
       dist: trusty
       sudo: required
     - os: osx
-      osx_image: xcode9.3
+      osx_image: xcode10.1
 branches:
   only:
     - master
@@ -14,7 +14,7 @@ branches:
 env:
   global:
     - IOS_SDK="iphonesimulator"
-    - IOS_DESTINATION="OS=11.3,name=iPhone 7"
+    - IOS_DESTINATION="name=iPhone XS,OS=12.0"
 before_install:
   - sudo easy_install pip
   - nvm install node
@@ -47,17 +47,6 @@ deploy:
   - provider: script
     script: npx semantic-release
     skip_cleanup: true
-    on:
-      branch: master
-      condition: $TRAVIS_OS_NAME = osx
-  - provider: script
-    script: Scripts/release-to-cocoapods.sh
-    skip_cleanup: true
-    on:
-      branch: master
-      condition: $TRAVIS_OS_NAME = osx
-  - provider: script
-    script: Scripts/publish-documentation.sh
     on:
       branch: master
       condition: $TRAVIS_OS_NAME = osx

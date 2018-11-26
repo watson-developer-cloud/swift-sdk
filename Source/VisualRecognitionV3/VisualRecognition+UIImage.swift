@@ -158,6 +158,7 @@ extension VisualRecognition {
         #if swift(>=4.2)
         guard let imageData = image.pngData() else {
             let error = WatsonError.serialization(values: "image to data")
+            completionHandler(nil, error)
             return
         }
         #else

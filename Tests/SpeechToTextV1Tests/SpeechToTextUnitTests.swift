@@ -35,6 +35,7 @@ class SpeechToTextUnitTests: XCTestCase {
 
         // Trailing forward slash
         speechToText.serviceURL = "https://stream.watsonplatform.net/speech-to-text/api/"
+        XCTAssertEqual(speechToText.serviceURL, "https://stream.watsonplatform.net/speech-to-text/api")
         XCTAssertEqual(speechToText.websocketsURL, "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize")
 
         // http instead of https

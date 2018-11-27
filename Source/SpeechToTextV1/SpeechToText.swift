@@ -37,9 +37,12 @@ public class SpeechToText {
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://stream.watsonplatform.net/speech-to-text/api" {
         didSet {
+            if serviceURL.last == "/" {
+                serviceURL.removeLast()
+            }
             // websocketsURL and tokenURL are both derivative of serviceURL
             websocketsURL = serviceURL.replacingOccurrences(of: "http", with: "ws", options: .anchored, range: nil)
-            websocketsURL.last == "/" ? websocketsURL.append("v1/recognize") : websocketsURL.append("/v1/recognize")
+            websocketsURL.append("/v1/recognize")
 
             tokenURL = serviceURL.replacingOccurrences(of: "/speech-to-text/api", with: "/authorization/api/v1/token")
         }

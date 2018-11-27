@@ -200,7 +200,6 @@
 		68AF8F5E2069690300D552E3 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AF8EBA206968CC00D552E3 /* Collection.swift */; };
 		68AF8F5F2069690300D552E3 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AF8EBB206968CC00D552E3 /* Environment.swift */; };
 		68AF8F602069690300D552E3 /* QueryRelations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AF8EBC206968CC00D552E3 /* QueryRelations.swift */; };
-		68AF8F612069690300D552E3 /* MemoryUsage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AF8EBD206968CC00D552E3 /* MemoryUsage.swift */; };
 		68AF8F622069690300D552E3 /* NluEnrichmentKeywords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AF8EBE206968CC00D552E3 /* NluEnrichmentKeywords.swift */; };
 		68AF8F632069690300D552E3 /* TrainingExampleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AF8EBF206968CC00D552E3 /* TrainingExampleList.swift */; };
 		68AF8F642069690300D552E3 /* QueryEntitiesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68AF8EC0206968CC00D552E3 /* QueryEntitiesResponse.swift */; };
@@ -510,9 +509,6 @@
 		92ED234D2187C57C00C049A2 /* TokenDictStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ED234B2187C57B00C049A2 /* TokenDictStatusResponse.swift */; };
 		92ED234F218A598D00C049A2 /* TokenDictRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ED234E218A598D00C049A2 /* TokenDictRule.swift */; };
 		CA151FA2200EE23F00DBA44F /* carz.zip in Resources */ = {isa = PBXBuildFile; fileRef = CA151FA0200EE0CF00DBA44F /* carz.zip */; };
-		CA17C8DA218F8C8A00677CA7 /* TokenDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA17C8D7218F8C8A00677CA7 /* TokenDict.swift */; };
-		CA17C8DB218F8C8A00677CA7 /* TokenDictStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA17C8D8218F8C8A00677CA7 /* TokenDictStatusResponse.swift */; };
-		CA17C8DC218F8C8A00677CA7 /* TokenDictRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA17C8D9218F8C8A00677CA7 /* TokenDictRule.swift */; };
 		CA28815D20CB07D600FC992C /* WatsonCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6C7B3C1D8C960300CD97FA /* WatsonCredentials.swift */; };
 		CA28817620CB095100FC992C /* glossary.tmx in Resources */ = {isa = PBXBuildFile; fileRef = CA28817420CB095100FC992C /* glossary.tmx */; };
 		CA28817720CB095100FC992C /* LanguageTranslatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA28817520CB095100FC992C /* LanguageTranslatorTests.swift */; };
@@ -916,7 +912,6 @@
 		68AF8EBA206968CC00D552E3 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		68AF8EBB206968CC00D552E3 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		68AF8EBC206968CC00D552E3 /* QueryRelations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryRelations.swift; sourceTree = "<group>"; };
-		68AF8EBD206968CC00D552E3 /* MemoryUsage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryUsage.swift; sourceTree = "<group>"; };
 		68AF8EBE206968CC00D552E3 /* NluEnrichmentKeywords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NluEnrichmentKeywords.swift; sourceTree = "<group>"; };
 		68AF8EBF206968CC00D552E3 /* TrainingExampleList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingExampleList.swift; sourceTree = "<group>"; };
 		68AF8EC0206968CC00D552E3 /* QueryEntitiesResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryEntitiesResponse.swift; sourceTree = "<group>"; };
@@ -1129,11 +1124,11 @@
 		929A23E521123E7E00E4C78A /* TestUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TestUtilities.swift; path = Tests/TestUtilities.swift; sourceTree = "<group>"; };
 		92B470672194F225006C3333 /* AssistantV1UnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantV1UnitTests.swift; sourceTree = "<group>"; };
 		92BF69AD213F129A00FE6325 /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Shared.swift; path = Source/SupportingFiles/Shared.swift; sourceTree = "<group>"; };
-		92F3F9882193AE7800211747 /* watson_tools.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = watson_tools.mlmodel; sourceTree = "<group>"; };
-		92F3F98E2194AFA300211747 /* watson_sample.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = watson_sample.mlmodel; sourceTree = "<group>"; };
 		92ED234A2187C57B00C049A2 /* TokenDict.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenDict.swift; sourceTree = "<group>"; };
 		92ED234B2187C57B00C049A2 /* TokenDictStatusResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenDictStatusResponse.swift; sourceTree = "<group>"; };
 		92ED234E218A598D00C049A2 /* TokenDictRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenDictRule.swift; sourceTree = "<group>"; };
+		92F3F9882193AE7800211747 /* watson_tools.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = watson_tools.mlmodel; sourceTree = "<group>"; };
+		92F3F98E2194AFA300211747 /* watson_sample.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = watson_sample.mlmodel; sourceTree = "<group>"; };
 		B1F21DF21CE2461800393146 /* SentenceAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentenceAnalysis.swift; sourceTree = "<group>"; };
 		B1F21DF31CE2461800393146 /* ToneAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneAnalysis.swift; sourceTree = "<group>"; };
 		B1F21DF41CE2461800393146 /* ToneCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneCategory.swift; sourceTree = "<group>"; };
@@ -1141,9 +1136,6 @@
 		B1F21DF71CE2461800393146 /* ToneAnalyzerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneAnalyzerTests.swift; sourceTree = "<group>"; };
 		B1F21DF81CE2461800393146 /* ToneAnalyzer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneAnalyzer.swift; sourceTree = "<group>"; };
 		CA151FA0200EE0CF00DBA44F /* carz.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = carz.zip; sourceTree = "<group>"; };
-		CA17C8D7218F8C8A00677CA7 /* TokenDict.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenDict.swift; sourceTree = "<group>"; };
-		CA17C8D8218F8C8A00677CA7 /* TokenDictStatusResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenDictStatusResponse.swift; sourceTree = "<group>"; };
-		CA17C8D9218F8C8A00677CA7 /* TokenDictRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenDictRule.swift; sourceTree = "<group>"; };
 		CA28815F20CB090700FC992C /* DeleteModelResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteModelResult.swift; sourceTree = "<group>"; };
 		CA28816020CB090700FC992C /* IdentifiableLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifiableLanguage.swift; sourceTree = "<group>"; };
 		CA28816120CB090700FC992C /* Translation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Translation.swift; sourceTree = "<group>"; };
@@ -1739,7 +1731,6 @@
 				928204C62124BC200013315B /* LogQueryResponseResult.swift */,
 				928204C02124BC1E0013315B /* LogQueryResponseResultDocuments.swift */,
 				928204C12124BC1E0013315B /* LogQueryResponseResultDocumentsResult.swift */,
-				68AF8EBD206968CC00D552E3 /* MemoryUsage.swift */,
 				928204C42124BC1F0013315B /* MetricAggregation.swift */,
 				928204BB2124BC1C0013315B /* MetricAggregationResult.swift */,
 				928204C22124BC1F0013315B /* MetricResponse.swift */,
@@ -2882,23 +2873,6 @@
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 1010;
 					};
-					7AAAF4DB1CEEA16100B74848 = {
-						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 1010;
-					};
-					7AAAF4E41CEEA16100B74848 = {
-						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 1010;
-					};
-					7AB445231D3E647A00E8748A = {
-						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 1010;
-					};
-					7AB4452C1D3E647A00E8748A = {
-						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = CDXLDASP22;
-						LastSwiftMigration = 1010;
-					};
 					924EE78021505D7A0048C0E5 = {
 						LastSwiftMigration = 1010;
 					};
@@ -3654,7 +3628,6 @@
 				68AF8F952069690300D552E3 /* QueryEntitiesContext.swift in Sources */,
 				928204D22124BC200013315B /* MetricTokenAggregation.swift in Sources */,
 				928204CB2124BC200013315B /* CreateEventResponse.swift in Sources */,
-				68AF8F612069690300D552E3 /* MemoryUsage.swift in Sources */,
 				68AF8F502069690300D552E3 /* NluEnrichmentSemanticRoles.swift in Sources */,
 				CADA95A120FCD66600B5BD84 /* SourceOptionsObject.swift in Sources */,
 				68AF8F812069690300D552E3 /* WordStyle.swift in Sources */,
@@ -3687,7 +3660,7 @@
 				683955092077E613009E1C8A /* Timeslice.swift in Sources */,
 				928204CC2124BC200013315B /* LogQueryResponse.swift in Sources */,
 				683955052077E613009E1C8A /* Nested.swift in Sources */,
-				68AF8F892069690300D552E3 /* PdfHeadingDetection.swift in Sources */,
+				68AF8F892069690300D552E3 /* PDFHeadingDetection.swift in Sources */,
 				92ED234F218A598D00C049A2 /* TokenDictRule.swift in Sources */,
 				68AF8F8B2069690300D552E3 /* Term.swift in Sources */,
 				68AF8F9D2069690300D552E3 /* NluEnrichmentRelations.swift in Sources */,
@@ -5055,172 +5028,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.NaturalLanguageClassifierV1Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-			};
-			name = Release;
-		};
-		7AAAF4EE1CEEA16100B74848 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.LanguageTranslatorV2";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
-			};
-			name = Debug;
-		};
-		7AAAF4EF1CEEA16100B74848 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.LanguageTranslatorV2";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
-			};
-			name = Release;
-		};
-		7AAAF4F11CEEA16100B74848 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.LanguageTranslatorV2Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-			};
-			name = Debug;
-		};
-		7AAAF4F21CEEA16100B74848 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.LanguageTranslatorV2Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-			};
-			name = Release;
-		};
-		7AB445361D3E647A00E8748A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.ConversationV1";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
-			};
-			name = Debug;
-		};
-		7AB445371D3E647A00E8748A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = "Source/SupportingFiles/Info-Release.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.ConversationV1";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
-			};
-			name = Release;
-		};
-		7AB445391D3E647A00E8748A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.ConversationV1Tests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-			};
-			name = Debug;
-		};
-		7AB4453A1D3E647A00E8748A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ANALYZER_NONNULL = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ibm.watson.developer-cloud.ConversationV1Tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 			};

@@ -26,11 +26,6 @@ public struct QueryResult: Codable, Equatable {
     public var id: String?
 
     /**
-     *Deprecated* This field is now part of the **result_metadata** object.
-     */
-    public var score: Double?
-
-    /**
      Metadata of the document.
      */
     public var metadata: [String: JSON]?
@@ -51,17 +46,15 @@ public struct QueryResult: Codable, Equatable {
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case id = "id"
-        case score = "score"
         case metadata = "metadata"
         case collectionID = "collection_id"
         case resultMetadata = "result_metadata"
-        static let allValues = [id, score, metadata, collectionID, resultMetadata]
+        static let allValues = [id, metadata, collectionID, resultMetadata]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decodeIfPresent(String.self, forKey: .id)
-        score = try container.decodeIfPresent(Double.self, forKey: .score)
         metadata = try container.decodeIfPresent([String: JSON].self, forKey: .metadata)
         collectionID = try container.decodeIfPresent(String.self, forKey: .collectionID)
         resultMetadata = try container.decodeIfPresent(QueryResultMetadata.self, forKey: .resultMetadata)
@@ -72,7 +65,6 @@ public struct QueryResult: Codable, Equatable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(id, forKey: .id)
-        try container.encodeIfPresent(score, forKey: .score)
         try container.encodeIfPresent(metadata, forKey: .metadata)
         try container.encodeIfPresent(collectionID, forKey: .collectionID)
         try container.encodeIfPresent(resultMetadata, forKey: .resultMetadata)

@@ -256,7 +256,6 @@ public class SpeechToText {
        specified with the `model` parameter. You must make the request with service credentials created for the instance
        of the service that owns the custom model. By default, no custom language model is used. See [Custom
        models](https://console.bluemix.net/docs/services/speech-to-text/input.html#custom).
-       **Note:** Use this parameter instead of the deprecated `customization_id` parameter.
      - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model that is to be used
        with the recognition request. The base model of the specified custom acoustic model must match the model
        specified with the `model` parameter. You must make the request with service credentials created for the instance
@@ -648,7 +647,6 @@ public class SpeechToText {
        specified with the `model` parameter. You must make the request with service credentials created for the instance
        of the service that owns the custom model. By default, no custom language model is used. See [Custom
        models](https://console.bluemix.net/docs/services/speech-to-text/input.html#custom).
-       **Note:** Use this parameter instead of the deprecated `customization_id` parameter.
      - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model that is to be used
        with the recognition request. The base model of the specified custom acoustic model must match the model
        specified with the `model` parameter. You must make the request with service credentials created for the instance

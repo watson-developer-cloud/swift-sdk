@@ -256,20 +256,4 @@ extension SpeechToText {
     }
 }
 
-extension SpeechToText {
-
-    @available(*, deprecated, message: "The recognize method has been deprecated in favor of recognizeUsingWebSocket method.  This method will be removed in a future release.")
-    public func recognize(
-        audio: Data,
-        settings: RecognitionSettings,
-        model: String? = nil,
-        customizationID: String? = nil,
-        learningOptOut: Bool? = nil,
-        completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, WatsonError?) -> Void)
-    {
-        recognizeUsingWebSocket(audio: audio, settings: settings, model: model, customizationID: customizationID,
-                                learningOptOut: learningOptOut, completionHandler: completionHandler)
-    }
-}
-
 #endif

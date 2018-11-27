@@ -36,17 +36,11 @@ public struct IndexCapacity: Codable, Equatable {
      */
     public var collections: CollectionUsage?
 
-    /**
-     **Deprecated**: Summary of the memory usage statistics for this environment.
-     */
-    public var memoryUsage: MemoryUsage?
-
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case documents = "documents"
         case diskUsage = "disk_usage"
         case collections = "collections"
-        case memoryUsage = "memory_usage"
     }
 
 }

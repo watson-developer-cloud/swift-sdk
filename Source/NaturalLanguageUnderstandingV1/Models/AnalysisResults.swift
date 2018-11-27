@@ -32,42 +32,43 @@ public struct AnalysisResults: Codable, Equatable {
     public var analyzedText: String?
 
     /**
-     URL of the webpage that was analyzed.
+     URL that was used to retrieve HTML content.
      */
     public var retrievedURL: String?
 
     /**
-     API usage information for the request.
+     Usage information.
      */
     public var usage: Usage?
 
     /**
-     The general concepts referenced or alluded to in the analyzed text.
+     The general concepts referenced or alluded to in the specified content.
      */
     public var concepts: [ConceptsResult]?
 
     /**
-     The entities detected in the analyzed text.
+     The important entities in the specified content.
      */
     public var entities: [EntitiesResult]?
 
     /**
-     The keywords from the analyzed text.
+     The important keywords in content organized by relevance.
      */
     public var keywords: [KeywordsResult]?
 
     /**
-     The categories that the service assigned to the analyzed text.
+     The hierarchical 5-level taxonomy the content is categorized into.
      */
     public var categories: [CategoriesResult]?
 
     /**
-     The anger, disgust, fear, joy, or sadness conveyed by the content.
+     The detected anger, disgust, fear, joy, or sadness that is conveyed by the content. Emotion information can be
+     returned for detected entities, keywords, or user-specified target phrases found in the text.
      */
     public var emotion: EmotionResult?
 
     /**
-     Webpage metadata, such as the author and the title of the page.
+     The Authors, Publication Date, and Title of the document. Supports URL and HTML input types.
      */
     public var metadata: MetadataResult?
 
@@ -77,7 +78,7 @@ public struct AnalysisResults: Codable, Equatable {
     public var relations: [RelationsResult]?
 
     /**
-     Sentences parsed into `subject`, `action`, and `object` form.
+     The subjects of actions and the objects the actions act upon.
      */
     public var semanticRoles: [SemanticRolesResult]?
 

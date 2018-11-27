@@ -40,7 +40,7 @@ public struct NluEnrichmentFeatures: Codable, Equatable {
     public var emotion: NluEnrichmentEmotion?
 
     /**
-     An object specifying the categories enrichment and related parameters.
+     An object that indicates the Categories enrichment will be applied to the specified field.
      */
     public var categories: NluEnrichmentCategories?
 
@@ -72,7 +72,8 @@ public struct NluEnrichmentFeatures: Codable, Equatable {
      - parameter entities: An object speficying the Entities enrichment and related parameters.
      - parameter sentiment: An object specifying the sentiment extraction enrichment and related parameters.
      - parameter emotion: An object specifying the emotion detection enrichment and related parameters.
-     - parameter categories: An object specifying the categories enrichment and related parameters.
+     - parameter categories: An object that indicates the Categories enrichment will be applied to the specified
+       field.
      - parameter semanticRoles: An object specifiying the semantic roles enrichment and related parameters.
      - parameter relations: An object specifying the relations enrichment and related parameters.
 

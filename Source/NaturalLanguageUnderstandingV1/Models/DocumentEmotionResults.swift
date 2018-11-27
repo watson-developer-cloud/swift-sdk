@@ -17,12 +17,12 @@
 import Foundation
 
 /**
- Emotion results for the document as a whole.
+ An object containing the emotion results of a document.
  */
 public struct DocumentEmotionResults: Codable, Equatable {
 
     /**
-     Emotion results for the document as a whole.
+     An object containing the emotion results for the document.
      */
     public var emotion: EmotionScores?
 

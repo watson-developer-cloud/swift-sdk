@@ -51,7 +51,7 @@ public struct QueryNoticesResult: Codable, Equatable {
     public var collectionID: String?
 
     /**
-     Metadata of the query result.
+     Metadata of a query result.
      */
     public var resultMetadata: QueryResultMetadata?
 

@@ -27,7 +27,7 @@ public struct IndexCapacity: Codable, Equatable {
     public var documents: EnvironmentDocuments?
 
     /**
-     Summary of the disk usage of the environment.
+     Summary of the disk usage statistics for the environment.
      */
     public var diskUsage: DiskUsage?
 
@@ -37,7 +37,7 @@ public struct IndexCapacity: Codable, Equatable {
     public var collections: CollectionUsage?
 
     /**
-     **Deprecated**: Summary of the memory usage of the environment.
+     **Deprecated**: Summary of the memory usage statistics for this environment.
      */
     public var memoryUsage: MemoryUsage?
 

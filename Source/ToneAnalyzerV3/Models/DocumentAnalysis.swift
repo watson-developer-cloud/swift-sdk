@@ -16,9 +16,7 @@
 
 import Foundation
 
-/**
- An object of type `DocumentAnalysis` that provides the results of the analysis for the full input document.
- */
+/** DocumentAnalysis. */
 public struct DocumentAnalysis: Codable, Equatable {
 
     /**

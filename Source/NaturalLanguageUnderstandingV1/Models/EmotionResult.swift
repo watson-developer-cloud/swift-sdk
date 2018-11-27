@@ -23,12 +23,12 @@ import Foundation
 public struct EmotionResult: Codable, Equatable {
 
     /**
-     Emotion results for the document as a whole.
+     An object containing the emotion results of a document.
      */
     public var document: DocumentEmotionResults?
 
     /**
-     Emotion results for specified targets.
+     The returned emotion results per specified target.
      */
     public var targets: [TargetedEmotionResults]?
 

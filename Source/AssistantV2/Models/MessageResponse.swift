@@ -27,8 +27,7 @@ public struct MessageResponse: Codable, Equatable {
     public var output: MessageOutput
 
     /**
-     The current session context. Included in the response if the `return_context` property of the message input was set
-     to `true`.
+     State information for the conversation.
      */
     public var context: MessageContext?
 

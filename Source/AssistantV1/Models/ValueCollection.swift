@@ -25,7 +25,7 @@ public struct ValueCollection: Codable, Equatable {
     public var values: [ValueExport]
 
     /**
-     An object defining the pagination data for the returned objects.
+     The pagination data for the returned objects.
      */
     public var pagination: Pagination
 

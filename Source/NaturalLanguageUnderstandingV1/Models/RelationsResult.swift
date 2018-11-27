@@ -37,7 +37,7 @@ public struct RelationsResult: Codable, Equatable {
     public var type: String?
 
     /**
-     Entity mentions that are involved in the relation.
+     The extracted relation objects from the text.
      */
     public var arguments: [RelationArgument]?
 

@@ -533,7 +533,6 @@
 		920F0AB6219CC1E900070C5B /* UpdatedLabelsOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F0A87219CC1E900070C5B /* UpdatedLabelsOut.swift */; };
 		920F0AB7219CC1E900070C5B /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F0A88219CC1E900070C5B /* Contact.swift */; };
 		920F0AB8219CC1E900070C5B /* CompareComply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F0A89219CC1E900070C5B /* CompareComply.swift */; };
-		920F0ABB219CC3C800070C5B /* CompareComplyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F0ABA219CC3C800070C5B /* CompareComplyTests.swift */; };
 		920F0AC4219CEE8C00070C5B /* RowHeaderIds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F0ABC219CEE8A00070C5B /* RowHeaderIds.swift */; };
 		920F0AC6219CEE8C00070C5B /* ColumnHeaderTextsNormalized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F0ABD219CEE8B00070C5B /* ColumnHeaderTextsNormalized.swift */; };
 		920F0AC8219CEE8C00070C5B /* ColumnHeaderIds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920F0ABE219CEE8B00070C5B /* ColumnHeaderIds.swift */; };
@@ -574,8 +573,11 @@
 		924EE7DF21505D810048C0E5 /* AssistantV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6877FA9A2056D4F100383B25 /* AssistantV1.framework */; };
 		924EE7E021505D810048C0E5 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92048D8F212F7C16004FD822 /* RestKit.framework */; };
 		924EE7EA21505E430048C0E5 /* AssistantV2.h in Headers */ = {isa = PBXBuildFile; fileRef = 924EE77D21505C2C0048C0E5 /* AssistantV2.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		92506C0A21AE1ADA0008E88D /* cloud-object-storage-credentials-output.json in Resources */ = {isa = PBXBuildFile; fileRef = 92506C0821AE1ADA0008E88D /* cloud-object-storage-credentials-output.json */; };
+		92506C0B21AE1ADA0008E88D /* cloud-object-storage-credentials-input.json in Resources */ = {isa = PBXBuildFile; fileRef = 92506C0921AE1ADA0008E88D /* cloud-object-storage-credentials-input.json */; };
 		9254773A216D4710003C2829 /* QueryLarge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92547738216D470F003C2829 /* QueryLarge.swift */; };
 		9254773B216D4710003C2829 /* SearchStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92547739216D4710003C2829 /* SearchStatus.swift */; };
+		927E1C1E219CF80100E5D272 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92048D8F212F7C16004FD822 /* RestKit.framework */; };
 		928204C72124BC200013315B /* CreateEventObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204BA2124BC1B0013315B /* CreateEventObject.swift */; };
 		928204C82124BC200013315B /* MetricAggregationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204BB2124BC1C0013315B /* MetricAggregationResult.swift */; };
 		928204C92124BC200013315B /* MetricTokenAggregationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928204BC2124BC1C0013315B /* MetricTokenAggregationResult.swift */; };
@@ -632,6 +634,10 @@
 		92ED234C2187C57C00C049A2 /* TokenDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ED234A2187C57B00C049A2 /* TokenDict.swift */; };
 		92ED234D2187C57C00C049A2 /* TokenDictStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ED234B2187C57B00C049A2 /* TokenDictStatusResponse.swift */; };
 		92ED234F218A598D00C049A2 /* TokenDictRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ED234E218A598D00C049A2 /* TokenDictRule.swift */; };
+		92EE4EE7219DF8720008CE33 /* CompareComplyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE4EE6219DF8720008CE33 /* CompareComplyTests.swift */; };
+		92EE4EF9219E25350008CE33 /* TestTable.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 92EE4EF6219E25350008CE33 /* TestTable.pdf */; };
+		92EE4EFA219E25350008CE33 /* contract_B.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 92EE4EF7219E25350008CE33 /* contract_B.pdf */; };
+		92EE4EFB219E25350008CE33 /* contract_A.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 92EE4EF8219E25350008CE33 /* contract_A.pdf */; };
 		CA151FA2200EE23F00DBA44F /* carz.zip in Resources */ = {isa = PBXBuildFile; fileRef = CA151FA0200EE0CF00DBA44F /* carz.zip */; };
 		CA28815D20CB07D600FC992C /* WatsonCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6C7B3C1D8C960300CD97FA /* WatsonCredentials.swift */; };
 		CA28817620CB095100FC992C /* glossary.tmx in Resources */ = {isa = PBXBuildFile; fileRef = CA28817420CB095100FC992C /* glossary.tmx */; };
@@ -1379,7 +1385,6 @@
 		920F0A87219CC1E900070C5B /* UpdatedLabelsOut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatedLabelsOut.swift; sourceTree = "<group>"; };
 		920F0A88219CC1E900070C5B /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		920F0A89219CC1E900070C5B /* CompareComply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompareComply.swift; sourceTree = "<group>"; };
-		920F0ABA219CC3C800070C5B /* CompareComplyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareComplyTests.swift; sourceTree = "<group>"; };
 		920F0ABC219CEE8A00070C5B /* RowHeaderIds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowHeaderIds.swift; sourceTree = "<group>"; };
 		920F0ABD219CEE8B00070C5B /* ColumnHeaderTextsNormalized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColumnHeaderTextsNormalized.swift; sourceTree = "<group>"; };
 		920F0ABE219CEE8B00070C5B /* ColumnHeaderIds.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColumnHeaderIds.swift; sourceTree = "<group>"; };
@@ -1414,6 +1419,8 @@
 		924EE77D21505C2C0048C0E5 /* AssistantV2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssistantV2.h; path = Source/SupportingFiles/AssistantV2.h; sourceTree = "<group>"; };
 		924EE7D321505D7A0048C0E5 /* AssistantV2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AssistantV2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		924EE7E721505D810048C0E5 /* AssistantV2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssistantV2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		92506C0821AE1ADA0008E88D /* cloud-object-storage-credentials-output.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "cloud-object-storage-credentials-output.json"; sourceTree = "<group>"; };
+		92506C0921AE1ADA0008E88D /* cloud-object-storage-credentials-input.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "cloud-object-storage-credentials-input.json"; sourceTree = "<group>"; };
 		92547738216D470F003C2829 /* QueryLarge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryLarge.swift; sourceTree = "<group>"; };
 		92547739216D4710003C2829 /* SearchStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchStatus.swift; sourceTree = "<group>"; };
 		928204BA2124BC1B0013315B /* CreateEventObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventObject.swift; sourceTree = "<group>"; };
@@ -1436,6 +1443,10 @@
 		92ED234A2187C57B00C049A2 /* TokenDict.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenDict.swift; sourceTree = "<group>"; };
 		92ED234B2187C57B00C049A2 /* TokenDictStatusResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenDictStatusResponse.swift; sourceTree = "<group>"; };
 		92ED234E218A598D00C049A2 /* TokenDictRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenDictRule.swift; sourceTree = "<group>"; };
+		92EE4EE6219DF8720008CE33 /* CompareComplyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CompareComplyTests.swift; path = CompareComplyV1Tests/CompareComplyTests.swift; sourceTree = "<group>"; };
+		92EE4EF6219E25350008CE33 /* TestTable.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = TestTable.pdf; sourceTree = "<group>"; };
+		92EE4EF7219E25350008CE33 /* contract_B.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = contract_B.pdf; sourceTree = "<group>"; };
+		92EE4EF8219E25350008CE33 /* contract_A.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = contract_A.pdf; sourceTree = "<group>"; };
 		B1F21DF21CE2461800393146 /* SentenceAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentenceAnalysis.swift; sourceTree = "<group>"; };
 		B1F21DF31CE2461800393146 /* ToneAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneAnalysis.swift; sourceTree = "<group>"; };
 		B1F21DF41CE2461800393146 /* ToneCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneCategory.swift; sourceTree = "<group>"; };
@@ -1741,6 +1752,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				928661A22191104C0064C6FD /* CompareComplyV1.framework in Frameworks */,
+				927E1C1E219CF80100E5D272 /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2701,14 +2713,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		920F0AB9219CC37500070C5B /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				920F0ABA219CC3C800070C5B /* CompareComplyTests.swift */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
 		922077802152FC5900C8C7E4 /* AssistantV2 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2762,10 +2766,32 @@
 			children = (
 				920F0A89219CC1E900070C5B /* CompareComply.swift */,
 				920F0A5A219CC1E900070C5B /* Models */,
-				920F0AB9219CC37500070C5B /* Tests */,
+				92EE4E53219DF8410008CE33 /* Tests */,
 			);
 			name = CompareComplyV1;
 			path = Source/CompareComplyV1;
+			sourceTree = "<group>";
+		};
+		92EE4E53219DF8410008CE33 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				92EE4EE6219DF8720008CE33 /* CompareComplyTests.swift */,
+				92EE4EF5219E25350008CE33 /* Resources */,
+			);
+			path = Tests;
+			sourceTree = SOURCE_ROOT;
+		};
+		92EE4EF5219E25350008CE33 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				92506C0921AE1ADA0008E88D /* cloud-object-storage-credentials-input.json */,
+				92506C0821AE1ADA0008E88D /* cloud-object-storage-credentials-output.json */,
+				92EE4EF8219E25350008CE33 /* contract_A.pdf */,
+				92EE4EF7219E25350008CE33 /* contract_B.pdf */,
+				92EE4EF6219E25350008CE33 /* TestTable.pdf */,
+			);
+			name = Resources;
+			path = CompareComplyV1Tests/Resources;
 			sourceTree = "<group>";
 		};
 		B1F21DEF1CE2461800393146 /* ToneAnalyzerV3 */ = {
@@ -3477,8 +3503,10 @@
 			buildConfigurationList = 928661A52191104C0064C6FD /* Build configuration list for PBXNativeTarget "CompareComplyV1Tests" */;
 			buildPhases = (
 				928661992191104C0064C6FD /* Sources */,
+				927E1C1B219CF3D300E5D272 /* Run SwiftLint */,
 				9286619A2191104C0064C6FD /* Frameworks */,
 				9286619B2191104C0064C6FD /* Resources */,
+				927E1C1C219CF46A00E5D272 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -3913,6 +3941,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92EE4EFB219E25350008CE33 /* contract_A.pdf in Resources */,
+				92EE4EF9219E25350008CE33 /* TestTable.pdf in Resources */,
+				92506C0B21AE1ADA0008E88D /* cloud-object-storage-credentials-input.json in Resources */,
+				92506C0A21AE1ADA0008E88D /* cloud-object-storage-credentials-output.json in Resources */,
+				92EE4EFA219E25350008CE33 /* contract_B.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4128,7 +4161,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${PROJECT_DIR}/.swiftlint.yml\" --no-cache --path Tests/AssistantV1Tests\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${PROJECT_DIR}/.swiftlint.yml\" --no-cache --path Tests/AssistantV1Tests\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		924EE7E321505D810048C0E5 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4143,7 +4176,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 		927E1C19219CF24000E5D272 /* Run SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4163,6 +4196,43 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint --config \"${PROJECT_DIR}/.swiftlint.yml\" --no-cache --path Source/CompareComplyV1\nelse\n    echo \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi\n";
 		};
+		927E1C1B219CF3D300E5D272 /* Run SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftLint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\nswiftlint lint --config \"${PROJECT_DIR}/.swiftlint.yml\" --no-cache --path Tests/CompareComplyV1Tests\nelse\necho \"SwiftLint is not available. Install SwiftLint to obtain linter results. See https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		927E1C1C219CF46A00E5D272 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/RestKit.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/RestKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
 		929DB99A212F7D8E00356EDC /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -4176,7 +4246,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
 		929DB9B1212F7E9F00356EDC /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -5247,7 +5317,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				920F0ABB219CC3C800070C5B /* CompareComplyTests.swift in Sources */,
+				92EE4EE7219DF8720008CE33 /* CompareComplyTests.swift in Sources */,
 				92866206219111E30064C6FD /* WatsonCredentials.swift in Sources */,
 				92866204219111E00064C6FD /* Shared.swift in Sources */,
 			);
@@ -6607,8 +6677,12 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = CompareComplyV1Tests/Info.plist;
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -6633,8 +6707,12 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = CompareComplyV1Tests/Info.plist;
+				INFOPLIST_FILE = "Source/SupportingFiles/Info-Tests.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_FAST_MATH = YES;

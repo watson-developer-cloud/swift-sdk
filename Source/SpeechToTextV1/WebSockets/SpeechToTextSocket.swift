@@ -158,13 +158,24 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         }
     }
 
-    internal static func buildURL(url: String, model: String?, customizationID: String?, acousticCustomizationID: String?, learningOptOut: Bool?) -> URL? {
+    internal static func buildURL(
+        url: String,
+        model: String?,
+        baseModelVersion: String?,
+        languageCustomizationID: String?,
+        acousticCustomizationID: String?,
+        learningOptOut: Bool?,
+        customerID: String?) -> URL?
+    {
         var queryParameters = [URLQueryItem]()
         if let model = model {
             queryParameters.append(URLQueryItem(name: "model", value: model))
         }
-        if let customizationID = customizationID {
-            queryParameters.append(URLQueryItem(name: "customization_id", value: customizationID))
+        if let baseModelVersion = baseModelVersion {
+            queryParameters.append(URLQueryItem(name: "base_model_version", value: baseModelVersion))
+        }
+        if let languageCustomizationID = languageCustomizationID {
+            queryParameters.append(URLQueryItem(name: "language_customization_id", value: languageCustomizationID))
         }
         if let acousticCustomizationID = acousticCustomizationID {
             queryParameters.append(URLQueryItem(name: "acoustic_customization_id", value: acousticCustomizationID))
@@ -172,6 +183,10 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         if let learningOptOut = learningOptOut {
             let value = "\(learningOptOut)"
             queryParameters.append(URLQueryItem(name: "x-watson-learning-opt-out", value: value))
+        }
+        if let customerID = customerID {
+            let value = "customer_id%3d\(customerID)"
+            queryParameters.append(URLQueryItem(name: "x-watson-metadata", value: value))
         }
         var urlComponents = URLComponents(string: url)
         if !queryParameters.isEmpty {

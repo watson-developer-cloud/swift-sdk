@@ -32,10 +32,19 @@ extension SpeechToText {
      - parameter settings: The configuration to use for this recognition request.
      - parameter model: The language and sample rate of the audio. For supported models, visit
        https://console.bluemix.net/docs/services/speech-to-text/input.html#models.
-     - parameter customizationID: The GUID of a custom language model that is to be used with the
-       request. The base language model of the specified custom language model must match the
-       model specified with the `model` parameter. By default, no custom model is used.
+     - parameter baseModelVersion: The version of the specified base model that is to be used for all requests sent
+       over the connection. Multiple versions of a base model can exist when a model is updated for internal improvements.
+       The parameter is intended primarily for use with custom models that have been upgraded for a new base model.
+       The default value depends on whether the parameter is used with or without a custom model. See
+       [Base model version](https://cloud.ibm.com/docs/services/speech-to-text/input.html#version).
+     - parameter languageCustomizationID: The customization ID (GUID) of a custom language model that is to be used
+       with the recognition request. The base model of the specified custom language model must match the model
+       specified with the `model` parameter. You must make the request with service credentials created for the instance
+       of the service that owns the custom model. By default, no custom language model is used. See [Custom
+       models](https://console.bluemix.net/docs/services/speech-to-text/input.html#custom).
      - parameter learningOptOut: If `true`, then this request will not be logged for training.
+     - parameter customerID: Associates a customer ID with all data that is passed over the connection.
+       By default, no customer ID is associated with the data.
      - parameter failure: A function executed whenever an error occurs.
      - parameter success: A function executed with all transcription results whenever
        a final or interim transcription is received.
@@ -44,8 +53,10 @@ extension SpeechToText {
         audio: URL,
         settings: RecognitionSettings,
         model: String? = nil,
-        customizationID: String? = nil,
+        baseModelVersion: String? = nil,
+        languageCustomizationID: String? = nil,
         learningOptOut: Bool? = nil,
+        customerID: String? = nil,
         completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, WatsonError?) -> Void)
     {
         do {
@@ -54,8 +65,10 @@ extension SpeechToText {
                 audio: data,
                 settings: settings,
                 model: model,
-                customizationID: customizationID,
+                baseModelVersion: baseModelVersion,
+                languageCustomizationID: languageCustomizationID,
                 learningOptOut: learningOptOut,
+                customerID: customerID,
                 completionHandler: completionHandler
             )
         } catch {
@@ -72,14 +85,23 @@ extension SpeechToText {
      - parameter settings: The configuration to use for this recognition request.
      - parameter model: The language and sample rate of the audio. For supported models, visit
        https://console.bluemix.net/docs/services/speech-to-text/input.html#models.
-     - parameter customizationID: The GUID of a custom language model that is to be used with the
-       request. The base language model of the specified custom language model must match the
-       model specified with the `model` parameter. By default, no custom model is used.
+     - parameter baseModelVersion: The version of the specified base model that is to be used for all requests sent
+       over the connection. Multiple versions of a base model can exist when a model is updated for internal improvements.
+       The parameter is intended primarily for use with custom models that have been upgraded for a new base model.
+       The default value depends on whether the parameter is used with or without a custom model. See
+       [Base model version](https://cloud.ibm.com/docs/services/speech-to-text/input.html#version).
+     - parameter languageCustomizationID: The customization ID (GUID) of a custom language model that is to be used
+       with the recognition request. The base model of the specified custom language model must match the model
+       specified with the `model` parameter. You must make the request with service credentials created for the instance
+       of the service that owns the custom model. By default, no custom language model is used. See [Custom
+       models](https://console.bluemix.net/docs/services/speech-to-text/input.html#custom).
      - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model
        that is to be used with the recognition request. The base model of the specified custom
        acoustic model must match the model specified with the `model` parameter. By default, no
        custom acoustic model is used.
      - parameter learningOptOut: If `true`, then this request will not be logged for training.
+     - parameter customerID: Associates a customer ID with all data that is passed over the connection.
+       By default, no customer ID is associated with the data.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter failure: A function executed whenever an error occurs.
      - parameter success: A function executed with all transcription results whenever
@@ -89,9 +111,11 @@ extension SpeechToText {
         audio: Data,
         settings: RecognitionSettings,
         model: String? = nil,
-        customizationID: String? = nil,
+        baseModelVersion: String? = nil,
+        languageCustomizationID: String? = nil,
         acousticCustomizationID: String? = nil,
         learningOptOut: Bool? = nil,
+        customerID: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, WatsonError?) -> Void)
     {
@@ -99,9 +123,11 @@ extension SpeechToText {
         let session = SpeechToTextSession(
             authMethod: authMethod,
             model: model,
-            customizationID: customizationID,
+            baseModelVersion: baseModelVersion,
+            languageCustomizationID: languageCustomizationID,
             acousticCustomizationID: acousticCustomizationID,
-            learningOptOut: learningOptOut
+            learningOptOut: learningOptOut,
+            customerID: customerID
         )
 
         // set urls
@@ -149,14 +175,23 @@ extension SpeechToText {
      - parameter settings: The configuration for this transcription request.
      - parameter model: The language and sample rate of the audio. For supported models, visit
        https://console.bluemix.net/docs/services/speech-to-text/input.html#models.
-     - parameter customizationID: The GUID of a custom language model that is to be used with the
-       request. The base language model of the specified custom language model must match the
-       model specified with the `model` parameter. By default, no custom model is used.
+     - parameter baseModelVersion: The version of the specified base model that is to be used for all requests sent
+       over the connection. Multiple versions of a base model can exist when a model is updated for internal improvements.
+       The parameter is intended primarily for use with custom models that have been upgraded for a new base model.
+       The default value depends on whether the parameter is used with or without a custom model. See
+       [Base model version](https://cloud.ibm.com/docs/services/speech-to-text/input.html#version).
+     - parameter languageCustomizationID: The customization ID (GUID) of a custom language model that is to be used
+       with the recognition request. The base model of the specified custom language model must match the model
+       specified with the `model` parameter. You must make the request with service credentials created for the instance
+       of the service that owns the custom model. By default, no custom language model is used. See [Custom
+       models](https://console.bluemix.net/docs/services/speech-to-text/input.html#custom).
      - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model
        that is to be used with the recognition request. The base model of the specified custom
        acoustic model must match the model specified with the `model` parameter. By default, no
        custom acoustic model is used.
      - parameter learningOptOut: If `true`, then this request will not be logged for training.
+     - parameter customerID: Associates a customer ID with all data that is passed over the connection.
+       By default, no customer ID is associated with the data.
      - parameter compress: Should microphone audio be compressed to Opus format?
        (Opus compression reduces latency and bandwidth.)
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -167,9 +202,11 @@ extension SpeechToText {
     public func recognizeMicrophone(
         settings: RecognitionSettings,
         model: String? = nil,
-        customizationID: String? = nil,
+        baseModelVersion: String? = nil,
+        languageCustomizationID: String? = nil,
         acousticCustomizationID: String? = nil,
         learningOptOut: Bool? = nil,
+        customerID: String? = nil,
         compress: Bool = true,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, WatsonError?) -> Void)
@@ -198,9 +235,11 @@ extension SpeechToText {
         let session = SpeechToTextSession(
             authMethod: authMethod,
             model: model,
-            customizationID: customizationID,
+            baseModelVersion: baseModelVersion,
+            languageCustomizationID: languageCustomizationID,
             acousticCustomizationID: acousticCustomizationID,
-            learningOptOut: learningOptOut
+            learningOptOut: learningOptOut,
+            customerID: customerID
         )
 
         // set urls
@@ -245,22 +284,6 @@ extension SpeechToText {
         microphoneSession?.stopMicrophone()
         microphoneSession?.stopRequest()
         microphoneSession?.disconnect()
-    }
-}
-
-extension SpeechToText {
-
-    @available(*, deprecated, message: "The recognize method has been deprecated in favor of recognizeUsingWebSocket method.  This method will be removed in a future release.")
-    public func recognize(
-        audio: Data,
-        settings: RecognitionSettings,
-        model: String? = nil,
-        customizationID: String? = nil,
-        learningOptOut: Bool? = nil,
-        completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, WatsonError?) -> Void)
-    {
-        recognizeUsingWebSocket(audio: audio, settings: settings, model: model, customizationID: customizationID,
-                                learningOptOut: learningOptOut, completionHandler: completionHandler)
     }
 }
 

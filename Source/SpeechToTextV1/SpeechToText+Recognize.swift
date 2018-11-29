@@ -194,14 +194,6 @@ extension SpeechToText {
         var settings = settings
         settings.contentType = compress ? "audio/ogg;codecs=opus" : "audio/l16;rate=16000;channels=1"
 
-        // extract authMethod
-        guard let basicAuth = authMethod as? BasicAuthentication else {
-            let failureReason = "Invalid authenticaion method format."
-            let error = WatsonError.other(message: failureReason)
-            completionHandler(nil, error)
-            return
-        }
-
         // create SpeechToTextSession
         let session = SpeechToTextSession(
             authMethod: authMethod,

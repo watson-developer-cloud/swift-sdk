@@ -29,6 +29,8 @@ class SpeechToTextUnitTests: XCTestCase {
         speechToText = SpeechToText(accessToken: accessToken)
     }
 
+    // MARK: - URLs
+
     func testServiceURLSetsWebsocketsURL() {
         speechToText.serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
         XCTAssertEqual(speechToText.websocketsURL, "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize")
@@ -58,5 +60,49 @@ class SpeechToTextUnitTests: XCTestCase {
         // Different base URL
         speechToText.serviceURL = "https://example.com/speech-to-text/api"
         XCTAssertEqual(speechToText.tokenURL, "https://example.com/authorization/api/v1/token")
+    }
+
+    // MARK - Websockets
+
+    // Check that instantiating a SpeechToTextSession creates the correct SpeechToTextSocket
+    func testSpeechToTextSessionSocket() {
+
+        let iamUrl = "https://example.com"
+        let model = "testModel"
+        let baseModelVersion = "1.0"
+        let languageCustomizationID = "123"
+        let acousticCustomizationID = "456"
+        let learningOptOut = true
+        let customerID = "Anthony"
+
+        // API Key authentication
+        var sttSession = SpeechToTextSession(
+            apiKey: "1234",
+            iamUrl: iamUrl,
+            model: model,
+            baseModelVersion: baseModelVersion,
+            languageCustomizationID: languageCustomizationID,
+            acousticCustomizationID: acousticCustomizationID,
+            learningOptOut: learningOptOut,
+            customerID: customerID)
+
+        var socket = sttSession.socket
+        var expectedURL = "\(sttSession.websocketsURL)?model=\(model)&base_model_version=\(baseModelVersion)&language_customization_id=\(languageCustomizationID)&acoustic_customization_id=\(acousticCustomizationID)&x-watson-learning-opt-out=\(learningOptOut)&x-watson-metadata=customer_id%3D\(customerID)"
+        XCTAssertEqual(socket.url, URL(string: expectedURL))
+
+        // Same as above, but with Basic Auth instead of API Key in the initializer
+        sttSession = SpeechToTextSession(
+            username: "Anthony",
+            password: "hunter2",
+            model: model,
+            baseModelVersion: baseModelVersion,
+            languageCustomizationID: languageCustomizationID,
+            acousticCustomizationID: acousticCustomizationID,
+            learningOptOut: learningOptOut,
+            customerID: customerID)
+
+        socket = sttSession.socket
+        expectedURL = "\(sttSession.websocketsURL)?model=\(model)&base_model_version=\(baseModelVersion)&language_customization_id=\(languageCustomizationID)&acoustic_customization_id=\(acousticCustomizationID)&x-watson-learning-opt-out=\(learningOptOut)&x-watson-metadata=customer_id%3D\(customerID)"
+        XCTAssertEqual(socket.url, URL(string: expectedURL))
     }
 }

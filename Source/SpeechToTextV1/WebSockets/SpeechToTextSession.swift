@@ -82,7 +82,7 @@ public class SpeechToTextSession {
     /// Invoked when the session disconnects from the Speech to Text service.
     public var onDisconnect: (() -> Void)?
 
-    private lazy var socket: SpeechToTextSocket = {
+    internal lazy var socket: SpeechToTextSocket = {
         let url = SpeechToTextSocket.buildURL(
             url: websocketsURL,
             model: model,

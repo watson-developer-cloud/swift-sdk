@@ -29,7 +29,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
     internal var onError: ((WatsonError) -> Void)?
     internal var onDisconnect: (() -> Void)?
 
-    private let url: URL
+    internal let url: URL
     private let authMethod: AuthenticationMethod
     private let maxConnectAttempts: Int
     private var connectAttempts: Int
@@ -185,7 +185,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
             queryParameters.append(URLQueryItem(name: "x-watson-learning-opt-out", value: value))
         }
         if let customerID = customerID {
-            let value = "customer_id%3d\(customerID)"
+            let value = "customer_id=\(customerID)"
             queryParameters.append(URLQueryItem(name: "x-watson-metadata", value: value))
         }
         var urlComponents = URLComponents(string: url)

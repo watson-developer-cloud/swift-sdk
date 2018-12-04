@@ -23,7 +23,7 @@ import SpeechToTextV1
 class SpeechToTextTests: XCTestCase {
 
     private var speechToText: SpeechToText!
-    private let timeout: TimeInterval = 10.0
+    private let timeout: TimeInterval = 20.0
     private let litePlanMessage = "This feature is not available for the Bluemix Lite plan."
 
     // MARK: - Test Configuration

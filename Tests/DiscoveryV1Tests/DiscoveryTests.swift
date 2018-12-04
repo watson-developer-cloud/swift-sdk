@@ -256,7 +256,7 @@ class DiscoveryTests: XCTestCase {
             name: "swift-sdk-test-" + UUID().uuidString,
             description: "A collection created while testing the Swift SDK. Safe to delete.",
             configurationID: configurationID,
-            language: "en")
+            language: language)
         {
             response, error in
 

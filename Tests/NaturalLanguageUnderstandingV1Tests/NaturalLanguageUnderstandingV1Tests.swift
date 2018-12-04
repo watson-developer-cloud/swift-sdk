@@ -574,7 +574,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             relations: RelationsOptions(model: "en-news"),
             semanticRoles: SemanticRolesOptions(limit: 5, keywords: true, entities: true),
             sentiment: SentimentOptions(document: true, targets: ["happy"]),
-            categories: CategoriesOptions(additionalProperties: ["example-key": .string("example-value")])
+            categories: CategoriesOptions()
         )
         naturalLanguageUnderstanding.analyze(features: features, text: text, returnAnalyzedText: true) {
             response, error in

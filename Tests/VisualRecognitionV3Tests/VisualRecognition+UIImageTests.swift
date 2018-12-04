@@ -144,7 +144,7 @@ class VisualRecognitionUIImageTests: XCTestCase {
             let age = face?.faces.first?.age
             XCTAssertGreaterThanOrEqual(age!.min!, 40)
             XCTAssertLessThanOrEqual(age!.max!, 54)
-            XCTAssertGreaterThanOrEqual(age!.score!, 0.25)
+            XCTAssertGreaterThanOrEqual(age!.score, 0.25)
 
             // verify the face location
             let location = face?.faces.first?.faceLocation
@@ -156,7 +156,7 @@ class VisualRecognitionUIImageTests: XCTestCase {
             // verify the gender
             let gender = face?.faces.first?.gender
             XCTAssertEqual(gender!.gender, "MALE")
-            XCTAssertGreaterThanOrEqual(gender!.score!, 0.75)
+            XCTAssertGreaterThanOrEqual(gender!.score, 0.75)
 
             expectation.fulfill()
         }

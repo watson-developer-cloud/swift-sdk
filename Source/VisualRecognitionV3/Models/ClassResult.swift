@@ -30,13 +30,13 @@ public struct ClassResult: Codable, Equatable {
      Confidence score for the property in the range of 0 to 1. A higher score indicates greater likelihood that the
      class is depicted in the image. The default threshold for returning scores from a classifier is 0.5.
      */
-    public var score: Double?
+    public var score: Double
 
     /**
      Knowledge graph of the property. For example, `/fruit/pome/apple/eating apple/Granny Smith`. Included only if
      identified.
      */
-    public var typeHierarchy: String?
+    public var typeHierarchy: String
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {

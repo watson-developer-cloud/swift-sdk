@@ -24,7 +24,7 @@ public struct DetectedFaces: Codable, Equatable {
     /**
      Number of images processed for the API call.
      */
-    public var imagesProcessed: Int?
+    public var imagesProcessed: Int
 
     /**
      The images.

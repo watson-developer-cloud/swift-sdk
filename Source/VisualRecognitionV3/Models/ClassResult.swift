@@ -36,7 +36,7 @@ public struct ClassResult: Codable, Equatable {
      Knowledge graph of the property. For example, `/fruit/pome/apple/eating apple/Granny Smith`. Included only if
      identified.
      */
-    public var typeHierarchy: String
+    public var typeHierarchy: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {

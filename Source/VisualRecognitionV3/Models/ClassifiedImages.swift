@@ -24,12 +24,12 @@ public struct ClassifiedImages: Codable, Equatable {
     /**
      Number of custom classes identified in the images.
      */
-    public var customClasses: Int
+    public var customClasses: Int?
 
     /**
      Number of images processed for the API call.
      */
-    public var imagesProcessed: Int
+    public var imagesProcessed: Int?
 
     /**
      Classified images.

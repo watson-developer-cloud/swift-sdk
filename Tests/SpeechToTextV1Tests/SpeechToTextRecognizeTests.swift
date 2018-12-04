@@ -21,8 +21,8 @@
 
 import XCTest
 import Foundation
-import SpeechToTextV1
 import RestKit
+@testable import SpeechToTextV1
 
 class SpeechToTextRecognizeTests: XCTestCase {
 
@@ -101,7 +101,11 @@ class SpeechToTextRecognizeTests: XCTestCase {
         transcribeFileDefault(filename: "SpeechSample", withExtension: "flac", format: "audio/flac")
     }
 
-    func transcribeFileDefault(filename: String, withExtension: String, format: String) {
+    func testTranscribeFileNoFormat() {
+        transcribeFileDefault(filename: "SpeechSample", withExtension: "wav", format: nil)
+    }
+
+    func transcribeFileDefault(filename: String, withExtension: String, format: String?) {
         let description = "Transcribe an audio file."
         let expectation = self.expectation(description: description)
 
@@ -148,7 +152,11 @@ class SpeechToTextRecognizeTests: XCTestCase {
         transcribeFileCustom(filename: "SpeechSample", withExtension: "flac", format: "audio/flac")
     }
 
-    func transcribeFileCustom(filename: String, withExtension: String, format: String) {
+    func testTranscribeFileCustomNoFormat() {
+        transcribeFileCustom(filename: "SpeechSample", withExtension: "ogg", format: nil)
+    }
+
+    func transcribeFileCustom(filename: String, withExtension: String, format: String?) {
         let description = "Transcribe an audio file."
         let expectation = self.expectation(description: description)
 
@@ -206,7 +214,11 @@ class SpeechToTextRecognizeTests: XCTestCase {
         transcribeDataDefault(filename: "SpeechSample", withExtension: "flac", format: "audio/flac")
     }
 
-    func transcribeDataDefault(filename: String, withExtension: String, format: String) {
+    func testTranscribeDataDefaultNoFormat() {
+        transcribeDataDefault(filename: "SpeechSample", withExtension: "flac", format: nil)
+    }
+
+    func transcribeDataDefault(filename: String, withExtension: String, format: String?) {
         let description = "Transcribe an audio file."
         let expectation = self.expectation(description: description)
 
@@ -260,7 +272,11 @@ class SpeechToTextRecognizeTests: XCTestCase {
         transcribeDataCustom(filename: "SpeechSample", withExtension: "flac", format: "audio/flac")
     }
 
-    func transcribeDataCustom(filename: String, withExtension: String, format: String) {
+    func testTranscribeDataCustomNoFormat() {
+        transcribeDataCustom(filename: "SpeechSample", withExtension: "wav", format: nil)
+    }
+
+    func transcribeDataCustom(filename: String, withExtension: String, format: String?) {
         let description = "Transcribe an audio file."
         let expectation = self.expectation(description: description)
 
@@ -355,7 +371,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
         do {
             let audio = try Data(contentsOf: file)
             let settings = RecognitionSettings(contentType: format)
-            speechToText.recognizeUsingWebSocket(audio: audio, settings: settings, model: baseModelName, customizationID: customizationID) {
+            speechToText.recognizeUsingWebSocket(audio: audio, settings: settings, model: baseModelName, languageCustomizationID: customizationID) {
                 response, error in
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
@@ -515,7 +531,11 @@ class SpeechToTextRecognizeTests: XCTestCase {
         transcribeDataWithSpeakerLabels(filename: "SpeechSample", withExtension: "flac", format: "audio/flac")
     }
 
-    func transcribeDataWithSpeakerLabels(filename: String, withExtension: String, format: String) {
+    func testTranscribeDataWithSpeakerLabelsNoFormat() {
+        transcribeDataWithSpeakerLabels(filename: "SpeechSample", withExtension: "ogg", format: nil)
+    }
+
+    func transcribeDataWithSpeakerLabels(filename: String, withExtension: String, format: String?) {
         let description = "Transcribe an audio file."
         let expectation = self.expectation(description: description)
         var expectationFulfilled = false

@@ -508,6 +508,7 @@
 		92ED234C2187C57C00C049A2 /* TokenDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ED234A2187C57B00C049A2 /* TokenDict.swift */; };
 		92ED234D2187C57C00C049A2 /* TokenDictStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ED234B2187C57B00C049A2 /* TokenDictStatusResponse.swift */; };
 		92ED234F218A598D00C049A2 /* TokenDictRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ED234E218A598D00C049A2 /* TokenDictRule.swift */; };
+		92EE4EFD21A470630008CE33 /* SpeechToTextUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE4EFC21A470630008CE33 /* SpeechToTextUnitTests.swift */; };
 		CA151FA2200EE23F00DBA44F /* carz.zip in Resources */ = {isa = PBXBuildFile; fileRef = CA151FA0200EE0CF00DBA44F /* carz.zip */; };
 		CA28815D20CB07D600FC992C /* WatsonCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6C7B3C1D8C960300CD97FA /* WatsonCredentials.swift */; };
 		CA28817620CB095100FC992C /* glossary.tmx in Resources */ = {isa = PBXBuildFile; fileRef = CA28817420CB095100FC992C /* glossary.tmx */; };
@@ -1124,6 +1125,7 @@
 		929A23E521123E7E00E4C78A /* TestUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TestUtilities.swift; path = Tests/TestUtilities.swift; sourceTree = "<group>"; };
 		92B470672194F225006C3333 /* AssistantV1UnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantV1UnitTests.swift; sourceTree = "<group>"; };
 		92BF69AD213F129A00FE6325 /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Shared.swift; path = Source/SupportingFiles/Shared.swift; sourceTree = "<group>"; };
+		92EE4EFC21A470630008CE33 /* SpeechToTextUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechToTextUnitTests.swift; sourceTree = "<group>"; };
 		92ED234A2187C57B00C049A2 /* TokenDict.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenDict.swift; sourceTree = "<group>"; };
 		92ED234B2187C57B00C049A2 /* TokenDictStatusResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenDictStatusResponse.swift; sourceTree = "<group>"; };
 		92ED234E218A598D00C049A2 /* TokenDictRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenDictRule.swift; sourceTree = "<group>"; };
@@ -1990,6 +1992,7 @@
 			children = (
 				7AAA9A211CEE3026002C9564 /* Audio Files */,
 				7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */,
+				92EE4EFC21A470630008CE33 /* SpeechToTextUnitTests.swift */,
 				68BB78F82089A97E00173438 /* SpeechToTextRecognizeTests.swift */,
 				12D82B4F1E2D2E5300430DB3 /* healthcare-short.txt */,
 			);
@@ -3941,6 +3944,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92B470702194F6AF006C3333 /* MockURLProtocol.swift in Sources */,
+				92EE4EFD21A470630008CE33 /* SpeechToTextUnitTests.swift in Sources */,
 				920A2447214B0E400077F10D /* Shared.swift in Sources */,
 				7A6C7B491D8C960300CD97FA /* WatsonCredentials.swift in Sources */,
 				7AF31BFB1D7A414D0040D944 /* SpeechToTextTests.swift in Sources */,

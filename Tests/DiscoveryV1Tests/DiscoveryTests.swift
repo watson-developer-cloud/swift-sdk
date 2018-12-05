@@ -85,6 +85,7 @@ class DiscoveryTests: XCTestCase {
             ("testCollectionsCRUD", testCollectionsCRUD),
             ("testListCollectionFields", testListCollectionFields),
             ("testExpansionsCRUD", testExpansionsCRUD),
+            ("testTokenizationDictionaryOperations", testTokenizationDictionaryOperations),
             ("testDocumentsCRUD", testDocumentsCRUD),
             ("testQuery", testQuery),
             ("testQueryWithNaturalLanguage", testQueryWithNaturalLanguage),
@@ -1008,7 +1009,7 @@ class DiscoveryTests: XCTestCase {
         waitForExpectations(timeout: timeout)
     }
 
-    func testTokenizationDictionaryCRD() {
+    func testTokenizationDictionaryOperations() {
         // Need to make sure the new collection gets deleted even after a test failure
         continueAfterFailure = true
 
@@ -1042,9 +1043,8 @@ class DiscoveryTests: XCTestCase {
         }
 
         let expectation = self.expectation(description: "createTokenizationDictionary")
-        let tokenizationRule1 = TokenDictRule(text: "すしネコ", tokens: ["すし", "ネコ"], readings: ["寿司", "ネコ"], partOfSpeech: "カスタム名詞")
-        let tokenizationRule2 = TokenDictRule(text: "すしネコ", tokens: ["すし", "ネコ"], readings: ["寿司", "ネコ"], partOfSpeech: "カスタム名詞")
-        discovery.createTokenizationDictionary(environmentID: environmentID, collectionID: collectionID, tokenizationRules: [tokenizationRule1, tokenizationRule2]) {
+        let tokenizationRule = TokenDictRule(text: "すしネコ", tokens: ["すし", "ネコ"], readings: ["寿司", "ネコ"], partOfSpeech: "カスタム名詞")
+        discovery.createTokenizationDictionary(environmentID: environmentID, collectionID: collectionID, tokenizationRules: [tokenizationRule]) {
             response, error in
 
             if let error = error {

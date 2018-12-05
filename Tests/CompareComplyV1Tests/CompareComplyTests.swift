@@ -49,8 +49,7 @@ class CompareComplyTests: XCTestCase {
     /** Instantiate CompareComply. */
     func instantiateCompareComply() {
         let version = "2018-11-15"
-//        compareComply = CompareComply(version: version, apiKey: WatsonCredentials.CompareComplyV1APIKey, iamUrl: "https://iam.stage1.bluemix.net/identity/token")
-        compareComply = CompareComply(version: version, apiKey: WatsonCredentials.CompareComplyV1APIKey)
+        compareComply = CompareComply(version: version, apiKey: WatsonCredentials.CompareComplyV1APIKey, iamUrl: "https://iam.stage1.bluemix.net/identity/token")
         if let url = WatsonCredentials.CompareComplyURL {
             compareComply.serviceURL = url
         }

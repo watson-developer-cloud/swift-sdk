@@ -19,6 +19,6 @@ IBM Watson™ Language Translator can identify the language of text and translat
                             'Source/SupportingFiles/Shared.swift'
   s.exclude_files         = 'Source/LanguageTranslatorV3/Shared.swift'
 
-  s.dependency              'IBMWatsonRestKit', '~> 1.3.0'
+  s.dependency              'IBMWatsonRestKit', '~> 2.0.0'
 
 end

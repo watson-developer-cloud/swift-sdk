@@ -20,6 +20,6 @@ scenes, objects, faces, and other content. The response includes keywords that p
                             'Source/SupportingFiles/Shared.swift'
   s.exclude_files         = 'Source/VisualRecognitionV3/Shared.swift'
 
-  s.dependency              'IBMWatsonRestKit', '~> 1.3.0'
+  s.dependency              'IBMWatsonRestKit', '~> 2.0.0'
   
 end

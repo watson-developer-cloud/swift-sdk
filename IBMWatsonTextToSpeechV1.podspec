@@ -22,7 +22,7 @@ The service streams the results back to the client with minimal delay.
   s.exclude_files         = 'Source/TextToSpeechV1/Shared.swift',
                             '**/config_types.h'
 
-  s.dependency              'IBMWatsonRestKit', '~> 1.3.0'
+  s.dependency              'IBMWatsonRestKit', '~> 2.0.0'
   s.vendored_libraries    = 'Source/SupportingFiles/Dependencies/Libraries/*.a'
 
   # The renaming of libogg.a and libopus.a is done to avoid duplicate library name errors

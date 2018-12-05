@@ -9,8 +9,8 @@ Before you open an issue, please check if a similar issue already exists or has 
 - [ ] Expected behavior
 - [ ] Actual behavior
 - [ ] Xcode version
-- [ ] ios-sdk version
-- [ ] ios version you are targeting
+- [ ] swift-sdk version
+- [ ] iOS or Linux version you are targeting
 
 
 ### When you open an issue for a feature request, please add as much detail as possible:

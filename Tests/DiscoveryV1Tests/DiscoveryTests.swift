@@ -639,7 +639,7 @@ class DiscoveryTests: XCTestCase {
         let sourceOptionsSiteColl = SourceOptionsSiteColl(siteCollectionPath: "sitePath")
         let sourceOptions = SourceOptions(folders: [SourceOptionsFolder(ownerUserID: "memyselfandI", folderID: "MyFolder")],
                                           objects: [SourceOptionsObject(name: "MyObjects")], siteCollections: [sourceOptionsSiteColl])
-        let source = Source(type: Source.ModelType.box.rawValue, credentialID: "my box credentialID", schedule: sourceSchedule, options: sourceOptions)
+        let source = Source(type: Source.TypeEnum.box.rawValue, credentialID: "my box credentialID", schedule: sourceSchedule, options: sourceOptions)
         var configuration: Configuration!
         discovery.createConfiguration(
             environmentID: environmentID,
@@ -2338,7 +2338,7 @@ class DiscoveryTests: XCTestCase {
 
         let createDetails = CredentialDetails(credentialType: "username_password", url: "https://login.salesforce.com",
                                         username: "email@server.xyz", password: "{my_salesforce_password}{my_salesforce_security_token}")
-        discovery.createCredentials(environmentID: environmentID, sourceType: Source.ModelType.salesforce.rawValue, credentialDetails: createDetails) {
+        discovery.createCredentials(environmentID: environmentID, sourceType: Source.TypeEnum.salesforce.rawValue, credentialDetails: createDetails) {
             response, error in
 
             if let error = error {
@@ -2381,7 +2381,7 @@ class DiscoveryTests: XCTestCase {
         let expectation3 = self.expectation(description: "updateCredentials")
         let updateDetails = CredentialDetails(credentialType: "username_password", url: "https://login.salesforce.com",
                                               username: "email@server.xyz", password: "foobarbaz")
-        discovery.updateCredentials(environmentID: environmentID, credentialID: credentialID, sourceType: Source.ModelType.salesforce.rawValue, credentialDetails: updateDetails) {
+        discovery.updateCredentials(environmentID: environmentID, credentialID: credentialID, sourceType: Source.TypeEnum.salesforce.rawValue, credentialDetails: updateDetails) {
             response, error in
 
             if let error = error {

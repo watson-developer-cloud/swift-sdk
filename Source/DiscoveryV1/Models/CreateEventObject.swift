@@ -24,7 +24,7 @@ internal struct CreateEventObject: Codable, Equatable {
     /**
      The event type to be created.
      */
-    public enum ModelType: String {
+    public enum TypeEnum: String {
         case click = "click"
     }
 

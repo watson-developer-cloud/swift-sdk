@@ -14,7 +14,7 @@ of the audio signal. It continuously returns and retroactively updates a transcr
                               'Mike Kistler'    => 'mkistler@us.ibm.com' }
 
   s.module_name           = 'SpeechToText'
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '10.0'
   s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => s.version.to_s }
   
   s.source_files          = 'Source/SpeechToTextV1/**/*.swift',

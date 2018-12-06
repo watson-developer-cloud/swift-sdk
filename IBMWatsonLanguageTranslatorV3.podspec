@@ -12,7 +12,7 @@ IBM Watson™ Language Translator can identify the language of text and translat
                               'Mike Kistler'    => 'mkistler@us.ibm.com' }
 
   s.module_name           = 'LanguageTranslator'
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '10.0'
   s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => s.version.to_s }
 
   s.source_files          = 'Source/LanguageTranslatorV3/**/*.swift',

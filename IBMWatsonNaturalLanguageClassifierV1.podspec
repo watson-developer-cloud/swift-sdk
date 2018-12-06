@@ -14,7 +14,7 @@ return information for texts that it is not trained on.
                               'Mike Kistler'    => 'mkistler@us.ibm.com' }
 
   s.module_name           = 'NaturalLanguageClassifier'
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '10.0'
   s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => s.version.to_s }
   
   s.source_files          = 'Source/NaturalLanguageClassifierV1/**/*.swift',

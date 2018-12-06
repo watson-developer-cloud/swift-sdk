@@ -13,7 +13,7 @@ natural-language input and uses machine learning to respond to customers in a wa
                               'Mike Kistler'    => 'mkistler@us.ibm.com' }
 
   s.module_name           = 'Assistant'
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '10.0'
   s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => s.version.to_s }
   
   s.source_files          = 'Source/AssistantV1/**/*.swift',

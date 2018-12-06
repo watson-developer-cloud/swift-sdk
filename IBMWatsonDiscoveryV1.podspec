@@ -14,7 +14,7 @@ as well as public and third-party data.
                               'Mike Kistler'    => 'mkistler@us.ibm.com' }
 
   s.module_name           = 'Discovery'
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '10.0'
   s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => s.version.to_s }
   
   s.source_files          = 'Source/DiscoveryV1/**/*.swift',

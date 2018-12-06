@@ -11,7 +11,8 @@ let apiKey = "your-api-key"
 let version = "YYYY-MM-DD" // use today's date for the most recent version
 let personalityInsights = PersonalityInsights(version: version, apiKey: apiKey)
 
-personalityInsights.profile(text: "your-input-text") { response, error in
+let content = ProfileContent.text("your-text")
+personalityInsights.profile(profileContent: content) { response, error in
 	if let error = error {
         print(error)
     }

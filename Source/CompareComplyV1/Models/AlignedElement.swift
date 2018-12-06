@@ -30,6 +30,11 @@ public struct AlignedElement: Codable, Equatable {
     public var identicalText: Bool?
 
     /**
+     Indicates that the elements aligned are contractual clauses of significance.
+     */
+    public var significantElements: Bool?
+
+    /**
      One or more hashed values that you can send to IBM to provide feedback or receive support.
      */
     public var provenanceIDs: [String]?
@@ -38,6 +43,7 @@ public struct AlignedElement: Codable, Equatable {
     private enum CodingKeys: String, CodingKey {
         case elementPair = "element_pair"
         case identicalText = "identical_text"
+        case significantElements = "significant_elements"
         case provenanceIDs = "provenance_ids"
     }
 

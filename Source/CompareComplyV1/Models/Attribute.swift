@@ -22,16 +22,18 @@ import Foundation
 public struct Attribute: Codable, Equatable {
 
     /**
-     The type of attribute. Possible values are `Currency`, `DateTime`, and `Location`.
+     The type of attribute. Possible values are `Currency`, `DateTime`, `Location`, `Organization`, and `Person`.
      */
-    public enum ModelType: String {
+    public enum TypeEnum: String {
         case currency = "Currency"
-        case dateTime = "DateTime"
+        case datetime = "DateTime"
         case location = "Location"
+        case organization = "Organization"
+        case person = "Person"
     }
 
     /**
-     The type of attribute. Possible values are `Currency`, `DateTime`, and `Location`.
+     The type of attribute. Possible values are `Currency`, `DateTime`, `Location`, `Organization`, and `Person`.
      */
     public var type: String?
 

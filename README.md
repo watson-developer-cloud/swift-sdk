@@ -37,7 +37,7 @@ There are many resources to help you build your first cognitive application with
 
 This SDK provides classes and methods to access the following Watson services.
 
-* [Assistant](https://www.ibm.com/watson/services/conversation)
+* [Assistant](https://www.ibm.com/cloud/watson-assistant/)
 * [Discovery](https://www.ibm.com/watson/services/discovery)
 * [Language Translator V3](https://www.ibm.com/watson/services/language-translator)
 * [Natural Language Classifier](https://www.ibm.com/watson/services/natural-language-classifier)
@@ -79,7 +79,6 @@ use_frameworks!
 target 'MyApp' do
     pod 'IBMWatsonAssistantV1', '~> 1.0.0'
     pod 'IBMWatsonAssistantV2', '~> 1.0.0'
-    pod 'IBMWatsonConversationV1', '~> 1.0.0'
     pod 'IBMWatsonDiscoveryV1', '~> 1.0.0'
     pod 'IBMWatsonLanguageTranslatorV3', '~> 1.0.0'
     pod 'IBMWatsonNaturalLanguageClassifierV1', '~> 1.0.0'

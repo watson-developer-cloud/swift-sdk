@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                  = 'IBMWatsonAssistantV2'
-  s.version               = '0.38.1'
+  s.version               = '1.0.0'
   s.summary               = 'Client framework for the IBM Watson Assistant service'
   s.description           = <<-DESC
 With the IBM Watson™ Assistant service, you can build a solution that understands 

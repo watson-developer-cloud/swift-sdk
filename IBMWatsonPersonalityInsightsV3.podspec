@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                  = 'IBMWatsonPersonalityInsightsV3'
-  s.version               = '0.38.1'
+  s.version               = '1.0.0'
   s.summary               = 'Client framework for the IBM Watson Personality Insights service'
   s.description           = <<-DESC
 IBM Watson™ Personality Insights uses linguistic analytics to infer individuals' intrinsic personality characteristics 

@@ -11,17 +11,19 @@ let apiKey = "your-apikey-here"
 let version = "YYYY-MM-DD" // use today's date for the most recent version
 let visualRecognition = VisualRecognition(version: version, apiKey: apiKey)
 
-let url = "your-image-url"
-let failure = { (error: Error) in print(error) }
-visualRecognition.classify(image: url, failure: failure) { classifiedImages in
+let imageURL = Bundle.main.url(forResource: "profile-picture", withExtension: "jpg")!
+visualRecognition.classify(imageFile: imageURL) { response, error in
+	if let error = error {
+        print(error)
+    }
+    guard let classifiedImages = response?.result else {
+        print("Failed to classify the image")
+        return
+    }
     print(classifiedImages)
 }
 ```
 
-Note: a different initializer is used for authentication with instances created before May 23, 2018:
-```swift
-let visualRecognition = VisualRecognition(apiKey: apiKey, version: version)
-```
 
 ## Using Core ML
 
@@ -42,30 +44,35 @@ The local Core ML model can be updated as needed.
 
 ```swift
 let classifierID = "your-classifier-id"
-let failure = { (error: Error) in print(error) }
-visualRecognition.updateLocalModel(classifierID: classifierID, failure: failure) {
-    print("model updated")
+visualRecognition.updateLocalModel(classifierID: classifierID) { _, error in
+	if let error = error {
+		print(error)
+	} else {
+		print("model successfully updated")
+	}
 }
 ```
 
 The following example demonstrates how to list the Core ML models that are stored in the filesystem and available for offline use:
 
 ```swift
-let localModels = try! visualRecognition.listLocalModels()
+let localModels = try? visualRecognition.listLocalModels()
 print(localModels)
 ```
 
 If you would prefer to bypass `classifyWithLocalModel` and construct your own Core ML classification request, then you can retrieve a Core ML model from the local filesystem with the following example.
+
 ```swift
 let classifierID = "your-classifier-id"
-let localModel = try! visualRecognition.getLocalModel(classifierID: classifierID)
+let localModel = try? visualRecognition.getLocalModel(classifierID: classifierID)
 print(localModel)
 ```
 
 The following example demonstrates how to delete a local Core ML model from the filesystem. This saves space when the model is no longer needed.
+
 ```swift
 let classifierID = "your-classifier-id"
-visualRecognition.deleteLocalModel(classifierID: classifierID)
+try? visualRecognition.deleteLocalModel(classifierID: classifierID)
 ```
 
 ### Bundling a model directly with your application

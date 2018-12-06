@@ -164,33 +164,26 @@ You supply either an IAM service **API key** or an **access token**:
 
 #### Supplying the IAM API key
 ```swift
-let discovery = Discovery(version: "your-version-here", apiKey: "your-apikey-here")
+let discovery = Discovery(version: "your-version", apiKey: "your-apikey")
 ```
 
 If you are supplying an API key for IBM Cloud Private (ICP), use basic authentication instead, with `"apikey"` for the `username` and the api key (prefixed with `icp-`) for the `password`. See the [Username and Password](#username-and-password) section.
 
 #### Supplying the accessToken
 ```swift
-let discovery = Discovery(version: "your-version-here", accessToken: "your-accessToken-here")
+let discovery = Discovery(version: "your-version", accessToken: "your-accessToken")
 ```
 #### Updating the accessToken
 ```swift
-discovery.accessToken("new-accessToken-here")
+discovery.accessToken("new-accessToken")
 ```
 
 ### Username and Password
 
 ```swift
-let discovery = Discovery(username: "your-username-here", password: "your-password-here", version: "your-version-here")
+let discovery = Discovery(username: "your-username", password: "your-password", version: "your-version")
 ```
 
-### API Key
-
-_Note: This type of authentication only works with Visual Recognition, and for instances created before May 23, 2018. Newer instances of Visual Recognition use IAM._
-
-```swift
-let visualRecognition = VisualRecognition(apiKey: "your-apiKey-here", version: "your-version-here")
-```
 
 ## Custom Service URLs
 
@@ -200,8 +193,8 @@ For example, here is how to connect to a Tone Analyzer instance that is hosted i
 
 ```swift
 let toneAnalyzer = ToneAnalyzer(
-    username: "your-username-here",
-    password: "your-password-here",
+    username: "your-username",
+    password: "your-password",
     version: "yyyy-mm-dd"
 )
 toneAnalyzer.serviceURL = "https://gateway-fra.watsonplatform.net/tone-analyzer/api"
@@ -236,8 +229,13 @@ By default, the SDK executes all networking operations asynchronously. If your a
 ```swift
 let dispatchGroup = DispatchGroup()
 dispatchGroup.enter()
-assistant.message(workspaceID: workspaceID) { response in
-    print(response.output.text)
+assistant.message(workspaceID: workspaceID) { response, error in
+	if let error = error {
+        print(error)
+    }
+    if let message = response?.result else {
+        print(message.output.text)
+    }
     dispatchGroup.leave()
 }
 dispatchGroup.wait(timeout: .distantFuture)

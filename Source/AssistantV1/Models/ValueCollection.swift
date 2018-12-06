@@ -17,7 +17,7 @@
 import Foundation
 
 /** ValueCollection. */
-public struct ValueCollection: Decodable {
+public struct ValueCollection: Codable, Equatable {
 
     /**
      An array of entity values.
@@ -25,7 +25,7 @@ public struct ValueCollection: Decodable {
     public var values: [ValueExport]
 
     /**
-     An object defining the pagination data for the returned objects.
+     The pagination data for the returned objects.
      */
     public var pagination: Pagination
 

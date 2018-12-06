@@ -19,7 +19,7 @@ import Foundation
 /**
  An object specifiying the semantic roles enrichment and related parameters.
  */
-public struct NluEnrichmentSemanticRoles: Codable {
+public struct NluEnrichmentSemanticRoles: Codable, Equatable {
 
     /**
      When `true`, entities are extracted from the identified sentence parts.

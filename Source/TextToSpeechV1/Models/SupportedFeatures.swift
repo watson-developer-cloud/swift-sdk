@@ -17,7 +17,7 @@
 import Foundation
 
 /** SupportedFeatures. */
-public struct SupportedFeatures: Decodable {
+public struct SupportedFeatures: Codable, Equatable {
 
     /**
      If `true`, the voice can be customized; if `false`, the voice cannot be customized. (Same as `customizable`.).

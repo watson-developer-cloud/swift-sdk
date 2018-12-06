@@ -20,7 +20,7 @@ import RestKit
 /**
  Contains information specific to particular skills within the Assistant.
  */
-public struct MessageContextSkills: Codable {
+public struct MessageContextSkills: Codable, Equatable {
 
     /// Additional properties associated with this model.
     public var additionalProperties: [String: JSON]

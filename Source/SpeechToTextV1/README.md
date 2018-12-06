@@ -23,7 +23,7 @@ See the [class documentation](http://watson-developer-cloud.github.io/swift-sdk/
 
 ### Microphone Audio and Compression
 
-The Speech to Text framework makes it easy to perform speech recognition with microphone audio. The framework internally manages the microphone, starting and stopping it with various function calls (such as `recognizeMicrophone(settings:model:customizationID:learningOptOut:compress:failure:success)` and `stopRecognizeMicrophone()` or `startMicrophone(compress:)` and `stopMicrophone()`).
+The Speech to Text framework makes it easy to perform speech recognition with microphone audio. The framework internally manages the microphone, starting and stopping it with various method calls (`recognizeMicrophone` and `stopRecognizeMicrophone`, or `startMicrophone` and `stopMicrophone`).
 
 There are two different ways that your app can determine when to stop the microphone:
 
@@ -67,18 +67,22 @@ The following example demonstrates how to use the Speech to Text service to tran
 ```swift
 import SpeechToTextV1
 
-let username = "your-username-here"
-let password = "your-password-here"
-let speechToText = SpeechToText(username: username, password: password)
+let apiKey = "your-api-key"
+let speechToText = SpeechToText(apiKey: apiKey)
 
 var accumulator = SpeechRecognitionResultsAccumulator()
 
-let audio = Bundle.main.url(forResource: "filename", withExtension: "wav")!
-var settings = RecognitionSettings(contentType: "audio/wav")
+let audioFile = Bundle.main.url(forResource: "filename", withExtension: "wav")!
+let settings = RecognitionSettings(contentType: "audio/wav")
 settings.interimResults = true
-let failure = { (error: Error) in print(error) }
-speechToText.recognize(audio, settings: settings, failure: failure) {
-    results in
+speechToText.recognize(audio: audioFile, settings: settings) { response, error in
+	if let error = error {
+        print(error)
+    }
+    guard let results = response?.result else {
+        print("Failed to recognize the audio")
+        return
+    }
     accumulator.add(results: results)
     print(accumulator.bestTranscript)
 }
@@ -91,17 +95,22 @@ Audio can be streamed from the microphone to the Speech to Text service for real
 ```swift
 import SpeechToTextV1
 
-let username = "your-username-here"
-let password = "your-password-here"
-let speechToText = SpeechToText(username: username, password: password)
+let apiKey = "your-api-key"
+let speechToText = SpeechToText(apiKey: apiKey)
 
 var accumulator = SpeechRecognitionResultsAccumulator()
 
 func startStreaming() {
     var settings = RecognitionSettings(contentType: "audio/ogg;codecs=opus")
     settings.interimResults = true
-    let failure = { (error: Error) in print(error) }
-    speechToText.recognizeMicrophone(settings: settings, failure: failure) { results in
+    speechToText.recognizeMicrophone(settings: settings) { response, error in
+    	if let error = error {
+    		print(error)
+	    }
+	    guard let results = response?.result else {
+	        print("Failed to recognize the audio")
+	        return
+	    }
         accumulator.add(results: results)
         print(accumulator.bestTranscript)
     }
@@ -142,18 +151,17 @@ The following example demonstrates how to use `SpeechToTextSession` to transcrib
 ```swift
 import SpeechToTextV1
 
-let username = "your-username-here"
-let password = "your-password-here"
-let speechToTextSession = SpeechToTextSession(username: username, password: password)
+let apiKey = "your-api-key"
+let speechToTextSession = SpeechToTextSession(apiKey: apiKey)
 
 var accumulator = SpeechRecognitionResultsAccumulator()
 
 do {
     let session = AVAudioSession.sharedInstance()
+    try session.setCategory(AVAudioSession.Category.playAndRecord, mode: .default, options: [.defaultToSpeaker, .mixWithOthers])
     try session.setActive(true)
-    try session.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.mixWithOthers, .defaultToSpeaker])
 } catch {
-    print(error.localizedDescription)
+    print(error)
 }
 
 func startStreaming() {
@@ -185,13 +193,9 @@ func stopStreaming() {
 }
 ```
 
-### Customization
-
-There are a number of ways that Speech to Text can be customized to suit your particular application. For example, you can define custom words or upload audio to train an acoustic model. For more information, refer to the [service documentation](https://console.bluemix.net/docs/services/speech-to-text/index.html) or [API documentation](http://watson-developer-cloud.github.io/swift-sdk/swift-api/services/SpeechToTextV1/Classes/SpeechToText.html).
-
 ### Additional Information
 
-The following links provide more information about the IBM Speech to Text service:
+There are a number of ways that Speech to Text can be customized to suit your particular application. For example, you can define custom words or upload audio to train an acoustic model. The following links provide more information about the IBM Speech to Text service:
 
 * [IBM Watson Speech to Text - Service Page](https://www.ibm.com/watson/services/speech-to-text/)
 * [IBM Watson Speech to Text - Documentation](https://console.bluemix.net/docs/services/speech-to-text/index.html)

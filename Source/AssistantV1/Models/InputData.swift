@@ -19,7 +19,7 @@ import Foundation
 /**
  The user input.
  */
-public struct InputData: Codable {
+public struct InputData: Codable, Equatable {
 
     /**
      The text of the user input. This string cannot contain carriage return, newline, or tab characters, and it must be

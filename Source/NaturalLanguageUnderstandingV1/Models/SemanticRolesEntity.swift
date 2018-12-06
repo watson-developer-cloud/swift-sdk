@@ -17,7 +17,7 @@
 import Foundation
 
 /** SemanticRolesEntity. */
-public struct SemanticRolesEntity: Decodable {
+public struct SemanticRolesEntity: Codable, Equatable {
 
     /**
      Entity type.

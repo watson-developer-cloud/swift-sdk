@@ -26,10 +26,10 @@ internal class SpeechToTextSocket: WebSocketDelegate {
     internal var onConnect: (() -> Void)?
     internal var onListening: (() -> Void)?
     internal var onResults: ((SpeechRecognitionResults) -> Void)?
-    internal var onError: ((Error) -> Void)?
+    internal var onError: ((WatsonError) -> Void)?
     internal var onDisconnect: (() -> Void)?
 
-    private let url: URL
+    internal let url: URL
     private let authMethod: AuthenticationMethod
     private let maxConnectAttempts: Int
     private var connectAttempts: Int
@@ -72,9 +72,8 @@ internal class SpeechToTextSocket: WebSocketDelegate {
 
         // restrict the number of retries
         guard connectAttempts <= maxConnectAttempts else {
-            let failureReason = "Invalid HTTP upgrade. Check credentials?"
-            let userInfo = [NSLocalizedDescriptionKey: failureReason]
-            let error = NSError(domain: "WebSocket", code: 400, userInfo: userInfo)
+            let failureReason = "Invalid HTTP upgrade. Check credentials."
+            let error = WatsonError.http(statusCode: 400, message: failureReason, metadata: ["type": "Websocket"])
             onError?(error)
             return
         }
@@ -82,7 +81,9 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         // create request with headers
         var request = URLRequest(url: url)
         request.timeoutInterval = 5
-        request.addValue(RestRequest.userAgent, forHTTPHeaderField: "User-Agent")
+        if let userAgentHeader = RestRequest.userAgent {
+            request.setValue(userAgentHeader, forHTTPHeaderField: "User-Agent")
+        }
         for (key, value) in defaultHeaders {
             request.addValue(value, forHTTPHeaderField: key)
         }
@@ -95,7 +96,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
                 self.socket.delegate = self
                 self.socket.connect()
             } else {
-                self.onError?(error ?? RestError.failure(400, "Token Manager error"))
+                self.onError?(error ?? WatsonError.http(statusCode: 400, message: "Token Manager error", metadata: nil))
             }
         }
     }
@@ -157,13 +158,24 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         }
     }
 
-    internal static func buildURL(url: String, model: String?, customizationID: String?, acousticCustomizationID: String?, learningOptOut: Bool?) -> URL? {
+    internal static func buildURL(
+        url: String,
+        model: String?,
+        baseModelVersion: String?,
+        languageCustomizationID: String?,
+        acousticCustomizationID: String?,
+        learningOptOut: Bool?,
+        customerID: String?) -> URL?
+    {
         var queryParameters = [URLQueryItem]()
         if let model = model {
             queryParameters.append(URLQueryItem(name: "model", value: model))
         }
-        if let customizationID = customizationID {
-            queryParameters.append(URLQueryItem(name: "customization_id", value: customizationID))
+        if let baseModelVersion = baseModelVersion {
+            queryParameters.append(URLQueryItem(name: "base_model_version", value: baseModelVersion))
+        }
+        if let languageCustomizationID = languageCustomizationID {
+            queryParameters.append(URLQueryItem(name: "language_customization_id", value: languageCustomizationID))
         }
         if let acousticCustomizationID = acousticCustomizationID {
             queryParameters.append(URLQueryItem(name: "acoustic_customization_id", value: acousticCustomizationID))
@@ -171,6 +183,10 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         if let learningOptOut = learningOptOut {
             let value = "\(learningOptOut)"
             queryParameters.append(URLQueryItem(name: "x-watson-learning-opt-out", value: value))
+        }
+        if let customerID = customerID {
+            let value = "customer_id=\(customerID)"
+            queryParameters.append(URLQueryItem(name: "x-watson-metadata", value: value))
         }
         var urlComponents = URLComponents(string: url)
         if !queryParameters.isEmpty {
@@ -192,22 +208,17 @@ internal class SpeechToTextSocket: WebSocketDelegate {
     }
 
     private func onErrorMessage(error: String) {
-        let error = RestError.failure(0, error)
+        let error = WatsonError.other(message: error)
         onError?(error)
     }
 
     private func isAuthenticationFailure(error: Error) -> Bool {
         if let error = error as? WSError {
             let matchesCode = (error.code == 400)
-            let matchesDescription = (error.message == "Invalid HTTP upgrade")
-            return matchesCode && matchesDescription
+            let matchesType     = (error.type == .upgradeError)
+            return matchesCode && matchesType
         }
-
-        let error = error as NSError
-        let matchesDomain = (error.domain == "WebSocket")
-        let matchesCode = (error.code == 400)
-        let matchesDescription = (error.localizedDescription == "Invalid HTTP upgrade")
-        return matchesDomain && matchesCode && matchesDescription
+        return false
     }
 
     private func isNormalDisconnect(error: Error) -> Bool {
@@ -261,7 +272,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
             self.connect()
             return
         }
-        onError?(error)
+        onError?(WatsonError.other(message: String(describing: error)))
         onDisconnect?()
     }
 }

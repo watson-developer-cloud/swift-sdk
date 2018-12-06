@@ -30,10 +30,9 @@ public class Assistant {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    private let session = URLSession(configuration: URLSessionConfiguration.default)
-    private var authMethod: AuthenticationMethod
-    private let domain = "com.ibm.watson.developer-cloud.AssistantV2"
-    private let version: String
+    var session = URLSession(configuration: URLSessionConfiguration.default)
+    var authMethod: AuthenticationMethod
+    let version: String
 
     /**
      Create a `Assistant` object.
@@ -83,24 +82,28 @@ public class Assistant {
     }
 
     /**
-     If the response or data represents an error returned by the Watson Assistant v2 service,
-     then return NSError with information about the error that occured. Otherwise, return nil.
+     Use the HTTP response and data received by the Watson Assistant v2 service to extract
+     information about the error that occurred.
 
-     - parameter data: Raw data returned from the service that may represent an error.
-     - parameter response: the URL response returned from the service.
+     - parameter data: Raw data returned by the service that may represent an error.
+     - parameter response: the URL response returned by the service.
      */
-    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> Error {
+    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> WatsonError {
 
-        let code = response.statusCode
+        let statusCode = response.statusCode
+        var errorMessage: String?
+        var metadata = [String: Any]()
+
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
-            var userInfo: [String: Any] = [:]
+            metadata = [:]
             if case let .some(.string(message)) = json["error"] {
-                userInfo[NSLocalizedDescriptionKey] = message
+                errorMessage = message
             }
-            return NSError(domain: domain, code: code, userInfo: userInfo)
+            // If metadata is empty, it should show up as nil in the WatsonError
+            return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
         } catch {
-            return NSError(domain: domain, code: code, userInfo: nil)
+            return WatsonError.http(statusCode: statusCode, message: nil, metadata: nil)
         }
     }
 
@@ -115,14 +118,12 @@ public class Assistant {
        [documentation](https://console.bluemix.net/docs/services/assistant/create-assistant.html#creating-assistants).
        **Note:** Currently, the v2 API does not support creating assistants.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createSession(
         assistantID: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (SessionResponse) -> Void)
+        completionHandler: @escaping (WatsonResponse<SessionResponse>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -139,7 +140,7 @@ public class Assistant {
         // construct REST request
         let path = "/v2/assistants/\(assistantID)/sessions"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -153,13 +154,7 @@ public class Assistant {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<SessionResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -173,15 +168,13 @@ public class Assistant {
        **Note:** Currently, the v2 API does not support creating assistants.
      - parameter sessionID: Unique identifier of the session.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteSession(
         assistantID: String,
         sessionID: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -197,7 +190,7 @@ public class Assistant {
         // construct REST request
         let path = "/v2/assistants/\(assistantID)/sessions/\(sessionID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -211,13 +204,7 @@ public class Assistant {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -231,11 +218,10 @@ public class Assistant {
        [documentation](https://console.bluemix.net/docs/services/assistant/create-assistant.html#creating-assistants).
        **Note:** Currently, the v2 API does not support creating assistants.
      - parameter sessionID: Unique identifier of the session.
-     - parameter input: An input object that includes the input text.
+     - parameter input: The user input.
      - parameter context: State information for the conversation.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func message(
         assistantID: String,
@@ -243,13 +229,14 @@ public class Assistant {
         input: MessageInput? = nil,
         context: MessageContext? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (MessageResponse) -> Void)
+        completionHandler: @escaping (WatsonResponse<MessageResponse>?, WatsonError?) -> Void)
     {
         // construct body
-        let messageRequest = MessageRequest(input: input, context: context)
+        let messageRequest = MessageRequest(
+            input: input,
+            context: context)
         guard let body = try? JSONEncoder().encodeIfPresent(messageRequest) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -268,7 +255,7 @@ public class Assistant {
         // construct REST request
         let path = "/v2/assistants/\(assistantID)/sessions/\(sessionID)/message"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -283,13 +270,7 @@ public class Assistant {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<MessageResponse>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
 }

@@ -35,20 +35,30 @@ import RestKit
 public class SpeechToText {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
+    public var serviceURL = "https://stream.watsonplatform.net/speech-to-text/api" {
+        didSet {
+            if serviceURL.last == "/" {
+                serviceURL.removeLast()
+            }
+            // websocketsURL and tokenURL are both derivative of serviceURL
+            websocketsURL = serviceURL.replacingOccurrences(of: "http", with: "ws", options: .anchored, range: nil)
+            websocketsURL.append("/v1/recognize")
 
-    /// The URL that shall be used to obtain a token.
-    public var tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
+            tokenURL = serviceURL.replacingOccurrences(of: "/speech-to-text/api", with: "/authorization/api/v1/token")
+        }
+    }
 
     /// The URL that shall be used to stream audio for transcription.
-    public var websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
+    internal var websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
+
+    /// The URL that shall be used to obtain a token.
+    internal var tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    internal let session = URLSession(configuration: URLSessionConfiguration.default)
-    internal var authMethod: AuthenticationMethod
-    internal let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
+    var session = URLSession(configuration: URLSessionConfiguration.default)
+    var authMethod: AuthenticationMethod
 
     /**
      Create a `SpeechToText` object.
@@ -89,27 +99,31 @@ public class SpeechToText {
     }
 
     /**
-     If the response or data represents an error returned by the Speech to Text service,
-     then return NSError with information about the error that occured. Otherwise, return nil.
+     Use the HTTP response and data received by the Speech to Text service to extract
+     information about the error that occurred.
 
-     - parameter data: Raw data returned from the service that may represent an error.
-     - parameter response: the URL response returned from the service.
+     - parameter data: Raw data returned by the service that may represent an error.
+     - parameter response: the URL response returned by the service.
      */
-    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> Error {
+    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> WatsonError {
 
-        let code = response.statusCode
+        let statusCode = response.statusCode
+        var errorMessage: String?
+        var metadata = [String: Any]()
+
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
-            var userInfo: [String: Any] = [:]
+            metadata = [:]
             if case let .some(.string(message)) = json["error"] {
-                userInfo[NSLocalizedDescriptionKey] = message
+                errorMessage = message
             }
             if case let .some(.string(description)) = json["code_description"] {
-                userInfo[NSLocalizedRecoverySuggestionErrorKey] = description
+                metadata["codeDescription"] = description
             }
-            return NSError(domain: domain, code: code, userInfo: userInfo)
+            // If metadata is empty, it should show up as nil in the WatsonError
+            return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
         } catch {
-            return NSError(domain: domain, code: code, userInfo: nil)
+            return WatsonError.http(statusCode: statusCode, message: nil, metadata: nil)
         }
     }
 
@@ -121,13 +135,11 @@ public class SpeechToText {
      **See also:** [Languages and models](https://console.bluemix.net/docs/services/speech-to-text/input.html#models).
 
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listModels(
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (SpeechModels) -> Void)
+        completionHandler: @escaping (WatsonResponse<SpeechModels>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -147,13 +159,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<SpeechModels>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -166,14 +172,12 @@ public class SpeechToText {
      - parameter modelID: The identifier of the model in the form of its name from the output of the **Get models**
        method.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getModel(
         modelID: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (SpeechModel) -> Void)
+        completionHandler: @escaping (WatsonResponse<SpeechModel>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -185,7 +189,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/models/\(modelID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -198,13 +202,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<SpeechModel>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -269,7 +267,6 @@ public class SpeechToText {
        specified with the `model` parameter. You must make the request with service credentials created for the instance
        of the service that owns the custom model. By default, no custom language model is used. See [Custom
        models](https://console.bluemix.net/docs/services/speech-to-text/input.html#custom).
-       **Note:** Use this parameter instead of the deprecated `customization_id` parameter.
      - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model that is to be used
        with the recognition request. The base model of the specified custom acoustic model must match the model
        specified with the `model` parameter. You must make the request with service credentials created for the instance
@@ -334,22 +331,17 @@ public class SpeechToText {
        parameter. To determine whether a language model supports speaker labels, use the **Get models** method and check
        that the attribute `speaker_labels` is set to `true`. See [Speaker
        labels](https://console.bluemix.net/docs/services/speech-to-text/output.html#speaker_labels).
-     - parameter customizationID: **Deprecated.** Use the `language_customization_id` parameter to specify the
-       customization ID (GUID) of a custom language model that is to be used with the recognition request. Do not
-       specify both parameters with a request.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func recognize(
+        audio: Data,
+        contentType: String,
         model: String? = nil,
-        customizationID: String? = nil,
         languageCustomizationID: String? = nil,
         acousticCustomizationID: String? = nil,
         baseModelVersion: String? = nil,
         customizationWeight: Double? = nil,
-        audio: Data,
-        contentType: String,
         inactivityTimeout: Int? = nil,
         keywords: [String]? = nil,
         keywordsThreshold: Double? = nil,
@@ -361,8 +353,7 @@ public class SpeechToText {
         smartFormatting: Bool? = nil,
         speakerLabels: Bool? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (SpeechRecognitionResults) -> Void)
+        completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, WatsonError?) -> Void)
     {
         // construct body
         let body = audio
@@ -437,10 +428,6 @@ public class SpeechToText {
             let queryParameter = URLQueryItem(name: "speaker_labels", value: "\(speakerLabels)")
             queryParameters.append(queryParameter)
         }
-        if let customizationID = customizationID {
-            let queryParameter = URLQueryItem(name: "customization_id", value: customizationID)
-            queryParameters.append(queryParameter)
-        }
 
         // construct REST request
         let request = RestRequest(
@@ -455,13 +442,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<SpeechRecognitionResults>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -490,7 +471,7 @@ public class SpeechToText {
      **See also:** [Registering a callback
      URL](https://console.bluemix.net/docs/services/speech-to-text/async.html#register).
 
-     - parameter callbackUrl: An HTTP or HTTPS URL to which callback notifications are to be sent. To be white-listed,
+     - parameter callbackURL: An HTTP or HTTPS URL to which callback notifications are to be sent. To be white-listed,
        the URL must successfully echo the challenge string during URL verification. During verification, the client can
        also check the signature that the service sends in the `X-Callback-Signature` header to verify the origin of the
        request.
@@ -499,15 +480,13 @@ public class SpeechToText {
        every notification sent to the callback URL. It calculates the signature over the payload of the notification. If
        you omit the parameter, the service does not send the header.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func registerCallback(
-        callbackUrl: String,
+        callbackURL: String,
         userSecret: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (RegisterStatus) -> Void)
+        completionHandler: @escaping (WatsonResponse<RegisterStatus>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -518,7 +497,7 @@ public class SpeechToText {
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "callback_url", value: callbackUrl))
+        queryParameters.append(URLQueryItem(name: "callback_url", value: callbackURL))
         if let userSecret = userSecret {
             let queryParameter = URLQueryItem(name: "user_secret", value: userSecret)
             queryParameters.append(queryParameter)
@@ -536,13 +515,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<RegisterStatus>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -553,16 +526,14 @@ public class SpeechToText {
      **See also:** [Unregistering a callback
      URL](https://console.bluemix.net/docs/services/speech-to-text/async.html#unregister).
 
-     - parameter callbackUrl: The callback URL that is to be unregistered.
+     - parameter callbackURL: The callback URL that is to be unregistered.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func unregisterCallback(
-        callbackUrl: String,
+        callbackURL: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -573,7 +544,7 @@ public class SpeechToText {
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "callback_url", value: callbackUrl))
+        queryParameters.append(URLQueryItem(name: "callback_url", value: callbackURL))
 
         // construct REST request
         let request = RestRequest(
@@ -587,13 +558,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -662,7 +627,7 @@ public class SpeechToText {
      - parameter audio: The audio to transcribe.
      - parameter contentType: The type of the input.
      - parameter model: The identifier of the model that is to be used for the recognition request.
-     - parameter callbackUrl: A URL to which callback notifications are to be sent. The URL must already be
+     - parameter callbackURL: A URL to which callback notifications are to be sent. The URL must already be
        successfully white-listed by using the **Register a callback** method. You can include the same callback URL with
        any number of job creation requests. Omit the parameter to poll the service for job completion and results.
        Use the `user_token` parameter to specify a unique user-specified string with each job to differentiate the
@@ -692,7 +657,6 @@ public class SpeechToText {
        specified with the `model` parameter. You must make the request with service credentials created for the instance
        of the service that owns the custom model. By default, no custom language model is used. See [Custom
        models](https://console.bluemix.net/docs/services/speech-to-text/input.html#custom).
-       **Note:** Use this parameter instead of the deprecated `customization_id` parameter.
      - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model that is to be used
        with the recognition request. The base model of the specified custom acoustic model must match the model
        specified with the `model` parameter. You must make the request with service credentials created for the instance
@@ -761,18 +725,16 @@ public class SpeechToText {
        customization ID (GUID) of a custom language model that is to be used with the recognition request. Do not
        specify both parameters with a request.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createJob(
         audio: Data,
         contentType: String,
         model: String? = nil,
-        callbackUrl: String? = nil,
+        callbackURL: String? = nil,
         events: String? = nil,
         userToken: String? = nil,
         resultsTtl: Int? = nil,
-        customizationID: String? = nil,
         languageCustomizationID: String? = nil,
         acousticCustomizationID: String? = nil,
         baseModelVersion: String? = nil,
@@ -788,8 +750,7 @@ public class SpeechToText {
         smartFormatting: Bool? = nil,
         speakerLabels: Bool? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (RecognitionJob) -> Void)
+        completionHandler: @escaping (WatsonResponse<RecognitionJob>?, WatsonError?) -> Void)
     {
         // construct body
         let body = audio
@@ -808,8 +769,8 @@ public class SpeechToText {
             let queryParameter = URLQueryItem(name: "model", value: model)
             queryParameters.append(queryParameter)
         }
-        if let callbackUrl = callbackUrl {
-            let queryParameter = URLQueryItem(name: "callback_url", value: callbackUrl)
+        if let callbackURL = callbackURL {
+            let queryParameter = URLQueryItem(name: "callback_url", value: callbackURL)
             queryParameters.append(queryParameter)
         }
         if let events = events {
@@ -880,10 +841,6 @@ public class SpeechToText {
             let queryParameter = URLQueryItem(name: "speaker_labels", value: "\(speakerLabels)")
             queryParameters.append(queryParameter)
         }
-        if let customizationID = customizationID {
-            let queryParameter = URLQueryItem(name: "customization_id", value: customizationID)
-            queryParameters.append(queryParameter)
-        }
 
         // construct REST request
         let request = RestRequest(
@@ -898,13 +855,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<RecognitionJob>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -920,13 +871,11 @@ public class SpeechToText {
      jobs](https://console.bluemix.net/docs/services/speech-to-text/async.html#jobs).
 
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func checkJobs(
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (RecognitionJobs) -> Void)
+        completionHandler: @escaping (WatsonResponse<RecognitionJobs>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -946,13 +895,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<RecognitionJobs>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -970,14 +913,12 @@ public class SpeechToText {
 
      - parameter id: The identifier of the asynchronous job that is to be used for the request.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func checkJob(
         id: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (RecognitionJob) -> Void)
+        completionHandler: @escaping (WatsonResponse<RecognitionJob>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -989,7 +930,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/recognitions/\(id)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1002,13 +943,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<RecognitionJob>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1021,14 +956,12 @@ public class SpeechToText {
 
      - parameter id: The identifier of the asynchronous job that is to be used for the request.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteJob(
         id: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1040,7 +973,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/recognitions/\(id)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1053,13 +986,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -1071,21 +998,43 @@ public class SpeechToText {
      **See also:** [Create a custom language
      model](https://console.bluemix.net/docs/services/speech-to-text/language-create.html#createModel).
 
-     - parameter createLanguageModel: A `CreateLanguageModel` object that provides basic information about the new
-       custom language model.
+     - parameter name: A user-defined name for the new custom language model. Use a name that is unique among all
+       custom language models that you own. Use a localized name that matches the language of the custom model. Use a
+       name that describes the domain of the custom model, such as `Medical custom model` or `Legal custom model`.
+     - parameter baseModelName: The name of the base language model that is to be customized by the new custom
+       language model. The new custom model can be used only with the base model that it customizes. To determine
+       whether a base model supports language model customization, request information about the base model and check
+       that the attribute `custom_language_model` is set to `true`, or refer to [Language support for
+       customization](https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport).
+     - parameter dialect: The dialect of the specified language that is to be used with the custom language model. The
+       parameter is meaningful only for Spanish models, for which the service creates a custom language model that is
+       suited for speech in one of the following dialects:
+       * `es-ES` for Castilian Spanish (the default)
+       * `es-LA` for Latin American Spanish
+       * `es-US` for North American (Mexican) Spanish
+       A specified dialect must be valid for the base model. By default, the dialect matches the language of the base
+       model; for example, `en-US` for either of the US English language models.
+     - parameter description: A description of the new custom language model. Use a localized description that matches
+       the language of the custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createLanguageModel(
-        createLanguageModel: CreateLanguageModel,
+        name: String,
+        baseModelName: String,
+        dialect: String? = nil,
+        description: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (LanguageModel) -> Void)
+        completionHandler: @escaping (WatsonResponse<LanguageModel>?, WatsonError?) -> Void)
     {
         // construct body
-        guard let body = try? JSONEncoder().encode(createLanguageModel) else {
-            failure?(RestError.serializationError)
+        let createLanguageModelRequest = CreateLanguageModel(
+            name: name,
+            baseModelName: baseModelName,
+            dialect: dialect,
+            description: description)
+        guard let body = try? JSONEncoder().encode(createLanguageModelRequest) else {
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -1109,13 +1058,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<LanguageModel>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1132,14 +1075,12 @@ public class SpeechToText {
        be returned (for example, `en-US`). Omit the parameter to see all custom language or custom acoustic models owned
        by the requesting service credentials.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listLanguageModels(
         language: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (LanguageModels) -> Void)
+        completionHandler: @escaping (WatsonResponse<LanguageModels>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1167,13 +1108,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<LanguageModels>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1188,14 +1123,12 @@ public class SpeechToText {
        request. You must make the request with service credentials created for the instance of the service that owns the
        custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getLanguageModel(
         customizationID: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (LanguageModel) -> Void)
+        completionHandler: @escaping (WatsonResponse<LanguageModel>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1207,7 +1140,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1220,13 +1153,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<LanguageModel>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1242,14 +1169,12 @@ public class SpeechToText {
        request. You must make the request with service credentials created for the instance of the service that owns the
        custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteLanguageModel(
         customizationID: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1261,7 +1186,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1274,13 +1199,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -1325,16 +1244,14 @@ public class SpeechToText {
        The value that you assign is used for all recognition requests that use the model. You can override it for any
        recognition request by specifying a customization weight for that request.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func trainLanguageModel(
         customizationID: String,
         wordTypeToAdd: String? = nil,
         customizationWeight: Double? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1357,7 +1274,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/train"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1371,13 +1288,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -1394,14 +1305,12 @@ public class SpeechToText {
        request. You must make the request with service credentials created for the instance of the service that owns the
        custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func resetLanguageModel(
         customizationID: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1413,7 +1322,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/reset"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1426,13 +1335,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -1455,14 +1358,12 @@ public class SpeechToText {
        request. You must make the request with service credentials created for the instance of the service that owns the
        custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func upgradeLanguageModel(
         customizationID: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1474,7 +1375,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/upgrade_model"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1487,13 +1388,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -1509,14 +1404,12 @@ public class SpeechToText {
        request. You must make the request with service credentials created for the instance of the service that owns the
        custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listCorpora(
         customizationID: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Corpora) -> Void)
+        completionHandler: @escaping (WatsonResponse<Corpora>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1528,7 +1421,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/corpora"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1541,13 +1434,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Corpora>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1600,31 +1487,27 @@ public class SpeechToText {
        audio resource with the same name. If `false`, the request fails if a corpus or audio resource with the same name
        already exists. The parameter has no effect if a corpus or audio resource with the same name does not already
        exist.
-     - parameter corpusFileContentType: The content type of corpusFile.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func addCorpus(
         customizationID: String,
         corpusName: String,
         corpusFile: URL,
         allowOverwrite: Bool? = nil,
-        corpusFileContentType: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
         do {
             try multipartFormData.append(file: corpusFile, withName: "corpus_file")
         } catch {
-            failure?(error)
+            completionHandler(nil, WatsonError.serialization(values: "file \(corpusFile.path)"))
             return
         }
         guard let body = try? multipartFormData.toData() else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
             return
         }
 
@@ -1646,7 +1529,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/corpora/\(corpusName)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1661,13 +1544,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -1684,15 +1561,13 @@ public class SpeechToText {
        custom model.
      - parameter corpusName: The name of the corpus for the custom language model.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getCorpus(
         customizationID: String,
         corpusName: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Corpus) -> Void)
+        completionHandler: @escaping (WatsonResponse<Corpus>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1704,7 +1579,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/corpora/\(corpusName)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1717,13 +1592,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Corpus>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1742,15 +1611,13 @@ public class SpeechToText {
        custom model.
      - parameter corpusName: The name of the corpus for the custom language model.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteCorpus(
         customizationID: String,
         corpusName: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1762,7 +1629,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/corpora/\(corpusName)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1775,13 +1642,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -1809,16 +1670,14 @@ public class SpeechToText {
        values with the same count are ordered alphabetically. With the `curl` command, URL encode the `+` symbol as
        `%2B`.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listWords(
         customizationID: String,
         wordType: String? = nil,
         sort: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Words) -> Void)
+        completionHandler: @escaping (WatsonResponse<Words>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1841,7 +1700,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1855,13 +1714,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Words>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1910,20 +1763,19 @@ public class SpeechToText {
      - parameter words: An array of objects that provides information about each custom word that is to be added to or
        updated in the custom language model.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func addWords(
         customizationID: String,
         words: [CustomWord],
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct body
-        let addWordsRequest = CustomWords(words: words)
+        let addWordsRequest = CustomWords(
+            words: words)
         guard let body = try? JSONEncoder().encode(addWordsRequest) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -1938,7 +1790,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1952,13 +1804,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -2012,8 +1858,7 @@ public class SpeechToText {
        parameter when you want the word to have a spelling that is different from its usual representation or from its
        spelling in corpora training data.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func addWord(
         customizationID: String,
@@ -2022,13 +1867,15 @@ public class SpeechToText {
         soundsLike: [String]? = nil,
         displayAs: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct body
-        let addWordRequest = CustomWord(word: word, soundsLike: soundsLike, displayAs: displayAs)
+        let addWordRequest = CustomWord(
+            word: word,
+            soundsLike: soundsLike,
+            displayAs: displayAs)
         guard let body = try? JSONEncoder().encode(addWordRequest) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -2043,7 +1890,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words/\(wordName)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2057,13 +1904,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -2081,15 +1922,13 @@ public class SpeechToText {
        the **Add a custom word** method, do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to
        connect the tokens of compound words.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getWord(
         customizationID: String,
         wordName: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Word) -> Void)
+        completionHandler: @escaping (WatsonResponse<Word>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2101,7 +1940,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words/\(wordName)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2114,13 +1953,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Word>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2141,15 +1974,13 @@ public class SpeechToText {
        the **Add a custom word** method, do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to
        connect the tokens of compound words.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteWord(
         customizationID: String,
         wordName: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2161,7 +1992,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words/\(wordName)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2174,13 +2005,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -2203,21 +2028,22 @@ public class SpeechToText {
      - parameter description: A description of the new custom acoustic model. Use a localized description that matches
        the language of the custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createAcousticModel(
         name: String,
         baseModelName: String,
         description: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (AcousticModel) -> Void)
+        completionHandler: @escaping (WatsonResponse<AcousticModel>?, WatsonError?) -> Void)
     {
         // construct body
-        let createAcousticModelRequest = CreateAcousticModel(name: name, baseModelName: baseModelName, description: description)
+        let createAcousticModelRequest = CreateAcousticModel(
+            name: name,
+            baseModelName: baseModelName,
+            description: description)
         guard let body = try? JSONEncoder().encode(createAcousticModelRequest) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -2241,13 +2067,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<AcousticModel>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2264,14 +2084,12 @@ public class SpeechToText {
        be returned (for example, `en-US`). Omit the parameter to see all custom language or custom acoustic models owned
        by the requesting service credentials.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listAcousticModels(
         language: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (AcousticModels) -> Void)
+        completionHandler: @escaping (WatsonResponse<AcousticModels>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2299,13 +2117,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<AcousticModels>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2320,14 +2132,12 @@ public class SpeechToText {
        request. You must make the request with service credentials created for the instance of the service that owns the
        custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getAcousticModel(
         customizationID: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (AcousticModel) -> Void)
+        completionHandler: @escaping (WatsonResponse<AcousticModel>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2339,7 +2149,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/acoustic_customizations/\(customizationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2352,13 +2162,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<AcousticModel>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2374,14 +2178,12 @@ public class SpeechToText {
        request. You must make the request with service credentials created for the instance of the service that owns the
        custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteAcousticModel(
         customizationID: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2393,7 +2195,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/acoustic_customizations/\(customizationID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2406,13 +2208,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -2453,15 +2249,13 @@ public class SpeechToText {
        transcriptions of the audio resources or that contains words that are relevant to the contents of the audio
        resources.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func trainAcousticModel(
         customizationID: String,
         customLanguageModelID: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2480,7 +2274,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/acoustic_customizations/\(customizationID)/train"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2494,13 +2288,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -2517,14 +2305,12 @@ public class SpeechToText {
        request. You must make the request with service credentials created for the instance of the service that owns the
        custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func resetAcousticModel(
         customizationID: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2536,7 +2322,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/acoustic_customizations/\(customizationID)/reset"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2549,13 +2335,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -2586,15 +2366,13 @@ public class SpeechToText {
        customization ID (GUID) of that custom language model. The custom language model must be upgraded before the
        custom acoustic model can be upgraded.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func upgradeAcousticModel(
         customizationID: String,
         customLanguageModelID: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2613,7 +2391,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/acoustic_customizations/\(customizationID)/upgrade_model"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2627,13 +2405,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -2651,14 +2423,12 @@ public class SpeechToText {
        request. You must make the request with service credentials created for the instance of the service that owns the
        custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listAudio(
         customizationID: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (AudioResources) -> Void)
+        completionHandler: @escaping (WatsonResponse<AudioResources>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2670,7 +2440,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/acoustic_customizations/\(customizationID)/audio"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2683,13 +2453,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<AudioResources>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2780,8 +2544,7 @@ public class SpeechToText {
        already exists. The parameter has no effect if a corpus or audio resource with the same name does not already
        exist.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func addAudio(
         customizationID: String,
@@ -2791,8 +2554,7 @@ public class SpeechToText {
         containedContentType: String? = nil,
         allowOverwrite: Bool? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct body
         let body = audioResource
@@ -2818,7 +2580,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/acoustic_customizations/\(customizationID)/audio/\(audioName)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2833,13 +2595,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -2866,15 +2622,13 @@ public class SpeechToText {
        custom model.
      - parameter audioName: The name of the audio resource for the custom acoustic model.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getAudio(
         customizationID: String,
         audioName: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (AudioListing) -> Void)
+        completionHandler: @escaping (WatsonResponse<AudioListing>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2886,7 +2640,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/acoustic_customizations/\(customizationID)/audio/\(audioName)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2899,13 +2653,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<AudioListing>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2924,15 +2672,13 @@ public class SpeechToText {
        custom model.
      - parameter audioName: The name of the audio resource for the custom acoustic model.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteAudio(
         customizationID: String,
         audioName: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2944,7 +2690,7 @@ public class SpeechToText {
         // construct REST request
         let path = "/v1/acoustic_customizations/\(customizationID)/audio/\(audioName)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -2957,13 +2703,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -2980,14 +2720,12 @@ public class SpeechToText {
 
      - parameter customerID: The customer ID for which all data is to be deleted.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteUserData(
         customerID: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping () -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3012,13 +2750,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseVoid {
-            (response: RestResponse) in
-            switch response.result {
-            case .success: success()
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
 }

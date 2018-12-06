@@ -19,7 +19,7 @@ import Foundation
 /**
  The query expansion definitions for the specified collection.
  */
-public struct Expansions: Codable {
+public struct Expansions: Codable, Equatable {
 
     /**
      An array of query expansion definitions.

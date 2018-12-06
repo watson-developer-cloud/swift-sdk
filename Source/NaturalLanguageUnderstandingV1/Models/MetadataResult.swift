@@ -19,7 +19,7 @@ import Foundation
 /**
  The Authors, Publication Date, and Title of the document. Supports URL and HTML input types.
  */
-public struct MetadataResult: Decodable {
+public struct MetadataResult: Codable, Equatable {
 
     /**
      The authors of the document.

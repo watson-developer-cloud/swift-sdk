@@ -10,7 +10,6 @@ outdir=${1:-gh-pages}
 services=(
   AssistantV1
   AssistantV2
-  ConversationV1
   DiscoveryV1
   LanguageTranslatorV3
   NaturalLanguageClassifierV1

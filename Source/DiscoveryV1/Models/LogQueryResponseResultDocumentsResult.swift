@@ -19,7 +19,7 @@ import Foundation
 /**
  Each object in the **results** array corresponds to an individual document returned by the original query.
  */
-public struct LogQueryResponseResultDocumentsResult: Decodable {
+public struct LogQueryResponseResultDocumentsResult: Codable, Equatable {
 
     /**
      The result rank of this document. A position of `1` indicates that it was the first returned result.

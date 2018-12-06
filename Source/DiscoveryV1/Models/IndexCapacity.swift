@@ -19,7 +19,7 @@ import Foundation
 /**
  Details about the resource usage and capacity of the environment.
  */
-public struct IndexCapacity: Decodable {
+public struct IndexCapacity: Codable, Equatable {
 
     /**
      Summary of the document usage statistics for the environment.
@@ -27,7 +27,7 @@ public struct IndexCapacity: Decodable {
     public var documents: EnvironmentDocuments?
 
     /**
-     Summary of the disk usage of the environment.
+     Summary of the disk usage statistics for the environment.
      */
     public var diskUsage: DiskUsage?
 
@@ -36,17 +36,11 @@ public struct IndexCapacity: Decodable {
      */
     public var collections: CollectionUsage?
 
-    /**
-     **Deprecated**: Summary of the memory usage of the environment.
-     */
-    public var memoryUsage: MemoryUsage?
-
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case documents = "documents"
         case diskUsage = "disk_usage"
         case collections = "collections"
-        case memoryUsage = "memory_usage"
     }
 
 }

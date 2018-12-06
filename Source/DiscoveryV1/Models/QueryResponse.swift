@@ -19,7 +19,7 @@ import Foundation
 /**
  A response containing the documents and aggregations for the query.
  */
-public struct QueryResponse: Decodable {
+public struct QueryResponse: Codable, Equatable {
 
     public var matchingResults: Int?
 

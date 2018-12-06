@@ -19,7 +19,7 @@ import Foundation
 /**
  Information about faces in the image.
  */
-public struct ImageWithFaces: Decodable {
+public struct ImageWithFaces: Codable, Equatable {
 
     /**
      Faces detected in the images.
@@ -34,12 +34,12 @@ public struct ImageWithFaces: Decodable {
     /**
      Source of the image before any redirects. Not returned when the image is uploaded.
      */
-    public var sourceUrl: String?
+    public var sourceURL: String?
 
     /**
      Fully resolved URL of the image after redirects are followed. Not returned when the image is uploaded.
      */
-    public var resolvedUrl: String?
+    public var resolvedURL: String?
 
     /**
      Information about what might have caused a failure, such as an image that is too large. Not returned when there is
@@ -51,8 +51,8 @@ public struct ImageWithFaces: Decodable {
     private enum CodingKeys: String, CodingKey {
         case faces = "faces"
         case image = "image"
-        case sourceUrl = "source_url"
-        case resolvedUrl = "resolved_url"
+        case sourceURL = "source_url"
+        case resolvedURL = "resolved_url"
         case error = "error"
     }
 

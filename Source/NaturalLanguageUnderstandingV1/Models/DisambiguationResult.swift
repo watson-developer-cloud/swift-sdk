@@ -19,7 +19,7 @@ import Foundation
 /**
  Disambiguation information for the entity.
  */
-public struct DisambiguationResult: Decodable {
+public struct DisambiguationResult: Codable, Equatable {
 
     /**
      Common entity name.

@@ -19,7 +19,7 @@ import Foundation
 /**
  Status information about a submitted document.
  */
-public struct DocumentStatus: Decodable {
+public struct DocumentStatus: Codable, Equatable {
 
     /**
      Status of the document in the ingestion process.
@@ -54,12 +54,12 @@ public struct DocumentStatus: Decodable {
     /**
      The creation date of the document in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
      */
-    public var created: String?
+    public var created: Date?
 
     /**
      Date of the most recent document update, in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
      */
-    public var updated: String?
+    public var updated: Date?
 
     /**
      Status of the document in the ingestion process.

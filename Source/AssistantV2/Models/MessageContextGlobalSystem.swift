@@ -19,7 +19,7 @@ import Foundation
 /**
  Properties that are shared by all skills used by the assistant.
  */
-public struct MessageContextGlobalSystem: Codable {
+public struct MessageContextGlobalSystem: Codable, Equatable {
 
     /**
      The user time zone. The assistant uses the time zone to correctly resolve relative time references.

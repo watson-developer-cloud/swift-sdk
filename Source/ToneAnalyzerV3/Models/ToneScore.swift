@@ -17,7 +17,7 @@
 import Foundation
 
 /** ToneScore. */
-public struct ToneScore: Decodable {
+public struct ToneScore: Codable, Equatable {
 
     /**
      The score for the tone.

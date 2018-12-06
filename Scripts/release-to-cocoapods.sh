@@ -7,7 +7,6 @@ set -e
 declare -a allPods=(
   "IBMWatsonAssistantV1.podspec"
   "IBMWatsonAssistantV2.podspec"
-  "IBMWatsonConversationV1.podspec"
   "IBMWatsonDiscoveryV1.podspec"
   "IBMWatsonLanguageTranslatorV3.podspec"
   "IBMWatsonNaturalLanguageClassifierV1.podspec"

@@ -17,7 +17,7 @@
 import Foundation
 
 /** SentenceAnalysis. */
-public struct SentenceAnalysis: Decodable {
+public struct SentenceAnalysis: Codable, Equatable {
 
     /**
      The unique identifier of a sentence of the input content. The first sentence has ID 0, and the ID of each

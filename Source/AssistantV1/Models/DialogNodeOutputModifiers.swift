@@ -19,7 +19,7 @@ import Foundation
 /**
  Options that modify how specified output is handled.
  */
-public struct DialogNodeOutputModifiers: Codable {
+public struct DialogNodeOutputModifiers: Codable, Equatable {
 
     /**
      Whether values in the output will overwrite output values in an array specified by previously executed dialog

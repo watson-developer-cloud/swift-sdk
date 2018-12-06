@@ -17,7 +17,7 @@
 import Foundation
 
 /** TrainingExample. */
-public struct TrainingExample: Codable {
+public struct TrainingExample: Codable, Equatable {
 
     public var documentID: String?
 

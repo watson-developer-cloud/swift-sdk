@@ -19,7 +19,7 @@ import Foundation
 /**
  The text of the user input.
  */
-public struct MessageInput: Decodable {
+public struct MessageInput: Codable, Equatable {
 
     /**
      The user's input.

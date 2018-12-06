@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** Value. */
-public struct Value: Decodable {
+public struct Value: Codable, Equatable {
 
     /**
      Specifies the type of value.
@@ -41,12 +41,12 @@ public struct Value: Decodable {
     /**
      The timestamp for creation of the entity value.
      */
-    public var created: String?
+    public var created: Date?
 
     /**
      The timestamp for the last update to the entity value.
      */
-    public var updated: String?
+    public var updated: Date?
 
     /**
      An array containing any synonyms for the entity value.

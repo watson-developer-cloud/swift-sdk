@@ -19,7 +19,7 @@ import Foundation
 /**
  A category within a classifier.
  */
-public struct Class: Decodable {
+public struct Class: Codable, Equatable {
 
     /**
      The name of the class.

@@ -1,3 +1,47 @@
+# [1.0.0](https://github.com/watson-developer-cloud/swift-sdk/compare/0.38.1...1.0.0) (2018-12-06)
+
+
+### All Services
+- `failure` and `success` callbacks are replaced with a single `completionHandler` of type `(WatsonResponse<T>?, WatsonError?) -> Void`
+- New `WatsonResponse` type in the completion handlers that contains the response HTTP status, headers, and data
+- New `WatsonError` type in the completion handlers that contains more useful and detailed information about the error that occurred
+- Change the type of date-time properties from `String` to `Date`
+- Remove all deprecated types, methods, and properties
+- All parameters now get passed directly to methods rather than packaging them up in the `properties` parameter
+- All models are now `Codable`, instead of only being `Encodable` or `Decodable`, so they can be converted both to and from JSON
+- All models are now `Equatable`
+
+
+### ConversationV1
+- REMOVED - use AssistantV1 instead
+
+
+### LanguageTranslatorV2
+- REMOVED - use LanguageTranslatorV3 instead
+
+
+### NaturalLanguageUnderstandingV1
+- Remove `additionalProperties` property from `CategoriesOptions` and `MetadataOptions`
+
+
+### SpeechToTextV1
+- The `tokenURL` and `websocketsURL` properties are no longer public. Setting the `serviceURL` will automatically update the other two URLs appropriately.
+- Add missing parameters `baseModelVersion`, `languageCustomizationID`, and `customerID` to the following methods:
+    - `recognize()` (using an audio file)
+    - `recognizeUsingWebsocket()`
+    - `recognizeMicrophone()`
+    - `SpeechToTextSession()` initializers
+
+
+### VisualRecognitionV3
+- Remove `PositiveExample` model. All parameters that used that model are now of type `[String: URL]`
+- Change the following properties from optional to nonoptional
+    - `ClassResult.score`
+    - `DetectedFaces.imagesProcessed`
+    - `FaceAge.score`
+    - `FaceGender.score`
+
+
 ## [0.38.1](https://github.com/watson-developer-cloud/swift-sdk/compare/0.38.0...0.38.1) (2018-11-13)
 
 

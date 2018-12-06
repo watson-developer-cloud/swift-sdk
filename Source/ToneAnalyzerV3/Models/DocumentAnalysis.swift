@@ -17,7 +17,7 @@
 import Foundation
 
 /** DocumentAnalysis. */
-public struct DocumentAnalysis: Decodable {
+public struct DocumentAnalysis: Codable, Equatable {
 
     /**
      **`2017-09-21`:** An array of `ToneScore` objects that provides the results of the analysis for each qualifying

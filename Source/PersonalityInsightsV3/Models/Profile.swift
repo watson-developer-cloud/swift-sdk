@@ -17,7 +17,7 @@
 import Foundation
 
 /** Profile. */
-public struct Profile: Decodable {
+public struct Profile: Codable, Equatable {
 
     /**
      The language model that was used to process the input.

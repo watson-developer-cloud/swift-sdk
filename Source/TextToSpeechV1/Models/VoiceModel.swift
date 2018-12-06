@@ -17,7 +17,7 @@
 import Foundation
 
 /** VoiceModel. */
-public struct VoiceModel: Decodable {
+public struct VoiceModel: Codable, Equatable {
 
     /**
      The customization ID (GUID) of the custom voice model. The **Create a custom model** method returns only this

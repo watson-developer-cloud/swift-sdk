@@ -17,7 +17,7 @@
 import Foundation
 
 /** DeleteEnvironmentResponse. */
-public struct DeleteEnvironmentResponse: Decodable {
+public struct DeleteEnvironmentResponse: Codable, Equatable {
 
     /**
      Status of the environment.

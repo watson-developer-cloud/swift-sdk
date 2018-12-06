@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** QueryNoticesResult. */
-public struct QueryNoticesResult: Decodable {
+public struct QueryNoticesResult: Codable, Equatable {
 
     /**
      The type of the original source file.
@@ -36,11 +36,6 @@ public struct QueryNoticesResult: Decodable {
     public var id: String?
 
     /**
-     *Deprecated* This field is now part of the **result_metadata** object.
-     */
-    public var score: Double?
-
-    /**
      Metadata of the document.
      */
     public var metadata: [String: JSON]?
@@ -51,7 +46,7 @@ public struct QueryNoticesResult: Decodable {
     public var collectionID: String?
 
     /**
-     Metadata of the query result.
+     Metadata of a query result.
      */
     public var resultMetadata: QueryResultMetadata?
 
@@ -87,7 +82,6 @@ public struct QueryNoticesResult: Decodable {
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case id = "id"
-        case score = "score"
         case metadata = "metadata"
         case collectionID = "collection_id"
         case resultMetadata = "result_metadata"
@@ -96,13 +90,12 @@ public struct QueryNoticesResult: Decodable {
         case fileType = "file_type"
         case sha1 = "sha1"
         case notices = "notices"
-        static let allValues = [id, score, metadata, collectionID, resultMetadata, code, filename, fileType, sha1, notices]
+        static let allValues = [id, metadata, collectionID, resultMetadata, code, filename, fileType, sha1, notices]
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decodeIfPresent(String.self, forKey: .id)
-        score = try container.decodeIfPresent(Double.self, forKey: .score)
         metadata = try container.decodeIfPresent([String: JSON].self, forKey: .metadata)
         collectionID = try container.decodeIfPresent(String.self, forKey: .collectionID)
         resultMetadata = try container.decodeIfPresent(QueryResultMetadata.self, forKey: .resultMetadata)
@@ -113,6 +106,21 @@ public struct QueryNoticesResult: Decodable {
         notices = try container.decodeIfPresent([Notice].self, forKey: .notices)
         let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
         additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: CodingKeys.allValues)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(id, forKey: .id)
+        try container.encodeIfPresent(metadata, forKey: .metadata)
+        try container.encodeIfPresent(collectionID, forKey: .collectionID)
+        try container.encodeIfPresent(resultMetadata, forKey: .resultMetadata)
+        try container.encodeIfPresent(code, forKey: .code)
+        try container.encodeIfPresent(filename, forKey: .filename)
+        try container.encodeIfPresent(fileType, forKey: .fileType)
+        try container.encodeIfPresent(sha1, forKey: .sha1)
+        try container.encodeIfPresent(notices, forKey: .notices)
+        var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
+        try dynamicContainer.encodeIfPresent(additionalProperties)
     }
 
 }

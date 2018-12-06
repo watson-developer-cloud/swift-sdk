@@ -19,7 +19,7 @@ import Foundation
 /**
  The general concepts referenced or alluded to in the specified content.
  */
-public struct ConceptsResult: Decodable {
+public struct ConceptsResult: Codable, Equatable {
 
     /**
      Name of the concept.

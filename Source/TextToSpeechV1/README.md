@@ -8,22 +8,31 @@ The following example demonstrates how to use the Text to Speech service:
 import TextToSpeechV1
 import AVFoundation
 
-let username = "your-username-here"
-let password = "your-password-here"
-let textToSpeech = TextToSpeech(username: username, password: password)
+let apiKey = "your-api-key"
+let textToSpeech = TextToSpeech(apiKey: apiKey)
 
 // The AVAudioPlayer object will stop playing if it falls out-of-scope.
 // Therefore, to prevent it from falling out-of-scope we declare it as
 // a property outside the completion handler where it will be played.
 var audioPlayer = AVAudioPlayer()
 
-let text = "your-text-here"
-let accept = "audio/wav"
-let failure = { (error: Error) in print(error) }
-textToSpeech.synthesize(text: text, accept: accept, failure: failure) { data in
-    audioPlayer = try! AVAudioPlayer(data: data)
-    audioPlayer.prepareToPlay()
-    audioPlayer.play()
+let text = "your-text"
+textToSpeech.synthesize(text: text, accept: "audio/wav") { response, error in
+	if let error = error {
+        print(error)
+    }
+    guard let data = response?.result else {
+        print("Failed to synthesize the text")
+        return
+    }
+    do {
+        audioPlayer = try AVAudioPlayer(data: data)
+        audioPlayer.prepareToPlay()
+        audioPlayer.play()
+    }
+    catch {
+        print(error)
+    }
 }
 ```
 
@@ -32,23 +41,35 @@ The Text to Speech service supports a number of [voices](https://console.bluemix
 ```swift
 import TextToSpeechV1
 
-let username = "your-username-here"
-let password = "your-password-here"
-let textToSpeech = TextToSpeech(username: username, password: password)
+let apiKey = "your-api-key"
+let textToSpeech = TextToSpeech(apiKey: apiKey)
 
 // The AVAudioPlayer object will stop playing if it falls out-of-scope.
 // Therefore, to prevent it from falling out-of-scope we declare it as
 // a property outside the completion handler where it will be played.
 var audioPlayer = AVAudioPlayer()
 
-let text = "your-text-here"
-let accept = "audio/wav"
-let voice = "en-US_LisaVoice"
-let failure = { (error: Error) in print(error) }
-textToSpeech.synthesize(text: text, accept: accept, voice: voice, failure: failure) { data in
-    audioPlayer = try! AVAudioPlayer(data: data)
-    audioPlayer.prepareToPlay()
-    audioPlayer.play()
+let text = "your-text"
+textToSpeech.synthesize(
+	text: text,
+	accept: "audio/wav",
+	voice: "en-US_LisaVoice") { response, error in
+	
+	if let error = error {
+        print(error)
+    }
+    guard let data = response?.result else {
+        print("Failed to synthesize the text")
+        return
+    }
+    do {
+        audioPlayer = try AVAudioPlayer(data: data)
+        audioPlayer.prepareToPlay()
+        audioPlayer.play()
+    }
+    catch {
+        print(error)
+    }
 }
 ```
 

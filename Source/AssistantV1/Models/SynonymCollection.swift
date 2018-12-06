@@ -17,7 +17,7 @@
 import Foundation
 
 /** SynonymCollection. */
-public struct SynonymCollection: Decodable {
+public struct SynonymCollection: Codable, Equatable {
 
     /**
      An array of synonyms.

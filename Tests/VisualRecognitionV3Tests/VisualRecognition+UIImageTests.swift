@@ -47,17 +47,16 @@ class VisualRecognitionUIImageTests: XCTestCase {
     }
 
     func instantiateVisualRecognition() {
-        let version = "2018-11-01"
-        visualRecognition = VisualRecognition(version: version, apiKey: WatsonCredentials.VisualRecognitionAPIKey)
+        guard let apiKey = WatsonCredentials.VisualRecognitionAPIKey else {
+            XCTFail("Missing credentials for Visual Recognition service")
+            return
+        }
+        visualRecognition = VisualRecognition(version: versionDate, apiKey: apiKey)
         if let url = WatsonCredentials.VisualRecognitionURL {
             visualRecognition.serviceURL = url
         }
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
-    }
-
-    func failWithError(error: Error) {
-        XCTFail("Positive test failed with error: \(error)")
     }
 
     func waitForExpectations(timeout: TimeInterval = 15.0) {
@@ -68,8 +67,16 @@ class VisualRecognitionUIImageTests: XCTestCase {
 
     func testClassifyUIImage() {
         let expectation = self.expectation(description: "Classify a UIImage using the default classifier.")
-        visualRecognition.classify(image: car, failure: failWithError) {
-            classifiedImages in
+        visualRecognition.classify(image: car) {
+            response, error in
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let classifiedImages = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
             var containsPersonClass = false
             var classifierScore: Double?
             // verify classified images object
@@ -78,8 +85,8 @@ class VisualRecognitionUIImageTests: XCTestCase {
 
             // verify the image's metadata
             let image = classifiedImages.images.first
-            XCTAssertNil(image?.sourceUrl)
-            XCTAssertNil(image?.resolvedUrl)
+            XCTAssertNil(image?.sourceURL)
+            XCTAssertNil(image?.resolvedURL)
             XCTAssertNil(image?.error)
             XCTAssertEqual(image?.classifiers.count, 1)
 
@@ -109,8 +116,16 @@ class VisualRecognitionUIImageTests: XCTestCase {
 
     func testDetectFacesByUIImage() {
         let expectation = self.expectation(description: "Detect faces in a UIImage.")
-        visualRecognition.detectFaces(image: obama, failure: failWithError) {
-            faceImages in
+        visualRecognition.detectFaces(image: obama) {
+            response, error in
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let faceImages = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
 
             // verify face images object
             XCTAssertEqual(faceImages.imagesProcessed, 1)
@@ -119,8 +134,8 @@ class VisualRecognitionUIImageTests: XCTestCase {
 
             // verify the face image object
             let face = faceImages.images.first
-            XCTAssertNil(face?.sourceUrl)
-            XCTAssertNil(face?.resolvedUrl)
+            XCTAssertNil(face?.sourceURL)
+            XCTAssertNil(face?.resolvedURL)
             XCTAssertNotNil(face?.image)
             XCTAssertNil(face?.error)
             XCTAssertEqual(face?.faces.count, 1)
@@ -129,7 +144,7 @@ class VisualRecognitionUIImageTests: XCTestCase {
             let age = face?.faces.first?.age
             XCTAssertGreaterThanOrEqual(age!.min!, 40)
             XCTAssertLessThanOrEqual(age!.max!, 54)
-            XCTAssertGreaterThanOrEqual(age!.score!, 0.25)
+            XCTAssertGreaterThanOrEqual(age!.score, 0.25)
 
             // verify the face location
             let location = face?.faces.first?.faceLocation
@@ -141,7 +156,7 @@ class VisualRecognitionUIImageTests: XCTestCase {
             // verify the gender
             let gender = face?.faces.first?.gender
             XCTAssertEqual(gender!.gender, "MALE")
-            XCTAssertGreaterThanOrEqual(gender!.score!, 0.75)
+            XCTAssertGreaterThanOrEqual(gender!.score, 0.75)
 
             expectation.fulfill()
         }
@@ -152,7 +167,13 @@ class VisualRecognitionUIImageTests: XCTestCase {
         if #available(iOS 11.0, tvOS 11.0, watchOS 4.0, *) {
             // update the local model
             let expectation1 = self.expectation(description: "updateLocalModel")
-            visualRecognition.updateLocalModel(classifierID: classifierID, failure: failWithError) {
+            visualRecognition.updateLocalModel(classifierID: classifierID) {
+                _, error in
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+
                 expectation1.fulfill()
             }
             waitForExpectations()
@@ -160,8 +181,17 @@ class VisualRecognitionUIImageTests: XCTestCase {
             // classify using the local model
             let expectation2 = self.expectation(description: "classifyWithLocalModel")
             let image = UIImage(named: "car", in: Bundle(for: type(of: self)), compatibleWith: nil)!
-            visualRecognition.classifyWithLocalModel(image: image, classifierIDs: [classifierID], threshold: 0.1, failure: failWithError) {
-                classifiedImages in
+            visualRecognition.classifyWithLocalModel(image: image, classifierIDs: [classifierID], threshold: 0.1) {
+                classifiedImages, error in
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let classifiedImages = classifiedImages else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
+
                 print(classifiedImages)
                 expectation2.fulfill()
             }

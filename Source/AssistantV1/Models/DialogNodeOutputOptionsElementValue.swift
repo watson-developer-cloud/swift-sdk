@@ -20,7 +20,7 @@ import Foundation
  An object defining the message input to be sent to the Watson Assistant service if the user selects the corresponding
  option.
  */
-public struct DialogNodeOutputOptionsElementValue: Codable {
+public struct DialogNodeOutputOptionsElementValue: Codable, Equatable {
 
     /**
      The user input.

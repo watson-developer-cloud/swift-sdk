@@ -17,7 +17,7 @@
 import Foundation
 
 /** Example. */
-public struct Example: Decodable {
+public struct Example: Codable, Equatable {
 
     /**
      The text of the user input example.
@@ -27,12 +27,12 @@ public struct Example: Decodable {
     /**
      The timestamp for creation of the example.
      */
-    public var created: String?
+    public var created: Date?
 
     /**
      The timestamp for the last update to the example.
      */
-    public var updated: String?
+    public var updated: Date?
 
     /**
      An array of contextual entity mentions.

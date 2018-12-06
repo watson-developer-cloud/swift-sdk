@@ -17,7 +17,7 @@
 import Foundation
 
 /** Synonym. */
-public struct Synonym: Decodable {
+public struct Synonym: Codable, Equatable {
 
     /**
      The text of the synonym.
@@ -27,12 +27,12 @@ public struct Synonym: Decodable {
     /**
      The timestamp for creation of the synonym.
      */
-    public var created: String?
+    public var created: Date?
 
     /**
      The timestamp for the most recent update to the synonym.
      */
-    public var updated: String?
+    public var updated: Date?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {

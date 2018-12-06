@@ -37,7 +37,7 @@ There are many resources to help you build your first cognitive application with
 
 This SDK provides classes and methods to access the following Watson services.
 
-* [Assistant](https://www.ibm.com/watson/services/conversation)
+* [Assistant](https://www.ibm.com/cloud/watson-assistant/)
 * [Discovery](https://www.ibm.com/watson/services/discovery)
 * [Language Translator V3](https://www.ibm.com/watson/services/language-translator)
 * [Natural Language Classifier](https://www.ibm.com/watson/services/natural-language-classifier)
@@ -77,18 +77,17 @@ If your project does not yet have a Podfile, use the `pod init` command in the r
 use_frameworks!
 
 target 'MyApp' do
-    pod 'IBMWatsonAssistantV1', '~> 0.38.1'
-    pod 'IBMWatsonAssistantV2', '~> 0.38.1'
-    pod 'IBMWatsonConversationV1', '~> 0.38.1'
-    pod 'IBMWatsonDiscoveryV1', '~> 0.38.1'
-    pod 'IBMWatsonLanguageTranslatorV3', '~> 0.38.1'
-    pod 'IBMWatsonNaturalLanguageClassifierV1', '~> 0.38.1'
-    pod 'IBMWatsonNaturalLanguageUnderstandingV1', '~> 0.38.1'
-    pod 'IBMWatsonPersonalityInsightsV3', '~> 0.38.1'
-    pod 'IBMWatsonSpeechToTextV1', '~> 0.38.1'
-    pod 'IBMWatsonTextToSpeechV1', '~> 0.38.1'
-    pod 'IBMWatsonToneAnalyzerV3', '~> 0.38.1'
-    pod 'IBMWatsonVisualRecognitionV3', '~> 0.38.1'
+    pod 'IBMWatsonAssistantV1', '~> 1.0.0'
+    pod 'IBMWatsonAssistantV2', '~> 1.0.0'
+    pod 'IBMWatsonDiscoveryV1', '~> 1.0.0'
+    pod 'IBMWatsonLanguageTranslatorV3', '~> 1.0.0'
+    pod 'IBMWatsonNaturalLanguageClassifierV1', '~> 1.0.0'
+    pod 'IBMWatsonNaturalLanguageUnderstandingV1', '~> 1.0.0'
+    pod 'IBMWatsonPersonalityInsightsV3', '~> 1.0.0'
+    pod 'IBMWatsonSpeechToTextV1', '~> 1.0.0'
+    pod 'IBMWatsonTextToSpeechV1', '~> 1.0.0'
+    pod 'IBMWatsonToneAnalyzerV3', '~> 1.0.0'
+    pod 'IBMWatsonVisualRecognitionV3', '~> 1.0.0'
 end
 ```
 
@@ -111,7 +110,7 @@ $ brew install carthage
 If your project does not have a Cartfile yet, use the `touch Cartfile` command in the root directory of your project. To install the IBM Watson Swift SDK using Carthage, add the following to your Cartfile. 
 
 ```
-github "watson-developer-cloud/swift-sdk" ~> 0.38.1
+github "watson-developer-cloud/swift-sdk" ~> 1.0.0
 ```
 
 Then run the following command to build the dependencies and frameworks:
@@ -132,7 +131,7 @@ Add the following to your `Package.swift` file to identify the IBM Watson Swift 
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "0.38.1")
+    .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "1.0.0")
 ]
 ```
 
@@ -164,33 +163,26 @@ You supply either an IAM service **API key** or an **access token**:
 
 #### Supplying the IAM API key
 ```swift
-let discovery = Discovery(version: "your-version-here", apiKey: "your-apikey-here")
+let discovery = Discovery(version: "your-version", apiKey: "your-apikey")
 ```
 
 If you are supplying an API key for IBM Cloud Private (ICP), use basic authentication instead, with `"apikey"` for the `username` and the api key (prefixed with `icp-`) for the `password`. See the [Username and Password](#username-and-password) section.
 
 #### Supplying the accessToken
 ```swift
-let discovery = Discovery(version: "your-version-here", accessToken: "your-accessToken-here")
+let discovery = Discovery(version: "your-version", accessToken: "your-accessToken")
 ```
 #### Updating the accessToken
 ```swift
-discovery.accessToken("new-accessToken-here")
+discovery.accessToken("new-accessToken")
 ```
 
 ### Username and Password
 
 ```swift
-let discovery = Discovery(username: "your-username-here", password: "your-password-here", version: "your-version-here")
+let discovery = Discovery(username: "your-username", password: "your-password", version: "your-version")
 ```
 
-### API Key
-
-_Note: This type of authentication only works with Visual Recognition, and for instances created before May 23, 2018. Newer instances of Visual Recognition use IAM._
-
-```swift
-let visualRecognition = VisualRecognition(apiKey: "your-apiKey-here", version: "your-version-here")
-```
 
 ## Custom Service URLs
 
@@ -200,8 +192,8 @@ For example, here is how to connect to a Tone Analyzer instance that is hosted i
 
 ```swift
 let toneAnalyzer = ToneAnalyzer(
-    username: "your-username-here",
-    password: "your-password-here",
+    username: "your-username",
+    password: "your-password",
     version: "yyyy-mm-dd"
 )
 toneAnalyzer.serviceURL = "https://gateway-fra.watsonplatform.net/tone-analyzer/api"
@@ -236,8 +228,13 @@ By default, the SDK executes all networking operations asynchronously. If your a
 ```swift
 let dispatchGroup = DispatchGroup()
 dispatchGroup.enter()
-assistant.message(workspaceID: workspaceID) { response in
-    print(response.output.text)
+assistant.message(workspaceID: workspaceID) { response, error in
+	if let error = error {
+        print(error)
+    }
+    if let message = response?.result else {
+        print(message.output.text)
+    }
     dispatchGroup.leave()
 }
 dispatchGroup.wait(timeout: .distantFuture)

@@ -17,7 +17,7 @@
 import Foundation
 
 /** CreateCollectionRequest. */
-public struct CreateCollectionRequest: Encodable {
+internal struct CreateCollectionRequest: Codable, Equatable {
 
     /**
      The language of the documents stored in the collection, in the form of an ISO 639-1 language code.

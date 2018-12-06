@@ -17,7 +17,7 @@
 import Foundation
 
 /** WorkspaceSystemSettingsDisambiguation. */
-public struct WorkspaceSystemSettingsDisambiguation: Codable {
+public struct WorkspaceSystemSettingsDisambiguation: Codable, Equatable {
 
     /**
      The sensitivity of the disambiguation feature to intent detection conflicts. Set to **high** if you want the

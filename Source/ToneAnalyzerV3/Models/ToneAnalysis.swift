@@ -17,7 +17,7 @@
 import Foundation
 
 /** ToneAnalysis. */
-public struct ToneAnalysis: Decodable {
+public struct ToneAnalysis: Codable, Equatable {
 
     /**
      An object of type `DocumentAnalysis` that provides the results of the analysis for the full input document.

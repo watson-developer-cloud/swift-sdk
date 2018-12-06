@@ -19,7 +19,7 @@ import Foundation
 /**
  An object defining the message input to be sent to the assistant if the user selects the corresponding option.
  */
-public struct DialogNodeOutputOptionsElementValue: Decodable {
+public struct DialogNodeOutputOptionsElementValue: Codable, Equatable {
 
     /**
      The user input.

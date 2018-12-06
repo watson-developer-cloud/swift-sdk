@@ -87,19 +87,24 @@
                 <a href="../Structs/FaceGender.html">FaceGender</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/FaceIdentity.html">FaceIdentity</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/FaceLocation.html">FaceLocation</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/ImageWithFaces.html">ImageWithFaces</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/PositiveExample.html">PositiveExample</a>
+                <a href="../Structs/WarningInfo.html">WarningInfo</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:19VisualRecognitionV311WatsonErrora">WatsonError</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/WarningInfo.html">WarningInfo</a>
+                <a href="../Typealiases.html#/s:19VisualRecognitionV314WatsonResponsea">WatsonResponse</a>
               </li>
             </ul>
           </li>
@@ -173,66 +178,6 @@ needs.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultHeaders</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">String</span><span class="p">]</span></code></pre>
 
                         </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:19VisualRecognitionV30aB0C6apiKey7versionACSS_SStcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(apiKey:version:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C6apiKey7versionACSS_SStcfc">init(apiKey:version:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Create a <code>VisualRecognition</code> object.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@available(*, deprecated, message: "This method has been deprecated. It will be removed in a future release.")</span>
-<span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">apiKey</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>apiKey</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The API key used to authenticate with the service.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>version</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The release date of the version of the API to use. Specify the date
-in <q>YYYY-MM-DD</q> format.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
                       </div>
                     </section>
                   </div>
@@ -397,9 +342,9 @@ in <q>YYYY-MM-DD</q> format.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C8classify10imagesFile3url9threshold6owners13classifierIDs14acceptLanguage7headers7failure7successy10Foundation3URLVSg_SSSgSdSgSaySSGSgAuRSDyS2SGSgys5Error_pcSgyAA16ClassifiedImagesVctF"></a>
-                    <a name="//apple_ref/swift/Method/classify(imagesFile:url:threshold:owners:classifierIDs:acceptLanguage:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C8classify10imagesFile3url9threshold6owners13classifierIDs14acceptLanguage7headers7failure7successy10Foundation3URLVSg_SSSgSdSgSaySSGSgAuRSDyS2SGSgys5Error_pcSgyAA16ClassifiedImagesVctF">classify(imagesFile:url:threshold:owners:classifierIDs:acceptLanguage:headers:failure:success:)</a>
+                    <a name="/s:19VisualRecognitionV30aB0C8classify10imagesFile14acceptLanguage3url9threshold6owners13classifierIDs0eF11ContentType7headers17completionHandlery10Foundation3URLVSg_SSSgARSdSgSaySSGSgAuRSDyS2SGSgy7RestKit0U8ResponseVyAA16ClassifiedImagesVGSg_AX0U5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/classify(imagesFile:acceptLanguage:url:threshold:owners:classifierIDs:imagesFileContentType:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C8classify10imagesFile14acceptLanguage3url9threshold6owners13classifierIDs0eF11ContentType7headers17completionHandlery10Foundation3URLVSg_SSSgARSdSgSaySSGSgAuRSDyS2SGSgy7RestKit0U8ResponseVyAA16ClassifiedImagesVGSg_AX0U5ErrorOSgtctF">classify(imagesFile:acceptLanguage:url:threshold:owners:classifierIDs:imagesFileContentType:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -418,14 +363,14 @@ in <q>YYYY-MM-DD</q> format.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">classify</span><span class="p">(</span>
     <span class="nv">imagesFile</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">url</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">threshold</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">owners</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">classifierIDs</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">imagesFileContentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ClassifiedImages.html">ClassifiedImages</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV314WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/ClassifiedImages.html">ClassifiedImages</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV311WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -555,24 +500,12 @@ The following built-in classifier IDs require no training:
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -585,9 +518,9 @@ The following built-in classifier IDs require no training:
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C11detectFaces10imagesFile3url7headers7failure7successy10Foundation3URLVSg_SSSgSDyS2SGSgys5Error_pcSgyAA08DetectedE0VctF"></a>
-                    <a name="//apple_ref/swift/Method/detectFaces(imagesFile:url:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C11detectFaces10imagesFile3url7headers7failure7successy10Foundation3URLVSg_SSSgSDyS2SGSgys5Error_pcSgyAA08DetectedE0VctF">detectFaces(imagesFile:url:headers:failure:success:)</a>
+                    <a name="/s:19VisualRecognitionV30aB0C11detectFaces10imagesFile3url0fG11ContentType7headers17completionHandlery10Foundation3URLVSg_SSSgANSDyS2SGSgy7RestKit0P8ResponseVyAA08DetectedE0VGSg_AQ0P5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/detectFaces(imagesFile:url:imagesFileContentType:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C11detectFaces10imagesFile3url0fG11ContentType7headers17completionHandlery10Foundation3URLVSg_SSSgANSDyS2SGSgy7RestKit0P8ResponseVyAA08DetectedE0VGSg_AQ0P5ErrorOSgtctF">detectFaces(imagesFile:url:imagesFileContentType:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -615,9 +548,9 @@ recommended pixel density is 32X32 pixels per inch.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">detectFaces</span><span class="p">(</span>
     <span class="nv">imagesFile</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">url</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">imagesFileContentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/DetectedFaces.html">DetectedFaces</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV314WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/DetectedFaces.html">DetectedFaces</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV311WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -683,24 +616,12 @@ You can also include images with the <strong>images_file</strong> parameter.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -713,9 +634,9 @@ You can also include images with the <strong>images_file</strong> parameter.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C16createClassifier4name16positiveExamples08negativeH07headers7failure7successySS_SayAA15PositiveExampleVG10Foundation3URLVSgSDyS2SGSgys5Error_pcSgyAA0E0VctF"></a>
-                    <a name="//apple_ref/swift/Method/createClassifier(name:positiveExamples:negativeExamples:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16createClassifier4name16positiveExamples08negativeH07headers7failure7successySS_SayAA15PositiveExampleVG10Foundation3URLVSgSDyS2SGSgys5Error_pcSgyAA0E0VctF">createClassifier(name:positiveExamples:negativeExamples:headers:failure:success:)</a>
+                    <a name="/s:19VisualRecognitionV30aB0C16createClassifier4name16positiveExamples08negativeH07headers17completionHandlerySS_SDySS10Foundation3URLVGALSgSDyS2SGSgy7RestKit0O8ResponseVyAA0E0VGSg_AQ0O5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/createClassifier(name:positiveExamples:negativeExamples:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16createClassifier4name16positiveExamples08negativeH07headers17completionHandlerySS_SDySS10Foundation3URLVGALSgSDyS2SGSgy7RestKit0O8ResponseVyAA0E0VGSg_AQ0O5ErrorOSgtctF">createClassifier(name:positiveExamples:negativeExamples:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -738,11 +659,10 @@ names). The service assumes UTF-8 encoding if it encounters non-ASCII characters
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createClassifier</span><span class="p">(</span>
     <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">positiveExamples</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/PositiveExample.html">PositiveExample</a></span><span class="p">],</span>
+    <span class="nv">positiveExamples</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">URL</span><span class="p">],</span>
     <span class="nv">negativeExamples</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Classifier.html">Classifier</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV314WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Classifier.html">Classifier</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV311WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -770,11 +690,12 @@ names). The service assumes UTF-8 encoding if it encounters non-ASCII characters
                               </td>
                               <td>
                                 <div>
-                                  <p>An array of of positive examples, each with a name and a compressed (.zip) file
-of images that depict the visual subject of a class in the new classifier. You can include more than one
-positive example file in a call.
-Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels.
-The maximum number of images is 10,000 images or 100 MB per .zip file.
+                                  <p>A .zip file of images that depict the visual subject of a class in the new
+classifier. You can include more than one positive example file in a call.
+Specify the parameter name by appending <code>_positive_examples</code> to the class name. For example,
+<code>goldenretriever_positive_examples</code> creates the class <strong>goldenretriever</strong>.
+Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The
+maximum number of images is 10,000 images or 100 MB per .zip file.
 Encode special characters in the file name in UTF-8.</p>
                                 </div>
                               </td>
@@ -808,24 +729,12 @@ Encode special characters in the file name in UTF-8.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -838,9 +747,9 @@ Encode special characters in the file name in UTF-8.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C15listClassifiers6owners7verbose7headers7failure7successySaySSGSg_SbSgSDyS2SGSgys5Error_pcSgyAA0E0VctF"></a>
-                    <a name="//apple_ref/swift/Method/listClassifiers(owners:verbose:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C15listClassifiers6owners7verbose7headers7failure7successySaySSGSg_SbSgSDyS2SGSgys5Error_pcSgyAA0E0VctF">listClassifiers(owners:verbose:headers:failure:success:)</a>
+                    <a name="/s:19VisualRecognitionV30aB0C15listClassifiers7verbose7headers17completionHandlerySbSg_SDyS2SGSgy7RestKit0J8ResponseVyAA0E0VGSg_AK0J5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/listClassifiers(verbose:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C15listClassifiers7verbose7headers17completionHandlerySbSg_SDyS2SGSgy7RestKit0J8ResponseVyAA0E0VGSg_AK0J5ErrorOSgtctF">listClassifiers(verbose:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -856,11 +765,9 @@ Encode special characters in the file name in UTF-8.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listClassifiers</span><span class="p">(</span>
-    <span class="nv">owners</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">verbose</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Classifiers.html">Classifiers</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV314WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Classifiers.html">Classifiers</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV311WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -868,18 +775,6 @@ Encode special characters in the file name in UTF-8.</p>
                         <h4>Parameters</h4>
                         <table class="graybox">
                           <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>owners</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Unused. This parameter will be removed in a future release.</p>
-                                </div>
-                              </td>
-                            </tr>
                             <tr>
                               <td>
                                 <code>
@@ -908,24 +803,12 @@ brief list of classifiers.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -938,9 +821,9 @@ brief list of classifiers.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C13getClassifier12classifierID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyAA0E0VctF"></a>
-                    <a name="//apple_ref/swift/Method/getClassifier(classifierID:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C13getClassifier12classifierID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyAA0E0VctF">getClassifier(classifierID:headers:failure:success:)</a>
+                    <a name="/s:19VisualRecognitionV30aB0C13getClassifier12classifierID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0K8ResponseVyAA0E0VGSg_AJ0K5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/getClassifier(classifierID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C13getClassifier12classifierID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0K8ResponseVyAA0E0VGSg_AJ0K5ErrorOSgtctF">getClassifier(classifierID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -960,8 +843,7 @@ brief list of classifiers.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getClassifier</span><span class="p">(</span>
     <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Classifier.html">Classifier</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV314WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Classifier.html">Classifier</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV311WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -996,24 +878,12 @@ brief list of classifiers.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -1026,9 +896,9 @@ brief list of classifiers.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C16updateClassifier12classifierID16positiveExamples08negativeI07headers7failure7successySS_SayAA15PositiveExampleVGSg10Foundation3URLVSgSDyS2SGSgys5Error_pcSgyAA0E0VctF"></a>
-                    <a name="//apple_ref/swift/Method/updateClassifier(classifierID:positiveExamples:negativeExamples:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16updateClassifier12classifierID16positiveExamples08negativeI07headers7failure7successySS_SayAA15PositiveExampleVGSg10Foundation3URLVSgSDyS2SGSgys5Error_pcSgyAA0E0VctF">updateClassifier(classifierID:positiveExamples:negativeExamples:headers:failure:success:)</a>
+                    <a name="/s:19VisualRecognitionV30aB0C16updateClassifier12classifierID16positiveExamples08negativeI07headers17completionHandlerySS_SDySS10Foundation3URLVGSgALSgSDyS2SGSgy7RestKit0P8ResponseVyAA0E0VGSg_AR0P5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/updateClassifier(classifierID:positiveExamples:negativeExamples:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16updateClassifier12classifierID16positiveExamples08negativeI07headers17completionHandlerySS_SDySS10Foundation3URLVGSgALSgSDyS2SGSgy7RestKit0P8ResponseVyAA0E0VGSg_AR0P5ErrorOSgtctF">updateClassifier(classifierID:positiveExamples:negativeExamples:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1055,11 +925,10 @@ classifier retraining finished.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateClassifier</span><span class="p">(</span>
     <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">positiveExamples</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/PositiveExample.html">PositiveExample</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">positiveExamples</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">URL</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">negativeExamples</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Classifier.html">Classifier</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV314WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Classifier.html">Classifier</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV311WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1087,11 +956,13 @@ classifier retraining finished.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>An array of positive examples, each with a name and a compressed (.zip) file
-of images that depict the visual subject of a class in the classifier. The positive examples create
-or update classes in the classifier. You can include more than one positive example file in a call.
-Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels.
-The maximum number of images is 10,000 images or 100 MB per .zip file.
+                                  <p>A .zip file of images that depict the visual subject of a class in the
+classifier. The positive examples create or update classes in the classifier. You can include more than one
+positive example file in a call.
+Specify the parameter name by appending <code>_positive_examples</code> to the class name. For example,
+<code>goldenretriever_positive_examples</code> creates the class <code>goldenretriever</code>.
+Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The
+maximum number of images is 10,000 images or 100 MB per .zip file.
 Encode special characters in the file name in UTF-8.</p>
                                 </div>
                               </td>
@@ -1125,24 +996,12 @@ Encode special characters in the file name in UTF-8.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -1155,9 +1014,9 @@ Encode special characters in the file name in UTF-8.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C16deleteClassifier12classifierID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyyctF"></a>
-                    <a name="//apple_ref/swift/Method/deleteClassifier(classifierID:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16deleteClassifier12classifierID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyyctF">deleteClassifier(classifierID:headers:failure:success:)</a>
+                    <a name="/s:19VisualRecognitionV30aB0C16deleteClassifier12classifierID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0K8ResponseVyytGSg_AJ0K5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/deleteClassifier(classifierID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16deleteClassifier12classifierID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0K8ResponseVyytGSg_AJ0K5ErrorOSgtctF">deleteClassifier(classifierID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1175,8 +1034,7 @@ Encode special characters in the file name in UTF-8.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteClassifier</span><span class="p">(</span>
     <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV314WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV311WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1211,24 +1069,12 @@ Encode special characters in the file name in UTF-8.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -1241,9 +1087,9 @@ Encode special characters in the file name in UTF-8.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C14getCoreMlModel12classifierID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgy10Foundation4DataVctF"></a>
-                    <a name="//apple_ref/swift/Method/getCoreMlModel(classifierID:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C14getCoreMlModel12classifierID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgy10Foundation4DataVctF">getCoreMlModel(classifierID:headers:failure:success:)</a>
+                    <a name="/s:19VisualRecognitionV30aB0C14getCoreMLModel12classifierID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0L8ResponseVy10Foundation4DataVGSg_AJ0L5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/getCoreMLModel(classifierID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C14getCoreMLModel12classifierID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0L8ResponseVy10Foundation4DataVGSg_AJ0L5ErrorOSgtctF">getCoreMLModel(classifierID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1261,11 +1107,10 @@ the classifier details.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getCoreMlModel</span><span class="p">(</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getCoreMLModel</span><span class="p">(</span>
     <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV314WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt">Data</span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV311WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1300,24 +1145,12 @@ the classifier details.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -1330,9 +1163,9 @@ the classifier details.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C14deleteUserData10customerID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyyctF"></a>
-                    <a name="//apple_ref/swift/Method/deleteUserData(customerID:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C14deleteUserData10customerID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyyctF">deleteUserData(customerID:headers:failure:success:)</a>
+                    <a name="/s:19VisualRecognitionV30aB0C14deleteUserData10customerID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0L8ResponseVyytGSg_AJ0L5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/deleteUserData(customerID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C14deleteUserData10customerID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0L8ResponseVyytGSg_AJ0L5ErrorOSgtctF">deleteUserData(customerID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1356,8 +1189,7 @@ security</a>.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteUserData</span><span class="p">(</span>
     <span class="nv">customerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV314WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV311WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1392,24 +1224,12 @@ security</a>.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -1483,9 +1303,9 @@ security</a>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C16updateLocalModel12classifierID7failure7successySS_ys5Error_pcSgyycSgtF"></a>
-                    <a name="//apple_ref/swift/Method/updateLocalModel(classifierID:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16updateLocalModel12classifierID7failure7successySS_ys5Error_pcSgyycSgtF">updateLocalModel(classifierID:failure:success:)</a>
+                    <a name="/s:19VisualRecognitionV30aB0C16updateLocalModel12classifierID17completionHandlerySS_y7RestKit0K8ResponseVyAA10ClassifierVGSg_AG0K5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/updateLocalModel(classifierID:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16updateLocalModel12classifierID17completionHandlerySS_y7RestKit0K8ResponseVyAA10ClassifierVGSg_AG0K5ErrorOSgtctF">updateLocalModel(classifierID:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1504,8 +1324,7 @@ in order to download the latest model.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateLocalModel</span><span class="p">(</span>
     <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="p">(()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV314WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Classifier.html">Classifier</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV311WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1528,24 +1347,13 @@ in order to download the latest model.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed after the local model has been updated.</p>
+                                  <p>A function executed when the request completes with a successful result or error.
+If both the response and error are <code>nil</code>, then the Core ML model already exists locally.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1635,9 +1443,9 @@ in order to download the latest model.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C22classifyWithLocalModel9imageData13classifierIDs9threshold7failure7successy10Foundation0I0V_SaySSGSdSgys5Error_pcSgyAA16ClassifiedImagesVctF"></a>
-                    <a name="//apple_ref/swift/Method/classifyWithLocalModel(imageData:classifierIDs:threshold:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C22classifyWithLocalModel9imageData13classifierIDs9threshold7failure7successy10Foundation0I0V_SaySSGSdSgys5Error_pcSgyAA16ClassifiedImagesVctF">classifyWithLocalModel(imageData:classifierIDs:threshold:failure:success:)</a>
+                    <a name="/s:19VisualRecognitionV30aB0C22classifyWithLocalModel9imageData13classifierIDs9threshold17completionHandlery10Foundation0I0V_SaySSGSdSgyAA16ClassifiedImagesVSg_7RestKit0R5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/classifyWithLocalModel(imageData:classifierIDs:threshold:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C22classifyWithLocalModel9imageData13classifierIDs9threshold17completionHandlery10Foundation0I0V_SaySSGSdSgyAA16ClassifiedImagesVSg_7RestKit0R5ErrorOSgtctF">classifyWithLocalModel(imageData:classifierIDs:threshold:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1656,8 +1464,7 @@ in order to download the latest model.</p>
     <span class="nv">imageData</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
     <span class="nv">classifierIDs</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">"default"</span><span class="p">],</span>
     <span class="nv">threshold</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ClassifiedImages.html">ClassifiedImages</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ClassifiedImages.html">ClassifiedImages</a></span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV311WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1705,24 +1512,12 @@ built-in classifier.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the image classifications.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -1739,9 +1534,9 @@ built-in classifier.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C8classify5image9threshold6owners13classifierIDs14acceptLanguage7failure7successySo7UIImageC_SdSgSaySSGSgAPSSSgys5Error_pcSgyAA16ClassifiedImagesVctF"></a>
-                    <a name="//apple_ref/swift/Method/classify(image:threshold:owners:classifierIDs:acceptLanguage:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C8classify5image9threshold6owners13classifierIDs14acceptLanguage7failure7successySo7UIImageC_SdSgSaySSGSgAPSSSgys5Error_pcSgyAA16ClassifiedImagesVctF">classify(image:threshold:owners:classifierIDs:acceptLanguage:failure:success:)</a>
+                    <a name="/s:19VisualRecognitionV30aB0C8classify5image9threshold6owners13classifierIDs14acceptLanguage17completionHandlerySo7UIImageC_SdSgSaySSGSgAOSSSgy7RestKit0O8ResponseVyAA16ClassifiedImagesVGSg_AQ0O5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/classify(image:threshold:owners:classifierIDs:acceptLanguage:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C8classify5image9threshold6owners13classifierIDs14acceptLanguage17completionHandlerySo7UIImageC_SdSgSaySSGSgAOSSSgy7RestKit0O8ResponseVyAA16ClassifiedImagesVGSg_AQ0O5ErrorOSgtctF">classify(image:threshold:owners:classifierIDs:acceptLanguage:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1764,8 +1559,7 @@ built-in classifier.</p>
     <span class="nv">owners</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">classifierIDs</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ClassifiedImages.html">ClassifiedImages</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV314WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/ClassifiedImages.html">ClassifiedImages</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV311WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1876,24 +1670,12 @@ these conditions:
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -1906,9 +1688,9 @@ these conditions:
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C11detectFaces5image7failure7successySo7UIImageC_ys5Error_pcSgyAA08DetectedE0VctF"></a>
-                    <a name="//apple_ref/swift/Method/detectFaces(image:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C11detectFaces5image7failure7successySo7UIImageC_ys5Error_pcSgyAA08DetectedE0VctF">detectFaces(image:failure:success:)</a>
+                    <a name="/s:19VisualRecognitionV30aB0C11detectFaces5image17completionHandlerySo7UIImageC_y7RestKit0J8ResponseVyAA08DetectedE0VGSg_AI0J5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/detectFaces(image:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C11detectFaces5image17completionHandlerySo7UIImageC_y7RestKit0J8ResponseVyAA08DetectedE0VGSg_AI0J5ErrorOSgtctF">detectFaces(image:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1935,8 +1717,7 @@ in the <code>imagesFile</code> parameter.</li>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">detectFaces</span><span class="p">(</span>
     <span class="nv">image</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/DetectedFaces.html">DetectedFaces</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV314WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/DetectedFaces.html">DetectedFaces</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV311WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1961,24 +1742,12 @@ in an image, age and gender confidence scores might return scores of 0.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -1991,9 +1760,9 @@ in an image, age and gender confidence scores might return scores of 0.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C22classifyWithLocalModel5image13classifierIDs9threshold7failure7successySo7UIImageC_SaySSGSdSgys5Error_pcSgyAA16ClassifiedImagesVctF"></a>
-                    <a name="//apple_ref/swift/Method/classifyWithLocalModel(image:classifierIDs:threshold:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C22classifyWithLocalModel5image13classifierIDs9threshold7failure7successySo7UIImageC_SaySSGSdSgys5Error_pcSgyAA16ClassifiedImagesVctF">classifyWithLocalModel(image:classifierIDs:threshold:failure:success:)</a>
+                    <a name="/s:19VisualRecognitionV30aB0C22classifyWithLocalModel5image13classifierIDs9threshold17completionHandlerySo7UIImageC_SaySSGSdSgyAA16ClassifiedImagesVSg_7RestKit0Q5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/classifyWithLocalModel(image:classifierIDs:threshold:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C22classifyWithLocalModel5image13classifierIDs9threshold17completionHandlerySo7UIImageC_SaySSGSdSgyAA16ClassifiedImagesVSg_7RestKit0Q5ErrorOSgtctF">classifyWithLocalModel(image:classifierIDs:threshold:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2013,8 +1782,7 @@ in an image, age and gender confidence scores might return scores of 0.</p>
     <span class="nv">image</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">,</span>
     <span class="nv">classifierIDs</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">"default"</span><span class="p">],</span>
     <span class="nv">threshold</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ClassifiedImages.html">ClassifiedImages</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ClassifiedImages.html">ClassifiedImages</a></span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV311WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -2094,7 +1862,7 @@ built-in classifier.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-11-12)</p>
+          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-12-06)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

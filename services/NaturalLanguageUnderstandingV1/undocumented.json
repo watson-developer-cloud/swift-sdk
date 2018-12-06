@@ -1,6 +1,20 @@
 {
   "warnings": [
     {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/NaturalLanguageUnderstandingV1/Models/CategoriesOptions.swift",
+      "line": 24,
+      "symbol": "CategoriesOptions.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/NaturalLanguageUnderstandingV1/Models/MetadataOptions.swift",
+      "line": 25,
+      "symbol": "MetadataOptions.init()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/NaturalLanguageUnderstandingV1/Models/SemanticRolesAction.swift",
       "line": 32,
       "symbol": "SemanticRolesAction.verb",
@@ -9,9 +23,23 @@
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/NaturalLanguageUnderstandingV1/NaturalLanguageUnderstanding.swift",
-      "line": 82,
+      "line": 81,
       "symbol": "NaturalLanguageUnderstanding.accessToken(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 20,
+      "symbol": "WatsonResponse",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 21,
+      "symbol": "WatsonError",
+      "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     }
   ],

@@ -90,6 +90,17 @@
               </li>
             </ul>
           </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14ToneAnalyzerV311WatsonErrora">WatsonError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14ToneAnalyzerV314WatsonResponsea">WatsonResponse</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <article class="main-content">
@@ -399,9 +410,9 @@ in <q>YYYY-MM-DD</q> format.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ToneAnalyzerV30aB0C4tone0D7Content9sentences5tones15contentLanguage06acceptI07headers7failure7successyAA0aE0O_SbSgSaySSGSgSSSgARSDyS2SGSgys5Error_pcSgyAA0A8AnalysisVctF"></a>
-                    <a name="//apple_ref/swift/Method/tone(toneContent:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C4tone0D7Content9sentences5tones15contentLanguage06acceptI07headers7failure7successyAA0aE0O_SbSgSaySSGSgSSSgARSDyS2SGSgys5Error_pcSgyAA0A8AnalysisVctF">tone(toneContent:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)</a>
+                    <a name="/s:14ToneAnalyzerV30aB0C4tone0D7Content9sentences15contentLanguage06acceptH07headers17completionHandleryAA0aE0O_SbSgSSSgANSDyS2SGSgy7RestKit0M8ResponseVyAA0A8AnalysisVGSg_AQ0M5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/tone(toneContent:sentences:contentLanguage:acceptLanguage:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C4tone0D7Content9sentences15contentLanguage06acceptH07headers17completionHandleryAA0aE0O_SbSgSSSgANSDyS2SGSgy7RestKit0M8ResponseVyAA0A8AnalysisVGSg_AQ0M5ErrorOSgtctF">tone(toneContent:sentences:contentLanguage:acceptLanguage:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -433,12 +444,10 @@ endpoint</a>.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">tone</span><span class="p">(</span>
     <span class="nv">toneContent</span><span class="p">:</span> <span class="kt"><a href="../Enums/ToneContent.html">ToneContent</a></span><span class="p">,</span>
     <span class="nv">sentences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">tones</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ToneAnalysis.html">ToneAnalysis</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14ToneAnalyzerV314WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/ToneAnalysis.html">ToneAnalysis</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14ToneAnalyzerV311WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -470,22 +479,6 @@ input, provide an object of type <code><a href="../Structs/ToneInput.html">ToneI
                                   <p>Indicates whether the service is to return an analysis of each individual sentence in
 addition to its analysis of the full document. If <code>true</code> (the default), the service returns results for each
 sentence.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>tones</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p><strong><code>2017-09-21</code>:</strong> Deprecated. The service continues to accept the parameter for
-backward-compatibility, but the parameter no longer affects the response.
-<strong><code>2016-05-19</code>:</strong> A comma-separated list of tones for which the service is to return its analysis of the input;
-the indicated tones apply both to the full document and to individual sentences of the document. You can specify
-one or more of the valid values. Omit the parameter to request results for all three tones.</p>
                                 </div>
                               </td>
                             </tr>
@@ -538,24 +531,12 @@ languages for <strong>Content-Language</strong> and <strong>Accept-Language</str
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -568,9 +549,9 @@ languages for <strong>Content-Language</strong> and <strong>Accept-Language</str
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ToneAnalyzerV30aB0C8toneChat10utterances15contentLanguage06acceptH07headers7failure7successySayAA9UtteranceVG_SSSgANSDyS2SGSgys5Error_pcSgyAA0M8AnalysesVctF"></a>
-                    <a name="//apple_ref/swift/Method/toneChat(utterances:contentLanguage:acceptLanguage:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C8toneChat10utterances15contentLanguage06acceptH07headers7failure7successySayAA9UtteranceVG_SSSgANSDyS2SGSgys5Error_pcSgyAA0M8AnalysesVctF">toneChat(utterances:contentLanguage:acceptLanguage:headers:failure:success:)</a>
+                    <a name="/s:14ToneAnalyzerV30aB0C8toneChat10utterances15contentLanguage06acceptH07headers17completionHandlerySayAA9UtteranceVG_SSSgAMSDyS2SGSgy7RestKit0N8ResponseVyAA0M8AnalysesVGSg_AP0N5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/toneChat(utterances:contentLanguage:acceptLanguage:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C8toneChat10utterances15contentLanguage06acceptH07headers17completionHandlerySayAA9UtteranceVG_SSSgAMSDyS2SGSgy7RestKit0N8ResponseVyAA0M8AnalysesVGSg_AP0N5ErrorOSgtctF">toneChat(utterances:contentLanguage:acceptLanguage:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -601,8 +582,7 @@ endpoint</a>.</p>
     <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/UtteranceAnalyses.html">UtteranceAnalyses</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14ToneAnalyzerV314WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/UtteranceAnalyses.html">UtteranceAnalyses</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14ToneAnalyzerV311WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -672,24 +652,12 @@ languages for <strong>Content-Language</strong> and <strong>Accept-Language</str
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -701,119 +669,10 @@ languages for <strong>Content-Language</strong> and <strong>Accept-Language</str
                 </li>
               </ul>
             </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:14ToneAnalyzerV30aB0C4tone0D5Input9sentences5tones15contentLanguage06acceptI07headers7failure7successyAA0aE0V_SbSgSaySSGSgSSSgARSDyS2SGSgys5Error_pcSgyAA0A8AnalysisVctF"></a>
-                    <a name="//apple_ref/swift/Method/tone(toneInput:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C4tone0D5Input9sentences5tones15contentLanguage06acceptI07headers7failure7successyAA0aE0V_SbSgSaySSGSgSSSgARSDyS2SGSgys5Error_pcSgyAA0A8AnalysisVctF">tone(toneInput:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">tone</span><span class="p">(</span>
-    <span class="nv">toneInput</span><span class="p">:</span> <span class="kt"><a href="../Structs/ToneInput.html">ToneInput</a></span><span class="p">,</span>
-    <span class="nv">sentences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">tones</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ToneAnalysis.html">ToneAnalysis</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:14ToneAnalyzerV30aB0C4tone4text9sentences5tones15contentLanguage06acceptI07headers7failure7successySS_SbSgSaySSGSgSSSgAPSDyS2SGSgys5Error_pcSgyAA0A8AnalysisVctF"></a>
-                    <a name="//apple_ref/swift/Method/tone(text:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C4tone4text9sentences5tones15contentLanguage06acceptI07headers7failure7successySS_SbSgSaySSGSgSSSgAPSDyS2SGSgys5Error_pcSgyAA0A8AnalysisVctF">tone(text:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">tone</span><span class="p">(</span>
-    <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">sentences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">tones</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ToneAnalysis.html">ToneAnalysis</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:14ToneAnalyzerV30aB0C4tone4html9sentences5tones15contentLanguage06acceptI07headers7failure7successySS_SbSgSaySSGSgSSSgAPSDyS2SGSgys5Error_pcSgyAA0A8AnalysisVctF"></a>
-                    <a name="//apple_ref/swift/Method/tone(html:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C4tone4html9sentences5tones15contentLanguage06acceptI07headers7failure7successySS_SbSgSaySSGSgSSSgAPSDyS2SGSgys5Error_pcSgyAA0A8AnalysisVctF">tone(html:sentences:tones:contentLanguage:acceptLanguage:headers:failure:success:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">tone</span><span class="p">(</span>
-    <span class="nv">html</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">sentences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">tones</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ToneAnalysis.html">ToneAnalysis</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-11-12)</p>
+          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-12-06)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

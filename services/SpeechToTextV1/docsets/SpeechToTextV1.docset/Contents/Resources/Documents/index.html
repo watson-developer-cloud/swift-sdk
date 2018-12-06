@@ -62,7 +62,7 @@
                 <a href="Structs/AudioDetails.html">AudioDetails</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/AudioDetails/ModelType.html">– ModelType</a>
+                <a href="Structs/AudioDetails/TypeEnum.html">– TypeEnum</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/AudioDetails/Compression.html">– Compression</a>
@@ -90,12 +90,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/Corpus/Status.html">– Status</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/CreateLanguageModel.html">CreateLanguageModel</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/CreateLanguageModel/BaseModelName.html">– BaseModelName</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/CustomWord.html">CustomWord</a>
@@ -177,6 +171,17 @@
               </li>
             </ul>
           </li>
+          <li class="nav-group-name">
+            <a href="Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:14SpeechToTextV111WatsonErrora">WatsonError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:14SpeechToTextV114WatsonResponsea">WatsonResponse</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <article class="main-content">
@@ -204,7 +209,7 @@
 <p>See the <a href="http://watson-developer-cloud.github.io/swift-sdk/services/SpeechToTextV1/Structs/RecognitionSettings.html">class documentation</a> or <a href="https://console.bluemix.net/docs/services/speech-to-text/index.html">service documentation</a> for more information about the available settings.</p>
 <h3 id='microphone-audio-and-compression' class='heading'>Microphone Audio and Compression</h3>
 
-<p>The Speech to Text framework makes it easy to perform speech recognition with microphone audio. The framework internally manages the microphone, starting and stopping it with various function calls (such as <code>recognizeMicrophone(settings:model:customizationID:learningOptOut:compress:failure:success)</code> and <code>stopRecognizeMicrophone()</code> or <code>startMicrophone(compress:)</code> and <code>stopMicrophone()</code>).</p>
+<p>The Speech to Text framework makes it easy to perform speech recognition with microphone audio. The framework internally manages the microphone, starting and stopping it with various method calls (<code>recognizeMicrophone</code> and <code>stopRecognizeMicrophone</code>, or <code>startMicrophone</code> and <code>stopMicrophone</code>).</p>
 
 <p>There are two different ways that your app can determine when to stop the microphone:</p>
 
@@ -241,18 +246,22 @@
 <p>The following example demonstrates how to use the Speech to Text service to transcribe a WAV audio file.</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">SpeechToTextV1</span>
 
-<span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
-<span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
-<span class="k">let</span> <span class="nv">speechToText</span> <span class="o">=</span> <span class="kt">SpeechToText</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">apiKey</span> <span class="o">=</span> <span class="s">"your-api-key"</span>
+<span class="k">let</span> <span class="nv">speechToText</span> <span class="o">=</span> <span class="kt">SpeechToText</span><span class="p">(</span><span class="nv">apiKey</span><span class="p">:</span> <span class="n">apiKey</span><span class="p">)</span>
 
 <span class="k">var</span> <span class="nv">accumulator</span> <span class="o">=</span> <span class="kt">SpeechRecognitionResultsAccumulator</span><span class="p">()</span>
 
-<span class="k">let</span> <span class="nv">audio</span> <span class="o">=</span> <span class="kt">Bundle</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="nf">url</span><span class="p">(</span><span class="nv">forResource</span><span class="p">:</span> <span class="s">"filename"</span><span class="p">,</span> <span class="nv">withExtension</span><span class="p">:</span> <span class="s">"wav"</span><span class="p">)</span><span class="o">!</span>
-<span class="k">var</span> <span class="nv">settings</span> <span class="o">=</span> <span class="kt">RecognitionSettings</span><span class="p">(</span><span class="nv">contentType</span><span class="p">:</span> <span class="s">"audio/wav"</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">audioFile</span> <span class="o">=</span> <span class="kt">Bundle</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="nf">url</span><span class="p">(</span><span class="nv">forResource</span><span class="p">:</span> <span class="s">"filename"</span><span class="p">,</span> <span class="nv">withExtension</span><span class="p">:</span> <span class="s">"wav"</span><span class="p">)</span><span class="o">!</span>
+<span class="k">let</span> <span class="nv">settings</span> <span class="o">=</span> <span class="kt">RecognitionSettings</span><span class="p">(</span><span class="nv">contentType</span><span class="p">:</span> <span class="s">"audio/wav"</span><span class="p">)</span>
 <span class="n">settings</span><span class="o">.</span><span class="n">interimResults</span> <span class="o">=</span> <span class="kc">true</span>
-<span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
-<span class="n">speechToText</span><span class="o">.</span><span class="nf">recognize</span><span class="p">(</span><span class="n">audio</span><span class="p">,</span> <span class="nv">settings</span><span class="p">:</span> <span class="n">settings</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">results</span> <span class="k">in</span>
+<span class="n">speechToText</span><span class="o">.</span><span class="nf">recognize</span><span class="p">(</span><span class="nv">audio</span><span class="p">:</span> <span class="n">audioFile</span><span class="p">,</span> <span class="nv">settings</span><span class="p">:</span> <span class="n">settings</span><span class="p">)</span> <span class="p">{</span> <span class="n">response</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">error</span> <span class="o">=</span> <span class="n">error</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">guard</span> <span class="k">let</span> <span class="nv">results</span> <span class="o">=</span> <span class="n">response</span><span class="p">?</span><span class="o">.</span><span class="n">result</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Failed to recognize the audio"</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="p">}</span>
     <span class="n">accumulator</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="nv">results</span><span class="p">:</span> <span class="n">results</span><span class="p">)</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">accumulator</span><span class="o">.</span><span class="n">bestTranscript</span><span class="p">)</span>
 <span class="p">}</span>
@@ -262,17 +271,22 @@
 <p>Audio can be streamed from the microphone to the Speech to Text service for real-time transcriptions. The following example demonstrates how to use the Speech to Text service to transcribe microphone audio:</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">SpeechToTextV1</span>
 
-<span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
-<span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
-<span class="k">let</span> <span class="nv">speechToText</span> <span class="o">=</span> <span class="kt">SpeechToText</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">apiKey</span> <span class="o">=</span> <span class="s">"your-api-key"</span>
+<span class="k">let</span> <span class="nv">speechToText</span> <span class="o">=</span> <span class="kt">SpeechToText</span><span class="p">(</span><span class="nv">apiKey</span><span class="p">:</span> <span class="n">apiKey</span><span class="p">)</span>
 
 <span class="k">var</span> <span class="nv">accumulator</span> <span class="o">=</span> <span class="kt">SpeechRecognitionResultsAccumulator</span><span class="p">()</span>
 
 <span class="kd">func</span> <span class="nf">startStreaming</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">var</span> <span class="nv">settings</span> <span class="o">=</span> <span class="kt">RecognitionSettings</span><span class="p">(</span><span class="nv">contentType</span><span class="p">:</span> <span class="s">"audio/ogg;codecs=opus"</span><span class="p">)</span>
     <span class="n">settings</span><span class="o">.</span><span class="n">interimResults</span> <span class="o">=</span> <span class="kc">true</span>
-    <span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
-    <span class="n">speechToText</span><span class="o">.</span><span class="nf">recognizeMicrophone</span><span class="p">(</span><span class="nv">settings</span><span class="p">:</span> <span class="n">settings</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span> <span class="n">results</span> <span class="k">in</span>
+    <span class="n">speechToText</span><span class="o">.</span><span class="nf">recognizeMicrophone</span><span class="p">(</span><span class="nv">settings</span><span class="p">:</span> <span class="n">settings</span><span class="p">)</span> <span class="p">{</span> <span class="n">response</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
+        <span class="k">if</span> <span class="k">let</span> <span class="nv">error</span> <span class="o">=</span> <span class="n">error</span> <span class="p">{</span>
+            <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="k">guard</span> <span class="k">let</span> <span class="nv">results</span> <span class="o">=</span> <span class="n">response</span><span class="p">?</span><span class="o">.</span><span class="n">result</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="nf">print</span><span class="p">(</span><span class="s">"Failed to recognize the audio"</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="p">}</span>
         <span class="n">accumulator</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="nv">results</span><span class="p">:</span> <span class="n">results</span><span class="p">)</span>
         <span class="nf">print</span><span class="p">(</span><span class="n">accumulator</span><span class="o">.</span><span class="n">bestTranscript</span><span class="p">)</span>
     <span class="p">}</span>
@@ -314,18 +328,17 @@
 <p>The following example demonstrates how to use <code><a href="Classes/SpeechToTextSession.html">SpeechToTextSession</a></code> to transcribe microphone audio:</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">SpeechToTextV1</span>
 
-<span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
-<span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
-<span class="k">let</span> <span class="nv">speechToTextSession</span> <span class="o">=</span> <span class="kt">SpeechToTextSession</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">apiKey</span> <span class="o">=</span> <span class="s">"your-api-key"</span>
+<span class="k">let</span> <span class="nv">speechToTextSession</span> <span class="o">=</span> <span class="kt">SpeechToTextSession</span><span class="p">(</span><span class="nv">apiKey</span><span class="p">:</span> <span class="n">apiKey</span><span class="p">)</span>
 
 <span class="k">var</span> <span class="nv">accumulator</span> <span class="o">=</span> <span class="kt">SpeechRecognitionResultsAccumulator</span><span class="p">()</span>
 
 <span class="k">do</span> <span class="p">{</span>
     <span class="k">let</span> <span class="nv">session</span> <span class="o">=</span> <span class="kt">AVAudioSession</span><span class="o">.</span><span class="nf">sharedInstance</span><span class="p">()</span>
+    <span class="k">try</span> <span class="n">session</span><span class="o">.</span><span class="nf">setCategory</span><span class="p">(</span><span class="kt">AVAudioSession</span><span class="o">.</span><span class="kt">Category</span><span class="o">.</span><span class="n">playAndRecord</span><span class="p">,</span> <span class="nv">mode</span><span class="p">:</span> <span class="o">.</span><span class="k">default</span><span class="p">,</span> <span class="nv">options</span><span class="p">:</span> <span class="p">[</span><span class="o">.</span><span class="n">defaultToSpeaker</span><span class="p">,</span> <span class="o">.</span><span class="n">mixWithOthers</span><span class="p">])</span>
     <span class="k">try</span> <span class="n">session</span><span class="o">.</span><span class="nf">setActive</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
-    <span class="k">try</span> <span class="n">session</span><span class="o">.</span><span class="nf">setCategory</span><span class="p">(</span><span class="kt">AVAudioSessionCategoryPlayAndRecord</span><span class="p">,</span> <span class="nv">with</span><span class="p">:</span> <span class="p">[</span><span class="o">.</span><span class="n">mixWithOthers</span><span class="p">,</span> <span class="o">.</span><span class="n">defaultToSpeaker</span><span class="p">])</span>
 <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="o">.</span><span class="n">localizedDescription</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
 <span class="p">}</span>
 
 <span class="kd">func</span> <span class="nf">startStreaming</span><span class="p">()</span> <span class="p">{</span>
@@ -356,12 +369,9 @@
     <span class="n">speechToTextSession</span><span class="o">.</span><span class="nf">disconnect</span><span class="p">()</span>
 <span class="p">}</span>
 </code></pre>
-<h3 id='customization' class='heading'>Customization</h3>
-
-<p>There are a number of ways that Speech to Text can be customized to suit your particular application. For example, you can define custom words or upload audio to train an acoustic model. For more information, refer to the <a href="https://console.bluemix.net/docs/services/speech-to-text/index.html">service documentation</a> or <a href="http://watson-developer-cloud.github.io/swift-sdk/swift-api/services/SpeechToTextV1/Classes/SpeechToText.html">API documentation</a>.</p>
 <h3 id='additional-information' class='heading'>Additional Information</h3>
 
-<p>The following links provide more information about the IBM Speech to Text service:</p>
+<p>There are a number of ways that Speech to Text can be customized to suit your particular application. For example, you can define custom words or upload audio to train an acoustic model. The following links provide more information about the IBM Speech to Text service:</p>
 
 <ul>
 <li><a href="https://www.ibm.com/watson/services/speech-to-text/">IBM Watson Speech to Text - Service Page</a></li>
@@ -372,7 +382,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-11-12)</p>
+          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-12-06)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

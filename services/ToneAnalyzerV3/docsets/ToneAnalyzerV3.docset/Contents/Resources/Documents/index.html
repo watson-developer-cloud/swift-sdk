@@ -89,6 +89,17 @@
               </li>
             </ul>
           </li>
+          <li class="nav-group-name">
+            <a href="Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:14ToneAnalyzerV311WatsonErrora">WatsonError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:14ToneAnalyzerV314WatsonResponsea">WatsonResponse</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <article class="main-content">
@@ -104,14 +115,19 @@
 <p>The following example demonstrates how to use the Tone Analyzer service:</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">ToneAnalyzerV3</span>
 
-<span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
-<span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
+<span class="k">let</span> <span class="nv">apiKey</span> <span class="o">=</span> <span class="s">"your-api-key"</span>
 <span class="k">let</span> <span class="nv">version</span> <span class="o">=</span> <span class="s">"YYYY-MM-DD"</span> <span class="c1">// use today's date for the most recent version</span>
-<span class="k">let</span> <span class="nv">toneAnalyzer</span> <span class="o">=</span> <span class="kt">ToneAnalyzer</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="n">version</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">toneAnalyzer</span> <span class="o">=</span> <span class="kt">ToneAnalyzer</span><span class="p">(</span><span class="nv">version</span><span class="p">:</span> <span class="n">version</span><span class="p">,</span> <span class="nv">apiKey</span><span class="p">:</span> <span class="n">apiKey</span><span class="p">)</span>
 
-<span class="k">let</span> <span class="nv">toneInput</span> <span class="o">=</span> <span class="kt">ToneInput</span><span class="p">(</span><span class="nv">text</span><span class="p">:</span> <span class="s">"your-input-text"</span><span class="p">)</span>
-<span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
-<span class="n">toneAnalyzer</span><span class="o">.</span><span class="nf">tone</span><span class="p">(</span><span class="nv">toneInput</span><span class="p">:</span> <span class="n">toneInput</span><span class="p">,</span> <span class="nv">contentType</span><span class="p">:</span> <span class="s">"plain/text"</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span> <span class="n">tones</span> <span class="k">in</span>
+<span class="k">let</span> <span class="nv">input</span> <span class="o">=</span> <span class="kt">ToneInput</span><span class="p">(</span><span class="nv">text</span><span class="p">:</span> <span class="s">"your-input-text"</span><span class="p">)</span>
+<span class="n">toneAnalyzer</span><span class="o">.</span><span class="nf">tone</span><span class="p">(</span><span class="nv">toneContent</span><span class="p">:</span> <span class="o">.</span><span class="nf">toneInput</span><span class="p">(</span><span class="n">input</span><span class="p">))</span> <span class="p">{</span> <span class="n">response</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">error</span> <span class="o">=</span> <span class="n">error</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">guard</span> <span class="k">let</span> <span class="nv">tones</span> <span class="o">=</span> <span class="n">response</span><span class="p">?</span><span class="o">.</span><span class="n">result</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Failed to analyze the tone input"</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="p">}</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">tones</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre>
@@ -127,7 +143,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-11-12)</p>
+          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-12-06)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

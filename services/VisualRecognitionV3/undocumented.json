@@ -1,6 +1,20 @@
 {
   "warnings": [
     {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 20,
+      "symbol": "WatsonResponse",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 21,
+      "symbol": "WatsonError",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/VisualRecognitionV3/Models/Classifier.swift",
       "line": 28,
       "symbol": "Classifier.Status.ready",
@@ -30,7 +44,7 @@
     },
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/VisualRecognitionV3/VisualRecognition.swift",
-      "line": 81,
+      "line": 65,
       "symbol": "VisualRecognition.accessToken(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

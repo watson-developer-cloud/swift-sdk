@@ -81,6 +81,17 @@
               </li>
             </ul>
           </li>
+          <li class="nav-group-name">
+            <a href="Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <article class="main-content">
@@ -95,45 +106,66 @@
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">TextToSpeechV1</span>
 <span class="kd">import</span> <span class="kt">AVFoundation</span>
 
-<span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
-<span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
-<span class="k">let</span> <span class="nv">textToSpeech</span> <span class="o">=</span> <span class="kt">TextToSpeech</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">apiKey</span> <span class="o">=</span> <span class="s">"your-api-key"</span>
+<span class="k">let</span> <span class="nv">textToSpeech</span> <span class="o">=</span> <span class="kt">TextToSpeech</span><span class="p">(</span><span class="nv">apiKey</span><span class="p">:</span> <span class="n">apiKey</span><span class="p">)</span>
 
 <span class="c1">// The AVAudioPlayer object will stop playing if it falls out-of-scope.</span>
 <span class="c1">// Therefore, to prevent it from falling out-of-scope we declare it as</span>
 <span class="c1">// a property outside the completion handler where it will be played.</span>
 <span class="k">var</span> <span class="nv">audioPlayer</span> <span class="o">=</span> <span class="kt">AVAudioPlayer</span><span class="p">()</span>
 
-<span class="k">let</span> <span class="nv">text</span> <span class="o">=</span> <span class="s">"your-text-here"</span>
-<span class="k">let</span> <span class="nv">accept</span> <span class="o">=</span> <span class="s">"audio/wav"</span>
-<span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
-<span class="n">textToSpeech</span><span class="o">.</span><span class="nf">synthesize</span><span class="p">(</span><span class="nv">text</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span> <span class="nv">accept</span><span class="p">:</span> <span class="n">accept</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span> <span class="n">data</span> <span class="k">in</span>
-    <span class="n">audioPlayer</span> <span class="o">=</span> <span class="k">try!</span> <span class="kt">AVAudioPlayer</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="n">data</span><span class="p">)</span>
-    <span class="n">audioPlayer</span><span class="o">.</span><span class="nf">prepareToPlay</span><span class="p">()</span>
-    <span class="n">audioPlayer</span><span class="o">.</span><span class="nf">play</span><span class="p">()</span>
+<span class="k">let</span> <span class="nv">text</span> <span class="o">=</span> <span class="s">"your-text"</span>
+<span class="n">textToSpeech</span><span class="o">.</span><span class="nf">synthesize</span><span class="p">(</span><span class="nv">text</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span> <span class="nv">accept</span><span class="p">:</span> <span class="s">"audio/wav"</span><span class="p">)</span> <span class="p">{</span> <span class="n">response</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">error</span> <span class="o">=</span> <span class="n">error</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">guard</span> <span class="k">let</span> <span class="nv">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">?</span><span class="o">.</span><span class="n">result</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Failed to synthesize the text"</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="p">}</span>
+    <span class="k">do</span> <span class="p">{</span>
+        <span class="n">audioPlayer</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">AVAudioPlayer</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="n">data</span><span class="p">)</span>
+        <span class="n">audioPlayer</span><span class="o">.</span><span class="nf">prepareToPlay</span><span class="p">()</span>
+        <span class="n">audioPlayer</span><span class="o">.</span><span class="nf">play</span><span class="p">()</span>
+    <span class="p">}</span>
+    <span class="k">catch</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
 
 <p>The Text to Speech service supports a number of <a href="https://console.bluemix.net/docs/services/text-to-speech/http.html#voices">voices</a> for different genders, languages, and dialects. The following example demonstrates how to use the Text to Speech service with a particular voice:</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">TextToSpeechV1</span>
 
-<span class="k">let</span> <span class="nv">username</span> <span class="o">=</span> <span class="s">"your-username-here"</span>
-<span class="k">let</span> <span class="nv">password</span> <span class="o">=</span> <span class="s">"your-password-here"</span>
-<span class="k">let</span> <span class="nv">textToSpeech</span> <span class="o">=</span> <span class="kt">TextToSpeech</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="n">password</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">apiKey</span> <span class="o">=</span> <span class="s">"your-api-key"</span>
+<span class="k">let</span> <span class="nv">textToSpeech</span> <span class="o">=</span> <span class="kt">TextToSpeech</span><span class="p">(</span><span class="nv">apiKey</span><span class="p">:</span> <span class="n">apiKey</span><span class="p">)</span>
 
 <span class="c1">// The AVAudioPlayer object will stop playing if it falls out-of-scope.</span>
 <span class="c1">// Therefore, to prevent it from falling out-of-scope we declare it as</span>
 <span class="c1">// a property outside the completion handler where it will be played.</span>
 <span class="k">var</span> <span class="nv">audioPlayer</span> <span class="o">=</span> <span class="kt">AVAudioPlayer</span><span class="p">()</span>
 
-<span class="k">let</span> <span class="nv">text</span> <span class="o">=</span> <span class="s">"your-text-here"</span>
-<span class="k">let</span> <span class="nv">accept</span> <span class="o">=</span> <span class="s">"audio/wav"</span>
-<span class="k">let</span> <span class="nv">voice</span> <span class="o">=</span> <span class="s">"en-US_LisaVoice"</span>
-<span class="k">let</span> <span class="nv">failure</span> <span class="o">=</span> <span class="p">{</span> <span class="p">(</span><span class="nv">error</span><span class="p">:</span> <span class="kt">Error</span><span class="p">)</span> <span class="k">in</span> <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">}</span>
-<span class="n">textToSpeech</span><span class="o">.</span><span class="nf">synthesize</span><span class="p">(</span><span class="nv">text</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span> <span class="nv">accept</span><span class="p">:</span> <span class="n">accept</span><span class="p">,</span> <span class="nv">voice</span><span class="p">:</span> <span class="n">voice</span><span class="p">,</span> <span class="nv">failure</span><span class="p">:</span> <span class="n">failure</span><span class="p">)</span> <span class="p">{</span> <span class="n">data</span> <span class="k">in</span>
-    <span class="n">audioPlayer</span> <span class="o">=</span> <span class="k">try!</span> <span class="kt">AVAudioPlayer</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="n">data</span><span class="p">)</span>
-    <span class="n">audioPlayer</span><span class="o">.</span><span class="nf">prepareToPlay</span><span class="p">()</span>
-    <span class="n">audioPlayer</span><span class="o">.</span><span class="nf">play</span><span class="p">()</span>
+<span class="k">let</span> <span class="nv">text</span> <span class="o">=</span> <span class="s">"your-text"</span>
+<span class="n">textToSpeech</span><span class="o">.</span><span class="nf">synthesize</span><span class="p">(</span>
+    <span class="nv">text</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span>
+    <span class="nv">accept</span><span class="p">:</span> <span class="s">"audio/wav"</span><span class="p">,</span>
+    <span class="nv">voice</span><span class="p">:</span> <span class="s">"en-US_LisaVoice"</span><span class="p">)</span> <span class="p">{</span> <span class="n">response</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
+
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">error</span> <span class="o">=</span> <span class="n">error</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">guard</span> <span class="k">let</span> <span class="nv">data</span> <span class="o">=</span> <span class="n">response</span><span class="p">?</span><span class="o">.</span><span class="n">result</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="s">"Failed to synthesize the text"</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="p">}</span>
+    <span class="k">do</span> <span class="p">{</span>
+        <span class="n">audioPlayer</span> <span class="o">=</span> <span class="k">try</span> <span class="kt">AVAudioPlayer</span><span class="p">(</span><span class="nv">data</span><span class="p">:</span> <span class="n">data</span><span class="p">)</span>
+        <span class="n">audioPlayer</span><span class="o">.</span><span class="nf">prepareToPlay</span><span class="p">()</span>
+        <span class="n">audioPlayer</span><span class="o">.</span><span class="nf">play</span><span class="p">()</span>
+    <span class="p">}</span>
+    <span class="k">catch</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
 
@@ -148,7 +180,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-11-12)</p>
+          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-12-06)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

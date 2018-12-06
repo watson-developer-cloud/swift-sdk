@@ -2,7 +2,7 @@
   "warnings": [
     {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/LanguageTranslatorV3/LanguageTranslator.swift",
-      "line": 81,
+      "line": 80,
       "symbol": "LanguageTranslator.accessToken(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -75,6 +75,20 @@
       "line": 37,
       "symbol": "TranslationModel.Status.error",
       "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 20,
+      "symbol": "WatsonResponse",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 21,
+      "symbol": "WatsonError",
+      "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     }
   ],

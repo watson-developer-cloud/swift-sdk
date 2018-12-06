@@ -73,6 +73,17 @@
               </li>
             </ul>
           </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:27NaturalLanguageClassifierV111WatsonErrora">WatsonError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:27NaturalLanguageClassifierV114WatsonResponsea">WatsonResponse</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <article class="main-content">
@@ -339,9 +350,9 @@ the service can apply those classes to new inputs.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:27NaturalLanguageClassifierV10abC0C8classify12classifierID4text7headers7failure7successySS_SSSDyS2SGSgys5Error_pcSgyAA14ClassificationVctF"></a>
-                    <a name="//apple_ref/swift/Method/classify(classifierID:text:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:27NaturalLanguageClassifierV10abC0C8classify12classifierID4text7headers7failure7successySS_SSSDyS2SGSgys5Error_pcSgyAA14ClassificationVctF">classify(classifierID:text:headers:failure:success:)</a>
+                    <a name="/s:27NaturalLanguageClassifierV10abC0C8classify12classifierID4text7headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0L8ResponseVyAA14ClassificationVGSg_AK0L5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/classify(classifierID:text:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:27NaturalLanguageClassifierV10abC0C8classify12classifierID4text7headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0L8ResponseVyAA14ClassificationVGSg_AK0L5ErrorOSgtctF">classify(classifierID:text:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -363,8 +374,7 @@ classify text.</p>
     <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Classification.html">Classification</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:27NaturalLanguageClassifierV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Classification.html">Classification</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:27NaturalLanguageClassifierV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -411,24 +421,12 @@ classify text.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -441,9 +439,9 @@ classify text.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:27NaturalLanguageClassifierV10abC0C18classifyCollection12classifierID10collection7headers7failure7successySS_SayAA13ClassifyInputVGSDyS2SGSgys5Error_pcSgyAA014ClassificationF0VctF"></a>
-                    <a name="//apple_ref/swift/Method/classifyCollection(classifierID:collection:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:27NaturalLanguageClassifierV10abC0C18classifyCollection12classifierID10collection7headers7failure7successySS_SayAA13ClassifyInputVGSDyS2SGSgys5Error_pcSgyAA014ClassificationF0VctF">classifyCollection(classifierID:collection:headers:failure:success:)</a>
+                    <a name="/s:27NaturalLanguageClassifierV10abC0C18classifyCollection12classifierID10collection7headers17completionHandlerySS_SayAA13ClassifyInputVGSDyS2SGSgy7RestKit0O8ResponseVyAA014ClassificationF0VGSg_AN0O5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/classifyCollection(classifierID:collection:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:27NaturalLanguageClassifierV10abC0C18classifyCollection12classifierID10collection7headers17completionHandlerySS_SayAA13ClassifyInputVGSDyS2SGSgy7RestKit0O8ResponseVyAA014ClassificationF0VGSg_AN0O5ErrorOSgtctF">classifyCollection(classifierID:collection:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -466,8 +464,7 @@ Note that classifying Japanese texts is a beta feature.</p>
     <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">collection</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/ClassifyInput.html">ClassifyInput</a></span><span class="p">],</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ClassificationCollection.html">ClassificationCollection</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:27NaturalLanguageClassifierV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/ClassificationCollection.html">ClassificationCollection</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:27NaturalLanguageClassifierV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -514,24 +511,12 @@ Note that classifying Japanese texts is a beta feature.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -544,9 +529,9 @@ Note that classifying Japanese texts is a beta feature.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:27NaturalLanguageClassifierV10abC0C06createC08metadata12trainingData7headers7failure7successy10Foundation3URLV_ALSDyS2SGSgys5Error_pcSgyAA0C0VctF"></a>
-                    <a name="//apple_ref/swift/Method/createClassifier(metadata:trainingData:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:27NaturalLanguageClassifierV10abC0C06createC08metadata12trainingData7headers7failure7successy10Foundation3URLV_ALSDyS2SGSgys5Error_pcSgyAA0C0VctF">createClassifier(metadata:trainingData:headers:failure:success:)</a>
+                    <a name="/s:27NaturalLanguageClassifierV10abC0C06createC08metadata12trainingData7headers17completionHandlery10Foundation3URLV_AKSDyS2SGSgy7RestKit0N8ResponseVyAA0C0VGSg_AN0N5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/createClassifier(metadata:trainingData:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:27NaturalLanguageClassifierV10abC0C06createC08metadata12trainingData7headers17completionHandlery10Foundation3URLV_AKSDyS2SGSgy7RestKit0N8ResponseVyAA0C0VGSg_AN0N5ErrorOSgtctF">createClassifier(metadata:trainingData:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -567,8 +552,7 @@ Note that classifying Japanese texts is a beta feature.</p>
     <span class="nv">metadata</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
     <span class="nv">trainingData</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Classifier.html">Classifier</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:27NaturalLanguageClassifierV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Classifier.html">Classifier</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:27NaturalLanguageClassifierV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -621,24 +605,12 @@ preparation</a>.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -651,9 +623,9 @@ preparation</a>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:27NaturalLanguageClassifierV10abC0C15listClassifiers7headers7failure7successySDyS2SGSg_ys5Error_pcSgyAA0C4ListVctF"></a>
-                    <a name="//apple_ref/swift/Method/listClassifiers(headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:27NaturalLanguageClassifierV10abC0C15listClassifiers7headers7failure7successySDyS2SGSg_ys5Error_pcSgyAA0C4ListVctF">listClassifiers(headers:failure:success:)</a>
+                    <a name="/s:27NaturalLanguageClassifierV10abC0C15listClassifiers7headers17completionHandlerySDyS2SGSg_y7RestKit0J8ResponseVyAA0C4ListVGSg_AI0J5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/listClassifiers(headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:27NaturalLanguageClassifierV10abC0C15listClassifiers7headers17completionHandlerySDyS2SGSg_y7RestKit0J8ResponseVyAA0C4ListVGSg_AI0J5ErrorOSgtctF">listClassifiers(headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -672,8 +644,7 @@ preparation</a>.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listClassifiers</span><span class="p">(</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/ClassifierList.html">ClassifierList</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:27NaturalLanguageClassifierV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/ClassifierList.html">ClassifierList</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:27NaturalLanguageClassifierV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -696,24 +667,12 @@ preparation</a>.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -726,9 +685,9 @@ preparation</a>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:27NaturalLanguageClassifierV10abC0C03getC012classifierID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyAA0C0VctF"></a>
-                    <a name="//apple_ref/swift/Method/getClassifier(classifierID:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:27NaturalLanguageClassifierV10abC0C03getC012classifierID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyAA0C0VctF">getClassifier(classifierID:headers:failure:success:)</a>
+                    <a name="/s:27NaturalLanguageClassifierV10abC0C03getC012classifierID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0K8ResponseVyAA0C0VGSg_AJ0K5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/getClassifier(classifierID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:27NaturalLanguageClassifierV10abC0C03getC012classifierID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0K8ResponseVyAA0C0VGSg_AJ0K5ErrorOSgtctF">getClassifier(classifierID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -748,8 +707,7 @@ preparation</a>.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getClassifier</span><span class="p">(</span>
     <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Classifier.html">Classifier</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:27NaturalLanguageClassifierV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Classifier.html">Classifier</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:27NaturalLanguageClassifierV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -784,24 +742,12 @@ preparation</a>.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -814,9 +760,9 @@ preparation</a>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:27NaturalLanguageClassifierV10abC0C06deleteC012classifierID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyyctF"></a>
-                    <a name="//apple_ref/swift/Method/deleteClassifier(classifierID:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:27NaturalLanguageClassifierV10abC0C06deleteC012classifierID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyyctF">deleteClassifier(classifierID:headers:failure:success:)</a>
+                    <a name="/s:27NaturalLanguageClassifierV10abC0C06deleteC012classifierID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0K8ResponseVyytGSg_AJ0K5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/deleteClassifier(classifierID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:27NaturalLanguageClassifierV10abC0C06deleteC012classifierID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0K8ResponseVyytGSg_AJ0K5ErrorOSgtctF">deleteClassifier(classifierID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -834,8 +780,7 @@ preparation</a>.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteClassifier</span><span class="p">(</span>
     <span class="nv">classifierID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:27NaturalLanguageClassifierV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:27NaturalLanguageClassifierV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -870,24 +815,12 @@ preparation</a>.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -902,7 +835,7 @@ preparation</a>.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-11-12)</p>
+          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-12-06)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

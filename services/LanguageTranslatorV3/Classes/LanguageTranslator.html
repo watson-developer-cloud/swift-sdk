@@ -63,9 +63,6 @@
                 <a href="../Structs/IdentifiedLanguages.html">IdentifiedLanguages</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/TranslateRequest.html">TranslateRequest</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/Translation.html">Translation</a>
               </li>
               <li class="nav-group-task">
@@ -79,6 +76,17 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/TranslationResult.html">TranslationResult</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:20LanguageTranslatorV311WatsonErrora">WatsonError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:20LanguageTranslatorV314WatsonResponsea">WatsonResponse</a>
               </li>
             </ul>
           </li>
@@ -388,9 +396,9 @@ in <q>YYYY-MM-DD</q> format.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20LanguageTranslatorV30aB0C9translate7request7headers7failure7successyAA16TranslateRequestV_SDyS2SGSgys5Error_pcSgyAA17TranslationResultVctF"></a>
-                    <a name="//apple_ref/swift/Method/translate(request:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV30aB0C9translate7request7headers7failure7successyAA16TranslateRequestV_SDyS2SGSgys5Error_pcSgyAA17TranslationResultVctF">translate(request:headers:failure:success:)</a>
+                    <a name="/s:20LanguageTranslatorV30aB0C9translate4text7modelID6source6target7headers17completionHandlerySaySSG_SSSgA2LSDyS2SGSgy7RestKit0M8ResponseVyAA17TranslationResultVGSg_AO0M5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/translate(text:modelID:source:target:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:20LanguageTranslatorV30aB0C9translate4text7modelID6source6target7headers17completionHandlerySaySSG_SSSgA2LSDyS2SGSgy7RestKit0M8ResponseVyAA17TranslationResultVGSg_AO0M5ErrorOSgtctF">translate(text:modelID:source:target:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -408,10 +416,12 @@ in <q>YYYY-MM-DD</q> format.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">translate</span><span class="p">(</span>
-    <span class="nv">request</span><span class="p">:</span> <span class="kt"><a href="../Structs/TranslateRequest.html">TranslateRequest</a></span><span class="p">,</span>
+    <span class="nv">text</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">],</span>
+    <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">source</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">target</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/TranslationResult.html">TranslationResult</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:20LanguageTranslatorV314WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/TranslationResult.html">TranslationResult</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:20LanguageTranslatorV311WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -422,13 +432,54 @@ in <q>YYYY-MM-DD</q> format.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>request</em>
+                                <em>text</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The translate request containing the text, and either a model ID or source and target
-language pair.</p>
+                                  <p>Input text in UTF-8 encoding. Multiple entries will result in multiple translations in the
+response.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>modelID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Model ID of the translation model to use. If this is specified, the <strong>source</strong> and
+<strong>target</strong> parameters will be ignored. The method requires either a model ID or both the <strong>source</strong> and
+<strong>target</strong> parameters.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>source</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Language code of the source text language. Use with <code>target</code> as an alternative way to select
+a translation model. When <code>source</code> and <code>target</code> are set, and a model ID is not set, the system chooses a default
+model for the language pair (usually the model based on the news domain).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>target</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Language code of the translation target language. Use with source as an alternative way to
+select a translation model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -447,24 +498,12 @@ language pair.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -477,9 +516,9 @@ language pair.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20LanguageTranslatorV30aB0C25listIdentifiableLanguages7headers7failure7successySDyS2SGSg_ys5Error_pcSgyAA0eF0VctF"></a>
-                    <a name="//apple_ref/swift/Method/listIdentifiableLanguages(headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV30aB0C25listIdentifiableLanguages7headers7failure7successySDyS2SGSg_ys5Error_pcSgyAA0eF0VctF">listIdentifiableLanguages(headers:failure:success:)</a>
+                    <a name="/s:20LanguageTranslatorV30aB0C25listIdentifiableLanguages7headers17completionHandlerySDyS2SGSg_y7RestKit0J8ResponseVyAA0eF0VGSg_AI0J5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/listIdentifiableLanguages(headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:20LanguageTranslatorV30aB0C25listIdentifiableLanguages7headers17completionHandlerySDyS2SGSg_y7RestKit0J8ResponseVyAA0eF0VGSg_AI0J5ErrorOSgtctF">listIdentifiableLanguages(headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -499,8 +538,7 @@ for Spanish) and name of each language.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listIdentifiableLanguages</span><span class="p">(</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/IdentifiableLanguages.html">IdentifiableLanguages</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:20LanguageTranslatorV314WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/IdentifiableLanguages.html">IdentifiableLanguages</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:20LanguageTranslatorV311WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -523,24 +561,12 @@ for Spanish) and name of each language.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -553,9 +579,9 @@ for Spanish) and name of each language.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20LanguageTranslatorV30aB0C8identify4text7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyAA19IdentifiedLanguagesVctF"></a>
-                    <a name="//apple_ref/swift/Method/identify(text:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV30aB0C8identify4text7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyAA19IdentifiedLanguagesVctF">identify(text:headers:failure:success:)</a>
+                    <a name="/s:20LanguageTranslatorV30aB0C8identify4text7headers17completionHandlerySS_SDyS2SGSgy7RestKit0I8ResponseVyAA19IdentifiedLanguagesVGSg_AJ0I5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/identify(text:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:20LanguageTranslatorV30aB0C8identify4text7headers17completionHandlerySS_SDyS2SGSgy7RestKit0I8ResponseVyAA19IdentifiedLanguagesVGSg_AJ0I5ErrorOSgtctF">identify(text:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -575,8 +601,7 @@ for Spanish) and name of each language.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">identify</span><span class="p">(</span>
     <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/IdentifiedLanguages.html">IdentifiedLanguages</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:20LanguageTranslatorV314WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/IdentifiedLanguages.html">IdentifiedLanguages</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:20LanguageTranslatorV311WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -611,24 +636,12 @@ for Spanish) and name of each language.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -641,9 +654,9 @@ for Spanish) and name of each language.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20LanguageTranslatorV30aB0C10listModels6source6target07defaultE07headers7failure7successySSSg_AKSbSgSDyS2SGSgys5Error_pcSgyAA011TranslationE0VctF"></a>
-                    <a name="//apple_ref/swift/Method/listModels(source:target:defaultModels:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV30aB0C10listModels6source6target07defaultE07headers7failure7successySSSg_AKSbSgSDyS2SGSgys5Error_pcSgyAA011TranslationE0VctF">listModels(source:target:defaultModels:headers:failure:success:)</a>
+                    <a name="/s:20LanguageTranslatorV30aB0C10listModels6source6target07defaultE07headers17completionHandlerySSSg_AJSbSgSDyS2SGSgy7RestKit0L8ResponseVyAA011TranslationE0VGSg_AN0L5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/listModels(source:target:defaultModels:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:20LanguageTranslatorV30aB0C10listModels6source6target07defaultE07headers17completionHandlerySSSg_AJSbSgSDyS2SGSgy7RestKit0L8ResponseVyAA011TranslationE0VGSg_AN0L5ErrorOSgtctF">listModels(source:target:defaultModels:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -665,8 +678,7 @@ for Spanish) and name of each language.</p>
     <span class="nv">target</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="n">defaultModels</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/TranslationModels.html">TranslationModels</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:20LanguageTranslatorV314WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/TranslationModels.html">TranslationModels</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:20LanguageTranslatorV311WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -728,24 +740,12 @@ base model.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -758,9 +758,9 @@ base model.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20LanguageTranslatorV30aB0C11createModel04baseE2ID4name14forcedGlossary14parallelCorpus7headers7failure7successySS_SSSg10Foundation3URLVSgAPSDyS2SGSgys5Error_pcSgyAA011TranslationE0VctF"></a>
-                    <a name="//apple_ref/swift/Method/createModel(baseModelID:name:forcedGlossary:parallelCorpus:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV30aB0C11createModel04baseE2ID4name14forcedGlossary14parallelCorpus7headers7failure7successySS_SSSg10Foundation3URLVSgAPSDyS2SGSgys5Error_pcSgyAA011TranslationE0VctF">createModel(baseModelID:name:forcedGlossary:parallelCorpus:headers:failure:success:)</a>
+                    <a name="/s:20LanguageTranslatorV30aB0C11createModel04baseE2ID4name14forcedGlossary14parallelCorpus7headers17completionHandlerySS_SSSg10Foundation3URLVSgAOSDyS2SGSgy7RestKit0R8ResponseVyAA011TranslationE0VGSg_AR0R5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/createModel(baseModelID:name:forcedGlossary:parallelCorpus:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:20LanguageTranslatorV30aB0C11createModel04baseE2ID4name14forcedGlossary14parallelCorpus7headers17completionHandlerySS_SSSg10Foundation3URLVSgAOSDyS2SGSgy7RestKit0R8ResponseVyAA011TranslationE0VGSg_AR0R5ErrorOSgtctF">createModel(baseModelID:name:forcedGlossary:parallelCorpus:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -792,8 +792,7 @@ You can have a <b>maxium of 10 custom models per language pair</b>.</p>
     <span class="nv">forcedGlossary</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">parallelCorpus</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/TranslationModel.html">TranslationModel</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:20LanguageTranslatorV314WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/TranslationModel.html">TranslationModel</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:20LanguageTranslatorV311WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -872,24 +871,12 @@ must contain at least 5,000 parallel sentences to train successfully.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -902,9 +889,9 @@ must contain at least 5,000 parallel sentences to train successfully.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20LanguageTranslatorV30aB0C11deleteModel7modelID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyAA06DeleteE6ResultVctF"></a>
-                    <a name="//apple_ref/swift/Method/deleteModel(modelID:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV30aB0C11deleteModel7modelID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyAA06DeleteE6ResultVctF">deleteModel(modelID:headers:failure:success:)</a>
+                    <a name="/s:20LanguageTranslatorV30aB0C11deleteModel7modelID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0K8ResponseVyAA06DeleteE6ResultVGSg_AJ0K5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/deleteModel(modelID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:20LanguageTranslatorV30aB0C11deleteModel7modelID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0K8ResponseVyAA06DeleteE6ResultVGSg_AJ0K5ErrorOSgtctF">deleteModel(modelID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -924,8 +911,7 @@ must contain at least 5,000 parallel sentences to train successfully.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteModel</span><span class="p">(</span>
     <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/DeleteModelResult.html">DeleteModelResult</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:20LanguageTranslatorV314WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/DeleteModelResult.html">DeleteModelResult</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:20LanguageTranslatorV311WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -960,24 +946,12 @@ must contain at least 5,000 parallel sentences to train successfully.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -990,9 +964,9 @@ must contain at least 5,000 parallel sentences to train successfully.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:20LanguageTranslatorV30aB0C8getModel7modelID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyAA011TranslationE0VctF"></a>
-                    <a name="//apple_ref/swift/Method/getModel(modelID:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:20LanguageTranslatorV30aB0C8getModel7modelID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyAA011TranslationE0VctF">getModel(modelID:headers:failure:success:)</a>
+                    <a name="/s:20LanguageTranslatorV30aB0C8getModel7modelID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0K8ResponseVyAA011TranslationE0VGSg_AJ0K5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/getModel(modelID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:20LanguageTranslatorV30aB0C8getModel7modelID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0K8ResponseVyAA011TranslationE0VGSg_AJ0K5ErrorOSgtctF">getModel(modelID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1013,8 +987,7 @@ the status of your customization request. A successfully completed training will
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getModel</span><span class="p">(</span>
     <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/TranslationModel.html">TranslationModel</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:20LanguageTranslatorV314WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/TranslationModel.html">TranslationModel</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:20LanguageTranslatorV311WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1049,24 +1022,12 @@ the status of your customization request. A successfully completed training will
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -1081,7 +1042,7 @@ the status of your customization request. A successfully completed training will
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-11-12)</p>
+          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-12-06)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

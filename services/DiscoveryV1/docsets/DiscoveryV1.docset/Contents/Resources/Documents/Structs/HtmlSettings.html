@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>HtmlSettings Structure Reference</title>
+    <title>HTMLSettings Structure Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset='utf-8'>
@@ -10,8 +10,8 @@
     
   </head>
   <body>
-    <a name="//apple_ref/swift/Struct/HtmlSettings" class="dashAnchor"></a>
-    <a title="HtmlSettings Structure Reference"></a>
+    <a name="//apple_ref/swift/Struct/HTMLSettings" class="dashAnchor"></a>
+    <a title="HTMLSettings Structure Reference"></a>
     <header>
       <div class="content-wrapper">
         <p><a href="../index.html">DiscoveryV1 Docs</a></p>
@@ -22,7 +22,7 @@
       <p id="breadcrumbs">
         <a href="../index.html">DiscoveryV1 Reference</a>
         <img id="carat" src="../img/carat.png" />
-        HtmlSettings Structure Reference
+        HTMLSettings Structure Reference
       </p>
     </div>
     <div class="content-wrapper">
@@ -80,16 +80,10 @@
                 <a href="../Structs/Conversions.html">Conversions</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/CreateCollectionRequest.html">CreateCollectionRequest</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/CreateCollectionRequest/Language.html">– Language</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/CreateEventResponse.html">CreateEventResponse</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/CreateEventResponse/ModelType.html">– ModelType</a>
+                <a href="../Structs/CreateEventResponse/TypeEnum.html">– TypeEnum</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/CredentialDetails.html">CredentialDetails</a>
@@ -209,10 +203,10 @@
                 <a href="../Structs/GenericQueryAggregation.html">GenericQueryAggregation</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/Histogram.html">Histogram</a>
+                <a href="../Structs/HTMLSettings.html">HTMLSettings</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/HtmlSettings.html">HtmlSettings</a>
+                <a href="../Structs/Histogram.html">Histogram</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/IndexCapacity.html">IndexCapacity</a>
@@ -249,9 +243,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/LogQueryResponseResultDocumentsResult.html">LogQueryResponseResultDocumentsResult</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/MemoryUsage.html">MemoryUsage</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/MetricAggregation.html">MetricAggregation</a>
@@ -311,13 +302,10 @@
                 <a href="../Structs/Notice/Severity.html">– Severity</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/PdfHeadingDetection.html">PdfHeadingDetection</a>
+                <a href="../Structs/PDFHeadingDetection.html">PDFHeadingDetection</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/PdfSettings.html">PdfSettings</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/QueryEntities.html">QueryEntities</a>
+                <a href="../Structs/PDFSettings.html">PDFSettings</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/QueryEntitiesContext.html">QueryEntitiesContext</a>
@@ -351,12 +339,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/QueryPassages.html">QueryPassages</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/QueryRelations.html">QueryRelations</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/QueryRelations/Sort.html">– Sort</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/QueryRelationsArgument.html">QueryRelationsArgument</a>
@@ -395,7 +377,7 @@
                 <a href="../Structs/Source.html">Source</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/Source/ModelType.html">– ModelType</a>
+                <a href="../Structs/Source/TypeEnum.html">– TypeEnum</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/SourceOptions.html">SourceOptions</a>
@@ -474,15 +456,26 @@
               </li>
             </ul>
           </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11DiscoveryV111WatsonErrora">WatsonError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11DiscoveryV114WatsonResponsea">WatsonResponse</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <article class="main-content">
         <section>
           <section class="section">
-            <h1>HtmlSettings</h1>
+            <h1>HTMLSettings</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">HtmlSettings</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">HTMLSettings</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                 </div>
               </div>
@@ -495,9 +488,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV112HtmlSettingsV21excludeTagsCompletelySaySSGSgvp"></a>
+                    <a name="/s:11DiscoveryV112HTMLSettingsV21excludeTagsCompletelySaySSGSgvp"></a>
                     <a name="//apple_ref/swift/Property/excludeTagsCompletely" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV112HtmlSettingsV21excludeTagsCompletelySaySSGSgvp">excludeTagsCompletely</a>
+                    <a class="token" href="#/s:11DiscoveryV112HTMLSettingsV21excludeTagsCompletelySaySSGSgvp">excludeTagsCompletely</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -522,9 +515,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV112HtmlSettingsV22excludeTagsKeepContentSaySSGSgvp"></a>
+                    <a name="/s:11DiscoveryV112HTMLSettingsV22excludeTagsKeepContentSaySSGSgvp"></a>
                     <a name="//apple_ref/swift/Property/excludeTagsKeepContent" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV112HtmlSettingsV22excludeTagsKeepContentSaySSGSgvp">excludeTagsKeepContent</a>
+                    <a class="token" href="#/s:11DiscoveryV112HTMLSettingsV22excludeTagsKeepContentSaySSGSgvp">excludeTagsKeepContent</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -549,9 +542,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV112HtmlSettingsV11keepContentAA13XPathPatternsVSgvp"></a>
+                    <a name="/s:11DiscoveryV112HTMLSettingsV11keepContentAA13XPathPatternsVSgvp"></a>
                     <a name="//apple_ref/swift/Property/keepContent" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV112HtmlSettingsV11keepContentAA13XPathPatternsVSgvp">keepContent</a>
+                    <a class="token" href="#/s:11DiscoveryV112HTMLSettingsV11keepContentAA13XPathPatternsVSgvp">keepContent</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -576,9 +569,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV112HtmlSettingsV14excludeContentAA13XPathPatternsVSgvp"></a>
+                    <a name="/s:11DiscoveryV112HTMLSettingsV14excludeContentAA13XPathPatternsVSgvp"></a>
                     <a name="//apple_ref/swift/Property/excludeContent" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV112HtmlSettingsV14excludeContentAA13XPathPatternsVSgvp">excludeContent</a>
+                    <a class="token" href="#/s:11DiscoveryV112HTMLSettingsV14excludeContentAA13XPathPatternsVSgvp">excludeContent</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -603,9 +596,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV112HtmlSettingsV17keepTagAttributesSaySSGSgvp"></a>
+                    <a name="/s:11DiscoveryV112HTMLSettingsV17keepTagAttributesSaySSGSgvp"></a>
                     <a name="//apple_ref/swift/Property/keepTagAttributes" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV112HtmlSettingsV17keepTagAttributesSaySSGSgvp">keepTagAttributes</a>
+                    <a class="token" href="#/s:11DiscoveryV112HTMLSettingsV17keepTagAttributesSaySSGSgvp">keepTagAttributes</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -630,9 +623,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV112HtmlSettingsV20excludeTagAttributesSaySSGSgvp"></a>
+                    <a name="/s:11DiscoveryV112HTMLSettingsV20excludeTagAttributesSaySSGSgvp"></a>
                     <a name="//apple_ref/swift/Property/excludeTagAttributes" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV112HtmlSettingsV20excludeTagAttributesSaySSGSgvp">excludeTagAttributes</a>
+                    <a class="token" href="#/s:11DiscoveryV112HTMLSettingsV20excludeTagAttributesSaySSGSgvp">excludeTagAttributes</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -657,9 +650,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV112HtmlSettingsV21excludeTagsCompletely0eF11KeepContent04keepI00eI00J13TagAttributes0ekL0ACSaySSGSg_AkA13XPathPatternsVSgAn2Ktcfc"></a>
+                    <a name="/s:11DiscoveryV112HTMLSettingsV21excludeTagsCompletely0dE11KeepContent04keepH00dH00I13TagAttributes0djK0ACSaySSGSg_AkA13XPathPatternsVSgAn2Ktcfc"></a>
                     <a name="//apple_ref/swift/Method/init(excludeTagsCompletely:excludeTagsKeepContent:keepContent:excludeContent:keepTagAttributes:excludeTagAttributes:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV112HtmlSettingsV21excludeTagsCompletely0eF11KeepContent04keepI00eI00J13TagAttributes0ekL0ACSaySSGSg_AkA13XPathPatternsVSgAn2Ktcfc">init(excludeTagsCompletely:excludeTagsKeepContent:keepContent:excludeContent:keepTagAttributes:excludeTagAttributes:)</a>
+                    <a class="token" href="#/s:11DiscoveryV112HTMLSettingsV21excludeTagsCompletely0dE11KeepContent04keepH00dH00I13TagAttributes0djK0ACSaySSGSg_AkA13XPathPatternsVSgAn2Ktcfc">init(excludeTagsCompletely:excludeTagsKeepContent:keepContent:excludeContent:keepTagAttributes:excludeTagAttributes:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -667,7 +660,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Initialize a <code>HtmlSettings</code> with member variables.</p>
+                        <p>Initialize a <code>HTMLSettings</code> with member variables.</p>
 
                       </div>
                       <div class="declaration">
@@ -766,7 +759,7 @@
                       </div>
                       <div>
                         <h4>Return Value</h4>
-                        <p>An initialized <code>HtmlSettings</code>.</p>
+                        <p>An initialized <code>HTMLSettings</code>.</p>
                       </div>
                     </section>
                   </div>
@@ -776,7 +769,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-11-12)</p>
+          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-12-06)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

@@ -130,6 +130,17 @@
               </li>
             </ul>
           </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11AssistantV211WatsonErrora">WatsonError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11AssistantV214WatsonResponsea">WatsonResponse</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <article class="main-content">
@@ -434,9 +445,9 @@ in <q>YYYY-MM-DD</q> format.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV20A0C13createSession11assistantID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyAA0D8ResponseVctF"></a>
-                    <a name="//apple_ref/swift/Method/createSession(assistantID:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV20A0C13createSession11assistantID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyAA0D8ResponseVctF">createSession(assistantID:headers:failure:success:)</a>
+                    <a name="/s:11AssistantV20A0C13createSession11assistantID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0J8ResponseVyAA0dL0VGSg_AJ0J5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/createSession(assistantID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV20A0C13createSession11assistantID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0J8ResponseVyAA0dL0VGSg_AJ0J5ErrorOSgtctF">createSession(assistantID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -457,8 +468,7 @@ state of the conversation.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createSession</span><span class="p">(</span>
     <span class="nv">assistantID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/SessionResponse.html">SessionResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11AssistantV214WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SessionResponse.html">SessionResponse</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11AssistantV211WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -496,24 +506,12 @@ state of the conversation.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -526,9 +524,9 @@ state of the conversation.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV20A0C13deleteSession11assistantID07sessionF07headers7failure7successySS_SSSDyS2SGSgys5Error_pcSgyyctF"></a>
-                    <a name="//apple_ref/swift/Method/deleteSession(assistantID:sessionID:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV20A0C13deleteSession11assistantID07sessionF07headers7failure7successySS_SSSDyS2SGSgys5Error_pcSgyyctF">deleteSession(assistantID:sessionID:headers:failure:success:)</a>
+                    <a name="/s:11AssistantV20A0C13deleteSession11assistantID07sessionF07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0K8ResponseVyytGSg_AK0K5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/deleteSession(assistantID:sessionID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV20A0C13deleteSession11assistantID07sessionF07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0K8ResponseVyytGSg_AK0K5ErrorOSgtctF">deleteSession(assistantID:sessionID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -549,8 +547,7 @@ state of the conversation.</p>
     <span class="nv">assistantID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">sessionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11AssistantV214WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11AssistantV211WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -600,24 +597,12 @@ state of the conversation.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -630,9 +615,9 @@ state of the conversation.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV20A0C7message11assistantID07sessionE05input7context7headers7failure7successySS_SSAA12MessageInputVSgAA0L7ContextVSgSDyS2SGSgys5Error_pcSgyAA0L8ResponseVctF"></a>
-                    <a name="//apple_ref/swift/Method/message(assistantID:sessionID:input:context:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV20A0C7message11assistantID07sessionE05input7context7headers7failure7successySS_SSAA12MessageInputVSgAA0L7ContextVSgSDyS2SGSgys5Error_pcSgyAA0L8ResponseVctF">message(assistantID:sessionID:input:context:headers:failure:success:)</a>
+                    <a name="/s:11AssistantV20A0C7message11assistantID07sessionE05input7context7headers17completionHandlerySS_SSAA12MessageInputVSgAA0L7ContextVSgSDyS2SGSgy7RestKit0O8ResponseVyAA0lQ0VGSg_AS0O5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/message(assistantID:sessionID:input:context:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV20A0C7message11assistantID07sessionE05input7context7headers17completionHandlerySS_SSAA12MessageInputVSgAA0L7ContextVSgSDyS2SGSgy7RestKit0O8ResponseVyAA0lQ0VGSg_AS0O5ErrorOSgtctF">message(assistantID:sessionID:input:context:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -656,8 +641,7 @@ There is no rate limit for this operation.</p>
     <span class="nv">input</span><span class="p">:</span> <span class="kt"><a href="../Structs/MessageInput.html">MessageInput</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">context</span><span class="p">:</span> <span class="kt"><a href="../Structs/MessageContext.html">MessageContext</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/MessageResponse.html">MessageResponse</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11AssistantV214WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/MessageResponse.html">MessageResponse</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11AssistantV211WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -700,7 +684,7 @@ There is no rate limit for this operation.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>An input object that includes the input text.</p>
+                                  <p>The user input.</p>
                                 </div>
                               </td>
                             </tr>
@@ -731,24 +715,12 @@ There is no rate limit for this operation.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -763,7 +735,7 @@ There is no rate limit for this operation.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-11-12)</p>
+          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-12-06)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

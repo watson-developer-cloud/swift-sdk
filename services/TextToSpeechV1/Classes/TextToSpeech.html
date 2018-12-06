@@ -82,6 +82,17 @@
               </li>
             </ul>
           </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <article class="main-content">
@@ -358,9 +369,9 @@ Phonetic Representation (SPR).</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C10listVoices7headers7failure7successySDyS2SGSg_ys5Error_pcSgyAA0F0VctF"></a>
-                    <a name="//apple_ref/swift/Method/listVoices(headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C10listVoices7headers7failure7successySDyS2SGSg_ys5Error_pcSgyAA0F0VctF">listVoices(headers:failure:success:)</a>
+                    <a name="/s:14TextToSpeechV10abC0C10listVoices7headers17completionHandlerySDyS2SGSg_y7RestKit0J8ResponseVyAA0F0VGSg_AI0J5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/listVoices(headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C10listVoices7headers17completionHandlerySDyS2SGSg_y7RestKit0J8ResponseVyAA0F0VGSg_AI0J5ErrorOSgtctF">listVoices(headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -381,8 +392,7 @@ details about the voice. To see information about a specific voice, use the <str
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listVoices</span><span class="p">(</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Voices.html">Voices</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Voices.html">Voices</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -405,24 +415,12 @@ details about the voice. To see information about a specific voice, use the <str
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -435,9 +433,9 @@ details about the voice. To see information about a specific voice, use the <str
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C8getVoice5voice15customizationID7headers7failure7successySS_SSSgSDyS2SGSgys5Error_pcSgyAA0F0VctF"></a>
-                    <a name="//apple_ref/swift/Method/getVoice(voice:customizationID:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C8getVoice5voice15customizationID7headers7failure7successySS_SSSgSDyS2SGSgys5Error_pcSgyAA0F0VctF">getVoice(voice:customizationID:headers:failure:success:)</a>
+                    <a name="/s:14TextToSpeechV10abC0C8getVoice5voice15customizationID7headers17completionHandlerySS_SSSgSDyS2SGSgy7RestKit0M8ResponseVyAA0F0VGSg_AL0M5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/getVoice(voice:customizationID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C8getVoice5voice15customizationID7headers17completionHandlerySS_SSSgSDyS2SGSgy7RestKit0M8ResponseVyAA0F0VGSg_AL0M5ErrorOSgtctF">getVoice(voice:customizationID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -461,8 +459,7 @@ voice. To list information about all available voices, use the <strong>List voic
     <span class="nv">voice</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Voice.html">Voice</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Voice.html">Voice</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -511,24 +508,12 @@ the custom model. Omit the parameter to see information about the specified voic
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -541,9 +526,9 @@ the custom model. Omit the parameter to see information about the specified voic
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C10synthesize4text6accept5voice15customizationID7headers7failure7successySS_SSSgA2LSDyS2SGSgys5Error_pcSgy10Foundation4DataVctF"></a>
-                    <a name="//apple_ref/swift/Method/synthesize(text:accept:voice:customizationID:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C10synthesize4text6accept5voice15customizationID7headers7failure7successySS_SSSgA2LSDyS2SGSgys5Error_pcSgy10Foundation4DataVctF">synthesize(text:accept:voice:customizationID:headers:failure:success:)</a>
+                    <a name="/s:14TextToSpeechV10abC0C10synthesize4text6accept5voice15customizationID7headers17completionHandlerySS_SSSgA2KSDyS2SGSgy7RestKit0N8ResponseVy10Foundation4DataVGSg_AN0N5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/synthesize(text:accept:voice:customizationID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C10synthesize4text6accept5voice15customizationID7headers17completionHandlerySS_SSSgA2KSDyS2SGSgy7RestKit0N8ResponseVy10Foundation4DataVGSg_AN0N5ErrorOSgtctF">synthesize(text:accept:voice:customizationID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -574,8 +559,7 @@ audio</a>.</p>
     <span class="nv">voice</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt">Data</span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -653,24 +637,12 @@ model. Omit the parameter to use the specified voice with no customization.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -683,9 +655,9 @@ model. Omit the parameter to use the specified voice with no customization.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C16getPronunciation4text5voice6format15customizationID7headers7failure7successySS_SSSgA2LSDyS2SGSgys5Error_pcSgyAA0F0VctF"></a>
-                    <a name="//apple_ref/swift/Method/getPronunciation(text:voice:format:customizationID:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C16getPronunciation4text5voice6format15customizationID7headers7failure7successySS_SSSgA2LSDyS2SGSgys5Error_pcSgyAA0F0VctF">getPronunciation(text:voice:format:customizationID:headers:failure:success:)</a>
+                    <a name="/s:14TextToSpeechV10abC0C16getPronunciation4text5voice6format15customizationID7headers17completionHandlerySS_SSSgA2KSDyS2SGSgy7RestKit0O8ResponseVyAA0F0VGSg_AN0O5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/getPronunciation(text:voice:format:customizationID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C16getPronunciation4text5voice6format15customizationID7headers17completionHandlerySS_SSSgA2KSDyS2SGSgy7RestKit0O8ResponseVyAA0F0VGSg_AN0O5ErrorOSgtctF">getPronunciation(text:voice:format:customizationID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -713,8 +685,7 @@ language</a>.</p>
     <span class="nv">format</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Pronunciation.html">Pronunciation</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Pronunciation.html">Pronunciation</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -791,24 +762,12 @@ owns the custom model. Omit the parameter to see the translation for the specifi
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -821,9 +780,9 @@ owns the custom model. Omit the parameter to see the translation for the specifi
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C16createVoiceModel4name8language11description7headers7failure7successySS_SSSgAKSDyS2SGSgys5Error_pcSgyAA0fG0VctF"></a>
-                    <a name="//apple_ref/swift/Method/createVoiceModel(name:language:description:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C16createVoiceModel4name8language11description7headers7failure7successySS_SSSgAKSDyS2SGSgys5Error_pcSgyAA0fG0VctF">createVoiceModel(name:language:description:headers:failure:success:)</a>
+                    <a name="/s:14TextToSpeechV10abC0C16createVoiceModel4name8language11description7headers17completionHandlerySS_SSSgAJSDyS2SGSgy7RestKit0N8ResponseVyAA0fG0VGSg_AM0N5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/createVoiceModel(name:language:description:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C16createVoiceModel4name8language11description7headers17completionHandlerySS_SSSgAJSDyS2SGSgy7RestKit0N8ResponseVyAA0fG0VGSg_AM0N5ErrorOSgtctF">createVoiceModel(name:language:description:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -850,8 +809,7 @@ model</a>.</p>
     <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/VoiceModel.html">VoiceModel</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/VoiceModel.html">VoiceModel</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -911,24 +869,12 @@ language, <code>en-US</code>.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -941,9 +887,9 @@ language, <code>en-US</code>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C15listVoiceModels8language7headers7failure7successySSSg_SDyS2SGSgys5Error_pcSgyAA0fG0VctF"></a>
-                    <a name="//apple_ref/swift/Method/listVoiceModels(language:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C15listVoiceModels8language7headers7failure7successySSSg_SDyS2SGSgys5Error_pcSgyAA0fG0VctF">listVoiceModels(language:headers:failure:success:)</a>
+                    <a name="/s:14TextToSpeechV10abC0C15listVoiceModels8language7headers17completionHandlerySSSg_SDyS2SGSgy7RestKit0L8ResponseVyAA0fG0VGSg_AK0L5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/listVoiceModels(language:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C15listVoiceModels8language7headers17completionHandlerySSSg_SDyS2SGSgy7RestKit0L8ResponseVyAA0fG0VGSg_AK0L5ErrorOSgtctF">listVoiceModels(language:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -969,8 +915,7 @@ models</a>.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listVoiceModels</span><span class="p">(</span>
     <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/VoiceModels.html">VoiceModels</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/VoiceModels.html">VoiceModels</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1007,24 +952,12 @@ requester.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -1037,9 +970,9 @@ requester.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C16updateVoiceModel15customizationID4name11description5words7headers7failure7successySS_SSSgALSayAA4WordVGSgSDyS2SGSgys5Error_pcSgyyctF"></a>
-                    <a name="//apple_ref/swift/Method/updateVoiceModel(customizationID:name:description:words:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C16updateVoiceModel15customizationID4name11description5words7headers7failure7successySS_SSSgALSayAA4WordVGSgSDyS2SGSgys5Error_pcSgyyctF">updateVoiceModel(customizationID:name:description:words:headers:failure:success:)</a>
+                    <a name="/s:14TextToSpeechV10abC0C16updateVoiceModel15customizationID4name11description5words7headers17completionHandlerySS_SSSgAKSayAA4WordVGSgSDyS2SGSgy7RestKit0Q8ResponseVyytGSg_AR0Q5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/updateVoiceModel(customizationID:name:description:words:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C16updateVoiceModel15customizationID4name11description5words7headers17completionHandlerySS_SSSgAKSayAA4WordVGSgSDyS2SGSgy7RestKit0Q8ResponseVyytGSg_AR0Q5ErrorOSgtctF">updateVoiceModel(customizationID:name:description:words:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1082,8 +1015,7 @@ model</a></li>
     <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">words</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Word.html">Word</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1156,24 +1088,12 @@ or updated for the custom voice model. Pass an empty array to make no additions 
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -1186,9 +1106,9 @@ or updated for the custom voice model. Pass an empty array to make no additions 
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C13getVoiceModel15customizationID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyAA0fG0VctF"></a>
-                    <a name="//apple_ref/swift/Method/getVoiceModel(customizationID:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C13getVoiceModel15customizationID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyAA0fG0VctF">getVoiceModel(customizationID:headers:failure:success:)</a>
+                    <a name="/s:14TextToSpeechV10abC0C13getVoiceModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0M8ResponseVyAA0fG0VGSg_AJ0M5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/getVoiceModel(customizationID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C13getVoiceModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0M8ResponseVyAA0fG0VGSg_AJ0M5ErrorOSgtctF">getVoiceModel(customizationID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1213,8 +1133,7 @@ model</a>.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getVoiceModel</span><span class="p">(</span>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/VoiceModel.html">VoiceModel</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/VoiceModel.html">VoiceModel</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1250,24 +1169,12 @@ with service credentials created for the instance of the service that owns the c
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -1280,9 +1187,9 @@ with service credentials created for the instance of the service that owns the c
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C16deleteVoiceModel15customizationID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyyctF"></a>
-                    <a name="//apple_ref/swift/Method/deleteVoiceModel(customizationID:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C16deleteVoiceModel15customizationID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyyctF">deleteVoiceModel(customizationID:headers:failure:success:)</a>
+                    <a name="/s:14TextToSpeechV10abC0C16deleteVoiceModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0M8ResponseVyytGSg_AJ0M5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/deleteVoiceModel(customizationID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C16deleteVoiceModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0M8ResponseVyytGSg_AJ0M5ErrorOSgtctF">deleteVoiceModel(customizationID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1306,8 +1213,7 @@ model</a>.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteVoiceModel</span><span class="p">(</span>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1343,24 +1249,12 @@ with service credentials created for the instance of the service that owns the c
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -1373,9 +1267,9 @@ with service credentials created for the instance of the service that owns the c
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C8addWords15customizationID5words7headers7failure7successySS_SayAA4WordVGSDyS2SGSgys5Error_pcSgyyctF"></a>
-                    <a name="//apple_ref/swift/Method/addWords(customizationID:words:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C8addWords15customizationID5words7headers7failure7successySS_SayAA4WordVGSDyS2SGSgys5Error_pcSgyyctF">addWords(customizationID:words:headers:failure:success:)</a>
+                    <a name="/s:14TextToSpeechV10abC0C8addWords15customizationID5words7headers17completionHandlerySS_SayAA4WordVGSDyS2SGSgy7RestKit0N8ResponseVyytGSg_AN0N5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/addWords(customizationID:words:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C8addWords15customizationID5words7headers17completionHandlerySS_SayAA4WordVGSDyS2SGSgy7RestKit0N8ResponseVyytGSg_AN0N5ErrorOSgtctF">addWords(customizationID:words:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1415,8 +1309,7 @@ model</a></li>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">words</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Word.html">Word</a></span><span class="p">],</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1468,24 +1361,12 @@ lowercase letters. The array is empty if the custom model contains no words.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -1498,9 +1379,9 @@ lowercase letters. The array is empty if the custom model contains no words.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C9listWords15customizationID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyAA0F0VctF"></a>
-                    <a name="//apple_ref/swift/Method/listWords(customizationID:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C9listWords15customizationID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyAA0F0VctF">listWords(customizationID:headers:failure:success:)</a>
+                    <a name="/s:14TextToSpeechV10abC0C9listWords15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0L8ResponseVyAA0F0VGSg_AJ0L5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/listWords(customizationID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C9listWords15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0L8ResponseVyAA0F0VGSg_AJ0L5ErrorOSgtctF">listWords(customizationID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1525,8 +1406,7 @@ model</a>.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listWords</span><span class="p">(</span>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Words.html">Words</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Words.html">Words</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1562,24 +1442,12 @@ with service credentials created for the instance of the service that owns the c
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -1592,9 +1460,9 @@ with service credentials created for the instance of the service that owns the c
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C7addWord15customizationID4word11translation06partOfC07headers7failure7successySS_S3SSgSDyS2SGSgys5Error_pcSgyyctF"></a>
-                    <a name="//apple_ref/swift/Method/addWord(customizationID:word:translation:partOfSpeech:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C7addWord15customizationID4word11translation06partOfC07headers7failure7successySS_S3SSgSDyS2SGSgys5Error_pcSgyyctF">addWord(customizationID:word:translation:partOfSpeech:headers:failure:success:)</a>
+                    <a name="/s:14TextToSpeechV10abC0C7addWord15customizationID4word11translation06partOfC07headers17completionHandlerySS_S3SSgSDyS2SGSgy7RestKit0P8ResponseVyytGSg_AN0P5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/addWord(customizationID:word:translation:partOfSpeech:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C7addWord15customizationID4word11translation06partOfC07headers17completionHandlerySS_S3SSgSDyS2SGSgy7RestKit0P8ResponseVyytGSg_AN0P5ErrorOSgtctF">addWord(customizationID:word:translation:partOfSpeech:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1636,8 +1504,7 @@ model</a></li>
     <span class="nv">translation</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">partOfSpeech</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1715,24 +1582,12 @@ entries</a>.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -1745,9 +1600,9 @@ entries</a>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C7getWord15customizationID4word7headers7failure7successySS_SSSDyS2SGSgys5Error_pcSgyAA11TranslationVctF"></a>
-                    <a name="//apple_ref/swift/Method/getWord(customizationID:word:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C7getWord15customizationID4word7headers7failure7successySS_SSSDyS2SGSgys5Error_pcSgyAA11TranslationVctF">getWord(customizationID:word:headers:failure:success:)</a>
+                    <a name="/s:14TextToSpeechV10abC0C7getWord15customizationID4word7headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0M8ResponseVyAA11TranslationVGSg_AK0M5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/getWord(customizationID:word:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C7getWord15customizationID4word7headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0M8ResponseVyAA11TranslationVGSg_AK0M5ErrorOSgtctF">getWord(customizationID:word:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1772,8 +1627,7 @@ model</a>.</p>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">word</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Structs/Translation.html">Translation</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Translation.html">Translation</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1821,24 +1675,12 @@ with service credentials created for the instance of the service that owns the c
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -1851,9 +1693,9 @@ with service credentials created for the instance of the service that owns the c
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C10deleteWord15customizationID4word7headers7failure7successySS_SSSDyS2SGSgys5Error_pcSgyyctF"></a>
-                    <a name="//apple_ref/swift/Method/deleteWord(customizationID:word:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C10deleteWord15customizationID4word7headers7failure7successySS_SSSDyS2SGSgys5Error_pcSgyyctF">deleteWord(customizationID:word:headers:failure:success:)</a>
+                    <a name="/s:14TextToSpeechV10abC0C10deleteWord15customizationID4word7headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0M8ResponseVyytGSg_AK0M5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/deleteWord(customizationID:word:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C10deleteWord15customizationID4word7headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0M8ResponseVyytGSg_AK0M5ErrorOSgtctF">deleteWord(customizationID:word:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1878,8 +1720,7 @@ model</a>.</p>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">word</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1927,24 +1768,12 @@ with service credentials created for the instance of the service that owns the c
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -1957,9 +1786,9 @@ with service credentials created for the instance of the service that owns the c
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C14deleteUserData10customerID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyyctF"></a>
-                    <a name="//apple_ref/swift/Method/deleteUserData(customerID:headers:failure:success:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C14deleteUserData10customerID7headers7failure7successySS_SDyS2SGSgys5Error_pcSgyyctF">deleteUserData(customerID:headers:failure:success:)</a>
+                    <a name="/s:14TextToSpeechV10abC0C14deleteUserData10customerID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0M8ResponseVyytGSg_AJ0M5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/deleteUserData(customerID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C14deleteUserData10customerID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0M8ResponseVyytGSg_AJ0M5ErrorOSgtctF">deleteUserData(customerID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1986,8 +1815,7 @@ security</a>.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteUserData</span><span class="p">(</span>
     <span class="nv">customerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">failure</span><span class="p">:</span> <span class="p">((</span><span class="kt">Error</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">success</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -2022,24 +1850,12 @@ security</a>.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed if an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with the successful result.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -2054,7 +1870,7 @@ security</a>.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-11-12)</p>
+          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-12-06)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

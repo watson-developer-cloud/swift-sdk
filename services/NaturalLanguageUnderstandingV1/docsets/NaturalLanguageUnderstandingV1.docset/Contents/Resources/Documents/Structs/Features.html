@@ -123,9 +123,6 @@
                 <a href="../Structs/Model.html">Model</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/Parameters.html">Parameters</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/RelationArgument.html">RelationArgument</a>
               </li>
               <li class="nav-group-task">
@@ -178,6 +175,17 @@
               </li>
             </ul>
           </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV111WatsonErrora">WatsonError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV114WatsonResponsea">WatsonResponse</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <article class="main-content">
@@ -186,7 +194,7 @@
             <h1>Features</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Features</span> <span class="p">:</span> <span class="kt">Encodable</span></code></pre>
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Features</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                 </div>
               </div>
@@ -241,7 +249,7 @@ Supported languages: English, French, German, Japanese, Korean, Portuguese, Span
                         <p>Detects anger, disgust, fear, joy, or sadness that is conveyed in the content or by the context around target
 phrases specified in the targets parameter. You can analyze emotion for detected entities with <code>entities.emotion</code>
 and for keywords with <code>keywords.emotion</code>.
-Supported languages: English</p>
+Supported languages: English.</p>
 
                       </div>
                       <div class="declaration">
@@ -415,7 +423,7 @@ Supported languages: English, German, Japanese, Korean, Spanish.</p>
                       <div class="abstract">
                         <p>Analyzes the general sentiment of your content or the sentiment toward specific target phrases. You can analyze
 sentiment for detected entities with <code>entities.sentiment</code> and for keywords with <code>keywords.sentiment</code>.
- Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish</p>
+ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish.</p>
 
                       </div>
                       <div class="declaration">
@@ -520,7 +528,7 @@ Supported languages: English, French, German, Japanese, Korean, Portuguese, Span
                                   <p>Detects anger, disgust, fear, joy, or sadness that is conveyed in the content or by the
 context around target phrases specified in the targets parameter. You can analyze emotion for detected entities
 with <code>entities.emotion</code> and for keywords with <code>keywords.emotion</code>.
-Supported languages: English</p>
+Supported languages: English.</p>
                                 </div>
                               </td>
                             </tr>
@@ -605,7 +613,7 @@ Supported languages: English, German, Japanese, Korean, Spanish.</p>
                                   <p>Analyzes the general sentiment of your content or the sentiment toward specific target
 phrases. You can analyze sentiment for detected entities with <code>entities.sentiment</code> and for keywords with
 <code>keywords.sentiment</code>.
-Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish</p>
+Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish.</p>
                                 </div>
                               </td>
                             </tr>
@@ -637,7 +645,7 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-11-12)</p>
+          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-12-06)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

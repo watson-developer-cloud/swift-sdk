@@ -80,16 +80,10 @@
                 <a href="Structs/Conversions.html">Conversions</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/CreateCollectionRequest.html">CreateCollectionRequest</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/CreateCollectionRequest/Language.html">– Language</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Structs/CreateEventResponse.html">CreateEventResponse</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/CreateEventResponse/ModelType.html">– ModelType</a>
+                <a href="Structs/CreateEventResponse/TypeEnum.html">– TypeEnum</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/CredentialDetails.html">CredentialDetails</a>
@@ -209,10 +203,10 @@
                 <a href="Structs/GenericQueryAggregation.html">GenericQueryAggregation</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/Histogram.html">Histogram</a>
+                <a href="Structs/HTMLSettings.html">HTMLSettings</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/HtmlSettings.html">HtmlSettings</a>
+                <a href="Structs/Histogram.html">Histogram</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/IndexCapacity.html">IndexCapacity</a>
@@ -249,9 +243,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/LogQueryResponseResultDocumentsResult.html">LogQueryResponseResultDocumentsResult</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/MemoryUsage.html">MemoryUsage</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/MetricAggregation.html">MetricAggregation</a>
@@ -311,13 +302,10 @@
                 <a href="Structs/Notice/Severity.html">– Severity</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/PdfHeadingDetection.html">PdfHeadingDetection</a>
+                <a href="Structs/PDFHeadingDetection.html">PDFHeadingDetection</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/PdfSettings.html">PdfSettings</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/QueryEntities.html">QueryEntities</a>
+                <a href="Structs/PDFSettings.html">PDFSettings</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/QueryEntitiesContext.html">QueryEntitiesContext</a>
@@ -351,12 +339,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/QueryPassages.html">QueryPassages</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/QueryRelations.html">QueryRelations</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/QueryRelations/Sort.html">– Sort</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/QueryRelationsArgument.html">QueryRelationsArgument</a>
@@ -395,7 +377,7 @@
                 <a href="Structs/Source.html">Source</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/Source/ModelType.html">– ModelType</a>
+                <a href="Structs/Source/TypeEnum.html">– TypeEnum</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/SourceOptions.html">SourceOptions</a>
@@ -474,6 +456,17 @@
               </li>
             </ul>
           </li>
+          <li class="nav-group-name">
+            <a href="Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:11DiscoveryV111WatsonErrora">WatsonError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:11DiscoveryV114WatsonResponsea">WatsonResponse</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <article class="main-content">
@@ -507,7 +500,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AggregationResult</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AggregationResult</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -539,7 +532,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Calculation</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Calculation</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -571,7 +564,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Collection</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Collection</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -603,7 +596,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CollectionDiskUsage</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CollectionDiskUsage</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -635,7 +628,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CollectionUsage</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CollectionUsage</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -667,7 +660,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Configuration</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Configuration</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -699,39 +692,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Conversions</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11DiscoveryV123CreateCollectionRequestV"></a>
-                    <a name="//apple_ref/swift/Struct/CreateCollectionRequest" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV123CreateCollectionRequestV">CreateCollectionRequest</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>CreateCollectionRequest.</p>
-
-                        <a href="Structs/CreateCollectionRequest.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CreateCollectionRequest</span> <span class="p">:</span> <span class="kt">Encodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Conversions</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -763,7 +724,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CreateEventResponse</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CreateEventResponse</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -796,7 +757,7 @@ Obtain credentials for your source from the administrator of the source.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CredentialDetails</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CredentialDetails</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -828,7 +789,7 @@ Obtain credentials for your source from the administrator of the source.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Credentials</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Credentials</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -860,7 +821,7 @@ Obtain credentials for your source from the administrator of the source.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CredentialsList</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CredentialsList</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -892,7 +853,7 @@ Obtain credentials for your source from the administrator of the source.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DeleteCollectionResponse</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DeleteCollectionResponse</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -924,7 +885,7 @@ Obtain credentials for your source from the administrator of the source.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DeleteConfigurationResponse</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DeleteConfigurationResponse</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -956,7 +917,7 @@ Obtain credentials for your source from the administrator of the source.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DeleteCredentials</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DeleteCredentials</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -988,7 +949,7 @@ Obtain credentials for your source from the administrator of the source.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DeleteDocumentResponse</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DeleteDocumentResponse</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1020,7 +981,7 @@ Obtain credentials for your source from the administrator of the source.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DeleteEnvironmentResponse</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DeleteEnvironmentResponse</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1052,7 +1013,7 @@ Obtain credentials for your source from the administrator of the source.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DiskUsage</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DiskUsage</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1084,7 +1045,7 @@ Obtain credentials for your source from the administrator of the source.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DocumentAccepted</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DocumentAccepted</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1116,7 +1077,7 @@ Obtain credentials for your source from the administrator of the source.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DocumentCounts</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DocumentCounts</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1148,7 +1109,7 @@ Obtain credentials for your source from the administrator of the source.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DocumentSnapshot</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DocumentSnapshot</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1180,7 +1141,7 @@ Obtain credentials for your source from the administrator of the source.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DocumentStatus</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DocumentStatus</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1212,7 +1173,7 @@ Obtain credentials for your source from the administrator of the source.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Enrichment</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Enrichment</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1244,7 +1205,7 @@ Obtain credentials for your source from the administrator of the source.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">EnrichmentOptions</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">EnrichmentOptions</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1276,7 +1237,7 @@ Obtain credentials for your source from the administrator of the source.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Environment</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Environment</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1308,7 +1269,7 @@ Obtain credentials for your source from the administrator of the source.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">EnvironmentDocuments</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">EnvironmentDocuments</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1340,7 +1301,7 @@ Obtain credentials for your source from the administrator of the source.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">EventData</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">EventData</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1373,7 +1334,7 @@ for the word <code>hot</code> in one object, and expansions for the word <code>c
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Expansion</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Expansion</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1405,7 +1366,7 @@ for the word <code>hot</code> in one object, and expansions for the word <code>c
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Expansions</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Expansions</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1437,7 +1398,7 @@ for the word <code>hot</code> in one object, and expansions for the word <code>c
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Field</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Field</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1469,7 +1430,7 @@ for the word <code>hot</code> in one object, and expansions for the word <code>c
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Filter</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Filter</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1501,7 +1462,7 @@ for the word <code>hot</code> in one object, and expansions for the word <code>c
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">FontSetting</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">FontSetting</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1533,7 +1494,39 @@ for the word <code>hot</code> in one object, and expansions for the word <code>c
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">GenericQueryAggregation</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">GenericQueryAggregation</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV112HTMLSettingsV"></a>
+                    <a name="//apple_ref/swift/Struct/HTMLSettings" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV112HTMLSettingsV">HTMLSettings</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A list of HTML conversion settings.</p>
+
+                        <a href="Structs/HTMLSettings.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">HTMLSettings</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1565,39 +1558,7 @@ for the word <code>hot</code> in one object, and expansions for the word <code>c
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Histogram</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11DiscoveryV112HtmlSettingsV"></a>
-                    <a name="//apple_ref/swift/Struct/HtmlSettings" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV112HtmlSettingsV">HtmlSettings</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A list of HTML conversion settings.</p>
-
-                        <a href="Structs/HtmlSettings.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">HtmlSettings</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Histogram</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1629,7 +1590,7 @@ for the word <code>hot</code> in one object, and expansions for the word <code>c
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">IndexCapacity</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">IndexCapacity</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1671,7 +1632,7 @@ means that the <code>warnings</code> object has a property called <code>severity
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ListCollectionFieldsResponse</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ListCollectionFieldsResponse</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1703,7 +1664,7 @@ means that the <code>warnings</code> object has a property called <code>severity
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ListCollectionsResponse</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ListCollectionsResponse</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1735,7 +1696,7 @@ means that the <code>warnings</code> object has a property called <code>severity
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ListConfigurationsResponse</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ListConfigurationsResponse</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1767,7 +1728,7 @@ means that the <code>warnings</code> object has a property called <code>severity
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ListEnvironmentsResponse</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ListEnvironmentsResponse</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1799,7 +1760,7 @@ means that the <code>warnings</code> object has a property called <code>severity
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">LogQueryResponse</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">LogQueryResponse</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1832,7 +1793,7 @@ event that is associated with a query.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">LogQueryResponseResult</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">LogQueryResponseResult</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1865,7 +1826,7 @@ logs of type <code>query</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">LogQueryResponseResultDocuments</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">LogQueryResponseResultDocuments</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1897,39 +1858,7 @@ logs of type <code>query</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">LogQueryResponseResultDocumentsResult</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11DiscoveryV111MemoryUsageV"></a>
-                    <a name="//apple_ref/swift/Struct/MemoryUsage" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV111MemoryUsageV">MemoryUsage</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Deprecated**: Summary of the memory usage statistics for this environment.</p>
-
-                        <a href="Structs/MemoryUsage.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MemoryUsage</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">LogQueryResponseResultDocumentsResult</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1961,7 +1890,7 @@ logs of type <code>query</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MetricAggregation</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MetricAggregation</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1993,7 +1922,7 @@ logs of type <code>query</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MetricAggregationResult</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MetricAggregationResult</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2025,7 +1954,7 @@ logs of type <code>query</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MetricResponse</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MetricResponse</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2057,7 +1986,7 @@ logs of type <code>query</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MetricTokenAggregation</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MetricTokenAggregation</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2089,7 +2018,7 @@ logs of type <code>query</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MetricTokenAggregationResult</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MetricTokenAggregationResult</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2121,7 +2050,7 @@ logs of type <code>query</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MetricTokenResponse</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">MetricTokenResponse</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2153,7 +2082,7 @@ logs of type <code>query</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Nested</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Nested</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2185,7 +2114,7 @@ logs of type <code>query</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">NluEnrichmentCategories</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">NluEnrichmentCategories</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2217,7 +2146,7 @@ logs of type <code>query</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">NluEnrichmentEmotion</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">NluEnrichmentEmotion</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2249,7 +2178,7 @@ logs of type <code>query</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">NluEnrichmentEntities</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">NluEnrichmentEntities</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2281,7 +2210,7 @@ logs of type <code>query</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">NluEnrichmentFeatures</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">NluEnrichmentFeatures</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2313,7 +2242,7 @@ logs of type <code>query</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">NluEnrichmentKeywords</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">NluEnrichmentKeywords</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2345,7 +2274,7 @@ logs of type <code>query</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">NluEnrichmentRelations</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">NluEnrichmentRelations</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2377,7 +2306,7 @@ logs of type <code>query</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">NluEnrichmentSemanticRoles</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">NluEnrichmentSemanticRoles</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2409,7 +2338,7 @@ logs of type <code>query</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">NluEnrichmentSentiment</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">NluEnrichmentSentiment</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2441,7 +2370,7 @@ logs of type <code>query</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">NormalizationOperation</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">NormalizationOperation</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2473,7 +2402,7 @@ logs of type <code>query</code>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Notice</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Notice</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2487,9 +2416,9 @@ logs of type <code>query</code>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV119PdfHeadingDetectionV"></a>
-                    <a name="//apple_ref/swift/Struct/PdfHeadingDetection" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV119PdfHeadingDetectionV">PdfHeadingDetection</a>
+                    <a name="/s:11DiscoveryV119PDFHeadingDetectionV"></a>
+                    <a name="//apple_ref/swift/Struct/PDFHeadingDetection" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV119PDFHeadingDetectionV">PDFHeadingDetection</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2497,15 +2426,15 @@ logs of type <code>query</code>.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>PdfHeadingDetection.</p>
+                        <p>PDFHeadingDetection.</p>
 
-                        <a href="Structs/PdfHeadingDetection.html" class="slightly-smaller">See more</a>
+                        <a href="Structs/PDFHeadingDetection.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">PdfHeadingDetection</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">PDFHeadingDetection</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2519,9 +2448,9 @@ logs of type <code>query</code>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV111PdfSettingsV"></a>
-                    <a name="//apple_ref/swift/Struct/PdfSettings" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV111PdfSettingsV">PdfSettings</a>
+                    <a name="/s:11DiscoveryV111PDFSettingsV"></a>
+                    <a name="//apple_ref/swift/Struct/PDFSettings" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV111PDFSettingsV">PDFSettings</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2531,45 +2460,13 @@ logs of type <code>query</code>.</p>
                       <div class="abstract">
                         <p>A list of PDF conversion settings.</p>
 
-                        <a href="Structs/PdfSettings.html" class="slightly-smaller">See more</a>
+                        <a href="Structs/PDFSettings.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">PdfSettings</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11DiscoveryV113QueryEntitiesV"></a>
-                    <a name="//apple_ref/swift/Struct/QueryEntities" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV113QueryEntitiesV">QueryEntities</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>QueryEntities.</p>
-
-                        <a href="Structs/QueryEntities.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryEntities</span> <span class="p">:</span> <span class="kt">Encodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">PDFSettings</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2602,7 +2499,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryEntitiesContext</span> <span class="p">:</span> <span class="kt">Encodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryEntitiesContext</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2634,7 +2531,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryEntitiesEntity</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryEntitiesEntity</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2666,7 +2563,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryEntitiesResponse</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryEntitiesResponse</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2698,7 +2595,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryEntitiesResponseItem</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryEntitiesResponseItem</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2730,7 +2627,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryEvidence</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryEvidence</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2762,7 +2659,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryEvidenceEntity</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryEvidenceEntity</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2794,7 +2691,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryFilterType</span> <span class="p">:</span> <span class="kt">Encodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryFilterType</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2826,7 +2723,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryNoticesResponse</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryNoticesResponse</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2858,7 +2755,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryNoticesResult</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryNoticesResult</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2890,39 +2787,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryPassages</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11DiscoveryV114QueryRelationsV"></a>
-                    <a name="//apple_ref/swift/Struct/QueryRelations" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV114QueryRelationsV">QueryRelations</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>A respresentation of a relationship query.</p>
-
-                        <a href="Structs/QueryRelations.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryRelations</span> <span class="p">:</span> <span class="kt">Encodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryPassages</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2954,7 +2819,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryRelationsArgument</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryRelationsArgument</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2986,7 +2851,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryRelationsEntity</span> <span class="p">:</span> <span class="kt">Encodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryRelationsEntity</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3018,7 +2883,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryRelationsFilter</span> <span class="p">:</span> <span class="kt">Encodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryRelationsFilter</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3050,7 +2915,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryRelationsRelationship</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryRelationsRelationship</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3082,7 +2947,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryRelationsResponse</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryRelationsResponse</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3114,7 +2979,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryResponse</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryResponse</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3146,7 +3011,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryResult</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryResult</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3178,7 +3043,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryResultMetadata</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryResultMetadata</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3210,7 +3075,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SearchStatus</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SearchStatus</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3242,7 +3107,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SegmentSettings</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SegmentSettings</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3274,7 +3139,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Source</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Source</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3306,7 +3171,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SourceOptions</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SourceOptions</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3338,7 +3203,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SourceOptionsFolder</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SourceOptionsFolder</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3370,7 +3235,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SourceOptionsObject</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SourceOptionsObject</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3402,7 +3267,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SourceOptionsSiteColl</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SourceOptionsSiteColl</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3434,7 +3299,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SourceSchedule</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SourceSchedule</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3466,7 +3331,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SourceStatus</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SourceStatus</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3498,7 +3363,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Term</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Term</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3530,7 +3395,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TestDocument</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TestDocument</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3562,7 +3427,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Timeslice</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Timeslice</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3594,7 +3459,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TokenDictRule</span> <span class="p">:</span> <span class="kt">Encodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TokenDictRule</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3626,7 +3491,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TokenDictStatusResponse</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TokenDictStatusResponse</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3658,7 +3523,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TopHits</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TopHits</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3690,7 +3555,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TopHitsResults</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TopHitsResults</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3722,7 +3587,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TrainingDataSet</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TrainingDataSet</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3754,7 +3619,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TrainingExample</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TrainingExample</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3786,7 +3651,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TrainingExampleList</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TrainingExampleList</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3818,7 +3683,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TrainingQuery</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TrainingQuery</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3850,7 +3715,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TrainingStatus</span> <span class="p">:</span> <span class="kt">Decodable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TrainingStatus</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3882,7 +3747,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">WordHeadingDetection</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">WordHeadingDetection</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3914,7 +3779,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">WordSettings</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">WordSettings</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3946,7 +3811,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">WordStyle</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">WordStyle</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3978,7 +3843,7 @@ query the city of London in England your query would look for <code>London</code
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">XPathPatterns</span> <span class="p">:</span> <span class="kt">Codable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">XPathPatterns</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -3990,7 +3855,7 @@ query the city of London in England your query would look for <code>London</code
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-11-12)</p>
+          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-12-06)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

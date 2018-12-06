@@ -39,7 +39,7 @@ public struct FeedbackReturn: Codable, Equatable {
     /**
      Timestamp listing the creation time of the feedback submission.
      */
-    public var created: String?
+    public var created: Date?
 
     /**
      Information returned from the `POST /v1/feedback` method.

@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /**
  Column-level cells, each applicable as a header to other cells in the same column as itself, of the current table.
@@ -28,10 +29,10 @@ public struct ColumnHeaders: Codable, Equatable {
     public var cellID: String?
 
     /**
-     The numeric location of the identified element in the document, represented with two integers labeled `begin` and
-     `end`.
+     The location of the column header cell in the current table as defined by its `begin` and `end` offsets,
+     respectfully, in the input document.
      */
-    public var location: Location?
+    public var location: [String: JSON]?
 
     /**
      The textual contents of this cell from the input document without associated markup content.

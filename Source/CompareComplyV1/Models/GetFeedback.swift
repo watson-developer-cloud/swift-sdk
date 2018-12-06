@@ -29,7 +29,7 @@ public struct GetFeedback: Codable, Equatable {
     /**
      A timestamp identifying the creation time of the feedback entry.
      */
-    public var created: String?
+    public var created: Date?
 
     /**
      A string containing the user's comment about the feedback entry.

@@ -41,7 +41,7 @@ public struct SectionTitles: Codable, Equatable {
     public var level: Int?
 
     /**
-     An array of `location` objects listing the locations of detected section titles.
+     An array of `location` objects listing the locations of detected leading sentences.
      */
     public var elementLocations: [ElementLocations]?
 

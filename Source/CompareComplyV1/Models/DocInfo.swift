@@ -19,7 +19,7 @@ import Foundation
 /**
  Information about the parsed input document.
  */
-public struct DocInfo: Decodable {
+public struct DocInfo: Codable, Equatable {
 
     /**
      The full text of the parsed document in HTML format.

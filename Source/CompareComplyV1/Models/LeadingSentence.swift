@@ -19,7 +19,7 @@ import Foundation
 /**
  The leading sentences in a section or subsection of the input document.
  */
-public struct LeadingSentence: Decodable {
+public struct LeadingSentence: Codable, Equatable {
 
     /**
      The text of the leading sentence.

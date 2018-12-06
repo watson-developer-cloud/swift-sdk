@@ -19,7 +19,7 @@ import Foundation
 /**
  Document counts.
  */
-public struct DocCounts: Decodable {
+public struct DocCounts: Codable, Equatable {
 
     /**
      Total number of documents.

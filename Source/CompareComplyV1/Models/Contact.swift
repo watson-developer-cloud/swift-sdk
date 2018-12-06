@@ -19,7 +19,7 @@ import Foundation
 /**
  A contact.
  */
-public struct Contact: Decodable {
+public struct Contact: Codable, Equatable {
 
     /**
      A string listing the name of the contact.

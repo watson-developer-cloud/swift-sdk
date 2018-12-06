@@ -19,7 +19,7 @@ import Foundation
 /**
  The comparison of the two submitted documents.
  */
-public struct CompareReturn: Decodable {
+public struct CompareReturn: Codable, Equatable {
 
     /**
      Information about the documents being compared.

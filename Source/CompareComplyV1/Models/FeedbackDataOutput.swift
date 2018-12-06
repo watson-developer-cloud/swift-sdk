@@ -19,7 +19,7 @@ import Foundation
 /**
  Information returned from the `POST /v1/feedback` method.
  */
-public struct FeedbackDataOutput: Decodable {
+public struct FeedbackDataOutput: Codable, Equatable {
 
     /**
      A string identifying the user adding the feedback. The only permitted value is `element_classification`.

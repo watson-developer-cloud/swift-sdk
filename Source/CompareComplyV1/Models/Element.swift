@@ -19,7 +19,7 @@ import Foundation
 /**
  A component part of the document.
  */
-public struct Element: Decodable {
+public struct Element: Codable, Equatable {
 
     /**
      The numeric location of the identified element in the document, represented with two integers labeled `begin` and

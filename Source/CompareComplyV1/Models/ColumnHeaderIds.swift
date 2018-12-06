@@ -19,7 +19,7 @@ import Foundation
 /**
  An array of values, each being the `id` value of a column header that is applicable to the current cell.
  */
-public struct ColumnHeaderIds: Decodable {
+public struct ColumnHeaderIDs: Codable, Equatable {
 
     /**
      The `id` value of a column header.

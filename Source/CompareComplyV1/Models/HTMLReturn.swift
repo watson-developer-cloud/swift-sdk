@@ -19,7 +19,7 @@ import Foundation
 /**
  The HTML converted from an input document.
  */
-public struct HTMLReturn: Decodable {
+public struct HTMLReturn: Codable, Equatable {
 
     /**
      The number of pages in the input document.

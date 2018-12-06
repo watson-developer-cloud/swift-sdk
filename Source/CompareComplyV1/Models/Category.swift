@@ -19,7 +19,7 @@ import Foundation
 /**
  Information defining an element's subject matter.
  */
-public struct Category: Codable {
+public struct Category: Codable, Equatable {
 
     /**
      The category of the associated element.

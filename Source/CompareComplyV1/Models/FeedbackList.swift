@@ -19,7 +19,7 @@ import Foundation
 /**
  The results of a successful `GET /v1/feedback` request.
  */
-public struct FeedbackList: Decodable {
+public struct FeedbackList: Codable, Equatable {
 
     /**
      A list of all feedback for the document.

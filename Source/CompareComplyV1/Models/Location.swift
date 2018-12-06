@@ -20,7 +20,7 @@ import Foundation
  The numeric location of the identified element in the document, represented with two integers labeled `begin` and
  `end`.
  */
-public struct Location: Codable {
+public struct Location: Codable, Equatable {
 
     /**
      The element's `begin` index.

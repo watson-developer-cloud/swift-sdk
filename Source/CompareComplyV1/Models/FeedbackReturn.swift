@@ -19,7 +19,7 @@ import Foundation
 /**
  Information about the document and the submitted feedback.
  */
-public struct FeedbackReturn: Decodable {
+public struct FeedbackReturn: Codable, Equatable {
 
     /**
      The unique ID of the feedback object.

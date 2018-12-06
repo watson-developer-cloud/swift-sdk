@@ -19,7 +19,7 @@ import Foundation
 /**
  Termination dates identified in the input document.
  */
-public struct TerminationDates: Decodable {
+public struct TerminationDates: Codable, Equatable {
 
     /**
      The termination date.

@@ -19,7 +19,7 @@ import Foundation
 /**
  The structure of the input document.
  */
-public struct DocStructure: Decodable {
+public struct DocStructure: Codable, Equatable {
 
     /**
      An array containing one object per section or subsection identified in the input document.

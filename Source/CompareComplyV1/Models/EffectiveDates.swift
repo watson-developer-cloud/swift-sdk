@@ -19,7 +19,7 @@ import Foundation
 /**
  An effective date.
  */
-public struct EffectiveDates: Decodable {
+public struct EffectiveDates: Codable, Equatable {
 
     /**
      The effective date, listed as a string.

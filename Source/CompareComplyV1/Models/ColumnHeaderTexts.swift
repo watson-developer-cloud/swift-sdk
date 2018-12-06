@@ -19,7 +19,7 @@ import Foundation
 /**
  An array of values, each being the `text` value of a column header that is applicable to the current cell.
  */
-public struct ColumnHeaderTexts: Decodable {
+public struct ColumnHeaderTexts: Codable, Equatable {
 
     /**
      The `text` value of a column header.

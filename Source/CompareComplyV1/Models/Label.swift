@@ -20,7 +20,7 @@ import Foundation
  A pair of `nature` and `party` objects. The `nature` object identifies the effect of the element on the identified
  `party`, and the `party` object identifies the affected party.
  */
-public struct Label: Codable {
+public struct Label: Codable, Equatable {
 
     /**
      The identified `nature` of the element.

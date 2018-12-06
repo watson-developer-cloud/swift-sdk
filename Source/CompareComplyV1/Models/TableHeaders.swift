@@ -19,7 +19,7 @@ import Foundation
 /**
  The contents of the current table's header.
  */
-public struct TableHeaders: Decodable {
+public struct TableHeaders: Codable, Equatable {
 
     /**
      String value in the format `tableHeader-x-y` where `x` and `y` are the `begin` and `end` offsets, respectfully, of

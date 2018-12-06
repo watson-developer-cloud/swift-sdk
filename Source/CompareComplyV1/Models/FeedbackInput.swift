@@ -19,7 +19,7 @@ import Foundation
 /**
  The feedback to be added to an element in the document.
  */
-internal struct FeedbackInput: Encodable {
+internal struct FeedbackInput: Codable, Equatable {
 
     /**
      An optional string identifying the user.

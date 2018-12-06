@@ -19,7 +19,7 @@ import Foundation
 /**
  Pagination details, if required by the length of the output.
  */
-public struct Pagination: Decodable {
+public struct Pagination: Codable, Equatable {
 
     /**
      A token identifying the current page of results.

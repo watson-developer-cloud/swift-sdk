@@ -19,7 +19,7 @@ import Foundation
 /**
  The status and message of the deletion request.
  */
-public struct FeedbackDeleted: Decodable {
+public struct FeedbackDeleted: Codable, Equatable {
 
     /**
      HTTP return code.

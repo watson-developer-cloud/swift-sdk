@@ -19,7 +19,7 @@ import Foundation
 /**
  Basic information about the input document.
  */
-public struct Document: Decodable {
+public struct Document: Codable, Equatable {
 
     /**
      Document title, if detected.

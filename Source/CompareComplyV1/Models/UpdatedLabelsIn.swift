@@ -19,7 +19,7 @@ import Foundation
 /**
  The updated labeling from the input document, accounting for the submitted feedback.
  */
-public struct UpdatedLabelsIn: Encodable {
+public struct UpdatedLabelsIn: Codable, Equatable {
 
     /**
      Description of the action specified by the element and whom it affects.

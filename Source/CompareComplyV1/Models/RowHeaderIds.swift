@@ -19,7 +19,7 @@ import Foundation
 /**
  An array of values, each being the `id` value of a row header that is applicable to this body cell.
  */
-public struct RowHeaderIds: Decodable {
+public struct RowHeaderIDs: Codable, Equatable {
 
     /**
      The `id` values of a row header.

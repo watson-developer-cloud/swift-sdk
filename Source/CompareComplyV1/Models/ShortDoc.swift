@@ -19,7 +19,7 @@ import Foundation
 /**
  Brief information about the input document.
  */
-public struct ShortDoc: Codable {
+public struct ShortDoc: Codable, Equatable {
 
     /**
      The title of the input document, if identified.

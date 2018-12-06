@@ -19,7 +19,7 @@ import Foundation
 /**
  Identification of a specific type.
  */
-public struct TypeLabel: Codable {
+public struct TypeLabel: Codable, Equatable {
 
     /**
      A pair of `nature` and `party` objects. The `nature` object identifies the effect of the element on the identified

@@ -19,7 +19,7 @@ import Foundation
 /**
  Cells that are not table header, column header, or row header cells.
  */
-public struct BodyCells: Decodable {
+public struct BodyCells: Codable, Equatable {
 
     /**
      A string value in the format `columnHeader-x-y`, where `x` and `y` are the begin and end offsets of this column

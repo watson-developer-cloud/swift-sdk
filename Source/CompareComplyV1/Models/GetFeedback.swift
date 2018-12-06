@@ -19,7 +19,7 @@ import Foundation
 /**
  The results of a single feedback query.
  */
-public struct GetFeedback: Decodable {
+public struct GetFeedback: Codable, Equatable {
 
     /**
      A string uniquely identifying the feedback entry.

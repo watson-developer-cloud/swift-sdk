@@ -19,7 +19,7 @@ import Foundation
 /**
  A party and its corresponding role, including address and contact information if identified.
  */
-public struct Parties: Decodable {
+public struct Parties: Codable, Equatable {
 
     /**
      A string identifying the party.

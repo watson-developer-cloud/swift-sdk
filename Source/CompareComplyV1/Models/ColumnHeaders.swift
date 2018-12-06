@@ -19,7 +19,7 @@ import Foundation
 /**
  Column-level cells, each applicable as a header to other cells in the same column as itself, of the current table.
  */
-public struct ColumnHeaders: Decodable {
+public struct ColumnHeaders: Codable, Equatable {
 
     /**
      A string value in the format `columnHeader-x-y`, where `x` and `y` are the begin and end offsets of this column

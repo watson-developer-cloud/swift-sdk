@@ -19,7 +19,7 @@ import Foundation
 /**
  The original labeling from the input document, without the submitted feedback.
  */
-public struct OriginalLabelsIn: Encodable {
+public struct OriginalLabelsIn: Codable, Equatable {
 
     /**
      Description of the action specified by the element and whom it affects.

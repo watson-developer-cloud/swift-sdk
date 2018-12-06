@@ -19,7 +19,7 @@ import Foundation
 /**
  Details of semantically aligned elements.
  */
-public struct ElementPair: Decodable {
+public struct ElementPair: Codable, Equatable {
 
     /**
      The label of the document (that is, the value of either the `file_1_label` or `file_2_label` parameters) in which

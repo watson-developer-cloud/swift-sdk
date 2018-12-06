@@ -20,7 +20,7 @@ import Foundation
  If you provide customization input, the normalized version of the row header texts according to the customization;
  otherwise, the same value as `row_header_texts`.
  */
-public struct RowHeaderTextsNormalized: Decodable {
+public struct RowHeaderTextsNormalized: Codable, Equatable {
 
     /**
      The normalized version of a row header text.

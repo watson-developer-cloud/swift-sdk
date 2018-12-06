@@ -21,7 +21,7 @@ import Foundation
  not nested; instead, they are flattened out and can be placed back in order by using the `begin` and `end` values of
  the element and the `level` value of the section.
  */
-public struct SectionTitles: Decodable {
+public struct SectionTitles: Codable, Equatable {
 
     /**
      The text of the section title, if identified.

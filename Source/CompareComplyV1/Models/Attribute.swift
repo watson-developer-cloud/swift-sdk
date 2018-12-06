@@ -19,7 +19,7 @@ import Foundation
 /**
  List of document attributes.
  */
-public struct Attribute: Decodable {
+public struct Attribute: Codable, Equatable {
 
     /**
      The type of attribute. Possible values are `Currency`, `DateTime`, and `Location`.

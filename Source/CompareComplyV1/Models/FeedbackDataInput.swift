@@ -19,7 +19,7 @@ import Foundation
 /**
  Feedback data for submission.
  */
-public struct FeedbackDataInput: Encodable {
+public struct FeedbackDataInput: Codable, Equatable {
 
     /**
      The type of feedback. The only permitted value is `element_classification`.

@@ -19,7 +19,7 @@ import Foundation
 /**
  A party's address.
  */
-public struct Address: Decodable {
+public struct Address: Codable, Equatable {
 
     /**
      A string listing the address.

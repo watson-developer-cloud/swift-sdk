@@ -19,7 +19,7 @@ import Foundation
 /**
  Element that does not align semantically between two compared documents.
  */
-public struct UnalignedElement: Decodable {
+public struct UnalignedElement: Codable, Equatable {
 
     /**
      The label assigned to the document by the value of the `file_1_label` or `file_2_label` parameters on the

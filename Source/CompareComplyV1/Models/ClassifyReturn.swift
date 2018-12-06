@@ -19,7 +19,7 @@ import Foundation
 /**
  The analysis of objects returned by the `/v1/element_classification` method.
  */
-public struct ClassifyReturn: Decodable {
+public struct ClassifyReturn: Codable, Equatable {
 
     /**
      Basic information about the input document.

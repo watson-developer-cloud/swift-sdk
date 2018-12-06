@@ -19,7 +19,7 @@ import Foundation
 /**
  A list of `begin` and `end` indexes that indicate the locations of the elements in the input document.
  */
-public struct ElementLocations: Decodable {
+public struct ElementLocations: Codable, Equatable {
 
     /**
      An integer that indicates the starting position of the element in the input document.

@@ -19,7 +19,7 @@ import Foundation
 /**
  The batch-request status.
  */
-public struct BatchStatus: Decodable {
+public struct BatchStatus: Codable, Equatable {
 
     /**
      The method to be run against the documents. Possible values are `html_conversion`, `element_classification`, and

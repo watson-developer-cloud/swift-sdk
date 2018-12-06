@@ -19,7 +19,7 @@ import Foundation
 /**
  An array of values, each being the `text` value of a row header that is applicable to this body cell.
  */
-public struct RowHeaderTexts: Decodable {
+public struct RowHeaderTexts: Codable, Equatable {
 
     /**
      The `text` value of a row header.

@@ -19,7 +19,7 @@ import Foundation
 /**
  A monetary amount identified in the input document.
  */
-public struct ContractAmts: Decodable {
+public struct ContractAmts: Codable, Equatable {
 
     /**
      The monetary amount.

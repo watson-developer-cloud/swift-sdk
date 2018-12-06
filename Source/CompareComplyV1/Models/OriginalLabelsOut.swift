@@ -19,7 +19,7 @@ import Foundation
 /**
  The original labeling from the input document, without the submitted feedback.
  */
-public struct OriginalLabelsOut: Decodable {
+public struct OriginalLabelsOut: Codable, Equatable {
 
     /**
      A string identifying the type of modification the feedback entry in the `updated_labels` array. Possible values are

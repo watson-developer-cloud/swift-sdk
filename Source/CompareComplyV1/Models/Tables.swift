@@ -19,7 +19,7 @@ import Foundation
 /**
  The contents of the tables extracted from a document.
  */
-public struct Tables: Decodable {
+public struct Tables: Codable, Equatable {
 
     /**
      The numeric location of the identified element in the document, represented with two integers labeled `begin` and

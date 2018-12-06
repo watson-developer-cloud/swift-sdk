@@ -19,7 +19,7 @@ import Foundation
 /**
  The results of a successful `GET /v1/batches` request.
  */
-public struct Batches: Decodable {
+public struct Batches: Codable, Equatable {
 
     /**
      A list of the status of all batch requests.

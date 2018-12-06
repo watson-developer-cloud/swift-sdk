@@ -20,7 +20,7 @@ import Foundation
  If you provide customization input, the normalized version of the column header texts according to the customization;
  otherwise, the same value as `column_header_texts`.
  */
-public struct ColumnHeaderTextsNormalized: Decodable {
+public struct ColumnHeaderTextsNormalized: Codable, Equatable {
 
     /**
      The normalized version of a column header text.

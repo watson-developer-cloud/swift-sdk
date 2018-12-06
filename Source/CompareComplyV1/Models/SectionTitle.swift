@@ -19,7 +19,7 @@ import Foundation
 /**
  The table's section title, if identified.
  */
-public struct SectionTitle: Decodable {
+public struct SectionTitle: Codable, Equatable {
 
     /**
      The text of the section title, if identified.

@@ -19,7 +19,7 @@ import Foundation
 /**
  The analysis of the document's tables.
  */
-public struct TableReturn: Decodable {
+public struct TableReturn: Codable, Equatable {
 
     /**
      Information about the parsed input document.

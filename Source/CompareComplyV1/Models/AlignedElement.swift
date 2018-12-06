@@ -17,7 +17,7 @@
 import Foundation
 
 /** AlignedElement. */
-public struct AlignedElement: Decodable {
+public struct AlignedElement: Codable, Equatable {
 
     /**
      Identifies two elements that semantically align between the compared documents.

@@ -19,7 +19,7 @@ import Foundation
 /**
  The updated labeling from the input document, accounting for the submitted feedback.
  */
-public struct UpdatedLabelsOut: Decodable {
+public struct UpdatedLabelsOut: Codable, Equatable {
 
     /**
      The type of modification the feedback entry in the `updated_labels` array. Possible values are `added`,

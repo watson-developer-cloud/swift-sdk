@@ -18,7 +18,9 @@
 
 import XCTest
 import RestKit
+#if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
 import CoreML
+#endif
 @testable import VisualRecognitionV3
 
 class VisualRecognitionUnitTests: XCTestCase {
@@ -133,7 +135,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             let bodyFieldsCount = numberOfFieldsInMultiPartFormBody(request: request)
             XCTAssertEqual(bodyFieldsCount, 5)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "classify")
@@ -151,7 +153,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             XCTAssertTrue(request.allHTTPHeaderFields?.keys.contains("x-foo") ?? false)
             XCTAssertEqual(request.allHTTPHeaderFields?["x-foo"], "bar")
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "Classify an image with explicit headers.")
@@ -174,7 +176,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             let bodyFieldsCount = numberOfFieldsInMultiPartFormBody(request: request)
             XCTAssertEqual(bodyFieldsCount, 4)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "createClassifier")
@@ -194,7 +196,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             XCTAssertNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "listClassifiers")
@@ -217,7 +219,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             XCTAssertNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "getClassifier")
@@ -243,7 +245,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             let bodyFieldsCount = numberOfFieldsInMultiPartFormBody(request: request)
             XCTAssertEqual(bodyFieldsCount, 3)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "updateClassifier")
@@ -265,7 +267,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             XCTAssertNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
         let expectation = self.expectation(description: "deleteClassifier.")
         visualRecognition.deleteClassifier(classifierID: classifierID) {
@@ -288,7 +290,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             let bodyFieldsCount = numberOfFieldsInMultiPartFormBody(request: request)
             XCTAssertEqual(bodyFieldsCount, 2)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "detectFaces")
@@ -314,7 +316,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             XCTAssertNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "getCoreMlModel")
@@ -338,7 +340,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             XCTAssertNil(request.httpBodyStream)
             XCTAssertNotNil(request.allHTTPHeaderFields)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
         let expectation = self.expectation(description: "deleteUserData")
         visualRecognition.deleteUserData(customerID: customerID) {
@@ -347,6 +349,8 @@ class VisualRecognitionUnitTests: XCTestCase {
         }
         waitForExpectations(timeout: timeout)
     }
+
+#if os(iOS) || os(tvOS) || os(watchOS)
 
     // MARK: - VisualRecognition+CoreML
 
@@ -545,7 +549,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             let bodyFieldsCount = numberOfFieldsInMultiPartFormBody(request: request)
             XCTAssertEqual(bodyFieldsCount, 4)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "classifyWithLocalModel")
@@ -645,7 +649,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             let bodyFieldsCount = numberOfFieldsInMultiPartFormBody(request: request)
             XCTAssertEqual(bodyFieldsCount, 4)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "classifyWithImage")
@@ -669,7 +673,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             let bodyFieldsCount = numberOfFieldsInMultiPartFormBody(request: request)
             XCTAssertEqual(bodyFieldsCount, 1)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "detectFacesWithImage")
@@ -695,7 +699,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             let bodyFieldsCount = numberOfFieldsInMultiPartFormBody(request: request)
             XCTAssertEqual(bodyFieldsCount, 4)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "classifyWithLocalModel using UIImage")
@@ -705,4 +709,7 @@ class VisualRecognitionUnitTests: XCTestCase {
         }
         waitForExpectations(timeout: timeout)
     }
+
+#endif
+
 }

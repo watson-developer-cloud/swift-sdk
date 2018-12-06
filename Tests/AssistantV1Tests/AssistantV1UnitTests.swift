@@ -94,7 +94,7 @@ class AssistantV1UnitTests: XCTestCase {
                 XCTFail(missingBodyMessage(error))
             }
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "message")
@@ -129,7 +129,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertTrue(request.url?.query?.contains("cursor=mouse") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_audit=true") ?? false)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "listWorkspaces")
@@ -182,7 +182,7 @@ class AssistantV1UnitTests: XCTestCase {
                 XCTFail(missingBodyMessage(error))
             }
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "createWorkspace")
@@ -216,7 +216,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertTrue(request.url?.query?.contains("export=true") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_audit=true") ?? false)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "getWorkspace")
@@ -270,7 +270,7 @@ class AssistantV1UnitTests: XCTestCase {
                 XCTFail(missingBodyMessage(error))
             }
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "updateWorkspace")
@@ -304,7 +304,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL.last!, self.workspaceID)
             XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "deleteWorkspace")
@@ -335,7 +335,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertTrue(request.url?.query?.contains("cursor=mouse") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_audit=true") ?? false)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "listIntents")
@@ -377,7 +377,7 @@ class AssistantV1UnitTests: XCTestCase {
                 XCTFail(missingBodyMessage(error))
             }
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "createIntent")
@@ -409,7 +409,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertTrue(request.url?.query?.contains("export=true") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_audit=true") ?? false)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "getIntent")
@@ -452,7 +452,7 @@ class AssistantV1UnitTests: XCTestCase {
                 XCTFail(missingBodyMessage(error))
             }
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "updateIntent")
@@ -483,7 +483,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 3], intent)
             XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "deleteIntent")
@@ -517,7 +517,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertTrue(request.url?.query?.contains("cursor=mouse") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_audit=true") ?? false)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "listExamples")
@@ -562,7 +562,7 @@ class AssistantV1UnitTests: XCTestCase {
                 XCTFail(missingBodyMessage(error))
             }
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "createExample")
@@ -596,7 +596,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_audit=true") ?? false)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "getExample")
@@ -640,7 +640,7 @@ class AssistantV1UnitTests: XCTestCase {
                 XCTFail(missingBodyMessage(error))
             }
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "updateExample")
@@ -674,7 +674,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 5], text)
             XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "deleteExample")
@@ -707,7 +707,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertTrue(request.url?.query?.contains("cursor=mouse") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_audit=true") ?? false)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "listCounterexamples")
@@ -746,7 +746,7 @@ class AssistantV1UnitTests: XCTestCase {
                 XCTFail(missingBodyMessage(error))
             }
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "createCounterexample")
@@ -775,7 +775,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_audit=true") ?? false)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "getCounterexample")
@@ -813,7 +813,7 @@ class AssistantV1UnitTests: XCTestCase {
                 XCTFail(missingBodyMessage(error))
             }
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "updateCounterexample")
@@ -842,7 +842,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 3], text)
             XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "deleteCounterexample")
@@ -875,7 +875,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertTrue(request.url?.query?.contains("cursor=mouse") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_audit=true") ?? false)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "listEntities")
@@ -923,7 +923,7 @@ class AssistantV1UnitTests: XCTestCase {
                 XCTFail(missingBodyMessage(error))
             }
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "createEntity")
@@ -956,7 +956,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_audit=true") ?? false)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "getEntity")
@@ -1003,7 +1003,7 @@ class AssistantV1UnitTests: XCTestCase {
                 XCTFail(missingBodyMessage(error))
             }
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "updateEntity")
@@ -1036,7 +1036,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 3], entity)
             XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "deleteEntity")
@@ -1069,7 +1069,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertTrue(request.url?.query?.contains("export=true") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_audit=true") ?? false)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "listMentions")
@@ -1108,7 +1108,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertTrue(request.url?.query?.contains("cursor=mouse") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_audit=true") ?? false)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "listValues")
@@ -1160,7 +1160,7 @@ class AssistantV1UnitTests: XCTestCase {
                 XCTFail(missingBodyMessage(error))
             }
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "createValue")
@@ -1198,7 +1198,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertTrue(request.url?.query?.contains("export=true") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_audit=true") ?? false)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "getValue")
@@ -1249,7 +1249,7 @@ class AssistantV1UnitTests: XCTestCase {
                 XCTFail(missingBodyMessage(error))
             }
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "updateValue")
@@ -1286,7 +1286,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 5], value)
             XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "deleteValue")
@@ -1326,7 +1326,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertTrue(request.url?.query?.contains("cursor=mouse") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_audit=true") ?? false)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "listSynonyms")
@@ -1373,7 +1373,7 @@ class AssistantV1UnitTests: XCTestCase {
                 XCTFail(missingBodyMessage(error))
             }
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "createSynonym")
@@ -1410,7 +1410,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_audit=true") ?? false)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "getSynonym")
@@ -1456,7 +1456,7 @@ class AssistantV1UnitTests: XCTestCase {
                 XCTFail(missingBodyMessage(error))
             }
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "updateSynonym")
@@ -1493,7 +1493,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 7], synonym)
             XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "deleteSynonym")
@@ -1527,7 +1527,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertTrue(request.url?.query?.contains("cursor=mouse") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_audit=true") ?? false)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "listDialogNodes")
@@ -1602,7 +1602,7 @@ class AssistantV1UnitTests: XCTestCase {
                 XCTFail(missingBodyMessage(error))
             }
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "createDialogNode")
@@ -1648,7 +1648,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_audit=true") ?? false)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "getDialogNode")
@@ -1722,7 +1722,7 @@ class AssistantV1UnitTests: XCTestCase {
                 XCTFail(missingBodyMessage(error))
             }
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "updateDialogNode")
@@ -1768,7 +1768,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(endOfURL[endOfURL.startIndex + 3], dialogNode)
             XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "deleteDialogNode")
@@ -1799,7 +1799,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertTrue(request.url?.query?.contains("sort=alphabetical") ?? false)
             XCTAssertTrue(request.url?.query?.contains("cursor=mouse") ?? false)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "listLogs")
@@ -1828,7 +1828,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertTrue(request.url?.query?.contains("sort=alphabetical") ?? false)
             XCTAssertTrue(request.url?.query?.contains("cursor=mouse") ?? false)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "listAllLogs")
@@ -1856,7 +1856,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertEqual(request.url!.pathComponents.last!, "user_data")
             XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
 
-            return (HTTPURLResponse(), Data())
+            return (dummyResponse, Data())
         }
 
         let expectation = self.expectation(description: "deleteUserData")

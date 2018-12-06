@@ -35,6 +35,50 @@ func missingBodyMessage(_ error: Error) -> String {
 let accessToken = "my_access_token"
 let versionDate = "2018-11-13"
 
+// MARK: - Mocking requests
+
+let dummyResponse = HTTPURLResponse(url: exampleURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
+
+/**
+ * MockURLProtocol from WWDC 2018 Session 417 Testing Tips & Tricks
+ */
+class MockURLProtocol: URLProtocol {
+
+    static var requestHandler: ((URLRequest) throws -> (HTTPURLResponse, Data?))?
+
+    override class func canInit(with request: URLRequest) -> Bool {
+        return true
+    }
+
+    override class func canonicalRequest(for request: URLRequest) -> URLRequest {
+        return request
+    }
+
+    override func startLoading() {
+        guard let handler = MockURLProtocol.requestHandler else {
+            XCTFail("Received unexpected request with no handler set")
+            return
+        }
+        do {
+            let (response, data) = try handler(request)
+            client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+            if let data = data {
+                client?.urlProtocol(self, didLoad: data)
+            }
+            client?.urlProtocolDidFinishLoading(self)
+        } catch {
+            client?.urlProtocol(self, didFailWithError: error)
+        }
+    }
+
+    override func stopLoading() {
+        // Don't delete this method!  Without it, your tests will crash
+        // in com.apple.CFNetwork.CustomProtocols
+    }
+
+}
+
+
 // MARK: - Analyzing request bodies
 
 /**

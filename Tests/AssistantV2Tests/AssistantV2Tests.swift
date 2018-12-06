@@ -96,7 +96,6 @@ class AssistantV2Tests: XCTestCase {
     func testCreateSessionWithInvalidAssistantID() {
         let description = "Create a session"
         let expectation = self.expectation(description: description)
-        let failure = { (error: Error) in expectation.fulfill() }
 
         let invalidID = "Invalid Assistant ID"
         assistant.createSession(assistantID: invalidID) {
@@ -158,7 +157,6 @@ class AssistantV2Tests: XCTestCase {
     func testDeleteSessionWithInvalidSessionID() {
         let description = "Delete an invalid session"
         let expectation = self.expectation(description: description)
-        let failure = { (error: Error) in expectation.fulfill() }
 
         let invalidID = "Invalid Session ID"
         assistant.deleteSession(assistantID: assistantID, sessionID: invalidID) {

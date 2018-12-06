@@ -32,13 +32,13 @@ public struct AlignedElement: Codable, Equatable {
     /**
      One or more hashed values that you can send to IBM to provide feedback or receive support.
      */
-    public var provenanceIds: [String]?
+    public var provenanceIDs: [String]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case elementPair = "element_pair"
         case identicalText = "identical_text"
-        case provenanceIds = "provenance_ids"
+        case provenanceIDs = "provenance_ids"
     }
 
 }

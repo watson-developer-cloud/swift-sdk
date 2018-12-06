@@ -59,30 +59,30 @@ public struct Category: Codable, Equatable {
     /**
      One or more hashed values that you can send to IBM to provide feedback or receive support.
      */
-    public var provenanceIds: [String]?
+    public var provenanceIDs: [String]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case label = "label"
-        case provenanceIds = "provenance_ids"
+        case provenanceIDs = "provenance_ids"
     }
 
     /**
      Initialize a `Category` with member variables.
 
      - parameter label: The category of the associated element.
-     - parameter provenanceIds: One or more hashed values that you can send to IBM to provide feedback or receive
+     - parameter provenanceIDs: One or more hashed values that you can send to IBM to provide feedback or receive
        support.
 
      - returns: An initialized `Category`.
     */
     public init(
         label: String? = nil,
-        provenanceIds: [String]? = nil
+        provenanceIDs: [String]? = nil
     )
     {
         self.label = label
-        self.provenanceIds = provenanceIds
+        self.provenanceIDs = provenanceIDs
     }
 
 }

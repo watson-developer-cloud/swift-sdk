@@ -34,12 +34,12 @@ public struct Pagination: Codable, Equatable {
     /**
      The URL that returns the current page of results.
      */
-    public var refreshUrl: String?
+    public var refreshURL: String?
 
     /**
      The URL that returns the next page of results.
      */
-    public var nextUrl: String?
+    public var nextURL: String?
 
     /**
      Reserved for future use.
@@ -50,8 +50,8 @@ public struct Pagination: Codable, Equatable {
     private enum CodingKeys: String, CodingKey {
         case refreshCursor = "refresh_cursor"
         case nextCursor = "next_cursor"
-        case refreshUrl = "refresh_url"
-        case nextUrl = "next_url"
+        case refreshURL = "refresh_url"
+        case nextURL = "next_url"
         case total = "total"
     }
 

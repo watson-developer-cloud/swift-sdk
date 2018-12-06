@@ -58,13 +58,13 @@ public struct BodyCells: Codable, Equatable {
      */
     public var columnIndexEnd: Int?
 
-    public var rowHeaderIds: [RowHeaderIds]?
+    public var rowHeaderIDs: [RowHeaderIDs]?
 
     public var rowHeaderTexts: [RowHeaderTexts]?
 
     public var rowHeaderTextsNormalized: [RowHeaderTextsNormalized]?
 
-    public var columnHeaderIds: [ColumnHeaderIds]?
+    public var columnHeaderIDs: [ColumnHeaderIDs]?
 
     public var columnHeaderTexts: [ColumnHeaderTexts]?
 
@@ -79,10 +79,10 @@ public struct BodyCells: Codable, Equatable {
         case rowIndexEnd = "row_index_end"
         case columnIndexBegin = "column_index_begin"
         case columnIndexEnd = "column_index_end"
-        case rowHeaderIds = "row_header_ids"
+        case rowHeaderIDs = "row_header_ids"
         case rowHeaderTexts = "row_header_texts"
         case rowHeaderTextsNormalized = "row_header_texts_normalized"
-        case columnHeaderIds = "column_header_ids"
+        case columnHeaderIDs = "column_header_ids"
         case columnHeaderTexts = "column_header_texts"
         case columnHeaderTextsNormalized = "column_header_texts_normalized"
     }

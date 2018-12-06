@@ -30,12 +30,12 @@ public struct TypeLabel: Codable, Equatable {
     /**
      One or more hash values that you can send to IBM to provide feedback or receive support.
      */
-    public var provenanceIds: [String]?
+    public var provenanceIDs: [String]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case label = "label"
-        case provenanceIds = "provenance_ids"
+        case provenanceIDs = "provenance_ids"
     }
 
     /**
@@ -43,18 +43,18 @@ public struct TypeLabel: Codable, Equatable {
 
      - parameter label: A pair of `nature` and `party` objects. The `nature` object identifies the effect of the
        element on the identified `party`, and the `party` object identifies the affected party.
-     - parameter provenanceIds: One or more hash values that you can send to IBM to provide feedback or receive
+     - parameter provenanceIDs: One or more hash values that you can send to IBM to provide feedback or receive
        support.
 
      - returns: An initialized `TypeLabel`.
     */
     public init(
         label: Label? = nil,
-        provenanceIds: [String]? = nil
+        provenanceIDs: [String]? = nil
     )
     {
         self.label = label
-        self.provenanceIds = provenanceIds
+        self.provenanceIDs = provenanceIDs
     }
 
 }

@@ -17,7 +17,7 @@
 import Foundation
 
 /** Model. */
-public struct Model: Decodable {
+public struct Model: Codable, Equatable {
 
     /**
      Shows as available if the model is ready for use.

@@ -20,7 +20,7 @@ import Foundation
  Parses sentences into subject, action, and object form.
  Supported languages: English, German, Japanese, Korean, Spanish.
  */
-public struct SemanticRolesOptions: Encodable {
+public struct SemanticRolesOptions: Codable, Equatable {
 
     /**
      Maximum number of semantic_roles results to return.

@@ -17,7 +17,7 @@
 import Foundation
 
 /** CreateIntent. */
-public struct CreateIntent: Encodable {
+public struct CreateIntent: Codable, Equatable {
 
     /**
      The name of the intent. This string must conform to the following restrictions:

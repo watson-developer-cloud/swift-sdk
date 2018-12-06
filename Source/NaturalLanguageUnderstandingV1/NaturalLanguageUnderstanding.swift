@@ -33,10 +33,9 @@ public class NaturalLanguageUnderstanding {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    private let session = URLSession(configuration: URLSessionConfiguration.default)
-    private var authMethod: AuthenticationMethod
-    private let domain = "com.ibm.watson.developer-cloud.NaturalLanguageUnderstandingV1"
-    private let version: String
+    var session = URLSession(configuration: URLSessionConfiguration.default)
+    var authMethod: AuthenticationMethod
+    let version: String
 
     /**
      Create a `NaturalLanguageUnderstanding` object.
@@ -86,27 +85,31 @@ public class NaturalLanguageUnderstanding {
     }
 
     /**
-     If the response or data represents an error returned by the Natural Language Understanding service,
-     then return NSError with information about the error that occured. Otherwise, return nil.
+     Use the HTTP response and data received by the Natural Language Understanding service to extract
+     information about the error that occurred.
 
-     - parameter data: Raw data returned from the service that may represent an error.
-     - parameter response: the URL response returned from the service.
+     - parameter data: Raw data returned by the service that may represent an error.
+     - parameter response: the URL response returned by the service.
      */
-    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> Error {
+    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> WatsonError {
 
-        let code = response.statusCode
+        let statusCode = response.statusCode
+        var errorMessage: String?
+        var metadata = [String: Any]()
+
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
-            var userInfo: [String: Any] = [:]
+            metadata = [:]
             if case let .some(.string(message)) = json["error"] {
-                userInfo[NSLocalizedDescriptionKey] = message
+                errorMessage = message
             }
             if case let .some(.string(description)) = json["description"] {
-                userInfo[NSLocalizedRecoverySuggestionErrorKey] = description
+                metadata["description"] = description
             }
-            return NSError(domain: domain, code: code, userInfo: userInfo)
+            // If metadata is empty, it should show up as nil in the WatsonError
+            return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
         } catch {
-            return NSError(domain: domain, code: code, userInfo: nil)
+            return WatsonError.http(statusCode: statusCode, message: nil, metadata: nil)
         }
     }
 
@@ -116,21 +119,52 @@ public class NaturalLanguageUnderstanding {
      Analyzes text, HTML, or a public webpage with one or more text analysis features, including categories, concepts,
      emotion, entities, keywords, metadata, relations, semantic roles, and sentiment.
 
-     - parameter parameters: An object containing request parameters. The `features` object and one of the `text`,
-       `html`, or `url` attributes are required.
+     - parameter features: Analysis features and options.
+     - parameter text: The plain text to analyze. One of the `text`, `html`, or `url` parameters is required.
+     - parameter html: The HTML file to analyze. One of the `text`, `html`, or `url` parameters is required.
+     - parameter url: The web page to analyze. One of the `text`, `html`, or `url` parameters is required.
+     - parameter clean: Remove website elements, such as links, ads, etc.
+     - parameter xpath: An [XPath query](https://www.w3.org/TR/xpath/) to perform on `html` or `url` input. Results of
+       the query will be appended to the cleaned webpage text before it is analyzed. To analyze only the results of the
+       XPath query, set the `clean` parameter to `false`.
+     - parameter fallbackToRaw: Whether to use raw HTML content if text cleaning fails.
+     - parameter returnAnalyzedText: Whether or not to return the analyzed text.
+     - parameter language: ISO 639-1 code that specifies the language of your text. This overrides automatic language
+       detection. Language support differs depending on the features you include in your analysis. See [Language
+       support](https://www.bluemix.net/docs/services/natural-language-understanding/language-support.html) for more
+       information.
+     - parameter limitTextCharacters: Sets the maximum number of characters that are processed by the service.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func analyze(
-        parameters: Parameters,
+        features: Features,
+        text: String? = nil,
+        html: String? = nil,
+        url: String? = nil,
+        clean: Bool? = nil,
+        xpath: String? = nil,
+        fallbackToRaw: Bool? = nil,
+        returnAnalyzedText: Bool? = nil,
+        language: String? = nil,
+        limitTextCharacters: Int? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (AnalysisResults) -> Void)
+        completionHandler: @escaping (WatsonResponse<AnalysisResults>?, WatsonError?) -> Void)
     {
         // construct body
-        guard let body = try? JSONEncoder().encode(parameters) else {
-            failure?(RestError.serializationError)
+        let analyzeRequest = Parameters(
+            features: features,
+            text: text,
+            html: html,
+            url: url,
+            clean: clean,
+            xpath: xpath,
+            fallbackToRaw: fallbackToRaw,
+            returnAnalyzedText: returnAnalyzedText,
+            language: language,
+            limitTextCharacters: limitTextCharacters)
+        guard let body = try? JSONEncoder().encode(analyzeRequest) else {
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -159,13 +193,7 @@ public class NaturalLanguageUnderstanding {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<AnalysisResults>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -175,13 +203,11 @@ public class NaturalLanguageUnderstanding {
      you have created and linked to your Natural Language Understanding service.
 
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listModels(
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ListModelsResults) -> Void)
+        completionHandler: @escaping (WatsonResponse<ListModelsResults>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -206,13 +232,7 @@ public class NaturalLanguageUnderstanding {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<ListModelsResults>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -222,14 +242,12 @@ public class NaturalLanguageUnderstanding {
 
      - parameter modelID: model_id of the model to delete.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteModel(
         modelID: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (DeleteModelResults) -> Void)
+        completionHandler: @escaping (WatsonResponse<DeleteModelResults>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -245,7 +263,7 @@ public class NaturalLanguageUnderstanding {
         // construct REST request
         let path = "/v1/models/\(modelID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -259,13 +277,7 @@ public class NaturalLanguageUnderstanding {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<DeleteModelResults>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
 }

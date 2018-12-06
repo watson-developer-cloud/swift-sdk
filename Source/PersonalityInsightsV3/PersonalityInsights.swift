@@ -41,10 +41,9 @@ public class PersonalityInsights {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    private let session = URLSession(configuration: URLSessionConfiguration.default)
-    private var authMethod: AuthenticationMethod
-    private let domain = "com.ibm.watson.developer-cloud.PersonalityInsightsV3"
-    private let version: String
+    var session = URLSession(configuration: URLSessionConfiguration.default)
+    var authMethod: AuthenticationMethod
+    let version: String
 
     /**
      Create a `PersonalityInsights` object.
@@ -94,27 +93,31 @@ public class PersonalityInsights {
     }
 
     /**
-     If the response or data represents an error returned by the Personality Insights service,
-     then return NSError with information about the error that occured. Otherwise, return nil.
+     Use the HTTP response and data received by the Personality Insights service to extract
+     information about the error that occurred.
 
-     - parameter data: Raw data returned from the service that may represent an error.
-     - parameter response: the URL response returned from the service.
+     - parameter data: Raw data returned by the service that may represent an error.
+     - parameter response: the URL response returned by the service.
      */
-    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> Error {
+    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> WatsonError {
 
-        let code = response.statusCode
+        let statusCode = response.statusCode
+        var errorMessage: String?
+        var metadata = [String: Any]()
+
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
-            var userInfo: [String: Any] = [:]
+            metadata = [:]
             if case let .some(.string(message)) = json["error"] {
-                userInfo[NSLocalizedDescriptionKey] = message
+                errorMessage = message
             }
             if case let .some(.string(help)) = json["help"] {
-                userInfo[NSLocalizedFailureReasonErrorKey] = help
+                metadata["help"] = help
             }
-            return NSError(domain: domain, code: code, userInfo: userInfo)
+            // If metadata is empty, it should show up as nil in the WatsonError
+            return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
         } catch {
-            return NSError(domain: domain, code: code, userInfo: nil)
+            return WatsonError.http(statusCode: statusCode, message: nil, metadata: nil)
         }
     }
 
@@ -158,8 +161,7 @@ public class PersonalityInsights {
      - parameter consumptionPreferences: Indicates whether consumption preferences are returned with the results. By
        default, no consumption preferences are returned.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func profile(
         profileContent: ProfileContent,
@@ -168,12 +170,11 @@ public class PersonalityInsights {
         rawScores: Bool? = nil,
         consumptionPreferences: Bool? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Profile) -> Void)
+        completionHandler: @escaping (WatsonResponse<Profile>?, WatsonError?) -> Void)
     {
         // construct body
         guard let body = profileContent.content else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -216,13 +217,7 @@ public class PersonalityInsights {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Profile>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -267,10 +262,9 @@ public class PersonalityInsights {
      - parameter consumptionPreferences: Indicates whether consumption preferences are returned with the results. By
        default, no consumption preferences are returned.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
-    public func profileAsCsv(
+    public func profileAsCSV(
         profileContent: ProfileContent,
         contentLanguage: String? = nil,
         acceptLanguage: String? = nil,
@@ -278,12 +272,11 @@ public class PersonalityInsights {
         csvHeaders: Bool? = nil,
         consumptionPreferences: Bool? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (String) -> Void)
+        completionHandler: @escaping (WatsonResponse<String>?, WatsonError?) -> Void)
     {
         // construct body
         guard let body = profileContent.content else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -330,115 +323,7 @@ public class PersonalityInsights {
         )
 
         // execute REST request
-        request.responseString {
-            (response: RestResponse<String>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.response(completionHandler: completionHandler)
     }
 
-}
-
-extension PersonalityInsights {
-
-    @available(*, deprecated, message: "This method has been deprecated in favor of the profile method that accepts a profileContent parameter.  This method will be removed in a future release.")
-    public func profile(
-        content: Content,
-        contentLanguage: String? = nil,
-        acceptLanguage: String? = nil,
-        rawScores: Bool? = nil,
-        consumptionPreferences: Bool? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Profile) -> Void)
-    {
-        profile(profileContent: .content(content), contentLanguage: contentLanguage, acceptLanguage: acceptLanguage,
-                rawScores: rawScores, consumptionPreferences: consumptionPreferences, headers: headers,
-                failure: failure, success: success)
-    }
-
-    @available(*, deprecated, message: "This method has been deprecated in favor of the profile method that accepts a profileContent parameter.  This method will be removed in a future release.")
-    public func profile(
-        text: String,
-        contentLanguage: String? = nil,
-        acceptLanguage: String? = nil,
-        rawScores: Bool? = nil,
-        consumptionPreferences: Bool? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Profile) -> Void)
-    {
-        profile(profileContent: .text(text), contentLanguage: contentLanguage, acceptLanguage: acceptLanguage,
-                rawScores: rawScores, consumptionPreferences: consumptionPreferences, headers: headers,
-                failure: failure, success: success)
-    }
-
-    @available(*, deprecated, message: "This method has been deprecated in favor of the profile method that accepts a profileContent parameter.  This method will be removed in a future release.")
-    public func profile(
-        html: String,
-        contentLanguage: String? = nil,
-        acceptLanguage: String? = nil,
-        rawScores: Bool? = nil,
-        consumptionPreferences: Bool? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Profile) -> Void)
-    {
-        profile(profileContent: .html(html), contentLanguage: contentLanguage, acceptLanguage: acceptLanguage,
-                rawScores: rawScores, consumptionPreferences: consumptionPreferences, headers: headers,
-                failure: failure, success: success)
-    }
-
-    @available(*, deprecated, message: "This method has been deprecated in favor of the profileAsCsv method that accepts a profileContent parameter.  This method will be removed in a future release.")
-    public func profileAsCsv(
-        content: Content,
-        contentLanguage: String? = nil,
-        acceptLanguage: String? = nil,
-        rawScores: Bool? = nil,
-        csvHeaders: Bool? = nil,
-        consumptionPreferences: Bool? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (String) -> Void)
-    {
-        profileAsCsv(profileContent: .content(content), contentLanguage: contentLanguage, acceptLanguage: acceptLanguage,
-                     rawScores: rawScores, csvHeaders: csvHeaders, consumptionPreferences: consumptionPreferences, headers: headers,
-                     failure: failure, success: success)
-    }
-
-    @available(*, deprecated, message: "This method has been deprecated in favor of the profileAsCsv method that accepts a profileContent parameter.  This method will be removed in a future release.")
-    public func profileAsCsv(
-        text: String,
-        contentLanguage: String? = nil,
-        acceptLanguage: String? = nil,
-        rawScores: Bool? = nil,
-        csvHeaders: Bool? = nil,
-        consumptionPreferences: Bool? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (String) -> Void)
-    {
-        profileAsCsv(profileContent: .text(text), contentLanguage: contentLanguage, acceptLanguage: acceptLanguage,
-                     rawScores: rawScores, csvHeaders: csvHeaders, consumptionPreferences: consumptionPreferences, headers: headers,
-                     failure: failure, success: success)
-    }
-
-    @available(*, deprecated, message: "This method has been deprecated in favor of the profileAsCsv method that accepts a profileContent parameter.  This method will be removed in a future release.")
-    public func profileAsCsv(
-        html: String,
-        contentLanguage: String? = nil,
-        acceptLanguage: String? = nil,
-        rawScores: Bool? = nil,
-        csvHeaders: Bool? = nil,
-        consumptionPreferences: Bool? = nil,
-        headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (String) -> Void)
-    {
-        profileAsCsv(profileContent: .html(html), contentLanguage: contentLanguage, acceptLanguage: acceptLanguage,
-                     rawScores: rawScores, csvHeaders: csvHeaders, consumptionPreferences: consumptionPreferences, headers: headers,
-                     failure: failure, success: success)
-    }
 }

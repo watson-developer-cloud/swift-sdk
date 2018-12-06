@@ -17,7 +17,7 @@
 import Foundation
 
 /** QueryRelationsArgument. */
-public struct QueryRelationsArgument: Decodable {
+public struct QueryRelationsArgument: Codable, Equatable {
 
     public var entities: [QueryEntitiesEntity]?
 

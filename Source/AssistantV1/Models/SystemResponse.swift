@@ -20,7 +20,7 @@ import RestKit
 /**
  For internal use only.
  */
-public struct SystemResponse: Codable {
+public struct SystemResponse: Codable, Equatable {
 
     /// Additional properties associated with this model.
     public var additionalProperties: [String: JSON]

@@ -20,7 +20,7 @@ import Foundation
  Individual result object for a **logs** query. Each object represents either a query to a Discovery collection or an
  event that is associated with a query.
  */
-public struct LogQueryResponseResult: Decodable {
+public struct LogQueryResponseResult: Codable, Equatable {
 
     /**
      The type of log entry returned.
@@ -84,13 +84,13 @@ public struct LogQueryResponseResult: Decodable {
     /**
      Date that the log result was created. Returned in `YYYY-MM-DDThh:mm:ssZ` format.
      */
-    public var createdTimestamp: String?
+    public var createdTimestamp: Date?
 
     /**
      Date specified by the user when recording an event. Returned in `YYYY-MM-DDThh:mm:ssZ` format. Only returned with
      logs of type **event**.
      */
-    public var clientTimestamp: String?
+    public var clientTimestamp: Date?
 
     /**
      Identifier that corresponds to the **natural_language_query** string used in the original or associated query. All

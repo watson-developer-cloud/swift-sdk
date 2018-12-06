@@ -19,7 +19,7 @@ import Foundation
 /**
  Object containing source crawl status information.
  */
-public struct SourceStatus: Decodable {
+public struct SourceStatus: Codable, Equatable {
 
     /**
      The current status of the source crawl for this collection. This field returns `not_configured` if the default
@@ -52,7 +52,7 @@ public struct SourceStatus: Decodable {
     /**
      Date in UTC format indicating when the last crawl was attempted. If `null`, no crawl was completed.
      */
-    public var lastUpdated: String?
+    public var lastUpdated: Date?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {

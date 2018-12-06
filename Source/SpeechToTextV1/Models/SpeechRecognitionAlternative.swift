@@ -17,7 +17,7 @@
 import Foundation
 
 /** SpeechRecognitionAlternative. */
-public struct SpeechRecognitionAlternative: Decodable {
+public struct SpeechRecognitionAlternative: Codable, Equatable {
 
     /**
      A transcription of the audio.

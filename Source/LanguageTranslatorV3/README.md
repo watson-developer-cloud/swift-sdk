@@ -7,16 +7,23 @@ The following example demonstrates how to use the Language Translator service:
 ```swift
 import LanguageTranslatorV3
 
-let username = "your-username-here"
-let password = "your-password-here"
-let version = "yyyy-mm-dd" // use today's date for the most recent version
-let languageTranslator = LanguageTranslator(username: username, password: password, version: version)
+let apiKey = "your-api-key"
+let version = "YYYY-MM-DD" // use today's date for the most recent version
+let languageTranslator = LanguageTranslator(version: version, apiKey: apiKey)
 
-let failure = { (error: Error) in print(error) }
-let request = TranslateRequest(text: ["Hello"], source: "en", target: "es")
-languageTranslator.translate(request: request, failure: failure) {
-    translation in
-    print(translation)
+languageTranslator.translate(
+	text: ["Hello"],
+	source: "en",
+	target: "es") { response, error in
+
+	if let error = error {
+        print(error)
+    }
+    guard let translation = response?.result else {
+        print("Failed to translate")
+        return
+    }
+    print(translation.translations)
 }
 ```
 

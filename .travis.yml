@@ -9,7 +9,6 @@ branches:
   only:
     - master
     - develop
-    - v1.0
 env:
   global:
     - IOS_SDK="iphonesimulator"
@@ -38,14 +37,7 @@ before_script:
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then tar xzf swift-4.1-RELEASE-ubuntu14.04.tar.gz ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then export PATH=swift-4.1-RELEASE-ubuntu14.04/usr/bin:$PATH ; fi
 script:
-  # - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./Scripts/run-tests.sh ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./Scripts/run-tests.sh ; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ./Scripts/pod-lint.sh ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then swift build ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then swift test ; fi
-deploy:
-  - provider: script
-    script: npx semantic-release
-    skip_cleanup: true
-    on:
-      branch: master
-      condition: $TRAVIS_OS_NAME = osx

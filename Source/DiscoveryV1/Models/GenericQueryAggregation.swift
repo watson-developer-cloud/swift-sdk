@@ -17,7 +17,7 @@
 import Foundation
 
 /** An aggregation produced by the Discovery service to analyze the input provided. */
-public struct GenericQueryAggregation: Decodable {
+public struct GenericQueryAggregation: Codable, Equatable {
 
     /// The type of aggregation command used. For example: term, filter, max, min, etc.
     public var type: String?

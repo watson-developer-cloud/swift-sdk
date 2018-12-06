@@ -9,14 +9,19 @@ The following example demonstrates how to use the Tone Analyzer service:
 ```swift
 import ToneAnalyzerV3
 
-let username = "your-username-here"
-let password = "your-password-here"
+let apiKey = "your-api-key"
 let version = "YYYY-MM-DD" // use today's date for the most recent version
-let toneAnalyzer = ToneAnalyzer(username: username, password: password, version: version)
+let toneAnalyzer = ToneAnalyzer(version: version, apiKey: apiKey)
 
-let toneInput = ToneInput(text: "your-input-text")
-let failure = { (error: Error) in print(error) }
-toneAnalyzer.tone(toneInput: toneInput, contentType: "plain/text", failure: failure) { tones in
+let input = ToneInput(text: "your-input-text")
+toneAnalyzer.tone(toneContent: .toneInput(input)) { response, error in
+	if let error = error {
+        print(error)
+    }
+    guard let tones = response?.result else {
+        print("Failed to analyze the tone input")
+        return
+    }
     print(tones)
 }
 ```

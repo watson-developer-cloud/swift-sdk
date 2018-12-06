@@ -19,7 +19,7 @@ import Foundation
 /**
  An object containing request parameters.
  */
-public struct Parameters: Encodable {
+internal struct Parameters: Codable, Equatable {
 
     /**
      The plain text to analyze. One of the `text`, `html`, or `url` parameters is required.
@@ -37,7 +37,7 @@ public struct Parameters: Encodable {
     public var url: String?
 
     /**
-     Specific features to analyze the document for.
+     Analysis features and options.
      */
     public var features: Features
 
@@ -93,7 +93,7 @@ public struct Parameters: Encodable {
     /**
      Initialize a `Parameters` with member variables.
 
-     - parameter features: Specific features to analyze the document for.
+     - parameter features: Analysis features and options.
      - parameter text: The plain text to analyze. One of the `text`, `html`, or `url` parameters is required.
      - parameter html: The HTML file to analyze. One of the `text`, `html`, or `url` parameters is required.
      - parameter url: The web page to analyze. One of the `text`, `html`, or `url` parameters is required.

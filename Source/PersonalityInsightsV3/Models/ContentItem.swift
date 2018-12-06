@@ -17,15 +17,15 @@
 import Foundation
 
 /** ContentItem. */
-public struct ContentItem: Encodable {
+public struct ContentItem: Codable, Equatable {
 
     /**
      The MIME type of the content. The default is plain text. The tags are stripped from HTML content before it is
      analyzed; plain text is processed as submitted.
      */
     public enum Contenttype: String {
-        case plain = "text/plain"
-        case html = "text/html"
+        case textPlain = "text/plain"
+        case textHTML = "text/html"
     }
 
     /**

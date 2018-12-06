@@ -21,7 +21,7 @@ import Foundation
  sentiment for detected entities with `entities.sentiment` and for keywords with `keywords.sentiment`.
   Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish.
  */
-public struct SentimentOptions: Encodable {
+public struct SentimentOptions: Codable, Equatable {
 
     /**
      Set this to `false` to hide document-level sentiment results.

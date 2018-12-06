@@ -17,7 +17,7 @@
 import Foundation
 
 /** WorkspaceCollection. */
-public struct WorkspaceCollection: Decodable {
+public struct WorkspaceCollection: Codable, Equatable {
 
     /**
      An array of objects describing the workspaces associated with the service instance.
@@ -25,7 +25,7 @@ public struct WorkspaceCollection: Decodable {
     public var workspaces: [Workspace]
 
     /**
-     An object defining the pagination data for the returned objects.
+     The pagination data for the returned objects.
      */
     public var pagination: Pagination
 

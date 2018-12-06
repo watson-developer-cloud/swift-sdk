@@ -30,6 +30,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
     private let japaneseText = "こんにちは"
     private let ssmlString = "<speak xml:lang=\"En-US\" version=\"1.0\">" +
     "<say-as interpret-as=\"letters\">Hello</say-as></speak>"
+    private let failedToInitializeAudioPlayerMessage = "Failed to initialize an AVAudioPlayer with the received data"
 
     // MARK: - Test Configuration
 
@@ -55,11 +56,6 @@ class TextToSpeechPlaybackTests: XCTestCase {
         textToSpeech.defaultHeaders["X-Watson-Test"] = "true"
     }
 
-    /** Fail false negatives. */
-    func failWithError(error: Error) {
-        XCTFail("Positive test failed with error: \(error)")
-    }
-
     /** Wait for expectations. */
     func waitForExpectations(timeout: TimeInterval = 10.0) {
         waitForExpectations(timeout: timeout) { error in
@@ -74,7 +70,16 @@ class TextToSpeechPlaybackTests: XCTestCase {
         let description = "Synthesize text to spoken audio using the default parameters."
         let expectation = self.expectation(description: description)
 
-        textToSpeech.synthesize(text: text, accept: "audio/wav", failure: failWithError) { data in
+        textToSpeech.synthesize(text: text, accept: "audio/wav") {
+            response, error in
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let data = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
             XCTAssertGreaterThan(data.count, 0)
             do {
                 let audioPlayer = try AVAudioPlayer(data: data)
@@ -84,7 +89,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
                     sleep(3)
                 }
             } catch {
-                XCTFail("Failed to initialize an AVAudioPlayer with the received data.")
+                XCTFail(self.failedToInitializeAudioPlayerMessage)
             }
             expectation.fulfill()
         }
@@ -96,8 +101,16 @@ class TextToSpeechPlaybackTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
 
-        textToSpeech.synthesize(text: text, accept: "audio/wav", voice: "en-US_LisaVoice", failure: failWithError) {
-            data in
+        textToSpeech.synthesize(text: text, accept: "audio/wav", voice: "en-US_LisaVoice") {
+            response, error in
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let data = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
             XCTAssertGreaterThan(data.count, 0)
             do {
                 let audioPlayer = try AVAudioPlayer(data: data)
@@ -107,7 +120,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
                     sleep(3)
                 }
             } catch {
-                XCTFail("Failed to initialize an AVAudioPlayer with the received data.")
+                XCTFail(self.failedToInitializeAudioPlayerMessage)
             }
             expectation.fulfill()
         }
@@ -119,8 +132,16 @@ class TextToSpeechPlaybackTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
 
-        textToSpeech.synthesize(text: germanText, accept: "audio/wav", voice: "de-DE_DieterVoice", failure: failWithError) {
-            data in
+        textToSpeech.synthesize(text: germanText, accept: "audio/wav", voice: "de-DE_DieterVoice") {
+            response, error in
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let data = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
             XCTAssertGreaterThan(data.count, 0)
             do {
                 let audioPlayer = try AVAudioPlayer(data: data)
@@ -130,7 +151,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
                     sleep(2)
                 }
             } catch {
-                XCTFail("Failed to initialize an AVAudioPlayer with the received data.")
+                XCTFail(self.failedToInitializeAudioPlayerMessage)
             }
             expectation.fulfill()
         }
@@ -142,8 +163,16 @@ class TextToSpeechPlaybackTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
 
-        textToSpeech.synthesize(text: japaneseText, accept: "audio/wav", voice: "ja-JP_EmiVoice", failure: failWithError) {
-            data in
+        textToSpeech.synthesize(text: japaneseText, accept: "audio/wav", voice: "ja-JP_EmiVoice") {
+            response, error in
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let data = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
             XCTAssertGreaterThan(data.count, 0)
             do {
                 let audioPlayer = try AVAudioPlayer(data: data)
@@ -153,7 +182,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
                     sleep(2)
                 }
             } catch {
-                XCTFail("Failed to initialize an AVAudioPlayer with the received data.")
+                XCTFail(self.failedToInitializeAudioPlayerMessage)
             }
             expectation.fulfill()
         }
@@ -165,7 +194,16 @@ class TextToSpeechPlaybackTests: XCTestCase {
         let description = "Synthesize SSML to spoken audio."
         let expectation = self.expectation(description: description)
 
-        textToSpeech.synthesize(text: ssmlString, accept: "audio/wav", failure: failWithError) { data in
+        textToSpeech.synthesize(text: ssmlString, accept: "audio/wav") {
+            response, error in
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let data = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
             XCTAssertGreaterThan(data.count, 0)
             do {
                 let audioPlayer = try AVAudioPlayer(data: data)
@@ -175,7 +213,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
                     sleep(1)
                 }
             } catch {
-                XCTFail("Failed to initialize an AVAudioPlayer with the received data.")
+                XCTFail(self.failedToInitializeAudioPlayerMessage)
             }
             expectation.fulfill()
         }
@@ -190,7 +228,16 @@ class TextToSpeechPlaybackTests: XCTestCase {
         let description = "Synthesize text to spoken audio in Opus format."
         let expectation = self.expectation(description: description)
 
-        textToSpeech.synthesize(text: text, accept: "audio/ogg;codecs=opus", failure: failWithError) { data in
+        textToSpeech.synthesize(text: text, accept: "audio/ogg;codecs=opus") {
+            response, error in
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let data = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
             XCTAssertGreaterThan(data.count, 0)
             do {
                 let audioPlayer = try AVAudioPlayer(data: data)

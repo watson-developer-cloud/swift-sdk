@@ -17,7 +17,7 @@
 import Foundation
 
 /** WordStyle. */
-public struct WordStyle: Codable {
+public struct WordStyle: Codable, Equatable {
 
     public var level: Int?
 

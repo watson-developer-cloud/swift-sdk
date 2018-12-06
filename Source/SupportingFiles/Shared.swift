@@ -17,10 +17,13 @@
 import Foundation
 import RestKit
 
+public typealias WatsonResponse = RestResponse
+public typealias WatsonError = RestError
+
 /// Contains functionality and information common to all of the services
 internal struct Shared {
 
-    static let sdkVersion = "0.38.1"
+    static let sdkVersion = "1.0.0"
     static let apiKey = "apikey"
     static let icpPrefix = "icp-"
 

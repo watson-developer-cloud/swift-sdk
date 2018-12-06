@@ -17,7 +17,7 @@
 import Foundation
 
 /** DialogNodeOutputGeneric. */
-public struct DialogNodeOutputGeneric: Codable {
+public struct DialogNodeOutputGeneric: Codable, Equatable {
 
     /**
      The type of response returned by the dialog node. The specified response type must be supported by the client

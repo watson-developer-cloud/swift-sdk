@@ -17,7 +17,7 @@
 import Foundation
 
 /** QueryFilterType. */
-public struct QueryFilterType: Encodable {
+public struct QueryFilterType: Codable, Equatable {
 
     /**
      A comma-separated list of types to exclude.

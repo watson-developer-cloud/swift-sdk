@@ -11,19 +11,22 @@ The following example shows how to query the Watson Discovery News dataset:
 ```swift
 import DiscoveryV1
 
-let username = "your-username-here"
-let password = "your-password-here"
+let apiKey = "your-api-key"
 let version = "YYYY-MM-DD" // use today's date for the most recent version
-let discovery = Discovery(username: username, password: password, version: version)
+let discovery = Discovery(version: version, apiKey: apiKey)
 
-let failure = { (error: Error) in print(failure) }
 discovery.query(
     environmentID: "system",
     collectionID: "news-en",
-    query: "enriched_text.concepts.text:\"Cloud computing\"",
-    failure: failure)
-{
-    queryResponse in
+    query: "enriched_text.concepts.text:\"Cloud computing\"") { response, error in
+    
+    if let error = error {
+        print(error)
+    }
+    guard let queryResponse = response?.result else {
+        print("Failed to get the query response")
+        return
+    }
     print(queryResponse)
 }
 ```
@@ -37,21 +40,24 @@ Once your content has been uploaded and enriched by the Discovery service, you c
 ```swift
 import DiscoveryV1
 
-let username = "your-username-here"
-let password = "your-password-here"
+let apiKey = "your-api-key"
 let version = "YYYY-MM-DD" // use today's date for the most recent version
-let discovery = Discovery(username: username, password: password, version: version)
+let discovery = Discovery(version: version, apiKey: apiKey)
 
-let failure = { (error: Error) in print(failure) }
 discovery.query(
     environmentID: "your-environment-id",
     collectionID: "your-collection-id",
     filter: "enriched_text.concepts.text:\"Technology\"",
     query: "enriched_text.concepts.text:\"Cloud computing\"",
-    aggregation: "term(enriched_text.concepts.text,count:10)",
-    failure: failure)
-{
-    queryResponse in
+    aggregation: "term(enriched_text.concepts.text,count:10)") { response, error in
+
+    if let error = error {
+        print(error)
+    }
+    guard let queryResponse = response?.result else {
+        print("Failed to get the query response")
+        return
+    }
     print(queryResponse)
 }
 ```
@@ -61,22 +67,25 @@ You can also upload new documents into your private collection:
 ```swift
 import DiscoveryV1
 
-let username = "your-username-here"
-let password = "your-password-here"
+let apiKey = "your-api-key"
 let version = "YYYY-MM-DD" // use today's date for the most recent version
-let discovery = Discovery(username: username, password: password, version: version)
+let discovery = Discovery(version: version, apiKey: apiKey)
 
-let failure = { (error: Error) in print(failure) }
 let file = Bundle.main.url(forResource: "KennedySpeech", withExtension: "html")!
 discovery.addDocument(
     environmentID: "your-environment-id",
     collectionID: "your-collection-id",
     file: file,
-    fileContentType: "text/html",
-    failure: failWithError)
-{
-    response in
-    print(response)
+    fileContentType: "text/html") { response, error in
+
+    if let error = error {
+        print(error)
+    }
+    guard let document = response?.result else {
+        print("Failed to add the document")
+        return
+    }
+    print(document)
 }
 ```
 

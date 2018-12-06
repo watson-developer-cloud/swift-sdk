@@ -19,7 +19,7 @@ import Foundation
 /**
  The most important keywords in the content, organized by relevance.
  */
-public struct KeywordsResult: Decodable {
+public struct KeywordsResult: Codable, Equatable {
 
     /**
      Relevance score from 0 to 1. Higher values indicate greater relevance.

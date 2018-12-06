@@ -19,7 +19,7 @@ import Foundation
 /**
  The location of the bounding box around the face.
  */
-public struct FaceLocation: Decodable {
+public struct FaceLocation: Codable, Equatable {
 
     /**
      Width in pixels of face region.

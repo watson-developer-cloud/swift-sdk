@@ -17,7 +17,7 @@
 import Foundation
 
 /** UpdateIntent. */
-internal struct UpdateIntent: Encodable {
+internal struct UpdateIntent: Codable, Equatable {
 
     /**
      The name of the intent. This string must conform to the following restrictions:

@@ -19,7 +19,7 @@ import Foundation
 /**
  The next step to execute following this dialog node.
  */
-public struct DialogNodeNextStep: Codable {
+public struct DialogNodeNextStep: Codable, Equatable {
 
     /**
      What happens after the dialog node completes. The valid values depend on the node type:

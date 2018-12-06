@@ -17,7 +17,7 @@
 import Foundation
 
 /** SupportedFeatures. */
-public struct SupportedFeatures: Decodable {
+public struct SupportedFeatures: Codable, Equatable {
 
     /**
      Indicates whether the customization interface can be used to create a custom language model based on the language

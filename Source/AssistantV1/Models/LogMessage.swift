@@ -20,7 +20,7 @@ import RestKit
 /**
  Log message details.
  */
-public struct LogMessage: Codable {
+public struct LogMessage: Codable, Equatable {
 
     /**
      The severity of the log message.

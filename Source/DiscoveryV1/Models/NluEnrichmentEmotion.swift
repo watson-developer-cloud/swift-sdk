@@ -19,7 +19,7 @@ import Foundation
 /**
  An object specifying the emotion detection enrichment and related parameters.
  */
-public struct NluEnrichmentEmotion: Codable {
+public struct NluEnrichmentEmotion: Codable, Equatable {
 
     /**
      When `true`, emotion detection is performed on the entire field.

@@ -17,7 +17,7 @@
 import Foundation
 
 /** EntityMention. */
-public struct EntityMention: Decodable {
+public struct EntityMention: Codable, Equatable {
 
     /**
      Entity mention text.

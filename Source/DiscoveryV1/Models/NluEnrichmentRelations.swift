@@ -19,7 +19,7 @@ import Foundation
 /**
  An object specifying the relations enrichment and related parameters.
  */
-public struct NluEnrichmentRelations: Codable {
+public struct NluEnrichmentRelations: Codable, Equatable {
 
     /**
      *For use with `natural_language_understanding` enrichments only.* The enrichement model to use with relationship

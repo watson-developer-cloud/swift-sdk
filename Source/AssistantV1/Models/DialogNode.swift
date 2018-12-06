@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** DialogNode. */
-public struct DialogNode: Decodable {
+public struct DialogNode: Codable, Equatable {
 
     /**
      How the dialog node is processed.
@@ -60,9 +60,9 @@ public struct DialogNode: Decodable {
      Whether this dialog node can be returned to after a digression.
      */
     public enum DigressOut: String {
-        case returning = "allow_returning"
-        case all = "allow_all"
-        case allNeverReturn = "allow_all_never_return"
+        case allowReturning = "allow_returning"
+        case allowAll = "allow_all"
+        case allowAllNeverReturn = "allow_all_never_return"
     }
 
     /**
@@ -124,12 +124,12 @@ public struct DialogNode: Decodable {
     /**
      The timestamp for creation of the dialog node.
      */
-    public var created: String?
+    public var created: Date?
 
     /**
      The timestamp for the most recent update to the dialog node.
      */
-    public var updated: String?
+    public var updated: Date?
 
     /**
      The actions for the dialog node.

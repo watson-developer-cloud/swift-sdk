@@ -19,7 +19,7 @@ import Foundation
 /**
  Object that defines a box folder to crawl with this configuration.
  */
-public struct SourceOptionsFolder: Codable {
+public struct SourceOptionsFolder: Codable, Equatable {
 
     /**
      The Box user ID of the user who owns the folder to crawl.

@@ -20,7 +20,7 @@ import RestKit
 /**
  An intent identified in the user input.
  */
-public struct RuntimeIntent: Codable {
+public struct RuntimeIntent: Codable, Equatable {
 
     /**
      The name of the recognized intent.

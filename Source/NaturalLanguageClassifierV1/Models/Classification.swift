@@ -19,7 +19,7 @@ import Foundation
 /**
  Response from the classifier for a phrase.
  */
-public struct Classification: Decodable {
+public struct Classification: Codable, Equatable {
 
     /**
      Unique identifier for this classifier.

@@ -19,7 +19,7 @@ import Foundation
 /**
  State information for the conversation.
  */
-public struct MessageContext: Codable {
+public struct MessageContext: Codable, Equatable {
 
     /**
      Contains information that can be shared by all skills within the Assistant.

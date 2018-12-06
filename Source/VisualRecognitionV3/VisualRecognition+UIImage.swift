@@ -59,8 +59,7 @@ extension VisualRecognition {
         - English is returned when the requested language is not supported.
         - Classes are not returned when there is no translation for them.
         - Custom classifiers returned with this method return tags in the language of the custom classifier.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+    - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func classify(
         image: UIImage,
@@ -68,32 +67,33 @@ extension VisualRecognition {
         owners: [String]? = nil,
         classifierIDs: [String]? = nil,
         acceptLanguage: String? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ClassifiedImages) -> Void)
+        completionHandler: @escaping (WatsonResponse<ClassifiedImages>?, WatsonError?) -> Void)
     {
         // save image to disk
         let file: URL
         do {
             file = try saveToDisk(image: image)
         } catch {
-            failure?(error)
+            let error = WatsonError.saveData
+            completionHandler(nil, error)
             return
         }
 
         // delete image after service call
         let deleteFile = { try? FileManager.default.removeItem(at: file) }
-        let failureWithDelete = { (error: Error) in deleteFile(); failure?(error) }
-        let successWithDelete = { (classifiedImages: ClassifiedImages) in deleteFile(); success(classifiedImages) }
+        let completion = {
+            (response: WatsonResponse<ClassifiedImages>?, error: WatsonError?) in
+            deleteFile()
+            completionHandler(response, error)
+        }
 
         self.classify(
             imagesFile: file,
-            url: nil,
+            acceptLanguage: acceptLanguage,
             threshold: threshold,
             owners: owners,
             classifierIDs: classifierIDs,
-            acceptLanguage: acceptLanguage,
-            failure: failureWithDelete,
-            success: successWithDelete
+            completionHandler: completion
         )
     }
 
@@ -110,29 +110,31 @@ extension VisualRecognition {
      - url: A string with the image URL to analyze. Must be in .jpg, or .png format. The minimum recommended
         pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB. You can also include images
         in the `imagesFile` parameter.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func detectFaces(
         image: UIImage,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (DetectedFaces) -> Void)
+        completionHandler: @escaping (WatsonResponse<DetectedFaces>?, WatsonError?) -> Void)
     {
         // save image to disk
         let file: URL
         do {
             file = try saveToDisk(image: image)
         } catch {
-            failure?(error)
+            let error = WatsonError.saveData
+            completionHandler(nil, error)
             return
         }
 
         // delete image after service call
         let deleteFile = { try? FileManager.default.removeItem(at: file) }
-        let failureWithDelete = { (error: Error) in deleteFile(); failure?(error) }
-        let successWithDelete = { (detectedFaces: DetectedFaces) in deleteFile(); success(detectedFaces) }
+        let completion = {
+            (response: WatsonResponse<DetectedFaces>?, error: WatsonError?) in
+            deleteFile()
+            completionHandler(response, error)
+        }
 
-        self.detectFaces(imagesFile: file, url: nil, failure: failureWithDelete, success: successWithDelete)
+        self.detectFaces(imagesFile: file, completionHandler: completion)
     }
 
     /**
@@ -150,30 +152,24 @@ extension VisualRecognition {
         image: UIImage,
         classifierIDs: [String] = ["default"],
         threshold: Double? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ClassifiedImages) -> Void)
+        completionHandler: @escaping (ClassifiedImages?, WatsonError?) -> Void)
     {
         // convert UIImage to Data
         #if swift(>=4.2)
         guard let imageData = image.pngData() else {
-            let description = "Failed to convert image from UIImage to Data."
-            let userInfo = [NSLocalizedDescriptionKey: description]
-            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-            failure?(error)
+            let error = WatsonError.serialization(values: "image to data")
+            completionHandler(nil, error)
             return
         }
         #else
         guard let imageData = UIImagePNGRepresentation(image) else {
-            let description = "Failed to convert image from UIImage to Data."
-            let userInfo = [NSLocalizedDescriptionKey: description]
-            let error = NSError(domain: self.domain, code: 0, userInfo: userInfo)
-            failure?(error)
+            let error = WatsonError.serialization(values: "image to data")
+            completionHandler(nil, error)
             return
         }
         #endif
 
-        self.classifyWithLocalModel(imageData: imageData, classifierIDs: classifierIDs, threshold: threshold,
-                                    failure: failure, success: success)
+        self.classifyWithLocalModel(imageData: imageData, classifierIDs: classifierIDs, threshold: threshold, completionHandler: completionHandler)
     }
 
     /**
@@ -183,11 +179,11 @@ extension VisualRecognition {
     private func saveToDisk(image: UIImage) throws -> URL {
         let filename = UUID().uuidString + ".jpg"
         let directory = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-        guard let file = directory.appendingPathComponent(filename) else { throw RestError.encodingError }
+        guard let file = directory.appendingPathComponent(filename) else { throw WatsonError.urlEncoding(path: filename) }
         #if swift(>=4.2)
-        guard let data = image.jpegData(compressionQuality: 0.75) else { throw RestError.encodingError }
+        guard let data = image.jpegData(compressionQuality: 0.75) else { throw WatsonError.serialization(values: "classify image") }
         #else
-        guard let data = UIImageJPEGRepresentation(image, 0.75) else { throw RestError.encodingError }
+        guard let data = UIImageJPEGRepresentation(image, 0.75) else { throw WatsonError.serialization(values: "classify image") }
         #endif
         try data.write(to: file)
         return file

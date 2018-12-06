@@ -17,7 +17,7 @@
 import Foundation
 
 /** DocumentAccepted. */
-public struct DocumentAccepted: Decodable {
+public struct DocumentAccepted: Codable, Equatable {
 
     /**
      Status of the document in the ingestion process.

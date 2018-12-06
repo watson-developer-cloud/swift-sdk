@@ -21,7 +21,7 @@ import RestKit
  An output object that includes the response to the user, the dialog nodes that were triggered, and messages from the
  log.
  */
-public struct OutputData: Codable {
+public struct OutputData: Codable, Equatable {
 
     /**
      An array of up to 50 messages logged with the request.

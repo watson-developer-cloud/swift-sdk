@@ -17,7 +17,7 @@
 import Foundation
 
 /** QueryNoticesResponse. */
-public struct QueryNoticesResponse: Decodable {
+public struct QueryNoticesResponse: Codable, Equatable {
 
     public var matchingResults: Int?
 

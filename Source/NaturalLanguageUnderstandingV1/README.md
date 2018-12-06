@@ -18,16 +18,20 @@ The following example demonstrates how to use the service:
 ```swift
 import NaturalLanguageUnderstandingV1
 
-let username = "your-username-here"
-let password = "your-password-here"
-let version = "yyyy-mm-dd" // use today's date for the most recent version
-let naturalLanguageUnderstanding = NaturalLanguageUnderstanding(username: username, password: password, version: version)
+let apiKey = "your-api-key"
+let version = "YYYY-MM-DD" // use today's date for the most recent version
+let naturalLanguageUnderstanding = NaturalLanguageUnderstanding(version: version, apiKey: apiKey)
 
 let features = Features(concepts: ConceptsOptions(limit: 5))
-let parameters = Parameters(features: features, text: "your-text-here")
-let failure = { (error: Error) in print(error) }
-naturalLanguageUnderstanding.analyze(parameters: parameters, failure: failure) {
-    results in
+let text = "your-text"
+naturalLanguageUnderstanding.analyze(features: features, text: text) { response, error in
+	if let error = error {
+        print(error)
+    }
+    guard let results = response?.result else {
+        print("Failed to analyze")
+        return
+    }
     print(results)
 }
 ```

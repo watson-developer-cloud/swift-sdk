@@ -7,15 +7,19 @@ The following example demonstrates how to use the Natural Language Classifier se
 ```swift
 import NaturalLanguageClassifierV1
 
-let username = "your-username-here"
-let password = "your-password-here"
-let naturalLanguageClassifier = NaturalLanguageClassifier(username: username, password: password)
+let apiKey = "your-api-key"
+let naturalLanguageClassifier = NaturalLanguageClassifier(apiKey: apiKey)
 
 let classifierID = "your-trained-classifier-id"
-let text = "your-text-here"
-let failure = { (error: Error) in print(error) }
-naturalLanguageClassifier.classify(classifierID: classifierID, text: text, failure: failure) {
-    classification in
+let text = "your-text"
+naturalLanguageClassifier.classify(classifierID: classifierID, text: text) { response, error in
+	if let error = error {
+        print(error)
+    }
+    guard let classification = response?.result else {
+        print("Failed to classify")
+        return
+    }
     print(classification)
 }
 ```

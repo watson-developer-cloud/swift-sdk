@@ -7,13 +7,18 @@ The following example demonstrates how to use the Personality Insights service:
 ```swift
 import PersonalityInsightsV3
 
-let username = "your-username-here"
-let password = "your-password-here"
-let version = "yyyy-mm-dd" // use today's date for the most recent version
-let personalityInsights = PersonalityInsights(username: username, password: password, version: version)
+let apiKey = "your-api-key"
+let version = "YYYY-MM-DD" // use today's date for the most recent version
+let personalityInsights = PersonalityInsights(version: version, apiKey: apiKey)
 
-let failure = { (error: Error) in print(error) }
-personalityInsights.profile(text: "your-input-text", failure: failure) { profile in
+personalityInsights.profile(text: "your-input-text") { response, error in
+	if let error = error {
+        print(error)
+    }
+    guard let profile = response?.result else {
+        print("Failed to generate profile")
+        return
+    }
     print(profile)
 }
 ```

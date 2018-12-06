@@ -22,30 +22,5 @@ import RestKit
  publication date. Supports URL and HTML input types only.
  */
 public struct MetadataOptions: Codable, Equatable {
-
-    /// Additional properties associated with this model.
-    public var additionalProperties: [String: JSON]
-
-    /**
-     Initialize a `MetadataOptions`.
-
-     - returns: An initialized `MetadataOptions`.
-    */
-    public init(
-        additionalProperties: [String: JSON] = [:]
-    )
-    {
-        self.additionalProperties = additionalProperties
-    }
-
-    public init(from decoder: Decoder) throws {
-        let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
-        additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: [CodingKey]())
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
-        try dynamicContainer.encodeIfPresent(additionalProperties)
-    }
-
+    public init() { }
 }

@@ -24,7 +24,7 @@ internal struct CreateEventObject: Codable, Equatable {
     /**
      The event type to be created.
      */
-    public enum ModelType: String {
+    public enum TypeEnum: String {
         case click = "click"
     }
 
@@ -34,7 +34,7 @@ internal struct CreateEventObject: Codable, Equatable {
     public var type: String
 
     /**
-     Data object used to create a query event.
+     Query event data object.
      */
     public var data: EventData
 
@@ -48,7 +48,7 @@ internal struct CreateEventObject: Codable, Equatable {
      Initialize a `CreateEventObject` with member variables.
 
      - parameter type: The event type to be created.
-     - parameter data: Data object used to create a query event.
+     - parameter data: Query event data object.
 
      - returns: An initialized `CreateEventObject`.
     */

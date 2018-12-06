@@ -24,8 +24,8 @@ public struct ContentItem: Codable, Equatable {
      analyzed; plain text is processed as submitted.
      */
     public enum Contenttype: String {
-        case plain = "text/plain"
-        case html = "text/html"
+        case textPlain = "text/plain"
+        case textHTML = "text/html"
     }
 
     /**

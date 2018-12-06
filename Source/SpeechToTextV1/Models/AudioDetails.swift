@@ -26,7 +26,7 @@ public struct AudioDetails: Codable, Equatable {
      * `undetermined` for a resource that the service cannot validate (for example, if the user mistakenly passes a file
      that does not contain audio, such as a JPEG file).
      */
-    public enum ModelType: String {
+    public enum TypeEnum: String {
         case audio = "audio"
         case archive = "archive"
         case undetermined = "undetermined"

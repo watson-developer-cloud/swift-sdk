@@ -78,8 +78,7 @@ public struct Collection: Codable, Equatable {
     public var documentCounts: DocumentCounts?
 
     /**
-     The object providing information about the disk usage of the collection. Present only when retrieving details of a
-     collection.
+     Summary of the disk usage statistics for this collection.
      */
     public var diskUsage: CollectionDiskUsage?
 

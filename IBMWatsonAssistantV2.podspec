@@ -20,6 +20,6 @@ natural-language input and uses machine learning to respond to customers in a wa
                             'Source/SupportingFiles/Shared.swift'
   s.exclude_files         = 'Source/AssistantV2/Shared.swift'
 
-  s.dependency              'IBMWatsonRestKit', '~> 1.3.0'
+  s.dependency              'IBMWatsonRestKit', '~> 2.0.0'
   
 end

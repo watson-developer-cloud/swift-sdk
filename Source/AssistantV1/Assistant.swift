@@ -114,17 +114,17 @@ public class Assistant {
      There is no rate limit for this operation.
 
      - parameter workspaceID: Unique identifier of the workspace.
-     - parameter input: An input object that includes the input text.
+     - parameter input: The user input.
      - parameter alternateIntents: Whether to return more than one intent. Set to `true` to return all matching
        intents.
-     - parameter context: State information for the conversation. Continue a conversation by including the context
-       object from the previous response.
+     - parameter context: State information for the conversation. To maintain state, include the context from the
+       previous response.
      - parameter entities: Entities to use when evaluating the message. Include entities from the previous response to
        continue using those entities rather than detecting entities in the new input.
      - parameter intents: Intents to use when evaluating the user input. Include intents from the previous response to
        continue using those intents rather than trying to recognize intents in the new input.
-     - parameter output: System output. Include the output from the previous response to maintain intermediate
-       information over multiple requests.
+     - parameter output: An output object that includes the response to the user, the dialog nodes that were
+       triggered, and messages from the log.
      - parameter nodesVisitedDetails: Whether to include additional diagnostic information about the dialog nodes that
        were visited during processing of the message.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -2723,7 +2723,7 @@ public class Assistant {
        see the [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
      - parameter context: The context for the dialog node.
      - parameter metadata: The metadata for the dialog node.
-     - parameter nextStep: The next step to be executed in dialog processing.
+     - parameter nextStep: The next step to execute following this dialog node.
      - parameter actions: An array of objects describing any actions to be invoked by the dialog node.
      - parameter title: The alias used to identify the dialog node. This string must conform to the following
        restrictions:
@@ -2898,7 +2898,7 @@ public class Assistant {
        [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
      - parameter newContext: The context for the dialog node.
      - parameter newMetadata: The metadata for the dialog node.
-     - parameter newNextStep: The next step to be executed in dialog processing.
+     - parameter newNextStep: The next step to execute following this dialog node.
      - parameter newTitle: The alias used to identify the dialog node. This string must conform to the following
        restrictions:
        - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.

@@ -47,7 +47,7 @@ public struct Configuration: Codable, Equatable {
     public var description: String?
 
     /**
-     The document conversion settings for the configuration.
+     Document conversion settings.
      */
     public var conversions: Conversions?
 
@@ -89,7 +89,7 @@ public struct Configuration: Codable, Equatable {
      - parameter updated: The timestamp of when the configuration was last updated in the format
        yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
      - parameter description: The description of the configuration, if available.
-     - parameter conversions: The document conversion settings for the configuration.
+     - parameter conversions: Document conversion settings.
      - parameter enrichments: An array of document enrichment settings for the configuration.
      - parameter normalizations: Defines operations that can be used to transform the final output JSON into a
        normalized form. Operations are executed in the order that they appear in the array.

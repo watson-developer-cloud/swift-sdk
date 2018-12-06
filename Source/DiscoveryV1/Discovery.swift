@@ -428,7 +428,7 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter name: The name of the configuration.
      - parameter description: The description of the configuration, if available.
-     - parameter conversions: The document conversion settings for the configuration.
+     - parameter conversions: Document conversion settings.
      - parameter enrichments: An array of document enrichment settings for the configuration.
      - parameter normalizations: Defines operations that can be used to transform the final output JSON into a
        normalized form. Operations are executed in the order that they appear in the array.
@@ -604,7 +604,7 @@ public class Discovery {
      - parameter configurationID: The ID of the configuration.
      - parameter name: The name of the configuration.
      - parameter description: The description of the configuration, if available.
-     - parameter conversions: The document conversion settings for the configuration.
+     - parameter conversions: Document conversion settings.
      - parameter enrichments: An array of document enrichment settings for the configuration.
      - parameter normalizations: Defines operations that can be used to transform the final output JSON into a
        normalized form. Operations are executed in the order that they appear in the array.
@@ -3104,7 +3104,7 @@ public class Discovery {
      can record which documents in the results set were \"clicked\" by a user and when that click occured.
 
      - parameter type: The event type to be created.
-     - parameter data: Data object used to create a query event.
+     - parameter data: Query event data object.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */

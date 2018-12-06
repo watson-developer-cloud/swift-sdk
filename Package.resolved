@@ -5,9 +5,9 @@
         "package": "IBMWatsonRestKit",
         "repositoryURL": "https://github.com/watson-developer-cloud/restkit.git",
         "state": {
-          "branch": "swift-sdk-1.0",
-          "revision": "485f4ec21caea6a6f0aa3fe18a2d7715a1e27ded",
-          "version": null
+          "branch": null,
+          "revision": "41d5ccd2553004afb5a3e8ce40e6e2606d67e0c1",
+          "version": "2.0.0"
         }
       }
     ]

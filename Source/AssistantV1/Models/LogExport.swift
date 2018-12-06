@@ -20,12 +20,12 @@ import Foundation
 public struct LogExport: Codable, Equatable {
 
     /**
-     A request received by the workspace, including the user input and context.
+     A message request formatted for the Watson Assistant service.
      */
     public var request: MessageRequest
 
     /**
-     The response sent by the workspace, including the output text, detected intents and entities, and context.
+     A response from the Watson Assistant service.
      */
     public var response: MessageResponse
 

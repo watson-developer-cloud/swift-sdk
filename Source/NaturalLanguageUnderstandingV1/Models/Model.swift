@@ -20,7 +20,7 @@ import Foundation
 public struct Model: Codable, Equatable {
 
     /**
-     When the status is `available`, the model is ready to use.
+     Shows as available if the model is ready for use.
      */
     public var status: String?
 

@@ -40,7 +40,7 @@ public struct MessageInput: Codable, Equatable {
     public var text: String?
 
     /**
-     Properties that control how the assistant responds.
+     Optional properties that control how the assistant responds.
      */
     public var options: MessageInputOptions?
 
@@ -77,7 +77,7 @@ public struct MessageInput: Codable, Equatable {
      - parameter messageType: The type of user input. Currently, only text input is supported.
      - parameter text: The text of the user input. This string cannot contain carriage return, newline, or tab
        characters, and it must be no longer than 2048 characters.
-     - parameter options: Properties that control how the assistant responds.
+     - parameter options: Optional properties that control how the assistant responds.
      - parameter intents: Intents to use when evaluating the user input. Include intents from the previous response
        to continue using those intents rather than trying to recognize intents in the new input.
      - parameter entities: Entities to use when evaluating the message. Include entities from the previous response

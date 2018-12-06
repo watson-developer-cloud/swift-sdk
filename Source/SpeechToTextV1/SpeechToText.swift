@@ -267,7 +267,6 @@ public class SpeechToText {
        specified with the `model` parameter. You must make the request with service credentials created for the instance
        of the service that owns the custom model. By default, no custom language model is used. See [Custom
        models](https://console.bluemix.net/docs/services/speech-to-text/input.html#custom).
-       **Note:** Use this parameter instead of the deprecated `customization_id` parameter.
      - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model that is to be used
        with the recognition request. The base model of the specified custom acoustic model must match the model
        specified with the `model` parameter. You must make the request with service credentials created for the instance
@@ -353,7 +352,6 @@ public class SpeechToText {
         profanityFilter: Bool? = nil,
         smartFormatting: Bool? = nil,
         speakerLabels: Bool? = nil,
-        customizationID: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, WatsonError?) -> Void)
     {
@@ -659,7 +657,6 @@ public class SpeechToText {
        specified with the `model` parameter. You must make the request with service credentials created for the instance
        of the service that owns the custom model. By default, no custom language model is used. See [Custom
        models](https://console.bluemix.net/docs/services/speech-to-text/input.html#custom).
-       **Note:** Use this parameter instead of the deprecated `customization_id` parameter.
      - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model that is to be used
        with the recognition request. The base model of the specified custom acoustic model must match the model
        specified with the `model` parameter. You must make the request with service credentials created for the instance
@@ -724,6 +721,9 @@ public class SpeechToText {
        parameter. To determine whether a language model supports speaker labels, use the **Get models** method and check
        that the attribute `speaker_labels` is set to `true`. See [Speaker
        labels](https://console.bluemix.net/docs/services/speech-to-text/output.html#speaker_labels).
+     - parameter customizationID: **Deprecated.** Use the `language_customization_id` parameter to specify the
+       customization ID (GUID) of a custom language model that is to be used with the recognition request. Do not
+       specify both parameters with a request.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */

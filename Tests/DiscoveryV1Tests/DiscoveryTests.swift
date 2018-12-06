@@ -85,6 +85,7 @@ class DiscoveryTests: XCTestCase {
             ("testCollectionsCRUD", testCollectionsCRUD),
             ("testListCollectionFields", testListCollectionFields),
             ("testExpansionsCRUD", testExpansionsCRUD),
+            ("testTokenizationDictionaryOperations", testTokenizationDictionaryOperations),
             ("testDocumentsCRUD", testDocumentsCRUD),
             ("testQuery", testQuery),
             ("testQueryWithNaturalLanguage", testQueryWithNaturalLanguage),
@@ -256,7 +257,7 @@ class DiscoveryTests: XCTestCase {
             name: "swift-sdk-test-" + UUID().uuidString,
             description: "A collection created while testing the Swift SDK. Safe to delete.",
             configurationID: configurationID,
-            language: "en")
+            language: language)
         {
             response, error in
 
@@ -638,7 +639,7 @@ class DiscoveryTests: XCTestCase {
         let sourceOptionsSiteColl = SourceOptionsSiteColl(siteCollectionPath: "sitePath")
         let sourceOptions = SourceOptions(folders: [SourceOptionsFolder(ownerUserID: "memyselfandI", folderID: "MyFolder")],
                                           objects: [SourceOptionsObject(name: "MyObjects")], siteCollections: [sourceOptionsSiteColl])
-        let source = Source(type: Source.ModelType.box.rawValue, credentialID: "my box credentialID", schedule: sourceSchedule, options: sourceOptions)
+        let source = Source(type: Source.TypeEnum.box.rawValue, credentialID: "my box credentialID", schedule: sourceSchedule, options: sourceOptions)
         var configuration: Configuration!
         discovery.createConfiguration(
             environmentID: environmentID,
@@ -1008,7 +1009,7 @@ class DiscoveryTests: XCTestCase {
         waitForExpectations(timeout: timeout)
     }
 
-    func testTokenizationDictionaryCRD() {
+    func testTokenizationDictionaryOperations() {
         // Need to make sure the new collection gets deleted even after a test failure
         continueAfterFailure = true
 
@@ -1042,9 +1043,8 @@ class DiscoveryTests: XCTestCase {
         }
 
         let expectation = self.expectation(description: "createTokenizationDictionary")
-        let tokenizationRule1 = TokenDictRule(text: "すしネコ", tokens: ["すし", "ネコ"], readings: ["寿司", "ネコ"], partOfSpeech: "カスタム名詞")
-        let tokenizationRule2 = TokenDictRule(text: "すしネコ", tokens: ["すし", "ネコ"], readings: ["寿司", "ネコ"], partOfSpeech: "カスタム名詞")
-        discovery.createTokenizationDictionary(environmentID: environmentID, collectionID: collectionID, tokenizationRules: [tokenizationRule1, tokenizationRule2]) {
+        let tokenizationRule = TokenDictRule(text: "すしネコ", tokens: ["すし", "ネコ"], readings: ["寿司", "ネコ"], partOfSpeech: "カスタム名詞")
+        discovery.createTokenizationDictionary(environmentID: environmentID, collectionID: collectionID, tokenizationRules: [tokenizationRule]) {
             response, error in
 
             if let error = error {
@@ -2338,7 +2338,7 @@ class DiscoveryTests: XCTestCase {
 
         let createDetails = CredentialDetails(credentialType: "username_password", url: "https://login.salesforce.com",
                                         username: "email@server.xyz", password: "{my_salesforce_password}{my_salesforce_security_token}")
-        discovery.createCredentials(environmentID: environmentID, sourceType: Source.ModelType.salesforce.rawValue, credentialDetails: createDetails) {
+        discovery.createCredentials(environmentID: environmentID, sourceType: Source.TypeEnum.salesforce.rawValue, credentialDetails: createDetails) {
             response, error in
 
             if let error = error {
@@ -2381,7 +2381,7 @@ class DiscoveryTests: XCTestCase {
         let expectation3 = self.expectation(description: "updateCredentials")
         let updateDetails = CredentialDetails(credentialType: "username_password", url: "https://login.salesforce.com",
                                               username: "email@server.xyz", password: "foobarbaz")
-        discovery.updateCredentials(environmentID: environmentID, credentialID: credentialID, sourceType: Source.ModelType.salesforce.rawValue, credentialDetails: updateDetails) {
+        discovery.updateCredentials(environmentID: environmentID, credentialID: credentialID, sourceType: Source.TypeEnum.salesforce.rawValue, credentialDetails: updateDetails) {
             response, error in
 
             if let error = error {

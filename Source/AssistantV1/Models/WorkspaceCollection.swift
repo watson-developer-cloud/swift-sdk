@@ -25,7 +25,7 @@ public struct WorkspaceCollection: Codable, Equatable {
     public var workspaces: [Workspace]
 
     /**
-     An object defining the pagination data for the returned objects.
+     The pagination data for the returned objects.
      */
     public var pagination: Pagination
 

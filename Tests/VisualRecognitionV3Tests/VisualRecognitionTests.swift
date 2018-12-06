@@ -1161,7 +1161,7 @@ class VisualRecognitionTests: XCTestCase {
             let age = face?.faces.first?.age
             XCTAssertGreaterThanOrEqual(age!.min!, 40)
             XCTAssertLessThanOrEqual(age!.max!, 54)
-            XCTAssertGreaterThanOrEqual(age!.score!, 0.25)
+            XCTAssertGreaterThanOrEqual(age!.score, 0.25)
 
             // verify the face location
             let location = face?.faces.first?.faceLocation
@@ -1173,7 +1173,7 @@ class VisualRecognitionTests: XCTestCase {
             // verify the gender
             let gender = face?.faces.first?.gender
             XCTAssertEqual(gender!.gender, "MALE")
-            XCTAssertGreaterThanOrEqual(gender!.score!, 0.75)
+            XCTAssertGreaterThanOrEqual(gender!.score, 0.75)
 
             expectation.fulfill()
         }
@@ -1211,7 +1211,7 @@ class VisualRecognitionTests: XCTestCase {
             let age = face?.faces.first?.age
             XCTAssertGreaterThanOrEqual(age!.min!, 40)
             XCTAssertLessThanOrEqual(age!.max!, 54)
-            XCTAssertGreaterThanOrEqual(age!.score!, 0.25)
+            XCTAssertGreaterThanOrEqual(age!.score, 0.25)
 
             // verify the face location
             let location = face?.faces.first?.faceLocation
@@ -1223,7 +1223,7 @@ class VisualRecognitionTests: XCTestCase {
             // verify the gender
             let gender = face?.faces.first?.gender
             XCTAssertEqual(gender!.gender, "MALE")
-            XCTAssertGreaterThanOrEqual(gender!.score!, 0.75)
+            XCTAssertGreaterThanOrEqual(gender!.score, 0.75)
 
             expectation.fulfill()
         }
@@ -1261,7 +1261,7 @@ class VisualRecognitionTests: XCTestCase {
                 let age = image.faces.first?.age
                 XCTAssert(age!.min! >= 18)
                 XCTAssert(age!.max! <= 44)
-                XCTAssert(age!.score! >= 0.25)
+                XCTAssert(age!.score >= 0.25)
 
                 // verify the face location
                 let location = image.faces.first?.faceLocation
@@ -1273,7 +1273,7 @@ class VisualRecognitionTests: XCTestCase {
                 // verify the gender
                 let gender = image.faces.first?.gender
                 XCTAssert(gender!.gender == "MALE")
-                XCTAssert(gender!.score! >= 0.75)
+                XCTAssert(gender!.score >= 0.75)
             }
 
             expectation.fulfill()

@@ -27,7 +27,7 @@ public struct Source: Codable, Equatable {
      -  `salesforce` indicates the configuration is to connect to Salesforce.
      -  `sharepoint` indicates the configuration is to connect to Microsoft SharePoint Online.
      */
-    public enum ModelType: String {
+    public enum TypeEnum: String {
         case box = "box"
         case salesforce = "salesforce"
         case sharepoint = "sharepoint"

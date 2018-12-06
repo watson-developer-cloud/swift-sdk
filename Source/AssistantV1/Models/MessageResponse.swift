@@ -23,7 +23,7 @@ import RestKit
 public struct MessageResponse: Codable, Equatable {
 
     /**
-     The user input from the request.
+     The text of the user input.
      */
     public var input: MessageInput?
 
@@ -43,12 +43,13 @@ public struct MessageResponse: Codable, Equatable {
     public var alternateIntents: Bool?
 
     /**
-     State information for the conversation.
+     State information for the conversation. To maintain state, include the context from the previous response.
      */
     public var context: Context
 
     /**
-     Output from the dialog, including the response to the user, the nodes that were triggered, and log messages.
+     An output object that includes the response to the user, the dialog nodes that were triggered, and messages from
+     the log.
      */
     public var output: OutputData
 

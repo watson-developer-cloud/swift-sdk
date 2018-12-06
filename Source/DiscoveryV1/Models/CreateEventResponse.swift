@@ -24,7 +24,7 @@ public struct CreateEventResponse: Codable, Equatable {
     /**
      The event type that was created.
      */
-    public enum ModelType: String {
+    public enum TypeEnum: String {
         case click = "click"
     }
 

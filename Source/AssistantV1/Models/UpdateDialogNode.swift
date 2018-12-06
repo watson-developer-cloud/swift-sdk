@@ -60,9 +60,9 @@ internal struct UpdateDialogNode: Codable, Equatable {
      Whether this dialog node can be returned to after a digression.
      */
     public enum DigressOut: String {
-        case returning = "allow_returning"
-        case all = "allow_all"
-        case allNeverReturn = "allow_all_never_return"
+        case allowReturning = "allow_returning"
+        case allowAll = "allow_all"
+        case allowAllNeverReturn = "allow_all_never_return"
     }
 
     /**
@@ -120,7 +120,7 @@ internal struct UpdateDialogNode: Codable, Equatable {
     public var metadata: [String: JSON]?
 
     /**
-     The next step to be executed in dialog processing.
+     The next step to execute following this dialog node.
      */
     public var nextStep: DialogNodeNextStep?
 
@@ -210,7 +210,7 @@ internal struct UpdateDialogNode: Codable, Equatable {
        see the [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
      - parameter context: The context for the dialog node.
      - parameter metadata: The metadata for the dialog node.
-     - parameter nextStep: The next step to be executed in dialog processing.
+     - parameter nextStep: The next step to execute following this dialog node.
      - parameter title: The alias used to identify the dialog node. This string must conform to the following
        restrictions:
        - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.

@@ -35,7 +35,7 @@ public struct FaceAge: Codable, Equatable {
      Confidence score in the range of 0 to 1. A higher score indicates greater confidence in the estimated value for the
      property.
      */
-    public var score: Double?
+    public var score: Double
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {

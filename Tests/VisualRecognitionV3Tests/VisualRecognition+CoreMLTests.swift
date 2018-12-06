@@ -36,18 +36,16 @@ class VisualRecognitionCoreMLTests: XCTestCase {
 
     /** Instantiate Visual Recognition */
     func instantiateVisualRecognition() {
-        let version = "2018-11-01"
-        visualRecognition = VisualRecognition(version: version, apiKey: WatsonCredentials.VisualRecognitionAPIKey)
+        guard let apiKey = WatsonCredentials.VisualRecognitionAPIKey else {
+            XCTFail("Missing credentials for Visual Recognition service")
+            return
+        }
+        visualRecognition = VisualRecognition(version: versionDate, apiKey: apiKey)
         if let url = WatsonCredentials.VisualRecognitionURL {
             visualRecognition.serviceURL = url
         }
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
-    }
-
-    /** Fail false negatives. */
-    func failWithError(error: Error) {
-        XCTFail("Positive test failed with error: \(error)")
     }
 
     /** Wait for expectations. */
@@ -60,10 +58,13 @@ class VisualRecognitionCoreMLTests: XCTestCase {
     /** Test local model file management. */
     func testLocalModelCRUD() {
         if #available(iOS 11.0, *) {
-
             // update the local model
             let expectation = self.expectation(description: "updateLocalModel")
-            visualRecognition.updateLocalModel(classifierID: classifierID, failure: failWithError) {
+            visualRecognition.updateLocalModel(classifierID: classifierID) {
+                _, error in
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                }
                 expectation.fulfill()
             }
             waitForExpectations()
@@ -100,9 +101,6 @@ class VisualRecognitionCoreMLTests: XCTestCase {
                 return
             }
             XCTAssertEqual(emptyModels.count, 0)
-
-        } else {
-            XCTFail("Core ML requires iOS 11+")
         }
     }
 
@@ -111,7 +109,11 @@ class VisualRecognitionCoreMLTests: XCTestCase {
 
             // update the local model
             let expectation1 = self.expectation(description: "updateLocalModel")
-            visualRecognition.updateLocalModel(classifierID: classifierID, failure: failWithError) {
+            visualRecognition.updateLocalModel(classifierID: classifierID) {
+                _, error in
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                }
                 expectation1.fulfill()
             }
             waitForExpectations()
@@ -123,9 +125,11 @@ class VisualRecognitionCoreMLTests: XCTestCase {
 
             // classify using the local model
             let expectation2 = self.expectation(description: "classifyWithLocalModel")
-            visualRecognition.classifyWithLocalModel(imageData: imageData, classifierIDs: [classifierID], threshold: 0.1, failure: failWithError) {
-                classifiedImages in
-                print(classifiedImages)
+            visualRecognition.classifyWithLocalModel(imageData: imageData, classifierIDs: [classifierID], threshold: 0.1) {
+                _, error in
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                }
                 expectation2.fulfill()
             }
             waitForExpectations()
@@ -136,9 +140,6 @@ class VisualRecognitionCoreMLTests: XCTestCase {
             } catch {
                 XCTFail("Failed to delete the local model: \(error)")
             }
-
-        } else {
-            XCTFail("Core ML required iOS 11+")
         }
     }
 }

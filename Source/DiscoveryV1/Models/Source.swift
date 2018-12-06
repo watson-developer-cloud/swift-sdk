@@ -19,7 +19,7 @@ import Foundation
 /**
  Object containing source parameters for the configuration.
  */
-public struct Source: Codable {
+public struct Source: Codable, Equatable {
 
     /**
      The type of source to connect to.
@@ -27,7 +27,7 @@ public struct Source: Codable {
      -  `salesforce` indicates the configuration is to connect to Salesforce.
      -  `sharepoint` indicates the configuration is to connect to Microsoft SharePoint Online.
      */
-    public enum ModelType: String {
+    public enum TypeEnum: String {
         case box = "box"
         case salesforce = "salesforce"
         case sharepoint = "sharepoint"

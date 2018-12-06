@@ -19,7 +19,7 @@ import Foundation
 /**
  A classifier for natural language phrases.
  */
-public struct Classifier: Decodable {
+public struct Classifier: Codable, Equatable {
 
     /**
      The state of the classifier.
@@ -55,7 +55,7 @@ public struct Classifier: Decodable {
     /**
      Date and time (UTC) the classifier was created.
      */
-    public var created: String?
+    public var created: Date?
 
     /**
      Additional detail about the status.

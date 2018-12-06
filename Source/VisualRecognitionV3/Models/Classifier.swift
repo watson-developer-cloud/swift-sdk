@@ -19,7 +19,7 @@ import Foundation
 /**
  Information about a classifier.
  */
-public struct Classifier: Decodable {
+public struct Classifier: Codable, Equatable {
 
     /**
      Training status of classifier.
@@ -55,7 +55,7 @@ public struct Classifier: Decodable {
     /**
      Whether the classifier can be downloaded as a Core ML model after the training status is `ready`.
      */
-    public var coreMlEnabled: Bool?
+    public var coreMLEnabled: Bool?
 
     /**
      If classifier training has failed, this field might explain why.
@@ -65,7 +65,7 @@ public struct Classifier: Decodable {
     /**
      Date and time in Coordinated Universal Time (UTC) that the classifier was created.
      */
-    public var created: String?
+    public var created: Date?
 
     /**
      Classes that define a classifier.
@@ -76,13 +76,13 @@ public struct Classifier: Decodable {
      Date and time in Coordinated Universal Time (UTC) that the classifier was updated. Returned when verbose=`true`.
      Might not be returned by some requests. Identical to `updated` and retained for backward compatibility.
      */
-    public var retrained: String?
+    public var retrained: Date?
 
     /**
      Date and time in Coordinated Universal Time (UTC) that the classifier was most recently updated. The field matches
      either `retrained` or `created`.  Returned when verbose=`true`. Might not be returned by some requests.
      */
-    public var updated: String?
+    public var updated: Date?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
@@ -90,7 +90,7 @@ public struct Classifier: Decodable {
         case name = "name"
         case owner = "owner"
         case status = "status"
-        case coreMlEnabled = "core_ml_enabled"
+        case coreMLEnabled = "core_ml_enabled"
         case explanation = "explanation"
         case created = "created"
         case classes = "classes"

@@ -17,7 +17,7 @@
 import Foundation
 
 /** AudioDetails. */
-public struct AudioDetails: Decodable {
+public struct AudioDetails: Codable, Equatable {
 
     /**
      The type of the audio resource:
@@ -26,7 +26,7 @@ public struct AudioDetails: Decodable {
      * `undetermined` for a resource that the service cannot validate (for example, if the user mistakenly passes a file
      that does not contain audio, such as a JPEG file).
      */
-    public enum ModelType: String {
+    public enum TypeEnum: String {
         case audio = "audio"
         case archive = "archive"
         case undetermined = "undetermined"

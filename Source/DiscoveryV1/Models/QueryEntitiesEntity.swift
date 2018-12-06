@@ -19,7 +19,7 @@ import Foundation
 /**
  A text string that appears within the entity text field.
  */
-public struct QueryEntitiesEntity: Codable {
+public struct QueryEntitiesEntity: Codable, Equatable {
 
     /**
      Entity text content.

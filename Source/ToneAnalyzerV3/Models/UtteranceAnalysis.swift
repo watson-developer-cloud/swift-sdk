@@ -17,7 +17,7 @@
 import Foundation
 
 /** UtteranceAnalysis. */
-public struct UtteranceAnalysis: Decodable {
+public struct UtteranceAnalysis: Codable, Equatable {
 
     /**
      The unique identifier of the utterance. The first utterance has ID 0, and the ID of each subsequent utterance is

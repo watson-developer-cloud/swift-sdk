@@ -19,7 +19,7 @@ import Foundation
 /**
  Request payload to classify.
  */
-public struct ClassifyInput: Encodable {
+public struct ClassifyInput: Codable, Equatable {
 
     /**
      The submitted phrase. The maximum length is 2048 characters.

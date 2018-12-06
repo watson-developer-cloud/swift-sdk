@@ -19,7 +19,7 @@ import Foundation
 /**
  A response from the Watson Assistant service.
  */
-public struct MessageResponse: Decodable {
+public struct MessageResponse: Codable, Equatable {
 
     /**
      Assistant output to be rendered or processed by the client.
@@ -27,8 +27,7 @@ public struct MessageResponse: Decodable {
     public var output: MessageOutput
 
     /**
-     The current session context. Included in the response if the `return_context` property of the message input was set
-     to `true`.
+     State information for the conversation.
      */
     public var context: MessageContext?
 

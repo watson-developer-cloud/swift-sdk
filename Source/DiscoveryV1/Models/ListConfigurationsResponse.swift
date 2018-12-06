@@ -17,7 +17,7 @@
 import Foundation
 
 /** ListConfigurationsResponse. */
-public struct ListConfigurationsResponse: Decodable {
+public struct ListConfigurationsResponse: Codable, Equatable {
 
     /**
      An array of Configurations that are available for the service instance.

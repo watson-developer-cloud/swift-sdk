@@ -19,7 +19,7 @@ import Foundation
 /**
  Metadata of a query result.
  */
-public struct QueryResultMetadata: Decodable {
+public struct QueryResultMetadata: Codable, Equatable {
 
     /**
      An unbounded measure of the relevance of a particular result, dependent on the query and matching document. A

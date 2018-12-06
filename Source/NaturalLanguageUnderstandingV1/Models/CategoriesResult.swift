@@ -19,7 +19,7 @@ import Foundation
 /**
  The hierarchical 5-level taxonomy the content is categorized into.
  */
-public struct CategoriesResult: Decodable {
+public struct CategoriesResult: Codable, Equatable {
 
     /**
      The path to the category through the taxonomy hierarchy.

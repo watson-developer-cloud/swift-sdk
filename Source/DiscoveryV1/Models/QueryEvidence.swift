@@ -19,7 +19,7 @@ import Foundation
 /**
  Description of evidence location supporting Knoweldge Graph query result.
  */
-public struct QueryEvidence: Decodable {
+public struct QueryEvidence: Codable, Equatable {
 
     /**
      The docuemnt ID (as indexed in Discovery) of the evidence location.

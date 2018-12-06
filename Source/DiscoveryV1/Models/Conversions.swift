@@ -19,12 +19,12 @@ import Foundation
 /**
  Document conversion settings.
  */
-public struct Conversions: Codable {
+public struct Conversions: Codable, Equatable {
 
     /**
      A list of PDF conversion settings.
      */
-    public var pdf: PdfSettings?
+    public var pdf: PDFSettings?
 
     /**
      A list of Word conversion settings.
@@ -34,7 +34,7 @@ public struct Conversions: Codable {
     /**
      A list of HTML conversion settings.
      */
-    public var html: HtmlSettings?
+    public var html: HTMLSettings?
 
     /**
      A list of Document Segmentation settings.
@@ -69,9 +69,9 @@ public struct Conversions: Codable {
      - returns: An initialized `Conversions`.
     */
     public init(
-        pdf: PdfSettings? = nil,
+        pdf: PDFSettings? = nil,
         word: WordSettings? = nil,
-        html: HtmlSettings? = nil,
+        html: HTMLSettings? = nil,
         segment: SegmentSettings? = nil,
         jsonNormalizations: [NormalizationOperation]? = nil
     )

@@ -17,7 +17,7 @@
 import Foundation
 
 /** AudioResource. */
-public struct AudioResource: Decodable {
+public struct AudioResource: Codable, Equatable {
 
     /**
      The status of the audio resource:

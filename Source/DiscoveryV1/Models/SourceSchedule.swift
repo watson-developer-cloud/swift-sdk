@@ -19,7 +19,7 @@ import Foundation
 /**
  Object containing the schedule information for the source.
  */
-public struct SourceSchedule: Codable {
+public struct SourceSchedule: Codable, Equatable {
 
     /**
      The crawl schedule in the specified **time_zone**.

@@ -17,7 +17,7 @@
 import Foundation
 
 /** Intent. */
-public struct Intent: Decodable {
+public struct Intent: Codable, Equatable {
 
     /**
      The name of the intent.
@@ -27,12 +27,12 @@ public struct Intent: Decodable {
     /**
      The timestamp for creation of the intent.
      */
-    public var created: String?
+    public var created: Date?
 
     /**
      The timestamp for the last update to the intent.
      */
-    public var updated: String?
+    public var updated: Date?
 
     /**
      The description of the intent.

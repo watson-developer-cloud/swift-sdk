@@ -19,7 +19,7 @@ import Foundation
 /**
  A list of Word conversion settings.
  */
-public struct WordSettings: Codable {
+public struct WordSettings: Codable, Equatable {
 
     public var heading: WordHeadingDetection?
 

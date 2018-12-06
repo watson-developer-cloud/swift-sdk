@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** Workspace. */
-public struct Workspace: Decodable {
+public struct Workspace: Codable, Equatable {
 
     /**
      The name of the workspace.
@@ -33,12 +33,12 @@ public struct Workspace: Decodable {
     /**
      The timestamp for creation of the workspace.
      */
-    public var created: String?
+    public var created: Date?
 
     /**
      The timestamp for the last update to the workspace.
      */
-    public var updated: String?
+    public var updated: Date?
 
     /**
      The workspace ID.

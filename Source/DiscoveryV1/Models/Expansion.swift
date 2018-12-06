@@ -20,7 +20,7 @@ import Foundation
  An expansion definition. Each object respresents one set of expandable strings. For example, you could have expansions
  for the word `hot` in one object, and expansions for the word `cold` in another.
  */
-public struct Expansion: Codable {
+public struct Expansion: Codable, Equatable {
 
     /**
      A list of terms that will be expanded for this expansion. If specified, only the items in this list are expanded.

@@ -19,7 +19,7 @@ import Foundation
 /**
  Information about the Continuous Relevancy Training for this environment.
  */
-public struct SearchStatus: Decodable {
+public struct SearchStatus: Codable, Equatable {
 
     /**
      The current status of Continuous Relevancy Training for this environment.
@@ -50,7 +50,7 @@ public struct SearchStatus: Decodable {
     /**
      The date stamp of the most recent completed training for this environment.
      */
-    public var lastTrained: String?
+    public var lastTrained: Date?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {

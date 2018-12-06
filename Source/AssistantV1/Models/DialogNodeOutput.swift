@@ -21,7 +21,7 @@ import RestKit
  The output of the dialog node. For more information about how to specify dialog node output, see the
  [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
  */
-public struct DialogNodeOutput: Codable {
+public struct DialogNodeOutput: Codable, Equatable {
 
     /**
      An array of objects describing the output defined for the dialog node.

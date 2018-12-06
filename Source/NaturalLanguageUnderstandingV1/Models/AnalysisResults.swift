@@ -19,7 +19,7 @@ import Foundation
 /**
  Results of the analysis, organized by feature.
  */
-public struct AnalysisResults: Decodable {
+public struct AnalysisResults: Codable, Equatable {
 
     /**
      Language used to analyze the text.
@@ -34,10 +34,10 @@ public struct AnalysisResults: Decodable {
     /**
      URL that was used to retrieve HTML content.
      */
-    public var retrievedUrl: String?
+    public var retrievedURL: String?
 
     /**
-     API usage information for the request.
+     Usage information.
      */
     public var usage: Usage?
 
@@ -62,12 +62,13 @@ public struct AnalysisResults: Decodable {
     public var categories: [CategoriesResult]?
 
     /**
-     The anger, disgust, fear, joy, or sadness conveyed by the content.
+     The detected anger, disgust, fear, joy, or sadness that is conveyed by the content. Emotion information can be
+     returned for detected entities, keywords, or user-specified target phrases found in the text.
      */
     public var emotion: EmotionResult?
 
     /**
-     The metadata holds author information, publication date and the title of the text/HTML content.
+     The Authors, Publication Date, and Title of the document. Supports URL and HTML input types.
      */
     public var metadata: MetadataResult?
 
@@ -90,7 +91,7 @@ public struct AnalysisResults: Decodable {
     private enum CodingKeys: String, CodingKey {
         case language = "language"
         case analyzedText = "analyzed_text"
-        case retrievedUrl = "retrieved_url"
+        case retrievedURL = "retrieved_url"
         case usage = "usage"
         case concepts = "concepts"
         case entities = "entities"

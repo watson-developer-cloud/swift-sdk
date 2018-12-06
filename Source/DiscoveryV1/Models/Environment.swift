@@ -19,7 +19,7 @@ import Foundation
 /**
  Details about an environment.
  */
-public struct Environment: Decodable {
+public struct Environment: Codable, Equatable {
 
     /**
      Current status of the environment. `resizing` is displayed when a request to increase the environment size has been
@@ -66,12 +66,12 @@ public struct Environment: Decodable {
     /**
      Creation date of the environment, in the format `yyyy-MM-dd'T'HH:mm:ss.SSS'Z'`.
      */
-    public var created: String?
+    public var created: Date?
 
     /**
      Date of most recent environment update, in the format `yyyy-MM-dd'T'HH:mm:ss.SSS'Z'`.
      */
-    public var updated: String?
+    public var updated: Date?
 
     /**
      Current status of the environment. `resizing` is displayed when a request to increase the environment size has been
@@ -101,7 +101,7 @@ public struct Environment: Decodable {
     public var indexCapacity: IndexCapacity?
 
     /**
-     Information about Continuous Relevancy Training for this environment.
+     Information about the Continuous Relevancy Training for this environment.
      */
     public var searchStatus: SearchStatus?
 

@@ -19,7 +19,7 @@ import Foundation
 /**
  Object that defines a Salesforce document object type crawl with this configuration.
  */
-public struct SourceOptionsObject: Codable {
+public struct SourceOptionsObject: Codable, Equatable {
 
     /**
      The name of the Salesforce document object to crawl. For example, `case`.

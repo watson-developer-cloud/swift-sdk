@@ -23,15 +23,15 @@ import Foundation
  For more information about the Speech to Text service parameters, visit:
  https://console.bluemix.net/docs/services/speech-to-text/input.html
  */
-public struct RecognitionSettings: Encodable {
+public struct RecognitionSettings: Codable, Equatable {
 
     /// The action to perform. Must be `start` to begin the request.
     private let action = "start"
 
     /// The format of the audio data. Endianness is automatically detected by the Speech to Text
-    /// service. For more information aboutthe supported formats, visit:
-    /// https://console.bluemix.net/docs/services/speech-to-text/input.html#formats
-    public var contentType: String
+    /// service. For more information about the supported formats, visit:
+    /// https://cloud.ibm.com/docs/services/speech-to-text/audio-formats.html
+    public var contentType: String?
 
     /// If you specify a customization ID when you open the connection, you can use the customization
     /// weight to tell the service how much weight to give to words from the custom language model
@@ -90,16 +90,14 @@ public struct RecognitionSettings: Encodable {
     /**
      Initialize a `RecognitionSettings` object to set the parameters of a Watson Speech to
      Text recognition request.
-
      - parameter contentType: The format of the audio data. Endianness is automatically detected
         by the Speech to Text service. For more information about the supported formats, visit:
-        https://console.bluemix.net/docs/services/speech-to-text/input.html#formats
-
+        https://cloud.ibm.com/docs/services/speech-to-text/audio-formats.html
      - returns: An initialized `RecognitionSettings` object with the given `contentType`.
         Configure additional parameters for the recognition request by directly modifying
         the returned object's properties.
      */
-    public init(contentType: String) {
+    public init(contentType: String? = nil) {
         self.contentType = contentType
     }
 

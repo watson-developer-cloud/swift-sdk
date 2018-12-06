@@ -17,7 +17,7 @@
 import Foundation
 
 /** Filter. */
-public struct Filter: Decodable {
+public struct Filter: Codable, Equatable {
 
     /**
      The type of aggregation command used. For example: term, filter, max, min, etc.

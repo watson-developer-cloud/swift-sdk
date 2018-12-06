@@ -20,10 +20,10 @@ import RestKit
 /**
  A response from the Watson Assistant service.
  */
-public struct MessageResponse: Decodable {
+public struct MessageResponse: Codable, Equatable {
 
     /**
-     The user input from the request.
+     The text of the user input.
      */
     public var input: MessageInput?
 
@@ -43,12 +43,13 @@ public struct MessageResponse: Decodable {
     public var alternateIntents: Bool?
 
     /**
-     State information for the conversation.
+     State information for the conversation. To maintain state, include the context from the previous response.
      */
     public var context: Context
 
     /**
-     Output from the dialog, including the response to the user, the nodes that were triggered, and log messages.
+     An output object that includes the response to the user, the dialog nodes that were triggered, and messages from
+     the log.
      */
     public var output: OutputData
 
@@ -83,6 +84,19 @@ public struct MessageResponse: Decodable {
         actions = try container.decodeIfPresent([DialogNodeAction].self, forKey: .actions)
         let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
         additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: CodingKeys.allValues)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(input, forKey: .input)
+        try container.encode(intents, forKey: .intents)
+        try container.encode(entities, forKey: .entities)
+        try container.encodeIfPresent(alternateIntents, forKey: .alternateIntents)
+        try container.encode(context, forKey: .context)
+        try container.encode(output, forKey: .output)
+        try container.encodeIfPresent(actions, forKey: .actions)
+        var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
+        try dynamicContainer.encodeIfPresent(additionalProperties)
     }
 
 }

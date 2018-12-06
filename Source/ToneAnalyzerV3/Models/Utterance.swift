@@ -15,10 +15,9 @@
  **/
 
 import Foundation
-import RestKit
 
 /** Utterance. */
-public struct Utterance: Encodable {
+public struct Utterance: Codable, Equatable {
 
     /**
      An utterance contributed by a user in the conversation that is to be analyzed. The utterance can contain multiple

@@ -19,7 +19,7 @@ import Foundation
 /**
  Analysis features and options.
  */
-public struct Features: Encodable {
+public struct Features: Codable, Equatable {
 
     /**
      Returns high-level concepts in the content. For example, a research paper about deep learning might return the
@@ -32,7 +32,7 @@ public struct Features: Encodable {
      Detects anger, disgust, fear, joy, or sadness that is conveyed in the content or by the context around target
      phrases specified in the targets parameter. You can analyze emotion for detected entities with `entities.emotion`
      and for keywords with `keywords.emotion`.
-     Supported languages: English
+     Supported languages: English.
      */
     public var emotion: EmotionOptions?
 
@@ -74,7 +74,7 @@ public struct Features: Encodable {
     /**
      Analyzes the general sentiment of your content or the sentiment toward specific target phrases. You can analyze
      sentiment for detected entities with `entities.sentiment` and for keywords with `keywords.sentiment`.
-      Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish
+      Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish.
      */
     public var sentiment: SentimentOptions?
 
@@ -106,7 +106,7 @@ public struct Features: Encodable {
      - parameter emotion: Detects anger, disgust, fear, joy, or sadness that is conveyed in the content or by the
        context around target phrases specified in the targets parameter. You can analyze emotion for detected entities
        with `entities.emotion` and for keywords with `keywords.emotion`.
-       Supported languages: English
+       Supported languages: English.
      - parameter entities: Identifies people, cities, organizations, and other entities in the content. See [Entity
        types and subtypes](/docs/services/natural-language-understanding/entity-types.html).
        Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
@@ -125,7 +125,7 @@ public struct Features: Encodable {
      - parameter sentiment: Analyzes the general sentiment of your content or the sentiment toward specific target
        phrases. You can analyze sentiment for detected entities with `entities.sentiment` and for keywords with
        `keywords.sentiment`.
-        Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish
+        Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish.
      - parameter categories: Returns a five-level taxonomy of the content. The top three categories are returned.
        Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
 

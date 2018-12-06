@@ -17,7 +17,7 @@
 import Foundation
 
 /** RegisterStatus. */
-public struct RegisterStatus: Decodable {
+public struct RegisterStatus: Codable, Equatable {
 
     /**
      The current status of the job:

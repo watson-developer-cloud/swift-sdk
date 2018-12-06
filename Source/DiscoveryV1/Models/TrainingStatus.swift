@@ -17,7 +17,7 @@
 import Foundation
 
 /** TrainingStatus. */
-public struct TrainingStatus: Decodable {
+public struct TrainingStatus: Codable, Equatable {
 
     public var totalExamples: Int?
 
@@ -33,9 +33,9 @@ public struct TrainingStatus: Decodable {
 
     public var notices: Int?
 
-    public var successfullyTrained: String?
+    public var successfullyTrained: Date?
 
-    public var dataUpdated: String?
+    public var dataUpdated: Date?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {

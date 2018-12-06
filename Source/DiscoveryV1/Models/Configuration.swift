@@ -19,7 +19,7 @@ import Foundation
 /**
  A custom configuration for the environment.
  */
-public struct Configuration: Codable {
+public struct Configuration: Codable, Equatable {
 
     /**
      The unique identifier of the configuration.
@@ -34,12 +34,12 @@ public struct Configuration: Codable {
     /**
      The creation date of the configuration in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
      */
-    public var created: String?
+    public var created: Date?
 
     /**
      The timestamp of when the configuration was last updated in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
      */
-    public var updated: String?
+    public var updated: Date?
 
     /**
      The description of the configuration, if available.
@@ -47,7 +47,7 @@ public struct Configuration: Codable {
     public var description: String?
 
     /**
-     The document conversion settings for the configuration.
+     Document conversion settings.
      */
     public var conversions: Conversions?
 
@@ -89,7 +89,7 @@ public struct Configuration: Codable {
      - parameter updated: The timestamp of when the configuration was last updated in the format
        yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
      - parameter description: The description of the configuration, if available.
-     - parameter conversions: The document conversion settings for the configuration.
+     - parameter conversions: Document conversion settings.
      - parameter enrichments: An array of document enrichment settings for the configuration.
      - parameter normalizations: Defines operations that can be used to transform the final output JSON into a
        normalized form. Operations are executed in the order that they appear in the array.
@@ -100,8 +100,8 @@ public struct Configuration: Codable {
     public init(
         name: String,
         configurationID: String? = nil,
-        created: String? = nil,
-        updated: String? = nil,
+        created: Date? = nil,
+        updated: Date? = nil,
         description: String? = nil,
         conversions: Conversions? = nil,
         enrichments: [Enrichment]? = nil,

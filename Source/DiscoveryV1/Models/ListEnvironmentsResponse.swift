@@ -17,7 +17,7 @@
 import Foundation
 
 /** ListEnvironmentsResponse. */
-public struct ListEnvironmentsResponse: Decodable {
+public struct ListEnvironmentsResponse: Codable, Equatable {
 
     /**
      An array of [environments] that are available for the service instance.

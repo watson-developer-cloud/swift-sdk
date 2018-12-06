@@ -19,7 +19,7 @@ import Foundation
 /**
  An object containing the emotion results of a document.
  */
-public struct DocumentEmotionResults: Decodable {
+public struct DocumentEmotionResults: Codable, Equatable {
 
     /**
      An object containing the emotion results for the document.

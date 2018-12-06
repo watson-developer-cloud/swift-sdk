@@ -17,7 +17,7 @@
 import Foundation
 
 /** SpeechRecognitionResults. */
-public struct SpeechRecognitionResults: Decodable {
+public struct SpeechRecognitionResults: Codable, Equatable {
 
     /**
      An array of `SpeechRecognitionResult` objects that can include interim and final results (interim results are

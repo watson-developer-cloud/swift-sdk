@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** DocumentSnapshot. */
-public struct DocumentSnapshot: Decodable {
+public struct DocumentSnapshot: Codable, Equatable {
 
     public enum Step: String {
         case htmlInput = "html_input"

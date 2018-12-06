@@ -17,7 +17,7 @@
 import Foundation
 
 /** TopHitsResults. */
-public struct TopHitsResults: Decodable {
+public struct TopHitsResults: Codable, Equatable {
 
     /**
      Number of matching results.

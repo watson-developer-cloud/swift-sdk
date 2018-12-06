@@ -19,7 +19,7 @@ import Foundation
 /**
  The **options** object defines which items to crawl from the source system.
  */
-public struct SourceOptions: Codable {
+public struct SourceOptions: Codable, Equatable {
 
     /**
      Array of folders to crawl from the Box source. Only valid, and required, when the **type** field of the **source**

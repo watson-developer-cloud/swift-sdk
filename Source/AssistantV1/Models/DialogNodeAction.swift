@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** DialogNodeAction. */
-public struct DialogNodeAction: Codable {
+public struct DialogNodeAction: Codable, Equatable {
 
     /**
      The type of action to invoke.

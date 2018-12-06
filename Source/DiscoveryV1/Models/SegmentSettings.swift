@@ -19,7 +19,7 @@ import Foundation
 /**
  A list of Document Segmentation settings.
  */
-public struct SegmentSettings: Codable {
+public struct SegmentSettings: Codable, Equatable {
 
     /**
      Enables/disables the Document Segmentation feature.

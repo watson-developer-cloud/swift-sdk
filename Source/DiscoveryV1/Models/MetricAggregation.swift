@@ -19,7 +19,7 @@ import Foundation
 /**
  An aggregation analyzing log information for queries and events.
  */
-public struct MetricAggregation: Decodable {
+public struct MetricAggregation: Codable, Equatable {
 
     /**
      The measurement interval for this metric. Metric intervals are always 1 day (`1d`).

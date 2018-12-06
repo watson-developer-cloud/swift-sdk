@@ -17,7 +17,7 @@
 import Foundation
 
 /** Corpus. */
-public struct Corpus: Decodable {
+public struct Corpus: Codable, Equatable {
 
     /**
      The status of the corpus:

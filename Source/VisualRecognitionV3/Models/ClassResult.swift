@@ -19,7 +19,7 @@ import Foundation
 /**
  Result of a class within a classifier.
  */
-public struct ClassResult: Decodable {
+public struct ClassResult: Codable, Equatable {
 
     /**
      Name of the class.
@@ -30,7 +30,7 @@ public struct ClassResult: Decodable {
      Confidence score for the property in the range of 0 to 1. A higher score indicates greater likelihood that the
      class is depicted in the image. The default threshold for returning scores from a classifier is 0.5.
      */
-    public var score: Double?
+    public var score: Double
 
     /**
      Knowledge graph of the property. For example, `/fruit/pome/apple/eating apple/Granny Smith`. Included only if

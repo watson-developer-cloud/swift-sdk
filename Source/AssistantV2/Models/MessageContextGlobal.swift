@@ -19,10 +19,10 @@ import Foundation
 /**
  Contains information that can be shared by all skills within the Assistant.
  */
-public struct MessageContextGlobal: Codable {
+public struct MessageContextGlobal: Codable, Equatable {
 
     /**
-     Properties interpreted by the Assistant that are shared across all skills within the Assistant.
+     Properties that are shared by all skills used by the assistant.
      */
     public var system: MessageContextGlobalSystem?
 
@@ -34,8 +34,7 @@ public struct MessageContextGlobal: Codable {
     /**
      Initialize a `MessageContextGlobal` with member variables.
 
-     - parameter system: Properties interpreted by the Assistant that are shared across all skills within the
-       Assistant.
+     - parameter system: Properties that are shared by all skills used by the assistant.
 
      - returns: An initialized `MessageContextGlobal`.
     */

@@ -19,7 +19,7 @@ import Foundation
 /**
  Information about something that went wrong.
  */
-public struct WarningInfo: Decodable {
+public struct WarningInfo: Codable, Equatable {
 
     /**
      Codified warning string, such as `limit_reached`.

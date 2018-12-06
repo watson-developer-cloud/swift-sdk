@@ -19,7 +19,7 @@ import Foundation
 /**
  An object specifying the sentiment extraction enrichment and related parameters.
  */
-public struct NluEnrichmentSentiment: Codable {
+public struct NluEnrichmentSentiment: Codable, Equatable {
 
     /**
      When `true`, sentiment analysis is performed on the entire field.

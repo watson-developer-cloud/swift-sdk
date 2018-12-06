@@ -19,7 +19,7 @@ import Foundation
 /**
  A notice produced for the collection.
  */
-public struct Notice: Decodable {
+public struct Notice: Codable, Equatable {
 
     /**
      Severity level of the notice.
@@ -38,7 +38,7 @@ public struct Notice: Decodable {
     /**
      The creation date of the collection in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
      */
-    public var created: String?
+    public var created: Date?
 
     /**
      Unique identifier of the document.

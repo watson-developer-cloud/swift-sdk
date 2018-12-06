@@ -17,7 +17,7 @@
 import Foundation
 
 /** FeatureSentimentResults. */
-public struct FeatureSentimentResults: Decodable {
+public struct FeatureSentimentResults: Codable, Equatable {
 
     /**
      Sentiment score from -1 (negative) to 1 (positive).

@@ -17,7 +17,7 @@
 import Foundation
 
 /** LanguageModels. */
-public struct LanguageModels: Decodable {
+public struct LanguageModels: Codable, Equatable {
 
     /**
      An array of objects that provides information about each available custom language model. The array is empty if the

@@ -19,12 +19,12 @@ import Foundation
 /**
  The pagination data for the returned objects.
  */
-public struct LogPagination: Decodable {
+public struct LogPagination: Codable, Equatable {
 
     /**
      The URL that will return the next page of results, if any.
      */
-    public var nextUrl: String?
+    public var nextURL: String?
 
     /**
      Reserved for future use.
@@ -38,7 +38,7 @@ public struct LogPagination: Decodable {
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case nextUrl = "next_url"
+        case nextURL = "next_url"
         case matched = "matched"
         case nextCursor = "next_cursor"
     }

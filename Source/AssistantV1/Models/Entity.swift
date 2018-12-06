@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /** Entity. */
-public struct Entity: Decodable {
+public struct Entity: Codable, Equatable {
 
     /**
      The name of the entity.
@@ -28,12 +28,12 @@ public struct Entity: Decodable {
     /**
      The timestamp for creation of the entity.
      */
-    public var created: String?
+    public var created: Date?
 
     /**
      The timestamp for the last update to the entity.
      */
-    public var updated: String?
+    public var updated: Date?
 
     /**
      The description of the entity.

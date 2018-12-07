@@ -55,6 +55,7 @@ class CompareComplyTests: XCTestCase {
         }
         compareComply.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         compareComply.defaultHeaders["X-Watson-Test"] = "true"
+        compareComply.defaultHeaders["x-watson-metadata"] = "customer_id=sdk-test-customer-id"
     }
 
     func loadDocument(name: String, ext: String) -> URL? {
@@ -205,13 +206,6 @@ class CompareComplyTests: XCTestCase {
                 XCTAssertNotNil(result.unalignedElements)
                 XCTAssertNotNil(result.documents)
                 XCTAssertNotNil(result.modelID)
-
-                if let alignedElements = result.alignedElements {
-                    XCTAssertEqual(alignedElements.count, 34)
-                }
-                if let unalignedElements = result.unalignedElements {
-                    XCTAssertEqual(unalignedElements.count, 34)
-                }
 
                 expectation.fulfill()
         }

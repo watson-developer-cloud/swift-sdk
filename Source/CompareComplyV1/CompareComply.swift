@@ -30,9 +30,8 @@ public class CompareComply {
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
-    let session = URLSession(configuration: URLSessionConfiguration.default)
+    var session = URLSession(configuration: URLSessionConfiguration.default)
     var authMethod: AuthenticationMethod
-    let domain = "com.ibm.watson.developer-cloud.CompareComplyV1"
     let version: String
 
     /**
@@ -97,9 +96,9 @@ public class CompareComply {
     /**
      Convert file to HTML.
 
-     Uploads an input file to the service instance, which returns an HTML version of the document.
+     Uploads an input file. The response includes an HTML version of the document.
 
-     - parameter file: The input file to convert.
+     - parameter file: The file to convert.
      - parameter modelID: The analysis model to be used by the service. For the `/v1/element_classification` and
        `/v1/comparison` methods, the default is `contracts`. For the `/v1/tables` method, the default is `tables`. These
        defaults apply to the standalone methods as well as to the methods' use in batch-processing requests.
@@ -162,10 +161,9 @@ public class CompareComply {
     /**
      Classify the elements of a document.
 
-     Uploads a file to the service instance, which returns an analysis of the document's structural and semantic
-     elements.
+     Uploads a file. The response includes an analysis of the document's structural and semantic elements.
 
-     - parameter file: The input file to convert.
+     - parameter file: The file to classify.
      - parameter modelID: The analysis model to be used by the service. For the `/v1/element_classification` and
        `/v1/comparison` methods, the default is `contracts`. For the `/v1/tables` method, the default is `tables`. These
        defaults apply to the standalone methods as well as to the methods' use in batch-processing requests.
@@ -228,9 +226,9 @@ public class CompareComply {
     /**
      Extract a document's tables.
 
-     Uploads a document file to the service instance, which extracts the contents of the document's tables.
+     Uploads a file. The response includes an analysis of the document's tables.
 
-     - parameter file: The input file on which to run table extraction.
+     - parameter file: The file on which to run table extraction.
      - parameter modelID: The analysis model to be used by the service. For the `/v1/element_classification` and
        `/v1/comparison` methods, the default is `contracts`. For the `/v1/tables` method, the default is `tables`. These
        defaults apply to the standalone methods as well as to the methods' use in batch-processing requests.
@@ -293,15 +291,13 @@ public class CompareComply {
     /**
      Compare two documents.
 
-     Uploads two input files to the service instance, which analyzes the content and returns parsed JSON comparing the
-     two documents. Uploaded files must be in the same file format.
+     Uploads two input files. The response includes JSON comparing the two documents. Uploaded files must be in the same
+     file format.
 
      - parameter file1: The first file to compare.
      - parameter file2: The second file to compare.
-     - parameter file1Label: A text label for the first file. The label cannot exceed 64 characters in length. The
-       default is `file_1`.
-     - parameter file2Label: A text label for the second file. The label cannot exceed 64 characters in length. The
-       default is `file_2`.
+     - parameter file1Label: A text label for the first file.
+     - parameter file2Label: A text label for the second file.
      - parameter modelID: The analysis model to be used by the service. For the `/v1/element_classification` and
        `/v1/comparison` methods, the default is `contracts`. For the `/v1/tables` method, the default is `tables`. These
        defaults apply to the standalone methods as well as to the methods' use in batch-processing requests.
@@ -472,7 +468,7 @@ public class CompareComply {
        the service filters the output to include only feedback that has at least one `nature`:`party` pair from the list
        unchanged.
      - parameter pageLimit: An optional integer specifying the number of documents that you want the service to
-       return. The default value is `10` and the maximum value is `100`.
+       return.
      - parameter cursor: An optional string that returns the set of documents after the previous set. Use this
        parameter with the `page_limit` parameter.
      - parameter sort: An optional comma-separated list of fields in the document to sort on. You can optionally
@@ -518,11 +514,11 @@ public class CompareComply {
             queryParameters.append(queryParameter)
         }
         if let before = before {
-            let queryParameter = URLQueryItem(name: "before", value: before)
+            let queryParameter = URLQueryItem(name: "before", value: "\(before)")
             queryParameters.append(queryParameter)
         }
         if let after = after {
-            let queryParameter = URLQueryItem(name: "after", value: after)
+            let queryParameter = URLQueryItem(name: "after", value: "\(after)")
             queryParameters.append(queryParameter)
         }
         if let documentTitle = documentTitle {
@@ -704,8 +700,7 @@ public class CompareComply {
      The use of IBM Cloud Object Storage with Compare and Comply is discussed at [Using batch
      processing](https://console.bluemix.net/docs/services/compare-comply/batching.html#before-you-batch).
 
-     - parameter function: The Compare and Comply method to run across the submitted input documents. Possible values
-       are `html_conversion`, `element_classification`, and `tables`.
+     - parameter function: The Compare and Comply method to run across the submitted input documents.
      - parameter inputCredentialsFile: A JSON file containing the input Cloud Object Storage credentials. At a
        minimum, the credentials must enable `READ` permissions on the bucket defined by the `input_bucket_name`
        parameter.
@@ -890,8 +885,7 @@ public class CompareComply {
      cancel a request.
 
      - parameter batchID: The ID of the batch-processing request you want to update.
-     - parameter action: The action you want to perform on the specified batch-processing request. Possible values are
-       `rescan` and `cancel`.
+     - parameter action: The action you want to perform on the specified batch-processing request.
      - parameter modelID: The analysis model to be used by the service. For the `/v1/element_classification` and
        `/v1/comparison` methods, the default is `contracts`. For the `/v1/tables` method, the default is `tables`. These
        defaults apply to the standalone methods as well as to the methods' use in batch-processing requests.

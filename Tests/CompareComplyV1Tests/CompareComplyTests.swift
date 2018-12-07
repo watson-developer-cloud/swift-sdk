@@ -67,23 +67,7 @@ class CompareComplyTests: XCTestCase {
         return url
     }
 
-    /** Fail false negatives. */
-    func failWithError(error: Error) {
-        XCTFail("Positive test failed with error: \(error)")
-    }
-
-    /** Fail false positives. */
-    func failWithResult<T>(result: T) {
-        XCTFail("Negative test returned a result.")
-    }
-
-    /** Fail false positives. */
-    func failWithResult() {
-        XCTFail("Negative test returned a result.")
-    }
-
-    /** Wait for expectations. */
-    func waitForExpectations(timeout: TimeInterval = 30.0) {
+    func waitForExpectations(timeout: TimeInterval = 20.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
@@ -97,20 +81,28 @@ class CompareComplyTests: XCTestCase {
             return
         }
 
-        compareComply.convertToHtml(
+        compareComply.convertToHTML(
             file: file,
             modelID: nil,
-            fileContentType: nil,
-            failure: failWithError) {
-                response in
+            fileContentType: nil) {
+                response, error in
 
-                XCTAssertNotNil(response.numPages)
-                if let numPages = response.numPages,
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let result = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
+
+                XCTAssertNotNil(result.numPages)
+                if let numPages = result.numPages,
                     let numberOfPages = Int(numPages) {
                     XCTAssert(numberOfPages == 4)
                 }
-                XCTAssertNotNil(response.title)
-                if let title = response.title {
+                XCTAssertNotNil(result.title)
+                if let title = result.title {
                     XCTAssert(title.contains("contract_A"))
                 }
                 expectation.fulfill()
@@ -123,23 +115,31 @@ class CompareComplyTests: XCTestCase {
 
         compareComply.classifyElements(
             file: contractAFile,
-            modelID: nil,
-            failure: failWithError) {
-                response in
+            modelID: nil) {
+                response, error in
 
-                XCTAssertNotNil(response.contractAmounts)
-                XCTAssertNotNil(response.document)
-                XCTAssertNotNil(response.document?.title)
-                XCTAssertNotNil(response.documentStructure)
-                XCTAssertNotNil(response.elements)
-                XCTAssertNotNil(response.modelID)
-                XCTAssertNotNil(response.modelVersion)
-                XCTAssertNotNil(response.parties)
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let result = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-                if let title = response.document?.title {
+                XCTAssertNotNil(result.contractAmounts)
+                XCTAssertNotNil(result.document)
+                XCTAssertNotNil(result.document?.title)
+                XCTAssertNotNil(result.documentStructure)
+                XCTAssertNotNil(result.elements)
+                XCTAssertNotNil(result.modelID)
+                XCTAssertNotNil(result.modelVersion)
+                XCTAssertNotNil(result.parties)
+
+                if let title = result.document?.title {
                     XCTAssert(title.contains("contract_A"))
                 }
-                if let modelID = response.modelID {
+                if let modelID = result.modelID {
                     XCTAssertEqual(modelID, "contracts")
                 }
 
@@ -154,15 +154,23 @@ class CompareComplyTests: XCTestCase {
         compareComply.extractTables(
             file: testTableFile,
             modelID: nil,
-            fileContentType: "application/pdf",
-            failure: failWithError) {
-                response in
+            fileContentType: "application/pdf") {
+                response, error in
 
-                XCTAssertNotNil(response.document)
-                XCTAssertNotNil(response.modelID)
-                XCTAssertNotNil(response.tables)
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let result = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-                if let tableCells = response.tables?[0].bodyCells {
+                XCTAssertNotNil(result.document)
+                XCTAssertNotNil(result.modelID)
+                XCTAssertNotNil(result.tables)
+
+                if let tableCells = result.tables?[0].bodyCells {
                     XCTAssertEqual(tableCells.count, 28)
                 }
 
@@ -181,19 +189,27 @@ class CompareComplyTests: XCTestCase {
             file2Label: "contract_b",
             modelID: nil,
             file1ContentType: "application/pdf",
-            file2ContentType: "application/pdf",
-            failure: failWithError) {
-                response in
+            file2ContentType: "application/pdf") {
+                response, error in
 
-                XCTAssertNotNil(response.alignedElements)
-                XCTAssertNotNil(response.unalignedElements)
-                XCTAssertNotNil(response.documents)
-                XCTAssertNotNil(response.modelID)
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let result = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-                if let alignedElements = response.alignedElements {
+                XCTAssertNotNil(result.alignedElements)
+                XCTAssertNotNil(result.unalignedElements)
+                XCTAssertNotNil(result.documents)
+                XCTAssertNotNil(result.modelID)
+
+                if let alignedElements = result.alignedElements {
                     XCTAssertEqual(alignedElements.count, 34)
                 }
-                if let unalignedElements = response.unalignedElements {
+                if let unalignedElements = result.unalignedElements {
                     XCTAssertEqual(unalignedElements.count, 34)
                 }
 
@@ -205,9 +221,13 @@ class CompareComplyTests: XCTestCase {
     func testListFeedback() {
         let expectation = self.expectation(description: "List feedback")
 
-        compareComply.listFeedback(failure: failWithError) {
-            response in
+        compareComply.listFeedback() {
+            _, error in
 
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
             expectation.fulfill()
         }
         waitForExpectations()
@@ -225,37 +245,37 @@ class CompareComplyTests: XCTestCase {
 
         let originalType1 = TypeLabel(
             label: Label(nature: "Obligation", party: "IBM"),
-            provenanceIds: ["85f5981a-ba91-44f5-9efa-0bd22e64b7bc", "ce0480a1-5ef1-4c3e-9861-3743b5610795"]
+            provenanceIDs: ["85f5981a-ba91-44f5-9efa-0bd22e64b7bc", "ce0480a1-5ef1-4c3e-9861-3743b5610795"]
         )
         let originalType2 = TypeLabel(
             label: Label(nature: "Exclusion", party: "End User"),
-            provenanceIds: ["85f5981a-ba91-44f5-9efa-0bd22e64b7bc", "ce0480a1-5ef1-4c3e-9861-3743b5610795"]
+            provenanceIDs: ["85f5981a-ba91-44f5-9efa-0bd22e64b7bc", "ce0480a1-5ef1-4c3e-9861-3743b5610795"]
         )
         let originalCategory1 = CompareComplyV1.Category(
             label: "Responsibilities",
-            provenanceIds: []
+            provenanceIDs: []
         )
         let originalCategory2 = CompareComplyV1.Category(
             label: "Amendments",
-            provenanceIds: []
+            provenanceIDs: []
         )
         let originalLabels = OriginalLabelsIn(types: [originalType1, originalType2], categories: [originalCategory1, originalCategory2])
 
         let updatedType1 = TypeLabel(
             label: Label(nature: "Obligation", party: "IBM"),
-            provenanceIds: nil
+            provenanceIDs: nil
         )
         let updatedType2 = TypeLabel(
             label: Label(nature: "Disclaimer", party: "Buyer"),
-            provenanceIds: nil
+            provenanceIDs: nil
         )
         let updatedCategory1 = CompareComplyV1.Category(
             label: "Responsibilities",
-            provenanceIds: nil
+            provenanceIDs: nil
         )
         let updatedCategory2 = CompareComplyV1.Category(
             label: "Audits",
-            provenanceIds: nil
+            provenanceIDs: nil
         )
         let updatedLabels = UpdatedLabelsIn(types: [updatedType1, updatedType2], categories: [updatedCategory1, updatedCategory2])
 
@@ -276,9 +296,17 @@ class CompareComplyTests: XCTestCase {
         compareComply.addFeedback(
             feedbackData: feedbackDataInput,
             userID: "Anthony",
-            comment: "Compare and Comply is the best!",
-            failure: failWithError) {
-                response in
+            comment: "Compare and Comply is the best!") {
+                response, error in
+
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let result = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
                 expectation1.fulfill()
         }
@@ -332,12 +360,20 @@ class CompareComplyTests: XCTestCase {
             inputBucketName: "compare-comply-integration-test-bucket-input",
             outputCredentialsFile: credentialsOutput,
             outputBucketLocation: bucketLocation,
-            outputBucketName: "compare-comply-integration-test-bucket-output",
-            failure: failWithError) {
-                response in
+            outputBucketName: "compare-comply-integration-test-bucket-output") {
+                response, error in
 
-                XCTAssertNotNil(response.batchID)
-                batchID = response.batchID
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let batch = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
+
+                XCTAssertNotNil(batch.batchID)
+                batchID = batch.batchID
                 expectation1.fulfill()
         }
 
@@ -346,15 +382,24 @@ class CompareComplyTests: XCTestCase {
         let expectation2 = self.expectation(description: "Get batch")
 
         var firstUpdated: Date!
-        compareComply.getBatch(batchID: batchID, failure: failWithError) {
-            response in
+        compareComply.getBatch(batchID: batchID) {
+            response, error in
 
-            XCTAssertNotNil(response.batchID)
-            guard let updated = response.updated else {
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let batch = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssertNotNil(batch.batchID)
+            guard let updated = batch.updated else {
                 XCTFail("Unknown last updated date for batch \(String(describing: batchID))")
                 return
             }
-            firstUpdated = dateFormatter.date(from: updated)
+            firstUpdated = updated
 
             expectation2.fulfill()
         }
@@ -365,16 +410,23 @@ class CompareComplyTests: XCTestCase {
 
         compareComply.updateBatch(
             batchID: batchID,
-            action: "rescan",
-            failure: failWithError) {
-                response in
+            action: "rescan") {
+                response, error in
 
-                guard let updated = response.updated else {
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let batch = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
+
+                guard let lastUpdated = batch.updated else {
                     XCTFail("Unknown last updated date for batch \(String(describing: batchID))")
                     return
                 }
-                let lastUpdated = dateFormatter.date(from: updated)
-                XCTAssert(lastUpdated?.compare(firstUpdated) == ComparisonResult.orderedDescending)
+                XCTAssert(lastUpdated.compare(firstUpdated) == ComparisonResult.orderedDescending)
 
                 expectation3.fulfill()
         }
@@ -383,8 +435,17 @@ class CompareComplyTests: XCTestCase {
 
         let expectation4 = self.expectation(description: "List batches")
 
-        compareComply.listBatches(failure: failWithError) {
-            response in
+        compareComply.listBatches() {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let response = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
 
             guard let batches = response.batches else {
                 XCTFail("Failed to get list of batches")

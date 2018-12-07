@@ -558,6 +558,7 @@
 		92BF69B7213F129A00FE6325 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
 		92BF69B8213F129A00FE6325 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
 		92BF69B9213F129A00FE6325 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
+		92DA57DF21B9F51C0036981E /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A23E521123E7E00E4C78A /* TestUtilities.swift */; };
 		92ED234C2187C57C00C049A2 /* TokenDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ED234A2187C57B00C049A2 /* TokenDict.swift */; };
 		92ED234D2187C57C00C049A2 /* TokenDictStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ED234B2187C57B00C049A2 /* TokenDictStatusResponse.swift */; };
 		92ED234F218A598D00C049A2 /* TokenDictRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ED234E218A598D00C049A2 /* TokenDictRule.swift */; };
@@ -4436,6 +4437,7 @@
 			files = (
 				92EE4EE7219DF8720008CE33 /* CompareComplyTests.swift in Sources */,
 				92866206219111E30064C6FD /* WatsonCredentials.swift in Sources */,
+				92DA57DF21B9F51C0036981E /* TestUtilities.swift in Sources */,
 				92866204219111E00064C6FD /* Shared.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

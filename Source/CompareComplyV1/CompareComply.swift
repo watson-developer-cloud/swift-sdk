@@ -101,27 +101,25 @@ public class CompareComply {
        defaults apply to the standalone methods as well as to the methods' use in batch-processing requests.
      - parameter fileContentType: The content type of file.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
-    public func convertToHtml(
+    public func convertToHTML(
         file: URL,
         modelID: String? = nil,
         fileContentType: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (HTMLReturn) -> Void)
+        completionHandler: @escaping (WatsonResponse<HTMLReturn>?, WatsonError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
         do {
             try multipartFormData.append(file: file, withName: "file")
         } catch {
-            failure?(error)
+            completionHandler(nil, WatsonError.serialization(values: "file \(file.path)"))
             return
         }
         guard let body = try? multipartFormData.toData() else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
             return
         }
 
@@ -154,13 +152,7 @@ public class CompareComply {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<HTMLReturn>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -175,27 +167,25 @@ public class CompareComply {
        defaults apply to the standalone methods as well as to the methods' use in batch-processing requests.
      - parameter fileContentType: The content type of file.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func classifyElements(
         file: URL,
         modelID: String? = nil,
         fileContentType: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (ClassifyReturn) -> Void)
+        completionHandler: @escaping (WatsonResponse<ClassifyReturn>?, WatsonError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
         do {
             try multipartFormData.append(file: file, withName: "file")
         } catch {
-            failure?(error)
+            completionHandler(nil, WatsonError.serialization(values: "file \(file.path)"))
             return
         }
         guard let body = try? multipartFormData.toData() else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
             return
         }
 
@@ -228,13 +218,7 @@ public class CompareComply {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<ClassifyReturn>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -248,27 +232,25 @@ public class CompareComply {
        defaults apply to the standalone methods as well as to the methods' use in batch-processing requests.
      - parameter fileContentType: The content type of file.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func extractTables(
         file: URL,
         modelID: String? = nil,
         fileContentType: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (TableReturn) -> Void)
+        completionHandler: @escaping (WatsonResponse<TableReturn>?, WatsonError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
         do {
             try multipartFormData.append(file: file, withName: "file")
         } catch {
-            failure?(error)
+            completionHandler(nil, WatsonError.serialization(values: "file \(file.path)"))
             return
         }
         guard let body = try? multipartFormData.toData() else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
             return
         }
 
@@ -301,13 +283,7 @@ public class CompareComply {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<TableReturn>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -328,8 +304,7 @@ public class CompareComply {
      - parameter file1ContentType: The content type of file1.
      - parameter file2ContentType: The content type of file2.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func compareDocuments(
         file1: URL,
@@ -340,25 +315,24 @@ public class CompareComply {
         file1ContentType: String? = nil,
         file2ContentType: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (CompareReturn) -> Void)
+        completionHandler: @escaping (WatsonResponse<CompareReturn>?, WatsonError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
         do {
             try multipartFormData.append(file: file1, withName: "file_1")
         } catch {
-            failure?(error)
+            completionHandler(nil, WatsonError.serialization(values: "file \(file1.path)"))
             return
         }
         do {
             try multipartFormData.append(file: file2, withName: "file_2")
         } catch {
-            failure?(error)
+            completionHandler(nil, WatsonError.serialization(values: "file \(file2.path)"))
             return
         }
         guard let body = try? multipartFormData.toData() else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
             return
         }
 
@@ -399,13 +373,7 @@ public class CompareComply {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<CompareReturn>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -419,21 +387,22 @@ public class CompareComply {
      - parameter userID: An optional string identifying the user.
      - parameter comment: An optional comment on or description of the feedback.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func addFeedback(
         feedbackData: FeedbackDataInput,
         userID: String? = nil,
         comment: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (FeedbackReturn) -> Void)
+        completionHandler: @escaping (WatsonResponse<FeedbackReturn>?, WatsonError?) -> Void)
     {
         // construct body
-        let addFeedbackRequest = FeedbackInput(feedbackData: feedbackData, userID: userID, comment: comment)
+        let addFeedbackRequest = FeedbackInput(
+            feedbackData: feedbackData,
+            userID: userID,
+            comment: comment)
         guard let body = try? JSONEncoder().encode(addFeedbackRequest) else {
-            failure?(RestError.serializationError)
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
 
@@ -462,13 +431,7 @@ public class CompareComply {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<FeedbackReturn>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -514,8 +477,7 @@ public class CompareComply {
      - parameter includeTotal: An optional boolean value. If specified as `true`, the `pagination` object in the
        output includes a value called `total` that gives the total count of feedback created.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listFeedback(
         feedbackType: String? = nil,
@@ -535,8 +497,7 @@ public class CompareComply {
         sort: String? = nil,
         includeTotal: Bool? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (FeedbackList) -> Void)
+        completionHandler: @escaping (WatsonResponse<FeedbackList>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -625,13 +586,7 @@ public class CompareComply {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<FeedbackList>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -642,15 +597,13 @@ public class CompareComply {
        `/v1/comparison` methods, the default is `contracts`. For the `/v1/tables` method, the default is `tables`. These
        defaults apply to the standalone methods as well as to the methods' use in batch-processing requests.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getFeedback(
         feedbackID: String,
         modelID: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (GetFeedback) -> Void)
+        completionHandler: @escaping (WatsonResponse<GetFeedback>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -670,7 +623,7 @@ public class CompareComply {
         // construct REST request
         let path = "/v1/feedback/\(feedbackID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -684,13 +637,7 @@ public class CompareComply {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<GetFeedback>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -701,15 +648,13 @@ public class CompareComply {
        `/v1/comparison` methods, the default is `contracts`. For the `/v1/tables` method, the default is `tables`. These
        defaults apply to the standalone methods as well as to the methods' use in batch-processing requests.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func deleteFeedback(
         feedbackID: String,
         modelID: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (FeedbackDeleted) -> Void)
+        completionHandler: @escaping (WatsonResponse<FeedbackDeleted>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -729,7 +674,7 @@ public class CompareComply {
         // construct REST request
         let path = "/v1/feedback/\(feedbackID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -743,13 +688,7 @@ public class CompareComply {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<FeedbackDeleted>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -779,8 +718,7 @@ public class CompareComply {
        `/v1/comparison` methods, the default is `contracts`. For the `/v1/tables` method, the default is `tables`. These
        defaults apply to the standalone methods as well as to the methods' use in batch-processing requests.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createBatch(
         function: String,
@@ -792,15 +730,14 @@ public class CompareComply {
         outputBucketName: String,
         modelID: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (BatchStatus) -> Void)
+        completionHandler: @escaping (WatsonResponse<BatchStatus>?, WatsonError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
         do {
             try multipartFormData.append(file: inputCredentialsFile, withName: "input_credentials_file")
         } catch {
-            failure?(error)
+            completionHandler(nil, WatsonError.serialization(values: "file \(inputCredentialsFile.path)"))
             return
         }
         if let inputBucketLocationData = inputBucketLocation.data(using: .utf8) {
@@ -812,7 +749,7 @@ public class CompareComply {
         do {
             try multipartFormData.append(file: outputCredentialsFile, withName: "output_credentials_file")
         } catch {
-            failure?(error)
+            completionHandler(nil, WatsonError.serialization(values: "file \(outputCredentialsFile.path)"))
             return
         }
         if let outputBucketLocationData = outputBucketLocation.data(using: .utf8) {
@@ -822,7 +759,7 @@ public class CompareComply {
             multipartFormData.append(outputBucketNameData, withName: "output_bucket_name")
         }
         guard let body = try? multipartFormData.toData() else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
             return
         }
 
@@ -856,13 +793,7 @@ public class CompareComply {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<BatchStatus>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -871,13 +802,11 @@ public class CompareComply {
      Gets the list of batch-processing jobs submitted by users.
 
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listBatches(
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (Batches) -> Void)
+        completionHandler: @escaping (WatsonResponse<Batches>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -902,13 +831,7 @@ public class CompareComply {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<Batches>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -918,14 +841,12 @@ public class CompareComply {
 
      - parameter batchID: The ID of the batch-processing request whose information you want to retrieve.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getBatch(
         batchID: String,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (BatchStatus) -> Void)
+        completionHandler: @escaping (WatsonResponse<BatchStatus>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -941,7 +862,7 @@ public class CompareComply {
         // construct REST request
         let path = "/v1/batches/\(batchID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -955,13 +876,7 @@ public class CompareComply {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<BatchStatus>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -977,16 +892,14 @@ public class CompareComply {
        `/v1/comparison` methods, the default is `contracts`. For the `/v1/tables` method, the default is `tables`. These
        defaults apply to the standalone methods as well as to the methods' use in batch-processing requests.
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed if an error occurs.
-     - parameter success: A function executed with the successful result.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func updateBatch(
         batchID: String,
         action: String,
         modelID: String? = nil,
         headers: [String: String]? = nil,
-        failure: ((Error) -> Void)? = nil,
-        success: @escaping (BatchStatus) -> Void)
+        completionHandler: @escaping (WatsonResponse<BatchStatus>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1007,7 +920,7 @@ public class CompareComply {
         // construct REST request
         let path = "/v1/batches/\(batchID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            failure?(RestError.encodingError)
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
         let request = RestRequest(
@@ -1021,13 +934,7 @@ public class CompareComply {
         )
 
         // execute REST request
-        request.responseObject {
-            (response: RestResponse<BatchStatus>) in
-            switch response.result {
-            case .success(let retval): success(retval)
-            case .failure(let error): failure?(error)
-            }
-        }
+        request.responseObject(completionHandler: completionHandler)
     }
 
 }

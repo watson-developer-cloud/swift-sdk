@@ -481,8 +481,8 @@ public class CompareComply {
      */
     public func listFeedback(
         feedbackType: String? = nil,
-        before: String? = nil,
-        after: String? = nil,
+        before: Date? = nil,
+        after: Date? = nil,
         documentTitle: String? = nil,
         modelID: String? = nil,
         modelVersion: String? = nil,

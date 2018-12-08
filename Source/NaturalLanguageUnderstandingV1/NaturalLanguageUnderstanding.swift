@@ -114,19 +114,28 @@ public class NaturalLanguageUnderstanding {
     }
 
     /**
-     Analyze text, HTML, or a public webpage.
+     Analyze text.
 
-     Analyzes text, HTML, or a public webpage with one or more text analysis features, including categories, concepts,
-     emotion, entities, keywords, metadata, relations, semantic roles, and sentiment.
+     Analyzes text, HTML, or a public webpage for the following features:
+     - Categories
+     - Concepts
+     - Emotion
+     - Entities
+     - Keywords
+     - Metadata
+     - Relations
+     - Semantic roles
+     - Sentiment.
 
      - parameter features: Analysis features and options.
      - parameter text: The plain text to analyze. One of the `text`, `html`, or `url` parameters is required.
      - parameter html: The HTML file to analyze. One of the `text`, `html`, or `url` parameters is required.
-     - parameter url: The web page to analyze. One of the `text`, `html`, or `url` parameters is required.
-     - parameter clean: Remove website elements, such as links, ads, etc.
-     - parameter xpath: An [XPath query](https://www.w3.org/TR/xpath/) to perform on `html` or `url` input. Results of
-       the query will be appended to the cleaned webpage text before it is analyzed. To analyze only the results of the
-       XPath query, set the `clean` parameter to `false`.
+     - parameter url: The webpage to analyze. One of the `text`, `html`, or `url` parameters is required.
+     - parameter clean: Set this to `false` to disable webpage cleaning. To learn more about webpage cleaning, see the
+       [Analyzing webpages](/docs/services/natural-language-understanding/analyzing-webpages.html) documentation.
+     - parameter xpath: An [XPath query](/docs/services/natural-language-understanding/analyzing-webpages.html#xpath)
+       to perform on `html` or `url` input. Results of the query will be appended to the cleaned webpage text before it
+       is analyzed. To analyze only the results of the XPath query, set the `clean` parameter to `false`.
      - parameter fallbackToRaw: Whether to use raw HTML content if text cleaning fails.
      - parameter returnAnalyzedText: Whether or not to return the analyzed text.
      - parameter language: ISO 639-1 code that specifies the language of your text. This overrides automatic language
@@ -199,8 +208,8 @@ public class NaturalLanguageUnderstanding {
     /**
      List models.
 
-     Lists available models for Relations and Entities features, including Watson Knowledge Studio custom models that
-     you have created and linked to your Natural Language Understanding service.
+     Lists Watson Knowledge Studio [custom models](/docs/services/natural-language-understanding/customizing.html) that
+     are deployed to your Natural Language Understanding service.
 
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error

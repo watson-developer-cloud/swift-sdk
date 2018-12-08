@@ -62,7 +62,7 @@ public struct WorkspaceExport: Codable, Equatable {
     public var updated: Date?
 
     /**
-     The workspace ID.
+     The workspace ID of the workspace.
      */
     public var workspaceID: String
 

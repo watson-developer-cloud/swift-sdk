@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** SupportedFeatures. */
+/**
+ Describes the additional service features that are supported with the voice.
+ */
 public struct SupportedFeatures: Codable, Equatable {
 
     /**

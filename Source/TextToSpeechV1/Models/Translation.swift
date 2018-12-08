@@ -23,7 +23,7 @@ public struct Translation: Codable, Equatable {
      **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation
      for the word. You can create only a single entry, with or without a single part of speech, for any word; you cannot
      create multiple entries with different parts of speech for the same word. For more information, see [Working with
-     Japanese entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
+     Japanese entries](/docs/services/text-to-speech/custom-rules.html#jaNotes).
      */
     public enum PartOfSpeech: String {
         case josi = "Josi"
@@ -56,7 +56,7 @@ public struct Translation: Codable, Equatable {
      **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation
      for the word. You can create only a single entry, with or without a single part of speech, for any word; you cannot
      create multiple entries with different parts of speech for the same word. For more information, see [Working with
-     Japanese entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
+     Japanese entries](/docs/services/text-to-speech/custom-rules.html#jaNotes).
      */
     public var partOfSpeech: String?
 
@@ -75,8 +75,7 @@ public struct Translation: Codable, Equatable {
      - parameter partOfSpeech: **Japanese only.** The part of speech for the word. The service uses the value to
        produce the correct intonation for the word. You can create only a single entry, with or without a single part of
        speech, for any word; you cannot create multiple entries with different parts of speech for the same word. For
-       more information, see [Working with Japanese
-       entries](https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes).
+       more information, see [Working with Japanese entries](/docs/services/text-to-speech/custom-rules.html#jaNotes).
 
      - returns: An initialized `Translation`.
     */

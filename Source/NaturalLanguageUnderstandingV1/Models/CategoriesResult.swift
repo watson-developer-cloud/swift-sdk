@@ -17,12 +17,14 @@
 import Foundation
 
 /**
- The hierarchical 5-level taxonomy the content is categorized into.
+ A categorization of the analyzed text.
  */
 public struct CategoriesResult: Codable, Equatable {
 
     /**
-     The path to the category through the taxonomy hierarchy.
+     The path to the category through the 5-level taxonomy hierarchy. For the complete list of categories, see the
+     [Categories hierarchy](/docs/services/natural-language-understanding/categories.html#categories-hierarchy)
+     documentation.
      */
     public var label: String?
 

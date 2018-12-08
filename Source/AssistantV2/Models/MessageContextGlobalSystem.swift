@@ -28,8 +28,9 @@ public struct MessageContextGlobalSystem: Codable, Equatable {
 
     /**
      A string value that identifies the user who is interacting with the assistant. The client must provide a unique
-     identifier for each individual end user who accesses the application. This user ID may be used for billing and
-     other purposes.
+     identifier for each individual end user who accesses the application. For Plus and Premium plans, this user ID is
+     used to identify unique users for billing purposes. This string cannot contain carriage return, newline, or tab
+     characters.
      */
     public var userID: String?
 
@@ -52,8 +53,9 @@ public struct MessageContextGlobalSystem: Codable, Equatable {
      - parameter timezone: The user time zone. The assistant uses the time zone to correctly resolve relative time
        references.
      - parameter userID: A string value that identifies the user who is interacting with the assistant. The client
-       must provide a unique identifier for each individual end user who accesses the application. This user ID may be
-       used for billing and other purposes.
+       must provide a unique identifier for each individual end user who accesses the application. For Plus and Premium
+       plans, this user ID is used to identify unique users for billing purposes. This string cannot contain carriage
+       return, newline, or tab characters.
      - parameter turnCount: A counter that is automatically incremented with each turn of the conversation. A value
        of 1 indicates that this is the the first turn of a new conversation, which can affect the behavior of some
        skills.

@@ -110,7 +110,7 @@ public class Assistant {
     /**
      Get response to user input.
 
-     Get a response to a user's input.
+     Send user input to a workspace and receive a response.
      There is no rate limit for this operation.
 
      - parameter workspaceID: Unique identifier of the workspace.
@@ -200,8 +200,8 @@ public class Assistant {
 
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
-     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the
-       value with a minus sign (`-`).
+     - parameter sort: The attribute by which returned workspaces will be sorted. To reverse the sort order, prefix
+       the value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
@@ -277,7 +277,7 @@ public class Assistant {
      - parameter language: The language of the workspace.
      - parameter intents: An array of objects defining the intents for the workspace.
      - parameter entities: An array of objects defining the entities for the workspace.
-     - parameter dialogNodes: An array of objects defining the nodes in the workspace dialog.
+     - parameter dialogNodes: An array of objects defining the nodes in the dialog.
      - parameter counterexamples: An array of objects defining input examples that have been marked as irrelevant
        input.
      - parameter metadata: Any metadata related to the workspace.
@@ -423,7 +423,7 @@ public class Assistant {
      - parameter language: The language of the workspace.
      - parameter intents: An array of objects defining the intents for the workspace.
      - parameter entities: An array of objects defining the entities for the workspace.
-     - parameter dialogNodes: An array of objects defining the nodes in the workspace dialog.
+     - parameter dialogNodes: An array of objects defining the nodes in the dialog.
      - parameter counterexamples: An array of objects defining input examples that have been marked as irrelevant
        input.
      - parameter metadata: Any metadata related to the workspace.
@@ -568,7 +568,7 @@ public class Assistant {
        subelements, is included.
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
-     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the
+     - parameter sort: The attribute by which returned intents will be sorted. To reverse the sort order, prefix the
        value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
@@ -902,7 +902,7 @@ public class Assistant {
      - parameter intent: The intent name.
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
-     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the
+     - parameter sort: The attribute by which returned examples will be sorted. To reverse the sort order, prefix the
        value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
@@ -1222,8 +1222,8 @@ public class Assistant {
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
-     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the
-       value with a minus sign (`-`).
+     - parameter sort: The attribute by which returned counterexamples will be sorted. To reverse the sort order,
+       prefix the value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
@@ -1529,7 +1529,7 @@ public class Assistant {
        subelements, is included.
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
-     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the
+     - parameter sort: The attribute by which returned entities will be sorted. To reverse the sort order, prefix the
        value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
@@ -1606,14 +1606,15 @@ public class Assistant {
     /**
      Create entity.
 
-     Create a new entity.
+     Create a new entity, or enable a system entity.
      This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity. This string must conform to the following restrictions:
        - It can contain only Unicode alphanumeric, underscore, and hyphen characters.
-       - It cannot begin with the reserved prefix `sys-`.
        - It must be no longer than 64 characters.
+       If you specify an entity name beginning with the reserved prefix `sys-`, it must be the name of a system entity
+       that you want to enable. (Any entity content specified with the request is ignored.).
      - parameter description: The description of the entity. This string cannot contain carriage return, newline, or
        tab characters, and it must be no longer than 128 characters.
      - parameter metadata: Any metadata related to the value.
@@ -1821,7 +1822,7 @@ public class Assistant {
     /**
      Delete entity.
 
-     Delete an entity from a workspace.
+     Delete an entity from a workspace, or disable a system entity.
      This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
@@ -1943,8 +1944,8 @@ public class Assistant {
        subelements, is included.
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
-     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the
-       value with a minus sign (`-`).
+     - parameter sort: The attribute by which returned entity values will be sorted. To reverse the sort order, prefix
+       the value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
@@ -2311,8 +2312,8 @@ public class Assistant {
      - parameter value: The text of the entity value.
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
-     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the
-       value with a minus sign (`-`).
+     - parameter sort: The attribute by which returned entity value synonyms will be sorted. To reverse the sort
+       order, prefix the value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
@@ -2634,8 +2635,8 @@ public class Assistant {
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
-     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the
-       value with a minus sign (`-`).
+     - parameter sort: The attribute by which returned dialog nodes will be sorted. To reverse the sort order, prefix
+       the value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.

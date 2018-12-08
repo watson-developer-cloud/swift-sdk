@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- An object containing the emotion results for the target.
+ Emotion results for a specified target.
  */
 public struct TargetedEmotionResults: Codable, Equatable {
 
@@ -27,7 +27,7 @@ public struct TargetedEmotionResults: Codable, Equatable {
     public var text: String?
 
     /**
-     An object containing the emotion results for the target.
+     The emotion results for the target.
      */
     public var emotion: EmotionScores?
 

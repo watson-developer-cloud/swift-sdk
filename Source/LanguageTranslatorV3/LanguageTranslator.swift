@@ -116,14 +116,9 @@ public class LanguageTranslator {
 
      - parameter text: Input text in UTF-8 encoding. Multiple entries will result in multiple translations in the
        response.
-     - parameter modelID: Model ID of the translation model to use. If this is specified, the **source** and
-       **target** parameters will be ignored. The method requires either a model ID or both the **source** and
-       **target** parameters.
-     - parameter source: Language code of the source text language. Use with `target` as an alternative way to select
-       a translation model. When `source` and `target` are set, and a model ID is not set, the system chooses a default
-       model for the language pair (usually the model based on the news domain).
-     - parameter target: Language code of the translation target language. Use with source as an alternative way to
-       select a translation model.
+     - parameter modelID: A globally unique string that identifies the underlying model that is used for translation.
+     - parameter source: Translation source language code.
+     - parameter target: Translation target language code.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */

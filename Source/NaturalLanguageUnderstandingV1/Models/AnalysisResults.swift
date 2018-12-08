@@ -32,7 +32,7 @@ public struct AnalysisResults: Codable, Equatable {
     public var analyzedText: String?
 
     /**
-     URL that was used to retrieve HTML content.
+     URL of the webpage that was analyzed.
      */
     public var retrievedURL: String?
 
@@ -42,22 +42,22 @@ public struct AnalysisResults: Codable, Equatable {
     public var usage: Usage?
 
     /**
-     The general concepts referenced or alluded to in the specified content.
+     The general concepts referenced or alluded to in the analyzed text.
      */
     public var concepts: [ConceptsResult]?
 
     /**
-     The important entities in the specified content.
+     The entities detected in the analyzed text.
      */
     public var entities: [EntitiesResult]?
 
     /**
-     The important keywords in content organized by relevance.
+     The keywords from the analyzed text.
      */
     public var keywords: [KeywordsResult]?
 
     /**
-     The hierarchical 5-level taxonomy the content is categorized into.
+     The categories that the service assigned to the analyzed text.
      */
     public var categories: [CategoriesResult]?
 
@@ -68,7 +68,8 @@ public struct AnalysisResults: Codable, Equatable {
     public var emotion: EmotionResult?
 
     /**
-     The Authors, Publication Date, and Title of the document. Supports URL and HTML input types.
+     The authors, publication date, title, prominent page image, and RSS/ATOM feeds of the webpage. Supports URL and
+     HTML input types.
      */
     public var metadata: MetadataResult?
 
@@ -78,7 +79,7 @@ public struct AnalysisResults: Codable, Equatable {
     public var relations: [RelationsResult]?
 
     /**
-     The subjects of actions and the objects the actions act upon.
+     Sentences parsed into `subject`, `action`, and `object` form.
      */
     public var semanticRoles: [SemanticRolesResult]?
 

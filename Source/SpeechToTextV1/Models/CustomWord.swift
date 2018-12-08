@@ -23,7 +23,7 @@ public struct CustomWord: Codable, Equatable {
      For the **Add custom words** method, you must specify the custom word that is to be added to or updated in the
      custom model. Do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of
      compound words.
-     Omit this field for the **Add a custom word** method.
+     Omit this parameter for the **Add a custom word** method.
      */
     public var word: String?
 
@@ -60,7 +60,7 @@ public struct CustomWord: Codable, Equatable {
      - parameter word: For the **Add custom words** method, you must specify the custom word that is to be added to
        or updated in the custom model. Do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to
        connect the tokens of compound words.
-       Omit this field for the **Add a custom word** method.
+       Omit this parameter for the **Add a custom word** method.
      - parameter soundsLike: An array of sounds-like pronunciations for the custom word. Specify how words that are
        difficult to pronounce, foreign words, acronyms, and so on can be pronounced by users.
        * For a word that is not in the service's base vocabulary, omit the parameter to have the service automatically

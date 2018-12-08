@@ -323,8 +323,9 @@ public class VisualRecognition {
      names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.
 
      - parameter name: The name of the new classifier. Encode special characters in UTF-8.
-     - parameter positiveExamples: A .zip file of images that depict the visual subject of a class in the new
-       classifier. You can include more than one positive example file in a call.
+     - parameter positiveExamples: A dictionary that contains the value for each classname. The value are a .zip file
+       of images that depict the visual subject of a class in the new classifier. You can include more than one positive
+       example file in a call.
        Specify the parameter name by appending `_positive_examples` to the class name. For example,
        `goldenretriever_positive_examples` creates the class **goldenretriever**.
        Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The
@@ -500,9 +501,9 @@ public class VisualRecognition {
      classifier retraining finished.
 
      - parameter classifierID: The ID of the classifier.
-     - parameter positiveExamples: A .zip file of images that depict the visual subject of a class in the
-       classifier. The positive examples create or update classes in the classifier. You can include more than one
-       positive example file in a call.
+     - parameter positiveExamples: A dictionary that contains the value for each classname. The value are a .zip file
+       of images that depict the visual subject of a class in the classifier. The positive examples create or update
+       classes in the classifier. You can include more than one positive example file in a call.
        Specify the parameter name by appending `_positive_examples` to the class name. For example,
        `goldenretriever_positive_examples` creates the class `goldenretriever`.
        Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The

@@ -39,12 +39,36 @@ public struct Model: Codable, Equatable {
      */
     public var description: String?
 
+    /**
+     ID of the Watson Knowledge Studio workspace that deployed this model to Natural Language Understanding.
+     */
+    public var workspaceID: String?
+
+    /**
+     The model version, if it was manually provided in Watson Knowledge Studio.
+     */
+    public var version: String?
+
+    /**
+     The description of the version, if it was manually provided in Watson Knowledge Studio.
+     */
+    public var versionDescription: String?
+
+    /**
+     A dateTime indicating when the model was created.
+     */
+    public var created: Date?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case status = "status"
         case modelID = "model_id"
         case language = "language"
         case description = "description"
+        case workspaceID = "workspace_id"
+        case version = "version"
+        case versionDescription = "version_description"
+        case created = "created"
     }
 
 }

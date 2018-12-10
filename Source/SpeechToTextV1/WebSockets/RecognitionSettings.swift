@@ -21,7 +21,7 @@ import Foundation
  use a default value provided by the Watson Speech to Text service.
 
  For more information about the Speech to Text service parameters, visit:
- https://console.bluemix.net/docs/services/speech-to-text/input.html
+ https://cloud.ibm.com/docs/services/speech-to-text/input.html
  */
 public struct RecognitionSettings: Codable, Equatable {
 

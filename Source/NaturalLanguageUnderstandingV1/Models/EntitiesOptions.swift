@@ -35,7 +35,7 @@ public struct EntitiesOptions: Codable, Equatable {
     public var mentions: Bool?
 
     /**
-     Enter a [custom model](https://www.bluemix.net/docs/services/natural-language-understanding/customizing.html) ID to
+     Enter a [custom model](https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html) ID to
      override the standard entity detection model.
      */
     public var model: String?
@@ -65,7 +65,7 @@ public struct EntitiesOptions: Codable, Equatable {
      - parameter limit: Maximum number of entities to return.
      - parameter mentions: Set this to `true` to return locations of entity mentions.
      - parameter model: Enter a [custom
-       model](https://www.bluemix.net/docs/services/natural-language-understanding/customizing.html) ID to override the
+       model](https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html) ID to override the
        standard entity detection model.
      - parameter sentiment: Set this to `true` to return sentiment information for detected entities.
      - parameter emotion: Set this to `true` to analyze emotion for detected keywords.

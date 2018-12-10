@@ -220,7 +220,7 @@ public class NaturalLanguageClassifier {
        (`ja`), Korean (`ko`), Brazilian Portuguese (`pt`), and Spanish (`es`).
      - parameter trainingData: Training data in CSV format. Each text value must have at least one class. The data can
        include up to 3,000 classes and 20,000 records. For details, see [Data
-       preparation](https://console.bluemix.net/docs/services/natural-language-classifier/using-your-data.html).
+       preparation](https://cloud.ibm.com/docs/services/natural-language-classifier/using-your-data.html).
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */

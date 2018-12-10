@@ -359,6 +359,9 @@ public class Assistant {
        subelements, is included.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
+     - parameter sort: Indicates how the returned workspace data will be sorted. This parameter is valid only if
+       **export**=`true`. Specify `sort=stable` to sort all workspace objects by unique identifier, in ascending
+       alphabetical order.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -366,6 +369,7 @@ public class Assistant {
         workspaceID: String,
         export: Bool? = nil,
         includeAudit: Bool? = nil,
+        sort: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<WorkspaceExport>?, WatsonError?) -> Void)
     {
@@ -385,6 +389,10 @@ public class Assistant {
         }
         if let includeAudit = includeAudit {
             let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
+            queryParameters.append(queryParameter)
+        }
+        if let sort = sort {
+            let queryParameter = URLQueryItem(name: "sort", value: sort)
             queryParameters.append(queryParameter)
         }
 

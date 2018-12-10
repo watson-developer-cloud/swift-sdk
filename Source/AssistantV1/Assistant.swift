@@ -2048,7 +2048,7 @@ public class Assistant {
      - parameter patterns: An array of patterns for the entity value. You can provide either synonyms or patterns (as
        indicated by **type**), but not both. A pattern is a regular expression no longer than 512 characters. For more
        information about how to specify a pattern, see the
-       [documentation](https://console.bluemix.net/docs/services/conversation/entities.html#creating-entities).
+       [documentation](https://cloud.ibm.com/docs/services/conversation/entities.html#creating-entities).
      - parameter valueType: Specifies the type of value.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -2198,7 +2198,7 @@ public class Assistant {
      - parameter newPatterns: An array of patterns for the entity value. You can provide either synonyms or patterns
        (as indicated by **type**), but not both. A pattern is a regular expression no longer than 512 characters. For
        more information about how to specify a pattern, see the
-       [documentation](https://console.bluemix.net/docs/services/conversation/entities.html#creating-entities).
+       [documentation](https://cloud.ibm.com/docs/services/conversation/entities.html#creating-entities).
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -2729,7 +2729,7 @@ public class Assistant {
      - parameter parent: The ID of the parent dialog node.
      - parameter previousSibling: The ID of the previous dialog node.
      - parameter output: The output of the dialog node. For more information about how to specify dialog node output,
-       see the [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
+       see the [documentation](https://cloud.ibm.com/docs/services/conversation/dialog-overview.html#complex).
      - parameter context: The context for the dialog node.
      - parameter metadata: The metadata for the dialog node.
      - parameter nextStep: The next step to execute following this dialog node.
@@ -2904,7 +2904,7 @@ public class Assistant {
      - parameter newPreviousSibling: The ID of the previous sibling dialog node.
      - parameter newOutput: The output of the dialog node. For more information about how to specify dialog node
        output, see the
-       [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
+       [documentation](https://cloud.ibm.com/docs/services/conversation/dialog-overview.html#complex).
      - parameter newContext: The context for the dialog node.
      - parameter newMetadata: The metadata for the dialog node.
      - parameter newNextStep: The next step to execute following this dialog node.
@@ -3066,7 +3066,7 @@ public class Assistant {
        order, prefix the parameter value with a minus sign (`-`).
      - parameter filter: A cacheable parameter that limits the results to those matching the specified filter. For
        more information, see the
-       [documentation](https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax).
+       [documentation](https://cloud.ibm.com/docs/services/conversation/filter-reference.html#filter-query-syntax).
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -3138,7 +3138,7 @@ public class Assistant {
      - parameter filter: A cacheable parameter that limits the results to those matching the specified filter. You
        must specify a filter query that includes a value for `language`, as well as a value for `workspace_id` or
        `request.context.metadata.deployment`. For more information, see the
-       [documentation](https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax).
+       [documentation](https://cloud.ibm.com/docs/services/conversation/filter-reference.html#filter-query-syntax).
      - parameter sort: How to sort the returned log events. You can sort by **request_timestamp**. To reverse the sort
        order, prefix the parameter value with a minus sign (`-`).
      - parameter pageLimit: The number of records to return in each page of results.
@@ -3200,7 +3200,7 @@ public class Assistant {
      the customer ID.
      You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request that passes data.
      For more information about personal data and customer IDs, see [Information
-     security](https://console.bluemix.net/docs/services/conversation/information-security.html).
+     security](https://cloud.ibm.com/docs/services/conversation/information-security.html).
 
      - parameter customerID: The customer ID for which all data is to be deleted.
      - parameter headers: A dictionary of request headers to be sent with this request.

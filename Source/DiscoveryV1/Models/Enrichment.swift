@@ -47,7 +47,7 @@ public struct Enrichment: Codable, Equatable {
      options.
       When using `elements` the **options** object must contain Element Classification options. Additionally, when using
      the `elements` enrichment the configuration specified and files ingested must meet all the criteria specified in
-     [the documentation](https://console.bluemix.net/docs/services/discovery/element-classification.html)
+     [the documentation](https://cloud.ibm.com/docs/services/discovery/element-classification.html)
       Previous API versions also supported `alchemy_language`.
      */
     public var enrichmentName: String
@@ -87,7 +87,7 @@ public struct Enrichment: Codable, Equatable {
        options.
         When using `elements` the **options** object must contain Element Classification options. Additionally, when
        using the `elements` enrichment the configuration specified and files ingested must meet all the criteria
-       specified in [the documentation](https://console.bluemix.net/docs/services/discovery/element-classification.html)
+       specified in [the documentation](https://cloud.ibm.com/docs/services/discovery/element-classification.html)
         Previous API versions also supported `alchemy_language`.
      - parameter description: Describes what the enrichment step does.
      - parameter overwrite: Indicates that the enrichments will overwrite the destination_field field if it already

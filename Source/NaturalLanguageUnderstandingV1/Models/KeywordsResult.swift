@@ -22,6 +22,11 @@ import Foundation
 public struct KeywordsResult: Codable, Equatable {
 
     /**
+     Number of times the keyword appears in the analyzed text.
+     */
+    public var count: Int?
+
+    /**
      Relevance score from 0 to 1. Higher values indicate greater relevance.
      */
     public var relevance: Double?
@@ -43,6 +48,7 @@ public struct KeywordsResult: Codable, Equatable {
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
+        case count = "count"
         case relevance = "relevance"
         case text = "text"
         case emotion = "emotion"

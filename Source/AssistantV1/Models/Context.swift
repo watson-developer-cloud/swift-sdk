@@ -32,6 +32,11 @@ public struct Context: Codable, Equatable {
      */
     public var system: SystemResponse?
 
+    /**
+     Metadata related to the message.
+     */
+    public var metadata: MessageContextMetadata?
+
     /// Additional properties associated with this model.
     public var additionalProperties: [String: JSON]
 
@@ -39,7 +44,8 @@ public struct Context: Codable, Equatable {
     private enum CodingKeys: String, CodingKey {
         case conversationID = "conversation_id"
         case system = "system"
-        static let allValues = [conversationID, system]
+        case metadata = "metadata"
+        static let allValues = [conversationID, system, metadata]
     }
 
     /**
@@ -47,17 +53,20 @@ public struct Context: Codable, Equatable {
 
      - parameter conversationID: The unique identifier of the conversation.
      - parameter system: For internal use only.
+     - parameter metadata: Metadata related to the message.
 
      - returns: An initialized `Context`.
     */
     public init(
         conversationID: String? = nil,
         system: SystemResponse? = nil,
+        metadata: MessageContextMetadata? = nil,
         additionalProperties: [String: JSON] = [:]
     )
     {
         self.conversationID = conversationID
         self.system = system
+        self.metadata = metadata
         self.additionalProperties = additionalProperties
     }
 
@@ -65,6 +74,7 @@ public struct Context: Codable, Equatable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         conversationID = try container.decodeIfPresent(String.self, forKey: .conversationID)
         system = try container.decodeIfPresent(SystemResponse.self, forKey: .system)
+        metadata = try container.decodeIfPresent(MessageContextMetadata.self, forKey: .metadata)
         let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
         additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: CodingKeys.allValues)
     }
@@ -73,6 +83,7 @@ public struct Context: Codable, Equatable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(conversationID, forKey: .conversationID)
         try container.encodeIfPresent(system, forKey: .system)
+        try container.encodeIfPresent(metadata, forKey: .metadata)
         var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
         try dynamicContainer.encodeIfPresent(additionalProperties)
     }

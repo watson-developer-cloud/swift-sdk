@@ -43,12 +43,12 @@ internal struct Parameters: Codable, Equatable {
 
     /**
      Set this to `false` to disable webpage cleaning. To learn more about webpage cleaning, see the [Analyzing
-     webpages](/docs/services/natural-language-understanding/analyzing-webpages.html) documentation.
+     webpages](https://cloud.ibm.com/docs/services/natural-language-understanding/analyzing-webpages.html) documentation.
      */
     public var clean: Bool?
 
     /**
-     An [XPath query](/docs/services/natural-language-understanding/analyzing-webpages.html#xpath) to perform on `html`
+     An [XPath query](https://cloud.ibm.com/docs/services/natural-language-understanding/analyzing-webpages.html#xpath) to perform on `html`
      or `url` input. Results of the query will be appended to the cleaned webpage text before it is analyzed. To analyze
      only the results of the XPath query, set the `clean` parameter to `false`.
      */
@@ -99,8 +99,8 @@ internal struct Parameters: Codable, Equatable {
      - parameter html: The HTML file to analyze. One of the `text`, `html`, or `url` parameters is required.
      - parameter url: The webpage to analyze. One of the `text`, `html`, or `url` parameters is required.
      - parameter clean: Set this to `false` to disable webpage cleaning. To learn more about webpage cleaning, see
-       the [Analyzing webpages](/docs/services/natural-language-understanding/analyzing-webpages.html) documentation.
-     - parameter xpath: An [XPath query](/docs/services/natural-language-understanding/analyzing-webpages.html#xpath)
+       the [Analyzing webpages](https://cloud.ibm.com/docs/services/natural-language-understanding/analyzing-webpages.html) documentation.
+     - parameter xpath: An [XPath query](https://cloud.ibm.com/docs/services/natural-language-understanding/analyzing-webpages.html#xpath)
        to perform on `html` or `url` input. Results of the query will be appended to the cleaned webpage text before it
        is analyzed. To analyze only the results of the XPath query, set the `clean` parameter to `false`.
      - parameter fallbackToRaw: Whether to use raw HTML content if text cleaning fails.

@@ -127,7 +127,7 @@ public class ToneAnalyzer {
      character encoding of the input text; for example: `Content-Type: text/plain;charset=utf-8`. For `text/html`, the
      service removes HTML tags and analyzes only the textual content.
      **See also:** [Using the general-purpose
-     endpoint](/docs/services/tone-analyzer/using-tone.html#using-the-general-purpose-endpoint).
+     endpoint](https://cloud.ibm.com/docs/services/tone-analyzer/using-tone.html#using-the-general-purpose-endpoint).
 
      - parameter toneContent: JSON, plain text, or HTML input that contains the content to be analyzed. For JSON
        input, provide an object of type `ToneInput`.
@@ -210,7 +210,7 @@ public class ToneAnalyzer {
      500 characters. Per the JSON specification, the default character encoding for JSON content is effectively always
      UTF-8.
      **See also:** [Using the customer-engagement
-     endpoint](/docs/services/tone-analyzer/using-tone-chat.html#using-the-customer-engagement-endpoint).
+     endpoint](https://cloud.ibm.com/docs/services/tone-analyzer/using-tone-chat.html#using-the-customer-engagement-endpoint).
 
      - parameter utterances: An array of `Utterance` objects that provides the input content that the service is to
        analyze.

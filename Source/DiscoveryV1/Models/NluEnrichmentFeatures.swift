@@ -54,6 +54,11 @@ public struct NluEnrichmentFeatures: Codable, Equatable {
      */
     public var relations: NluEnrichmentRelations?
 
+    /**
+     An object specifiying the concepts enrichment and related parameters.
+     */
+    public var concepts: NluEnrichmentConcepts?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case keywords = "keywords"
@@ -63,6 +68,7 @@ public struct NluEnrichmentFeatures: Codable, Equatable {
         case categories = "categories"
         case semanticRoles = "semantic_roles"
         case relations = "relations"
+        case concepts = "concepts"
     }
 
     /**
@@ -76,6 +82,7 @@ public struct NluEnrichmentFeatures: Codable, Equatable {
        field.
      - parameter semanticRoles: An object specifiying the semantic roles enrichment and related parameters.
      - parameter relations: An object specifying the relations enrichment and related parameters.
+     - parameter concepts: An object specifiying the concepts enrichment and related parameters.
 
      - returns: An initialized `NluEnrichmentFeatures`.
     */
@@ -86,7 +93,8 @@ public struct NluEnrichmentFeatures: Codable, Equatable {
         emotion: NluEnrichmentEmotion? = nil,
         categories: NluEnrichmentCategories? = nil,
         semanticRoles: NluEnrichmentSemanticRoles? = nil,
-        relations: NluEnrichmentRelations? = nil
+        relations: NluEnrichmentRelations? = nil,
+        concepts: NluEnrichmentConcepts? = nil
     )
     {
         self.keywords = keywords
@@ -96,6 +104,7 @@ public struct NluEnrichmentFeatures: Codable, Equatable {
         self.categories = categories
         self.semanticRoles = semanticRoles
         self.relations = relations
+        self.concepts = concepts
     }
 
 }

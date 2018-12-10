@@ -21,5 +21,31 @@ import Foundation
  Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
  */
 public struct CategoriesOptions: Codable, Equatable {
-    public init() { }
+
+    /**
+     Maximum number of categories to return.
+     Maximum value: **10**.
+     */
+    public var limit: Int?
+
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case limit = "limit"
+    }
+
+    /**
+     Initialize a `CategoriesOptions` with member variables.
+
+     - parameter limit: Maximum number of categories to return.
+       Maximum value: **10**.
+
+     - returns: An initialized `CategoriesOptions`.
+    */
+    public init(
+        limit: Int? = nil
+    )
+    {
+        self.limit = limit
+    }
+
 }

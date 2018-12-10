@@ -18,7 +18,7 @@ import Foundation
 
 /**
  Identifies people, cities, organizations, and other entities in the content. See [Entity types and
- subtypes](/docs/services/natural-language-understanding/entity-types.html).
+ subtypes](https://cloud.ibm.com/docs/services/natural-language-understanding/entity-types.html).
  Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish. Arabic,
  Chinese, and Dutch custom models are also supported.
  */

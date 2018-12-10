@@ -23,7 +23,7 @@ internal struct CreateAcousticModel: Codable, Equatable {
      The name of the base language model that is to be customized by the new custom acoustic model. The new custom model
      can be used only with the base model that it customizes.
      To determine whether a base model supports acoustic model customization, refer to [Language support for
-     customization](/docs/services/speech-to-text/custom.html#languageSupport).
+     customization](https://cloud.ibm.com/docs/services/speech-to-text/custom.html#languageSupport).
      */
     public enum BaseModelName: String {
         case arArBroadbandmodel = "ar-AR_BroadbandModel"
@@ -56,7 +56,7 @@ internal struct CreateAcousticModel: Codable, Equatable {
      The name of the base language model that is to be customized by the new custom acoustic model. The new custom model
      can be used only with the base model that it customizes.
      To determine whether a base model supports acoustic model customization, refer to [Language support for
-     customization](/docs/services/speech-to-text/custom.html#languageSupport).
+     customization](https://cloud.ibm.com/docs/services/speech-to-text/custom.html#languageSupport).
      */
     public var baseModelName: String
 
@@ -83,7 +83,7 @@ internal struct CreateAcousticModel: Codable, Equatable {
      - parameter baseModelName: The name of the base language model that is to be customized by the new custom
        acoustic model. The new custom model can be used only with the base model that it customizes.
        To determine whether a base model supports acoustic model customization, refer to [Language support for
-       customization](/docs/services/speech-to-text/custom.html#languageSupport).
+       customization](https://cloud.ibm.com/docs/services/speech-to-text/custom.html#languageSupport).
      - parameter description: A description of the new custom acoustic model. Use a localized description that
        matches the language of the custom model.
 

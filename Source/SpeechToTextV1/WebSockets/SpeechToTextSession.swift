@@ -152,7 +152,7 @@ public class SpeechToTextSession {
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
      - parameter model: The language and sample rate of the audio. For supported models, visit
-        https://console.bluemix.net/docs/services/speech-to-text/input.html#models.
+        https://cloud.ibm.com/docs/services/speech-to-text/input.html#models.
      - parameter baseModelVersion: The version of the specified base model that is to be used for all requests sent
        over the connection. Multiple versions of a base model can exist when a model is updated for internal improvements.
        The parameter is intended primarily for use with custom models that have been upgraded for a new base model.
@@ -162,7 +162,7 @@ public class SpeechToTextSession {
        with the recognition request. The base model of the specified custom language model must match the model
        specified with the `model` parameter. You must make the request with service credentials created for the instance
        of the service that owns the custom model. By default, no custom language model is used. See [Custom
-       models](https://console.bluemix.net/docs/services/speech-to-text/input.html#custom).
+       models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
      - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model
        that is to be used with the recognition request. The base model of the specified custom
        acoustic model must match the model specified with the `model` parameter. By default, no
@@ -198,7 +198,7 @@ public class SpeechToTextSession {
      - parameter apiKey: An API key for IAM that can be used to obtain access tokens for the service.
      - parameter iamUrl: The URL for the IAM service.
      - parameter model: The language and sample rate of the audio. For supported models, visit
-       https://console.bluemix.net/docs/services/speech-to-text/input.html#models.
+       https://cloud.ibm.com/docs/services/speech-to-text/input.html#models.
      - parameter baseModelVersion: The version of the specified base model that is to be used for all requests sent
        over the connection. Multiple versions of a base model can exist when a model is updated for internal improvements.
        The parameter is intended primarily for use with custom models that have been upgraded for a new base model.
@@ -208,7 +208,7 @@ public class SpeechToTextSession {
        with the recognition request. The base model of the specified custom language model must match the model
        specified with the `model` parameter. You must make the request with service credentials created for the instance
        of the service that owns the custom model. By default, no custom language model is used. See [Custom
-       models](https://console.bluemix.net/docs/services/speech-to-text/input.html#custom).
+       models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
      - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model
        that is to be used with the recognition request. The base model of the specified custom
        acoustic model must match the model specified with the `model` parameter. By default, no

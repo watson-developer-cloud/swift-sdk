@@ -102,7 +102,7 @@ public struct DialogNode: Codable, Equatable {
 
     /**
      The output of the dialog node. For more information about how to specify dialog node output, see the
-     [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
+     [documentation](https://cloud.ibm.com/docs/services/conversation/dialog-overview.html#complex).
      */
     public var output: DialogNodeOutput?
 

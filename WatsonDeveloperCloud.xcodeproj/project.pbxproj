@@ -496,6 +496,8 @@
 		92BF69B8213F129A00FE6325 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
 		92BF69B9213F129A00FE6325 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
 		92EAA86821BF053600A4714C /* MessageContextMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EAA86721BF053600A4714C /* MessageContextMetadata.swift */; };
+		92EAA86A21BF091700A4714C /* NluEnrichmentConcepts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EAA86921BF091700A4714C /* NluEnrichmentConcepts.swift */; };
+		92EAA86B21BF093000A4714C /* RetrievalDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926FAD6221BB3B2C00033989 /* RetrievalDetails.swift */; };
 		92ED234C2187C57C00C049A2 /* TokenDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ED234A2187C57B00C049A2 /* TokenDict.swift */; };
 		92ED234D2187C57C00C049A2 /* TokenDictStatusResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ED234B2187C57B00C049A2 /* TokenDictStatusResponse.swift */; };
 		92ED234F218A598D00C049A2 /* TokenDictRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92ED234E218A598D00C049A2 /* TokenDictRule.swift */; };
@@ -1117,6 +1119,7 @@
 		92B470672194F225006C3333 /* AssistantV1UnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantV1UnitTests.swift; sourceTree = "<group>"; };
 		92BF69AD213F129A00FE6325 /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Shared.swift; path = Source/SupportingFiles/Shared.swift; sourceTree = "<group>"; };
 		92EAA86721BF053600A4714C /* MessageContextMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageContextMetadata.swift; sourceTree = "<group>"; };
+		92EAA86921BF091700A4714C /* NluEnrichmentConcepts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NluEnrichmentConcepts.swift; sourceTree = "<group>"; };
 		92ED234A2187C57B00C049A2 /* TokenDict.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenDict.swift; sourceTree = "<group>"; };
 		92ED234B2187C57B00C049A2 /* TokenDictStatusResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenDictStatusResponse.swift; sourceTree = "<group>"; };
 		92ED234E218A598D00C049A2 /* TokenDictRule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenDictRule.swift; sourceTree = "<group>"; };
@@ -1725,7 +1728,6 @@
 				928204C62124BC200013315B /* LogQueryResponseResult.swift */,
 				928204C02124BC1E0013315B /* LogQueryResponseResultDocuments.swift */,
 				928204C12124BC1E0013315B /* LogQueryResponseResultDocumentsResult.swift */,
-				926FAD6321BB3B2D00033989 /* MemoryUsage.swift */,
 				928204C42124BC1F0013315B /* MetricAggregation.swift */,
 				928204BB2124BC1C0013315B /* MetricAggregationResult.swift */,
 				928204C22124BC1F0013315B /* MetricResponse.swift */,
@@ -1735,7 +1737,7 @@
 				683955002077E612009E1C8A /* Nested.swift */,
 				68AF8EC1206968CC00D552E3 /* NewTrainingQuery.swift */,
 				68AF8EFA206968CC00D552E3 /* NluEnrichmentCategories.swift */,
-				926FAD6121BB3B2C00033989 /* NluEnrichmentConcepts.swift */,
+				92EAA86921BF091700A4714C /* NluEnrichmentConcepts.swift */,
 				68AF8EB7206968CC00D552E3 /* NluEnrichmentEmotion.swift */,
 				68AF8EDE206968CC00D552E3 /* NluEnrichmentEntities.swift */,
 				68AF8EB8206968CC00D552E3 /* NluEnrichmentFeatures.swift */,
@@ -3550,7 +3552,9 @@
 				68AF8F8F2069690300D552E3 /* QueryPassages.swift in Sources */,
 				68AF8F662069690300D552E3 /* QueryRelationsResponse.swift in Sources */,
 				68AF8F9A2069690300D552E3 /* DocumentSnapshot.swift in Sources */,
+				92EAA86B21BF093000A4714C /* RetrievalDetails.swift in Sources */,
 				68AF8F982069690300D552E3 /* QueryRelationsEntity.swift in Sources */,
+				92EAA86A21BF091700A4714C /* NluEnrichmentConcepts.swift in Sources */,
 				928204CA2124BC200013315B /* MetricTokenResponse.swift in Sources */,
 				68AF8F7C2069690300D552E3 /* UpdateEnvironmentRequest.swift in Sources */,
 				68AE2FD220697C2800330836 /* QueryResultMetadata.swift in Sources */,

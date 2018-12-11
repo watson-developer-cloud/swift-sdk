@@ -532,7 +532,7 @@ The following built-in classifier IDs require no training:
 
 <p><strong>Important:</strong> On April 2, 2018, the identity information in the response to calls to the Face model was removed.
 The identity information refers to the <code>name</code> of the person, <code>score</code>, and <code>type_hierarchy</code> knowledge graph. For
-details about the enhanced Face model, see the <a href="https://console.bluemix.net/docs/services/visual-recognition/release-notes.html#2april2018">Release
+details about the enhanced Face model, see the <a href="https://cloud.ibm.com/docs/services/visual-recognition/release-notes.html#2april2018">Release
 notes</a>.
 Analyze and get data about faces in images. Responses can include estimated age and gender. This feature uses a
 built-in model, so no training is necessary. The Detect faces method does not support general biometric facial
@@ -690,8 +690,9 @@ names). The service assumes UTF-8 encoding if it encounters non-ASCII characters
                               </td>
                               <td>
                                 <div>
-                                  <p>A .zip file of images that depict the visual subject of a class in the new
-classifier. You can include more than one positive example file in a call.
+                                  <p>A dictionary that contains the value for each classname. The value are a .zip file
+of images that depict the visual subject of a class in the new classifier. You can include more than one positive
+example file in a call.
 Specify the parameter name by appending <code>_positive_examples</code> to the class name. For example,
 <code>goldenretriever_positive_examples</code> creates the class <strong>goldenretriever</strong>.
 Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The
@@ -909,7 +910,7 @@ brief list of classifiers.</p>
                         <p>Update a classifier.</p>
 
 <p>Update a custom classifier by adding new positive or negative classes (examples) or by adding new images to
-existing classes. You must supply at least one set of positive or negative examples. For details, see <a href="https://console.bluemix.net/docs/services/visual-recognition/customizing.html#updating-custom-classifiers">Updating
+existing classes. You must supply at least one set of positive or negative examples. For details, see <a href="https://cloud.ibm.com/docs/services/visual-recognition/customizing.html#updating-custom-classifiers">Updating
 custom
 classifiers</a>.
 Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and class
@@ -956,9 +957,9 @@ classifier retraining finished.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A .zip file of images that depict the visual subject of a class in the
-classifier. The positive examples create or update classes in the classifier. You can include more than one
-positive example file in a call.
+                                  <p>A dictionary that contains the value for each classname. The value are a .zip file
+of images that depict the visual subject of a class in the classifier. The positive examples create or update
+classes in the classifier. You can include more than one positive example file in a call.
 Specify the parameter name by appending <code>_positive_examples</code> to the class name. For example,
 <code>goldenretriever_positive_examples</code> creates the class <code>goldenretriever</code>.
 Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The
@@ -1178,7 +1179,7 @@ the classifier details.</p>
 <p>Deletes all data associated with a specified customer ID. The method has no effect if no data is associated with
 the customer ID.
 You associate a customer ID with data by passing the <code>X-Watson-Metadata</code> header with a request that passes data.
-For more information about personal data and customer IDs, see <a href="https://console.bluemix.net/docs/services/visual-recognition/information-security.html">Information
+For more information about personal data and customer IDs, see <a href="https://cloud.ibm.com/docs/services/visual-recognition/information-security.html">Information
 security</a>.</p>
 
                       </div>
@@ -1862,7 +1863,7 @@ built-in classifier.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-12-06)</p>
+          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-12-11)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

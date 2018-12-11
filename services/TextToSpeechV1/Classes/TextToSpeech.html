@@ -383,7 +383,7 @@ Phonetic Representation (SPR).</p>
 
 <p>Lists all voices available for use with the service. The information includes the name, language, gender, and other
 details about the voice. To see information about a specific voice, use the <strong>Get a voice</strong> method.
-<strong>See also:</strong> <a href="https://console.bluemix.net/docs/services/text-to-speech/http.html#voices">Specifying a voice</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech/http.html#voices">Specifying a voice</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -448,7 +448,7 @@ details about the voice. To see information about a specific voice, use the <str
 <p>Gets information about the specified voice. The information includes the name, language, gender, and other details
 about the voice. Specify a customization ID to obtain information for that custom voice model of the specified
 voice. To list information about all available voices, use the <strong>List voices</strong> method.
-<strong>See also:</strong> <a href="https://console.bluemix.net/docs/services/text-to-speech/http.html#voices">Specifying a voice</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech/http.html#voices">Specifying a voice</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -538,15 +538,61 @@ the custom model. Omit the parameter to see information about the specified voic
                       <div class="abstract">
                         <p>Synthesize audio.</p>
 
-<p>Synthesizes text to spoken audio, returning the synthesized audio stream as an array of bytes. You can pass a
-maximum of 5 KB of text.  Use the <code>Accept</code> header or the <code>accept</code> query parameter to specify the requested format
-(MIME type) of the response audio. By default, the service uses <code>audio/ogg;codecs=opus</code>.
-If a request includes invalid query parameters, the service returns a <code>Warnings</code> response header that provides
+<p>Synthesizes text to audio that is spoken in the specified voice. The service bases its understanding of the
+language for the input text on the specified voice. Use a voice that matches the language of the input text.
+The service returns the synthesized audio stream as an array of bytes. You can pass a maximum of 5 KB of text to
+the service.
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech/http.html#synthesize">Synthesizing text to audio</a>.</p>
+<h3 id='audio-formats-accept-types' class='heading'>Audio formats (accept types)</h3>
+
+<p>The service can return audio in the following formats (MIME types).</p>
+
+<ul>
+<li>Where indicated, you can optionally specify the sampling rate (<code>rate</code>) of the audio. You must specify a sampling
+rate for the <code>audio/l16</code> and <code>audio/mulaw</code> formats. A specified sampling rate must lie in the range of 8 kHz to 192
+kHz.</li>
+<li>For the <code>audio/l16</code> format, you can optionally specify the endianness (<code>endianness</code>) of the audio:
+<code>endianness=big-endian</code> or <code>endianness=little-endian</code>.
+Use the <code>Accept</code> header or the <code>accept</code> parameter to specify the requested format of the response audio. If you
+omit an audio format altogether, the service returns the audio in Ogg format with the Opus codec
+(<code>audio/ogg;codecs=opus</code>). The service always returns single-channel audio.</li>
+<li><code>audio/basic</code>
+The service returns audio with a sampling rate of 8000 Hz.</li>
+<li><code>audio/flac</code>
+You can optionally specify the <code>rate</code> of the audio. The default sampling rate is 22,050 Hz.</li>
+<li><code>audio/l16</code>
+You must specify the <code>rate</code> of the audio. You can optionally specify the <code>endianness</code> of the audio. The default
+endianness is <code>little-endian</code>.</li>
+<li><code>audio/mp3</code>
+You can optionally specify the <code>rate</code> of the audio. The default sampling rate is 22,050 Hz.</li>
+<li><code>audio/mpeg</code>
+You can optionally specify the <code>rate</code> of the audio. The default sampling rate is 22,050 Hz.</li>
+<li><code>audio/mulaw</code>
+You must specify the <code>rate</code> of the audio.</li>
+<li><code>audio/ogg</code>
+The service returns the audio in the <code>vorbis</code> codec. You can optionally specify the <code>rate</code> of the audio. The
+default sampling rate is 22,050 Hz.</li>
+<li><code>audio/ogg;codecs=opus</code>
+You can optionally specify the <code>rate</code> of the audio. The default sampling rate is 22,050 Hz.</li>
+<li><code>audio/ogg;codecs=vorbis</code>
+You can optionally specify the <code>rate</code> of the audio. The default sampling rate is 22,050 Hz.</li>
+<li><code>audio/wav</code>
+You can optionally specify the <code>rate</code> of the audio. The default sampling rate is 22,050 Hz.</li>
+<li><code>audio/webm</code>
+The service returns the audio in the <code>opus</code> codec. The service returns audio with a sampling rate of 48,000 Hz.</li>
+<li><code>audio/webm;codecs=opus</code>
+The service returns audio with a sampling rate of 48,000 Hz.</li>
+<li><p><code>audio/webm;codecs=vorbis</code>
+You can optionally specify the <code>rate</code> of the audio. The default sampling rate is 22,050 Hz.
+For more information about specifying an audio format, including additional details about some of the formats, see
+<a href="https://cloud.ibm.com/docs/services/text-to-speech/http.html#format">Specifying an audio format</a>.</p>
+<h3 id='warning-messages' class='heading'>Warning messages</h3>
+
+<p>If a request includes invalid query parameters, the service returns a <code>Warnings</code> response header that provides
 messages about the invalid parameters. The warning includes a descriptive message and a list of invalid argument
 strings. For example, a message such as <code>\&quot;Unknown arguments:\&quot;</code> or <code>\&quot;Unknown url query arguments:\&quot;</code> followed by
-a list of the form <code>\&quot;invalid_arg_1, invalid_arg_2.\&quot;</code> The request succeeds despite the warnings.
-<strong>See also:</strong> <a href="https://console.bluemix.net/docs/services/text-to-speech/http.html#synthesize">Synthesizing text to
-audio</a>.</p>
+a list of the form <code>\&quot;{invalid_arg_1}, {invalid_arg_2}.\&quot;</code> The request succeeds despite the warnings.</p></li>
+</ul>
 
                       </div>
                       <div class="declaration">
@@ -587,11 +633,10 @@ audio</a>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The requested audio format (MIME type) of the audio. You can use the <code>Accept</code> header or the
-<code>accept</code> query parameter to specify the audio format. (For the <code>audio/l16</code> format, you can optionally specify
-<code>endianness=big-endian</code> or <code>endianness=little-endian</code>; the default is little endian.) For detailed information
-about the supported audio formats and sampling rates, see <a href="https://console.bluemix.net/docs/services/text-to-speech/http.html#format">Specifying an audio
-format</a>.</p>
+                                  <p>The requested format (MIME type) of the audio. You can use the <code>Accept</code> header or the
+<code>accept</code> parameter to specify the audio format. For more information about specifying an audio format, see
+<strong>Audio formats (accept types)</strong> in the method description.
+Default: <code>audio/ogg;codecs=opus</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -671,7 +716,7 @@ model. Omit the parameter to use the specified voice with no customization.</p>
 You can also request the pronunciation for a specific voice to see the default translation for the language of that
 voice or for a specific custom voice model to see the translation for that voice model.
 <strong>Note:</strong> This method is currently a beta release.
-<strong>See also:</strong> <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-entries.html#cuWordsQueryLanguage">Querying a word from a
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech/custom-entries.html#cuWordsQueryLanguage">Querying a word from a
 language</a>.</p>
 
                       </div>
@@ -796,8 +841,7 @@ owns the custom model. Omit the parameter to see the translation for the specifi
 specify the language and a description for the new model. The model is owned by the instance of the service whose
 credentials are used to create it.
 <strong>Note:</strong> This method is currently a beta release.
-<strong>See also:</strong> <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-models.html#cuModelsCreate">Creating a custom
-model</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech/custom-models.html#cuModelsCreate">Creating a custom model</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -904,8 +948,7 @@ service. Specify a language to list the voice models for that language only. To 
 metadata for a specific voice model, use the <strong>List a custom model</strong> method. You must use credentials for the
 instance of the service that owns a model to list information about it.
 <strong>Note:</strong> This method is currently a beta release.
-<strong>See also:</strong> <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-models.html#cuModelsQueryAll">Querying all custom
-models</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech/custom-models.html#cuModelsQueryAll">Querying all custom models</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -997,11 +1040,9 @@ representing a word. You can specify them in standard International Phonetic Alp
 <strong>See also:</strong></p>
 
 <ul>
-<li><a href="https://console.bluemix.net/docs/services/text-to-speech/custom-models.html#cuModelsUpdate">Updating a custom
-model</a></li>
-<li><a href="https://console.bluemix.net/docs/services/text-to-speech/custom-entries.html#cuJapaneseAdd">Adding words to a Japanese custom
-model</a></li>
-<li><p><a href="https://console.bluemix.net/docs/services/text-to-speech/custom-intro.html">Understanding customization</a>.</p></li>
+<li><a href="https://cloud.ibm.com/docs/services/text-to-speech/custom-models.html#cuModelsUpdate">Updating a custom model</a></li>
+<li><a href="https://cloud.ibm.com/docs/services/text-to-speech/custom-entries.html#cuJapaneseAdd">Adding words to a Japanese custom model</a></li>
+<li><p><a href="https://cloud.ibm.com/docs/services/text-to-speech/custom-intro.html">Understanding customization</a>.</p></li>
 </ul>
 
                       </div>
@@ -1122,8 +1163,7 @@ or updated for the custom voice model. Pass an empty array to make no additions 
 of the voice model, the output includes the words and their translations as defined in the model. To see just the
 metadata for a voice model, use the <strong>List custom models</strong> method.
 <strong>Note:</strong> This method is currently a beta release.
-<strong>See also:</strong> <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-models.html#cuModelsQuery">Querying a custom
-model</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech/custom-models.html#cuModelsQuery">Querying a custom model</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -1202,8 +1242,7 @@ with service credentials created for the instance of the service that owns the c
 <p>Deletes the specified custom voice model. You must use credentials for the instance of the service that owns a
 model to delete it.
 <strong>Note:</strong> This method is currently a beta release.
-<strong>See also:</strong> <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-models.html#cuModelsDelete">Deleting a custom
-model</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech/custom-models.html#cuModelsDelete">Deleting a custom model</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -1293,11 +1332,9 @@ representing a word. You can specify them in standard International Phonetic Alp
 <strong>See also:</strong></p>
 
 <ul>
-<li><a href="https://console.bluemix.net/docs/services/text-to-speech/custom-entries.html#cuWordsAdd">Adding multiple words to a custom
-model</a></li>
-<li><a href="https://console.bluemix.net/docs/services/text-to-speech/custom-entries.html#cuJapaneseAdd">Adding words to a Japanese custom
-model</a></li>
-<li><p><a href="https://console.bluemix.net/docs/services/text-to-speech/custom-intro.html">Understanding customization</a>.</p></li>
+<li><a href="https://cloud.ibm.com/docs/services/text-to-speech/custom-entries.html#cuWordsAdd">Adding multiple words to a custom model</a></li>
+<li><a href="https://cloud.ibm.com/docs/services/text-to-speech/custom-entries.html#cuJapaneseAdd">Adding words to a Japanese custom model</a></li>
+<li><p><a href="https://cloud.ibm.com/docs/services/text-to-speech/custom-intro.html">Understanding customization</a>.</p></li>
 </ul>
 
                       </div>
@@ -1395,7 +1432,7 @@ lowercase letters. The array is empty if the custom model contains no words.</p>
 translations as they are defined in the model. You must use credentials for the instance of the service that owns a
 model to list its words.
 <strong>Note:</strong> This method is currently a beta release.
-<strong>See also:</strong> <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-entries.html#cuWordsQueryModel">Querying all words from a custom
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech/custom-entries.html#cuWordsQueryModel">Querying all words from a custom
 model</a>.</p>
 
                       </div>
@@ -1486,11 +1523,9 @@ representing a word. You can specify them in standard International Phonetic Alp
 <strong>See also:</strong></p>
 
 <ul>
-<li><a href="https://console.bluemix.net/docs/services/text-to-speech/custom-entries.html#cuWordAdd">Adding a single word to a custom
-model</a></li>
-<li><a href="https://console.bluemix.net/docs/services/text-to-speech/custom-entries.html#cuJapaneseAdd">Adding words to a Japanese custom
-model</a></li>
-<li><p><a href="https://console.bluemix.net/docs/services/text-to-speech/custom-intro.html">Understanding customization</a>.</p></li>
+<li><a href="https://cloud.ibm.com/docs/services/text-to-speech/custom-entries.html#cuWordAdd">Adding a single word to a custom model</a></li>
+<li><a href="https://cloud.ibm.com/docs/services/text-to-speech/custom-entries.html#cuJapaneseAdd">Adding words to a Japanese custom model</a></li>
+<li><p><a href="https://cloud.ibm.com/docs/services/text-to-speech/custom-intro.html">Understanding customization</a>.</p></li>
 </ul>
 
                       </div>
@@ -1562,8 +1597,7 @@ translation. A sounds-like is one or more words that, when combined, sound like 
                                   <p><strong>Japanese only.</strong> The part of speech for the word. The service uses the value to
 produce the correct intonation for the word. You can create only a single entry, with or without a single part of
 speech, for any word; you cannot create multiple entries with different parts of speech for the same word. For
-more information, see <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-rules.html#jaNotes">Working with Japanese
-entries</a>.</p>
+more information, see <a href="https://cloud.ibm.com/docs/services/text-to-speech/custom-rules.html#jaNotes">Working with Japanese entries</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1615,7 +1649,7 @@ entries</a>.</p>
 <p>Gets the translation for a single word from the specified custom model. The output shows the translation as it is
 defined in the model. You must use credentials for the instance of the service that owns a model to list its words.
 <strong>Note:</strong> This method is currently a beta release.
-<strong>See also:</strong> <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-entries.html#cuWordQueryModel">Querying a single word from a custom
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech/custom-entries.html#cuWordQueryModel">Querying a single word from a custom
 model</a>.</p>
 
                       </div>
@@ -1708,7 +1742,7 @@ with service credentials created for the instance of the service that owns the c
 <p>Deletes a single word from the specified custom voice model. You must use credentials for the instance of the
 service that owns a model to delete its words.
 <strong>Note:</strong> This method is currently a beta release.
-<strong>See also:</strong> <a href="https://console.bluemix.net/docs/services/text-to-speech/custom-entries.html#cuWordDelete">Deleting a word from a custom
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech/custom-entries.html#cuWordDelete">Deleting a word from a custom
 model</a>.</p>
 
                       </div>
@@ -1804,8 +1838,7 @@ the customer ID. You must issue the request with credentials for the same instan
 associate the customer ID with the data.
 You associate a customer ID with data by passing the <code>X-Watson-Metadata</code> header with a request that passes the
 data.
-<strong>See also:</strong> <a href="https://console.bluemix.net/docs/services/text-to-speech/information-security.html">Information
-security</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech/information-security.html">Information security</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -1870,7 +1903,7 @@ security</a>.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-12-06)</p>
+          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-12-11)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

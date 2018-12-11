@@ -201,7 +201,7 @@
             <p>Analyze various features of text content at scale. Provide text, raw HTML, or a public URL and IBM Watson Natural
 Language Understanding will give you results for the features you request. The service cleans HTML content before
 analysis by default, so the results can ignore most advertisements and other unwanted content.
-You can create <a href="/docs/services/natural-language-understanding/customizing.html">custom models</a> with Watson Knowledge
+You can create <a href="https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html">custom models</a> with Watson Knowledge
 Studio to detect custom entities and relations in Natural Language Understanding.</p>
 
           </section>
@@ -503,10 +503,21 @@ in <q>YYYY-MM-DD</q> format.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Analyze text, HTML, or a public webpage.</p>
+                        <p>Analyze text.</p>
 
-<p>Analyzes text, HTML, or a public webpage with one or more text analysis features, including categories, concepts,
-emotion, entities, keywords, metadata, relations, semantic roles, and sentiment.</p>
+<p>Analyzes text, HTML, or a public webpage for the following features:</p>
+
+<ul>
+<li>Categories</li>
+<li>Concepts</li>
+<li>Emotion</li>
+<li>Entities</li>
+<li>Keywords</li>
+<li>Metadata</li>
+<li>Relations</li>
+<li>Semantic roles</li>
+<li><p>Sentiment.</p></li>
+</ul>
 
                       </div>
                       <div class="declaration">
@@ -577,7 +588,7 @@ emotion, entities, keywords, metadata, relations, semantic roles, and sentiment.
                               </td>
                               <td>
                                 <div>
-                                  <p>The web page to analyze. One of the <code>text</code>, <code>html</code>, or <code>url</code> parameters is required.</p>
+                                  <p>The webpage to analyze. One of the <code>text</code>, <code>html</code>, or <code>url</code> parameters is required.</p>
                                 </div>
                               </td>
                             </tr>
@@ -589,7 +600,8 @@ emotion, entities, keywords, metadata, relations, semantic roles, and sentiment.
                               </td>
                               <td>
                                 <div>
-                                  <p>Remove website elements, such as links, ads, etc.</p>
+                                  <p>Set this to <code>false</code> to disable webpage cleaning. To learn more about webpage cleaning, see the
+<a href="https://cloud.ibm.com/docs/services/natural-language-understanding/analyzing-webpages.html">Analyzing webpages</a> documentation.</p>
                                 </div>
                               </td>
                             </tr>
@@ -601,9 +613,9 @@ emotion, entities, keywords, metadata, relations, semantic roles, and sentiment.
                               </td>
                               <td>
                                 <div>
-                                  <p>An <a href="https://www.w3.org/TR/xpath/">XPath query</a> to perform on <code>html</code> or <code>url</code> input. Results of
-the query will be appended to the cleaned webpage text before it is analyzed. To analyze only the results of the
-XPath query, set the <code>clean</code> parameter to <code>false</code>.</p>
+                                  <p>An <a href="https://cloud.ibm.com/docs/services/natural-language-understanding/analyzing-webpages.html#xpath">XPath query</a>
+to perform on <code>html</code> or <code>url</code> input. Results of the query will be appended to the cleaned webpage text before it
+is analyzed. To analyze only the results of the XPath query, set the <code>clean</code> parameter to <code>false</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -640,7 +652,7 @@ XPath query, set the <code>clean</code> parameter to <code>false</code>.</p>
                               <td>
                                 <div>
                                   <p>ISO 639-1 code that specifies the language of your text. This overrides automatic language
-detection. Language support differs depending on the features you include in your analysis. See <a href="https://www.bluemix.net/docs/services/natural-language-understanding/language-support.html">Language
+detection. Language support differs depending on the features you include in your analysis. See <a href="https://cloud.ibm.com/docs/services/natural-language-understanding/language-support.html">Language
 support</a> for more
 information.</p>
                                 </div>
@@ -703,8 +715,8 @@ information.</p>
                       <div class="abstract">
                         <p>List models.</p>
 
-<p>Lists available models for Relations and Entities features, including Watson Knowledge Studio custom models that
-you have created and linked to your Natural Language Understanding service.</p>
+<p>Lists Watson Knowledge Studio <a href="https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html">custom models</a> that
+are deployed to your Natural Language Understanding service.</p>
 
                       </div>
                       <div class="declaration">
@@ -831,7 +843,7 @@ you have created and linked to your Natural Language Understanding service.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-12-06)</p>
+          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-12-11)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

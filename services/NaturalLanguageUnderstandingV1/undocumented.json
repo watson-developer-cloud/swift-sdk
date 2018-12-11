@@ -1,13 +1,6 @@
 {
   "warnings": [
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/NaturalLanguageUnderstandingV1/Models/CategoriesOptions.swift",
-      "line": 24,
-      "symbol": "CategoriesOptions.init()",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/NaturalLanguageUnderstandingV1/Models/MetadataOptions.swift",
       "line": 25,
       "symbol": "MetadataOptions.init()",

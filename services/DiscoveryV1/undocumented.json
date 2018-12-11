@@ -939,6 +939,27 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/RetrievalDetails.swift",
+      "line": 33,
+      "symbol": "RetrievalDetails.DocumentRetrievalStrategy.untrained",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/RetrievalDetails.swift",
+      "line": 34,
+      "symbol": "RetrievalDetails.DocumentRetrievalStrategy.relevancyTraining",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/RetrievalDetails.swift",
+      "line": 35,
+      "symbol": "RetrievalDetails.DocumentRetrievalStrategy.continuousRelevancyTraining",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/DiscoveryV1/Models/SearchStatus.swift",
       "line": 28,
       "symbol": "SearchStatus.Status.noData",

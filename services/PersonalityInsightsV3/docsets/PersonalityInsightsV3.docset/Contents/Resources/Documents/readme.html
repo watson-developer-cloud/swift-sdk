@@ -95,6 +95,17 @@
               </li>
             </ul>
           </li>
+          <li class="nav-group-name">
+            <a href="Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:21PersonalityInsightsV311WatsonErrora">WatsonError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:21PersonalityInsightsV314WatsonResponsea">WatsonResponse</a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <article class="main-content">
@@ -141,7 +152,7 @@
 <p>This SDK provides classes and methods to access the following Watson services.</p>
 
 <ul>
-<li><a href="https://www.ibm.com/watson/services/conversation">Assistant</a></li>
+<li><a href="https://www.ibm.com/cloud/watson-assistant/">Assistant</a></li>
 <li><a href="https://www.ibm.com/watson/services/discovery">Discovery</a></li>
 <li><a href="https://www.ibm.com/watson/services/language-translator">Language Translator V3</a></li>
 <li><a href="https://www.ibm.com/watson/services/natural-language-classifier">Natural Language Classifier</a></li>
@@ -177,18 +188,17 @@
 <pre class="highlight ruby"><code><span class="n">use_frameworks!</span>
 
 <span class="n">target</span> <span class="s1">'MyApp'</span> <span class="k">do</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonAssistantV1'</span><span class="p">,</span> <span class="s1">'~&gt; 0.38.0'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonAssistantV2'</span><span class="p">,</span> <span class="s1">'~&gt; 0.38.0'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonConversationV1'</span><span class="p">,</span> <span class="s1">'~&gt; 0.38.0'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonDiscoveryV1'</span><span class="p">,</span> <span class="s1">'~&gt; 0.38.0'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonLanguageTranslatorV3'</span><span class="p">,</span> <span class="s1">'~&gt; 0.38.0'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonNaturalLanguageClassifierV1'</span><span class="p">,</span> <span class="s1">'~&gt; 0.38.0'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonNaturalLanguageUnderstandingV1'</span><span class="p">,</span> <span class="s1">'~&gt; 0.38.0'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonPersonalityInsightsV3'</span><span class="p">,</span> <span class="s1">'~&gt; 0.38.0'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonSpeechToTextV1'</span><span class="p">,</span> <span class="s1">'~&gt; 0.38.0'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonTextToSpeechV1'</span><span class="p">,</span> <span class="s1">'~&gt; 0.38.0'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonToneAnalyzerV3'</span><span class="p">,</span> <span class="s1">'~&gt; 0.38.0'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonVisualRecognitionV3'</span><span class="p">,</span> <span class="s1">'~&gt; 0.38.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonAssistantV1'</span><span class="p">,</span> <span class="s1">'~&gt; 1.1.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonAssistantV2'</span><span class="p">,</span> <span class="s1">'~&gt; 1.1.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonDiscoveryV1'</span><span class="p">,</span> <span class="s1">'~&gt; 1.1.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonLanguageTranslatorV3'</span><span class="p">,</span> <span class="s1">'~&gt; 1.1.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonNaturalLanguageClassifierV1'</span><span class="p">,</span> <span class="s1">'~&gt; 1.1.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonNaturalLanguageUnderstandingV1'</span><span class="p">,</span> <span class="s1">'~&gt; 1.1.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonPersonalityInsightsV3'</span><span class="p">,</span> <span class="s1">'~&gt; 1.1.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonSpeechToTextV1'</span><span class="p">,</span> <span class="s1">'~&gt; 1.1.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonTextToSpeechV1'</span><span class="p">,</span> <span class="s1">'~&gt; 1.1.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonToneAnalyzerV3'</span><span class="p">,</span> <span class="s1">'~&gt; 1.1.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonVisualRecognitionV3'</span><span class="p">,</span> <span class="s1">'~&gt; 1.1.0'</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -205,7 +215,7 @@
 </code></pre>
 
 <p>If your project does not have a Cartfile yet, use the <code>touch Cartfile</code> command in the root directory of your project. To install the IBM Watson Swift SDK using Carthage, add the following to your Cartfile. </p>
-<pre class="highlight plaintext"><code>github "watson-developer-cloud/swift-sdk" ~&gt; 0.38.0
+<pre class="highlight plaintext"><code>github "watson-developer-cloud/swift-sdk" ~&gt; 1.1.0
 </code></pre>
 
 <p>Then run the following command to build the dependencies and frameworks:</p>
@@ -223,7 +233,7 @@
 
 <p>Add the following to your <code>Package.swift</code> file to identify the IBM Watson Swift SDK as a dependency. The package manager will clone the Swift SDK when you build your project with <code>swift build</code>.</p>
 <pre class="highlight swift"><code><span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
-    <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/watson-developer-cloud/swift-sdk"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"0.38.0"</span><span class="p">)</span>
+    <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/watson-developer-cloud/swift-sdk"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"1.1.0"</span><span class="p">)</span>
 <span class="p">]</span>
 </code></pre>
 <h2 id='authentication' class='heading'>Authentication</h2>
@@ -240,8 +250,8 @@
 <p>To find out which authentication to use, view the service credentials. You find the service credentials for authentication the same way for all Watson services:</p>
 
 <ol>
-<li>Go to the IBM Cloud <a href="https://console.bluemix.net/dashboard/apps?category=ai">Dashboard</a> page.</li>
-<li>Either click an existing Watson service instance or click <a href="https://console.bluemix.net/catalog/?category=ai"><strong>Create resource &gt; AI</strong></a> and create a service instance.</li>
+<li>Go to the IBM Cloud <a href="https://cloud.ibm.com/dashboard/apps?category=ai">Dashboard</a> page.</li>
+<li>Either click an existing Watson service instance or click <a href="https://cloud.ibm.com/catalog/?category=ai"><strong>Create resource &gt; AI</strong></a> and create a service instance.</li>
 <li>Click <strong>Show</strong> to view your service credentials.</li>
 <li>Copy the <code>url</code> and either <code>apikey</code> or <code>username</code> and <code>password</code>.</li>
 </ol>
@@ -253,26 +263,21 @@
 
 <ul>
 <li>Use the API key to have the SDK manage the lifecycle of the access token. The SDK requests an access token, ensures that the access token is valid, and refreshes it if necessary.</li>
-<li>Use the access token if you want to manage the lifecycle yourself. For details, see <a href="https://console.bluemix.net/docs/services/watson/getting-started-iam.html">Authenticating with IAM tokens</a>. If you want to switch to API key, override your stored IAM credentials with an IAM API key.</li>
+<li>Use the access token if you want to manage the lifecycle yourself. For details, see <a href="https://cloud.ibm.com/docs/services/watson/getting-started-iam.html">Authenticating with IAM tokens</a>. If you want to switch to API key, override your stored IAM credentials with an IAM API key.</li>
 </ul>
 <h4 id='supplying-the-iam-api-key' class='heading'>Supplying the IAM API key</h4>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">discovery</span> <span class="o">=</span> <span class="kt">Discovery</span><span class="p">(</span><span class="nv">version</span><span class="p">:</span> <span class="s">"your-version-here"</span><span class="p">,</span> <span class="nv">apiKey</span><span class="p">:</span> <span class="s">"your-apikey-here"</span><span class="p">)</span>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">discovery</span> <span class="o">=</span> <span class="kt">Discovery</span><span class="p">(</span><span class="nv">version</span><span class="p">:</span> <span class="s">"your-version"</span><span class="p">,</span> <span class="nv">apiKey</span><span class="p">:</span> <span class="s">"your-apikey"</span><span class="p">)</span>
 </code></pre>
 
 <p>If you are supplying an API key for IBM Cloud Private (ICP), use basic authentication instead, with <code>&quot;apikey&quot;</code> for the <code>username</code> and the api key (prefixed with <code>icp-</code>) for the <code>password</code>. See the <a href="#username-and-password">Username and Password</a> section.</p>
 <h4 id='supplying-the-accesstoken' class='heading'>Supplying the accessToken</h4>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">discovery</span> <span class="o">=</span> <span class="kt">Discovery</span><span class="p">(</span><span class="nv">version</span><span class="p">:</span> <span class="s">"your-version-here"</span><span class="p">,</span> <span class="nv">accessToken</span><span class="p">:</span> <span class="s">"your-accessToken-here"</span><span class="p">)</span>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">discovery</span> <span class="o">=</span> <span class="kt">Discovery</span><span class="p">(</span><span class="nv">version</span><span class="p">:</span> <span class="s">"your-version"</span><span class="p">,</span> <span class="nv">accessToken</span><span class="p">:</span> <span class="s">"your-accessToken"</span><span class="p">)</span>
 </code></pre>
 <h4 id='updating-the-accesstoken' class='heading'>Updating the accessToken</h4>
-<pre class="highlight swift"><code><span class="n">discovery</span><span class="o">.</span><span class="nf">accessToken</span><span class="p">(</span><span class="s">"new-accessToken-here"</span><span class="p">)</span>
+<pre class="highlight swift"><code><span class="n">discovery</span><span class="o">.</span><span class="nf">accessToken</span><span class="p">(</span><span class="s">"new-accessToken"</span><span class="p">)</span>
 </code></pre>
 <h3 id='username-and-password' class='heading'>Username and Password</h3>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">discovery</span> <span class="o">=</span> <span class="kt">Discovery</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="s">"your-username-here"</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="s">"your-password-here"</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="s">"your-version-here"</span><span class="p">)</span>
-</code></pre>
-<h3 id='api-key' class='heading'>API Key</h3>
-
-<p><em>Note: This type of authentication only works with Visual Recognition, and for instances created before May 23, 2018. Newer instances of Visual Recognition use IAM.</em></p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">visualRecognition</span> <span class="o">=</span> <span class="kt">VisualRecognition</span><span class="p">(</span><span class="nv">apiKey</span><span class="p">:</span> <span class="s">"your-apiKey-here"</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="s">"your-version-here"</span><span class="p">)</span>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">discovery</span> <span class="o">=</span> <span class="kt">Discovery</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="s">"your-username"</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="s">"your-password"</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="s">"your-version"</span><span class="p">)</span>
 </code></pre>
 <h2 id='custom-service-urls' class='heading'>Custom Service URLs</h2>
 
@@ -280,8 +285,8 @@
 
 <p>For example, here is how to connect to a Tone Analyzer instance that is hosted in Germany:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">toneAnalyzer</span> <span class="o">=</span> <span class="kt">ToneAnalyzer</span><span class="p">(</span>
-    <span class="nv">username</span><span class="p">:</span> <span class="s">"your-username-here"</span><span class="p">,</span>
-    <span class="nv">password</span><span class="p">:</span> <span class="s">"your-password-here"</span><span class="p">,</span>
+    <span class="nv">username</span><span class="p">:</span> <span class="s">"your-username"</span><span class="p">,</span>
+    <span class="nv">password</span><span class="p">:</span> <span class="s">"your-password"</span><span class="p">,</span>
     <span class="nv">version</span><span class="p">:</span> <span class="s">"yyyy-mm-dd"</span>
 <span class="p">)</span>
 <span class="n">toneAnalyzer</span><span class="o">.</span><span class="n">serviceURL</span> <span class="o">=</span> <span class="s">"https://gateway-fra.watsonplatform.net/tone-analyzer/api"</span>
@@ -312,8 +317,13 @@
 <p>By default, the SDK executes all networking operations asynchronously. If your application requires synchronous execution, you can use a <code>DispatchGroup</code>. For example:</p>
 <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">dispatchGroup</span> <span class="o">=</span> <span class="kt">DispatchGroup</span><span class="p">()</span>
 <span class="n">dispatchGroup</span><span class="o">.</span><span class="nf">enter</span><span class="p">()</span>
-<span class="n">assistant</span><span class="o">.</span><span class="nf">message</span><span class="p">(</span><span class="nv">workspaceID</span><span class="p">:</span> <span class="n">workspaceID</span><span class="p">)</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+<span class="n">assistant</span><span class="o">.</span><span class="nf">message</span><span class="p">(</span><span class="nv">workspaceID</span><span class="p">:</span> <span class="n">workspaceID</span><span class="p">)</span> <span class="p">{</span> <span class="n">response</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">error</span> <span class="o">=</span> <span class="n">error</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="k">let</span> <span class="nv">message</span> <span class="o">=</span> <span class="n">response</span><span class="p">?</span><span class="o">.</span><span class="n">result</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">message</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+    <span class="p">}</span>
     <span class="n">dispatchGroup</span><span class="o">.</span><span class="nf">leave</span><span class="p">()</span>
 <span class="p">}</span>
 <span class="n">dispatchGroup</span><span class="o">.</span><span class="nf">wait</span><span class="p">(</span><span class="nv">timeout</span><span class="p">:</span> <span class="o">.</span><span class="n">distantFuture</span><span class="p">)</span>
@@ -337,7 +347,7 @@ available in <a href="https://github.com/watson-developer-cloud/swift-sdk/blob/m
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-11-12)</p>
+          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-12-11)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

@@ -228,6 +228,9 @@
                 <a href="../Structs/Mentions.html">Mentions</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/MessageContextMetadata.html">MessageContextMetadata</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/MessageInput.html">MessageInput</a>
               </li>
               <li class="nav-group-task">
@@ -625,7 +628,7 @@ in <q>YYYY-MM-DD</q> format.</p>
                       <div class="abstract">
                         <p>Get response to user input.</p>
 
-<p>Get a response to a user&rsquo;s input.
+<p>Send user input to a workspace and receive a response.
 There is no rate limit for this operation.</p>
 
                       </div>
@@ -853,8 +856,8 @@ This operation is limited to 500 requests per 30 minutes. For more information, 
                               </td>
                               <td>
                                 <div>
-                                  <p>The attribute by which returned results will be sorted. To reverse the sort order, prefix the
-value with a minus sign (<code>-</code>).</p>
+                                  <p>The attribute by which returned workspaces will be sorted. To reverse the sort order, prefix
+the value with a minus sign (<code>-</code>).</p>
                                 </div>
                               </td>
                             </tr>
@@ -1027,7 +1030,7 @@ or tab characters, and it must be no longer than 128 characters.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>An array of objects defining the nodes in the workspace dialog.</p>
+                                  <p>An array of objects defining the nodes in the dialog.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1114,9 +1117,9 @@ improvements. <code>true</code> indicates that workspace training data is not to
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C12getWorkspace11workspaceID6export12includeAudit7headers17completionHandlerySS_SbSgAJSDyS2SGSgy7RestKit0M8ResponseVyAA0D6ExportVGSg_AM0M5ErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/getWorkspace(workspaceID:export:includeAudit:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C12getWorkspace11workspaceID6export12includeAudit7headers17completionHandlerySS_SbSgAJSDyS2SGSgy7RestKit0M8ResponseVyAA0D6ExportVGSg_AM0M5ErrorOSgtctF">getWorkspace(workspaceID:export:includeAudit:headers:completionHandler:)</a>
+                    <a name="/s:11AssistantV10A0C12getWorkspace11workspaceID6export12includeAudit4sort7headers17completionHandlerySS_SbSgAKSSSgSDyS2SGSgy7RestKit0N8ResponseVyAA0D6ExportVGSg_AO0N5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/getWorkspace(workspaceID:export:includeAudit:sort:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C12getWorkspace11workspaceID6export12includeAudit4sort7headers17completionHandlerySS_SbSgAKSSSgSDyS2SGSgy7RestKit0N8ResponseVyAA0D6ExportVGSg_AO0N5ErrorOSgtctF">getWorkspace(workspaceID:export:includeAudit:sort:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1139,6 +1142,7 @@ limit is 20 requests per 30 minutes. For more information, see <strong>Rate limi
     <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">export</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">includeAudit</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11AssistantV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/WorkspaceExport.html">WorkspaceExport</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11AssistantV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1184,6 +1188,20 @@ subelements, is included.</p>
                                 <div>
                                   <p>Whether to include the audit properties (<code>created</code> and <code>updated</code> timestamps) in the
 response.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sort</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Indicates how the returned workspace data will be sorted. This parameter is valid only if
+<strong>export</strong>=<code>true</code>. Specify <code>sort=stable</code> to sort all workspace objects by unique identifier, in ascending
+alphabetical order.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1345,7 +1363,7 @@ or tab characters, and it must be no longer than 128 characters.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>An array of objects defining the nodes in the workspace dialog.</p>
+                                  <p>An array of objects defining the nodes in the dialog.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1621,7 +1639,7 @@ subelements, is included.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The attribute by which returned results will be sorted. To reverse the sort order, prefix the
+                                  <p>The attribute by which returned intents will be sorted. To reverse the sort order, prefix the
 value with a minus sign (<code>-</code>).</p>
                                 </div>
                               </td>
@@ -2242,7 +2260,7 @@ This operation is limited to 2500 requests per 30 minutes. For more information,
                               </td>
                               <td>
                                 <div>
-                                  <p>The attribute by which returned results will be sorted. To reverse the sort order, prefix the
+                                  <p>The attribute by which returned examples will be sorted. To reverse the sort order, prefix the
 value with a minus sign (<code>-</code>).</p>
                                 </div>
                               </td>
@@ -2858,8 +2876,8 @@ This operation is limited to 2500 requests per 30 minutes. For more information,
                               </td>
                               <td>
                                 <div>
-                                  <p>The attribute by which returned results will be sorted. To reverse the sort order, prefix the
-value with a minus sign (<code>-</code>).</p>
+                                  <p>The attribute by which returned counterexamples will be sorted. To reverse the sort order,
+prefix the value with a minus sign (<code>-</code>).</p>
                                 </div>
                               </td>
                             </tr>
@@ -3407,7 +3425,7 @@ subelements, is included.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The attribute by which returned results will be sorted. To reverse the sort order, prefix the
+                                  <p>The attribute by which returned entities will be sorted. To reverse the sort order, prefix the
 value with a minus sign (<code>-</code>).</p>
                                 </div>
                               </td>
@@ -3482,7 +3500,7 @@ response.</p>
                       <div class="abstract">
                         <p>Create entity.</p>
 
-<p>Create a new entity.
+<p>Create a new entity, or enable a system entity.
 This operation is limited to 1000 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
 
                       </div>
@@ -3530,8 +3548,9 @@ This operation is limited to 1000 requests per 30 minutes. For more information,
 
 <ul>
 <li>It can contain only Unicode alphanumeric, underscore, and hyphen characters.</li>
-<li>It cannot begin with the reserved prefix <code>sys-</code>.</li>
-<li>It must be no longer than 64 characters.</li>
+<li>It must be no longer than 64 characters.
+If you specify an entity name beginning with the reserved prefix <code>sys-</code>, it must be the name of a system entity
+that you want to enable. (Any entity content specified with the request is ignored.).</li>
 </ul></p>
                                 </div>
                               </td>
@@ -3911,7 +3930,7 @@ or tab characters, and it must be no longer than 128 characters.</p>
                       <div class="abstract">
                         <p>Delete entity.</p>
 
-<p>Delete an entity from a workspace.
+<p>Delete an entity from a workspace, or disable a system entity.
 This operation is limited to 1000 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
 
                       </div>
@@ -4215,8 +4234,8 @@ subelements, is included.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The attribute by which returned results will be sorted. To reverse the sort order, prefix the
-value with a minus sign (<code>-</code>).</p>
+                                  <p>The attribute by which returned entity values will be sorted. To reverse the sort order, prefix
+the value with a minus sign (<code>-</code>).</p>
                                 </div>
                               </td>
                             </tr>
@@ -4399,7 +4418,7 @@ patterns (as indicated by <strong>type</strong>), but not both. A synonym must c
                                   <p>An array of patterns for the entity value. You can provide either synonyms or patterns (as
 indicated by <strong>type</strong>), but not both. A pattern is a regular expression no longer than 512 characters. For more
 information about how to specify a pattern, see the
-<a href="https://console.bluemix.net/docs/services/conversation/entities.html#creating-entities">documentation</a>.</p>
+<a href="https://cloud.ibm.com/docs/services/conversation/entities.html#creating-entities">documentation</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4726,7 +4745,7 @@ This operation is limited to 1000 requests per 30 minutes. For more information,
                                   <p>An array of patterns for the entity value. You can provide either synonyms or patterns
 (as indicated by <strong>type</strong>), but not both. A pattern is a regular expression no longer than 512 characters. For
 more information about how to specify a pattern, see the
-<a href="https://console.bluemix.net/docs/services/conversation/entities.html#creating-entities">documentation</a>.</p>
+<a href="https://cloud.ibm.com/docs/services/conversation/entities.html#creating-entities">documentation</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4971,8 +4990,8 @@ This operation is limited to 2500 requests per 30 minutes. For more information,
                               </td>
                               <td>
                                 <div>
-                                  <p>The attribute by which returned results will be sorted. To reverse the sort order, prefix the
-value with a minus sign (<code>-</code>).</p>
+                                  <p>The attribute by which returned entity value synonyms will be sorted. To reverse the sort
+order, prefix the value with a minus sign (<code>-</code>).</p>
                                 </div>
                               </td>
                             </tr>
@@ -5613,8 +5632,8 @@ This operation is limited to 2500 requests per 30 minutes. For more information,
                               </td>
                               <td>
                                 <div>
-                                  <p>The attribute by which returned results will be sorted. To reverse the sort order, prefix the
-value with a minus sign (<code>-</code>).</p>
+                                  <p>The attribute by which returned dialog nodes will be sorted. To reverse the sort order, prefix
+the value with a minus sign (<code>-</code>).</p>
                                 </div>
                               </td>
                             </tr>
@@ -5813,7 +5832,7 @@ return, newline, or tab characters, and it must be no longer than 2048 character
                               <td>
                                 <div>
                                   <p>The output of the dialog node. For more information about how to specify dialog node output,
-see the <a href="https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex">documentation</a>.</p>
+see the <a href="https://cloud.ibm.com/docs/services/conversation/dialog-overview.html#complex">documentation</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -6255,7 +6274,7 @@ return, newline, or tab characters, and it must be no longer than 2048 character
                                 <div>
                                   <p>The output of the dialog node. For more information about how to specify dialog node
 output, see the
-<a href="https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex">documentation</a>.</p>
+<a href="https://cloud.ibm.com/docs/services/conversation/dialog-overview.html#complex">documentation</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -6603,7 +6622,7 @@ order, prefix the parameter value with a minus sign (<code>-</code>).</p>
                                 <div>
                                   <p>A cacheable parameter that limits the results to those matching the specified filter. For
 more information, see the
-<a href="https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax">documentation</a>.</p>
+<a href="https://cloud.ibm.com/docs/services/conversation/filter-reference.html#filter-query-syntax">documentation</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -6710,7 +6729,7 @@ specified, the limit is 120 requests per minute. For more information, see <stro
                                   <p>A cacheable parameter that limits the results to those matching the specified filter. You
 must specify a filter query that includes a value for <code>language</code>, as well as a value for <code>workspace_id</code> or
 <code>request.context.metadata.deployment</code>. For more information, see the
-<a href="https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax">documentation</a>.</p>
+<a href="https://cloud.ibm.com/docs/services/conversation/filter-reference.html#filter-query-syntax">documentation</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -6799,7 +6818,7 @@ order, prefix the parameter value with a minus sign (<code>-</code>).</p>
 <p>Deletes all data associated with a specified customer ID. The method has no effect if no data is associated with
 the customer ID.
 You associate a customer ID with data by passing the <code>X-Watson-Metadata</code> header with a request that passes data.
-For more information about personal data and customer IDs, see <a href="https://console.bluemix.net/docs/services/conversation/information-security.html">Information
+For more information about personal data and customer IDs, see <a href="https://cloud.ibm.com/docs/services/conversation/information-security.html">Information
 security</a>.</p>
 
                       </div>
@@ -6865,7 +6884,7 @@ security</a>.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-12-06)</p>
+          <p>&copy; 2018 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2018-12-11)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

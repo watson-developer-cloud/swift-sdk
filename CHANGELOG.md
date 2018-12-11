@@ -1,3 +1,16 @@
+# [1.1.0](https://github.com/watson-developer-cloud/swift-sdk/compare/1.0.0...1.1.0) (2018-12-11)
+
+
+### Features
+
+* **AssistantV1:** Add metadata field to Context model ([13a90c1](https://github.com/watson-developer-cloud/swift-sdk/commit/13a90c1))
+* **AssistantV1:** Add option to sort results in getWorkspace() ([5cefc7b](https://github.com/watson-developer-cloud/swift-sdk/commit/5cefc7b))
+* **DiscoveryV1:** Add new concepts property to NluEnrichmentFeatures model ([80258db](https://github.com/watson-developer-cloud/swift-sdk/commit/80258db))
+* **DiscoveryV1:** Add retrievalDetails property to QueryResponse model ([631affc](https://github.com/watson-developer-cloud/swift-sdk/commit/631affc))
+* **NaturalLanguageUnderstandingV1:** Add 4 new properties to the Model model ([53fe057](https://github.com/watson-developer-cloud/swift-sdk/commit/53fe057))
+* **NaturalLanguageUnderstandingV1:** Add new count property to KeywordsResult model ([ab9a339](https://github.com/watson-developer-cloud/swift-sdk/commit/ab9a339))
+* **NaturalLanguageUnderstandingV1:** Add new limit property to CategoriesOptions model ([5bf6637](https://github.com/watson-developer-cloud/swift-sdk/commit/5bf6637))
+
 # [1.0.0](https://github.com/watson-developer-cloud/swift-sdk/compare/0.38.1...1.0.0) (2018-12-06)
 
 

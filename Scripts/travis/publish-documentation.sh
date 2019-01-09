@@ -3,7 +3,7 @@
 
 set -e
 
-gem install jazzy
+gem install jazzy --silent
 
 # Configure Travis to be able to push to the Github repo
 git config --global user.email "travis@travis-ci.org"

@@ -7,16 +7,16 @@
 
 set -e
 
-sudo easy_install pip
+sudo easy_install pip >/dev/null
 source ~/.nvm/nvm.sh
 nvm install 10
-sudo pip install bumpversion
-npm install -g semantic-release@15.9.0
-npm install -g @semantic-release/exec
-npm install -g @semantic-release/changelog
-npm install -g @semantic-release/git
-brew update
-brew outdated carthage || brew upgrade carthage
+sudo pip install bumpversion >/dev/null
+npm install -g semantic-release@15.9.0 --silent
+npm install -g @semantic-release/exec --silent
+npm install -g @semantic-release/changelog --silent
+npm install -g @semantic-release/git --silent
+brew update >/dev/null
+brew outdated carthage || brew upgrade carthage >/dev/null
 
 carthage update --platform iOS
 npx semantic-release

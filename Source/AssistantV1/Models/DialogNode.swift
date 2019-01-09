@@ -142,6 +142,11 @@ public struct DialogNode: Codable, Equatable {
     public var title: String?
 
     /**
+     For internal use only.
+     */
+    public var disabled: Bool?
+
+    /**
      How the dialog node is processed.
      */
     public var nodeType: String?
@@ -192,6 +197,7 @@ public struct DialogNode: Codable, Equatable {
         case updated = "updated"
         case actions = "actions"
         case title = "title"
+        case disabled = "disabled"
         case nodeType = "type"
         case eventName = "event_name"
         case variable = "variable"

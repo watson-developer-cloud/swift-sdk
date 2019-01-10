@@ -32,6 +32,7 @@ let package = Package(
     products: [
         .library(name: "AssistantV1", targets: ["AssistantV1"]),
         .library(name: "AssistantV2", targets: ["AssistantV2"]),
+        .library(name: "CompareComplyV1", targets: ["CompareComplyV1"]),
         .library(name: "DiscoveryV1", targets: ["DiscoveryV1"]),
         .library(name: "LanguageTranslatorV3", targets: ["LanguageTranslatorV3"]),
         .library(name: "NaturalLanguageClassifierV1", targets: ["NaturalLanguageClassifierV1"]),
@@ -48,6 +49,8 @@ let package = Package(
         .testTarget(name: "AssistantV1Tests", dependencies: ["AssistantV1"]),
         .target(name: "AssistantV2", dependencies: ["RestKit"]),
         .testTarget(name: "AssistantV2Tests", dependencies: ["AssistantV2"]),
+        .target(name: "CompareComplyV1", dependencies: ["RestKit"]),
+        .testTarget(name: "CompareComplyV1Tests", dependencies: ["CompareComplyV1"]),
         .target(name: "DiscoveryV1", dependencies: ["RestKit"]),
         .testTarget(name: "DiscoveryV1Tests", dependencies: ["DiscoveryV1"]),
         .target(name: "LanguageTranslatorV3", dependencies: ["RestKit"]),

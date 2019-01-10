@@ -212,21 +212,6 @@ class CompareComplyTests: XCTestCase {
         waitForExpectations()
     }
 
-    func testListFeedback() {
-        let expectation = self.expectation(description: "List feedback")
-
-        compareComply.listFeedback() {
-            _, error in
-
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            expectation.fulfill()
-        }
-        waitForExpectations()
-    }
-
     func testFeedbackOperations() {
         let expectation1 = self.expectation(description: "Add feedback")
 
@@ -287,10 +272,37 @@ class CompareComplyTests: XCTestCase {
             modelID: modelID,
             modelVersion: modelVersion)
 
+        var newFeedbackID: String!
+        let userID = "Anthony"
+        let myComment = "Compare and Comply is the best!"
         compareComply.addFeedback(
             feedbackData: feedbackDataInput,
-            userID: "Anthony",
-            comment: "Compare and Comply is the best!") {
+            userID: userID,
+            comment: myComment) {
+                response, error in
+
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let result = response?.result, let feedbackID = result.feedbackID else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
+
+                XCTAssertEqual(result.comment, myComment)
+                XCTAssertEqual(result.userID, userID)
+
+                newFeedbackID = feedbackID
+
+                expectation1.fulfill()
+        }
+        waitForExpectations()
+
+
+        let expectation2 = self.expectation(description: "Get feedback")
+        compareComply.getFeedback(
+            feedbackID: newFeedbackID) {
                 response, error in
 
                 if let error = error {
@@ -302,36 +314,53 @@ class CompareComplyTests: XCTestCase {
                     return
                 }
 
-                expectation1.fulfill()
-        }
+                XCTAssertEqual(result.comment, myComment)
 
+                expectation2.fulfill()
+        }
         waitForExpectations()
 
-//        let expectation2 = self.expectation(description: "Get feedback")
-//
-//        compareComply.getFeedback(
-//            feedbackID: <#T##String#>,
-//            modelID: modelID,
-//            failure: failWithError) {
-//                response in
-//
-//                expectation2.fulfill()
-//        }
-//
-//        waitForExpectations()
-//
-//        let expectation3 = self.expectation(description: "Delete feedback")
-//
-//        compareComply.deleteFeedback(
-//            feedbackID: <#T##String#>,
-//            modelID: modelID,
-//            failure: failWithError) {
-//                response in
-//
-//                expectation3.fulfill()
-//        }
-//
-//        waitForExpectations()
+
+        let expectation3 = self.expectation(description: "List feedback")
+        compareComply.listFeedback() {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+
+            guard let result = response?.result, let feedback = result.feedback else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssert(feedback.count > 0)
+
+            expectation3.fulfill()
+        }
+        waitForExpectations()
+
+
+        let expectation4 = self.expectation(description: "Delete feedback")
+        compareComply.deleteFeedback(
+            feedbackID: newFeedbackID) {
+                response, error in
+
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let result = response?.result, let status = result.status else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
+
+                XCTAssertEqual(status, 200)
+
+                expectation4.fulfill()
+        }
+        waitForExpectations()
     }
 
     func testBatchOperations() {

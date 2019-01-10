@@ -24,8 +24,8 @@ import RestKit
  your written communications are perceived and then to improve the tone of your communications. Businesses can use the
  service to learn the tone of their customers' communications and to respond to each customer appropriately, or to
  understand and improve their customer conversations.
- **Note:** Request logging is disabled for the Tone Analyzer service. The service neither logs nor retains data from
- requests and responses, regardless of whether the `X-Watson-Learning-Opt-Out` request header is set.
+ **Note:** Request logging is disabled for the Tone Analyzer service. Regardless of whether you set the
+ `X-Watson-Learning-Opt-Out` request header, the service does not log or retain data from requests and responses.
  */
 public class ToneAnalyzer {
 
@@ -127,7 +127,7 @@ public class ToneAnalyzer {
      character encoding of the input text; for example: `Content-Type: text/plain;charset=utf-8`. For `text/html`, the
      service removes HTML tags and analyzes only the textual content.
      **See also:** [Using the general-purpose
-     endpoint](https://console.bluemix.net/docs/services/tone-analyzer/using-tone.html#using-the-general-purpose-endpoint).
+     endpoint](https://cloud.ibm.com/docs/services/tone-analyzer/using-tone.html#using-the-general-purpose-endpoint).
 
      - parameter toneContent: JSON, plain text, or HTML input that contains the content to be analyzed. For JSON
        input, provide an object of type `ToneInput`.
@@ -210,7 +210,7 @@ public class ToneAnalyzer {
      500 characters. Per the JSON specification, the default character encoding for JSON content is effectively always
      UTF-8.
      **See also:** [Using the customer-engagement
-     endpoint](https://console.bluemix.net/docs/services/tone-analyzer/using-tone-chat.html#using-the-customer-engagement-endpoint).
+     endpoint](https://cloud.ibm.com/docs/services/tone-analyzer/using-tone-chat.html#using-the-customer-engagement-endpoint).
 
      - parameter utterances: An array of `Utterance` objects that provides the input content that the service is to
        analyze.

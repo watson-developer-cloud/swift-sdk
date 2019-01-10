@@ -17,33 +17,33 @@
 import Foundation
 
 /**
- Object describing the current status of the tokenization dictionary.
+ An object specifiying the concepts enrichment and related parameters.
  */
-public struct TokenDictStatusResponse: Decodable {
+public struct NluEnrichmentConcepts: Codable, Equatable {
 
     /**
-     Current tokenization dictionary status for the specified collection.
+     The maximum number of concepts enrichments to extact from each instance of the specified field.
      */
-    public enum Status: String {
-        case active = "active"
-        case pending = "pending"
-        case notFound = "not found"
-    }
-
-    /**
-     Current tokenization dictionary status for the specified collection.
-     */
-    public var status: String?
-
-    /**
-     The type for this dictionary. Always returns `tokenization_dictionary`.
-     */
-    public var type: String?
+    public var limit: Int?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case status = "status"
-        case type = "type"
+        case limit = "limit"
+    }
+
+    /**
+     Initialize a `NluEnrichmentConcepts` with member variables.
+
+     - parameter limit: The maximum number of concepts enrichments to extact from each instance of the specified
+       field.
+
+     - returns: An initialized `NluEnrichmentConcepts`.
+    */
+    public init(
+        limit: Int? = nil
+    )
+    {
+        self.limit = limit
     }
 
 }

@@ -33,8 +33,9 @@ public struct SpeechRecognitionResult: Codable, Equatable {
 
     /**
      A dictionary (or associative array) whose keys are the strings specified for `keywords` if both that parameter and
-     `keywords_threshold` are specified. A keyword for which no matches are found is omitted from the array. The array
-     is omitted if no matches are found for any keywords.
+     `keywords_threshold` are specified. The value for each key is an array of matches spotted in the audio for that
+     keyword. Each match is described by a `KeywordResult` object. A keyword for which no matches are found is omitted
+     from the dictionary. The dictionary is omitted entirely if no matches are found for any keywords.
      */
     public var keywordsResult: [String: [KeywordResult]]?
 

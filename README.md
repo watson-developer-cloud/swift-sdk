@@ -77,17 +77,17 @@ If your project does not yet have a Podfile, use the `pod init` command in the r
 use_frameworks!
 
 target 'MyApp' do
-    pod 'IBMWatsonAssistantV1', '~> 1.0.0'
-    pod 'IBMWatsonAssistantV2', '~> 1.0.0'
-    pod 'IBMWatsonDiscoveryV1', '~> 1.0.0'
-    pod 'IBMWatsonLanguageTranslatorV3', '~> 1.0.0'
-    pod 'IBMWatsonNaturalLanguageClassifierV1', '~> 1.0.0'
-    pod 'IBMWatsonNaturalLanguageUnderstandingV1', '~> 1.0.0'
-    pod 'IBMWatsonPersonalityInsightsV3', '~> 1.0.0'
-    pod 'IBMWatsonSpeechToTextV1', '~> 1.0.0'
-    pod 'IBMWatsonTextToSpeechV1', '~> 1.0.0'
-    pod 'IBMWatsonToneAnalyzerV3', '~> 1.0.0'
-    pod 'IBMWatsonVisualRecognitionV3', '~> 1.0.0'
+    pod 'IBMWatsonAssistantV1', '~> 1.1.1'
+    pod 'IBMWatsonAssistantV2', '~> 1.1.1'
+    pod 'IBMWatsonDiscoveryV1', '~> 1.1.1'
+    pod 'IBMWatsonLanguageTranslatorV3', '~> 1.1.1'
+    pod 'IBMWatsonNaturalLanguageClassifierV1', '~> 1.1.1'
+    pod 'IBMWatsonNaturalLanguageUnderstandingV1', '~> 1.1.1'
+    pod 'IBMWatsonPersonalityInsightsV3', '~> 1.1.1'
+    pod 'IBMWatsonSpeechToTextV1', '~> 1.1.1'
+    pod 'IBMWatsonTextToSpeechV1', '~> 1.1.1'
+    pod 'IBMWatsonToneAnalyzerV3', '~> 1.1.1'
+    pod 'IBMWatsonVisualRecognitionV3', '~> 1.1.1'
 end
 ```
 
@@ -110,7 +110,7 @@ $ brew install carthage
 If your project does not have a Cartfile yet, use the `touch Cartfile` command in the root directory of your project. To install the IBM Watson Swift SDK using Carthage, add the following to your Cartfile. 
 
 ```
-github "watson-developer-cloud/swift-sdk" ~> 1.0.0
+github "watson-developer-cloud/swift-sdk" ~> 1.1.1
 ```
 
 Then run the following command to build the dependencies and frameworks:
@@ -131,7 +131,7 @@ Add the following to your `Package.swift` file to identify the IBM Watson Swift 
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "1.0.0")
+    .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "1.1.1")
 ]
 ```
 
@@ -147,8 +147,8 @@ Watson services are migrating to token-based Identity and Access Management (IAM
 ### Getting credentials
 To find out which authentication to use, view the service credentials. You find the service credentials for authentication the same way for all Watson services:
 
-1. Go to the IBM Cloud [Dashboard](https://console.bluemix.net/dashboard/apps?category=ai) page.
-1. Either click an existing Watson service instance or click [**Create resource > AI**](https://console.bluemix.net/catalog/?category=ai) and create a service instance.
+1. Go to the IBM Cloud [Dashboard](https://cloud.ibm.com/dashboard/apps?category=ai) page.
+1. Either click an existing Watson service instance or click [**Create resource > AI**](https://cloud.ibm.com/catalog/?category=ai) and create a service instance.
 1. Click **Show** to view your service credentials.
 1. Copy the `url` and either `apikey` or `username` and `password`.
 
@@ -159,7 +159,7 @@ Some services use token-based Identity and Access Management (IAM) authenticatio
 You supply either an IAM service **API key** or an **access token**:
 
 - Use the API key to have the SDK manage the lifecycle of the access token. The SDK requests an access token, ensures that the access token is valid, and refreshes it if necessary.
-- Use the access token if you want to manage the lifecycle yourself. For details, see [Authenticating with IAM tokens](https://console.bluemix.net/docs/services/watson/getting-started-iam.html). If you want to switch to API key, override your stored IAM credentials with an IAM API key.
+- Use the access token if you want to manage the lifecycle yourself. For details, see [Authenticating with IAM tokens](https://cloud.ibm.com/docs/services/watson/getting-started-iam.html). If you want to switch to API key, override your stored IAM credentials with an IAM API key.
 
 #### Supplying the IAM API key
 ```swift

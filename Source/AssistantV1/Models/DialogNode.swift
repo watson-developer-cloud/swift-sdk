@@ -102,7 +102,7 @@ public struct DialogNode: Codable, Equatable {
 
     /**
      The output of the dialog node. For more information about how to specify dialog node output, see the
-     [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
+     [documentation](https://cloud.ibm.com/docs/services/conversation/dialog-overview.html#complex).
      */
     public var output: DialogNodeOutput?
 
@@ -140,6 +140,11 @@ public struct DialogNode: Codable, Equatable {
      The alias used to identify the dialog node.
      */
     public var title: String?
+
+    /**
+     For internal use only.
+     */
+    public var disabled: Bool?
 
     /**
      How the dialog node is processed.
@@ -192,6 +197,7 @@ public struct DialogNode: Codable, Equatable {
         case updated = "updated"
         case actions = "actions"
         case title = "title"
+        case disabled = "disabled"
         case nodeType = "type"
         case eventName = "event_name"
         case variable = "variable"

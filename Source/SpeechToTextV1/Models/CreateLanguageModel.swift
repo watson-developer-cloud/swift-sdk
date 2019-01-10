@@ -21,10 +21,10 @@ internal struct CreateLanguageModel: Codable, Equatable {
 
     /**
      The name of the base language model that is to be customized by the new custom language model. The new custom model
-     can be used only with the base model that it customizes. To determine whether a base model supports language model
-     customization, request information about the base model and check that the attribute `custom_language_model` is set
-     to `true`, or refer to [Language support for
-     customization](https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport).
+     can be used only with the base model that it customizes.
+     To determine whether a base model supports language model customization, use the **Get a model** method and check
+     that the attribute `custom_language_model` is set to `true`. You can also refer to [Language support for
+     customization](https://cloud.ibm.com/docs/services/speech-to-text/custom.html#languageSupport).
      */
     public enum BaseModelName: String {
         case deDeBroadbandmodel = "de-DE_BroadbandModel"
@@ -52,10 +52,10 @@ internal struct CreateLanguageModel: Codable, Equatable {
 
     /**
      The name of the base language model that is to be customized by the new custom language model. The new custom model
-     can be used only with the base model that it customizes. To determine whether a base model supports language model
-     customization, request information about the base model and check that the attribute `custom_language_model` is set
-     to `true`, or refer to [Language support for
-     customization](https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport).
+     can be used only with the base model that it customizes.
+     To determine whether a base model supports language model customization, use the **Get a model** method and check
+     that the attribute `custom_language_model` is set to `true`. You can also refer to [Language support for
+     customization](https://cloud.ibm.com/docs/services/speech-to-text/custom.html#languageSupport).
      */
     public var baseModelName: String
 
@@ -92,10 +92,10 @@ internal struct CreateLanguageModel: Codable, Equatable {
        custom language models that you own. Use a localized name that matches the language of the custom model. Use a
        name that describes the domain of the custom model, such as `Medical custom model` or `Legal custom model`.
      - parameter baseModelName: The name of the base language model that is to be customized by the new custom
-       language model. The new custom model can be used only with the base model that it customizes. To determine
-       whether a base model supports language model customization, request information about the base model and check
-       that the attribute `custom_language_model` is set to `true`, or refer to [Language support for
-       customization](https://console.bluemix.net/docs/services/speech-to-text/custom.html#languageSupport).
+       language model. The new custom model can be used only with the base model that it customizes.
+       To determine whether a base model supports language model customization, use the **Get a model** method and check
+       that the attribute `custom_language_model` is set to `true`. You can also refer to [Language support for
+       customization](https://cloud.ibm.com/docs/services/speech-to-text/custom.html#languageSupport).
      - parameter dialect: The dialect of the specified language that is to be used with the custom language model.
        The parameter is meaningful only for Spanish models, for which the service creates a custom language model that
        is suited for speech in one of the following dialects:

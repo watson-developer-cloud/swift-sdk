@@ -110,7 +110,7 @@ public class Assistant {
     /**
      Get response to user input.
 
-     Get a response to a user's input.
+     Send user input to a workspace and receive a response.
      There is no rate limit for this operation.
 
      - parameter workspaceID: Unique identifier of the workspace.
@@ -200,8 +200,8 @@ public class Assistant {
 
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
-     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the
-       value with a minus sign (`-`).
+     - parameter sort: The attribute by which returned workspaces will be sorted. To reverse the sort order, prefix
+       the value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
@@ -277,7 +277,7 @@ public class Assistant {
      - parameter language: The language of the workspace.
      - parameter intents: An array of objects defining the intents for the workspace.
      - parameter entities: An array of objects defining the entities for the workspace.
-     - parameter dialogNodes: An array of objects defining the nodes in the workspace dialog.
+     - parameter dialogNodes: An array of objects defining the nodes in the dialog.
      - parameter counterexamples: An array of objects defining input examples that have been marked as irrelevant
        input.
      - parameter metadata: Any metadata related to the workspace.
@@ -359,6 +359,9 @@ public class Assistant {
        subelements, is included.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
+     - parameter sort: Indicates how the returned workspace data will be sorted. This parameter is valid only if
+       **export**=`true`. Specify `sort=stable` to sort all workspace objects by unique identifier, in ascending
+       alphabetical order.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -366,6 +369,7 @@ public class Assistant {
         workspaceID: String,
         export: Bool? = nil,
         includeAudit: Bool? = nil,
+        sort: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<WorkspaceExport>?, WatsonError?) -> Void)
     {
@@ -385,6 +389,10 @@ public class Assistant {
         }
         if let includeAudit = includeAudit {
             let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
+            queryParameters.append(queryParameter)
+        }
+        if let sort = sort {
+            let queryParameter = URLQueryItem(name: "sort", value: sort)
             queryParameters.append(queryParameter)
         }
 
@@ -423,7 +431,7 @@ public class Assistant {
      - parameter language: The language of the workspace.
      - parameter intents: An array of objects defining the intents for the workspace.
      - parameter entities: An array of objects defining the entities for the workspace.
-     - parameter dialogNodes: An array of objects defining the nodes in the workspace dialog.
+     - parameter dialogNodes: An array of objects defining the nodes in the dialog.
      - parameter counterexamples: An array of objects defining input examples that have been marked as irrelevant
        input.
      - parameter metadata: Any metadata related to the workspace.
@@ -568,7 +576,7 @@ public class Assistant {
        subelements, is included.
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
-     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the
+     - parameter sort: The attribute by which returned intents will be sorted. To reverse the sort order, prefix the
        value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
@@ -902,7 +910,7 @@ public class Assistant {
      - parameter intent: The intent name.
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
-     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the
+     - parameter sort: The attribute by which returned examples will be sorted. To reverse the sort order, prefix the
        value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
@@ -1222,8 +1230,8 @@ public class Assistant {
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
-     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the
-       value with a minus sign (`-`).
+     - parameter sort: The attribute by which returned counterexamples will be sorted. To reverse the sort order,
+       prefix the value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
@@ -1529,7 +1537,7 @@ public class Assistant {
        subelements, is included.
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
-     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the
+     - parameter sort: The attribute by which returned entities will be sorted. To reverse the sort order, prefix the
        value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
@@ -1606,14 +1614,15 @@ public class Assistant {
     /**
      Create entity.
 
-     Create a new entity.
+     Create a new entity, or enable a system entity.
      This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity. This string must conform to the following restrictions:
        - It can contain only Unicode alphanumeric, underscore, and hyphen characters.
-       - It cannot begin with the reserved prefix `sys-`.
        - It must be no longer than 64 characters.
+       If you specify an entity name beginning with the reserved prefix `sys-`, it must be the name of a system entity
+       that you want to enable. (Any entity content specified with the request is ignored.).
      - parameter description: The description of the entity. This string cannot contain carriage return, newline, or
        tab characters, and it must be no longer than 128 characters.
      - parameter metadata: Any metadata related to the value.
@@ -1821,7 +1830,7 @@ public class Assistant {
     /**
      Delete entity.
 
-     Delete an entity from a workspace.
+     Delete an entity from a workspace, or disable a system entity.
      This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
@@ -1943,8 +1952,8 @@ public class Assistant {
        subelements, is included.
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
-     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the
-       value with a minus sign (`-`).
+     - parameter sort: The attribute by which returned entity values will be sorted. To reverse the sort order, prefix
+       the value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
@@ -2039,7 +2048,7 @@ public class Assistant {
      - parameter patterns: An array of patterns for the entity value. You can provide either synonyms or patterns (as
        indicated by **type**), but not both. A pattern is a regular expression no longer than 512 characters. For more
        information about how to specify a pattern, see the
-       [documentation](https://console.bluemix.net/docs/services/conversation/entities.html#creating-entities).
+       [documentation](https://cloud.ibm.com/docs/services/conversation/entities.html#creating-entities).
      - parameter valueType: Specifies the type of value.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -2189,7 +2198,7 @@ public class Assistant {
      - parameter newPatterns: An array of patterns for the entity value. You can provide either synonyms or patterns
        (as indicated by **type**), but not both. A pattern is a regular expression no longer than 512 characters. For
        more information about how to specify a pattern, see the
-       [documentation](https://console.bluemix.net/docs/services/conversation/entities.html#creating-entities).
+       [documentation](https://cloud.ibm.com/docs/services/conversation/entities.html#creating-entities).
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -2311,8 +2320,8 @@ public class Assistant {
      - parameter value: The text of the entity value.
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
-     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the
-       value with a minus sign (`-`).
+     - parameter sort: The attribute by which returned entity value synonyms will be sorted. To reverse the sort
+       order, prefix the value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
@@ -2634,8 +2643,8 @@ public class Assistant {
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter includeCount: Whether to include information about the number of records returned.
-     - parameter sort: The attribute by which returned results will be sorted. To reverse the sort order, prefix the
-       value with a minus sign (`-`).
+     - parameter sort: The attribute by which returned dialog nodes will be sorted. To reverse the sort order, prefix
+       the value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
@@ -2720,7 +2729,7 @@ public class Assistant {
      - parameter parent: The ID of the parent dialog node.
      - parameter previousSibling: The ID of the previous dialog node.
      - parameter output: The output of the dialog node. For more information about how to specify dialog node output,
-       see the [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
+       see the [documentation](https://cloud.ibm.com/docs/services/conversation/dialog-overview.html#complex).
      - parameter context: The context for the dialog node.
      - parameter metadata: The metadata for the dialog node.
      - parameter nextStep: The next step to execute following this dialog node.
@@ -2895,7 +2904,7 @@ public class Assistant {
      - parameter newPreviousSibling: The ID of the previous sibling dialog node.
      - parameter newOutput: The output of the dialog node. For more information about how to specify dialog node
        output, see the
-       [documentation](https://console.bluemix.net/docs/services/conversation/dialog-overview.html#complex).
+       [documentation](https://cloud.ibm.com/docs/services/conversation/dialog-overview.html#complex).
      - parameter newContext: The context for the dialog node.
      - parameter newMetadata: The metadata for the dialog node.
      - parameter newNextStep: The next step to execute following this dialog node.
@@ -3057,7 +3066,7 @@ public class Assistant {
        order, prefix the parameter value with a minus sign (`-`).
      - parameter filter: A cacheable parameter that limits the results to those matching the specified filter. For
        more information, see the
-       [documentation](https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax).
+       [documentation](https://cloud.ibm.com/docs/services/conversation/filter-reference.html#filter-query-syntax).
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -3129,7 +3138,7 @@ public class Assistant {
      - parameter filter: A cacheable parameter that limits the results to those matching the specified filter. You
        must specify a filter query that includes a value for `language`, as well as a value for `workspace_id` or
        `request.context.metadata.deployment`. For more information, see the
-       [documentation](https://console.bluemix.net/docs/services/conversation/filter-reference.html#filter-query-syntax).
+       [documentation](https://cloud.ibm.com/docs/services/conversation/filter-reference.html#filter-query-syntax).
      - parameter sort: How to sort the returned log events. You can sort by **request_timestamp**. To reverse the sort
        order, prefix the parameter value with a minus sign (`-`).
      - parameter pageLimit: The number of records to return in each page of results.
@@ -3191,7 +3200,7 @@ public class Assistant {
      the customer ID.
      You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request that passes data.
      For more information about personal data and customer IDs, see [Information
-     security](https://console.bluemix.net/docs/services/conversation/information-security.html).
+     security](https://cloud.ibm.com/docs/services/conversation/information-security.html).
 
      - parameter customerID: The customer ID for which all data is to be deleted.
      - parameter headers: A dictionary of request headers to be sent with this request.

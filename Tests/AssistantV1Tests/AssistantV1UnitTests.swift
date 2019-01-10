@@ -215,6 +215,7 @@ class AssistantV1UnitTests: XCTestCase {
             XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertTrue(request.url?.query?.contains("export=true") ?? false)
             XCTAssertTrue(request.url?.query?.contains("include_audit=true") ?? false)
+            XCTAssertTrue(request.url?.query?.contains("sort=stable") ?? false)
 
             return (dummyResponse, Data())
         }
@@ -223,7 +224,8 @@ class AssistantV1UnitTests: XCTestCase {
         assistant.getWorkspace(
             workspaceID: self.workspaceID,
             export: true,
-            includeAudit: true) {
+            includeAudit: true,
+            sort: "stable") {
                 _, _ in
                 expectation.fulfill()
         }

@@ -32,7 +32,7 @@ internal struct Parameters: Codable, Equatable {
     public var html: String?
 
     /**
-     The web page to analyze. One of the `text`, `html`, or `url` parameters is required.
+     The webpage to analyze. One of the `text`, `html`, or `url` parameters is required.
      */
     public var url: String?
 
@@ -42,14 +42,15 @@ internal struct Parameters: Codable, Equatable {
     public var features: Features
 
     /**
-     Remove website elements, such as links, ads, etc.
+     Set this to `false` to disable webpage cleaning. To learn more about webpage cleaning, see the [Analyzing
+     webpages](https://cloud.ibm.com/docs/services/natural-language-understanding/analyzing-webpages.html) documentation.
      */
     public var clean: Bool?
 
     /**
-     An [XPath query](https://www.w3.org/TR/xpath/) to perform on `html` or `url` input. Results of the query will be
-     appended to the cleaned webpage text before it is analyzed. To analyze only the results of the XPath query, set the
-     `clean` parameter to `false`.
+     An [XPath query](https://cloud.ibm.com/docs/services/natural-language-understanding/analyzing-webpages.html#xpath) to perform on `html`
+     or `url` input. Results of the query will be appended to the cleaned webpage text before it is analyzed. To analyze
+     only the results of the XPath query, set the `clean` parameter to `false`.
      */
     public var xpath: String?
 
@@ -66,7 +67,7 @@ internal struct Parameters: Codable, Equatable {
     /**
      ISO 639-1 code that specifies the language of your text. This overrides automatic language detection. Language
      support differs depending on the features you include in your analysis. See [Language
-     support](https://www.bluemix.net/docs/services/natural-language-understanding/language-support.html) for more
+     support](https://cloud.ibm.com/docs/services/natural-language-understanding/language-support.html) for more
      information.
      */
     public var language: String?
@@ -96,16 +97,17 @@ internal struct Parameters: Codable, Equatable {
      - parameter features: Analysis features and options.
      - parameter text: The plain text to analyze. One of the `text`, `html`, or `url` parameters is required.
      - parameter html: The HTML file to analyze. One of the `text`, `html`, or `url` parameters is required.
-     - parameter url: The web page to analyze. One of the `text`, `html`, or `url` parameters is required.
-     - parameter clean: Remove website elements, such as links, ads, etc.
-     - parameter xpath: An [XPath query](https://www.w3.org/TR/xpath/) to perform on `html` or `url` input. Results
-       of the query will be appended to the cleaned webpage text before it is analyzed. To analyze only the results of
-       the XPath query, set the `clean` parameter to `false`.
+     - parameter url: The webpage to analyze. One of the `text`, `html`, or `url` parameters is required.
+     - parameter clean: Set this to `false` to disable webpage cleaning. To learn more about webpage cleaning, see
+       the [Analyzing webpages](https://cloud.ibm.com/docs/services/natural-language-understanding/analyzing-webpages.html) documentation.
+     - parameter xpath: An [XPath query](https://cloud.ibm.com/docs/services/natural-language-understanding/analyzing-webpages.html#xpath)
+       to perform on `html` or `url` input. Results of the query will be appended to the cleaned webpage text before it
+       is analyzed. To analyze only the results of the XPath query, set the `clean` parameter to `false`.
      - parameter fallbackToRaw: Whether to use raw HTML content if text cleaning fails.
      - parameter returnAnalyzedText: Whether or not to return the analyzed text.
      - parameter language: ISO 639-1 code that specifies the language of your text. This overrides automatic language
        detection. Language support differs depending on the features you include in your analysis. See [Language
-       support](https://www.bluemix.net/docs/services/natural-language-understanding/language-support.html) for more
+       support](https://cloud.ibm.com/docs/services/natural-language-understanding/language-support.html) for more
        information.
      - parameter limitTextCharacters: Sets the maximum number of characters that are processed by the service.
 

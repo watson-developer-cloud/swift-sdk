@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /**
  Assistant output to be rendered or processed by the client.
@@ -47,6 +48,12 @@ public struct MessageOutput: Codable, Equatable {
      */
     public var debug: MessageOutputDebug?
 
+    /**
+     An object containing any custom properties included in the response. This object includes any arbitrary properties
+     defined in the dialog JSON editor as part of the dialog node output.
+     */
+    public var userDefined: [String: JSON]?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case generic = "generic"
@@ -54,6 +61,7 @@ public struct MessageOutput: Codable, Equatable {
         case entities = "entities"
         case actions = "actions"
         case debug = "debug"
+        case userDefined = "user_defined"
     }
 
 }

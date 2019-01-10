@@ -17,9 +17,14 @@
 import Foundation
 
 /**
- The most important keywords in the content, organized by relevance.
+ The important keywords in the content, organized by relevance.
  */
 public struct KeywordsResult: Codable, Equatable {
+
+    /**
+     Number of times the keyword appears in the analyzed text.
+     */
+    public var count: Int?
 
     /**
      Relevance score from 0 to 1. Higher values indicate greater relevance.
@@ -32,17 +37,18 @@ public struct KeywordsResult: Codable, Equatable {
     public var text: String?
 
     /**
-     Emotion analysis results for the keyword, enabled with the "emotion" option.
+     Emotion analysis results for the keyword, enabled with the `emotion` option.
      */
     public var emotion: EmotionScores?
 
     /**
-     Sentiment analysis results for the keyword, enabled with the "sentiment" option.
+     Sentiment analysis results for the keyword, enabled with the `sentiment` option.
      */
     public var sentiment: FeatureSentimentResults?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
+        case count = "count"
         case relevance = "relevance"
         case text = "text"
         case emotion = "emotion"

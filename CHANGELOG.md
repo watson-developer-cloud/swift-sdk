@@ -1,3 +1,22 @@
+# [1.2.0](https://github.com/watson-developer-cloud/swift-sdk/compare/1.1.0...1.2.0) (2019-01-10)
+
+
+### Bug Fixes
+
+* **AssistantV1:** Add missing "disabled" field to DialogNode ([e45de83](https://github.com/watson-developer-cloud/swift-sdk/commit/e45de83))
+* **AssistantV2:** Add missing userDefined field to MessageOutput ([f65cafc](https://github.com/watson-developer-cloud/swift-sdk/commit/f65cafc))
+
+
+### Features
+
+* **AssistantV1:** Add metadata field to Context model ([c7bd31e](https://github.com/watson-developer-cloud/swift-sdk/commit/c7bd31e))
+* **AssistantV1:** Add option to sort results in getWorkspace() ([47cb1a1](https://github.com/watson-developer-cloud/swift-sdk/commit/47cb1a1))
+* **DiscoveryV1:** Add new concepts property to NluEnrichmentFeatures model ([1b46a68](https://github.com/watson-developer-cloud/swift-sdk/commit/1b46a68))
+* **DiscoveryV1:** Add retrievalDetails property to QueryResponse model ([5514c7e](https://github.com/watson-developer-cloud/swift-sdk/commit/5514c7e))
+* **NaturalLanguageUnderstandingV1:** Add 4 new properties to the Model model ([4d2d5ce](https://github.com/watson-developer-cloud/swift-sdk/commit/4d2d5ce))
+* **NaturalLanguageUnderstandingV1:** Add new count property to KeywordsResult model ([3f69bfd](https://github.com/watson-developer-cloud/swift-sdk/commit/3f69bfd))
+* **NaturalLanguageUnderstandingV1:** Add new limit property to CategoriesOptions model ([6918e9a](https://github.com/watson-developer-cloud/swift-sdk/commit/6918e9a))
+
 # [1.1.0](https://github.com/watson-developer-cloud/swift-sdk/compare/1.0.0...1.1.0) (2018-12-11)
 
 

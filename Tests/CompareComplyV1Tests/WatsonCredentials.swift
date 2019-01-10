@@ -1,1 +1,1 @@
-/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/SupportingFiles/WatsonCredentials.swift
+../../Source/SupportingFiles/WatsonCredentials.swift

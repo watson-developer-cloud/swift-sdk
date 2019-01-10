@@ -1,1 +1,1 @@
-/Users/anthony/Development/Watson-SDKs/swift-sdk/Tests/TestUtilities.swift
+../TestUtilities.swift

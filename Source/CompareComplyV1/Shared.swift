@@ -1,1 +1,1 @@
-/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/SupportingFiles/Shared.swift
+../SupportingFiles/Shared.swift

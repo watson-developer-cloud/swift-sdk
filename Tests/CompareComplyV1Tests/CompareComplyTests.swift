@@ -43,6 +43,11 @@ class CompareComplyTests: XCTestCase {
     static var allTests: [(String, (CompareComplyTests) -> () throws -> Void)] {
         return [
             ("testConvertToHtml", testConvertToHtml),
+            ("testClassifyElements", testClassifyElements),
+            ("testExtractTables", testExtractTables),
+            ("testCompareDocuments", testCompareDocuments),
+            ("testFeedbackOperations", testFeedbackOperations),
+            ("testBatchOperations", testBatchOperations),
         ]
     }
 
@@ -60,7 +65,7 @@ class CompareComplyTests: XCTestCase {
 
     func loadDocument(name: String, ext: String) -> URL? {
         #if os(Linux)
-        let url = URL(fileURLWithPath: "Tests/CompareComplyV1Tests/" + name + "." + ext)
+        let url = URL(fileURLWithPath: "Tests/CompareComplyV1Tests/Resources/" + name + "." + ext)
         #else
         let bundle = Bundle(for: type(of: self))
         guard let url = bundle.url(forResource: name, withExtension: ext) else { return nil }

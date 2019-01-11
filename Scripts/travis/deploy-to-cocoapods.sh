@@ -2,6 +2,8 @@
 
 set -e
 
+git pull # Needed to get the new version created by semantic-release
+
 declare -a allPods=(
   "IBMWatsonAssistantV1.podspec"
   "IBMWatsonAssistantV2.podspec"

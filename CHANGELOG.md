@@ -1,3 +1,18 @@
+# [1.2.0](https://github.com/watson-developer-cloud/swift-sdk/compare/1.1.1...1.2.0) (2019-01-11)
+
+
+### Bug Fixes
+
+* **CompareComplyV1:** Change Location properties to optional ([2e66ac5](https://github.com/watson-developer-cloud/swift-sdk/commit/2e66ac5))
+* **CompareComplyV1:** Fix incorrect parameter types ([4cfa292](https://github.com/watson-developer-cloud/swift-sdk/commit/4cfa292))
+* **CompareComplyV1:** Give more appropriate types to model properties ([4b1af08](https://github.com/watson-developer-cloud/swift-sdk/commit/4b1af08))
+
+
+### Features
+
+* **CompareComplyV1:** Add properties to AlignedElements and Attribute ([0fbeb6d](https://github.com/watson-developer-cloud/swift-sdk/commit/0fbeb6d))
+* **CompareComplyV1:** New framework for Compare & Comply service ([482444a](https://github.com/watson-developer-cloud/swift-sdk/commit/482444a))
+
 # [1.1.1](https://github.com/watson-developer-cloud/swift-sdk/compare/1.1.0...1.1.1) (2019-01-10)
 
 

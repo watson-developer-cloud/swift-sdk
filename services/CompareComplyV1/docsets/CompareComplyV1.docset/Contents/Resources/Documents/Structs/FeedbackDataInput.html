@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>FeedbackDataInput Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/FeedbackDataInput" class="dashAnchor"></a>
+    <a title="FeedbackDataInput Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">CompareComplyV1 Docs</a></p>
+        <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">CompareComplyV1 Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        FeedbackDataInput Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../readme.html">README</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/CompareComply.html">CompareComply</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Address.html">Address</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AlignedElement.html">AlignedElement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Attribute.html">Attribute</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Attribute/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BatchStatus.html">BatchStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BatchStatus/Function.html">– Function</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Batches.html">Batches</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BodyCells.html">BodyCells</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Category.html">Category</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Category/Label.html">– Label</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ClassifyReturn.html">ClassifyReturn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ColumnHeaderIDs.html">ColumnHeaderIDs</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ColumnHeaderTexts.html">ColumnHeaderTexts</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ColumnHeaderTextsNormalized.html">ColumnHeaderTextsNormalized</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ColumnHeaders.html">ColumnHeaders</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CompareReturn.html">CompareReturn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Contact.html">Contact</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ContractAmts.html">ContractAmts</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DocCounts.html">DocCounts</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DocInfo.html">DocInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DocStructure.html">DocStructure</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Document.html">Document</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/EffectiveDates.html">EffectiveDates</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Element.html">Element</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ElementLocations.html">ElementLocations</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ElementPair.html">ElementPair</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FeedbackDataInput.html">FeedbackDataInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FeedbackDataOutput.html">FeedbackDataOutput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FeedbackDeleted.html">FeedbackDeleted</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FeedbackList.html">FeedbackList</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FeedbackReturn.html">FeedbackReturn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GetFeedback.html">GetFeedback</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/HTMLReturn.html">HTMLReturn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Label.html">Label</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LeadingSentence.html">LeadingSentence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Location.html">Location</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/OriginalLabelsIn.html">OriginalLabelsIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/OriginalLabelsOut.html">OriginalLabelsOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/OriginalLabelsOut/Modification.html">– Modification</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Pagination.html">Pagination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Parties.html">Parties</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RowHeaderIDs.html">RowHeaderIDs</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RowHeaderTexts.html">RowHeaderTexts</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RowHeaderTextsNormalized.html">RowHeaderTextsNormalized</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RowHeaders.html">RowHeaders</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SectionTitle.html">SectionTitle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SectionTitles.html">SectionTitles</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ShortDoc.html">ShortDoc</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TableHeaders.html">TableHeaders</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TableReturn.html">TableReturn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Tables.html">Tables</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TerminationDates.html">TerminationDates</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TypeLabel.html">TypeLabel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UnalignedElement.html">UnalignedElement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdatedLabelsIn.html">UpdatedLabelsIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdatedLabelsOut.html">UpdatedLabelsOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdatedLabelsOut/Modification.html">– Modification</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/WatsonError">WatsonError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>FeedbackDataInput</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">FeedbackDataInput</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                </div>
+              </div>
+            <p>Feedback data for submission.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV117FeedbackDataInputV12feedbackTypeSSvp"></a>
+                    <a name="//apple_ref/swift/Property/feedbackType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV117FeedbackDataInputV12feedbackTypeSSvp">feedbackType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The type of feedback. The only permitted value is <code>element_classification</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">feedbackType</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV117FeedbackDataInputV8documentAA8ShortDocVSgvp"></a>
+                    <a name="//apple_ref/swift/Property/document" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV117FeedbackDataInputV8documentAA8ShortDocVSgvp">document</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Brief information about the input document.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">document</span><span class="p">:</span> <span class="kt"><a href="../Structs/ShortDoc.html">ShortDoc</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV117FeedbackDataInputV7modelIDSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/modelID" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV117FeedbackDataInputV7modelIDSSSgvp">modelID</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An optional string identifying the model ID. The only permitted value is <code>contracts</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV117FeedbackDataInputV12modelVersionSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/modelVersion" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV117FeedbackDataInputV12modelVersionSSSgvp">modelVersion</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An optional string identifying the version of the model used.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">modelVersion</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV117FeedbackDataInputV8locationAA8LocationVvp"></a>
+                    <a name="//apple_ref/swift/Property/location" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV117FeedbackDataInputV8locationAA8LocationVvp">location</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The numeric location of the identified element in the document, represented with two integers labeled <code>begin</code> and
+<code>end</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">location</span><span class="p">:</span> <span class="kt"><a href="../Structs/Location.html">Location</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV117FeedbackDataInputV4textSSvp"></a>
+                    <a name="//apple_ref/swift/Property/text" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV117FeedbackDataInputV4textSSvp">text</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The text on which to submit feedback.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV117FeedbackDataInputV14originalLabelsAA08OriginalH2InVvp"></a>
+                    <a name="//apple_ref/swift/Property/originalLabels" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV117FeedbackDataInputV14originalLabelsAA08OriginalH2InVvp">originalLabels</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The original labeling from the input document, without the submitted feedback.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">originalLabels</span><span class="p">:</span> <span class="kt"><a href="../Structs/OriginalLabelsIn.html">OriginalLabelsIn</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV117FeedbackDataInputV13updatedLabelsAA07UpdatedH2InVvp"></a>
+                    <a name="//apple_ref/swift/Property/updatedLabels" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV117FeedbackDataInputV13updatedLabelsAA07UpdatedH2InVvp">updatedLabels</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The updated labeling from the input document, accounting for the submitted feedback.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">updatedLabels</span><span class="p">:</span> <span class="kt"><a href="../Structs/UpdatedLabelsIn.html">UpdatedLabelsIn</a></span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV117FeedbackDataInputV12feedbackType8location4text14originalLabels07updatedL08document7modelID0O7VersionACSS_AA8LocationVSSAA08OriginalL2InVAA07UpdatedlT0VAA8ShortDocVSgSSSgAUtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(feedbackType:location:text:originalLabels:updatedLabels:document:modelID:modelVersion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV117FeedbackDataInputV12feedbackType8location4text14originalLabels07updatedL08document7modelID0O7VersionACSS_AA8LocationVSSAA08OriginalL2InVAA07UpdatedlT0VAA8ShortDocVSgSSSgAUtcfc">init(feedbackType:location:text:originalLabels:updatedLabels:document:modelID:modelVersion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initialize a <code>FeedbackDataInput</code> with member variables.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
+    <span class="nv">feedbackType</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">location</span><span class="p">:</span> <span class="kt"><a href="../Structs/Location.html">Location</a></span><span class="p">,</span>
+    <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">originalLabels</span><span class="p">:</span> <span class="kt"><a href="../Structs/OriginalLabelsIn.html">OriginalLabelsIn</a></span><span class="p">,</span>
+    <span class="nv">updatedLabels</span><span class="p">:</span> <span class="kt"><a href="../Structs/UpdatedLabelsIn.html">UpdatedLabelsIn</a></span><span class="p">,</span>
+    <span class="nv">document</span><span class="p">:</span> <span class="kt"><a href="../Structs/ShortDoc.html">ShortDoc</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">modelVersion</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>feedbackType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The type of feedback. The only permitted value is <code>element_classification</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>location</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The numeric location of the identified element in the document, represented with two
+integers labeled <code>begin</code> and <code>end</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>text</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The text on which to submit feedback.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>originalLabels</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The original labeling from the input document, without the submitted feedback.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>updatedLabels</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The updated labeling from the input document, accounting for the submitted feedback.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>document</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Brief information about the input document.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>modelID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An optional string identifying the model ID. The only permitted value is <code>contracts</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>modelVersion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An optional string identifying the version of the model used.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An initialized <code>FeedbackDataInput</code>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-01-11)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

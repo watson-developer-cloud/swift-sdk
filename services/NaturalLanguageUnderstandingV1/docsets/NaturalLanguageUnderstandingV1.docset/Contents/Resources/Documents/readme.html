@@ -178,10 +178,10 @@
             <a href="Typealiases.html">Type Aliases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Typealiases.html#/s:30NaturalLanguageUnderstandingV111WatsonErrora">WatsonError</a>
+                <a href="Typealiases.html#/WatsonError">WatsonError</a>
               </li>
               <li class="nav-group-task">
-                <a href="Typealiases.html#/s:30NaturalLanguageUnderstandingV114WatsonResponsea">WatsonResponse</a>
+                <a href="Typealiases.html#/WatsonResponse">WatsonResponse</a>
               </li>
             </ul>
           </li>
@@ -232,6 +232,7 @@
 
 <ul>
 <li><a href="https://www.ibm.com/cloud/watson-assistant/">Assistant</a></li>
+<li><a href="https://www.ibm.com/cloud/compare-and-comply">Compare &amp; Comply</a></li>
 <li><a href="https://www.ibm.com/watson/services/discovery">Discovery</a></li>
 <li><a href="https://www.ibm.com/watson/services/language-translator">Language Translator V3</a></li>
 <li><a href="https://www.ibm.com/watson/services/natural-language-classifier">Natural Language Classifier</a></li>
@@ -260,24 +261,25 @@
 <h3 id='cocoapods' class='heading'>Cocoapods</h3>
 
 <p>You can install Cocoapods with <a href="https://rubygems.org/">RubyGems</a>:</p>
-<pre class="highlight shell"><code><span class="gp">$ </span>sudo gem install cocoapods
+<pre class="highlight shell"><code><span class="nv">$ </span><span class="nb">sudo </span>gem <span class="nb">install </span>cocoapods
 </code></pre>
 
 <p>If your project does not yet have a Podfile, use the <code>pod init</code> command in the root directory of your project. To install the Swift SDK using Cocoapods, add the services you will be using to your Podfile as demonstrated below (substituting <code>MyApp</code> with the name of your app). The example below shows all of the currently available services; your Podfile should only include the services that your app will use.</p>
 <pre class="highlight ruby"><code><span class="n">use_frameworks!</span>
 
 <span class="n">target</span> <span class="s1">'MyApp'</span> <span class="k">do</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonAssistantV1'</span><span class="p">,</span> <span class="s1">'~&gt; 1.1.1'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonAssistantV2'</span><span class="p">,</span> <span class="s1">'~&gt; 1.1.1'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonDiscoveryV1'</span><span class="p">,</span> <span class="s1">'~&gt; 1.1.1'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonLanguageTranslatorV3'</span><span class="p">,</span> <span class="s1">'~&gt; 1.1.1'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonNaturalLanguageClassifierV1'</span><span class="p">,</span> <span class="s1">'~&gt; 1.1.1'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonNaturalLanguageUnderstandingV1'</span><span class="p">,</span> <span class="s1">'~&gt; 1.1.1'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonPersonalityInsightsV3'</span><span class="p">,</span> <span class="s1">'~&gt; 1.1.1'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonSpeechToTextV1'</span><span class="p">,</span> <span class="s1">'~&gt; 1.1.1'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonTextToSpeechV1'</span><span class="p">,</span> <span class="s1">'~&gt; 1.1.1'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonToneAnalyzerV3'</span><span class="p">,</span> <span class="s1">'~&gt; 1.1.1'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonVisualRecognitionV3'</span><span class="p">,</span> <span class="s1">'~&gt; 1.1.1'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonAssistantV1'</span><span class="p">,</span> <span class="s1">'~&gt; 1.2.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonAssistantV2'</span><span class="p">,</span> <span class="s1">'~&gt; 1.2.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonCompareComplyV1'</span><span class="p">,</span> <span class="s1">'~&gt; 1.2.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonDiscoveryV1'</span><span class="p">,</span> <span class="s1">'~&gt; 1.2.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonLanguageTranslatorV3'</span><span class="p">,</span> <span class="s1">'~&gt; 1.2.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonNaturalLanguageClassifierV1'</span><span class="p">,</span> <span class="s1">'~&gt; 1.2.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonNaturalLanguageUnderstandingV1'</span><span class="p">,</span> <span class="s1">'~&gt; 1.2.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonPersonalityInsightsV3'</span><span class="p">,</span> <span class="s1">'~&gt; 1.2.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonSpeechToTextV1'</span><span class="p">,</span> <span class="s1">'~&gt; 1.2.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonTextToSpeechV1'</span><span class="p">,</span> <span class="s1">'~&gt; 1.2.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonToneAnalyzerV3'</span><span class="p">,</span> <span class="s1">'~&gt; 1.2.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonVisualRecognitionV3'</span><span class="p">,</span> <span class="s1">'~&gt; 1.2.0'</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -289,16 +291,16 @@
 <h3 id='carthage' class='heading'>Carthage</h3>
 
 <p>You can install Carthage with <a href="http://brew.sh/">Homebrew</a>:</p>
-<pre class="highlight shell"><code><span class="gp">$ </span>brew update
-<span class="gp">$ </span>brew install carthage
+<pre class="highlight shell"><code><span class="nv">$ </span>brew update
+<span class="nv">$ </span>brew <span class="nb">install </span>carthage
 </code></pre>
 
 <p>If your project does not have a Cartfile yet, use the <code>touch Cartfile</code> command in the root directory of your project. To install the IBM Watson Swift SDK using Carthage, add the following to your Cartfile. </p>
-<pre class="highlight plaintext"><code>github "watson-developer-cloud/swift-sdk" ~&gt; 1.1.1
+<pre class="highlight plaintext"><code>github "watson-developer-cloud/swift-sdk" ~&gt; 1.2.0
 </code></pre>
 
 <p>Then run the following command to build the dependencies and frameworks:</p>
-<pre class="highlight shell"><code><span class="gp">$ </span>carthage update --platform iOS
+<pre class="highlight shell"><code><span class="nv">$ </span>carthage update <span class="nt">--platform</span> iOS
 </code></pre>
 
 <p>Follow the remaining Carthage installation instructions <a href="https://github.com/Carthage/Carthage#getting-started">here</a>. Note that the above command will download and build all of the services in the IBM Watson Swift SDK. Make sure to drag-and-drop the built frameworks (only for the services your app requires) into your Xcode project and import them in the source files that require them. The following frameworks need to be added to your app:</p>
@@ -312,7 +314,7 @@
 
 <p>Add the following to your <code>Package.swift</code> file to identify the IBM Watson Swift SDK as a dependency. The package manager will clone the Swift SDK when you build your project with <code>swift build</code>.</p>
 <pre class="highlight swift"><code><span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
-    <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/watson-developer-cloud/swift-sdk"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"1.1.1"</span><span class="p">)</span>
+    <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/watson-developer-cloud/swift-sdk"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"1.2.0"</span><span class="p">)</span>
 <span class="p">]</span>
 </code></pre>
 <h2 id='authentication' class='heading'>Authentication</h2>
@@ -427,7 +429,7 @@ available in <a href="https://github.com/watson-developer-cloud/swift-sdk/blob/m
         </section>
         <section id="footer">
           <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-01-11)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

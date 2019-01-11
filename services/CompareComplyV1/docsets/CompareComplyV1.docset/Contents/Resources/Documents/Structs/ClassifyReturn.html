@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ClassifyReturn Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/ClassifyReturn" class="dashAnchor"></a>
+    <a title="ClassifyReturn Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">CompareComplyV1 Docs</a></p>
+        <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">CompareComplyV1 Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        ClassifyReturn Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../readme.html">README</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/CompareComply.html">CompareComply</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Address.html">Address</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AlignedElement.html">AlignedElement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Attribute.html">Attribute</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Attribute/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BatchStatus.html">BatchStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BatchStatus/Function.html">– Function</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Batches.html">Batches</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BodyCells.html">BodyCells</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Category.html">Category</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Category/Label.html">– Label</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ClassifyReturn.html">ClassifyReturn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ColumnHeaderIDs.html">ColumnHeaderIDs</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ColumnHeaderTexts.html">ColumnHeaderTexts</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ColumnHeaderTextsNormalized.html">ColumnHeaderTextsNormalized</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ColumnHeaders.html">ColumnHeaders</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CompareReturn.html">CompareReturn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Contact.html">Contact</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ContractAmts.html">ContractAmts</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DocCounts.html">DocCounts</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DocInfo.html">DocInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DocStructure.html">DocStructure</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Document.html">Document</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/EffectiveDates.html">EffectiveDates</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Element.html">Element</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ElementLocations.html">ElementLocations</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ElementPair.html">ElementPair</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FeedbackDataInput.html">FeedbackDataInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FeedbackDataOutput.html">FeedbackDataOutput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FeedbackDeleted.html">FeedbackDeleted</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FeedbackList.html">FeedbackList</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FeedbackReturn.html">FeedbackReturn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GetFeedback.html">GetFeedback</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/HTMLReturn.html">HTMLReturn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Label.html">Label</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LeadingSentence.html">LeadingSentence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Location.html">Location</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/OriginalLabelsIn.html">OriginalLabelsIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/OriginalLabelsOut.html">OriginalLabelsOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/OriginalLabelsOut/Modification.html">– Modification</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Pagination.html">Pagination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Parties.html">Parties</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RowHeaderIDs.html">RowHeaderIDs</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RowHeaderTexts.html">RowHeaderTexts</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RowHeaderTextsNormalized.html">RowHeaderTextsNormalized</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RowHeaders.html">RowHeaders</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SectionTitle.html">SectionTitle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SectionTitles.html">SectionTitles</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ShortDoc.html">ShortDoc</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TableHeaders.html">TableHeaders</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TableReturn.html">TableReturn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Tables.html">Tables</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TerminationDates.html">TerminationDates</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TypeLabel.html">TypeLabel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UnalignedElement.html">UnalignedElement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdatedLabelsIn.html">UpdatedLabelsIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdatedLabelsOut.html">UpdatedLabelsOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdatedLabelsOut/Modification.html">– Modification</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/WatsonError">WatsonError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>ClassifyReturn</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ClassifyReturn</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                </div>
+              </div>
+            <p>The analysis of objects returned by the <code>/v1/element_classification</code> method.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV114ClassifyReturnV8documentAA8DocumentVSgvp"></a>
+                    <a name="//apple_ref/swift/Property/document" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV114ClassifyReturnV8documentAA8DocumentVSgvp">document</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Basic information about the input document.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">document</span><span class="p">:</span> <span class="kt"><a href="../Structs/Document.html">Document</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV114ClassifyReturnV7modelIDSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/modelID" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV114ClassifyReturnV7modelIDSSSgvp">modelID</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The analysis model used to classify the input document. For the <code>/v1/element_classification</code> method, the only valid
+value is <code>contracts</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV114ClassifyReturnV12modelVersionSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/modelVersion" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV114ClassifyReturnV12modelVersionSSSgvp">modelVersion</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The version of the analysis model identified by the value of the <code>model_id</code> key.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">modelVersion</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV114ClassifyReturnV8elementsSayAA7ElementVGSgvp"></a>
+                    <a name="//apple_ref/swift/Property/elements" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV114ClassifyReturnV8elementsSayAA7ElementVGSgvp">elements</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Document elements identified by the service.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">elements</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Element.html">Element</a></span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV114ClassifyReturnV6tablesSayAA6TablesVGSgvp"></a>
+                    <a name="//apple_ref/swift/Property/tables" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV114ClassifyReturnV6tablesSayAA6TablesVGSgvp">tables</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Definition of tables identified in the input document.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">tables</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Tables.html">Tables</a></span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV114ClassifyReturnV17documentStructureAA03DocG0VSgvp"></a>
+                    <a name="//apple_ref/swift/Property/documentStructure" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV114ClassifyReturnV17documentStructureAA03DocG0VSgvp">documentStructure</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The structure of the input document.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">documentStructure</span><span class="p">:</span> <span class="kt"><a href="../Structs/DocStructure.html">DocStructure</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV114ClassifyReturnV7partiesSayAA7PartiesVGSgvp"></a>
+                    <a name="//apple_ref/swift/Property/parties" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV114ClassifyReturnV7partiesSayAA7PartiesVGSgvp">parties</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Definitions of the parties identified in the input document.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">parties</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Parties.html">Parties</a></span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV114ClassifyReturnV14effectiveDatesSayAA09EffectiveG0VGSgvp"></a>
+                    <a name="//apple_ref/swift/Property/effectiveDates" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV114ClassifyReturnV14effectiveDatesSayAA09EffectiveG0VGSgvp">effectiveDates</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The effective dates of the input document.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">effectiveDates</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/EffectiveDates.html">EffectiveDates</a></span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV114ClassifyReturnV15contractAmountsSayAA12ContractAmtsVGSgvp"></a>
+                    <a name="//apple_ref/swift/Property/contractAmounts" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV114ClassifyReturnV15contractAmountsSayAA12ContractAmtsVGSgvp">contractAmounts</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The monetary amounts identified in the input document.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">contractAmounts</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/ContractAmts.html">ContractAmts</a></span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV114ClassifyReturnV16terminationDatesSayAA011TerminationG0VGSgvp"></a>
+                    <a name="//apple_ref/swift/Property/terminationDates" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV114ClassifyReturnV16terminationDatesSayAA011TerminationG0VGSgvp">terminationDates</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The input document&rsquo;s termination dates.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">terminationDates</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/TerminationDates.html">TerminationDates</a></span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-01-11)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

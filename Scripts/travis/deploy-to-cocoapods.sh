@@ -7,6 +7,7 @@ git pull # Needed to get the new version created by semantic-release
 declare -a allPods=(
   "IBMWatsonAssistantV1.podspec"
   "IBMWatsonAssistantV2.podspec"
+  "IBMWatsonCompareComplyV1.podspec"
   "IBMWatsonDiscoveryV1.podspec"
   "IBMWatsonLanguageTranslatorV3.podspec"
   "IBMWatsonNaturalLanguageClassifierV1.podspec"

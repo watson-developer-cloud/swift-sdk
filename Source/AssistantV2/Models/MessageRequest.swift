@@ -22,7 +22,7 @@ import Foundation
 internal struct MessageRequest: Codable, Equatable {
 
     /**
-     The user input.
+     An input object that includes the input text.
      */
     public var input: MessageInput?
 
@@ -40,7 +40,7 @@ internal struct MessageRequest: Codable, Equatable {
     /**
      Initialize a `MessageRequest` with member variables.
 
-     - parameter input: The user input.
+     - parameter input: An input object that includes the input text.
      - parameter context: State information for the conversation.
 
      - returns: An initialized `MessageRequest`.

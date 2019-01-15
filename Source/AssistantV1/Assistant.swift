@@ -114,7 +114,7 @@ public class Assistant {
      There is no rate limit for this operation.
 
      - parameter workspaceID: Unique identifier of the workspace.
-     - parameter input: The user input.
+     - parameter input: An input object that includes the input text.
      - parameter alternateIntents: Whether to return more than one intent. Set to `true` to return all matching
        intents.
      - parameter context: State information for the conversation. To maintain state, include the context from the

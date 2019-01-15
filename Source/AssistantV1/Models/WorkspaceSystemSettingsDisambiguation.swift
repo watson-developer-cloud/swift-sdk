@@ -16,7 +16,10 @@
 
 import Foundation
 
-/** WorkspaceSystemSettingsDisambiguation. */
+/**
+ Workspace settings related to the disambiguation feature.
+ **Note:** This feature is available only to Premium users.
+ */
 public struct WorkspaceSystemSettingsDisambiguation: Codable, Equatable {
 
     /**

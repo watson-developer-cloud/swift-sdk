@@ -20,8 +20,8 @@ import Foundation
 public struct AcousticModels: Codable, Equatable {
 
     /**
-     An array of objects that provides information about each available custom acoustic model. The array is empty if the
-     requesting service credentials own no custom acoustic models (if no language is specified) or own no custom
+     An array of `AcousticModel` objects that provides information about each available custom acoustic model. The array
+     is empty if the requesting credentials own no custom acoustic models (if no language is specified) or own no custom
      acoustic models for the specified language.
      */
     public var customizations: [AcousticModel]

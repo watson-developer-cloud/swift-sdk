@@ -21,8 +21,8 @@ public struct RegisterStatus: Codable, Equatable {
 
     /**
      The current status of the job:
-     * `created` if the callback URL was successfully white-listed as a result of the call.
-     * `already created` if the URL was already white-listed.
+     * `created`: The service successfully white-listed the callback URL as a result of the call.
+     * `already created`: The URL was already white-listed.
      */
     public enum Status: String {
         case created = "created"
@@ -31,8 +31,8 @@ public struct RegisterStatus: Codable, Equatable {
 
     /**
      The current status of the job:
-     * `created` if the callback URL was successfully white-listed as a result of the call.
-     * `already created` if the URL was already white-listed.
+     * `created`: The service successfully white-listed the callback URL as a result of the call.
+     * `already created`: The URL was already white-listed.
      */
     public var status: String
 

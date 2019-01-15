@@ -23,7 +23,7 @@ import Foundation
 public struct DialogNodeOutputOptionsElementValue: Codable, Equatable {
 
     /**
-     The user input.
+     An input object that includes the input text.
      */
     public var input: InputData?
 
@@ -35,7 +35,7 @@ public struct DialogNodeOutputOptionsElementValue: Codable, Equatable {
     /**
      Initialize a `DialogNodeOutputOptionsElementValue` with member variables.
 
-     - parameter input: The user input.
+     - parameter input: An input object that includes the input text.
 
      - returns: An initialized `DialogNodeOutputOptionsElementValue`.
     */

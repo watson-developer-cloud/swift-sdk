@@ -26,8 +26,8 @@ public struct AudioResources: Codable, Equatable {
     public var totalMinutesOfAudio: Double
 
     /**
-     An array of objects that provides information about the audio resources of the custom acoustic model. The array is
-     empty if the custom model has no audio resources.
+     An array of `AudioResource` objects that provides information about the audio resources of the custom acoustic
+     model. The array is empty if the custom model has no audio resources.
      */
     public var audio: [AudioResource]
 

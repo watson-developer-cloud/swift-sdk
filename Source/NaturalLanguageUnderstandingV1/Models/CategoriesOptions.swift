@@ -24,7 +24,6 @@ public struct CategoriesOptions: Codable, Equatable {
 
     /**
      Maximum number of categories to return.
-     Maximum value: **10**.
      */
     public var limit: Int?
 
@@ -37,7 +36,6 @@ public struct CategoriesOptions: Codable, Equatable {
      Initialize a `CategoriesOptions` with member variables.
 
      - parameter limit: Maximum number of categories to return.
-       Maximum value: **10**.
 
      - returns: An initialized `CategoriesOptions`.
     */

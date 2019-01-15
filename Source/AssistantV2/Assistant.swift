@@ -218,7 +218,7 @@ public class Assistant {
        [documentation](https://cloud.ibm.com/docs/services/assistant/create-assistant.html#creating-assistants).
        **Note:** Currently, the v2 API does not support creating assistants.
      - parameter sessionID: Unique identifier of the session.
-     - parameter input: The user input.
+     - parameter input: An input object that includes the input text.
      - parameter context: State information for the conversation.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error

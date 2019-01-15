@@ -17,7 +17,9 @@
 import Foundation
 import RestKit
 
-/** WorkspaceSystemSettings. */
+/**
+ Global settings for the workspace.
+ */
 public struct WorkspaceSystemSettings: Codable, Equatable {
 
     /**

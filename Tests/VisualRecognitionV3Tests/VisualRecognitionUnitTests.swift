@@ -285,7 +285,15 @@ class VisualRecognitionUnitTests: XCTestCase {
             XCTAssertEqual(request.url?.lastPathComponent, "detect_faces")
             XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
             XCTAssertNotNil(request.httpBodyStream)
-            XCTAssertNotNil(request.allHTTPHeaderFields)
+
+            let headers = request.allHTTPHeaderFields
+            XCTAssertNotNil(headers)
+            if let headers = headers {
+                XCTAssertNotNil(headers["Accept-Language"])
+                if let acceptLanguage = headers["Accept-Language"] {
+                    XCTAssertEqual(acceptLanguage, "en")
+                }
+            }
 
             let bodyFieldsCount = numberOfFieldsInMultiPartFormBody(request: request)
             XCTAssertEqual(bodyFieldsCount, 2)
@@ -294,7 +302,7 @@ class VisualRecognitionUnitTests: XCTestCase {
         }
 
         let expectation = self.expectation(description: "detectFaces")
-        visualRecognition.detectFaces(imagesFile: faces, url: "http://example.com") {
+        visualRecognition.detectFaces(imagesFile: faces, url: "http://example.com", acceptLanguage: "en") {
             _, _ in
             expectation.fulfill()
         }

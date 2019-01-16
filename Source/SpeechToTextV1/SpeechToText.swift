@@ -29,8 +29,10 @@ import RestKit
  Clients send requests and audio to the service and receive results over a single connection asynchronously.
  The service also offers two customization interfaces. Use language model customization to expand the vocabulary of a
  base model with domain-specific terminology. Use acoustic model customization to adapt a base model for the acoustic
- characteristics of your audio. Language model customization is generally available for production use with most
- supported languages; acoustic model customization is beta functionality that is available for all supported languages.
+ characteristics of your audio. For language model customization, the service also supports grammars. A grammar is a
+ formal language specification that lets you restrict the phrases that the service can recognize.
+ Language model customization is generally available for production use with most supported languages. Acoustic model
+ customization is beta functionality that is available for all supported languages.
  */
 public class SpeechToText {
 
@@ -340,6 +342,21 @@ public class SpeechToText {
        supports speaker labels, you can also use the **Get a model** method and check that the attribute
        `speaker_labels` is set to `true`.
        See [Speaker labels](https://cloud.ibm.com/docs/services/speech-to-text/output.html#speaker_labels).
+     - parameter grammarName: The name of a grammar that is to be used with the recognition request. If you specify a
+       grammar, you must also use the `language_customization_id` parameter to specify the name of the custom language
+       model for which the grammar is defined. The service recognizes only strings that are recognized by the specified
+       grammar; it does not recognize other custom words from the model's words resource. See
+       [Grammars](https://cloud.ibm.com/docs/services/speech-to-text/output.html).
+     - parameter redaction: If `true`, the service redacts, or masks, numeric data from final transcripts. The feature
+       redacts any number that has three or more consecutive digits by replacing each digit with an `X` character. It is
+       intended to redact sensitive numeric data, such as credit card numbers. By default, the service performs no
+       redaction.
+       When you enable redaction, the service automatically enables smart formatting, regardless of whether you
+       explicitly disable that feature. To ensure maximum security, the service also disables keyword spotting (ignores
+       the `keywords` and `keywords_threshold` parameters) and returns only a single final transcript (forces the
+       `max_alternatives` parameter to be `1`).
+       **Note:** Applies to US English, Japanese, and Korean transcription only.
+       See [Numeric redaction](https://cloud.ibm.com/docs/services/speech-to-text/output.html#redaction).
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -361,6 +378,8 @@ public class SpeechToText {
         profanityFilter: Bool? = nil,
         smartFormatting: Bool? = nil,
         speakerLabels: Bool? = nil,
+        grammarName: String? = nil,
+        redaction: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, WatsonError?) -> Void)
     {
@@ -437,6 +456,14 @@ public class SpeechToText {
         }
         if let speakerLabels = speakerLabels {
             let queryParameter = URLQueryItem(name: "speaker_labels", value: "\(speakerLabels)")
+            queryParameters.append(queryParameter)
+        }
+        if let grammarName = grammarName {
+            let queryParameter = URLQueryItem(name: "grammar_name", value: grammarName)
+            queryParameters.append(queryParameter)
+        }
+        if let redaction = redaction {
+            let queryParameter = URLQueryItem(name: "redaction", value: "\(redaction)")
             queryParameters.append(queryParameter)
         }
 
@@ -741,6 +768,21 @@ public class SpeechToText {
        supports speaker labels, you can also use the **Get a model** method and check that the attribute
        `speaker_labels` is set to `true`.
        See [Speaker labels](https://cloud.ibm.com/docs/services/speech-to-text/output.html#speaker_labels).
+     - parameter grammarName: The name of a grammar that is to be used with the recognition request. If you specify a
+       grammar, you must also use the `language_customization_id` parameter to specify the name of the custom language
+       model for which the grammar is defined. The service recognizes only strings that are recognized by the specified
+       grammar; it does not recognize other custom words from the model's words resource. See
+       [Grammars](https://cloud.ibm.com/docs/services/speech-to-text/output.html).
+     - parameter redaction: If `true`, the service redacts, or masks, numeric data from final transcripts. The feature
+       redacts any number that has three or more consecutive digits by replacing each digit with an `X` character. It is
+       intended to redact sensitive numeric data, such as credit card numbers. By default, the service performs no
+       redaction.
+       When you enable redaction, the service automatically enables smart formatting, regardless of whether you
+       explicitly disable that feature. To ensure maximum security, the service also disables keyword spotting (ignores
+       the `keywords` and `keywords_threshold` parameters) and returns only a single final transcript (forces the
+       `max_alternatives` parameter to be `1`).
+       **Note:** Applies to US English, Japanese, and Korean transcription only.
+       See [Numeric redaction](https://cloud.ibm.com/docs/services/speech-to-text/output.html#redaction).
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -766,6 +808,8 @@ public class SpeechToText {
         profanityFilter: Bool? = nil,
         smartFormatting: Bool? = nil,
         speakerLabels: Bool? = nil,
+        grammarName: String? = nil,
+        redaction: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<RecognitionJob>?, WatsonError?) -> Void)
     {
@@ -858,6 +902,14 @@ public class SpeechToText {
         }
         if let speakerLabels = speakerLabels {
             let queryParameter = URLQueryItem(name: "speaker_labels", value: "\(speakerLabels)")
+            queryParameters.append(queryParameter)
+        }
+        if let grammarName = grammarName {
+            let queryParameter = URLQueryItem(name: "grammar_name", value: grammarName)
+            queryParameters.append(queryParameter)
+        }
+        if let redaction = redaction {
+            let queryParameter = URLQueryItem(name: "redaction", value: "\(redaction)")
             queryParameters.append(queryParameter)
         }
 
@@ -2004,6 +2056,249 @@ public class SpeechToText {
 
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words/\(wordName)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            return
+        }
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "DELETE",
+            url: serviceURL + encodedPath,
+            headerParameters: headerParameters
+        )
+
+        // execute REST request
+        request.response(completionHandler: completionHandler)
+    }
+
+    /**
+     List grammars.
+
+     Lists information about all grammars from a custom language model. The information includes the total number of
+     out-of-vocabulary (OOV) words, name, and status of each grammar. You must use credentials for the instance of the
+     service that owns a model to list its grammars.
+     **See also:** [Listing grammars from a custom language model](https://cloud.ibm.com/docs/services/speech-to-text/).
+
+     - parameter customizationID: The customization ID (GUID) of the custom language model that is to be used for the
+       request. You must make the request with credentials for the instance of the service that owns the custom model.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func listGrammars(
+        customizationID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Grammars>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct REST request
+        let path = "/v1/customizations/\(customizationID)/grammars"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            return
+        }
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceURL + encodedPath,
+            headerParameters: headerParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Add a grammar.
+
+     Adds a single grammar file to a custom language model. Submit a plain text file in UTF-8 format that defines the
+     grammar. Use multiple requests to submit multiple grammar files. You must use credentials for the instance of the
+     service that owns a model to add a grammar to it. Adding a grammar does not affect the custom language model until
+     you train the model for the new data by using the **Train a custom language model** method.
+     The call returns an HTTP 201 response code if the grammar is valid. The service then asynchronously processes the
+     contents of the grammar and automatically extracts new words that it finds. This can take a few seconds to complete
+     depending on the size and complexity of the grammar, as well as the current load on the service. You cannot submit
+     requests to add additional resources to the custom model or to train the model until the service's analysis of the
+     grammar for the current request completes. Use the **Get a grammar** method to check the status of the analysis.
+     The service populates the model's words resource with any word that is recognized by the grammar that is not found
+     in the model's base vocabulary. These are referred to as out-of-vocabulary (OOV) words. You can use the **List
+     custom words** method to examine the words resource and use other words-related methods to eliminate typos and
+     modify how words are pronounced as needed.
+     To add a grammar that has the same name as an existing grammar, set the `allow_overwrite` parameter to `true`;
+     otherwise, the request fails. Overwriting an existing grammar causes the service to process the grammar file and
+     extract OOV words anew. Before doing so, it removes any OOV words associated with the existing grammar from the
+     model's words resource unless they were also added by another resource or they have been modified in some way with
+     the **Add custom words** or **Add a custom word** method.
+     The service limits the overall amount of data that you can add to a custom model to a maximum of 10 million total
+     words from all sources combined. Also, you can add no more than 30 thousand OOV words to a model. This includes
+     words that the service extracts from corpora and grammars and words that you add directly.
+     **See also:**
+     * [Working with grammars](https://cloud.ibm.com/docs/services/speech-to-text/)
+     * [Add grammars to the custom language model](https://cloud.ibm.com/docs/services/speech-to-text/).
+
+     - parameter customizationID: The customization ID (GUID) of the custom language model that is to be used for the
+       request. You must make the request with credentials for the instance of the service that owns the custom model.
+     - parameter grammarName: The name of the new grammar for the custom language model. Use a localized name that
+       matches the language of the custom model and reflects the contents of the grammar.
+       * Include a maximum of 128 characters in the name.
+       * Do not include spaces, slashes, or backslashes in the name.
+       * Do not use the name of an existing grammar or corpus that is already defined for the custom model.
+       * Do not use the name `user`, which is reserved by the service to denote custom words that are added or modified
+       by the user.
+     - parameter grammarFile: A plain text file that contains the grammar in the format specified by the
+       `Content-Type` header. Encode the file in UTF-8 (ASCII is a subset of UTF-8). Using any other encoding can lead
+       to issues when compiling the grammar or to unexpected results in decoding. The service ignores an encoding that
+       is specified in the header of the grammar.
+     - parameter contentType: The format (MIME type) of the grammar file:
+       * `application/srgs` for Augmented Backus-Naur Form (ABNF), which uses a plain-text representation that is
+       similar to traditional BNF grammars.
+       * `application/srgs+xml` for XML Form, which uses XML elements to represent the grammar.
+     - parameter allowOverwrite: If `true`, the specified grammar overwrites an existing grammar with the same name.
+       If `false`, the request fails if a grammar with the same name already exists. The parameter has no effect if a
+       grammar with the same name does not already exist.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func addGrammar(
+        customizationID: String,
+        grammarName: String,
+        grammarFile: String,
+        contentType: String,
+        allowOverwrite: Bool? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
+    {
+        // construct body
+        // convert body parameter to Data with UTF-8 encoding
+        guard let body = grammarFile.data(using: .utf8) else {
+            let error = WatsonError.serialization(values: "grammarFile could not be encoded with UTF8.")
+            completionHandler(nil, error)
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = contentType
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        if let allowOverwrite = allowOverwrite {
+            let queryParameter = URLQueryItem(name: "allow_overwrite", value: "\(allowOverwrite)")
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let path = "/v1/customizations/\(customizationID)/grammars/\(grammarName)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            return
+        }
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "POST",
+            url: serviceURL + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.response(completionHandler: completionHandler)
+    }
+
+    /**
+     Get a grammar.
+
+     Gets information about a grammar from a custom language model. The information includes the total number of
+     out-of-vocabulary (OOV) words, name, and status of the grammar. You must use credentials for the instance of the
+     service that owns a model to list its grammars.
+     **See also:** [Listing grammars from a custom language model](https://cloud.ibm.com/docs/services/speech-to-text/).
+
+     - parameter customizationID: The customization ID (GUID) of the custom language model that is to be used for the
+       request. You must make the request with credentials for the instance of the service that owns the custom model.
+     - parameter grammarName: The name of the grammar for the custom language model.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func getGrammar(
+        customizationID: String,
+        grammarName: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Grammar>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct REST request
+        let path = "/v1/customizations/\(customizationID)/grammars/\(grammarName)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            return
+        }
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceURL + encodedPath,
+            headerParameters: headerParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Delete a grammar.
+
+     Deletes an existing grammar from a custom language model. The service removes any out-of-vocabulary (OOV) words
+     associated with the grammar from the custom model's words resource unless they were also added by another resource
+     or they were modified in some way with the **Add custom words** or **Add a custom word** method. Removing a grammar
+     does not affect the custom model until you train the model with the **Train a custom language model** method. You
+     must use credentials for the instance of the service that owns a model to delete its grammar.
+     **See also:** [Deleting a grammar from a custom language
+     model](https://cloud.ibm.com/docs/services/speech-to-text/).
+
+     - parameter customizationID: The customization ID (GUID) of the custom language model that is to be used for the
+       request. You must make the request with credentials for the instance of the service that owns the custom model.
+     - parameter grammarName: The name of the grammar for the custom language model.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func deleteGrammar(
+        customizationID: String,
+        grammarName: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct REST request
+        let path = "/v1/customizations/\(customizationID)/grammars/\(grammarName)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return

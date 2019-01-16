@@ -112,6 +112,13 @@ public struct LanguageModel: Codable, Equatable {
     public var progress: Int?
 
     /**
+     If an error occurred while adding a grammar file to the custom language model, a message that describes an
+     `Internal Server Error` and includes the string `Cannot compile grammar`. The status of the custom model is not
+     affected by the error, but the grammar cannot be used with the model.
+     */
+    public var error: String?
+
+    /**
      If the request included unknown parameters, the following message: `Unexpected query parameter(s) ['parameters']
      detected`, where `parameters` is a list that includes a quoted string for each unknown parameter.
      */
@@ -130,6 +137,7 @@ public struct LanguageModel: Codable, Equatable {
         case baseModelName = "base_model_name"
         case status = "status"
         case progress = "progress"
+        case error = "error"
         case warnings = "warnings"
     }
 

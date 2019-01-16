@@ -45,9 +45,22 @@ extension SpeechToText {
      - parameter learningOptOut: If `true`, then this request will not be logged for training.
      - parameter customerID: Associates a customer ID with all data that is passed over the connection.
        By default, no customer ID is associated with the data.
-     - parameter failure: A function executed whenever an error occurs.
-     - parameter success: A function executed with all transcription results whenever
-       a final or interim transcription is received.
+     - parameter grammarName: The name of a grammar that is to be used with the recognition request. If you specify a
+       grammar, you must also use the `language_customization_id` parameter to specify the name of the custom language
+       model for which the grammar is defined. The service recognizes only strings that are recognized by the specified
+       grammar; it does not recognize other custom words from the model's words resource. See
+       [Grammars](https://cloud.ibm.com/docs/services/speech-to-text/output.html).
+     - parameter redaction: If `true`, the service redacts, or masks, numeric data from final transcripts. The feature
+       redacts any number that has three or more consecutive digits by replacing each digit with an `X` character. It is
+       intended to redact sensitive numeric data, such as credit card numbers. By default, the service performs no
+       redaction.
+       When you enable redaction, the service automatically enables smart formatting, regardless of whether you
+       explicitly disable that feature. To ensure maximum security, the service also disables keyword spotting (ignores
+       the `keywords` and `keywords_threshold` parameters) and returns only a single final transcript (forces the
+       `max_alternatives` parameter to be `1`).
+       **Note:** Applies to US English, Japanese, and Korean transcription only.
+       See [Numeric redaction](https://cloud.ibm.com/docs/services/speech-to-text/output.html#redaction).
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func recognize(
         audio: URL,
@@ -57,6 +70,8 @@ extension SpeechToText {
         languageCustomizationID: String? = nil,
         learningOptOut: Bool? = nil,
         customerID: String? = nil,
+        grammarName: String? = nil,
+        redaction: Bool? = nil,
         completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, WatsonError?) -> Void)
     {
         do {
@@ -69,6 +84,8 @@ extension SpeechToText {
                 languageCustomizationID: languageCustomizationID,
                 learningOptOut: learningOptOut,
                 customerID: customerID,
+                grammarName: grammarName,
+                redaction: redaction,
                 completionHandler: completionHandler
             )
         } catch {
@@ -102,10 +119,23 @@ extension SpeechToText {
      - parameter learningOptOut: If `true`, then this request will not be logged for training.
      - parameter customerID: Associates a customer ID with all data that is passed over the connection.
        By default, no customer ID is associated with the data.
+     - parameter grammarName: The name of a grammar that is to be used with the recognition request. If you specify a
+       grammar, you must also use the `language_customization_id` parameter to specify the name of the custom language
+       model for which the grammar is defined. The service recognizes only strings that are recognized by the specified
+       grammar; it does not recognize other custom words from the model's words resource. See
+       [Grammars](https://cloud.ibm.com/docs/services/speech-to-text/output.html).
+     - parameter redaction: If `true`, the service redacts, or masks, numeric data from final transcripts. The feature
+       redacts any number that has three or more consecutive digits by replacing each digit with an `X` character. It is
+       intended to redact sensitive numeric data, such as credit card numbers. By default, the service performs no
+       redaction.
+       When you enable redaction, the service automatically enables smart formatting, regardless of whether you
+       explicitly disable that feature. To ensure maximum security, the service also disables keyword spotting (ignores
+       the `keywords` and `keywords_threshold` parameters) and returns only a single final transcript (forces the
+       `max_alternatives` parameter to be `1`).
+       **Note:** Applies to US English, Japanese, and Korean transcription only.
+       See [Numeric redaction](https://cloud.ibm.com/docs/services/speech-to-text/output.html#redaction).
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed whenever an error occurs.
-     - parameter success: A function executed with all transcription results whenever
-       a final or interim transcription is received.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func recognizeUsingWebSocket(
         audio: Data,
@@ -116,6 +146,8 @@ extension SpeechToText {
         acousticCustomizationID: String? = nil,
         learningOptOut: Bool? = nil,
         customerID: String? = nil,
+        grammarName: String? = nil,
+        redaction: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, WatsonError?) -> Void)
     {
@@ -127,7 +159,9 @@ extension SpeechToText {
             languageCustomizationID: languageCustomizationID,
             acousticCustomizationID: acousticCustomizationID,
             learningOptOut: learningOptOut,
-            customerID: customerID
+            customerID: customerID,
+            grammarName: grammarName,
+            redaction: redaction
         )
 
         // set urls
@@ -194,10 +228,23 @@ extension SpeechToText {
        By default, no customer ID is associated with the data.
      - parameter compress: Should microphone audio be compressed to Opus format?
        (Opus compression reduces latency and bandwidth.)
+     - parameter grammarName: The name of a grammar that is to be used with the recognition request. If you specify a
+       grammar, you must also use the `language_customization_id` parameter to specify the name of the custom language
+       model for which the grammar is defined. The service recognizes only strings that are recognized by the specified
+       grammar; it does not recognize other custom words from the model's words resource. See
+       [Grammars](https://cloud.ibm.com/docs/services/speech-to-text/output.html).
+     - parameter redaction: If `true`, the service redacts, or masks, numeric data from final transcripts. The feature
+       redacts any number that has three or more consecutive digits by replacing each digit with an `X` character. It is
+       intended to redact sensitive numeric data, such as credit card numbers. By default, the service performs no
+       redaction.
+       When you enable redaction, the service automatically enables smart formatting, regardless of whether you
+       explicitly disable that feature. To ensure maximum security, the service also disables keyword spotting (ignores
+       the `keywords` and `keywords_threshold` parameters) and returns only a single final transcript (forces the
+       `max_alternatives` parameter to be `1`).
+       **Note:** Applies to US English, Japanese, and Korean transcription only.
+       See [Numeric redaction](https://cloud.ibm.com/docs/services/speech-to-text/output.html#redaction).
      - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter failure: A function executed whenever an error occurs.
-     - parameter success: A function executed with all transcription results whenever
-       a final or interim transcription is received.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func recognizeMicrophone(
         settings: RecognitionSettings,
@@ -208,6 +255,8 @@ extension SpeechToText {
         learningOptOut: Bool? = nil,
         customerID: String? = nil,
         compress: Bool = true,
+        grammarName: String? = nil,
+        redaction: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, WatsonError?) -> Void)
     {
@@ -239,7 +288,9 @@ extension SpeechToText {
             languageCustomizationID: languageCustomizationID,
             acousticCustomizationID: acousticCustomizationID,
             learningOptOut: learningOptOut,
-            customerID: customerID
+            customerID: customerID,
+            grammarName: grammarName,
+            redaction: redaction
         )
 
         // set urls

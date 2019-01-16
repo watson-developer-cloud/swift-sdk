@@ -481,6 +481,8 @@
 		922078552152FCE400C8C7E4 /* MessageInputOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922077962152FC5900C8C7E4 /* MessageInputOptions.swift */; };
 		922078562152FCE400C8C7E4 /* DialogNodesVisited.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922077972152FC5900C8C7E4 /* DialogNodesVisited.swift */; };
 		922078572152FCE400C8C7E4 /* MessageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922077982152FC5900C8C7E4 /* MessageResponse.swift */; };
+		92261E8E21EFAA9B00A1A620 /* Grammar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261E8C21EFAA9B00A1A620 /* Grammar.swift */; };
+		92261E8F21EFAA9B00A1A620 /* Grammars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261E8D21EFAA9B00A1A620 /* Grammars.swift */; };
 		924008B92152FD3E005EC1F1 /* AssistantV2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924008B82152FD3D005EC1F1 /* AssistantV2Tests.swift */; };
 		924EE7BA21505D7A0048C0E5 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
 		924EE7CB21505D7A0048C0E5 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92048D8F212F7C16004FD822 /* RestKit.framework */; };
@@ -1223,6 +1225,8 @@
 		922077972152FC5900C8C7E4 /* DialogNodesVisited.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogNodesVisited.swift; sourceTree = "<group>"; };
 		922077982152FC5900C8C7E4 /* MessageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageResponse.swift; sourceTree = "<group>"; };
 		922077992152FC5900C8C7E4 /* Assistant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assistant.swift; sourceTree = "<group>"; };
+		92261E8C21EFAA9B00A1A620 /* Grammar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grammar.swift; sourceTree = "<group>"; };
+		92261E8D21EFAA9B00A1A620 /* Grammars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grammars.swift; sourceTree = "<group>"; };
 		924008B82152FD3D005EC1F1 /* AssistantV2Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AssistantV2Tests.swift; path = AssistantV2Tests/AssistantV2Tests.swift; sourceTree = "<group>"; };
 		924EE77D21505C2C0048C0E5 /* AssistantV2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssistantV2.h; path = Source/SupportingFiles/AssistantV2.h; sourceTree = "<group>"; };
 		924EE7D321505D7A0048C0E5 /* AssistantV2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AssistantV2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2118,6 +2122,8 @@
 				68F7FEDF207D458600E84DBF /* CreateLanguageModel.swift */,
 				68F7FEF8207D458800E84DBF /* CustomWord.swift */,
 				68F7FEF2207D458700E84DBF /* CustomWords.swift */,
+				92261E8C21EFAA9B00A1A620 /* Grammar.swift */,
+				92261E8D21EFAA9B00A1A620 /* Grammars.swift */,
 				68F7FEEC207D458700E84DBF /* KeywordResult.swift */,
 				68F7FEE0207D458600E84DBF /* LanguageModel.swift */,
 				68F7FEF1207D458700E84DBF /* LanguageModels.swift */,
@@ -4263,9 +4269,11 @@
 				68F7FF15207D458900E84DBF /* Corpus.swift in Sources */,
 				68F7FF11207D458900E84DBF /* CustomWords.swift in Sources */,
 				68F7FF10207D458900E84DBF /* LanguageModels.swift in Sources */,
+				92261E8E21EFAA9B00A1A620 /* Grammar.swift in Sources */,
 				68F7FF18207D458900E84DBF /* SupportedFeatures.swift in Sources */,
 				68F7FF0B207D458900E84DBF /* KeywordResult.swift in Sources */,
 				7A9EC80B1D79B75100507725 /* SpeechToTextRecorder.swift in Sources */,
+				92261E8F21EFAA9B00A1A620 /* Grammars.swift in Sources */,
 				68F7FF02207D458900E84DBF /* SpeechModel.swift in Sources */,
 				68F7FF24207D47BD00E84DBF /* RecognitionState.swift in Sources */,
 				68F7FEFC207D458900E84DBF /* AudioResources.swift in Sources */,

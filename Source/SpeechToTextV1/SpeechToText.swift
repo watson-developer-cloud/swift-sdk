@@ -345,7 +345,7 @@ public class SpeechToText {
      */
     public func recognize(
         audio: Data,
-        contentType: String,
+        contentType: String? = nil,
         model: String? = nil,
         languageCustomizationID: String? = nil,
         acousticCustomizationID: String? = nil,
@@ -373,7 +373,9 @@ public class SpeechToText {
             headerParameters.merge(headers) { (_, new) in new }
         }
         headerParameters["Accept"] = "application/json"
-        headerParameters["Content-Type"] = contentType
+        if let contentType = contentType {
+            headerParameters["Content-Type"] = contentType
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -744,7 +746,7 @@ public class SpeechToText {
      */
     public func createJob(
         audio: Data,
-        contentType: String,
+        contentType: String? = nil,
         model: String? = nil,
         callbackURL: String? = nil,
         events: String? = nil,
@@ -776,7 +778,9 @@ public class SpeechToText {
             headerParameters.merge(headers) { (_, new) in new }
         }
         headerParameters["Accept"] = "application/json"
-        headerParameters["Content-Type"] = contentType
+        if let contentType = contentType {
+            headerParameters["Content-Type"] = contentType
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2555,7 +2559,7 @@ public class SpeechToText {
         customizationID: String,
         audioName: String,
         audioResource: Data,
-        contentType: String,
+        contentType: String? = nil,
         containedContentType: String? = nil,
         allowOverwrite: Bool? = nil,
         headers: [String: String]? = nil,
@@ -2570,7 +2574,9 @@ public class SpeechToText {
             headerParameters.merge(headers) { (_, new) in new }
         }
         headerParameters["Accept"] = "application/json"
-        headerParameters["Content-Type"] = contentType
+        if let contentType = contentType {
+            headerParameters["Content-Type"] = contentType
+        }
         if let containedContentType = containedContentType {
             headerParameters["Contained-Content-Type"] = containedContentType
         }

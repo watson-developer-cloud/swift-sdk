@@ -3679,6 +3679,7 @@ public class Discovery {
        -  `box` indicates the credentials are used to connect an instance of Enterprise Box.
        -  `salesforce` indicates the credentials are used to connect to Salesforce.
        -  `sharepoint` indicates the credentials are used to connect to Microsoft SharePoint Online.
+       -  `web_crawl` indicates the credentials are used to perform a web crawl.
      - parameter credentialDetails: Object containing details of the stored credentials.
        Obtain credentials for your source from the administrator of the source.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -3794,6 +3795,7 @@ public class Discovery {
        -  `box` indicates the credentials are used to connect an instance of Enterprise Box.
        -  `salesforce` indicates the credentials are used to connect to Salesforce.
        -  `sharepoint` indicates the credentials are used to connect to Microsoft SharePoint Online.
+       -  `web_crawl` indicates the credentials are used to perform a web crawl.
      - parameter credentialDetails: Object containing details of the stored credentials.
        Obtain credentials for your source from the administrator of the source.
      - parameter headers: A dictionary of request headers to be sent with this request.

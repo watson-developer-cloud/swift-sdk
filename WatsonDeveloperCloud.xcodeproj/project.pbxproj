@@ -487,6 +487,7 @@
 		92261EA421EFFFE800A1A620 /* GatewayDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261EA021EFFFE800A1A620 /* GatewayDelete.swift */; };
 		92261EA521EFFFE800A1A620 /* GatewayName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261EA121EFFFE800A1A620 /* GatewayName.swift */; };
 		92261EA621EFFFE800A1A620 /* GatewayList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261EA221EFFFE800A1A620 /* GatewayList.swift */; };
+		92261EA821F1007800A1A620 /* SourceOptionsWebCrawl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261EA721F1007500A1A620 /* SourceOptionsWebCrawl.swift */; };
 		924008B92152FD3E005EC1F1 /* AssistantV2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924008B82152FD3D005EC1F1 /* AssistantV2Tests.swift */; };
 		924EE7BA21505D7A0048C0E5 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
 		924EE7CB21505D7A0048C0E5 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92048D8F212F7C16004FD822 /* RestKit.framework */; };
@@ -1235,6 +1236,7 @@
 		92261EA021EFFFE800A1A620 /* GatewayDelete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GatewayDelete.swift; sourceTree = "<group>"; };
 		92261EA121EFFFE800A1A620 /* GatewayName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GatewayName.swift; sourceTree = "<group>"; };
 		92261EA221EFFFE800A1A620 /* GatewayList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GatewayList.swift; sourceTree = "<group>"; };
+		92261EA721F1007500A1A620 /* SourceOptionsWebCrawl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceOptionsWebCrawl.swift; sourceTree = "<group>"; };
 		924008B82152FD3D005EC1F1 /* AssistantV2Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AssistantV2Tests.swift; path = AssistantV2Tests/AssistantV2Tests.swift; sourceTree = "<group>"; };
 		924EE77D21505C2C0048C0E5 /* AssistantV2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssistantV2.h; path = Source/SupportingFiles/AssistantV2.h; sourceTree = "<group>"; };
 		924EE7D321505D7A0048C0E5 /* AssistantV2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AssistantV2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1849,6 +1851,7 @@
 		68AF8EAA206968CC00D552E3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				92261EA721F1007500A1A620 /* SourceOptionsWebCrawl.swift */,
 				68AF8EE8206968CC00D552E3 /* AggregationResult.swift */,
 				68AF8ED5206968CC00D552E3 /* Calculation.swift */,
 				68AF8EBA206968CC00D552E3 /* Collection.swift */,
@@ -3948,6 +3951,7 @@
 				68AF8F962069690300D552E3 /* DiskUsage.swift in Sources */,
 				682CBD2C209051BA0049EE9F /* SegmentSettings.swift in Sources */,
 				68AF8F752069690300D552E3 /* QueryRelationsRelationship.swift in Sources */,
+				92261EA821F1007800A1A620 /* SourceOptionsWebCrawl.swift in Sources */,
 				68AF8F932069690300D552E3 /* QueryEntitiesEntity.swift in Sources */,
 				68AF8F772069690300D552E3 /* CollectionDiskUsage.swift in Sources */,
 				68AF8F642069690300D552E3 /* QueryEntitiesResponse.swift in Sources */,

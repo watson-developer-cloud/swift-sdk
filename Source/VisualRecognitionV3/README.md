@@ -12,7 +12,7 @@ let version = "YYYY-MM-DD" // use today's date for the most recent version
 let visualRecognition = VisualRecognition(version: version, apiKey: apiKey)
 
 let imageURL = Bundle.main.url(forResource: "profile-picture", withExtension: "jpg")!
-visualRecognition.classify(imageFile: imageURL) { response, error in
+visualRecognition.classify(imagesFile: imageURL) { response, error in
 	if let error = error {
         print(error)
     }

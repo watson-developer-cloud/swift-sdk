@@ -488,6 +488,7 @@
 		92261EA521EFFFE800A1A620 /* GatewayName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261EA121EFFFE800A1A620 /* GatewayName.swift */; };
 		92261EA621EFFFE800A1A620 /* GatewayList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261EA221EFFFE800A1A620 /* GatewayList.swift */; };
 		92261EA821F1007800A1A620 /* SourceOptionsWebCrawl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261EA721F1007500A1A620 /* SourceOptionsWebCrawl.swift */; };
+		92261EAA21F11E4400A1A620 /* stopwords.txt in Resources */ = {isa = PBXBuildFile; fileRef = 92261EA921F11E4400A1A620 /* stopwords.txt */; };
 		924008B92152FD3E005EC1F1 /* AssistantV2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924008B82152FD3D005EC1F1 /* AssistantV2Tests.swift */; };
 		924EE7BA21505D7A0048C0E5 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
 		924EE7CB21505D7A0048C0E5 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92048D8F212F7C16004FD822 /* RestKit.framework */; };
@@ -1237,6 +1238,7 @@
 		92261EA121EFFFE800A1A620 /* GatewayName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GatewayName.swift; sourceTree = "<group>"; };
 		92261EA221EFFFE800A1A620 /* GatewayList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GatewayList.swift; sourceTree = "<group>"; };
 		92261EA721F1007500A1A620 /* SourceOptionsWebCrawl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceOptionsWebCrawl.swift; sourceTree = "<group>"; };
+		92261EA921F11E4400A1A620 /* stopwords.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stopwords.txt; sourceTree = "<group>"; };
 		924008B82152FD3D005EC1F1 /* AssistantV2Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AssistantV2Tests.swift; path = AssistantV2Tests/AssistantV2Tests.swift; sourceTree = "<group>"; };
 		924EE77D21505C2C0048C0E5 /* AssistantV2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssistantV2.h; path = Source/SupportingFiles/AssistantV2.h; sourceTree = "<group>"; };
 		924EE7D321505D7A0048C0E5 /* AssistantV2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AssistantV2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1725,6 +1727,7 @@
 		12F8005A1DF71B74006851D6 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				92261EA921F11E4400A1A620 /* stopwords.txt */,
 				CE7BEE371E09FCC6000367FE /* discoverySample.json */,
 				CE7BEE351E09E358000367FE /* KennedySpeech.html */,
 				12F8005D1DF71BED006851D6 /* DiscoveryTests.swift */,
@@ -3299,6 +3302,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92261EAA21F11E4400A1A620 /* stopwords.txt in Resources */,
 				CE7BEE391E0A165C000367FE /* discoverySample.json in Resources */,
 				CE7BEE3B1E0A221B000367FE /* metadata.json in Resources */,
 				CE7BEE361E09E358000367FE /* KennedySpeech.html in Resources */,

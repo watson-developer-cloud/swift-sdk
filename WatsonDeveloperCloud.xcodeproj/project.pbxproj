@@ -1727,11 +1727,8 @@
 		12F8005A1DF71B74006851D6 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				92261EA921F11E4400A1A620 /* stopwords.txt */,
-				CE7BEE371E09FCC6000367FE /* discoverySample.json */,
-				CE7BEE351E09E358000367FE /* KennedySpeech.html */,
+				92261EAB21F1296000A1A620 /* Resources */,
 				12F8005D1DF71BED006851D6 /* DiscoveryTests.swift */,
-				CE7BEE3A1E0A221B000367FE /* metadata.json */,
 			);
 			name = Tests;
 			path = ../../Tests/DiscoveryV1Tests;
@@ -2418,6 +2415,17 @@
 			);
 			path = Tests;
 			sourceTree = SOURCE_ROOT;
+		};
+		92261EAB21F1296000A1A620 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CE7BEE3A1E0A221B000367FE /* metadata.json */,
+				92261EA921F11E4400A1A620 /* stopwords.txt */,
+				CE7BEE371E09FCC6000367FE /* discoverySample.json */,
+				CE7BEE351E09E358000367FE /* KennedySpeech.html */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
 		};
 		92866207219112190064C6FD /* CompareComplyV1 */ = {
 			isa = PBXGroup;

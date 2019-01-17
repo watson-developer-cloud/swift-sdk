@@ -58,7 +58,7 @@ class DiscoveryTests: XCTestCase {
 
     func loadDocument(name: String, ext: String) -> URL? {
         #if os(Linux)
-            let url = URL(fileURLWithPath: "Tests/DiscoveryV1Tests/" + name + "." + ext)
+            let url = URL(fileURLWithPath: "Tests/DiscoveryV1Tests/Resources/" + name + "." + ext)
         #else
             let bundle = Bundle(for: type(of: self))
             guard let url = bundle.url(forResource: name, withExtension: ext) else { return nil }

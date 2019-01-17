@@ -483,6 +483,10 @@
 		922078572152FCE400C8C7E4 /* MessageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922077982152FC5900C8C7E4 /* MessageResponse.swift */; };
 		92261E8E21EFAA9B00A1A620 /* Grammar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261E8C21EFAA9B00A1A620 /* Grammar.swift */; };
 		92261E8F21EFAA9B00A1A620 /* Grammars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261E8D21EFAA9B00A1A620 /* Grammars.swift */; };
+		92261EA321EFFFE800A1A620 /* Gateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261E9F21EFFFE800A1A620 /* Gateway.swift */; };
+		92261EA421EFFFE800A1A620 /* GatewayDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261EA021EFFFE800A1A620 /* GatewayDelete.swift */; };
+		92261EA521EFFFE800A1A620 /* GatewayName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261EA121EFFFE800A1A620 /* GatewayName.swift */; };
+		92261EA621EFFFE800A1A620 /* GatewayList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261EA221EFFFE800A1A620 /* GatewayList.swift */; };
 		924008B92152FD3E005EC1F1 /* AssistantV2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924008B82152FD3D005EC1F1 /* AssistantV2Tests.swift */; };
 		924EE7BA21505D7A0048C0E5 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
 		924EE7CB21505D7A0048C0E5 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92048D8F212F7C16004FD822 /* RestKit.framework */; };
@@ -1227,6 +1231,10 @@
 		922077992152FC5900C8C7E4 /* Assistant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assistant.swift; sourceTree = "<group>"; };
 		92261E8C21EFAA9B00A1A620 /* Grammar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grammar.swift; sourceTree = "<group>"; };
 		92261E8D21EFAA9B00A1A620 /* Grammars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grammars.swift; sourceTree = "<group>"; };
+		92261E9F21EFFFE800A1A620 /* Gateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gateway.swift; sourceTree = "<group>"; };
+		92261EA021EFFFE800A1A620 /* GatewayDelete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GatewayDelete.swift; sourceTree = "<group>"; };
+		92261EA121EFFFE800A1A620 /* GatewayName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GatewayName.swift; sourceTree = "<group>"; };
+		92261EA221EFFFE800A1A620 /* GatewayList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GatewayList.swift; sourceTree = "<group>"; };
 		924008B82152FD3D005EC1F1 /* AssistantV2Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AssistantV2Tests.swift; path = AssistantV2Tests/AssistantV2Tests.swift; sourceTree = "<group>"; };
 		924EE77D21505C2C0048C0E5 /* AssistantV2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssistantV2.h; path = Source/SupportingFiles/AssistantV2.h; sourceTree = "<group>"; };
 		924EE7D321505D7A0048C0E5 /* AssistantV2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AssistantV2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1875,6 +1883,10 @@
 				68AF8ED6206968CC00D552E3 /* Field.swift */,
 				683955022077E612009E1C8A /* Filter.swift */,
 				68AF8EC4206968CC00D552E3 /* FontSetting.swift */,
+				92261E9F21EFFFE800A1A620 /* Gateway.swift */,
+				92261EA021EFFFE800A1A620 /* GatewayDelete.swift */,
+				92261EA221EFFFE800A1A620 /* GatewayList.swift */,
+				92261EA121EFFFE800A1A620 /* GatewayName.swift */,
 				68D97E2A206989010087432F /* GenericQueryAggregation.swift */,
 				68AF8ECB206968CC00D552E3 /* Histogram.swift */,
 				68AF8EE0206968CC00D552E3 /* HTMLSettings.swift */,
@@ -3909,6 +3921,7 @@
 				68AF8F762069690300D552E3 /* CollectionUsage.swift in Sources */,
 				68AF8F842069690300D552E3 /* HTMLSettings.swift in Sources */,
 				928204D02124BC200013315B /* EventData.swift in Sources */,
+				92261EA621EFFFE800A1A620 /* GatewayList.swift in Sources */,
 				68AF8F832069690300D552E3 /* DeleteCollectionResponse.swift in Sources */,
 				68AF8F5A2069690300D552E3 /* ListCollectionsResponse.swift in Sources */,
 				68AF8F8F2069690300D552E3 /* QueryPassages.swift in Sources */,
@@ -3966,6 +3979,7 @@
 				68AF8F972069690300D552E3 /* CreateCollectionRequest.swift in Sources */,
 				68AF8F712069690300D552E3 /* QueryResult.swift in Sources */,
 				68AF8F742069690300D552E3 /* Notice.swift in Sources */,
+				92261EA321EFFFE800A1A620 /* Gateway.swift in Sources */,
 				68AF8F8A2069690300D552E3 /* UpdateCollectionRequest.swift in Sources */,
 				68AF8F732069690300D552E3 /* PDFSettings.swift in Sources */,
 				68AF8F6D2069690300D552E3 /* QueryNoticesResponse.swift in Sources */,
@@ -4000,6 +4014,7 @@
 				68AF8F602069690300D552E3 /* QueryRelations.swift in Sources */,
 				68AF8F5F2069690300D552E3 /* Environment.swift in Sources */,
 				68AF8F5B2069690300D552E3 /* NluEnrichmentEmotion.swift in Sources */,
+				92261EA521EFFFE800A1A620 /* GatewayName.swift in Sources */,
 				928204CD2124BC200013315B /* LogQueryResponseResultDocuments.swift in Sources */,
 				928204C72124BC200013315B /* CreateEventObject.swift in Sources */,
 				68AF8FA02069690300D552E3 /* Configuration.swift in Sources */,
@@ -4014,6 +4029,7 @@
 				68AF8F9B2069690300D552E3 /* WordSettings.swift in Sources */,
 				928204C92124BC200013315B /* MetricTokenAggregationResult.swift in Sources */,
 				CADA959C20FCD66600B5BD84 /* SourceOptions.swift in Sources */,
+				92261EA421EFFFE800A1A620 /* GatewayDelete.swift in Sources */,
 				68AF8F7F2069690300D552E3 /* TrainingExample.swift in Sources */,
 				68AF8F9E2069690300D552E3 /* NluEnrichmentCategories.swift in Sources */,
 				68AF8F692069690300D552E3 /* Conversions.swift in Sources */,

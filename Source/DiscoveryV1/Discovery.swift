@@ -3784,4 +3784,200 @@ public class Discovery {
         request.responseObject(completionHandler: completionHandler)
     }
 
+    /**
+     List Gateways.
+
+     List the currently configured gateways.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func listGateways(
+        environmentID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<GatewayList>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/gateways"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            return
+        }
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceURL + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Create Gateway.
+
+     Create a gateway configuration to use with a remotely installed gateway.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter name: User-defined name.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func createGateway(
+        environmentID: String,
+        name: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Gateway>?, WatsonError?) -> Void)
+    {
+        // construct body
+        let createGatewayRequest = GatewayName(
+            name: name)
+        guard let body = try? JSONEncoder().encodeIfPresent(createGatewayRequest) else {
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/gateways"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            return
+        }
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "POST",
+            url: serviceURL + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     List Gateway Details.
+
+     List information about the specified gateway.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter gatewayID: The requested gateway ID.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func getGateway(
+        environmentID: String,
+        gatewayID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Gateway>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/gateways/\(gatewayID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            return
+        }
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceURL + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Delete Gateway.
+
+     Delete the specified gateway configuration.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter gatewayID: The requested gateway ID.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func deleteGateway(
+        environmentID: String,
+        gatewayID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<GatewayDelete>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/gateways/\(gatewayID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            return
+        }
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "DELETE",
+            url: serviceURL + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
 }

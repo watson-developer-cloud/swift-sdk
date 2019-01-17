@@ -1463,6 +1463,118 @@ public class Discovery {
     }
 
     /**
+     Create stopword list.
+
+     Upload a custom stopword list to use with the specified collection.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter stopwordFile: The content of the stopword list to ingest.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func createStopwordList(
+        environmentID: String,
+        collectionID: String,
+        stopwordFile: URL,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<TokenDictStatusResponse>?, WatsonError?) -> Void)
+    {
+        // construct body
+        let multipartFormData = MultipartFormData()
+        do {
+            try multipartFormData.append(file: stopwordFile, withName: "stopword_file")
+        } catch {
+            completionHandler(nil, WatsonError.serialization(values: "file \(stopwordFile.path)"))
+            return
+        }
+        guard let body = try? multipartFormData.toData() else {
+            completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = multipartFormData.contentType
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/word_lists/stopwords"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            return
+        }
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "POST",
+            url: serviceURL + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Delete a custom stopword list.
+
+     Delete a custom stopword list from the collection. After a custom stopword list is deleted, the default list is
+     used for the collection.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func deleteStopwordList(
+        environmentID: String,
+        collectionID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/word_lists/stopwords"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            return
+        }
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "DELETE",
+            url: serviceURL + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.response(completionHandler: completionHandler)
+    }
+
+    /**
      Add a document.
 
      Add a document to a collection with optional metadata.

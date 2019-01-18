@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/watson-developer-cloud/swift-sdk/compare/1.3.0...1.3.1) (2019-01-18)
+
+
+### Bug Fixes
+
+* **SpeechToTextV1:** Fix grammarName and redaction parameters in recognize websocket methods ([64b116c](https://github.com/watson-developer-cloud/swift-sdk/commit/64b116c))
+
 # [1.3.0](https://github.com/watson-developer-cloud/swift-sdk/compare/1.2.0...1.3.0) (2019-01-18)
 
 

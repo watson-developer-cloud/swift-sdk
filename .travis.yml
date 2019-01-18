@@ -8,9 +8,11 @@ jobs:
     - stage: test Linux
       script: ./Scripts/travis/test-Linux.sh
       os: linux
+      if: branch = develop
     - stage: test macOS
       script: ./Scripts/travis/test-macOS.sh
       os: osx
+      if: branch = develop
     - stage: release new version
       script: ./Scripts/travis/new-release.sh
       os: osx

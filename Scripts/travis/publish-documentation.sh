@@ -11,7 +11,8 @@ git config --global user.name "Travis CI"
 git config --replace-all remote.origin.fetch +refs/heads/*:refs/remotes/origin/*
 git remote rm origin
 git remote add origin https://watson-developer-cloud:${GH_TOKEN}@github.com/watson-developer-cloud/swift-sdk.git
-git pull
+git fetch
+git checkout master
 latestVersion=$(git describe --abbrev=0 --tags)
 
 # Generate the API docs

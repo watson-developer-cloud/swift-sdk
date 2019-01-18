@@ -90,9 +90,7 @@ public class SpeechToTextSession {
             languageCustomizationID: languageCustomizationID,
             acousticCustomizationID: acousticCustomizationID,
             learningOptOut: learningOptOut,
-            customerID: customerID,
-            grammarName: grammarName,
-            redaction: redaction
+            customerID: customerID
         )!
         var socket = SpeechToTextSocket(
             url: url,
@@ -121,8 +119,6 @@ public class SpeechToTextSession {
     private let acousticCustomizationID: String?
     private let learningOptOut: Bool?
     private let customerID: String?
-    private let grammarName: String?
-    private let redaction: Bool?
 
     internal init(
         authMethod: AuthenticationMethod,
@@ -131,9 +127,7 @@ public class SpeechToTextSession {
         languageCustomizationID: String? = nil,
         acousticCustomizationID: String? = nil,
         learningOptOut: Bool? = nil,
-        customerID: String? = nil,
-        grammarName: String? = nil,
-        redaction: Bool? = nil)
+        customerID: String? = nil)
     {
         self.authMethod = authMethod
         self.model = model
@@ -142,8 +136,6 @@ public class SpeechToTextSession {
         self.acousticCustomizationID = acousticCustomizationID
         self.learningOptOut = learningOptOut
         self.customerID = customerID
-        self.grammarName = grammarName
-        self.redaction = redaction
 
         recorder = SpeechToTextRecorder()
         // swiftlint:disable:next force_try
@@ -187,9 +179,7 @@ public class SpeechToTextSession {
         languageCustomizationID: String? = nil,
         acousticCustomizationID: String? = nil,
         learningOptOut: Bool? = nil,
-        customerID: String? = nil,
-        grammarName: String? = nil,
-        redaction: Bool? = nil)
+        customerID: String? = nil)
     {
         let authMethod = BasicAuthentication(username: username, password: password)
         self.init(
@@ -199,9 +189,7 @@ public class SpeechToTextSession {
             languageCustomizationID: languageCustomizationID,
             acousticCustomizationID: acousticCustomizationID,
             learningOptOut: learningOptOut,
-            customerID: customerID,
-            grammarName: grammarName,
-            redaction: redaction)
+            customerID: customerID)
     }
 
     /**
@@ -237,9 +225,7 @@ public class SpeechToTextSession {
         languageCustomizationID: String? = nil,
         acousticCustomizationID: String? = nil,
         learningOptOut: Bool? = nil,
-        customerID: String? = nil,
-        grammarName: String? = nil,
-        redaction: Bool? = nil)
+        customerID: String? = nil)
     {
         let authMethod = IAMAuthentication(apiKey: apiKey, url: iamUrl)
         self.init(
@@ -249,9 +235,7 @@ public class SpeechToTextSession {
             languageCustomizationID: languageCustomizationID,
             acousticCustomizationID: acousticCustomizationID,
             learningOptOut: learningOptOut,
-            customerID: customerID,
-            grammarName: grammarName,
-            redaction: redaction
+            customerID: customerID
         )
     }
 

@@ -165,9 +165,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         languageCustomizationID: String?,
         acousticCustomizationID: String?,
         learningOptOut: Bool?,
-        customerID: String?,
-        grammarName: String?,
-        redaction: Bool?) -> URL?
+        customerID: String?) -> URL?
     {
         var queryParameters = [URLQueryItem]()
         if let model = model {
@@ -189,12 +187,6 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         if let customerID = customerID {
             let value = "customer_id=\(customerID)"
             queryParameters.append(URLQueryItem(name: "x-watson-metadata", value: value))
-        }
-        if let grammarName = grammarName {
-            queryParameters.append(URLQueryItem(name: "grammar_name", value: grammarName))
-        }
-        if let redaction = redaction {
-            queryParameters.append(URLQueryItem(name: "redaction", value: redaction.description))
         }
         var urlComponents = URLComponents(string: url)
         if !queryParameters.isEmpty {

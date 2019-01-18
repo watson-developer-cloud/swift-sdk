@@ -5421,8 +5421,8 @@ data.
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/recognize(audio:settings:model:baseModelVersion:languageCustomizationID:learningOptOut:customerID:grammarName:redaction:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">recognize(audio:settings:model:baseModelVersion:languageCustomizationID:learningOptOut:customerID:grammarName:redaction:completionHandler:)</a>
+                    <a name="//apple_ref/swift/Method/recognize(audio:settings:model:baseModelVersion:languageCustomizationID:learningOptOut:customerID:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">recognize(audio:settings:model:baseModelVersion:languageCustomizationID:learningOptOut:customerID:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -5445,8 +5445,6 @@ data.
     <span class="nv">languageCustomizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">learningOptOut</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">customerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">grammarName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">redaction</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SpeechRecognitionResults.html">SpeechRecognitionResults</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
@@ -5552,43 +5550,6 @@ By default, no customer ID is associated with the data.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>grammarName</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The name of a grammar that is to be used with the recognition request. If you specify a
-grammar, you must also use the <code>language_customization_id</code> parameter to specify the name of the custom language
-model for which the grammar is defined. The service recognizes only strings that are recognized by the specified
-grammar; it does not recognize other custom words from the model&rsquo;s words resource. See
-<a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html">Grammars</a>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>redaction</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>If <code>true</code>, the service redacts, or masks, numeric data from final transcripts. The feature
-redacts any number that has three or more consecutive digits by replacing each digit with an <code>X</code> character. It is
-intended to redact sensitive numeric data, such as credit card numbers. By default, the service performs no
-redaction.
-When you enable redaction, the service automatically enables smart formatting, regardless of whether you
-explicitly disable that feature. To ensure maximum security, the service also disables keyword spotting (ignores
-the <code>keywords</code> and <code>keywords_threshold</code> parameters) and returns only a single final transcript (forces the
-<code>max_alternatives</code> parameter to be <code>1</code>).
-<strong>Note:</strong> Applies to US English, Japanese, and Korean transcription only.
-See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#redaction">Numeric redaction</a>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
                                 <em>completionHandler</em>
                                 </code>
                               </td>
@@ -5608,8 +5569,8 @@ See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#reda
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/recognizeUsingWebSocket(audio:settings:model:baseModelVersion:languageCustomizationID:acousticCustomizationID:learningOptOut:customerID:grammarName:redaction:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">recognizeUsingWebSocket(audio:settings:model:baseModelVersion:languageCustomizationID:acousticCustomizationID:learningOptOut:customerID:grammarName:redaction:headers:completionHandler:)</a>
+                    <a name="//apple_ref/swift/Method/recognizeUsingWebSocket(audio:settings:model:baseModelVersion:languageCustomizationID:acousticCustomizationID:learningOptOut:customerID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">recognizeUsingWebSocket(audio:settings:model:baseModelVersion:languageCustomizationID:acousticCustomizationID:learningOptOut:customerID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -5633,8 +5594,6 @@ See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#reda
     <span class="nv">acousticCustomizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">learningOptOut</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">customerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">grammarName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">redaction</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SpeechRecognitionResults.html">SpeechRecognitionResults</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -5756,43 +5715,6 @@ By default, no customer ID is associated with the data.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>grammarName</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The name of a grammar that is to be used with the recognition request. If you specify a
-grammar, you must also use the <code>language_customization_id</code> parameter to specify the name of the custom language
-model for which the grammar is defined. The service recognizes only strings that are recognized by the specified
-grammar; it does not recognize other custom words from the model&rsquo;s words resource. See
-<a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html">Grammars</a>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>redaction</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>If <code>true</code>, the service redacts, or masks, numeric data from final transcripts. The feature
-redacts any number that has three or more consecutive digits by replacing each digit with an <code>X</code> character. It is
-intended to redact sensitive numeric data, such as credit card numbers. By default, the service performs no
-redaction.
-When you enable redaction, the service automatically enables smart formatting, regardless of whether you
-explicitly disable that feature. To ensure maximum security, the service also disables keyword spotting (ignores
-the <code>keywords</code> and <code>keywords_threshold</code> parameters) and returns only a single final transcript (forces the
-<code>max_alternatives</code> parameter to be <code>1</code>).
-<strong>Note:</strong> Applies to US English, Japanese, and Korean transcription only.
-See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#redaction">Numeric redaction</a>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
                                 <em>headers</em>
                                 </code>
                               </td>
@@ -5824,8 +5746,8 @@ See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#reda
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/recognizeMicrophone(settings:model:baseModelVersion:languageCustomizationID:acousticCustomizationID:learningOptOut:customerID:compress:grammarName:redaction:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">recognizeMicrophone(settings:model:baseModelVersion:languageCustomizationID:acousticCustomizationID:learningOptOut:customerID:compress:grammarName:redaction:headers:completionHandler:)</a>
+                    <a name="//apple_ref/swift/Method/recognizeMicrophone(settings:model:baseModelVersion:languageCustomizationID:acousticCustomizationID:learningOptOut:customerID:compress:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">recognizeMicrophone(settings:model:baseModelVersion:languageCustomizationID:acousticCustomizationID:learningOptOut:customerID:compress:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -5859,8 +5781,6 @@ would prefer to ask for the user&rsquo;s permission in advance.</p>
     <span class="nv">learningOptOut</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">customerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">compress</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nv">grammarName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">redaction</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SpeechRecognitionResults.html">SpeechRecognitionResults</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -5977,43 +5897,6 @@ By default, no customer ID is associated with the data.</p>
                                 <div>
                                   <p>Should microphone audio be compressed to Opus format?
 (Opus compression reduces latency and bandwidth.)</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>grammarName</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The name of a grammar that is to be used with the recognition request. If you specify a
-grammar, you must also use the <code>language_customization_id</code> parameter to specify the name of the custom language
-model for which the grammar is defined. The service recognizes only strings that are recognized by the specified
-grammar; it does not recognize other custom words from the model&rsquo;s words resource. See
-<a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html">Grammars</a>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>redaction</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>If <code>true</code>, the service redacts, or masks, numeric data from final transcripts. The feature
-redacts any number that has three or more consecutive digits by replacing each digit with an <code>X</code> character. It is
-intended to redact sensitive numeric data, such as credit card numbers. By default, the service performs no
-redaction.
-When you enable redaction, the service automatically enables smart formatting, regardless of whether you
-explicitly disable that feature. To ensure maximum security, the service also disables keyword spotting (ignores
-the <code>keywords</code> and <code>keywords_threshold</code> parameters) and returns only a single final transcript (forces the
-<code>max_alternatives</code> parameter to be <code>1</code>).
-<strong>Note:</strong> Applies to US English, Japanese, and Korean transcription only.
-See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#redaction">Numeric redaction</a>.</p>
                                 </div>
                               </td>
                             </tr>

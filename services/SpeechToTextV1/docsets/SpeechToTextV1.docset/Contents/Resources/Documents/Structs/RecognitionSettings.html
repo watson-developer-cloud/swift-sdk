@@ -588,6 +588,73 @@ if false (the default), no formatting is performed. Applies to US English transc
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:14SpeechToTextV119RecognitionSettingsV11grammarNameSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/grammarName" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SpeechToTextV119RecognitionSettingsV11grammarNameSSSgvp">grammarName</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The name of a grammar that is to be used with the recognition request. If you specify a
+grammar, you must also use the <code>language_customization_id</code> parameter to specify the name of the custom language
+model for which the grammar is defined. The service recognizes only strings that are recognized by the specified
+grammar; it does not recognize other custom words from the model&rsquo;s words resource. See
+<a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html">Grammars</a>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">grammarName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SpeechToTextV119RecognitionSettingsV9redactionSbSgvp"></a>
+                    <a name="//apple_ref/swift/Property/redaction" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SpeechToTextV119RecognitionSettingsV9redactionSbSgvp">redaction</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>If <code>true</code>, the service redacts, or masks, numeric data from final transcripts. The feature
+redacts any number that has three or more consecutive digits by replacing each digit with an <code>X</code> character. It is
+intended to redact sensitive numeric data, such as credit card numbers. By default, the service performs no
+redaction.
+When you enable redaction, the service automatically enables smart formatting, regardless of whether you
+explicitly disable that feature. To ensure maximum security, the service also disables keyword spotting (ignores
+the <code><a href="../Structs/RecognitionSettings.html#/s:14SpeechToTextV119RecognitionSettingsV8keywordsSaySSGSgvp">keywords</a></code> and <code>keywords_threshold</code> parameters) and returns only a single final transcript (forces the
+<code>max_alternatives</code> parameter to be <code>1</code>).
+<strong>Note:</strong> Applies to US English, Japanese, and Korean transcription only.
+See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#redaction">Numeric redaction</a>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">redaction</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:14SpeechToTextV119RecognitionSettingsV11contentTypeACSSSg_tcfc"></a>
                     <a name="//apple_ref/swift/Method/init(contentType:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:14SpeechToTextV119RecognitionSettingsV11contentTypeACSSSg_tcfc">init(contentType:)</a>

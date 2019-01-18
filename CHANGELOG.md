@@ -1,3 +1,21 @@
+# [1.3.0](https://github.com/watson-developer-cloud/swift-sdk/compare/1.2.0...1.3.0) (2019-01-18)
+
+
+### Bug Fixes
+
+* **SpeechToTextV1:** Change contentType parameter to optional in certain methods ([e033cff](https://github.com/watson-developer-cloud/swift-sdk/commit/e033cff))
+
+
+### Features
+
+* **DiscoveryV1:** Add support for custom stopword lists ([915ce68](https://github.com/watson-developer-cloud/swift-sdk/commit/915ce68))
+* **DiscoveryV1:** Add support for gateways ([39393fa](https://github.com/watson-developer-cloud/swift-sdk/commit/39393fa))
+* **DiscoveryV1:** Add web crawlers to the list of possible sources ([5a4a62e](https://github.com/watson-developer-cloud/swift-sdk/commit/5a4a62e))
+* **SpeechToTextV1:** Add new options to acoustic models and language models ([3345b46](https://github.com/watson-developer-cloud/swift-sdk/commit/3345b46))
+* **SpeechToTextV1:** Add the ability to specify grammars in recognition requests ([7edcdf4](https://github.com/watson-developer-cloud/swift-sdk/commit/7edcdf4))
+* **VisualRecognitionV3:** Add acceptLanguage parameter to detectFaces() ([a260a9c](https://github.com/watson-developer-cloud/swift-sdk/commit/a260a9c))
+* **VisualRecognitionV3:** Add genderLabel property to FaceGender model ([a00f3c6](https://github.com/watson-developer-cloud/swift-sdk/commit/a00f3c6))
+
 # [1.2.0](https://github.com/watson-developer-cloud/swift-sdk/compare/1.1.1...1.2.0) (2019-01-11)
 
 

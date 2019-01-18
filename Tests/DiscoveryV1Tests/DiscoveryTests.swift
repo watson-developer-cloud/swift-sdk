@@ -86,6 +86,7 @@ class DiscoveryTests: XCTestCase {
             ("testListCollectionFields", testListCollectionFields),
             ("testExpansionsCRUD", testExpansionsCRUD),
             ("testTokenizationDictionaryOperations", testTokenizationDictionaryOperations),
+            ("testCreateAndDeleteStopwordList", testCreateAndDeleteStopwordList),
             ("testDocumentsCRUD", testDocumentsCRUD),
             ("testQuery", testQuery),
             ("testQueryWithNaturalLanguage", testQueryWithNaturalLanguage),
@@ -119,6 +120,7 @@ class DiscoveryTests: XCTestCase {
             ("testTrainingExamplesCRUD", testTrainingExamplesCRUD),
             ("testListCredentials", testListCredentials),
             ("testCredentialsCRUD", testCredentialsCRUD),
+            ("testGatewayOperations", testGatewayOperations),
             ("testGetEnvironmentWithInvalidID", testGetEnvironmentWithInvalidID),
             ("testGetConfigurationWithInvalidID", testGetConfigurationWithInvalidID),
             ("testGetCollectionWithInvalidID", testGetCollectionWithInvalidID),
@@ -992,7 +994,7 @@ class DiscoveryTests: XCTestCase {
 
             XCTAssertEqual(result.expansions.count, 1)
             XCTAssertEqual(result.expansions.first!.expandedTerms.count, 2)
-            XCTAssertEqual(result.expansions.first!.inputTerms!.count, 1)
+            XCTAssertEqual(result.expansions.first!.inputTerms?.count, 1)
             expectation2.fulfill()
         }
         waitForExpectations(timeout: timeout)

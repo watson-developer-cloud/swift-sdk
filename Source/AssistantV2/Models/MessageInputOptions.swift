@@ -28,8 +28,8 @@ public struct MessageInputOptions: Codable, Equatable {
     public var debug: Bool?
 
     /**
-     Whether to start a new conversation with this user input. Specify `true` to clear the state information stored by
-     the session.
+     Whether to restart dialog processing at the root of the dialog, regardless of any previously visited nodes.
+     **Note:** This does not affect `turn_count` or any other context variables.
      */
     public var restart: Bool?
 
@@ -57,8 +57,8 @@ public struct MessageInputOptions: Codable, Equatable {
 
      - parameter debug: Whether to return additional diagnostic information. Set to `true` to return additional
        information under the `output.debug` key.
-     - parameter restart: Whether to start a new conversation with this user input. Specify `true` to clear the state
-       information stored by the session.
+     - parameter restart: Whether to restart dialog processing at the root of the dialog, regardless of any
+       previously visited nodes. **Note:** This does not affect `turn_count` or any other context variables.
      - parameter alternateIntents: Whether to return more than one intent. Set to `true` to return all matching
        intents.
      - parameter returnContext: Whether to return session context with the response. If you specify `true`, the

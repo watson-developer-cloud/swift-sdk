@@ -481,6 +481,14 @@
 		922078552152FCE400C8C7E4 /* MessageInputOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922077962152FC5900C8C7E4 /* MessageInputOptions.swift */; };
 		922078562152FCE400C8C7E4 /* DialogNodesVisited.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922077972152FC5900C8C7E4 /* DialogNodesVisited.swift */; };
 		922078572152FCE400C8C7E4 /* MessageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922077982152FC5900C8C7E4 /* MessageResponse.swift */; };
+		92261E8E21EFAA9B00A1A620 /* Grammar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261E8C21EFAA9B00A1A620 /* Grammar.swift */; };
+		92261E8F21EFAA9B00A1A620 /* Grammars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261E8D21EFAA9B00A1A620 /* Grammars.swift */; };
+		92261EA321EFFFE800A1A620 /* Gateway.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261E9F21EFFFE800A1A620 /* Gateway.swift */; };
+		92261EA421EFFFE800A1A620 /* GatewayDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261EA021EFFFE800A1A620 /* GatewayDelete.swift */; };
+		92261EA521EFFFE800A1A620 /* GatewayName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261EA121EFFFE800A1A620 /* GatewayName.swift */; };
+		92261EA621EFFFE800A1A620 /* GatewayList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261EA221EFFFE800A1A620 /* GatewayList.swift */; };
+		92261EA821F1007800A1A620 /* SourceOptionsWebCrawl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92261EA721F1007500A1A620 /* SourceOptionsWebCrawl.swift */; };
+		92261EAA21F11E4400A1A620 /* stopwords.txt in Resources */ = {isa = PBXBuildFile; fileRef = 92261EA921F11E4400A1A620 /* stopwords.txt */; };
 		924008B92152FD3E005EC1F1 /* AssistantV2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924008B82152FD3D005EC1F1 /* AssistantV2Tests.swift */; };
 		924EE7BA21505D7A0048C0E5 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
 		924EE7CB21505D7A0048C0E5 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92048D8F212F7C16004FD822 /* RestKit.framework */; };
@@ -1223,6 +1231,14 @@
 		922077972152FC5900C8C7E4 /* DialogNodesVisited.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogNodesVisited.swift; sourceTree = "<group>"; };
 		922077982152FC5900C8C7E4 /* MessageResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageResponse.swift; sourceTree = "<group>"; };
 		922077992152FC5900C8C7E4 /* Assistant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assistant.swift; sourceTree = "<group>"; };
+		92261E8C21EFAA9B00A1A620 /* Grammar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grammar.swift; sourceTree = "<group>"; };
+		92261E8D21EFAA9B00A1A620 /* Grammars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grammars.swift; sourceTree = "<group>"; };
+		92261E9F21EFFFE800A1A620 /* Gateway.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gateway.swift; sourceTree = "<group>"; };
+		92261EA021EFFFE800A1A620 /* GatewayDelete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GatewayDelete.swift; sourceTree = "<group>"; };
+		92261EA121EFFFE800A1A620 /* GatewayName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GatewayName.swift; sourceTree = "<group>"; };
+		92261EA221EFFFE800A1A620 /* GatewayList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GatewayList.swift; sourceTree = "<group>"; };
+		92261EA721F1007500A1A620 /* SourceOptionsWebCrawl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SourceOptionsWebCrawl.swift; sourceTree = "<group>"; };
+		92261EA921F11E4400A1A620 /* stopwords.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = stopwords.txt; sourceTree = "<group>"; };
 		924008B82152FD3D005EC1F1 /* AssistantV2Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AssistantV2Tests.swift; path = AssistantV2Tests/AssistantV2Tests.swift; sourceTree = "<group>"; };
 		924EE77D21505C2C0048C0E5 /* AssistantV2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssistantV2.h; path = Source/SupportingFiles/AssistantV2.h; sourceTree = "<group>"; };
 		924EE7D321505D7A0048C0E5 /* AssistantV2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AssistantV2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1711,10 +1727,8 @@
 		12F8005A1DF71B74006851D6 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				CE7BEE371E09FCC6000367FE /* discoverySample.json */,
-				CE7BEE351E09E358000367FE /* KennedySpeech.html */,
+				92261EAB21F1296000A1A620 /* Resources */,
 				12F8005D1DF71BED006851D6 /* DiscoveryTests.swift */,
-				CE7BEE3A1E0A221B000367FE /* metadata.json */,
 			);
 			name = Tests;
 			path = ../../Tests/DiscoveryV1Tests;
@@ -1837,6 +1851,7 @@
 		68AF8EAA206968CC00D552E3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				92261EA721F1007500A1A620 /* SourceOptionsWebCrawl.swift */,
 				68AF8EE8206968CC00D552E3 /* AggregationResult.swift */,
 				68AF8ED5206968CC00D552E3 /* Calculation.swift */,
 				68AF8EBA206968CC00D552E3 /* Collection.swift */,
@@ -1871,6 +1886,10 @@
 				68AF8ED6206968CC00D552E3 /* Field.swift */,
 				683955022077E612009E1C8A /* Filter.swift */,
 				68AF8EC4206968CC00D552E3 /* FontSetting.swift */,
+				92261E9F21EFFFE800A1A620 /* Gateway.swift */,
+				92261EA021EFFFE800A1A620 /* GatewayDelete.swift */,
+				92261EA221EFFFE800A1A620 /* GatewayList.swift */,
+				92261EA121EFFFE800A1A620 /* GatewayName.swift */,
 				68D97E2A206989010087432F /* GenericQueryAggregation.swift */,
 				68AF8ECB206968CC00D552E3 /* Histogram.swift */,
 				68AF8EE0206968CC00D552E3 /* HTMLSettings.swift */,
@@ -2118,6 +2137,8 @@
 				68F7FEDF207D458600E84DBF /* CreateLanguageModel.swift */,
 				68F7FEF8207D458800E84DBF /* CustomWord.swift */,
 				68F7FEF2207D458700E84DBF /* CustomWords.swift */,
+				92261E8C21EFAA9B00A1A620 /* Grammar.swift */,
+				92261E8D21EFAA9B00A1A620 /* Grammars.swift */,
 				68F7FEEC207D458700E84DBF /* KeywordResult.swift */,
 				68F7FEE0207D458600E84DBF /* LanguageModel.swift */,
 				68F7FEF1207D458700E84DBF /* LanguageModels.swift */,
@@ -2394,6 +2415,17 @@
 			);
 			path = Tests;
 			sourceTree = SOURCE_ROOT;
+		};
+		92261EAB21F1296000A1A620 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CE7BEE3A1E0A221B000367FE /* metadata.json */,
+				92261EA921F11E4400A1A620 /* stopwords.txt */,
+				CE7BEE371E09FCC6000367FE /* discoverySample.json */,
+				CE7BEE351E09E358000367FE /* KennedySpeech.html */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
 		};
 		92866207219112190064C6FD /* CompareComplyV1 */ = {
 			isa = PBXGroup;
@@ -3278,6 +3310,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92261EAA21F11E4400A1A620 /* stopwords.txt in Resources */,
 				CE7BEE391E0A165C000367FE /* discoverySample.json in Resources */,
 				CE7BEE3B1E0A221B000367FE /* metadata.json in Resources */,
 				CE7BEE361E09E358000367FE /* KennedySpeech.html in Resources */,
@@ -3903,6 +3936,7 @@
 				68AF8F762069690300D552E3 /* CollectionUsage.swift in Sources */,
 				68AF8F842069690300D552E3 /* HTMLSettings.swift in Sources */,
 				928204D02124BC200013315B /* EventData.swift in Sources */,
+				92261EA621EFFFE800A1A620 /* GatewayList.swift in Sources */,
 				68AF8F832069690300D552E3 /* DeleteCollectionResponse.swift in Sources */,
 				68AF8F5A2069690300D552E3 /* ListCollectionsResponse.swift in Sources */,
 				68AF8F8F2069690300D552E3 /* QueryPassages.swift in Sources */,
@@ -3929,6 +3963,7 @@
 				68AF8F962069690300D552E3 /* DiskUsage.swift in Sources */,
 				682CBD2C209051BA0049EE9F /* SegmentSettings.swift in Sources */,
 				68AF8F752069690300D552E3 /* QueryRelationsRelationship.swift in Sources */,
+				92261EA821F1007800A1A620 /* SourceOptionsWebCrawl.swift in Sources */,
 				68AF8F932069690300D552E3 /* QueryEntitiesEntity.swift in Sources */,
 				68AF8F772069690300D552E3 /* CollectionDiskUsage.swift in Sources */,
 				68AF8F642069690300D552E3 /* QueryEntitiesResponse.swift in Sources */,
@@ -3960,6 +3995,7 @@
 				68AF8F972069690300D552E3 /* CreateCollectionRequest.swift in Sources */,
 				68AF8F712069690300D552E3 /* QueryResult.swift in Sources */,
 				68AF8F742069690300D552E3 /* Notice.swift in Sources */,
+				92261EA321EFFFE800A1A620 /* Gateway.swift in Sources */,
 				68AF8F8A2069690300D552E3 /* UpdateCollectionRequest.swift in Sources */,
 				68AF8F732069690300D552E3 /* PDFSettings.swift in Sources */,
 				68AF8F6D2069690300D552E3 /* QueryNoticesResponse.swift in Sources */,
@@ -3994,6 +4030,7 @@
 				68AF8F602069690300D552E3 /* QueryRelations.swift in Sources */,
 				68AF8F5F2069690300D552E3 /* Environment.swift in Sources */,
 				68AF8F5B2069690300D552E3 /* NluEnrichmentEmotion.swift in Sources */,
+				92261EA521EFFFE800A1A620 /* GatewayName.swift in Sources */,
 				928204CD2124BC200013315B /* LogQueryResponseResultDocuments.swift in Sources */,
 				928204C72124BC200013315B /* CreateEventObject.swift in Sources */,
 				68AF8FA02069690300D552E3 /* Configuration.swift in Sources */,
@@ -4008,6 +4045,7 @@
 				68AF8F9B2069690300D552E3 /* WordSettings.swift in Sources */,
 				928204C92124BC200013315B /* MetricTokenAggregationResult.swift in Sources */,
 				CADA959C20FCD66600B5BD84 /* SourceOptions.swift in Sources */,
+				92261EA421EFFFE800A1A620 /* GatewayDelete.swift in Sources */,
 				68AF8F7F2069690300D552E3 /* TrainingExample.swift in Sources */,
 				68AF8F9E2069690300D552E3 /* NluEnrichmentCategories.swift in Sources */,
 				68AF8F692069690300D552E3 /* Conversions.swift in Sources */,
@@ -4263,9 +4301,11 @@
 				68F7FF15207D458900E84DBF /* Corpus.swift in Sources */,
 				68F7FF11207D458900E84DBF /* CustomWords.swift in Sources */,
 				68F7FF10207D458900E84DBF /* LanguageModels.swift in Sources */,
+				92261E8E21EFAA9B00A1A620 /* Grammar.swift in Sources */,
 				68F7FF18207D458900E84DBF /* SupportedFeatures.swift in Sources */,
 				68F7FF0B207D458900E84DBF /* KeywordResult.swift in Sources */,
 				7A9EC80B1D79B75100507725 /* SpeechToTextRecorder.swift in Sources */,
+				92261E8F21EFAA9B00A1A620 /* Grammars.swift in Sources */,
 				68F7FF02207D458900E84DBF /* SpeechModel.swift in Sources */,
 				68F7FF24207D47BD00E84DBF /* RecognitionState.swift in Sources */,
 				68F7FEFC207D458900E84DBF /* AudioResources.swift in Sources */,

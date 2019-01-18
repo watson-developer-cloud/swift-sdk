@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,33 +17,32 @@
 import Foundation
 
 /**
- Returns a five-level taxonomy of the content. The top three categories are returned.
- Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
+ Object containing user-defined name.
  */
-public struct CategoriesOptions: Codable, Equatable {
+internal struct GatewayName: Codable, Equatable {
 
     /**
-     Maximum number of categories to return.
+     User-defined name.
      */
-    public var limit: Int?
+    public var name: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case limit = "limit"
+        case name = "name"
     }
 
     /**
-     Initialize a `CategoriesOptions` with member variables.
+     Initialize a `GatewayName` with member variables.
 
-     - parameter limit: Maximum number of categories to return.
+     - parameter name: User-defined name.
 
-     - returns: An initialized `CategoriesOptions`.
+     - returns: An initialized `GatewayName`.
     */
     public init(
-        limit: Int? = nil
+        name: String? = nil
     )
     {
-        self.limit = limit
+        self.name = name
     }
 
 }

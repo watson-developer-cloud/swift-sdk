@@ -24,7 +24,7 @@ public struct Features: Codable, Equatable {
     /**
      Returns high-level concepts in the content. For example, a research paper about deep learning might return the
      concept, "Artificial Intelligence" although the term is not mentioned.
-     Supported languages: English, French, German, Japanese, Korean, Portuguese, Spanish.
+     Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
      */
     public var concepts: ConceptsOptions?
 
@@ -40,7 +40,7 @@ public struct Features: Codable, Equatable {
      Identifies people, cities, organizations, and other entities in the content. See [Entity types and
      subtypes](https://cloud.ibm.com/docs/services/natural-language-understanding/entity-types.html).
      Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
-     Arabic, Chinese, and Dutch custom models are also supported.
+     Arabic, Chinese, and Dutch are supported only through custom models.
      */
     public var entities: EntitiesOptions?
 
@@ -102,7 +102,7 @@ public struct Features: Codable, Equatable {
 
      - parameter concepts: Returns high-level concepts in the content. For example, a research paper about deep
        learning might return the concept, "Artificial Intelligence" although the term is not mentioned.
-       Supported languages: English, French, German, Japanese, Korean, Portuguese, Spanish.
+       Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
      - parameter emotion: Detects anger, disgust, fear, joy, or sadness that is conveyed in the content or by the
        context around target phrases specified in the targets parameter. You can analyze emotion for detected entities
        with `entities.emotion` and for keywords with `keywords.emotion`.
@@ -110,7 +110,7 @@ public struct Features: Codable, Equatable {
      - parameter entities: Identifies people, cities, organizations, and other entities in the content. See [Entity
        types and subtypes](https://cloud.ibm.com/docs/services/natural-language-understanding/entity-types.html).
        Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
-       Arabic, Chinese, and Dutch custom models are also supported.
+       Arabic, Chinese, and Dutch are supported only through custom models.
      - parameter keywords: Returns important keywords in the content.
        Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
      - parameter metadata: Returns information from the document, including author name, title, RSS/ATOM feeds,

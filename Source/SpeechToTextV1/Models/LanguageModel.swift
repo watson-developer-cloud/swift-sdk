@@ -21,13 +21,13 @@ public struct LanguageModel: Codable, Equatable {
 
     /**
      The current status of the custom language model:
-     * `pending` indicates that the model was created but is waiting either for training data to be added or for the
-     service to finish analyzing added data.
-     * `ready` indicates that the model contains data and is ready to be trained.
-     * `training` indicates that the model is currently being trained.
-     * `available` indicates that the model is trained and ready to use.
-     * `upgrading` indicates that the model is currently being upgraded.
-     * `failed` indicates that training of the model failed.
+     * `pending`: The model was created but is waiting either for training data to be added or for the service to finish
+     analyzing added data.
+     * `ready`: The model contains data and is ready to be trained.
+     * `training`: The model is currently being trained.
+     * `available`: The model is trained and ready to use.
+     * `upgrading`: The model is currently being upgraded.
+     * `failed`: Training of the model failed.
      */
     public enum Status: String {
         case pending = "pending"
@@ -73,7 +73,7 @@ public struct LanguageModel: Codable, Equatable {
     public var versions: [String]?
 
     /**
-     The GUID of the service credentials for the instance of the service that owns the custom language model.
+     The GUID of the credentials for the instance of the service that owns the custom language model.
      */
     public var owner: String?
 
@@ -94,13 +94,13 @@ public struct LanguageModel: Codable, Equatable {
 
     /**
      The current status of the custom language model:
-     * `pending` indicates that the model was created but is waiting either for training data to be added or for the
-     service to finish analyzing added data.
-     * `ready` indicates that the model contains data and is ready to be trained.
-     * `training` indicates that the model is currently being trained.
-     * `available` indicates that the model is trained and ready to use.
-     * `upgrading` indicates that the model is currently being upgraded.
-     * `failed` indicates that training of the model failed.
+     * `pending`: The model was created but is waiting either for training data to be added or for the service to finish
+     analyzing added data.
+     * `ready`: The model contains data and is ready to be trained.
+     * `training`: The model is currently being trained.
+     * `available`: The model is trained and ready to use.
+     * `upgrading`: The model is currently being upgraded.
+     * `failed`: Training of the model failed.
      */
     public var status: String?
 
@@ -110,6 +110,13 @@ public struct LanguageModel: Codable, Equatable {
      training. The field changes from `0` to `100` when training is complete.
      */
     public var progress: Int?
+
+    /**
+     If an error occurred while adding a grammar file to the custom language model, a message that describes an
+     `Internal Server Error` and includes the string `Cannot compile grammar`. The status of the custom model is not
+     affected by the error, but the grammar cannot be used with the model.
+     */
+    public var error: String?
 
     /**
      If the request included unknown parameters, the following message: `Unexpected query parameter(s) ['parameters']
@@ -130,6 +137,7 @@ public struct LanguageModel: Codable, Equatable {
         case baseModelName = "base_model_name"
         case status = "status"
         case progress = "progress"
+        case error = "error"
         case warnings = "warnings"
     }
 

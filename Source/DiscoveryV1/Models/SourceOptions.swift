@@ -39,11 +39,18 @@ public struct SourceOptions: Codable, Equatable {
      */
     public var siteCollections: [SourceOptionsSiteColl]?
 
+    /**
+     Array of Web page URLs to begin crawling the web from. Only valid and required when the **type** field of the
+     **source** object is set to `web_crawl`.
+     */
+    public var urls: [SourceOptionsWebCrawl]?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case folders = "folders"
         case objects = "objects"
         case siteCollections = "site_collections"
+        case urls = "urls"
     }
 
     /**
@@ -56,18 +63,22 @@ public struct SourceOptions: Codable, Equatable {
      - parameter siteCollections: Array of Microsoft SharePointoint Online site collections to crawl from the
        SharePoint source. Only valid and required when the **type** field of the **source** object is set to
        `sharepoint`.
+     - parameter urls: Array of Web page URLs to begin crawling the web from. Only valid and required when the
+       **type** field of the **source** object is set to `web_crawl`.
 
      - returns: An initialized `SourceOptions`.
     */
     public init(
         folders: [SourceOptionsFolder]? = nil,
         objects: [SourceOptionsObject]? = nil,
-        siteCollections: [SourceOptionsSiteColl]? = nil
+        siteCollections: [SourceOptionsSiteColl]? = nil,
+        urls: [SourceOptionsWebCrawl]? = nil
     )
     {
         self.folders = folders
         self.objects = objects
         self.siteCollections = siteCollections
+        self.urls = urls
     }
 
 }

@@ -22,7 +22,7 @@ import Foundation
 public struct DialogNodeOutputOptionsElementValue: Codable, Equatable {
 
     /**
-     The user input.
+     An input object that includes the input text.
      */
     public var input: MessageInput?
 

@@ -17,12 +17,12 @@
 import Foundation
 
 /**
- Object describing the current status of the tokenization dictionary.
+ Object describing the current status of the wordlist.
  */
 public struct TokenDictStatusResponse: Codable, Equatable {
 
     /**
-     Current tokenization dictionary status for the specified collection.
+     Current wordlist status for the specified collection.
      */
     public enum Status: String {
         case active = "active"
@@ -31,12 +31,12 @@ public struct TokenDictStatusResponse: Codable, Equatable {
     }
 
     /**
-     Current tokenization dictionary status for the specified collection.
+     Current wordlist status for the specified collection.
      */
     public var status: String?
 
     /**
-     The type for this dictionary. Always returns `tokenization_dictionary`.
+     The type for this wordlist. Can be `tokenization_dictionary` or `stopwords`.
      */
     public var type: String?
 

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,25 @@
 
 import Foundation
 
-/** Words. */
-public struct Words: Codable, Equatable {
+/**
+ Gatway deletion confirmation.
+ */
+public struct GatewayDelete: Codable, Equatable {
 
     /**
-     An array of `Word` objects that provides information about each word in the custom model's words resource. The
-     array is empty if the custom model has no words.
+     The gateway ID of the deleted gateway.
      */
-    public var words: [Word]
+    public var gatewayID: String?
+
+    /**
+     The status of the request.
+     */
+    public var status: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case words = "words"
+        case gatewayID = "gateway_id"
+        case status = "status"
     }
 
 }

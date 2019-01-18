@@ -58,7 +58,7 @@ class DiscoveryTests: XCTestCase {
 
     func loadDocument(name: String, ext: String) -> URL? {
         #if os(Linux)
-            let url = URL(fileURLWithPath: "Tests/DiscoveryV1Tests/" + name + "." + ext)
+            let url = URL(fileURLWithPath: "Tests/DiscoveryV1Tests/Resources/" + name + "." + ext)
         #else
             let bundle = Bundle(for: type(of: self))
             guard let url = bundle.url(forResource: name, withExtension: ext) else { return nil }
@@ -1099,6 +1099,45 @@ class DiscoveryTests: XCTestCase {
         waitForExpectations(timeout: timeout)
     }
 
+    // MARK: - Stopword lists
+
+    func testCreateAndDeleteStopwordList() {
+        let environmentID = environment.environmentID!
+        let configuration = lookupOrCreateTestConfiguration(environmentID: environmentID)
+        let collection = lookupOrCreateTestCollection(environmentID: environmentID, configurationID: configuration.configurationID!)
+        let collectionID = collection.collectionID!
+
+        let expectation1 = self.expectation(description: "createStopwordList")
+        let stopwordFile = loadDocument(name: "stopwords", ext: "txt")!
+        discovery.createStopwordList(environmentID: environmentID, collectionID: collectionID, stopwordFile: stopwordFile) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+            XCTAssertEqual(result.status, "pending")
+            expectation1.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+
+        let expectation2 = self.expectation(description: "createStopwordList")
+        discovery.deleteStopwordList(environmentID: environmentID, collectionID: collectionID) {
+            _, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            expectation2.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+    }
+
     // MARK: - Documents
 
     func testDocumentsCRUD() {
@@ -1130,7 +1169,7 @@ class DiscoveryTests: XCTestCase {
 
             documentID = result.documentID
             XCTAssertNotNil(result.documentID)
-            XCTAssert(result.status == "processing" || result.status == "available")
+            XCTAssert(result.status == "pending" || result.status == "available")
             XCTAssertNil(result.notices)
             expectation1.fulfill()
         }
@@ -1185,7 +1224,7 @@ class DiscoveryTests: XCTestCase {
             }
             documentID = result.documentID
             XCTAssertNotNil(result.documentID)
-            XCTAssert(result.status == "processing" || result.status == "available")
+            XCTAssert(result.status == "pending" || result.status == "available")
             XCTAssertNil(result.notices)
             expectation3.fulfill()
         }
@@ -2406,6 +2445,85 @@ class DiscoveryTests: XCTestCase {
                 XCTFail(unexpectedErrorMessage(error))
                 return
             }
+            expectation4.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+    }
+
+    // MARK: - Gateways
+
+    func testGatewayOperations() {
+        let environmentID = environment.environmentID!
+
+        let expectation1 = self.expectation(description: "createGateway")
+        var newGatewayID: String!
+        discovery.createGateway(environmentID: environmentID) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let gateway = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+            newGatewayID = gateway.gatewayID
+            expectation1.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+
+        let expectation2 = self.expectation(description: "getGateway")
+        discovery.getGateway(environmentID: environmentID, gatewayID: newGatewayID) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let gateway = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+            XCTAssertEqual(gateway.gatewayID, newGatewayID)
+            expectation2.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+
+        let expectation3 = self.expectation(description: "listGateways")
+        discovery.listGateways(environmentID: environmentID) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let gatewayList = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+            let foundGateway = gatewayList.gateways?.first(where: { gateway in
+                gateway.gatewayID == newGatewayID
+            })
+            XCTAssertNotNil(foundGateway)
+            expectation3.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+
+        let expectation4 = self.expectation(description: "deleteGateway")
+        discovery.deleteGateway(environmentID: environmentID, gatewayID: newGatewayID) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+            XCTAssertEqual(result.status?.lowercased(), "deleted")
+            XCTAssertEqual(result.gatewayID, newGatewayID)
             expectation4.fulfill()
         }
         waitForExpectations(timeout: timeout)

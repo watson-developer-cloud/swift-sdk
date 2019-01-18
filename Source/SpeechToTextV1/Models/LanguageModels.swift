@@ -20,8 +20,8 @@ import Foundation
 public struct LanguageModels: Codable, Equatable {
 
     /**
-     An array of objects that provides information about each available custom language model. The array is empty if the
-     requesting service credentials own no custom language models (if no language is specified) or own no custom
+     An array of `LanguageModel` objects that provides information about each available custom language model. The array
+     is empty if the requesting credentials own no custom language models (if no language is specified) or own no custom
      language models for the specified language.
      */
     public var customizations: [LanguageModel]

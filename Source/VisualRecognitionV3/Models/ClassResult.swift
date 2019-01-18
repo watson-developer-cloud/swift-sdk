@@ -23,6 +23,10 @@ public struct ClassResult: Codable, Equatable {
 
     /**
      Name of the class.
+     Class names are translated in the language defined by the **Accept-Language** request header for the build-in
+     classifier IDs (`default`, `food`, and `explicit`). Class names of custom classifiers are not translated. The
+     response might not be in the specified language when the requested language is not supported or when there is no
+     translation for the class name.
      */
     public var className: String
 

@@ -207,7 +207,8 @@ public class TextToSpeech {
      language for the input text on the specified voice. Use a voice that matches the language of the input text.
      The service returns the synthesized audio stream as an array of bytes. You can pass a maximum of 5 KB of text to
      the service.
-     **See also:** [Synthesizing text to audio](https://cloud.ibm.com/docs/services/text-to-speech/http.html#synthesize).
+     **See also:** [Synthesizing text to
+     audio](https://cloud.ibm.com/docs/services/text-to-speech/http.html#synthesize).
      ### Audio formats (accept types)
       The service can return audio in the following formats (MIME types).
      * Where indicated, you can optionally specify the sampling rate (`rate`) of the audio. You must specify a sampling
@@ -426,7 +427,8 @@ public class TextToSpeech {
      specify the language and a description for the new model. The model is owned by the instance of the service whose
      credentials are used to create it.
      **Note:** This method is currently a beta release.
-     **See also:** [Creating a custom model](https://cloud.ibm.com/docs/services/text-to-speech/custom-models.html#cuModelsCreate).
+     **See also:** [Creating a custom
+     model](https://cloud.ibm.com/docs/services/text-to-speech/custom-models.html#cuModelsCreate).
 
      - parameter name: The name of the new custom voice model.
      - parameter language: The language of the new custom voice model. Omit the parameter to use the the default
@@ -483,7 +485,8 @@ public class TextToSpeech {
      metadata for a specific voice model, use the **List a custom model** method. You must use credentials for the
      instance of the service that owns a model to list information about it.
      **Note:** This method is currently a beta release.
-     **See also:** [Querying all custom models](https://cloud.ibm.com/docs/services/text-to-speech/custom-models.html#cuModelsQueryAll).
+     **See also:** [Querying all custom
+     models](https://cloud.ibm.com/docs/services/text-to-speech/custom-models.html#cuModelsQueryAll).
 
      - parameter language: The language for which custom voice models that are owned by the requesting service
        credentials are to be returned. Omit the parameter to see all custom voice models that are owned by the
@@ -542,7 +545,8 @@ public class TextToSpeech {
      **Note:** This method is currently a beta release.
      **See also:**
      * [Updating a custom model](https://cloud.ibm.com/docs/services/text-to-speech/custom-models.html#cuModelsUpdate)
-     * [Adding words to a Japanese custom model](https://cloud.ibm.com/docs/services/text-to-speech/custom-entries.html#cuJapaneseAdd)
+     * [Adding words to a Japanese custom
+     model](https://cloud.ibm.com/docs/services/text-to-speech/custom-entries.html#cuJapaneseAdd)
      * [Understanding customization](https://cloud.ibm.com/docs/services/text-to-speech/custom-intro.html).
 
      - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request
@@ -607,7 +611,8 @@ public class TextToSpeech {
      of the voice model, the output includes the words and their translations as defined in the model. To see just the
      metadata for a voice model, use the **List custom models** method.
      **Note:** This method is currently a beta release.
-     **See also:** [Querying a custom model](https://cloud.ibm.com/docs/services/text-to-speech/custom-models.html#cuModelsQuery).
+     **See also:** [Querying a custom
+     model](https://cloud.ibm.com/docs/services/text-to-speech/custom-models.html#cuModelsQuery).
 
      - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request
        with service credentials created for the instance of the service that owns the custom model.
@@ -651,7 +656,8 @@ public class TextToSpeech {
      Deletes the specified custom voice model. You must use credentials for the instance of the service that owns a
      model to delete it.
      **Note:** This method is currently a beta release.
-     **See also:** [Deleting a custom model](https://cloud.ibm.com/docs/services/text-to-speech/custom-models.html#cuModelsDelete).
+     **See also:** [Deleting a custom
+     model](https://cloud.ibm.com/docs/services/text-to-speech/custom-models.html#cuModelsDelete).
 
      - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request
        with service credentials created for the instance of the service that owns the custom model.
@@ -703,8 +709,10 @@ public class TextToSpeech {
        <code>&lt;phoneme alphabet=\"ibm\" ph=\"1gAstroEntxrYFXs\"&gt;&lt;/phoneme&gt;</code>
      **Note:** This method is currently a beta release.
      **See also:**
-     * [Adding multiple words to a custom model](https://cloud.ibm.com/docs/services/text-to-speech/custom-entries.html#cuWordsAdd)
-     * [Adding words to a Japanese custom model](https://cloud.ibm.com/docs/services/text-to-speech/custom-entries.html#cuJapaneseAdd)
+     * [Adding multiple words to a custom
+     model](https://cloud.ibm.com/docs/services/text-to-speech/custom-entries.html#cuWordsAdd)
+     * [Adding words to a Japanese custom
+     model](https://cloud.ibm.com/docs/services/text-to-speech/custom-entries.html#cuJapaneseAdd)
      * [Understanding customization](https://cloud.ibm.com/docs/services/text-to-speech/custom-intro.html).
 
      - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request
@@ -820,8 +828,10 @@ public class TextToSpeech {
        <code>&lt;phoneme alphabet=\"ibm\" ph=\"1gAstroEntxrYFXs\"&gt;&lt;/phoneme&gt;</code>
      **Note:** This method is currently a beta release.
      **See also:**
-     * [Adding a single word to a custom model](https://cloud.ibm.com/docs/services/text-to-speech/custom-entries.html#cuWordAdd)
-     * [Adding words to a Japanese custom model](https://cloud.ibm.com/docs/services/text-to-speech/custom-entries.html#cuJapaneseAdd)
+     * [Adding a single word to a custom
+     model](https://cloud.ibm.com/docs/services/text-to-speech/custom-entries.html#cuWordAdd)
+     * [Adding words to a Japanese custom
+     model](https://cloud.ibm.com/docs/services/text-to-speech/custom-entries.html#cuJapaneseAdd)
      * [Understanding customization](https://cloud.ibm.com/docs/services/text-to-speech/custom-intro.html).
 
      - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request
@@ -833,7 +843,8 @@ public class TextToSpeech {
      - parameter partOfSpeech: **Japanese only.** The part of speech for the word. The service uses the value to
        produce the correct intonation for the word. You can create only a single entry, with or without a single part of
        speech, for any word; you cannot create multiple entries with different parts of speech for the same word. For
-       more information, see [Working with Japanese entries](https://cloud.ibm.com/docs/services/text-to-speech/custom-rules.html#jaNotes).
+       more information, see [Working with Japanese
+       entries](https://cloud.ibm.com/docs/services/text-to-speech/custom-rules.html#jaNotes).
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */

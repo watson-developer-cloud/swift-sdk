@@ -20,8 +20,8 @@ import Foundation
 public struct Corpora: Codable, Equatable {
 
     /**
-     An array of objects that provides information about the corpora for the custom model. The array is empty if the
-     custom model has no corpora.
+     An array of `Corpus` objects that provides information about the corpora for the custom model. The array is empty
+     if the custom model has no corpora.
      */
     public var corpora: [Corpus]
 

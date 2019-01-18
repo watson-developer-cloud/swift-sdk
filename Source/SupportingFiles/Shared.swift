@@ -23,7 +23,7 @@ public typealias WatsonError = RestError
 /// Contains functionality and information common to all of the services
 internal struct Shared {
 
-    static let sdkVersion = "1.3.0"
+    static let sdkVersion = "1.3.1"
     static let apiKey = "apikey"
     static let icpPrefix = "icp-"
 

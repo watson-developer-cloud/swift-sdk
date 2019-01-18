@@ -78,18 +78,18 @@ If your project does not yet have a Podfile, use the `pod init` command in the r
 use_frameworks!
 
 target 'MyApp' do
-    pod 'IBMWatsonAssistantV1', '~> 1.3.0'
-    pod 'IBMWatsonAssistantV2', '~> 1.3.0'
-    pod 'IBMWatsonCompareComplyV1', '~> 1.3.0'
-    pod 'IBMWatsonDiscoveryV1', '~> 1.3.0'
-    pod 'IBMWatsonLanguageTranslatorV3', '~> 1.3.0'
-    pod 'IBMWatsonNaturalLanguageClassifierV1', '~> 1.3.0'
-    pod 'IBMWatsonNaturalLanguageUnderstandingV1', '~> 1.3.0'
-    pod 'IBMWatsonPersonalityInsightsV3', '~> 1.3.0'
-    pod 'IBMWatsonSpeechToTextV1', '~> 1.3.0'
-    pod 'IBMWatsonTextToSpeechV1', '~> 1.3.0'
-    pod 'IBMWatsonToneAnalyzerV3', '~> 1.3.0'
-    pod 'IBMWatsonVisualRecognitionV3', '~> 1.3.0'
+    pod 'IBMWatsonAssistantV1', '~> 1.3.1'
+    pod 'IBMWatsonAssistantV2', '~> 1.3.1'
+    pod 'IBMWatsonCompareComplyV1', '~> 1.3.1'
+    pod 'IBMWatsonDiscoveryV1', '~> 1.3.1'
+    pod 'IBMWatsonLanguageTranslatorV3', '~> 1.3.1'
+    pod 'IBMWatsonNaturalLanguageClassifierV1', '~> 1.3.1'
+    pod 'IBMWatsonNaturalLanguageUnderstandingV1', '~> 1.3.1'
+    pod 'IBMWatsonPersonalityInsightsV3', '~> 1.3.1'
+    pod 'IBMWatsonSpeechToTextV1', '~> 1.3.1'
+    pod 'IBMWatsonTextToSpeechV1', '~> 1.3.1'
+    pod 'IBMWatsonToneAnalyzerV3', '~> 1.3.1'
+    pod 'IBMWatsonVisualRecognitionV3', '~> 1.3.1'
 end
 ```
 
@@ -112,7 +112,7 @@ $ brew install carthage
 If your project does not have a Cartfile yet, use the `touch Cartfile` command in the root directory of your project. To install the IBM Watson Swift SDK using Carthage, add the following to your Cartfile. 
 
 ```
-github "watson-developer-cloud/swift-sdk" ~> 1.3.0
+github "watson-developer-cloud/swift-sdk" ~> 1.3.1
 ```
 
 Then run the following command to build the dependencies and frameworks:
@@ -135,7 +135,7 @@ Add the following to your `Package.swift` file to identify the IBM Watson Swift 
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "1.3.0")
+    .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "1.3.1")
 ]
 ```
 

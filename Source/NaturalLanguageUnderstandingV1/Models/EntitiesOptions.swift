@@ -20,7 +20,7 @@ import Foundation
  Identifies people, cities, organizations, and other entities in the content. See [Entity types and
  subtypes](https://cloud.ibm.com/docs/services/natural-language-understanding/entity-types.html).
  Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish. Arabic,
- Chinese, and Dutch custom models are also supported.
+ Chinese, and Dutch are supported only through custom models.
  */
 public struct EntitiesOptions: Codable, Equatable {
 

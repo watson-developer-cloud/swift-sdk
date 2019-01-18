@@ -26,8 +26,8 @@ import Foundation
 public struct RelationsOptions: Codable, Equatable {
 
     /**
-     Enter a [custom model](https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html) ID to override the default
-     model.
+     Enter a [custom model](https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html) ID to
+     override the default model.
      */
     public var model: String?
 
@@ -39,8 +39,9 @@ public struct RelationsOptions: Codable, Equatable {
     /**
      Initialize a `RelationsOptions` with member variables.
 
-     - parameter model: Enter a [custom model](https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html) ID to
-       override the default model.
+     - parameter model: Enter a [custom
+       model](https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html) ID to override the
+       default model.
 
      - returns: An initialized `RelationsOptions`.
     */

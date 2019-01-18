@@ -26,7 +26,7 @@ public struct RecognitionJob: Codable, Equatable {
      service has the capacity to begin processing it.
      * `processing`: The service is actively processing the job.
      * `completed`: The service has finished processing the job. If the job specified a callback URL and the event
-     `recognitions.completed_with_results`, the service sent the results with the callback notification; otherwise, you
+     `recognitions.completed_with_results`, the service sent the results with the callback notification. Otherwise, you
      must retrieve the results by checking the individual job.
      * `failed`: The job failed.
      */
@@ -49,7 +49,7 @@ public struct RecognitionJob: Codable, Equatable {
      service has the capacity to begin processing it.
      * `processing`: The service is actively processing the job.
      * `completed`: The service has finished processing the job. If the job specified a callback URL and the event
-     `recognitions.completed_with_results`, the service sent the results with the callback notification; otherwise, you
+     `recognitions.completed_with_results`, the service sent the results with the callback notification. Otherwise, you
      must retrieve the results by checking the individual job.
      * `failed`: The job failed.
      */

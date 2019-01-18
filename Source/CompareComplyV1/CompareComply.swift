@@ -696,9 +696,9 @@ public class CompareComply {
 
      Run Compare and Comply methods over a collection of input documents.
      **Important:** Batch processing requires the use of the [IBM Cloud Object Storage
-     service](https://console.bluemix.net/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).
+     service](https://cloud.ibm.com/docs/services/cloud-object-storage/about-cos.html#about-ibm-cloud-object-storage).
      The use of IBM Cloud Object Storage with Compare and Comply is discussed at [Using batch
-     processing](https://console.bluemix.net/docs/services/compare-comply/batching.html#before-you-batch).
+     processing](https://cloud.ibm.com/docs/services/compare-comply/batching.html#before-you-batch).
 
      - parameter function: The Compare and Comply method to run across the submitted input documents.
      - parameter inputCredentialsFile: A JSON file containing the input Cloud Object Storage credentials. At a

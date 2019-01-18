@@ -129,11 +129,7 @@ public class VisualRecognition {
        no more than 20 images and limit the .zip file to 100 MB. Encode the image and .zip file names in UTF-8 if they
        contain non-ASCII characters. The service assumes UTF-8 encoding if it encounters non-ASCII characters.
        You can also include an image with the **url** parameter.
-     - parameter acceptLanguage: The language of the output class names. The full set of languages is supported for
-       the built-in classifier IDs: `default`, `food`, and `explicit`. The class names of custom classifiers are not
-       translated.
-       The response might not be in the specified language when the requested language is not supported or when there is
-       no translation for the class name.
+     - parameter acceptLanguage: The desired language of parts of the response. See the response for details.
      - parameter url: The URL of an image to analyze. Must be in .jpg, or .png format. The minimum recommended pixel
        density is 32X32 pixels per inch, and the maximum image size is 10 MB.
        You can also include images with the **images_file** parameter.
@@ -254,6 +250,7 @@ public class VisualRecognition {
        recommended pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB. Redirects are followed,
        so you can use a shortened URL.
        You can also include images with the **images_file** parameter.
+     - parameter acceptLanguage: The desired language of parts of the response. See the response for details.
      - parameter imagesFileContentType: The content type of imagesFile.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -261,6 +258,7 @@ public class VisualRecognition {
     public func detectFaces(
         imagesFile: URL? = nil,
         url: String? = nil,
+        acceptLanguage: String? = nil,
         imagesFileContentType: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<DetectedFaces>?, WatsonError?) -> Void)
@@ -292,6 +290,9 @@ public class VisualRecognition {
         }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
+        if let acceptLanguage = acceptLanguage {
+            headerParameters["Accept-Language"] = acceptLanguage
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()

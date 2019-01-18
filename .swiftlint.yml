@@ -8,6 +8,7 @@ disabled_rules: # rule identifiers to exclude from running
   - redundant_string_enum_value
   - cyclomatic_complexity
   - superfluous_disable_command
+  - function_parameter_count
 
 opt_in_rules:
  - force_unwrapping

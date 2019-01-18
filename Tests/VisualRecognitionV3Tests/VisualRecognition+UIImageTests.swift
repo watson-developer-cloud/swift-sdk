@@ -67,7 +67,7 @@ class VisualRecognitionUIImageTests: XCTestCase {
 
     func testClassifyUIImage() {
         let expectation = self.expectation(description: "Classify a UIImage using the default classifier.")
-        visualRecognition.classify(image: car) {
+        visualRecognition.classify(image: car, acceptLanguage: "en") {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))

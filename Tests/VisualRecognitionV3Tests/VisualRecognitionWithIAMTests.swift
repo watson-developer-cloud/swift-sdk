@@ -90,7 +90,7 @@ class VisualRecognitionWithIAMTests: XCTestCase {
 
         let expectation = self.expectation(description: "Access service using IAM API Key WatsonCredentials.")
 
-        visualRecognition.classify(url: ginniURL) {
+        visualRecognition.classify(acceptLanguage: "en", url: ginniURL) {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -145,7 +145,7 @@ class VisualRecognitionWithIAMTests: XCTestCase {
         // Verify access to the service using the access token
 
         let expectation = self.expectation(description: "Access VR service with access token")
-        visualRecognition.classify(url: obamaURL) {
+        visualRecognition.classify(acceptLanguage: "en", url: obamaURL) {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -192,7 +192,7 @@ class VisualRecognitionWithIAMTests: XCTestCase {
         // Verify access to the service using the refreshed access token
 
         let expectation2 = self.expectation(description: "Access VR service with refreshed access token")
-        visualRecognition.classify(url: trumpURL) {
+        visualRecognition.classify(acceptLanguage: "en", url: trumpURL) {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))

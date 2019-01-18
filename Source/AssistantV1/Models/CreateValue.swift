@@ -54,7 +54,7 @@ public struct CreateValue: Codable, Equatable {
      An array of patterns for the entity value. You can provide either synonyms or patterns (as indicated by **type**),
      but not both. A pattern is a regular expression no longer than 512 characters. For more information about how to
      specify a pattern, see the
-     [documentation](https://cloud.ibm.com/docs/services/conversation/entities.html#creating-entities).
+     [documentation](https://cloud.ibm.com/docs/services/assistant/entities.html#creating-entities).
      */
     public var patterns: [String]?
 
@@ -88,7 +88,7 @@ public struct CreateValue: Codable, Equatable {
      - parameter patterns: An array of patterns for the entity value. You can provide either synonyms or patterns (as
        indicated by **type**), but not both. A pattern is a regular expression no longer than 512 characters. For more
        information about how to specify a pattern, see the
-       [documentation](https://cloud.ibm.com/docs/services/conversation/entities.html#creating-entities).
+       [documentation](https://cloud.ibm.com/docs/services/assistant/entities.html#creating-entities).
      - parameter valueType: Specifies the type of value.
 
      - returns: An initialized `CreateValue`.

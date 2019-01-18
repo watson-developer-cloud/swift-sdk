@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,34 +16,18 @@
 
 import Foundation
 
-/**
- Returns a five-level taxonomy of the content. The top three categories are returned.
- Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
- */
-public struct CategoriesOptions: Codable, Equatable {
+/** Grammars. */
+public struct Grammars: Codable, Equatable {
 
     /**
-     Maximum number of categories to return.
+     An array of `Grammar` objects that provides information about the grammars for the custom model. The array is empty
+     if the custom model has no grammars.
      */
-    public var limit: Int?
+    public var grammars: [Grammar]
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case limit = "limit"
-    }
-
-    /**
-     Initialize a `CategoriesOptions` with member variables.
-
-     - parameter limit: Maximum number of categories to return.
-
-     - returns: An initialized `CategoriesOptions`.
-    */
-    public init(
-        limit: Int? = nil
-    )
-    {
-        self.limit = limit
+        case grammars = "grammars"
     }
 
 }

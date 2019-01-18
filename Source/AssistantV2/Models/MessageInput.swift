@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- The user input.
+ An input object that includes the input text.
  */
 public struct MessageInput: Codable, Equatable {
 

@@ -23,7 +23,7 @@ import Foundation
 public struct DialogSuggestionValue: Codable, Equatable {
 
     /**
-     The user input.
+     An input object that includes the input text.
      */
     public var input: MessageInput?
 

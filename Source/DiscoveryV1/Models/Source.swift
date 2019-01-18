@@ -26,11 +26,13 @@ public struct Source: Codable, Equatable {
      -  `box` indicates the configuration is to connect an instance of Enterprise Box.
      -  `salesforce` indicates the configuration is to connect to Salesforce.
      -  `sharepoint` indicates the configuration is to connect to Microsoft SharePoint Online.
+     -  `web_crawl` indicates the configuration is to perform a web page crawl.
      */
     public enum TypeEnum: String {
         case box = "box"
         case salesforce = "salesforce"
         case sharepoint = "sharepoint"
+        case webCrawl = "web_crawl"
     }
 
     /**
@@ -38,6 +40,7 @@ public struct Source: Codable, Equatable {
      -  `box` indicates the configuration is to connect an instance of Enterprise Box.
      -  `salesforce` indicates the configuration is to connect to Salesforce.
      -  `sharepoint` indicates the configuration is to connect to Microsoft SharePoint Online.
+     -  `web_crawl` indicates the configuration is to perform a web page crawl.
      */
     public var type: String?
 
@@ -73,6 +76,7 @@ public struct Source: Codable, Equatable {
        -  `box` indicates the configuration is to connect an instance of Enterprise Box.
        -  `salesforce` indicates the configuration is to connect to Salesforce.
        -  `sharepoint` indicates the configuration is to connect to Microsoft SharePoint Online.
+       -  `web_crawl` indicates the configuration is to perform a web page crawl.
      - parameter credentialID: The **credential_id** of the credentials to use to connect to the source. Credentials
        are defined using the **credentials** method. The **source_type** of the credentials used must match the **type**
        field specified in this object.

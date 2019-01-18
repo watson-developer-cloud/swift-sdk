@@ -17,12 +17,12 @@
 import Foundation
 
 /**
- A message request formatted for the Watson Assistant service.
+ A request sent to the workspace, including the user input and context.
  */
 public struct MessageRequest: Codable, Equatable {
 
     /**
-     The user input.
+     An input object that includes the input text.
      */
     public var input: InputData?
 
@@ -67,7 +67,7 @@ public struct MessageRequest: Codable, Equatable {
     /**
      Initialize a `MessageRequest` with member variables.
 
-     - parameter input: The user input.
+     - parameter input: An input object that includes the input text.
      - parameter alternateIntents: Whether to return more than one intent. Set to `true` to return all matching
        intents.
      - parameter context: State information for the conversation. To maintain state, include the context from the

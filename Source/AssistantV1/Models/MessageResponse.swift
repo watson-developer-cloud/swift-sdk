@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /**
- A response from the Watson Assistant service.
+ The response sent by the workspace, including the output text, detected intents and entities, and context.
  */
 public struct MessageResponse: Codable, Equatable {
 

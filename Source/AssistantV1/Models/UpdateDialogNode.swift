@@ -105,7 +105,7 @@ internal struct UpdateDialogNode: Codable, Equatable {
 
     /**
      The output of the dialog node. For more information about how to specify dialog node output, see the
-     [documentation](https://cloud.ibm.com/docs/services/conversation/dialog-overview.html#complex).
+     [documentation](https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#complex).
      */
     public var output: DialogNodeOutput?
 
@@ -207,7 +207,7 @@ internal struct UpdateDialogNode: Codable, Equatable {
      - parameter parent: The ID of the parent dialog node.
      - parameter previousSibling: The ID of the previous sibling dialog node.
      - parameter output: The output of the dialog node. For more information about how to specify dialog node output,
-       see the [documentation](https://cloud.ibm.com/docs/services/conversation/dialog-overview.html#complex).
+       see the [documentation](https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#complex).
      - parameter context: The context for the dialog node.
      - parameter metadata: The metadata for the dialog node.
      - parameter nextStep: The next step to execute following this dialog node.

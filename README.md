@@ -126,6 +126,8 @@ Follow the remaining Carthage installation instructions [here](https://github.co
 1. Whichever services your app will be using (`AssistantV1.framework`, `DiscoveryV1.framework`, etc.)
 1. (**Speech to Text only**) `Starscream.framework`
 
+If your app fails to build because it is built with a different version of Swift than the downloaded SDK, then re-run the `carthage update` command with the `--no-use-binaries` flag added.
+
 
 ### Swift Package Manager
 

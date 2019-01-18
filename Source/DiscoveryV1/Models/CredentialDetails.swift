@@ -27,12 +27,25 @@ public struct CredentialDetails: Codable, Equatable {
      the **source_type**. The following combinations are possible:
      -  `"source_type": "box"` - valid `credential_type`s: `oauth2`
      -  `"source_type": "salesforce"` - valid `credential_type`s: `username_password`
-     -  `"source_type": "sharepoint"` - valid `credential_type`s: `saml`.
+     -  `"source_type": "sharepoint"` - valid `credential_type`s: `saml` with **source_version** of `online`, or
+     `ntml_v1` with **source_version** of `2016`
+     -  `"source_type": "web_crawl"` - valid `credential_type`s: `noauth` or `basic`.
      */
     public enum CredentialType: String {
         case oauth2 = "oauth2"
         case saml = "saml"
         case usernamePassword = "username_password"
+        case noauth = "noauth"
+        case basic = "basic"
+        case ntmlV1 = "ntml_v1"
+    }
+
+    /**
+     The type of Sharepoint repository to connect to. Only valid, and required, with a **source_type** of `sharepoint`.
+     */
+    public enum SourceVersion: String {
+        case online = "online"
+        case sp2016 = "2016"
     }
 
     /**
@@ -40,7 +53,9 @@ public struct CredentialDetails: Codable, Equatable {
      the **source_type**. The following combinations are possible:
      -  `"source_type": "box"` - valid `credential_type`s: `oauth2`
      -  `"source_type": "salesforce"` - valid `credential_type`s: `username_password`
-     -  `"source_type": "sharepoint"` - valid `credential_type`s: `saml`.
+     -  `"source_type": "sharepoint"` - valid `credential_type`s: `saml` with **source_version** of `online`, or
+     `ntml_v1` with **source_version** of `2016`
+     -  `"source_type": "web_crawl"` - valid `credential_type`s: `noauth` or `basic`.
      */
     public var credentialType: String?
 
@@ -58,13 +73,13 @@ public struct CredentialDetails: Codable, Equatable {
 
     /**
      The **url** of the source that these credentials connect to. Only valid, and required, with a **credential_type**
-     of `username_password`.
+     of `username_password`, `noauth`, and `basic`.
      */
     public var url: String?
 
     /**
      The **username** of the source that these credentials connect to. Only valid, and required, with a
-     **credential_type** of `saml` and `username_password`.
+     **credential_type** of `saml`, `username_password`, `basic`, or `ntml_v1`.
      */
     public var username: String?
 
@@ -110,12 +125,35 @@ public struct CredentialDetails: Codable, Equatable {
 
     /**
      The **password** of the source that these credentials connect to. Only valid, and required, with
-     **credential_type**s of `saml` and `username_password`.
+     **credential_type**s of `saml`, `username_password`, `basic`, or `ntml_v1`.
      **Note:** When used with a **source_type** of `salesforce`, the password consists of the Salesforce password and a
      valid Salesforce security token concatenated. This value is never returned and is only used when creating or
      modifying **credentials**.
      */
     public var password: String?
+
+    /**
+     The ID of the **gateway** to be connected through (when connecting to intranet sites). Only valid with a
+     **credential_type** of `noauth`, `basic`, or `ntml_v1`. Gateways are created using the
+     `/v1/environments/{environment_id}/gateways` methods.
+     */
+    public var gatewayID: String?
+
+    /**
+     The type of Sharepoint repository to connect to. Only valid, and required, with a **source_type** of `sharepoint`.
+     */
+    public var sourceVersion: String?
+
+    /**
+     SharePoint OnPrem WebApplication URL. Only valid, and required, with a **source_version** of `2016`.
+     */
+    public var webApplicationURL: String?
+
+    /**
+     The domain used to log in to your OnPrem SharePoint account. Only valid, and required, with a **source_version** of
+     `2016`.
+     */
+    public var domain: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
@@ -131,6 +169,10 @@ public struct CredentialDetails: Codable, Equatable {
         case privateKey = "private_key"
         case passphrase = "passphrase"
         case password = "password"
+        case gatewayID = "gateway_id"
+        case sourceVersion = "source_version"
+        case webApplicationURL = "web_application_url"
+        case domain = "domain"
     }
 
     /**
@@ -140,15 +182,17 @@ public struct CredentialDetails: Codable, Equatable {
        specified must be supported by the **source_type**. The following combinations are possible:
        -  `"source_type": "box"` - valid `credential_type`s: `oauth2`
        -  `"source_type": "salesforce"` - valid `credential_type`s: `username_password`
-       -  `"source_type": "sharepoint"` - valid `credential_type`s: `saml`.
+       -  `"source_type": "sharepoint"` - valid `credential_type`s: `saml` with **source_version** of `online`, or
+       `ntml_v1` with **source_version** of `2016`
+       -  `"source_type": "web_crawl"` - valid `credential_type`s: `noauth` or `basic`.
      - parameter clientID: The **client_id** of the source that these credentials connect to. Only valid, and
        required, with a **credential_type** of `oauth2`.
      - parameter enterpriseID: The **enterprise_id** of the Box site that these credentials connect to. Only valid,
        and required, with a **source_type** of `box`.
      - parameter url: The **url** of the source that these credentials connect to. Only valid, and required, with a
-       **credential_type** of `username_password`.
+       **credential_type** of `username_password`, `noauth`, and `basic`.
      - parameter username: The **username** of the source that these credentials connect to. Only valid, and
-       required, with a **credential_type** of `saml` and `username_password`.
+       required, with a **credential_type** of `saml`, `username_password`, `basic`, or `ntml_v1`.
      - parameter organizationURL: The **organization_url** of the source that these credentials connect to. Only
        valid, and required, with a **credential_type** of `saml`.
      - parameter siteCollectionPath: The **site_collection.path** of the source that these credentials connect to.
@@ -166,10 +210,19 @@ public struct CredentialDetails: Codable, Equatable {
        required, with a **credential_type** of `oauth2`. This value is never returned and is only used when creating or
        modifying **credentials**.
      - parameter password: The **password** of the source that these credentials connect to. Only valid, and
-       required, with **credential_type**s of `saml` and `username_password`.
+       required, with **credential_type**s of `saml`, `username_password`, `basic`, or `ntml_v1`.
        **Note:** When used with a **source_type** of `salesforce`, the password consists of the Salesforce password and
        a valid Salesforce security token concatenated. This value is never returned and is only used when creating or
        modifying **credentials**.
+     - parameter gatewayID: The ID of the **gateway** to be connected through (when connecting to intranet sites).
+       Only valid with a **credential_type** of `noauth`, `basic`, or `ntml_v1`. Gateways are created using the
+       `/v1/environments/{environment_id}/gateways` methods.
+     - parameter sourceVersion: The type of Sharepoint repository to connect to. Only valid, and required, with a
+       **source_type** of `sharepoint`.
+     - parameter webApplicationURL: SharePoint OnPrem WebApplication URL. Only valid, and required, with a
+       **source_version** of `2016`.
+     - parameter domain: The domain used to log in to your OnPrem SharePoint account. Only valid, and required, with
+       a **source_version** of `2016`.
 
      - returns: An initialized `CredentialDetails`.
     */
@@ -185,7 +238,11 @@ public struct CredentialDetails: Codable, Equatable {
         publicKeyID: String? = nil,
         privateKey: String? = nil,
         passphrase: String? = nil,
-        password: String? = nil
+        password: String? = nil,
+        gatewayID: String? = nil,
+        sourceVersion: String? = nil,
+        webApplicationURL: String? = nil,
+        domain: String? = nil
     )
     {
         self.credentialType = credentialType
@@ -200,6 +257,10 @@ public struct CredentialDetails: Codable, Equatable {
         self.privateKey = privateKey
         self.passphrase = passphrase
         self.password = password
+        self.gatewayID = gatewayID
+        self.sourceVersion = sourceVersion
+        self.webApplicationURL = webApplicationURL
+        self.domain = domain
     }
 
 }

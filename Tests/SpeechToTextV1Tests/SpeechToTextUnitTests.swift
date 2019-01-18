@@ -74,6 +74,8 @@ class SpeechToTextUnitTests: XCTestCase {
         let acousticCustomizationID = "456"
         let learningOptOut = true
         let customerID = "Anthony"
+        let grammarName = "example"
+        let redaction = true
 
         // API Key authentication
         var sttSession = SpeechToTextSession(
@@ -84,10 +86,12 @@ class SpeechToTextUnitTests: XCTestCase {
             languageCustomizationID: languageCustomizationID,
             acousticCustomizationID: acousticCustomizationID,
             learningOptOut: learningOptOut,
-            customerID: customerID)
+            customerID: customerID,
+            grammarName: grammarName,
+            redaction: redaction)
 
         var socket = sttSession.socket
-        var expectedURL = "\(sttSession.websocketsURL)?model=\(model)&base_model_version=\(baseModelVersion)&language_customization_id=\(languageCustomizationID)&acoustic_customization_id=\(acousticCustomizationID)&x-watson-learning-opt-out=\(learningOptOut)&x-watson-metadata=customer_id%3D\(customerID)"
+        var expectedURL = "\(sttSession.websocketsURL)?model=\(model)&base_model_version=\(baseModelVersion)&language_customization_id=\(languageCustomizationID)&acoustic_customization_id=\(acousticCustomizationID)&x-watson-learning-opt-out=\(learningOptOut)&x-watson-metadata=customer_id%3D\(customerID)&grammar_name=\(grammarName)&redaction=\(redaction)"
         XCTAssertEqual(socket.url, URL(string: expectedURL))
 
         // Same as above, but with Basic Auth instead of API Key in the initializer
@@ -99,10 +103,12 @@ class SpeechToTextUnitTests: XCTestCase {
             languageCustomizationID: languageCustomizationID,
             acousticCustomizationID: acousticCustomizationID,
             learningOptOut: learningOptOut,
-            customerID: customerID)
+            customerID: customerID,
+            grammarName: grammarName,
+            redaction: redaction)
 
         socket = sttSession.socket
-        expectedURL = "\(sttSession.websocketsURL)?model=\(model)&base_model_version=\(baseModelVersion)&language_customization_id=\(languageCustomizationID)&acoustic_customization_id=\(acousticCustomizationID)&x-watson-learning-opt-out=\(learningOptOut)&x-watson-metadata=customer_id%3D\(customerID)"
+        expectedURL = "\(sttSession.websocketsURL)?model=\(model)&base_model_version=\(baseModelVersion)&language_customization_id=\(languageCustomizationID)&acoustic_customization_id=\(acousticCustomizationID)&x-watson-learning-opt-out=\(learningOptOut)&x-watson-metadata=customer_id%3D\(customerID)&grammar_name=\(grammarName)&redaction=\(redaction)"
         XCTAssertEqual(socket.url, URL(string: expectedURL))
     }
 }

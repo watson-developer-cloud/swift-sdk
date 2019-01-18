@@ -96,6 +96,15 @@
                 <a href="../Structs/CustomWord.html">CustomWord</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/Grammar.html">Grammar</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Grammar/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Grammars.html">Grammars</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/KeywordResult.html">KeywordResult</a>
               </li>
               <li class="nav-group-task">
@@ -205,8 +214,10 @@ interfaces. It also supports a WebSocket interface that provides a full-duplex, 
 Clients send requests and audio to the service and receive results over a single connection asynchronously.
 The service also offers two customization interfaces. Use language model customization to expand the vocabulary of a
 base model with domain-specific terminology. Use acoustic model customization to adapt a base model for the acoustic
-characteristics of your audio. Language model customization is generally available for production use with most
-supported languages; acoustic model customization is beta functionality that is available for all supported languages.</p>
+characteristics of your audio. For language model customization, the service also supports grammars. A grammar is a
+formal language specification that lets you restrict the phrases that the service can recognize.
+Language model customization is generally available for production use with most supported languages. Acoustic model
+customization is beta functionality that is available for all supported languages.</p>
 
           </section>
           <section class="section task-group-section">
@@ -472,7 +483,7 @@ supported languages; acoustic model customization is beta functionality that is 
 
 <p>Lists all language models that are available for use with the service. The information includes the name of the
 model and its minimum sampling rate in Hertz, among other things.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#models">Languages and models</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/models.html">Languages and models</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -536,7 +547,7 @@ model and its minimum sampling rate in Hertz, among other things.
 
 <p>Gets information for a single specified language model that is available for use with the service. The information
 includes the name of the model and its minimum sampling rate in Hertz, among other things.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#models">Languages and models</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/models.html">Languages and models</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -601,8 +612,8 @@ method.</p>
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/recognize(audio:contentType:model:languageCustomizationID:acousticCustomizationID:baseModelVersion:customizationWeight:inactivityTimeout:keywords:keywordsThreshold:maxAlternatives:wordAlternativesThreshold:wordConfidence:timestamps:profanityFilter:smartFormatting:speakerLabels:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">recognize(audio:contentType:model:languageCustomizationID:acousticCustomizationID:baseModelVersion:customizationWeight:inactivityTimeout:keywords:keywordsThreshold:maxAlternatives:wordAlternativesThreshold:wordConfidence:timestamps:profanityFilter:smartFormatting:speakerLabels:headers:completionHandler:)</a>
+                    <a name="//apple_ref/swift/Method/recognize(audio:contentType:model:languageCustomizationID:acousticCustomizationID:baseModelVersion:customizationWeight:inactivityTimeout:keywords:keywordsThreshold:maxAlternatives:wordAlternativesThreshold:wordConfidence:timestamps:profanityFilter:smartFormatting:speakerLabels:grammarName:redaction:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">recognize(audio:contentType:model:languageCustomizationID:acousticCustomizationID:baseModelVersion:customizationWeight:inactivityTimeout:keywords:keywordsThreshold:maxAlternatives:wordAlternativesThreshold:wordConfidence:timestamps:profanityFilter:smartFormatting:speakerLabels:grammarName:redaction:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -616,7 +627,8 @@ method.</p>
 minimum of 100 bytes of audio with a request. The service automatically detects the endianness of the incoming
 audio and, for audio that includes multiple channels, downmixes the audio to one-channel mono during transcoding.
 The method returns only final results; to enable interim results, use the WebSocket API.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/http.html#HTTP-basic">Making a basic HTTP request</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/http.html#HTTP-basic">Making a basic HTTP
+request</a>.</p>
 <h3 id='streaming-mode' class='heading'>Streaming mode</h3>
 
 <p>For requests to transcribe live audio as it becomes available, you must set the <code>Transfer-Encoding</code> header to
@@ -640,6 +652,7 @@ Where indicated, the format that you specify must include the sampling rate and 
 of channels and the endianness of the audio.</li>
 <li><code>audio/basic</code> (<strong>Required.</strong> Use only with narrowband models.)</li>
 <li><code>audio/flac</code></li>
+<li><code>audio/g729</code> (Use only with narrowband models.)</li>
 <li><code>audio/l16</code> (<strong>Required.</strong> Specify the sampling rate (<code>rate</code>) and optionally the number of channels (<code>channels</code>)
 and endianness (<code>endianness</code>) of the audio.)</li>
 <li><code>audio/mp3</code></li>
@@ -652,6 +665,10 @@ and endianness (<code>endianness</code>) of the audio.)</li>
 <li><code>audio/webm</code> (The service automatically detects the codec of the input audio.)</li>
 <li><code>audio/webm;codecs=opus</code></li>
 <li><p><code>audio/webm;codecs=vorbis</code>
+The sampling rate of the audio must match the sampling rate of the model for the recognition request: for broadband
+models, at least 16 kHz; for narrowband models, at least 8 kHz. If the sampling rate of the audio is higher than
+the minimum required rate, the service down-samples the audio to the appropriate rate. If the sampling rate of the
+audio is lower than the minimum required rate, the request fails.
 <strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/audio-formats.html">Audio formats</a>.</p>
 <h3 id='multipart-speech-recognition' class='heading'>Multipart speech recognition</h3>
 
@@ -662,7 +679,8 @@ pass JSON metadata as form data to control most aspects of the transcription.
 The multipart approach is intended for use with browsers for which JavaScript is disabled or when the parameters
 used with the request are greater than the 8 KB limit imposed by most HTTP servers and proxies. You can encounter
 this limit, for example, if you want to spot a very large number of keywords.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/http.html#HTTP-multi">Making a multipart HTTP request</a>.</p></li>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/http.html#HTTP-multi">Making a multipart HTTP
+request</a>.</p></li>
 </ul>
 
                       </div>
@@ -672,7 +690,7 @@ this limit, for example, if you want to spot a very large number of keywords.
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">recognize</span><span class="p">(</span>
     <span class="nv">audio</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
-    <span class="nv">contentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">contentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">model</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">languageCustomizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">acousticCustomizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -688,6 +706,8 @@ this limit, for example, if you want to spot a very large number of keywords.
     <span class="nv">profanityFilter</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">smartFormatting</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">speakerLabels</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">grammarName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">redaction</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SpeechRecognitionResults.html">SpeechRecognitionResults</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -730,7 +750,8 @@ format, see <strong>Audio formats (content types)</strong> in the method descrip
                               </td>
                               <td>
                                 <div>
-                                  <p>The identifier of the model that is to be used for the recognition request.</p>
+                                  <p>The identifier of the model that is to be used for the recognition request. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/models.html">Languages and
+models</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -744,8 +765,8 @@ format, see <strong>Audio formats (content types)</strong> in the method descrip
                                 <div>
                                   <p>The customization ID (GUID) of a custom language model that is to be used
 with the recognition request. The base model of the specified custom language model must match the model
-specified with the <code>model</code> parameter. You must make the request with service credentials created for the instance
-of the service that owns the custom model. By default, no custom language model is used. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom">Custom
+specified with the <code>model</code> parameter. You must make the request with credentials for the instance of the service
+that owns the custom model. By default, no custom language model is used. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom">Custom
 models</a>.
 <strong>Note:</strong> Use this parameter instead of the deprecated <code>customization_id</code> parameter.</p>
                                 </div>
@@ -761,8 +782,8 @@ models</a>.
                                 <div>
                                   <p>The customization ID (GUID) of a custom acoustic model that is to be used
 with the recognition request. The base model of the specified custom acoustic model must match the model
-specified with the <code>model</code> parameter. You must make the request with service credentials created for the instance
-of the service that owns the custom model. By default, no custom acoustic model is used. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom">Custom
+specified with the <code>model</code> parameter. You must make the request with credentials for the instance of the service
+that owns the custom model. By default, no custom acoustic model is used. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom">Custom
 models</a>.</p>
                                 </div>
                               </td>
@@ -845,8 +866,8 @@ spotting</a>.</p>
                                 <div>
                                   <p>A confidence value that is the lower bound for spotting a keyword. A word is
 considered to match a keyword if its confidence is greater than or equal to the threshold. Specify a probability
-between 0.0 and 1.0. No keyword spotting is performed if you omit the parameter. If you specify a threshold, you
-must also specify one or more keywords. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#keyword_spotting">Keyword
+between 0.0 and 1.0. If you specify a threshold, you must also specify one or more keywords. The service performs
+no keyword spotting if you omit either parameter. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#keyword_spotting">Keyword
 spotting</a>.</p>
                                 </div>
                               </td>
@@ -860,7 +881,7 @@ spotting</a>.</p>
                               <td>
                                 <div>
                                   <p>The maximum number of alternative transcripts that the service is to return. By
-default, a single transcription is returned. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#max_alternatives">Maximum
+default, the service returns a single transcript. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#max_alternatives">Maximum
 alternatives</a>.</p>
                                 </div>
                               </td>
@@ -875,8 +896,8 @@ alternatives</a>.</p>
                                 <div>
                                   <p>A confidence value that is the lower bound for identifying a hypothesis as
 a possible word alternative (also known as \<q>Confusion Networks\</q>). An alternative word is considered if its
-confidence is greater than or equal to the threshold. Specify a probability between 0.0 and 1.0. No alternative
-words are computed if you omit the parameter. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_alternatives">Word
+confidence is greater than or equal to the threshold. Specify a probability between 0.0 and 1.0. By default, the
+service computes no alternative words. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_alternatives">Word
 alternatives</a>.</p>
                                 </div>
                               </td>
@@ -890,7 +911,7 @@ alternatives</a>.</p>
                               <td>
                                 <div>
                                   <p>If <code>true</code>, the service returns a confidence measure in the range of 0.0 to 1.0 for
-each word. By default, no word confidence measures are returned. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_confidence">Word
+each word. By default, the service returns no word confidence scores. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_confidence">Word
 confidence</a>.</p>
                                 </div>
                               </td>
@@ -904,7 +925,8 @@ confidence</a>.</p>
                               <td>
                                 <div>
                                   <p>If <code>true</code>, the service returns time alignment for each word. By default, no timestamps
-are returned. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_timestamps">Word timestamps</a>.</p>
+are returned. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_timestamps">Word
+timestamps</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -934,8 +956,9 @@ filtering</a>.</p>
                                   <p>If <code>true</code>, the service converts dates, times, series of digits and numbers, phone
 numbers, currency values, and internet addresses into more readable, conventional representations in the final
 transcript of a recognition request. For US English, the service also converts certain keyword strings to
-punctuation symbols. By default, no smart formatting is performed. Applies to US English, Japanese, and Spanish
-transcription only. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#smart_formatting">Smart formatting</a>.</p>
+punctuation symbols. By default, the service performs no smart formatting.
+<strong>Note:</strong> Applies to US English, Japanese, and Spanish transcription only.
+See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#smart_formatting">Smart formatting</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -948,12 +971,50 @@ transcription only. See <a href="https://cloud.ibm.com/docs/services/speech-to-t
                               <td>
                                 <div>
                                   <p>If <code>true</code>, the response includes labels that identify which words were spoken by which
-participants in a multi-person exchange. By default, no speaker labels are returned. Setting <code>speaker_labels</code> to
-<code>true</code> forces the <code>timestamps</code> parameter to be <code>true</code>, regardless of whether you specify <code>false</code> for the
-parameter.
-To determine whether a language model supports speaker labels, use the <strong>Get a model</strong> method and check that the
-attribute <code>speaker_labels</code> is set to <code>true</code>. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#speaker_labels">Speaker
-labels</a>.</p>
+participants in a multi-person exchange. By default, the service returns no speaker labels. Setting
+<code>speaker_labels</code> to <code>true</code> forces the <code>timestamps</code> parameter to be <code>true</code>, regardless of whether you specify
+<code>false</code> for the parameter.
+<strong>Note:</strong> Applies to US English, Japanese, and Spanish transcription only. To determine whether a language model
+supports speaker labels, you can also use the <strong>Get a model</strong> method and check that the attribute
+<code>speaker_labels</code> is set to <code>true</code>.
+See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#speaker_labels">Speaker labels</a>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>grammarName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of a grammar that is to be used with the recognition request. If you specify a
+grammar, you must also use the <code>language_customization_id</code> parameter to specify the name of the custom language
+model for which the grammar is defined. The service recognizes only strings that are recognized by the specified
+grammar; it does not recognize other custom words from the model&rsquo;s words resource. See
+<a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html">Grammars</a>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>redaction</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If <code>true</code>, the service redacts, or masks, numeric data from final transcripts. The feature
+redacts any number that has three or more consecutive digits by replacing each digit with an <code>X</code> character. It is
+intended to redact sensitive numeric data, such as credit card numbers. By default, the service performs no
+redaction.
+When you enable redaction, the service automatically enables smart formatting, regardless of whether you
+explicitly disable that feature. To ensure maximum security, the service also disables keyword spotting (ignores
+the <code>keywords</code> and <code>keywords_threshold</code> parameters) and returns only a single final transcript (forces the
+<code>max_alternatives</code> parameter to be <code>1</code>).
+<strong>Note:</strong> Applies to US English, Japanese, and Korean transcription only.
+See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#redaction">Numeric redaction</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1118,7 +1179,8 @@ you omit the parameter, the service does not send the header.</p>
 
 <p>Unregisters a callback URL that was previously white-listed with a <strong>Register a callback</strong> request for use with the
 asynchronous interface. Once unregistered, the URL can no longer be used with asynchronous recognition requests.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/async.html#unregister">Unregistering a callback URL</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/async.html#unregister">Unregistering a callback
+URL</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -1182,8 +1244,8 @@ asynchronous interface. Once unregistered, the URL can no longer be used with as
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/createJob(audio:contentType:model:callbackURL:events:userToken:resultsTtl:languageCustomizationID:acousticCustomizationID:baseModelVersion:customizationWeight:inactivityTimeout:keywords:keywordsThreshold:maxAlternatives:wordAlternativesThreshold:wordConfidence:timestamps:profanityFilter:smartFormatting:speakerLabels:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">createJob(audio:contentType:model:callbackURL:events:userToken:resultsTtl:languageCustomizationID:acousticCustomizationID:baseModelVersion:customizationWeight:inactivityTimeout:keywords:keywordsThreshold:maxAlternatives:wordAlternativesThreshold:wordConfidence:timestamps:profanityFilter:smartFormatting:speakerLabels:headers:completionHandler:)</a>
+                    <a name="//apple_ref/swift/Method/createJob(audio:contentType:model:callbackURL:events:userToken:resultsTtl:languageCustomizationID:acousticCustomizationID:baseModelVersion:customizationWeight:inactivityTimeout:keywords:keywordsThreshold:maxAlternatives:wordAlternativesThreshold:wordConfidence:timestamps:profanityFilter:smartFormatting:speakerLabels:grammarName:redaction:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">createJob(audio:contentType:model:callbackURL:events:userToken:resultsTtl:languageCustomizationID:acousticCustomizationID:baseModelVersion:customizationWeight:inactivityTimeout:keywords:keywordsThreshold:maxAlternatives:wordAlternativesThreshold:wordConfidence:timestamps:profanityFilter:smartFormatting:speakerLabels:grammarName:redaction:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1193,9 +1255,9 @@ asynchronous interface. Once unregistered, the URL can no longer be used with as
                       <div class="abstract">
                         <p>Create a job.</p>
 
-<p>Creates a job for a new asynchronous recognition request. The job is owned by the user whose service credentials
-are used to create it. How you learn the status and results of a job depends on the parameters you include with the
-job creation request:</p>
+<p>Creates a job for a new asynchronous recognition request. The job is owned by the instance of the service whose
+credentials are used to create it. How you learn the status and results of a job depends on the parameters you
+include with the job creation request:</p>
 
 <ul>
 <li>By callback notification: Include the <code>callback_url</code> parameter to specify a URL to which the service is to send
@@ -1241,6 +1303,7 @@ Where indicated, the format that you specify must include the sampling rate and 
 of channels and the endianness of the audio.</li>
 <li><code>audio/basic</code> (<strong>Required.</strong> Use only with narrowband models.)</li>
 <li><code>audio/flac</code></li>
+<li><code>audio/g729</code> (Use only with narrowband models.)</li>
 <li><code>audio/l16</code> (<strong>Required.</strong> Specify the sampling rate (<code>rate</code>) and optionally the number of channels (<code>channels</code>)
 and endianness (<code>endianness</code>) of the audio.)</li>
 <li><code>audio/mp3</code></li>
@@ -1253,6 +1316,10 @@ and endianness (<code>endianness</code>) of the audio.)</li>
 <li><code>audio/webm</code> (The service automatically detects the codec of the input audio.)</li>
 <li><code>audio/webm;codecs=opus</code></li>
 <li><p><code>audio/webm;codecs=vorbis</code>
+The sampling rate of the audio must match the sampling rate of the model for the recognition request: for broadband
+models, at least 16 kHz; for narrowband models, at least 8 kHz. If the sampling rate of the audio is higher than
+the minimum required rate, the service down-samples the audio to the appropriate rate. If the sampling rate of the
+audio is lower than the minimum required rate, the request fails.
 <strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/audio-formats.html">Audio formats</a>.</p></li>
 </ul>
 
@@ -1263,7 +1330,7 @@ and endianness (<code>endianness</code>) of the audio.)</li>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createJob</span><span class="p">(</span>
     <span class="nv">audio</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
-    <span class="nv">contentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">contentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">model</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">callbackURL</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">events</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -1283,6 +1350,8 @@ and endianness (<code>endianness</code>) of the audio.)</li>
     <span class="nv">profanityFilter</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">smartFormatting</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">speakerLabels</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">grammarName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">redaction</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/RecognitionJob.html">RecognitionJob</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1325,7 +1394,8 @@ format, see <strong>Audio formats (content types)</strong> in the method descrip
                               </td>
                               <td>
                                 <div>
-                                  <p>The identifier of the model that is to be used for the recognition request.</p>
+                                  <p>The identifier of the model that is to be used for the recognition request. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/models.html">Languages and
+models</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1411,8 +1481,8 @@ use a time to live of one week. The parameter is valid with or without a callbac
                                 <div>
                                   <p>The customization ID (GUID) of a custom language model that is to be used
 with the recognition request. The base model of the specified custom language model must match the model
-specified with the <code>model</code> parameter. You must make the request with service credentials created for the instance
-of the service that owns the custom model. By default, no custom language model is used. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom">Custom
+specified with the <code>model</code> parameter. You must make the request with credentials for the instance of the service
+that owns the custom model. By default, no custom language model is used. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom">Custom
 models</a>.
 <strong>Note:</strong> Use this parameter instead of the deprecated <code>customization_id</code> parameter.</p>
                                 </div>
@@ -1428,8 +1498,8 @@ models</a>.
                                 <div>
                                   <p>The customization ID (GUID) of a custom acoustic model that is to be used
 with the recognition request. The base model of the specified custom acoustic model must match the model
-specified with the <code>model</code> parameter. You must make the request with service credentials created for the instance
-of the service that owns the custom model. By default, no custom acoustic model is used. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom">Custom
+specified with the <code>model</code> parameter. You must make the request with credentials for the instance of the service
+that owns the custom model. By default, no custom acoustic model is used. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom">Custom
 models</a>.</p>
                                 </div>
                               </td>
@@ -1512,8 +1582,8 @@ spotting</a>.</p>
                                 <div>
                                   <p>A confidence value that is the lower bound for spotting a keyword. A word is
 considered to match a keyword if its confidence is greater than or equal to the threshold. Specify a probability
-between 0.0 and 1.0. No keyword spotting is performed if you omit the parameter. If you specify a threshold, you
-must also specify one or more keywords. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#keyword_spotting">Keyword
+between 0.0 and 1.0. If you specify a threshold, you must also specify one or more keywords. The service performs
+no keyword spotting if you omit either parameter. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#keyword_spotting">Keyword
 spotting</a>.</p>
                                 </div>
                               </td>
@@ -1527,7 +1597,7 @@ spotting</a>.</p>
                               <td>
                                 <div>
                                   <p>The maximum number of alternative transcripts that the service is to return. By
-default, a single transcription is returned. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#max_alternatives">Maximum
+default, the service returns a single transcript. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#max_alternatives">Maximum
 alternatives</a>.</p>
                                 </div>
                               </td>
@@ -1542,8 +1612,8 @@ alternatives</a>.</p>
                                 <div>
                                   <p>A confidence value that is the lower bound for identifying a hypothesis as
 a possible word alternative (also known as \<q>Confusion Networks\</q>). An alternative word is considered if its
-confidence is greater than or equal to the threshold. Specify a probability between 0.0 and 1.0. No alternative
-words are computed if you omit the parameter. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_alternatives">Word
+confidence is greater than or equal to the threshold. Specify a probability between 0.0 and 1.0. By default, the
+service computes no alternative words. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_alternatives">Word
 alternatives</a>.</p>
                                 </div>
                               </td>
@@ -1557,7 +1627,7 @@ alternatives</a>.</p>
                               <td>
                                 <div>
                                   <p>If <code>true</code>, the service returns a confidence measure in the range of 0.0 to 1.0 for
-each word. By default, no word confidence measures are returned. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_confidence">Word
+each word. By default, the service returns no word confidence scores. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_confidence">Word
 confidence</a>.</p>
                                 </div>
                               </td>
@@ -1571,7 +1641,8 @@ confidence</a>.</p>
                               <td>
                                 <div>
                                   <p>If <code>true</code>, the service returns time alignment for each word. By default, no timestamps
-are returned. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_timestamps">Word timestamps</a>.</p>
+are returned. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_timestamps">Word
+timestamps</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1601,8 +1672,9 @@ filtering</a>.</p>
                                   <p>If <code>true</code>, the service converts dates, times, series of digits and numbers, phone
 numbers, currency values, and internet addresses into more readable, conventional representations in the final
 transcript of a recognition request. For US English, the service also converts certain keyword strings to
-punctuation symbols. By default, no smart formatting is performed. Applies to US English, Japanese, and Spanish
-transcription only. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#smart_formatting">Smart formatting</a>.</p>
+punctuation symbols. By default, the service performs no smart formatting.
+<strong>Note:</strong> Applies to US English, Japanese, and Spanish transcription only.
+See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#smart_formatting">Smart formatting</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1615,12 +1687,50 @@ transcription only. See <a href="https://cloud.ibm.com/docs/services/speech-to-t
                               <td>
                                 <div>
                                   <p>If <code>true</code>, the response includes labels that identify which words were spoken by which
-participants in a multi-person exchange. By default, no speaker labels are returned. Setting <code>speaker_labels</code> to
-<code>true</code> forces the <code>timestamps</code> parameter to be <code>true</code>, regardless of whether you specify <code>false</code> for the
-parameter.
-To determine whether a language model supports speaker labels, use the <strong>Get a model</strong> method and check that the
-attribute <code>speaker_labels</code> is set to <code>true</code>. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#speaker_labels">Speaker
-labels</a>.</p>
+participants in a multi-person exchange. By default, the service returns no speaker labels. Setting
+<code>speaker_labels</code> to <code>true</code> forces the <code>timestamps</code> parameter to be <code>true</code>, regardless of whether you specify
+<code>false</code> for the parameter.
+<strong>Note:</strong> Applies to US English, Japanese, and Spanish transcription only. To determine whether a language model
+supports speaker labels, you can also use the <strong>Get a model</strong> method and check that the attribute
+<code>speaker_labels</code> is set to <code>true</code>.
+See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#speaker_labels">Speaker labels</a>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>grammarName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of a grammar that is to be used with the recognition request. If you specify a
+grammar, you must also use the <code>language_customization_id</code> parameter to specify the name of the custom language
+model for which the grammar is defined. The service recognizes only strings that are recognized by the specified
+grammar; it does not recognize other custom words from the model&rsquo;s words resource. See
+<a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html">Grammars</a>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>redaction</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If <code>true</code>, the service redacts, or masks, numeric data from final transcripts. The feature
+redacts any number that has three or more consecutive digits by replacing each digit with an <code>X</code> character. It is
+intended to redact sensitive numeric data, such as credit card numbers. By default, the service performs no
+redaction.
+When you enable redaction, the service automatically enables smart formatting, regardless of whether you
+explicitly disable that feature. To ensure maximum security, the service also disables keyword spotting (ignores
+the <code>keywords</code> and <code>keywords_threshold</code> parameters) and returns only a single final transcript (forces the
+<code>max_alternatives</code> parameter to be <code>1</code>).
+<strong>Note:</strong> Applies to US English, Japanese, and Korean transcription only.
+See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#redaction">Numeric redaction</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1669,13 +1779,14 @@ labels</a>.</p>
                       <div class="abstract">
                         <p>Check jobs.</p>
 
-<p>Returns the ID and status of the latest 100 outstanding jobs associated with the service credentials with which it
-is called. The method also returns the creation and update times of each job, and, if a job was created with a
+<p>Returns the ID and status of the latest 100 outstanding jobs associated with the credentials with which it is
+called. The method also returns the creation and update times of each job, and, if a job was created with a
 callback URL and a user token, the user token for the job. To obtain the results for a job whose status is
 <code>completed</code> or not one of the latest 100 outstanding jobs, use the <strong>Check a job</strong> method. A job and its results
 remain available until you delete them with the <strong>Delete a job</strong> method or until the job&rsquo;s time to live expires,
 whichever comes first.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/async.html#jobs">Checking the status of the latest jobs</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/async.html#jobs">Checking the status of the latest
+jobs</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -1739,11 +1850,11 @@ whichever comes first.
 
 <p>Returns information about the specified job. The response always includes the status of the job and its creation
 and update times. If the status is <code>completed</code>, the response includes the results of the recognition request. You
-must submit the request with the service credentials of the user who created the job.
+must use credentials for the instance of the service that owns a job to list information about it.
 You can use the method to retrieve the results of any job, regardless of whether it was submitted with a callback
 URL and the <code>recognitions.completed_with_results</code> event, and you can retrieve the results multiple times for as
 long as they remain available. Use the <strong>Check jobs</strong> method to request information about the most recent jobs
-associated with the caller.
+associated with the calling credentials.
 <strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/async.html#job">Checking the status and retrieving the results of a
 job</a>.</p>
 
@@ -1771,7 +1882,8 @@ job</a>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The identifier of the asynchronous job that is to be used for the request.</p>
+                                  <p>The identifier of the asynchronous job that is to be used for the request. You must make the
+request with credentials for the instance of the service that owns the job.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1822,7 +1934,7 @@ job</a>.</p>
 
 <p>Deletes the specified job. You cannot delete a job that the service is actively processing. Once you delete a job,
 its results are no longer available. The service automatically deletes a job and its results when the time to live
-for the results expires. You must submit the request with the service credentials of the user who created the job.
+for the results expires. You must use credentials for the instance of the service that owns a job to delete it.
 <strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/async.html#delete">Deleting a job</a>.</p>
 
                       </div>
@@ -1849,7 +1961,8 @@ for the results expires. You must submit the request with the service credential
                               </td>
                               <td>
                                 <div>
-                                  <p>The identifier of the asynchronous job that is to be used for the request.</p>
+                                  <p>The identifier of the asynchronous job that is to be used for the request. You must make the
+request with credentials for the instance of the service that owns the job.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1901,7 +2014,8 @@ for the results expires. You must submit the request with the service credential
 <p>Creates a new custom language model for a specified base model. The custom language model can be used only with the
 base model for which it is created. The model is owned by the instance of the service whose credentials are used to
 create it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#createModel">Create a custom language model</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#createModel">Create a custom language
+model</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -2036,7 +2150,8 @@ the language of the custom model.</p>
 parameter to see all custom language models for the specified language. Omit the parameter to see all custom
 language models for all languages. You must use credentials for the instance of the service that owns a model to
 list information about it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#listModels">Listing custom language models</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#listModels">Listing custom language
+models</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -2063,8 +2178,8 @@ list information about it.
                               <td>
                                 <div>
                                   <p>The identifier of the language for which custom language or custom acoustic models are to
-be returned (for example, <code>en-US</code>). Omit the parameter to see all custom language or custom acoustic models owned
-by the requesting service credentials.</p>
+be returned (for example, <code>en-US</code>). Omit the parameter to see all custom language or custom acoustic models that
+are owned by the requesting credentials.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2115,7 +2230,8 @@ by the requesting service credentials.</p>
 
 <p>Gets information about a specified custom language model. You must use credentials for the instance of the service
 that owns a model to list information about it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#listModels">Listing custom language models</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#listModels">Listing custom language
+models</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -2142,8 +2258,7 @@ that owns a model to list information about it.
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom language model that is to be used for the
-request. You must make the request with service credentials created for the instance of the service that owns the
-custom model.</p>
+request. You must make the request with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2193,9 +2308,10 @@ custom model.</p>
                         <p>Delete a custom language model.</p>
 
 <p>Deletes an existing custom language model. The custom model cannot be deleted if another request, such as adding a
-corpus to the model, is currently being processed. You must use credentials for the instance of the service that
-owns a model to delete it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#deleteModel">Deleting a custom language model</a>.</p>
+corpus or grammar to the model, is currently being processed. You must use credentials for the instance of the
+service that owns a model to delete it.
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#deleteModel">Deleting a custom language
+model</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -2222,8 +2338,7 @@ owns a model to delete it.
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom language model that is to be used for the
-request. You must make the request with service credentials created for the instance of the service that owns the
-custom model.</p>
+request. You must make the request with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2272,27 +2387,28 @@ custom model.</p>
                       <div class="abstract">
                         <p>Train a custom language model.</p>
 
-<p>Initiates the training of a custom language model with new corpora, custom words, or both. After adding, modifying,
-or deleting corpora or words for a custom language model, use this method to begin the actual training of the model
-on the latest data. You can specify whether the custom language model is to be trained with all words from its
-words resource or only with words that were added or modified by the user. You must use credentials for the
-instance of the service that owns a model to train it.
+<p>Initiates the training of a custom language model with new resources such as corpora, grammars, and custom words.
+After adding, modifying, or deleting resources for a custom language model, use this method to begin the actual
+training of the model on the latest data. You can specify whether the custom language model is to be trained with
+all words from its words resource or only with words that were added or modified by the user directly. You must use
+credentials for the instance of the service that owns a model to train it.
 The training method is asynchronous. It can take on the order of minutes to complete depending on the amount of
 data on which the service is being trained and the current load on the service. The method returns an HTTP 200
 response code to indicate that the training process has begun.
 You can monitor the status of the training by using the <strong>Get a custom language model</strong> method to poll the model&rsquo;s
 status. Use a loop to check the status every 10 seconds. The method returns a <code><a href="../Structs/LanguageModel.html">LanguageModel</a></code> object that includes
 <code>status</code> and <code>progress</code> fields. A status of <code>available</code> means that the custom model is trained and ready to use.
-The service cannot accept subsequent training requests, or requests to add new corpora or words, until the existing
-request completes.
+The service cannot accept subsequent training requests or requests to add new resources until the existing request
+completes.
 Training can fail to start for the following reasons:</p>
 
 <ul>
 <li>The service is currently handling another request for the custom model, such as another training request or a
-request to add a corpus or words to the model.</li>
-<li>No training data (corpora or words) have been added to the custom model.</li>
+request to add a corpus or grammar to the model.</li>
+<li>No training data have been added to the custom model.</li>
 <li><p>One or more words that were added to the custom model have invalid sounds-like pronunciations that you must fix.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#trainModel">Train the custom language model</a>.</p></li>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#trainModel">Train the custom language
+model</a>.</p></li>
 </ul>
 
                       </div>
@@ -2322,8 +2438,7 @@ request to add a corpus or words to the model.</li>
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom language model that is to be used for the
-request. You must make the request with service credentials created for the instance of the service that owns the
-custom model.</p>
+request. You must make the request with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2340,9 +2455,9 @@ the model:</p>
 
 <ul>
 <li><code>all</code> (the default) trains the model on all new words, regardless of whether they were extracted from corpora
-or were added or modified by the user.</li>
-<li><code>user</code> trains the model only on new words that were added or modified by the user; the model is not trained on
-new words extracted from corpora.</li>
+or grammars or were added or modified by the user.</li>
+<li><code>user</code> trains the model only on new words that were added or modified by the user directly. The model is not
+trained on new words extracted from corpora or grammars.</li>
 </ul>
                                 </div>
                               </td>
@@ -2411,11 +2526,12 @@ recognition request by specifying a customization weight for that request.</p>
                       <div class="abstract">
                         <p>Reset a custom language model.</p>
 
-<p>Resets a custom language model by removing all corpora and words from the model. Resetting a custom language model
-initializes the model to its state when it was first created. Metadata such as the name and language of the model
-are preserved, but the model&rsquo;s words resource is removed and must be re-created. You must use credentials for the
-instance of the service that owns a model to reset it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#resetModel">Resetting a custom language model</a>.</p>
+<p>Resets a custom language model by removing all corpora, grammars, and words from the model. Resetting a custom
+language model initializes the model to its state when it was first created. Metadata such as the name and language
+of the model are preserved, but the model&rsquo;s words resource is removed and must be re-created. You must use
+credentials for the instance of the service that owns a model to reset it.
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#resetModel">Resetting a custom language
+model</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -2442,8 +2558,7 @@ instance of the service that owns a model to reset it.
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom language model that is to be used for the
-request. You must make the request with service credentials created for the instance of the service that owns the
-custom model.</p>
+request. You must make the request with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2530,8 +2645,7 @@ model</a>.</p>
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom language model that is to be used for the
-request. You must make the request with service credentials created for the instance of the service that owns the
-custom model.</p>
+request. You must make the request with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2611,8 +2725,7 @@ model</a>.</p>
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom language model that is to be used for the
-request. You must make the request with service credentials created for the instance of the service that owns the
-custom model.</p>
+request. You must make the request with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2671,25 +2784,27 @@ the domain, the better the service&rsquo;s recognition accuracy.
 The call returns an HTTP 201 response code if the corpus is valid. The service then asynchronously processes the
 contents of the corpus and automatically extracts new words that it finds. This can take on the order of a minute
 or two to complete depending on the total number of words and the number of new words in the corpus, as well as the
-current load on the service. You cannot submit requests to add additional corpora or words to the custom model, or
-to train the model, until the service&rsquo;s analysis of the corpus for the current request completes. Use the <strong>List a
-corpus</strong> method to check the status of the analysis.
-The service auto-populates the model&rsquo;s words resource with any word that is not found in its base vocabulary; these
-are referred to as out-of-vocabulary (OOV) words. You can use the <strong>List custom words</strong> method to examine the words
-resource, using other words method to eliminate typos and modify how words are pronounced as needed.
+current load on the service. You cannot submit requests to add additional resources to the custom model or to train
+the model until the service&rsquo;s analysis of the corpus for the current request completes. Use the <strong>List a corpus</strong>
+method to check the status of the analysis.
+The service auto-populates the model&rsquo;s words resource with words from the corpus that are not found in its base
+vocabulary. These are referred to as out-of-vocabulary (OOV) words. You can use the <strong>List custom words</strong> method to
+examine the words resource. You can use other words method to eliminate typos and modify how words are pronounced
+as needed.
 To add a corpus file that has the same name as an existing corpus, set the <code>allow_overwrite</code> parameter to <code>true</code>;
 otherwise, the request fails. Overwriting an existing corpus causes the service to process the corpus text file and
 extract OOV words anew. Before doing so, it removes any OOV words associated with the existing corpus from the
-model&rsquo;s words resource unless they were also added by another corpus or they have been modified in some way with
-the <strong>Add custom words</strong> or <strong>Add a custom word</strong> method.
+model&rsquo;s words resource unless they were also added by another corpus or grammar, or they have been modified in some
+way with the <strong>Add custom words</strong> or <strong>Add a custom word</strong> method.
 The service limits the overall amount of data that you can add to a custom model to a maximum of 10 million total
-words from all corpora combined. Also, you can add no more than 30 thousand custom (OOV) words to a model; this
-includes words that the service extracts from corpora and words that you add directly.
+words from all sources combined. Also, you can add no more than 30 thousand custom (OOV) words to a model. This
+includes words that the service extracts from corpora and grammars, and words that you add directly.
 <strong>See also:</strong></p>
 
 <ul>
 <li><a href="https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#workingCorpora">Working with corpora</a></li>
-<li><p><a href="https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#addCorpora">Add corpora to the custom language model</a>.</p></li>
+<li><p><a href="https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#addCorpora">Add corpora to the custom language
+model</a>.</p></li>
 </ul>
 
                       </div>
@@ -2720,8 +2835,7 @@ includes words that the service extracts from corpora and words that you add dir
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom language model that is to be used for the
-request. You must make the request with service credentials created for the instance of the service that owns the
-custom model.</p>
+request. You must make the request with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2739,7 +2853,7 @@ matches the language of the custom model and reflects the contents of the corpus
 <ul>
 <li>Include a maximum of 128 characters in the name.</li>
 <li>Do not include spaces, slashes, or backslashes in the name.</li>
-<li>Do not use the name of a corpus that has already been added to the custom model.</li>
+<li>Do not use the name of an existing corpus or grammar that is already defined for the custom model.</li>
 <li>Do not use the name <code>user</code>, which is reserved by the service to denote custom words that are added or modified
 by the user.</li>
 </ul>
@@ -2855,8 +2969,7 @@ model</a>.</p>
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom language model that is to be used for the
-request. You must make the request with service credentials created for the instance of the service that owns the
-custom model.</p>
+request. You must make the request with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2917,11 +3030,11 @@ custom model.</p>
                       <div class="abstract">
                         <p>Delete a corpus.</p>
 
-<p>Deletes an existing corpus from a custom language model. The service removes any out-of-vocabulary (OOV) words
-associated with the corpus from the custom model&rsquo;s words resource unless they were also added by another corpus or
-they have been modified in some way with the <strong>Add custom words</strong> or <strong>Add a custom word</strong> method. Removing a
-corpus does not affect the custom model until you train the model with the <strong>Train a custom language model</strong>
-method. You must use credentials for the instance of the service that owns a model to delete its corpora.
+<p>Deletes an existing corpus from a custom language model. The service removes any out-of-vocabulary (OOV) words that
+are associated with the corpus from the custom model&rsquo;s words resource unless they were also added by another corpus
+or grammar, or they were modified in some way with the <strong>Add custom words</strong> or <strong>Add a custom word</strong> method.
+Removing a corpus does not affect the custom model until you train the model with the <strong>Train a custom language
+model</strong> method. You must use credentials for the instance of the service that owns a model to delete its corpora.
 <strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-corpora.html#deleteCorpus">Deleting a corpus from a custom language
 model</a>.</p>
 
@@ -2951,8 +3064,7 @@ model</a>.</p>
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom language model that is to be used for the
-request. You must make the request with service credentials created for the instance of the service that owns the
-custom model.</p>
+request. You must make the request with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3015,9 +3127,9 @@ custom model.</p>
 
 <p>Lists information about custom words from a custom language model. You can list all words from the custom model&rsquo;s
 words resource, only custom words that were added or modified by the user, or only out-of-vocabulary (OOV) words
-that were extracted from corpora. You can also indicate the order in which the service is to return words; by
-default, words are listed in ascending alphabetical order. You must use credentials for the instance of the service
-that owns a model to query information about its words.
+that were extracted from corpora or are recognized by grammars. You can also indicate the order in which the
+service is to return words; by default, the service lists words in ascending alphabetical order. You must use
+credentials for the instance of the service that owns a model to list information about its words.
 <strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-words.html#listWords">Listing words from a custom language
 model</a>.</p>
 
@@ -3048,8 +3160,7 @@ model</a>.</p>
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom language model that is to be used for the
-request. You must make the request with service credentials created for the instance of the service that owns the
-custom model.</p>
+request. You must make the request with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3065,8 +3176,9 @@ custom model.</p>
 
 <ul>
 <li><code>all</code> (the default) shows all words.</li>
-<li><code>user</code> shows only custom words that were added or modified by the user.</li>
+<li><code>user</code> shows only custom words that were added or modified by the user directly.</li>
 <li><code>corpora</code> shows only OOV that were extracted from corpora.</li>
+<li><code>grammars</code> shows only OOV words that are recognized by grammars.</li>
 </ul></p>
                                 </div>
                               </td>
@@ -3134,10 +3246,10 @@ values with the same count are ordered alphabetically. With the <code>curl</code
                         <p>Add custom words.</p>
 
 <p>Adds one or more custom words to a custom language model. The service populates the words resource for a custom
-model with out-of-vocabulary (OOV) words found in each corpus added to the model. You can use this method to add
-additional words or to modify existing words in the words resource. The words resource for a model can contain a
-maximum of 30 thousand custom (OOV) words, including words that the service extracts from corpora and words that
-you add directly.
+model with out-of-vocabulary (OOV) words from each corpus or grammar that is added to the model. You can use this
+method to add additional words or to modify existing words in the words resource. The words resource for a model
+can contain a maximum of 30 thousand custom (OOV) words. This includes words that the service extracts from corpora
+and grammars and words that you add directly.
 You must use credentials for the instance of the service that owns a model to add or modify custom words for the
 model. Adding or modifying custom words does not affect the custom model until you train the model for the new data
 by using the <strong>Train a custom language model</strong> method.
@@ -3151,24 +3263,26 @@ specify how the word can be pronounced by users. Use the parameter for words tha
 foreign words, acronyms, and so on. For example, you might specify that the word <code>IEEE</code> can sound like <code>i triple
 e</code>. You can specify a maximum of five sounds-like pronunciations for a word.</li>
 <li>The <code>display_as</code> field provides a different way of spelling the word in a transcript. Use the parameter when you
-want the word to appear different from its usual representation or from its spelling in corpora training data. For
-example, you might indicate that the word <code>IBM(trademark)</code> is to be displayed as <code>IBM&amp;trade;</code>.
+want the word to appear different from its usual representation or from its spelling in training data. For example,
+you might indicate that the word <code>IBM(trademark)</code> is to be displayed as <code>IBM&amp;trade;</code>.
 If you add a custom word that already exists in the words resource for the custom model, the new definition
 overwrites the existing data for the word. If the service encounters an error with the input data, it returns a
 failure code and does not add any of the words to the words resource.
 The call returns an HTTP 201 response code if the input data is valid. It then asynchronously processes the words
 to add them to the model&rsquo;s words resource. The time that it takes for the analysis to complete depends on the
-number of new words that you add but is generally faster than adding a corpus or training a model.
+number of new words that you add but is generally faster than adding a corpus or grammar.
 You can monitor the status of the request by using the <strong>List a custom language model</strong> method to poll the model&rsquo;s
 status. Use a loop to check the status every 10 seconds. The method returns a <code>Customization</code> object that includes
 a <code>status</code> field. A status of <code>ready</code> means that the words have been added to the custom model. The service cannot
-accept requests to add new corpora or words or to train the model until the existing request completes.
+accept requests to add new data or to train the model until the existing request completes.
 You can use the <strong>List custom words</strong> or <strong>List a custom word</strong> method to review the words that you add. Words with
 an invalid <code>sounds_like</code> field include an <code>error</code> field that describes the problem. You can use other words-related
 methods to correct errors, eliminate typos, and modify how words are pronounced as needed.
 <strong>See also:</strong></li>
-<li><a href="https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#workingWords">Working with custom words</a></li>
-<li><p><a href="https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#addWords">Add words to the custom language model</a>.</p></li>
+<li><a href="https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#workingWords">Working with custom
+words</a></li>
+<li><p><a href="https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#addWords">Add words to the custom language
+model</a>.</p></li>
 </ul>
 
                       </div>
@@ -3197,8 +3311,7 @@ methods to correct errors, eliminate typos, and modify how words are pronounced 
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom language model that is to be used for the
-request. You must make the request with service credentials created for the instance of the service that owns the
-custom model.</p>
+request. You must make the request with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3210,8 +3323,8 @@ custom model.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>An array of objects that provides information about each custom word that is to be added to or
-updated in the custom language model.</p>
+                                  <p>An array of <code><a href="../Structs/CustomWord.html">CustomWord</a></code> objects that provides information about each custom word that is to
+be added to or updated in the custom language model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3261,9 +3374,10 @@ updated in the custom language model.</p>
                         <p>Add a custom word.</p>
 
 <p>Adds a custom word to a custom language model. The service populates the words resource for a custom model with
-out-of-vocabulary (OOV) words found in each corpus added to the model. You can use this method to add a word or to
-modify an existing word in the words resource. The words resource for a model can contain a maximum of 30 thousand
-custom (OOV) words, including words that the service extracts from corpora and words that you add directly.
+out-of-vocabulary (OOV) words from each corpus or grammar that is added to the model. You can use this method to
+add a word or to modify an existing word in the words resource. The words resource for a model can contain a
+maximum of 30 thousand custom (OOV) words. This includes words that the service extracts from corpora and grammars
+and words that you add directly.
 You must use credentials for the instance of the service that owns a model to add or modify a custom word for the
 model. Adding or modifying a custom word does not affect the custom model until you train the model for the new
 data by using the <strong>Train a custom language model</strong> method.
@@ -3276,14 +3390,16 @@ specify how the word can be pronounced by users. Use the parameter for words tha
 foreign words, acronyms, and so on. For example, you might specify that the word <code>IEEE</code> can sound like <code>i triple
 e</code>. You can specify a maximum of five sounds-like pronunciations for a word.</li>
 <li>The <code>display_as</code> field provides a different way of spelling the word in a transcript. Use the parameter when you
-want the word to appear different from its usual representation or from its spelling in corpora training data. For
-example, you might indicate that the word <code>IBM(trademark)</code> is to be displayed as <code>IBM&amp;trade;</code>.
+want the word to appear different from its usual representation or from its spelling in training data. For example,
+you might indicate that the word <code>IBM(trademark)</code> is to be displayed as <code>IBM&amp;trade;</code>.
 If you add a custom word that already exists in the words resource for the custom model, the new definition
 overwrites the existing data for the word. If the service encounters an error, it does not add the word to the
 words resource. Use the <strong>List a custom word</strong> method to review the word that you add.
 <strong>See also:</strong></li>
-<li><a href="https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#workingWords">Working with custom words</a></li>
-<li><p><a href="https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#addWords">Add words to the custom language model</a>.</p></li>
+<li><a href="https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#workingWords">Working with custom
+words</a></li>
+<li><p><a href="https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#addWords">Add words to the custom language
+model</a>.</p></li>
 </ul>
 
                       </div>
@@ -3315,8 +3431,7 @@ words resource. Use the <strong>List a custom word</strong> method to review the
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom language model that is to be used for the
-request. You must make the request with service credentials created for the instance of the service that owns the
-custom model.</p>
+request. You must make the request with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3433,7 +3548,7 @@ spelling in corpora training data.</p>
                         <p>Get a custom word.</p>
 
 <p>Gets information about a custom word from a custom language model. You must use credentials for the instance of the
-service that owns a model to query information about its words.
+service that owns a model to list information about its words.
 <strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-words.html#listWords">Listing words from a custom language
 model</a>.</p>
 
@@ -3463,8 +3578,7 @@ model</a>.</p>
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom language model that is to be used for the
-request. You must make the request with service credentials created for the instance of the service that owns the
-custom model.</p>
+request. You must make the request with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3561,8 +3675,7 @@ model</a>.</p>
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom language model that is to be used for the
-request. You must make the request with service credentials created for the instance of the service that owns the
-custom model.</p>
+request. You must make the request with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3614,6 +3727,446 @@ encoding</a>.</p>
                   <div>
                     <code>
                     <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/listGrammars(customizationID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">listGrammars(customizationID:headers:completionHandler:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List grammars.</p>
+
+<p>Lists information about all grammars from a custom language model. The information includes the total number of
+out-of-vocabulary (OOV) words, name, and status of each grammar. You must use credentials for the instance of the
+service that owns a model to list its grammars.
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/">Listing grammars from a custom language model</a>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listGrammars</span><span class="p">(</span>
+    <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Grammars.html">Grammars</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>customizationID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The customization ID (GUID) of the custom language model that is to be used for the
+request. You must make the request with credentials for the instance of the service that owns the custom model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/addGrammar(customizationID:grammarName:grammarFile:contentType:allowOverwrite:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">addGrammar(customizationID:grammarName:grammarFile:contentType:allowOverwrite:headers:completionHandler:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Add a grammar.</p>
+
+<p>Adds a single grammar file to a custom language model. Submit a plain text file in UTF-8 format that defines the
+grammar. Use multiple requests to submit multiple grammar files. You must use credentials for the instance of the
+service that owns a model to add a grammar to it. Adding a grammar does not affect the custom language model until
+you train the model for the new data by using the <strong>Train a custom language model</strong> method.
+The call returns an HTTP 201 response code if the grammar is valid. The service then asynchronously processes the
+contents of the grammar and automatically extracts new words that it finds. This can take a few seconds to complete
+depending on the size and complexity of the grammar, as well as the current load on the service. You cannot submit
+requests to add additional resources to the custom model or to train the model until the service&rsquo;s analysis of the
+grammar for the current request completes. Use the <strong>Get a grammar</strong> method to check the status of the analysis.
+The service populates the model&rsquo;s words resource with any word that is recognized by the grammar that is not found
+in the model&rsquo;s base vocabulary. These are referred to as out-of-vocabulary (OOV) words. You can use the <strong>List
+custom words</strong> method to examine the words resource and use other words-related methods to eliminate typos and
+modify how words are pronounced as needed.
+To add a grammar that has the same name as an existing grammar, set the <code>allow_overwrite</code> parameter to <code>true</code>;
+otherwise, the request fails. Overwriting an existing grammar causes the service to process the grammar file and
+extract OOV words anew. Before doing so, it removes any OOV words associated with the existing grammar from the
+model&rsquo;s words resource unless they were also added by another resource or they have been modified in some way with
+the <strong>Add custom words</strong> or <strong>Add a custom word</strong> method.
+The service limits the overall amount of data that you can add to a custom model to a maximum of 10 million total
+words from all sources combined. Also, you can add no more than 30 thousand OOV words to a model. This includes
+words that the service extracts from corpora and grammars and words that you add directly.
+<strong>See also:</strong></p>
+
+<ul>
+<li><a href="https://cloud.ibm.com/docs/services/speech-to-text/">Working with grammars</a></li>
+<li><p><a href="https://cloud.ibm.com/docs/services/speech-to-text/">Add grammars to the custom language model</a>.</p></li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addGrammar</span><span class="p">(</span>
+    <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">grammarName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">grammarFile</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">contentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">allowOverwrite</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>customizationID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The customization ID (GUID) of the custom language model that is to be used for the
+request. You must make the request with credentials for the instance of the service that owns the custom model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>grammarName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the new grammar for the custom language model. Use a localized name that
+matches the language of the custom model and reflects the contents of the grammar.</p>
+
+<ul>
+<li>Include a maximum of 128 characters in the name.</li>
+<li>Do not include spaces, slashes, or backslashes in the name.</li>
+<li>Do not use the name of an existing grammar or corpus that is already defined for the custom model.</li>
+<li>Do not use the name <code>user</code>, which is reserved by the service to denote custom words that are added or modified
+by the user.</li>
+</ul>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>grammarFile</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A plain text file that contains the grammar in the format specified by the
+<code>Content-Type</code> header. Encode the file in UTF-8 (ASCII is a subset of UTF-8). Using any other encoding can lead
+to issues when compiling the grammar or to unexpected results in decoding. The service ignores an encoding that
+is specified in the header of the grammar.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>contentType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The format (MIME type) of the grammar file:</p>
+
+<ul>
+<li><code>application/srgs</code> for Augmented Backus-Naur Form (ABNF), which uses a plain-text representation that is
+similar to traditional BNF grammars.</li>
+<li><code>application/srgs+xml</code> for XML Form, which uses XML elements to represent the grammar.</li>
+</ul>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>allowOverwrite</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If <code>true</code>, the specified grammar overwrites an existing grammar with the same name.
+If <code>false</code>, the request fails if a grammar with the same name already exists. The parameter has no effect if a
+grammar with the same name does not already exist.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/getGrammar(customizationID:grammarName:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">getGrammar(customizationID:grammarName:headers:completionHandler:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get a grammar.</p>
+
+<p>Gets information about a grammar from a custom language model. The information includes the total number of
+out-of-vocabulary (OOV) words, name, and status of the grammar. You must use credentials for the instance of the
+service that owns a model to list its grammars.
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/">Listing grammars from a custom language model</a>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getGrammar</span><span class="p">(</span>
+    <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">grammarName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Grammar.html">Grammar</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>customizationID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The customization ID (GUID) of the custom language model that is to be used for the
+request. You must make the request with credentials for the instance of the service that owns the custom model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>grammarName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the grammar for the custom language model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/deleteGrammar(customizationID:grammarName:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">deleteGrammar(customizationID:grammarName:headers:completionHandler:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete a grammar.</p>
+
+<p>Deletes an existing grammar from a custom language model. The service removes any out-of-vocabulary (OOV) words
+associated with the grammar from the custom model&rsquo;s words resource unless they were also added by another resource
+or they were modified in some way with the <strong>Add custom words</strong> or <strong>Add a custom word</strong> method. Removing a grammar
+does not affect the custom model until you train the model with the <strong>Train a custom language model</strong> method. You
+must use credentials for the instance of the service that owns a model to delete its grammar.
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/">Deleting a grammar from a custom language
+model</a>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteGrammar</span><span class="p">(</span>
+    <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">grammarName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>customizationID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The customization ID (GUID) of the custom language model that is to be used for the
+request. You must make the request with credentials for the instance of the service that owns the custom model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>grammarName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the grammar for the custom language model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
                     <a name="//apple_ref/swift/Method/createAcousticModel(name:baseModelName:description:headers:completionHandler:)" class="dashAnchor"></a>
                     <a class="token" href="#/">createAcousticModel(name:baseModelName:description:headers:completionHandler:)</a>
                     </code>
@@ -3628,7 +4181,8 @@ encoding</a>.</p>
 <p>Creates a new custom acoustic model for a specified base model. The custom acoustic model can be used only with the
 base model for which it is created. The model is owned by the instance of the service whose credentials are used to
 create it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-create.html#createModel">Create a custom acoustic model</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-create.html#createModel">Create a custom acoustic
+model</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -3740,7 +4294,8 @@ the language of the custom model.</p>
 parameter to see all custom acoustic models for the specified language. Omit the parameter to see all custom
 acoustic models for all languages. You must use credentials for the instance of the service that owns a model to
 list information about it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#listModels">Listing custom acoustic models</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#listModels">Listing custom acoustic
+models</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -3767,8 +4322,8 @@ list information about it.
                               <td>
                                 <div>
                                   <p>The identifier of the language for which custom language or custom acoustic models are to
-be returned (for example, <code>en-US</code>). Omit the parameter to see all custom language or custom acoustic models owned
-by the requesting service credentials.</p>
+be returned (for example, <code>en-US</code>). Omit the parameter to see all custom language or custom acoustic models that
+are owned by the requesting credentials.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3819,7 +4374,8 @@ by the requesting service credentials.</p>
 
 <p>Gets information about a specified custom acoustic model. You must use credentials for the instance of the service
 that owns a model to list information about it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#listModels">Listing custom acoustic models</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#listModels">Listing custom acoustic
+models</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -3846,8 +4402,7 @@ that owns a model to list information about it.
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom acoustic model that is to be used for the
-request. You must make the request with service credentials created for the instance of the service that owns the
-custom model.</p>
+request. You must make the request with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3899,7 +4454,8 @@ custom model.</p>
 <p>Deletes an existing custom acoustic model. The custom model cannot be deleted if another request, such as adding an
 audio resource to the model, is currently being processed. You must use credentials for the instance of the service
 that owns a model to delete it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#deleteModel">Deleting a custom acoustic model</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#deleteModel">Deleting a custom acoustic
+model</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -3926,8 +4482,7 @@ that owns a model to delete it.
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom acoustic model that is to be used for the
-request. You must make the request with service credentials created for the instance of the service that owns the
-custom model.</p>
+request. You must make the request with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4000,9 +4555,10 @@ Training can fail to start for the following reasons:</p>
 <ul>
 <li>The service is currently handling another request for the custom model, such as another training request or a
 request to add audio resources to the model.</li>
-<li>The custom model contains less than 10 minutes or more than 50 hours of audio data.</li>
+<li>The custom model contains less than 10 minutes or more than 100 hours of audio data.</li>
 <li><p>One or more of the custom model&rsquo;s audio resources is invalid.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-create.html#trainModel">Train the custom acoustic model</a>.</p></li>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-create.html#trainModel">Train the custom acoustic
+model</a>.</p></li>
 </ul>
 
                       </div>
@@ -4031,8 +4587,7 @@ request to add audio resources to the model.</li>
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom acoustic model that is to be used for the
-request. You must make the request with service credentials created for the instance of the service that owns the
-custom model.</p>
+request. You must make the request with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4100,7 +4655,8 @@ resources.</p>
 initializes the model to its state when it was first created. Metadata such as the name and language of the model
 are preserved, but the model&rsquo;s audio resources are removed and must be re-created. You must use credentials for the
 instance of the service that owns a model to reset it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#resetModel">Resetting a custom acoustic model</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#resetModel">Resetting a custom acoustic
+model</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -4127,8 +4683,7 @@ instance of the service that owns a model to reset it.
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom acoustic model that is to be used for the
-request. You must make the request with service credentials created for the instance of the service that owns the
-custom model.</p>
+request. You must make the request with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4221,8 +4776,7 @@ model</a>.</p>
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom acoustic model that is to be used for the
-request. You must make the request with service credentials created for the instance of the service that owns the
-custom model.</p>
+request. You must make the request with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4318,8 +4872,7 @@ model</a>.</p>
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom acoustic model that is to be used for the
-request. You must make the request with service credentials created for the instance of the service that owns the
-custom model.</p>
+request. You must make the request with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4377,7 +4930,7 @@ files via a single archive file is significantly more efficient than adding each
 audio resources in any format that the service supports for speech recognition.
 You can use this method to add any number of audio resources to a custom model by calling the method once for each
 audio or archive file. But the addition of one audio resource must be fully complete before you can add another.
-You must add a minimum of 10 minutes and a maximum of 50 hours of audio that includes speech, not just silence, to
+You must add a minimum of 10 minutes and a maximum of 100 hours of audio that includes speech, not just silence, to
 a custom acoustic model before you can train it. No audio resource, audio- or archive-type, can be larger than 100
 MB. To add an audio resource that has the same name as an existing audio resource, set the <code>allow_overwrite</code>
 parameter to <code>true</code>; otherwise, the request fails.
@@ -4402,6 +4955,7 @@ including specifying the sampling rate, channels, and endianness where indicated
 <ul>
 <li><code>audio/basic</code> (Use only with narrowband models.)</li>
 <li><code>audio/flac</code></li>
+<li><code>audio/g729</code> (Use only with narrowband models.)</li>
 <li><code>audio/l16</code> (Specify the sampling rate (<code>rate</code>) and optionally the number of channels (<code>channels</code>) and endianness
 (<code>endianness</code>) of the audio.)</li>
 <li><code>audio/mp3</code></li>
@@ -4414,11 +4968,11 @@ including specifying the sampling rate, channels, and endianness where indicated
 <li><code>audio/webm</code> (The service automatically detects the codec of the input audio.)</li>
 <li><code>audio/webm;codecs=opus</code></li>
 <li><code>audio/webm;codecs=vorbis</code>
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/audio-formats.html">Audio formats</a>.
-<strong>Note:</strong> The sampling rate of an audio file must match the sampling rate of the base model for the custom model:
-for broadband models, at least 16 kHz; for narrowband models, at least 8 kHz. If the sampling rate of the audio is
+The sampling rate of an audio file must match the sampling rate of the base model for the custom model: for
+broadband models, at least 16 kHz; for narrowband models, at least 8 kHz. If the sampling rate of the audio is
 higher than the minimum required rate, the service down-samples the audio to the appropriate rate. If the sampling
 rate of the audio is lower than the minimum required rate, the service labels the audio file as <code>invalid</code>.
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/audio-formats.html">Audio formats</a>.
 ### Content types for archive-type resources
 You can add an archive file (<strong>.zip</strong> or <strong>.tar.gz</strong> file) that contains audio files in any format that the
 service supports for speech recognition. For an archive-type resource, use the <code>Content-Type</code> parameter to specify
@@ -4446,7 +5000,7 @@ resource.</p></li>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">audioName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">audioResource</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
-    <span class="nv">contentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">contentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">containedContentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">allowOverwrite</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -4467,8 +5021,7 @@ resource.</p></li>
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom acoustic model that is to be used for the
-request. You must make the request with service credentials created for the instance of the service that owns the
-custom model.</p>
+request. You must make the request with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4638,8 +5191,7 @@ model</a>.</p></li>
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom acoustic model that is to be used for the
-request. You must make the request with service credentials created for the instance of the service that owns the
-custom model.</p>
+request. You must make the request with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4734,8 +5286,7 @@ model</a>.</p>
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom acoustic model that is to be used for the
-request. You must make the request with service credentials created for the instance of the service that owns the
-custom model.</p>
+request. You must make the request with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4870,8 +5421,8 @@ data.
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/recognize(audio:settings:model:baseModelVersion:languageCustomizationID:learningOptOut:customerID:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">recognize(audio:settings:model:baseModelVersion:languageCustomizationID:learningOptOut:customerID:completionHandler:)</a>
+                    <a name="//apple_ref/swift/Method/recognize(audio:settings:model:baseModelVersion:languageCustomizationID:learningOptOut:customerID:grammarName:redaction:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">recognize(audio:settings:model:baseModelVersion:languageCustomizationID:learningOptOut:customerID:grammarName:redaction:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4894,6 +5445,8 @@ data.
     <span class="nv">languageCustomizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">learningOptOut</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">customerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">grammarName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">redaction</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SpeechRecognitionResults.html">SpeechRecognitionResults</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
@@ -4999,25 +5552,49 @@ By default, no customer ID is associated with the data.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>grammarName</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed whenever an error occurs.</p>
+                                  <p>The name of a grammar that is to be used with the recognition request. If you specify a
+grammar, you must also use the <code>language_customization_id</code> parameter to specify the name of the custom language
+model for which the grammar is defined. The service recognizes only strings that are recognized by the specified
+grammar; it does not recognize other custom words from the model&rsquo;s words resource. See
+<a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html">Grammars</a>.</p>
                                 </div>
                               </td>
                             </tr>
                             <tr>
                               <td>
                                 <code>
-                                <em>success</em>
+                                <em>redaction</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed with all transcription results whenever
-a final or interim transcription is received.</p>
+                                  <p>If <code>true</code>, the service redacts, or masks, numeric data from final transcripts. The feature
+redacts any number that has three or more consecutive digits by replacing each digit with an <code>X</code> character. It is
+intended to redact sensitive numeric data, such as credit card numbers. By default, the service performs no
+redaction.
+When you enable redaction, the service automatically enables smart formatting, regardless of whether you
+explicitly disable that feature. To ensure maximum security, the service also disables keyword spotting (ignores
+the <code>keywords</code> and <code>keywords_threshold</code> parameters) and returns only a single final transcript (forces the
+<code>max_alternatives</code> parameter to be <code>1</code>).
+<strong>Note:</strong> Applies to US English, Japanese, and Korean transcription only.
+See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#redaction">Numeric redaction</a>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -5031,8 +5608,8 @@ a final or interim transcription is received.</p>
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/recognizeUsingWebSocket(audio:settings:model:baseModelVersion:languageCustomizationID:acousticCustomizationID:learningOptOut:customerID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">recognizeUsingWebSocket(audio:settings:model:baseModelVersion:languageCustomizationID:acousticCustomizationID:learningOptOut:customerID:headers:completionHandler:)</a>
+                    <a name="//apple_ref/swift/Method/recognizeUsingWebSocket(audio:settings:model:baseModelVersion:languageCustomizationID:acousticCustomizationID:learningOptOut:customerID:grammarName:redaction:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">recognizeUsingWebSocket(audio:settings:model:baseModelVersion:languageCustomizationID:acousticCustomizationID:learningOptOut:customerID:grammarName:redaction:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -5056,6 +5633,8 @@ a final or interim transcription is received.</p>
     <span class="nv">acousticCustomizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">learningOptOut</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">customerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">grammarName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">redaction</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SpeechRecognitionResults.html">SpeechRecognitionResults</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -5177,6 +5756,43 @@ By default, no customer ID is associated with the data.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>grammarName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of a grammar that is to be used with the recognition request. If you specify a
+grammar, you must also use the <code>language_customization_id</code> parameter to specify the name of the custom language
+model for which the grammar is defined. The service recognizes only strings that are recognized by the specified
+grammar; it does not recognize other custom words from the model&rsquo;s words resource. See
+<a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html">Grammars</a>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>redaction</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If <code>true</code>, the service redacts, or masks, numeric data from final transcripts. The feature
+redacts any number that has three or more consecutive digits by replacing each digit with an <code>X</code> character. It is
+intended to redact sensitive numeric data, such as credit card numbers. By default, the service performs no
+redaction.
+When you enable redaction, the service automatically enables smart formatting, regardless of whether you
+explicitly disable that feature. To ensure maximum security, the service also disables keyword spotting (ignores
+the <code>keywords</code> and <code>keywords_threshold</code> parameters) and returns only a single final transcript (forces the
+<code>max_alternatives</code> parameter to be <code>1</code>).
+<strong>Note:</strong> Applies to US English, Japanese, and Korean transcription only.
+See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#redaction">Numeric redaction</a>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>headers</em>
                                 </code>
                               </td>
@@ -5189,25 +5805,12 @@ By default, no customer ID is associated with the data.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed whenever an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with all transcription results whenever
-a final or interim transcription is received.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -5221,8 +5824,8 @@ a final or interim transcription is received.</p>
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/recognizeMicrophone(settings:model:baseModelVersion:languageCustomizationID:acousticCustomizationID:learningOptOut:customerID:compress:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">recognizeMicrophone(settings:model:baseModelVersion:languageCustomizationID:acousticCustomizationID:learningOptOut:customerID:compress:headers:completionHandler:)</a>
+                    <a name="//apple_ref/swift/Method/recognizeMicrophone(settings:model:baseModelVersion:languageCustomizationID:acousticCustomizationID:learningOptOut:customerID:compress:grammarName:redaction:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">recognizeMicrophone(settings:model:baseModelVersion:languageCustomizationID:acousticCustomizationID:learningOptOut:customerID:compress:grammarName:redaction:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -5256,6 +5859,8 @@ would prefer to ask for the user&rsquo;s permission in advance.</p>
     <span class="nv">learningOptOut</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">customerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">compress</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nv">grammarName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">redaction</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SpeechRecognitionResults.html">SpeechRecognitionResults</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -5378,6 +5983,43 @@ By default, no customer ID is associated with the data.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>grammarName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of a grammar that is to be used with the recognition request. If you specify a
+grammar, you must also use the <code>language_customization_id</code> parameter to specify the name of the custom language
+model for which the grammar is defined. The service recognizes only strings that are recognized by the specified
+grammar; it does not recognize other custom words from the model&rsquo;s words resource. See
+<a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html">Grammars</a>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>redaction</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If <code>true</code>, the service redacts, or masks, numeric data from final transcripts. The feature
+redacts any number that has three or more consecutive digits by replacing each digit with an <code>X</code> character. It is
+intended to redact sensitive numeric data, such as credit card numbers. By default, the service performs no
+redaction.
+When you enable redaction, the service automatically enables smart formatting, regardless of whether you
+explicitly disable that feature. To ensure maximum security, the service also disables keyword spotting (ignores
+the <code>keywords</code> and <code>keywords_threshold</code> parameters) and returns only a single final transcript (forces the
+<code>max_alternatives</code> parameter to be <code>1</code>).
+<strong>Note:</strong> Applies to US English, Japanese, and Korean transcription only.
+See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#redaction">Numeric redaction</a>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>headers</em>
                                 </code>
                               </td>
@@ -5390,25 +6032,12 @@ By default, no customer ID is associated with the data.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>failure</em>
+                                <em>completionHandler</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>A function executed whenever an error occurs.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>success</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed with all transcription results whenever
-a final or interim transcription is received.</p>
+                                  <p>A function executed when the request completes with a successful result or error</p>
                                 </div>
                               </td>
                             </tr>
@@ -5458,8 +6087,8 @@ a final or interim transcription is received.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-01-11)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-01-18)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

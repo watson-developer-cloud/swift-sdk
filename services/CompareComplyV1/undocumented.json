@@ -1,334 +1,334 @@
 {
   "warnings": [
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/CompareComply.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/CompareComply.swift",
       "line": 64,
       "symbol": "CompareComply.accessToken(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/Attribute.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Attribute.swift",
       "line": 28,
       "symbol": "Attribute.TypeEnum.currency",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/Attribute.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Attribute.swift",
       "line": 29,
       "symbol": "Attribute.TypeEnum.datetime",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/Attribute.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Attribute.swift",
       "line": 30,
       "symbol": "Attribute.TypeEnum.location",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/Attribute.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Attribute.swift",
       "line": 31,
       "symbol": "Attribute.TypeEnum.organization",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/Attribute.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Attribute.swift",
       "line": 32,
       "symbol": "Attribute.TypeEnum.person",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/BatchStatus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/BatchStatus.swift",
       "line": 29,
       "symbol": "BatchStatus.Function.elementClassification",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/BatchStatus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/BatchStatus.swift",
       "line": 30,
       "symbol": "BatchStatus.Function.htmlConversion",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/BatchStatus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/BatchStatus.swift",
       "line": 31,
       "symbol": "BatchStatus.Function.tables",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/BodyCells.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/BodyCells.swift",
       "line": 61,
       "symbol": "BodyCells.rowHeaderIDs",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/BodyCells.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/BodyCells.swift",
       "line": 63,
       "symbol": "BodyCells.rowHeaderTexts",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/BodyCells.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/BodyCells.swift",
       "line": 65,
       "symbol": "BodyCells.rowHeaderTextsNormalized",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/BodyCells.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/BodyCells.swift",
       "line": 67,
       "symbol": "BodyCells.columnHeaderIDs",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/BodyCells.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/BodyCells.swift",
       "line": 69,
       "symbol": "BodyCells.columnHeaderTexts",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/BodyCells.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/BodyCells.swift",
       "line": 71,
       "symbol": "BodyCells.columnHeaderTextsNormalized",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
       "line": 28,
       "symbol": "Category.Label.amendments",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
       "line": 29,
       "symbol": "Category.Label.assetUse",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
       "line": 30,
       "symbol": "Category.Label.assignments",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
       "line": 31,
       "symbol": "Category.Label.audits",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
       "line": 32,
       "symbol": "Category.Label.businessContinuity",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
       "line": 33,
       "symbol": "Category.Label.communication",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
       "line": 34,
       "symbol": "Category.Label.confidentiality",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
       "line": 35,
       "symbol": "Category.Label.deliverables",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
       "line": 36,
       "symbol": "Category.Label.delivery",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
       "line": 37,
       "symbol": "Category.Label.disputeResolution",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
       "line": 38,
       "symbol": "Category.Label.forceMajeure",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
       "line": 39,
       "symbol": "Category.Label.indemnification",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
       "line": 40,
       "symbol": "Category.Label.insurance",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
       "line": 41,
       "symbol": "Category.Label.intellectualProperty",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
       "line": 42,
       "symbol": "Category.Label.liability",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
       "line": 43,
       "symbol": "Category.Label.paymentTermsAndBilling",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
       "line": 44,
       "symbol": "Category.Label.pricingAndTaxes",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
       "line": 45,
       "symbol": "Category.Label.privacy",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
       "line": 46,
       "symbol": "Category.Label.responsibilities",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
       "line": 47,
       "symbol": "Category.Label.safetyAndSecurity",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
       "line": 48,
       "symbol": "Category.Label.scopeOfWork",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
       "line": 49,
       "symbol": "Category.Label.subcontracts",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
       "line": 50,
       "symbol": "Category.Label.termAndTermination",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Category.swift",
       "line": 51,
       "symbol": "Category.Label.warranties",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/OriginalLabelsOut.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/OriginalLabelsOut.swift",
       "line": 29,
       "symbol": "OriginalLabelsOut.Modification.added",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/OriginalLabelsOut.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/OriginalLabelsOut.swift",
       "line": 30,
       "symbol": "OriginalLabelsOut.Modification.notChanged",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/OriginalLabelsOut.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/OriginalLabelsOut.swift",
       "line": 31,
       "symbol": "OriginalLabelsOut.Modification.removed",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/UpdatedLabelsOut.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/UpdatedLabelsOut.swift",
       "line": 29,
       "symbol": "UpdatedLabelsOut.Modification.added",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/UpdatedLabelsOut.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/UpdatedLabelsOut.swift",
       "line": 30,
       "symbol": "UpdatedLabelsOut.Modification.notChanged",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/CompareComplyV1/Models/UpdatedLabelsOut.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/UpdatedLabelsOut.swift",
       "line": 31,
       "symbol": "UpdatedLabelsOut.Modification.removed",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/SupportingFiles/Shared.swift",
       "line": 20,
       "symbol": "WatsonResponse",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/SupportingFiles/Shared.swift",
       "line": 21,
       "symbol": "WatsonError",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     }
   ],
-  "source_directory": "/Users/anthony/Development/Watson-SDKs/swift-sdk"
+  "source_directory": "/Users/travis/build/watson-developer-cloud/swift-sdk"
 }

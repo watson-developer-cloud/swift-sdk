@@ -1,54 +1,54 @@
 {
   "warnings": [
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/SupportingFiles/Shared.swift",
       "line": 20,
       "symbol": "WatsonResponse",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/SupportingFiles/Shared.swift",
       "line": 21,
       "symbol": "WatsonError",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/VisualRecognitionV3/Models/Classifier.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/VisualRecognitionV3/Models/Classifier.swift",
       "line": 28,
       "symbol": "Classifier.Status.ready",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/VisualRecognitionV3/Models/Classifier.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/VisualRecognitionV3/Models/Classifier.swift",
       "line": 29,
       "symbol": "Classifier.Status.training",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/VisualRecognitionV3/Models/Classifier.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/VisualRecognitionV3/Models/Classifier.swift",
       "line": 30,
       "symbol": "Classifier.Status.retraining",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/VisualRecognitionV3/Models/Classifier.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/VisualRecognitionV3/Models/Classifier.swift",
       "line": 31,
       "symbol": "Classifier.Status.failed",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/anthony/Development/Watson-SDKs/swift-sdk/Source/VisualRecognitionV3/VisualRecognition.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/VisualRecognitionV3/VisualRecognition.swift",
       "line": 65,
       "symbol": "VisualRecognition.accessToken(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     }
   ],
-  "source_directory": "/Users/anthony/Development/Watson-SDKs/swift-sdk"
+  "source_directory": "/Users/travis/build/watson-developer-cloud/swift-sdk"
 }

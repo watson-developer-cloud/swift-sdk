@@ -401,11 +401,7 @@ You can also include an image with the <strong>url</strong> parameter.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The language of the output class names. The full set of languages is supported for
-the built-in classifier IDs: <code>default</code>, <code>food</code>, and <code>explicit</code>. The class names of custom classifiers are not
-translated.
-The response might not be in the specified language when the requested language is not supported or when there is
-no translation for the class name.</p>
+                                  <p>The desired language of parts of the response. See the response for details.</p>
                                 </div>
                               </td>
                             </tr>
@@ -519,8 +515,8 @@ The following built-in classifier IDs require no training:
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/detectFaces(imagesFile:url:imagesFileContentType:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">detectFaces(imagesFile:url:imagesFileContentType:headers:completionHandler:)</a>
+                    <a name="//apple_ref/swift/Method/detectFaces(imagesFile:url:acceptLanguage:imagesFileContentType:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">detectFaces(imagesFile:url:acceptLanguage:imagesFileContentType:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -548,6 +544,7 @@ recommended pixel density is 32X32 pixels per inch.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">detectFaces</span><span class="p">(</span>
     <span class="nv">imagesFile</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">url</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">imagesFileContentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/DetectedFaces.html">DetectedFaces</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
@@ -586,6 +583,18 @@ You can also include an image with the <strong>url</strong> parameter.</p>
 recommended pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB. Redirects are followed,
 so you can use a shortened URL.
 You can also include images with the <strong>images_file</strong> parameter.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>acceptLanguage</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The desired language of parts of the response. See the response for details.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1763,8 +1772,8 @@ in an image, age and gender confidence scores might return scores of 0.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-01-11)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-01-18)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

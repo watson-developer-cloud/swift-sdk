@@ -578,6 +578,7 @@
 		92EE4EFA219E25350008CE33 /* contract_B.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 92EE4EF7219E25350008CE33 /* contract_B.pdf */; };
 		92EE4EFB219E25350008CE33 /* contract_A.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 92EE4EF8219E25350008CE33 /* contract_A.pdf */; };
 		92EE4EFD21A470630008CE33 /* SpeechToTextUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE4EFC21A470630008CE33 /* SpeechToTextUnitTests.swift */; };
+		92FB960221FB852C00FEAD21 /* confirm.abnf in Resources */ = {isa = PBXBuildFile; fileRef = 92FB95FE21FB7FF100FEAD21 /* confirm.abnf */; };
 		CA151FA2200EE23F00DBA44F /* carz.zip in Resources */ = {isa = PBXBuildFile; fileRef = CA151FA0200EE0CF00DBA44F /* carz.zip */; };
 		CA28815D20CB07D600FC992C /* WatsonCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6C7B3C1D8C960300CD97FA /* WatsonCredentials.swift */; };
 		CA28817620CB095100FC992C /* glossary.tmx in Resources */ = {isa = PBXBuildFile; fileRef = CA28817420CB095100FC992C /* glossary.tmx */; };
@@ -1280,6 +1281,7 @@
 		92EE4EFC21A470630008CE33 /* SpeechToTextUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechToTextUnitTests.swift; sourceTree = "<group>"; };
 		92F3F9882193AE7800211747 /* watson_tools.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = watson_tools.mlmodel; sourceTree = "<group>"; };
 		92F3F98E2194AFA300211747 /* watson_sample.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = watson_sample.mlmodel; sourceTree = "<group>"; };
+		92FB95FE21FB7FF100FEAD21 /* confirm.abnf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = confirm.abnf; sourceTree = "<group>"; };
 		B1F21DF21CE2461800393146 /* SentenceAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentenceAnalysis.swift; sourceTree = "<group>"; };
 		B1F21DF31CE2461800393146 /* ToneAnalysis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneAnalysis.swift; sourceTree = "<group>"; };
 		B1F21DF41CE2461800393146 /* ToneCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToneCategory.swift; sourceTree = "<group>"; };
@@ -2166,25 +2168,26 @@
 		7AAA9A201CEE3026002C9564 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				7AAA9A211CEE3026002C9564 /* Audio Files */,
 				7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */,
 				92EE4EFC21A470630008CE33 /* SpeechToTextUnitTests.swift */,
 				68BB78F82089A97E00173438 /* SpeechToTextRecognizeTests.swift */,
-				12D82B4F1E2D2E5300430DB3 /* healthcare-short.txt */,
+				7AAA9A211CEE3026002C9564 /* Resources */,
 			);
 			name = Tests;
 			path = ../../Tests/SpeechToTextV1Tests;
 			sourceTree = "<group>";
 		};
-		7AAA9A211CEE3026002C9564 /* Audio Files */ = {
+		7AAA9A211CEE3026002C9564 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				92FB95FE21FB7FF100FEAD21 /* confirm.abnf */,
+				12D82B4F1E2D2E5300430DB3 /* healthcare-short.txt */,
 				7AAA9A221CEE3026002C9564 /* SpeechSample.flac */,
 				7AAA9A231CEE3026002C9564 /* SpeechSample.ogg */,
 				7AAA9A241CEE3026002C9564 /* SpeechSample.wav */,
 				7A31CA8D1DD3A31C0001D469 /* StockAnnouncement.wav */,
 			);
-			path = "Audio Files";
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		7AAA9A461CEE6089002C9564 /* VisualRecognitionV3 */ = {
@@ -3399,6 +3402,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A31CA8E1DD3A31C0001D469 /* StockAnnouncement.wav in Resources */,
+				92FB960221FB852C00FEAD21 /* confirm.abnf in Resources */,
 				7AAAF4731CEE9FBA00B74848 /* SpeechSample.flac in Resources */,
 				7AAAF4741CEE9FBA00B74848 /* SpeechSample.ogg in Resources */,
 				12D82B501E2D2E5300430DB3 /* healthcare-short.txt in Resources */,

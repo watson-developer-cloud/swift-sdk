@@ -62,6 +62,7 @@ class SpeechToTextTests: XCTestCase {
             ("testCustomWords", testCustomWords),
             ("testAcousticModels", testAcousticModels),
             ("testCustomAudioResources", testCustomAudioResources),
+            ("testGrammarsOperations", testGrammarsOperations)
         ]
     }
 
@@ -730,6 +731,95 @@ class SpeechToTextTests: XCTestCase {
 
     }
 
+    // MARK: - Grammars
+
+    func testGrammarsOperations() {
+        let expectation1 = self.expectation(description: "addGrammar")
+
+        // create or reuse an existing language model
+        guard let languageModel = lookupOrCreateTestLanguageModel() else {
+            return
+        }
+        let customizationID = languageModel.customizationID
+        let grammarName = "swift-sdk-test-grammar"
+        let grammarFile = Bundle(for: type(of: self)).url(forResource: "confirm", withExtension: "abnf")!
+        speechToText.addGrammar(
+            customizationID: customizationID,
+            grammarName: grammarName,
+            grammarFile: grammarFile.absoluteString,
+            contentType: "application/srgs",
+            allowOverwrite: true)
+        {
+            _, error in
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            expectation1.fulfill()
+        }
+
+        wait(for: [expectation1], timeout: timeout)
+
+        let expectation2 = self.expectation(description: "getGrammar")
+
+        speechToText.getGrammar(customizationID: customizationID, grammarName: grammarName) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let grammar = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+            XCTAssertEqual(grammar.name, grammarName)
+            expectation2.fulfill()
+        }
+
+        wait(for: [expectation2], timeout: timeout)
+
+        let expectation3 = self.expectation(description: "listGrammars")
+
+        speechToText.listGrammars(customizationID: customizationID) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let grammars = response?.result?.grammars else {
+                XCTFail(missingResultMessage)
+                return
+            }
+            XCTAssert(grammars.count > 0)
+            let foundGrammar = grammars.first(where: { grammar -> Bool in
+                grammar.name == grammarName
+            })
+            XCTAssertNotNil(foundGrammar)
+            expectation3.fulfill()
+        }
+
+        wait(for: [expectation3], timeout: timeout)
+
+        let expectation4 = self.expectation(description: "deleteGrammar")
+
+        // Can't delete the grammar until the Language model (with the customizationID) is no longer process-locked
+        waitUntil(languageModel, is: "ready")
+
+        speechToText.deleteGrammar(customizationID: customizationID, grammarName: grammarName) {
+            _, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            expectation4.fulfill()
+        }
+
+        wait(for: [expectation4], timeout: timeout)
+    }
+
     // MARK: - Custom Acoustic Models
 
     func testAcousticModels() {
@@ -824,7 +914,7 @@ class SpeechToTextTests: XCTestCase {
         }
         wait(for: [expectation5], timeout: timeout)
 
-        // updgrade the acoustic model
+        // upgrade the acoustic model
         let expectation6 = self.expectation(description: "upgradeAcousticModel")
         speechToText.upgradeAcousticModel(customizationID: acousticModel.customizationID) {
             _, error in

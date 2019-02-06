@@ -26,7 +26,7 @@ public class Assistant {
 
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/assistant/api"
-    internal let serviceName = "Assistant"
+    internal let serviceName = "Conversation"
     internal let serviceVersion = "v2"
 
     /// The default HTTP headers for all requests to the service.

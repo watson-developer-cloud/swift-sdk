@@ -27,7 +27,7 @@ public class VisualRecognition {
 
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/visual-recognition/api"
-    internal let serviceName = "VisualRecognition"
+    internal let serviceName = "WatsonVisionCombined"
     internal let serviceVersion = "v3"
 
     /// The default HTTP headers for all requests to the service.

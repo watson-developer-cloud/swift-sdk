@@ -29,6 +29,8 @@ public class NaturalLanguageUnderstanding {
 
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/natural-language-understanding/api"
+    internal let serviceName = "NaturalLanguageUnderstanding"
+    internal let serviceVersion = "v1"
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
@@ -48,7 +50,6 @@ public class NaturalLanguageUnderstanding {
     public init(username: String, password: String, version: String) {
         self.authMethod = Shared.getAuthMethod(username: username, password: password)
         self.version = version
-        Shared.configureRestRequest()
     }
 
     /**
@@ -62,7 +63,6 @@ public class NaturalLanguageUnderstanding {
     public init(version: String, apiKey: String, iamUrl: String? = nil) {
         self.authMethod = Shared.getAuthMethod(apiKey: apiKey, iamURL: iamUrl)
         self.version = version
-        Shared.configureRestRequest()
     }
 
     /**
@@ -75,7 +75,6 @@ public class NaturalLanguageUnderstanding {
     public init(version: String, accessToken: String) {
         self.authMethod = IAMAccessToken(accessToken: accessToken)
         self.version = version
-        Shared.configureRestRequest()
     }
 
     public func accessToken(_ newToken: String) {
@@ -184,6 +183,8 @@ public class NaturalLanguageUnderstanding {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "analyze")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -226,6 +227,8 @@ public class NaturalLanguageUnderstanding {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listModels")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -266,6 +269,8 @@ public class NaturalLanguageUnderstanding {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteModel")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters

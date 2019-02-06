@@ -36,6 +36,8 @@ public class TextToSpeech {
 
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://stream.watsonplatform.net/text-to-speech/api"
+    internal let serviceName = "TextToSpeech"
+    internal let serviceVersion = "v1"
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
@@ -51,7 +53,6 @@ public class TextToSpeech {
      */
     public init(username: String, password: String) {
         self.authMethod = Shared.getAuthMethod(username: username, password: password)
-        Shared.configureRestRequest()
     }
 
     /**
@@ -62,7 +63,6 @@ public class TextToSpeech {
      */
     public init(apiKey: String, iamUrl: String? = nil) {
         self.authMethod = Shared.getAuthMethod(apiKey: apiKey, iamURL: iamUrl)
-        Shared.configureRestRequest()
     }
 
     /**
@@ -72,7 +72,6 @@ public class TextToSpeech {
      */
     public init(accessToken: String) {
         self.authMethod = IAMAccessToken(accessToken: accessToken)
-        Shared.configureRestRequest()
     }
 
     public func accessToken(_ newToken: String) {
@@ -129,6 +128,8 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listVoices")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -171,6 +172,8 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getVoice")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -289,6 +292,8 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "synthesize")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Content-Type"] = "application/json"
         if let accept = accept {
             headerParameters["Accept"] = accept
@@ -387,6 +392,8 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getPronunciation")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -459,6 +466,8 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createVoiceModel")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -504,6 +513,8 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listVoiceModels")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -581,6 +592,8 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateVoiceModel")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -629,6 +642,8 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getVoiceModel")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -674,6 +689,8 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteVoiceModel")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
 
         // construct REST request
         let path = "/v1/customizations/\(customizationID)"
@@ -744,6 +761,8 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "addWords")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -792,6 +811,8 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listWords")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -870,6 +891,8 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "addWord")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Content-Type"] = "application/json"
 
         // construct REST request
@@ -918,6 +941,8 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getWord")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -965,6 +990,8 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteWord")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
 
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words/\(word)"
@@ -1010,6 +1037,8 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteUserData")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()

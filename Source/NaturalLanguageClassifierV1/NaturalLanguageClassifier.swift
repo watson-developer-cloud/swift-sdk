@@ -27,6 +27,8 @@ public class NaturalLanguageClassifier {
 
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/natural-language-classifier/api"
+    internal let serviceName = "NaturalLanguageClassifier"
+    internal let serviceVersion = "v1"
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
@@ -42,7 +44,6 @@ public class NaturalLanguageClassifier {
      */
     public init(username: String, password: String) {
         self.authMethod = Shared.getAuthMethod(username: username, password: password)
-        Shared.configureRestRequest()
     }
 
     /**
@@ -53,7 +54,6 @@ public class NaturalLanguageClassifier {
      */
     public init(apiKey: String, iamUrl: String? = nil) {
         self.authMethod = Shared.getAuthMethod(apiKey: apiKey, iamURL: iamUrl)
-        Shared.configureRestRequest()
     }
 
     /**
@@ -63,7 +63,6 @@ public class NaturalLanguageClassifier {
      */
     public init(accessToken: String) {
         self.authMethod = IAMAccessToken(accessToken: accessToken)
-        Shared.configureRestRequest()
     }
 
     public func accessToken(_ newToken: String) {
@@ -131,6 +130,8 @@ public class NaturalLanguageClassifier {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "classify")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -185,6 +186,8 @@ public class NaturalLanguageClassifier {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "classifyCollection")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -254,6 +257,8 @@ public class NaturalLanguageClassifier {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createClassifier")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
 
@@ -289,6 +294,8 @@ public class NaturalLanguageClassifier {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listClassifiers")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -324,6 +331,8 @@ public class NaturalLanguageClassifier {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getClassifier")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -362,6 +371,8 @@ public class NaturalLanguageClassifier {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteClassifier")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request

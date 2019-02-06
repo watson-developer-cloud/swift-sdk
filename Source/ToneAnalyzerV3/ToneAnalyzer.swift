@@ -31,6 +31,8 @@ public class ToneAnalyzer {
 
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/tone-analyzer/api"
+    internal let serviceName = "ToneAnalyzer"
+    internal let serviceVersion = "v3"
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
@@ -50,7 +52,6 @@ public class ToneAnalyzer {
     public init(username: String, password: String, version: String) {
         self.authMethod = Shared.getAuthMethod(username: username, password: password)
         self.version = version
-        Shared.configureRestRequest()
     }
 
     /**
@@ -64,7 +65,6 @@ public class ToneAnalyzer {
     public init(version: String, apiKey: String, iamUrl: String? = nil) {
         self.authMethod = Shared.getAuthMethod(apiKey: apiKey, iamURL: iamUrl)
         self.version = version
-        Shared.configureRestRequest()
     }
 
     /**
@@ -77,7 +77,6 @@ public class ToneAnalyzer {
     public init(version: String, accessToken: String) {
         self.authMethod = IAMAccessToken(accessToken: accessToken)
         self.version = version
-        Shared.configureRestRequest()
     }
 
     public func accessToken(_ newToken: String) {
@@ -165,6 +164,8 @@ public class ToneAnalyzer {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "tone")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = toneContent.contentType
         if let contentLanguage = contentLanguage {
@@ -246,6 +247,8 @@ public class ToneAnalyzer {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "toneChat")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
         if let contentLanguage = contentLanguage {

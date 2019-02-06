@@ -27,6 +27,8 @@ public class VisualRecognition {
 
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/visual-recognition/api"
+    internal let serviceName = "VisualRecognition"
+    internal let serviceVersion = "v3"
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
@@ -46,7 +48,6 @@ public class VisualRecognition {
     public init(version: String, apiKey: String, iamUrl: String? = nil) {
         self.authMethod = Shared.getAuthMethod(apiKey: apiKey, iamURL: iamUrl)
         self.version = version
-        Shared.configureRestRequest()
     }
 
     /**
@@ -59,7 +60,6 @@ public class VisualRecognition {
     public init(version: String, accessToken: String) {
         self.authMethod = IAMAccessToken(accessToken: accessToken)
         self.version = version
-        Shared.configureRestRequest()
     }
 
     public func accessToken(_ newToken: String) {
@@ -202,6 +202,8 @@ public class VisualRecognition {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "classify")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
         if let acceptLanguage = acceptLanguage {
@@ -288,6 +290,8 @@ public class VisualRecognition {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "detectFaces")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
         if let acceptLanguage = acceptLanguage {
@@ -377,6 +381,8 @@ public class VisualRecognition {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createClassifier")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
 
@@ -418,6 +424,8 @@ public class VisualRecognition {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listClassifiers")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -462,6 +470,8 @@ public class VisualRecognition {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getClassifier")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -554,6 +564,8 @@ public class VisualRecognition {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateClassifier")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
 
@@ -599,6 +611,8 @@ public class VisualRecognition {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteClassifier")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -645,6 +659,8 @@ public class VisualRecognition {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getCoreMLModel")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/octet-stream"
 
         // construct query parameters
@@ -694,6 +710,8 @@ public class VisualRecognition {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteUserData")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters

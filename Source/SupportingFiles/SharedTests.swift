@@ -38,13 +38,26 @@ class SharedTests: XCTestCase {
         XCTAssert(authMethod2 is BasicAuthentication)
     }
 
-    func testConfigureRestRequest() {
-        Shared.configureRestRequest()
-        let userAgent = RestRequest.userAgent!
-        XCTAssert(userAgent.contains(Shared.sdkVersion))
+    func testGetMetadataHeaders() {
+        let serviceName = "test-service"
+        let serviceVersion = "v9"
+        let methodName = "testMethod"
+        
+        let headers = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: methodName)
+        let userAgentHeader = headers["User-Agent"]
+        let analyticsHeader = headers["X-IBMCloud-SDK-Analytics"]
 
-        #if os(iOS)
-        XCTAssert(userAgent.contains("iOS"))
-        #endif
+        XCTAssertNotNil(userAgentHeader)
+        XCTAssertNotNil(analyticsHeader)
+
+        if let userAgentHeader = userAgentHeader {
+            #if os(iOS)
+            XCTAssert(userAgentHeader.contains("iOS"))
+            #endif
+        }
+        if let analyticsHeader = analyticsHeader {
+            let expectedHeader = "service_name=test-service;service_version=v9;operation_id=testMethod;async=true"
+            XCTAssertEqual(analyticsHeader, expectedHeader)
+        }
     }
 }

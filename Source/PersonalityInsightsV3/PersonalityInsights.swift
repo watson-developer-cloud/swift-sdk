@@ -37,6 +37,8 @@ public class PersonalityInsights {
 
     /// The base URL to use when contacting the service.
     public var serviceURL = "https://gateway.watsonplatform.net/personality-insights/api"
+    internal let serviceName = "PersonalityInsights"
+    internal let serviceVersion = "v3"
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
@@ -56,7 +58,6 @@ public class PersonalityInsights {
     public init(username: String, password: String, version: String) {
         self.authMethod = Shared.getAuthMethod(username: username, password: password)
         self.version = version
-        Shared.configureRestRequest()
     }
 
     /**
@@ -70,7 +71,6 @@ public class PersonalityInsights {
     public init(version: String, apiKey: String, iamUrl: String? = nil) {
         self.authMethod = Shared.getAuthMethod(apiKey: apiKey, iamURL: iamUrl)
         self.version = version
-        Shared.configureRestRequest()
     }
 
     /**
@@ -83,7 +83,6 @@ public class PersonalityInsights {
     public init(version: String, accessToken: String) {
         self.authMethod = IAMAccessToken(accessToken: accessToken)
         self.version = version
-        Shared.configureRestRequest()
     }
 
     public func accessToken(_ newToken: String) {
@@ -191,6 +190,8 @@ public class PersonalityInsights {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "profile")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = profileContent.contentType
         if let contentLanguage = contentLanguage {
@@ -301,6 +302,8 @@ public class PersonalityInsights {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "profileAsCSV")
+        headerParameters.merge(metadataHeaders) { (_, new) in new }
         headerParameters["Accept"] = "text/csv"
         headerParameters["Content-Type"] = profileContent.contentType
         if let contentLanguage = contentLanguage {

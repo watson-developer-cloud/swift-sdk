@@ -47,10 +47,9 @@ internal struct Shared {
         }
     }
 
-    /// RestKit sends a "User-Agent" header with every RestRequest
-    /// This sets the value of that header, which includes the current version of the Swift SDK
-    static func configureRestRequest() {
-        RestRequest.userAgent = {
+    /// These headers must be sent with every request in order to collect SDK metrics
+    static func getMetadataHeaders(serviceName: String, serviceVersion: String, methodName: String) -> [String: String] {
+        let userAgent: String = {
             let sdk = "watson-apis-swift-sdk"
 
             let operatingSystem: String = {
@@ -73,7 +72,14 @@ internal struct Shared {
                 let os = ProcessInfo.processInfo.operatingSystemVersion
                 return "\(os.majorVersion).\(os.minorVersion).\(os.patchVersion)"
             }()
-            return "\(sdk)/\(sdkVersion) \(operatingSystem)/\(operatingSystemVersion)"
+            return "\(sdk)-\(sdkVersion) \(operatingSystem) \(operatingSystemVersion)"
         }()
+
+        let serviceInfo = "service_name=\(serviceName);service_version=\(serviceVersion);operation_id=\(methodName);async=true"
+
+        return [
+            "User-Agent": userAgent,
+            "X-IBMCloud-SDK-Analytics": serviceInfo,
+        ]
     }
 }

@@ -136,6 +136,8 @@ extension SpeechToText {
         if let headers = headers {
             session.defaultHeaders.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "recognizeUsingWebSocket")
+        session.defaultHeaders.merge(metadataHeaders) { (_, new) in new }
 
         // set callbacks
         session.onResults = { result in
@@ -246,6 +248,8 @@ extension SpeechToText {
         if let headers = headers {
             session.defaultHeaders.merge(headers) { (_, new) in new }
         }
+        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "recognizeMicrophone")
+        session.defaultHeaders.merge(metadataHeaders) { (_, new) in new }
 
         // set callbacks
         session.onResults = { result in

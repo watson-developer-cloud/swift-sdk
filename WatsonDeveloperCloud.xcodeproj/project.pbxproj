@@ -496,7 +496,6 @@
 		924EE7D921505D810048C0E5 /* SharedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920A2432214ADFB20077F10D /* SharedTests.swift */; };
 		924EE7DB21505D810048C0E5 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
 		924EE7DC21505D810048C0E5 /* WatsonCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6C7B3C1D8C960300CD97FA /* WatsonCredentials.swift */; };
-		924EE7DF21505D810048C0E5 /* AssistantV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6877FA9A2056D4F100383B25 /* AssistantV1.framework */; };
 		924EE7E021505D810048C0E5 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92048D8F212F7C16004FD822 /* RestKit.framework */; };
 		924EE7EA21505E430048C0E5 /* AssistantV2.h in Headers */ = {isa = PBXBuildFile; fileRef = 924EE77D21505C2C0048C0E5 /* AssistantV2.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		92506C0A21AE1ADA0008E88D /* cloud-object-storage-credentials-output.json in Resources */ = {isa = PBXBuildFile; fileRef = 92506C0821AE1ADA0008E88D /* cloud-object-storage-credentials-output.json */; };
@@ -525,6 +524,7 @@
 		92866205219111E00064C6FD /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
 		92866206219111E30064C6FD /* WatsonCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6C7B3C1D8C960300CD97FA /* WatsonCredentials.swift */; };
 		92866260219254460064C6FD /* VisualRecognitionTestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9286625F219254460064C6FD /* VisualRecognitionTestUtilities.swift */; };
+		92882AFE220CCFE6001BC702 /* AssistantV2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 924EE7D321505D7A0048C0E5 /* AssistantV2.framework */; };
 		929A23E621123E7E00E4C78A /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A23E521123E7E00E4C78A /* TestUtilities.swift */; };
 		929A23E821123E7E00E4C78A /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A23E521123E7E00E4C78A /* TestUtilities.swift */; };
 		929A23EA21123E7E00E4C78A /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A23E521123E7E00E4C78A /* TestUtilities.swift */; };
@@ -1521,7 +1521,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				924EE7DF21505D810048C0E5 /* AssistantV1.framework in Frameworks */,
+				92882AFE220CCFE6001BC702 /* AssistantV2.framework in Frameworks */,
 				924EE7E021505D810048C0E5 /* RestKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

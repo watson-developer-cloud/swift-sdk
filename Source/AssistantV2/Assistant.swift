@@ -39,6 +39,34 @@ public class Assistant {
     /**
      Create a `Assistant` object.
 
+     Use this initializer to automatically pull service credentials from your credentials file.
+     This file is downloaded from your service instance on IBM Cloud as ibm-credentials.env.
+     Make sure to add the credentials file to your project so that it can be loaded at runtime.
+
+     If the credentials cannot be loaded from the file, or the file is not found, initialization will fail.
+     In that case, try another initializer that directly passes in the credentials.
+
+     - parameter credentialsFile: The URL of the credentials file.
+     - parameter version: The release date of the version of the API to use. Specify the date
+       in "YYYY-MM-DD" format.
+     */
+    public init?(credentialsFile: URL, version: String) {
+        guard let credentials = Shared.extractCredentials(from: credentialsFile, serviceName: "assistant") else {
+            return nil
+        }
+        guard let authMethod = Shared.getAuthMethod(from: credentials) else {
+            return nil
+        }
+        if let serviceURL = Shared.getServiceURL(from: credentials) {
+            self.serviceURL = serviceURL
+        }
+        self.authMethod = authMethod
+        self.version = version
+    }
+
+    /**
+     Create a `Assistant` object.
+
      - parameter username: The username used to authenticate with the service.
      - parameter password: The password used to authenticate with the service.
      - parameter version: The release date of the version of the API to use. Specify the date

@@ -57,7 +57,7 @@ public class TextToSpeech {
 
      - parameter credentialsFile: The URL of the credentials file.
      */
-    public init?(credentialsFile: URL, version: String) {
+    public init?(credentialsFile: URL) {
         guard let credentials = Shared.extractCredentials(from: credentialsFile, serviceName: "text_to_speech") else {
             return nil
         }

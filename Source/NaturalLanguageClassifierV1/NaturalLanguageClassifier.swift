@@ -48,7 +48,7 @@ public class NaturalLanguageClassifier {
 
      - parameter credentialsFile: The URL of the credentials file.
      */
-    public init?(credentialsFile: URL, version: String) {
+    public init?(credentialsFile: URL) {
         guard let credentials = Shared.extractCredentials(from: credentialsFile, serviceName: "natural_language_classifier") else {
             return nil
         }

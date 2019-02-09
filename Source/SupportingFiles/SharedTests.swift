@@ -38,11 +38,71 @@ class SharedTests: XCTestCase {
         XCTAssert(authMethod2 is BasicAuthentication)
     }
 
+    func testGetAuthMethodFromCredentials() {
+        var credentials: [String: String] = [
+            "username": "me"
+        ]
+
+        // Missing credentials
+        var authMethod = Shared.getAuthMethod(from: credentials)
+        XCTAssertNil(authMethod)
+
+        // Username and password
+        credentials["password"] = "hunter2"
+        authMethod = Shared.getAuthMethod(from: credentials)
+        XCTAssert(authMethod is BasicAuthentication)
+
+        // API Key
+        credentials = [
+            "apikey": "1234",
+            "iam_url": "https://cloud.ibm.com/iam"
+        ]
+        authMethod = Shared.getAuthMethod(from: credentials)
+        XCTAssert(authMethod is IAMAuthentication)
+    }
+
+    func testGetServiceURLFromCredentials() {
+        var credentials: [String: String] = [:]
+        XCTAssertNil(Shared.getServiceURL(from: credentials))
+
+        credentials["useless_key"] = "useless_value"
+        XCTAssertNil(Shared.getServiceURL(from: credentials))
+
+        let serviceURL = "https://cloud.ibm.com/test"
+        credentials["url"] = serviceURL
+        XCTAssertEqual(Shared.getServiceURL(from: credentials), serviceURL)
+    }
+
+    func testExtractCredentials() {
+        let testCredentialsFile = Bundle(for: type(of: self)).url(forResource: "ibm-credentials", withExtension: "env")
+        guard testCredentialsFile != nil else {
+            XCTFail("Failed to load ibm-credentials.env file")
+            return
+        }
+
+        // Discovery credentials (API key)
+        guard let discoveryCredentials = Shared.extractCredentials(from: testCredentialsFile!, serviceName: "discovery") else {
+            XCTFail("Failed to extract Discovery credentials")
+            return
+        }
+        XCTAssertEqual(discoveryCredentials["username"], "me")
+        XCTAssertEqual(discoveryCredentials["password"], "hunter2")
+
+        // Visual Recognition credentials (username/password)
+        guard let visualRecognitionCredentials = Shared.extractCredentials(from: testCredentialsFile!, serviceName: "visual_recognition") else {
+            XCTFail("Failed to extract Visual Recognition credentials")
+            return
+        }
+        XCTAssertEqual(visualRecognitionCredentials["apikey"], "1234abcd")
+        XCTAssertEqual(visualRecognitionCredentials["iam_url"], "https://cloud.ibm.com/iam")
+        XCTAssertEqual(visualRecognitionCredentials["url"], "https://test.us-south.containers.mybluemix.net/visual-recognition/api")
+    }
+
     func testGetMetadataHeaders() {
         let serviceName = "test-service"
         let serviceVersion = "v9"
         let methodName = "testMethod"
-        
+
         let headers = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: methodName)
         let userAgentHeader = headers["User-Agent"]
         let analyticsHeader = headers["X-IBMCloud-SDK-Analytics"]

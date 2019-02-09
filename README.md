@@ -151,12 +151,40 @@ Watson services are migrating to token-based Identity and Access Management (IAM
 ### Getting credentials
 To find out which authentication to use, view the service credentials. You find the service credentials for authentication the same way for all Watson services:
 
-1. Go to the IBM Cloud [Dashboard](https://cloud.ibm.com/dashboard/apps?category=ai) page.
-1. Either click an existing Watson service instance or click [**Create resource > AI**](https://cloud.ibm.com/catalog/?category=ai) and create a service instance.
-1. Click **Show** to view your service credentials.
-1. Copy the `url` and either `apikey` or `username` and `password`.
+1. Go to the IBM Cloud [Dashboard](https://cloud.ibm.com/) page.
+1. Either click an existing Watson service instance in your [resource list](https://cloud.ibm.com/resources) or click [**Create resource > AI**](https://cloud.ibm.com/catalog?category=ai) and create a service instance.
+1. Click on the **Manage** item in the left nav bar of your service instance.
 
-### IAM
+On this page, you will see your credentials to use in the SDK to access your service instance.
+
+### Supplying credentials
+There are two ways to supply the credentials from the steps above to the SDK: either downloading and using the credentials file, or copy-pasting the credentials into the SDK.
+
+#### Credentials File
+
+On the **Manage** tab of your service instance on IBM Cloud, there is an button to download the credentials. The file will be called `ibm-credentials.env`, but you can rename it after downloading. Add this file to a location that is accessible from your project. For iOS apps, make sure to add it to the application target.
+
+Get the `URL` for the credential file's location (you can use [Bundle](https://developer.apple.com/documentation/foundation/bundle) for iOS), and pass it to the service initializer.
+
+```swift
+let discovery = Discovery(credentialsFile: credentialsURL, version: "your-version")
+```
+
+If your project is using multiple Watson services, you can merge the contents of the `ibm-credentials.env` files into a single file. Lines in the file can be added, deleted, or reordered, but the content of each line **must not** be changed.
+
+#### Copy-Pasting Credentials
+
+Copy the credentials from IBM Cloud and store them within your project. Then pass those values to the service initializer that accepts the type of credentials you have.
+
+
+##### Username and Password
+
+```swift
+let discovery = Discovery(username: "your-username", password: "your-password", version: "your-version")
+```
+
+
+##### IAM
 
 Some services use token-based Identity and Access Management (IAM) authentication. IAM authentication uses a service API key to get an access token that is passed with the call. Access tokens are valid for approximately one hour and must be regenerated.
 
@@ -165,26 +193,20 @@ You supply either an IAM service **API key** or an **access token**:
 - Use the API key to have the SDK manage the lifecycle of the access token. The SDK requests an access token, ensures that the access token is valid, and refreshes it if necessary.
 - Use the access token if you want to manage the lifecycle yourself. For details, see [Authenticating with IAM tokens](https://cloud.ibm.com/docs/services/watson/getting-started-iam.html). If you want to switch to API key, override your stored IAM credentials with an IAM API key.
 
-#### Supplying the IAM API key
+###### Supplying the IAM API key
 ```swift
 let discovery = Discovery(version: "your-version", apiKey: "your-apikey")
 ```
 
 If you are supplying an API key for IBM Cloud Private (ICP), use basic authentication instead, with `"apikey"` for the `username` and the api key (prefixed with `icp-`) for the `password`. See the [Username and Password](#username-and-password) section.
 
-#### Supplying the accessToken
+###### Supplying the accessToken
 ```swift
 let discovery = Discovery(version: "your-version", accessToken: "your-accessToken")
 ```
-#### Updating the accessToken
+###### Updating the accessToken
 ```swift
 discovery.accessToken("new-accessToken")
-```
-
-### Username and Password
-
-```swift
-let discovery = Discovery(username: "your-username", password: "your-password", version: "your-version")
 ```
 
 

@@ -525,6 +525,18 @@
 		92866206219111E30064C6FD /* WatsonCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6C7B3C1D8C960300CD97FA /* WatsonCredentials.swift */; };
 		92866260219254460064C6FD /* VisualRecognitionTestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9286625F219254460064C6FD /* VisualRecognitionTestUtilities.swift */; };
 		92882AFE220CCFE6001BC702 /* AssistantV2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 924EE7D321505D7A0048C0E5 /* AssistantV2.framework */; };
+		92882B00220E10B4001BC702 /* ibm-credentials.env in Resources */ = {isa = PBXBuildFile; fileRef = 92882AFF220E10B4001BC702 /* ibm-credentials.env */; };
+		92882B01220E10B4001BC702 /* ibm-credentials.env in Resources */ = {isa = PBXBuildFile; fileRef = 92882AFF220E10B4001BC702 /* ibm-credentials.env */; };
+		92882B02220E10B4001BC702 /* ibm-credentials.env in Resources */ = {isa = PBXBuildFile; fileRef = 92882AFF220E10B4001BC702 /* ibm-credentials.env */; };
+		92882B03220E10B4001BC702 /* ibm-credentials.env in Resources */ = {isa = PBXBuildFile; fileRef = 92882AFF220E10B4001BC702 /* ibm-credentials.env */; };
+		92882B04220E10B4001BC702 /* ibm-credentials.env in Resources */ = {isa = PBXBuildFile; fileRef = 92882AFF220E10B4001BC702 /* ibm-credentials.env */; };
+		92882B05220E10B4001BC702 /* ibm-credentials.env in Resources */ = {isa = PBXBuildFile; fileRef = 92882AFF220E10B4001BC702 /* ibm-credentials.env */; };
+		92882B06220E10B4001BC702 /* ibm-credentials.env in Resources */ = {isa = PBXBuildFile; fileRef = 92882AFF220E10B4001BC702 /* ibm-credentials.env */; };
+		92882B07220E10B4001BC702 /* ibm-credentials.env in Resources */ = {isa = PBXBuildFile; fileRef = 92882AFF220E10B4001BC702 /* ibm-credentials.env */; };
+		92882B08220E10B4001BC702 /* ibm-credentials.env in Resources */ = {isa = PBXBuildFile; fileRef = 92882AFF220E10B4001BC702 /* ibm-credentials.env */; };
+		92882B09220E10B4001BC702 /* ibm-credentials.env in Resources */ = {isa = PBXBuildFile; fileRef = 92882AFF220E10B4001BC702 /* ibm-credentials.env */; };
+		92882B0A220E10B4001BC702 /* ibm-credentials.env in Resources */ = {isa = PBXBuildFile; fileRef = 92882AFF220E10B4001BC702 /* ibm-credentials.env */; };
+		92882B0B220E10B4001BC702 /* ibm-credentials.env in Resources */ = {isa = PBXBuildFile; fileRef = 92882AFF220E10B4001BC702 /* ibm-credentials.env */; };
 		929A23E621123E7E00E4C78A /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A23E521123E7E00E4C78A /* TestUtilities.swift */; };
 		929A23E821123E7E00E4C78A /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A23E521123E7E00E4C78A /* TestUtilities.swift */; };
 		929A23EA21123E7E00E4C78A /* TestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A23E521123E7E00E4C78A /* TestUtilities.swift */; };
@@ -1266,6 +1278,7 @@
 		9286619D2191104C0064C6FD /* CompareComplyV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CompareComplyV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		928661A82191109C0064C6FD /* CompareComplyV1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CompareComplyV1.h; path = Source/SupportingFiles/CompareComplyV1.h; sourceTree = "<group>"; };
 		9286625F219254460064C6FD /* VisualRecognitionTestUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualRecognitionTestUtilities.swift; sourceTree = "<group>"; };
+		92882AFF220E10B4001BC702 /* ibm-credentials.env */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "ibm-credentials.env"; path = "Source/SupportingFiles/ibm-credentials.env"; sourceTree = "<group>"; };
 		929A23E521123E7E00E4C78A /* TestUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TestUtilities.swift; path = Tests/TestUtilities.swift; sourceTree = "<group>"; };
 		92B470672194F225006C3333 /* AssistantV1UnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantV1UnitTests.swift; sourceTree = "<group>"; };
 		92BF69AD213F129A00FE6325 /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Shared.swift; path = Source/SupportingFiles/Shared.swift; sourceTree = "<group>"; };
@@ -2049,6 +2062,7 @@
 		7A6117231CB596E0009A4DA1 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				92882AFF220E10B4001BC702 /* ibm-credentials.env */,
 				920645F4212E2880004ACCC9 /* Dependencies */,
 				6800FC9C2056D7340078788A /* AssistantV1.h */,
 				924EE77D21505C2C0048C0E5 /* AssistantV2.h */,
@@ -3285,6 +3299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				12103CD71E40E89D00F9C842 /* testArticle.html in Resources */,
+				92882B06220E10B4001BC702 /* ibm-credentials.env in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3299,6 +3314,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92882B09220E10B4001BC702 /* ibm-credentials.env in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3315,6 +3331,7 @@
 			files = (
 				92261EAA21F11E4400A1A620 /* stopwords.txt in Resources */,
 				CE7BEE391E0A165C000367FE /* discoverySample.json in Resources */,
+				92882B03220E10B4001BC702 /* ibm-credentials.env in Resources */,
 				CE7BEE3B1E0A221B000367FE /* metadata.json in Resources */,
 				CE7BEE361E09E358000367FE /* KennedySpeech.html in Resources */,
 			);
@@ -3332,6 +3349,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92882B00220E10B4001BC702 /* ibm-credentials.env in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3347,6 +3365,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A6711A51DD0F1970070CA9D /* KennedySpeech.txt in Resources */,
+				92882B07220E10B4001BC702 /* ibm-credentials.env in Resources */,
 				7A6711A61DD0F1970070CA9D /* MobyDickIntro.txt in Resources */,
 				CE75BAA91DDE5F2F006EBB51 /* KennedySpeech.html in Resources */,
 			);
@@ -3365,6 +3384,7 @@
 			files = (
 				7AAD66541DCA5D730010481E /* car.png in Resources */,
 				7AAD66531DCA5D730010481E /* trucks.zip in Resources */,
+				92882B0B220E10B4001BC702 /* ibm-credentials.env in Resources */,
 				CE6B98D41DF09D4B004CD6B5 /* face1.jpg in Resources */,
 				7AAD66571DCA5D730010481E /* sign.jpg in Resources */,
 				CE6B98DC1DF22638004CD6B5 /* metadata.txt in Resources */,
@@ -3387,6 +3407,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92882B0A220E10B4001BC702 /* ibm-credentials.env in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3407,6 +3428,7 @@
 				7AAAF4741CEE9FBA00B74848 /* SpeechSample.ogg in Resources */,
 				12D82B501E2D2E5300430DB3 /* healthcare-short.txt in Resources */,
 				7AAAF4751CEE9FBA00B74848 /* SpeechSample.wav in Resources */,
+				92882B08220E10B4001BC702 /* ibm-credentials.env in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3426,6 +3448,7 @@
 				CEEFC6141E3164CD004011D5 /* training_meta.txt in Resources */,
 				7AAAF4CB1CEEA11E00B74848 /* weather_data_train.csv in Resources */,
 				7AAAF4CE1CEEA11E00B74848 /* training_meta_missing_name.txt in Resources */,
+				92882B05220E10B4001BC702 /* ibm-credentials.env in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3441,6 +3464,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92882B01220E10B4001BC702 /* ibm-credentials.env in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3460,6 +3484,7 @@
 				92506C0B21AE1ADA0008E88D /* cloud-object-storage-credentials-input.json in Resources */,
 				92506C0A21AE1ADA0008E88D /* cloud-object-storage-credentials-output.json in Resources */,
 				92EE4EFA219E25350008CE33 /* contract_B.pdf in Resources */,
+				92882B02220E10B4001BC702 /* ibm-credentials.env in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3475,6 +3500,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA28817620CB095100FC992C /* glossary.tmx in Resources */,
+				92882B04220E10B4001BC702 /* ibm-credentials.env in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

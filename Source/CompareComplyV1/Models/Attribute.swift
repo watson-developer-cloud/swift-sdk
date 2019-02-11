@@ -22,7 +22,7 @@ import Foundation
 public struct Attribute: Codable, Equatable {
 
     /**
-     The type of attribute. Possible values are `Currency`, `DateTime`, `Location`, `Organization`, and `Person`.
+     The type of attribute.
      */
     public enum TypeEnum: String {
         case currency = "Currency"
@@ -33,7 +33,7 @@ public struct Attribute: Codable, Equatable {
     }
 
     /**
-     The type of attribute. Possible values are `Currency`, `DateTime`, `Location`, `Organization`, and `Person`.
+     The type of attribute.
      */
     public var type: String?
 

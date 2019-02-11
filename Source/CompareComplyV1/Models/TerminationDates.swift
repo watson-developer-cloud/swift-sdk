@@ -22,9 +22,23 @@ import Foundation
 public struct TerminationDates: Codable, Equatable {
 
     /**
+     The confidence level in the identification of the termination date.
+     */
+    public enum ConfidenceLevel: String {
+        case high = "High"
+        case medium = "Medium"
+        case low = "Low"
+    }
+
+    /**
      The termination date.
      */
     public var text: String?
+
+    /**
+     The confidence level in the identification of the termination date.
+     */
+    public var confidenceLevel: String?
 
     /**
      The numeric location of the identified element in the document, represented with two integers labeled `begin` and
@@ -35,6 +49,7 @@ public struct TerminationDates: Codable, Equatable {
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case text = "text"
+        case confidenceLevel = "confidence_level"
         case location = "location"
     }
 

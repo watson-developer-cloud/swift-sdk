@@ -25,6 +25,7 @@ public struct Attribute: Codable, Equatable {
      The type of attribute.
      */
     public enum TypeEnum: String {
+        case address = "Address"
         case currency = "Currency"
         case datetime = "DateTime"
         case location = "Location"

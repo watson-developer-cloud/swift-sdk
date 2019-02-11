@@ -112,8 +112,34 @@ public class VisualRecognition {
         do {
             let json = try JSONDecoder().decode([String: JSON].self, from: data)
             metadata = [:]
-            if case let .some(.string(message)) = json["error"] {
-                errorMessage = message
+            switch statusCode {
+            case 403:
+                // ErrorAuthentication
+                if case let .some(.string(status)) = json["status"],
+                    case let .some(.string(statusInfo)) = json["statusInfo"] {
+                    errorMessage = statusInfo
+                    metadata["status"] = status
+                    metadata["statusInfo"] = statusInfo
+                }
+            case 404:
+                // "error": ErrorInfo
+                if case let .some(.object(errorObj)) = json["error"],
+                    case let .some(.string(message)) = errorObj["description"],
+                    case let .some(.string(errorID)) = errorObj["error_id"] {
+                    errorMessage = message
+                    metadata["description"] = message
+                    metadata["errorID"] = errorID
+                }
+            case 413:
+                // ErrorHTML
+                if case let .some(.string(message)) = json["Error"] {
+                    errorMessage = message
+                }
+            default:
+                // ErrorResponse
+                if case let .some(.string(message)) = json["error"] {
+                    errorMessage = message
+                }
             }
             // If metadata is empty, it should show up as nil in the WatsonError
             return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
@@ -127,25 +153,21 @@ public class VisualRecognition {
 
      Classify images with built-in or custom classifiers.
 
-     - parameter imagesFile: An image file (.gif, .jpg, .png, .tif) or .zip file with images. Maximum image size is 10
-       MB. Include no more than 20 images and limit the .zip file to 100 MB. Encode the image and .zip file names in
-       UTF-8 if they contain non-ASCII characters. The service assumes UTF-8 encoding if it encounters non-ASCII
-       characters.
+     - parameter imagesFile: An image file (.jpg, .png) or .zip file with images. Maximum image size is 10 MB. Include
+       no more than 20 images and limit the .zip file to 100 MB. Encode the image and .zip file names in UTF-8 if they
+       contain non-ASCII characters. The service assumes UTF-8 encoding if it encounters non-ASCII characters.
        You can also include an image with the **url** parameter.
      - parameter acceptLanguage: The desired language of parts of the response. See the response for details.
-     - parameter url: The URL of an image (.gif, .jpg, .png, .tif) to analyze. The minimum recommended pixel density
-       is 32X32 pixels, but the service tends to perform better with images that are at least 224 x 224 pixels. The
-       maximum image size is 10 MB.
+     - parameter url: The URL of an image to analyze. Must be in .jpg, or .png format. The minimum recommended pixel
+       density is 32X32 pixels per inch, and the maximum image size is 10 MB.
        You can also include images with the **images_file** parameter.
      - parameter threshold: The minimum score a class must have to be displayed in the response. Set the threshold to
-       `0.0` to return all identified classes.
-     - parameter owners: The categories of classifiers to apply. The **classifier_ids** parameter overrides
-       **owners**, so make sure that **classifier_ids** is empty.
-       - Use `IBM` to classify against the `default` general classifier. You get the same result if both
-       **classifier_ids** and **owners** parameters are empty.
-       - Use `me` to classify against all your custom classifiers. However, for better performance use
-       **classifier_ids** to specify the specific custom classifiers to apply.
-       - Use both `IBM` and `me` to analyze the image against both classifier categories.
+       `0.0` to ignore the classification score and return all values.
+     - parameter owners: The categories of classifiers to apply. Use `IBM` to classify against the `default` general
+       classifier, and use `me` to classify against your custom classifiers. To analyze the image against both
+       classifier categories, set the value to both `IBM` and `me`.
+       The built-in `default` classifier is used if both **classifier_ids** and **owners** parameters are empty.
+       The **classifier_ids** parameter overrides **owners**, so make sure that **classifier_ids** is empty.
      - parameter classifierIDs: Which classifiers to apply. Overrides the **owners** parameter. You can specify both
        custom and built-in classifier IDs. The built-in `default` classifier is used if both **classifier_ids** and
        **owners** parameters are empty.
@@ -247,8 +269,7 @@ public class VisualRecognition {
      built-in model, so no training is necessary. The Detect faces method does not support general biometric facial
      recognition.
      Supported image formats include .gif, .jpg, .png, and .tif. The maximum image size is 10 MB. The minimum
-     recommended pixel density is 32X32 pixels, but the service tends to perform better with images that are at least
-     224 x 224 pixels.
+     recommended pixel density is 32X32 pixels per inch.
 
      - parameter imagesFile: An image file (gif, .jpg, .png, .tif.) or .zip file with images. Limit the .zip file to
        100 MB. You can include a maximum of 15 images in a request.
@@ -256,8 +277,8 @@ public class VisualRecognition {
        encoding if it encounters non-ASCII characters.
        You can also include an image with the **url** parameter.
      - parameter url: The URL of an image to analyze. Must be in .gif, .jpg, .png, or .tif format. The minimum
-       recommended pixel density is 32X32 pixels, but the service tends to perform better with images that are at least
-       224 x 224 pixels. The maximum image size is 10 MB. Redirects are followed, so you can use a shortened URL.
+       recommended pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB. Redirects are followed,
+       so you can use a shortened URL.
        You can also include images with the **images_file** parameter.
      - parameter acceptLanguage: The desired language of parts of the response. See the response for details.
      - parameter imagesFileContentType: The content type of imagesFile.
@@ -508,8 +529,9 @@ public class VisualRecognition {
     /**
      Update a classifier.
 
-     Update a custom classifier by adding new positive or negative classes or by adding new images to existing classes.
-     You must supply at least one set of positive or negative examples. For details, see [Updating custom
+     Update a custom classifier by adding new positive or negative classes (examples) or by adding new images to
+     existing classes. You must supply at least one set of positive or negative examples. For details, see [Updating
+     custom
      classifiers](https://cloud.ibm.com/docs/services/visual-recognition/customizing.html#updating-custom-classifiers).
      Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and class
      names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.
@@ -690,7 +712,7 @@ public class VisualRecognition {
         )
 
         // execute REST request
-        request.responseObject(completionHandler: completionHandler)
+        request.response(completionHandler: completionHandler)
     }
 
     /**

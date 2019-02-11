@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  The response sent by the workspace, including the output text, detected intents and entities, and context.
@@ -58,9 +57,6 @@ public struct MessageResponse: Codable, Equatable {
      */
     public var actions: [DialogNodeAction]?
 
-    /// Additional properties associated with this model.
-    public var additionalProperties: [String: JSON]
-
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case input = "input"
@@ -70,33 +66,6 @@ public struct MessageResponse: Codable, Equatable {
         case context = "context"
         case output = "output"
         case actions = "actions"
-        static let allValues = [input, intents, entities, alternateIntents, context, output, actions]
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        input = try container.decodeIfPresent(MessageInput.self, forKey: .input)
-        intents = try container.decode([RuntimeIntent].self, forKey: .intents)
-        entities = try container.decode([RuntimeEntity].self, forKey: .entities)
-        alternateIntents = try container.decodeIfPresent(Bool.self, forKey: .alternateIntents)
-        context = try container.decode(Context.self, forKey: .context)
-        output = try container.decode(OutputData.self, forKey: .output)
-        actions = try container.decodeIfPresent([DialogNodeAction].self, forKey: .actions)
-        let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
-        additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: CodingKeys.allValues)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encodeIfPresent(input, forKey: .input)
-        try container.encode(intents, forKey: .intents)
-        try container.encode(entities, forKey: .entities)
-        try container.encodeIfPresent(alternateIntents, forKey: .alternateIntents)
-        try container.encode(context, forKey: .context)
-        try container.encode(output, forKey: .output)
-        try container.encodeIfPresent(actions, forKey: .actions)
-        var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
-        try dynamicContainer.encodeIfPresent(additionalProperties)
     }
 
 }

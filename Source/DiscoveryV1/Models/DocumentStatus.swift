@@ -29,6 +29,7 @@ public struct DocumentStatus: Codable, Equatable {
         case availableWithNotices = "available with notices"
         case failed = "failed"
         case processing = "processing"
+        case pending = "pending"
     }
 
     /**

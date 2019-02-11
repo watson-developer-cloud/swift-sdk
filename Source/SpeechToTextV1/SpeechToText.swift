@@ -2765,12 +2765,18 @@ public class SpeechToText {
      - parameter customLanguageModelID: If the custom acoustic model was trained with a custom language model, the
        customization ID (GUID) of that custom language model. The custom language model must be upgraded before the
        custom acoustic model can be upgraded. The credentials specified with the request must own both custom models.
+     - parameter force: If `true`, forces the upgrade of a custom acoustic model for which no input data has been
+       modified since it was last trained. Use this parameter only to force the upgrade of a custom acoustic model that
+       is trained with a custom language model, and only if you receive a 400 response code and the message `No input
+       data modified since last training`. See [Upgrading a custom acoustic
+       model](https://cloud.ibm.com/docs/services/speech-to-text/custom-upgrade.html#upgradeAcoustic).
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func upgradeAcousticModel(
         customizationID: String,
         customLanguageModelID: String? = nil,
+        force: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
@@ -2787,6 +2793,10 @@ public class SpeechToText {
         var queryParameters = [URLQueryItem]()
         if let customLanguageModelID = customLanguageModelID {
             let queryParameter = URLQueryItem(name: "custom_language_model_id", value: customLanguageModelID)
+            queryParameters.append(queryParameter)
+        }
+        if let force = force {
+            let queryParameter = URLQueryItem(name: "force", value: "\(force)")
             queryParameters.append(queryParameter)
         }
 

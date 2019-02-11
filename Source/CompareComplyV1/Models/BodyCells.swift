@@ -69,6 +69,7 @@ public struct BodyCells: Codable, Equatable {
     public var columnHeaderTexts: [ColumnHeaderTexts]?
 
     public var columnHeaderTextsNormalized: [ColumnHeaderTextsNormalized]?
+    public var attributes: [Attribute]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
@@ -85,6 +86,7 @@ public struct BodyCells: Codable, Equatable {
         case columnHeaderIDs = "column_header_ids"
         case columnHeaderTexts = "column_header_texts"
         case columnHeaderTextsNormalized = "column_header_texts_normalized"
+        case attributes = "attributes"
     }
 
 }

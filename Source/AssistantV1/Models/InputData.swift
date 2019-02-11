@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /**
  An input object that includes the input text.
@@ -27,9 +28,13 @@ public struct InputData: Codable, Equatable {
      */
     public var text: String
 
+    /// Additional properties associated with this model.
+    public var additionalProperties: [String: JSON]
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case text = "text"
+        static let allValues = [text]
     }
 
     /**
@@ -41,10 +46,26 @@ public struct InputData: Codable, Equatable {
      - returns: An initialized `InputData`.
     */
     public init(
-        text: String
+        text: String,
+        additionalProperties: [String: JSON] = [:]
     )
     {
         self.text = text
+        self.additionalProperties = additionalProperties
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        text = try container.decode(String.self, forKey: .text)
+        let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
+        additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: CodingKeys.allValues)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(text, forKey: .text)
+        var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
+        try dynamicContainer.encodeIfPresent(additionalProperties)
     }
 
 }

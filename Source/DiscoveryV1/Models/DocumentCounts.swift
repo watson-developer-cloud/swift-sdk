@@ -34,11 +34,17 @@ public struct DocumentCounts: Codable, Equatable {
      */
     public var failed: Int?
 
+    /**
+     The number of documents that have been uploaded to the collection, but have not yet started processing.
+     */
+    public var pending: Int?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case available = "available"
         case processing = "processing"
         case failed = "failed"
+        case pending = "pending"
     }
 
 }

@@ -124,7 +124,7 @@ public class CompareComply {
     /**
      Convert file to HTML.
 
-     Uploads an input file. The response includes an HTML version of the document.
+     Convert an uploaded file to HTML.
 
      - parameter file: The file to convert.
      - parameter modelID: The analysis model to be used by the service. For the `/v1/element_classification` and
@@ -191,7 +191,7 @@ public class CompareComply {
     /**
      Classify the elements of a document.
 
-     Uploads a file. The response includes an analysis of the document's structural and semantic elements.
+     Analyze an uploaded file's structural and semantic elements.
 
      - parameter file: The file to classify.
      - parameter modelID: The analysis model to be used by the service. For the `/v1/element_classification` and
@@ -258,7 +258,7 @@ public class CompareComply {
     /**
      Extract a document's tables.
 
-     Uploads a file. The response includes an analysis of the document's tables.
+     Extract and analyze an uploaded file's tables.
 
      - parameter file: The file on which to run table extraction.
      - parameter modelID: The analysis model to be used by the service. For the `/v1/element_classification` and
@@ -325,8 +325,7 @@ public class CompareComply {
     /**
      Compare two documents.
 
-     Uploads two input files. The response includes JSON comparing the two documents. Uploaded files must be in the same
-     file format.
+     Compare two uploaded input files. Uploaded files must be in the same file format.
 
      - parameter file1: The first file to compare.
      - parameter file2: The second file to compare.
@@ -632,7 +631,7 @@ public class CompareComply {
     /**
      List a specified feedback entry.
 
-     - parameter feedbackID: An string that specifies the feedback entry to be included in the output.
+     - parameter feedbackID: A string that specifies the feedback entry to be included in the output.
      - parameter modelID: The analysis model to be used by the service. For the `/v1/element_classification` and
        `/v1/comparison` methods, the default is `contracts`. For the `/v1/tables` method, the default is `tables`. These
        defaults apply to the standalone methods as well as to the methods' use in batch-processing requests.
@@ -685,7 +684,7 @@ public class CompareComply {
     /**
      Deletes a specified feedback entry.
 
-     - parameter feedbackID: An string that specifies the feedback entry to be deleted from the document.
+     - parameter feedbackID: A string that specifies the feedback entry to be deleted from the document.
      - parameter modelID: The analysis model to be used by the service. For the `/v1/element_classification` and
        `/v1/comparison` methods, the default is `contracts`. For the `/v1/tables` method, the default is `tables`. These
        defaults apply to the standalone methods as well as to the methods' use in batch-processing requests.
@@ -842,9 +841,9 @@ public class CompareComply {
     }
 
     /**
-     Gets the list of submitted batch-processing jobs.
+     List submitted batch-processing jobs.
 
-     Gets the list of batch-processing jobs submitted by users.
+     List the batch-processing jobs submitted by users.
 
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -882,9 +881,9 @@ public class CompareComply {
     }
 
     /**
-     Gets information about a specific batch-processing request.
+     Get information about a specific batch-processing request.
 
-     Gets information about a batch-processing request with a specified ID.
+     Get information about a batch-processing request with a specified ID.
 
      - parameter batchID: The ID of the batch-processing request whose information you want to retrieve.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -929,9 +928,9 @@ public class CompareComply {
     }
 
     /**
-     Updates a pending or active batch-processing request.
+     Update a pending or active batch-processing request.
 
-     Updates a pending or active batch-processing request. You can rescan the input bucket to check for new documents or
+     Update a pending or active batch-processing request. You can rescan the input bucket to check for new documents or
      cancel a request.
 
      - parameter batchID: The ID of the batch-processing request you want to update.

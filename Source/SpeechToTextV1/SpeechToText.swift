@@ -20,7 +20,7 @@ import RestKit
 
 /**
  The IBM&reg; Speech to Text service provides APIs that use IBM's speech-recognition capabilities to produce transcripts
- of spoken audio. The service can transcribe speech from various languages and audio formats. It addition to basic
+ of spoken audio. The service can transcribe speech from various languages and audio formats. In addition to basic
  transcription, the service can produce detailed information about many different aspects of the audio. For most
  languages, the service supports two sampling rates, broadband and narrowband. It returns all JSON response content in
  the UTF-8 character set.
@@ -2625,15 +2625,17 @@ public class SpeechToText {
      use. The service cannot accept subsequent training requests, or requests to add new audio resources, until the
      existing request completes.
      You can use the optional `custom_language_model_id` parameter to specify the GUID of a separately created custom
-     language model that is to be used during training. Specify a custom language model if you have verbatim
+     language model that is to be used during training. Train with a custom language model if you have verbatim
      transcriptions of the audio files that you have added to the custom model or you have either corpora (text files)
-     or a list of words that are relevant to the contents of the audio files. For more information, see the **Create a
-     custom language model** method.
+     or a list of words that are relevant to the contents of the audio files. Both of the custom models must be based on
+     the same version of the same base model for training to succeed.
      Training can fail to start for the following reasons:
      * The service is currently handling another request for the custom model, such as another training request or a
      request to add audio resources to the model.
      * The custom model contains less than 10 minutes or more than 100 hours of audio data.
      * One or more of the custom model's audio resources is invalid.
+     * You passed an incompatible custom language model with the `custom_language_model_id` query parameter. Both custom
+     models must be based on the same version of the same base model.
      **See also:** [Train the custom acoustic
      model](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-create.html#trainModel).
 
@@ -2642,7 +2644,8 @@ public class SpeechToText {
      - parameter customLanguageModelID: The customization ID (GUID) of a custom language model that is to be used
        during training of the custom acoustic model. Specify a custom language model that has been trained with verbatim
        transcriptions of the audio resources or that contains words that are relevant to the contents of the audio
-       resources.
+       resources. The custom language model must be based on the same version of the same base model as the custom
+       acoustic model. The credentials specified with the request must own both custom models.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -2761,7 +2764,7 @@ public class SpeechToText {
        request. You must make the request with credentials for the instance of the service that owns the custom model.
      - parameter customLanguageModelID: If the custom acoustic model was trained with a custom language model, the
        customization ID (GUID) of that custom language model. The custom language model must be upgraded before the
-       custom acoustic model can be upgraded.
+       custom acoustic model can be upgraded. The credentials specified with the request must own both custom models.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */

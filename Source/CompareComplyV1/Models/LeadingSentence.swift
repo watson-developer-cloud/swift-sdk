@@ -33,7 +33,7 @@ public struct LeadingSentence: Codable, Equatable {
     public var location: Location?
 
     /**
-     An array of `location` objects listing the locations of detected leading sentences.
+     An array of `location` objects that lists the locations of detected leading sentences.
      */
     public var elementLocations: [ElementLocations]?
 

@@ -42,8 +42,7 @@ public struct Classifier: Codable, Equatable {
     public var name: String
 
     /**
-     Unique ID of the account who owns the classifier. Returned when verbose=`true`. Might not be returned by some
-     requests.
+     Unique ID of the account who owns the classifier. Might not be returned by some requests.
      */
     public var owner: String?
 
@@ -73,14 +72,14 @@ public struct Classifier: Codable, Equatable {
     public var classes: [Class]?
 
     /**
-     Date and time in Coordinated Universal Time (UTC) that the classifier was updated. Returned when verbose=`true`.
-     Might not be returned by some requests. Identical to `updated` and retained for backward compatibility.
+     Date and time in Coordinated Universal Time (UTC) that the classifier was updated. Might not be returned by some
+     requests. Identical to `updated` and retained for backward compatibility.
      */
     public var retrained: Date?
 
     /**
      Date and time in Coordinated Universal Time (UTC) that the classifier was most recently updated. The field matches
-     either `retrained` or `created`.  Returned when verbose=`true`. Might not be returned by some requests.
+     either `retrained` or `created`. Might not be returned by some requests.
      */
     public var updated: Date?
 

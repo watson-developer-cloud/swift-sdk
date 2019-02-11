@@ -22,9 +22,22 @@ import Foundation
 public struct Parties: Codable, Equatable {
 
     /**
+     A string that identifies the importance of the party.
+     */
+    public enum Importance: String {
+        case primary = "Primary"
+        case unknown = "Unknown"
+    }
+
+    /**
      A string identifying the party.
      */
     public var party: String?
+
+    /**
+     A string that identifies the importance of the party.
+     */
+    public var importance: String?
 
     /**
      A string identifying the party's role.
@@ -44,6 +57,7 @@ public struct Parties: Codable, Equatable {
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case party = "party"
+        case importance = "importance"
         case role = "role"
         case addresses = "addresses"
         case contacts = "contacts"

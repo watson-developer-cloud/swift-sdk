@@ -20,10 +20,12 @@ import Foundation
 public struct DocumentAccepted: Codable, Equatable {
 
     /**
-     Status of the document in the ingestion process.
+     Status of the document in the ingestion process. A status of `processing` is returned for documents that are
+     ingested with a *version* date before `2019-01-01`. The `pending` status is returned for all others.
      */
     public enum Status: String {
         case processing = "processing"
+        case pending = "pending"
     }
 
     /**
@@ -32,7 +34,8 @@ public struct DocumentAccepted: Codable, Equatable {
     public var documentID: String?
 
     /**
-     Status of the document in the ingestion process.
+     Status of the document in the ingestion process. A status of `processing` is returned for documents that are
+     ingested with a *version* date before `2019-01-01`. The `pending` status is returned for all others.
      */
     public var status: String?
 

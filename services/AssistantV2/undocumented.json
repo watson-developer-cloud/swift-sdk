@@ -2,7 +2,7 @@
   "warnings": [
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/AssistantV2/Assistant.swift",
-      "line": 78,
+      "line": 105,
       "symbol": "Assistant.accessToken(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

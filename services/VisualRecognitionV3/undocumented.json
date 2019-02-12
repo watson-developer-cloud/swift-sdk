@@ -44,7 +44,7 @@
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/VisualRecognitionV3/VisualRecognition.swift",
-      "line": 65,
+      "line": 93,
       "symbol": "VisualRecognition.accessToken(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

@@ -2,7 +2,7 @@
   "warnings": [
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Discovery.swift",
-      "line": 80,
+      "line": 107,
       "symbol": "Discovery.accessToken(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -163,8 +163,15 @@
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DocumentAccepted.swift",
-      "line": 26,
+      "line": 27,
       "symbol": "DocumentAccepted.Status.processing",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DocumentAccepted.swift",
+      "line": 28,
+      "symbol": "DocumentAccepted.Status.pending",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
@@ -261,28 +268,35 @@
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DocumentStatus.swift",
-      "line": 38,
-      "symbol": "DocumentStatus.FileType.pdf",
+      "line": 32,
+      "symbol": "DocumentStatus.Status.pending",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DocumentStatus.swift",
       "line": 39,
-      "symbol": "DocumentStatus.FileType.html",
+      "symbol": "DocumentStatus.FileType.pdf",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DocumentStatus.swift",
       "line": 40,
-      "symbol": "DocumentStatus.FileType.word",
+      "symbol": "DocumentStatus.FileType.html",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DocumentStatus.swift",
       "line": 41,
+      "symbol": "DocumentStatus.FileType.word",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/DiscoveryV1/Models/DocumentStatus.swift",
+      "line": 42,
       "symbol": "DocumentStatus.FileType.json",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"

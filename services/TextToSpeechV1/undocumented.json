@@ -254,7 +254,7 @@
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/TextToSpeechV1/TextToSpeech.swift",
-      "line": 78,
+      "line": 102,
       "symbol": "TextToSpeech.accessToken(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

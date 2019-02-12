@@ -185,6 +185,72 @@ needs.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:19VisualRecognitionV30aB0C15credentialsFile7versionACSg10Foundation3URLV_SStcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(credentialsFile:version:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C15credentialsFile7versionACSg10Foundation3URLV_SStcfc">init(credentialsFile:version:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a <code>VisualRecognition</code> object.</p>
+
+<p>Use this initializer to automatically pull service credentials from your credentials file.
+This file is downloaded from your service instance on IBM Cloud as ibm-credentials.env.
+Make sure to add the credentials file to your project so that it can be loaded at runtime.</p>
+
+<p>If the credentials cannot be loaded from the file, or the file is not found, initialization will fail.
+In that case, try another initializer that directly passes in the credentials.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">?(</span><span class="nv">credentialsFile</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>credentialsFile</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The URL of the credentials file.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>version</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The release date of the version of the API to use. Specify the date
+in <q>YYYY-MM-DD</q> format.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:19VisualRecognitionV30aB0C7version6apiKey6iamUrlACSS_S2SSgtcfc"></a>
                     <a name="//apple_ref/swift/Method/init(version:apiKey:iamUrl:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:19VisualRecognitionV30aB0C7version6apiKey6iamUrlACSS_S2SSgtcfc">init(version:apiKey:iamUrl:)</a>
@@ -386,9 +452,10 @@ in <q>YYYY-MM-DD</q> format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>An image file (.jpg, .png) or .zip file with images. Maximum image size is 10 MB. Include
-no more than 20 images and limit the .zip file to 100 MB. Encode the image and .zip file names in UTF-8 if they
-contain non-ASCII characters. The service assumes UTF-8 encoding if it encounters non-ASCII characters.
+                                  <p>An image file (.gif, .jpg, .png, .tif) or .zip file with images. Maximum image size is 10
+MB. Include no more than 20 images and limit the .zip file to 100 MB. Encode the image and .zip file names in
+UTF-8 if they contain non-ASCII characters. The service assumes UTF-8 encoding if it encounters non-ASCII
+characters.
 You can also include an image with the <strong>url</strong> parameter.</p>
                                 </div>
                               </td>
@@ -413,8 +480,9 @@ You can also include an image with the <strong>url</strong> parameter.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The URL of an image to analyze. Must be in .jpg, or .png format. The minimum recommended pixel
-density is 32X32 pixels per inch, and the maximum image size is 10 MB.
+                                  <p>The URL of an image (.gif, .jpg, .png, .tif) to analyze. The minimum recommended pixel density
+is 32X32 pixels, but the service tends to perform better with images that are at least 224 x 224 pixels. The
+maximum image size is 10 MB.
 You can also include images with the <strong>images_file</strong> parameter.</p>
                                 </div>
                               </td>
@@ -428,7 +496,7 @@ You can also include images with the <strong>images_file</strong> parameter.</p>
                               <td>
                                 <div>
                                   <p>The minimum score a class must have to be displayed in the response. Set the threshold to
-<code>0.0</code> to ignore the classification score and return all values.</p>
+<code>0.0</code> to return all identified classes.</p>
                                 </div>
                               </td>
                             </tr>
@@ -440,11 +508,16 @@ You can also include images with the <strong>images_file</strong> parameter.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The categories of classifiers to apply. Use <code>IBM</code> to classify against the <code>default</code> general
-classifier, and use <code>me</code> to classify against your custom classifiers. To analyze the image against both
-classifier categories, set the value to both <code>IBM</code> and <code>me</code>.
-The built-in <code>default</code> classifier is used if both <strong>classifier_ids</strong> and <strong>owners</strong> parameters are empty.
-The <strong>classifier_ids</strong> parameter overrides <strong>owners</strong>, so make sure that <strong>classifier_ids</strong> is empty.</p>
+                                  <p>The categories of classifiers to apply. The <strong>classifier_ids</strong> parameter overrides
+<strong>owners</strong>, so make sure that <strong>classifier_ids</strong> is empty.
+
+<ul>
+<li>Use <code>IBM</code> to classify against the <code>default</code> general classifier. You get the same result if both
+<strong>classifier_ids</strong> and <strong>owners</strong> parameters are empty.</li>
+<li>Use <code>me</code> to classify against all your custom classifiers. However, for better performance use
+<strong>classifier_ids</strong> to specify the specific custom classifiers to apply.</li>
+<li>Use both <code>IBM</code> and <code>me</code> to analyze the image against both classifier categories.</li>
+</ul></p>
                                 </div>
                               </td>
                             </tr>
@@ -534,7 +607,8 @@ Analyze and get data about faces in images. Responses can include estimated age 
 built-in model, so no training is necessary. The Detect faces method does not support general biometric facial
 recognition.
 Supported image formats include .gif, .jpg, .png, and .tif. The maximum image size is 10 MB. The minimum
-recommended pixel density is 32X32 pixels per inch.</p>
+recommended pixel density is 32X32 pixels, but the service tends to perform better with images that are at least
+224 x 224 pixels.</p>
 
                       </div>
                       <div class="declaration">
@@ -580,8 +654,8 @@ You can also include an image with the <strong>url</strong> parameter.</p>
                               <td>
                                 <div>
                                   <p>The URL of an image to analyze. Must be in .gif, .jpg, .png, or .tif format. The minimum
-recommended pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB. Redirects are followed,
-so you can use a shortened URL.
+recommended pixel density is 32X32 pixels, but the service tends to perform better with images that are at least
+224 x 224 pixels. The maximum image size is 10 MB. Redirects are followed, so you can use a shortened URL.
 You can also include images with the <strong>images_file</strong> parameter.</p>
                                 </div>
                               </td>
@@ -918,9 +992,8 @@ brief list of classifiers.</p>
                       <div class="abstract">
                         <p>Update a classifier.</p>
 
-<p>Update a custom classifier by adding new positive or negative classes (examples) or by adding new images to
-existing classes. You must supply at least one set of positive or negative examples. For details, see <a href="https://cloud.ibm.com/docs/services/visual-recognition/customizing.html#updating-custom-classifiers">Updating
-custom
+<p>Update a custom classifier by adding new positive or negative classes or by adding new images to existing classes.
+You must supply at least one set of positive or negative examples. For details, see <a href="https://cloud.ibm.com/docs/services/visual-recognition/customizing.html#updating-custom-classifiers">Updating custom
 classifiers</a>.
 Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and class
 names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.
@@ -1772,8 +1845,8 @@ in an image, age and gender confidence scores might return scores of 0.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-01-18)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-02-12)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

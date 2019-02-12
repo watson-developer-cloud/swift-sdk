@@ -102,6 +102,9 @@
                 <a href="../Structs/ContractAmts.html">ContractAmts</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/ContractAmts/ConfidenceLevel.html">– ConfidenceLevel</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/DocCounts.html">DocCounts</a>
               </li>
               <li class="nav-group-task">
@@ -115,6 +118,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/EffectiveDates.html">EffectiveDates</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/EffectiveDates/ConfidenceLevel.html">– ConfidenceLevel</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Element.html">Element</a>
@@ -171,6 +177,9 @@
                 <a href="../Structs/Parties.html">Parties</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/Parties/Importance.html">– Importance</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/RowHeaderIDs.html">RowHeaderIDs</a>
               </li>
               <li class="nav-group-task">
@@ -202,6 +211,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/TerminationDates.html">TerminationDates</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TerminationDates/ConfidenceLevel.html">– ConfidenceLevel</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/TypeLabel.html">TypeLabel</a>
@@ -300,6 +312,72 @@ documents.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">defaultHeaders</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">String</span><span class="p">]</span></code></pre>
 
                         </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV10aB0C15credentialsFile7versionACSg10Foundation3URLV_SStcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(credentialsFile:version:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV10aB0C15credentialsFile7versionACSg10Foundation3URLV_SStcfc">init(credentialsFile:version:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a <code>CompareComply</code> object.</p>
+
+<p>Use this initializer to automatically pull service credentials from your credentials file.
+This file is downloaded from your service instance on IBM Cloud as ibm-credentials.env.
+Make sure to add the credentials file to your project so that it can be loaded at runtime.</p>
+
+<p>If the credentials cannot be loaded from the file, or the file is not found, initialization will fail.
+In that case, try another initializer that directly passes in the credentials.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">?(</span><span class="nv">credentialsFile</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>credentialsFile</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The URL of the credentials file.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>version</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The release date of the version of the API to use. Specify the date
+in <q>YYYY-MM-DD</q> format.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
                     </section>
                   </div>
@@ -476,7 +554,7 @@ in <q>YYYY-MM-DD</q> format.</p>
                       <div class="abstract">
                         <p>Convert file to HTML.</p>
 
-<p>Uploads an input file. The response includes an HTML version of the document.</p>
+<p>Convert an uploaded file to HTML.</p>
 
                       </div>
                       <div class="declaration">
@@ -579,7 +657,7 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                       <div class="abstract">
                         <p>Classify the elements of a document.</p>
 
-<p>Uploads a file. The response includes an analysis of the document&rsquo;s structural and semantic elements.</p>
+<p>Analyze an uploaded file&rsquo;s structural and semantic elements.</p>
 
                       </div>
                       <div class="declaration">
@@ -682,7 +760,7 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                       <div class="abstract">
                         <p>Extract a document&rsquo;s tables.</p>
 
-<p>Uploads a file. The response includes an analysis of the document&rsquo;s tables.</p>
+<p>Extract and analyze an uploaded file&rsquo;s tables.</p>
 
                       </div>
                       <div class="declaration">
@@ -785,8 +863,7 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                       <div class="abstract">
                         <p>Compare two documents.</p>
 
-<p>Uploads two input files. The response includes JSON comparing the two documents. Uploaded files must be in the same
-file format.</p>
+<p>Compare two uploaded input files. Uploaded files must be in the same file format.</p>
 
                       </div>
                       <div class="declaration">
@@ -1360,7 +1437,7 @@ output includes a value called <code>total</code> that gives the total count of 
                               </td>
                               <td>
                                 <div>
-                                  <p>An string that specifies the feedback entry to be included in the output.</p>
+                                  <p>A string that specifies the feedback entry to be included in the output.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1448,7 +1525,7 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                               </td>
                               <td>
                                 <div>
-                                  <p>An string that specifies the feedback entry to be deleted from the document.</p>
+                                  <p>A string that specifies the feedback entry to be deleted from the document.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1687,9 +1764,9 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Gets the list of submitted batch-processing jobs.</p>
+                        <p>List submitted batch-processing jobs.</p>
 
-<p>Gets the list of batch-processing jobs submitted by users.</p>
+<p>List the batch-processing jobs submitted by users.</p>
 
                       </div>
                       <div class="declaration">
@@ -1749,9 +1826,9 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Gets information about a specific batch-processing request.</p>
+                        <p>Get information about a specific batch-processing request.</p>
 
-<p>Gets information about a batch-processing request with a specified ID.</p>
+<p>Get information about a batch-processing request with a specified ID.</p>
 
                       </div>
                       <div class="declaration">
@@ -1824,9 +1901,9 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Updates a pending or active batch-processing request.</p>
+                        <p>Update a pending or active batch-processing request.</p>
 
-<p>Updates a pending or active batch-processing request. You can rescan the input bucket to check for new documents or
+<p>Update a pending or active batch-processing request. You can rescan the input bucket to check for new documents or
 cancel a request.</p>
 
                       </div>
@@ -1920,8 +1997,8 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-01-18)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-02-12)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

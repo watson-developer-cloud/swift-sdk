@@ -16,7 +16,7 @@
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/NaturalLanguageUnderstandingV1/NaturalLanguageUnderstanding.swift",
-      "line": 81,
+      "line": 108,
       "symbol": "NaturalLanguageUnderstanding.accessToken(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

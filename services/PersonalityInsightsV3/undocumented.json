@@ -156,7 +156,7 @@
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/PersonalityInsightsV3/PersonalityInsights.swift",
-      "line": 89,
+      "line": 116,
       "symbol": "PersonalityInsights.accessToken(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

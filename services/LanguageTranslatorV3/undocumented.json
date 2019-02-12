@@ -2,7 +2,7 @@
   "warnings": [
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/LanguageTranslatorV3/LanguageTranslator.swift",
-      "line": 80,
+      "line": 107,
       "symbol": "LanguageTranslator.accessToken(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

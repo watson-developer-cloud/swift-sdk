@@ -37,7 +37,7 @@
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/NaturalLanguageClassifierV1/NaturalLanguageClassifier.swift",
-      "line": 69,
+      "line": 93,
       "symbol": "NaturalLanguageClassifier.accessToken(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

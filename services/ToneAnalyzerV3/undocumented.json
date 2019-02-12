@@ -86,7 +86,7 @@
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/ToneAnalyzerV3/ToneAnalyzer.swift",
-      "line": 83,
+      "line": 110,
       "symbol": "ToneAnalyzer.accessToken(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

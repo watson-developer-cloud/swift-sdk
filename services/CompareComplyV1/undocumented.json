@@ -2,7 +2,7 @@
   "warnings": [
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/CompareComply.swift",
-      "line": 64,
+      "line": 92,
       "symbol": "CompareComply.accessToken(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
@@ -10,34 +10,41 @@
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Attribute.swift",
       "line": 28,
-      "symbol": "Attribute.TypeEnum.currency",
+      "symbol": "Attribute.TypeEnum.address",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Attribute.swift",
       "line": 29,
-      "symbol": "Attribute.TypeEnum.datetime",
+      "symbol": "Attribute.TypeEnum.currency",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Attribute.swift",
       "line": 30,
-      "symbol": "Attribute.TypeEnum.location",
+      "symbol": "Attribute.TypeEnum.datetime",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Attribute.swift",
       "line": 31,
-      "symbol": "Attribute.TypeEnum.organization",
+      "symbol": "Attribute.TypeEnum.location",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Attribute.swift",
       "line": 32,
+      "symbol": "Attribute.TypeEnum.organization",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Attribute.swift",
+      "line": 33,
       "symbol": "Attribute.TypeEnum.person",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
@@ -65,43 +72,8 @@
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/BodyCells.swift",
-      "line": 61,
-      "symbol": "BodyCells.rowHeaderIDs",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/BodyCells.swift",
-      "line": 63,
-      "symbol": "BodyCells.rowHeaderTexts",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/BodyCells.swift",
-      "line": 65,
-      "symbol": "BodyCells.rowHeaderTextsNormalized",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/BodyCells.swift",
-      "line": 67,
-      "symbol": "BodyCells.columnHeaderIDs",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/BodyCells.swift",
-      "line": 69,
-      "symbol": "BodyCells.columnHeaderTexts",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/BodyCells.swift",
-      "line": 71,
-      "symbol": "BodyCells.columnHeaderTextsNormalized",
+      "line": 93,
+      "symbol": "BodyCells.attributes",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
@@ -274,6 +246,48 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/ContractAmts.swift",
+      "line": 28,
+      "symbol": "ContractAmts.ConfidenceLevel.high",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/ContractAmts.swift",
+      "line": 29,
+      "symbol": "ContractAmts.ConfidenceLevel.medium",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/ContractAmts.swift",
+      "line": 30,
+      "symbol": "ContractAmts.ConfidenceLevel.low",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/EffectiveDates.swift",
+      "line": 28,
+      "symbol": "EffectiveDates.ConfidenceLevel.high",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/EffectiveDates.swift",
+      "line": 29,
+      "symbol": "EffectiveDates.ConfidenceLevel.medium",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/EffectiveDates.swift",
+      "line": 30,
+      "symbol": "EffectiveDates.ConfidenceLevel.low",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/OriginalLabelsOut.swift",
       "line": 29,
       "symbol": "OriginalLabelsOut.Modification.added",
@@ -291,6 +305,41 @@
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/OriginalLabelsOut.swift",
       "line": 31,
       "symbol": "OriginalLabelsOut.Modification.removed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Parties.swift",
+      "line": 28,
+      "symbol": "Parties.Importance.primary",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/Parties.swift",
+      "line": 29,
+      "symbol": "Parties.Importance.unknown",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/TerminationDates.swift",
+      "line": 28,
+      "symbol": "TerminationDates.ConfidenceLevel.high",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/TerminationDates.swift",
+      "line": 29,
+      "symbol": "TerminationDates.ConfidenceLevel.medium",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/CompareComplyV1/Models/TerminationDates.swift",
+      "line": 30,
+      "symbol": "TerminationDates.ConfidenceLevel.low",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },

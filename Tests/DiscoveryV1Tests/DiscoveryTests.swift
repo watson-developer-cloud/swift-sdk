@@ -86,7 +86,7 @@ class DiscoveryTests: XCTestCase {
             ("testListCollectionFields", testListCollectionFields),
             ("testExpansionsCRUD", testExpansionsCRUD),
             ("testTokenizationDictionaryOperations", testTokenizationDictionaryOperations),
-            ("testCreateAndDeleteStopwordList", testCreateAndDeleteStopwordList),
+            ("testStopwordListOperations", testStopwordListOperations),
             ("testDocumentsCRUD", testDocumentsCRUD),
             ("testQuery", testQuery),
             ("testQueryWithNaturalLanguage", testQueryWithNaturalLanguage),
@@ -1103,7 +1103,7 @@ class DiscoveryTests: XCTestCase {
 
     // MARK: - Stopword lists
 
-    func testCreateAndDeleteStopwordList() {
+    func testStopwordListOperations() {
         let environmentID = environment.environmentID!
         let configuration = lookupOrCreateTestConfiguration(environmentID: environmentID)
         let collection = lookupOrCreateTestCollection(environmentID: environmentID, configurationID: configuration.configurationID!)
@@ -1127,7 +1127,25 @@ class DiscoveryTests: XCTestCase {
         }
         waitForExpectations(timeout: timeout)
 
-        let expectation2 = self.expectation(description: "createStopwordList")
+        let expectation2 = self.expectation(description: "getStopwordListStatus")
+        discovery.getStopwordListStatus(environmentID: environmentID, collectionID: collectionID) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssertEqual(result.type, "stopwords")
+            expectation2.fulfill()
+        }
+        waitForExpectations(timeout: timeout)
+
+        let expectation3 = self.expectation(description: "createStopwordList")
         discovery.deleteStopwordList(environmentID: environmentID, collectionID: collectionID) {
             _, error in
 
@@ -1135,7 +1153,7 @@ class DiscoveryTests: XCTestCase {
                 XCTFail(unexpectedErrorMessage(error))
                 return
             }
-            expectation2.fulfill()
+            expectation3.fulfill()
         }
         waitForExpectations(timeout: timeout)
     }

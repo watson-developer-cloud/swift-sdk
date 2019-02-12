@@ -1,3 +1,24 @@
+# [1.4.0](https://github.com/watson-developer-cloud/swift-sdk/compare/1.3.1...1.4.0) (2019-02-12)
+
+
+### Bug Fixes
+
+* **AssistantV1:** Remove erroneous `additionalProperties` from MessageResponse ([60f1616](https://github.com/watson-developer-cloud/swift-sdk/commit/60f1616))
+* **CompareComplyV1:** BodyCells had incorrect types for some of its properties ([13c66af](https://github.com/watson-developer-cloud/swift-sdk/commit/13c66af))
+
+
+### Features
+
+* **All:** New initializer that loads credentials from file ([39ddae3](https://github.com/watson-developer-cloud/swift-sdk/commit/39ddae3))
+* **AssistantV1:** Add `additionalProperties` property to InputData ([1e14888](https://github.com/watson-developer-cloud/swift-sdk/commit/1e14888))
+* **CompareComplyV1:** Add `address` as a possible Attribute ([b34a782](https://github.com/watson-developer-cloud/swift-sdk/commit/b34a782))
+* **CompareComplyV1:** Add `attributes` property to BodyCells ([3302504](https://github.com/watson-developer-cloud/swift-sdk/commit/3302504))
+* **CompareComplyV1:** Add `importance` to Parties ([96eb790](https://github.com/watson-developer-cloud/swift-sdk/commit/96eb790))
+* **CompareComplyV1:** Add confidence level for the identification of the contract amount ([35a773a](https://github.com/watson-developer-cloud/swift-sdk/commit/35a773a))
+* **DiscoveryV1:** Add method to get the stopword list status ([4a6b615](https://github.com/watson-developer-cloud/swift-sdk/commit/4a6b615))
+* **DiscoveryV1:** Add the `pending` status for Documents ([f342c68](https://github.com/watson-developer-cloud/swift-sdk/commit/f342c68))
+* **SpeechToTextV1:** Add new parameter `force` to upgradeAcousticModel() method ([eecf18b](https://github.com/watson-developer-cloud/swift-sdk/commit/eecf18b))
+
 ## [1.3.1](https://github.com/watson-developer-cloud/swift-sdk/compare/1.3.0...1.3.1) (2019-01-18)
 
 

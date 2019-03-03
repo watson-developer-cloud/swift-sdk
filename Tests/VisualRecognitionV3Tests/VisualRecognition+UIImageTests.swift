@@ -204,8 +204,6 @@ class VisualRecognitionUIImageTests: XCTestCase {
                 XCTFail("Failed to delete the local model: \(error)")
             }
 
-        } else {
-            XCTFail("Core ML required iOS 11+")
         }
     }
 }

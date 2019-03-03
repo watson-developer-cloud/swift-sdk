@@ -98,7 +98,7 @@ public class SpeechToTextSession {
             defaultHeaders: self.defaultHeaders
         )
         socket.onDisconnect = { [weak self] in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             if self.recorder.isRecording {
                 self.stopMicrophone()
             }
@@ -325,7 +325,7 @@ public class SpeechToTextSession {
 
             // callback if uncompressed
             let onMicrophoneDataPCM = { [weak self] (pcm: Data) in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
                 guard pcm.count > 0 else { return }
                 self.socket.writeAudio(audio: pcm)
                 self.onMicrophoneData?(pcm)
@@ -333,7 +333,7 @@ public class SpeechToTextSession {
 
             // callback if compressed
             let onMicrophoneDataOpus = { [weak self] (pcm: Data) in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
                 guard pcm.count > 0 else { return }
                 // swiftlint:disable:next force_try
                 try! self.encoder.encode(pcm: pcm)

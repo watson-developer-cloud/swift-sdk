@@ -145,7 +145,7 @@ func numberOfFieldsInMultiPartFormBody(request: URLRequest) -> Int? {
     var count = 0
     var rangeStart = bodyData.startIndex
     while true {
-        if let boundaryRange = bodyData.range(of: boundaryData, options: [], in: Range.init(rangeStart ..< bodyData.endIndex)) {
+        if let boundaryRange = bodyData.range(of: boundaryData, options: [], in: rangeStart ..< bodyData.endIndex) {
             count += 1
             rangeStart = boundaryRange.upperBound
         } else {

@@ -210,11 +210,7 @@ extension SpeechToText {
         // make sure the AVAudioSession shared instance is properly configured
         do {
             let audioSession = AVAudioSession.sharedInstance()
-            #if swift(>=4.2)
             try audioSession.setCategory(AVAudioSession.Category.playAndRecord, mode: .default, options: [.defaultToSpeaker, .mixWithOthers])
-            #else
-            try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.defaultToSpeaker, .mixWithOthers])
-            #endif
             try audioSession.setActive(true)
         } catch {
             let failureReason = "Failed to setup the AVAudioSession sharedInstance properly."

@@ -55,10 +55,8 @@ This SDK provides classes and methods to access the following Watson services.
 ## Requirements
 
 - Xcode 9.3+
-- Swift 4.1+
+- Swift 4.2+
 - iOS 10.0+
-
-
 
 ## Installation
 

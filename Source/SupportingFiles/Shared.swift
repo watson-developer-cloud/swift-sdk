@@ -35,7 +35,6 @@ internal struct Shared {
 
     static let sdkVersion = "1.4.0"
 
-
     /// For Basic Authentication, switch to using IAM tokens for "apikey" usernames,
     /// but only for api keys that are not for ICP (which currently does not support IAM token authentication)
     static func getAuthMethod(username: String, password: String) -> AuthenticationMethod {
@@ -62,10 +61,8 @@ internal struct Shared {
         if let apiKey = credentials[Constant.apiKey] {
             let iamURL = credentials[Constant.iamURL]
             return getAuthMethod(apiKey: apiKey, iamURL: iamURL)
-        }
-        else if let username = credentials[Constant.username],
+        } else if let username = credentials[Constant.username],
             let password = credentials[Constant.password] {
-
             return getAuthMethod(username: username, password: password)
         }
         return nil

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -71,10 +71,6 @@ public struct Collection: Codable, Equatable {
      */
     public var language: String?
 
-    /**
-     The object providing information about the documents in the collection. Present only when retrieving details of a
-     collection.
-     */
     public var documentCounts: DocumentCounts?
 
     /**
@@ -82,9 +78,6 @@ public struct Collection: Codable, Equatable {
      */
     public var diskUsage: CollectionDiskUsage?
 
-    /**
-     Provides information about the status of relevance training for collection.
-     */
     public var trainingStatus: TrainingStatus?
 
     /**

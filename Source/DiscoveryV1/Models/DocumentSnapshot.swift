@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,9 @@ import RestKit
 /** DocumentSnapshot. */
 public struct DocumentSnapshot: Codable, Equatable {
 
+    /**
+     The step in the document conversion process that the snapshot object represents.
+     */
     public enum Step: String {
         case htmlInput = "html_input"
         case htmlOutput = "html_output"
@@ -29,8 +32,14 @@ public struct DocumentSnapshot: Codable, Equatable {
         case normalizationsOutput = "normalizations_output"
     }
 
+    /**
+     The step in the document conversion process that the snapshot object represents.
+     */
     public var step: String?
 
+    /**
+     Snapshot of the conversion.
+     */
     public var snapshot: [String: JSON]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

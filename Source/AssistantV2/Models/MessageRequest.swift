@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,8 @@ internal struct MessageRequest: Codable, Equatable {
     public var input: MessageInput?
 
     /**
-     State information for the conversation.
+     State information for the conversation. The context is stored by the assistant on a per-session basis. You can use
+     this property to set or modify context variables, which can also be accessed by dialog nodes.
      */
     public var context: MessageContext?
 
@@ -41,7 +42,9 @@ internal struct MessageRequest: Codable, Equatable {
      Initialize a `MessageRequest` with member variables.
 
      - parameter input: An input object that includes the input text.
-     - parameter context: State information for the conversation.
+     - parameter context: State information for the conversation. The context is stored by the assistant on a
+       per-session basis. You can use this property to set or modify context variables, which can also be accessed by
+       dialog nodes.
 
      - returns: An initialized `MessageRequest`.
     */

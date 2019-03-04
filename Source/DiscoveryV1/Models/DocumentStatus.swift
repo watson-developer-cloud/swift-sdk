@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,16 +53,6 @@ public struct DocumentStatus: Codable, Equatable {
     public var configurationID: String?
 
     /**
-     The creation date of the document in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
-     */
-    public var created: Date?
-
-    /**
-     Date of the most recent document update, in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
-     */
-    public var updated: Date?
-
-    /**
      Status of the document in the ingestion process.
      */
     public var status: String
@@ -96,8 +86,6 @@ public struct DocumentStatus: Codable, Equatable {
     private enum CodingKeys: String, CodingKey {
         case documentID = "document_id"
         case configurationID = "configuration_id"
-        case created = "created"
-        case updated = "updated"
         case status = "status"
         case statusDescription = "status_description"
         case filename = "filename"

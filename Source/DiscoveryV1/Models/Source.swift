@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,12 +27,14 @@ public struct Source: Codable, Equatable {
      -  `salesforce` indicates the configuration is to connect to Salesforce.
      -  `sharepoint` indicates the configuration is to connect to Microsoft SharePoint Online.
      -  `web_crawl` indicates the configuration is to perform a web page crawl.
+     -  `cloud_object_storage` indicates the configuration is to connect to a cloud object store.
      */
     public enum TypeEnum: String {
         case box = "box"
         case salesforce = "salesforce"
         case sharepoint = "sharepoint"
         case webCrawl = "web_crawl"
+        case cloudObjectStorage = "cloud_object_storage"
     }
 
     /**
@@ -41,6 +43,7 @@ public struct Source: Codable, Equatable {
      -  `salesforce` indicates the configuration is to connect to Salesforce.
      -  `sharepoint` indicates the configuration is to connect to Microsoft SharePoint Online.
      -  `web_crawl` indicates the configuration is to perform a web page crawl.
+     -  `cloud_object_storage` indicates the configuration is to connect to a cloud object store.
      */
     public var type: String?
 
@@ -77,6 +80,7 @@ public struct Source: Codable, Equatable {
        -  `salesforce` indicates the configuration is to connect to Salesforce.
        -  `sharepoint` indicates the configuration is to connect to Microsoft SharePoint Online.
        -  `web_crawl` indicates the configuration is to perform a web page crawl.
+       -  `cloud_object_storage` indicates the configuration is to connect to a cloud object store.
      - parameter credentialID: The **credential_id** of the credentials to use to connect to the source. Credentials
        are defined using the **credentials** method. The **source_type** of the credentials used must match the **type**
        field specified in this object.

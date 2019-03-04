@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- Properties that are shared by all skills used by the assistant.
+ Built-in system properties that apply to all skills used by the assistant.
  */
 public struct MessageContextGlobalSystem: Codable, Equatable {
 
@@ -36,7 +36,8 @@ public struct MessageContextGlobalSystem: Codable, Equatable {
 
     /**
      A counter that is automatically incremented with each turn of the conversation. A value of 1 indicates that this is
-     the the first turn of a new conversation, which can affect the behavior of some skills.
+     the the first turn of a new conversation, which can affect the behavior of some skills (for example, triggering the
+     start node of a dialog).
      */
     public var turnCount: Int?
 
@@ -58,7 +59,7 @@ public struct MessageContextGlobalSystem: Codable, Equatable {
        return, newline, or tab characters.
      - parameter turnCount: A counter that is automatically incremented with each turn of the conversation. A value
        of 1 indicates that this is the the first turn of a new conversation, which can affect the behavior of some
-       skills.
+       skills (for example, triggering the start node of a dialog).
 
      - returns: An initialized `MessageContextGlobalSystem`.
     */

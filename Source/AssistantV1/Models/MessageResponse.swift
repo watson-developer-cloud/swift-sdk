@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,9 @@ import Foundation
 public struct MessageResponse: Codable, Equatable {
 
     /**
-     The text of the user input.
+     An input object that includes the input text.
      */
-    public var input: MessageInput?
+    public var input: MessageInput
 
     /**
      An array of intents recognized in the user input, sorted in descending order of confidence.

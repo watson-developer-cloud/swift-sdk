@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,12 +17,12 @@
 import Foundation
 
 /**
- Contains information that can be shared by all skills within the Assistant.
+ Information that is shared by all skills used by the Assistant.
  */
 public struct MessageContextGlobal: Codable, Equatable {
 
     /**
-     Properties that are shared by all skills used by the assistant.
+     Built-in system properties that apply to all skills used by the assistant.
      */
     public var system: MessageContextGlobalSystem?
 
@@ -34,7 +34,7 @@ public struct MessageContextGlobal: Codable, Equatable {
     /**
      Initialize a `MessageContextGlobal` with member variables.
 
-     - parameter system: Properties that are shared by all skills used by the assistant.
+     - parameter system: Built-in system properties that apply to all skills used by the assistant.
 
      - returns: An initialized `MessageContextGlobal`.
     */

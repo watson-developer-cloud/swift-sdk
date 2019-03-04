@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,6 +51,11 @@ public struct QueryNoticesResult: Codable, Equatable {
     public var resultMetadata: QueryResultMetadata?
 
     /**
+     Automatically extracted result title.
+     */
+    public var title: String?
+
+    /**
      The internal status code returned by the ingestion subsystem indicating the overall result of ingesting the source
      document.
      */
@@ -85,12 +90,13 @@ public struct QueryNoticesResult: Codable, Equatable {
         case metadata = "metadata"
         case collectionID = "collection_id"
         case resultMetadata = "result_metadata"
+        case title = "title"
         case code = "code"
         case filename = "filename"
         case fileType = "file_type"
         case sha1 = "sha1"
         case notices = "notices"
-        static let allValues = [id, metadata, collectionID, resultMetadata, code, filename, fileType, sha1, notices]
+        static let allValues = [id, metadata, collectionID, resultMetadata, title, code, filename, fileType, sha1, notices]
     }
 
     public init(from decoder: Decoder) throws {
@@ -99,6 +105,7 @@ public struct QueryNoticesResult: Codable, Equatable {
         metadata = try container.decodeIfPresent([String: JSON].self, forKey: .metadata)
         collectionID = try container.decodeIfPresent(String.self, forKey: .collectionID)
         resultMetadata = try container.decodeIfPresent(QueryResultMetadata.self, forKey: .resultMetadata)
+        title = try container.decodeIfPresent(String.self, forKey: .title)
         code = try container.decodeIfPresent(Int.self, forKey: .code)
         filename = try container.decodeIfPresent(String.self, forKey: .filename)
         fileType = try container.decodeIfPresent(String.self, forKey: .fileType)
@@ -114,6 +121,7 @@ public struct QueryNoticesResult: Codable, Equatable {
         try container.encodeIfPresent(metadata, forKey: .metadata)
         try container.encodeIfPresent(collectionID, forKey: .collectionID)
         try container.encodeIfPresent(resultMetadata, forKey: .resultMetadata)
+        try container.encodeIfPresent(title, forKey: .title)
         try container.encodeIfPresent(code, forKey: .code)
         try container.encodeIfPresent(filename, forKey: .filename)
         try container.encodeIfPresent(fileType, forKey: .fileType)

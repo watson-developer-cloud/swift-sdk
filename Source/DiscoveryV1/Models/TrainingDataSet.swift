@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,10 +19,19 @@ import Foundation
 /** TrainingDataSet. */
 public struct TrainingDataSet: Codable, Equatable {
 
+    /**
+     The environment id associated with this training data set.
+     */
     public var environmentID: String?
 
+    /**
+     The collection id associated with this training data set.
+     */
     public var collectionID: String?
 
+    /**
+     Array of training queries.
+     */
     public var queries: [TrainingQuery]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

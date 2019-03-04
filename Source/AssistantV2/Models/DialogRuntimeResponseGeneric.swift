@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -71,7 +71,7 @@ public struct DialogRuntimeResponseGeneric: Codable, Equatable {
     public var source: String?
 
     /**
-     The title to show before the response.
+     The title or introductory text to show before the response.
      */
     public var title: String?
 

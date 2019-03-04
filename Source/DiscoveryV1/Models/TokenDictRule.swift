@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,12 +24,12 @@ public struct TokenDictRule: Codable, Equatable {
     /**
      The string to tokenize.
      */
-    public var text: String?
+    public var text: String
 
     /**
      Array of tokens that the `text` field is split into when found.
      */
-    public var tokens: [String]?
+    public var tokens: [String]
 
     /**
      Array of tokens that represent the content of the `text` field in an alternate character set.
@@ -39,7 +39,7 @@ public struct TokenDictRule: Codable, Equatable {
     /**
      The part of speech that the `text` string belongs to. For example `noun`. Custom parts of speech can be specified.
      */
-    public var partOfSpeech: String?
+    public var partOfSpeech: String
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
@@ -54,24 +54,24 @@ public struct TokenDictRule: Codable, Equatable {
 
      - parameter text: The string to tokenize.
      - parameter tokens: Array of tokens that the `text` field is split into when found.
-     - parameter readings: Array of tokens that represent the content of the `text` field in an alternate character
-       set.
      - parameter partOfSpeech: The part of speech that the `text` string belongs to. For example `noun`. Custom parts
        of speech can be specified.
+     - parameter readings: Array of tokens that represent the content of the `text` field in an alternate character
+       set.
 
      - returns: An initialized `TokenDictRule`.
     */
     public init(
-        text: String? = nil,
-        tokens: [String]? = nil,
-        readings: [String]? = nil,
-        partOfSpeech: String? = nil
+        text: String,
+        tokens: [String],
+        partOfSpeech: String,
+        readings: [String]? = nil
     )
     {
         self.text = text
         self.tokens = tokens
-        self.readings = readings
         self.partOfSpeech = partOfSpeech
+        self.readings = readings
     }
 
 }

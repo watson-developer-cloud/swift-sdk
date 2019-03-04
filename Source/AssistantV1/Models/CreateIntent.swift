@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,14 +34,26 @@ public struct CreateIntent: Codable, Equatable {
     public var description: String?
 
     /**
+     The timestamp for creation of the object.
+     */
+    public var created: Date?
+
+    /**
+     The timestamp for the most recent update to the object.
+     */
+    public var updated: Date?
+
+    /**
      An array of user input examples for the intent.
      */
-    public var examples: [CreateExample]?
+    public var examples: [Example]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case intent = "intent"
         case description = "description"
+        case created = "created"
+        case updated = "updated"
         case examples = "examples"
     }
 
@@ -54,6 +66,8 @@ public struct CreateIntent: Codable, Equatable {
        - It must be no longer than 128 characters.
      - parameter description: The description of the intent. This string cannot contain carriage return, newline, or
        tab characters, and it must be no longer than 128 characters.
+     - parameter created: The timestamp for creation of the object.
+     - parameter updated: The timestamp for the most recent update to the object.
      - parameter examples: An array of user input examples for the intent.
 
      - returns: An initialized `CreateIntent`.
@@ -61,11 +75,15 @@ public struct CreateIntent: Codable, Equatable {
     public init(
         intent: String,
         description: String? = nil,
-        examples: [CreateExample]? = nil
+        created: Date? = nil,
+        updated: Date? = nil,
+        examples: [Example]? = nil
     )
     {
         self.intent = intent
         self.description = description
+        self.created = created
+        self.updated = updated
         self.examples = examples
     }
 

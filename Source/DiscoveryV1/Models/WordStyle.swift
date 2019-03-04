@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,14 @@ import Foundation
 /** WordStyle. */
 public struct WordStyle: Codable, Equatable {
 
+    /**
+     HTML head level that content matching this style is tagged with.
+     */
     public var level: Int?
 
+    /**
+     Array of word style names to convert.
+     */
     public var names: [String]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -32,8 +38,8 @@ public struct WordStyle: Codable, Equatable {
     /**
      Initialize a `WordStyle` with member variables.
 
-     - parameter level:
-     - parameter names:
+     - parameter level: HTML head level that content matching this style is tagged with.
+     - parameter names: Array of word style names to convert.
 
      - returns: An initialized `WordStyle`.
     */

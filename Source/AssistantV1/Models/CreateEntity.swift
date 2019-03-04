@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,27 +36,39 @@ public struct CreateEntity: Codable, Equatable {
     public var description: String?
 
     /**
-     Any metadata related to the value.
+     Any metadata related to the entity.
      */
     public var metadata: [String: JSON]?
-
-    /**
-     An array of objects describing the entity values.
-     */
-    public var values: [CreateValue]?
 
     /**
      Whether to use fuzzy matching for the entity.
      */
     public var fuzzyMatch: Bool?
 
+    /**
+     The timestamp for creation of the object.
+     */
+    public var created: Date?
+
+    /**
+     The timestamp for the most recent update to the object.
+     */
+    public var updated: Date?
+
+    /**
+     An array of objects describing the entity values.
+     */
+    public var values: [CreateValue]?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case entity = "entity"
         case description = "description"
         case metadata = "metadata"
-        case values = "values"
         case fuzzyMatch = "fuzzy_match"
+        case created = "created"
+        case updated = "updated"
+        case values = "values"
     }
 
     /**
@@ -69,9 +81,11 @@ public struct CreateEntity: Codable, Equatable {
        that you want to enable. (Any entity content specified with the request is ignored.).
      - parameter description: The description of the entity. This string cannot contain carriage return, newline, or
        tab characters, and it must be no longer than 128 characters.
-     - parameter metadata: Any metadata related to the value.
-     - parameter values: An array of objects describing the entity values.
+     - parameter metadata: Any metadata related to the entity.
      - parameter fuzzyMatch: Whether to use fuzzy matching for the entity.
+     - parameter created: The timestamp for creation of the object.
+     - parameter updated: The timestamp for the most recent update to the object.
+     - parameter values: An array of objects describing the entity values.
 
      - returns: An initialized `CreateEntity`.
     */
@@ -79,15 +93,19 @@ public struct CreateEntity: Codable, Equatable {
         entity: String,
         description: String? = nil,
         metadata: [String: JSON]? = nil,
-        values: [CreateValue]? = nil,
-        fuzzyMatch: Bool? = nil
+        fuzzyMatch: Bool? = nil,
+        created: Date? = nil,
+        updated: Date? = nil,
+        values: [CreateValue]? = nil
     )
     {
         self.entity = entity
         self.description = description
         self.metadata = metadata
-        self.values = values
         self.fuzzyMatch = fuzzyMatch
+        self.created = created
+        self.updated = updated
+        self.values = values
     }
 
 }

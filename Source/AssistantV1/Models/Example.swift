@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,31 +20,60 @@ import Foundation
 public struct Example: Codable, Equatable {
 
     /**
-     The text of the user input example.
+     The text of a user input example. This string must conform to the following restrictions:
+     - It cannot contain carriage return, newline, or tab characters.
+     - It cannot consist of only whitespace characters.
+     - It must be no longer than 1024 characters.
      */
-    public var exampleText: String
-
-    /**
-     The timestamp for creation of the example.
-     */
-    public var created: Date?
-
-    /**
-     The timestamp for the last update to the example.
-     */
-    public var updated: Date?
+    public var text: String
 
     /**
      An array of contextual entity mentions.
      */
-    public var mentions: [Mentions]?
+    public var mentions: [Mention]?
+
+    /**
+     The timestamp for creation of the object.
+     */
+    public var created: Date?
+
+    /**
+     The timestamp for the most recent update to the object.
+     */
+    public var updated: Date?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case exampleText = "text"
+        case text = "text"
+        case mentions = "mentions"
         case created = "created"
         case updated = "updated"
-        case mentions = "mentions"
+    }
+
+    /**
+     Initialize a `Example` with member variables.
+
+     - parameter text: The text of a user input example. This string must conform to the following restrictions:
+       - It cannot contain carriage return, newline, or tab characters.
+       - It cannot consist of only whitespace characters.
+       - It must be no longer than 1024 characters.
+     - parameter mentions: An array of contextual entity mentions.
+     - parameter created: The timestamp for creation of the object.
+     - parameter updated: The timestamp for the most recent update to the object.
+
+     - returns: An initialized `Example`.
+    */
+    public init(
+        text: String,
+        mentions: [Mention]? = nil,
+        created: Date? = nil,
+        updated: Date? = nil
+    )
+    {
+        self.text = text
+        self.mentions = mentions
+        self.created = created
+        self.updated = updated
     }
 
 }

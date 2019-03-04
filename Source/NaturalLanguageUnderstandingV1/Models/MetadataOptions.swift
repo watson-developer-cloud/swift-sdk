@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,9 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  Returns information from the document, including author name, title, RSS/ATOM feeds, prominent page image, and
  publication date. Supports URL and HTML input types only.
  */
-public struct MetadataOptions: Codable, Equatable {
-    public init() { }
-}
+public typealias MetadataOptions = JSON

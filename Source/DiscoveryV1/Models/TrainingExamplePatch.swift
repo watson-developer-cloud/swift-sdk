@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,14 @@ import Foundation
 /** TrainingExamplePatch. */
 internal struct TrainingExamplePatch: Codable, Equatable {
 
+    /**
+     The example to add.
+     */
     public var crossReference: String?
 
+    /**
+     The relevance value for this example.
+     */
     public var relevance: Int?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -32,8 +38,8 @@ internal struct TrainingExamplePatch: Codable, Equatable {
     /**
      Initialize a `TrainingExamplePatch` with member variables.
 
-     - parameter crossReference:
-     - parameter relevance:
+     - parameter crossReference: The example to add.
+     - parameter relevance: The relevance value for this example.
 
      - returns: An initialized `TrainingExamplePatch`.
     */

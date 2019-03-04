@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,16 +26,13 @@ public struct SourceStatus: Codable, Equatable {
      configuration for this source does not have a **source** object defined.
      -  `running` indicates that a crawl to fetch more documents is in progress.
      -  `complete` indicates that the crawl has completed with no errors.
-     -  `complete_with_notices` indicates that some notices were generated during the crawl. Notices can be checked by
-     using the **notices** query method.
-     -  `stopped` indicates that the crawl has stopped but is not complete.
+     -  `queued` indicates that the crawl has been paused by the system and will automatically restart when possible.
      */
     public enum Status: String {
         case running = "running"
         case complete = "complete"
-        case completeWithNotices = "complete_with_notices"
-        case stopped = "stopped"
         case notConfigured = "not_configured"
+        case queued = "queued"
     }
 
     /**
@@ -43,9 +40,7 @@ public struct SourceStatus: Codable, Equatable {
      configuration for this source does not have a **source** object defined.
      -  `running` indicates that a crawl to fetch more documents is in progress.
      -  `complete` indicates that the crawl has completed with no errors.
-     -  `complete_with_notices` indicates that some notices were generated during the crawl. Notices can be checked by
-     using the **notices** query method.
-     -  `stopped` indicates that the crawl has stopped but is not complete.
+     -  `queued` indicates that the crawl has been paused by the system and will automatically restart when possible.
      */
     public var status: String?
 

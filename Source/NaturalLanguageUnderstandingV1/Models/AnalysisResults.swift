@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- Results of the analysis, organized by feature.
+ Analysis results for each requested feature.
  */
 public struct AnalysisResults: Codable, Equatable {
 
@@ -37,9 +37,9 @@ public struct AnalysisResults: Codable, Equatable {
     public var retrievedURL: String?
 
     /**
-     Usage information.
+     API usage information for the request.
      */
-    public var usage: Usage?
+    public var usage: AnalysisResultsUsage?
 
     /**
      The general concepts referenced or alluded to in the analyzed text.
@@ -62,16 +62,14 @@ public struct AnalysisResults: Codable, Equatable {
     public var categories: [CategoriesResult]?
 
     /**
-     The detected anger, disgust, fear, joy, or sadness that is conveyed by the content. Emotion information can be
-     returned for detected entities, keywords, or user-specified target phrases found in the text.
+     The anger, disgust, fear, joy, or sadness conveyed by the content.
      */
     public var emotion: EmotionResult?
 
     /**
-     The authors, publication date, title, prominent page image, and RSS/ATOM feeds of the webpage. Supports URL and
-     HTML input types.
+     Webpage metadata, such as the author and the title of the page.
      */
-    public var metadata: MetadataResult?
+    public var metadata: AnalysisResultsMetadata?
 
     /**
      The relationships between entities in the content.
@@ -88,6 +86,11 @@ public struct AnalysisResults: Codable, Equatable {
      */
     public var sentiment: SentimentResult?
 
+    /**
+     Tokens and sentences returned from syntax analysis.
+     */
+    public var syntax: SyntaxResult?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case language = "language"
@@ -103,6 +106,7 @@ public struct AnalysisResults: Codable, Equatable {
         case relations = "relations"
         case semanticRoles = "semantic_roles"
         case sentiment = "sentiment"
+        case syntax = "syntax"
     }
 
 }

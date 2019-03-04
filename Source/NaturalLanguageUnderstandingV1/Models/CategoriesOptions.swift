@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,23 +27,35 @@ public struct CategoriesOptions: Codable, Equatable {
      */
     public var limit: Int?
 
+    /**
+     Enter a [custom model](https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html) ID to
+     override the standard categories model.
+     */
+    public var model: String?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case limit = "limit"
+        case model = "model"
     }
 
     /**
      Initialize a `CategoriesOptions` with member variables.
 
      - parameter limit: Maximum number of categories to return.
+     - parameter model: Enter a [custom
+       model](https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html) ID to override the
+       standard categories model.
 
      - returns: An initialized `CategoriesOptions`.
     */
     public init(
-        limit: Int? = nil
+        limit: Int? = nil,
+        model: String? = nil
     )
     {
         self.limit = limit
+        self.model = model
     }
 
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,41 +16,28 @@
 
 import Foundation
 
-/** IntentExport. */
-public struct IntentExport: Codable, Equatable {
+/**
+ The extracted action from the sentence.
+ */
+public struct SemanticRolesResultAction: Codable, Equatable {
 
     /**
-     The name of the intent.
+     Analyzed text that corresponds to the action.
      */
-    public var intentName: String
+    public var text: String?
 
     /**
-     The timestamp for creation of the intent.
+     normalized version of the action.
      */
-    public var created: Date?
+    public var normalized: String?
 
-    /**
-     The timestamp for the last update to the intent.
-     */
-    public var updated: Date?
-
-    /**
-     The description of the intent.
-     */
-    public var description: String?
-
-    /**
-     An array of objects describing the user input examples for the intent.
-     */
-    public var examples: [Example]?
+    public var verb: SemanticRolesVerb?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case intentName = "intent"
-        case created = "created"
-        case updated = "updated"
-        case description = "description"
-        case examples = "examples"
+        case text = "text"
+        case normalized = "normalized"
+        case verb = "verb"
     }
 
 }

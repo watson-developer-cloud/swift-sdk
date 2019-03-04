@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,6 +55,11 @@ public struct Tables: Codable, Equatable {
     public var columnHeaders: [ColumnHeaders]?
 
     /**
+     An array of key-value pairs identified in the current table.
+     */
+    public var keyValuePairs: [KeyValuePair]?
+
+    /**
      An array of cells that are neither table header nor column header nor row header cells, of the current table with
      corresponding row and column header associations.
      */
@@ -68,6 +73,7 @@ public struct Tables: Codable, Equatable {
         case tableHeaders = "table_headers"
         case rowHeaders = "row_headers"
         case columnHeaders = "column_headers"
+        case keyValuePairs = "key_value_pairs"
         case bodyCells = "body_cells"
     }
 

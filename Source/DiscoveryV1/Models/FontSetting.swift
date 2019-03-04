@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,16 +19,34 @@ import Foundation
 /** FontSetting. */
 public struct FontSetting: Codable, Equatable {
 
+    /**
+     The HTML heading level that any content with the matching font will be converted to.
+     */
     public var level: Int?
 
+    /**
+     The minimum size of the font to match.
+     */
     public var minSize: Int?
 
+    /**
+     The maximum size of the font to match.
+     */
     public var maxSize: Int?
 
+    /**
+     When `true`, the font is matched if it is bold.
+     */
     public var bold: Bool?
 
+    /**
+     When `true`, the font is matched if it is italic.
+     */
     public var italic: Bool?
 
+    /**
+     The name of the font.
+     */
     public var name: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -44,12 +62,12 @@ public struct FontSetting: Codable, Equatable {
     /**
      Initialize a `FontSetting` with member variables.
 
-     - parameter level:
-     - parameter minSize:
-     - parameter maxSize:
-     - parameter bold:
-     - parameter italic:
-     - parameter name:
+     - parameter level: The HTML heading level that any content with the matching font will be converted to.
+     - parameter minSize: The minimum size of the font to match.
+     - parameter maxSize: The maximum size of the font to match.
+     - parameter bold: When `true`, the font is matched if it is bold.
+     - parameter italic: When `true`, the font is matched if it is italic.
+     - parameter name: The name of the font.
 
      - returns: An initialized `FontSetting`.
     */

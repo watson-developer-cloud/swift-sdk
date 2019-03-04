@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,7 +50,7 @@ public struct NluEnrichmentEntities: Codable, Equatable {
      When `true`, a list of sentence locations for each instance of each identified entity is recorded. The default is
      `false`.
      */
-    public var sentenceLocation: Bool?
+    public var sentenceLocations: Bool?
 
     /**
      The enrichement model to use with entity extraction. May be a custom model provided by Watson Knowledge Studio, the
@@ -65,7 +65,7 @@ public struct NluEnrichmentEntities: Codable, Equatable {
         case limit = "limit"
         case mentions = "mentions"
         case mentionTypes = "mention_types"
-        case sentenceLocation = "sentence_location"
+        case sentenceLocations = "sentence_locations"
         case model = "model"
     }
 
@@ -79,7 +79,7 @@ public struct NluEnrichmentEntities: Codable, Equatable {
        `false`.
      - parameter mentionTypes: When `true`, the types of mentions for each idetifieid entity is recorded. The default
        is `false`.
-     - parameter sentenceLocation: When `true`, a list of sentence locations for each instance of each identified
+     - parameter sentenceLocations: When `true`, a list of sentence locations for each instance of each identified
        entity is recorded. The default is `false`.
      - parameter model: The enrichement model to use with entity extraction. May be a custom model provided by Watson
        Knowledge Studio, the public model for use with Knowledge Graph `en-news`, or the default public model `alchemy`.
@@ -92,7 +92,7 @@ public struct NluEnrichmentEntities: Codable, Equatable {
         limit: Int? = nil,
         mentions: Bool? = nil,
         mentionTypes: Bool? = nil,
-        sentenceLocation: Bool? = nil,
+        sentenceLocations: Bool? = nil,
         model: String? = nil
     )
     {
@@ -101,7 +101,7 @@ public struct NluEnrichmentEntities: Codable, Equatable {
         self.limit = limit
         self.mentions = mentions
         self.mentionTypes = mentionTypes
-        self.sentenceLocation = sentenceLocation
+        self.sentenceLocations = sentenceLocations
         self.model = model
     }
 

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,9 @@ public struct MetricTokenAggregation: Codable, Equatable {
      */
     public var eventType: String?
 
+    /**
+     Array of results for the metric token aggregation.
+     */
     public var results: [MetricTokenAggregationResult]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

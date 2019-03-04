@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ public struct QueryResultMetadata: Codable, Equatable {
      An unbounded measure of the relevance of a particular result, dependent on the query and matching document. A
      higher score indicates a greater match to the query parameters.
      */
-    public var score: Double?
+    public var score: Double
 
     /**
      The confidence score for the given result. Calculated based on how relevant the result is estimated to be.

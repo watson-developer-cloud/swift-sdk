@@ -41,3 +41,5 @@ Carthage/
 # swagger-codegen
 .swagger-codegen-ignore
 .swagger-codegen/
+.openapi-generator-ignore
+.openapi-generator/

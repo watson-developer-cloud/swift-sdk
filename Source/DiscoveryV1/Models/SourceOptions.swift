@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,12 +45,26 @@ public struct SourceOptions: Codable, Equatable {
      */
     public var urls: [SourceOptionsWebCrawl]?
 
+    /**
+     Array of cloud object store buckets to begin crawling. Only valid and required when the **type** field of the
+     **source** object is set to `cloud_object_store`, and the **crawl_all_buckets** field is `false` or not specified.
+     */
+    public var buckets: [SourceOptionsBuckets]?
+
+    /**
+     When `true`, all buckets in the specified cloud object store are crawled. If set to `true`, the **buckets** array
+     must not be specified.
+     */
+    public var crawlAllBuckets: Bool?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case folders = "folders"
         case objects = "objects"
         case siteCollections = "site_collections"
         case urls = "urls"
+        case buckets = "buckets"
+        case crawlAllBuckets = "crawl_all_buckets"
     }
 
     /**
@@ -65,6 +79,11 @@ public struct SourceOptions: Codable, Equatable {
        `sharepoint`.
      - parameter urls: Array of Web page URLs to begin crawling the web from. Only valid and required when the
        **type** field of the **source** object is set to `web_crawl`.
+     - parameter buckets: Array of cloud object store buckets to begin crawling. Only valid and required when the
+       **type** field of the **source** object is set to `cloud_object_store`, and the **crawl_all_buckets** field is
+       `false` or not specified.
+     - parameter crawlAllBuckets: When `true`, all buckets in the specified cloud object store are crawled. If set to
+       `true`, the **buckets** array must not be specified.
 
      - returns: An initialized `SourceOptions`.
     */
@@ -72,13 +91,17 @@ public struct SourceOptions: Codable, Equatable {
         folders: [SourceOptionsFolder]? = nil,
         objects: [SourceOptionsObject]? = nil,
         siteCollections: [SourceOptionsSiteColl]? = nil,
-        urls: [SourceOptionsWebCrawl]? = nil
+        urls: [SourceOptionsWebCrawl]? = nil,
+        buckets: [SourceOptionsBuckets]? = nil,
+        crawlAllBuckets: Bool? = nil
     )
     {
         self.folders = folders
         self.objects = objects
         self.siteCollections = siteCollections
         self.urls = urls
+        self.buckets = buckets
+        self.crawlAllBuckets = crawlAllBuckets
     }
 
 }

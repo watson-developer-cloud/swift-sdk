@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,22 +36,23 @@ public class CompareComply {
     var authMethod: AuthenticationMethod
     let version: String
 
+    #if os(Linux)
     /**
      Create a `CompareComply` object.
 
-     Use this initializer to automatically pull service credentials from your credentials file.
-     This file is downloaded from your service instance on IBM Cloud as ibm-credentials.env.
+     This initializer will retrieve credentials from the environment or a local credentials file.
+     The credentials file can be downloaded from your service instance on IBM Cloud as ibm-credentials.env.
      Make sure to add the credentials file to your project so that it can be loaded at runtime.
 
-     If the credentials cannot be loaded from the file, or the file is not found, initialization will fail.
+     If credentials are not available in the environment or a local credentials file, initialization will fail.
      In that case, try another initializer that directly passes in the credentials.
 
-     - parameter credentialsFile: The URL of the credentials file.
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
      */
-    public init?(credentialsFile: URL, version: String) {
-        guard let credentials = Shared.extractCredentials(from: credentialsFile, serviceName: "compare_comply") else {
+    public init?(version: String) {
+        self.version = version
+        guard let credentials = Shared.extractCredentials(serviceName: "compare_comply") else {
             return nil
         }
         guard let authMethod = Shared.getAuthMethod(from: credentials) else {
@@ -61,8 +62,9 @@ public class CompareComply {
             self.serviceURL = serviceURL
         }
         self.authMethod = authMethod
-        self.version = version
+        RestRequest.userAgent = Shared.userAgent
     }
+    #endif
 
     /**
      Create a `CompareComply` object.
@@ -75,6 +77,7 @@ public class CompareComply {
     public init(version: String, apiKey: String, iamUrl: String? = nil) {
         self.authMethod = Shared.getAuthMethod(apiKey: apiKey, iamURL: iamUrl)
         self.version = version
+        RestRequest.userAgent = Shared.userAgent
     }
 
     /**
@@ -85,8 +88,9 @@ public class CompareComply {
      - parameter accessToken: An access token for the service.
      */
     public init(version: String, accessToken: String) {
-        self.authMethod = IAMAccessToken(accessToken: accessToken)
         self.version = version
+        self.authMethod = IAMAccessToken(accessToken: accessToken)
+        RestRequest.userAgent = Shared.userAgent
     }
 
     public func accessToken(_ newToken: String) {
@@ -109,16 +113,25 @@ public class CompareComply {
         var metadata = [String: Any]()
 
         do {
-            let json = try JSONDecoder().decode([String: JSON].self, from: data)
-            metadata = [:]
-            if case let .some(.string(message)) = json["error"] {
+            let json = try JSON.decoder.decode([String: JSON].self, from: data)
+            metadata["response"] = json
+            if case let .some(.array(errors)) = json["errors"],
+                case let .some(.object(error)) = errors.first,
+                case let .some(.string(message)) = error["message"] {
                 errorMessage = message
+            } else if case let .some(.string(message)) = json["error"] {
+                errorMessage = message
+            } else if case let .some(.string(message)) = json["message"] {
+                errorMessage = message
+            } else {
+                errorMessage = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
             }
-            // If metadata is empty, it should show up as nil in the WatsonError
-            return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
         } catch {
-            return WatsonError.http(statusCode: statusCode, message: nil, metadata: nil)
+            metadata["response"] = data
+            errorMessage = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
         }
+
+        return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: metadata)
     }
 
     /**
@@ -127,6 +140,7 @@ public class CompareComply {
      Convert an uploaded file to HTML.
 
      - parameter file: The file to convert.
+     - parameter filename: The filename for file.
      - parameter modelID: The analysis model to be used by the service. For the `/v1/element_classification` and
        `/v1/comparison` methods, the default is `contracts`. For the `/v1/tables` method, the default is `tables`. These
        defaults apply to the standalone methods as well as to the methods' use in batch-processing requests.
@@ -135,7 +149,8 @@ public class CompareComply {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func convertToHTML(
-        file: URL,
+        file: Data,
+        filename: String,
         modelID: String? = nil,
         fileContentType: String? = nil,
         headers: [String: String]? = nil,
@@ -143,12 +158,7 @@ public class CompareComply {
     {
         // construct body
         let multipartFormData = MultipartFormData()
-        do {
-            try multipartFormData.append(file: file, withName: "file")
-        } catch {
-            completionHandler(nil, WatsonError.serialization(values: "file \(file.path)"))
-            return
-        }
+        multipartFormData.append(file, withName: "file", mimeType: fileContentType, fileName: filename)
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
             return
@@ -159,8 +169,8 @@ public class CompareComply {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "convertToHTML")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "convertToHTML")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
 
@@ -202,7 +212,7 @@ public class CompareComply {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func classifyElements(
-        file: URL,
+        file: Data,
         modelID: String? = nil,
         fileContentType: String? = nil,
         headers: [String: String]? = nil,
@@ -210,12 +220,7 @@ public class CompareComply {
     {
         // construct body
         let multipartFormData = MultipartFormData()
-        do {
-            try multipartFormData.append(file: file, withName: "file")
-        } catch {
-            completionHandler(nil, WatsonError.serialization(values: "file \(file.path)"))
-            return
-        }
+        multipartFormData.append(file, withName: "file", mimeType: fileContentType, fileName: "filename")
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
             return
@@ -226,8 +231,8 @@ public class CompareComply {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "classifyElements")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "classifyElements")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
 
@@ -269,7 +274,7 @@ public class CompareComply {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func extractTables(
-        file: URL,
+        file: Data,
         modelID: String? = nil,
         fileContentType: String? = nil,
         headers: [String: String]? = nil,
@@ -277,12 +282,7 @@ public class CompareComply {
     {
         // construct body
         let multipartFormData = MultipartFormData()
-        do {
-            try multipartFormData.append(file: file, withName: "file")
-        } catch {
-            completionHandler(nil, WatsonError.serialization(values: "file \(file.path)"))
-            return
-        }
+        multipartFormData.append(file, withName: "file", mimeType: fileContentType, fileName: "filename")
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
             return
@@ -293,8 +293,8 @@ public class CompareComply {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "extractTables")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "extractTables")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
 
@@ -340,8 +340,8 @@ public class CompareComply {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func compareDocuments(
-        file1: URL,
-        file2: URL,
+        file1: Data,
+        file2: Data,
         file1Label: String? = nil,
         file2Label: String? = nil,
         modelID: String? = nil,
@@ -352,18 +352,8 @@ public class CompareComply {
     {
         // construct body
         let multipartFormData = MultipartFormData()
-        do {
-            try multipartFormData.append(file: file1, withName: "file_1")
-        } catch {
-            completionHandler(nil, WatsonError.serialization(values: "file \(file1.path)"))
-            return
-        }
-        do {
-            try multipartFormData.append(file: file2, withName: "file_2")
-        } catch {
-            completionHandler(nil, WatsonError.serialization(values: "file \(file2.path)"))
-            return
-        }
+        multipartFormData.append(file1, withName: "file_1", mimeType: file1ContentType, fileName: "filename")
+        multipartFormData.append(file2, withName: "file_2", mimeType: file2ContentType, fileName: "filename")
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
             return
@@ -374,8 +364,8 @@ public class CompareComply {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "compareDocuments")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "compareDocuments")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
 
@@ -436,7 +426,7 @@ public class CompareComply {
             feedbackData: feedbackData,
             userID: userID,
             comment: comment)
-        guard let body = try? JSONEncoder().encode(addFeedbackRequest) else {
+        guard let body = try? JSON.encoder.encode(addFeedbackRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
@@ -446,8 +436,8 @@ public class CompareComply {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "addFeedback")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "addFeedback")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -541,8 +531,8 @@ public class CompareComply {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listFeedback")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listFeedback")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -649,8 +639,8 @@ public class CompareComply {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getFeedback")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getFeedback")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -702,8 +692,8 @@ public class CompareComply {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteFeedback")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteFeedback")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -764,10 +754,10 @@ public class CompareComply {
      */
     public func createBatch(
         function: String,
-        inputCredentialsFile: URL,
+        inputCredentialsFile: Data,
         inputBucketLocation: String,
         inputBucketName: String,
-        outputCredentialsFile: URL,
+        outputCredentialsFile: Data,
         outputBucketLocation: String,
         outputBucketName: String,
         modelID: String? = nil,
@@ -776,24 +766,14 @@ public class CompareComply {
     {
         // construct body
         let multipartFormData = MultipartFormData()
-        do {
-            try multipartFormData.append(file: inputCredentialsFile, withName: "input_credentials_file")
-        } catch {
-            completionHandler(nil, WatsonError.serialization(values: "file \(inputCredentialsFile.path)"))
-            return
-        }
+        multipartFormData.append(inputCredentialsFile, withName: "input_credentials_file", fileName: "filename")
         if let inputBucketLocationData = inputBucketLocation.data(using: .utf8) {
             multipartFormData.append(inputBucketLocationData, withName: "input_bucket_location")
         }
         if let inputBucketNameData = inputBucketName.data(using: .utf8) {
             multipartFormData.append(inputBucketNameData, withName: "input_bucket_name")
         }
-        do {
-            try multipartFormData.append(file: outputCredentialsFile, withName: "output_credentials_file")
-        } catch {
-            completionHandler(nil, WatsonError.serialization(values: "file \(outputCredentialsFile.path)"))
-            return
-        }
+        multipartFormData.append(outputCredentialsFile, withName: "output_credentials_file", fileName: "filename")
         if let outputBucketLocationData = outputBucketLocation.data(using: .utf8) {
             multipartFormData.append(outputBucketLocationData, withName: "output_bucket_location")
         }
@@ -810,8 +790,8 @@ public class CompareComply {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createBatch")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createBatch")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
 
@@ -857,8 +837,8 @@ public class CompareComply {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listBatches")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listBatches")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -899,8 +879,8 @@ public class CompareComply {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getBatch")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getBatch")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -953,8 +933,8 @@ public class CompareComply {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateBatch")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateBatch")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters

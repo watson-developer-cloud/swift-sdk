@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,12 +27,14 @@ public struct Credentials: Codable, Equatable {
      -  `salesforce` indicates the credentials are used to connect to Salesforce.
      -  `sharepoint` indicates the credentials are used to connect to Microsoft SharePoint Online.
      -  `web_crawl` indicates the credentials are used to perform a web crawl.
+     =  `cloud_object_storage` indicates the credentials are used to connect to an IBM Cloud Object Store.
      */
     public enum SourceType: String {
         case box = "box"
         case salesforce = "salesforce"
         case sharepoint = "sharepoint"
         case webCrawl = "web_crawl"
+        case cloudObjectStorage = "cloud_object_storage"
     }
 
     /**
@@ -46,6 +48,7 @@ public struct Credentials: Codable, Equatable {
      -  `salesforce` indicates the credentials are used to connect to Salesforce.
      -  `sharepoint` indicates the credentials are used to connect to Microsoft SharePoint Online.
      -  `web_crawl` indicates the credentials are used to perform a web crawl.
+     =  `cloud_object_storage` indicates the credentials are used to connect to an IBM Cloud Object Store.
      */
     public var sourceType: String?
 
@@ -71,6 +74,7 @@ public struct Credentials: Codable, Equatable {
        -  `salesforce` indicates the credentials are used to connect to Salesforce.
        -  `sharepoint` indicates the credentials are used to connect to Microsoft SharePoint Online.
        -  `web_crawl` indicates the credentials are used to perform a web crawl.
+       =  `cloud_object_storage` indicates the credentials are used to connect to an IBM Cloud Object Store.
      - parameter credentialDetails: Object containing details of the stored credentials.
        Obtain credentials for your source from the administrator of the source.
 

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,22 +21,17 @@ import RestKit
 public struct Entity: Codable, Equatable {
 
     /**
-     The name of the entity.
+     The name of the entity. This string must conform to the following restrictions:
+     - It can contain only Unicode alphanumeric, underscore, and hyphen characters.
+     - It must be no longer than 64 characters.
+     If you specify an entity name beginning with the reserved prefix `sys-`, it must be the name of a system entity
+     that you want to enable. (Any entity content specified with the request is ignored.).
      */
-    public var entityName: String
+    public var entity: String
 
     /**
-     The timestamp for creation of the entity.
-     */
-    public var created: Date?
-
-    /**
-     The timestamp for the last update to the entity.
-     */
-    public var updated: Date?
-
-    /**
-     The description of the entity.
+     The description of the entity. This string cannot contain carriage return, newline, or tab characters, and it must
+     be no longer than 128 characters.
      */
     public var description: String?
 
@@ -46,18 +41,34 @@ public struct Entity: Codable, Equatable {
     public var metadata: [String: JSON]?
 
     /**
-     Whether fuzzy matching is used for the entity.
+     Whether to use fuzzy matching for the entity.
      */
     public var fuzzyMatch: Bool?
 
+    /**
+     The timestamp for creation of the object.
+     */
+    public var created: Date?
+
+    /**
+     The timestamp for the most recent update to the object.
+     */
+    public var updated: Date?
+
+    /**
+     An array of objects describing the entity values.
+     */
+    public var values: [Value]?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case entityName = "entity"
-        case created = "created"
-        case updated = "updated"
+        case entity = "entity"
         case description = "description"
         case metadata = "metadata"
         case fuzzyMatch = "fuzzy_match"
+        case created = "created"
+        case updated = "updated"
+        case values = "values"
     }
 
 }

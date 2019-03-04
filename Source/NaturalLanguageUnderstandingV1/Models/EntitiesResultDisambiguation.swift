@@ -15,42 +15,33 @@
  **/
 
 import Foundation
+import RestKit
 
-/** IntentExport. */
-public struct IntentExport: Codable, Equatable {
-
-    /**
-     The name of the intent.
-     */
-    public var intentName: String
+/**
+ Disambiguation information for the entity.
+ */
+public struct EntitiesResultDisambiguation: Codable, Equatable {
 
     /**
-     The timestamp for creation of the intent.
+     Common entity name.
      */
-    public var created: Date?
+    public var name: String?
 
     /**
-     The timestamp for the last update to the intent.
+     Link to the corresponding DBpedia resource.
      */
-    public var updated: Date?
+    public var dbpediaResource: [String: JSON]?
 
     /**
-     The description of the intent.
+     Entity subtype information.
      */
-    public var description: String?
-
-    /**
-     An array of objects describing the user input examples for the intent.
-     */
-    public var examples: [Example]?
+    public var subtype: [String]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case intentName = "intent"
-        case created = "created"
-        case updated = "updated"
-        case description = "description"
-        case examples = "examples"
+        case name = "name"
+        case dbpediaResource = "dbpedia_resource"
+        case subtype = "subtype"
     }
 
 }

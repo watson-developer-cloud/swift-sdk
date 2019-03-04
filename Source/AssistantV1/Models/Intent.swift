@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,31 +20,41 @@ import Foundation
 public struct Intent: Codable, Equatable {
 
     /**
-     The name of the intent.
+     The name of the intent. This string must conform to the following restrictions:
+     - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.
+     - It cannot begin with the reserved prefix `sys-`.
+     - It must be no longer than 128 characters.
      */
-    public var intentName: String
+    public var intent: String
 
     /**
-     The timestamp for creation of the intent.
+     The description of the intent. This string cannot contain carriage return, newline, or tab characters, and it must
+     be no longer than 128 characters.
+     */
+    public var description: String?
+
+    /**
+     The timestamp for creation of the object.
      */
     public var created: Date?
 
     /**
-     The timestamp for the last update to the intent.
+     The timestamp for the most recent update to the object.
      */
     public var updated: Date?
 
     /**
-     The description of the intent.
+     An array of user input examples for the intent.
      */
-    public var description: String?
+    public var examples: [Example]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case intentName = "intent"
+        case intent = "intent"
+        case description = "description"
         case created = "created"
         case updated = "updated"
-        case description = "description"
+        case examples = "examples"
     }
 
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,10 +35,10 @@ public struct NormalizationOperation: Codable, Equatable {
      array (if it is not an array already). This conversion ensures the type for **destination_field** is consistent
      across all documents.
      **remove** - Deletes the **source_field** field. The **destination_field** is ignored for this operation.
-     **remove_nulls** - Removes all nested null (blank) field values from the JSON tree. **source_field** and
-     **destination_field** are ignored by this operation because _remove_nulls_ operates on the entire JSON tree.
-     Typically, **remove_nulls** is invoked as the last normalization operation (if it is invoked at all, it can be
-     time-expensive).
+     **remove_nulls** - Removes all nested null (blank) field values from the ingested document. **source_field** and
+     **destination_field** are ignored by this operation because _remove_nulls_ operates on the entire ingested
+     document. Typically, **remove_nulls** is invoked as the last normalization operation (if it is invoked at all, it
+     can be time-expensive).
      */
     public enum Operation: String {
         case copy = "copy"
@@ -64,10 +64,10 @@ public struct NormalizationOperation: Codable, Equatable {
      array (if it is not an array already). This conversion ensures the type for **destination_field** is consistent
      across all documents.
      **remove** - Deletes the **source_field** field. The **destination_field** is ignored for this operation.
-     **remove_nulls** - Removes all nested null (blank) field values from the JSON tree. **source_field** and
-     **destination_field** are ignored by this operation because _remove_nulls_ operates on the entire JSON tree.
-     Typically, **remove_nulls** is invoked as the last normalization operation (if it is invoked at all, it can be
-     time-expensive).
+     **remove_nulls** - Removes all nested null (blank) field values from the ingested document. **source_field** and
+     **destination_field** are ignored by this operation because _remove_nulls_ operates on the entire ingested
+     document. Typically, **remove_nulls** is invoked as the last normalization operation (if it is invoked at all, it
+     can be time-expensive).
      */
     public var operation: String?
 
@@ -106,10 +106,10 @@ public struct NormalizationOperation: Codable, Equatable {
        an array (if it is not an array already). This conversion ensures the type for **destination_field** is
        consistent across all documents.
        **remove** - Deletes the **source_field** field. The **destination_field** is ignored for this operation.
-       **remove_nulls** - Removes all nested null (blank) field values from the JSON tree. **source_field** and
-       **destination_field** are ignored by this operation because _remove_nulls_ operates on the entire JSON tree.
-       Typically, **remove_nulls** is invoked as the last normalization operation (if it is invoked at all, it can be
-       time-expensive).
+       **remove_nulls** - Removes all nested null (blank) field values from the ingested document. **source_field** and
+       **destination_field** are ignored by this operation because _remove_nulls_ operates on the entire ingested
+       document. Typically, **remove_nulls** is invoked as the last normalization operation (if it is invoked at all, it
+       can be time-expensive).
      - parameter sourceField: The source field for the operation.
      - parameter destinationField: The destination field for the operation.
 

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,12 +24,12 @@ public struct EntityMention: Codable, Equatable {
     /**
      The text of the user input example.
      */
-    public var exampleText: String
+    public var text: String
 
     /**
      The name of the intent.
      */
-    public var intentName: String
+    public var intent: String
 
     /**
      An array of zero-based character offsets that indicate where the entity mentions begin and end in the input text.
@@ -38,8 +38,8 @@ public struct EntityMention: Codable, Equatable {
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case exampleText = "text"
-        case intentName = "intent"
+        case text = "text"
+        case intent = "intent"
         case location = "location"
     }
 

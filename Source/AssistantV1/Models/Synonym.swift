@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,25 +20,51 @@ import Foundation
 public struct Synonym: Codable, Equatable {
 
     /**
-     The text of the synonym.
+     The text of the synonym. This string must conform to the following restrictions:
+     - It cannot contain carriage return, newline, or tab characters.
+     - It cannot consist of only whitespace characters.
+     - It must be no longer than 64 characters.
      */
-    public var synonymText: String
+    public var synonym: String
 
     /**
-     The timestamp for creation of the synonym.
+     The timestamp for creation of the object.
      */
     public var created: Date?
 
     /**
-     The timestamp for the most recent update to the synonym.
+     The timestamp for the most recent update to the object.
      */
     public var updated: Date?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case synonymText = "synonym"
+        case synonym = "synonym"
         case created = "created"
         case updated = "updated"
+    }
+
+    /**
+     Initialize a `Synonym` with member variables.
+
+     - parameter synonym: The text of the synonym. This string must conform to the following restrictions:
+       - It cannot contain carriage return, newline, or tab characters.
+       - It cannot consist of only whitespace characters.
+       - It must be no longer than 64 characters.
+     - parameter created: The timestamp for creation of the object.
+     - parameter updated: The timestamp for the most recent update to the object.
+
+     - returns: An initialized `Synonym`.
+    */
+    public init(
+        synonym: String,
+        created: Date? = nil,
+        updated: Date? = nil
+    )
+    {
+        self.synonym = synonym
+        self.created = created
+        self.updated = updated
     }
 
 }

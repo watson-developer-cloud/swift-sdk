@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,12 +30,24 @@ internal struct UpdateExample: Codable, Equatable {
     /**
      An array of contextual entity mentions.
      */
-    public var mentions: [Mentions]?
+    public var mentions: [Mention]?
+
+    /**
+     The timestamp for creation of the object.
+     */
+    public var created: Date?
+
+    /**
+     The timestamp for the most recent update to the object.
+     */
+    public var updated: Date?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case text = "text"
         case mentions = "mentions"
+        case created = "created"
+        case updated = "updated"
     }
 
     /**
@@ -46,16 +58,22 @@ internal struct UpdateExample: Codable, Equatable {
        - It cannot consist of only whitespace characters.
        - It must be no longer than 1024 characters.
      - parameter mentions: An array of contextual entity mentions.
+     - parameter created: The timestamp for creation of the object.
+     - parameter updated: The timestamp for the most recent update to the object.
 
      - returns: An initialized `UpdateExample`.
     */
     public init(
         text: String? = nil,
-        mentions: [Mentions]? = nil
+        mentions: [Mention]? = nil,
+        created: Date? = nil,
+        updated: Date? = nil
     )
     {
         self.text = text
         self.mentions = mentions
+        self.created = created
+        self.updated = updated
     }
 
 }

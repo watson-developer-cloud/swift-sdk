@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -84,6 +84,11 @@ public struct Features: Codable, Equatable {
      */
     public var categories: CategoriesOptions?
 
+    /**
+     Returns tokens and sentences from the input text.
+     */
+    public var syntax: SyntaxOptions?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case concepts = "concepts"
@@ -95,6 +100,7 @@ public struct Features: Codable, Equatable {
         case semanticRoles = "semantic_roles"
         case sentiment = "sentiment"
         case categories = "categories"
+        case syntax = "syntax"
     }
 
     /**
@@ -128,6 +134,7 @@ public struct Features: Codable, Equatable {
         Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish.
      - parameter categories: Returns a five-level taxonomy of the content. The top three categories are returned.
        Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
+     - parameter syntax: Returns tokens and sentences from the input text.
 
      - returns: An initialized `Features`.
     */
@@ -140,7 +147,8 @@ public struct Features: Codable, Equatable {
         relations: RelationsOptions? = nil,
         semanticRoles: SemanticRolesOptions? = nil,
         sentiment: SentimentOptions? = nil,
-        categories: CategoriesOptions? = nil
+        categories: CategoriesOptions? = nil,
+        syntax: SyntaxOptions? = nil
     )
     {
         self.concepts = concepts
@@ -152,6 +160,7 @@ public struct Features: Codable, Equatable {
         self.semanticRoles = semanticRoles
         self.sentiment = sentiment
         self.categories = categories
+        self.syntax = syntax
     }
 
 }

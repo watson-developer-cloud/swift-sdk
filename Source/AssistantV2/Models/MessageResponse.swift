@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,9 @@ public struct MessageResponse: Codable, Equatable {
     public var output: MessageOutput
 
     /**
-     State information for the conversation.
+     State information for the conversation. The context is stored by the assistant on a per-session basis. You can use
+     this property to access context variables.
+     **Note:** The context is included in message responses only if **return_context**=`true` in the message request.
      */
     public var context: MessageContext?
 

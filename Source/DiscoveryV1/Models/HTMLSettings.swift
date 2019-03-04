@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,16 +21,28 @@ import Foundation
  */
 public struct HTMLSettings: Codable, Equatable {
 
+    /**
+     Array of HTML tags that are excluded completely.
+     */
     public var excludeTagsCompletely: [String]?
 
+    /**
+     Array of HTML tags which are excluded but still retain content.
+     */
     public var excludeTagsKeepContent: [String]?
 
     public var keepContent: XPathPatterns?
 
     public var excludeContent: XPathPatterns?
 
+    /**
+     An array of HTML tag attributes to keep in the converted document.
+     */
     public var keepTagAttributes: [String]?
 
+    /**
+     Array of HTML tag attributes to exclude.
+     */
     public var excludeTagAttributes: [String]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -46,12 +58,12 @@ public struct HTMLSettings: Codable, Equatable {
     /**
      Initialize a `HTMLSettings` with member variables.
 
-     - parameter excludeTagsCompletely:
-     - parameter excludeTagsKeepContent:
+     - parameter excludeTagsCompletely: Array of HTML tags that are excluded completely.
+     - parameter excludeTagsKeepContent: Array of HTML tags which are excluded but still retain content.
      - parameter keepContent:
      - parameter excludeContent:
-     - parameter keepTagAttributes:
-     - parameter excludeTagAttributes:
+     - parameter keepTagAttributes: An array of HTML tag attributes to keep in the converted document.
+     - parameter excludeTagAttributes: Array of HTML tag attributes to exclude.
 
      - returns: An initialized `HTMLSettings`.
     */

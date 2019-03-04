@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,14 +21,29 @@ import Foundation
  */
 public struct QueryResponse: Codable, Equatable {
 
+    /**
+     The number of matching results for the query.
+     */
     public var matchingResults: Int?
 
+    /**
+     Array of document results for the query.
+     */
     public var results: [QueryResult]?
 
+    /**
+     Array of aggregation results for the query.
+     */
     public var aggregations: [QueryAggregation]?
 
+    /**
+     Array of passage results for the query.
+     */
     public var passages: [QueryPassages]?
 
+    /**
+     The number of duplicate results removed.
+     */
     public var duplicatesRemoved: Int?
 
     /**

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,20 +36,20 @@ public class NaturalLanguageClassifier {
     var session = URLSession(configuration: URLSessionConfiguration.default)
     var authMethod: AuthenticationMethod
 
+    #if os(Linux)
     /**
      Create a `NaturalLanguageClassifier` object.
 
-     Use this initializer to automatically pull service credentials from your credentials file.
-     This file is downloaded from your service instance on IBM Cloud as ibm-credentials.env.
+     This initializer will retrieve credentials from the environment or a local credentials file.
+     The credentials file can be downloaded from your service instance on IBM Cloud as ibm-credentials.env.
      Make sure to add the credentials file to your project so that it can be loaded at runtime.
 
-     If the credentials cannot be loaded from the file, or the file is not found, initialization will fail.
+     If credentials are not available in the environment or a local credentials file, initialization will fail.
      In that case, try another initializer that directly passes in the credentials.
 
-     - parameter credentialsFile: The URL of the credentials file.
      */
-    public init?(credentialsFile: URL) {
-        guard let credentials = Shared.extractCredentials(from: credentialsFile, serviceName: "natural_language_classifier") else {
+    public init?() {
+        guard let credentials = Shared.extractCredentials(serviceName: "natural_language_classifier") else {
             return nil
         }
         guard let authMethod = Shared.getAuthMethod(from: credentials) else {
@@ -59,7 +59,9 @@ public class NaturalLanguageClassifier {
             self.serviceURL = serviceURL
         }
         self.authMethod = authMethod
+        RestRequest.userAgent = Shared.userAgent
     }
+    #endif
 
     /**
      Create a `NaturalLanguageClassifier` object.
@@ -69,6 +71,7 @@ public class NaturalLanguageClassifier {
      */
     public init(username: String, password: String) {
         self.authMethod = Shared.getAuthMethod(username: username, password: password)
+        RestRequest.userAgent = Shared.userAgent
     }
 
     /**
@@ -79,6 +82,7 @@ public class NaturalLanguageClassifier {
      */
     public init(apiKey: String, iamUrl: String? = nil) {
         self.authMethod = Shared.getAuthMethod(apiKey: apiKey, iamURL: iamUrl)
+        RestRequest.userAgent = Shared.userAgent
     }
 
     /**
@@ -88,6 +92,7 @@ public class NaturalLanguageClassifier {
      */
     public init(accessToken: String) {
         self.authMethod = IAMAccessToken(accessToken: accessToken)
+        RestRequest.userAgent = Shared.userAgent
     }
 
     public func accessToken(_ newToken: String) {
@@ -110,19 +115,25 @@ public class NaturalLanguageClassifier {
         var metadata = [String: Any]()
 
         do {
-            let json = try JSONDecoder().decode([String: JSON].self, from: data)
-            metadata = [:]
-            if case let .some(.string(message)) = json["error"] {
+            let json = try JSON.decoder.decode([String: JSON].self, from: data)
+            metadata["response"] = json
+            if case let .some(.array(errors)) = json["errors"],
+                case let .some(.object(error)) = errors.first,
+                case let .some(.string(message)) = error["message"] {
                 errorMessage = message
+            } else if case let .some(.string(message)) = json["error"] {
+                errorMessage = message
+            } else if case let .some(.string(message)) = json["message"] {
+                errorMessage = message
+            } else {
+                errorMessage = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
             }
-            if case let .some(.string(description)) = json["description"] {
-                metadata["description"] = description
-            }
-            // If metadata is empty, it should show up as nil in the WatsonError
-            return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
         } catch {
-            return WatsonError.http(statusCode: statusCode, message: nil, metadata: nil)
+            metadata["response"] = data
+            errorMessage = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
         }
+
+        return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: metadata)
     }
 
     /**
@@ -145,7 +156,7 @@ public class NaturalLanguageClassifier {
         // construct body
         let classifyRequest = ClassifyInput(
             text: text)
-        guard let body = try? JSONEncoder().encode(classifyRequest) else {
+        guard let body = try? JSON.encoder.encode(classifyRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
@@ -155,8 +166,8 @@ public class NaturalLanguageClassifier {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "classify")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "classify")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -201,7 +212,7 @@ public class NaturalLanguageClassifier {
         // construct body
         let classifyCollectionRequest = ClassifyCollectionInput(
             collection: collection)
-        guard let body = try? JSONEncoder().encode(classifyCollectionRequest) else {
+        guard let body = try? JSON.encoder.encode(classifyCollectionRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
@@ -211,8 +222,8 @@ public class NaturalLanguageClassifier {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "classifyCollection")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "classifyCollection")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -253,25 +264,15 @@ public class NaturalLanguageClassifier {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createClassifier(
-        metadata: URL,
-        trainingData: URL,
+        metadata: Data,
+        trainingData: Data,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Classifier>?, WatsonError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
-        do {
-            try multipartFormData.append(file: metadata, withName: "training_metadata")
-        } catch {
-            completionHandler(nil, WatsonError.serialization(values: "file \(metadata.path)"))
-            return
-        }
-        do {
-            try multipartFormData.append(file: trainingData, withName: "training_data")
-        } catch {
-            completionHandler(nil, WatsonError.serialization(values: "file \(trainingData.path)"))
-            return
-        }
+        multipartFormData.append(metadata, withName: "training_metadata", fileName: "filename")
+        multipartFormData.append(trainingData, withName: "training_data", fileName: "filename")
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
             return
@@ -282,8 +283,8 @@ public class NaturalLanguageClassifier {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createClassifier")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createClassifier")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
 
@@ -319,8 +320,8 @@ public class NaturalLanguageClassifier {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listClassifiers")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listClassifiers")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -356,8 +357,8 @@ public class NaturalLanguageClassifier {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getClassifier")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getClassifier")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -396,8 +397,8 @@ public class NaturalLanguageClassifier {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteClassifier")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteClassifier")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,13 @@
 import Foundation
 
 /**
- An array of entities resulting from the query.
+ An object that contains an array of entities resulting from the query.
  */
 public struct QueryEntitiesResponse: Codable, Equatable {
 
+    /**
+     Array of entities that results from the query.
+     */
     public var entities: [QueryEntitiesResponseItem]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

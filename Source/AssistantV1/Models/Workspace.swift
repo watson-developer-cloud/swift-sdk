@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,34 +21,32 @@ import RestKit
 public struct Workspace: Codable, Equatable {
 
     /**
-     The name of the workspace.
+     The current status of the workspace.
+     */
+    public enum Status: String {
+        case nonExistent = "Non Existent"
+        case training = "Training"
+        case failed = "Failed"
+        case available = "Available"
+        case unavailable = "Unavailable"
+    }
+
+    /**
+     The name of the workspace. This string cannot contain carriage return, newline, or tab characters, and it must be
+     no longer than 64 characters.
      */
     public var name: String
+
+    /**
+     The description of the workspace. This string cannot contain carriage return, newline, or tab characters, and it
+     must be no longer than 128 characters.
+     */
+    public var description: String?
 
     /**
      The language of the workspace.
      */
     public var language: String
-
-    /**
-     The timestamp for creation of the workspace.
-     */
-    public var created: Date?
-
-    /**
-     The timestamp for the last update to the workspace.
-     */
-    public var updated: Date?
-
-    /**
-     The workspace ID of the workspace.
-     */
-    public var workspaceID: String
-
-    /**
-     The description of the workspace.
-     */
-    public var description: String?
 
     /**
      Any metadata related to the workspace.
@@ -59,24 +57,69 @@ public struct Workspace: Codable, Equatable {
      Whether training data from the workspace (including artifacts such as intents and entities) can be used by IBM for
      general service improvements. `true` indicates that workspace training data is not to be used.
      */
-    public var learningOptOut: Bool?
+    public var learningOptOut: Bool
 
     /**
      Global settings for the workspace.
      */
     public var systemSettings: WorkspaceSystemSettings?
 
+    /**
+     The workspace ID of the workspace.
+     */
+    public var workspaceID: String
+
+    /**
+     The current status of the workspace.
+     */
+    public var status: String?
+
+    /**
+     The timestamp for creation of the object.
+     */
+    public var created: Date?
+
+    /**
+     The timestamp for the most recent update to the object.
+     */
+    public var updated: Date?
+
+    /**
+     An array of intents.
+     */
+    public var intents: [Intent]?
+
+    /**
+     An array of objects describing the entities for the workspace.
+     */
+    public var entities: [Entity]?
+
+    /**
+     An array of objects describing the dialog nodes in the workspace.
+     */
+    public var dialogNodes: [DialogNode]?
+
+    /**
+     An array of counterexamples.
+     */
+    public var counterexamples: [Counterexample]?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case name = "name"
-        case language = "language"
-        case created = "created"
-        case updated = "updated"
-        case workspaceID = "workspace_id"
         case description = "description"
+        case language = "language"
         case metadata = "metadata"
         case learningOptOut = "learning_opt_out"
         case systemSettings = "system_settings"
+        case workspaceID = "workspace_id"
+        case status = "status"
+        case created = "created"
+        case updated = "updated"
+        case intents = "intents"
+        case entities = "entities"
+        case dialogNodes = "dialog_nodes"
+        case counterexamples = "counterexamples"
     }
 
 }

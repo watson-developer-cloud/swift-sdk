@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,9 +27,21 @@ internal struct UpdateSynonym: Codable, Equatable {
      */
     public var synonym: String?
 
+    /**
+     The timestamp for creation of the object.
+     */
+    public var created: Date?
+
+    /**
+     The timestamp for the most recent update to the object.
+     */
+    public var updated: Date?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case synonym = "synonym"
+        case created = "created"
+        case updated = "updated"
     }
 
     /**
@@ -39,14 +51,20 @@ internal struct UpdateSynonym: Codable, Equatable {
        - It cannot contain carriage return, newline, or tab characters.
        - It cannot consist of only whitespace characters.
        - It must be no longer than 64 characters.
+     - parameter created: The timestamp for creation of the object.
+     - parameter updated: The timestamp for the most recent update to the object.
 
      - returns: An initialized `UpdateSynonym`.
     */
     public init(
-        synonym: String? = nil
+        synonym: String? = nil,
+        created: Date? = nil,
+        updated: Date? = nil
     )
     {
         self.synonym = synonym
+        self.created = created
+        self.updated = updated
     }
 
 }

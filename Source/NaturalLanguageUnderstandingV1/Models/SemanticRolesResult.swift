@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,17 +29,17 @@ public struct SemanticRolesResult: Codable, Equatable {
     /**
      The extracted subject from the sentence.
      */
-    public var subject: SemanticRolesSubject?
+    public var subject: SemanticRolesResultSubject?
 
     /**
      The extracted action from the sentence.
      */
-    public var action: SemanticRolesAction?
+    public var action: SemanticRolesResultAction?
 
     /**
      The extracted object from the sentence.
      */
-    public var object: SemanticRolesObject?
+    public var object: SemanticRolesResultObject?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {

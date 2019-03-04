@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** CaptureGroup. */
+/**
+ A recognized capture group for a pattern-based entity.
+ */
 public struct CaptureGroup: Codable, Equatable {
 
     /**

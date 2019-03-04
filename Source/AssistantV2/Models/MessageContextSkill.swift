@@ -17,42 +17,32 @@
 import Foundation
 
 /**
- A mention of a contextual entity.
+ Contains information specific to a particular skill used by the Assistant.
  */
-public struct Mentions: Codable, Equatable {
+public struct MessageContextSkill: Codable, Equatable {
 
     /**
-     The name of the entity.
+     Arbitrary variables that can be read and written by a particular skill.
      */
-    public var entity: String
-
-    /**
-     An array of zero-based character offsets that indicate where the entity mentions begin and end in the input text.
-     */
-    public var location: [Int]
+    public var userDefined: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case entity = "entity"
-        case location = "location"
+        case userDefined = "user_defined"
     }
 
     /**
-     Initialize a `Mentions` with member variables.
+     Initialize a `MessageContextSkill` with member variables.
 
-     - parameter entity: The name of the entity.
-     - parameter location: An array of zero-based character offsets that indicate where the entity mentions begin and
-       end in the input text.
+     - parameter userDefined: Arbitrary variables that can be read and written by a particular skill.
 
-     - returns: An initialized `Mentions`.
+     - returns: An initialized `MessageContextSkill`.
     */
     public init(
-        entity: String,
-        location: [Int]
+        userDefined: String? = nil
     )
     {
-        self.entity = entity
-        self.location = location
+        self.userDefined = userDefined
     }
 
 }

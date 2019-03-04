@@ -25,6 +25,13 @@ private var microphoneSession: SpeechToTextSession?
 
 extension SpeechToText {
 
+    /// The URL that shall be used to stream audio for transcription.
+    internal var websocketsURL: String {
+        return serviceURL
+            .replacingOccurrences(of: "http", with: "ws", options: .anchored, range: nil)
+            + "/v1/recognize"
+    }
+
     /**
      Perform speech recognition for an audio file.
 
@@ -126,9 +133,7 @@ extension SpeechToText {
             customerID: customerID
         )
 
-        // set urls
-        session.serviceURL = serviceURL
-        session.tokenURL = tokenURL
+        // set url
         session.websocketsURL = websocketsURL
 
         // set headers
@@ -234,9 +239,7 @@ extension SpeechToText {
             customerID: customerID
         )
 
-        // set urls
-        session.serviceURL = serviceURL
-        session.tokenURL = tokenURL
+        // set url
         session.websocketsURL = websocketsURL
 
         // set headers

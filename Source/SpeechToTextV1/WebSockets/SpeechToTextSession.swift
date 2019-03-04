@@ -33,14 +33,25 @@ import RestKit
  */
 public class SpeechToTextSession {
 
+    /// The URL that shall be used to stream audio for transcription.
+    public var websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize" {
+        didSet {
+            // serviceURL and tokenURL are both derivative of websocketsURL
+            if websocketsURL.last == "/" {
+                websocketsURL.removeLast()
+            }
+            serviceURL = websocketsURL
+                .replacingOccurrences(of: "ws", with: "http", options: .anchored, range: nil)
+                .replacingOccurrences(of: "/v1/recognize", with: "")
+            tokenURL = serviceURL.replacingOccurrences(of: "/speech-to-text/api", with: "/authorization/api/v1/token")
+        }
+    }
+
     /// The base URL of the Speech to Text service.
-    public var serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
+    internal var serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
 
     /// The URL that shall be used to obtain a token.
-    public var tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
-
-    /// The URL that shall be used to stream audio for transcription.
-    public var websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
+    internal var tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()

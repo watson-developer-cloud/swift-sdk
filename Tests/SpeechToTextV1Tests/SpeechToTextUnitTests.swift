@@ -31,35 +31,50 @@ class SpeechToTextUnitTests: XCTestCase {
 
     // MARK: - URLs
 
-    func testServiceURLSetsWebsocketsURL() {
-        speechToText.serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
-        XCTAssertEqual(speechToText.websocketsURL, "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize")
+    func testWebsocketsURLSetsServiceURL() {
+        let apiKey = "your-api-key"
+        let speechToTextSession = SpeechToTextSession(apiKey: apiKey)
+
+        // Default URLs value
+        XCTAssertEqual(speechToTextSession.websocketsURL, "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize")
+        XCTAssertEqual(speechToTextSession.serviceURL, "https://stream.watsonplatform.net/speech-to-text/api")
+
+        // Set websockets URL and verify serviceURL
+        speechToTextSession.websocketsURL = "wss://gateway-syd.watsonplatform.net/speech-to-text/api/v1/recognize"
+        XCTAssertEqual(speechToTextSession.serviceURL, "https://gateway-syd.watsonplatform.net/speech-to-text/api")
 
         // Trailing forward slash
-        speechToText.serviceURL = "https://stream.watsonplatform.net/speech-to-text/api/"
-        XCTAssertEqual(speechToText.serviceURL, "https://stream.watsonplatform.net/speech-to-text/api")
-        XCTAssertEqual(speechToText.websocketsURL, "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize")
+        speechToTextSession.websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize/"
+        XCTAssertEqual(speechToTextSession.serviceURL, "https://stream.watsonplatform.net/speech-to-text/api")
 
         // http instead of https
-        speechToText.serviceURL = "http://stream.watsonplatform.net/speech-to-text/api"
-        XCTAssertEqual(speechToText.websocketsURL, "ws://stream.watsonplatform.net/speech-to-text/api/v1/recognize")
+        speechToTextSession.websocketsURL = "ws://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
+        XCTAssertEqual(speechToTextSession.serviceURL, "http://stream.watsonplatform.net/speech-to-text/api")
 
         // Different base URL
-        speechToText.serviceURL = "https://example.com/speech-to-text/api"
-        XCTAssertEqual(speechToText.websocketsURL, "wss://example.com/speech-to-text/api/v1/recognize")
+        speechToTextSession.websocketsURL = "wss://example.com/speech-to-text/api/v1/recognize/v1/recognize"
+        XCTAssertEqual(speechToTextSession.serviceURL, "https://example.com/speech-to-text/api")
     }
 
-    func testServiceURLSetsTokenURL() {
-        speechToText.serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
-        XCTAssertEqual(speechToText.tokenURL, "https://stream.watsonplatform.net/authorization/api/v1/token")
+    func testWebsocketsURLSetsTokenURL() {
+        let apiKey = "your-api-key"
+        let speechToTextSession = SpeechToTextSession(apiKey: apiKey)
+
+        // Default URLs value
+        XCTAssertEqual(speechToTextSession.websocketsURL, "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize")
+        XCTAssertEqual(speechToTextSession.tokenURL, "https://stream.watsonplatform.net/authorization/api/v1/token")
+
+        // Set websockets URL and verify tokenURL
+        speechToTextSession.websocketsURL = "wss://gateway-syd.watsonplatform.net/speech-to-text/api/v1/recognize"
+        XCTAssertEqual(speechToTextSession.tokenURL, "https://gateway-syd.watsonplatform.net/authorization/api/v1/token")
 
         // http instead of https
-        speechToText.serviceURL = "http://stream.watsonplatform.net/speech-to-text/api"
-        XCTAssertEqual(speechToText.tokenURL, "http://stream.watsonplatform.net/authorization/api/v1/token")
+        speechToTextSession.websocketsURL = "ws://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
+        XCTAssertEqual(speechToTextSession.tokenURL, "http://stream.watsonplatform.net/authorization/api/v1/token")
 
         // Different base URL
-        speechToText.serviceURL = "https://example.com/speech-to-text/api"
-        XCTAssertEqual(speechToText.tokenURL, "https://example.com/authorization/api/v1/token")
+        speechToTextSession.websocketsURL = "wss://example.com/speech-to-text/api/v1/recognize/v1/recognize"
+        XCTAssertEqual(speechToTextSession.tokenURL, "https://example.com/authorization/api/v1/token")
     }
 
     // MARK - Websockets

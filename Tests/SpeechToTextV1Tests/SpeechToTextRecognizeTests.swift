@@ -47,8 +47,6 @@ class SpeechToTextRecognizeTests: XCTestCase {
         }
         if let url = WatsonCredentials.SpeechToTextURL {
             speechToText.serviceURL = url
-            let wsUrl = url.replacingOccurrences(of: "https", with: "wss").appending("/v1/recognize")
-            speechToText.websocketsURL = wsUrl
         }
         speechToText.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         speechToText.defaultHeaders["X-Watson-Test"] = "true"

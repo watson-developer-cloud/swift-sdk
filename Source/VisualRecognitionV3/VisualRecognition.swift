@@ -124,6 +124,16 @@ public class VisualRecognition {
                 errorMessage = message
             } else if case let .some(.string(message)) = json["message"] {
                 errorMessage = message
+            // ErrorAuthentication
+            } else if case let .some(.string(message)) = json["statusInfo"] {
+                errorMessage = message
+            // ErrorInfo
+            } else if case let .some(.object(errorObj)) = json["error"],    // 404
+                case let .some(.string(message)) = errorObj["description"] {
+                errorMessage = message
+            // ErrorHTML
+            } else if case let .some(.string(message)) = json["Error"] {   // 413
+                errorMessage = message
             } else {
                 errorMessage = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
             }

@@ -35,14 +35,14 @@ public struct SpeechRecognitionAlternative: Codable, Equatable {
      the word followed by its start and end time in seconds, for example: `[["hello",0.0,1.2],["world",1.2,2.5]]`.
      Timestamps are returned only for the best alternative.
      */
-    public var timestamps: [String]?
+    public var timestamps: [WordTimestamp]?
 
     /**
      A confidence score for each word of the transcript as a list of lists. Each inner list consists of two elements:
      the word and its confidence score in the range of 0.0 to 1.0, for example: `[["hello",0.95],["world",0.866]]`.
      Confidence scores are returned only for the best alternative and only with results marked as final.
      */
-    public var wordConfidence: [String]?
+    public var wordConfidence: [WordConfidence]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {

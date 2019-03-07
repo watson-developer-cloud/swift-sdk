@@ -127,6 +127,12 @@ internal class TextToSpeechDecoder {
     // Extract a packet from the ogg stream and store the extracted data within the packet object.
     private func extractPacket(_ streamState: inout ogg_stream_state, _ packet: inout ogg_packet) throws {
         // attempt to extract a packet from the ogg stream
+
+        // deallocate pcmDataBuffer when the function ends, regardless if the function ended normally or with an error.
+        defer {
+            pcmDataBuffer.deallocate()
+        }
+
         while ogg_stream_packetout(&streamState, &packet) == 1 {
             // execute if initial stream header
             if packet.b_o_s != 0 && packet.bytes >= 8 && memcmp(packet.packet, "OpusHead", 8) == 0 {
@@ -173,11 +179,6 @@ internal class TextToSpeechDecoder {
                 granOffset = preSkip
 
                 pcmDataBuffer = UnsafeMutablePointer<Float>.allocate(capacity: MemoryLayout<Float>.stride * Int(MAX_FRAME_SIZE) * Int(numChannels))
-
-                // deallocate pcmDataBuffer when the function ends, regardless if the function ended normally or with an error.
-                defer {
-                    pcmDataBuffer.deallocate()
-                }
             } else if packetCount == 1 {
                 hasTagsPacket = true
 

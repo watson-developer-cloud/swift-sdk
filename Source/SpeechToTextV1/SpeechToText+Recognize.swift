@@ -219,7 +219,7 @@ extension SpeechToText {
             try audioSession.setActive(true)
         } catch {
             let failureReason = "Failed to setup the AVAudioSession sharedInstance properly."
-            let error = WatsonError.other(message: failureReason)
+            let error = WatsonError.other(message: failureReason, metadata: nil)
             completionHandler(nil, error)
             return
         }

@@ -614,7 +614,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             visualRecognition.downloadClassifier(classifierID: classifierID) {
                 _, error in
 
-                if case .some(WatsonError.other(let message)) = error,
+                if case .some(WatsonError.other(let message, _)) = error,
                     let errorMessage = message {
                     XCTAssertTrue(errorMessage.contains("Could not compile Core ML model from source"))
                 } else {

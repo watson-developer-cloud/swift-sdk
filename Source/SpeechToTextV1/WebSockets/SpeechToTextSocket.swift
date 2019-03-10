@@ -208,7 +208,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
     }
 
     private func onErrorMessage(error: String) {
-        let error = WatsonError.other(message: error)
+        let error = WatsonError.other(message: error, metadata: nil)
         onError?(error)
     }
 
@@ -272,7 +272,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
             self.connect()
             return
         }
-        onError?(WatsonError.other(message: String(describing: error)))
+        onError?(WatsonError.other(message: String(describing: error), metadata: nil))
         onDisconnect?()
     }
 }

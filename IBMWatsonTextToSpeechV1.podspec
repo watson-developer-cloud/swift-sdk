@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
   s.version               = '1.4.0'
   s.summary               = 'Client framework for the IBM Watson Text to Speech service'
   s.description           = <<-DESC
-IBM® Text to Speech uses IBM's speech-synthesis capabilities to convert written text to natural-sounding speech. 
+IBM® Text to Speech uses IBM's speech-synthesis capabilities to convert written text to natural-sounding speech.
 The service streams the results back to the client with minimal delay.
                             DESC
   s.homepage              = 'https://www.ibm.com/watson/services/text-to-speech/'
@@ -22,11 +22,11 @@ The service streams the results back to the client with minimal delay.
   s.exclude_files         = 'Source/TextToSpeechV1/Shared.swift',
                             '**/config_types.h'
 
-  s.dependency              'IBMWatsonRestKit', '~> 2.0.0'
+  s.dependency              'IBMWatsonRestKit', '~> 3.0.0'
   s.vendored_libraries    = 'Source/SupportingFiles/Dependencies/Libraries/*.a'
 
   # The renaming of libogg.a and libopus.a is done to avoid duplicate library name errors
-  # in case SpeechToText is being installed in the same app (which also includes libogg and libopus) 
+  # in case SpeechToText is being installed in the same app (which also includes libogg and libopus)
   # The ogg/ and opus/ files are flattened to the same directory so that all #include statements work
   s.prepare_command = <<-CMD
                         cd Source/SupportingFiles/Dependencies/Libraries

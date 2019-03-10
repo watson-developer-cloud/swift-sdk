@@ -329,7 +329,7 @@ public class SpeechToTextSession {
         recorder.session.requestRecordPermission { granted in
             guard granted else {
                 let failureReason = "Permission was not granted to access the microphone."
-                let error = WatsonError.other(message: failureReason)
+                let error = WatsonError.other(message: failureReason, metadata: nil)
                 self.onError?(error)
                 return
             }
@@ -366,7 +366,7 @@ public class SpeechToTextSession {
                 try self.recorder.startRecording()
             } catch {
                 let failureReason = "Failed to start recording."
-                let error = WatsonError.other(message: failureReason)
+                let error = WatsonError.other(message: failureReason, metadata: nil)
                 self.onError?(error)
                 return
             }
@@ -381,7 +381,7 @@ public class SpeechToTextSession {
             try recorder.stopRecording()
         } catch {
             let failureReason = "Failed to stop recording."
-            let error = WatsonError.other(message: failureReason)
+            let error = WatsonError.other(message: failureReason, metadata: nil)
             self.onError?(error)
             return
         }

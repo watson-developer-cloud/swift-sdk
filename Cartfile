@@ -1,2 +1,2 @@
 github "daltoniam/Starscream" == 3.0.5
-github "watson-developer-cloud/restkit" ~> 2.0.0
+github "watson-developer-cloud/restkit" "release-3.0"

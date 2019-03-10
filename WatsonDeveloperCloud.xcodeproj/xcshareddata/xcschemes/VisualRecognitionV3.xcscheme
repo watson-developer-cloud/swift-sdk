@@ -50,12 +50,6 @@
             </BuildableReference>
             <SkippedTests>
                <Test
-                  Identifier = "VisualRecognitionTests/testCreateDeleteClassifier1()">
-               </Test>
-               <Test
-                  Identifier = "VisualRecognitionTests/testCreateDeleteClassifier2()">
-               </Test>
-               <Test
                   Identifier = "VisualRecognitionTests/testUpdateClassifierWithNegativeExample()">
                </Test>
                <Test

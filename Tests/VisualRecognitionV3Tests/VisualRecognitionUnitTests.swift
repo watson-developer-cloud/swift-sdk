@@ -59,8 +59,10 @@ class VisualRecognitionUnitTests: XCTestCase {
             XCTAssertEqual(statusCode, 403)
             XCTAssertNotNil(message)
             XCTAssertNotNil(metadata)
-            XCTAssertNotNil(metadata!["status"])
-            XCTAssertNotNil(metadata!["statusInfo"])
+            XCTAssertNotNil(metadata?["response"] as? [String: Any])
+            let response = metadata?["response"] as? [String: Any]
+            XCTAssertNotNil(response?["status"])
+            XCTAssertNotNil(response?["statusInfo"])
         }
     }
 
@@ -78,8 +80,15 @@ class VisualRecognitionUnitTests: XCTestCase {
         if case let .http(statusCode, message, metadata) = error {
             XCTAssertEqual(statusCode, 404)
             XCTAssertNotNil(message)
-            XCTAssertNotNil(metadata?["description"])
-            XCTAssertNotNil(metadata?["errorID"])
+            XCTAssertNotNil(metadata?["response"] as? [String: JSON])
+            let response = metadata?["response"] as? [String: JSON]
+            XCTAssertNotNil(response?["error"])
+            if case let .some(.object(responseError)) = response?["error"] {
+                XCTAssertNotNil(responseError["description"])
+                XCTAssertNotNil(responseError["error_id"])
+            } else {
+                XCTFail("error not present in response")
+            }
         }
     }
 
@@ -114,8 +123,10 @@ class VisualRecognitionUnitTests: XCTestCase {
         let error = visualRecognition.errorResponseDecoder(data: testData, response: testResponse)
         if case let .http(statusCode, message, metadata) = error {
             XCTAssertEqual(statusCode, 500)
-            XCTAssertNil(message)
-            XCTAssertNil(metadata)
+            XCTAssertNotNil(message)
+            XCTAssertEqual("internal server error", message)
+            XCTAssertNotNil(metadata)
+            XCTAssertNotNil(metadata?["response"])
         }
     }
 
@@ -139,7 +150,7 @@ class VisualRecognitionUnitTests: XCTestCase {
         }
 
         let expectation = self.expectation(description: "classify")
-        visualRecognition.classify(imagesFile: obama, acceptLanguage: "en", url: "http://example.com", threshold: 1.0, owners: owners, classifierIDs: classifierIDs, imagesFileContentType: "png") {
+        visualRecognition.classify(imagesFile: obama, url: "http://example.com", threshold: 1.0, owners: owners, classifierIDs: classifierIDs, imagesFileContentType: "png") {
             _, _ in
             expectation.fulfill()
         }
@@ -543,7 +554,6 @@ class VisualRecognitionUnitTests: XCTestCase {
     func testClassifyWithLocalModel() {
         if #available(iOS 11.0, tvOS 11.0, watchOS 4.0, *) {
             let classifierIDs = ["watson_tools"]
-            let data = try! Data(contentsOf: car)
 
             // Save a CoreML file to the Application Support directory on the simulator for the duration of this test
             saveCoreMLModelToSimulator(name: classifierIDs.first!, modelURL: watson_tools.urlOfModelInThisBundle)
@@ -565,7 +575,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             }
 
             let expectation = self.expectation(description: "classifyWithLocalModel")
-            visualRecognition.classifyWithLocalModel(imageData: data, classifierIDs: classifierIDs, threshold: 1.0) {
+            visualRecognition.classifyWithLocalModel(imageData: car, classifierIDs: classifierIDs, threshold: 1.0) {
                 _, _ in
                 expectation.fulfill()
             }
@@ -651,7 +661,7 @@ class VisualRecognitionUnitTests: XCTestCase {
     func testClassifyWithImage() {
         let owners = ["Anthony", "Mike"]
         let classifierIDs = ["1", "2"]
-        let image = UIImage(contentsOfFile: car.path)!
+        let image = UIImage(data: car)!
 
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
@@ -675,7 +685,7 @@ class VisualRecognitionUnitTests: XCTestCase {
     }
 
     func testDetectFacesWithImage() {
-        let image = UIImage(contentsOfFile: obama.path)!
+        let image = UIImage(data: obama)!
 
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
@@ -701,7 +711,7 @@ class VisualRecognitionUnitTests: XCTestCase {
     func testClassifyWithLocalModelUIImage() {
         if #available(iOS 11.0, tvOS 11.0, watchOS 4.0, *) {
             let classifierIDs = ["1"]
-            let image = UIImage(contentsOfFile: car.path)!
+            let image = UIImage(data: car)!
 
             MockURLProtocol.requestHandler = { request in
                 XCTAssertEqual(request.httpMethod, "POST")

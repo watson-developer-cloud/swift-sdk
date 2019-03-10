@@ -163,10 +163,11 @@ class SpeechToTextTests: XCTestCase {
     func addTrainingData(to languageModel: LanguageModel) {
         let expectation = self.expectation(description: "addCorpus")
         let file = Bundle(for: type(of: self)).url(forResource: "healthcare-short", withExtension: "txt")!
+        let fileData = try! Data(contentsOf: file)
         speechToText.addCorpus(
             customizationID: languageModel.customizationID,
             corpusName: "swift-test-corpus",
-            corpusFile: file,
+            corpusFile: fileData,
             allowOverwrite: true)
         {
             _, error in
@@ -186,8 +187,8 @@ class SpeechToTextTests: XCTestCase {
             customizationID: acousticModel.customizationID,
             audioName: "audio",
             audioResource: audio,
-            contentType: "audio/wav",
-            allowOverwrite: true)
+            allowOverwrite: true,
+            contentType: "audio/wav")
         {
             _, error in
             if let error = error {
@@ -331,7 +332,7 @@ class SpeechToTextTests: XCTestCase {
     func testRecognizeSessionless() {
         let expectation = self.expectation(description: "recognizeSessionless")
         let audio = try! Data(contentsOf: Bundle(for: type(of: self)).url(forResource: "SpeechSample", withExtension: "wav")!)
-        speechToText.recognize(audio: audio, contentType: "audio/wav", model: "en-US_BroadbandModel") {
+        speechToText.recognize(audio: audio, model: "en-US_BroadbandModel", contentType: "audio/wav") {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -359,7 +360,7 @@ class SpeechToTextTests: XCTestCase {
         let expectation1 = self.expectation(description: "createJob")
         let audio = try! Data(contentsOf: Bundle(for: type(of: self)).url(forResource: "SpeechSample", withExtension: "wav")!)
         var job: RecognitionJob!
-        speechToText.createJob(audio: audio, contentType: "audio/wav", model: "en-US_BroadbandModel") {
+        speechToText.createJob(audio: audio, model: "en-US_BroadbandModel", contentType: "audio/wav") {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -585,7 +586,8 @@ class SpeechToTextTests: XCTestCase {
         let id = languageModel.customizationID
         let corpusName = "test-corpus"
         let file = Bundle(for: type(of: self)).url(forResource: "healthcare-short", withExtension: "txt")!
-        speechToText.addCorpus(customizationID: id, corpusName: corpusName, corpusFile: file, allowOverwrite: true) {
+        let fileData = try! Data(contentsOf: file)
+        speechToText.addCorpus(customizationID: id, corpusName: corpusName, corpusFile: fileData, allowOverwrite: true) {
             _, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -955,7 +957,7 @@ class SpeechToTextTests: XCTestCase {
         // add audio resource to acoustic model
         let expectation1 = self.expectation(description: "addAudio")
         let audio = try! Data(contentsOf: Bundle(for: type(of: self)).url(forResource: "SpeechSample", withExtension: "wav")!)
-        speechToText.addAudio(customizationID: acousticModel.customizationID, audioName: "audio", audioResource: audio, contentType: "audio/wav", allowOverwrite: true) {
+        speechToText.addAudio(customizationID: acousticModel.customizationID, audioName: "audio", audioResource: audio, allowOverwrite: true, contentType: "audio/wav") {
             _, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))

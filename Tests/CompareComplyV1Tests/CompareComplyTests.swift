@@ -23,9 +23,9 @@ class CompareComplyTests: XCTestCase {
 
     private var compareComply: CompareComply!
 
-    var contractAFile: URL!
-    var contractBFile: URL!
-    var testTableFile: URL!
+    var contractAFile: Data!
+    var contractBFile: Data!
+    var testTableFile: Data!
 
     // MARK: - Test Configuration
 
@@ -63,14 +63,15 @@ class CompareComplyTests: XCTestCase {
         compareComply.defaultHeaders["x-watson-metadata"] = "customer_id=sdk-test-customer-id"
     }
 
-    func loadDocument(name: String, ext: String) -> URL? {
+    func loadDocument(name: String, ext: String) -> Data? {
         #if os(Linux)
         let url = URL(fileURLWithPath: "Tests/CompareComplyV1Tests/Resources/" + name + "." + ext)
         #else
         let bundle = Bundle(for: type(of: self))
         guard let url = bundle.url(forResource: name, withExtension: ext) else { return nil }
         #endif
-        return url
+        let data = try? Data(contentsOf: url)
+        return data
     }
 
     func waitForExpectations(timeout: TimeInterval = 20.0) {
@@ -89,8 +90,7 @@ class CompareComplyTests: XCTestCase {
 
         compareComply.convertToHTML(
             file: file,
-            modelID: nil,
-            fileContentType: nil) {
+            filename: "contract_A.pdf") {
                 response, error in
 
                 if let error = error {
@@ -121,7 +121,8 @@ class CompareComplyTests: XCTestCase {
 
         compareComply.classifyElements(
             file: contractAFile,
-            modelID: nil) {
+            modelID: nil,
+            fileContentType: "application/pdf") {
                 response, error in
 
                 if let error = error {

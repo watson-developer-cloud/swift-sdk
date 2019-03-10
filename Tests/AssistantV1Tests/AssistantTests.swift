@@ -139,7 +139,7 @@ class AssistantTests: XCTestCase {
             }
 
             // verify input
-            XCTAssertNil(message.input?.text)
+            XCTAssertNil(message.input.text)
 
             // verify context
             XCTAssertNotNil(message.context.conversationID)
@@ -171,7 +171,7 @@ class AssistantTests: XCTestCase {
         let description2 = "Continue a conversation."
         let expectation2 = self.expectation(description: description2)
 
-        let input = InputData(text: "Turn on the radio.")
+        let input = MessageInput(text: "Turn on the radio.")
         let result2 = ["Sure thing! Which genre would you prefer? Jazz is my personal favorite."]
 
         assistant.message(workspaceID: workspaceID, input: input, context: context!) {
@@ -187,7 +187,7 @@ class AssistantTests: XCTestCase {
             }
 
             // verify input
-            XCTAssertEqual(message.input?.text, input.text)
+            XCTAssertEqual(message.input.text, input.text)
 
             // verify context
             XCTAssertEqual(message.context.conversationID, context!.conversationID)
@@ -251,13 +251,13 @@ class AssistantTests: XCTestCase {
         let description2 = "Continue a conversation."
         let expectation2 = expectation(description: description2)
 
-        let input2 = InputData(text: "Turn on the radio.")
+        let input2 = MessageInput(text: "Turn on the radio.")
         assistant.message(
             workspaceID: workspaceID,
             input: input2,
-            context: context,
-            entities: entities,
             intents: intents,
+            entities: entities,
+            context: context,
             output: output)
         {
             response, error in
@@ -328,13 +328,13 @@ class AssistantTests: XCTestCase {
         let description2 = "Continue a conversation."
         let expectation2 = expectation(description: description2)
 
-        let input2 = InputData(text: "Turn on the radio.")
+        let input2 = MessageInput(text: "Turn on the radio.")
         assistant.message(
             workspaceID: workspaceID,
             input: input2,
-            context: context,
-            entities: entities,
             intents: intents,
+            entities: entities,
+            context: context,
             output: output)
         {
             response, error in
@@ -359,13 +359,13 @@ class AssistantTests: XCTestCase {
         let description3 = "Continue a conversation with non-empty intents and entities."
         let expectation3 = expectation(description: description3)
 
-        let input3 = InputData(text: "Rock music.")
+        let input3 = MessageInput(text: "Rock music.")
         assistant.message(
             workspaceID: workspaceID,
             input: input3,
-            context: context,
-            entities: entities,
             intents: intents,
+            entities: entities,
+            context: context,
             output: output)
         {
             response, error in
@@ -433,7 +433,7 @@ class AssistantTests: XCTestCase {
         let description2 = "Continue a conversation."
         let expectation2 = expectation(description: description2)
 
-        let input2 = InputData(text: "Turn on the radio.")
+        let input2 = MessageInput(text: "Turn on the radio.")
         assistant.message(workspaceID: workspaceID, input: input2, context: context) {
             response, error in
 
@@ -565,22 +565,22 @@ class AssistantTests: XCTestCase {
         let workspaceDescription = "temporary workspace for the swift sdk unit tests"
         let workspaceLanguage = "en"
         let workspaceMetadata: [String: JSON] = ["testKey": .string("testValue")]
-        let intentExample = CreateExample(text: "This is an example of Intent1")
+        let intentExample = Example(text: "This is an example of Intent1")
         let workspaceIntent = CreateIntent(intent: "Intent1", description: "description of Intent1", examples: [intentExample])
         let entityValue = CreateValue(value: "Entity1Value", metadata: workspaceMetadata, synonyms: ["Synonym1", "Synonym2"])
         let workspaceEntity = CreateEntity(entity: "Entity1", description: "description of Entity1", values: [entityValue])
-        let workspaceDialogNode = CreateDialogNode(dialogNode: "DialogNode1", description: "description of DialogNode1")
-        let workspaceCounterexample = CreateCounterexample(text: "This is a counterexample")
+        let workspaceDialogNode = DialogNode(dialogNode: "DialogNode1", description: "description of DialogNode1")
+        let workspaceCounterexample = Counterexample(text: "This is a counterexample")
 
         assistant.createWorkspace(
             name: workspaceName,
             description: workspaceDescription,
             language: workspaceLanguage,
+            metadata: workspaceMetadata,
             intents: [workspaceIntent],
             entities: [workspaceEntity],
             dialogNodes: [workspaceDialogNode],
-            counterexamples: [workspaceCounterexample],
-            metadata: workspaceMetadata)
+            counterexamples: [workspaceCounterexample])
         {
             response, error in
 
@@ -634,7 +634,7 @@ class AssistantTests: XCTestCase {
 
             XCTAssertNotNil(workspace.intents)
             for intent in workspace.intents! {
-                XCTAssertEqual(intent.intentName, workspaceIntent.intent)
+                XCTAssertEqual(intent.intent, workspaceIntent.intent)
                 XCTAssertEqual(intent.description, workspaceIntent.description)
                 XCTAssertNotNil(intent.created)
                 XCTAssertNotNil(intent.updated)
@@ -642,7 +642,7 @@ class AssistantTests: XCTestCase {
                 for example in intent.examples! {
                     XCTAssertNotNil(example.created)
                     XCTAssertNotNil(example.updated)
-                    XCTAssertEqual(example.exampleText, intentExample.text)
+                    XCTAssertEqual(example.text, intentExample.text)
                 }
             }
 
@@ -798,7 +798,7 @@ class AssistantTests: XCTestCase {
             }
 
             for intent in intents.intents {
-                XCTAssertNotNil(intent.intentName)
+                XCTAssertNotNil(intent.intent)
                 XCTAssertNotNil(intent.created)
                 XCTAssertNotNil(intent.updated)
                 XCTAssertNil(intent.examples)
@@ -829,7 +829,7 @@ class AssistantTests: XCTestCase {
             }
 
             for intent in intents.intents {
-                XCTAssertNotNil(intent.intentName)
+                XCTAssertNotNil(intent.intent)
                 XCTAssertNotNil(intent.created)
                 XCTAssertNotNil(intent.updated)
                 XCTAssertNil(intent.examples)
@@ -862,7 +862,7 @@ class AssistantTests: XCTestCase {
 
             XCTAssertEqual(intents.intents.count, 1)
             for intent in intents.intents {
-                XCTAssertNotNil(intent.intentName)
+                XCTAssertNotNil(intent.intent)
                 XCTAssertNotNil(intent.created)
                 XCTAssertNotNil(intent.updated)
                 XCTAssertNil(intent.examples)
@@ -893,14 +893,14 @@ class AssistantTests: XCTestCase {
             }
 
             for intent in intents.intents {
-                XCTAssertNotNil(intent.intentName)
+                XCTAssertNotNil(intent.intent)
                 XCTAssertNotNil(intent.created)
                 XCTAssertNotNil(intent.updated)
                 XCTAssertNotNil(intent.examples)
                 for example in intent.examples! {
                     XCTAssertNotNil(example.created)
                     XCTAssertNotNil(example.updated)
-                    XCTAssertNotNil(example.exampleText)
+                    XCTAssertNotNil(example.text)
                 }
             }
             XCTAssertNotNil(intents.pagination.refreshURL)
@@ -918,8 +918,8 @@ class AssistantTests: XCTestCase {
 
         let newIntentName = "swift-sdk-test-intent" + UUID().uuidString
         let newIntentDescription = "description for \(newIntentName)"
-        let example1 = CreateExample(text: "example 1 for \(newIntentName)")
-        let example2 = CreateExample(text: "example 2 for \(newIntentName)")
+        let example1 = Example(text: "example 1 for \(newIntentName)")
+        let example2 = Example(text: "example 2 for \(newIntentName)")
         assistant.createIntent(workspaceID: workspaceID, intent: newIntentName, description: newIntentDescription, examples: [example1, example2]) {
             response, error in
 
@@ -932,7 +932,7 @@ class AssistantTests: XCTestCase {
                 return
             }
 
-            XCTAssertEqual(intent.intentName, newIntentName)
+            XCTAssertEqual(intent.intent, newIntentName)
             XCTAssertEqual(intent.description, newIntentDescription)
             expectation.fulfill()
         }
@@ -969,14 +969,14 @@ class AssistantTests: XCTestCase {
                 return
             }
 
-            XCTAssertNotNil(intent.intentName)
+            XCTAssertNotNil(intent.intent)
             XCTAssertNotNil(intent.created)
             XCTAssertNotNil(intent.updated)
             XCTAssertNotNil(intent.examples)
             for example in intent.examples! {
                 XCTAssertNotNil(example.created)
                 XCTAssertNotNil(example.updated)
-                XCTAssertNotNil(example.exampleText)
+                XCTAssertNotNil(example.text)
             }
             expectation.fulfill()
         }
@@ -989,8 +989,8 @@ class AssistantTests: XCTestCase {
 
         let newIntentName = "swift-sdk-test-intent" + UUID().uuidString
         let newIntentDescription = "description for \(newIntentName)"
-        let example1 = CreateExample(text: "example 1 for \(newIntentName)")
-        let example2 = CreateExample(text: "example 2 for \(newIntentName)")
+        let example1 = Example(text: "example 1 for \(newIntentName)")
+        let example2 = Example(text: "example 2 for \(newIntentName)")
         assistant.createIntent(workspaceID: workspaceID, intent: newIntentName, description: newIntentDescription, examples: [example1, example2]) {
             response, error in
 
@@ -1003,7 +1003,7 @@ class AssistantTests: XCTestCase {
                 return
             }
 
-            XCTAssertEqual(intent.intentName, newIntentName)
+            XCTAssertEqual(intent.intent, newIntentName)
             XCTAssertEqual(intent.description, newIntentDescription)
             expectation.fulfill()
         }
@@ -1014,7 +1014,7 @@ class AssistantTests: XCTestCase {
 
         let updatedIntentName = "updated-name-for-\(newIntentName)"
         let updatedIntentDescription = "updated-description-for-\(newIntentName)"
-        let updatedExample1 = CreateExample(text: "updated example for \(newIntentName)")
+        let updatedExample1 = Example(text: "updated example for \(newIntentName)")
         assistant.updateIntent(workspaceID: workspaceID, intent: newIntentName, newIntent: updatedIntentName, newDescription: updatedIntentDescription, newExamples: [updatedExample1]) {
             response, error in
 
@@ -1027,7 +1027,7 @@ class AssistantTests: XCTestCase {
                 return
             }
 
-            XCTAssertEqual(intent.intentName, updatedIntentName)
+            XCTAssertEqual(intent.intent, updatedIntentName)
             XCTAssertEqual(intent.description, updatedIntentDescription)
             expectation2.fulfill()
         }
@@ -1069,7 +1069,7 @@ class AssistantTests: XCTestCase {
             for example in examples.examples {
                 XCTAssertNotNil(example.created)
                 XCTAssertNotNil(example.updated)
-                XCTAssertNotNil(example.exampleText)
+                XCTAssertNotNil(example.text)
             }
             XCTAssertNotNil(examples.pagination.refreshURL)
             XCTAssertNil(examples.pagination.total)
@@ -1098,7 +1098,7 @@ class AssistantTests: XCTestCase {
             for example in examples.examples {
                 XCTAssertNotNil(example.created)
                 XCTAssertNotNil(example.updated)
-                XCTAssertNotNil(example.exampleText)
+                XCTAssertNotNil(example.text)
             }
             XCTAssertNotNil(examples.pagination.refreshURL)
             XCTAssertNotNil(examples.pagination.total)
@@ -1129,7 +1129,7 @@ class AssistantTests: XCTestCase {
             for example in examples.examples {
                 XCTAssertNotNil(example.created)
                 XCTAssertNotNil(example.updated)
-                XCTAssertNotNil(example.exampleText)
+                XCTAssertNotNil(example.text)
             }
             XCTAssertNotNil(examples.pagination.refreshURL)
             XCTAssertNotNil(examples.pagination.nextURL)
@@ -1157,7 +1157,7 @@ class AssistantTests: XCTestCase {
                 return
             }
 
-            XCTAssertEqual(example.exampleText, newExample)
+            XCTAssertEqual(example.text, newExample)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -1196,7 +1196,7 @@ class AssistantTests: XCTestCase {
 
             XCTAssertNotNil(example.created)
             XCTAssertNotNil(example.updated)
-            XCTAssertEqual(example.exampleText, exampleText)
+            XCTAssertEqual(example.text, exampleText)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -1219,7 +1219,7 @@ class AssistantTests: XCTestCase {
                 return
             }
 
-            XCTAssertEqual(example.exampleText, newExample)
+            XCTAssertEqual(example.text, newExample)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -1240,7 +1240,7 @@ class AssistantTests: XCTestCase {
                 return
             }
 
-            XCTAssertEqual(example.exampleText, updatedText)
+            XCTAssertEqual(example.text, updatedText)
             expectation2.fulfill()
         }
         waitForExpectations()
@@ -1394,8 +1394,8 @@ class AssistantTests: XCTestCase {
         let description = "Get details of a specific counterexample."
         let expectation = self.expectation(description: description)
 
-        let exampleText = "when will it be funny"
-        assistant.getCounterexample(workspaceID: workspaceID, text: exampleText, includeAudit: true) {
+        let example = "when will it be funny"
+        assistant.getCounterexample(workspaceID: workspaceID, text: example, includeAudit: true) {
             response, error in
 
             if let error = error {
@@ -1409,7 +1409,7 @@ class AssistantTests: XCTestCase {
 
             XCTAssertNotNil(counterexample.created)
             XCTAssertNotNil(counterexample.updated)
-            XCTAssertEqual(counterexample.text, exampleText)
+            XCTAssertEqual(counterexample.text, example)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -1492,7 +1492,7 @@ class AssistantTests: XCTestCase {
             }
 
             for entity in entities.entities {
-                XCTAssertNotNil(entity.entityName)
+                XCTAssertNotNil(entity.entity)
                 XCTAssertNotNil(entity.created)
                 XCTAssertNotNil(entity.updated)
             }
@@ -1523,7 +1523,7 @@ class AssistantTests: XCTestCase {
             }
 
             for entity in entities.entities {
-                XCTAssertNotNil(entity.entityName)
+                XCTAssertNotNil(entity.entity)
                 XCTAssertNotNil(entity.created)
                 XCTAssertNotNil(entity.updated)
             }
@@ -1554,7 +1554,7 @@ class AssistantTests: XCTestCase {
             }
 
             for entity in entities.entities {
-                XCTAssertNotNil(entity.entityName)
+                XCTAssertNotNil(entity.entity)
                 XCTAssertNotNil(entity.created)
                 XCTAssertNotNil(entity.updated)
             }
@@ -1586,7 +1586,7 @@ class AssistantTests: XCTestCase {
             }
 
             for entity in entities.entities {
-                XCTAssertNotNil(entity.entityName)
+                XCTAssertNotNil(entity.entity)
                 XCTAssertNotNil(entity.created)
                 XCTAssertNotNil(entity.updated)
             }
@@ -1618,7 +1618,7 @@ class AssistantTests: XCTestCase {
                 return
             }
 
-            XCTAssertEqual(entity.entityName, entityName)
+            XCTAssertEqual(entity.entity, entityName)
             XCTAssertEqual(entity.description, entityDescription)
             expectation.fulfill()
         }
@@ -1658,7 +1658,7 @@ class AssistantTests: XCTestCase {
                 return
             }
 
-            XCTAssertEqual(entity.entityName, entityName)
+            XCTAssertEqual(entity.entity, entityName)
             XCTAssertEqual(entity.description, entityDescription)
             expectation.fulfill()
         }
@@ -1686,7 +1686,7 @@ class AssistantTests: XCTestCase {
                 return
             }
 
-            XCTAssertEqual(entity.entityName, updatedEntityName)
+            XCTAssertEqual(entity.entity, updatedEntityName)
             XCTAssertEqual(entity.description, updatedEntityDescription)
             expectationTwo.fulfill()
         }
@@ -1724,23 +1724,23 @@ class AssistantTests: XCTestCase {
             }
 
             XCTAssert(entityCollection.entities.count > 0)
-            let entity = entityCollection.entities[0]
-            self.assistant.getEntity(workspaceID: self.workspaceID, entity: entity.entityName, export: true, includeAudit: true) {
+            let entity0 = entityCollection.entities[0]
+            self.assistant.getEntity(workspaceID: self.workspaceID, entity: entity0.entity, export: true, includeAudit: true) {
                 response, error in
 
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
                     return
                 }
-                guard let entityExport = response?.result else {
+                guard let entity = response?.result else {
                     XCTFail(missingResultMessage)
                     return
                 }
 
-                XCTAssertEqual(entityExport.entityName, entity.entityName)
-                XCTAssertEqual(entityExport.description, entity.description)
-                XCTAssertNotNil(entityExport.created)
-                XCTAssertNotNil(entityExport.updated)
+                XCTAssertEqual(entity.entity, entity0.entity)
+                XCTAssertEqual(entity.description, entity0.description)
+                XCTAssertNotNil(entity.created)
+                XCTAssertNotNil(entity.updated)
                 expectation.fulfill()
             }
         }
@@ -1770,8 +1770,8 @@ class AssistantTests: XCTestCase {
                 }
 
                 for mention in mentionCollection.examples {
-                    XCTAssertNotNil(mention.exampleText)
-                    XCTAssertNotNil(mention.intentName)
+                    XCTAssertNotNil(mention.text)
+                    XCTAssertNotNil(mention.intent)
                     XCTAssertNotNil(mention.location)
                     XCTAssert(mention.location.count == 2)
                 }
@@ -1805,7 +1805,7 @@ class AssistantTests: XCTestCase {
                 }
 
                 for value in valueCollection.values {
-                    XCTAssertNotNil(value.valueText)
+                    XCTAssertNotNil(value.value)
                     XCTAssertNotNil(value.created)
                     XCTAssertNotNil(value.updated)
                 }
@@ -1835,7 +1835,7 @@ class AssistantTests: XCTestCase {
                 return
             }
 
-            XCTAssertEqual(value.valueText, valueName)
+            XCTAssertEqual(value.value, valueName)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -1862,7 +1862,7 @@ class AssistantTests: XCTestCase {
                 return
             }
 
-            XCTAssertEqual(value.valueText, updatedValueName)
+            XCTAssertEqual(value.value, updatedValueName)
             XCTAssertNotNil(value.metadata)
             expectationTwo.fulfill()
         }
@@ -1902,22 +1902,22 @@ class AssistantTests: XCTestCase {
             }
 
             XCTAssert(valueCollection.values.count > 0)
-            let value = valueCollection.values[0]
-            self.assistant.getValue(workspaceID: self.workspaceID, entity: entityName, value: value.valueText, export: true, includeAudit: true) {
+            let value0 = valueCollection.values[0]
+            self.assistant.getValue(workspaceID: self.workspaceID, entity: entityName, value: value0.value, export: true, includeAudit: true) {
                 response, error in
 
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
                     return
                 }
-                guard let valueExport = response?.result else {
+                guard let value = response?.result else {
                     XCTFail(missingResultMessage)
                     return
                 }
 
-                XCTAssertEqual(valueExport.valueText, value.valueText)
-                XCTAssertNotNil(valueExport.created)
-                XCTAssertNotNil(valueExport.updated)
+                XCTAssertEqual(value0.value, value.value)
+                XCTAssertNotNil(value.created)
+                XCTAssertNotNil(value.updated)
                 expectation.fulfill()
             }
         }
@@ -1945,7 +1945,7 @@ class AssistantTests: XCTestCase {
             for synonym in synonyms.synonyms {
                 XCTAssertNotNil(synonym.created)
                 XCTAssertNotNil(synonym.updated)
-                XCTAssertNotNil(synonym.synonymText)
+                XCTAssertNotNil(synonym.synonym)
             }
             XCTAssertNotNil(synonyms.pagination.refreshURL)
             XCTAssertNil(synonyms.pagination.total)
@@ -1974,7 +1974,7 @@ class AssistantTests: XCTestCase {
             for synonym in synonyms.synonyms {
                 XCTAssertNotNil(synonym.created)
                 XCTAssertNotNil(synonym.updated)
-                XCTAssertNotNil(synonym.synonymText)
+                XCTAssertNotNil(synonym.synonym)
             }
             XCTAssertNotNil(synonyms.pagination.refreshURL)
             XCTAssertNotNil(synonyms.pagination.total)
@@ -2005,7 +2005,7 @@ class AssistantTests: XCTestCase {
             for synonym in synonyms.synonyms {
                 XCTAssertNotNil(synonym.created)
                 XCTAssertNotNil(synonym.updated)
-                XCTAssertNotNil(synonym.synonymText)
+                XCTAssertNotNil(synonym.synonym)
             }
             XCTAssertNotNil(synonyms.pagination.refreshURL)
             XCTAssertNotNil(synonyms.pagination.nextURL)
@@ -2033,7 +2033,7 @@ class AssistantTests: XCTestCase {
                 return
             }
 
-            XCTAssertEqual(synonym.synonymText, newSynonym)
+            XCTAssertEqual(synonym.synonym, newSynonym)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -2070,7 +2070,7 @@ class AssistantTests: XCTestCase {
                 return
             }
 
-            XCTAssertEqual(synonym.synonymText, synonymName)
+            XCTAssertEqual(synonym.synonym, synonymName)
             XCTAssertNotNil(synonym.created)
             XCTAssertNotNil(synonym.updated)
             expectation.fulfill()
@@ -2095,7 +2095,7 @@ class AssistantTests: XCTestCase {
                 return
             }
 
-            XCTAssertEqual(synonym.synonymText, newSynonym)
+            XCTAssertEqual(synonym.synonym, newSynonym)
             expectation.fulfill()
         }
         waitForExpectations()
@@ -2116,7 +2116,7 @@ class AssistantTests: XCTestCase {
                 return
             }
 
-            XCTAssertEqual(synonym.synonymText, updatedSynonym)
+            XCTAssertEqual(synonym.synonym, updatedSynonym)
             expectation2.fulfill()
         }
         waitForExpectations()
@@ -2155,7 +2155,7 @@ class AssistantTests: XCTestCase {
             }
 
             for node in nodes.dialogNodes {
-                XCTAssertNotNil(node.dialogNodeID)
+                XCTAssertNotNil(node.dialogNode)
             }
             XCTAssertGreaterThan(nodes.dialogNodes.count, 0)
             XCTAssertNotNil(nodes.pagination.refreshURL)
@@ -2168,13 +2168,13 @@ class AssistantTests: XCTestCase {
 
     func testCreateAndDeleteDialogNode() {
         let description1 = "Create a dialog node."
-        let dialogNodeID = "OrderMyPizza"
+        let dialogNode = "OrderMyPizza"
         let dialogMetadata: [String: JSON] = ["swift-sdk-test": .boolean(true)]
         let expectation1 = self.expectation(description: description1)
 
         assistant.createDialogNode(
             workspaceID: workspaceID,
-            dialogNode: dialogNodeID,
+            dialogNode: dialogNode,
             description: "Reply affirmatively",
             conditions: "#order_pizza",
             metadata: dialogMetadata,
@@ -2192,7 +2192,7 @@ class AssistantTests: XCTestCase {
                 return
             }
 
-            XCTAssertEqual(node.dialogNodeID, dialogNodeID)
+            XCTAssertEqual(node.dialogNode, dialogNode)
             XCTAssertEqual(node.description, "Reply affirmatively")
             XCTAssertEqual(node.conditions, "#order_pizza")
             XCTAssertNil(node.parent)
@@ -2212,7 +2212,7 @@ class AssistantTests: XCTestCase {
         let description2 = "Delete a dialog node"
         let expectation2 = self.expectation(description: description2)
 
-        assistant.deleteDialogNode(workspaceID: workspaceID, dialogNode: dialogNodeID) {
+        assistant.deleteDialogNode(workspaceID: workspaceID, dialogNode: dialogNode) {
             _, error in
 
             if let error = error {
@@ -2239,7 +2239,7 @@ class AssistantTests: XCTestCase {
                 return
             }
 
-            XCTAssertEqual(node.dialogNodeID, "test-node")
+            XCTAssertEqual(node.dialogNode, "test-node")
             expectation1.fulfill()
         }
         waitForExpectations()
@@ -2262,7 +2262,7 @@ class AssistantTests: XCTestCase {
                 return
             }
 
-            XCTAssertEqual(node.dialogNodeID, "test-node-updated")
+            XCTAssertEqual(node.dialogNode, "test-node-updated")
             expectation2.fulfill()
         }
         waitForExpectations()
@@ -2300,7 +2300,7 @@ class AssistantTests: XCTestCase {
             let dialogNode = nodes.dialogNodes.first!
             self.assistant.getDialogNode(
                 workspaceID: self.workspaceID,
-                dialogNode: dialogNode.dialogNodeID) {
+                dialogNode: dialogNode.dialogNode) {
                     response, error in
 
                     if let error = error {
@@ -2312,7 +2312,7 @@ class AssistantTests: XCTestCase {
                         return
                     }
 
-                    XCTAssertEqual(dialogNode.dialogNodeID, node.dialogNodeID)
+                    XCTAssertEqual(dialogNode.dialogNode, node.dialogNode)
                     expectation.fulfill()
                 }
         }

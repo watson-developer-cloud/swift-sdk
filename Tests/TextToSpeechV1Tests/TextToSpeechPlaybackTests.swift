@@ -101,7 +101,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
 
-        textToSpeech.synthesize(text: text, accept: "audio/wav", voice: "en-US_LisaVoice") {
+        textToSpeech.synthesize(text: text, voice: "en-US_LisaVoice", accept: "audio/wav") {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -132,7 +132,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
 
-        textToSpeech.synthesize(text: germanText, accept: "audio/wav", voice: "de-DE_DieterVoice") {
+        textToSpeech.synthesize(text: germanText, voice: "de-DE_DieterVoice", accept: "audio/wav") {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -163,7 +163,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
 
-        textToSpeech.synthesize(text: japaneseText, accept: "audio/wav", voice: "ja-JP_EmiVoice") {
+        textToSpeech.synthesize(text: japaneseText, voice: "ja-JP_EmiVoice", accept: "audio/wav") {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))

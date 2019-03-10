@@ -190,16 +190,17 @@ class LanguageTranslatorTests: XCTestCase {
         let expectation = self.expectation(description: "Create and delete a custom language model.")
 
         #if os(Linux)
-            let glossary = URL(fileURLWithPath: "Tests/LanguageTranslatorV3Tests/glossary.tmx")
+            let url = URL(fileURLWithPath: "Tests/LanguageTranslatorV3Tests/glossary.tmx")
         #else
             let bundle = Bundle(for: type(of: self))
-            guard let glossary = bundle.url(forResource: "glossary", withExtension: "tmx") else {
+            guard let url = bundle.url(forResource: "glossary", withExtension: "tmx") else {
                 XCTFail("Unable to read forced glossary.")
                 return
             }
         #endif
+        let glossary = try? Data(contentsOf: url)
 
-        languageTranslator.createModel(baseModelID: "en-es", name: "custom-english-to-spanish-model", forcedGlossary: glossary) {
+        languageTranslator.createModel(baseModelID: "en-es", forcedGlossary: glossary, name: "custom-english-to-spanish-model") {
             response, error in
 
             if let error = error {

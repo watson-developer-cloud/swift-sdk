@@ -148,10 +148,10 @@ class VisualRecognitionUIImageTests: XCTestCase {
 
             // verify the face location
             let location = face?.faces.first?.faceLocation
-            XCTAssertEqual(location?.height, 174)
+            XCTAssertEqual(location?.height, 172)
             XCTAssertEqual(location?.left, 219)
-            XCTAssertEqual(location?.top, 78)
-            XCTAssertEqual(location?.width, 143)
+            XCTAssertEqual(location?.top, 79)
+            XCTAssertEqual(location?.width, 141)
 
             // verify the gender
             let gender = face?.faces.first?.gender

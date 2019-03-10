@@ -27,7 +27,7 @@ class DiscoveryTests: XCTestCase {
     private var environment: Environment!
     private let newsEnvironmentID = "system"
     private let newsCollectionID = "news-en"
-    private var documentURL: URL!
+    private var document: Data!
     private let timeout: TimeInterval = 30.0
     private let unexpectedAggregationTypeMessage = "Unexpected aggregation type"
 
@@ -38,7 +38,7 @@ class DiscoveryTests: XCTestCase {
         continueAfterFailure = false
         instantiateDiscovery()
         environment = getTestEnvironment()
-        documentURL = loadDocument(name: "KennedySpeech", ext: "html")
+        document = loadDocument(name: "KennedySpeech", ext: "html")
     }
 
     func instantiateDiscovery() {
@@ -56,14 +56,15 @@ class DiscoveryTests: XCTestCase {
         discovery.defaultHeaders["X-Watson-Test"] = "true"
     }
 
-    func loadDocument(name: String, ext: String) -> URL? {
+    func loadDocument(name: String, ext: String) -> Data? {
         #if os(Linux)
             let url = URL(fileURLWithPath: "Tests/DiscoveryV1Tests/Resources/" + name + "." + ext)
         #else
             let bundle = Bundle(for: type(of: self))
             guard let url = bundle.url(forResource: name, withExtension: ext) else { return nil }
         #endif
-        return url
+        let data = try? Data(contentsOf: url)
+        return data
     }
 
     // MARK: - Test Definition for Linux
@@ -287,8 +288,8 @@ class DiscoveryTests: XCTestCase {
         discovery.addDocument(
             environmentID: environmentID,
             collectionID: collectionID,
-            file: documentURL,
-            fileContentType: "text/html")
+            file: document,
+            filename: "KennedySpeech.html")
         {
             response, error in
 
@@ -490,8 +491,8 @@ class DiscoveryTests: XCTestCase {
 
             XCTAssertNotNil(result.fields)
             XCTAssertGreaterThan(result.fields!.count, 0)
-            XCTAssertNotNil(result.fields!.first!.fieldName)
-            XCTAssertNotNil(result.fields!.first!.fieldType)
+            XCTAssertNotNil(result.fields?.first?.fieldName)
+            XCTAssertNotNil(result.fields?.first?.fieldType)
             expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
@@ -731,10 +732,10 @@ class DiscoveryTests: XCTestCase {
         let expectation = self.expectation(description: "testConfigurationInEnvironment")
         discovery.testConfigurationInEnvironment(
             environmentID: environmentID,
-            configurationID: configuration.configurationID,
-            file: documentURL,
+            file: document,
+            filename: "KennedySpeech.html",
             metadata: "{ \"Creator\": \"John F. Kennedy\" }",
-            fileContentType: "text/html")
+            configurationID: configuration.configurationID)
         {
             response, error in
 
@@ -941,8 +942,8 @@ class DiscoveryTests: XCTestCase {
 
             XCTAssertNotNil(result.fields)
             XCTAssertGreaterThan(result.fields!.count, 0)
-            XCTAssertNotNil(result.fields!.first!.fieldName)
-            XCTAssertNotNil(result.fields!.first!.fieldType)
+            XCTAssertNotNil(result.fields?.first?.fieldName)
+            XCTAssertNotNil(result.fields?.first?.fieldType)
             expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
@@ -1045,7 +1046,7 @@ class DiscoveryTests: XCTestCase {
         }
 
         let expectation = self.expectation(description: "createTokenizationDictionary")
-        let tokenizationRule = TokenDictRule(text: "すしネコ", tokens: ["すし", "ネコ"], readings: ["寿司", "ネコ"], partOfSpeech: "カスタム名詞")
+        let tokenizationRule = TokenDictRule(text: "すしネコ", tokens: ["すし", "ネコ"], partOfSpeech: "カスタム名詞", readings: ["寿司", "ネコ"])
         discovery.createTokenizationDictionary(environmentID: environmentID, collectionID: collectionID, tokenizationRules: [tokenizationRule]) {
             response, error in
 
@@ -1111,7 +1112,7 @@ class DiscoveryTests: XCTestCase {
 
         let expectation1 = self.expectation(description: "createStopwordList")
         let stopwordFile = loadDocument(name: "stopwords", ext: "txt")!
-        discovery.createStopwordList(environmentID: environmentID, collectionID: collectionID, stopwordFile: stopwordFile) {
+        discovery.createStopwordList(environmentID: environmentID, collectionID: collectionID, stopwordFile: stopwordFile, stopwordFilename: "stopwords.txt") {
             response, error in
 
             if let error = error {
@@ -1172,9 +1173,9 @@ class DiscoveryTests: XCTestCase {
         discovery.addDocument(
             environmentID: environmentID,
             collectionID: collectionID,
-            file: documentURL,
-            metadata: metadata,
-            fileContentType: "text/html")
+            file: document,
+            filename: "KennedySpeech.html",
+            metadata: metadata)
         {
             response, error in
 

@@ -33,7 +33,7 @@ func missingBodyMessage(_ error: Error) -> String {
 // MARK: - Service instantiation
 
 let accessToken = "my_access_token"
-let versionDate = "2019-01-11"
+let versionDate = "2019-03-29"
 
 // MARK: - Mocking requests
 

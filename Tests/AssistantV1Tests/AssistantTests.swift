@@ -18,7 +18,7 @@
 
 import XCTest
 import Foundation
-import AssistantV1
+@testable import AssistantV1
 import RestKit
 
 class AssistantTests: XCTestCase {
@@ -36,17 +36,20 @@ class AssistantTests: XCTestCase {
     }
 
     static var allTests: [(String, (AssistantTests) -> () throws -> Void)] {
-        return [
+        let tests: [(String, (AssistantTests) -> () throws -> Void)] = [
+            // Positive Tests
             ("testMessage", testMessage),
             ("testMessageAllFields1", testMessageAllFields1),
             ("testMessageAllFields2", testMessageAllFields2),
             ("testMessageContextVariable", testMessageContextVariable),
+            // Workspaces
             ("testListAllWorkspaces", testListAllWorkspaces),
             ("testListAllWorkspacesWithPageLimit1", testListAllWorkspacesWithPageLimit1),
             ("testListAllWorkspacesWithIncludeCount", testListAllWorkspacesWithIncludeCount),
             ("testCreateAndDeleteWorkspace", testCreateAndDeleteWorkspace),
             ("testListSingleWorkspace", testListSingleWorkspace),
             ("testCreateUpdateAndDeleteWorkspace", testCreateUpdateAndDeleteWorkspace),
+            // Intents
             ("testListAllIntents", testListAllIntents),
             ("testListAllIntentsWithIncludeCount", testListAllIntentsWithIncludeCount),
             ("testListAllIntentsWithPageLimit1", testListAllIntentsWithPageLimit1),
@@ -54,18 +57,21 @@ class AssistantTests: XCTestCase {
             ("testCreateAndDeleteIntent", testCreateAndDeleteIntent),
             ("testGetIntentWithExport", testGetIntentWithExport),
             ("testCreateUpdateAndDeleteIntent", testCreateUpdateAndDeleteIntent),
+            // Examples
             ("testListAllExamples", testListAllExamples),
             ("testListAllExamplesWithIncludeCount", testListAllExamplesWithIncludeCount),
             ("testListAllExamplesWithPageLimit1", testListAllExamplesWithPageLimit1),
             ("testCreateAndDeleteExample", testCreateAndDeleteExample),
             ("testGetExample", testGetExample),
             ("testCreateUpdateAndDeleteExample", testCreateUpdateAndDeleteExample),
+            // Counterexamples
             ("testListAllCounterexamples", testListAllCounterexamples),
             ("testListAllCounterexamplesWithIncludeCount", testListAllCounterexamplesWithIncludeCount),
             ("testListAllCounterexamplesWithPageLimit1", testListAllCounterexamplesWithPageLimit1),
             ("testCreateAndDeleteCounterexample", testCreateAndDeleteCounterexample),
             ("testGetCounterexample", testGetCounterexample),
             ("testCreateUpdateAndDeleteCounterexample", testCreateUpdateAndDeleteCounterexample),
+            // Entities
             ("testListAllEntities", testListAllEntities),
             ("testListAllEntitiesWithIncludeCount", testListAllEntitiesWithIncludeCount),
             ("testListAllEntitiesWithPageLimit1", testListAllEntitiesWithPageLimit1),
@@ -73,26 +79,41 @@ class AssistantTests: XCTestCase {
             ("testCreateAndDeleteEntity", testCreateAndDeleteEntity),
             ("testCreateUpdateAndDeleteEntity", testCreateUpdateAndDeleteEntity),
             ("testGetEntity", testGetEntity),
+            // Mentions
             ("testListMentions", testListMentions),
+            // Values
             ("testListAllValues", testListAllValues),
             ("testCreateUpdateAndDeleteValue", testCreateUpdateAndDeleteValue),
             ("testGetValue", testGetValue),
+            // Synonyms
             ("testListAllSynonym", testListAllSynonym),
             ("testListAllSynonymWithIncludeCount", testListAllSynonymWithIncludeCount),
             ("testListAllSynonymWithPageLimit1", testListAllSynonymWithPageLimit1),
             ("testCreateAndDeleteSynonym", testCreateAndDeleteSynonym),
             ("testGetSynonym", testGetSynonym),
             ("testCreateUpdateAndDeleteSynonym", testCreateUpdateAndDeleteSynonym),
+            // Dialog Nodes
             ("testListAllDialogNodes", testListAllDialogNodes),
             ("testCreateAndDeleteDialogNode", testCreateAndDeleteDialogNode),
             ("testCreateUpdateAndDeleteDialogNode", testCreateUpdateAndDeleteDialogNode),
             ("testGetDialogNode", testGetDialogNode),
+            // Logs
             // ("testListAllLogs", testListAllLogs), // temporarily disabled due to server-side bug
             // ("testListLogs", testListLogs), // temporarily disabled due to server-side bug
+            // Negative Tests
             ("testMessageUnknownWorkspace", testMessageUnknownWorkspace),
             ("testMessageInvalidWorkspaceID", testMessageInvalidWorkspaceID),
             ("testInvalidServiceURL", testInvalidServiceURL),
         ]
+        #if os(Linux)
+        let linuxTests: [(String, (AssistantTests) -> () throws -> Void)] = [
+            // Inject Credentials
+            ("testInjectCredentialsFromFile", testInjectCredentialsFromFile),
+        ]
+        return tests + linuxTests
+        #else
+        return tests
+        #endif
     }
 
     /** Instantiate Assistant. */
@@ -102,7 +123,7 @@ class AssistantTests: XCTestCase {
         } else {
             let username = WatsonCredentials.AssistantUsername
             let password = WatsonCredentials.AssistantPassword
-            assistant = Assistant(username: username, password: password, version: versionDate)
+            assistant = Assistant(version: versionDate, username: username, password: password)
         }
         if let url = WatsonCredentials.AssistantURL {
             assistant.serviceURL = url
@@ -2415,4 +2436,16 @@ class AssistantTests: XCTestCase {
         }
         waitForExpectations()
     }
+
+    // MARK: - Inject Credentials
+
+    #if os(Linux)
+    func testInjectCredentialsFromFile() {
+        setenv("IBM_CREDENTIALS_FILE", "Source/SupportingFiles/ibm-credentials.env", 1)
+        let assistant = Assistant(version: versionDate)
+        XCTAssertNotNil(assistant)
+        XCTAssert(assistant?.authMethod is IAMAuthentication)
+    }
+    #endif
+
 }

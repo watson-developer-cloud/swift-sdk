@@ -56,7 +56,7 @@ class PersonalityInsightsTests: XCTestCase {
         } else {
             let username = WatsonCredentials.PersonalityInsightsV3Username
             let password = WatsonCredentials.PersonalityInsightsV3Password
-            personalityInsights = PersonalityInsights(username: username, password: password, version: versionDate)
+            personalityInsights = PersonalityInsights(version: versionDate, username: username, password: password)
         }
         if let url = WatsonCredentials.PersonalityInsightsV3URL {
             personalityInsights.serviceURL = url

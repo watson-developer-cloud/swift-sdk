@@ -18,7 +18,8 @@
 
 import XCTest
 import Foundation
-import VisualRecognitionV3
+@testable import VisualRecognitionV3
+import RestKit
 
 class VisualRecognitionTests: XCTestCase {
 
@@ -28,14 +29,17 @@ class VisualRecognitionTests: XCTestCase {
     private let classifierID = WatsonCredentials.VisualRecognitionClassifierID
 
     static var allTests: [(String, (VisualRecognitionTests) -> () throws -> Void)] {
-        return [
+        let tests: [(String, (VisualRecognitionTests) -> () throws -> Void)] = [
+            // Classifiers CRUD
             ("testListClassifiers", testListClassifiers),
             ("testListClassifiersVerbose", testListClassifiersVerbose),
-            // disabled: ("testCreateDeleteClassifier1", testCreateDeleteClassifier1),
-            // disabled: ("testCreateDeleteClassifier2", testCreateDeleteClassifier2),
+            ("testCreateDeleteClassifier1", testCreateDeleteClassifier1),
+            ("testCreateDeleteClassifier2", testCreateDeleteClassifier2),
             ("testGetClassifier", testGetClassifier),
             // disabled: ("testUpdateClassifierWithPositiveExample", testUpdateClassifierWithPositiveExample),
             // disabled: ("testUpdateClassifierWithNegativeExample", testUpdateClassifierWithNegativeExample),
+            ("testGetCoreMlModel", testGetCoreMlModel),
+            // Classify
             ("testClassifyByURL1", testClassifyByURL1),
             ("testClassifyByURL2", testClassifyByURL2),
             ("testClassifyByURL3", testClassifyByURL3),
@@ -47,15 +51,26 @@ class VisualRecognitionTests: XCTestCase {
             ("testClassifyImage4", testClassifyImage4),
             ("testClassifyImage5", testClassifyImage5),
             ("testClassifyImage6", testClassifyImage6),
+            // Detect faces
             ("testDetectFacesByURL", testDetectFacesByURL),
             ("testDetectFacesByImage1", testDetectFacesByImage1),
             ("testDetectFacesByImage2", testDetectFacesByImage2),
+            // Negative tests
             ("testAuthenticationError", testAuthenticationError),
             ("testCreateClassifierWithInvalidPositiveExamples", testCreateClassifierWithInvalidPositiveExamples),
             ("testClassifyByInvalidURL", testClassifyByInvalidURL),
             ("testDetectFacesByInvalidURL", testDetectFacesByInvalidURL),
             ("testGetUnknownClassifier", testGetUnknownClassifier),
         ]
+        #if os(Linux)
+        let linuxTests: [(String, (VisualRecognitionTests) -> () throws -> Void)] = [
+            // Inject Credentials
+            ("testInjectCredentialsFromFile", testInjectCredentialsFromFile),
+            ]
+        return tests + linuxTests
+        #else
+        return tests
+        #endif
     }
 
     // MARK: - Test Configuration
@@ -1368,4 +1383,16 @@ class VisualRecognitionTests: XCTestCase {
         }
         waitForExpectations()
     }
+
+    // MARK: - Inject Credentials
+
+    #if os(Linux)
+    func testInjectCredentialsFromFile() {
+        setenv("IBM_CREDENTIALS_FILE", "Source/SupportingFiles/ibm-credentials.env", 1)
+        let visualRecognition = VisualRecognition(version: versionDate)
+        XCTAssertNotNil(visualRecognition)
+        XCTAssertEqual("https://test.us-south.containers.mybluemix.net/visual-recognition/api", visualRecognition?.serviceURL)
+        XCTAssert(visualRecognition?.authMethod is IAMAuthentication)
+    }
+    #endif
 }

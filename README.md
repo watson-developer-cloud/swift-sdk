@@ -140,11 +140,8 @@ dependencies: [
 
 ## Authentication
 
-Watson services are migrating to token-based Identity and Access Management (IAM) authentication.
-
-- With some service instances, you authenticate to the API by using **[IAM](#iam)**.
-- In other instances, you authenticate by providing the **[username and password](#username-and-password)** for the service instance.
-- Visual Recognition uses a form of [API key](#api-key) only with instances created before May 23, 2018. Newer instances of Visual Recognition use [IAM](#iam).
+The Identity and Access Management (IAM) service of the IBM Cloud is the primary method of authentication to IBM Cloud services.
+Some service instances may use an alternate form of authentication, such as basic authentication (username and password).
 
 ### Getting credentials
 To find out which authentication to use, view the service credentials. You find the service credentials for authentication the same way for all Watson services:
@@ -156,16 +153,25 @@ To find out which authentication to use, view the service credentials. You find 
 On this page, you will see your credentials to use in the SDK to access your service instance.
 
 ### Supplying credentials
-There are two ways to supply the credentials from the steps above to the SDK: either downloading and using the credentials file, or copy-pasting the credentials into the SDK.
 
-#### Credentials File
+The SDK provides separate init methods for each form of authentication that may be used by instances of the service.
 
-On the **Manage** tab of your service instance on IBM Cloud, there is an button to download the credentials. The file will be called `ibm-credentials.env`, but you can rename it after downloading. Add this file to a location that is accessible from your project. For iOS apps, make sure to add it to the application target.
+- For service instances that use **[IAM](#iam)** authentication, the SDK provides two init methods -- one that accepts an apikey and another
+that accepts an access token created from an apikey. If you use the init method that supplies the apikey, the SDK will obtain an
+access token and refresh it when needed. If you initialize the SDK with the method that supplies an access token, you will need
+to periodically refresh the token as they expire after a short time. Learn more about [IAM](link).
 
-Get the `URL` for the credential file's location (you can use [Bundle](https://developer.apple.com/documentation/foundation/bundle) for iOS), and pass it to the service initializer.
+- For service instances that use basic authentication (username and password), use the init method that specifies the username
+and password.
+
+#### Credentials in the environment or a local credentials file
+
+The SDK can extract service credentails from the environment, e.g. the VCAP_SERVICES environment variable, or a local credentials file.
+
+To use credentials stored in a local file, go to the **Manage** tab of your service instance on IBM Cloud, and click on the button to download the credentials. The file will be called `ibm-credentials.env`. Add this file to a location that is accessible from your project. For iOS apps, make sure to add it to the application target.
 
 ```swift
-let discovery = Discovery(credentialsFile: credentialsURL, version: "your-version")
+let discovery = Discovery(version: "your-version")
 ```
 
 If your project is using multiple Watson services, you can merge the contents of the `ibm-credentials.env` files into a single file. Lines in the file can be added, deleted, or reordered, but the content of each line **must not** be changed.
@@ -173,14 +179,6 @@ If your project is using multiple Watson services, you can merge the contents of
 #### Copy-Pasting Credentials
 
 Copy the credentials from IBM Cloud and store them within your project. Then pass those values to the service initializer that accepts the type of credentials you have.
-
-
-##### Username and Password
-
-```swift
-let discovery = Discovery(username: "your-username", password: "your-password", version: "your-version")
-```
-
 
 ##### IAM
 
@@ -208,6 +206,14 @@ discovery.accessToken("new-accessToken")
 ```
 
 
+##### Username and Password
+
+```swift
+let discovery = Discovery(version: "your-version", username: "your-username", password: "your-password")
+```
+
+
+
 ## Custom Service URLs
 
 You can set a custom service URL by modifying the `serviceURL` property. A custom service URL may be required when running an  instance in a particular region or connecting through a proxy.
@@ -216,9 +222,9 @@ For example, here is how to connect to a Tone Analyzer instance that is hosted i
 
 ```swift
 let toneAnalyzer = ToneAnalyzer(
+    version: "yyyy-mm-dd",
     username: "your-username",
-    password: "your-password",
-    version: "yyyy-mm-dd"
+    password: "your-password"
 )
 toneAnalyzer.serviceURL = "https://gateway-fra.watsonplatform.net/tone-analyzer/api"
 ```

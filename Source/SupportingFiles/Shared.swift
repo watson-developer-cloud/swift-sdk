@@ -24,7 +24,7 @@ public typealias WatsonError = RestError
 internal struct Shared {
 
     struct Constant {
-        static let credentialsFileName = "ibm-credentials"
+        static let credentialsFileName = "ibm-credentials.env"
         static let serviceURL = "url"
         static let username = "username"
         static let password = "password"
@@ -100,6 +100,19 @@ internal struct Shared {
         return credentials[Constant.serviceURL]
     }
 
+    /// These headers must be sent with every request in order to collect SDK metrics
+    static func getSDKHeaders(serviceName: String, serviceVersion: String, methodName: String) -> [String: String] {
+        let serviceInfo = "service_name=\(serviceName);service_version=\(serviceVersion);operation_id=\(methodName);async=true"
+
+        return [
+            "X-IBMCloud-SDK-Analytics": serviceInfo,
+        ]
+    }
+}
+
+#if os(Linux)
+extension Shared {
+
     /// Get all credentials for the given service from a credentials file (ibm-credentials.env)
     /// See the discussion below for an example of what the credentials file could look like.
     ///
@@ -108,8 +121,14 @@ internal struct Shared {
     ///     VISUAL_RECOGNITION_IAM_URL=https://cloud.ibm.com/iam
     ///     DISCOVERY_USERNAME=me
     ///     DISCOVERY_PASSWORD=hunter2
-    static func extractCredentials(from credentialsFile: URL, serviceName: String) -> [String: String]? {
-        // Extract credentials from file line-by-line
+    static func extractCredentials(serviceName: String) -> [String: String]? {
+
+        // first look for an env variable called IBM_CREDENTIALS_FILE
+        // it should be the path to the file
+        let credentialsFileName = ProcessInfo.processInfo.environment["IBM_CREDENTIALS_FILE"] ??
+                                    Constant.credentialsFileName
+
+        let credentialsFile = URL(fileURLWithPath: credentialsFileName)
         guard let fileLines = try? String(contentsOf: credentialsFile).components(separatedBy: .newlines) else {
             return nil
         }
@@ -128,12 +147,5 @@ internal struct Shared {
         return serviceCredentials
     }
 
-    /// These headers must be sent with every request in order to collect SDK metrics
-    static func getSDKHeaders(serviceName: String, serviceVersion: String, methodName: String) -> [String: String] {
-        let serviceInfo = "service_name=\(serviceName);service_version=\(serviceVersion);operation_id=\(methodName);async=true"
-
-        return [
-            "X-IBMCloud-SDK-Analytics": serviceInfo,
-        ]
-    }
 }
+#endif

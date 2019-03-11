@@ -66,7 +66,7 @@ class ToneAnalyzerTests: XCTestCase {
         } else {
             let username = WatsonCredentials.ToneAnalyzerUsername
             let password = WatsonCredentials.ToneAnalyzerPassword
-            toneAnalyzer = ToneAnalyzer(username: username, password: password, version: versionDate)
+            toneAnalyzer = ToneAnalyzer(version: versionDate, username: username, password: password)
         }
         if let url = WatsonCredentials.ToneAnalyzerURL {
             toneAnalyzer.serviceURL = url

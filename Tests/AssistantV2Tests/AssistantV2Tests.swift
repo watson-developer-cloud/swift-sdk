@@ -53,7 +53,7 @@ class AssistantV2Tests: XCTestCase {
         } else {
             let username = WatsonCredentials.AssistantV2Username
             let password = WatsonCredentials.AssistantV2Password
-            assistant = Assistant(username: username, password: password, version: versionDate)
+            assistant = Assistant(version: versionDate, username: username, password: password)
         }
         if let url = WatsonCredentials.AssistantV2URL {
             assistant.serviceURL = url

@@ -64,7 +64,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         } else {
             let username = WatsonCredentials.NaturalLanguageUnderstandingUsername
             let password = WatsonCredentials.NaturalLanguageUnderstandingPassword
-            naturalLanguageUnderstanding = NaturalLanguageUnderstanding(username: username, password: password, version: versionDate)
+            naturalLanguageUnderstanding = NaturalLanguageUnderstanding(version: versionDate, username: username, password: password)
         }
         if let url = WatsonCredentials.NaturalLanguageUnderstandingURL {
             naturalLanguageUnderstanding.serviceURL = url

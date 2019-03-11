@@ -18,7 +18,7 @@
 
 import XCTest
 import Foundation
-import DiscoveryV1
+@testable import DiscoveryV1
 import RestKit
 
 class DiscoveryTests: XCTestCase {
@@ -47,7 +47,7 @@ class DiscoveryTests: XCTestCase {
         } else {
             let username = WatsonCredentials.DiscoveryUsername
             let password = WatsonCredentials.DiscoveryPassword
-            discovery = Discovery(username: username, password: password, version: versionDate)
+            discovery = Discovery(version: versionDate, username: username, password: password)
         }
         if let url = WatsonCredentials.DiscoveryURL {
             discovery.serviceURL = url
@@ -70,25 +70,32 @@ class DiscoveryTests: XCTestCase {
     // MARK: - Test Definition for Linux
 
     static var allTests: [(String, (DiscoveryTests) -> () throws -> Void)] {
-        return [
+        let tests: [(String, (DiscoveryTests) -> () throws -> Void)] = [
+            // Environments
             ("testListEnvironments", testListEnvironments),
             ("testListEnvironmentsByName", testListEnvironmentsByName),
             ("testGetEnvironment", testGetEnvironment),
             ("testEnvironmentCRUD", testEnvironmentCRUD),
             ("testListFields", testListFields),
+            // Configurations
             ("testListConfigurations", testListConfigurations),
             ("testListConfigurationsByName", testListConfigurationsByName),
             ("testConfigurationCRUD", testConfigurationCRUD),
             ("testConfigurationWithSource", testConfigurationWithSource),
+            // Test Configuration in Environment
             ("testConfigurationInEnvironment", testConfigurationInEnvironment),
+            // Collections
             ("testListCollections", testListCollections),
             ("testListCollectionsByName", testListCollectionsByName),
             ("testCollectionsCRUD", testCollectionsCRUD),
             ("testListCollectionFields", testListCollectionFields),
             ("testExpansionsCRUD", testExpansionsCRUD),
             ("testTokenizationDictionaryOperations", testTokenizationDictionaryOperations),
+            // Stopwords List
             ("testStopwordListOperations", testStopwordListOperations),
+            // Documents
             ("testDocumentsCRUD", testDocumentsCRUD),
+            // Queries
             ("testQuery", testQuery),
             ("testQueryWithNaturalLanguage", testQueryWithNaturalLanguage),
             ("testQueryWithPassages", testQueryWithPassages),
@@ -114,19 +121,35 @@ class DiscoveryTests: XCTestCase {
             ("testGetMetricsQueryNoResults", testGetMetricsQueryNoResults),
             ("testGetMetricsEventRate", testGetMetricsEventRate),
             ("testGetMetricsQueryTokenEvent", testGetMetricsQueryTokenEvent),
+            // Training Data
             ("testListTrainingData", testListTrainingData),
             ("testTrainingDataCRUD", testTrainingDataCRUD),
             ("testDeleteAllTrainingData", testDeleteAllTrainingData),
+            // Training Examples
             ("testListTrainingExamples", testListTrainingExamples),
             ("testTrainingExamplesCRUD", testTrainingExamplesCRUD),
+            // Credentials
             ("testListCredentials", testListCredentials),
             ("testCredentialsCRUD", testCredentialsCRUD),
+            // Gateways
             ("testGatewayOperations", testGatewayOperations),
+            // User Data
+            ("testDeleteLabeledData", testDeleteLabeledData),
+            // Negative Tests
             ("testGetEnvironmentWithInvalidID", testGetEnvironmentWithInvalidID),
             ("testGetConfigurationWithInvalidID", testGetConfigurationWithInvalidID),
             ("testGetCollectionWithInvalidID", testGetCollectionWithInvalidID),
             ("testQueryWithInvalidID", testQueryWithInvalidID),
         ]
+        #if os(Linux)
+        let linuxTests: [(String, (DiscoveryTests) -> () throws -> Void)] = [
+            // Inject Credentials
+            ("testInjectCredentialsFromFile", testInjectCredentialsFromFile),
+            ]
+        return tests + linuxTests
+        #else
+        return tests
+        #endif
     }
 
     // MARK: - State Management
@@ -2633,4 +2656,16 @@ class DiscoveryTests: XCTestCase {
         }
         waitForExpectations(timeout: timeout)
     }
+
+    // MARK: - Inject Credentials
+
+    #if os(Linux)
+    func testInjectCredentialsFromFile() {
+        setenv("IBM_CREDENTIALS_FILE", "Source/SupportingFiles/ibm-credentials.env", 1)
+        let discovery = Discovery(version: versionDate)
+        XCTAssertNotNil(discovery)
+        XCTAssert(discovery?.authMethod is BasicAuthentication)
+    }
+    #endif
+
 }

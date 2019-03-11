@@ -57,7 +57,7 @@ class LanguageTranslatorTests: XCTestCase {
         } else {
             let username = WatsonCredentials.LanguageTranslatorV3Username
             let password = WatsonCredentials.LanguageTranslatorV3Password
-            languageTranslator = LanguageTranslator(username: username, password: password, version: versionDate)
+            languageTranslator = LanguageTranslator(version: versionDate, username: username, password: password)
         }
         if let url = WatsonCredentials.LanguageTranslatorV3URL {
             languageTranslator.serviceURL = url

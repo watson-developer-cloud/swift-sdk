@@ -98,13 +98,13 @@ class SharedTests: XCTestCase {
         XCTAssertEqual(visualRecognitionCredentials["url"], "https://test.us-south.containers.mybluemix.net/visual-recognition/api")
     }
 
-    func testGetMetadataHeaders() {
+    func testHeaders() {
         let serviceName = "test-service"
         let serviceVersion = "v9"
         let methodName = "testMethod"
 
-        let headers = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: methodName)
-        let userAgentHeader = headers["User-Agent"]
+        let userAgentHeader = Shared.userAgent
+        let headers = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: methodName)
         let analyticsHeader = headers["X-IBMCloud-SDK-Analytics"]
 
         XCTAssertNotNil(userAgentHeader)

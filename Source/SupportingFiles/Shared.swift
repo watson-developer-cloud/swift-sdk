@@ -35,6 +35,33 @@ internal struct Shared {
 
     static let sdkVersion = "1.4.0"
 
+    /// The "User-Agent" header to be sent with every RestRequest
+    static let userAgent: String? = {
+        let sdk = "watson-apis-swift-sdk"
+
+        let operatingSystem: String = {
+            #if os(iOS)
+            return "iOS"
+            #elseif os(watchOS)
+            return "watchOS"
+            #elseif os(tvOS)
+            return "tvOS"
+            #elseif os(macOS)
+            return "macOS"
+            #elseif os(Linux)
+            return "Linux"
+            #else
+            return "Unknown"
+            #endif
+        }()
+        let operatingSystemVersion: String = {
+            // swiftlint:disable:next identifier_name
+            let os = ProcessInfo.processInfo.operatingSystemVersion
+            return "\(os.majorVersion).\(os.minorVersion).\(os.patchVersion)"
+        }()
+        return "\(sdk)/\(sdkVersion) \(operatingSystem)/\(operatingSystemVersion)"
+    }()
+
     /// For Basic Authentication, switch to using IAM tokens for "apikey" usernames,
     /// but only for api keys that are not for ICP (which currently does not support IAM token authentication)
     static func getAuthMethod(username: String, password: String) -> AuthenticationMethod {
@@ -102,37 +129,10 @@ internal struct Shared {
     }
 
     /// These headers must be sent with every request in order to collect SDK metrics
-    static func getMetadataHeaders(serviceName: String, serviceVersion: String, methodName: String) -> [String: String] {
-        let userAgent: String = {
-            let sdk = "watson-apis-swift-sdk"
-
-            let operatingSystem: String = {
-                #if os(iOS)
-                return "iOS"
-                #elseif os(watchOS)
-                return "watchOS"
-                #elseif os(tvOS)
-                return "tvOS"
-                #elseif os(macOS)
-                return "macOS"
-                #elseif os(Linux)
-                return "Linux"
-                #else
-                return "Unknown"
-                #endif
-            }()
-            let operatingSystemVersion: String = {
-                // swiftlint:disable:next identifier_name
-                let os = ProcessInfo.processInfo.operatingSystemVersion
-                return "\(os.majorVersion).\(os.minorVersion).\(os.patchVersion)"
-            }()
-            return "\(sdk)-\(sdkVersion) \(operatingSystem) \(operatingSystemVersion)"
-        }()
-
+    static func getSDKHeaders(serviceName: String, serviceVersion: String, methodName: String) -> [String: String] {
         let serviceInfo = "service_name=\(serviceName);service_version=\(serviceVersion);operation_id=\(methodName);async=true"
 
         return [
-            "User-Agent": userAgent,
             "X-IBMCloud-SDK-Analytics": serviceInfo,
         ]
     }

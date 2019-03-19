@@ -654,6 +654,7 @@
 		CADC4B8F214216FC00C76DE6 /* VisualRecognitionUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADC4B8D2141BC9A00C76DE6 /* VisualRecognitionUnitTests.swift */; };
 		CAF9A5C420ACED3E006C86B7 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = CAF9A5C320ACED3E006C86B7 /* CHANGELOG.md */; };
 		CAF9A5CB20B75B3A006C86B7 /* VisualRecognitionWithIAMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF9A5C920B753B7006C86B7 /* VisualRecognitionWithIAMTests.swift */; };
+		CAFD2A9322400D7900325779 /* RecognizeCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFD2A9222400D7900325779 /* RecognizeCallback.swift */; };
 		CE6B98D41DF09D4B004CD6B5 /* face1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE6B98D31DF09D4B004CD6B5 /* face1.jpg */; };
 		CE6B98DC1DF22638004CD6B5 /* metadata.txt in Resources */ = {isa = PBXBuildFile; fileRef = CE6B98DB1DF22638004CD6B5 /* metadata.txt */; };
 		CE75BAA91DDE5F2F006EBB51 /* KennedySpeech.html in Resources */ = {isa = PBXBuildFile; fileRef = CE75BAA81DDE5F2F006EBB51 /* KennedySpeech.html */; };
@@ -1381,6 +1382,7 @@
 		CADC4B8D2141BC9A00C76DE6 /* VisualRecognitionUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualRecognitionUnitTests.swift; sourceTree = "<group>"; };
 		CAF9A5C320ACED3E006C86B7 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		CAF9A5C920B753B7006C86B7 /* VisualRecognitionWithIAMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualRecognitionWithIAMTests.swift; sourceTree = "<group>"; };
+		CAFD2A9222400D7900325779 /* RecognizeCallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognizeCallback.swift; sourceTree = "<group>"; };
 		CE6B98D31DF09D4B004CD6B5 /* face1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = face1.jpg; sourceTree = "<group>"; };
 		CE6B98DB1DF22638004CD6B5 /* metadata.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = metadata.txt; sourceTree = "<group>"; };
 		CE6D55C31DC7CC1300E7BDF9 /* trained_meta.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = trained_meta.txt; sourceTree = "<group>"; };
@@ -1891,6 +1893,7 @@
 		685E5D812087E343009BB020 /* WebSockets */ = {
 			isa = PBXGroup;
 			children = (
+				CAFD2A9222400D7900325779 /* RecognizeCallback.swift */,
 				68F7FF1B207D47BC00E84DBF /* RecognitionSettings.swift */,
 				68F7FF1F207D47BD00E84DBF /* RecognitionState.swift */,
 				68F7FF1C207D47BC00E84DBF /* RecognitionStop.swift */,
@@ -4404,6 +4407,7 @@
 				68F7FF0A207D458900E84DBF /* SpeechModels.swift in Sources */,
 				68F7FF06207D458900E84DBF /* AudioDetails.swift in Sources */,
 				68F7FF0E207D458900E84DBF /* AudioResource.swift in Sources */,
+				CAFD2A9322400D7900325779 /* RecognizeCallback.swift in Sources */,
 				68F7FF22207D47BD00E84DBF /* WordTimestamp.swift in Sources */,
 				68F7FF19207D458900E84DBF /* CreateAcousticModel.swift in Sources */,
 				68F7FF00207D458900E84DBF /* AcousticModels.swift in Sources */,

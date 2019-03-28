@@ -3,10 +3,6 @@
   "verifyConditions": [],
   "tagFormat": "${version}",
   "prepare": [
-    {
-      "path": "@semantic-release/changelog",
-      "changelogFile": "CHANGELOG.md",
-    },
     "@semantic-release/git",
     {
       "path": "@semantic-release/exec",

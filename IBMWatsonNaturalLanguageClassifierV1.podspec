@@ -21,6 +21,7 @@ return information for texts that it is not trained on.
                             'Source/SupportingFiles/Shared.swift'
   s.exclude_files         = 'Source/NaturalLanguageClassifierV1/Shared.swift'
 
+  s.swift_version         = '4.2'
   s.dependency              'IBMWatsonRestKit', '~> 3.0.0'
 
 end

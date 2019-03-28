@@ -20,6 +20,7 @@ including categories, concepts, emotion, entities, keywords, metadata, relations
                             'Source/SupportingFiles/Shared.swift'
   s.exclude_files         = 'Source/NaturalLanguageUnderstandingV1/Shared.swift'
 
+  s.swift_version         = '4.2'
   s.dependency              'IBMWatsonRestKit', '~> 3.0.0'
 
 end

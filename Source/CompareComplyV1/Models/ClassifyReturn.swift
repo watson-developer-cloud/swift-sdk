@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- The analysis of objects returned by the `/v1/element_classification` method.
+ The analysis of objects returned by the **Element classification** method.
  */
 public struct ClassifyReturn: Codable, Equatable {
 
@@ -27,7 +27,7 @@ public struct ClassifyReturn: Codable, Equatable {
     public var document: Document?
 
     /**
-     The analysis model used to classify the input document. For the `/v1/element_classification` method, the only valid
+     The analysis model used to classify the input document. For the **Element classification** method, the only valid
      value is `contracts`.
      */
     public var modelID: String?
@@ -58,19 +58,25 @@ public struct ClassifyReturn: Codable, Equatable {
     public var parties: [Parties]?
 
     /**
-     The effective dates of the input document.
+     The date or dates on which the document becomes effective.
      */
     public var effectiveDates: [EffectiveDates]?
 
     /**
-     The monetary amounts identified in the input document.
+     The monetary amounts that identify the total amount of the contract that needs to be paid from one party to
+     another.
      */
     public var contractAmounts: [ContractAmts]?
 
     /**
-     The input document's termination dates.
+     The date or dates on which the document is to be terminated.
      */
     public var terminationDates: [TerminationDates]?
+
+    /**
+     The document's contract type or types as declared in the document.
+     */
+    public var contractType: [ContractType]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
@@ -84,6 +90,7 @@ public struct ClassifyReturn: Codable, Equatable {
         case effectiveDates = "effective_dates"
         case contractAmounts = "contract_amounts"
         case terminationDates = "termination_dates"
+        case contractType = "contract_type"
     }
 
 }

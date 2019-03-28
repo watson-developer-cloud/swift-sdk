@@ -25,55 +25,11 @@ private var microphoneSession: SpeechToTextSession?
 
 extension SpeechToText {
 
-    /**
-     Perform speech recognition for an audio file.
-
-     - parameter audio: The audio file to transcribe.
-     - parameter settings: The configuration to use for this recognition request.
-     - parameter model: The language and sample rate of the audio. For supported models, visit
-       https://cloud.ibm.com/docs/services/speech-to-text/input.html#models.
-     - parameter baseModelVersion: The version of the specified base model that is to be used for all requests sent
-       over the connection. Multiple versions of a base model can exist when a model is updated for internal improvements.
-       The parameter is intended primarily for use with custom models that have been upgraded for a new base model.
-       The default value depends on whether the parameter is used with or without a custom model. See
-       [Base model version](https://cloud.ibm.com/docs/services/speech-to-text/input.html#version).
-     - parameter languageCustomizationID: The customization ID (GUID) of a custom language model that is to be used
-       with the recognition request. The base model of the specified custom language model must match the model
-       specified with the `model` parameter. You must make the request with service credentials created for the instance
-       of the service that owns the custom model. By default, no custom language model is used. See [Custom
-       models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
-     - parameter learningOptOut: If `true`, then this request will not be logged for training.
-     - parameter customerID: Associates a customer ID with all data that is passed over the connection.
-       By default, no customer ID is associated with the data.
-     - parameter completionHandler: A function executed when the request completes with a successful result or error
-     */
-    public func recognize(
-        audio: URL,
-        settings: RecognitionSettings,
-        model: String? = nil,
-        baseModelVersion: String? = nil,
-        languageCustomizationID: String? = nil,
-        learningOptOut: Bool? = nil,
-        customerID: String? = nil,
-        completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, WatsonError?) -> Void)
-    {
-        do {
-            let data = try Data(contentsOf: audio)
-            recognizeUsingWebSocket(
-                audio: data,
-                settings: settings,
-                model: model,
-                baseModelVersion: baseModelVersion,
-                languageCustomizationID: languageCustomizationID,
-                learningOptOut: learningOptOut,
-                customerID: customerID,
-                completionHandler: completionHandler
-            )
-        } catch {
-            let error = WatsonError.serialization(values: "audio data from \(audio)")
-            completionHandler(nil, error)
-            return
-        }
+    /// The URL that shall be used to stream audio for transcription.
+    internal var websocketsURL: String {
+        return serviceURL
+            .replacingOccurrences(of: "http", with: "ws", options: .anchored, range: nil)
+            + "/v1/recognize"
     }
 
     /**
@@ -113,7 +69,7 @@ extension SpeechToText {
         learningOptOut: Bool? = nil,
         customerID: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, WatsonError?) -> Void)
+        callback: RecognizeCallback)
     {
         // create SpeechToTextSession
         let session = SpeechToTextSession(
@@ -126,9 +82,7 @@ extension SpeechToText {
             customerID: customerID
         )
 
-        // set urls
-        session.serviceURL = serviceURL
-        session.tokenURL = tokenURL
+        // set url
         session.websocketsURL = websocketsURL
 
         // set headers
@@ -136,18 +90,12 @@ extension SpeechToText {
         if let headers = headers {
             session.defaultHeaders.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "recognizeUsingWebSocket")
-        session.defaultHeaders.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "recognizeUsingWebSocket")
+        session.defaultHeaders.merge(sdkHeaders) { (_, new) in new }
 
         // set callbacks
-        session.onResults = { result in
-            var response = WatsonResponse<SpeechRecognitionResults>(statusCode: 0)
-            response.result = result
-            completionHandler(response, nil)
-        }
-        session.onError = { error in
-            completionHandler(nil, error)
-        }
+        session.onResults = callback.onResults
+        session.onError = callback.onError
 
         // execute recognition request
         session.connect()
@@ -205,21 +153,16 @@ extension SpeechToText {
         customerID: String? = nil,
         compress: Bool = true,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, WatsonError?) -> Void)
+        callback: RecognizeCallback)
     {
         // make sure the AVAudioSession shared instance is properly configured
         do {
             let audioSession = AVAudioSession.sharedInstance()
-            #if swift(>=4.2)
             try audioSession.setCategory(AVAudioSession.Category.playAndRecord, mode: .default, options: [.defaultToSpeaker, .mixWithOthers])
-            #else
-            try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord, with: [.defaultToSpeaker, .mixWithOthers])
-            #endif
             try audioSession.setActive(true)
         } catch {
             let failureReason = "Failed to setup the AVAudioSession sharedInstance properly."
-            let error = WatsonError.other(message: failureReason)
-            completionHandler(nil, error)
+            callback.onError?(WatsonError.other(message: failureReason, metadata: nil))
             return
         }
 
@@ -238,9 +181,7 @@ extension SpeechToText {
             customerID: customerID
         )
 
-        // set urls
-        session.serviceURL = serviceURL
-        session.tokenURL = tokenURL
+        // set url
         session.websocketsURL = websocketsURL
 
         // set headers
@@ -248,18 +189,12 @@ extension SpeechToText {
         if let headers = headers {
             session.defaultHeaders.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "recognizeMicrophone")
-        session.defaultHeaders.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "recognizeMicrophone")
+        session.defaultHeaders.merge(sdkHeaders) { (_, new) in new }
 
         // set callbacks
-        session.onResults = { result in
-            var response = WatsonResponse<SpeechRecognitionResults>(statusCode: 200)
-            response.result = result
-            completionHandler(response, nil)
-        }
-        session.onError = { error in
-            completionHandler(nil, error)
-        }
+        session.onResults = callback.onResults
+        session.onError = callback.onError
 
         // start recognition request
         session.connect()

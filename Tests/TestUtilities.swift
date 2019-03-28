@@ -33,7 +33,7 @@ func missingBodyMessage(_ error: Error) -> String {
 // MARK: - Service instantiation
 
 let accessToken = "my_access_token"
-let versionDate = "2019-01-11"
+let versionDate = "2019-03-29"
 
 // MARK: - Mocking requests
 
@@ -145,7 +145,7 @@ func numberOfFieldsInMultiPartFormBody(request: URLRequest) -> Int? {
     var count = 0
     var rangeStart = bodyData.startIndex
     while true {
-        if let boundaryRange = bodyData.range(of: boundaryData, options: [], in: Range.init(rangeStart ..< bodyData.endIndex)) {
+        if let boundaryRange = bodyData.range(of: boundaryData, options: [], in: rangeStart ..< bodyData.endIndex) {
             count += 1
             rangeStart = boundaryRange.upperBound
         } else {

@@ -31,10 +31,10 @@ class NaturalLanguageClassifierTests: XCTestCase {
     private let trainedClassifierName = "swift-sdk-test-classifier - DO NOT DELETE"
     private let temporaryClassifierName = "swift-sdk-temporary-classifier"
 
-    private var metadataFile: URL!
-    private var metadataFileEmpty: URL!
-    private var metadataFileMissingName: URL!
-    private var trainingFile: URL!
+    private var metadataFile: Data!
+    private var metadataFileEmpty: Data!
+    private var metadataFileMissingName: Data!
+    private var trainingFile: Data!
 
     // MARK: - Test Configuration
 
@@ -97,14 +97,15 @@ class NaturalLanguageClassifierTests: XCTestCase {
     }
 
     /** Load a file used when creating a classifier. */
-    func loadClassifierFile(name: String, withExtension: String) -> URL? {
+    func loadClassifierFile(name: String, withExtension: String) -> Data? {
         #if os(Linux)
             let url = URL(fileURLWithPath: "Tests/NaturalLanguageClassifierV1Tests/" + name + "." + withExtension)
         #else
             let bundle = Bundle(for: type(of: self))
             guard let url = bundle.url(forResource: name, withExtension: withExtension) else { return nil }
         #endif
-        return url
+        let data = try? Data(contentsOf: url)
+        return data
     }
 
     // MARK: - Positive Tests

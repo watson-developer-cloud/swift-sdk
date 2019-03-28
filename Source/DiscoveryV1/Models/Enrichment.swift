@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,6 +33,8 @@ public struct Enrichment: Codable, Equatable {
 
     /**
      Field to be enriched.
+     Arrays can be specified as the **source_field** if the **enrichment** service for this enrichment is set to
+     `natural_language_undstanding`.
      */
     public var sourceField: String
 
@@ -47,8 +49,8 @@ public struct Enrichment: Codable, Equatable {
      options.
       When using `elements` the **options** object must contain Element Classification options. Additionally, when using
      the `elements` enrichment the configuration specified and files ingested must meet all the criteria specified in
-     [the documentation](https://cloud.ibm.com/docs/services/discovery/element-classification.html)
-      Previous API versions also supported `alchemy_language`.
+     [the
+     documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-element-classification#element-classification).
      */
     public var enrichmentName: String
 
@@ -59,7 +61,7 @@ public struct Enrichment: Codable, Equatable {
     public var ignoreDownstreamErrors: Bool?
 
     /**
-     Options which are specific to a particular enrichment.
+     An object representing the configuration options to use for the `elements` enrichment.
      */
     public var options: EnrichmentOptions?
 
@@ -81,20 +83,22 @@ public struct Enrichment: Codable, Equatable {
        most 1 level deeper than an existing field. For example, if `text` is a top-level field with no sub-fields,
        `text.foo` is a valid destination but `text.foo.bar` is not.
      - parameter sourceField: Field to be enriched.
+       Arrays can be specified as the **source_field** if the **enrichment** service for this enrichment is set to
+       `natural_language_undstanding`.
      - parameter enrichmentName: Name of the enrichment service to call. Current options are
        `natural_language_understanding` and `elements`.
         When using `natual_language_understanding`, the **options** object must contain Natural Language Understanding
        options.
         When using `elements` the **options** object must contain Element Classification options. Additionally, when
        using the `elements` enrichment the configuration specified and files ingested must meet all the criteria
-       specified in [the documentation](https://cloud.ibm.com/docs/services/discovery/element-classification.html)
-        Previous API versions also supported `alchemy_language`.
+       specified in [the
+       documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-element-classification#element-classification).
      - parameter description: Describes what the enrichment step does.
      - parameter overwrite: Indicates that the enrichments will overwrite the destination_field field if it already
        exists.
      - parameter ignoreDownstreamErrors: If true, then most errors generated during the enrichment process will be
        treated as warnings and will not cause the document to fail processing.
-     - parameter options: Options which are specific to a particular enrichment.
+     - parameter options: An object representing the configuration options to use for the `elements` enrichment.
 
      - returns: An initialized `Enrichment`.
     */

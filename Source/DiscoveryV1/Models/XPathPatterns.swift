@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,9 @@ import Foundation
 /** XPathPatterns. */
 public struct XPathPatterns: Codable, Equatable {
 
+    /**
+     An array to XPaths.
+     */
     public var xpaths: [String]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -29,7 +32,7 @@ public struct XPathPatterns: Codable, Equatable {
     /**
      Initialize a `XPathPatterns` with member variables.
 
-     - parameter xpaths:
+     - parameter xpaths: An array to XPaths.
 
      - returns: An initialized `XPathPatterns`.
     */

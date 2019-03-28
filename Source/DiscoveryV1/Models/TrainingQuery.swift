@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,12 +19,24 @@ import Foundation
 /** TrainingQuery. */
 public struct TrainingQuery: Codable, Equatable {
 
+    /**
+     The query ID associated with the training query.
+     */
     public var queryID: String?
 
+    /**
+     The natural text query for the training query.
+     */
     public var naturalLanguageQuery: String?
 
+    /**
+     The filter used on the collection before the **natural_language_query** is applied.
+     */
     public var filter: String?
 
+    /**
+     Array of training examples.
+     */
     public var examples: [TrainingExample]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

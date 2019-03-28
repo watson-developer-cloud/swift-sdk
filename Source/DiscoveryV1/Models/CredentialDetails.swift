@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,8 @@ public struct CredentialDetails: Codable, Equatable {
      -  `"source_type": "salesforce"` - valid `credential_type`s: `username_password`
      -  `"source_type": "sharepoint"` - valid `credential_type`s: `saml` with **source_version** of `online`, or
      `ntml_v1` with **source_version** of `2016`
-     -  `"source_type": "web_crawl"` - valid `credential_type`s: `noauth` or `basic`.
+     -  `"source_type": "web_crawl"` - valid `credential_type`s: `noauth` or `basic`
+     -  "source_type": "cloud_object_storage"` - valid `credential_type`s: `aws4_hmac`.
      */
     public enum CredentialType: String {
         case oauth2 = "oauth2"
@@ -38,6 +39,7 @@ public struct CredentialDetails: Codable, Equatable {
         case noauth = "noauth"
         case basic = "basic"
         case ntmlV1 = "ntml_v1"
+        case aws4Hmac = "aws4_hmac"
     }
 
     /**
@@ -45,7 +47,6 @@ public struct CredentialDetails: Codable, Equatable {
      */
     public enum SourceVersion: String {
         case online = "online"
-        case sp2016 = "2016"
     }
 
     /**
@@ -55,7 +56,8 @@ public struct CredentialDetails: Codable, Equatable {
      -  `"source_type": "salesforce"` - valid `credential_type`s: `username_password`
      -  `"source_type": "sharepoint"` - valid `credential_type`s: `saml` with **source_version** of `online`, or
      `ntml_v1` with **source_version** of `2016`
-     -  `"source_type": "web_crawl"` - valid `credential_type`s: `noauth` or `basic`.
+     -  `"source_type": "web_crawl"` - valid `credential_type`s: `noauth` or `basic`
+     -  "source_type": "cloud_object_storage"` - valid `credential_type`s: `aws4_hmac`.
      */
     public var credentialType: String?
 
@@ -155,6 +157,27 @@ public struct CredentialDetails: Codable, Equatable {
      */
     public var domain: String?
 
+    /**
+     The endpoint associated with the cloud object store that your are connecting to. Only valid, and required, with a
+     **credential_type** of `aws4_hmac`.
+     */
+    public var endpoint: String?
+
+    /**
+     The access key ID associated with the cloud object store. Only valid, and required, with a **credential_type** of
+     `aws4_hmac`. For more infomation, see the [cloud object store
+     documentation](https://cloud.ibm.com/docs/services/cloud-object-storage?topic=cloud-object-storage-using-hmac-credentials#using-hmac-credentials).
+     */
+    public var accessKeyID: String?
+
+    /**
+     The secret access key associated with the cloud object store. Only valid, and required, with a **credential_type**
+     of `aws4_hmac`. This value is never returned and is only used when creating or modifying **credentials**. For more
+     infomation, see the [cloud object store
+     documentation](https://cloud.ibm.com/docs/services/cloud-object-storage?topic=cloud-object-storage-using-hmac-credentials#using-hmac-credentials).
+     */
+    public var secretAccessKey: String?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case credentialType = "credential_type"
@@ -173,6 +196,9 @@ public struct CredentialDetails: Codable, Equatable {
         case sourceVersion = "source_version"
         case webApplicationURL = "web_application_url"
         case domain = "domain"
+        case endpoint = "endpoint"
+        case accessKeyID = "access_key_id"
+        case secretAccessKey = "secret_access_key"
     }
 
     /**
@@ -184,7 +210,8 @@ public struct CredentialDetails: Codable, Equatable {
        -  `"source_type": "salesforce"` - valid `credential_type`s: `username_password`
        -  `"source_type": "sharepoint"` - valid `credential_type`s: `saml` with **source_version** of `online`, or
        `ntml_v1` with **source_version** of `2016`
-       -  `"source_type": "web_crawl"` - valid `credential_type`s: `noauth` or `basic`.
+       -  `"source_type": "web_crawl"` - valid `credential_type`s: `noauth` or `basic`
+       -  "source_type": "cloud_object_storage"` - valid `credential_type`s: `aws4_hmac`.
      - parameter clientID: The **client_id** of the source that these credentials connect to. Only valid, and
        required, with a **credential_type** of `oauth2`.
      - parameter enterpriseID: The **enterprise_id** of the Box site that these credentials connect to. Only valid,
@@ -223,6 +250,15 @@ public struct CredentialDetails: Codable, Equatable {
        **source_version** of `2016`.
      - parameter domain: The domain used to log in to your OnPrem SharePoint account. Only valid, and required, with
        a **source_version** of `2016`.
+     - parameter endpoint: The endpoint associated with the cloud object store that your are connecting to. Only
+       valid, and required, with a **credential_type** of `aws4_hmac`.
+     - parameter accessKeyID: The access key ID associated with the cloud object store. Only valid, and required,
+       with a **credential_type** of `aws4_hmac`. For more infomation, see the [cloud object store
+       documentation](https://cloud.ibm.com/docs/services/cloud-object-storage?topic=cloud-object-storage-using-hmac-credentials#using-hmac-credentials).
+     - parameter secretAccessKey: The secret access key associated with the cloud object store. Only valid, and
+       required, with a **credential_type** of `aws4_hmac`. This value is never returned and is only used when creating
+       or modifying **credentials**. For more infomation, see the [cloud object store
+       documentation](https://cloud.ibm.com/docs/services/cloud-object-storage?topic=cloud-object-storage-using-hmac-credentials#using-hmac-credentials).
 
      - returns: An initialized `CredentialDetails`.
     */
@@ -242,7 +278,10 @@ public struct CredentialDetails: Codable, Equatable {
         gatewayID: String? = nil,
         sourceVersion: String? = nil,
         webApplicationURL: String? = nil,
-        domain: String? = nil
+        domain: String? = nil,
+        endpoint: String? = nil,
+        accessKeyID: String? = nil,
+        secretAccessKey: String? = nil
     )
     {
         self.credentialType = credentialType
@@ -261,6 +300,9 @@ public struct CredentialDetails: Codable, Equatable {
         self.sourceVersion = sourceVersion
         self.webApplicationURL = webApplicationURL
         self.domain = domain
+        self.endpoint = endpoint
+        self.accessKeyID = accessKeyID
+        self.secretAccessKey = secretAccessKey
     }
 
 }

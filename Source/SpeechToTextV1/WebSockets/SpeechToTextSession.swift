@@ -33,14 +33,25 @@ import RestKit
  */
 public class SpeechToTextSession {
 
+    /// The URL that shall be used to stream audio for transcription.
+    public var websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize" {
+        didSet {
+            // serviceURL and tokenURL are both derivative of websocketsURL
+            if websocketsURL.last == "/" {
+                websocketsURL.removeLast()
+            }
+            serviceURL = websocketsURL
+                .replacingOccurrences(of: "ws", with: "http", options: .anchored, range: nil)
+                .replacingOccurrences(of: "/v1/recognize", with: "")
+            tokenURL = serviceURL.replacingOccurrences(of: "/speech-to-text/api", with: "/authorization/api/v1/token")
+        }
+    }
+
     /// The base URL of the Speech to Text service.
-    public var serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
+    internal var serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
 
     /// The URL that shall be used to obtain a token.
-    public var tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
-
-    /// The URL that shall be used to stream audio for transcription.
-    public var websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
+    internal var tokenURL = "https://stream.watsonplatform.net/authorization/api/v1/token"
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
@@ -98,7 +109,7 @@ public class SpeechToTextSession {
             defaultHeaders: self.defaultHeaders
         )
         socket.onDisconnect = { [weak self] in
-            guard let `self` = self else { return }
+            guard let self = self else { return }
             if self.recorder.isRecording {
                 self.stopMicrophone()
             }
@@ -318,14 +329,14 @@ public class SpeechToTextSession {
         recorder.session.requestRecordPermission { granted in
             guard granted else {
                 let failureReason = "Permission was not granted to access the microphone."
-                let error = WatsonError.other(message: failureReason)
+                let error = WatsonError.other(message: failureReason, metadata: nil)
                 self.onError?(error)
                 return
             }
 
             // callback if uncompressed
             let onMicrophoneDataPCM = { [weak self] (pcm: Data) in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
                 guard pcm.count > 0 else { return }
                 self.socket.writeAudio(audio: pcm)
                 self.onMicrophoneData?(pcm)
@@ -333,7 +344,7 @@ public class SpeechToTextSession {
 
             // callback if compressed
             let onMicrophoneDataOpus = { [weak self] (pcm: Data) in
-                guard let `self` = self else { return }
+                guard let self = self else { return }
                 guard pcm.count > 0 else { return }
                 // swiftlint:disable:next force_try
                 try! self.encoder.encode(pcm: pcm)
@@ -355,7 +366,7 @@ public class SpeechToTextSession {
                 try self.recorder.startRecording()
             } catch {
                 let failureReason = "Failed to start recording."
-                let error = WatsonError.other(message: failureReason)
+                let error = WatsonError.other(message: failureReason, metadata: nil)
                 self.onError?(error)
                 return
             }
@@ -370,7 +381,7 @@ public class SpeechToTextSession {
             try recorder.stopRecording()
         } catch {
             let failureReason = "Failed to stop recording."
-            let error = WatsonError.other(message: failureReason)
+            let error = WatsonError.other(message: failureReason, metadata: nil)
             self.onError?(error)
             return
         }

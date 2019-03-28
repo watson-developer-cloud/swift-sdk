@@ -15,20 +15,33 @@
  **/
 
 import Foundation
+import RestKit
 
 /**
- An array of values, each being the `id` value of a row header that is applicable to this body cell.
+ Disambiguation information for the entity.
  */
-public struct RowHeaderIDs: Codable, Equatable {
+public struct EntitiesResultDisambiguation: Codable, Equatable {
 
     /**
-     The `id` values of a row header.
+     Common entity name.
      */
-    public var id: String?
+    public var name: String?
+
+    /**
+     Link to the corresponding DBpedia resource.
+     */
+    public var dbpediaResource: [String: JSON]?
+
+    /**
+     Entity subtype information.
+     */
+    public var subtype: [String]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case id = "id"
+        case name = "name"
+        case dbpediaResource = "dbpedia_resource"
+        case subtype = "subtype"
     }
 
 }

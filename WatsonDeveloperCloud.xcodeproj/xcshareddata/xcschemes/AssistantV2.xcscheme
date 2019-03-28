@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0940"
+   LastUpgradeVersion = "1010"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -32,9 +32,9 @@
       <CodeCoverageTargets>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "7AB445231D3E647A00E8748A"
-            BuildableName = "ConversationV1.framework"
-            BlueprintName = "ConversationV1"
+            BlueprintIdentifier = "924EE78021505D7A0048C0E5"
+            BuildableName = "AssistantV2.framework"
+            BlueprintName = "AssistantV2"
             ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
          </BuildableReference>
       </CodeCoverageTargets>

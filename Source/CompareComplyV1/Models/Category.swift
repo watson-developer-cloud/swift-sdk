@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,14 +40,14 @@ public struct Category: Codable, Equatable {
         case insurance = "Insurance"
         case intellectualProperty = "Intellectual Property"
         case liability = "Liability"
-        case paymentTermsAndBilling = "Payment Terms & Billing"
-        case pricingAndTaxes = "Pricing & Taxes"
+        case paymentTermsBilling = "Payment Terms & Billing"
+        case pricingTaxes = "Pricing & Taxes"
         case privacy = "Privacy"
         case responsibilities = "Responsibilities"
         case safetyAndSecurity = "Safety and Security"
         case scopeOfWork = "Scope of Work"
         case subcontracts = "Subcontracts"
-        case termAndTermination = "Term & Termination"
+        case termTermination = "Term & Termination"
         case warranties = "Warranties"
     }
 

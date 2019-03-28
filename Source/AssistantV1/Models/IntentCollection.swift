@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ public struct IntentCollection: Codable, Equatable {
     /**
      An array of objects describing the intents defined for the workspace.
      */
-    public var intents: [IntentExport]
+    public var intents: [Intent]
 
     /**
      The pagination data for the returned objects.

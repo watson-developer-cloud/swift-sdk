@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -75,44 +75,47 @@ public struct DialogNode: Codable, Equatable {
     }
 
     /**
-     The dialog node ID.
+     The dialog node ID. This string must conform to the following restrictions:
+     - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
+     - It must be no longer than 1024 characters.
      */
-    public var dialogNodeID: String
+    public var dialogNode: String
 
     /**
-     The description of the dialog node.
+     The description of the dialog node. This string cannot contain carriage return, newline, or tab characters, and it
+     must be no longer than 128 characters.
      */
     public var description: String?
 
     /**
-     The condition that triggers the dialog node.
+     The condition that will trigger the dialog node. This string cannot contain carriage return, newline, or tab
+     characters, and it must be no longer than 2048 characters.
      */
     public var conditions: String?
 
     /**
-     The ID of the parent dialog node. This property is not returned if the dialog node has no parent.
+     The ID of the parent dialog node. This property is omitted if the dialog node has no parent.
      */
     public var parent: String?
 
     /**
-     The ID of the previous sibling dialog node. This property is not returned if the dialog node has no previous
-     sibling.
+     The ID of the previous sibling dialog node. This property is omitted if the dialog node has no previous sibling.
      */
     public var previousSibling: String?
 
     /**
      The output of the dialog node. For more information about how to specify dialog node output, see the
-     [documentation](https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#complex).
+     [documentation](https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#dialog-overview-responses).
      */
     public var output: DialogNodeOutput?
 
     /**
-     The context (if defined) for the dialog node.
+     The context for the dialog node.
      */
     public var context: [String: JSON]?
 
     /**
-     Any metadata for the dialog node.
+     The metadata for the dialog node.
      */
     public var metadata: [String: JSON]?
 
@@ -122,29 +125,11 @@ public struct DialogNode: Codable, Equatable {
     public var nextStep: DialogNodeNextStep?
 
     /**
-     The timestamp for creation of the dialog node.
-     */
-    public var created: Date?
-
-    /**
-     The timestamp for the most recent update to the dialog node.
-     */
-    public var updated: Date?
-
-    /**
-     The actions for the dialog node.
-     */
-    public var actions: [DialogNodeAction]?
-
-    /**
-     The alias used to identify the dialog node.
+     The alias used to identify the dialog node. This string must conform to the following restrictions:
+     - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
+     - It must be no longer than 64 characters.
      */
     public var title: String?
-
-    /**
-     For internal use only.
-     */
-    public var disabled: Bool?
 
     /**
      How the dialog node is processed.
@@ -160,6 +145,11 @@ public struct DialogNode: Codable, Equatable {
      The location in the dialog context where output is stored.
      */
     public var variable: String?
+
+    /**
+     An array of objects describing any actions to be invoked by the dialog node.
+     */
+    public var actions: [DialogNodeAction]?
 
     /**
      Whether this top-level dialog node can be digressed into.
@@ -182,9 +172,24 @@ public struct DialogNode: Codable, Equatable {
      */
     public var userLabel: String?
 
+    /**
+     For internal use only.
+     */
+    public var disabled: Bool?
+
+    /**
+     The timestamp for creation of the object.
+     */
+    public var created: Date?
+
+    /**
+     The timestamp for the most recent update to the object.
+     */
+    public var updated: Date?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case dialogNodeID = "dialog_node"
+        case dialogNode = "dialog_node"
         case description = "description"
         case conditions = "conditions"
         case parent = "parent"
@@ -193,18 +198,103 @@ public struct DialogNode: Codable, Equatable {
         case context = "context"
         case metadata = "metadata"
         case nextStep = "next_step"
-        case created = "created"
-        case updated = "updated"
-        case actions = "actions"
         case title = "title"
-        case disabled = "disabled"
         case nodeType = "type"
         case eventName = "event_name"
         case variable = "variable"
+        case actions = "actions"
         case digressIn = "digress_in"
         case digressOut = "digress_out"
         case digressOutSlots = "digress_out_slots"
         case userLabel = "user_label"
+        case disabled = "disabled"
+        case created = "created"
+        case updated = "updated"
+    }
+
+    /**
+     Initialize a `DialogNode` with member variables.
+
+     - parameter dialogNode: The dialog node ID. This string must conform to the following restrictions:
+       - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
+       - It must be no longer than 1024 characters.
+     - parameter description: The description of the dialog node. This string cannot contain carriage return,
+       newline, or tab characters, and it must be no longer than 128 characters.
+     - parameter conditions: The condition that will trigger the dialog node. This string cannot contain carriage
+       return, newline, or tab characters, and it must be no longer than 2048 characters.
+     - parameter parent: The ID of the parent dialog node. This property is omitted if the dialog node has no parent.
+     - parameter previousSibling: The ID of the previous sibling dialog node. This property is omitted if the dialog
+       node has no previous sibling.
+     - parameter output: The output of the dialog node. For more information about how to specify dialog node output,
+       see the
+       [documentation](https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#dialog-overview-responses).
+     - parameter context: The context for the dialog node.
+     - parameter metadata: The metadata for the dialog node.
+     - parameter nextStep: The next step to execute following this dialog node.
+     - parameter title: The alias used to identify the dialog node. This string must conform to the following
+       restrictions:
+       - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
+       - It must be no longer than 64 characters.
+     - parameter nodeType: How the dialog node is processed.
+     - parameter eventName: How an `event_handler` node is processed.
+     - parameter variable: The location in the dialog context where output is stored.
+     - parameter actions: An array of objects describing any actions to be invoked by the dialog node.
+     - parameter digressIn: Whether this top-level dialog node can be digressed into.
+     - parameter digressOut: Whether this dialog node can be returned to after a digression.
+     - parameter digressOutSlots: Whether the user can digress to top-level nodes while filling out slots.
+     - parameter userLabel: A label that can be displayed externally to describe the purpose of the node to users.
+       This string must be no longer than 512 characters.
+     - parameter disabled: For internal use only.
+     - parameter created: The timestamp for creation of the object.
+     - parameter updated: The timestamp for the most recent update to the object.
+
+     - returns: An initialized `DialogNode`.
+    */
+    public init(
+        dialogNode: String,
+        description: String? = nil,
+        conditions: String? = nil,
+        parent: String? = nil,
+        previousSibling: String? = nil,
+        output: DialogNodeOutput? = nil,
+        context: [String: JSON]? = nil,
+        metadata: [String: JSON]? = nil,
+        nextStep: DialogNodeNextStep? = nil,
+        title: String? = nil,
+        nodeType: String? = nil,
+        eventName: String? = nil,
+        variable: String? = nil,
+        actions: [DialogNodeAction]? = nil,
+        digressIn: String? = nil,
+        digressOut: String? = nil,
+        digressOutSlots: String? = nil,
+        userLabel: String? = nil,
+        disabled: Bool? = nil,
+        created: Date? = nil,
+        updated: Date? = nil
+    )
+    {
+        self.dialogNode = dialogNode
+        self.description = description
+        self.conditions = conditions
+        self.parent = parent
+        self.previousSibling = previousSibling
+        self.output = output
+        self.context = context
+        self.metadata = metadata
+        self.nextStep = nextStep
+        self.title = title
+        self.nodeType = nodeType
+        self.eventName = eventName
+        self.variable = variable
+        self.actions = actions
+        self.digressIn = digressIn
+        self.digressOut = digressOut
+        self.digressOutSlots = digressOutSlots
+        self.userLabel = userLabel
+        self.disabled = disabled
+        self.created = created
+        self.updated = updated
     }
 
 }

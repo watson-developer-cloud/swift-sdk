@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,8 +23,7 @@ import RestKit
 public struct ColumnHeaders: Codable, Equatable {
 
     /**
-     A string value in the format `columnHeader-x-y`, where `x` and `y` are the begin and end offsets of this column
-     header cell in the input document.
+     The unique ID of the cell in the current table.
      */
     public var cellID: String?
 

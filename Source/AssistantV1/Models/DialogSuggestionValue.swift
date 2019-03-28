@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ public struct DialogSuggestionValue: Codable, Equatable {
     /**
      An input object that includes the input text.
      */
-    public var input: InputData?
+    public var input: MessageInput?
 
     /**
      An array of intents to be sent along with the user input.
@@ -54,7 +54,7 @@ public struct DialogSuggestionValue: Codable, Equatable {
      - returns: An initialized `DialogSuggestionValue`.
     */
     public init(
-        input: InputData? = nil,
+        input: MessageInput? = nil,
         intents: [RuntimeIntent]? = nil,
         entities: [RuntimeEntity]? = nil
     )

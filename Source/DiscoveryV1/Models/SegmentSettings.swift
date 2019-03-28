@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,8 @@ public struct SegmentSettings: Codable, Equatable {
     public var enabled: Bool?
 
     /**
-     Defines the heading level that splits into document segments. Valid values are h1, h2, h3, h4, h5, h6.
+     Defines the heading level that splits into document segments. Valid values are h1, h2, h3, h4, h5, h6. The content
+     of the header field that the segmentation splits at is used as the **title** field for that segmented result.
      */
     public var selectorTags: [String]?
 
@@ -42,7 +43,8 @@ public struct SegmentSettings: Codable, Equatable {
 
      - parameter enabled: Enables/disables the Document Segmentation feature.
      - parameter selectorTags: Defines the heading level that splits into document segments. Valid values are h1, h2,
-       h3, h4, h5, h6.
+       h3, h4, h5, h6. The content of the header field that the segmentation splits at is used as the **title** field
+       for that segmented result.
 
      - returns: An initialized `SegmentSettings`.
     */

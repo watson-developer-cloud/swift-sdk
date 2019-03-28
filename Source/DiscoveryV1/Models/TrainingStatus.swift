@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,22 +19,49 @@ import Foundation
 /** TrainingStatus. */
 public struct TrainingStatus: Codable, Equatable {
 
+    /**
+     The total number of training examples uploaded to this collection.
+     */
     public var totalExamples: Int?
 
+    /**
+     When `true`, the collection has been successfully trained.
+     */
     public var available: Bool?
 
+    /**
+     When `true`, the collection is currently processing training.
+     */
     public var processing: Bool?
 
+    /**
+     When `true`, the collection has a sufficent amount of queries added for training to occur.
+     */
     public var minimumQueriesAdded: Bool?
 
+    /**
+     When `true`, the collection has a sufficent amount of examples added for training to occur.
+     */
     public var minimumExamplesAdded: Bool?
 
+    /**
+     When `true`, the collection has a sufficent amount of diversity in labeled results for training to occur.
+     */
     public var sufficientLabelDiversity: Bool?
 
+    /**
+     The number of notices associated with this data set.
+     */
     public var notices: Int?
 
+    /**
+     The timestamp of when the collection was successfully trained.
+     */
     public var successfullyTrained: Date?
 
+    /**
+     The timestamp of when the data was uploaded.
+     */
     public var dataUpdated: Date?
 
     // Map each property name to the key that shall be used for encoding/decoding.

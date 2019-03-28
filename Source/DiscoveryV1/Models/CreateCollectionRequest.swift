@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ internal struct CreateCollectionRequest: Codable, Equatable {
         case ko = "ko"
         case pt = "pt"
         case nl = "nl"
+        case zhCn = "zh-CN"
     }
 
     /**

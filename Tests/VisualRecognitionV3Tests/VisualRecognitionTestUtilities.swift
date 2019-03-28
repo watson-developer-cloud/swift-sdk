@@ -18,15 +18,15 @@ import Foundation
 import XCTest
 import VisualRecognitionV3
 
-let car: URL = loadResource(name: "car", ext: "png")
-let cars: URL = loadResource(name: "cars", ext: "zip")
-let carz: URL = loadResource(name: "carz", ext: "zip")
-let trucks: URL = loadResource(name: "trucks", ext: "zip")
-let baseball: URL = loadResource(name: "baseball", ext: "zip")
-let faces: URL = loadResource(name: "faces", ext: "zip")
-let face1: URL = loadResource(name: "face1", ext: "jpg")
-let obama: URL = loadResource(name: "obama", ext: "jpg")
-let sign: URL = loadResource(name: "sign", ext: "jpg")
+let car: Data = loadResource(name: "car", ext: "png")
+let cars: Data = loadResource(name: "cars", ext: "zip")
+let carz: Data = loadResource(name: "carz", ext: "zip")
+let trucks: Data = loadResource(name: "trucks", ext: "zip")
+let baseball: Data = loadResource(name: "baseball", ext: "zip")
+let faces: Data = loadResource(name: "faces", ext: "zip")
+let face1: Data = loadResource(name: "face1", ext: "jpg")
+let obama: Data = loadResource(name: "obama", ext: "jpg")
+let sign: Data = loadResource(name: "sign", ext: "jpg")
 
 let obamaURL = "https://www.whitehouse.gov/sites/whitehouse.gov/files/images/" +
 "Administration/People/president_official_portrait_lores.jpg"
@@ -35,15 +35,19 @@ let carURL = "https://raw.githubusercontent.com/watson-developer-cloud/java-sdk"
 let signURL = "https://raw.githubusercontent.com/watson-developer-cloud/java-sdk/" +
 "master/visual-recognition/src/test/resources/visual_recognition/open.png"
 
-func loadResource(name: String, ext: String) -> URL {
+func loadResource(name: String, ext: String) -> Data {
     #if os(Linux)
-    return URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Resources/" + name + "." + ext)
+    let url = URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Resources/" + name + "." + ext)
     #else
     let bundle = Bundle(for: VisualRecognitionTests.self)
     guard let url = bundle.url(forResource: name, withExtension: ext) else {
         XCTFail("Unable to locate sample image files.")
         assert(false)
     }
-    return url
     #endif
+    guard let data = try? Data(contentsOf: url) else {
+        XCTFail("Unable to locate sample image files.")
+        assert(false)
+    }
+    return data
 }

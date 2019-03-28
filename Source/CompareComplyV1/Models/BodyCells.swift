@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,8 +22,7 @@ import Foundation
 public struct BodyCells: Codable, Equatable {
 
     /**
-     A string value in the format `columnHeader-x-y`, where `x` and `y` are the begin and end offsets of this column
-     header cell in the input document.
+     The unique ID of the cell in the current table.
      */
     public var cellID: String?
 
@@ -58,37 +57,17 @@ public struct BodyCells: Codable, Equatable {
      */
     public var columnIndexEnd: Int?
 
-    /**
-     An array of values, each being the `id` value of a row header that is applicable to this body cell.
-     */
-    public var rowHeaderIDs: [String]?
+    public var rowHeaderIDs: [RowHeaderIDs]?
 
-    /**
-     An array of values, each being the `text` value of a row header that is applicable to this body cell.
-     */
-    public var rowHeaderTexts: [String]?
+    public var rowHeaderTexts: [RowHeaderTexts]?
 
-    /**
-     If you provide customization input, the normalized version of the row header texts according to the customization;
-     otherwise, the same value as `row_header_texts`.
-     */
-    public var rowHeaderTextsNormalized: [String]?
+    public var rowHeaderTextsNormalized: [RowHeaderTextsNormalized]?
 
-    /**
-     An array of values, each being the `id` value of a column header that is applicable to the current cell.
-     */
-    public var columnHeaderIDs: [String]?
+    public var columnHeaderIDs: [ColumnHeaderIDs]?
 
-    /**
-     An array of values, each being the `text` value of a column header that is applicable to the current cell.
-     */
-    public var columnHeaderTexts: [String]?
+    public var columnHeaderTexts: [ColumnHeaderTexts]?
 
-    /**
-     If you provide customization input, the normalized version of the column header texts according to the
-     customization; otherwise, the same value as `column_header_texts`.
-     */
-    public var columnHeaderTextsNormalized: [String]?
+    public var columnHeaderTextsNormalized: [ColumnHeaderTextsNormalized]?
 
     public var attributes: [Attribute]?
 

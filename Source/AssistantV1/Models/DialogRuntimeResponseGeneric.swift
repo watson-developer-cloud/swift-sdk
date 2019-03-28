@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -101,6 +101,12 @@ public struct DialogRuntimeResponseGeneric: Codable, Equatable {
     public var topic: String?
 
     /**
+     The ID of the dialog node that the **topic** property is taken from. The **topic** property is populated using the
+     value of the dialog node's **user_label** property.
+     */
+    public var dialogNode: String?
+
+    /**
      An array of objects describing the possible matching dialog nodes from which the user can choose.
      **Note:** The **suggestions** property is part of the disambiguation feature, which is only available for Premium
      users.
@@ -120,6 +126,7 @@ public struct DialogRuntimeResponseGeneric: Codable, Equatable {
         case options = "options"
         case messageToHumanAgent = "message_to_human_agent"
         case topic = "topic"
+        case dialogNode = "dialog_node"
         case suggestions = "suggestions"
     }
 
@@ -142,6 +149,8 @@ public struct DialogRuntimeResponseGeneric: Codable, Equatable {
        conversation.
      - parameter topic: A label identifying the topic of the conversation, derived from the **user_label** property
        of the relevant node.
+     - parameter dialogNode: The ID of the dialog node that the **topic** property is taken from. The **topic**
+       property is populated using the value of the dialog node's **user_label** property.
      - parameter suggestions: An array of objects describing the possible matching dialog nodes from which the user
        can choose.
        **Note:** The **suggestions** property is part of the disambiguation feature, which is only available for Premium
@@ -161,6 +170,7 @@ public struct DialogRuntimeResponseGeneric: Codable, Equatable {
         options: [DialogNodeOutputOptionsElement]? = nil,
         messageToHumanAgent: String? = nil,
         topic: String? = nil,
+        dialogNode: String? = nil,
         suggestions: [DialogSuggestion]? = nil
     )
     {
@@ -175,6 +185,7 @@ public struct DialogRuntimeResponseGeneric: Codable, Equatable {
         self.options = options
         self.messageToHumanAgent = messageToHumanAgent
         self.topic = topic
+        self.dialogNode = dialogNode
         self.suggestions = suggestions
     }
 

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,11 +25,12 @@ public struct Attribute: Codable, Equatable {
      The type of attribute.
      */
     public enum TypeEnum: String {
-        case address = "Address"
         case currency = "Currency"
         case datetime = "DateTime"
+        case duration = "Duration"
         case location = "Location"
         case organization = "Organization"
+        case percentage = "Percentage"
         case person = "Person"
     }
 

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,17 +20,20 @@ import Foundation
 public struct Counterexample: Codable, Equatable {
 
     /**
-     The text of the counterexample.
+     The text of a user input marked as irrelevant input. This string must conform to the following restrictions:
+     - It cannot contain carriage return, newline, or tab characters
+     - It cannot consist of only whitespace characters
+     - It must be no longer than 1024 characters.
      */
     public var text: String
 
     /**
-     The timestamp for creation of the counterexample.
+     The timestamp for creation of the object.
      */
     public var created: Date?
 
     /**
-     The timestamp for the last update to the counterexample.
+     The timestamp for the most recent update to the object.
      */
     public var updated: Date?
 
@@ -39,6 +42,30 @@ public struct Counterexample: Codable, Equatable {
         case text = "text"
         case created = "created"
         case updated = "updated"
+    }
+
+    /**
+     Initialize a `Counterexample` with member variables.
+
+     - parameter text: The text of a user input marked as irrelevant input. This string must conform to the following
+       restrictions:
+       - It cannot contain carriage return, newline, or tab characters
+       - It cannot consist of only whitespace characters
+       - It must be no longer than 1024 characters.
+     - parameter created: The timestamp for creation of the object.
+     - parameter updated: The timestamp for the most recent update to the object.
+
+     - returns: An initialized `Counterexample`.
+    */
+    public init(
+        text: String,
+        created: Date? = nil,
+        updated: Date? = nil
+    )
+    {
+        self.text = text
+        self.created = created
+        self.updated = updated
     }
 
 }

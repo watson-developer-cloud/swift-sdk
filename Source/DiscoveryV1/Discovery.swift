@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,22 +38,23 @@ public class Discovery {
     var authMethod: AuthenticationMethod
     let version: String
 
+    #if os(Linux)
     /**
      Create a `Discovery` object.
 
-     Use this initializer to automatically pull service credentials from your credentials file.
-     This file is downloaded from your service instance on IBM Cloud as ibm-credentials.env.
+     This initializer will retrieve credentials from the environment or a local credentials file.
+     The credentials file can be downloaded from your service instance on IBM Cloud as ibm-credentials.env.
      Make sure to add the credentials file to your project so that it can be loaded at runtime.
 
-     If the credentials cannot be loaded from the file, or the file is not found, initialization will fail.
+     If credentials are not available in the environment or a local credentials file, initialization will fail.
      In that case, try another initializer that directly passes in the credentials.
 
-     - parameter credentialsFile: The URL of the credentials file.
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
      */
-    public init?(credentialsFile: URL, version: String) {
-        guard let credentials = Shared.extractCredentials(from: credentialsFile, serviceName: "discovery") else {
+    public init?(version: String) {
+        self.version = version
+        guard let credentials = Shared.extractCredentials(serviceName: "discovery") else {
             return nil
         }
         guard let authMethod = Shared.getAuthMethod(from: credentials) else {
@@ -63,20 +64,22 @@ public class Discovery {
             self.serviceURL = serviceURL
         }
         self.authMethod = authMethod
-        self.version = version
+        RestRequest.userAgent = Shared.userAgent
     }
+    #endif
 
     /**
      Create a `Discovery` object.
 
-     - parameter username: The username used to authenticate with the service.
-     - parameter password: The password used to authenticate with the service.
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
+     - parameter username: The username used to authenticate with the service.
+     - parameter password: The password used to authenticate with the service.
      */
-    public init(username: String, password: String, version: String) {
-        self.authMethod = Shared.getAuthMethod(username: username, password: password)
+    public init(version: String, username: String, password: String) {
         self.version = version
+        self.authMethod = Shared.getAuthMethod(username: username, password: password)
+        RestRequest.userAgent = Shared.userAgent
     }
 
     /**
@@ -90,6 +93,7 @@ public class Discovery {
     public init(version: String, apiKey: String, iamUrl: String? = nil) {
         self.authMethod = Shared.getAuthMethod(apiKey: apiKey, iamURL: iamUrl)
         self.version = version
+        RestRequest.userAgent = Shared.userAgent
     }
 
     /**
@@ -100,8 +104,9 @@ public class Discovery {
      - parameter accessToken: An access token for the service.
      */
     public init(version: String, accessToken: String) {
-        self.authMethod = IAMAccessToken(accessToken: accessToken)
         self.version = version
+        self.authMethod = IAMAccessToken(accessToken: accessToken)
+        RestRequest.userAgent = Shared.userAgent
     }
 
     public func accessToken(_ newToken: String) {
@@ -124,19 +129,25 @@ public class Discovery {
         var metadata = [String: Any]()
 
         do {
-            let json = try JSONDecoder().decode([String: JSON].self, from: data)
-            metadata = [:]
-            if case let .some(.string(message)) = json["error"] {
+            let json = try JSON.decoder.decode([String: JSON].self, from: data)
+            metadata["response"] = json
+            if case let .some(.array(errors)) = json["errors"],
+                case let .some(.object(error)) = errors.first,
+                case let .some(.string(message)) = error["message"] {
                 errorMessage = message
+            } else if case let .some(.string(message)) = json["error"] {
+                errorMessage = message
+            } else if case let .some(.string(message)) = json["message"] {
+                errorMessage = message
+            } else {
+                errorMessage = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
             }
-            if case let .some(.string(description)) = json["description"] {
-                metadata["description"] = description
-            }
-            // If metadata is empty, it should show up as nil in the WatsonError
-            return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: !metadata.isEmpty ? metadata : nil)
         } catch {
-            return WatsonError.http(statusCode: statusCode, message: nil, metadata: nil)
+            metadata["response"] = data
+            errorMessage = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
         }
+
+        return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: metadata)
     }
 
     /**
@@ -165,7 +176,7 @@ public class Discovery {
             name: name,
             description: description,
             size: size)
-        guard let body = try? JSONEncoder().encode(createEnvironmentRequest) else {
+        guard let body = try? JSON.encoder.encode(createEnvironmentRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
@@ -175,8 +186,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createEnvironment")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createEnvironment")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -219,8 +230,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listEnvironments")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listEnvironments")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -263,8 +274,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getEnvironment")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getEnvironment")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -318,7 +329,7 @@ public class Discovery {
             name: name,
             description: description,
             size: size)
-        guard let body = try? JSONEncoder().encode(updateEnvironmentRequest) else {
+        guard let body = try? JSON.encoder.encode(updateEnvironmentRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
@@ -328,8 +339,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateEnvironment")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateEnvironment")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -375,8 +386,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteEnvironment")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteEnvironment")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -424,8 +435,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listFields")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listFields")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -494,7 +505,7 @@ public class Discovery {
             enrichments: enrichments,
             normalizations: normalizations,
             source: source)
-        guard let body = try? JSONEncoder().encode(createConfigurationRequest) else {
+        guard let body = try? JSON.encoder.encode(createConfigurationRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
@@ -504,8 +515,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createConfiguration")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createConfiguration")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -555,8 +566,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listConfigurations")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listConfigurations")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -606,8 +617,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getConfiguration")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getConfiguration")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -677,7 +688,7 @@ public class Discovery {
             enrichments: enrichments,
             normalizations: normalizations,
             source: source)
-        guard let body = try? JSONEncoder().encode(updateConfigurationRequest) else {
+        guard let body = try? JSON.encoder.encode(updateConfigurationRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
@@ -687,8 +698,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateConfiguration")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateConfiguration")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -741,8 +752,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteConfiguration")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteConfiguration")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -781,12 +792,11 @@ public class Discovery {
        present at the same time), then request is rejected. The maximum supported configuration size is 1 MB.
        Configuration parts larger than 1 MB are rejected.
        See the `GET /configurations/{configuration_id}` operation for an example configuration.
-     - parameter step: Specify to only run the input document through the given step instead of running the input
-       document through the entire ingestion workflow. Valid values are `convert`, `enrich`, and `normalize`.
-     - parameter configurationID: The ID of the configuration to use to process the document. If the **configuration**
-       form part is also provided (both are present at the same time), then the request will be rejected.
-     - parameter file: The content of the document to ingest. The maximum supported file size is 50 megabytes. Files
-       larger than 50 megabytes is rejected.
+     - parameter file: The content of the document to ingest. The maximum supported file size when adding a file to a
+       collection is 50 megabytes, the maximum supported file size when testing a confiruration is 1 megabyte. Files
+       larger than the supported size are rejected.
+     - parameter filename: The filename for file.
+     - parameter fileContentType: The content type of file.
      - parameter metadata: If you're using the Data Crawler to upload your documents, you can test a document against
        the type of metadata that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata
        parts larger than 1 MB are rejected.
@@ -794,18 +804,22 @@ public class Discovery {
          \"Creator\": \"Johnny Appleseed\",
          \"Subject\": \"Apples\"
        } ```.
-     - parameter fileContentType: The content type of file.
+     - parameter step: Specify to only run the input document through the given step instead of running the input
+       document through the entire ingestion workflow. Valid values are `convert`, `enrich`, and `normalize`.
+     - parameter configurationID: The ID of the configuration to use to process the document. If the **configuration**
+       form part is also provided (both are present at the same time), then the request will be rejected.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func testConfigurationInEnvironment(
         environmentID: String,
         configuration: String? = nil,
+        file: Data? = nil,
+        filename: String? = nil,
+        fileContentType: String? = nil,
+        metadata: String? = nil,
         step: String? = nil,
         configurationID: String? = nil,
-        file: URL? = nil,
-        metadata: String? = nil,
-        fileContentType: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<TestDocument>?, WatsonError?) -> Void)
     {
@@ -817,12 +831,7 @@ public class Discovery {
             }
         }
         if let file = file {
-            do {
-                try multipartFormData.append(file: file, withName: "file")
-            } catch {
-                completionHandler(nil, WatsonError.serialization(values: "file \(file.path)"))
-                return
-            }
+            multipartFormData.append(file, withName: "file", mimeType: fileContentType, fileName: filename ?? "filename")
         }
         if let metadata = metadata {
             if let metadataData = metadata.data(using: .utf8) {
@@ -839,8 +848,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "testConfigurationInEnvironment")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "testConfigurationInEnvironment")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
 
@@ -904,7 +913,7 @@ public class Discovery {
             description: description,
             configurationID: configurationID,
             language: language)
-        guard let body = try? JSONEncoder().encode(createCollectionRequest) else {
+        guard let body = try? JSON.encoder.encode(createCollectionRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
@@ -914,8 +923,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createCollection")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createCollection")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -965,8 +974,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listCollections")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listCollections")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -1016,8 +1025,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getCollection")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getCollection")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -1069,7 +1078,7 @@ public class Discovery {
             name: name,
             description: description,
             configurationID: configurationID)
-        guard let body = try? JSONEncoder().encodeIfPresent(updateCollectionRequest) else {
+        guard let body = try? JSON.encoder.encodeIfPresent(updateCollectionRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
@@ -1079,8 +1088,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateCollection")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateCollection")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -1128,8 +1137,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteCollection")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteCollection")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -1177,8 +1186,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listCollectionFields")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listCollectionFields")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -1227,8 +1236,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listExpansions")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listExpansions")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -1287,7 +1296,7 @@ public class Discovery {
         // construct body
         let createExpansionsRequest = Expansions(
             expansions: expansions)
-        guard let body = try? JSONEncoder().encode(createExpansionsRequest) else {
+        guard let body = try? JSON.encoder.encode(createExpansionsRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
@@ -1297,8 +1306,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createExpansions")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createExpansions")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -1349,9 +1358,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteExpansions")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
-        headerParameters["Accept"] = "application/json"
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteExpansions")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1398,8 +1406,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getTokenizationDictionaryStatus")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getTokenizationDictionaryStatus")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -1448,7 +1456,7 @@ public class Discovery {
         // construct body
         let createTokenizationDictionaryRequest = TokenDict(
             tokenizationRules: tokenizationRules)
-        guard let body = try? JSONEncoder().encodeIfPresent(createTokenizationDictionaryRequest) else {
+        guard let body = try? JSON.encoder.encodeIfPresent(createTokenizationDictionaryRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
@@ -1458,8 +1466,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createTokenizationDictionary")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createTokenizationDictionary")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -1509,9 +1517,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteTokenizationDictionary")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
-        headerParameters["Accept"] = "application/json"
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteTokenizationDictionary")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1558,6 +1565,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getStopwordListStatus")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -1592,24 +1601,21 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
      - parameter stopwordFile: The content of the stopword list to ingest.
+     - parameter stopwordFilename: The filename for stopwordFile.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createStopwordList(
         environmentID: String,
         collectionID: String,
-        stopwordFile: URL,
+        stopwordFile: Data,
+        stopwordFilename: String,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<TokenDictStatusResponse>?, WatsonError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
-        do {
-            try multipartFormData.append(file: stopwordFile, withName: "stopword_file")
-        } catch {
-            completionHandler(nil, WatsonError.serialization(values: "file \(stopwordFile.path)"))
-            return
-        }
+        multipartFormData.append(stopwordFile, withName: "stopword_file", fileName: stopwordFilename)
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
             return
@@ -1620,8 +1626,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createStopwordList")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createStopwordList")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
 
@@ -1672,9 +1678,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteStopwordList")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
-        headerParameters["Accept"] = "application/json"
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteStopwordList")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1714,12 +1719,17 @@ public class Discovery {
        * The following field names are reserved and will be filtered out if present after normalization: `id`, `score`,
      `highlight`, and any field with the prefix of: `_`, `+`, or `-`
        * Fields with empty name values after normalization are filtered out before indexing.
-       * Fields containing the following characters after normalization are filtered out before indexing: `#` and `,`.
+       * Fields containing the following characters after normalization are filtered out before indexing: `#` and `,`
+      **Note:** Documents can be added with a specific **document_id** by using the
+     **_/v1/environments/{environment_id}/collections/{collection_id}/documents** method.
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
-     - parameter file: The content of the document to ingest. The maximum supported file size is 50 megabytes. Files
-       larger than 50 megabytes is rejected.
+     - parameter file: The content of the document to ingest. The maximum supported file size when adding a file to a
+       collection is 50 megabytes, the maximum supported file size when testing a confiruration is 1 megabyte. Files
+       larger than the supported size are rejected.
+     - parameter filename: The filename for file.
+     - parameter fileContentType: The content type of file.
      - parameter metadata: If you're using the Data Crawler to upload your documents, you can test a document against
        the type of metadata that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata
        parts larger than 1 MB are rejected.
@@ -1727,28 +1737,23 @@ public class Discovery {
          \"Creator\": \"Johnny Appleseed\",
          \"Subject\": \"Apples\"
        } ```.
-     - parameter fileContentType: The content type of file.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func addDocument(
         environmentID: String,
         collectionID: String,
-        file: URL? = nil,
-        metadata: String? = nil,
+        file: Data? = nil,
+        filename: String? = nil,
         fileContentType: String? = nil,
+        metadata: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<DocumentAccepted>?, WatsonError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
         if let file = file {
-            do {
-                try multipartFormData.append(file: file, withName: "file")
-            } catch {
-                completionHandler(nil, WatsonError.serialization(values: "file \(file.path)"))
-                return
-            }
+            multipartFormData.append(file, withName: "file", mimeType: fileContentType, fileName: filename ?? "filename")
         }
         if let metadata = metadata {
             if let metadataData = metadata.data(using: .utf8) {
@@ -1765,8 +1770,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "addDocument")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "addDocument")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
 
@@ -1820,8 +1825,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getDocumentStatus")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getDocumentStatus")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -1851,13 +1856,19 @@ public class Discovery {
     /**
      Update a document.
 
-     Replace an existing document. Starts ingesting a document with optional metadata.
+     Replace an existing document or add a document with a specified **document_id**. Starts ingesting a document with
+     optional metadata.
+     **Note:** When uploading a new document with this method it automatically replaces any document stored with the
+     same **document_id** if it exists.
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
      - parameter documentID: The ID of the document.
-     - parameter file: The content of the document to ingest. The maximum supported file size is 50 megabytes. Files
-       larger than 50 megabytes is rejected.
+     - parameter file: The content of the document to ingest. The maximum supported file size when adding a file to a
+       collection is 50 megabytes, the maximum supported file size when testing a confiruration is 1 megabyte. Files
+       larger than the supported size are rejected.
+     - parameter filename: The filename for file.
+     - parameter fileContentType: The content type of file.
      - parameter metadata: If you're using the Data Crawler to upload your documents, you can test a document against
        the type of metadata that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata
        parts larger than 1 MB are rejected.
@@ -1865,7 +1876,6 @@ public class Discovery {
          \"Creator\": \"Johnny Appleseed\",
          \"Subject\": \"Apples\"
        } ```.
-     - parameter fileContentType: The content type of file.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -1873,21 +1883,17 @@ public class Discovery {
         environmentID: String,
         collectionID: String,
         documentID: String,
-        file: URL? = nil,
-        metadata: String? = nil,
+        file: Data? = nil,
+        filename: String? = nil,
         fileContentType: String? = nil,
+        metadata: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<DocumentAccepted>?, WatsonError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
         if let file = file {
-            do {
-                try multipartFormData.append(file: file, withName: "file")
-            } catch {
-                completionHandler(nil, WatsonError.serialization(values: "file \(file.path)"))
-                return
-            }
+            multipartFormData.append(file, withName: "file", mimeType: fileContentType, fileName: filename ?? "filename")
         }
         if let metadata = metadata {
             if let metadataData = metadata.data(using: .utf8) {
@@ -1904,8 +1910,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateDocument")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateDocument")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
 
@@ -1958,8 +1964,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteDocument")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteDocument")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -1991,7 +1997,8 @@ public class Discovery {
 
      Complex queries might be too long for a standard method query. By using this method, you can construct longer
      queries. However, these queries may take longer to complete than the standard method. For details, see the
-     [Discovery service documentation](https://cloud.ibm.com/docs/services/discovery/using.html).
+     [Discovery service
+     documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-query-concepts#query-concepts).
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
@@ -2021,7 +2028,7 @@ public class Discovery {
      - parameter passagesCount: The maximum number of passages to return. The search returns fewer passages if the
        requested total is not found. The default is `10`. The maximum is `100`.
      - parameter passagesCharacters: The approximate number of characters that any one passage will have.
-     - parameter deduplicate: When `true` and used with a Watson Discovery News collection, duplicate results (based
+     - parameter deduplicate: When `true`, and used with a Watson Discovery News collection, duplicate results (based
        on the contents of the **title** field) are removed. Duplicate comparison is limited to the current query only;
        **offset** is not considered. This parameter is currently Beta functionality.
      - parameter deduplicateField: When specified, duplicate results based on the field specified are removed from the
@@ -2094,7 +2101,7 @@ public class Discovery {
             similarDocumentIDs: similarDocumentIDs,
             similarFields: similarFields,
             bias: bias)
-        guard let body = try? JSONEncoder().encodeIfPresent(queryRequest) else {
+        guard let body = try? JSON.encoder.encodeIfPresent(queryRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
@@ -2104,8 +2111,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "query")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "query")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
         if let loggingOptOut = loggingOptOut {
@@ -2142,8 +2149,8 @@ public class Discovery {
 
      Queries for notices (errors or warnings) that might have been generated by the system. Notices are generated when
      ingesting documents and performing relevance training. See the [Discovery service
-     documentation](https://cloud.ibm.com/docs/services/discovery/using.html) for more details on the query
-     language.
+     documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-query-concepts#query-concepts) for
+     more details on the query language.
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
@@ -2159,10 +2166,12 @@ public class Discovery {
      - parameter aggregation: An aggregation search that returns an exact answer by combining query search with
        filters. Useful for applications to build lists, tables, and time series. For a full list of possible
        aggregations, see the Query reference.
-     - parameter count: Number of results to return.
+     - parameter count: Number of results to return. The maximum for the **count** and **offset** values together in
+       any one query is **10000**.
      - parameter returnFields: A comma-separated list of the portion of the document hierarchy to return.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
-       results that are returned is 10 and the offset is 8, it returns the last two results.
+       results that are returned is 10 and the offset is 8, it returns the last two results. The maximum for the
+       **count** and **offset** values together in any one query is **10000**.
      - parameter sort: A comma-separated list of fields in the document to sort on. You can optionally specify a sort
        direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort
        direction if no prefix is specified.
@@ -2215,8 +2224,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "queryNotices")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "queryNotices")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -2316,7 +2325,8 @@ public class Discovery {
 
      Complex queries might be too long for a standard method query. By using this method, you can construct longer
      queries. However, these queries may take longer to complete than the standard method. For details, see the
-     [Discovery service documentation](https://cloud.ibm.com/docs/services/discovery/using.html).
+     [Discovery service
+     documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-query-concepts#query-concepts).
 
      - parameter environmentID: The ID of the environment.
      - parameter filter: A cacheable query that excludes documents that don't mention the query content. Filter
@@ -2345,7 +2355,7 @@ public class Discovery {
      - parameter passagesCount: The maximum number of passages to return. The search returns fewer passages if the
        requested total is not found. The default is `10`. The maximum is `100`.
      - parameter passagesCharacters: The approximate number of characters that any one passage will have.
-     - parameter deduplicate: When `true` and used with a Watson Discovery News collection, duplicate results (based
+     - parameter deduplicate: When `true`, and used with a Watson Discovery News collection, duplicate results (based
        on the contents of the **title** field) are removed. Duplicate comparison is limited to the current query only;
        **offset** is not considered. This parameter is currently Beta functionality.
      - parameter deduplicateField: When specified, duplicate results based on the field specified are removed from the
@@ -2417,7 +2427,7 @@ public class Discovery {
             similarDocumentIDs: similarDocumentIDs,
             similarFields: similarFields,
             bias: bias)
-        guard let body = try? JSONEncoder().encodeIfPresent(federatedQueryRequest) else {
+        guard let body = try? JSON.encoder.encodeIfPresent(federatedQueryRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
@@ -2427,8 +2437,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "federatedQuery")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "federatedQuery")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
         if let loggingOptOut = loggingOptOut {
@@ -2465,8 +2475,8 @@ public class Discovery {
 
      Queries for notices (errors or warnings) that might have been generated by the system. Notices are generated when
      ingesting documents and performing relevance training. See the [Discovery service
-     documentation](https://cloud.ibm.com/docs/services/discovery/using.html) for more details on the query
-     language.
+     documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-query-concepts#query-concepts) for
+     more details on the query language.
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionIDs: A comma-separated list of collection IDs to be queried against.
@@ -2481,10 +2491,12 @@ public class Discovery {
      - parameter aggregation: An aggregation search that returns an exact answer by combining query search with
        filters. Useful for applications to build lists, tables, and time series. For a full list of possible
        aggregations, see the Query reference.
-     - parameter count: Number of results to return.
+     - parameter count: Number of results to return. The maximum for the **count** and **offset** values together in
+       any one query is **10000**.
      - parameter returnFields: A comma-separated list of the portion of the document hierarchy to return.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
-       results that are returned is 10 and the offset is 8, it returns the last two results.
+       results that are returned is 10 and the offset is 8, it returns the last two results. The maximum for the
+       **count** and **offset** values together in any one query is **10000**.
      - parameter sort: A comma-separated list of fields in the document to sort on. You can optionally specify a sort
        direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort
        direction if no prefix is specified.
@@ -2528,8 +2540,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "federatedQueryNotices")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "federatedQueryNotices")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -2612,7 +2624,7 @@ public class Discovery {
     /**
      Knowledge Graph entity query.
 
-     See the [Knowledge Graph documentation](https://cloud.ibm.com/docs/services/discovery/building-kg.html) for
+     See the [Knowledge Graph documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-kg#kg) for
      more details.
 
      - parameter environmentID: The ID of the environment.
@@ -2647,7 +2659,7 @@ public class Discovery {
             context: context,
             count: count,
             evidenceCount: evidenceCount)
-        guard let body = try? JSONEncoder().encode(queryEntitiesRequest) else {
+        guard let body = try? JSON.encoder.encode(queryEntitiesRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
@@ -2657,8 +2669,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "queryEntities")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "queryEntities")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -2690,7 +2702,7 @@ public class Discovery {
     /**
      Knowledge Graph relationship query.
 
-     See the [Knowledge Graph documentation](https://cloud.ibm.com/docs/services/discovery/building-kg.html) for
+     See the [Knowledge Graph documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-kg#kg) for
      more details.
 
      - parameter environmentID: The ID of the environment.
@@ -2702,7 +2714,7 @@ public class Discovery {
      - parameter sort: The sorting method for the relationships, can be `score` or `frequency`. `frequency` is the
        number of unique times each entity is identified. The default is `score`. This parameter cannot be used in the
        same query as the **bias** parameter.
-     - parameter filter: Filters to apply to the relationship query.
+     - parameter filter:
      - parameter count: The number of results to return. The default is `10`. The maximum is `1000`.
      - parameter evidenceCount: The number of evidence items to return for each result. The default is `0`. The
        maximum number of evidence items per query is 10,000.
@@ -2729,7 +2741,7 @@ public class Discovery {
             filter: filter,
             count: count,
             evidenceCount: evidenceCount)
-        guard let body = try? JSONEncoder().encode(queryRelationsRequest) else {
+        guard let body = try? JSON.encoder.encode(queryRelationsRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
@@ -2739,8 +2751,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "queryRelations")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "queryRelations")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -2790,8 +2802,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listTrainingData")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listTrainingData")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -2825,9 +2837,9 @@ public class Discovery {
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
-     - parameter naturalLanguageQuery:
-     - parameter filter:
-     - parameter examples:
+     - parameter naturalLanguageQuery: The natural text query for the new training query.
+     - parameter filter: The filter used on the collection before the **natural_language_query** is applied.
+     - parameter examples: Array of training examples.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -2845,7 +2857,7 @@ public class Discovery {
             naturalLanguageQuery: naturalLanguageQuery,
             filter: filter,
             examples: examples)
-        guard let body = try? JSONEncoder().encode(addTrainingDataRequest) else {
+        guard let body = try? JSON.encoder.encode(addTrainingDataRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
@@ -2855,8 +2867,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "addTrainingData")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "addTrainingData")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -2906,9 +2918,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteAllTrainingData")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
-        headerParameters["Accept"] = "application/json"
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteAllTrainingData")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2957,8 +2968,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getTrainingData")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getTrainingData")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -3008,9 +3019,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteTrainingData")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
-        headerParameters["Accept"] = "application/json"
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteTrainingData")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -3059,8 +3069,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listTrainingExamples")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listTrainingExamples")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -3095,9 +3105,9 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
      - parameter queryID: The ID of the query used for training.
-     - parameter documentID:
-     - parameter crossReference:
-     - parameter relevance:
+     - parameter documentID: The document ID associated with this training example.
+     - parameter crossReference: The cross reference associated with this training example.
+     - parameter relevance: The relevance of the training example.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -3116,7 +3126,7 @@ public class Discovery {
             documentID: documentID,
             crossReference: crossReference,
             relevance: relevance)
-        guard let body = try? JSONEncoder().encode(createTrainingExampleRequest) else {
+        guard let body = try? JSON.encoder.encode(createTrainingExampleRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
@@ -3126,8 +3136,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createTrainingExample")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createTrainingExample")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -3181,9 +3191,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteTrainingExample")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
-        headerParameters["Accept"] = "application/json"
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteTrainingExample")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -3218,8 +3227,8 @@ public class Discovery {
      - parameter collectionID: The ID of the collection.
      - parameter queryID: The ID of the query used for training.
      - parameter exampleID: The ID of the document as it is indexed.
-     - parameter crossReference:
-     - parameter relevance:
+     - parameter crossReference: The example to add.
+     - parameter relevance: The relevance value for this example.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -3237,7 +3246,7 @@ public class Discovery {
         let updateTrainingExampleRequest = TrainingExamplePatch(
             crossReference: crossReference,
             relevance: relevance)
-        guard let body = try? JSONEncoder().encode(updateTrainingExampleRequest) else {
+        guard let body = try? JSON.encoder.encode(updateTrainingExampleRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
@@ -3247,8 +3256,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateTrainingExample")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateTrainingExample")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -3302,8 +3311,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getTrainingExample")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getTrainingExample")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -3337,7 +3346,7 @@ public class Discovery {
      the customer ID.
      You associate a customer ID with data by passing the **X-Watson-Metadata** header with a request that passes data.
      For more information about personal data and customer IDs, see [Information
-     security](https://cloud.ibm.com/docs/services/discovery/information-security.html).
+     security](https://cloud.ibm.com/docs/services/discovery?topic=discovery-information-security#information-security).
 
      - parameter customerID: The customer ID for which all data is to be deleted.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -3353,9 +3362,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteUserData")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
-        headerParameters["Accept"] = "application/json"
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteUserData")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -3398,7 +3406,7 @@ public class Discovery {
         let createEventRequest = CreateEventObject(
             type: type,
             data: data)
-        guard let body = try? JSONEncoder().encode(createEventRequest) else {
+        guard let body = try? JSON.encoder.encode(createEventRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
@@ -3408,8 +3416,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createEvent")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createEvent")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -3444,9 +3452,11 @@ public class Discovery {
      - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
        with the most relevant documents listed first. Use a query search when you want to find the most relevant search
        results. You cannot use **natural_language_query** and **query** at the same time.
-     - parameter count: Number of results to return.
+     - parameter count: Number of results to return. The maximum for the **count** and **offset** values together in
+       any one query is **10000**.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
-       results that are returned is 10 and the offset is 8, it returns the last two results.
+       results that are returned is 10 and the offset is 8, it returns the last two results. The maximum for the
+       **count** and **offset** values together in any one query is **10000**.
      - parameter sort: A comma-separated list of fields in the document to sort on. You can optionally specify a sort
        direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort
        direction if no prefix is specified.
@@ -3467,8 +3477,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "queryLog")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "queryLog")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -3535,8 +3545,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getMetricsQuery")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getMetricsQuery")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -3597,8 +3607,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getMetricsQueryEvent")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getMetricsQueryEvent")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -3658,8 +3668,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getMetricsQueryNoResults")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getMetricsQueryNoResults")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -3720,8 +3730,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getMetricsEventRate")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getMetricsEventRate")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -3762,7 +3772,8 @@ public class Discovery {
      \"click\" event rate within the recording period (queries and events are stored for 30 days). A query token is an
      individual word or unigram within the query string.
 
-     - parameter count: Number of results to return.
+     - parameter count: Number of results to return. The maximum for the **count** and **offset** values together in
+       any one query is **10000**.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -3776,8 +3787,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getMetricsQueryTokenEvent")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getMetricsQueryTokenEvent")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -3823,8 +3834,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listCredentials")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listCredentials")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -3864,6 +3875,7 @@ public class Discovery {
        -  `salesforce` indicates the credentials are used to connect to Salesforce.
        -  `sharepoint` indicates the credentials are used to connect to Microsoft SharePoint Online.
        -  `web_crawl` indicates the credentials are used to perform a web crawl.
+       =  `cloud_object_storage` indicates the credentials are used to connect to an IBM Cloud Object Store.
      - parameter credentialDetails: Object containing details of the stored credentials.
        Obtain credentials for your source from the administrator of the source.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -3880,7 +3892,7 @@ public class Discovery {
         let createCredentialsRequest = Credentials(
             sourceType: sourceType,
             credentialDetails: credentialDetails)
-        guard let body = try? JSONEncoder().encode(createCredentialsRequest) else {
+        guard let body = try? JSON.encoder.encode(createCredentialsRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
@@ -3890,8 +3902,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createCredentials")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createCredentials")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -3943,8 +3955,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getCredentials")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getCredentials")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -3984,6 +3996,7 @@ public class Discovery {
        -  `salesforce` indicates the credentials are used to connect to Salesforce.
        -  `sharepoint` indicates the credentials are used to connect to Microsoft SharePoint Online.
        -  `web_crawl` indicates the credentials are used to perform a web crawl.
+       =  `cloud_object_storage` indicates the credentials are used to connect to an IBM Cloud Object Store.
      - parameter credentialDetails: Object containing details of the stored credentials.
        Obtain credentials for your source from the administrator of the source.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -4001,7 +4014,7 @@ public class Discovery {
         let updateCredentialsRequest = Credentials(
             sourceType: sourceType,
             credentialDetails: credentialDetails)
-        guard let body = try? JSONEncoder().encode(updateCredentialsRequest) else {
+        guard let body = try? JSON.encoder.encode(updateCredentialsRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
@@ -4011,8 +4024,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateCredentials")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateCredentials")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -4062,8 +4075,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteCredentials")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteCredentials")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -4109,8 +4122,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listGateways")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listGateways")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -4156,7 +4169,7 @@ public class Discovery {
         // construct body
         let createGatewayRequest = GatewayName(
             name: name)
-        guard let body = try? JSONEncoder().encodeIfPresent(createGatewayRequest) else {
+        guard let body = try? JSON.encoder.encodeIfPresent(createGatewayRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
@@ -4166,8 +4179,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createGateway")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createGateway")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -4217,8 +4230,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getGateway")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getGateway")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -4266,8 +4279,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let metadataHeaders = Shared.getMetadataHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteGateway")
-        headerParameters.merge(metadataHeaders) { (_, new) in new }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteGateway")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters

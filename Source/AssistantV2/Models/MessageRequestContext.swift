@@ -17,18 +17,27 @@
 import Foundation
 
 /**
- An array of values, each being the `id` value of a column header that is applicable to the current cell.
+ State information for the conversation. The context is stored by the assistant on a per-session basis. You can use this
+ property to set or modify context variables, which can also be accessed by dialog nodes.
  */
-public struct ColumnHeaderIDs: Codable, Equatable {
+public struct MessageRequestContext: Codable, Equatable {
 
     /**
-     The `id` value of a column header.
+     Information that is shared by all skills used by the Assistant.
      */
-    public var id: String?
+    public var global: MessageContextGlobal?
+
+    /**
+     Information specific to particular skills used by the Assistant.
+     **Note:** Currently, only a single property named `main skill` is supported. This object contains variables that
+     apply to the dialog skill used by the assistant.
+     */
+    public var skills: [String: MessageContextSkill]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case id = "id"
+        case global = "global"
+        case skills = "skills"
     }
 
 }

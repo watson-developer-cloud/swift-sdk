@@ -69,31 +69,21 @@ extension VisualRecognition {
         acceptLanguage: String? = nil,
         completionHandler: @escaping (WatsonResponse<ClassifiedImages>?, WatsonError?) -> Void)
     {
-        // save image to disk
-        let file: URL
-        do {
-            file = try saveToDisk(image: image)
-        } catch {
-            let error = WatsonError.saveData
+        // convert UIImage to Data
+        guard let imageData = getImageData(image: image) else {
+            let error = WatsonError.serialization(values: "image to data")
             completionHandler(nil, error)
             return
         }
 
-        // delete image after service call
-        let deleteFile = { try? FileManager.default.removeItem(at: file) }
-        let completion = {
-            (response: WatsonResponse<ClassifiedImages>?, error: WatsonError?) in
-            deleteFile()
-            completionHandler(response, error)
-        }
-
         self.classify(
-            imagesFile: file,
-            acceptLanguage: acceptLanguage,
+            imagesFile: imageData,
+            imagesFilename: "image.png",
             threshold: threshold,
             owners: owners,
             classifierIDs: classifierIDs,
-            completionHandler: completion
+            acceptLanguage: acceptLanguage,
+            completionHandler: completionHandler
         )
     }
 
@@ -116,25 +106,14 @@ extension VisualRecognition {
         image: UIImage,
         completionHandler: @escaping (WatsonResponse<DetectedFaces>?, WatsonError?) -> Void)
     {
-        // save image to disk
-        let file: URL
-        do {
-            file = try saveToDisk(image: image)
-        } catch {
-            let error = WatsonError.saveData
+        // convert UIImage to Data
+        guard let imageData = getImageData(image: image) else {
+            let error = WatsonError.serialization(values: "image to data")
             completionHandler(nil, error)
             return
         }
 
-        // delete image after service call
-        let deleteFile = { try? FileManager.default.removeItem(at: file) }
-        let completion = {
-            (response: WatsonResponse<DetectedFaces>?, error: WatsonError?) in
-            deleteFile()
-            completionHandler(response, error)
-        }
-
-        self.detectFaces(imagesFile: file, completionHandler: completion)
+        self.detectFaces(imagesFile: imageData, imagesFilename: "image.png", completionHandler: completionHandler)
     }
 
     /**
@@ -155,38 +134,20 @@ extension VisualRecognition {
         completionHandler: @escaping (ClassifiedImages?, WatsonError?) -> Void)
     {
         // convert UIImage to Data
-        #if swift(>=4.2)
-        guard let imageData = image.pngData() else {
+        guard let imageData = getImageData(image: image) else {
             let error = WatsonError.serialization(values: "image to data")
             completionHandler(nil, error)
             return
         }
-        #else
-        guard let imageData = UIImagePNGRepresentation(image) else {
-            let error = WatsonError.serialization(values: "image to data")
-            completionHandler(nil, error)
-            return
-        }
-        #endif
 
         self.classifyWithLocalModel(imageData: imageData, classifierIDs: classifierIDs, threshold: threshold, completionHandler: completionHandler)
     }
 
     /**
-     Save an image to a temporary location on disk.
-     The image will be compressed in an attempt to stay under the service's 10MB image size restriction.
+     Convert UIImage to Data
      */
-    private func saveToDisk(image: UIImage) throws -> URL {
-        let filename = UUID().uuidString + ".jpg"
-        let directory = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-        guard let file = directory.appendingPathComponent(filename) else { throw WatsonError.urlEncoding(path: filename) }
-        #if swift(>=4.2)
-        guard let data = image.jpegData(compressionQuality: 0.75) else { throw WatsonError.serialization(values: "classify image") }
-        #else
-        guard let data = UIImageJPEGRepresentation(image, 0.75) else { throw WatsonError.serialization(values: "classify image") }
-        #endif
-        try data.write(to: file)
-        return file
+    private func getImageData(image: UIImage) -> Data? {
+        return image.pngData()
     }
 }
 

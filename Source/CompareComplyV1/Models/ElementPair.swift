@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ public struct ElementPair: Codable, Equatable {
     public var documentLabel: String?
 
     /**
-     The text of the element.
+     The contents of the element.
      */
     public var text: String?
 
@@ -39,14 +39,14 @@ public struct ElementPair: Codable, Equatable {
     public var location: Location?
 
     /**
-     Description of the action specified by the element  and whom it affects.
+     Description of the action specified by the element and whom it affects.
      */
-    public var types: [TypeLabel]?
+    public var types: [TypeLabelComparison]?
 
     /**
      List of functional categories into which the element falls; in other words, the subject matter of the element.
      */
-    public var categories: [Category]?
+    public var categories: [CategoryComparison]?
 
     /**
      List of document attributes.

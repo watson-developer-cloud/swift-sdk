@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -98,7 +98,7 @@ internal struct QueryLarge: Codable, Equatable {
     public var passagesCharacters: Int?
 
     /**
-     When `true` and used with a Watson Discovery News collection, duplicate results (based on the contents of the
+     When `true`, and used with a Watson Discovery News collection, duplicate results (based on the contents of the
      **title** field) are removed. Duplicate comparison is limited to the current query only; **offset** is not
      considered. This parameter is currently Beta functionality.
      */
@@ -198,7 +198,7 @@ internal struct QueryLarge: Codable, Equatable {
      - parameter passagesCount: The maximum number of passages to return. The search returns fewer passages if the
        requested total is not found. The default is `10`. The maximum is `100`.
      - parameter passagesCharacters: The approximate number of characters that any one passage will have.
-     - parameter deduplicate: When `true` and used with a Watson Discovery News collection, duplicate results (based
+     - parameter deduplicate: When `true`, and used with a Watson Discovery News collection, duplicate results (based
        on the contents of the **title** field) are removed. Duplicate comparison is limited to the current query only;
        **offset** is not considered. This parameter is currently Beta functionality.
      - parameter deduplicateField: When specified, duplicate results based on the field specified are removed from

@@ -59,8 +59,10 @@ class VisualRecognitionUnitTests: XCTestCase {
             XCTAssertEqual(statusCode, 403)
             XCTAssertNotNil(message)
             XCTAssertNotNil(metadata)
-            XCTAssertNotNil(metadata!["status"])
-            XCTAssertNotNil(metadata!["statusInfo"])
+            XCTAssertNotNil(metadata?["response"] as? [String: Any])
+            let response = metadata?["response"] as? [String: Any]
+            XCTAssertNotNil(response?["status"])
+            XCTAssertNotNil(response?["statusInfo"])
         }
     }
 
@@ -78,8 +80,15 @@ class VisualRecognitionUnitTests: XCTestCase {
         if case let .http(statusCode, message, metadata) = error {
             XCTAssertEqual(statusCode, 404)
             XCTAssertNotNil(message)
-            XCTAssertNotNil(metadata?["description"])
-            XCTAssertNotNil(metadata?["errorID"])
+            XCTAssertNotNil(metadata?["response"] as? [String: JSON])
+            let response = metadata?["response"] as? [String: JSON]
+            XCTAssertNotNil(response?["error"])
+            if case let .some(.object(responseError)) = response?["error"] {
+                XCTAssertNotNil(responseError["description"])
+                XCTAssertNotNil(responseError["error_id"])
+            } else {
+                XCTFail("error not present in response")
+            }
         }
     }
 
@@ -114,8 +123,10 @@ class VisualRecognitionUnitTests: XCTestCase {
         let error = visualRecognition.errorResponseDecoder(data: testData, response: testResponse)
         if case let .http(statusCode, message, metadata) = error {
             XCTAssertEqual(statusCode, 500)
-            XCTAssertNil(message)
-            XCTAssertNil(metadata)
+            XCTAssertNotNil(message)
+            XCTAssertEqual("internal server error", message)
+            XCTAssertNotNil(metadata)
+            XCTAssertNotNil(metadata?["response"])
         }
     }
 
@@ -139,7 +150,7 @@ class VisualRecognitionUnitTests: XCTestCase {
         }
 
         let expectation = self.expectation(description: "classify")
-        visualRecognition.classify(imagesFile: obama, acceptLanguage: "en", url: "http://example.com", threshold: 1.0, owners: owners, classifierIDs: classifierIDs, imagesFileContentType: "png") {
+        visualRecognition.classify(imagesFile: obama, imagesFileContentType: "png", url: "http://example.com", threshold: 1.0, owners: owners, classifierIDs: classifierIDs) {
             _, _ in
             expectation.fulfill()
         }
@@ -362,252 +373,257 @@ class VisualRecognitionUnitTests: XCTestCase {
 
     // MARK: - VisualRecognition+CoreML
 
-    @available(iOS 11.0, macOS 10.13, tvOS 11.0, watchOS 4.0, *)
     func testGetAndDeleteLocalModel() {
-        let classifierID = "watson_tools"
+        if #available(iOS 11.0, tvOS 11.0, watchOS 4.0, *) {
+            let classifierID = "watson_tools"
 
-        do {
+            do {
+                // Save a CoreML file to the Application Support directory on the simulator for the duration of this test
+                saveCoreMLModelToSimulator(name: classifierID, modelURL: watson_tools.urlOfModelInThisBundle)
+                defer {
+                    deleteLocalCoreMLModels(classifierIDs: [classifierID])
+                }
+
+                // Then check if getLocalModel() can properly retrieve that model
+                let localModel = try visualRecognition.getLocalModel(classifierID: classifierID)
+                XCTAssertEqual(localModel.modelDescription.metadata[MLModelMetadataKey.author] as? String, "IBM")
+            } catch {
+                XCTFail(error.localizedDescription)
+            }
+        }
+    }
+
+    func testUpdateLocalModelWithOutdatedModel() {
+        if #available(iOS 11.0, tvOS 11.0, watchOS 4.0, *) {
+            let classifierID = "watson_sample"
+
+            // Pretend that the VR service has a newly-retrained version of the CoreML model
+            class MockVisualRecognition: VisualRecognition {
+
+                let expectation: XCTestExpectation
+
+                init(version: String, accessToken: String, expectation: XCTestExpectation) {
+                    self.expectation = expectation
+                    super.init(version: version, accessToken: accessToken)
+                }
+
+                override func getClassifier(
+                    classifierID: String,
+                    headers: [String: String]?,
+                    completionHandler: @escaping (RestResponse<Classifier>?, WatsonError?) -> Void) {
+
+                    expectation.fulfill()
+
+                    var response: RestResponse<Classifier> = RestResponse(statusCode: 200)
+                    response.result = Classifier(
+                        classifierID: classifierID,
+                        name: classifierID,
+                        owner: nil,
+                        status: "ready",
+                        coreMLEnabled: true,
+                        explanation: nil,
+                        created: nil,
+                        classes: nil,
+                        retrained: Date(),
+                        updated: nil)
+                    completionHandler(response, nil)
+                }
+            }
+
+            // We expect the newer CoreML model to be downloaded
+            MockURLProtocol.requestHandler = { request in
+                XCTAssertEqual(request.httpMethod, "GET")
+                let endOfURL = request.url!.pathComponents.suffix(3)
+                XCTAssertEqual(endOfURL[endOfURL.startIndex], "classifiers")
+                XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], classifierID)
+                XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "core_ml_model")
+                XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
+                XCTAssertNil(request.httpBodyStream)
+                XCTAssertNotNil(request.allHTTPHeaderFields)
+
+                let response = HTTPURLResponse(url: exampleURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
+                return (response, Data())
+            }
+
+            // Save a CoreML file to the Application Support directory on the simulator for the duration of this test
+            saveCoreMLModelToSimulator(name: classifierID, modelURL: watson_sample.urlOfModelInThisBundle)
+            defer {
+                deleteLocalCoreMLModels(classifierIDs: [classifierID])
+            }
+
+            let classifierExpectation = self.expectation(description: "getClassifier() should get called")
+            let visualRecognition = MockVisualRecognition(version: versionDate, accessToken: accessToken, expectation: classifierExpectation)
+            createMockSession(for: visualRecognition)
+
+            // If there is a newer version of the CoreML model available in the VisualRecognition service,
+            // it should be downloaded to replace the local outdated model.
+            let expectation = self.expectation(description: "updateLocalModel with outdated model")
+            visualRecognition.updateLocalModel(classifierID: classifierID) {
+                _, _ in
+                expectation.fulfill()
+            }
+            waitForExpectations(timeout: timeout)
+        }
+    }
+
+    func testUpdateLocalModelWithUpToDateModel() {
+        if #available(iOS 11.0, tvOS 11.0, watchOS 4.0, *) {
+            let classifierID = "watson_sample"
+
+            // Pretend that the VR service has a newly-retrained version of the CoreML model
+            class MockVisualRecognition: VisualRecognition {
+
+                let expectation: XCTestExpectation
+
+                init(version: String, accessToken: String, expectation: XCTestExpectation) {
+                    self.expectation = expectation
+                    super.init(version: version, accessToken: accessToken)
+                }
+
+                override func getClassifier(
+                    classifierID: String,
+                    headers: [String: String]?,
+                    completionHandler: @escaping (RestResponse<Classifier>?, WatsonError?) -> Void) {
+
+                    expectation.fulfill()
+
+                    let oldDate = Date(timeIntervalSinceReferenceDate: 0)
+                    var response: RestResponse<Classifier> = RestResponse(statusCode: 200)
+                    response.result = Classifier(
+                        classifierID: classifierID,
+                        name: classifierID,
+                        owner: nil,
+                        status: "ready",
+                        coreMLEnabled: true,
+                        explanation: nil,
+                        created: nil,
+                        classes: nil,
+                        retrained: oldDate,
+                        updated: nil)
+                    completionHandler(response, nil)
+                }
+            }
+
+            // Save a CoreML file to the Application Support directory on the simulator for the duration of this test
+            saveCoreMLModelToSimulator(name: classifierID, modelURL: watson_sample.urlOfModelInThisBundle)
+            defer {
+                deleteLocalCoreMLModels(classifierIDs: [classifierID])
+            }
+
+            let classifierExpectation = self.expectation(description: "getClassifier() should get called")
+            let visualRecognition = MockVisualRecognition(version: versionDate, accessToken: accessToken, expectation: classifierExpectation)
+            createMockSession(for: visualRecognition)
+
+            // If the local copy of the CoreML model is at least as updated as
+            // the model available in the VisualRecognition service, then there is no need to download.
+            let expectation = self.expectation(description: "updateLocalModel with up to date model")
+            visualRecognition.updateLocalModel(classifierID: classifierID) {
+                response, error in
+                XCTAssertNil(response)
+                XCTAssertNil(error)
+                expectation.fulfill()
+            }
+            waitForExpectations(timeout: timeout)
+        }
+    }
+
+    func testListLocalModels() {
+        if #available(iOS 11.0, tvOS 11.0, watchOS 4.0, *) {
+            // Save 2 Core ML models first
+            let toolsClassifierID = "watson_tools"
+            let sampleClassifierID = "watson_sample"
+
+            // Save 2 CoreML files to the Application Support directory on the simulator for the duration of this test
+            saveCoreMLModelToSimulator(name: toolsClassifierID, modelURL: watson_tools.urlOfModelInThisBundle)
+            saveCoreMLModelToSimulator(name: sampleClassifierID, modelURL: watson_sample.urlOfModelInThisBundle)
+            defer {
+                deleteLocalCoreMLModels(classifierIDs: [toolsClassifierID, sampleClassifierID])
+            }
+
+            // Then check if we can retrieve those models
+            do {
+                let localModels = try visualRecognition.listLocalModels()
+                XCTAssertTrue(localModels.contains(toolsClassifierID))
+                XCTAssertTrue(localModels.contains(sampleClassifierID))
+            } catch {
+                XCTFail(error.localizedDescription)
+            }
+        }
+    }
+
+    func testClassifyWithLocalModel() {
+        if #available(iOS 11.0, tvOS 11.0, watchOS 4.0, *) {
+            let classifierIDs = ["watson_tools"]
+
+            // Save a CoreML file to the Application Support directory on the simulator for the duration of this test
+            saveCoreMLModelToSimulator(name: classifierIDs.first!, modelURL: watson_tools.urlOfModelInThisBundle)
+            defer {
+                deleteLocalCoreMLModels(classifierIDs: classifierIDs)
+            }
+
+            MockURLProtocol.requestHandler = { request in
+                XCTAssertEqual(request.httpMethod, "POST")
+                XCTAssertEqual(request.url?.lastPathComponent, "classify")
+                XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
+                XCTAssertNotNil(request.httpBodyStream)
+                XCTAssertNotNil(request.allHTTPHeaderFields)
+
+                let bodyFieldsCount = numberOfFieldsInMultiPartFormBody(request: request)
+                XCTAssertEqual(bodyFieldsCount, 4)
+
+                return (dummyResponse, Data())
+            }
+
+            let expectation = self.expectation(description: "classifyWithLocalModel")
+            visualRecognition.classifyWithLocalModel(imageData: car, classifierIDs: classifierIDs, threshold: 1.0) {
+                _, _ in
+                expectation.fulfill()
+            }
+            waitForExpectations(timeout: timeout)
+        }
+    }
+
+    // Check that error handling is correct when the download
+    // fails to download a CoreML model or fails to save the downloaded CoreML model
+    func testDownloadClassifierWithoutCoreMLModel() {
+        if #available(iOS 11.0, tvOS 11.0, watchOS 4.0, *) {
+            let classifierID = "watson_tools"
+
             // Save a CoreML file to the Application Support directory on the simulator for the duration of this test
             saveCoreMLModelToSimulator(name: classifierID, modelURL: watson_tools.urlOfModelInThisBundle)
             defer {
                 deleteLocalCoreMLModels(classifierIDs: [classifierID])
             }
 
-            // Then check if getLocalModel() can properly retrieve that model
-            let localModel = try visualRecognition.getLocalModel(classifierID: classifierID)
-            XCTAssertEqual(localModel.modelDescription.metadata[MLModelMetadataKey.author] as? String, "IBM")
-        } catch {
-            XCTFail(error.localizedDescription)
-        }
-    }
+            MockURLProtocol.requestHandler = { request in
+                XCTAssertEqual(request.httpMethod, "GET")
+                let endOfURL = request.url!.pathComponents.suffix(3)
+                XCTAssertEqual(endOfURL[endOfURL.startIndex], "classifiers")
+                XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], classifierID)
+                XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "core_ml_model")
+                XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
+                XCTAssertNil(request.httpBodyStream)
+                XCTAssertNotNil(request.allHTTPHeaderFields)
 
-    @available(iOS 11.0, macOS 10.13, tvOS 11.0, watchOS 4.0, *)
-    func testUpdateLocalModelWithOutdatedModel() {
-        let classifierID = "watson_sample"
-
-        // Pretend that the VR service has a newly-retrained version of the CoreML model
-        class MockVisualRecognition: VisualRecognition {
-
-            let expectation: XCTestExpectation
-
-            init(version: String, accessToken: String, expectation: XCTestExpectation) {
-                self.expectation = expectation
-                super.init(version: version, accessToken: accessToken)
+                let response = HTTPURLResponse(url: exampleURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
+                // The download receives empty Data() instead of a CoreML model
+                return (response, Data())
             }
 
-            override func getClassifier(
-                classifierID: String,
-                headers: [String: String]?,
-                completionHandler: @escaping (RestResponse<Classifier>?, WatsonError?) -> Void) {
+            let expectation = self.expectation(description: "downloadClassifier without CoreML model")
+            visualRecognition.downloadClassifier(classifierID: classifierID) {
+                _, error in
 
+                if case .some(WatsonError.other(let message, _)) = error,
+                    let errorMessage = message {
+                    XCTAssertTrue(errorMessage.contains("Could not compile Core ML model from source"))
+                } else {
+                    XCTFail(missingErrorMessage)
+                }
                 expectation.fulfill()
-
-                var response: RestResponse<Classifier> = RestResponse(statusCode: 200)
-                response.result = Classifier(
-                    classifierID: classifierID,
-                    name: classifierID,
-                    owner: nil,
-                    status: "ready",
-                    coreMLEnabled: true,
-                    explanation: nil,
-                    created: nil,
-                    classes: nil,
-                    retrained: Date(),
-                    updated: nil)
-                completionHandler(response, nil)
             }
+            waitForExpectations(timeout: timeout)
         }
-
-        // We expect the newer CoreML model to be downloaded
-        MockURLProtocol.requestHandler = { request in
-            XCTAssertEqual(request.httpMethod, "GET")
-            let endOfURL = request.url!.pathComponents.suffix(3)
-            XCTAssertEqual(endOfURL[endOfURL.startIndex], "classifiers")
-            XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], classifierID)
-            XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "core_ml_model")
-            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
-            XCTAssertNil(request.httpBodyStream)
-            XCTAssertNotNil(request.allHTTPHeaderFields)
-
-            let response = HTTPURLResponse(url: exampleURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
-            return (response, Data())
-        }
-
-        // Save a CoreML file to the Application Support directory on the simulator for the duration of this test
-        saveCoreMLModelToSimulator(name: classifierID, modelURL: watson_sample.urlOfModelInThisBundle)
-        defer {
-            deleteLocalCoreMLModels(classifierIDs: [classifierID])
-        }
-
-        let classifierExpectation = self.expectation(description: "getClassifier() should get called")
-        let visualRecognition = MockVisualRecognition(version: versionDate, accessToken: accessToken, expectation: classifierExpectation)
-        createMockSession(for: visualRecognition)
-
-        // If there is a newer version of the CoreML model available in the VisualRecognition service,
-        // it should be downloaded to replace the local outdated model.
-        let expectation = self.expectation(description: "updateLocalModel with outdated model")
-        visualRecognition.updateLocalModel(classifierID: classifierID) {
-            _, _ in
-            expectation.fulfill()
-        }
-        waitForExpectations(timeout: timeout)
-    }
-
-    @available(iOS 11.0, macOS 10.13, tvOS 11.0, watchOS 4.0, *)
-    func testUpdateLocalModelWithUpToDateModel() {
-        let classifierID = "watson_sample"
-
-        // Pretend that the VR service has a newly-retrained version of the CoreML model
-        class MockVisualRecognition: VisualRecognition {
-
-            let expectation: XCTestExpectation
-
-            init(version: String, accessToken: String, expectation: XCTestExpectation) {
-                self.expectation = expectation
-                super.init(version: version, accessToken: accessToken)
-            }
-
-            override func getClassifier(
-                classifierID: String,
-                headers: [String: String]?,
-                completionHandler: @escaping (RestResponse<Classifier>?, WatsonError?) -> Void) {
-
-                expectation.fulfill()
-
-                let oldDate = Date(timeIntervalSinceReferenceDate: 0)
-                var response: RestResponse<Classifier> = RestResponse(statusCode: 200)
-                response.result = Classifier(
-                    classifierID: classifierID,
-                    name: classifierID,
-                    owner: nil,
-                    status: "ready",
-                    coreMLEnabled: true,
-                    explanation: nil,
-                    created: nil,
-                    classes: nil,
-                    retrained: oldDate,
-                    updated: nil)
-                completionHandler(response, nil)
-            }
-        }
-
-        // Save a CoreML file to the Application Support directory on the simulator for the duration of this test
-        saveCoreMLModelToSimulator(name: classifierID, modelURL: watson_sample.urlOfModelInThisBundle)
-        defer {
-            deleteLocalCoreMLModels(classifierIDs: [classifierID])
-        }
-
-        let classifierExpectation = self.expectation(description: "getClassifier() should get called")
-        let visualRecognition = MockVisualRecognition(version: versionDate, accessToken: accessToken, expectation: classifierExpectation)
-        createMockSession(for: visualRecognition)
-
-        // If the local copy of the CoreML model is at least as updated as
-        // the model available in the VisualRecognition service, then there is no need to download.
-        let expectation = self.expectation(description: "updateLocalModel with up to date model")
-        visualRecognition.updateLocalModel(classifierID: classifierID) {
-            response, error in
-            XCTAssertNil(response)
-            XCTAssertNil(error)
-            expectation.fulfill()
-        }
-        waitForExpectations(timeout: timeout)
-    }
-
-    @available(iOS 11.0, macOS 10.13, tvOS 11.0, watchOS 4.0, *)
-    func testListLocalModels() {
-        // Save 2 Core ML models first
-        let toolsClassifierID = "watson_tools"
-        let sampleClassifierID = "watson_sample"
-
-        // Save 2 CoreML files to the Application Support directory on the simulator for the duration of this test
-        saveCoreMLModelToSimulator(name: toolsClassifierID, modelURL: watson_tools.urlOfModelInThisBundle)
-        saveCoreMLModelToSimulator(name: sampleClassifierID, modelURL: watson_sample.urlOfModelInThisBundle)
-        defer {
-            deleteLocalCoreMLModels(classifierIDs: [toolsClassifierID, sampleClassifierID])
-        }
-
-        // Then check if we can retrieve those models
-        do {
-            let localModels = try visualRecognition.listLocalModels()
-            XCTAssertTrue(localModels.contains(toolsClassifierID))
-            XCTAssertTrue(localModels.contains(sampleClassifierID))
-        } catch {
-            XCTFail(error.localizedDescription)
-        }
-    }
-
-    @available(iOS 11.0, macOS 10.13, tvOS 11.0, watchOS 4.0, *)
-    func testClassifyWithLocalModel() {
-        let classifierIDs = ["watson_tools"]
-        let data = try! Data(contentsOf: car)
-
-        // Save a CoreML file to the Application Support directory on the simulator for the duration of this test
-        saveCoreMLModelToSimulator(name: classifierIDs.first!, modelURL: watson_tools.urlOfModelInThisBundle)
-        defer {
-            deleteLocalCoreMLModels(classifierIDs: classifierIDs)
-        }
-
-        MockURLProtocol.requestHandler = { request in
-            XCTAssertEqual(request.httpMethod, "POST")
-            XCTAssertEqual(request.url?.lastPathComponent, "classify")
-            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
-            XCTAssertNotNil(request.httpBodyStream)
-            XCTAssertNotNil(request.allHTTPHeaderFields)
-
-            let bodyFieldsCount = numberOfFieldsInMultiPartFormBody(request: request)
-            XCTAssertEqual(bodyFieldsCount, 4)
-
-            return (dummyResponse, Data())
-        }
-
-        let expectation = self.expectation(description: "classifyWithLocalModel")
-        visualRecognition.classifyWithLocalModel(imageData: data, classifierIDs: classifierIDs, threshold: 1.0) {
-            _, _ in
-            expectation.fulfill()
-        }
-        waitForExpectations(timeout: timeout)
-    }
-
-    // Check that error handling is correct when the download
-    // fails to download a CoreML model or fails to save the downloaded CoreML model
-    @available(iOS 11.0, macOS 10.13, tvOS 11.0, watchOS 4.0, *)
-    func testDownloadClassifierWithoutCoreMLModel() {
-        let classifierID = "watson_tools"
-
-        // Save a CoreML file to the Application Support directory on the simulator for the duration of this test
-        saveCoreMLModelToSimulator(name: classifierID, modelURL: watson_tools.urlOfModelInThisBundle)
-        defer {
-            deleteLocalCoreMLModels(classifierIDs: [classifierID])
-        }
-
-        MockURLProtocol.requestHandler = { request in
-            XCTAssertEqual(request.httpMethod, "GET")
-            let endOfURL = request.url!.pathComponents.suffix(3)
-            XCTAssertEqual(endOfURL[endOfURL.startIndex], "classifiers")
-            XCTAssertEqual(endOfURL[endOfURL.startIndex + 1], classifierID)
-            XCTAssertEqual(endOfURL[endOfURL.startIndex + 2], "core_ml_model")
-            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
-            XCTAssertNil(request.httpBodyStream)
-            XCTAssertNotNil(request.allHTTPHeaderFields)
-
-            let response = HTTPURLResponse(url: exampleURL, statusCode: 200, httpVersion: nil, headerFields: nil)!
-            // The download receives empty Data() instead of a CoreML model
-            return (response, Data())
-        }
-
-        let expectation = self.expectation(description: "downloadClassifier without CoreML model")
-        visualRecognition.downloadClassifier(classifierID: classifierID) {
-            _, error in
-
-            if case .some(WatsonError.other(let message)) = error,
-                let errorMessage = message {
-                XCTAssertTrue(errorMessage.contains("Could not compile Core ML model from source"))
-            } else {
-                XCTFail(missingErrorMessage)
-            }
-            expectation.fulfill()
-        }
-        waitForExpectations(timeout: timeout)
     }
 
     // MARK: Helpers
@@ -645,7 +661,7 @@ class VisualRecognitionUnitTests: XCTestCase {
     func testClassifyWithImage() {
         let owners = ["Anthony", "Mike"]
         let classifierIDs = ["1", "2"]
-        let image = UIImage(contentsOfFile: car.path)!
+        let image = UIImage(data: car)!
 
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
@@ -669,7 +685,7 @@ class VisualRecognitionUnitTests: XCTestCase {
     }
 
     func testDetectFacesWithImage() {
-        let image = UIImage(contentsOfFile: obama.path)!
+        let image = UIImage(data: obama)!
 
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")
@@ -692,30 +708,31 @@ class VisualRecognitionUnitTests: XCTestCase {
         waitForExpectations(timeout: timeout)
     }
 
-    @available(iOS 11.0, macOS 10.13, tvOS 11.0, watchOS 4.0, *)
     func testClassifyWithLocalModelUIImage() {
-        let classifierIDs = ["1"]
-        let image = UIImage(contentsOfFile: car.path)!
+        if #available(iOS 11.0, tvOS 11.0, watchOS 4.0, *) {
+            let classifierIDs = ["1"]
+            let image = UIImage(data: car)!
 
-        MockURLProtocol.requestHandler = { request in
-            XCTAssertEqual(request.httpMethod, "POST")
-            XCTAssertEqual(request.url?.lastPathComponent, "classify")
-            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
-            XCTAssertNotNil(request.httpBodyStream)
-            XCTAssertNotNil(request.allHTTPHeaderFields)
+            MockURLProtocol.requestHandler = { request in
+                XCTAssertEqual(request.httpMethod, "POST")
+                XCTAssertEqual(request.url?.lastPathComponent, "classify")
+                XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
+                XCTAssertNotNil(request.httpBodyStream)
+                XCTAssertNotNil(request.allHTTPHeaderFields)
 
-            let bodyFieldsCount = numberOfFieldsInMultiPartFormBody(request: request)
-            XCTAssertEqual(bodyFieldsCount, 4)
+                let bodyFieldsCount = numberOfFieldsInMultiPartFormBody(request: request)
+                XCTAssertEqual(bodyFieldsCount, 4)
 
-            return (dummyResponse, Data())
+                return (dummyResponse, Data())
+            }
+
+            let expectation = self.expectation(description: "classifyWithLocalModel using UIImage")
+            visualRecognition.classifyWithLocalModel(image: image, classifierIDs: classifierIDs, threshold: 1.0) {
+                _, _ in
+                expectation.fulfill()
+            }
+            waitForExpectations(timeout: timeout)
         }
-
-        let expectation = self.expectation(description: "classifyWithLocalModel using UIImage")
-        visualRecognition.classifyWithLocalModel(image: image, classifierIDs: classifierIDs, threshold: 1.0) {
-            _, _ in
-            expectation.fulfill()
-        }
-        waitForExpectations(timeout: timeout)
     }
 
 #endif

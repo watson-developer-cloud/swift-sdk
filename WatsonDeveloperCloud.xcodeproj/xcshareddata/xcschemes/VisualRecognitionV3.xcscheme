@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0930"
+   LastUpgradeVersion = "1010"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -49,12 +49,6 @@
                ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
             </BuildableReference>
             <SkippedTests>
-               <Test
-                  Identifier = "VisualRecognitionTests/testCreateDeleteClassifier1()">
-               </Test>
-               <Test
-                  Identifier = "VisualRecognitionTests/testCreateDeleteClassifier2()">
-               </Test>
                <Test
                   Identifier = "VisualRecognitionTests/testUpdateClassifierWithNegativeExample()">
                </Test>

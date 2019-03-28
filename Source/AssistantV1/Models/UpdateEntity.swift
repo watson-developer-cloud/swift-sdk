@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,7 +45,17 @@ internal struct UpdateEntity: Codable, Equatable {
     public var fuzzyMatch: Bool?
 
     /**
-     An array of entity values.
+     The timestamp for creation of the object.
+     */
+    public var created: Date?
+
+    /**
+     The timestamp for the most recent update to the object.
+     */
+    public var updated: Date?
+
+    /**
+     An array of objects describing the entity values.
      */
     public var values: [CreateValue]?
 
@@ -55,6 +65,8 @@ internal struct UpdateEntity: Codable, Equatable {
         case description = "description"
         case metadata = "metadata"
         case fuzzyMatch = "fuzzy_match"
+        case created = "created"
+        case updated = "updated"
         case values = "values"
     }
 
@@ -69,7 +81,9 @@ internal struct UpdateEntity: Codable, Equatable {
        tab characters, and it must be no longer than 128 characters.
      - parameter metadata: Any metadata related to the entity.
      - parameter fuzzyMatch: Whether to use fuzzy matching for the entity.
-     - parameter values: An array of entity values.
+     - parameter created: The timestamp for creation of the object.
+     - parameter updated: The timestamp for the most recent update to the object.
+     - parameter values: An array of objects describing the entity values.
 
      - returns: An initialized `UpdateEntity`.
     */
@@ -78,6 +92,8 @@ internal struct UpdateEntity: Codable, Equatable {
         description: String? = nil,
         metadata: [String: JSON]? = nil,
         fuzzyMatch: Bool? = nil,
+        created: Date? = nil,
+        updated: Date? = nil,
         values: [CreateValue]? = nil
     )
     {
@@ -85,6 +101,8 @@ internal struct UpdateEntity: Codable, Equatable {
         self.description = description
         self.metadata = metadata
         self.fuzzyMatch = fuzzyMatch
+        self.created = created
+        self.updated = updated
         self.values = values
     }
 

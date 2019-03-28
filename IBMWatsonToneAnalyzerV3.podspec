@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
-  
+
   s.name                  = 'IBMWatsonToneAnalyzerV3'
   s.version               = '1.4.0'
   s.summary               = 'Client framework for the IBM Watson Tone Analyzer service'
   s.description           = <<-DESC
-IBM Watson™ Tone Analyzer uses linguistic analysis to detect emotional and language tones in written text. 
+IBM Watson™ Tone Analyzer uses linguistic analysis to detect emotional and language tones in written text.
 The service can analyze tone at both the document and sentence levels.
                             DESC
   s.homepage              = 'https://www.ibm.com/watson/services/tone-analyzer/'
@@ -15,11 +15,12 @@ The service can analyze tone at both the document and sentence levels.
   s.module_name           = 'ToneAnalyzer'
   s.ios.deployment_target = '10.0'
   s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => s.version.to_s }
-  
+
   s.source_files          = 'Source/ToneAnalyzerV3/**/*.swift',
                             'Source/SupportingFiles/Shared.swift'
   s.exclude_files         = 'Source/ToneAnalyzerV3/Shared.swift'
 
-  s.dependency              'IBMWatsonRestKit', '~> 2.0.0'
+  s.swift_version         = '4.2'
+  s.dependency              'IBMWatsonRestKit', '~> 3.0.0'
 
 end

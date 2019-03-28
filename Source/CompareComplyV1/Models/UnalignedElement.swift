@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,8 +22,8 @@ import Foundation
 public struct UnalignedElement: Codable, Equatable {
 
     /**
-     The label assigned to the document by the value of the `file_1_label` or `file_2_label` parameters on the
-     `/v1/compare` method.
+     The label assigned to the document by the value of the `file_1_label` or `file_2_label` parameters on the **Compare
+     two documents** method.
      */
     public var documentLabel: String?
 
@@ -41,12 +41,12 @@ public struct UnalignedElement: Codable, Equatable {
     /**
      Description of the action specified by the element and whom it affects.
      */
-    public var types: [TypeLabel]?
+    public var types: [TypeLabelComparison]?
 
     /**
      List of functional categories into which the element falls; in other words, the subject matter of the element.
      */
-    public var categories: [Category]?
+    public var categories: [CategoryComparison]?
 
     /**
      List of document attributes.

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,11 +38,18 @@ public struct DialogSuggestion: Codable, Equatable {
      */
     public var output: [String: JSON]?
 
+    /**
+     The ID of the dialog node that the **label** property is taken from. The **label** property is populated using the
+     value of the dialog node's **user_label** property.
+     */
+    public var dialogNode: String?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case label = "label"
         case value = "value"
         case output = "output"
+        case dialogNode = "dialog_node"
     }
 
     /**
@@ -54,18 +61,22 @@ public struct DialogSuggestion: Codable, Equatable {
        Assistant service if the user selects the corresponding disambiguation option.
      - parameter output: The dialog output that will be returned from the Watson Assistant service if the user
        selects the corresponding option.
+     - parameter dialogNode: The ID of the dialog node that the **label** property is taken from. The **label**
+       property is populated using the value of the dialog node's **user_label** property.
 
      - returns: An initialized `DialogSuggestion`.
     */
     public init(
         label: String,
         value: DialogSuggestionValue,
-        output: [String: JSON]? = nil
+        output: [String: JSON]? = nil,
+        dialogNode: String? = nil
     )
     {
         self.label = label
         self.value = value
         self.output = output
+        self.dialogNode = dialogNode
     }
 
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import RestKit
 public struct CreateValue: Codable, Equatable {
 
     /**
-     Specifies the type of value.
+     Specifies the type of entity value.
      */
     public enum ValueType: String {
         case synonyms = "synonyms"
@@ -42,8 +42,13 @@ public struct CreateValue: Codable, Equatable {
     public var metadata: [String: JSON]?
 
     /**
-     An array containing any synonyms for the entity value. You can provide either synonyms or patterns (as indicated by
-     **type**), but not both. A synonym must conform to the following restrictions:
+     Specifies the type of entity value.
+     */
+    public var valueType: String?
+
+    /**
+     An array of synonyms for the entity value. A value can specify either synonyms or patterns (depending on the value
+     type), but not both. A synonym must conform to the following resrictions:
      - It cannot contain carriage return, newline, or tab characters.
      - It cannot consist of only whitespace characters.
      - It must be no longer than 64 characters.
@@ -51,25 +56,32 @@ public struct CreateValue: Codable, Equatable {
     public var synonyms: [String]?
 
     /**
-     An array of patterns for the entity value. You can provide either synonyms or patterns (as indicated by **type**),
-     but not both. A pattern is a regular expression no longer than 512 characters. For more information about how to
-     specify a pattern, see the
-     [documentation](https://cloud.ibm.com/docs/services/assistant/entities.html#creating-entities).
+     An array of patterns for the entity value. A value can specify either synonyms or patterns (depending on the value
+     type), but not both. A pattern is a regular expression no longer than 512 characters. For more information about
+     how to specify a pattern, see the
+     [documentation](https://cloud.ibm.com/docs/services/assistant/entities.html#entities-create-dictionary-based).
      */
     public var patterns: [String]?
 
     /**
-     Specifies the type of value.
+     The timestamp for creation of the object.
      */
-    public var valueType: String?
+    public var created: Date?
+
+    /**
+     The timestamp for the most recent update to the object.
+     */
+    public var updated: Date?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case value = "value"
         case metadata = "metadata"
+        case valueType = "type"
         case synonyms = "synonyms"
         case patterns = "patterns"
-        case valueType = "type"
+        case created = "created"
+        case updated = "updated"
     }
 
     /**
@@ -80,32 +92,38 @@ public struct CreateValue: Codable, Equatable {
        - It cannot consist of only whitespace characters.
        - It must be no longer than 64 characters.
      - parameter metadata: Any metadata related to the entity value.
-     - parameter synonyms: An array containing any synonyms for the entity value. You can provide either synonyms or
-       patterns (as indicated by **type**), but not both. A synonym must conform to the following restrictions:
+     - parameter valueType: Specifies the type of entity value.
+     - parameter synonyms: An array of synonyms for the entity value. A value can specify either synonyms or patterns
+       (depending on the value type), but not both. A synonym must conform to the following resrictions:
        - It cannot contain carriage return, newline, or tab characters.
        - It cannot consist of only whitespace characters.
        - It must be no longer than 64 characters.
-     - parameter patterns: An array of patterns for the entity value. You can provide either synonyms or patterns (as
-       indicated by **type**), but not both. A pattern is a regular expression no longer than 512 characters. For more
-       information about how to specify a pattern, see the
-       [documentation](https://cloud.ibm.com/docs/services/assistant/entities.html#creating-entities).
-     - parameter valueType: Specifies the type of value.
+     - parameter patterns: An array of patterns for the entity value. A value can specify either synonyms or patterns
+       (depending on the value type), but not both. A pattern is a regular expression no longer than 512 characters. For
+       more information about how to specify a pattern, see the
+       [documentation](https://cloud.ibm.com/docs/services/assistant/entities.html#entities-create-dictionary-based).
+     - parameter created: The timestamp for creation of the object.
+     - parameter updated: The timestamp for the most recent update to the object.
 
      - returns: An initialized `CreateValue`.
     */
     public init(
         value: String,
         metadata: [String: JSON]? = nil,
+        valueType: String? = nil,
         synonyms: [String]? = nil,
         patterns: [String]? = nil,
-        valueType: String? = nil
+        created: Date? = nil,
+        updated: Date? = nil
     )
     {
         self.value = value
         self.metadata = metadata
+        self.valueType = valueType
         self.synonyms = synonyms
         self.patterns = patterns
-        self.valueType = valueType
+        self.created = created
+        self.updated = updated
     }
 
 }

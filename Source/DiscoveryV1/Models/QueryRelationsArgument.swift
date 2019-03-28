@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,9 @@ import Foundation
 /** QueryRelationsArgument. */
 public struct QueryRelationsArgument: Codable, Equatable {
 
+    /**
+     Array of query entities.
+     */
     public var entities: [QueryEntitiesEntity]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

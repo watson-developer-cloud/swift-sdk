@@ -1,3 +1,22 @@
+
+# [2.0.0](https://github.com/watson-developer-cloud/swift-sdk/compare/1.4.0...2.0.0) (2019-03-28)
+
+
+### Features
+
+* **All:**
+  * Version moved to first parameter of init methods for basic authentication
+  * Credentials file support in the intializer dropped for iOS. Only supported in Linux
+  * Error response handling reworked for consistency across services and languages
+  * Ordering of parameters in some methods has changed due to migration of the API docs and generator to OpenAPI 3.0
+  * File-type parameters are now defined as `Data` rather than `URL`
+* **AssistantV1:**
+  * Some model classes have been merged / simplified
+  * The `InputData` class has been renamed to `MessageInput`
+* **SpeechToTextV1:** 
+  * The `recognizeWithWebsockets` method has been revised to accept a `RecognizeCallback` object with `onResults` and `onError` callback properties
+
+
 # [1.4.0](https://github.com/watson-developer-cloud/swift-sdk/compare/1.3.1...1.4.0) (2019-02-12)
 
 

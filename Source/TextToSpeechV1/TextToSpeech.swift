@@ -370,7 +370,7 @@ public class TextToSpeech {
                 // repair the WAV header
                 var wav = data
                 guard WAVRepair.isWAVFile(data: wav) else {
-                    let error = WatsonError.other(message: "Expected returned audio to be in WAV format")
+                    let error = WatsonError.other(message: "Expected returned audio to be in WAV format", metadata: nil)
                     completionHandler(nil, error)
                     return
                 }

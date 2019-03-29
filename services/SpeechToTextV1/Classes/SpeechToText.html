@@ -129,6 +129,9 @@
                 <a href="../Structs/RecognitionSettings.html">RecognitionSettings</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/RecognizeCallback.html">RecognizeCallback</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/RegisterStatus.html">RegisterStatus</a>
               </li>
               <li class="nav-group-task">
@@ -243,7 +246,7 @@ customization is beta functionality that is available for all supported language
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="k">set</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -280,9 +283,9 @@ customization is beta functionality that is available for all supported language
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C15credentialsFileACSg10Foundation3URLV_tcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(credentialsFile:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C15credentialsFileACSg10Foundation3URLV_tcfc">init(credentialsFile:)</a>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
+                    <a class="token" href="#/">init()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -292,40 +295,13 @@ customization is beta functionality that is available for all supported language
                       <div class="abstract">
                         <p>Create a <code>SpeechToText</code> object.</p>
 
-<p>Use this initializer to automatically pull service credentials from your credentials file.
-This file is downloaded from your service instance on IBM Cloud as ibm-credentials.env.
+<p>This initializer will retrieve credentials from the environment or a local credentials file.
+The credentials file can be downloaded from your service instance on IBM Cloud as ibm-credentials.env.
 Make sure to add the credentials file to your project so that it can be loaded at runtime.</p>
 
-<p>If the credentials cannot be loaded from the file, or the file is not found, initialization will fail.
+<p>If credentials are not available in the environment or a local credentials file, initialization will fail.
 In that case, try another initializer that directly passes in the credentials.</p>
 
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">?(</span><span class="nv">credentialsFile</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>credentialsFile</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The URL of the credentials file.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
                       </div>
                     </section>
                   </div>
@@ -665,8 +641,8 @@ method.</p>
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/recognize(audio:contentType:model:languageCustomizationID:acousticCustomizationID:baseModelVersion:customizationWeight:inactivityTimeout:keywords:keywordsThreshold:maxAlternatives:wordAlternativesThreshold:wordConfidence:timestamps:profanityFilter:smartFormatting:speakerLabels:grammarName:redaction:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">recognize(audio:contentType:model:languageCustomizationID:acousticCustomizationID:baseModelVersion:customizationWeight:inactivityTimeout:keywords:keywordsThreshold:maxAlternatives:wordAlternativesThreshold:wordConfidence:timestamps:profanityFilter:smartFormatting:speakerLabels:grammarName:redaction:headers:completionHandler:)</a>
+                    <a name="//apple_ref/swift/Method/recognize(audio:model:languageCustomizationID:acousticCustomizationID:baseModelVersion:customizationWeight:inactivityTimeout:keywords:keywordsThreshold:maxAlternatives:wordAlternativesThreshold:wordConfidence:timestamps:profanityFilter:smartFormatting:speakerLabels:grammarName:redaction:contentType:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">recognize(audio:model:languageCustomizationID:acousticCustomizationID:baseModelVersion:customizationWeight:inactivityTimeout:keywords:keywordsThreshold:maxAlternatives:wordAlternativesThreshold:wordConfidence:timestamps:profanityFilter:smartFormatting:speakerLabels:grammarName:redaction:contentType:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -685,10 +661,10 @@ request</a>.</p>
 <h3 id='streaming-mode' class='heading'>Streaming mode</h3>
 
 <p>For requests to transcribe live audio as it becomes available, you must set the <code>Transfer-Encoding</code> header to
-<code>chunked</code> to use streaming mode. In streaming mode, the server closes the connection (status code 408) if the
-service receives no data chunk for 30 seconds and it has no audio to transcribe for 30 seconds. The server also
-closes the connection (status code 400) if no speech is detected for <code>inactivity_timeout</code> seconds of audio (not
-processing time); use the <code>inactivity_timeout</code> parameter to change the default of 30 seconds.
+<code>chunked</code> to use streaming mode. In streaming mode, the service closes the connection (status code 408) if it does
+not receive at least 15 seconds of audio (including silence) in any 30-second period. The service also closes the
+connection (status code 400) if it detects no speech for <code>inactivity_timeout</code> seconds of streaming audio; use the
+<code>inactivity_timeout</code> parameter to change the default of 30 seconds.
 <strong>See also:</strong></p>
 
 <ul>
@@ -703,6 +679,7 @@ header to have the service automatically detect the format of the audio. (With t
 either <code>\&quot;Content-Type:\&quot;</code> or <code>\&quot;Content-Type: application/octet-stream\&quot;</code>.)
 Where indicated, the format that you specify must include the sampling rate and can optionally include the number
 of channels and the endianness of the audio.</li>
+<li><code>audio/alaw</code> (<strong>Required.</strong> Specify the sampling rate (<code>rate</code>) of the audio.)</li>
 <li><code>audio/basic</code> (<strong>Required.</strong> Use only with narrowband models.)</li>
 <li><code>audio/flac</code></li>
 <li><code>audio/g729</code> (Use only with narrowband models.)</li>
@@ -743,7 +720,6 @@ request</a>.</p></li>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">recognize</span><span class="p">(</span>
     <span class="nv">audio</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
-    <span class="nv">contentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">model</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">languageCustomizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">acousticCustomizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -761,6 +737,7 @@ request</a>.</p></li>
     <span class="nv">speakerLabels</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">grammarName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">redaction</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">contentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SpeechRecognitionResults.html">SpeechRecognitionResults</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -779,19 +756,6 @@ request</a>.</p></li>
                               <td>
                                 <div>
                                   <p>The audio to transcribe.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>contentType</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The format (MIME type) of the audio. For more information about specifying an audio
-format, see <strong>Audio formats (content types)</strong> in the method description.</p>
                                 </div>
                               </td>
                             </tr>
@@ -819,7 +783,7 @@ models</a>.</p>
                                   <p>The customization ID (GUID) of a custom language model that is to be used
 with the recognition request. The base model of the specified custom language model must match the model
 specified with the <code>model</code> parameter. You must make the request with credentials for the instance of the service
-that owns the custom model. By default, no custom language model is used. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom">Custom
+that owns the custom model. By default, no custom language model is used. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input">Custom
 models</a>.
 <strong>Note:</strong> Use this parameter instead of the deprecated <code>customization_id</code> parameter.</p>
                                 </div>
@@ -836,7 +800,7 @@ models</a>.
                                   <p>The customization ID (GUID) of a custom acoustic model that is to be used
 with the recognition request. The base model of the specified custom acoustic model must match the model
 specified with the <code>model</code> parameter. You must make the request with credentials for the instance of the service
-that owns the custom model. By default, no custom acoustic model is used. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom">Custom
+that owns the custom model. By default, no custom acoustic model is used. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input">Custom
 models</a>.</p>
                                 </div>
                               </td>
@@ -874,7 +838,7 @@ was specified when the custom model was trained.
 The default value yields the best performance in general. Assign a higher value if your audio makes frequent use
 of OOV words from the custom model. Use caution when setting the weight: a higher value can improve the accuracy
 of phrases from the custom model&rsquo;s domain, but it can negatively affect performance on non-domain phrases.
-See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom">Custom models</a>.</p>
+See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input">Custom models</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -887,9 +851,9 @@ See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custo
                               <td>
                                 <div>
                                   <p>The time in seconds after which, if only silence (no speech) is detected in
-submitted audio, the connection is closed with a 400 error. The parameter is useful for stopping audio submission
-from a live microphone when a user simply walks away. Use <code>-1</code> for infinity. See
-<a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts">Timeouts</a>.</p>
+streaming audio, the connection is closed with a 400 error. The parameter is useful for stopping audio submission
+from a live microphone when a user simply walks away. Use <code>-1</code> for infinity. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts-inactivity">Inactivity
+timeout</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -934,7 +898,8 @@ spotting</a>.</p>
                               <td>
                                 <div>
                                   <p>The maximum number of alternative transcripts that the service is to return. By
-default, the service returns a single transcript. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#max_alternatives">Maximum
+default, the service returns a single transcript. If you specify a value of <code>0</code>, the service uses the default
+value, <code>1</code>. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#max_alternatives">Maximum
 alternatives</a>.</p>
                                 </div>
                               </td>
@@ -1046,7 +1011,7 @@ See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#spea
 grammar, you must also use the <code>language_customization_id</code> parameter to specify the name of the custom language
 model for which the grammar is defined. The service recognizes only strings that are recognized by the specified
 grammar; it does not recognize other custom words from the model&rsquo;s words resource. See
-<a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html">Grammars</a>.</p>
+<a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#grammars-input">Grammars</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1068,6 +1033,19 @@ the <code>keywords</code> and <code>keywords_threshold</code> parameters) and re
 <code>max_alternatives</code> parameter to be <code>1</code>).
 <strong>Note:</strong> Applies to US English, Japanese, and Korean transcription only.
 See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#redaction">Numeric redaction</a>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>contentType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The format (MIME type) of the audio. For more information about specifying an audio
+format, see <strong>Audio formats (content types)</strong> in the method description.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1297,8 +1275,8 @@ URL</a>.</p>
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/createJob(audio:contentType:model:callbackURL:events:userToken:resultsTtl:languageCustomizationID:acousticCustomizationID:baseModelVersion:customizationWeight:inactivityTimeout:keywords:keywordsThreshold:maxAlternatives:wordAlternativesThreshold:wordConfidence:timestamps:profanityFilter:smartFormatting:speakerLabels:grammarName:redaction:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">createJob(audio:contentType:model:callbackURL:events:userToken:resultsTtl:languageCustomizationID:acousticCustomizationID:baseModelVersion:customizationWeight:inactivityTimeout:keywords:keywordsThreshold:maxAlternatives:wordAlternativesThreshold:wordConfidence:timestamps:profanityFilter:smartFormatting:speakerLabels:grammarName:redaction:headers:completionHandler:)</a>
+                    <a name="//apple_ref/swift/Method/createJob(audio:model:callbackURL:events:userToken:resultsTtl:languageCustomizationID:acousticCustomizationID:baseModelVersion:customizationWeight:inactivityTimeout:keywords:keywordsThreshold:maxAlternatives:wordAlternativesThreshold:wordConfidence:timestamps:profanityFilter:smartFormatting:speakerLabels:grammarName:redaction:contentType:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">createJob(audio:model:callbackURL:events:userToken:resultsTtl:languageCustomizationID:acousticCustomizationID:baseModelVersion:customizationWeight:inactivityTimeout:keywords:keywordsThreshold:maxAlternatives:wordAlternativesThreshold:wordConfidence:timestamps:profanityFilter:smartFormatting:speakerLabels:grammarName:redaction:contentType:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1331,17 +1309,17 @@ the following parameters specific to the asynchronous interface:</li>
 <li><code>events</code></li>
 <li><code>user_token</code></li>
 <li><code>results_ttl</code>
-You can pass a maximum of 100 MB and a minimum of 100 bytes of audio with a request. The service automatically
+You can pass a maximum of 1 GB and a minimum of 100 bytes of audio with a request. The service automatically
 detects the endianness of the incoming audio and, for audio that includes multiple channels, downmixes the audio to
 one-channel mono during transcoding. The method returns only final results; to enable interim results, use the
 WebSocket API.
 <strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/async.html#create">Creating a job</a>.
 ### Streaming mode
 For requests to transcribe live audio as it becomes available, you must set the <code>Transfer-Encoding</code> header to
-<code>chunked</code> to use streaming mode. In streaming mode, the server closes the connection (status code 408) if the
-service receives no data chunk for 30 seconds and it has no audio to transcribe for 30 seconds. The server also
-closes the connection (status code 400) if no speech is detected for <code>inactivity_timeout</code> seconds of audio (not
-processing time); use the <code>inactivity_timeout</code> parameter to change the default of 30 seconds.
+<code>chunked</code> to use streaming mode. In streaming mode, the service closes the connection (status code 408) if it does
+not receive at least 15 seconds of audio (including silence) in any 30-second period. The service also closes the
+connection (status code 400) if it detects no speech for <code>inactivity_timeout</code> seconds of streaming audio; use the
+<code>inactivity_timeout</code> parameter to change the default of 30 seconds.
 <strong>See also:</strong></li>
 <li><a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#transmission">Audio transmission</a></li>
 <li><a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts">Timeouts</a>
@@ -1354,6 +1332,7 @@ header to have the service automatically detect the format of the audio. (With t
 either <code>\&quot;Content-Type:\&quot;</code> or <code>\&quot;Content-Type: application/octet-stream\&quot;</code>.)
 Where indicated, the format that you specify must include the sampling rate and can optionally include the number
 of channels and the endianness of the audio.</li>
+<li><code>audio/alaw</code> (<strong>Required.</strong> Specify the sampling rate (<code>rate</code>) of the audio.)</li>
 <li><code>audio/basic</code> (<strong>Required.</strong> Use only with narrowband models.)</li>
 <li><code>audio/flac</code></li>
 <li><code>audio/g729</code> (Use only with narrowband models.)</li>
@@ -1383,7 +1362,6 @@ audio is lower than the minimum required rate, the request fails.
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createJob</span><span class="p">(</span>
     <span class="nv">audio</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
-    <span class="nv">contentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">model</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">callbackURL</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">events</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -1405,6 +1383,7 @@ audio is lower than the minimum required rate, the request fails.
     <span class="nv">speakerLabels</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">grammarName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">redaction</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">contentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/RecognitionJob.html">RecognitionJob</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1423,19 +1402,6 @@ audio is lower than the minimum required rate, the request fails.
                               <td>
                                 <div>
                                   <p>The audio to transcribe.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>contentType</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The format (MIME type) of the audio. For more information about specifying an audio
-format, see <strong>Audio formats (content types)</strong> in the method description.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1535,7 +1501,7 @@ use a time to live of one week. The parameter is valid with or without a callbac
                                   <p>The customization ID (GUID) of a custom language model that is to be used
 with the recognition request. The base model of the specified custom language model must match the model
 specified with the <code>model</code> parameter. You must make the request with credentials for the instance of the service
-that owns the custom model. By default, no custom language model is used. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom">Custom
+that owns the custom model. By default, no custom language model is used. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input">Custom
 models</a>.
 <strong>Note:</strong> Use this parameter instead of the deprecated <code>customization_id</code> parameter.</p>
                                 </div>
@@ -1552,7 +1518,7 @@ models</a>.
                                   <p>The customization ID (GUID) of a custom acoustic model that is to be used
 with the recognition request. The base model of the specified custom acoustic model must match the model
 specified with the <code>model</code> parameter. You must make the request with credentials for the instance of the service
-that owns the custom model. By default, no custom acoustic model is used. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom">Custom
+that owns the custom model. By default, no custom acoustic model is used. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input">Custom
 models</a>.</p>
                                 </div>
                               </td>
@@ -1590,7 +1556,7 @@ was specified when the custom model was trained.
 The default value yields the best performance in general. Assign a higher value if your audio makes frequent use
 of OOV words from the custom model. Use caution when setting the weight: a higher value can improve the accuracy
 of phrases from the custom model&rsquo;s domain, but it can negatively affect performance on non-domain phrases.
-See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom">Custom models</a>.</p>
+See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input">Custom models</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1603,9 +1569,9 @@ See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custo
                               <td>
                                 <div>
                                   <p>The time in seconds after which, if only silence (no speech) is detected in
-submitted audio, the connection is closed with a 400 error. The parameter is useful for stopping audio submission
-from a live microphone when a user simply walks away. Use <code>-1</code> for infinity. See
-<a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts">Timeouts</a>.</p>
+streaming audio, the connection is closed with a 400 error. The parameter is useful for stopping audio submission
+from a live microphone when a user simply walks away. Use <code>-1</code> for infinity. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts-inactivity">Inactivity
+timeout</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1650,7 +1616,8 @@ spotting</a>.</p>
                               <td>
                                 <div>
                                   <p>The maximum number of alternative transcripts that the service is to return. By
-default, the service returns a single transcript. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#max_alternatives">Maximum
+default, the service returns a single transcript. If you specify a value of <code>0</code>, the service uses the default
+value, <code>1</code>. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#max_alternatives">Maximum
 alternatives</a>.</p>
                                 </div>
                               </td>
@@ -1762,7 +1729,7 @@ See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#spea
 grammar, you must also use the <code>language_customization_id</code> parameter to specify the name of the custom language
 model for which the grammar is defined. The service recognizes only strings that are recognized by the specified
 grammar; it does not recognize other custom words from the model&rsquo;s words resource. See
-<a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html">Grammars</a>.</p>
+<a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#grammars-input">Grammars</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1784,6 +1751,19 @@ the <code>keywords</code> and <code>keywords_threshold</code> parameters) and re
 <code>max_alternatives</code> parameter to be <code>1</code>).
 <strong>Note:</strong> Applies to US English, Japanese, and Korean transcription only.
 See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#redaction">Numeric redaction</a>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>contentType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The format (MIME type) of the audio. For more information about specifying an audio
+format, see <strong>Audio formats (content types)</strong> in the method description.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1988,7 +1968,7 @@ request with credentials for the instance of the service that owns the job.</p>
 <p>Deletes the specified job. You cannot delete a job that the service is actively processing. Once you delete a job,
 its results are no longer available. The service automatically deletes a job and its results when the time to live
 for the results expires. You must use credentials for the instance of the service that owns a job to delete it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/async.html#delete">Deleting a job</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/async.html#delete-async">Deleting a job</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -2067,7 +2047,7 @@ request with credentials for the instance of the service that owns the job.</p>
 <p>Creates a new custom language model for a specified base model. The custom language model can be used only with the
 base model for which it is created. The model is owned by the instance of the service whose credentials are used to
 create it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#createModel">Create a custom language
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#createModel-language">Create a custom language
 model</a>.</p>
 
                       </div>
@@ -2203,7 +2183,7 @@ the language of the custom model.</p>
 parameter to see all custom language models for the specified language. Omit the parameter to see all custom
 language models for all languages. You must use credentials for the instance of the service that owns a model to
 list information about it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#listModels">Listing custom language
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#listModels-language">Listing custom language
 models</a>.</p>
 
                       </div>
@@ -2283,7 +2263,7 @@ are owned by the requesting credentials.</p>
 
 <p>Gets information about a specified custom language model. You must use credentials for the instance of the service
 that owns a model to list information about it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#listModels">Listing custom language
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#listModels-language">Listing custom language
 models</a>.</p>
 
                       </div>
@@ -2363,7 +2343,7 @@ request. You must make the request with credentials for the instance of the serv
 <p>Deletes an existing custom language model. The custom model cannot be deleted if another request, such as adding a
 corpus or grammar to the model, is currently being processed. You must use credentials for the instance of the
 service that owns a model to delete it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#deleteModel">Deleting a custom language
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#deleteModel-language">Deleting a custom language
 model</a>.</p>
 
                       </div>
@@ -2460,7 +2440,7 @@ Training can fail to start for the following reasons:</p>
 request to add a corpus or grammar to the model.</li>
 <li>No training data have been added to the custom model.</li>
 <li><p>One or more words that were added to the custom model have invalid sounds-like pronunciations that you must fix.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#trainModel">Train the custom language
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#trainModel-language">Train the custom language
 model</a>.</p></li>
 </ul>
 
@@ -2583,7 +2563,7 @@ recognition request by specifying a customization weight for that request.</p>
 language model initializes the model to its state when it was first created. Metadata such as the name and language
 of the model are preserved, but the model&rsquo;s words resource is removed and must be re-created. You must use
 credentials for the instance of the service that owns a model to reset it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#resetModel">Resetting a custom language
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#resetModel-language">Resetting a custom language
 model</a>.</p>
 
                       </div>
@@ -2868,7 +2848,7 @@ model</a>.</p></li>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addCorpus</span><span class="p">(</span>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">corpusName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">corpusFile</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+    <span class="nv">corpusFile</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
     <span class="nv">allowOverwrite</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
@@ -4234,7 +4214,7 @@ request. You must make the request with credentials for the instance of the serv
 <p>Creates a new custom acoustic model for a specified base model. The custom acoustic model can be used only with the
 base model for which it is created. The model is owned by the instance of the service whose credentials are used to
 create it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-create.html#createModel">Create a custom acoustic
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-create.html#createModel-acoustic">Create a custom acoustic
 model</a>.</p>
 
                       </div>
@@ -4347,7 +4327,7 @@ the language of the custom model.</p>
 parameter to see all custom acoustic models for the specified language. Omit the parameter to see all custom
 acoustic models for all languages. You must use credentials for the instance of the service that owns a model to
 list information about it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#listModels">Listing custom acoustic
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#listModels-acoustic">Listing custom acoustic
 models</a>.</p>
 
                       </div>
@@ -4427,7 +4407,7 @@ are owned by the requesting credentials.</p>
 
 <p>Gets information about a specified custom acoustic model. You must use credentials for the instance of the service
 that owns a model to list information about it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#listModels">Listing custom acoustic
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#listModels-acoustic">Listing custom acoustic
 models</a>.</p>
 
                       </div>
@@ -4507,7 +4487,7 @@ request. You must make the request with credentials for the instance of the serv
 <p>Deletes an existing custom acoustic model. The custom model cannot be deleted if another request, such as adding an
 audio resource to the model, is currently being processed. You must use credentials for the instance of the service
 that owns a model to delete it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#deleteModel">Deleting a custom acoustic
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#deleteModel-acoustic">Deleting a custom acoustic
 model</a>.</p>
 
                       </div>
@@ -4612,7 +4592,7 @@ request to add audio resources to the model.</li>
 <li>One or more of the custom model&rsquo;s audio resources is invalid.</li>
 <li><p>You passed an incompatible custom language model with the <code>custom_language_model_id</code> query parameter. Both custom
 models must be based on the same version of the same base model.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-create.html#trainModel">Train the custom acoustic
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-create.html#trainModel-acoustic">Train the custom acoustic
 model</a>.</p></li>
 </ul>
 
@@ -4711,7 +4691,7 @@ acoustic model. The credentials specified with the request must own both custom 
 initializes the model to its state when it was first created. Metadata such as the name and language of the model
 are preserved, but the model&rsquo;s audio resources are removed and must be re-created. You must use credentials for the
 instance of the service that owns a model to reset it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#resetModel">Resetting a custom acoustic
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#resetModel-acoustic">Resetting a custom acoustic
 model</a>.</p>
 
                       </div>
@@ -4983,8 +4963,8 @@ request. You must make the request with credentials for the instance of the serv
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/addAudio(customizationID:audioName:audioResource:contentType:containedContentType:allowOverwrite:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">addAudio(customizationID:audioName:audioResource:contentType:containedContentType:allowOverwrite:headers:completionHandler:)</a>
+                    <a name="//apple_ref/swift/Method/addAudio(customizationID:audioName:audioResource:containedContentType:allowOverwrite:contentType:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">addAudio(customizationID:audioName:audioResource:containedContentType:allowOverwrite:contentType:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -5026,6 +5006,7 @@ audio-type resource, use the <code>Content-Type</code> parameter to specify the 
 including specifying the sampling rate, channels, and endianness where indicated.</p>
 
 <ul>
+<li><code>audio/alaw</code> (Specify the sampling rate (<code>rate</code>) of the audio.)</li>
 <li><code>audio/basic</code> (Use only with narrowband models.)</li>
 <li><code>audio/flac</code></li>
 <li><code>audio/g729</code> (Use only with narrowband models.)</li>
@@ -5052,10 +5033,16 @@ service supports for speech recognition. For an archive-type resource, use the <
 the media type of the archive file:</li>
 <li><code>application/zip</code> for a <strong>.zip</strong> file</li>
 <li><code>application/gzip</code> for a <strong>.tar.gz</strong> file.
-All audio files contained in the archive must have the same audio format. Use the <code>Contained-Content-Type</code>
-parameter to specify the format of the contained audio files. The parameter accepts all of the audio formats
-supported for use with speech recognition and with the <code>Content-Type</code> header, including the <code>rate</code>, <code>channels</code>, and
-<code>endianness</code> parameters that are used with some formats. The default contained audio format is <code>audio/wav</code>.
+When you add an archive-type resource, the <code>Contained-Content-Type</code> header is optional depending on the format of
+the files that you are adding:</li>
+<li>For audio files of type <code>audio/alaw</code>, <code>audio/basic</code>, <code>audio/l16</code>, or <code>audio/mulaw</code>, you must use the
+<code>Contained-Content-Type</code> header to specify the format of the contained audio files. Include the <code>rate</code>, <code>channels</code>,
+and <code>endianness</code> parameters where necessary. In this case, all audio files contained in the archive file must have
+the same audio format.</li>
+<li>For audio files of all other types, you can omit the <code>Contained-Content-Type</code> header. In this case, the audio
+files contained in the archive file can have any of the formats not listed in the previous bullet. The audio files
+do not need to have the same format.
+Do not use the <code>Contained-Content-Type</code> header when adding an audio-type resource.
 ### Naming restrictions for embedded audio files
 The name of an audio file that is embedded within an archive-type resource must meet the following restrictions:</li>
 <li>Include a maximum of 128 characters in the file name; this includes the file extension.</li>
@@ -5073,9 +5060,9 @@ resource.</p></li>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">audioName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">audioResource</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
-    <span class="nv">contentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">containedContentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">allowOverwrite</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">contentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -5133,30 +5120,20 @@ audio file or an archive file.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>contentType</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>For an audio-type resource, the format (MIME type) of the audio. For more information,
-see <strong>Content types for audio-type resources</strong> in the method description.
-For an archive-type resource, the media type of the archive file. For more information, see <strong>Content types for
-archive-type resources</strong> in the method description.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
                                 <em>containedContentType</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>For an archive-type resource, specifies the format of the audio files that are
-contained in the archive file. The parameter accepts all of the audio formats that are supported for use with
-speech recognition, including the <code>rate</code>, <code>channels</code>, and <code>endianness</code> parameters that are used with some
-formats. For more information, see <strong>Content types for audio-type resources</strong> in the method description.</p>
+                                  <p><strong>For an archive-type resource,</strong> specify the format of the audio files that
+are contained in the archive file if they are of type <code>audio/alaw</code>, <code>audio/basic</code>, <code>audio/l16</code>, or <code>audio/mulaw</code>.
+Include the <code>rate</code>, <code>channels</code>, and <code>endianness</code> parameters where necessary. In this case, all audio files that
+are contained in the archive file must be of the indicated type.
+For all other audio formats, you can omit the header. In this case, the audio files can be of multiple types as
+long as they are not of the types listed in the previous paragraph.
+The parameter accepts all of the audio formats that are supported for use with speech recognition. For more
+information, see <strong>Content types for audio-type resources</strong> in the method description.
+<strong>For an audio-type resource,</strong> omit the header.</p>
                                 </div>
                               </td>
                             </tr>
@@ -5171,6 +5148,21 @@ formats. For more information, see <strong>Content types for audio-type resource
                                   <p>If <code>true</code>, the specified audio resource overwrites an existing audio resource with
 the same name. If <code>false</code>, the request fails if an audio resource with the same name already exists. The
 parameter has no effect if an audio resource with the same name does not already exist.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>contentType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>For an audio-type resource, the format (MIME type) of the audio. For more information,
+see <strong>Content types for audio-type resources</strong> in the method description.
+For an archive-type resource, the media type of the archive file. For more information, see <strong>Content types for
+archive-type resources</strong> in the method description.</p>
                                 </div>
                               </td>
                             </tr>
@@ -5493,157 +5485,9 @@ data.
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/recognize(audio:settings:model:baseModelVersion:languageCustomizationID:learningOptOut:customerID:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">recognize(audio:settings:model:baseModelVersion:languageCustomizationID:learningOptOut:customerID:completionHandler:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Perform speech recognition for an audio file.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">recognize</span><span class="p">(</span>
-    <span class="nv">audio</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
-    <span class="nv">settings</span><span class="p">:</span> <span class="kt"><a href="../Structs/RecognitionSettings.html">RecognitionSettings</a></span><span class="p">,</span>
-    <span class="nv">model</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">baseModelVersion</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">languageCustomizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">learningOptOut</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">customerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SpeechRecognitionResults.html">SpeechRecognitionResults</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>audio</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The audio file to transcribe.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>settings</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The configuration to use for this recognition request.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>model</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The language and sample rate of the audio. For supported models, visit
-<a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#models">https://cloud.ibm.com/docs/services/speech-to-text/input.html#models</a>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>baseModelVersion</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The version of the specified base model that is to be used for all requests sent
-over the connection. Multiple versions of a base model can exist when a model is updated for internal improvements.
-The parameter is intended primarily for use with custom models that have been upgraded for a new base model.
-The default value depends on whether the parameter is used with or without a custom model. See
-<a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#version">Base model version</a>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>languageCustomizationID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The customization ID (GUID) of a custom language model that is to be used
-with the recognition request. The base model of the specified custom language model must match the model
-specified with the <code>model</code> parameter. You must make the request with service credentials created for the instance
-of the service that owns the custom model. By default, no custom language model is used. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom">Custom
-models</a>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>learningOptOut</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>If <code>true</code>, then this request will not be logged for training.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>customerID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Associates a customer ID with all data that is passed over the connection.
-By default, no customer ID is associated with the data.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>completionHandler</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed when the request completes with a successful result or error</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/recognizeUsingWebSocket(audio:settings:model:baseModelVersion:languageCustomizationID:acousticCustomizationID:learningOptOut:customerID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">recognizeUsingWebSocket(audio:settings:model:baseModelVersion:languageCustomizationID:acousticCustomizationID:learningOptOut:customerID:headers:completionHandler:)</a>
+                    <a name="/s:14SpeechToTextV10abC0C23recognizeUsingWebSocket5audio8settings5model16baseModelVersion23languageCustomizationID08acousticpQ014learningOptOut08customerQ07headers8callbacky10Foundation4DataV_AA19RecognitionSettingsVSSSgA3TSbSgATSDyS2SGSgAA17RecognizeCallbackVtF"></a>
+                    <a name="//apple_ref/swift/Method/recognizeUsingWebSocket(audio:settings:model:baseModelVersion:languageCustomizationID:acousticCustomizationID:learningOptOut:customerID:headers:callback:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C23recognizeUsingWebSocket5audio8settings5model16baseModelVersion23languageCustomizationID08acousticpQ014learningOptOut08customerQ07headers8callbacky10Foundation4DataV_AA19RecognitionSettingsVSSSgA3TSbSgATSDyS2SGSgAA17RecognizeCallbackVtF">recognizeUsingWebSocket(audio:settings:model:baseModelVersion:languageCustomizationID:acousticCustomizationID:learningOptOut:customerID:headers:callback:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -5668,7 +5512,7 @@ By default, no customer ID is associated with the data.</p>
     <span class="nv">learningOptOut</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">customerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SpeechRecognitionResults.html">SpeechRecognitionResults</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">callback</span><span class="p">:</span> <span class="kt"><a href="../Structs/RecognizeCallback.html">RecognizeCallback</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -5818,9 +5662,9 @@ By default, no customer ID is associated with the data.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/recognizeMicrophone(settings:model:baseModelVersion:languageCustomizationID:acousticCustomizationID:learningOptOut:customerID:compress:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">recognizeMicrophone(settings:model:baseModelVersion:languageCustomizationID:acousticCustomizationID:learningOptOut:customerID:compress:headers:completionHandler:)</a>
+                    <a name="/s:14SpeechToTextV10abC0C19recognizeMicrophone8settings5model16baseModelVersion23languageCustomizationID08acousticmN014learningOptOut08customerN08compress7headers8callbackyAA19RecognitionSettingsV_SSSgA3QSbSgAQSbSDyS2SGSgAA17RecognizeCallbackVtF"></a>
+                    <a name="//apple_ref/swift/Method/recognizeMicrophone(settings:model:baseModelVersion:languageCustomizationID:acousticCustomizationID:learningOptOut:customerID:compress:headers:callback:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C19recognizeMicrophone8settings5model16baseModelVersion23languageCustomizationID08acousticmN014learningOptOut08customerN08compress7headers8callbackyAA19RecognitionSettingsV_SSSgA3QSbSgAQSbSDyS2SGSgAA17RecognizeCallbackVtF">recognizeMicrophone(settings:model:baseModelVersion:languageCustomizationID:acousticCustomizationID:learningOptOut:customerID:compress:headers:callback:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -5855,7 +5699,7 @@ would prefer to ask for the user&rsquo;s permission in advance.</p>
     <span class="nv">customerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">compress</span><span class="p">:</span> <span class="kt">Bool</span> <span class="o">=</span> <span class="kc">true</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SpeechRecognitionResults.html">SpeechRecognitionResults</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">callback</span><span class="p">:</span> <span class="kt"><a href="../Structs/RecognizeCallback.html">RecognizeCallback</a></span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -6043,8 +5887,8 @@ By default, no customer ID is associated with the data.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-02-12)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-03-28)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

@@ -407,6 +407,9 @@
                 <a href="../Structs/SourceOptions.html">SourceOptions</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/SourceOptionsBuckets.html">SourceOptionsBuckets</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/SourceOptionsFolder.html">SourceOptionsFolder</a>
               </li>
               <li class="nav-group-task">
@@ -630,9 +633,65 @@ required when the <strong>type</strong> field of the <strong>source</strong> obj
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV113SourceOptionsV7folders7objects15siteCollections4urlsACSayAA0cD6FolderVGSg_SayAA0cD6ObjectVGSgSayAA0cD8SiteCollVGSgSayAA0cD8WebCrawlVGSgtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(folders:objects:siteCollections:urls:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV113SourceOptionsV7folders7objects15siteCollections4urlsACSayAA0cD6FolderVGSg_SayAA0cD6ObjectVGSgSayAA0cD8SiteCollVGSgSayAA0cD8WebCrawlVGSgtcfc">init(folders:objects:siteCollections:urls:)</a>
+                    <a name="/s:11DiscoveryV113SourceOptionsV7bucketsSayAA0cD7BucketsVGSgvp"></a>
+                    <a name="//apple_ref/swift/Property/buckets" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV113SourceOptionsV7bucketsSayAA0cD7BucketsVGSgvp">buckets</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Array of cloud object store buckets to begin crawling. Only valid and required when the <strong>type</strong> field of the
+<strong>source</strong> object is set to <code>cloud_object_store</code>, and the <strong>crawl_all_buckets</strong> field is <code>false</code> or not specified.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">buckets</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/SourceOptionsBuckets.html">SourceOptionsBuckets</a></span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV113SourceOptionsV15crawlAllBucketsSbSgvp"></a>
+                    <a name="//apple_ref/swift/Property/crawlAllBuckets" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV113SourceOptionsV15crawlAllBucketsSbSgvp">crawlAllBuckets</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>When <code>true</code>, all buckets in the specified cloud object store are crawled. If set to <code>true</code>, the <strong>buckets</strong> array
+must not be specified.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">crawlAllBuckets</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV113SourceOptionsV7folders7objects15siteCollections4urls7buckets15crawlAllBucketsACSayAA0cD6FolderVGSg_SayAA0cD6ObjectVGSgSayAA0cD8SiteCollVGSgSayAA0cD8WebCrawlVGSgSayAA0cdM0VGSgSbSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(folders:objects:siteCollections:urls:buckets:crawlAllBuckets:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV113SourceOptionsV7folders7objects15siteCollections4urls7buckets15crawlAllBucketsACSayAA0cD6FolderVGSg_SayAA0cD6ObjectVGSgSayAA0cD8SiteCollVGSgSayAA0cD8WebCrawlVGSgSayAA0cdM0VGSgSbSgtcfc">init(folders:objects:siteCollections:urls:buckets:crawlAllBuckets:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -651,7 +710,9 @@ required when the <strong>type</strong> field of the <strong>source</strong> obj
     <span class="nv">folders</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/SourceOptionsFolder.html">SourceOptionsFolder</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">objects</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/SourceOptionsObject.html">SourceOptionsObject</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">siteCollections</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/SourceOptionsSiteColl.html">SourceOptionsSiteColl</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">urls</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/SourceOptionsWebCrawl.html">SourceOptionsWebCrawl</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span>
+    <span class="nv">urls</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/SourceOptionsWebCrawl.html">SourceOptionsWebCrawl</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">buckets</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/SourceOptionsBuckets.html">SourceOptionsBuckets</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">crawlAllBuckets</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
 <span class="p">)</span></code></pre>
 
                         </div>
@@ -713,6 +774,33 @@ SharePoint source. Only valid and required when the <strong>type</strong> field 
                                 </div>
                               </td>
                             </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>buckets</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Array of cloud object store buckets to begin crawling. Only valid and required when the
+<strong>type</strong> field of the <strong>source</strong> object is set to <code>cloud_object_store</code>, and the <strong>crawl_all_buckets</strong> field is
+<code>false</code> or not specified.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>crawlAllBuckets</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>When <code>true</code>, all buckets in the specified cloud object store are crawled. If set to
+<code>true</code>, the <strong>buckets</strong> array must not be specified.</p>
+                                </div>
+                              </td>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
@@ -728,8 +816,8 @@ SharePoint source. Only valid and required when the <strong>type</strong> field 
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-02-12)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-03-28)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

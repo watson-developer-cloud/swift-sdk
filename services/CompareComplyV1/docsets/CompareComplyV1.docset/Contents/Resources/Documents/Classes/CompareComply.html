@@ -78,6 +78,12 @@
                 <a href="../Structs/Category/Label.html">– Label</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/CategoryComparison.html">CategoryComparison</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CategoryComparison/Label.html">– Label</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/ClassifyReturn.html">ClassifyReturn</a>
               </li>
               <li class="nav-group-task">
@@ -103,6 +109,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/ContractAmts/ConfidenceLevel.html">– ConfidenceLevel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ContractType.html">ContractType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ContractType/ConfidenceLevel.html">– ConfidenceLevel</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/DocCounts.html">DocCounts</a>
@@ -151,6 +163,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/HTMLReturn.html">HTMLReturn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Key.html">Key</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KeyValuePair.html">KeyValuePair</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Label.html">Label</a>
@@ -219,6 +237,9 @@
                 <a href="../Structs/TypeLabel.html">TypeLabel</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/TypeLabelComparison.html">TypeLabelComparison</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/UnalignedElement.html">UnalignedElement</a>
               </li>
               <li class="nav-group-task">
@@ -229,6 +250,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/UpdatedLabelsOut/Modification.html">– Modification</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Value.html">Value</a>
               </li>
             </ul>
           </li>
@@ -319,9 +343,9 @@ documents.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:15CompareComplyV10aB0C15credentialsFile7versionACSg10Foundation3URLV_SStcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(credentialsFile:version:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:15CompareComplyV10aB0C15credentialsFile7versionACSg10Foundation3URLV_SStcfc">init(credentialsFile:version:)</a>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/init(version:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">init(version:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -331,53 +355,13 @@ documents.</p>
                       <div class="abstract">
                         <p>Create a <code>CompareComply</code> object.</p>
 
-<p>Use this initializer to automatically pull service credentials from your credentials file.
-This file is downloaded from your service instance on IBM Cloud as ibm-credentials.env.
+<p>This initializer will retrieve credentials from the environment or a local credentials file.
+The credentials file can be downloaded from your service instance on IBM Cloud as ibm-credentials.env.
 Make sure to add the credentials file to your project so that it can be loaded at runtime.</p>
 
-<p>If the credentials cannot be loaded from the file, or the file is not found, initialization will fail.
+<p>If credentials are not available in the environment or a local credentials file, initialization will fail.
 In that case, try another initializer that directly passes in the credentials.</p>
 
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">?(</span><span class="nv">credentialsFile</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>credentialsFile</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The URL of the credentials file.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>version</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The release date of the version of the API to use. Specify the date
-in <q>YYYY-MM-DD</q> format.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
                       </div>
                     </section>
                   </div>
@@ -543,8 +527,8 @@ in <q>YYYY-MM-DD</q> format.</p>
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/convertToHTML(file:modelID:fileContentType:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">convertToHTML(file:modelID:fileContentType:headers:completionHandler:)</a>
+                    <a name="//apple_ref/swift/Method/convertToHTML(file:filename:fileContentType:model:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">convertToHTML(file:filename:fileContentType:model:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -552,9 +536,9 @@ in <q>YYYY-MM-DD</q> format.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Convert file to HTML.</p>
+                        <p>Convert document to HTML.</p>
 
-<p>Convert an uploaded file to HTML.</p>
+<p>Converts a document to HTML.</p>
 
                       </div>
                       <div class="declaration">
@@ -562,9 +546,10 @@ in <q>YYYY-MM-DD</q> format.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">convertToHTML</span><span class="p">(</span>
-    <span class="nv">file</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
-    <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
+    <span class="nv">filename</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">fileContentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">model</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/HTMLReturn.html">HTMLReturn</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -582,21 +567,19 @@ in <q>YYYY-MM-DD</q> format.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The file to convert.</p>
+                                  <p>The document to convert.</p>
                                 </div>
                               </td>
                             </tr>
                             <tr>
                               <td>
                                 <code>
-                                <em>modelID</em>
+                                <em>filename</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The analysis model to be used by the service. For the <code>/v1/element_classification</code> and
-<code>/v1/comparison</code> methods, the default is <code>contracts</code>. For the <code>/v1/tables</code> method, the default is <code>tables</code>. These
-defaults apply to the standalone methods as well as to the methods&rsquo; use in batch-processing requests.</p>
+                                  <p>The filename for file.</p>
                                 </div>
                               </td>
                             </tr>
@@ -609,6 +592,20 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                               <td>
                                 <div>
                                   <p>The content type of file.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>model</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The analysis model to be used by the service. For the <strong>Element classification</strong> and <strong>Compare
+two documents</strong> methods, the default is <code>contracts</code>. For the <strong>Extract tables</strong> method, the default is <code>tables</code>.
+These defaults apply to the standalone methods as well as to the methods&rsquo; use in batch-processing requests.</p>
                                 </div>
                               </td>
                             </tr>
@@ -646,8 +643,8 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/classifyElements(file:modelID:fileContentType:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">classifyElements(file:modelID:fileContentType:headers:completionHandler:)</a>
+                    <a name="//apple_ref/swift/Method/classifyElements(file:fileContentType:model:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">classifyElements(file:fileContentType:model:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -657,7 +654,7 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                       <div class="abstract">
                         <p>Classify the elements of a document.</p>
 
-<p>Analyze an uploaded file&rsquo;s structural and semantic elements.</p>
+<p>Analyzes the structural and semantic elements of a document.</p>
 
                       </div>
                       <div class="declaration">
@@ -665,9 +662,9 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">classifyElements</span><span class="p">(</span>
-    <span class="nv">file</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
-    <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
     <span class="nv">fileContentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">model</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/ClassifyReturn.html">ClassifyReturn</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -685,21 +682,7 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                               </td>
                               <td>
                                 <div>
-                                  <p>The file to classify.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>modelID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The analysis model to be used by the service. For the <code>/v1/element_classification</code> and
-<code>/v1/comparison</code> methods, the default is <code>contracts</code>. For the <code>/v1/tables</code> method, the default is <code>tables</code>. These
-defaults apply to the standalone methods as well as to the methods&rsquo; use in batch-processing requests.</p>
+                                  <p>The document to classify.</p>
                                 </div>
                               </td>
                             </tr>
@@ -712,6 +695,20 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                               <td>
                                 <div>
                                   <p>The content type of file.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>model</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The analysis model to be used by the service. For the <strong>Element classification</strong> and <strong>Compare
+two documents</strong> methods, the default is <code>contracts</code>. For the <strong>Extract tables</strong> method, the default is <code>tables</code>.
+These defaults apply to the standalone methods as well as to the methods&rsquo; use in batch-processing requests.</p>
                                 </div>
                               </td>
                             </tr>
@@ -749,8 +746,8 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/extractTables(file:modelID:fileContentType:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">extractTables(file:modelID:fileContentType:headers:completionHandler:)</a>
+                    <a name="//apple_ref/swift/Method/extractTables(file:fileContentType:model:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">extractTables(file:fileContentType:model:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -760,7 +757,7 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                       <div class="abstract">
                         <p>Extract a document&rsquo;s tables.</p>
 
-<p>Extract and analyze an uploaded file&rsquo;s tables.</p>
+<p>Analyzes the tables in a document.</p>
 
                       </div>
                       <div class="declaration">
@@ -768,9 +765,9 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">extractTables</span><span class="p">(</span>
-    <span class="nv">file</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
-    <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
     <span class="nv">fileContentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">model</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/TableReturn.html">TableReturn</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -788,21 +785,7 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                               </td>
                               <td>
                                 <div>
-                                  <p>The file on which to run table extraction.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>modelID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The analysis model to be used by the service. For the <code>/v1/element_classification</code> and
-<code>/v1/comparison</code> methods, the default is <code>contracts</code>. For the <code>/v1/tables</code> method, the default is <code>tables</code>. These
-defaults apply to the standalone methods as well as to the methods&rsquo; use in batch-processing requests.</p>
+                                  <p>The document on which to run table extraction.</p>
                                 </div>
                               </td>
                             </tr>
@@ -815,6 +798,20 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                               <td>
                                 <div>
                                   <p>The content type of file.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>model</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The analysis model to be used by the service. For the <strong>Element classification</strong> and <strong>Compare
+two documents</strong> methods, the default is <code>contracts</code>. For the <strong>Extract tables</strong> method, the default is <code>tables</code>.
+These defaults apply to the standalone methods as well as to the methods&rsquo; use in batch-processing requests.</p>
                                 </div>
                               </td>
                             </tr>
@@ -852,8 +849,8 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/compareDocuments(file1:file2:file1Label:file2Label:modelID:file1ContentType:file2ContentType:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">compareDocuments(file1:file2:file1Label:file2Label:modelID:file1ContentType:file2ContentType:headers:completionHandler:)</a>
+                    <a name="//apple_ref/swift/Method/compareDocuments(file1:file2:file1ContentType:file2ContentType:file1Label:file2Label:model:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">compareDocuments(file1:file2:file1ContentType:file2ContentType:file1Label:file2Label:model:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -863,7 +860,7 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                       <div class="abstract">
                         <p>Compare two documents.</p>
 
-<p>Compare two uploaded input files. Uploaded files must be in the same file format.</p>
+<p>Compares two input documents. Documents must be in the same format.</p>
 
                       </div>
                       <div class="declaration">
@@ -871,13 +868,13 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">compareDocuments</span><span class="p">(</span>
-    <span class="nv">file1</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
-    <span class="nv">file2</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
-    <span class="nv">file1Label</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">file2Label</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">file1</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
+    <span class="nv">file2</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
     <span class="nv">file1ContentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">file2ContentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">file1Label</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">file2Label</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">model</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/CompareReturn.html">CompareReturn</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -895,7 +892,7 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                               </td>
                               <td>
                                 <div>
-                                  <p>The first file to compare.</p>
+                                  <p>The first document to compare.</p>
                                 </div>
                               </td>
                             </tr>
@@ -907,45 +904,7 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                               </td>
                               <td>
                                 <div>
-                                  <p>The second file to compare.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>file1Label</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A text label for the first file.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>file2Label</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A text label for the second file.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>modelID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The analysis model to be used by the service. For the <code>/v1/element_classification</code> and
-<code>/v1/comparison</code> methods, the default is <code>contracts</code>. For the <code>/v1/tables</code> method, the default is <code>tables</code>. These
-defaults apply to the standalone methods as well as to the methods&rsquo; use in batch-processing requests.</p>
+                                  <p>The second document to compare.</p>
                                 </div>
                               </td>
                             </tr>
@@ -970,6 +929,44 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                               <td>
                                 <div>
                                   <p>The content type of file2.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file1Label</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A text label for the first document.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file2Label</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A text label for the second document.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>model</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The analysis model to be used by the service. For the <strong>Element classification</strong> and <strong>Compare
+two documents</strong> methods, the default is <code>contracts</code>. For the <strong>Extract tables</strong> method, the default is <code>tables</code>.
+These defaults apply to the standalone methods as well as to the methods&rsquo; use in batch-processing requests.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1119,7 +1116,9 @@ incorporated at a later date. Instead, submitted feedback is used to suggest fut
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>List the feedback in documents.</p>
+                        <p>List the feedback in a document.</p>
+
+<p>Lists the feedback in a document.</p>
 
                       </div>
                       <div class="declaration">
@@ -1401,8 +1400,8 @@ output includes a value called <code>total</code> that gives the total count of 
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/getFeedback(feedbackID:modelID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">getFeedback(feedbackID:modelID:headers:completionHandler:)</a>
+                    <a name="//apple_ref/swift/Method/getFeedback(feedbackID:model:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">getFeedback(feedbackID:model:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1412,6 +1411,8 @@ output includes a value called <code>total</code> that gives the total count of 
                       <div class="abstract">
                         <p>List a specified feedback entry.</p>
 
+<p>Lists a feedback entry with a specified <code>feedback_id</code>.</p>
+
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -1419,7 +1420,7 @@ output includes a value called <code>total</code> that gives the total count of 
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getFeedback</span><span class="p">(</span>
     <span class="nv">feedbackID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">model</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/GetFeedback.html">GetFeedback</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1444,14 +1445,14 @@ output includes a value called <code>total</code> that gives the total count of 
                             <tr>
                               <td>
                                 <code>
-                                <em>modelID</em>
+                                <em>model</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The analysis model to be used by the service. For the <code>/v1/element_classification</code> and
-<code>/v1/comparison</code> methods, the default is <code>contracts</code>. For the <code>/v1/tables</code> method, the default is <code>tables</code>. These
-defaults apply to the standalone methods as well as to the methods&rsquo; use in batch-processing requests.</p>
+                                  <p>The analysis model to be used by the service. For the <strong>Element classification</strong> and <strong>Compare
+two documents</strong> methods, the default is <code>contracts</code>. For the <strong>Extract tables</strong> method, the default is <code>tables</code>.
+These defaults apply to the standalone methods as well as to the methods&rsquo; use in batch-processing requests.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1489,8 +1490,8 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/deleteFeedback(feedbackID:modelID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">deleteFeedback(feedbackID:modelID:headers:completionHandler:)</a>
+                    <a name="//apple_ref/swift/Method/deleteFeedback(feedbackID:model:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">deleteFeedback(feedbackID:model:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1498,7 +1499,9 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Deletes a specified feedback entry.</p>
+                        <p>Delete a specified feedback entry.</p>
+
+<p>Deletes a feedback entry with a specified <code>feedback_id</code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -1507,7 +1510,7 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteFeedback</span><span class="p">(</span>
     <span class="nv">feedbackID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">model</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/FeedbackDeleted.html">FeedbackDeleted</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1532,14 +1535,14 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                             <tr>
                               <td>
                                 <code>
-                                <em>modelID</em>
+                                <em>model</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The analysis model to be used by the service. For the <code>/v1/element_classification</code> and
-<code>/v1/comparison</code> methods, the default is <code>contracts</code>. For the <code>/v1/tables</code> method, the default is <code>tables</code>. These
-defaults apply to the standalone methods as well as to the methods&rsquo; use in batch-processing requests.</p>
+                                  <p>The analysis model to be used by the service. For the <strong>Element classification</strong> and <strong>Compare
+two documents</strong> methods, the default is <code>contracts</code>. For the <strong>Extract tables</strong> method, the default is <code>tables</code>.
+These defaults apply to the standalone methods as well as to the methods&rsquo; use in batch-processing requests.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1577,8 +1580,8 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/createBatch(function:inputCredentialsFile:inputBucketLocation:inputBucketName:outputCredentialsFile:outputBucketLocation:outputBucketName:modelID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">createBatch(function:inputCredentialsFile:inputBucketLocation:inputBucketName:outputCredentialsFile:outputBucketLocation:outputBucketName:modelID:headers:completionHandler:)</a>
+                    <a name="//apple_ref/swift/Method/createBatch(function:inputCredentialsFile:inputBucketLocation:inputBucketName:outputCredentialsFile:outputBucketLocation:outputBucketName:model:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">createBatch(function:inputCredentialsFile:inputBucketLocation:inputBucketName:outputCredentialsFile:outputBucketLocation:outputBucketName:model:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1601,13 +1604,13 @@ processing</a>.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createBatch</span><span class="p">(</span>
     <span class="nv">function</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">inputCredentialsFile</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+    <span class="nv">inputCredentialsFile</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
     <span class="nv">inputBucketLocation</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">inputBucketName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">outputCredentialsFile</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+    <span class="nv">outputCredentialsFile</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
     <span class="nv">outputBucketLocation</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">outputBucketName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">model</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/BatchStatus.html">BatchStatus</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1710,14 +1713,14 @@ on the <strong>Endpoint</strong> tab of your Cloud Object Storage instance; for 
                             <tr>
                               <td>
                                 <code>
-                                <em>modelID</em>
+                                <em>model</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The analysis model to be used by the service. For the <code>/v1/element_classification</code> and
-<code>/v1/comparison</code> methods, the default is <code>contracts</code>. For the <code>/v1/tables</code> method, the default is <code>tables</code>. These
-defaults apply to the standalone methods as well as to the methods&rsquo; use in batch-processing requests.</p>
+                                  <p>The analysis model to be used by the service. For the <strong>Element classification</strong> and <strong>Compare
+two documents</strong> methods, the default is <code>contracts</code>. For the <strong>Extract tables</strong> method, the default is <code>tables</code>.
+These defaults apply to the standalone methods as well as to the methods&rsquo; use in batch-processing requests.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1766,7 +1769,7 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                       <div class="abstract">
                         <p>List submitted batch-processing jobs.</p>
 
-<p>List the batch-processing jobs submitted by users.</p>
+<p>Lists batch-processing jobs submitted by users.</p>
 
                       </div>
                       <div class="declaration">
@@ -1826,9 +1829,9 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Get information about a specific batch-processing request.</p>
+                        <p>Get information about a specific batch-processing job.</p>
 
-<p>Get information about a batch-processing request with a specified ID.</p>
+<p>Gets information about a batch-processing job with a specified ID.</p>
 
                       </div>
                       <div class="declaration">
@@ -1854,7 +1857,7 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                               </td>
                               <td>
                                 <div>
-                                  <p>The ID of the batch-processing request whose information you want to retrieve.</p>
+                                  <p>The ID of the batch-processing job whose information you want to retrieve.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1892,8 +1895,8 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/updateBatch(batchID:action:modelID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">updateBatch(batchID:action:modelID:headers:completionHandler:)</a>
+                    <a name="//apple_ref/swift/Method/updateBatch(batchID:action:model:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">updateBatch(batchID:action:model:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1901,10 +1904,10 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Update a pending or active batch-processing request.</p>
+                        <p>Update a pending or active batch-processing job.</p>
 
-<p>Update a pending or active batch-processing request. You can rescan the input bucket to check for new documents or
-cancel a request.</p>
+<p>Updates a pending or active batch-processing job. You can rescan the input bucket to check for new documents or
+cancel a job.</p>
 
                       </div>
                       <div class="declaration">
@@ -1914,7 +1917,7 @@ cancel a request.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateBatch</span><span class="p">(</span>
     <span class="nv">batchID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">action</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">model</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/BatchStatus.html">BatchStatus</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -1932,7 +1935,7 @@ cancel a request.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The ID of the batch-processing request you want to update.</p>
+                                  <p>The ID of the batch-processing job you want to update.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1944,21 +1947,21 @@ cancel a request.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The action you want to perform on the specified batch-processing request.</p>
+                                  <p>The action you want to perform on the specified batch-processing job.</p>
                                 </div>
                               </td>
                             </tr>
                             <tr>
                               <td>
                                 <code>
-                                <em>modelID</em>
+                                <em>model</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The analysis model to be used by the service. For the <code>/v1/element_classification</code> and
-<code>/v1/comparison</code> methods, the default is <code>contracts</code>. For the <code>/v1/tables</code> method, the default is <code>tables</code>. These
-defaults apply to the standalone methods as well as to the methods&rsquo; use in batch-processing requests.</p>
+                                  <p>The analysis model to be used by the service. For the <strong>Element classification</strong> and <strong>Compare
+two documents</strong> methods, the default is <code>contracts</code>. For the <strong>Extract tables</strong> method, the default is <code>tables</code>.
+These defaults apply to the standalone methods as well as to the methods&rsquo; use in batch-processing requests.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1997,8 +2000,8 @@ defaults apply to the standalone methods as well as to the methods&rsquo; use in
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-02-12)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-03-28)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

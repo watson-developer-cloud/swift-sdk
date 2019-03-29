@@ -180,9 +180,9 @@ Phonetic Representation (SPR).</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C15credentialsFileACSg10Foundation3URLV_tcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(credentialsFile:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C15credentialsFileACSg10Foundation3URLV_tcfc">init(credentialsFile:)</a>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
+                    <a class="token" href="#/">init()</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -192,40 +192,13 @@ Phonetic Representation (SPR).</p>
                       <div class="abstract">
                         <p>Create a <code>TextToSpeech</code> object.</p>
 
-<p>Use this initializer to automatically pull service credentials from your credentials file.
-This file is downloaded from your service instance on IBM Cloud as ibm-credentials.env.
+<p>This initializer will retrieve credentials from the environment or a local credentials file.
+The credentials file can be downloaded from your service instance on IBM Cloud as ibm-credentials.env.
 Make sure to add the credentials file to your project so that it can be loaded at runtime.</p>
 
-<p>If the credentials cannot be loaded from the file, or the file is not found, initialization will fail.
+<p>If credentials are not available in the environment or a local credentials file, initialization will fail.
 In that case, try another initializer that directly passes in the credentials.</p>
 
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">?(</span><span class="nv">credentialsFile</span><span class="p">:</span> <span class="kt">URL</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>credentialsFile</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The URL of the credentials file.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
                       </div>
                     </section>
                   </div>
@@ -436,7 +409,8 @@ In that case, try another initializer that directly passes in the credentials.</
 
 <p>Lists all voices available for use with the service. The information includes the name, language, gender, and other
 details about the voice. To see information about a specific voice, use the <strong>Get a voice</strong> method.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech/http.html#voices">Specifying a voice</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech/voices.html#listVoices">Listing all available
+voices</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -501,7 +475,7 @@ details about the voice. To see information about a specific voice, use the <str
 <p>Gets information about the specified voice. The information includes the name, language, gender, and other details
 about the voice. Specify a customization ID to obtain information for that custom voice model of the specified
 voice. To list information about all available voices, use the <strong>List voices</strong> method.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech/http.html#voices">Specifying a voice</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech/voices.html#listVoice">Listing a specific voice</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -580,8 +554,8 @@ the custom model. Omit the parameter to see information about the specified voic
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/synthesize(text:accept:voice:customizationID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">synthesize(text:accept:voice:customizationID:headers:completionHandler:)</a>
+                    <a name="//apple_ref/swift/Method/synthesize(text:voice:customizationID:accept:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">synthesize(text:voice:customizationID:accept:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -593,10 +567,10 @@ the custom model. Omit the parameter to see information about the specified voic
 
 <p>Synthesizes text to audio that is spoken in the specified voice. The service bases its understanding of the
 language for the input text on the specified voice. Use a voice that matches the language of the input text.
-The service returns the synthesized audio stream as an array of bytes. You can pass a maximum of 5 KB of text to
-the service.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech/http.html#synthesize">Synthesizing text to
-audio</a>.</p>
+The method accepts a maximum of 5 KB of input text in the body of the request, and 8 KB for the URL and headers.
+The 5 KB limit includes any SSML tags that you specify. The service returns the synthesized audio stream as an
+array of bytes.
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech/http.html">The HTTP interface</a>.</p>
 <h3 id='audio-formats-accept-types' class='heading'>Audio formats (accept types)</h3>
 
 <p>The service can return audio in the following formats (MIME types).</p>
@@ -639,7 +613,7 @@ The service returns audio with a sampling rate of 48,000 Hz.</li>
 <li><p><code>audio/webm;codecs=vorbis</code>
 You can optionally specify the <code>rate</code> of the audio. The default sampling rate is 22,050 Hz.
 For more information about specifying an audio format, including additional details about some of the formats, see
-<a href="https://cloud.ibm.com/docs/services/text-to-speech/http.html#format">Specifying an audio format</a>.</p>
+<a href="https://cloud.ibm.com/docs/services/text-to-speech/audio-formats.html">Audio formats</a>.</p>
 <h3 id='warning-messages' class='heading'>Warning messages</h3>
 
 <p>If a request includes invalid query parameters, the service returns a <code>Warnings</code> response header that provides
@@ -655,9 +629,9 @@ a list of the form <code>\&quot;{invalid_arg_1}, {invalid_arg_2}.\&quot;</code> 
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">synthesize</span><span class="p">(</span>
     <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">accept</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">voice</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">accept</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt">Data</span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -676,21 +650,6 @@ a list of the form <code>\&quot;{invalid_arg_1}, {invalid_arg_2}.\&quot;</code> 
                               <td>
                                 <div>
                                   <p>The text to synthesize.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>accept</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The requested format (MIME type) of the audio. You can use the <code>Accept</code> header or the
-<code>accept</code> parameter to specify the audio format. For more information about specifying an audio format, see
-<strong>Audio formats (accept types)</strong> in the method description.
-Default: <code>audio/ogg;codecs=opus</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -718,6 +677,21 @@ Default: <code>audio/ogg;codecs=opus</code>.</p>
 custom voice model is specified, it is guaranteed to work only if it matches the language of the indicated voice.
 You must make the request with service credentials created for the instance of the service that owns the custom
 model. Omit the parameter to use the specified voice with no customization.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>accept</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The requested format (MIME type) of the audio. You can use the <code>Accept</code> header or the
+<code>accept</code> parameter to specify the audio format. For more information about specifying an audio format, see
+<strong>Audio formats (accept types)</strong> in the method description.
+Default: <code>audio/ogg;codecs=opus</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1967,8 +1941,8 @@ data.
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-02-12)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-03-28)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

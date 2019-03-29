@@ -1,61 +1,61 @@
 {
   "warnings": [
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
       "line": 28,
       "symbol": "Classifier.Status.nonExistent",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
       "line": 29,
       "symbol": "Classifier.Status.training",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
       "line": 30,
       "symbol": "Classifier.Status.failed",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
       "line": 31,
       "symbol": "Classifier.Status.available",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
       "line": 32,
       "symbol": "Classifier.Status.unavailable",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/NaturalLanguageClassifierV1/NaturalLanguageClassifier.swift",
-      "line": 93,
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageClassifierV1/NaturalLanguageClassifier.swift",
+      "line": 98,
       "symbol": "NaturalLanguageClassifier.accessToken(_:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/SupportingFiles/Shared.swift",
       "line": 20,
       "symbol": "WatsonResponse",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/SupportingFiles/Shared.swift",
       "line": 21,
       "symbol": "WatsonError",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     }
   ],
-  "source_directory": "/Users/travis/build/watson-developer-cloud/swift-sdk"
+  "source_directory": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk"
 }

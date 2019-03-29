@@ -407,6 +407,9 @@
                 <a href="../../Structs/SourceOptions.html">SourceOptions</a>
               </li>
               <li class="nav-group-task">
+                <a href="../../Structs/SourceOptionsBuckets.html">SourceOptionsBuckets</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../../Structs/SourceOptionsFolder.html">SourceOptionsFolder</a>
               </li>
               <li class="nav-group-task">
@@ -515,9 +518,7 @@ configuration for this source does not have a <strong>source</strong> object def
 <ul>
 <li><code>running</code> indicates that a crawl to fetch more documents is in progress.</li>
 <li><code>complete</code> indicates that the crawl has completed with no errors.</li>
-<li><code>complete_with_notices</code> indicates that some notices were generated during the crawl. Notices can be checked by
-using the <strong>notices</strong> query method.</li>
-<li><code>stopped</code> indicates that the crawl has stopped but is not complete.</li>
+<li><code>queued</code> indicates that the crawl has been paused by the system and will automatically restart when possible.</li>
 </ul>
 
           </section>
@@ -581,60 +582,6 @@ using the <strong>notices</strong> query method.</li>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV112SourceStatusV0D0O19completeWithNoticesyA2EmF"></a>
-                    <a name="//apple_ref/swift/Element/completeWithNotices" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV112SourceStatusV0D0O19completeWithNoticesyA2EmF">completeWithNotices</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">completeWithNotices</span> <span class="o">=</span> <span class="s">"complete_with_notices"</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11DiscoveryV112SourceStatusV0D0O7stoppedyA2EmF"></a>
-                    <a name="//apple_ref/swift/Element/stopped" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV112SourceStatusV0D0O7stoppedyA2EmF">stopped</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">stopped</span> <span class="o">=</span> <span class="s">"stopped"</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/s:11DiscoveryV112SourceStatusV0D0O13notConfiguredyA2EmF"></a>
                     <a name="//apple_ref/swift/Element/notConfigured" class="dashAnchor"></a>
                     <a class="token" href="#/s:11DiscoveryV112SourceStatusV0D0O13notConfiguredyA2EmF">notConfigured</a>
@@ -659,13 +606,40 @@ using the <strong>notices</strong> query method.</li>
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV112SourceStatusV0D0O6queuedyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/queued" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV112SourceStatusV0D0O6queuedyA2EmF">queued</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">queued</span> <span class="o">=</span> <span class="s">"queued"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-02-12)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-03-28)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

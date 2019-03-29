@@ -407,6 +407,9 @@
                 <a href="../Structs/SourceOptions.html">SourceOptions</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/SourceOptionsBuckets.html">SourceOptionsBuckets</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/SourceOptionsFolder.html">SourceOptionsFolder</a>
               </li>
               <li class="nav-group-task">
@@ -575,9 +578,9 @@ for manual filtering of results.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C15credentialsFile7versionACSg10Foundation3URLV_SStcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(credentialsFile:version:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C15credentialsFile7versionACSg10Foundation3URLV_SStcfc">init(credentialsFile:version:)</a>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/init(version:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">init(version:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -587,19 +590,38 @@ for manual filtering of results.</p>
                       <div class="abstract">
                         <p>Create a <code>Discovery</code> object.</p>
 
-<p>Use this initializer to automatically pull service credentials from your credentials file.
-This file is downloaded from your service instance on IBM Cloud as ibm-credentials.env.
+<p>This initializer will retrieve credentials from the environment or a local credentials file.
+The credentials file can be downloaded from your service instance on IBM Cloud as ibm-credentials.env.
 Make sure to add the credentials file to your project so that it can be loaded at runtime.</p>
 
-<p>If the credentials cannot be loaded from the file, or the file is not found, initialization will fail.
+<p>If credentials are not available in the environment or a local credentials file, initialization will fail.
 In that case, try another initializer that directly passes in the credentials.</p>
+
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV10A0C7version8username8passwordACSS_S2Stcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(version:username:password:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C7version8username8passwordACSS_S2Stcfc">init(version:username:password:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a <code>Discovery</code> object.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">?(</span><span class="nv">credentialsFile</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">version</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">username</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -607,18 +629,6 @@ In that case, try another initializer that directly passes in the credentials.</
                         <h4>Parameters</h4>
                         <table class="graybox">
                           <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>credentialsFile</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The URL of the credentials file.</p>
-                                </div>
-                              </td>
-                            </tr>
                             <tr>
                               <td>
                                 <code>
@@ -632,40 +642,6 @@ in <q>YYYY-MM-DD</q> format.</p>
                                 </div>
                               </td>
                             </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11DiscoveryV10A0C8username8password7versionACSS_S2Stcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(username:password:version:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C8username8password7versionACSS_S2Stcfc">init(username:password:version:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Create a <code>Discovery</code> object.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
                             <tr>
                               <td>
                                 <code>
@@ -687,19 +663,6 @@ in <q>YYYY-MM-DD</q> format.</p>
                               <td>
                                 <div>
                                   <p>The password used to authenticate with the service.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>version</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The release date of the version of the API to use. Specify the date
-in <q>YYYY-MM-DD</q> format.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2000,8 +1963,8 @@ configuration as it existed at the time the document was submitted.</p>
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/testConfigurationInEnvironment(environmentID:configuration:step:configurationID:file:metadata:fileContentType:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">testConfigurationInEnvironment(environmentID:configuration:step:configurationID:file:metadata:fileContentType:headers:completionHandler:)</a>
+                    <a name="//apple_ref/swift/Method/testConfigurationInEnvironment(environmentID:configuration:file:filename:fileContentType:metadata:step:configurationID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">testConfigurationInEnvironment(environmentID:configuration:file:filename:fileContentType:metadata:step:configurationID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2022,11 +1985,12 @@ help you understand how the document was processed. The document is not added to
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">testConfigurationInEnvironment</span><span class="p">(</span>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">configuration</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">filename</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">fileContentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">metadata</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">step</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">file</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">metadata</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">fileContentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/TestDocument.html">TestDocument</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -2067,39 +2031,38 @@ See the <code>GET /configurations/{configuration_id}</code> operation for an exa
                             <tr>
                               <td>
                                 <code>
-                                <em>step</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Specify to only run the input document through the given step instead of running the input
-document through the entire ingestion workflow. Valid values are <code>convert</code>, <code>enrich</code>, and <code>normalize</code>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>configurationID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The ID of the configuration to use to process the document. If the <strong>configuration</strong>
-form part is also provided (both are present at the same time), then the request will be rejected.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
                                 <em>file</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The content of the document to ingest. The maximum supported file size is 50 megabytes. Files
-larger than 50 megabytes is rejected.</p>
+                                  <p>The content of the document to ingest. The maximum supported file size when adding a file to a
+collection is 50 megabytes, the maximum supported file size when testing a confiruration is 1 megabyte. Files
+larger than the supported size are rejected.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>filename</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The filename for file.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fileContentType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The content type of file.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2124,12 +2087,26 @@ Example:  <code>{
                             <tr>
                               <td>
                                 <code>
-                                <em>fileContentType</em>
+                                <em>step</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The content type of file.</p>
+                                  <p>Specify to only run the input document through the given step instead of running the input
+document through the entire ingestion workflow. Valid values are <code>convert</code>, <code>enrich</code>, and <code>normalize</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>configurationID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the configuration to use to process the document. If the <strong>configuration</strong>
+form part is also provided (both are present at the same time), then the request will be rejected.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3422,8 +3399,8 @@ component <code>tokens</code>, any alternate character set <code>readings</code>
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/createStopwordList(environmentID:collectionID:stopwordFile:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">createStopwordList(environmentID:collectionID:stopwordFile:headers:completionHandler:)</a>
+                    <a name="//apple_ref/swift/Method/createStopwordList(environmentID:collectionID:stopwordFile:stopwordFilename:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">createStopwordList(environmentID:collectionID:stopwordFile:stopwordFilename:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3443,7 +3420,8 @@ component <code>tokens</code>, any alternate character set <code>readings</code>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createStopwordList</span><span class="p">(</span>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">stopwordFile</span><span class="p">:</span> <span class="kt">URL</span><span class="p">,</span>
+    <span class="nv">stopwordFile</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
+    <span class="nv">stopwordFilename</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/TokenDictStatusResponse.html">TokenDictStatusResponse</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -3486,6 +3464,18 @@ component <code>tokens</code>, any alternate character set <code>readings</code>
                               <td>
                                 <div>
                                   <p>The content of the stopword list to ingest.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>stopwordFilename</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The filename for stopwordFile.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3612,8 +3602,8 @@ used for the collection.</p>
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/addDocument(environmentID:collectionID:file:metadata:fileContentType:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">addDocument(environmentID:collectionID:file:metadata:fileContentType:headers:completionHandler:)</a>
+                    <a name="//apple_ref/swift/Method/addDocument(environmentID:collectionID:file:filename:fileContentType:metadata:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">addDocument(environmentID:collectionID:file:filename:fileContentType:metadata:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3635,7 +3625,9 @@ document. If the <strong>Content-Type</strong> parameter is missing or is one of
 <li>The following field names are reserved and will be filtered out if present after normalization: <code>id</code>, <code>score</code>,
 <code>highlight</code>, and any field with the prefix of: <code>_</code>, <code>+</code>, or <code>-</code></li>
 <li>Fields with empty name values after normalization are filtered out before indexing.</li>
-<li><p>Fields containing the following characters after normalization are filtered out before indexing: <code>#</code> and <code>,</code>.</p></li>
+<li><p>Fields containing the following characters after normalization are filtered out before indexing: <code>#</code> and <code>,</code>
+<strong>Note:</strong> Documents can be added with a specific <strong>document_id</strong> by using the
+<strong>_/v1/environments/{environment_id}/collections/{collection_id}/documents</strong> method.</p></li>
 </ul>
 
                       </div>
@@ -3646,9 +3638,10 @@ document. If the <strong>Content-Type</strong> parameter is missing or is one of
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addDocument</span><span class="p">(</span>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">file</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">metadata</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">filename</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">fileContentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">metadata</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/DocumentAccepted.html">DocumentAccepted</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -3690,8 +3683,33 @@ document. If the <strong>Content-Type</strong> parameter is missing or is one of
                               </td>
                               <td>
                                 <div>
-                                  <p>The content of the document to ingest. The maximum supported file size is 50 megabytes. Files
-larger than 50 megabytes is rejected.</p>
+                                  <p>The content of the document to ingest. The maximum supported file size when adding a file to a
+collection is 50 megabytes, the maximum supported file size when testing a confiruration is 1 megabyte. Files
+larger than the supported size are rejected.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>filename</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The filename for file.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fileContentType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The content type of file.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3710,18 +3728,6 @@ Example:  <code>{
 \&quot;Creator\&quot;: \&quot;Johnny Appleseed\&quot;,
 \&quot;Subject\&quot;: \&quot;Apples\&quot;
 }</code>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>fileContentType</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The content type of file.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3862,8 +3868,8 @@ when the document was ingested. Use the query API to retrieve the actual documen
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/updateDocument(environmentID:collectionID:documentID:file:metadata:fileContentType:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">updateDocument(environmentID:collectionID:documentID:file:metadata:fileContentType:headers:completionHandler:)</a>
+                    <a name="//apple_ref/swift/Method/updateDocument(environmentID:collectionID:documentID:file:filename:fileContentType:metadata:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">updateDocument(environmentID:collectionID:documentID:file:filename:fileContentType:metadata:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3873,7 +3879,10 @@ when the document was ingested. Use the query API to retrieve the actual documen
                       <div class="abstract">
                         <p>Update a document.</p>
 
-<p>Replace an existing document. Starts ingesting a document with optional metadata.</p>
+<p>Replace an existing document or add a document with a specified <strong>document_id</strong>. Starts ingesting a document with
+optional metadata.
+<strong>Note:</strong> When uploading a new document with this method it automatically replaces any document stored with the
+same <strong>document_id</strong> if it exists.</p>
 
                       </div>
                       <div class="declaration">
@@ -3884,9 +3893,10 @@ when the document was ingested. Use the query API to retrieve the actual documen
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">documentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">file</span><span class="p">:</span> <span class="kt">URL</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">metadata</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">filename</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">fileContentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">metadata</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/WatsonResponse">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/DocumentAccepted.html">DocumentAccepted</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/WatsonError">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -3940,8 +3950,33 @@ when the document was ingested. Use the query API to retrieve the actual documen
                               </td>
                               <td>
                                 <div>
-                                  <p>The content of the document to ingest. The maximum supported file size is 50 megabytes. Files
-larger than 50 megabytes is rejected.</p>
+                                  <p>The content of the document to ingest. The maximum supported file size when adding a file to a
+collection is 50 megabytes, the maximum supported file size when testing a confiruration is 1 megabyte. Files
+larger than the supported size are rejected.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>filename</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The filename for file.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fileContentType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The content type of file.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3960,18 +3995,6 @@ Example:  <code>{
 \&quot;Creator\&quot;: \&quot;Johnny Appleseed\&quot;,
 \&quot;Subject\&quot;: \&quot;Apples\&quot;
 }</code>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>fileContentType</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The content type of file.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4124,7 +4147,8 @@ status code <code>200</code>) with the status set to &lsquo;deleted&rsquo;.</p>
 
 <p>Complex queries might be too long for a standard method query. By using this method, you can construct longer
 queries. However, these queries may take longer to complete than the standard method. For details, see the
-<a href="https://cloud.ibm.com/docs/services/discovery/using.html">Discovery service documentation</a>.</p>
+<a href="https://cloud.ibm.com/docs/services/discovery?topic=discovery-query-concepts#query-concepts">Discovery service
+documentation</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -4365,7 +4389,7 @@ requested total is not found. The default is <code>10</code>. The maximum is <co
                               </td>
                               <td>
                                 <div>
-                                  <p>When <code>true</code> and used with a Watson Discovery News collection, duplicate results (based
+                                  <p>When <code>true</code>, and used with a Watson Discovery News collection, duplicate results (based
 on the contents of the <strong>title</strong> field) are removed. Duplicate comparison is limited to the current query only;
 <strong>offset</strong> is not considered. This parameter is currently Beta functionality.</p>
                                 </div>
@@ -4512,9 +4536,9 @@ higher field values. This parameter cannot be used in the same query as the <str
                         <p>Query system notices.</p>
 
 <p>Queries for notices (errors or warnings) that might have been generated by the system. Notices are generated when
-ingesting documents and performing relevance training. See the <a href="https://cloud.ibm.com/docs/services/discovery/using.html">Discovery service
-documentation</a> for more details on the query
-language.</p>
+ingesting documents and performing relevance training. See the <a href="https://cloud.ibm.com/docs/services/discovery?topic=discovery-query-concepts#query-concepts">Discovery service
+documentation</a> for
+more details on the query language.</p>
 
                       </div>
                       <div class="declaration">
@@ -4649,7 +4673,8 @@ aggregations, see the Query reference.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Number of results to return.</p>
+                                  <p>Number of results to return. The maximum for the <strong>count</strong> and <strong>offset</strong> values together in
+any one query is <strong>10000</strong>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4674,7 +4699,8 @@ aggregations, see the Query reference.</p>
                               <td>
                                 <div>
                                   <p>The number of query results to skip at the beginning. For example, if the total number of
-results that are returned is 10 and the offset is 8, it returns the last two results.</p>
+results that are returned is 10 and the offset is 8, it returns the last two results. The maximum for the
+<strong>count</strong> and <strong>offset</strong> values together in any one query is <strong>10000</strong>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4845,7 +4871,8 @@ identify similar documents. If not specified, the entire document is used for co
 
 <p>Complex queries might be too long for a standard method query. By using this method, you can construct longer
 queries. However, these queries may take longer to complete than the standard method. For details, see the
-<a href="https://cloud.ibm.com/docs/services/discovery/using.html">Discovery service documentation</a>.</p>
+<a href="https://cloud.ibm.com/docs/services/discovery?topic=discovery-query-concepts#query-concepts">Discovery service
+documentation</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -5073,7 +5100,7 @@ requested total is not found. The default is <code>10</code>. The maximum is <co
                               </td>
                               <td>
                                 <div>
-                                  <p>When <code>true</code> and used with a Watson Discovery News collection, duplicate results (based
+                                  <p>When <code>true</code>, and used with a Watson Discovery News collection, duplicate results (based
 on the contents of the <strong>title</strong> field) are removed. Duplicate comparison is limited to the current query only;
 <strong>offset</strong> is not considered. This parameter is currently Beta functionality.</p>
                                 </div>
@@ -5220,9 +5247,9 @@ higher field values. This parameter cannot be used in the same query as the <str
                         <p>Query multiple collection system notices.</p>
 
 <p>Queries for notices (errors or warnings) that might have been generated by the system. Notices are generated when
-ingesting documents and performing relevance training. See the <a href="https://cloud.ibm.com/docs/services/discovery/using.html">Discovery service
-documentation</a> for more details on the query
-language.</p>
+ingesting documents and performing relevance training. See the <a href="https://cloud.ibm.com/docs/services/discovery?topic=discovery-query-concepts#query-concepts">Discovery service
+documentation</a> for
+more details on the query language.</p>
 
                       </div>
                       <div class="declaration">
@@ -5341,7 +5368,8 @@ aggregations, see the Query reference.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Number of results to return.</p>
+                                  <p>Number of results to return. The maximum for the <strong>count</strong> and <strong>offset</strong> values together in
+any one query is <strong>10000</strong>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -5366,7 +5394,8 @@ aggregations, see the Query reference.</p>
                               <td>
                                 <div>
                                   <p>The number of query results to skip at the beginning. For example, if the total number of
-results that are returned is 10 and the offset is 8, it returns the last two results.</p>
+results that are returned is 10 and the offset is 8, it returns the last two results. The maximum for the
+<strong>count</strong> and <strong>offset</strong> values together in any one query is <strong>10000</strong>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -5497,7 +5526,7 @@ identify similar documents. If not specified, the entire document is used for co
                       <div class="abstract">
                         <p>Knowledge Graph entity query.</p>
 
-<p>See the <a href="https://cloud.ibm.com/docs/services/discovery/building-kg.html">Knowledge Graph documentation</a> for
+<p>See the <a href="https://cloud.ibm.com/docs/services/discovery?topic=discovery-kg#kg">Knowledge Graph documentation</a> for
 more details.</p>
 
                       </div>
@@ -5655,7 +5684,7 @@ maximum number of evidence items per query is 10,000.</p>
                       <div class="abstract">
                         <p>Knowledge Graph relationship query.</p>
 
-<p>See the <a href="https://cloud.ibm.com/docs/services/discovery/building-kg.html">Knowledge Graph documentation</a> for
+<p>See the <a href="https://cloud.ibm.com/docs/services/discovery?topic=discovery-kg#kg">Knowledge Graph documentation</a> for
 more details.</p>
 
                       </div>
@@ -5753,7 +5782,7 @@ same query as the <strong>bias</strong> parameter.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Filters to apply to the relationship query.</p>
+                                  <p></p>
                                 </div>
                               </td>
                             </tr>
@@ -5969,7 +5998,7 @@ maximum number of evidence items per query is 10,000.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p></p>
+                                  <p>The natural text query for the new training query.</p>
                                 </div>
                               </td>
                             </tr>
@@ -5981,7 +6010,7 @@ maximum number of evidence items per query is 10,000.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p></p>
+                                  <p>The filter used on the collection before the <strong>natural_language_query</strong> is applied.</p>
                                 </div>
                               </td>
                             </tr>
@@ -5993,7 +6022,7 @@ maximum number of evidence items per query is 10,000.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p></p>
+                                  <p>Array of training examples.</p>
                                 </div>
                               </td>
                             </tr>
@@ -6500,7 +6529,7 @@ maximum number of evidence items per query is 10,000.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p></p>
+                                  <p>The document ID associated with this training example.</p>
                                 </div>
                               </td>
                             </tr>
@@ -6512,7 +6541,7 @@ maximum number of evidence items per query is 10,000.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p></p>
+                                  <p>The cross reference associated with this training example.</p>
                                 </div>
                               </td>
                             </tr>
@@ -6524,7 +6553,7 @@ maximum number of evidence items per query is 10,000.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p></p>
+                                  <p>The relevance of the training example.</p>
                                 </div>
                               </td>
                             </tr>
@@ -6766,7 +6795,7 @@ maximum number of evidence items per query is 10,000.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p></p>
+                                  <p>The example to add.</p>
                                 </div>
                               </td>
                             </tr>
@@ -6778,7 +6807,7 @@ maximum number of evidence items per query is 10,000.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p></p>
+                                  <p>The relevance value for this example.</p>
                                 </div>
                               </td>
                             </tr>
@@ -6944,7 +6973,7 @@ maximum number of evidence items per query is 10,000.</p>
 <p>Deletes all data associated with a specified customer ID. The method has no effect if no data is associated with
 the customer ID.
 You associate a customer ID with data by passing the <strong>X-Watson-Metadata</strong> header with a request that passes data.
-For more information about personal data and customer IDs, see <a href="https://cloud.ibm.com/docs/services/discovery/information-security.html">Information
+For more information about personal data and customer IDs, see <a href="https://cloud.ibm.com/docs/services/discovery?topic=discovery-information-security#information-security">Information
 security</a>.</p>
 
                       </div>
@@ -7167,7 +7196,8 @@ results. You cannot use <strong>natural_language_query</strong> and <strong>quer
                               </td>
                               <td>
                                 <div>
-                                  <p>Number of results to return.</p>
+                                  <p>Number of results to return. The maximum for the <strong>count</strong> and <strong>offset</strong> values together in
+any one query is <strong>10000</strong>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -7180,7 +7210,8 @@ results. You cannot use <strong>natural_language_query</strong> and <strong>quer
                               <td>
                                 <div>
                                   <p>The number of query results to skip at the beginning. For example, if the total number of
-results that are returned is 10 and the offset is 8, it returns the last two results.</p>
+results that are returned is 10 and the offset is 8, it returns the last two results. The maximum for the
+<strong>count</strong> and <strong>offset</strong> values together in any one query is <strong>10000</strong>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -7688,7 +7719,8 @@ individual word or unigram within the query string.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Number of results to return.</p>
+                                  <p>Number of results to return. The maximum for the <strong>count</strong> and <strong>offset</strong> values together in
+any one query is <strong>10000</strong>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -7861,7 +7893,8 @@ associate a collection with the remote source.
 <li><code>box</code> indicates the credentials are used to connect an instance of Enterprise Box.</li>
 <li><code>salesforce</code> indicates the credentials are used to connect to Salesforce.</li>
 <li><code>sharepoint</code> indicates the credentials are used to connect to Microsoft SharePoint Online.</li>
-<li><code>web_crawl</code> indicates the credentials are used to perform a web crawl.</li>
+<li><code>web_crawl</code> indicates the credentials are used to perform a web crawl.
+=  <code>cloud_object_storage</code> indicates the credentials are used to connect to an IBM Cloud Object Store.</li>
 </ul></p>
                                 </div>
                               </td>
@@ -8074,7 +8107,8 @@ the source system.</p>
 <li><code>box</code> indicates the credentials are used to connect an instance of Enterprise Box.</li>
 <li><code>salesforce</code> indicates the credentials are used to connect to Salesforce.</li>
 <li><code>sharepoint</code> indicates the credentials are used to connect to Microsoft SharePoint Online.</li>
-<li><code>web_crawl</code> indicates the credentials are used to perform a web crawl.</li>
+<li><code>web_crawl</code> indicates the credentials are used to perform a web crawl.
+=  <code>cloud_object_storage</code> indicates the credentials are used to connect to an IBM Cloud Object Store.</li>
 </ul></p>
                                 </div>
                               </td>
@@ -8554,8 +8588,8 @@ Obtain credentials for your source from the administrator of the source.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-02-12)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-03-28)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

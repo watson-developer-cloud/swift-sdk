@@ -78,6 +78,12 @@
                 <a href="../Structs/Category/Label.html">– Label</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/CategoryComparison.html">CategoryComparison</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CategoryComparison/Label.html">– Label</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/ClassifyReturn.html">ClassifyReturn</a>
               </li>
               <li class="nav-group-task">
@@ -103,6 +109,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/ContractAmts/ConfidenceLevel.html">– ConfidenceLevel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ContractType.html">ContractType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ContractType/ConfidenceLevel.html">– ConfidenceLevel</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/DocCounts.html">DocCounts</a>
@@ -151,6 +163,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/HTMLReturn.html">HTMLReturn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Key.html">Key</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KeyValuePair.html">KeyValuePair</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Label.html">Label</a>
@@ -219,6 +237,9 @@
                 <a href="../Structs/TypeLabel.html">TypeLabel</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/TypeLabelComparison.html">TypeLabelComparison</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/UnalignedElement.html">UnalignedElement</a>
               </li>
               <li class="nav-group-task">
@@ -229,6 +250,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/UpdatedLabelsOut/Modification.html">– Modification</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Value.html">Value</a>
               </li>
             </ul>
           </li>
@@ -261,6 +285,61 @@
           <section class="section task-group-section">
             <div class="task-group">
               <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV10A6ReturnV7modelIDSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/modelID" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV10A6ReturnV7modelIDSSSgvp">modelID</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The analysis model used to compare the input documents. For the <strong>Compare two documents</strong> method, the only valid
+value is <code>contracts</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV10A6ReturnV12modelVersionSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/modelVersion" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV10A6ReturnV12modelVersionSSSgvp">modelVersion</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The version of the analysis model identified by the value of the <code>model_id</code> key.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">modelVersion</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -342,68 +421,13 @@
                     </section>
                   </div>
                 </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:15CompareComplyV10A6ReturnV7modelIDSSSgvp"></a>
-                    <a name="//apple_ref/swift/Property/modelID" class="dashAnchor"></a>
-                    <a class="token" href="#/s:15CompareComplyV10A6ReturnV7modelIDSSSgvp">modelID</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The analysis model used to classify the input document. For the <code>/v1/element_classification</code> method, the only valid
-value is <code>contracts</code>.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:15CompareComplyV10A6ReturnV12modelVersionSSSgvp"></a>
-                    <a name="//apple_ref/swift/Property/modelVersion" class="dashAnchor"></a>
-                    <a class="token" href="#/s:15CompareComplyV10A6ReturnV12modelVersionSSSgvp">modelVersion</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The version of the analysis model identified by the value of the <code>model_id</code> key.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">modelVersion</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
               </ul>
             </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-02-12)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-03-28)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

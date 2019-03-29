@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PartOfSpeech Enumeration Reference</title>
+    <link rel="stylesheet" type="text/css" href="../../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../../js/jquery.min.js" defer></script>
+    <script src="../../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Enum/PartOfSpeech" class="dashAnchor"></a>
+    <a title="PartOfSpeech Enumeration Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../../index.html">NaturalLanguageUnderstandingV1 Docs</a></p>
+        <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../../index.html">NaturalLanguageUnderstandingV1 Reference</a>
+        <img id="carat" src="../../img/carat.png" />
+        PartOfSpeech Enumeration Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../../Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../readme.html">README</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Classes/NaturalLanguageUnderstanding.html">NaturalLanguageUnderstanding</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Structs/AnalysisResults.html">AnalysisResults</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/AnalysisResultsEmotion.html">AnalysisResultsEmotion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/AnalysisResultsMetadata.html">AnalysisResultsMetadata</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/AnalysisResultsSentiment.html">AnalysisResultsSentiment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/AnalysisResultsUsage.html">AnalysisResultsUsage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/Author.html">Author</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/CategoriesOptions.html">CategoriesOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/CategoriesResult.html">CategoriesResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/ConceptsOptions.html">ConceptsOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/ConceptsResult.html">ConceptsResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DeleteModelResults.html">DeleteModelResults</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DisambiguationResult.html">DisambiguationResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DocumentEmotionResults.html">DocumentEmotionResults</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DocumentEmotionResultsEmotion.html">DocumentEmotionResultsEmotion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DocumentSentimentResults.html">DocumentSentimentResults</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/EmotionOptions.html">EmotionOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/EmotionResult.html">EmotionResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/EmotionScores.html">EmotionScores</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/EntitiesOptions.html">EntitiesOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/EntitiesResult.html">EntitiesResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/EntitiesResultDisambiguation.html">EntitiesResultDisambiguation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/EntitiesResultEmotion.html">EntitiesResultEmotion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/EntitiesResultSentiment.html">EntitiesResultSentiment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/EntityMention.html">EntityMention</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/FeatureSentimentResults.html">FeatureSentimentResults</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/Features.html">Features</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/Feed.html">Feed</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/KeywordsOptions.html">KeywordsOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/KeywordsResult.html">KeywordsResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/KeywordsResultEmotion.html">KeywordsResultEmotion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/KeywordsResultSentiment.html">KeywordsResultSentiment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/ListModelsResults.html">ListModelsResults</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MetadataOptions.html">MetadataOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MetadataResult.html">MetadataResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/Model.html">Model</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/ParametersFeatures.html">ParametersFeatures</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/RelationArgument.html">RelationArgument</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/RelationEntity.html">RelationEntity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/RelationsOptions.html">RelationsOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/RelationsResult.html">RelationsResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/SemanticRolesAction.html">SemanticRolesAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/SemanticRolesEntity.html">SemanticRolesEntity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/SemanticRolesKeyword.html">SemanticRolesKeyword</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/SemanticRolesObject.html">SemanticRolesObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/SemanticRolesOptions.html">SemanticRolesOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/SemanticRolesResult.html">SemanticRolesResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/SemanticRolesResultAction.html">SemanticRolesResultAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/SemanticRolesResultObject.html">SemanticRolesResultObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/SemanticRolesResultSubject.html">SemanticRolesResultSubject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/SemanticRolesSubject.html">SemanticRolesSubject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/SemanticRolesVerb.html">SemanticRolesVerb</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/SentenceResult.html">SentenceResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/SentimentOptions.html">SentimentOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/SentimentResult.html">SentimentResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/SyntaxOptions.html">SyntaxOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/SyntaxOptionsTokens.html">SyntaxOptionsTokens</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/SyntaxResult.html">SyntaxResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/TargetedEmotionResults.html">TargetedEmotionResults</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/TargetedEmotionResultsEmotion.html">TargetedEmotionResultsEmotion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/TargetedSentimentResults.html">TargetedSentimentResults</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/TokenResult.html">TokenResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/TokenResult/PartOfSpeech.html">– PartOfSpeech</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/Usage.html">Usage</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Typealiases.html#/WatsonError">WatsonError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Typealiases.html#/WatsonResponse">WatsonResponse</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>PartOfSpeech</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">PartOfSpeech</span> <span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                </div>
+              </div>
+            <p>The part of speech of the token. For descriptions of the values, see <a href="https://universaldependencies.org/u/pos/">Universal Dependencies POS
+tags</a>.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO3adjyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/adj" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO3adjyA2EmF">adj</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">adj</span> <span class="o">=</span> <span class="s">"ADJ"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO3adpyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/adp" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO3adpyA2EmF">adp</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">adp</span> <span class="o">=</span> <span class="s">"ADP"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO3advyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/adv" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO3advyA2EmF">adv</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">adv</span> <span class="o">=</span> <span class="s">"ADV"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO3auxyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/aux" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO3auxyA2EmF">aux</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">aux</span> <span class="o">=</span> <span class="s">"AUX"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO5cconjyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/cconj" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO5cconjyA2EmF">cconj</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">cconj</span> <span class="o">=</span> <span class="s">"CCONJ"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO3detyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/det" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO3detyA2EmF">det</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">det</span> <span class="o">=</span> <span class="s">"DET"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO4intjyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/intj" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO4intjyA2EmF">intj</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">intj</span> <span class="o">=</span> <span class="s">"INTJ"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO4nounyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/noun" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO4nounyA2EmF">noun</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">noun</span> <span class="o">=</span> <span class="s">"NOUN"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO3numyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/num" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO3numyA2EmF">num</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">num</span> <span class="o">=</span> <span class="s">"NUM"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO4partyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/part" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO4partyA2EmF">part</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">part</span> <span class="o">=</span> <span class="s">"PART"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO4pronyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/pron" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO4pronyA2EmF">pron</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">pron</span> <span class="o">=</span> <span class="s">"PRON"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO5propnyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/propn" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO5propnyA2EmF">propn</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">propn</span> <span class="o">=</span> <span class="s">"PROPN"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO5punctyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/punct" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO5punctyA2EmF">punct</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">punct</span> <span class="o">=</span> <span class="s">"PUNCT"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO5sconjyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/sconj" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO5sconjyA2EmF">sconj</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">sconj</span> <span class="o">=</span> <span class="s">"SCONJ"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO3symyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/sym" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO3symyA2EmF">sym</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">sym</span> <span class="o">=</span> <span class="s">"SYM"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO4verbyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/verb" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO4verbyA2EmF">verb</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">verb</span> <span class="o">=</span> <span class="s">"VERB"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO1xyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/x" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV111TokenResultV12PartOfSpeechO1xyA2EmF">x</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">x</span> <span class="o">=</span> <span class="s">"X"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-03-28)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

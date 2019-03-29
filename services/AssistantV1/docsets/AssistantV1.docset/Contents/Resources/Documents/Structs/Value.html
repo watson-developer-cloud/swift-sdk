@@ -60,31 +60,7 @@
                 <a href="../Structs/CounterexampleCollection.html">CounterexampleCollection</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/CreateCounterexample.html">CreateCounterexample</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/CreateDialogNode.html">CreateDialogNode</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/CreateDialogNode/NodeType.html">– NodeType</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/CreateDialogNode/EventName.html">– EventName</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/CreateDialogNode/DigressIn.html">– DigressIn</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/CreateDialogNode/DigressOut.html">– DigressOut</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/CreateDialogNode/DigressOutSlots.html">– DigressOutSlots</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/CreateEntity.html">CreateEntity</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/CreateExample.html">CreateExample</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/CreateIntent.html">CreateIntent</a>
@@ -183,9 +159,6 @@
                 <a href="../Structs/EntityCollection.html">EntityCollection</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/EntityExport.html">EntityExport</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/EntityMention.html">EntityMention</a>
               </li>
               <li class="nav-group-task">
@@ -198,22 +171,16 @@
                 <a href="../Structs/ExampleCollection.html">ExampleCollection</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/InputData.html">InputData</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/Intent.html">Intent</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/IntentCollection.html">IntentCollection</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/IntentExport.html">IntentExport</a>
+                <a href="../Structs/Log.html">Log</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/LogCollection.html">LogCollection</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/LogExport.html">LogExport</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/LogMessage.html">LogMessage</a>
@@ -225,7 +192,7 @@
                 <a href="../Structs/LogPagination.html">LogPagination</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/Mentions.html">Mentions</a>
+                <a href="../Structs/Mention.html">Mention</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/MessageContextMetadata.html">MessageContextMetadata</a>
@@ -270,22 +237,13 @@
                 <a href="../Structs/ValueCollection.html">ValueCollection</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/ValueExport.html">ValueExport</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/ValueExport/ValueType.html">– ValueType</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/Workspace.html">Workspace</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/Workspace/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/WorkspaceCollection.html">WorkspaceCollection</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/WorkspaceExport.html">WorkspaceExport</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/WorkspaceExport/Status.html">– Status</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/WorkspaceSystemSettings.html">WorkspaceSystemSettings</a>
@@ -343,7 +301,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Specifies the type of value.</p>
+                        <p>Specifies the type of entity value.</p>
 
                         <a href="../Structs/Value/ValueType.html" class="slightly-smaller">See more</a>
                       </div>
@@ -361,9 +319,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV15ValueV9valueTextSSvp"></a>
-                    <a name="//apple_ref/swift/Property/valueText" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV15ValueV9valueTextSSvp">valueText</a>
+                    <a name="/s:11AssistantV15ValueV5valueSSvp"></a>
+                    <a name="//apple_ref/swift/Property/value" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV15ValueV5valueSSvp">value</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -371,14 +329,20 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The text of the entity value.</p>
+                        <p>The text of the entity value. This string must conform to the following restrictions:</p>
+
+<ul>
+<li>It cannot contain carriage return, newline, or tab characters.</li>
+<li>It cannot consist of only whitespace characters.</li>
+<li>It must be no longer than 64 characters.</li>
+</ul>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">valueText</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">value</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -415,9 +379,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV15ValueV7created10Foundation4DateVSgvp"></a>
-                    <a name="//apple_ref/swift/Property/created" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV15ValueV7created10Foundation4DateVSgvp">created</a>
+                    <a name="/s:11AssistantV15ValueV9valueTypeSSvp"></a>
+                    <a name="//apple_ref/swift/Property/valueType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV15ValueV9valueTypeSSvp">valueType</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -425,41 +389,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The timestamp for creation of the entity value.</p>
+                        <p>Specifies the type of entity value.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">created</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11AssistantV15ValueV7updated10Foundation4DateVSgvp"></a>
-                    <a name="//apple_ref/swift/Property/updated" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV15ValueV7updated10Foundation4DateVSgvp">updated</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The timestamp for the last update to the entity value.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">updated</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">valueType</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -479,7 +416,14 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An array containing any synonyms for the entity value.</p>
+                        <p>An array of synonyms for the entity value. A value can specify either synonyms or patterns (depending on the value
+type), but not both. A synonym must conform to the following resrictions:</p>
+
+<ul>
+<li>It cannot contain carriage return, newline, or tab characters.</li>
+<li>It cannot consist of only whitespace characters.</li>
+<li>It must be no longer than 64 characters.</li>
+</ul>
 
                       </div>
                       <div class="declaration">
@@ -506,7 +450,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An array containing any patterns for the entity value.</p>
+                        <p>An array of patterns for the entity value. A value can specify either synonyms or patterns (depending on the value
+type), but not both. A pattern is a regular expression no longer than 512 characters. For more information about
+how to specify a pattern, see the
+<a href="https://cloud.ibm.com/docs/services/assistant/entities.html#entities-create-dictionary-based">documentation</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -523,9 +470,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV15ValueV9valueTypeSSvp"></a>
-                    <a name="//apple_ref/swift/Property/valueType" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV15ValueV9valueTypeSSvp">valueType</a>
+                    <a name="/s:11AssistantV15ValueV7created10Foundation4DateVSgvp"></a>
+                    <a name="//apple_ref/swift/Property/created" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV15ValueV7created10Foundation4DateVSgvp">created</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -533,14 +480,41 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Specifies the type of value.</p>
+                        <p>The timestamp for creation of the object.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">valueType</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">created</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV15ValueV7updated10Foundation4DateVSgvp"></a>
+                    <a name="//apple_ref/swift/Property/updated" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV15ValueV7updated10Foundation4DateVSgvp">updated</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The timestamp for the most recent update to the object.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">updated</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -552,8 +526,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-02-12)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-03-28)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

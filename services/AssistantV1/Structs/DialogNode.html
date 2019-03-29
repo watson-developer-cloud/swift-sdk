@@ -60,31 +60,7 @@
                 <a href="../Structs/CounterexampleCollection.html">CounterexampleCollection</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/CreateCounterexample.html">CreateCounterexample</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/CreateDialogNode.html">CreateDialogNode</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/CreateDialogNode/NodeType.html">– NodeType</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/CreateDialogNode/EventName.html">– EventName</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/CreateDialogNode/DigressIn.html">– DigressIn</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/CreateDialogNode/DigressOut.html">– DigressOut</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/CreateDialogNode/DigressOutSlots.html">– DigressOutSlots</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/CreateEntity.html">CreateEntity</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/CreateExample.html">CreateExample</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/CreateIntent.html">CreateIntent</a>
@@ -183,9 +159,6 @@
                 <a href="../Structs/EntityCollection.html">EntityCollection</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/EntityExport.html">EntityExport</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/EntityMention.html">EntityMention</a>
               </li>
               <li class="nav-group-task">
@@ -198,22 +171,16 @@
                 <a href="../Structs/ExampleCollection.html">ExampleCollection</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/InputData.html">InputData</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/Intent.html">Intent</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/IntentCollection.html">IntentCollection</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/IntentExport.html">IntentExport</a>
+                <a href="../Structs/Log.html">Log</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/LogCollection.html">LogCollection</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/LogExport.html">LogExport</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/LogMessage.html">LogMessage</a>
@@ -225,7 +192,7 @@
                 <a href="../Structs/LogPagination.html">LogPagination</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/Mentions.html">Mentions</a>
+                <a href="../Structs/Mention.html">Mention</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/MessageContextMetadata.html">MessageContextMetadata</a>
@@ -270,22 +237,13 @@
                 <a href="../Structs/ValueCollection.html">ValueCollection</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/ValueExport.html">ValueExport</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/ValueExport/ValueType.html">– ValueType</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/Workspace.html">Workspace</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/Workspace/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/WorkspaceCollection.html">WorkspaceCollection</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/WorkspaceExport.html">WorkspaceExport</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/WorkspaceExport/Status.html">– Status</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/WorkspaceSystemSettings.html">WorkspaceSystemSettings</a>
@@ -473,9 +431,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV110DialogNodeV06dialogD2IDSSvp"></a>
-                    <a name="//apple_ref/swift/Property/dialogNodeID" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV110DialogNodeV06dialogD2IDSSvp">dialogNodeID</a>
+                    <a name="/s:11AssistantV110DialogNodeV06dialogD0SSvp"></a>
+                    <a name="//apple_ref/swift/Property/dialogNode" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV110DialogNodeV06dialogD0SSvp">dialogNode</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -483,14 +441,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The dialog node ID.</p>
+                        <p>The dialog node ID. This string must conform to the following restrictions:</p>
+
+<ul>
+<li>It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.</li>
+<li>It must be no longer than 1024 characters.</li>
+</ul>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">dialogNodeID</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">dialogNode</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -510,7 +473,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The description of the dialog node.</p>
+                        <p>The description of the dialog node. This string cannot contain carriage return, newline, or tab characters, and it
+must be no longer than 128 characters.</p>
 
                       </div>
                       <div class="declaration">
@@ -537,7 +501,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The condition that triggers the dialog node.</p>
+                        <p>The condition that will trigger the dialog node. This string cannot contain carriage return, newline, or tab
+characters, and it must be no longer than 2048 characters.</p>
 
                       </div>
                       <div class="declaration">
@@ -564,7 +529,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The ID of the parent dialog node. This property is not returned if the dialog node has no parent.</p>
+                        <p>The ID of the parent dialog node. This property is omitted if the dialog node has no parent.</p>
 
                       </div>
                       <div class="declaration">
@@ -591,8 +556,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The ID of the previous sibling dialog node. This property is not returned if the dialog node has no previous
-sibling.</p>
+                        <p>The ID of the previous sibling dialog node. This property is omitted if the dialog node has no previous sibling.</p>
 
                       </div>
                       <div class="declaration">
@@ -620,7 +584,7 @@ sibling.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>The output of the dialog node. For more information about how to specify dialog node output, see the
-<a href="https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#complex">documentation</a>.</p>
+<a href="https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#dialog-overview-responses">documentation</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -647,7 +611,7 @@ sibling.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The context (if defined) for the dialog node.</p>
+                        <p>The context for the dialog node.</p>
 
                       </div>
                       <div class="declaration">
@@ -674,7 +638,7 @@ sibling.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Any metadata for the dialog node.</p>
+                        <p>The metadata for the dialog node.</p>
 
                       </div>
                       <div class="declaration">
@@ -718,87 +682,6 @@ sibling.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV110DialogNodeV7created10Foundation4DateVSgvp"></a>
-                    <a name="//apple_ref/swift/Property/created" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV110DialogNodeV7created10Foundation4DateVSgvp">created</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The timestamp for creation of the dialog node.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">created</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11AssistantV110DialogNodeV7updated10Foundation4DateVSgvp"></a>
-                    <a name="//apple_ref/swift/Property/updated" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV110DialogNodeV7updated10Foundation4DateVSgvp">updated</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The timestamp for the most recent update to the dialog node.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">updated</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11AssistantV110DialogNodeV7actionsSayAA0cD6ActionVGSgvp"></a>
-                    <a name="//apple_ref/swift/Property/actions" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV110DialogNodeV7actionsSayAA0cD6ActionVGSgvp">actions</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The actions for the dialog node.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">actions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/DialogNodeAction.html">DialogNodeAction</a></span><span class="p">]?</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/s:11AssistantV110DialogNodeV5titleSSSgvp"></a>
                     <a name="//apple_ref/swift/Property/title" class="dashAnchor"></a>
                     <a class="token" href="#/s:11AssistantV110DialogNodeV5titleSSSgvp">title</a>
@@ -809,7 +692,12 @@ sibling.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The alias used to identify the dialog node.</p>
+                        <p>The alias used to identify the dialog node. This string must conform to the following restrictions:</p>
+
+<ul>
+<li>It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.</li>
+<li>It must be no longer than 64 characters.</li>
+</ul>
 
                       </div>
                       <div class="declaration">
@@ -817,33 +705,6 @@ sibling.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11AssistantV110DialogNodeV8disabledSbSgvp"></a>
-                    <a name="//apple_ref/swift/Property/disabled" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV110DialogNodeV8disabledSbSgvp">disabled</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>For internal use only.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">disabled</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -925,6 +786,33 @@ sibling.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">variable</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV110DialogNodeV7actionsSayAA0cD6ActionVGSgvp"></a>
+                    <a name="//apple_ref/swift/Property/actions" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV110DialogNodeV7actionsSayAA0cD6ActionVGSgvp">actions</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An array of objects describing any actions to be invoked by the dialog node.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">actions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/DialogNodeAction.html">DialogNodeAction</a></span><span class="p">]?</span></code></pre>
 
                         </div>
                       </div>
@@ -1040,13 +928,423 @@ longer than 512 characters.</p>
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV110DialogNodeV8disabledSbSgvp"></a>
+                    <a name="//apple_ref/swift/Property/disabled" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV110DialogNodeV8disabledSbSgvp">disabled</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>For internal use only.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">disabled</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV110DialogNodeV7created10Foundation4DateVSgvp"></a>
+                    <a name="//apple_ref/swift/Property/created" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV110DialogNodeV7created10Foundation4DateVSgvp">created</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The timestamp for creation of the object.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">created</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV110DialogNodeV7updated10Foundation4DateVSgvp"></a>
+                    <a name="//apple_ref/swift/Property/updated" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV110DialogNodeV7updated10Foundation4DateVSgvp">updated</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The timestamp for the most recent update to the object.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">updated</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/"></a>
+                    <a name="//apple_ref/swift/Method/init(dialogNode:description:conditions:parent:previousSibling:output:context:metadata:nextStep:title:nodeType:eventName:variable:actions:digressIn:digressOut:digressOutSlots:userLabel:disabled:created:updated:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">init(dialogNode:description:conditions:parent:previousSibling:output:context:metadata:nextStep:title:nodeType:eventName:variable:actions:digressIn:digressOut:digressOutSlots:userLabel:disabled:created:updated:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initialize a <code>DialogNode</code> with member variables.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
+    <span class="nv">dialogNode</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">conditions</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">parent</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">previousSibling</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">output</span><span class="p">:</span> <span class="kt"><a href="../Structs/DialogNodeOutput.html">DialogNodeOutput</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">context</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">JSON</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">metadata</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">JSON</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">nextStep</span><span class="p">:</span> <span class="kt"><a href="../Structs/DialogNodeNextStep.html">DialogNodeNextStep</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">nodeType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">eventName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">variable</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">actions</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/DialogNodeAction.html">DialogNodeAction</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">digressIn</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">digressOut</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">digressOutSlots</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">userLabel</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">disabled</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">created</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">updated</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>dialogNode</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The dialog node ID. This string must conform to the following restrictions:
+
+<ul>
+<li>It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.</li>
+<li>It must be no longer than 1024 characters.</li>
+</ul></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>description</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The description of the dialog node. This string cannot contain carriage return,
+newline, or tab characters, and it must be no longer than 128 characters.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>conditions</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The condition that will trigger the dialog node. This string cannot contain carriage
+return, newline, or tab characters, and it must be no longer than 2048 characters.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>parent</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the parent dialog node. This property is omitted if the dialog node has no parent.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>previousSibling</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the previous sibling dialog node. This property is omitted if the dialog
+node has no previous sibling.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>output</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The output of the dialog node. For more information about how to specify dialog node output,
+see the
+<a href="https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#dialog-overview-responses">documentation</a>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>context</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The context for the dialog node.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>metadata</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The metadata for the dialog node.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>nextStep</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The next step to execute following this dialog node.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>title</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The alias used to identify the dialog node. This string must conform to the following
+restrictions:
+
+<ul>
+<li>It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.</li>
+<li>It must be no longer than 64 characters.</li>
+</ul></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>nodeType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>How the dialog node is processed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>eventName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>How an <code>event_handler</code> node is processed.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>variable</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The location in the dialog context where output is stored.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>actions</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of objects describing any actions to be invoked by the dialog node.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>digressIn</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether this top-level dialog node can be digressed into.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>digressOut</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether this dialog node can be returned to after a digression.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>digressOutSlots</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether the user can digress to top-level nodes while filling out slots.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>userLabel</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A label that can be displayed externally to describe the purpose of the node to users.
+This string must be no longer than 512 characters.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>disabled</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>For internal use only.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>created</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The timestamp for creation of the object.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>updated</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The timestamp for the most recent update to the object.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An initialized <code>DialogNode</code>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/ai-assistant/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-02-12)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.5</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-03-28)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

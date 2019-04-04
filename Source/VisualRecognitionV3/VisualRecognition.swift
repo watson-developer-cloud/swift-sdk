@@ -382,10 +382,10 @@ public class VisualRecognition {
         }
         positiveExamples.forEach { (classname, value) in
             let partName = "\(classname)_positive_examples"
-            multipartFormData.append(value, withName: partName, fileName: classname)
+            multipartFormData.append(value, withName: partName, fileName: "\(classname).zip")
         }
         if let negativeExamples = negativeExamples {
-            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename")
+            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename.zip")
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
@@ -555,11 +555,11 @@ public class VisualRecognition {
         if let positiveExamples = positiveExamples {
             positiveExamples.forEach { (classname, value) in
                 let partName = "\(classname)_positive_examples"
-                multipartFormData.append(value, withName: partName, fileName: classname)
+                multipartFormData.append(value, withName: partName, fileName: "\(classname).zip")
             }
         }
         if let negativeExamples = negativeExamples {
-            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename")
+            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename.zip")
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))

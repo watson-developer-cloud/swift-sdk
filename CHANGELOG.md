@@ -1,4 +1,13 @@
 
+# [2.0.1](https://github.com/watson-developer-cloud/swift-sdk/compare/2.0.0...2.0.1) (2019-04-07)
+
+
+### Bug Fixes
+* **VisualRecognitionV3:**
+  * Add .zip to filenames passed to create/update classifier
+  * Fix multiple calls to completionHandler from classifyWithLocalModel.
+
+
 # [2.0.0](https://github.com/watson-developer-cloud/swift-sdk/compare/1.4.0...2.0.0) (2019-03-28)
 
 

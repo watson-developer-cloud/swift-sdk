@@ -18,7 +18,7 @@
 
 import XCTest
 import Foundation
-@testable import VisualRecognitionV3
+import VisualRecognitionV3
 import RestKit
 
 class VisualRecognitionTests: XCTestCase {

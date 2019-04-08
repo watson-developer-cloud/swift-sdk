@@ -18,7 +18,7 @@
 
 import XCTest
 import Foundation
-@testable import AssistantV1
+import AssistantV1
 import RestKit
 
 class AssistantTests: XCTestCase {

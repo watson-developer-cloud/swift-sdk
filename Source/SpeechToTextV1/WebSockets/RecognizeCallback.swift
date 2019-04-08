@@ -17,6 +17,10 @@
 import Foundation
 
 public struct RecognizeCallback {
+    /// Allows you to set up callback in application to use microphone streaming results.
+    public init() {
+        
+    }
 
     /// Invoked when transcription results are received for a recognition request.
     public var onResults: ((SpeechRecognitionResults) -> Void)?

@@ -29,6 +29,7 @@ internal struct Shared {
         static let username = "username"
         static let password = "password"
         static let apiKey = "apikey"
+        static let iamApiKey = "iam_apikey"
         static let iamURL = "iam_url"
         static let icpPrefix = "icp-"
     }
@@ -85,7 +86,7 @@ internal struct Shared {
     /// Get the auth method based on the provided credentials
     static func getAuthMethod(from credentials: [String: String]) -> AuthenticationMethod? {
         // Get the appropriate auth method for the provided credentials
-        if let apiKey = credentials[Constant.apiKey] {
+        if let apiKey = (credentials[Constant.apiKey] ?? credentials[Constant.iamApiKey]) {
             let iamURL = credentials[Constant.iamURL]
             return getAuthMethod(apiKey: apiKey, iamURL: iamURL)
         } else if let username = credentials[Constant.username],

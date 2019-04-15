@@ -229,7 +229,7 @@ extension VisualRecognition {
             } else {
                 classifiedImages = nil
             }
-            var error: WatsonError? = nil
+            var error: WatsonError?
             if !errors.isEmpty {
                 error = WatsonError.other(message: "Local classification failed: \(errors[0].localizedDescription)", metadata: nil)
             }

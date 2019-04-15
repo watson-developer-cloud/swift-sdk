@@ -1,4 +1,11 @@
 
+## 2.0.2 (https://github.com/watson-developer-cloud/swift-sdk/compare/2.0.1...2.0.2) (2019-04-15)
+
+### Bug Fixes
+
+* core: Look for iam_apikey in credential file with IAM auth (689d748 (https://github.com/watson-developer-cloud/swift-sdk/commit/689d748))
+* Fix swiftlint errors (9b12dba (https://github.com/watson-developer-cloud/swift-sdk/commit/9b12dba))
+
 # [2.0.1](https://github.com/watson-developer-cloud/swift-sdk/compare/2.0.0...2.0.1) (2019-04-07)
 
 

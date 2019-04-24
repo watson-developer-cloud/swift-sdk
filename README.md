@@ -241,7 +241,9 @@ naturalLanguageClassifier.defaultHeaders = ["X-Watson-Learning-Opt-Out": "true"]
 
 Each service method also accepts an optional `headers` parameter which is a dictionary of request headers to be sent with the request.
 
-## Sample Applications
+## Featured Projects
+
+We love to highlight cool open-source projects that use this SDK! If you'd like to get your project added to the list, feel free to make an issue linking us to it.
 
 * [Simple Chat (Swift)](https://github.com/watson-developer-cloud/simple-chat-swift)
 * [Simple Chat (Objective-C)](https://github.com/watson-developer-cloud/simple-chat-objective-c)

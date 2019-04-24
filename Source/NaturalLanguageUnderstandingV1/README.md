@@ -42,5 +42,5 @@ Note that **you are required to include at least one feature in your request.** 
 The following links provide more information about the Natural Language Understanding service:
 
 * [IBM Watson Natural Language Understanding - Service Page](https://www.ibm.com/watson/services/natural-language-understanding/)
-* [IBM Watson Natural Language Understanding - Documentation](https://console.bluemix.net/docs/services/natural-language-understanding/index.html)
+* [IBM Watson Natural Language Understanding - Documentation](https://cloud.ibm.com/docs/services/natural-language-understanding/index.html)
 * [IBM Watson Natural Language Understanding - Demo](https://natural-language-understanding-demo.ng.bluemix.net/)

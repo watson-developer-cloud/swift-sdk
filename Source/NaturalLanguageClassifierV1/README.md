@@ -27,5 +27,5 @@ naturalLanguageClassifier.classify(classifierID: classifierID, text: text) { res
 The following links provide more information about the Natural Language Classifier service:
 
 * [IBM Watson Natural Language Classifier - Service Page](https://www.ibm.com/watson/services/natural-language-classifier/)
-* [IBM Watson Natural Language Classifier - Documentation](https://console.bluemix.net/docs/services/natural-language-classifier/natural-language-classifier-overview.html)
+* [IBM Watson Natural Language Classifier - Documentation](https://cloud.ibm.com/docs/services/natural-language-classifier/natural-language-classifier-overview.html)
 * [IBM Watson Natural Language Classifier - Demo](https://natural-language-classifier-demo.ng.bluemix.net/)

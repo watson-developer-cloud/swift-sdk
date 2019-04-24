@@ -19,7 +19,7 @@ discovery.query(
     environmentID: "system",
     collectionID: "news-en",
     query: "enriched_text.concepts.text:\"Cloud computing\"") { response, error in
-    
+
     if let error = error {
         print(error)
     }
@@ -33,7 +33,7 @@ discovery.query(
 
 ## Private Data Collections
 
-The Swift SDK supports environment management, collection management, and document uploading. But you may find it easier to create private data collections using the [Discovery Tooling](https://console.bluemix.net/docs/services/discovery/getting-started-tool.html#getting-started-with-the-tooling) instead.
+The Swift SDK supports environment management, collection management, and document uploading. But you may find it easier to create private data collections using the [Discovery Tooling](https://cloud.ibm.com/docs/services/discovery/getting-started-tool.html#getting-started-with-the-tooling) instead.
 
 Once your content has been uploaded and enriched by the Discovery service, you can search the collection with queries. The following example demonstrates a complex query with a filter, query, and aggregation:
 
@@ -92,5 +92,5 @@ discovery.addDocument(
 The following links provide more information about the IBM Discovery service:
 
 * [IBM Discovery - Service Page](https://www.ibm.com/watson/services/discovery/)
-* [IBM Discovery - Documentation](https://console.bluemix.net/docs/services/discovery/index.html)
+* [IBM Discovery - Documentation](https://cloud.ibm.com/docs/services/discovery/index.html)
 * [IBM Discovery - Demo](https://discovery-news-demo.ng.bluemix.net/)

@@ -291,4 +291,4 @@ available in [LICENSE](https://github.com/watson-developer-cloud/swift-sdk/blob/
 
 This SDK is intended for use with an Apple iOS product and intended to be used in conjunction with officially licensed Apple development tools.
 
-[ibm-cloud-onboarding]: http://console.bluemix.net/registration?target=/developer/watson&cm_sp=WatsonPlatform-WatsonServices-_-OnPageNavLink-IBMWatson_SDKs-_-Swift
+[ibm-cloud-onboarding]: http://cloud.ibm.com/registration?target=/developer/watson&cm_sp=WatsonPlatform-WatsonServices-_-OnPageNavLink-IBMWatson_SDKs-_-Swift

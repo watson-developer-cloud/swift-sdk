@@ -13,7 +13,7 @@ Before you open an issue, please check if a similar issue already exists or has 
 
 **Check service status**
 
-1.  For service issues or 5xx errors, first, go to https://console.bluemix.net/status?tags=platform,runtimes,services&view=n:i and check the status of the service.
+1.  For service issues or 5xx errors, first, go to https://cloud.ibm.com/status?tags=platform,runtimes,services&view=n:i and check the status of the service.
 1.  If the service status is OK, continue with a bug report.
 
 ---

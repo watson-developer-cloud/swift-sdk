@@ -36,7 +36,7 @@ textToSpeech.synthesize(text: text, accept: "audio/wav") { response, error in
 }
 ```
 
-The Text to Speech service supports a number of [voices](https://console.bluemix.net/docs/services/text-to-speech/http.html#voices) for different genders, languages, and dialects. The following example demonstrates how to use the Text to Speech service with a particular voice:
+The Text to Speech service supports a number of [voices](https://cloud.ibm.com/docs/services/text-to-speech/http.html#voices) for different genders, languages, and dialects. The following example demonstrates how to use the Text to Speech service with a particular voice:
 
 ```swift
 import TextToSpeechV1
@@ -54,7 +54,7 @@ textToSpeech.synthesize(
 	text: text,
 	accept: "audio/wav",
 	voice: "en-US_LisaVoice") { response, error in
-	
+
 	if let error = error {
         print(error)
     }
@@ -76,5 +76,5 @@ textToSpeech.synthesize(
 The following links provide more information about the IBM Text To Speech service:
 
 * [IBM Watson Text To Speech - Service Page](https://www.ibm.com/watson/services/text-to-speech/)
-* [IBM Watson Text To Speech - Documentation](https://console.bluemix.net/docs/services/text-to-speech/index.html)
+* [IBM Watson Text To Speech - Documentation](https://cloud.ibm.com/docs/services/text-to-speech/index.html)
 * [IBM Watson Text To Speech - Demo](https://text-to-speech-demo.ng.bluemix.net/)

@@ -10,7 +10,7 @@ Beginning with iOS 10+, any application that accesses the microphone must includ
 
 ### Recognition Request Settings
 
-The `RecognitionSettings` class is used to define the audio format and behavior of a recognition request. These settings are transmitted to the service when [initating a request](https://console.bluemix.net/docs/services/speech-to-text/websockets.html#WSstart).
+The `RecognitionSettings` class is used to define the audio format and behavior of a recognition request. These settings are transmitted to the service when [initiating a request](https://cloud.ibm.com/docs/services/speech-to-text/websockets.html#WSstart).
 
 The following example demonstrates how to define a recognition request that transcribes WAV audio data with interim results:
 
@@ -19,7 +19,7 @@ var settings = RecognitionSettings(contentType: "audio/wav")
 settings.interimResults = true
 ```
 
-See the [class documentation](http://watson-developer-cloud.github.io/swift-sdk/services/SpeechToTextV1/Structs/RecognitionSettings.html) or [service documentation](https://console.bluemix.net/docs/services/speech-to-text/index.html) for more information about the available settings.
+See the [class documentation](http://watson-developer-cloud.github.io/swift-sdk/services/SpeechToTextV1/Structs/RecognitionSettings.html) or [service documentation](https://cloud.ibm.com/docs/services/speech-to-text/index.html) for more information about the available settings.
 
 ### Microphone Audio and Compression
 
@@ -123,7 +123,7 @@ func stopStreaming() {
 
 ### Session Management and Advanced Features
 
-Advanced users may want more customizability than provided by the `SpeechToText` class. The `SpeechToTextSession` class exposes more control over the WebSockets connection and also includes several advanced features for accessing the microphone. The `SpeechToTextSession` class also allows users more control over the AVAudioSession shared instance. Before using `SpeechToTextSession`, it's helpful to be familiar with the [Speech to Text WebSocket interface](https://console.bluemix.net/docs/services/speech-to-text/websockets.html).
+Advanced users may want more customizability than provided by the `SpeechToText` class. The `SpeechToTextSession` class exposes more control over the WebSockets connection and also includes several advanced features for accessing the microphone. The `SpeechToTextSession` class also allows users more control over the AVAudioSession shared instance. Before using `SpeechToTextSession`, it's helpful to be familiar with the [Speech to Text WebSocket interface](https://cloud.ibm.com/docs/services/speech-to-text/websockets.html).
 
 The following steps describe how to execute a recognition request with `SpeechToTextSession`:
 
@@ -198,5 +198,5 @@ func stopStreaming() {
 There are a number of ways that Speech to Text can be customized to suit your particular application. For example, you can define custom words or upload audio to train an acoustic model. The following links provide more information about the IBM Speech to Text service:
 
 * [IBM Watson Speech to Text - Service Page](https://www.ibm.com/watson/services/speech-to-text/)
-* [IBM Watson Speech to Text - Documentation](https://console.bluemix.net/docs/services/speech-to-text/index.html)
+* [IBM Watson Speech to Text - Documentation](https://cloud.ibm.com/docs/services/speech-to-text/index.html)
 * [IBM Watson Speech to Text - Demo](https://speech-to-text-demo.ng.bluemix.net/)

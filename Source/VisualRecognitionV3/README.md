@@ -81,6 +81,6 @@ You may also choose to include a Core ML model with your application, enabling i
 The following links provide more information about the IBM Watson Visual Recognition service:
 
 * [IBM Watson Visual Recognition - Service Page](https://www.ibm.com/watson/services/visual-recognition/)
-* [IBM Watson Visual Recognition - Documentation](https://console.bluemix.net/docs/services/visual-recognition/index.html)
+* [IBM Watson Visual Recognition - Documentation](https://cloud.ibm.com/docs/services/visual-recognition/index.html)
 * [IBM Watson Visual Recognition - Demo](https://visual-recognition-demo.ng.bluemix.net/)
 

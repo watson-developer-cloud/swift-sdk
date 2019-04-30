@@ -29,5 +29,5 @@ toneAnalyzer.tone(toneContent: .toneInput(input)) { response, error in
 The following links provide more information about the IBM Watson Tone Analyzer service:
 
 * [IBM Watson Tone Analyzer - Service Page](https://www.ibm.com/watson/services/tone-analyzer/)
-* [IBM Watson Tone Analyzer - Documentation](https://console.bluemix.net/docs/services/tone-analyzer/index.html)
+* [IBM Watson Tone Analyzer - Documentation](https://cloud.ibm.com/docs/services/tone-analyzer/index.html)
 * [IBM Watson Tone Analyzer - Demo](https://tone-analyzer-demo.ng.bluemix.net/)

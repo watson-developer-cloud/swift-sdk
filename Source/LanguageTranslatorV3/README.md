@@ -30,5 +30,5 @@ languageTranslator.translate(
 The following links provide more information about the IBM Watson Language Translator service:
 
 * [IBM Watson Language Translator - Service Page](https://www.ibm.com/watson/services/language-translator/)
-* [IBM Watson Language Translator - Documentation](https://console.bluemix.net/docs/services/language-translator/index.html)
+* [IBM Watson Language Translator - Documentation](https://cloud.ibm.com/docs/services/language-translator/index.html)
 * [IBM Watson Language Translator - Demo](https://language-translator-demo.ng.bluemix.net/)

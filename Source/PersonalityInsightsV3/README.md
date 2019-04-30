@@ -27,5 +27,5 @@ personalityInsights.profile(profileContent: content) { response, error in
 The following links provide more information about the Personality Insights service:
 
 * [IBM Watson Personality Insights - Service Page](https://www.ibm.com/watson/services/personality-insights/)
-* [IBM Watson Personality Insights - Documentation](https://console.bluemix.net/docs/services/personality-insights/index.html)
+* [IBM Watson Personality Insights - Documentation](https://cloud.ibm.com/docs/services/personality-insights/index.html)
 * [IBM Watson Personality Insights - Demo](https://personality-insights-demo.ng.bluemix.net/)

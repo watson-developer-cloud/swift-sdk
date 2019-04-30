@@ -1,6 +1,6 @@
 # Watson Assistant
 
-With the IBM Watson Assistant service you can create cognitive agents -- virtual agents 
+With the IBM Watson Assistant service you can create cognitive agents -- virtual agents
 that combine machine learning, natural language understanding, and integrated dialog scripting tools to provide conversation flows between your apps and your users.
 
 The following example shows how to start a conversation with the Assistant service:
@@ -95,4 +95,4 @@ assistant.message(
 The following links provide more information about the IBM Watson Assistant service:
 
 * [IBM Watson Assistant - Service Page](https://www.ibm.com/cloud/watson-assistant/)
-* [IBM Watson Assistant - Documentation](https://console.bluemix.net/docs/services/assistant/index.html#about)
+* [IBM Watson Assistant - Documentation](https://cloud.ibm.com/docs/services/assistant/index.html#about)

@@ -39,7 +39,7 @@ class VisualRecognitionWithIAMTests: XCTestCase {
     /** Get access token using IAM API Key. */
     func getTokenInfo(apiKey: String, refreshToken: String? = nil) -> [String: Any]? {
         // swiftlint:disable force_unwrapping
-        let url = URL(string: "https://iam.ng.bluemix.net/identity/token")!
+        let url = URL(string: "https://iam.cloud.ibm.com/identity/token")!
         let auth = "bx:bx".data(using: String.Encoding.utf8)!.base64EncodedString()
         // swiftlint:enable force_unwrapping
         var request = URLRequest(url: url)

@@ -156,7 +156,7 @@ public class Assistant {
 
      - parameter assistantID: Unique identifier of the assistant. You can find the assistant ID of an assistant on the
        **Assistants** tab of the Watson Assistant tool. For information about creating assistants, see the
-       [documentation](https://console.bluemix.net/docs/services/assistant/assistant-add.html#assistant-add-task).
+       [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-assistant-add#assistant-add-task).
        **Note:** Currently, the v2 API does not support creating assistants.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -207,7 +207,7 @@ public class Assistant {
 
      - parameter assistantID: Unique identifier of the assistant. You can find the assistant ID of an assistant on the
        **Assistants** tab of the Watson Assistant tool. For information about creating assistants, see the
-       [documentation](https://console.bluemix.net/docs/services/assistant/assistant-add.html#assistant-add-task).
+       [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-assistant-add#assistant-add-task).
        **Note:** Currently, the v2 API does not support creating assistants.
      - parameter sessionID: Unique identifier of the session.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -260,7 +260,7 @@ public class Assistant {
 
      - parameter assistantID: Unique identifier of the assistant. You can find the assistant ID of an assistant on the
        **Assistants** tab of the Watson Assistant tool. For information about creating assistants, see the
-       [documentation](https://console.bluemix.net/docs/services/assistant/assistant-add.html#assistant-add-task).
+       [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-assistant-add#assistant-add-task).
        **Note:** Currently, the v2 API does not support creating assistants.
      - parameter sessionID: Unique identifier of the session.
      - parameter input: An input object that includes the input text.

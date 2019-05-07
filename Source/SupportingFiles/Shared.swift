@@ -118,7 +118,7 @@ extension Shared {
     /// See the discussion below for an example of what the credentials file could look like.
     ///
     ///     VISUAL_RECOGNITION_APIKEY=1234abcd
-    ///     VISUAL_RECOGNITION_URL=https://test.us-south.containers.mybluemix.net/visual-recognition/api
+    ///     VISUAL_RECOGNITION_URL=https://test.us-south.containers.cloud.ibm.com/visual-recognition/api
     ///     VISUAL_RECOGNITION_IAM_URL=https://cloud.ibm.com/iam
     ///     DISCOVERY_USERNAME=me
     ///     DISCOVERY_PASSWORD=hunter2

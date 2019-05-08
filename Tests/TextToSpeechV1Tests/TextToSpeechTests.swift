@@ -40,7 +40,7 @@ class TextToSpeechTests: XCTestCase {
         "ja-JP_EmiVoice",
         "pt-BR_IsabelaVoice",
     ]
-    private let litePlanMessage = "This feature is not available for the Bluemix Lite plan."
+    private let litePlanMessage = "This feature is not available for the IBM Cloud Lite plan."
 
     static var allTests: [(String, (TextToSpeechTests) -> () throws -> Void)] {
         return [

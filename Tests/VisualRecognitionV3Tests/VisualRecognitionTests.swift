@@ -1391,7 +1391,7 @@ class VisualRecognitionTests: XCTestCase {
         setenv("IBM_CREDENTIALS_FILE", "Source/SupportingFiles/ibm-credentials.env", 1)
         let visualRecognition = VisualRecognition(version: versionDate)
         XCTAssertNotNil(visualRecognition)
-        XCTAssertEqual("https://test.us-south.containers.mybluemix.net/visual-recognition/api", visualRecognition?.serviceURL)
+        XCTAssertEqual("https://test.us-south.containers.cloud.ibm.com/visual-recognition/api", visualRecognition?.serviceURL)
         XCTAssert(visualRecognition?.authMethod is IAMAuthentication)
     }
     #endif

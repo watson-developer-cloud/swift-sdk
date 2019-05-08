@@ -22,9 +22,9 @@ import NaturalLanguageClassifierV1
 
 class NaturalLanguageClassifierTests: XCTestCase {
 
-    // Several tests depend upon an already-trained classifier. If the classifier does not exist then use the
-    // API Explorer (watson-api-explorer.mybluemix.net) to create a classifier using the `trained_meta.txt`
-    // and `weather_data_train.csv` files. Be sure to update the `trainedClassifierId` property below!
+    // Several tests depend upon an already-trained classifier. If the classifier does not exist then 
+    // create a classifier using the `trained_meta.txt` and `weather_data_train.csv` files. Be sure 
+    // to update the `trainedClassifierId` property below!
 
     private var naturalLanguageClassifier: NaturalLanguageClassifier!
     private let trainedClassifierId = "6b5ab4x398-nlc-95"

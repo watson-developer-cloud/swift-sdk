@@ -43,3 +43,7 @@ Carthage/
 .swagger-codegen/
 .openapi-generator-ignore
 .openapi-generator/
+
+# ignore detect secrets files
+.pre-commit-config.yaml
+.secrets.baseline

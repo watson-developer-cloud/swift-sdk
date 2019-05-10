@@ -19,4 +19,4 @@ brew update >/dev/null
 brew outdated carthage || brew upgrade carthage >/dev/null
 
 carthage update --platform iOS
-npx semantic-release
+npx semantic-release --repository-url https://${GH_TOKEN}@github.com/watson-developer-cloud/swift-sdk --debug

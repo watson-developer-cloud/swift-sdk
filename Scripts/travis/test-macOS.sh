@@ -11,7 +11,7 @@ openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_i
 openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-output.json.enc -out Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-output.json -d
 
 pod repo update master --silent # Gets the latest version of RestKit
-carthage update --platform iOS
+carthage bootstrap --platform iOS
 
 ./Scripts/pod-lint.sh
 # ./Scripts/run-tests.sh

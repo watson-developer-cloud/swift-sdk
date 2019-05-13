@@ -116,7 +116,7 @@ github "watson-developer-cloud/swift-sdk" ~> 2.0.2
 Then run the following command to build the dependencies and frameworks:
 
 ```bash
-$ carthage update --platform iOS
+$ carthage bootstrap --platform iOS
 ```
 
 Follow the remaining Carthage installation instructions [here](https://github.com/Carthage/Carthage#getting-started). Note that the above command will download and build all of the services in the IBM Watson Swift SDK. Make sure to drag-and-drop the built frameworks (only for the services your app requires) into your Xcode project and import them in the source files that require them. The following frameworks need to be added to your app:

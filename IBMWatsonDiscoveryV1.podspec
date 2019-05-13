@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                  = 'IBMWatsonDiscoveryV1'
-  s.version               = '2.0.2'
+  s.version               = '2.0.3'
   s.summary               = 'Client framework for the IBM Watson Discovery service'
   s.description           = <<-DESC
 IBM Watson™ Discovery makes it possible to rapidly build cognitive, cloud-based exploration applications

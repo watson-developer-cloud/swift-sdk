@@ -118,6 +118,7 @@ public class ToneAnalyzer {
         }
     }
 
+    #if !os(Linux)
     /**
       Allow network requests to a server without verification of the server certificate.
       **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
@@ -125,6 +126,7 @@ public class ToneAnalyzer {
     public func disableSSLVerification() {
         session = InsecureConnection.session()
     }
+    #endif
 
     /**
      Use the HTTP response and data received by the Tone Analyzer service to extract

@@ -14,6 +14,7 @@
  * limitations under the License.
  **/
 
+#if !os(Linux)
 import Foundation
 
 class InsecureConnection {
@@ -35,3 +36,4 @@ class AllowInsecureConnectionDelegate: NSObject, URLSessionDelegate {
         completionHandler(URLSession.AuthChallengeDisposition.useCredential, credential)
     }
 }
+#endif

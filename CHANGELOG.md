@@ -1,4 +1,14 @@
 
+## 2.0.3 (https://github.com/watson-developer-cloud/swift-sdk/compare/2.0.3...2.0.3) (2019-04-15)
+
+### Bug Fixes
+
+* **All:**
+  * Use bootstrap instead of update in carthage
+  * Use full url in semantic release
+  * Refactor bluemix to cloud.ibm
+  * Add Featured Projects section to README
+
 ## 2.0.2 (https://github.com/watson-developer-cloud/swift-sdk/compare/2.0.1...2.0.2) (2019-04-15)
 
 ### Bug Fixes

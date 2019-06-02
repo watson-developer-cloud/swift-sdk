@@ -38,7 +38,11 @@ class VisualRecognitionUnitTests: XCTestCase {
     }
 
     func createMockSession(for visualRecognition: VisualRecognition) {
+        #if !os(Linux)
         let configuration = URLSessionConfiguration.ephemeral
+        #else
+        let configuration = URLSessionConfiguration.default
+        #endif
         configuration.protocolClasses = [MockURLProtocol.self]
         let mockSession = URLSession(configuration: configuration)
         visualRecognition.session = mockSession
@@ -368,6 +372,18 @@ class VisualRecognitionUnitTests: XCTestCase {
         }
         waitForExpectations(timeout: timeout)
     }
+
+    // MARK: - Inject Credentials
+
+    #if os(Linux)
+    func testInjectCredentialsFromFile() {
+        setenv("IBM_CREDENTIALS_FILE", "Source/SupportingFiles/ibm-credentials.env", 1)
+        let visualRecognition = VisualRecognition(version: versionDate)
+        XCTAssertNotNil(visualRecognition)
+        XCTAssertEqual("https://test.us-south.containers.cloud.ibm.com/visual-recognition/api", visualRecognition?.serviceURL)
+        XCTAssert(visualRecognition?.authMethod is IAMAuthentication)
+    }
+    #endif
 
 #if os(iOS) || os(tvOS) || os(watchOS)
 
@@ -738,3 +754,15 @@ class VisualRecognitionUnitTests: XCTestCase {
 #endif
 
 }
+
+#if os(Linux)
+extension VisualRecognitionUnitTests {
+    static var allTests: [(String, (VisualRecognitionUnitTests) -> () throws -> ())] {
+        let tests: [(String, (VisualRecognitionUnitTests) -> () throws -> ())] = [
+            // Inject Credentials
+            ("testInjectCredentialsFromFile", testInjectCredentialsFromFile),
+        ]
+        return tests
+    }
+}
+#endif

@@ -658,6 +658,7 @@
 		CADA969B2110ABB500B5BD84 /* EntityMentionCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA968C2110ABB500B5BD84 /* EntityMentionCollection.swift */; };
 		CADA969D2110ABB500B5BD84 /* WorkspaceSystemSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADA968E2110ABB500B5BD84 /* WorkspaceSystemSettings.swift */; };
 		CADC4B8F214216FC00C76DE6 /* VisualRecognitionUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADC4B8D2141BC9A00C76DE6 /* VisualRecognitionUnitTests.swift */; };
+		CAEBE47322A4148C00F86C3A /* DiscoveryUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEBE47222A4148C00F86C3A /* DiscoveryUnitTests.swift */; };
 		CAF9A5C420ACED3E006C86B7 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = CAF9A5C320ACED3E006C86B7 /* CHANGELOG.md */; };
 		CAF9A5CB20B75B3A006C86B7 /* VisualRecognitionWithIAMTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF9A5C920B753B7006C86B7 /* VisualRecognitionWithIAMTests.swift */; };
 		CAFD2A9322400D7900325779 /* RecognizeCallback.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAFD2A9222400D7900325779 /* RecognizeCallback.swift */; };
@@ -1392,6 +1393,7 @@
 		CADA968C2110ABB500B5BD84 /* EntityMentionCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityMentionCollection.swift; sourceTree = "<group>"; };
 		CADA968E2110ABB500B5BD84 /* WorkspaceSystemSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceSystemSettings.swift; sourceTree = "<group>"; };
 		CADC4B8D2141BC9A00C76DE6 /* VisualRecognitionUnitTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualRecognitionUnitTests.swift; sourceTree = "<group>"; };
+		CAEBE47222A4148C00F86C3A /* DiscoveryUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryUnitTests.swift; sourceTree = "<group>"; };
 		CAF9A5C320ACED3E006C86B7 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		CAF9A5C920B753B7006C86B7 /* VisualRecognitionWithIAMTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualRecognitionWithIAMTests.swift; sourceTree = "<group>"; };
 		CAFD2A9222400D7900325779 /* RecognizeCallback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognizeCallback.swift; sourceTree = "<group>"; };
@@ -1808,6 +1810,7 @@
 			children = (
 				92261EAB21F1296000A1A620 /* Resources */,
 				12F8005D1DF71BED006851D6 /* DiscoveryTests.swift */,
+				CAEBE47222A4148C00F86C3A /* DiscoveryUnitTests.swift */,
 			);
 			name = Tests;
 			path = ../../Tests/DiscoveryV1Tests;
@@ -3317,6 +3320,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 7A0F95A91C23288E004C01C0;
@@ -4187,6 +4191,7 @@
 				920A2435214ADFB20077F10D /* SharedTests.swift in Sources */,
 				12F800581DF71AD9006851D6 /* WatsonCredentials.swift in Sources */,
 				920A2441214B0E390077F10D /* Shared.swift in Sources */,
+				CAEBE47322A4148C00F86C3A /* DiscoveryUnitTests.swift in Sources */,
 				12F8005E1DF71BED006851D6 /* DiscoveryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

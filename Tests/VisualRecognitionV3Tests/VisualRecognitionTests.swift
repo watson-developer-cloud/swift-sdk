@@ -18,6 +18,7 @@
 
 import XCTest
 import Foundation
+// Do not import @testable to ensure only public interface is exposed
 import VisualRecognitionV3
 import RestKit
 
@@ -62,15 +63,7 @@ class VisualRecognitionTests: XCTestCase {
             ("testDetectFacesByInvalidURL", testDetectFacesByInvalidURL),
             ("testGetUnknownClassifier", testGetUnknownClassifier),
         ]
-        #if os(Linux)
-        let linuxTests: [(String, (VisualRecognitionTests) -> () throws -> Void)] = [
-            // Inject Credentials
-            ("testInjectCredentialsFromFile", testInjectCredentialsFromFile),
-            ]
-        return tests + linuxTests
-        #else
         return tests
-        #endif
     }
 
     // MARK: - Test Configuration
@@ -1383,16 +1376,4 @@ class VisualRecognitionTests: XCTestCase {
         }
         waitForExpectations()
     }
-
-    // MARK: - Inject Credentials
-
-    #if os(Linux)
-    func testInjectCredentialsFromFile() {
-        setenv("IBM_CREDENTIALS_FILE", "Source/SupportingFiles/ibm-credentials.env", 1)
-        let visualRecognition = VisualRecognition(version: versionDate)
-        XCTAssertNotNil(visualRecognition)
-        XCTAssertEqual("https://test.us-south.containers.cloud.ibm.com/visual-recognition/api", visualRecognition?.serviceURL)
-        XCTAssert(visualRecognition?.authMethod is IAMAuthentication)
-    }
-    #endif
 }

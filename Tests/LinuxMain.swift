@@ -18,15 +18,18 @@ import XCTest
 
 XCTMain([
     testCase(AssistantTests.allTests),
+    testCase(AssistantV1UnitTests.allTests),
     testCase(AssistantV2Tests.allTests),
     testCase(CompareComplyTests.allTests),
     testCase(DiscoveryTests.allTests),
+    testCase(DiscoveryUnitTests.allTests),
     testCase(LanguageTranslatorTests.allTests),
     testCase(NaturalLanguageClassifierTests.allTests),
     testCase(NaturalLanguageUnderstandingTests.allTests),
     testCase(PersonalityInsightsTests.allTests),
     testCase(ToneAnalyzerTests.allTests),
     testCase(VisualRecognitionTests.allTests),
+    testCase(VisualRecognitionUnitTests.allTests),
 
     // the following tests are currently disabled because their
     // dependencies do not build with Swift Package Manager

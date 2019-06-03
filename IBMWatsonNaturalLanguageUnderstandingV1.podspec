@@ -17,6 +17,7 @@ including categories, concepts, emotion, entities, keywords, metadata, relations
   s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => s.version.to_s }
 
   s.source_files          = 'Source/NaturalLanguageUnderstandingV1/**/*.swift',
+                            'Source/SupportingFiles/InsecureConnection.swift',
                             'Source/SupportingFiles/Shared.swift'
   s.exclude_files         = 'Source/NaturalLanguageUnderstandingV1/Shared.swift'
 

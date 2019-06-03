@@ -18,6 +18,7 @@ return information for texts that it is not trained on.
   s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => s.version.to_s }
 
   s.source_files          = 'Source/NaturalLanguageClassifierV1/**/*.swift',
+                            'Source/SupportingFiles/InsecureConnection.swift',
                             'Source/SupportingFiles/Shared.swift'
   s.exclude_files         = 'Source/NaturalLanguageClassifierV1/Shared.swift'
 

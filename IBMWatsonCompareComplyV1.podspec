@@ -15,6 +15,7 @@ IBM Watson™ Compare and Comply analyzes governing documents to provide details
   s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => s.version.to_s }
 
   s.source_files          = 'Source/CompareComplyV1/**/*.swift',
+                            'Source/SupportingFiles/InsecureConnection.swift',
                             'Source/SupportingFiles/Shared.swift'
   s.exclude_files         = 'Source/CompareComplyV1/Shared.swift'
 

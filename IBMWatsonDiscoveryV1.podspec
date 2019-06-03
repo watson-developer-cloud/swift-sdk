@@ -18,6 +18,7 @@ as well as public and third-party data.
   s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => s.version.to_s }
 
   s.source_files          = 'Source/DiscoveryV1/**/*.swift',
+                            'Source/SupportingFiles/InsecureConnection.swift',
                             'Source/SupportingFiles/Shared.swift'
   s.exclude_files         = 'Source/DiscoveryV1/Shared.swift'
 

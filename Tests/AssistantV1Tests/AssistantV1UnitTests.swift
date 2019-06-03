@@ -1872,6 +1872,17 @@ class AssistantV1UnitTests: XCTestCase {
         waitForExpectations(timeout: timeout)
     }
 
+    // MARK: - Allow Insecure Connections
+
+    #if !os(Linux)
+    func testAllowInsecureConnections() {
+        let assistant = Assistant(version: versionDate, username: "username", password: "password")
+        XCTAssertNil(assistant.session.delegate)
+        assistant.disableSSLVerification()
+        XCTAssertNotNil(assistant.session.delegate)
+    }
+    #endif
+
     // MARK: - Inject Credentials
 
     #if os(Linux)

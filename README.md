@@ -231,6 +231,15 @@ let toneAnalyzer = ToneAnalyzer(
 toneAnalyzer.serviceURL = "https://gateway-fra.watsonplatform.net/tone-analyzer/api"
 ```
 
+## Disable SSL certificate verification
+
+For ICP(IBM Cloud Private), you can disable the SSL certificate verification by:
+```
+service.disableSSLVerification()
+```
+
+Note: `disableSSLVerification()` is currently not supported on Linux.
+
 ## Custom Headers
 There are different headers that can be sent to the Watson services. For example, Watson services log requests and their results for the purpose of improving the services, but you can include the `X-Watson-Learning-Opt-Out` header to opt out of this.
 

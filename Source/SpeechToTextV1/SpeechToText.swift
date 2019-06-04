@@ -1587,7 +1587,7 @@ public class SpeechToText {
         wordTypeToAdd: String? = nil,
         customizationWeight: Double? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<TrainingResponse>?, WatsonError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1633,7 +1633,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseObject(completionHandler: completionHandler)
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -3028,7 +3028,7 @@ public class SpeechToText {
         customizationID: String,
         customLanguageModelID: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<TrainingResponse>?, WatsonError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -3070,7 +3070,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseObject(completionHandler: completionHandler)
+        request.response(completionHandler: completionHandler)
     }
 
     /**

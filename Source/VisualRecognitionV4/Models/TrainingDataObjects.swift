@@ -30,5 +30,19 @@ public struct TrainingDataObjects: Codable, Equatable {
     private enum CodingKeys: String, CodingKey {
         case objects = "objects"
     }
+    
+    /* HAND EDIT
+        This is required to bypass inconsistencies in the service response for this model, and will be removed in the future as a refactor change.
+     */
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        guard let existingObjectValue = try container.decodeIfPresent([TrainingDataObject].self, forKey: .objects) else {
+            objects = [TrainingDataObject]()
+            return
+        }
+        
+        objects = existingObjectValue
+    }
 
 }

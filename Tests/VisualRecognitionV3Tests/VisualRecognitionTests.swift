@@ -20,7 +20,6 @@ import XCTest
 import Foundation
 // Do not import @testable to ensure only public interface is exposed
 import VisualRecognitionV3
-import RestKit
 
 class VisualRecognitionTests: XCTestCase {
 
@@ -52,14 +51,9 @@ class VisualRecognitionTests: XCTestCase {
             ("testClassifyImage4", testClassifyImage4),
             ("testClassifyImage5", testClassifyImage5),
             ("testClassifyImage6", testClassifyImage6),
-            // Detect faces
-            ("testDetectFacesByURL", testDetectFacesByURL),
-            ("testDetectFacesByImage1", testDetectFacesByImage1),
-            ("testDetectFacesByImage2", testDetectFacesByImage2),
             // Negative tests
             ("testCreateClassifierWithInvalidPositiveExamples", testCreateClassifierWithInvalidPositiveExamples),
             ("testClassifyByInvalidURL", testClassifyByInvalidURL),
-            ("testDetectFacesByInvalidURL", testDetectFacesByInvalidURL),
             ("testGetUnknownClassifier", testGetUnknownClassifier),
         ]
         return tests
@@ -80,7 +74,7 @@ class VisualRecognitionTests: XCTestCase {
             XCTFail("Missing credentials for Visual Recognition service")
             return
         }
-        let authenticator = IAMAuthenticator.init(apiKey: apiKey)
+        let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
         visualRecognition = VisualRecognition(version: versionDate, authenticator: authenticator)
         if let url = WatsonCredentials.VisualRecognitionURL {
             visualRecognition.serviceURL = url
@@ -1145,159 +1139,6 @@ class VisualRecognitionTests: XCTestCase {
         waitForExpectations(timeout: 60)
     }
 
-    // MARK: - Detect faces
-
-    /** Detect faces by URL. */
-    func testDetectFacesByURL() {
-        let expectation = self.expectation(description: "Detect faces by URL.")
-        visualRecognition.detectFaces(url: obamaURL) {
-            response, error in
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let faceImages = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
-
-            // verify face images object
-            XCTAssertEqual(faceImages.imagesProcessed, 1)
-            XCTAssertNil(faceImages.warnings)
-            XCTAssertEqual(faceImages.images.count, 1)
-
-            // verify the face image object
-            let face = faceImages.images.first
-            XCTAssertEqual(face?.sourceURL, obamaURL)
-            XCTAssertEqual(face?.resolvedURL, obamaURL)
-            XCTAssertNil(face?.image)
-            XCTAssertNil(face?.error)
-            XCTAssertEqual(face?.faces.count, 1)
-
-            // verify the age
-            let age = face?.faces.first?.age
-            XCTAssertGreaterThanOrEqual(age!.min!, 40)
-            XCTAssertLessThanOrEqual(age!.max!, 54)
-            XCTAssertGreaterThanOrEqual(age!.score, 0.25)
-
-            // verify the face location
-            let location = face?.faces.first?.faceLocation
-            XCTAssertEqual(location?.height, 172)
-            XCTAssertEqual(location?.left, 219)
-            XCTAssertEqual(location?.top, 79)
-            XCTAssertEqual(location?.width, 141)
-
-            // verify the gender
-            let gender = face?.faces.first?.gender
-            XCTAssertEqual(gender!.gender, "MALE")
-            XCTAssertGreaterThanOrEqual(gender!.score, 0.75)
-
-            expectation.fulfill()
-        }
-        waitForExpectations()
-    }
-
-    /** Detect faces in an uploaded image */
-    func testDetectFacesByImage1() {
-        let expectation = self.expectation(description: "Detect faces in an uploaded image.")
-        visualRecognition.detectFaces(imagesFile: obama, imagesFilename: "obama.jpg") {
-            response, error in
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let faceImages = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
-
-            // verify face images object
-            XCTAssertEqual(faceImages.imagesProcessed, 1)
-            XCTAssertNil(faceImages.warnings)
-            XCTAssertEqual(faceImages.images.count, 1)
-
-            // verify the face image object
-            let face = faceImages.images.first
-            XCTAssertNil(face?.sourceURL)
-            XCTAssertNil(face?.resolvedURL)
-            XCTAssertNotNil(face?.image)
-            XCTAssertNil(face?.error)
-            XCTAssertEqual(face?.faces.count, 1)
-
-            // verify the age
-            let age = face?.faces.first?.age
-            XCTAssertGreaterThanOrEqual(age!.min!, 40)
-            XCTAssertLessThanOrEqual(age!.max!, 54)
-            XCTAssertGreaterThanOrEqual(age!.score, 0.25)
-
-            // verify the face location
-            let location = face?.faces.first?.faceLocation
-            XCTAssertEqual(location?.height, 172)
-            XCTAssertEqual(location?.left, 219)
-            XCTAssertEqual(location?.top, 79)
-            XCTAssertEqual(location?.width, 141)
-
-            // verify the gender
-            let gender = face?.faces.first?.gender
-            XCTAssertEqual(gender!.gender, "MALE")
-            XCTAssertGreaterThanOrEqual(gender!.score, 0.75)
-
-            expectation.fulfill()
-        }
-        waitForExpectations()
-    }
-
-    /** Detect faces in uploaded images. */
-    func testDetectFacesByImage2() {
-        let expectation = self.expectation(description: "Detect faces in uploaded images.")
-        visualRecognition.detectFaces(imagesFile: faces, imagesFilename: "faces.zip") {
-            response, error in
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let faceImages = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
-
-            // verify face images object
-            XCTAssertEqual(faceImages.imagesProcessed, 3)
-            XCTAssertNil(faceImages.warnings)
-            XCTAssertEqual(faceImages.images.count, 3)
-
-            for image in faceImages.images {
-                // verify the face image object
-                XCTAssertNil(image.sourceURL)
-                XCTAssertNil(image.resolvedURL)
-                XCTAssert(image.image?.hasPrefix("faces.zip/faces/face") == true)
-                XCTAssertNil(image.error)
-                XCTAssertEqual(image.faces.count, 1)
-
-                // verify the age
-                let age = image.faces.first?.age
-                XCTAssert(age!.min! >= 18)
-                XCTAssert(age!.max! <= 44)
-                XCTAssert(age!.score >= 0.25)
-
-                // verify the face location
-                let location = image.faces.first?.faceLocation
-                XCTAssert(location!.height >= 90)
-                XCTAssert(location!.left >= 30)
-                XCTAssert(location!.top >= 20)
-                XCTAssert(location!.width >= 90)
-
-                // verify the gender
-                let gender = image.faces.first?.gender
-                XCTAssert(gender!.gender == "MALE")
-                XCTAssert(gender!.score >= 0.75)
-            }
-
-            expectation.fulfill()
-        }
-        waitForExpectations()
-    }
-
     // MARK: - Negative Tests
 
     /** Test creating a classifier with a single image for positive examples. */
@@ -1321,21 +1162,6 @@ class VisualRecognitionTests: XCTestCase {
 
         let invalidImageURL = "invalid-image-url"
         visualRecognition.classify(url: invalidImageURL) {
-            _, error in
-            if error == nil {
-                XCTFail(missingErrorMessage)
-            }
-            expectation.fulfill()
-        }
-        waitForExpectations()
-    }
-
-    /** Test detecting faces with an invalid URL using the default classifier and parameters. */
-    func testDetectFacesByInvalidURL() {
-        let expectation = self.expectation(description: "Classify an image with an invalid type.")
-
-        let invalidImageURL = "invalid-image-url"
-        visualRecognition.detectFaces(url: invalidImageURL) {
             _, error in
             if error == nil {
                 XCTFail(missingErrorMessage)

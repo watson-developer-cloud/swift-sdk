@@ -15,10 +15,22 @@
  **/
 
 import Foundation
-import RestKit
+import IBMSwiftSDKCore
 
+// Typealias rest types
 public typealias WatsonResponse = RestResponse
 public typealias WatsonError = RestError
+public typealias WatsonJSON = JSON
+
+// Typealias Authenticators provided by the core
+public typealias WatsonAuthenticator = Authenticator
+public typealias WatsonIAMAuthenticator = IAMAuthenticator
+public typealias WatsonBasicAuthenticator = BasicAuthenticator
+public typealias WatsonCloudPakForDataAuthenticator = CloudPakForDataAuthenticator
+public typealias WatsonTokenSourceAuthenticator = TokenSourceAuthenticator
+public typealias WatsonBearerTokenAuthenticator = BearerTokenAuthenticator
+public typealias WatsonNoAuthAuthenticator = NoAuthAuthenticator
+
 
 /// Contains functionality and information common to all of the services
 internal struct Shared {

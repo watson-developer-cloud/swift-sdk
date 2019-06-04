@@ -19,7 +19,6 @@
 import XCTest
 import Foundation
 import TextToSpeechV1
-import RestKit
 
 class TextToSpeechTests: XCTestCase {
 
@@ -84,12 +83,12 @@ class TextToSpeechTests: XCTestCase {
     /** Instantiate Text to Speech instance. */
     func instantiateTextToSpeech() {
         if let apiKey = WatsonCredentials.TextToSpeechAPIKey {
-            let authenticator = IAMAuthenticator.init(apiKey: apiKey)
+            let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
             textToSpeech = TextToSpeech(authenticator: authenticator)
         } else {
             let username = WatsonCredentials.TextToSpeechUsername
             let password = WatsonCredentials.TextToSpeechPassword
-            let authenticator = BasicAuthenticator.init(username: username, password: password)
+            let authenticator = WatsonBasicAuthenticator.init(username: username, password: password)
             textToSpeech = TextToSpeech(authenticator: authenticator)
         }
         if let url = WatsonCredentials.TextToSpeechURL {

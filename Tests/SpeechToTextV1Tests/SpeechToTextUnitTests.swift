@@ -15,7 +15,6 @@
  **/
 
 import XCTest
-import RestKit
 @testable import SpeechToTextV1
 
 class SpeechToTextUnitTests: XCTestCase {

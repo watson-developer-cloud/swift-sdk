@@ -17,7 +17,6 @@
 import XCTest
 import Foundation
 import CompareComplyV1
-import RestKit
 
 class CompareComplyTests: XCTestCase {
 
@@ -103,7 +102,7 @@ class CompareComplyTests: XCTestCase {
     /** Instantiate CompareComply. */
     func instantiateCompareComply() {
         let version = "2018-11-15"
-        let authenticator = IAMAuthenticator.init(apiKey: WatsonCredentials.CompareComplyV1APIKey)
+        let authenticator = WatsonIAMAuthenticator.init(apiKey: WatsonCredentials.CompareComplyV1APIKey)
         compareComply = CompareComply(version: version, authenticator: authenticator)
         if let url = WatsonCredentials.CompareComplyURL {
             compareComply.serviceURL = url

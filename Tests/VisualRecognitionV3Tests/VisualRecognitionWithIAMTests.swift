@@ -17,7 +17,6 @@
 import XCTest
 import Foundation
 import VisualRecognitionV3
-import RestKit
 
 class VisualRecognitionWithIAMTests: XCTestCase {
 
@@ -84,7 +83,7 @@ class VisualRecognitionWithIAMTests: XCTestCase {
             XCTFail("Missing credentials for Visual Recognition service")
             return
         }
-        let authenticator = IAMAuthenticator.init(apiKey: apiKey)
+        let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
         let visualRecognition = VisualRecognition(version: versionDate, authenticator: authenticator)
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"

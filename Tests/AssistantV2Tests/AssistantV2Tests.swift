@@ -19,7 +19,6 @@
 import XCTest
 import Foundation
 import AssistantV2
-import RestKit
 
 class AssistantV2Tests: XCTestCase {
 
@@ -49,12 +48,12 @@ class AssistantV2Tests: XCTestCase {
     /** Instantiate Assistant. */
     func instantiateAssistant() {
         if let apiKey = WatsonCredentials.AssistantAPIKey {
-            let authenticator = IAMAuthenticator.init(apiKey: apiKey)
+            let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
             assistant = Assistant(version: versionDate, authenticator: authenticator)
         } else {
             let username = WatsonCredentials.AssistantV2Username
             let password = WatsonCredentials.AssistantV2Password
-            let authenticator = BasicAuthenticator.init(username: username, password: password)
+            let authenticator = WatsonBasicAuthenticator.init(username: username, password: password)
             assistant = Assistant(version: versionDate, authenticator: authenticator)
         }
         if let url = WatsonCredentials.AssistantV2URL {
@@ -65,7 +64,7 @@ class AssistantV2Tests: XCTestCase {
     }
 
     /** Wait for expectations. */
-    func waitForExpectations(timeout: Time¨Interval = 10.0) {
+    func waitForExpectations(timeout: TimeInterval = 10.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
@@ -320,7 +319,7 @@ class AssistantV2Tests: XCTestCase {
         let global = MessageContextGlobal(system: system)
 
         // build user-defined context variables, put in skill-specific context for main skill
-        var userDefinedContext: [String: JSON] = [:]
+        var userDefinedContext: [String: WatsonJSON] = [:]
         userDefinedContext["account_number"] = .string("123456")
         let mainSkillContext = MessageContextSkill(userDefined: userDefinedContext)
         let skills = MessageContextSkills(additionalProperties: ["main skill": mainSkillContext])

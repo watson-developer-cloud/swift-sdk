@@ -357,7 +357,38 @@ public class TextToSpeech {
         )
 
         // execute REST request
-        request.response(completionHandler: completionHandler)
+        request.response { (response: WatsonResponse<Data>?, error: WatsonError?) in
+            var response = response
+            guard let data = response?.result else {
+                completionHandler(response, error)
+                return
+            }
+            if accept?.lowercased().contains("audio/wav") == true {
+                // repair the WAV header
+                var wav = data
+                guard WAVRepair.isWAVFile(data: wav) else {
+                    let error = WatsonError.other(message: "Expected returned audio to be in WAV format", metadata: nil)
+                    completionHandler(nil, error)
+                    return
+                }
+                WAVRepair.repairWAVHeader(data: &wav)
+                response?.result = wav
+                completionHandler(response, nil)
+            } else if accept?.lowercased().contains("ogg") == true && accept?.lowercased().contains("opus") == true {
+                do {
+                    let decodedAudio = try TextToSpeechDecoder(audioData: data)
+                    response?.result = decodedAudio.pcmDataWithHeaders
+                    completionHandler(response, nil)
+                } catch {
+                    let error = WatsonError.serialization(values: "returned audio")
+                    completionHandler(nil, error)
+                    return
+                }
+            } else {
+                completionHandler(response, nil)
+            }
+        }
+
     }
 
     /**

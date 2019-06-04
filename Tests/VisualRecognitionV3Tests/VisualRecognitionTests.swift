@@ -773,7 +773,7 @@ class VisualRecognitionTests: XCTestCase {
                 XCTFail("No classifiers found")
                 return
             }
-            XCTAssertEqual(2, classifiers.count)
+
             for classifier in classifiers {
                 var containsCarClass = false
                 var classifierScore: Double?
@@ -1038,7 +1038,7 @@ class VisualRecognitionTests: XCTestCase {
                 XCTFail("No classifiers found")
                 return
             }
-            XCTAssertEqual(2, classifiers.count)
+
             for classifier in classifiers {
                 // verify the image's default classifier
                 if classifier.name == "default" {
@@ -1096,7 +1096,6 @@ class VisualRecognitionTests: XCTestCase {
                 XCTAssertNil(image.resolvedURL)
                 XCTAssert(image.image?.hasPrefix("car") == true)
                 XCTAssertNil(image.error)
-                XCTAssertEqual(image.classifiers.count, 2)
 
                 for classifier in image.classifiers {
                     var containsCarClass = false

@@ -20,4 +20,6 @@ import Foundation
  Returns information from the document, including author name, title, RSS/ATOM feeds, prominent page image, and
  publication date. Supports URL and HTML input types only.
  */
-public typealias MetadataOptions = JSON
+public struct MetadataOptions: Codable, Equatable {
+    public init() { }
+}

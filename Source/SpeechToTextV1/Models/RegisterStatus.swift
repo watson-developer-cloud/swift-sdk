@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** RegisterStatus. */
+/**
+ Information about a request to register a callback for asynchronous speech recognition.
+ */
 public struct RegisterStatus: Codable, Equatable {
 
     /**

@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Profile. */
+/**
+ The personality profile that the service generated for the input content.
+ */
 public struct Profile: Codable, Equatable {
 
     /**
@@ -77,8 +79,8 @@ public struct Profile: Codable, Equatable {
     public var consumptionPreferences: [ConsumptionPreferencesCategory]?
 
     /**
-     Warning messages associated with the input text submitted with the request. The array is empty if the input
-     generated no warnings.
+     An array of warning messages that are associated with the input text for the request. The array is empty if the
+     input generated no warnings.
      */
     public var warnings: [Warning]
 

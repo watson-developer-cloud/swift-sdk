@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Corpora. */
+/**
+ Information about the corpora from a custom language model.
+ */
 public struct Corpora: Codable, Equatable {
 
     /**

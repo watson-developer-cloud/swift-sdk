@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- Describes the additional service features that are supported with the model.
+ Additional service features that are supported with the model.
  */
 public struct SupportedFeatures: Codable, Equatable {
 

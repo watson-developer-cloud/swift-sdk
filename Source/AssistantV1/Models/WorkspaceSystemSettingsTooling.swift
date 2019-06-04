@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- Workspace settings related to the Watson Assistant tool.
+ Workspace settings related to the Watson Assistant user interface.
  */
 public struct WorkspaceSystemSettingsTooling: Codable, Equatable {
 

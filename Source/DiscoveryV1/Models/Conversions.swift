@@ -47,6 +47,14 @@ public struct Conversions: Codable, Equatable {
      */
     public var jsonNormalizations: [NormalizationOperation]?
 
+    /**
+     When `true`, automatic text extraction from images (this includes images embedded in supported document formats,
+     for example PDF, and suppported image formats, for example TIFF) is performed on documents uploaded to the
+     collection. This field is supported on **Advanced** and higher plans only. **Lite** plans do not support image text
+     recognition.
+     */
+    public var imageTextRecognition: Bool?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case pdf = "pdf"
@@ -54,6 +62,7 @@ public struct Conversions: Codable, Equatable {
         case html = "html"
         case segment = "segment"
         case jsonNormalizations = "json_normalizations"
+        case imageTextRecognition = "image_text_recognition"
     }
 
     /**
@@ -65,6 +74,10 @@ public struct Conversions: Codable, Equatable {
      - parameter segment: A list of Document Segmentation settings.
      - parameter jsonNormalizations: Defines operations that can be used to transform the final output JSON into a
        normalized form. Operations are executed in the order that they appear in the array.
+     - parameter imageTextRecognition: When `true`, automatic text extraction from images (this includes images
+       embedded in supported document formats, for example PDF, and suppported image formats, for example TIFF) is
+       performed on documents uploaded to the collection. This field is supported on **Advanced** and higher plans only.
+       **Lite** plans do not support image text recognition.
 
      - returns: An initialized `Conversions`.
     */
@@ -73,7 +86,8 @@ public struct Conversions: Codable, Equatable {
         word: WordSettings? = nil,
         html: HTMLSettings? = nil,
         segment: SegmentSettings? = nil,
-        jsonNormalizations: [NormalizationOperation]? = nil
+        jsonNormalizations: [NormalizationOperation]? = nil,
+        imageTextRecognition: Bool? = nil
     )
     {
         self.pdf = pdf
@@ -81,6 +95,7 @@ public struct Conversions: Codable, Equatable {
         self.html = html
         self.segment = segment
         self.jsonNormalizations = jsonNormalizations
+        self.imageTextRecognition = imageTextRecognition
     }
 
 }

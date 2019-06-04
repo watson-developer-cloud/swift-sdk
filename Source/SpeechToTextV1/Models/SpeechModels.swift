@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** SpeechModels. */
+/**
+ Information about the available language models.
+ */
 public struct SpeechModels: Codable, Equatable {
 
     /**

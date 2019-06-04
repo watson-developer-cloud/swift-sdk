@@ -24,7 +24,7 @@ public struct CategoriesResult: Codable, Equatable {
     /**
      The path to the category through the 5-level taxonomy hierarchy. For the complete list of categories, see the
      [Categories
-     hierarchy](https://cloud.ibm.com/docs/services/natural-language-understanding/categories.html#categories-hierarchy)
+     hierarchy](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-categories#categories-hierarchy)
      documentation.
      */
     public var label: String?
@@ -34,10 +34,16 @@ public struct CategoriesResult: Codable, Equatable {
      */
     public var score: Double?
 
+    /**
+     Information that helps to explain what contributed to the categories result.
+     */
+    public var explanation: CategoriesResultExplanation?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case label = "label"
         case score = "score"
+        case explanation = "explanation"
     }
 
 }

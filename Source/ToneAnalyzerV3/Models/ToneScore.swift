@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** ToneScore. */
+/**
+ The score for a tone from the input content.
+ */
 public struct ToneScore: Codable, Equatable {
 
     /**

@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- The results of a single feedback query.
+ The results of a successful **Get Feedback** request for a single feedback entry.
  */
 public struct GetFeedback: Codable, Equatable {
 
@@ -37,7 +37,7 @@ public struct GetFeedback: Codable, Equatable {
     public var comment: String?
 
     /**
-     Information returned from the `POST /v1/feedback` method.
+     Information returned from the **Add Feedback** method.
      */
     public var feedbackData: FeedbackDataOutput?
 

@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** LanguageModels. */
+/**
+ Information about existing custom language models.
+ */
 public struct LanguageModels: Codable, Equatable {
 
     /**

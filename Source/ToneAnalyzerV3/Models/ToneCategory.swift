@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** ToneCategory. */
+/**
+ The category for a tone from the input content.
+ */
 public struct ToneCategory: Codable, Equatable {
 
     /**

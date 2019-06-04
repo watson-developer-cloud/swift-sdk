@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** SpeechRecognitionResults. */
+/**
+ The complete results for a speech recognition request.
+ */
 public struct SpeechRecognitionResults: Codable, Equatable {
 
     /**
@@ -42,6 +44,16 @@ public struct SpeechRecognitionResults: Codable, Equatable {
     public var speakerLabels: [SpeakerLabelsResult]?
 
     /**
+     If processing metrics are requested, information about the service's processing of the input audio.
+     */
+    public var processingMetrics: ProcessingMetrics?
+
+    /**
+     If audio metrics are requested, information about the signal characteristics of the input audio.
+     */
+    public var audioMetrics: AudioMetrics?
+
+    /**
      An array of warning messages associated with the request:
      * Warnings for invalid parameters or fields can include a descriptive message and a list of invalid argument
      strings, for example, `"Unknown arguments:"` or `"Unknown url query arguments:"` followed by a list of the form
@@ -60,6 +72,8 @@ public struct SpeechRecognitionResults: Codable, Equatable {
         case results = "results"
         case resultIndex = "result_index"
         case speakerLabels = "speaker_labels"
+        case processingMetrics = "processing_metrics"
+        case audioMetrics = "audio_metrics"
         case warnings = "warnings"
     }
 

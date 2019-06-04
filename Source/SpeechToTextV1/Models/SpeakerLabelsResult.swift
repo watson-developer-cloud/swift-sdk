@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** SpeakerLabelsResult. */
+/**
+ Information about the speakers from speech recognition results.
+ */
 public struct SpeakerLabelsResult: Codable, Equatable {
 
     /**

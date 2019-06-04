@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** UpdateVoiceModel. */
+/**
+ Information about the updated custom voice model.
+ */
 internal struct UpdateVoiceModel: Codable, Equatable {
 
     /**

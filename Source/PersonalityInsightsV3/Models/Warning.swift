@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Warning. */
+/**
+ A warning message that is associated with the input content.
+ */
 public struct Warning: Codable, Equatable {
 
     /**

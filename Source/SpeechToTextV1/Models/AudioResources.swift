@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** AudioResources. */
+/**
+ Information about the audio resources from a custom acoustic model.
+ */
 public struct AudioResources: Codable, Equatable {
 
     /**

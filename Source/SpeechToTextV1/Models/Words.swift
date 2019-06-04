@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Words. */
+/**
+ Information about the words from a custom language model.
+ */
 public struct Words: Codable, Equatable {
 
     /**

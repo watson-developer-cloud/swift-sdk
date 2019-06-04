@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- Information returned from the `POST /v1/feedback` method.
+ Information returned from the **Add Feedback** method.
  */
 public struct FeedbackDataOutput: Codable, Equatable {
 

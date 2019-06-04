@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** SpeechModel. */
+/**
+ Information about an available language model.
+ */
 public struct SpeechModel: Codable, Equatable {
 
     /**
@@ -40,7 +42,7 @@ public struct SpeechModel: Codable, Equatable {
     public var url: String
 
     /**
-     Describes the additional service features that are supported with the model.
+     Additional service features that are supported with the model.
      */
     public var supportedFeatures: SupportedFeatures
 

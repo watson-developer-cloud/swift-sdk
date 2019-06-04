@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- The results of a successful `GET /v1/batches` request.
+ The results of a successful **List Batches** request.
  */
 public struct Batches: Codable, Equatable {
 

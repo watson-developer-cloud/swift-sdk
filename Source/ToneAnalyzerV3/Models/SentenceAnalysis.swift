@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** SentenceAnalysis. */
+/**
+ The results of the analysis for the individual sentences of the input content.
+ */
 public struct SentenceAnalysis: Codable, Equatable {
 
     /**

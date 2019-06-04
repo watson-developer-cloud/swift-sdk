@@ -42,7 +42,7 @@ public struct FeedbackReturn: Codable, Equatable {
     public var created: Date?
 
     /**
-     Information returned from the `POST /v1/feedback` method.
+     Information returned from the **Add Feedback** method.
      */
     public var feedbackData: FeedbackDataOutput?
 

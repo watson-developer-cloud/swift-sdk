@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Behavior. */
+/**
+ The temporal behavior for the input content.
+ */
 public struct Behavior: Codable, Equatable {
 
     /**

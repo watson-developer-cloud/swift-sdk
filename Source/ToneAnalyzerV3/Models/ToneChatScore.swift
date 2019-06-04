@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** ToneChatScore. */
+/**
+ The score for an utterance from the input content.
+ */
 public struct ToneChatScore: Codable, Equatable {
 
     /**

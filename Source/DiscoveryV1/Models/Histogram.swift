@@ -35,7 +35,7 @@ public struct Histogram: Codable, Equatable {
     public var matchingResults: Int?
 
     /**
-     Aggregations returned by the Discovery service.
+     Aggregations returned by Discovery.
      */
     public var aggregations: [QueryAggregation]?
 

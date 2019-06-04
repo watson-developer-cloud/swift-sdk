@@ -32,14 +32,12 @@ internal struct UpdateWorkspace: Codable, Equatable {
     }
 
     /**
-     The name of the workspace. This string cannot contain carriage return, newline, or tab characters, and it must be
-     no longer than 64 characters.
+     The name of the workspace. This string cannot contain carriage return, newline, or tab characters.
      */
     public var name: String?
 
     /**
-     The description of the workspace. This string cannot contain carriage return, newline, or tab characters, and it
-     must be no longer than 128 characters.
+     The description of the workspace. This string cannot contain carriage return, newline, or tab characters.
      */
     public var description: String?
 
@@ -126,9 +124,9 @@ internal struct UpdateWorkspace: Codable, Equatable {
      Initialize a `UpdateWorkspace` with member variables.
 
      - parameter name: The name of the workspace. This string cannot contain carriage return, newline, or tab
-       characters, and it must be no longer than 64 characters.
+       characters.
      - parameter description: The description of the workspace. This string cannot contain carriage return, newline,
-       or tab characters, and it must be no longer than 128 characters.
+       or tab characters.
      - parameter language: The language of the workspace.
      - parameter metadata: Any metadata related to the workspace.
      - parameter learningOptOut: Whether training data from the workspace (including artifacts such as intents and

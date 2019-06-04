@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** CreateVoiceModel. */
+/**
+ Information about the new custom voice model.
+ */
 internal struct CreateVoiceModel: Codable, Equatable {
 
     /**
@@ -24,8 +26,8 @@ internal struct CreateVoiceModel: Codable, Equatable {
      */
     public enum Language: String {
         case deDe = "de-DE"
-        case enUs = "en-US"
         case enGb = "en-GB"
+        case enUs = "en-US"
         case esEs = "es-ES"
         case esLa = "es-LA"
         case esUs = "es-US"

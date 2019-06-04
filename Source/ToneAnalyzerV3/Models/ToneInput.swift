@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** ToneInput. */
+/**
+ Input for the general-purpose endpoint.
+ */
 public struct ToneInput: Codable, Equatable {
 
     /**

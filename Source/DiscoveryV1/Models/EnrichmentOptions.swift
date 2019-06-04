@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- An object representing the configuration options to use for the `elements` enrichment.
+ Options which are specific to a particular enrichment.
  */
 public struct EnrichmentOptions: Codable, Equatable {
 

@@ -32,6 +32,7 @@ public struct DialogRuntimeResponseGeneric: Codable, Equatable {
         case option = "option"
         case connectToAgent = "connect_to_agent"
         case suggestion = "suggestion"
+        case search = "search"
     }
 
     /**

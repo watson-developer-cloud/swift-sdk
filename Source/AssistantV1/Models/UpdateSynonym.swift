@@ -23,7 +23,6 @@ internal struct UpdateSynonym: Codable, Equatable {
      The text of the synonym. This string must conform to the following restrictions:
      - It cannot contain carriage return, newline, or tab characters.
      - It cannot consist of only whitespace characters.
-     - It must be no longer than 64 characters.
      */
     public var synonym: String?
 
@@ -50,7 +49,6 @@ internal struct UpdateSynonym: Codable, Equatable {
      - parameter synonym: The text of the synonym. This string must conform to the following restrictions:
        - It cannot contain carriage return, newline, or tab characters.
        - It cannot consist of only whitespace characters.
-       - It must be no longer than 64 characters.
      - parameter created: The timestamp for creation of the object.
      - parameter updated: The timestamp for the most recent update to the object.
 

@@ -22,7 +22,8 @@ import RestKit
  Analyze various features of text content at scale. Provide text, raw HTML, or a public URL and IBM Watson Natural
  Language Understanding will give you results for the features you request. The service cleans HTML content before
  analysis by default, so the results can ignore most advertisements and other unwanted content.
- You can create [custom models](https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html)
+ You can create [custom
+ models](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-customizing)
  with Watson Knowledge Studio to detect custom entities, relations, and categories in Natural Language Understanding.
  */
 public class NaturalLanguageUnderstanding {
@@ -181,18 +182,19 @@ public class NaturalLanguageUnderstanding {
      - parameter html: The HTML file to analyze. One of the `text`, `html`, or `url` parameters is required.
      - parameter url: The webpage to analyze. One of the `text`, `html`, or `url` parameters is required.
      - parameter clean: Set this to `false` to disable webpage cleaning. To learn more about webpage cleaning, see the
-       [Analyzing webpages](https://cloud.ibm.com/docs/services/natural-language-understanding/analyzing-webpages.html)
+       [Analyzing
+       webpages](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-analyzing-webpages)
        documentation.
      - parameter xpath: An [XPath
-       query](https://cloud.ibm.com/docs/services/natural-language-understanding/analyzing-webpages.html#xpath) to
-       perform on `html` or `url` input. Results of the query will be appended to the cleaned webpage text before it is
-       analyzed. To analyze only the results of the XPath query, set the `clean` parameter to `false`.
+       query](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-analyzing-webpages#xpath)
+       to perform on `html` or `url` input. Results of the query will be appended to the cleaned webpage text before it
+       is analyzed. To analyze only the results of the XPath query, set the `clean` parameter to `false`.
      - parameter fallbackToRaw: Whether to use raw HTML content if text cleaning fails.
      - parameter returnAnalyzedText: Whether or not to return the analyzed text.
      - parameter language: ISO 639-1 code that specifies the language of your text. This overrides automatic language
        detection. Language support differs depending on the features you include in your analysis. See [Language
-       support](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding
-       -language-support) for more information.
+       support](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-language-support)
+       for more information.
      - parameter limitTextCharacters: Sets the maximum number of characters that are processed by the service.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -261,9 +263,9 @@ public class NaturalLanguageUnderstanding {
     /**
      List models.
 
-     Lists Watson Knowledge Studio [custom
-     models](https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html) that are deployed to
-     your Natural Language Understanding service.
+     Lists Watson Knowledge Studio [custom entities and relations
+     models](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-customizing)
+     that are deployed to your Natural Language Understanding service.
 
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error

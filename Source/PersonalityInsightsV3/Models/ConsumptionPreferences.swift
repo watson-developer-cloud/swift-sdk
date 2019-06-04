@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** ConsumptionPreferences. */
+/**
+ A consumption preference that the service inferred from the input content.
+ */
 public struct ConsumptionPreferences: Codable, Equatable {
 
     /**

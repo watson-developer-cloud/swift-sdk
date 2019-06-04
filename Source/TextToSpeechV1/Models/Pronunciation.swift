@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Pronunciation. */
+/**
+ The pronunciation of the specified text.
+ */
 public struct Pronunciation: Codable, Equatable {
 
     /**

@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- The results of a successful `GET /v1/feedback` request.
+ The results of a successful **List Feedback** request for all feedback.
  */
 public struct FeedbackList: Codable, Equatable {
 

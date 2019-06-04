@@ -61,7 +61,7 @@ public struct Enrichment: Codable, Equatable {
     public var ignoreDownstreamErrors: Bool?
 
     /**
-     An object representing the configuration options to use for the `elements` enrichment.
+     Options which are specific to a particular enrichment.
      */
     public var options: EnrichmentOptions?
 
@@ -98,7 +98,7 @@ public struct Enrichment: Codable, Equatable {
        exists.
      - parameter ignoreDownstreamErrors: If true, then most errors generated during the enrichment process will be
        treated as warnings and will not cause the document to fail processing.
-     - parameter options: An object representing the configuration options to use for the `elements` enrichment.
+     - parameter options: Options which are specific to a particular enrichment.
 
      - returns: An initialized `Enrichment`.
     */

@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** AcousticModels. */
+/**
+ Information about existing custom acoustic models.
+ */
 public struct AcousticModels: Codable, Equatable {
 
     /**

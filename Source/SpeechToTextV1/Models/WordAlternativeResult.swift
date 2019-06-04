@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** WordAlternativeResult. */
+/**
+ An alternative hypothesis for a word from speech recognition results.
+ */
 public struct WordAlternativeResult: Codable, Equatable {
 
     /**

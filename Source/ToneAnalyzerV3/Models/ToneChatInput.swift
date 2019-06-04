@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** ToneChatInput. */
+/**
+ Input for the customer-engagement endpoint.
+ */
 internal struct ToneChatInput: Codable, Equatable {
 
     /**

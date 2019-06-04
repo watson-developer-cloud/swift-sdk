@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Utterance. */
+/**
+ An utterance for the input of the general-purpose endpoint.
+ */
 public struct Utterance: Codable, Equatable {
 
     /**

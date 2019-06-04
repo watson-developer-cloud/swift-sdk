@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Corpus. */
+/**
+ Information about a corpus from a custom language model.
+ */
 public struct Corpus: Codable, Equatable {
 
     /**

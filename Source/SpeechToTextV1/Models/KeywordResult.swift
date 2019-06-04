@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** KeywordResult. */
+/**
+ Information about a match for a keyword from speech recognition results.
+ */
 public struct KeywordResult: Codable, Equatable {
 
     /**

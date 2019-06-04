@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Content. */
+/**
+ The full input content that the service is to analyze.
+ */
 public struct Content: Codable, Equatable {
 
     /**

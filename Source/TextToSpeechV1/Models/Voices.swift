@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Voices. */
+/**
+ Information about all available voice models.
+ */
 public struct Voices: Codable, Equatable {
 
     /**

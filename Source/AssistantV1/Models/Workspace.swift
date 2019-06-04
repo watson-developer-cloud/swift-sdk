@@ -32,14 +32,12 @@ public struct Workspace: Codable, Equatable {
     }
 
     /**
-     The name of the workspace. This string cannot contain carriage return, newline, or tab characters, and it must be
-     no longer than 64 characters.
+     The name of the workspace. This string cannot contain carriage return, newline, or tab characters.
      */
     public var name: String
 
     /**
-     The description of the workspace. This string cannot contain carriage return, newline, or tab characters, and it
-     must be no longer than 128 characters.
+     The description of the workspace. This string cannot contain carriage return, newline, or tab characters.
      */
     public var description: String?
 

@@ -16,7 +16,10 @@
 
 import Foundation
 
-/** Text. */
+/**
+ The text to synthesize. Specify either plain text or a subset of SSML. SSML is an XML-based markup language that
+ provides text annotation for speech-synthesis applications. Pass a maximum of 5 KB of input text.
+ */
 internal struct Text: Codable, Equatable {
 
     /**

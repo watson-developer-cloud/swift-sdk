@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** CustomWords. */
+/**
+ Information about the words that are to be added to a custom language model.
+ */
 internal struct CustomWords: Codable, Equatable {
 
     /**

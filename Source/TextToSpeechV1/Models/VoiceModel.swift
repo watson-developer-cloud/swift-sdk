@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** VoiceModel. */
+/**
+ Information about an existing custom voice model.
+ */
 public struct VoiceModel: Codable, Equatable {
 
     /**

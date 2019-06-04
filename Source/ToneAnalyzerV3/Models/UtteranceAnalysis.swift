@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** UtteranceAnalysis. */
+/**
+ The results of the analysis for an utterance of the input content.
+ */
 public struct UtteranceAnalysis: Codable, Equatable {
 
     /**

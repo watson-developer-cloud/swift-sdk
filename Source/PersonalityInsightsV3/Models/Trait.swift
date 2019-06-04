@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Trait. */
+/**
+ The characteristics that the service inferred from the input content.
+ */
 public struct Trait: Codable, Equatable {
 
     /**

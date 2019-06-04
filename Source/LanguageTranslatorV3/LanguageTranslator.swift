@@ -556,4 +556,285 @@ public class LanguageTranslator {
         request.responseObject(completionHandler: completionHandler)
     }
 
+    /**
+     List documents.
+
+     Lists documents that have been submitted for translation.
+
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func listDocuments(
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<DocumentList>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listDocuments")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceURL + "/v3/documents",
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Translate document.
+
+     Submit a document for translation. You can submit the document contents in the `file` parameter, or you can
+     reference a previously submitted document by document ID.
+
+     - parameter file: The source file to translate.
+       [Supported file
+       types](https://cloud.ibm.com/docs/services/language-translator?topic=language-translator-document-translator-tutorial#supported-file-formats)
+       Maximum file size: **20 MB**.
+     - parameter filename: The filename for file.
+     - parameter fileContentType: The content type of file.
+     - parameter modelID: The model to use for translation. `model_id` or both `source` and `target` are required.
+     - parameter source: Language code that specifies the language of the source document.
+     - parameter target: Language code that specifies the target language for translation.
+     - parameter documentID: To use a previously submitted document as the source for a new translation, enter the
+       `document_id` of the document.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func translateDocument(
+        file: Data,
+        filename: String,
+        fileContentType: String? = nil,
+        modelID: String? = nil,
+        source: String? = nil,
+        target: String? = nil,
+        documentID: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<DocumentStatus>?, WatsonError?) -> Void)
+    {
+        // construct body
+        let multipartFormData = MultipartFormData()
+        multipartFormData.append(file, withName: "file", mimeType: fileContentType, fileName: filename)
+        if let modelID = modelID {
+            if let modelIDData = modelID.data(using: .utf8) {
+                multipartFormData.append(modelIDData, withName: "model_id")
+            }
+        }
+        if let source = source {
+            if let sourceData = source.data(using: .utf8) {
+                multipartFormData.append(sourceData, withName: "source")
+            }
+        }
+        if let target = target {
+            if let targetData = target.data(using: .utf8) {
+                multipartFormData.append(targetData, withName: "target")
+            }
+        }
+        if let documentID = documentID {
+            if let documentIDData = documentID.data(using: .utf8) {
+                multipartFormData.append(documentIDData, withName: "document_id")
+            }
+        }
+        guard let body = try? multipartFormData.toData() else {
+            completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "translateDocument")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = multipartFormData.contentType
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "POST",
+            url: serviceURL + "/v3/documents",
+            headerParameters: headerParameters,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Get document status.
+
+     Gets the translation status of a document.
+
+     - parameter documentID: The document ID of the document.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func getDocumentStatus(
+        documentID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<DocumentStatus>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getDocumentStatus")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v3/documents/\(documentID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            return
+        }
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceURL + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Delete document.
+
+     Deletes a document.
+
+     - parameter documentID: Document ID of the document to delete.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func deleteDocument(
+        documentID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteDocument")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v3/documents/\(documentID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            return
+        }
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "DELETE",
+            url: serviceURL + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.response(completionHandler: completionHandler)
+    }
+
+    /**
+     Get translated document.
+
+     Gets the translated document associated with the given document ID.
+
+     - parameter documentID: The document ID of the document that was submitted for translation.
+     - parameter accept: The type of the response: application/powerpoint, application/mspowerpoint,
+       application/x-rtf, application/json, application/xml, application/vnd.ms-excel,
+       application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-powerpoint,
+       application/vnd.openxmlformats-officedocument.presentationml.presentation, application/msword,
+       application/vnd.openxmlformats-officedocument.wordprocessingml.document,
+       application/vnd.oasis.opendocument.spreadsheet, application/vnd.oasis.opendocument.presentation,
+       application/vnd.oasis.opendocument.text, application/pdf, application/rtf, text/html, text/json, text/plain,
+       text/richtext, text/rtf, or text/xml. A character encoding can be specified by including a `charset` parameter.
+       For example, 'text/html;charset=utf-8'.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func getTranslatedDocument(
+        documentID: String,
+        accept: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Data>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getTranslatedDocument")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        if let accept = accept {
+            headerParameters["Accept"] = accept
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v3/documents/\(documentID)/translated_document"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            return
+        }
+        let request = RestRequest(
+            session: session,
+            authMethod: authMethod,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceURL + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.response(completionHandler: completionHandler)
+    }
+
 }

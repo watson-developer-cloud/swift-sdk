@@ -41,12 +41,4 @@ public struct AggregationResult: Codable, Equatable {
         case aggregations = "aggregations"
     }
 
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        if let keyAsString = try? container.decode(String.self, forKey: .key) { key = keyAsString }
-        if let keyAsInt = try? container.decode(Int.self, forKey: .key) { key = "\(keyAsInt)" }
-        matchingResults = try container.decodeIfPresent(Int.self, forKey: .matchingResults)
-        aggregations = try container.decodeIfPresent([QueryAggregation].self, forKey: .aggregations)
-    }
-
 }

@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** ContentItem. */
+/**
+ An input content item that the service is to analyze.
+ */
 public struct ContentItem: Codable, Equatable {
 
     /**

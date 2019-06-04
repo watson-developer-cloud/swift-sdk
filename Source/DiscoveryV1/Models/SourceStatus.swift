@@ -27,12 +27,14 @@ public struct SourceStatus: Codable, Equatable {
      -  `running` indicates that a crawl to fetch more documents is in progress.
      -  `complete` indicates that the crawl has completed with no errors.
      -  `queued` indicates that the crawl has been paused by the system and will automatically restart when possible.
+     -  `unknown` indicates that an unidentified error has occured in the service.
      */
     public enum Status: String {
         case running = "running"
         case complete = "complete"
         case notConfigured = "not_configured"
         case queued = "queued"
+        case unknown = "unknown"
     }
 
     /**
@@ -41,18 +43,19 @@ public struct SourceStatus: Codable, Equatable {
      -  `running` indicates that a crawl to fetch more documents is in progress.
      -  `complete` indicates that the crawl has completed with no errors.
      -  `queued` indicates that the crawl has been paused by the system and will automatically restart when possible.
+     -  `unknown` indicates that an unidentified error has occured in the service.
      */
     public var status: String?
 
     /**
-     Date in UTC format indicating when the last crawl was attempted. If `null`, no crawl was completed.
+     Date in `RFC 3339` format indicating the time of the next crawl attempt.
      */
-    public var lastUpdated: Date?
+    public var nextCrawl: Date?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case status = "status"
-        case lastUpdated = "last_updated"
+        case nextCrawl = "next_crawl"
     }
 
 }

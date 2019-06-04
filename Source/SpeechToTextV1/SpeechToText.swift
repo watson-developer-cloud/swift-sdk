@@ -162,7 +162,8 @@ public class SpeechToText {
 
      Lists all language models that are available for use with the service. The information includes the name of the
      model and its minimum sampling rate in Hertz, among other things.
-     **See also:** [Languages and models](https://cloud.ibm.com/docs/services/speech-to-text/models.html).
+     **See also:** [Languages and
+     models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-models#models).
 
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -199,7 +200,8 @@ public class SpeechToText {
 
      Gets information for a single specified language model that is available for use with the service. The information
      includes the name of the model and its minimum sampling rate in Hertz, among other things.
-     **See also:** [Languages and models](https://cloud.ibm.com/docs/services/speech-to-text/models.html).
+     **See also:** [Languages and
+     models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-models#models).
 
      - parameter modelID: The identifier of the model in the form of its name from the output of the **Get a model**
        method.
@@ -245,9 +247,10 @@ public class SpeechToText {
      Sends audio and returns transcription results for a recognition request. You can pass a maximum of 100 MB and a
      minimum of 100 bytes of audio with a request. The service automatically detects the endianness of the incoming
      audio and, for audio that includes multiple channels, downmixes the audio to one-channel mono during transcoding.
-     The method returns only final results; to enable interim results, use the WebSocket API.
+     The method returns only final results; to enable interim results, use the WebSocket API. (With the `curl` command,
+     use the `--data-binary` option to upload the file for the request.)
      **See also:** [Making a basic HTTP
-     request](https://cloud.ibm.com/docs/services/speech-to-text/http.html#HTTP-basic).
+     request](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-http#HTTP-basic).
      ### Streaming mode
       For requests to transcribe live audio as it becomes available, you must set the `Transfer-Encoding` header to
      `chunked` to use streaming mode. In streaming mode, the service closes the connection (status code 408) if it does
@@ -255,8 +258,8 @@ public class SpeechToText {
      connection (status code 400) if it detects no speech for `inactivity_timeout` seconds of streaming audio; use the
      `inactivity_timeout` parameter to change the default of 30 seconds.
      **See also:**
-     * [Audio transmission](https://cloud.ibm.com/docs/services/speech-to-text/input.html#transmission)
-     * [Timeouts](https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts)
+     * [Audio transmission](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#transmission)
+     * [Timeouts](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#timeouts)
      ### Audio formats (content types)
       The service accepts audio in the following formats (MIME types).
      * For formats that are labeled **Required**, you must use the `Content-Type` header with the request to specify the
@@ -286,37 +289,39 @@ public class SpeechToText {
      models, at least 16 kHz; for narrowband models, at least 8 kHz. If the sampling rate of the audio is higher than
      the minimum required rate, the service down-samples the audio to the appropriate rate. If the sampling rate of the
      audio is lower than the minimum required rate, the request fails.
-      **See also:** [Audio formats](https://cloud.ibm.com/docs/services/speech-to-text/audio-formats.html).
+      **See also:** [Audio
+     formats](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-audio-formats#audio-formats).
      ### Multipart speech recognition
       **Note:** The Watson SDKs do not support multipart speech recognition.
      The HTTP `POST` method of the service also supports multipart speech recognition. With multipart requests, you pass
      all audio data as multipart form data. You specify some parameters as request headers and query parameters, but you
-     pass JSON metadata as form data to control most aspects of the transcription.
-     The multipart approach is intended for use with browsers for which JavaScript is disabled or when the parameters
-     used with the request are greater than the 8 KB limit imposed by most HTTP servers and proxies. You can encounter
-     this limit, for example, if you want to spot a very large number of keywords.
+     pass JSON metadata as form data to control most aspects of the transcription. You can use multipart recognition to
+     pass multiple audio files with a single request.
+     Use the multipart approach with browsers for which JavaScript is disabled or when the parameters used with the
+     request are greater than the 8 KB limit imposed by most HTTP servers and proxies. You can encounter this limit, for
+     example, if you want to spot a very large number of keywords.
      **See also:** [Making a multipart HTTP
-     request](https://cloud.ibm.com/docs/services/speech-to-text/http.html#HTTP-multi).
+     request](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-http#HTTP-multi).
 
      - parameter audio: The audio to transcribe.
      - parameter model: The identifier of the model that is to be used for the recognition request. See [Languages and
-       models](https://cloud.ibm.com/docs/services/speech-to-text/models.html).
+       models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-models#models).
      - parameter languageCustomizationID: The customization ID (GUID) of a custom language model that is to be used
        with the recognition request. The base model of the specified custom language model must match the model
        specified with the `model` parameter. You must make the request with credentials for the instance of the service
        that owns the custom model. By default, no custom language model is used. See [Custom
-       models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input).
+       models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#custom-input).
        **Note:** Use this parameter instead of the deprecated `customization_id` parameter.
      - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model that is to be used
        with the recognition request. The base model of the specified custom acoustic model must match the model
        specified with the `model` parameter. You must make the request with credentials for the instance of the service
        that owns the custom model. By default, no custom acoustic model is used. See [Custom
-       models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input).
-     - parameter baseModelVersion: The version of the specified base model that is to be used with recognition
+       models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#custom-input).
+     - parameter baseModelVersion: The version of the specified base model that is to be used with the recognition
        request. Multiple versions of a base model can exist when a model is updated for internal improvements. The
        parameter is intended primarily for use with custom models that have been upgraded for a new base model. The
        default value depends on whether the parameter is used with or without a custom model. See [Base model
-       version](https://cloud.ibm.com/docs/services/speech-to-text/input.html#version).
+       version](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#version).
      - parameter customizationWeight: If you specify the customization ID (GUID) of a custom language model with the
        recognition request, the customization weight tells the service how much weight to give to words from the custom
        language model compared to those from the base model for the current request.
@@ -326,46 +331,47 @@ public class SpeechToText {
        The default value yields the best performance in general. Assign a higher value if your audio makes frequent use
        of OOV words from the custom model. Use caution when setting the weight: a higher value can improve the accuracy
        of phrases from the custom model's domain, but it can negatively affect performance on non-domain phrases.
-       See [Custom models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input).
+       See [Custom models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#custom-input).
      - parameter inactivityTimeout: The time in seconds after which, if only silence (no speech) is detected in
        streaming audio, the connection is closed with a 400 error. The parameter is useful for stopping audio submission
        from a live microphone when a user simply walks away. Use `-1` for infinity. See [Inactivity
-       timeout](https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts-inactivity).
+       timeout](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#timeouts-inactivity).
      - parameter keywords: An array of keyword strings to spot in the audio. Each keyword string can include one or
        more string tokens. Keywords are spotted only in the final results, not in interim hypotheses. If you specify any
        keywords, you must also specify a keywords threshold. You can spot a maximum of 1000 keywords. Omit the parameter
        or specify an empty array if you do not need to spot keywords. See [Keyword
-       spotting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#keyword_spotting).
+       spotting](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#keyword_spotting).
      - parameter keywordsThreshold: A confidence value that is the lower bound for spotting a keyword. A word is
        considered to match a keyword if its confidence is greater than or equal to the threshold. Specify a probability
        between 0.0 and 1.0. If you specify a threshold, you must also specify one or more keywords. The service performs
        no keyword spotting if you omit either parameter. See [Keyword
-       spotting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#keyword_spotting).
+       spotting](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#keyword_spotting).
      - parameter maxAlternatives: The maximum number of alternative transcripts that the service is to return. By
        default, the service returns a single transcript. If you specify a value of `0`, the service uses the default
        value, `1`. See [Maximum
-       alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#max_alternatives).
+       alternatives](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#max_alternatives).
      - parameter wordAlternativesThreshold: A confidence value that is the lower bound for identifying a hypothesis as
        a possible word alternative (also known as \"Confusion Networks\"). An alternative word is considered if its
        confidence is greater than or equal to the threshold. Specify a probability between 0.0 and 1.0. By default, the
        service computes no alternative words. See [Word
-       alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_alternatives).
+       alternatives](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#word_alternatives).
      - parameter wordConfidence: If `true`, the service returns a confidence measure in the range of 0.0 to 1.0 for
        each word. By default, the service returns no word confidence scores. See [Word
-       confidence](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_confidence).
+       confidence](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#word_confidence).
      - parameter timestamps: If `true`, the service returns time alignment for each word. By default, no timestamps
        are returned. See [Word
-       timestamps](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_timestamps).
+       timestamps](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#word_timestamps).
      - parameter profanityFilter: If `true`, the service filters profanity from all output except for keyword results
        by replacing inappropriate words with a series of asterisks. Set the parameter to `false` to return results with
        no censoring. Applies to US English transcription only. See [Profanity
-       filtering](https://cloud.ibm.com/docs/services/speech-to-text/output.html#profanity_filter).
+       filtering](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#profanity_filter).
      - parameter smartFormatting: If `true`, the service converts dates, times, series of digits and numbers, phone
        numbers, currency values, and internet addresses into more readable, conventional representations in the final
        transcript of a recognition request. For US English, the service also converts certain keyword strings to
        punctuation symbols. By default, the service performs no smart formatting.
        **Note:** Applies to US English, Japanese, and Spanish transcription only.
-       See [Smart formatting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#smart_formatting).
+       See [Smart
+       formatting](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#smart_formatting).
      - parameter speakerLabels: If `true`, the response includes labels that identify which words were spoken by which
        participants in a multi-person exchange. By default, the service returns no speaker labels. Setting
        `speaker_labels` to `true` forces the `timestamps` parameter to be `true`, regardless of whether you specify
@@ -373,12 +379,16 @@ public class SpeechToText {
        **Note:** Applies to US English, Japanese, and Spanish transcription only. To determine whether a language model
        supports speaker labels, you can also use the **Get a model** method and check that the attribute
        `speaker_labels` is set to `true`.
-       See [Speaker labels](https://cloud.ibm.com/docs/services/speech-to-text/output.html#speaker_labels).
+       See [Speaker
+       labels](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#speaker_labels).
+     - parameter customizationID: **Deprecated.** Use the `language_customization_id` parameter to specify the
+       customization ID (GUID) of a custom language model that is to be used with the recognition request. Do not
+       specify both parameters with a request.
      - parameter grammarName: The name of a grammar that is to be used with the recognition request. If you specify a
        grammar, you must also use the `language_customization_id` parameter to specify the name of the custom language
        model for which the grammar is defined. The service recognizes only strings that are recognized by the specified
        grammar; it does not recognize other custom words from the model's words resource. See
-       [Grammars](https://cloud.ibm.com/docs/services/speech-to-text/input.html#grammars-input).
+       [Grammars](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#grammars-input).
      - parameter redaction: If `true`, the service redacts, or masks, numeric data from final transcripts. The feature
        redacts any number that has three or more consecutive digits by replacing each digit with an `X` character. It is
        intended to redact sensitive numeric data, such as credit card numbers. By default, the service performs no
@@ -388,7 +398,23 @@ public class SpeechToText {
        the `keywords` and `keywords_threshold` parameters) and returns only a single final transcript (forces the
        `max_alternatives` parameter to be `1`).
        **Note:** Applies to US English, Japanese, and Korean transcription only.
-       See [Numeric redaction](https://cloud.ibm.com/docs/services/speech-to-text/output.html#redaction).
+       See [Numeric
+       redaction](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#redaction).
+     - parameter processingMetrics: If `true`, requests processing metrics about the service's transcription of the
+       input audio. The service returns processing metrics at the interval specified by the
+       `processing_metrics_interval` parameter. It also returns processing metrics for transcription events, for
+       example, for final and interim results. By default, the service returns no processing metrics.
+     - parameter processingMetricsInterval: Specifies the interval in real wall-clock seconds at which the service is
+       to return processing metrics. The parameter is ignored unless the `processing_metrics` parameter is set to
+       `true`.
+       The parameter accepts a minimum value of 0.1 seconds. The level of precision is not restricted, so you can
+       specify values such as 0.25 and 0.125.
+       The service does not impose a maximum value. If you want to receive processing metrics only for transcription
+       events instead of at periodic intervals, set the value to a large number. If the value is larger than the
+       duration of the audio, the service returns processing metrics only for transcription events.
+     - parameter audioMetrics: If `true`, requests detailed information about the signal characteristics of the input
+       audio. The service returns audio metrics with the final transcription results. By default, the service returns no
+       audio metrics.
      - parameter contentType: The format (MIME type) of the audio. For more information about specifying an audio
        format, see **Audio formats (content types)** in the method description.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -411,8 +437,12 @@ public class SpeechToText {
         profanityFilter: Bool? = nil,
         smartFormatting: Bool? = nil,
         speakerLabels: Bool? = nil,
+        customizationID: String? = nil,
         grammarName: String? = nil,
         redaction: Bool? = nil,
+        processingMetrics: Bool? = nil,
+        processingMetricsInterval: Double? = nil,
+        audioMetrics: Bool? = nil,
         contentType: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, WatsonError?) -> Void)
@@ -494,12 +524,28 @@ public class SpeechToText {
             let queryParameter = URLQueryItem(name: "speaker_labels", value: "\(speakerLabels)")
             queryParameters.append(queryParameter)
         }
+        if let customizationID = customizationID {
+            let queryParameter = URLQueryItem(name: "customization_id", value: customizationID)
+            queryParameters.append(queryParameter)
+        }
         if let grammarName = grammarName {
             let queryParameter = URLQueryItem(name: "grammar_name", value: grammarName)
             queryParameters.append(queryParameter)
         }
         if let redaction = redaction {
             let queryParameter = URLQueryItem(name: "redaction", value: "\(redaction)")
+            queryParameters.append(queryParameter)
+        }
+        if let processingMetrics = processingMetrics {
+            let queryParameter = URLQueryItem(name: "processing_metrics", value: "\(processingMetrics)")
+            queryParameters.append(queryParameter)
+        }
+        if let processingMetricsInterval = processingMetricsInterval {
+            let queryParameter = URLQueryItem(name: "processing_metrics_interval", value: "\(processingMetricsInterval)")
+            queryParameters.append(queryParameter)
+        }
+        if let audioMetrics = audioMetrics {
+            let queryParameter = URLQueryItem(name: "audio_metrics", value: "\(audioMetrics)")
             queryParameters.append(queryParameter)
         }
 
@@ -542,7 +588,8 @@ public class SpeechToText {
      integrity for HTTP communications.
      After you successfully register a callback URL, you can use it with an indefinite number of recognition requests.
      You can register a maximum of 20 callback URLS in a one-hour span of time.
-     **See also:** [Registering a callback URL](https://cloud.ibm.com/docs/services/speech-to-text/async.html#register).
+     **See also:** [Registering a callback
+     URL](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-async#register).
 
      - parameter callbackURL: An HTTP or HTTPS URL to which callback notifications are to be sent. To be white-listed,
        the URL must successfully echo the challenge string during URL verification. During verification, the client can
@@ -599,7 +646,7 @@ public class SpeechToText {
      Unregisters a callback URL that was previously white-listed with a **Register a callback** request for use with the
      asynchronous interface. Once unregistered, the URL can no longer be used with asynchronous recognition requests.
      **See also:** [Unregistering a callback
-     URL](https://cloud.ibm.com/docs/services/speech-to-text/async.html#unregister).
+     URL](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-async#unregister).
 
      - parameter callbackURL: The callback URL that is to be unregistered.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -664,8 +711,9 @@ public class SpeechToText {
      You can pass a maximum of 1 GB and a minimum of 100 bytes of audio with a request. The service automatically
      detects the endianness of the incoming audio and, for audio that includes multiple channels, downmixes the audio to
      one-channel mono during transcoding. The method returns only final results; to enable interim results, use the
-     WebSocket API.
-     **See also:** [Creating a job](https://cloud.ibm.com/docs/services/speech-to-text/async.html#create).
+     WebSocket API. (With the `curl` command, use the `--data-binary` option to upload the file for the request.)
+     **See also:** [Creating a
+     job](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-async#create).
      ### Streaming mode
       For requests to transcribe live audio as it becomes available, you must set the `Transfer-Encoding` header to
      `chunked` to use streaming mode. In streaming mode, the service closes the connection (status code 408) if it does
@@ -673,8 +721,8 @@ public class SpeechToText {
      connection (status code 400) if it detects no speech for `inactivity_timeout` seconds of streaming audio; use the
      `inactivity_timeout` parameter to change the default of 30 seconds.
      **See also:**
-     * [Audio transmission](https://cloud.ibm.com/docs/services/speech-to-text/input.html#transmission)
-     * [Timeouts](https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts)
+     * [Audio transmission](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#transmission)
+     * [Timeouts](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#timeouts)
      ### Audio formats (content types)
       The service accepts audio in the following formats (MIME types).
      * For formats that are labeled **Required**, you must use the `Content-Type` header with the request to specify the
@@ -704,11 +752,12 @@ public class SpeechToText {
      models, at least 16 kHz; for narrowband models, at least 8 kHz. If the sampling rate of the audio is higher than
      the minimum required rate, the service down-samples the audio to the appropriate rate. If the sampling rate of the
      audio is lower than the minimum required rate, the request fails.
-      **See also:** [Audio formats](https://cloud.ibm.com/docs/services/speech-to-text/audio-formats.html).
+      **See also:** [Audio
+     formats](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-audio-formats#audio-formats).
 
      - parameter audio: The audio to transcribe.
      - parameter model: The identifier of the model that is to be used for the recognition request. See [Languages and
-       models](https://cloud.ibm.com/docs/services/speech-to-text/models.html).
+       models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-models#models).
      - parameter callbackURL: A URL to which callback notifications are to be sent. The URL must already be
        successfully white-listed by using the **Register a callback** method. You can include the same callback URL with
        any number of job creation requests. Omit the parameter to poll the service for job completion and results.
@@ -738,18 +787,18 @@ public class SpeechToText {
        with the recognition request. The base model of the specified custom language model must match the model
        specified with the `model` parameter. You must make the request with credentials for the instance of the service
        that owns the custom model. By default, no custom language model is used. See [Custom
-       models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input).
+       models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#custom-input).
        **Note:** Use this parameter instead of the deprecated `customization_id` parameter.
      - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model that is to be used
        with the recognition request. The base model of the specified custom acoustic model must match the model
        specified with the `model` parameter. You must make the request with credentials for the instance of the service
        that owns the custom model. By default, no custom acoustic model is used. See [Custom
-       models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input).
-     - parameter baseModelVersion: The version of the specified base model that is to be used with recognition
+       models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#custom-input).
+     - parameter baseModelVersion: The version of the specified base model that is to be used with the recognition
        request. Multiple versions of a base model can exist when a model is updated for internal improvements. The
        parameter is intended primarily for use with custom models that have been upgraded for a new base model. The
        default value depends on whether the parameter is used with or without a custom model. See [Base model
-       version](https://cloud.ibm.com/docs/services/speech-to-text/input.html#version).
+       version](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#version).
      - parameter customizationWeight: If you specify the customization ID (GUID) of a custom language model with the
        recognition request, the customization weight tells the service how much weight to give to words from the custom
        language model compared to those from the base model for the current request.
@@ -759,46 +808,47 @@ public class SpeechToText {
        The default value yields the best performance in general. Assign a higher value if your audio makes frequent use
        of OOV words from the custom model. Use caution when setting the weight: a higher value can improve the accuracy
        of phrases from the custom model's domain, but it can negatively affect performance on non-domain phrases.
-       See [Custom models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input).
+       See [Custom models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#custom-input).
      - parameter inactivityTimeout: The time in seconds after which, if only silence (no speech) is detected in
        streaming audio, the connection is closed with a 400 error. The parameter is useful for stopping audio submission
        from a live microphone when a user simply walks away. Use `-1` for infinity. See [Inactivity
-       timeout](https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts-inactivity).
+       timeout](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#timeouts-inactivity).
      - parameter keywords: An array of keyword strings to spot in the audio. Each keyword string can include one or
        more string tokens. Keywords are spotted only in the final results, not in interim hypotheses. If you specify any
        keywords, you must also specify a keywords threshold. You can spot a maximum of 1000 keywords. Omit the parameter
        or specify an empty array if you do not need to spot keywords. See [Keyword
-       spotting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#keyword_spotting).
+       spotting](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#keyword_spotting).
      - parameter keywordsThreshold: A confidence value that is the lower bound for spotting a keyword. A word is
        considered to match a keyword if its confidence is greater than or equal to the threshold. Specify a probability
        between 0.0 and 1.0. If you specify a threshold, you must also specify one or more keywords. The service performs
        no keyword spotting if you omit either parameter. See [Keyword
-       spotting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#keyword_spotting).
+       spotting](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#keyword_spotting).
      - parameter maxAlternatives: The maximum number of alternative transcripts that the service is to return. By
        default, the service returns a single transcript. If you specify a value of `0`, the service uses the default
        value, `1`. See [Maximum
-       alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#max_alternatives).
+       alternatives](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#max_alternatives).
      - parameter wordAlternativesThreshold: A confidence value that is the lower bound for identifying a hypothesis as
        a possible word alternative (also known as \"Confusion Networks\"). An alternative word is considered if its
        confidence is greater than or equal to the threshold. Specify a probability between 0.0 and 1.0. By default, the
        service computes no alternative words. See [Word
-       alternatives](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_alternatives).
+       alternatives](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#word_alternatives).
      - parameter wordConfidence: If `true`, the service returns a confidence measure in the range of 0.0 to 1.0 for
        each word. By default, the service returns no word confidence scores. See [Word
-       confidence](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_confidence).
+       confidence](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#word_confidence).
      - parameter timestamps: If `true`, the service returns time alignment for each word. By default, no timestamps
        are returned. See [Word
-       timestamps](https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_timestamps).
+       timestamps](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#word_timestamps).
      - parameter profanityFilter: If `true`, the service filters profanity from all output except for keyword results
        by replacing inappropriate words with a series of asterisks. Set the parameter to `false` to return results with
        no censoring. Applies to US English transcription only. See [Profanity
-       filtering](https://cloud.ibm.com/docs/services/speech-to-text/output.html#profanity_filter).
+       filtering](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#profanity_filter).
      - parameter smartFormatting: If `true`, the service converts dates, times, series of digits and numbers, phone
        numbers, currency values, and internet addresses into more readable, conventional representations in the final
        transcript of a recognition request. For US English, the service also converts certain keyword strings to
        punctuation symbols. By default, the service performs no smart formatting.
        **Note:** Applies to US English, Japanese, and Spanish transcription only.
-       See [Smart formatting](https://cloud.ibm.com/docs/services/speech-to-text/output.html#smart_formatting).
+       See [Smart
+       formatting](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#smart_formatting).
      - parameter speakerLabels: If `true`, the response includes labels that identify which words were spoken by which
        participants in a multi-person exchange. By default, the service returns no speaker labels. Setting
        `speaker_labels` to `true` forces the `timestamps` parameter to be `true`, regardless of whether you specify
@@ -806,12 +856,16 @@ public class SpeechToText {
        **Note:** Applies to US English, Japanese, and Spanish transcription only. To determine whether a language model
        supports speaker labels, you can also use the **Get a model** method and check that the attribute
        `speaker_labels` is set to `true`.
-       See [Speaker labels](https://cloud.ibm.com/docs/services/speech-to-text/output.html#speaker_labels).
+       See [Speaker
+       labels](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#speaker_labels).
+     - parameter customizationID: **Deprecated.** Use the `language_customization_id` parameter to specify the
+       customization ID (GUID) of a custom language model that is to be used with the recognition request. Do not
+       specify both parameters with a request.
      - parameter grammarName: The name of a grammar that is to be used with the recognition request. If you specify a
        grammar, you must also use the `language_customization_id` parameter to specify the name of the custom language
        model for which the grammar is defined. The service recognizes only strings that are recognized by the specified
        grammar; it does not recognize other custom words from the model's words resource. See
-       [Grammars](https://cloud.ibm.com/docs/services/speech-to-text/input.html#grammars-input).
+       [Grammars](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#grammars-input).
      - parameter redaction: If `true`, the service redacts, or masks, numeric data from final transcripts. The feature
        redacts any number that has three or more consecutive digits by replacing each digit with an `X` character. It is
        intended to redact sensitive numeric data, such as credit card numbers. By default, the service performs no
@@ -821,7 +875,23 @@ public class SpeechToText {
        the `keywords` and `keywords_threshold` parameters) and returns only a single final transcript (forces the
        `max_alternatives` parameter to be `1`).
        **Note:** Applies to US English, Japanese, and Korean transcription only.
-       See [Numeric redaction](https://cloud.ibm.com/docs/services/speech-to-text/output.html#redaction).
+       See [Numeric
+       redaction](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#redaction).
+     - parameter processingMetrics: If `true`, requests processing metrics about the service's transcription of the
+       input audio. The service returns processing metrics at the interval specified by the
+       `processing_metrics_interval` parameter. It also returns processing metrics for transcription events, for
+       example, for final and interim results. By default, the service returns no processing metrics.
+     - parameter processingMetricsInterval: Specifies the interval in real wall-clock seconds at which the service is
+       to return processing metrics. The parameter is ignored unless the `processing_metrics` parameter is set to
+       `true`.
+       The parameter accepts a minimum value of 0.1 seconds. The level of precision is not restricted, so you can
+       specify values such as 0.25 and 0.125.
+       The service does not impose a maximum value. If you want to receive processing metrics only for transcription
+       events instead of at periodic intervals, set the value to a large number. If the value is larger than the
+       duration of the audio, the service returns processing metrics only for transcription events.
+     - parameter audioMetrics: If `true`, requests detailed information about the signal characteristics of the input
+       audio. The service returns audio metrics with the final transcription results. By default, the service returns no
+       audio metrics.
      - parameter contentType: The format (MIME type) of the audio. For more information about specifying an audio
        format, see **Audio formats (content types)** in the method description.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -848,8 +918,12 @@ public class SpeechToText {
         profanityFilter: Bool? = nil,
         smartFormatting: Bool? = nil,
         speakerLabels: Bool? = nil,
+        customizationID: String? = nil,
         grammarName: String? = nil,
         redaction: Bool? = nil,
+        processingMetrics: Bool? = nil,
+        processingMetricsInterval: Double? = nil,
+        audioMetrics: Bool? = nil,
         contentType: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<RecognitionJob>?, WatsonError?) -> Void)
@@ -947,12 +1021,28 @@ public class SpeechToText {
             let queryParameter = URLQueryItem(name: "speaker_labels", value: "\(speakerLabels)")
             queryParameters.append(queryParameter)
         }
+        if let customizationID = customizationID {
+            let queryParameter = URLQueryItem(name: "customization_id", value: customizationID)
+            queryParameters.append(queryParameter)
+        }
         if let grammarName = grammarName {
             let queryParameter = URLQueryItem(name: "grammar_name", value: grammarName)
             queryParameters.append(queryParameter)
         }
         if let redaction = redaction {
             let queryParameter = URLQueryItem(name: "redaction", value: "\(redaction)")
+            queryParameters.append(queryParameter)
+        }
+        if let processingMetrics = processingMetrics {
+            let queryParameter = URLQueryItem(name: "processing_metrics", value: "\(processingMetrics)")
+            queryParameters.append(queryParameter)
+        }
+        if let processingMetricsInterval = processingMetricsInterval {
+            let queryParameter = URLQueryItem(name: "processing_metrics_interval", value: "\(processingMetricsInterval)")
+            queryParameters.append(queryParameter)
+        }
+        if let audioMetrics = audioMetrics {
+            let queryParameter = URLQueryItem(name: "audio_metrics", value: "\(audioMetrics)")
             queryParameters.append(queryParameter)
         }
 
@@ -982,7 +1072,7 @@ public class SpeechToText {
      remain available until you delete them with the **Delete a job** method or until the job's time to live expires,
      whichever comes first.
      **See also:** [Checking the status of the latest
-     jobs](https://cloud.ibm.com/docs/services/speech-to-text/async.html#jobs).
+     jobs](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-async#jobs).
 
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -1025,7 +1115,7 @@ public class SpeechToText {
      long as they remain available. Use the **Check jobs** method to request information about the most recent jobs
      associated with the calling credentials.
      **See also:** [Checking the status and retrieving the results of a
-     job](https://cloud.ibm.com/docs/services/speech-to-text/async.html#job).
+     job](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-async#job).
 
      - parameter id: The identifier of the asynchronous job that is to be used for the request. You must make the
        request with credentials for the instance of the service that owns the job.
@@ -1071,7 +1161,8 @@ public class SpeechToText {
      Deletes the specified job. You cannot delete a job that the service is actively processing. Once you delete a job,
      its results are no longer available. The service automatically deletes a job and its results when the time to live
      for the results expires. You must use credentials for the instance of the service that owns a job to delete it.
-     **See also:** [Deleting a job](https://cloud.ibm.com/docs/services/speech-to-text/async.html#delete-async).
+     **See also:** [Deleting a
+     job](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-async#delete-async).
 
      - parameter id: The identifier of the asynchronous job that is to be used for the request. You must make the
        request with credentials for the instance of the service that owns the job.
@@ -1117,7 +1208,7 @@ public class SpeechToText {
      base model for which it is created. The model is owned by the instance of the service whose credentials are used to
      create it.
      **See also:** [Create a custom language
-     model](https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#createModel-language).
+     model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-languageCreate#createModel-language).
 
      - parameter name: A user-defined name for the new custom language model. Use a name that is unique among all
        custom language models that you own. Use a localized name that matches the language of the custom model. Use a
@@ -1126,7 +1217,7 @@ public class SpeechToText {
        language model. The new custom model can be used only with the base model that it customizes.
        To determine whether a base model supports language model customization, use the **Get a model** method and check
        that the attribute `custom_language_model` is set to `true`. You can also refer to [Language support for
-       customization](https://cloud.ibm.com/docs/services/speech-to-text/custom.html#languageSupport).
+       customization](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-customization#languageSupport).
      - parameter dialect: The dialect of the specified language that is to be used with the custom language model. The
        parameter is meaningful only for Spanish models, for which the service creates a custom language model that is
        suited for speech in one of the following dialects:
@@ -1192,7 +1283,7 @@ public class SpeechToText {
      language models for all languages. You must use credentials for the instance of the service that owns a model to
      list information about it.
      **See also:** [Listing custom language
-     models](https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#listModels-language).
+     models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageLanguageModels#listModels-language).
 
      - parameter language: The identifier of the language for which custom language or custom acoustic models are to
        be returned (for example, `en-US`). Omit the parameter to see all custom language or custom acoustic models that
@@ -1242,7 +1333,7 @@ public class SpeechToText {
      Gets information about a specified custom language model. You must use credentials for the instance of the service
      that owns a model to list information about it.
      **See also:** [Listing custom language
-     models](https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#listModels-language).
+     models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageLanguageModels#listModels-language).
 
      - parameter customizationID: The customization ID (GUID) of the custom language model that is to be used for the
        request. You must make the request with credentials for the instance of the service that owns the custom model.
@@ -1289,7 +1380,7 @@ public class SpeechToText {
      corpus or grammar to the model, is currently being processed. You must use credentials for the instance of the
      service that owns a model to delete it.
      **See also:** [Deleting a custom language
-     model](https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#deleteModel-language).
+     model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageLanguageModels#deleteModel-language).
 
      - parameter customizationID: The customization ID (GUID) of the custom language model that is to be used for the
        request. You must make the request with credentials for the instance of the service that owns the custom model.
@@ -1345,13 +1436,17 @@ public class SpeechToText {
      `status` and `progress` fields. A status of `available` means that the custom model is trained and ready to use.
      The service cannot accept subsequent training requests or requests to add new resources until the existing request
      completes.
-     Training can fail to start for the following reasons:
+     **See also:** [Train the custom language
+     model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-languageCreate#trainModel-language).
+     ### Training failures
+      Training can fail to start for the following reasons:
      * The service is currently handling another request for the custom model, such as another training request or a
      request to add a corpus or grammar to the model.
      * No training data have been added to the custom model.
-     * One or more words that were added to the custom model have invalid sounds-like pronunciations that you must fix.
-     **See also:** [Train the custom language
-     model](https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#trainModel-language).
+     * The custom model contains one or more invalid corpora, grammars, or words (for example, a custom word has an
+     invalid sounds-like pronunciation). You can correct the invalid resources or set the `strict` parameter to `false`
+     to exclude the invalid resources from the training. The model must contain at least one valid resource for training
+     to succeed.
 
      - parameter customizationID: The customization ID (GUID) of the custom language model that is to be used for the
        request. You must make the request with credentials for the instance of the service that owns the custom model.
@@ -1369,6 +1464,10 @@ public class SpeechToText {
        of phrases from the custom model's domain, but it can negatively affect performance on non-domain phrases.
        The value that you assign is used for all recognition requests that use the model. You can override it for any
        recognition request by specifying a customization weight for that request.
+     - parameter strict: If `false`, allows training of the custom language model to proceed as long as the model
+       contains at least one valid resource. The method returns an array of `TrainingWarning` objects that lists any
+       invalid resources. By default (`true`), training of a custom language model fails (status code 400) if the model
+       contains one or more invalid resources (corpus files, grammar files, or custom words).
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -1376,8 +1475,9 @@ public class SpeechToText {
         customizationID: String,
         wordTypeToAdd: String? = nil,
         customizationWeight: Double? = nil,
+        strict: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TrainingResponse>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1398,6 +1498,10 @@ public class SpeechToText {
             let queryParameter = URLQueryItem(name: "customization_weight", value: "\(customizationWeight)")
             queryParameters.append(queryParameter)
         }
+        if let strict = strict {
+            let queryParameter = URLQueryItem(name: "strict", value: "\(strict)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/train"
@@ -1416,7 +1520,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.response(completionHandler: completionHandler)
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1427,7 +1531,7 @@ public class SpeechToText {
      of the model are preserved, but the model's words resource is removed and must be re-created. You must use
      credentials for the instance of the service that owns a model to reset it.
      **See also:** [Resetting a custom language
-     model](https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#resetModel-language).
+     model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageLanguageModels#resetModel-language).
 
      - parameter customizationID: The customization ID (GUID) of the custom language model that is to be used for the
        request. You must make the request with credentials for the instance of the service that owns the custom model.
@@ -1481,7 +1585,7 @@ public class SpeechToText {
      is complete, the model resumes the status that it had prior to upgrade. The service cannot accept subsequent
      requests for the model until the upgrade completes.
      **See also:** [Upgrading a custom language
-     model](https://cloud.ibm.com/docs/services/speech-to-text/custom-upgrade.html#upgradeLanguage).
+     model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-customUpgrade#upgradeLanguage).
 
      - parameter customizationID: The customization ID (GUID) of the custom language model that is to be used for the
        request. You must make the request with credentials for the instance of the service that owns the custom model.
@@ -1528,7 +1632,7 @@ public class SpeechToText {
      words and out-of-vocabulary (OOV) words, name, and status of each corpus. You must use credentials for the instance
      of the service that owns a model to list its corpora.
      **See also:** [Listing corpora for a custom language
-     model](https://cloud.ibm.com/docs/services/speech-to-text/language-corpora.html#listCorpora).
+     model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageCorpora#listCorpora).
 
      - parameter customizationID: The customization ID (GUID) of the custom language model that is to be used for the
        request. You must make the request with credentials for the instance of the service that owns the custom model.
@@ -1594,12 +1698,13 @@ public class SpeechToText {
      model's words resource unless they were also added by another corpus or grammar, or they have been modified in some
      way with the **Add custom words** or **Add a custom word** method.
      The service limits the overall amount of data that you can add to a custom model to a maximum of 10 million total
-     words from all sources combined. Also, you can add no more than 30 thousand custom (OOV) words to a model. This
+     words from all sources combined. Also, you can add no more than 90 thousand custom (OOV) words to a model. This
      includes words that the service extracts from corpora and grammars, and words that you add directly.
      **See also:**
-     * [Working with corpora](https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#workingCorpora)
-     * [Add corpora to the custom language
-     model](https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#addCorpora).
+     * [Working with
+     corpora](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-corporaWords#workingCorpora)
+     * [Add a corpus to the custom language
+     model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-languageCreate#addCorpus).
 
      - parameter customizationID: The customization ID (GUID) of the custom language model that is to be used for the
        request. You must make the request with credentials for the instance of the service that owns the custom model.
@@ -1615,7 +1720,7 @@ public class SpeechToText {
        characters.
        Make sure that you know the character encoding of the file. You must use that encoding when working with the
        words in the custom language model. For more information, see [Character
-       encoding](https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#charEncoding).
+       encoding](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-corporaWords#charEncoding).
        With the `curl` command, use the `--data-binary` option to upload the file for the request.
      - parameter allowOverwrite: If `true`, the specified corpus overwrites an existing corpus with the same name. If
        `false`, the request fails if a corpus with the same name already exists. The parameter has no effect if a corpus
@@ -1684,7 +1789,7 @@ public class SpeechToText {
      and out-of-vocabulary (OOV) words, name, and status of the corpus. You must use credentials for the instance of the
      service that owns a model to list its corpora.
      **See also:** [Listing corpora for a custom language
-     model](https://cloud.ibm.com/docs/services/speech-to-text/language-corpora.html#listCorpora).
+     model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageCorpora#listCorpora).
 
      - parameter customizationID: The customization ID (GUID) of the custom language model that is to be used for the
        request. You must make the request with credentials for the instance of the service that owns the custom model.
@@ -1735,7 +1840,7 @@ public class SpeechToText {
      Removing a corpus does not affect the custom model until you train the model with the **Train a custom language
      model** method. You must use credentials for the instance of the service that owns a model to delete its corpora.
      **See also:** [Deleting a corpus from a custom language
-     model](https://cloud.ibm.com/docs/services/speech-to-text/language-corpora.html#deleteCorpus).
+     model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageCorpora#deleteCorpus).
 
      - parameter customizationID: The customization ID (GUID) of the custom language model that is to be used for the
        request. You must make the request with credentials for the instance of the service that owns the custom model.
@@ -1786,7 +1891,7 @@ public class SpeechToText {
      service is to return words; by default, the service lists words in ascending alphabetical order. You must use
      credentials for the instance of the service that owns a model to list information about its words.
      **See also:** [Listing words from a custom language
-     model](https://cloud.ibm.com/docs/services/speech-to-text/language-words.html#listWords).
+     model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageWords#listWords).
 
      - parameter customizationID: The customization ID (GUID) of the custom language model that is to be used for the
        request. You must make the request with credentials for the instance of the service that owns the custom model.
@@ -1857,7 +1962,7 @@ public class SpeechToText {
      Adds one or more custom words to a custom language model. The service populates the words resource for a custom
      model with out-of-vocabulary (OOV) words from each corpus or grammar that is added to the model. You can use this
      method to add additional words or to modify existing words in the words resource. The words resource for a model
-     can contain a maximum of 30 thousand custom (OOV) words. This includes words that the service extracts from corpora
+     can contain a maximum of 90 thousand custom (OOV) words. This includes words that the service extracts from corpora
      and grammars and words that you add directly.
      You must use credentials for the instance of the service that owns a model to add or modify custom words for the
      model. Adding or modifying custom words does not affect the custom model until you train the model for the new data
@@ -1887,9 +1992,9 @@ public class SpeechToText {
      methods to correct errors, eliminate typos, and modify how words are pronounced as needed.
      **See also:**
      * [Working with custom
-     words](https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#workingWords)
+     words](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-corporaWords#workingWords)
      * [Add words to the custom language
-     model](https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#addWords).
+     model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-languageCreate#addWords).
 
      - parameter customizationID: The customization ID (GUID) of the custom language model that is to be used for the
        request. You must make the request with credentials for the instance of the service that owns the custom model.
@@ -1948,7 +2053,7 @@ public class SpeechToText {
      Adds a custom word to a custom language model. The service populates the words resource for a custom model with
      out-of-vocabulary (OOV) words from each corpus or grammar that is added to the model. You can use this method to
      add a word or to modify an existing word in the words resource. The words resource for a model can contain a
-     maximum of 30 thousand custom (OOV) words. This includes words that the service extracts from corpora and grammars
+     maximum of 90 thousand custom (OOV) words. This includes words that the service extracts from corpora and grammars
      and words that you add directly.
      You must use credentials for the instance of the service that owns a model to add or modify a custom word for the
      model. Adding or modifying a custom word does not affect the custom model until you train the model for the new
@@ -1967,16 +2072,16 @@ public class SpeechToText {
      words resource. Use the **List a custom word** method to review the word that you add.
      **See also:**
      * [Working with custom
-     words](https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#workingWords)
+     words](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-corporaWords#workingWords)
      * [Add words to the custom language
-     model](https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#addWords).
+     model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-languageCreate#addWords).
 
      - parameter customizationID: The customization ID (GUID) of the custom language model that is to be used for the
        request. You must make the request with credentials for the instance of the service that owns the custom model.
      - parameter wordName: The custom word that is to be added to or updated in the custom language model. Do not
        include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect the tokens of compound words.
        URL-encode the word if it includes non-ASCII characters. For more information, see [Character
-       encoding](https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#charEncoding).
+       encoding](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-corporaWords#charEncoding).
      - parameter word: For the **Add custom words** method, you must specify the custom word that is to be added to or
        updated in the custom model. Do not include spaces in the word. Use a `-` (dash) or `_` (underscore) to connect
        the tokens of compound words.
@@ -2051,13 +2156,13 @@ public class SpeechToText {
      Gets information about a custom word from a custom language model. You must use credentials for the instance of the
      service that owns a model to list information about its words.
      **See also:** [Listing words from a custom language
-     model](https://cloud.ibm.com/docs/services/speech-to-text/language-words.html#listWords).
+     model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageWords#listWords).
 
      - parameter customizationID: The customization ID (GUID) of the custom language model that is to be used for the
        request. You must make the request with credentials for the instance of the service that owns the custom model.
      - parameter wordName: The custom word that is to be read from the custom language model. URL-encode the word if
        it includes non-ASCII characters. For more information, see [Character
-       encoding](https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#charEncoding).
+       encoding](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-corporaWords#charEncoding).
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -2104,13 +2209,13 @@ public class SpeechToText {
      does not affect the custom model until you train the model with the **Train a custom language model** method. You
      must use credentials for the instance of the service that owns a model to delete its words.
      **See also:** [Deleting a word from a custom language
-     model](https://cloud.ibm.com/docs/services/speech-to-text/language-words.html#deleteWord).
+     model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageWords#deleteWord).
 
      - parameter customizationID: The customization ID (GUID) of the custom language model that is to be used for the
        request. You must make the request with credentials for the instance of the service that owns the custom model.
      - parameter wordName: The custom word that is to be deleted from the custom language model. URL-encode the word
        if it includes non-ASCII characters. For more information, see [Character
-       encoding](https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#charEncoding).
+       encoding](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-corporaWords#charEncoding).
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -2154,7 +2259,8 @@ public class SpeechToText {
      Lists information about all grammars from a custom language model. The information includes the total number of
      out-of-vocabulary (OOV) words, name, and status of each grammar. You must use credentials for the instance of the
      service that owns a model to list its grammars.
-     **See also:** [Listing grammars from a custom language model](https://cloud.ibm.com/docs/services/speech-to-text/).
+     **See also:** [Listing grammars from a custom language
+     model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageGrammars#listGrammars).
 
      - parameter customizationID: The customization ID (GUID) of the custom language model that is to be used for the
        request. You must make the request with credentials for the instance of the service that owns the custom model.
@@ -2216,11 +2322,13 @@ public class SpeechToText {
      model's words resource unless they were also added by another resource or they have been modified in some way with
      the **Add custom words** or **Add a custom word** method.
      The service limits the overall amount of data that you can add to a custom model to a maximum of 10 million total
-     words from all sources combined. Also, you can add no more than 30 thousand OOV words to a model. This includes
+     words from all sources combined. Also, you can add no more than 90 thousand OOV words to a model. This includes
      words that the service extracts from corpora and grammars and words that you add directly.
      **See also:**
-     * [Working with grammars](https://cloud.ibm.com/docs/services/speech-to-text/)
-     * [Add grammars to the custom language model](https://cloud.ibm.com/docs/services/speech-to-text/).
+     * [Understanding
+     grammars](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-grammarUnderstand#grammarUnderstand)
+     * [Add a grammar to the custom language
+     model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-grammarAdd#addGrammar).
 
      - parameter customizationID: The customization ID (GUID) of the custom language model that is to be used for the
        request. You must make the request with credentials for the instance of the service that owns the custom model.
@@ -2235,6 +2343,7 @@ public class SpeechToText {
        `Content-Type` header. Encode the file in UTF-8 (ASCII is a subset of UTF-8). Using any other encoding can lead
        to issues when compiling the grammar or to unexpected results in decoding. The service ignores an encoding that
        is specified in the header of the grammar.
+       With the `curl` command, use the `--data-binary` option to upload the file for the request.
      - parameter contentType: The format (MIME type) of the grammar file:
        * `application/srgs` for Augmented Backus-Naur Form (ABNF), which uses a plain-text representation that is
        similar to traditional BNF grammars.
@@ -2306,7 +2415,8 @@ public class SpeechToText {
      Gets information about a grammar from a custom language model. The information includes the total number of
      out-of-vocabulary (OOV) words, name, and status of the grammar. You must use credentials for the instance of the
      service that owns a model to list its grammars.
-     **See also:** [Listing grammars from a custom language model](https://cloud.ibm.com/docs/services/speech-to-text/).
+     **See also:** [Listing grammars from a custom language
+     model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageGrammars#listGrammars).
 
      - parameter customizationID: The customization ID (GUID) of the custom language model that is to be used for the
        request. You must make the request with credentials for the instance of the service that owns the custom model.
@@ -2357,7 +2467,7 @@ public class SpeechToText {
      does not affect the custom model until you train the model with the **Train a custom language model** method. You
      must use credentials for the instance of the service that owns a model to delete its grammar.
      **See also:** [Deleting a grammar from a custom language
-     model](https://cloud.ibm.com/docs/services/speech-to-text/).
+     model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageGrammars#deleteGrammar).
 
      - parameter customizationID: The customization ID (GUID) of the custom language model that is to be used for the
        request. You must make the request with credentials for the instance of the service that owns the custom model.
@@ -2406,7 +2516,7 @@ public class SpeechToText {
      base model for which it is created. The model is owned by the instance of the service whose credentials are used to
      create it.
      **See also:** [Create a custom acoustic
-     model](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-create.html#createModel-acoustic).
+     model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-acoustic#createModel-acoustic).
 
      - parameter name: A user-defined name for the new custom acoustic model. Use a name that is unique among all
        custom acoustic models that you own. Use a localized name that matches the language of the custom model. Use a
@@ -2415,7 +2525,7 @@ public class SpeechToText {
      - parameter baseModelName: The name of the base language model that is to be customized by the new custom
        acoustic model. The new custom model can be used only with the base model that it customizes.
        To determine whether a base model supports acoustic model customization, refer to [Language support for
-       customization](https://cloud.ibm.com/docs/services/speech-to-text/custom.html#languageSupport).
+       customization](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-customization#languageSupport).
      - parameter description: A description of the new custom acoustic model. Use a localized description that matches
        the language of the custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -2471,7 +2581,7 @@ public class SpeechToText {
      acoustic models for all languages. You must use credentials for the instance of the service that owns a model to
      list information about it.
      **See also:** [Listing custom acoustic
-     models](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#listModels-acoustic).
+     models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAcousticModels#listModels-acoustic).
 
      - parameter language: The identifier of the language for which custom language or custom acoustic models are to
        be returned (for example, `en-US`). Omit the parameter to see all custom language or custom acoustic models that
@@ -2521,7 +2631,7 @@ public class SpeechToText {
      Gets information about a specified custom acoustic model. You must use credentials for the instance of the service
      that owns a model to list information about it.
      **See also:** [Listing custom acoustic
-     models](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#listModels-acoustic).
+     models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAcousticModels#listModels-acoustic).
 
      - parameter customizationID: The customization ID (GUID) of the custom acoustic model that is to be used for the
        request. You must make the request with credentials for the instance of the service that owns the custom model.
@@ -2568,7 +2678,7 @@ public class SpeechToText {
      audio resource to the model, is currently being processed. You must use credentials for the instance of the service
      that owns a model to delete it.
      **See also:** [Deleting a custom acoustic
-     model](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#deleteModel-acoustic).
+     model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAcousticModels#deleteModel-acoustic).
 
      - parameter customizationID: The customization ID (GUID) of the custom acoustic model that is to be used for the
        request. You must make the request with credentials for the instance of the service that owns the custom model.
@@ -2630,15 +2740,21 @@ public class SpeechToText {
      transcriptions of the audio files that you have added to the custom model or you have either corpora (text files)
      or a list of words that are relevant to the contents of the audio files. Both of the custom models must be based on
      the same version of the same base model for training to succeed.
-     Training can fail to start for the following reasons:
+     **See also:**
+     * [Train the custom acoustic
+     model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-acoustic#trainModel-acoustic)
+     * [Using custom acoustic and custom language models
+     together](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-useBoth#useBoth)
+     ### Training failures
+      Training can fail to start for the following reasons:
      * The service is currently handling another request for the custom model, such as another training request or a
      request to add audio resources to the model.
-     * The custom model contains less than 10 minutes or more than 100 hours of audio data.
-     * One or more of the custom model's audio resources is invalid.
+     * The custom model contains less than 10 minutes or more than 200 hours of audio data.
      * You passed an incompatible custom language model with the `custom_language_model_id` query parameter. Both custom
      models must be based on the same version of the same base model.
-     **See also:** [Train the custom acoustic
-     model](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-create.html#trainModel-acoustic).
+     * The custom model contains one or more invalid audio resources. You can correct the invalid audio resources or set
+     the `strict` parameter to `false` to exclude the invalid resources from the training. The model must contain at
+     least one valid resource for training to succeed.
 
      - parameter customizationID: The customization ID (GUID) of the custom acoustic model that is to be used for the
        request. You must make the request with credentials for the instance of the service that owns the custom model.
@@ -2647,14 +2763,19 @@ public class SpeechToText {
        transcriptions of the audio resources or that contains words that are relevant to the contents of the audio
        resources. The custom language model must be based on the same version of the same base model as the custom
        acoustic model. The credentials specified with the request must own both custom models.
+     - parameter strict: If `false`, allows training of the custom acoustic model to proceed as long as the model
+       contains at least one valid audio resource. The method returns an array of `TrainingWarning` objects that lists
+       any invalid resources. By default (`true`), training of a custom acoustic model fails (status code 400) if the
+       model contains one or more invalid audio resources.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func trainAcousticModel(
         customizationID: String,
         customLanguageModelID: String? = nil,
+        strict: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TrainingResponse>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2669,6 +2790,10 @@ public class SpeechToText {
         var queryParameters = [URLQueryItem]()
         if let customLanguageModelID = customLanguageModelID {
             let queryParameter = URLQueryItem(name: "custom_language_model_id", value: customLanguageModelID)
+            queryParameters.append(queryParameter)
+        }
+        if let strict = strict {
+            let queryParameter = URLQueryItem(name: "strict", value: "\(strict)")
             queryParameters.append(queryParameter)
         }
 
@@ -2689,7 +2814,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.response(completionHandler: completionHandler)
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2700,7 +2825,7 @@ public class SpeechToText {
      are preserved, but the model's audio resources are removed and must be re-created. You must use credentials for the
      instance of the service that owns a model to reset it.
      **See also:** [Resetting a custom acoustic
-     model](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#resetModel-acoustic).
+     model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAcousticModels#resetModel-acoustic).
 
      - parameter customizationID: The customization ID (GUID) of the custom acoustic model that is to be used for the
        request. You must make the request with credentials for the instance of the service that owns the custom model.
@@ -2759,7 +2884,7 @@ public class SpeechToText {
      must be upgraded before the custom acoustic model can be upgraded. Omit the parameter if the custom acoustic model
      was not trained with a custom language model.
      **See also:** [Upgrading a custom acoustic
-     model](https://cloud.ibm.com/docs/services/speech-to-text/custom-upgrade.html#upgradeAcoustic).
+     model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-customUpgrade#upgradeAcoustic).
 
      - parameter customizationID: The customization ID (GUID) of the custom acoustic model that is to be used for the
        request. You must make the request with credentials for the instance of the service that owns the custom model.
@@ -2770,7 +2895,7 @@ public class SpeechToText {
        modified since it was last trained. Use this parameter only to force the upgrade of a custom acoustic model that
        is trained with a custom language model, and only if you receive a 400 response code and the message `No input
        data modified since last training`. See [Upgrading a custom acoustic
-       model](https://cloud.ibm.com/docs/services/speech-to-text/custom-upgrade.html#upgradeAcoustic).
+       model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-customUpgrade#upgradeAcoustic).
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -2830,7 +2955,7 @@ public class SpeechToText {
      to the custom acoustic model. You must use credentials for the instance of the service that owns a model to list
      its audio resources.
      **See also:** [Listing audio resources for a custom acoustic
-     model](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-audio.html#listAudio).
+     model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAudio#listAudio).
 
      - parameter customizationID: The customization ID (GUID) of the custom acoustic model that is to be used for the
        request. You must make the request with credentials for the instance of the service that owns the custom model.
@@ -2882,7 +3007,7 @@ public class SpeechToText {
      audio resources in any format that the service supports for speech recognition.
      You can use this method to add any number of audio resources to a custom model by calling the method once for each
      audio or archive file. But the addition of one audio resource must be fully complete before you can add another.
-     You must add a minimum of 10 minutes and a maximum of 100 hours of audio that includes speech, not just silence, to
+     You must add a minimum of 10 minutes and a maximum of 200 hours of audio that includes speech, not just silence, to
      a custom acoustic model before you can train it. No audio resource, audio- or archive-type, can be larger than 100
      MB. To add an audio resource that has the same name as an existing audio resource, set the `allow_overwrite`
      parameter to `true`; otherwise, the request fails.
@@ -2897,7 +3022,7 @@ public class SpeechToText {
      resource, and it returns the status of the resource. Use a loop to check the status of the audio every few seconds
      until it becomes `ok`.
      **See also:** [Add audio to the custom acoustic
-     model](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-create.html#addAudio).
+     model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-acoustic#addAudio).
      ### Content types for audio-type resources
       You can add an individual audio file in any format that the service supports for speech recognition. For an
      audio-type resource, use the `Content-Type` parameter to specify the audio format (MIME type) of the audio file,
@@ -2922,7 +3047,8 @@ public class SpeechToText {
      broadband models, at least 16 kHz; for narrowband models, at least 8 kHz. If the sampling rate of the audio is
      higher than the minimum required rate, the service down-samples the audio to the appropriate rate. If the sampling
      rate of the audio is lower than the minimum required rate, the service labels the audio file as `invalid`.
-      **See also:** [Audio formats](https://cloud.ibm.com/docs/services/speech-to-text/audio-formats.html).
+      **See also:** [Audio
+     formats](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-audio-formats#audio-formats).
      ### Content types for archive-type resources
       You can add an archive file (**.zip** or **.tar.gz** file) that contains audio files in any format that the
      service supports for speech recognition. For an archive-type resource, use the `Content-Type` parameter to specify
@@ -2955,6 +3081,7 @@ public class SpeechToText {
        * Do not use the name of an audio resource that has already been added to the custom model.
      - parameter audioResource: The audio resource that is to be added to the custom acoustic model, an individual
        audio file or an archive file.
+       With the `curl` command, use the `--data-binary` option to upload the file for the request.
      - parameter containedContentType: **For an archive-type resource,** specify the format of the audio files that
        are contained in the archive file if they are of type `audio/alaw`, `audio/basic`, `audio/l16`, or `audio/mulaw`.
        Include the `rate`, `channels`, and `endianness` parameters where necessary. In this case, all audio files that
@@ -3047,7 +3174,7 @@ public class SpeechToText {
      `container` field.
      You must use credentials for the instance of the service that owns a model to list its audio resources.
      **See also:** [Listing audio resources for a custom acoustic
-     model](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-audio.html#listAudio).
+     model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAudio#listAudio).
 
      - parameter customizationID: The customization ID (GUID) of the custom acoustic model that is to be used for the
        request. You must make the request with credentials for the instance of the service that owns the custom model.
@@ -3098,7 +3225,7 @@ public class SpeechToText {
      by using the **Train a custom acoustic model** method. You must use credentials for the instance of the service
      that owns a model to delete its audio resources.
      **See also:** [Deleting an audio resource from a custom acoustic
-     model](https://cloud.ibm.com/docs/services/speech-to-text/acoustic-audio.html#deleteAudio).
+     model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAudio#deleteAudio).
 
      - parameter customizationID: The customization ID (GUID) of the custom acoustic model that is to be used for the
        request. You must make the request with credentials for the instance of the service that owns the custom model.
@@ -3149,7 +3276,8 @@ public class SpeechToText {
      associate the customer ID with the data.
      You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request that passes the
      data.
-     **See also:** [Information security](https://cloud.ibm.com/docs/services/speech-to-text/information-security.html).
+     **See also:** [Information
+     security](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-information-security#information-security).
 
      - parameter customerID: The customer ID for which all data is to be deleted.
      - parameter headers: A dictionary of request headers to be sent with this request.

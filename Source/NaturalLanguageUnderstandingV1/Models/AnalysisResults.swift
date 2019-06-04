@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- Analysis results for each requested feature.
+ Results of the analysis, organized by feature.
  */
 public struct AnalysisResults: Codable, Equatable {
 

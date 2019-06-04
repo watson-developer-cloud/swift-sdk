@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Voice. */
+/**
+ Information about an available voice model.
+ */
 public struct Voice: Codable, Equatable {
 
     /**
@@ -51,7 +53,7 @@ public struct Voice: Codable, Equatable {
     public var customizable: Bool
 
     /**
-     Describes the additional service features that are supported with the voice.
+     Additional service features that are supported with the voice.
      */
     public var supportedFeatures: SupportedFeatures
 

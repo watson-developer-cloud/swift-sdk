@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** SpeechRecognitionResult. */
+/**
+ Component results for a speech recognition request.
+ */
 public struct SpeechRecognitionResult: Codable, Equatable {
 
     /**

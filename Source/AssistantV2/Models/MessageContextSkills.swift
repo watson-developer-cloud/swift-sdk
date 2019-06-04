@@ -25,7 +25,7 @@ import RestKit
 public struct MessageContextSkills: Codable, Equatable {
 
     /// Additional properties associated with this model.
-    public var additionalProperties: [String: JSON]
+    public var additionalProperties: [String: MessageContextSkill]
 
     /**
      Initialize a `MessageContextSkills`.
@@ -33,7 +33,7 @@ public struct MessageContextSkills: Codable, Equatable {
      - returns: An initialized `MessageContextSkills`.
     */
     public init(
-        additionalProperties: [String: JSON] = [:]
+        additionalProperties: [String: MessageContextSkill] = [:]
     )
     {
         self.additionalProperties = additionalProperties
@@ -41,7 +41,7 @@ public struct MessageContextSkills: Codable, Equatable {
 
     public init(from decoder: Decoder) throws {
         let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
-        additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: [CodingKey]())
+        additionalProperties = try dynamicContainer.decode([String: MessageContextSkill].self, excluding: [CodingKey]())
     }
 
     public func encode(to encoder: Encoder) throws {

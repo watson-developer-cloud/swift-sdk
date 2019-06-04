@@ -166,7 +166,7 @@ public class ToneAnalyzer {
     /**
      Analyze general tone.
 
-     Use the general purpose endpoint to analyze the tone of your input content. The service analyzes the content for
+     Use the general-purpose endpoint to analyze the tone of your input content. The service analyzes the content for
      emotional and language tones. The method always analyzes the tone of the full document; by default, it also
      analyzes the tone of each individual sentence of the content.
      You can submit no more than 128 KB of total input content and no more than 1000 individual sentences in JSON, plain
@@ -178,13 +178,18 @@ public class ToneAnalyzer {
      character encoding of the input text; for example: `Content-Type: text/plain;charset=utf-8`. For `text/html`, the
      service removes HTML tags and analyzes only the textual content.
      **See also:** [Using the general-purpose
-     endpoint](https://cloud.ibm.com/docs/services/tone-analyzer/using-tone.html#using-the-general-purpose-endpoint).
+     endpoint](https://cloud.ibm.com/docs/services/tone-analyzer?topic=tone-analyzer-utgpe#utgpe).
 
      - parameter toneContent: JSON, plain text, or HTML input that contains the content to be analyzed. For JSON
        input, provide an object of type `ToneInput`.
      - parameter sentences: Indicates whether the service is to return an analysis of each individual sentence in
        addition to its analysis of the full document. If `true` (the default), the service returns results for each
        sentence.
+     - parameter tones: **`2017-09-21`:** Deprecated. The service continues to accept the parameter for
+       backward-compatibility, but the parameter no longer affects the response.
+       **`2016-05-19`:** A comma-separated list of tones for which the service is to return its analysis of the input;
+       the indicated tones apply both to the full document and to individual sentences of the document. You can specify
+       one or more of the valid values. Omit the parameter to request results for all three tones.
      - parameter contentLanguage: The language of the input text for the request: English or French. Regional variants
        are treated as their parent language; for example, `en-US` is interpreted as `en`. The input content must match
        the specified language. Do not submit content that contains both languages. You can use different languages for
@@ -200,6 +205,7 @@ public class ToneAnalyzer {
     public func tone(
         toneContent: ToneContent,
         sentences: Bool? = nil,
+        tones: [String]? = nil,
         contentLanguage: String? = nil,
         acceptLanguage: String? = nil,
         headers: [String: String]? = nil,
@@ -234,6 +240,10 @@ public class ToneAnalyzer {
             let queryParameter = URLQueryItem(name: "sentences", value: "\(sentences)")
             queryParameters.append(queryParameter)
         }
+        if let tones = tones {
+            let queryParameter = URLQueryItem(name: "tones", value: tones.joined(separator: ","))
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
         let request = RestRequest(
@@ -252,9 +262,9 @@ public class ToneAnalyzer {
     }
 
     /**
-     Analyze customer engagement tone.
+     Analyze customer-engagement tone.
 
-     Use the customer engagement endpoint to analyze the tone of customer service and customer support conversations.
+     Use the customer-engagement endpoint to analyze the tone of customer service and customer support conversations.
      For each utterance of a conversation, the method reports the most prevalent subset of the following seven tones:
      sad, frustrated, satisfied, excited, polite, impolite, and sympathetic.
      If you submit more than 50 utterances, the service returns a warning for the overall content and analyzes only the
@@ -263,7 +273,7 @@ public class ToneAnalyzer {
      500 characters. Per the JSON specification, the default character encoding for JSON content is effectively always
      UTF-8.
      **See also:** [Using the customer-engagement
-     endpoint](https://cloud.ibm.com/docs/services/tone-analyzer/using-tone-chat.html#using-the-customer-engagement-endpoint).
+     endpoint](https://cloud.ibm.com/docs/services/tone-analyzer?topic=tone-analyzer-utco#utco).
 
      - parameter utterances: An array of `Utterance` objects that provides the input content that the service is to
        analyze.

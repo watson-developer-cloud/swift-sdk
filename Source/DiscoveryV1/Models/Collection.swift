@@ -81,9 +81,14 @@ public struct Collection: Codable, Equatable {
     public var trainingStatus: TrainingStatus?
 
     /**
-     Object containing source crawl status information.
+     Object containing information about the crawl status of this collection.
      */
-    public var sourceCrawl: SourceStatus?
+    public var crawlStatus: CollectionCrawlStatus?
+
+    /**
+     Object containing smart document understanding information for this collection.
+     */
+    public var smartDocumentUnderstanding: SduStatus?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
@@ -98,7 +103,8 @@ public struct Collection: Codable, Equatable {
         case documentCounts = "document_counts"
         case diskUsage = "disk_usage"
         case trainingStatus = "training_status"
-        case sourceCrawl = "source_crawl"
+        case crawlStatus = "crawl_status"
+        case smartDocumentUnderstanding = "smart_document_understanding"
     }
 
 }

@@ -89,14 +89,12 @@ public struct DialogNodeOutputGeneric: Codable, Equatable {
     public var source: String?
 
     /**
-     An optional title to show before the response. Valid only when **response_type**=`image` or `option`. This string
-     must be no longer than 512 characters.
+     An optional title to show before the response. Valid only when **response_type**=`image` or `option`.
      */
     public var title: String?
 
     /**
-     An optional description to show with the response. Valid only when **response_type**=`image` or `option`. This
-     string must be no longer than 256 characters.
+     An optional description to show with the response. Valid only when **response_type**=`image` or `option`.
      */
     public var description: String?
 
@@ -113,7 +111,7 @@ public struct DialogNodeOutputGeneric: Codable, Equatable {
 
     /**
      An optional message to be sent to the human agent who will be taking over the conversation. Valid only when
-     **reponse_type**=`connect_to_agent`. This string must be no longer than 256 characters.
+     **reponse_type**=`connect_to_agent`.
      */
     public var messageToHumanAgent: String?
 
@@ -150,16 +148,15 @@ public struct DialogNodeOutputGeneric: Codable, Equatable {
        support this event. Valid only when **response_type**=`pause`.
      - parameter source: The URL of the image. Required when **response_type**=`image`.
      - parameter title: An optional title to show before the response. Valid only when **response_type**=`image` or
-       `option`. This string must be no longer than 512 characters.
+       `option`.
      - parameter description: An optional description to show with the response. Valid only when
-       **response_type**=`image` or `option`. This string must be no longer than 256 characters.
+       **response_type**=`image` or `option`.
      - parameter preference: The preferred type of control to display, if supported by the channel. Valid only when
        **response_type**=`option`.
      - parameter options: An array of objects describing the options from which the user can choose. You can include
        up to 20 options. Required when **response_type**=`option`.
      - parameter messageToHumanAgent: An optional message to be sent to the human agent who will be taking over the
-       conversation. Valid only when **reponse_type**=`connect_to_agent`. This string must be no longer than 256
-       characters.
+       conversation. Valid only when **reponse_type**=`connect_to_agent`.
 
      - returns: An initialized `DialogNodeOutputGeneric`.
     */

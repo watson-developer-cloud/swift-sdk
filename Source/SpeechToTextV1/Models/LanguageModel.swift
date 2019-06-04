@@ -16,14 +16,17 @@
 
 import Foundation
 
-/** LanguageModel. */
+/**
+ Information about an existing custom language model.
+ */
 public struct LanguageModel: Codable, Equatable {
 
     /**
      The current status of the custom language model:
-     * `pending`: The model was created but is waiting either for training data to be added or for the service to finish
-     analyzing added data.
-     * `ready`: The model contains data and is ready to be trained.
+     * `pending`: The model was created but is waiting either for valid training data to be added or for the service to
+     finish analyzing added data.
+     * `ready`: The model contains valid data and is ready to be trained. If the model contains a mix of valid and
+     invalid resources, you need to set the `strict` parameter to `false` for the training to proceed.
      * `training`: The model is currently being trained.
      * `available`: The model is trained and ready to use.
      * `upgrading`: The model is currently being upgraded.
@@ -94,9 +97,10 @@ public struct LanguageModel: Codable, Equatable {
 
     /**
      The current status of the custom language model:
-     * `pending`: The model was created but is waiting either for training data to be added or for the service to finish
-     analyzing added data.
-     * `ready`: The model contains data and is ready to be trained.
+     * `pending`: The model was created but is waiting either for valid training data to be added or for the service to
+     finish analyzing added data.
+     * `ready`: The model contains valid data and is ready to be trained. If the model contains a mix of valid and
+     invalid resources, you need to set the `strict` parameter to `false` for the training to proceed.
      * `training`: The model is currently being trained.
      * `available`: The model is trained and ready to use.
      * `upgrading`: The model is currently being upgraded.

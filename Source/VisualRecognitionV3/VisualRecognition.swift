@@ -134,16 +134,6 @@ public class VisualRecognition {
                 errorMessage = message
             } else if case let .some(.string(message)) = json["message"] {
                 errorMessage = message
-            // ErrorAuthentication
-            } else if case let .some(.string(message)) = json["statusInfo"] {
-                errorMessage = message
-            // ErrorInfo
-            } else if case let .some(.object(errorObj)) = json["error"],    // 404
-                case let .some(.string(message)) = errorObj["description"] {
-                errorMessage = message
-            // ErrorHTML
-            } else if case let .some(.string(message)) = json["Error"] {   // 413
-                errorMessage = message
             } else {
                 errorMessage = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
             }
@@ -272,9 +262,9 @@ public class VisualRecognition {
      **Important:** On April 2, 2018, the identity information in the response to calls to the Face model was removed.
      The identity information refers to the `name` of the person, `score`, and `type_hierarchy` knowledge graph. For
      details about the enhanced Face model, see the [Release
-     notes](https://cloud.ibm.com/docs/services/visual-recognition/release-notes.html#2april2018).
+     notes](https://cloud.ibm.com/docs/services/visual-recognition?topic=visual-recognition-release-notes#2april2018).
      Analyze and get data about faces in images. Responses can include estimated age and gender. This feature uses a
-     built-in model, so no training is necessary. The Detect faces method does not support general biometric facial
+     built-in model, so no training is necessary. The **Detect faces** method does not support general biometric facial
      recognition.
      Supported image formats include .gif, .jpg, .png, and .tif. The maximum image size is 10 MB. The minimum
      recommended pixel density is 32X32 pixels, but the service tends to perform better with images that are at least
@@ -392,10 +382,10 @@ public class VisualRecognition {
         }
         positiveExamples.forEach { (classname, value) in
             let partName = "\(classname)_positive_examples"
-            multipartFormData.append(value, withName: partName, fileName: "\(classname).zip")
+            multipartFormData.append(value, withName: partName, fileName: classname)
         }
         if let negativeExamples = negativeExamples {
-            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename.zip")
+            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename")
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
@@ -529,7 +519,7 @@ public class VisualRecognition {
 
      Update a custom classifier by adding new positive or negative classes or by adding new images to existing classes.
      You must supply at least one set of positive or negative examples. For details, see [Updating custom
-     classifiers](https://cloud.ibm.com/docs/services/visual-recognition/customizing.html#updating-custom-classifiers).
+     classifiers](https://cloud.ibm.com/docs/services/visual-recognition?topic=visual-recognition-customizing#updating-custom-classifiers).
      Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and class
      names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.
      **Tip:** Don't make retraining calls on a classifier until the status is ready. When you submit retraining requests
@@ -565,11 +555,11 @@ public class VisualRecognition {
         if let positiveExamples = positiveExamples {
             positiveExamples.forEach { (classname, value) in
                 let partName = "\(classname)_positive_examples"
-                multipartFormData.append(value, withName: partName, fileName: "\(classname).zip")
+                multipartFormData.append(value, withName: partName, fileName: classname)
             }
         }
         if let negativeExamples = negativeExamples {
-            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename.zip")
+            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename")
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
@@ -711,7 +701,7 @@ public class VisualRecognition {
      the customer ID.
      You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request that passes data.
      For more information about personal data and customer IDs, see [Information
-     security](https://cloud.ibm.com/docs/services/visual-recognition/information-security.html).
+     security](https://cloud.ibm.com/docs/services/visual-recognition?topic=visual-recognition-information-security).
 
      - parameter customerID: The customer ID for which all data is to be deleted.
      - parameter headers: A dictionary of request headers to be sent with this request.

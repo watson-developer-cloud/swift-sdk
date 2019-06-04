@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** RecognitionJob. */
+/**
+ Information about a current asynchronous speech recognition job.
+ */
 public struct RecognitionJob: Codable, Equatable {
 
     /**

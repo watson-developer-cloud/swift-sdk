@@ -20,7 +20,6 @@ import XCTest
 import Foundation
 // Do not import @testable to ensure only public interface is exposed
 import AssistantV1
-import RestKit
 
 class AssistantTests: XCTestCase {
 
@@ -46,13 +45,11 @@ class AssistantTests: XCTestCase {
             // Workspaces
             ("testListAllWorkspaces", testListAllWorkspaces),
             ("testListAllWorkspacesWithPageLimit1", testListAllWorkspacesWithPageLimit1),
-            ("testListAllWorkspacesWithIncludeCount", testListAllWorkspacesWithIncludeCount),
             ("testCreateAndDeleteWorkspace", testCreateAndDeleteWorkspace),
             ("testListSingleWorkspace", testListSingleWorkspace),
             ("testCreateUpdateAndDeleteWorkspace", testCreateUpdateAndDeleteWorkspace),
             // Intents
             ("testListAllIntents", testListAllIntents),
-            ("testListAllIntentsWithIncludeCount", testListAllIntentsWithIncludeCount),
             ("testListAllIntentsWithPageLimit1", testListAllIntentsWithPageLimit1),
             ("testListAllIntentsWithExport", testListAllIntentsWithExport),
             ("testCreateAndDeleteIntent", testCreateAndDeleteIntent),
@@ -60,21 +57,18 @@ class AssistantTests: XCTestCase {
             ("testCreateUpdateAndDeleteIntent", testCreateUpdateAndDeleteIntent),
             // Examples
             ("testListAllExamples", testListAllExamples),
-            ("testListAllExamplesWithIncludeCount", testListAllExamplesWithIncludeCount),
             ("testListAllExamplesWithPageLimit1", testListAllExamplesWithPageLimit1),
             ("testCreateAndDeleteExample", testCreateAndDeleteExample),
             ("testGetExample", testGetExample),
             ("testCreateUpdateAndDeleteExample", testCreateUpdateAndDeleteExample),
             // Counterexamples
             ("testListAllCounterexamples", testListAllCounterexamples),
-            ("testListAllCounterexamplesWithIncludeCount", testListAllCounterexamplesWithIncludeCount),
             ("testListAllCounterexamplesWithPageLimit1", testListAllCounterexamplesWithPageLimit1),
             ("testCreateAndDeleteCounterexample", testCreateAndDeleteCounterexample),
             ("testGetCounterexample", testGetCounterexample),
             ("testCreateUpdateAndDeleteCounterexample", testCreateUpdateAndDeleteCounterexample),
             // Entities
             ("testListAllEntities", testListAllEntities),
-            ("testListAllEntitiesWithIncludeCount", testListAllEntitiesWithIncludeCount),
             ("testListAllEntitiesWithPageLimit1", testListAllEntitiesWithPageLimit1),
             ("testListAllEntitiesWithExport", testListAllEntitiesWithExport),
             ("testCreateAndDeleteEntity", testCreateAndDeleteEntity),
@@ -88,7 +82,6 @@ class AssistantTests: XCTestCase {
             ("testGetValue", testGetValue),
             // Synonyms
             ("testListAllSynonym", testListAllSynonym),
-            ("testListAllSynonymWithIncludeCount", testListAllSynonymWithIncludeCount),
             ("testListAllSynonymWithPageLimit1", testListAllSynonymWithPageLimit1),
             ("testCreateAndDeleteSynonym", testCreateAndDeleteSynonym),
             ("testGetSynonym", testGetSynonym),
@@ -112,12 +105,12 @@ class AssistantTests: XCTestCase {
     /** Instantiate Assistant. */
     func instantiateAssistant() {
         if let apiKey = WatsonCredentials.AssistantAPIKey {
-            let authenticator = IAMAuthenticator.init(apiKey: apiKey)
+            let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
             assistant = Assistant(version: versionDate, authenticator: authenticator)
         } else {
             let username = WatsonCredentials.AssistantUsername
             let password = WatsonCredentials.AssistantPassword
-            let authenticator = BasicAuthenticator.init(username: username, password: password)
+            let authenticator = WatsonBasicAuthenticator.init(username: username, password: password)
             assistant = Assistant(version: versionDate, authenticator: authenticator)
         }
         if let url = WatsonCredentials.AssistantURL {
@@ -548,7 +541,7 @@ class AssistantTests: XCTestCase {
         let workspaceName = "swift-sdk-test-workspace"
         let workspaceDescription = "temporary workspace for the swift sdk unit tests"
         let workspaceLanguage = "en"
-        let workspaceMetadata: [String: JSON] = ["testKey": .string("testValue")]
+        let workspaceMetadata: [String: WatsonJSON] = ["testKey": .string("testValue")]
         let intentExample = Example(text: "This is an example of Intent1")
         let workspaceIntent = CreateIntent(intent: "Intent1", description: "description of Intent1", examples: [intentExample])
         let entityValue = CreateValue(value: "Entity1Value", metadata: workspaceMetadata, synonyms: ["Synonym1", "Synonym2"])
@@ -1995,7 +1988,7 @@ class AssistantTests: XCTestCase {
     func testCreateAndDeleteDialogNode() {
         let description1 = "Create a dialog node."
         let dialogNode = "OrderMyPizza"
-        let dialogMetadata: [String: JSON] = ["swift-sdk-test": .boolean(true)]
+        let dialogMetadata: [String: WatsonJSON] = ["swift-sdk-test": .boolean(true)]
         let expectation1 = self.expectation(description: description1)
 
         assistant.createDialogNode(

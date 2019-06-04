@@ -19,7 +19,7 @@
 
 import Foundation
 import AVFoundation
-import RestKit
+import IBMSwiftSDKCore
 
 /**
  The IBM Watson Speech to Text service enables you to add speech transcription capabilities to

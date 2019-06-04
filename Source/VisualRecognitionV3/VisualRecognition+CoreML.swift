@@ -19,7 +19,7 @@
 import Foundation
 import CoreML
 import Vision
-import RestKit
+import IBMSwiftSDKCore
 
 @available(iOS 11.0, macOS 10.13, tvOS 11.0, watchOS 4.0, *)
 extension VisualRecognition {
@@ -341,6 +341,11 @@ extension VisualRecognition {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        guard let serviceURL = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
 
         // construct REST request
         let request = RestRequest(

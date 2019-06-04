@@ -16,7 +16,7 @@
 
 import Foundation
 import Starscream
-import RestKit
+import IBMSwiftSDKCore
 
 internal class SpeechToTextSocket: WebSocketDelegate {
 

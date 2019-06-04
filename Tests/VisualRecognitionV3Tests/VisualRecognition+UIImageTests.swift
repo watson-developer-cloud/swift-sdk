@@ -22,7 +22,6 @@ import XCTest
 import Foundation
 import UIKit
 import VisualRecognitionV3
-import RestKit
 
 class VisualRecognitionUIImageTests: XCTestCase {
 
@@ -52,7 +51,7 @@ class VisualRecognitionUIImageTests: XCTestCase {
             XCTFail("Missing credentials for Visual Recognition service")
             return
         }
-        let authenticator = IAMAuthenticator.init(apiKey: apiKey)
+        let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
         visualRecognition = VisualRecognition(version: versionDate, authenticator: authenticator)
         if let url = WatsonCredentials.VisualRecognitionURL {
             visualRecognition.serviceURL = url
@@ -110,55 +109,6 @@ class VisualRecognitionUIImageTests: XCTestCase {
             if let score = classifierScore {
                 XCTAssertGreaterThan(score, 0.5)
             }
-
-            expectation.fulfill()
-        }
-        waitForExpectations()
-    }
-
-    func testDetectFacesByUIImage() {
-        let expectation = self.expectation(description: "Detect faces in a UIImage.")
-        visualRecognition.detectFaces(image: obama) {
-            response, error in
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let faceImages = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
-
-            // verify face images object
-            XCTAssertEqual(faceImages.imagesProcessed, 1)
-            XCTAssertNil(faceImages.warnings)
-            XCTAssertEqual(faceImages.images.count, 1)
-
-            // verify the face image object
-            let face = faceImages.images.first
-            XCTAssertNil(face?.sourceURL)
-            XCTAssertNil(face?.resolvedURL)
-            XCTAssertNotNil(face?.image)
-            XCTAssertNil(face?.error)
-            XCTAssertEqual(face?.faces.count, 1)
-
-            // verify the age
-            let age = face?.faces.first?.age
-            XCTAssertGreaterThanOrEqual(age!.min!, 40)
-            XCTAssertLessThanOrEqual(age!.max!, 54)
-            XCTAssertGreaterThanOrEqual(age!.score, 0.25)
-
-            // verify the face location
-            let location = face?.faces.first?.faceLocation
-            XCTAssertEqual(location?.height, 172)
-            XCTAssertEqual(location?.left, 219)
-            XCTAssertEqual(location?.top, 79)
-            XCTAssertEqual(location?.width, 141)
-
-            // verify the gender
-            let gender = face?.faces.first?.gender
-            XCTAssertEqual(gender!.gender, "MALE")
-            XCTAssertGreaterThanOrEqual(gender!.score, 0.75)
 
             expectation.fulfill()
         }

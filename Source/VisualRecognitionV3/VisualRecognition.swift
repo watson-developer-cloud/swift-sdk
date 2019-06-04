@@ -115,6 +115,16 @@ public class VisualRecognition {
                 errorMessage = message
             } else if case let .some(.string(message)) = json["message"] {
                 errorMessage = message
+            // ErrorAuthentication
+            } else if case let .some(.string(message)) = json["statusInfo"] {
+                errorMessage = message
+            // ErrorInfo
+            } else if case let .some(.object(errorObj)) = json["error"],    // 404
+                case let .some(.string(message)) = errorObj["description"] {
+                errorMessage = message
+            // ErrorHTML
+            } else if case let .some(.string(message)) = json["Error"] {   // 413
+                errorMessage = message
             } else {
                 errorMessage = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
             }
@@ -288,10 +298,10 @@ public class VisualRecognition {
         }
         positiveExamples.forEach { (classname, value) in
             let partName = "\(classname)_positive_examples"
-            multipartFormData.append(value, withName: partName, fileName: classname)
+            multipartFormData.append(value, withName: partName, fileName: "\(classname).zip")
         }
         if let negativeExamples = negativeExamples {
-            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename")
+            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename.zip")
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
@@ -486,11 +496,11 @@ public class VisualRecognition {
         if let positiveExamples = positiveExamples {
             positiveExamples.forEach { (classname, value) in
                 let partName = "\(classname)_positive_examples"
-                multipartFormData.append(value, withName: partName, fileName: classname)
+                multipartFormData.append(value, withName: partName, fileName: "\(classname).zip")
             }
         }
         if let negativeExamples = negativeExamples {
-            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename")
+            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename.zip")
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))

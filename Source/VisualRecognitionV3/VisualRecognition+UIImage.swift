@@ -18,7 +18,7 @@
 
 import Foundation
 import UIKit
-import RestKit
+import IBMSwiftSDKCore
 
 // This extension adds convenience methods for using `UIImage`. The comments and interface were copied from
 // `VisualRecognition.swift`, then modified to use `UIImage` instead of `URL`. Some parameters were also
@@ -85,35 +85,6 @@ extension VisualRecognition {
             acceptLanguage: acceptLanguage,
             completionHandler: completionHandler
         )
-    }
-
-    /**
-     Detect faces in images.
-
-     Analyze and get data about faces in images. Responses can include estimated age and gender, and the service can
-     identify celebrities. This feature uses a built-in classifier, so you do not train it on custom classifiers. The
-     Detect faces method does not support general biometric facial recognition.
-
-     - parameter imagesFile: An image file (.jpg, .png) or .zip file with images. Include no more than 15 images. You
-        can also include images with the `url` parameter.  All faces are detected, but if there are more than 10 faces
-        in an image, age and gender confidence scores might return scores of 0.
-     - url: A string with the image URL to analyze. Must be in .jpg, or .png format. The minimum recommended
-        pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB. You can also include images
-        in the `imagesFile` parameter.
-     - parameter completionHandler: A function executed when the request completes with a successful result or error
-     */
-    public func detectFaces(
-        image: UIImage,
-        completionHandler: @escaping (WatsonResponse<DetectedFaces>?, WatsonError?) -> Void)
-    {
-        // convert UIImage to Data
-        guard let imageData = getImageData(image: image) else {
-            let error = WatsonError.serialization(values: "image to data")
-            completionHandler(nil, error)
-            return
-        }
-
-        self.detectFaces(imagesFile: imageData, imagesFilename: "image.png", completionHandler: completionHandler)
     }
 
     /**

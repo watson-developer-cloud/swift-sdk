@@ -1,3 +1,2 @@
+github "IBM/swift-sdk-core" "a55200f02f07073d6414c579d9e24e701337b77b"
 github "daltoniam/Starscream" "3.0.5"
-github "watson-developer-cloud/restkit" "98264a7b19182783135f07a71e97547de08e260f"
-

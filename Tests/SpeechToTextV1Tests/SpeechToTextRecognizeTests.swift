@@ -21,7 +21,6 @@
 
 import XCTest
 import Foundation
-import RestKit
 import SpeechToTextV1
 
 class SpeechToTextRecognizeTests: XCTestCase {
@@ -39,12 +38,12 @@ class SpeechToTextRecognizeTests: XCTestCase {
 
     func instantiateSpeechToText() {
         if let apiKey = WatsonCredentials.SpeechToTextAPIKey {
-            let authenticator = IAMAuthenticator.init(apiKey: apiKey)
+            let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
             speechToText = SpeechToText(authenticator: authenticator)
         } else {
             let username = WatsonCredentials.SpeechToTextUsername
             let password = WatsonCredentials.SpeechToTextPassword
-            let authenticator = BasicAuthenticator.init(username: username, password: password)
+            let authenticator = WatsonBasicAuthenticator.init(username: username, password: password)
             speechToText = SpeechToText(authenticator: authenticator)
         }
         if let url = WatsonCredentials.SpeechToTextURL {

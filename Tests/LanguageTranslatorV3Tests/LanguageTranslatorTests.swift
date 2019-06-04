@@ -19,7 +19,6 @@
 import XCTest
 import Foundation
 import LanguageTranslatorV3
-import RestKit
 
 class LanguageTranslatorTests: XCTestCase {
 
@@ -61,12 +60,12 @@ class LanguageTranslatorTests: XCTestCase {
     /** Instantiate Language Translator. */
     func instantiateLanguageTranslator() {
         if let apiKey = WatsonCredentials.LanguageTranslatorV3APIKey {
-            let authenticator = IAMAuthenticator.init(apiKey: apiKey)
+            let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
             languageTranslator = LanguageTranslator(version: versionDate, authenticator: authenticator)
         } else {
             let username = WatsonCredentials.LanguageTranslatorV3Username
             let password = WatsonCredentials.LanguageTranslatorV3Password
-            let authenticator = BasicAuthenticator.init(username: username, password: password)
+            let authenticator = WatsonBasicAuthenticator.init(username: username, password: password)
             languageTranslator = LanguageTranslator(version: versionDate, authenticator: authenticator)
         }
         if let url = WatsonCredentials.LanguageTranslatorV3URL {

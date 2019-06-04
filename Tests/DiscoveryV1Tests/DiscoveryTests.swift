@@ -20,7 +20,6 @@ import XCTest
 import Foundation
 // Do not import @testable to ensure only public interface is exposed
 import DiscoveryV1
-import RestKit
 
 class DiscoveryTests: XCTestCase {
 
@@ -44,12 +43,12 @@ class DiscoveryTests: XCTestCase {
 
     func instantiateDiscovery() {
         if let apiKey = WatsonCredentials.DiscoveryAPIKey {
-            let authenticator = IAMAuthenticator.init(apiKey: apiKey)
+            let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
             discovery = Discovery(version: versionDate, authenticator: authenticator)
         } else {
             let username = WatsonCredentials.DiscoveryUsername
             let password = WatsonCredentials.DiscoveryPassword
-            let authenticator = BasicAuthenticator.init(username: username, password: password)
+            let authenticator = WatsonBasicAuthenticator.init(username: username, password: password)
             discovery = Discovery(version: versionDate, authenticator: authenticator)
         }
         if let url = WatsonCredentials.DiscoveryURL {
@@ -85,8 +84,6 @@ class DiscoveryTests: XCTestCase {
             ("testListConfigurationsByName", testListConfigurationsByName),
             ("testConfigurationCRUD", testConfigurationCRUD),
             ("testConfigurationWithSource", testConfigurationWithSource),
-            // Test Configuration in Environment
-            ("testConfigurationInEnvironment", testConfigurationInEnvironment),
             // Collections
             ("testListCollections", testListCollections),
             ("testListCollectionsByName", testListCollectionsByName),
@@ -738,42 +735,6 @@ class DiscoveryTests: XCTestCase {
             XCTAssertEqual(result.configurationID, configuration.configurationID!)
             XCTAssertEqual(result.status, "deleted")
             expectation3.fulfill()
-        }
-        waitForExpectations(timeout: timeout)
-    }
-
-    // MARK: - Test Configuration in Environment
-
-    func testConfigurationInEnvironment() {
-        let environmentID = environment.environmentID!
-        let configuration = lookupOrCreateTestConfiguration(environmentID: environmentID)
-        let expectation = self.expectation(description: "testConfigurationInEnvironment")
-        discovery.testConfigurationInEnvironment(
-            environmentID: environmentID,
-            file: document,
-            filename: "KennedySpeech.html",
-            metadata: "{ \"Creator\": \"John F. Kennedy\" }",
-            configurationID: configuration.configurationID)
-        {
-            response, error in
-
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let result = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
-
-            XCTAssertEqual(result.status, "completed")
-            XCTAssertEqual(result.originalMediaType, "text/html")
-            XCTAssertNotNil(result.snapshots)
-            XCTAssertGreaterThan(result.snapshots!.count, 0)
-            XCTAssertEqual(result.snapshots!.first!.step, "html_input")
-            XCTAssertNotNil(result.snapshots!.first!.snapshot)
-            XCTAssertGreaterThan(result.snapshots!.first!.snapshot!.count, 0)
-            expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
     }

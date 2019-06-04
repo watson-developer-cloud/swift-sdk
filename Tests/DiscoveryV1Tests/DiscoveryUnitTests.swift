@@ -15,7 +15,6 @@
  **/
 
 import XCTest
-import RestKit
 @testable import DiscoveryV1
 
 class DiscoveryUnitTests: XCTestCase {

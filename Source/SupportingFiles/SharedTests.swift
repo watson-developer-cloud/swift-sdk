@@ -15,7 +15,7 @@
  **/
 
 import XCTest
-import RestKit
+import IBMSwiftSDKCore
 
 class SharedTests: XCTestCase {
     func testHeaders() {

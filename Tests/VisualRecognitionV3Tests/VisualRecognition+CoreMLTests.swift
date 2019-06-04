@@ -20,7 +20,6 @@
 
 import XCTest
 import VisualRecognitionV3
-import RestKit
 
 class VisualRecognitionCoreMLTests: XCTestCase {
 
@@ -41,7 +40,7 @@ class VisualRecognitionCoreMLTests: XCTestCase {
             XCTFail("Missing credentials for Visual Recognition service")
             return
         }
-        let authenticator = IAMAuthenticator.init(apiKey: apiKey)
+        let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
         visualRecognition = VisualRecognition(version: versionDate, authenticator: authenticator)
         if let url = WatsonCredentials.VisualRecognitionURL {
             visualRecognition.serviceURL = url

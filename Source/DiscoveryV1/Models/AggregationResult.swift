@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,6 +41,14 @@ public struct AggregationResult: Codable, Equatable {
         case key = "key"
         case matchingResults = "matching_results"
         case aggregations = "aggregations"
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        if let keyAsString = try? container.decode(String.self, forKey: .key) { key = keyAsString }
+        if let keyAsInt = try? container.decode(Int.self, forKey: .key) { key = "\(keyAsInt)" }
+        matchingResults = try container.decodeIfPresent(Int.self, forKey: .matchingResults)
+        aggregations = try container.decodeIfPresent([QueryAggregation].self, forKey: .aggregations)
     }
 
 }

@@ -381,9 +381,6 @@ public class SpeechToText {
        `speaker_labels` is set to `true`.
        See [Speaker
        labels](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#speaker_labels).
-     - parameter customizationID: **Deprecated.** Use the `language_customization_id` parameter to specify the
-       customization ID (GUID) of a custom language model that is to be used with the recognition request. Do not
-       specify both parameters with a request.
      - parameter grammarName: The name of a grammar that is to be used with the recognition request. If you specify a
        grammar, you must also use the `language_customization_id` parameter to specify the name of the custom language
        model for which the grammar is defined. The service recognizes only strings that are recognized by the specified
@@ -437,7 +434,6 @@ public class SpeechToText {
         profanityFilter: Bool? = nil,
         smartFormatting: Bool? = nil,
         speakerLabels: Bool? = nil,
-        customizationID: String? = nil,
         grammarName: String? = nil,
         redaction: Bool? = nil,
         processingMetrics: Bool? = nil,
@@ -522,10 +518,6 @@ public class SpeechToText {
         }
         if let speakerLabels = speakerLabels {
             let queryParameter = URLQueryItem(name: "speaker_labels", value: "\(speakerLabels)")
-            queryParameters.append(queryParameter)
-        }
-        if let customizationID = customizationID {
-            let queryParameter = URLQueryItem(name: "customization_id", value: customizationID)
             queryParameters.append(queryParameter)
         }
         if let grammarName = grammarName {
@@ -858,9 +850,6 @@ public class SpeechToText {
        `speaker_labels` is set to `true`.
        See [Speaker
        labels](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#speaker_labels).
-     - parameter customizationID: **Deprecated.** Use the `language_customization_id` parameter to specify the
-       customization ID (GUID) of a custom language model that is to be used with the recognition request. Do not
-       specify both parameters with a request.
      - parameter grammarName: The name of a grammar that is to be used with the recognition request. If you specify a
        grammar, you must also use the `language_customization_id` parameter to specify the name of the custom language
        model for which the grammar is defined. The service recognizes only strings that are recognized by the specified
@@ -918,7 +907,6 @@ public class SpeechToText {
         profanityFilter: Bool? = nil,
         smartFormatting: Bool? = nil,
         speakerLabels: Bool? = nil,
-        customizationID: String? = nil,
         grammarName: String? = nil,
         redaction: Bool? = nil,
         processingMetrics: Bool? = nil,
@@ -1019,10 +1007,6 @@ public class SpeechToText {
         }
         if let speakerLabels = speakerLabels {
             let queryParameter = URLQueryItem(name: "speaker_labels", value: "\(speakerLabels)")
-            queryParameters.append(queryParameter)
-        }
-        if let customizationID = customizationID {
-            let queryParameter = URLQueryItem(name: "customization_id", value: customizationID)
             queryParameters.append(queryParameter)
         }
         if let grammarName = grammarName {

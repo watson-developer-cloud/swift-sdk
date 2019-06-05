@@ -397,18 +397,6 @@ public class SpeechToText {
        **Note:** Applies to US English, Japanese, and Korean transcription only.
        See [Numeric
        redaction](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#redaction).
-     - parameter processingMetrics: If `true`, requests processing metrics about the service's transcription of the
-       input audio. The service returns processing metrics at the interval specified by the
-       `processing_metrics_interval` parameter. It also returns processing metrics for transcription events, for
-       example, for final and interim results. By default, the service returns no processing metrics.
-     - parameter processingMetricsInterval: Specifies the interval in real wall-clock seconds at which the service is
-       to return processing metrics. The parameter is ignored unless the `processing_metrics` parameter is set to
-       `true`.
-       The parameter accepts a minimum value of 0.1 seconds. The level of precision is not restricted, so you can
-       specify values such as 0.25 and 0.125.
-       The service does not impose a maximum value. If you want to receive processing metrics only for transcription
-       events instead of at periodic intervals, set the value to a large number. If the value is larger than the
-       duration of the audio, the service returns processing metrics only for transcription events.
      - parameter audioMetrics: If `true`, requests detailed information about the signal characteristics of the input
        audio. The service returns audio metrics with the final transcription results. By default, the service returns no
        audio metrics.
@@ -436,8 +424,6 @@ public class SpeechToText {
         speakerLabels: Bool? = nil,
         grammarName: String? = nil,
         redaction: Bool? = nil,
-        processingMetrics: Bool? = nil,
-        processingMetricsInterval: Double? = nil,
         audioMetrics: Bool? = nil,
         contentType: String? = nil,
         headers: [String: String]? = nil,
@@ -526,14 +512,6 @@ public class SpeechToText {
         }
         if let redaction = redaction {
             let queryParameter = URLQueryItem(name: "redaction", value: "\(redaction)")
-            queryParameters.append(queryParameter)
-        }
-        if let processingMetrics = processingMetrics {
-            let queryParameter = URLQueryItem(name: "processing_metrics", value: "\(processingMetrics)")
-            queryParameters.append(queryParameter)
-        }
-        if let processingMetricsInterval = processingMetricsInterval {
-            let queryParameter = URLQueryItem(name: "processing_metrics_interval", value: "\(processingMetricsInterval)")
             queryParameters.append(queryParameter)
         }
         if let audioMetrics = audioMetrics {
@@ -1448,10 +1426,6 @@ public class SpeechToText {
        of phrases from the custom model's domain, but it can negatively affect performance on non-domain phrases.
        The value that you assign is used for all recognition requests that use the model. You can override it for any
        recognition request by specifying a customization weight for that request.
-     - parameter strict: If `false`, allows training of the custom language model to proceed as long as the model
-       contains at least one valid resource. The method returns an array of `TrainingWarning` objects that lists any
-       invalid resources. By default (`true`), training of a custom language model fails (status code 400) if the model
-       contains one or more invalid resources (corpus files, grammar files, or custom words).
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -1459,9 +1433,8 @@ public class SpeechToText {
         customizationID: String,
         wordTypeToAdd: String? = nil,
         customizationWeight: Double? = nil,
-        strict: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<TrainingResponse>?, WatsonError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1482,10 +1455,6 @@ public class SpeechToText {
             let queryParameter = URLQueryItem(name: "customization_weight", value: "\(customizationWeight)")
             queryParameters.append(queryParameter)
         }
-        if let strict = strict {
-            let queryParameter = URLQueryItem(name: "strict", value: "\(strict)")
-            queryParameters.append(queryParameter)
-        }
 
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/train"
@@ -1504,7 +1473,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseObject(completionHandler: completionHandler)
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -2747,19 +2716,14 @@ public class SpeechToText {
        transcriptions of the audio resources or that contains words that are relevant to the contents of the audio
        resources. The custom language model must be based on the same version of the same base model as the custom
        acoustic model. The credentials specified with the request must own both custom models.
-     - parameter strict: If `false`, allows training of the custom acoustic model to proceed as long as the model
-       contains at least one valid audio resource. The method returns an array of `TrainingWarning` objects that lists
-       any invalid resources. By default (`true`), training of a custom acoustic model fails (status code 400) if the
-       model contains one or more invalid audio resources.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func trainAcousticModel(
         customizationID: String,
         customLanguageModelID: String? = nil,
-        strict: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<TrainingResponse>?, WatsonError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2774,10 +2738,6 @@ public class SpeechToText {
         var queryParameters = [URLQueryItem]()
         if let customLanguageModelID = customLanguageModelID {
             let queryParameter = URLQueryItem(name: "custom_language_model_id", value: customLanguageModelID)
-            queryParameters.append(queryParameter)
-        }
-        if let strict = strict {
-            let queryParameter = URLQueryItem(name: "strict", value: "\(strict)")
             queryParameters.append(queryParameter)
         }
 
@@ -2798,7 +2758,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.responseObject(completionHandler: completionHandler)
+        request.response(completionHandler: completionHandler)
     }
 
     /**

@@ -582,7 +582,6 @@
 		CA03C887229C1918009503B9 /* InsecureConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA03C886229C1918009503B9 /* InsecureConnection.swift */; };
 		CA151FA2200EE23F00DBA44F /* carz.zip in Resources */ = {isa = PBXBuildFile; fileRef = CA151FA0200EE0CF00DBA44F /* carz.zip */; };
 		CA28815D20CB07D600FC992C /* WatsonCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6C7B3C1D8C960300CD97FA /* WatsonCredentials.swift */; };
-		CA28817620CB095100FC992C /* glossary.tmx in Resources */ = {isa = PBXBuildFile; fileRef = CA28817420CB095100FC992C /* glossary.tmx */; };
 		CA28817720CB095100FC992C /* LanguageTranslatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA28817520CB095100FC992C /* LanguageTranslatorTests.swift */; };
 		CA28817920CB099D00FC992C /* DeleteModelResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA28815F20CB090700FC992C /* DeleteModelResult.swift */; };
 		CA28817A20CB099D00FC992C /* IdentifiableLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA28816020CB090700FC992C /* IdentifiableLanguage.swift */; };
@@ -630,6 +629,8 @@
 		CA6E525822A70E29002965D9 /* AudioResourceDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEBE48522A6BA2600F86C3A /* AudioResourceDetails.swift */; };
 		CA6E525922A70E29002965D9 /* TrainingResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEBE48322A6BA2600F86C3A /* TrainingResponse.swift */; };
 		CA6E525A22A70E29002965D9 /* TrainingWarning.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEBE48722A6BA2600F86C3A /* TrainingWarning.swift */; };
+		CA6E526122A8B6A3002965D9 /* glossary.tmx in Resources */ = {isa = PBXBuildFile; fileRef = CA6E526022A8B6A2002965D9 /* glossary.tmx */; };
+		CA6E526322A8B8C1002965D9 /* common-phrases.pptx in Resources */ = {isa = PBXBuildFile; fileRef = CA6E526222A8B8C1002965D9 /* common-phrases.pptx */; };
 		CA8E9264223406C4001BFABF /* Mention.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E9262223406C4001BFABF /* Mention.swift */; };
 		CA8E9265223406C4001BFABF /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E9263223406C4001BFABF /* Log.swift */; };
 		CA8E9268223406E2001BFABF /* MessageRequestContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E9266223406E2001BFABF /* MessageRequestContext.swift */; };
@@ -1353,7 +1354,6 @@
 		CA28816620CB090700FC992C /* TranslationModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationModels.swift; sourceTree = "<group>"; };
 		CA28816720CB090700FC992C /* TranslateRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslateRequest.swift; sourceTree = "<group>"; };
 		CA28816820CB090700FC992C /* IdentifiableLanguages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IdentifiableLanguages.swift; sourceTree = "<group>"; };
-		CA28817420CB095100FC992C /* glossary.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = glossary.tmx; path = Tests/LanguageTranslatorV3Tests/glossary.tmx; sourceTree = SOURCE_ROOT; };
 		CA28817520CB095100FC992C /* LanguageTranslatorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LanguageTranslatorTests.swift; path = Tests/LanguageTranslatorV3Tests/LanguageTranslatorTests.swift; sourceTree = SOURCE_ROOT; };
 		CA29B869222E0AE700626030 /* SyntaxOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyntaxOptions.swift; sourceTree = "<group>"; };
 		CA29B86A222E0AE700626030 /* TokenResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenResult.swift; sourceTree = "<group>"; };
@@ -1372,6 +1372,8 @@
 		CA59FD9F224AA0DF00E152AE /* Key.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		CA59FDA0224AA0E000E152AE /* ColumnHeaderIDs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColumnHeaderIDs.swift; sourceTree = "<group>"; };
 		CA59FDA8224AB66E00E152AE /* ContractType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContractType.swift; sourceTree = "<group>"; };
+		CA6E526022A8B6A2002965D9 /* glossary.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = glossary.tmx; sourceTree = "<group>"; };
+		CA6E526222A8B8C1002965D9 /* common-phrases.pptx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "common-phrases.pptx"; sourceTree = "<group>"; };
 		CA8E9262223406C4001BFABF /* Mention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mention.swift; sourceTree = "<group>"; };
 		CA8E9263223406C4001BFABF /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		CA8E9266223406E2001BFABF /* MessageRequestContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageRequestContext.swift; sourceTree = "<group>"; };
@@ -2670,11 +2672,20 @@
 		CA28817320CB092500FC992C /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				CA28817420CB095100FC992C /* glossary.tmx */,
 				CA28817520CB095100FC992C /* LanguageTranslatorTests.swift */,
+				CA6E525F22A8B63A002965D9 /* Resources */,
 			);
 			name = Tests;
 			path = ../../Tests/LanguageTranslatorV3Tests;
+			sourceTree = "<group>";
+		};
+		CA6E525F22A8B63A002965D9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CA6E526222A8B8C1002965D9 /* common-phrases.pptx */,
+				CA6E526022A8B6A2002965D9 /* glossary.tmx */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		CAD2685320CAF28A002BA2C4 /* LanguageTranslatorV3 */ = {
@@ -3634,8 +3645,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA28817620CB095100FC992C /* glossary.tmx in Resources */,
+				CA6E526322A8B8C1002965D9 /* common-phrases.pptx in Resources */,
 				92882B04220E10B4001BC702 /* ibm-credentials.env in Resources */,
+				CA6E526122A8B6A3002965D9 /* glossary.tmx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

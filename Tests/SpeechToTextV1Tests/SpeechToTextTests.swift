@@ -448,7 +448,158 @@ class SpeechToTextTests: XCTestCase {
             expectation6.fulfill()
         }
         wait(for: [expectation6], timeout: timeout)
+    }
 
+    func testAsynchronous2() {
+        // create an asynchronous job
+        let audio = try! Data(contentsOf: Bundle(for: type(of: self)).url(forResource: "SpeechSample", withExtension: "wav")!)
+        var jobID: String!
+
+        let keywords = ["rain", "tornadoes"]
+
+        let expectation1 = self.expectation(description: "createJob")
+        speechToText.createJob(audio: audio, model: "en-US_BroadbandModel", resultsTtl: 600, inactivityTimeout: -1, keywords: keywords, keywordsThreshold: 0.75, maxAlternatives: 3, wordAlternativesThreshold: 0.25, wordConfidence: true, timestamps: true, profanityFilter: false, smartFormatting: true, contentType: "audio/wav") {
+            response, error in
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+            jobID = result.id
+            expectation1.fulfill()
+        }
+        wait(for: [expectation1], timeout: timeout)
+
+        // check the job we created
+
+        var status = ""
+        var tries = 0
+
+        while status != RecognitionJob.Status.completed.rawValue {
+            let expectation2 = self.expectation(description: "checkJob")
+            speechToText.checkJob(id: jobID) {
+                response, error in
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let job = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
+                XCTAssertEqual(job.id, jobID)
+                status = job.status
+                if status == RecognitionJob.Status.completed.rawValue {
+                    XCTAssertNotNil(job.results)
+                    XCTAssertTrue(job.results?.count ?? 0 > 0)
+                    XCTAssertNotNil(job.results?[0].results)
+                    XCTAssertTrue(job.results?[0].results?.count ?? 0 > 0)
+                    let results0 = job.results?[0].results?[0]
+                    XCTAssertNotNil(results0?.keywordsResult)
+                }
+                expectation2.fulfill()
+            }
+            wait(for: [expectation2], timeout: timeout)
+
+            tries += 1
+            if tries > 8 {
+                XCTFail("Could not train a new classifier. Try again later.")
+                return
+            }
+            sleep(5)
+        }
+
+        // delete the job we created
+        let expectation3 = self.expectation(description: "deleteJob")
+        speechToText.deleteJob(id: jobID) {
+            _, error in
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+            }
+            expectation3.fulfill()
+        }
+        wait(for: [expectation3], timeout: timeout)
+    }
+
+    func testAsynchronousProcessingMetrics() {
+        // create an asynchronous job
+        let audio = try! Data(contentsOf: Bundle(for: type(of: self)).url(forResource: "SpeechSample", withExtension: "wav")!)
+        var jobID: String!
+
+        let expectation1 = self.expectation(description: "createJob")
+        speechToText.createJob(audio: audio, model: "en-US_BroadbandModel", processingMetrics: true, processingMetricsInterval: 0.5, contentType: "audio/wav") {
+            response, error in
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+            jobID = result.id
+            expectation1.fulfill()
+        }
+        wait(for: [expectation1], timeout: timeout)
+
+        // check the job we created
+
+        var status = ""
+        var tries = 0
+
+        while status != RecognitionJob.Status.completed.rawValue {
+            let expectation2 = self.expectation(description: "checkJob")
+            speechToText.checkJob(id: jobID) {
+                response, error in
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let job = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
+                XCTAssertEqual(job.id, jobID)
+                status = job.status
+                if status == RecognitionJob.Status.completed.rawValue {
+                    XCTAssertNotNil(job.results)
+                    XCTAssertTrue(job.results?.count ?? 0 > 0)
+                    // Check procesing metrics - should be present in all but last result
+                    for results in job.results?.dropLast() ?? [] {
+                        XCTAssertNotNil(results.processingMetrics)
+                    }
+                    // Check final results
+                    let finalResults = job.results?.last
+                    XCTAssertNotNil(finalResults?.results)
+                    XCTAssertTrue(finalResults?.results?.count ?? 0 > 0)
+                    let transcript = finalResults?.results?[0].alternatives[0].transcript
+                    XCTAssertNotNil(transcript)
+                }
+                expectation2.fulfill()
+            }
+            wait(for: [expectation2], timeout: timeout)
+
+            tries += 1
+            if tries > 8 {
+                XCTFail("Could not train a new classifier. Try again later.")
+                return
+            }
+            sleep(5)
+        }
+
+        // delete the job we created
+        let expectation3 = self.expectation(description: "deleteJob")
+        speechToText.deleteJob(id: jobID) {
+            _, error in
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+            }
+            expectation3.fulfill()
+        }
+        wait(for: [expectation3], timeout: timeout)
     }
 
     // MARK: - Custom Language Models

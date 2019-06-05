@@ -538,7 +538,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
     func testAnalyzeTextForCategories() {
         let description = "Analyze text and verify categories returned."
         let expectation = self.expectation(description: description)
-        let features = Features(categories: CategoriesOptions())
+        let features = Features(categories: CategoriesOptions(explanation: true))
         naturalLanguageUnderstanding.analyze(features: features, text: text, returnAnalyzedText: true) {
             response, error in
 
@@ -557,6 +557,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             for category in results.categories! {
                 XCTAssertNotNil(category.label)
                 XCTAssertNotNil(category.score)
+                XCTAssertNotNil(category.explanation?.relevantText)
             }
             expectation.fulfill()
         }

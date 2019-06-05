@@ -36,16 +36,23 @@ class LanguageTranslatorTests: XCTestCase {
 
     static var allTests: [(String, (LanguageTranslatorTests) -> () throws -> Void)] {
         return [
+            // Models
             ("testListModelsAll", testListModelsAll),
             ("testListModelsBySourceLanguage", testListModelsBySourceLanguage),
             ("testListModelsByTargetLanguage", testListModelsByTargetLanguage),
             ("testListModelsDefault", testListModelsDefault),
             ("testCreateDeleteModel", testCreateDeleteModel),
             ("testGetModel", testGetModel),
+            // Translation
             ("testTranslateStringWithModelID", testTranslateStringWithModelID),
             ("testTranslateStringWithSourceAndTarget", testTranslateStringWithSourceAndTarget),
+            // Identification
             ("testListIdentifiableLanguages", testListIdentifiableLanguages),
             ("testIdentify", testIdentify),
+            // Document Translation
+            ("testListDocuments", testListDocuments),
+            ("testDocumentsCRUD", testDocumentsCRUD),
+            // Negative Tests
             ("testGetModelDoesntExist", testGetModelDoesntExist),
         ]
     }
@@ -104,7 +111,7 @@ class LanguageTranslatorTests: XCTestCase {
         }
     }
 
-    // MARK: - Positive Tests
+    // MARK: - Models
 
     func testListModelsAll() {
         let expectation = self.expectation(description: "List all models.")
@@ -190,7 +197,7 @@ class LanguageTranslatorTests: XCTestCase {
         let expectation = self.expectation(description: "Create and delete a custom language model.")
 
         #if os(Linux)
-            let url = URL(fileURLWithPath: "Tests/LanguageTranslatorV3Tests/glossary.tmx")
+            let url = URL(fileURLWithPath: "Tests/LanguageTranslatorV3Tests/Resources/glossary.tmx")
         #else
             let bundle = Bundle(for: type(of: self))
             guard let url = bundle.url(forResource: "glossary", withExtension: "tmx") else {
@@ -250,6 +257,8 @@ class LanguageTranslatorTests: XCTestCase {
         waitForExpectations()
     }
 
+    // MARK: - Translation
+
     func testTranslateStringWithModelID() {
         let expectation = self.expectation(description: "Translate text string using model id.")
         languageTranslator.translate(text: ["Hello"], modelID: "en-es") {
@@ -296,6 +305,8 @@ class LanguageTranslatorTests: XCTestCase {
         waitForExpectations()
     }
 
+    // MARK: - Identification
+
     func testListIdentifiableLanguages() {
         let expectation = self.expectation(description: "List identifiable languages.")
         languageTranslator.listIdentifiableLanguages() {
@@ -338,6 +349,143 @@ class LanguageTranslatorTests: XCTestCase {
             expectation.fulfill()
         }
         waitForExpectations()
+    }
+
+    // MARK: - Document Translation
+
+    func testListDocuments() {
+        let expectation = self.expectation(description: "List documents.")
+        languageTranslator.listDocuments {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let documents = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssertGreaterThan(documents.documents.count, 0)
+            expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+
+    func testDocumentsCRUD() {
+        let filename = "common-phrases.pptx"
+        #if os(Linux)
+        let url = URL(fileURLWithPath: "Tests/LanguageTranslatorV3Tests/Resources/" + filename)
+        #else
+        let bundle = Bundle(for: type(of: self))
+        let filenameParts = filename.components(separatedBy: ".")
+        guard let url = bundle.url(forResource: filenameParts[0], withExtension: filenameParts[1]) else {
+            XCTFail("Unable to read document.")
+            return
+        }
+        #endif
+        let document = try? Data(contentsOf: url)
+
+        var documentID: String!
+        let expectation1 = self.expectation(description: "Translate document.")
+        languageTranslator.translateDocument(file: document!, filename: filename, modelID: "en-es") {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let documentStatus = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssertEqual(filename, documentStatus.filename)
+            documentID = documentStatus.documentID
+            expectation1.fulfill()
+        }
+        waitForExpectations()
+
+        guard documentID != nil else {
+            // If the create failed, skip remainder of the test
+            return
+        }
+
+        var status = ""
+        let expectation2 = self.expectation(description: "Get document status.")
+        languageTranslator.getDocumentStatus(documentID: documentID) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let documentStatus = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssertEqual(filename, documentStatus.filename)
+            status = documentStatus.status
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+
+        // Make sure translation is available before attempting to retrieve it
+
+        var tries = 0
+        while status != DocumentStatus.Status.available.rawValue {
+            sleep(15)
+            let expectation = self.expectation(description: "Get document status.")
+            languageTranslator.getDocumentStatus(documentID: documentID) {
+                response, error in
+                status = response?.result?.status ?? "unknown"
+                expectation.fulfill()
+            }
+            waitForExpectations()
+            tries += 1
+            if tries > 4 {
+                XCTFail("Document translation did not complete within allowed time interval")
+                return
+            }
+        }
+
+        let expectation3 = self.expectation(description: "Get translated document.")
+        languageTranslator.getTranslatedDocument(documentID: documentID) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let document = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssertGreaterThan(document.count, 0)  // document has content
+            let contentType = response?.headers
+                                .first { $0.key.compare("content-type", options: .caseInsensitive) == .orderedSame }
+                                .map { $0.value }
+            XCTAssertNotNil(contentType)
+            expectation3.fulfill()
+        }
+        waitForExpectations()
+
+        let expectation4 = self.expectation(description: "Delete document.")
+        languageTranslator.deleteDocument(documentID: documentID) {
+            _, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+
+            expectation4.fulfill()
+        }
+        waitForExpectations()
+
     }
 
     // MARK: - Negative Tests

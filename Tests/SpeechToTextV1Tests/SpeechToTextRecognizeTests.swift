@@ -27,7 +27,7 @@ import SpeechToTextV1
 class SpeechToTextRecognizeTests: XCTestCase {
 
     private var speechToText: SpeechToText!
-    private let timeout: TimeInterval = 10.0
+    private let timeout: TimeInterval = 20.0
 
     // MARK: - Test Configuration
 
@@ -348,7 +348,6 @@ class SpeechToTextRecognizeTests: XCTestCase {
             return
         }
 
-        let expectation2 = self.expectation(description: "Recognize with custom language model")
         let bundle = Bundle(for: type(of: self))
         guard let file = bundle.url(forResource: filename, withExtension: withExtension) else {
             XCTFail("Unable to locate \(filename).\(withExtension).")
@@ -363,6 +362,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
             callback.onError = { error in
                 XCTFail(unexpectedErrorMessage(error))
             }
+            let expectation2 = self.expectation(description: "Recognize with custom language model")
             callback.onResults = { results in
                 self.validateSTTResults(results: results, settings: settings)
                 XCTAssertNotNil(results.results)
@@ -374,7 +374,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
                 expectation2.fulfill()
             }
             speechToText.recognizeUsingWebSocket(audio: audio, settings: settings, model: baseModelName, languageCustomizationID: customizationID, callback: callback)
-            wait(for: [expectation2], timeout: timeout)
+            wait(for: [expectation2], timeout: 30)
         } catch {
             XCTFail("Unable to read \(filename).\(withExtension).")
             return

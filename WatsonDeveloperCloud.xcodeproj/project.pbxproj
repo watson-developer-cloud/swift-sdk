@@ -631,6 +631,8 @@
 		CA6E525A22A70E29002965D9 /* TrainingWarning.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAEBE48722A6BA2600F86C3A /* TrainingWarning.swift */; };
 		CA6E526122A8B6A3002965D9 /* glossary.tmx in Resources */ = {isa = PBXBuildFile; fileRef = CA6E526022A8B6A2002965D9 /* glossary.tmx */; };
 		CA6E526322A8B8C1002965D9 /* common-phrases.pptx in Resources */ = {isa = PBXBuildFile; fileRef = CA6E526222A8B8C1002965D9 /* common-phrases.pptx */; };
+		CA6E526522AAE0A7002965D9 /* TextToSpeechDecoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6E526422AAE0A7002965D9 /* TextToSpeechDecoderTests.swift */; };
+		CA6E526A22AAF9CF002965D9 /* audio.ogg in Resources */ = {isa = PBXBuildFile; fileRef = CA6E526922AAF9CE002965D9 /* audio.ogg */; };
 		CA8E9264223406C4001BFABF /* Mention.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E9262223406C4001BFABF /* Mention.swift */; };
 		CA8E9265223406C4001BFABF /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E9263223406C4001BFABF /* Log.swift */; };
 		CA8E9268223406E2001BFABF /* MessageRequestContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA8E9266223406E2001BFABF /* MessageRequestContext.swift */; };
@@ -1374,6 +1376,8 @@
 		CA59FDA8224AB66E00E152AE /* ContractType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContractType.swift; sourceTree = "<group>"; };
 		CA6E526022A8B6A2002965D9 /* glossary.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = glossary.tmx; sourceTree = "<group>"; };
 		CA6E526222A8B8C1002965D9 /* common-phrases.pptx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "common-phrases.pptx"; sourceTree = "<group>"; };
+		CA6E526422AAE0A7002965D9 /* TextToSpeechDecoderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextToSpeechDecoderTests.swift; sourceTree = "<group>"; };
+		CA6E526922AAF9CE002965D9 /* audio.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = audio.ogg; sourceTree = "<group>"; };
 		CA8E9262223406C4001BFABF /* Mention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mention.swift; sourceTree = "<group>"; };
 		CA8E9263223406C4001BFABF /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		CA8E9266223406E2001BFABF /* MessageRequestContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageRequestContext.swift; sourceTree = "<group>"; };
@@ -1727,8 +1731,10 @@
 		124C2E131D19E2FA00D9F602 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				CA6E526622AAE204002965D9 /* Resources */,
 				124C2E141D19E2FA00D9F602 /* TextToSpeechTests.swift */,
 				12819F6E1DCA8753004E8467 /* TextToSpeechPlaybackTests.swift */,
+				CA6E526422AAE0A7002965D9 /* TextToSpeechDecoderTests.swift */,
 			);
 			name = Tests;
 			path = ../../Tests/TextToSpeechV1Tests;
@@ -2688,6 +2694,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		CA6E526622AAE204002965D9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CA6E526922AAF9CE002965D9 /* audio.ogg */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		CAD2685320CAF28A002BA2C4 /* LanguageTranslatorV3 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3461,6 +3475,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92882B09220E10B4001BC702 /* ibm-credentials.env in Resources */,
+				CA6E526A22AAF9CF002965D9 /* audio.ogg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4124,6 +4139,7 @@
 				920A2448214B0E400077F10D /* Shared.swift in Sources */,
 				7A6C7B4A1D8C960300CD97FA /* WatsonCredentials.swift in Sources */,
 				12819F6F1DCA8753004E8467 /* TextToSpeechPlaybackTests.swift in Sources */,
+				CA6E526522AAE0A7002965D9 /* TextToSpeechDecoderTests.swift in Sources */,
 				929A23EF21123E7E00E4C78A /* TestUtilities.swift in Sources */,
 				920A243C214ADFB20077F10D /* SharedTests.swift in Sources */,
 				124C2E231D19E30700D9F602 /* TextToSpeechTests.swift in Sources */,

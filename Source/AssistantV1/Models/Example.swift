@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ public struct Example: Codable, Equatable {
      The text of a user input example. This string must conform to the following restrictions:
      - It cannot contain carriage return, newline, or tab characters.
      - It cannot consist of only whitespace characters.
-     - It must be no longer than 1024 characters.
      */
     public var text: String
 
@@ -56,7 +55,6 @@ public struct Example: Codable, Equatable {
      - parameter text: The text of a user input example. This string must conform to the following restrictions:
        - It cannot contain carriage return, newline, or tab characters.
        - It cannot consist of only whitespace characters.
-       - It must be no longer than 1024 characters.
      - parameter mentions: An array of contextual entity mentions.
      - parameter created: The timestamp for creation of the object.
      - parameter updated: The timestamp for the most recent update to the object.

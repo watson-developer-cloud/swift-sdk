@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,8 @@ public struct SourceSchedule: Codable, Equatable {
 
     /**
      The crawl schedule in the specified **time_zone**.
+     -  `five_minutes`: Runs every five minutes.
+     -  `hourly`: Runs every hour.
      -  `daily`: Runs every day between 00:00 and 06:00.
      -  `weekly`: Runs every week on Sunday between 00:00 and 06:00.
      -  `monthly`: Runs the on the first Sunday of every month between 00:00 and 06:00.
@@ -31,6 +33,8 @@ public struct SourceSchedule: Codable, Equatable {
         case daily = "daily"
         case weekly = "weekly"
         case monthly = "monthly"
+        case fiveMinutes = "five_minutes"
+        case hourly = "hourly"
     }
 
     /**
@@ -47,6 +51,8 @@ public struct SourceSchedule: Codable, Equatable {
 
     /**
      The crawl schedule in the specified **time_zone**.
+     -  `five_minutes`: Runs every five minutes.
+     -  `hourly`: Runs every hour.
      -  `daily`: Runs every day between 00:00 and 06:00.
      -  `weekly`: Runs every week on Sunday between 00:00 and 06:00.
      -  `monthly`: Runs the on the first Sunday of every month between 00:00 and 06:00.
@@ -68,6 +74,8 @@ public struct SourceSchedule: Codable, Equatable {
      - parameter timeZone: The time zone to base source crawl times on. Possible values correspond to the IANA
        (Internet Assigned Numbers Authority) time zones list.
      - parameter frequency: The crawl schedule in the specified **time_zone**.
+       -  `five_minutes`: Runs every five minutes.
+       -  `hourly`: Runs every hour.
        -  `daily`: Runs every day between 00:00 and 06:00.
        -  `weekly`: Runs every week on Sunday between 00:00 and 06:00.
        -  `monthly`: Runs the on the first Sunday of every month between 00:00 and 06:00.

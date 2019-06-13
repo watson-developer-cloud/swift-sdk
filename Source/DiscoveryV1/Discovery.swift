@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2016, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,10 +19,10 @@ import Foundation
 import RestKit
 
 /**
- The IBM Watson&trade; Discovery Service is a cognitive search and content analytics engine that you can add to
- applications to identify patterns, trends and actionable insights to drive better decision-making. Securely unify
- structured and unstructured data with pre-enriched content, and use a simplified query language to eliminate the need
- for manual filtering of results.
+ IBM Watson&trade; Discovery is a cognitive search and content analytics engine that you can add to applications to
+ identify patterns, trends and actionable insights to drive better decision-making. Securely unify structured and
+ unstructured data with pre-enriched content, and use a simplified query language to eliminate the need for manual
+ filtering of results.
  */
 public class Discovery {
 
@@ -793,7 +793,8 @@ public class Discovery {
     /**
      Test configuration.
 
-     Runs a sample document through the default or your configuration and returns diagnostic information designed to
+     **Deprecated** This method is no longer supported and is scheduled to be removed from service on July 31st 2019.
+      Runs a sample document through the default or your configuration and returns diagnostic information designed to
      help you understand how the document was processed. The document is not added to the index.
 
      - parameter environmentID: The ID of the environment.
@@ -807,9 +808,8 @@ public class Discovery {
        larger than the supported size are rejected.
      - parameter filename: The filename for file.
      - parameter fileContentType: The content type of file.
-     - parameter metadata: If you're using the Data Crawler to upload your documents, you can test a document against
-       the type of metadata that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata
-       parts larger than 1 MB are rejected.
+     - parameter metadata: The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are
+       rejected.
        Example:  ``` {
          \"Creator\": \"Johnny Appleseed\",
          \"Subject\": \"Apples\"
@@ -1740,9 +1740,8 @@ public class Discovery {
        larger than the supported size are rejected.
      - parameter filename: The filename for file.
      - parameter fileContentType: The content type of file.
-     - parameter metadata: If you're using the Data Crawler to upload your documents, you can test a document against
-       the type of metadata that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata
-       parts larger than 1 MB are rejected.
+     - parameter metadata: The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are
+       rejected.
        Example:  ``` {
          \"Creator\": \"Johnny Appleseed\",
          \"Subject\": \"Apples\"
@@ -1879,9 +1878,8 @@ public class Discovery {
        larger than the supported size are rejected.
      - parameter filename: The filename for file.
      - parameter fileContentType: The content type of file.
-     - parameter metadata: If you're using the Data Crawler to upload your documents, you can test a document against
-       the type of metadata that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata
-       parts larger than 1 MB are rejected.
+     - parameter metadata: The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are
+       rejected.
        Example:  ``` {
          \"Creator\": \"Johnny Appleseed\",
          \"Subject\": \"Apples\"
@@ -2003,11 +2001,9 @@ public class Discovery {
     }
 
     /**
-     Long collection queries.
+     Query a collection.
 
-     Complex queries might be too long for a standard method query. By using this method, you can construct longer
-     queries. However, these queries may take longer to complete than the standard method. For details, see the
-     [Discovery service
+     By using this method, you can construct long queries. For details, see the [Discovery
      documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-query-concepts#query-concepts).
 
      - parameter environmentID: The ID of the environment.
@@ -2016,10 +2012,9 @@ public class Discovery {
        searches are better for metadata-type searches and for assessing the concepts in the data set.
      - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
        with the most relevant documents listed first. Use a query search when you want to find the most relevant search
-       results. You cannot use **natural_language_query** and **query** at the same time.
+       results.
      - parameter naturalLanguageQuery: A natural language query that returns relevant documents by utilizing training
-       data and natural language understanding. You cannot use **natural_language_query** and **query** at the same
-       time.
+       data and natural language understanding.
      - parameter passages: A passages query that returns the most relevant passages from the results.
      - parameter aggregation: An aggregation search that returns an exact answer by combining query search with
        filters. Useful for applications to build lists, tables, and time series. For a full list of possible
@@ -2158,7 +2153,7 @@ public class Discovery {
      Query system notices.
 
      Queries for notices (errors or warnings) that might have been generated by the system. Notices are generated when
-     ingesting documents and performing relevance training. See the [Discovery service
+     ingesting documents and performing relevance training. See the [Discovery
      documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-query-concepts#query-concepts) for
      more details on the query language.
 
@@ -2167,11 +2162,9 @@ public class Discovery {
      - parameter filter: A cacheable query that excludes documents that don't mention the query content. Filter
        searches are better for metadata-type searches and for assessing the concepts in the data set.
      - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
-       with the most relevant documents listed first. Use a query search when you want to find the most relevant search
-       results. You cannot use **natural_language_query** and **query** at the same time.
+       with the most relevant documents listed first.
      - parameter naturalLanguageQuery: A natural language query that returns relevant documents by utilizing training
-       data and natural language understanding. You cannot use **natural_language_query** and **query** at the same
-       time.
+       data and natural language understanding.
      - parameter passages: A passages query that returns the most relevant passages from the results.
      - parameter aggregation: An aggregation search that returns an exact answer by combining query search with
        filters. Useful for applications to build lists, tables, and time series. For a full list of possible
@@ -2331,11 +2324,10 @@ public class Discovery {
     }
 
     /**
-     Long environment queries.
+     Query multiple collections.
 
-     Complex queries might be too long for a standard method query. By using this method, you can construct longer
-     queries. However, these queries may take longer to complete than the standard method. For details, see the
-     [Discovery service
+     By using this method, you can construct long queries that search multiple collection. For details, see the
+     [Discovery
      documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-query-concepts#query-concepts).
 
      - parameter environmentID: The ID of the environment.
@@ -2343,10 +2335,9 @@ public class Discovery {
        searches are better for metadata-type searches and for assessing the concepts in the data set.
      - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
        with the most relevant documents listed first. Use a query search when you want to find the most relevant search
-       results. You cannot use **natural_language_query** and **query** at the same time.
+       results.
      - parameter naturalLanguageQuery: A natural language query that returns relevant documents by utilizing training
-       data and natural language understanding. You cannot use **natural_language_query** and **query** at the same
-       time.
+       data and natural language understanding.
      - parameter passages: A passages query that returns the most relevant passages from the results.
      - parameter aggregation: An aggregation search that returns an exact answer by combining query search with
        filters. Useful for applications to build lists, tables, and time series. For a full list of possible
@@ -2484,7 +2475,7 @@ public class Discovery {
      Query multiple collection system notices.
 
      Queries for notices (errors or warnings) that might have been generated by the system. Notices are generated when
-     ingesting documents and performing relevance training. See the [Discovery service
+     ingesting documents and performing relevance training. See the [Discovery
      documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-query-concepts#query-concepts) for
      more details on the query language.
 
@@ -2493,11 +2484,9 @@ public class Discovery {
      - parameter filter: A cacheable query that excludes documents that don't mention the query content. Filter
        searches are better for metadata-type searches and for assessing the concepts in the data set.
      - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
-       with the most relevant documents listed first. Use a query search when you want to find the most relevant search
-       results. You cannot use **natural_language_query** and **query** at the same time.
+       with the most relevant documents listed first.
      - parameter naturalLanguageQuery: A natural language query that returns relevant documents by utilizing training
-       data and natural language understanding. You cannot use **natural_language_query** and **query** at the same
-       time.
+       data and natural language understanding.
      - parameter aggregation: An aggregation search that returns an exact answer by combining query search with
        filters. Useful for applications to build lists, tables, and time series. For a full list of possible
        aggregations, see the Query reference.
@@ -3460,8 +3449,7 @@ public class Discovery {
      - parameter filter: A cacheable query that excludes documents that don't mention the query content. Filter
        searches are better for metadata-type searches and for assessing the concepts in the data set.
      - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
-       with the most relevant documents listed first. Use a query search when you want to find the most relevant search
-       results. You cannot use **natural_language_query** and **query** at the same time.
+       with the most relevant documents listed first.
      - parameter count: Number of results to return. The maximum for the **count** and **offset** values together in
        any one query is **10000**.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
@@ -3888,6 +3876,9 @@ public class Discovery {
        =  `cloud_object_storage` indicates the credentials are used to connect to an IBM Cloud Object Store.
      - parameter credentialDetails: Object containing details of the stored credentials.
        Obtain credentials for your source from the administrator of the source.
+     - parameter status: The current status of this set of credentials. `connected` indicates that the credentials are
+       available to use with the source configuration of a collection. `invalid` refers to the credentials (for example,
+       the password provided has expired) and must be corrected before they can be used with a collection.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -3895,13 +3886,15 @@ public class Discovery {
         environmentID: String,
         sourceType: String? = nil,
         credentialDetails: CredentialDetails? = nil,
+        status: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Credentials>?, WatsonError?) -> Void)
     {
         // construct body
         let createCredentialsRequest = Credentials(
             sourceType: sourceType,
-            credentialDetails: credentialDetails)
+            credentialDetails: credentialDetails,
+            status: status)
         guard let body = try? JSON.encoder.encode(createCredentialsRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -4009,6 +4002,9 @@ public class Discovery {
        =  `cloud_object_storage` indicates the credentials are used to connect to an IBM Cloud Object Store.
      - parameter credentialDetails: Object containing details of the stored credentials.
        Obtain credentials for your source from the administrator of the source.
+     - parameter status: The current status of this set of credentials. `connected` indicates that the credentials are
+       available to use with the source configuration of a collection. `invalid` refers to the credentials (for example,
+       the password provided has expired) and must be corrected before they can be used with a collection.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -4017,13 +4013,15 @@ public class Discovery {
         credentialID: String,
         sourceType: String? = nil,
         credentialDetails: CredentialDetails? = nil,
+        status: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Credentials>?, WatsonError?) -> Void)
     {
         // construct body
         let updateCredentialsRequest = Credentials(
             sourceType: sourceType,
-            credentialDetails: credentialDetails)
+            credentialDetails: credentialDetails,
+            status: status)
         guard let body = try? JSON.encoder.encode(updateCredentialsRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return

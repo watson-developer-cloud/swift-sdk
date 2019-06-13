@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- The results of a successful `GET /v1/feedback` request.
+ The results of a successful **List Feedback** request for all feedback.
  */
 public struct FeedbackList: Codable, Equatable {
 

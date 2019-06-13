@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016, 2017
+ * (C) Copyright IBM Corp. 2016, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -281,6 +281,87 @@ class AssistantV2Tests: XCTestCase {
             expectation3.fulfill()
         }
         waitForExpectations()
+    }
+
+    // MARK: - Skill Contexts
+
+    func testMessageContextSkills() {
+        // Create a session
+        var newSessionID: String?
+        let expectation1 = self.expectation(description: "Create a session")
+        assistant.createSession(assistantID: assistantID) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let session = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssertNotNil(session.sessionID)
+            newSessionID = session.sessionID
+            expectation1.fulfill()
+        }
+
+        waitForExpectations()
+
+        guard let sessionID = newSessionID else {
+            XCTFail("Failed to get the ID of the newly created session")
+            return
+        }
+
+        // create global context with user ID
+        let system = MessageContextGlobalSystem(userID: "my_user_id")
+        let global = MessageContextGlobal(system: system)
+
+        // build user-defined context variables, put in skill-specific context for main skill
+        var userDefinedContext: [String: JSON] = [:]
+        userDefinedContext["account_number"] = .string("123456")
+        let mainSkillContext = MessageContextSkill(userDefined: userDefinedContext)
+        let skills = MessageContextSkills(additionalProperties: ["main skill": mainSkillContext])
+
+        let context = MessageContext(global: global, skills: skills)
+
+        let input = MessageInput(messageType: "text", text: "Hello", options: MessageInputOptions(returnContext: true))
+
+        // Start conversation with a non-empty context
+        let expectation2 = self.expectation(description: "Start a conversation.")
+        assistant.message(assistantID: assistantID, sessionID: sessionID, input: input, context: context) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let message = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            let output = message.output
+
+            // verify response message
+            guard let dialogRuntimeResponse = output.generic, dialogRuntimeResponse.count == 1 else {
+                XCTFail("Expected to receive a response message")
+                return
+            }
+
+            XCTAssertEqual(dialogRuntimeResponse[0].responseType, "text")
+            XCTAssertNotNil(dialogRuntimeResponse[0].text)
+
+            // verify context
+            XCTAssertNotNil(message.context)
+            XCTAssertNotNil(message.context?.skills)
+            XCTAssertNotNil(message.context?.skills?.additionalProperties)
+            XCTAssertTrue(message.context?.skills?.additionalProperties.keys.contains("main skill") ?? false)
+
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+
     }
 
     func testMessageWithInvalidSessionID() {

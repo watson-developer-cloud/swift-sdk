@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- Describes the additional service features that are supported with the model.
+ Additional service features that are supported with the model.
  */
 public struct SupportedFeatures: Codable, Equatable {
 

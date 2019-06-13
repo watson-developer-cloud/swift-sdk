@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- The results of a single feedback query.
+ The results of a successful **Get Feedback** request for a single feedback entry.
  */
 public struct GetFeedback: Codable, Equatable {
 
@@ -37,7 +37,7 @@ public struct GetFeedback: Codable, Equatable {
     public var comment: String?
 
     /**
-     Information returned from the `POST /v1/feedback` method.
+     Information returned from the **Add Feedback** method.
      */
     public var feedbackData: FeedbackDataOutput?
 

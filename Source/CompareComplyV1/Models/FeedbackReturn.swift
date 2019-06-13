@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ public struct FeedbackReturn: Codable, Equatable {
     public var created: Date?
 
     /**
-     Information returned from the `POST /v1/feedback` method.
+     Information returned from the **Add Feedback** method.
      */
     public var feedbackData: FeedbackDataOutput?
 

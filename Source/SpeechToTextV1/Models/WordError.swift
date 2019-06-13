@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,17 @@
 
 import Foundation
 
-/** WordError. */
+/**
+ An error associated with a word from a custom language model.
+ */
 public struct WordError: Codable, Equatable {
 
     /**
-     A key-value pair that describes an error associated with the definition of a word in the words resource. Each pair
+     A key-value pair that describes an error associated with the definition of a word in the words resource. The pair
      has the format `"element": "message"`, where `element` is the aspect of the definition that caused the problem and
      `message` describes the problem. The following example describes a problem with one of the word's sounds-like
      definitions: `"{sounds_like_string}": "Numbers are not allowed in sounds-like. You can try for example
-     '{suggested_string}'."` You must correct the error before you can train the model.
+     '{suggested_string}'."`.
      */
     public var element: String
 

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -127,7 +127,7 @@ extension Shared {
         // first look for an env variable called IBM_CREDENTIALS_FILE
         // it should be the path to the file
         let credentialsFileName = ProcessInfo.processInfo.environment["IBM_CREDENTIALS_FILE"] ??
-                                    Constant.credentialsFileName
+            Constant.credentialsFileName
 
         let credentialsFile = URL(fileURLWithPath: credentialsFileName)
         guard let fileLines = try? String(contentsOf: credentialsFile).components(separatedBy: .newlines) else {

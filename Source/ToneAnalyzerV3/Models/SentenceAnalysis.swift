@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2016, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** SentenceAnalysis. */
+/**
+ The results of the analysis for the individual sentences of the input content.
+ */
 public struct SentenceAnalysis: Codable, Equatable {
 
     /**

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2016, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -166,7 +166,7 @@ public class ToneAnalyzer {
     /**
      Analyze general tone.
 
-     Use the general purpose endpoint to analyze the tone of your input content. The service analyzes the content for
+     Use the general-purpose endpoint to analyze the tone of your input content. The service analyzes the content for
      emotional and language tones. The method always analyzes the tone of the full document; by default, it also
      analyzes the tone of each individual sentence of the content.
      You can submit no more than 128 KB of total input content and no more than 1000 individual sentences in JSON, plain
@@ -178,7 +178,7 @@ public class ToneAnalyzer {
      character encoding of the input text; for example: `Content-Type: text/plain;charset=utf-8`. For `text/html`, the
      service removes HTML tags and analyzes only the textual content.
      **See also:** [Using the general-purpose
-     endpoint](https://cloud.ibm.com/docs/services/tone-analyzer/using-tone.html#using-the-general-purpose-endpoint).
+     endpoint](https://cloud.ibm.com/docs/services/tone-analyzer?topic=tone-analyzer-utgpe#utgpe).
 
      - parameter toneContent: JSON, plain text, or HTML input that contains the content to be analyzed. For JSON
        input, provide an object of type `ToneInput`.
@@ -252,9 +252,9 @@ public class ToneAnalyzer {
     }
 
     /**
-     Analyze customer engagement tone.
+     Analyze customer-engagement tone.
 
-     Use the customer engagement endpoint to analyze the tone of customer service and customer support conversations.
+     Use the customer-engagement endpoint to analyze the tone of customer service and customer support conversations.
      For each utterance of a conversation, the method reports the most prevalent subset of the following seven tones:
      sad, frustrated, satisfied, excited, polite, impolite, and sympathetic.
      If you submit more than 50 utterances, the service returns a warning for the overall content and analyzes only the
@@ -263,7 +263,7 @@ public class ToneAnalyzer {
      500 characters. Per the JSON specification, the default character encoding for JSON content is effectively always
      UTF-8.
      **See also:** [Using the customer-engagement
-     endpoint](https://cloud.ibm.com/docs/services/tone-analyzer/using-tone-chat.html#using-the-customer-engagement-endpoint).
+     endpoint](https://cloud.ibm.com/docs/services/tone-analyzer?topic=tone-analyzer-utco#utco).
 
      - parameter utterances: An array of `Utterance` objects that provides the input content that the service is to
        analyze.

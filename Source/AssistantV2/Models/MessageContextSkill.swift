@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import RestKit
 
 /**
  Contains information specific to a particular skill used by the Assistant.
@@ -24,7 +25,7 @@ public struct MessageContextSkill: Codable, Equatable {
     /**
      Arbitrary variables that can be read and written by a particular skill.
      */
-    public var userDefined: String?
+    public var userDefined: [String: JSON]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
@@ -39,7 +40,7 @@ public struct MessageContextSkill: Codable, Equatable {
      - returns: An initialized `MessageContextSkill`.
     */
     public init(
-        userDefined: String? = nil
+        userDefined: [String: JSON]? = nil
     )
     {
         self.userDefined = userDefined

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2016, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,13 @@
 
 import Foundation
 
-/** ToneAnalysis. */
+/**
+ The tone analysis results for the input from the general-purpose endpoint.
+ */
 public struct ToneAnalysis: Codable, Equatable {
 
     /**
-     An object of type `DocumentAnalysis` that provides the results of the analysis for the full input document.
+     The results of the analysis for the full input content.
      */
     public var documentTone: DocumentAnalysis
 

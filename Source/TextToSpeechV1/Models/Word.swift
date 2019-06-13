@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2016, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,37 +16,39 @@
 
 import Foundation
 
-/** Word. */
+/**
+ Information about a word for the custom voice model.
+ */
 public struct Word: Codable, Equatable {
 
     /**
      **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation
      for the word. You can create only a single entry, with or without a single part of speech, for any word; you cannot
      create multiple entries with different parts of speech for the same word. For more information, see [Working with
-     Japanese entries](https://cloud.ibm.com/docs/services/text-to-speech/custom-rules.html#jaNotes).
+     Japanese entries](https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-rules#jaNotes).
      */
     public enum PartOfSpeech: String {
-        case josi = "Josi"
-        case mesi = "Mesi"
-        case kigo = "Kigo"
-        case gobi = "Gobi"
         case dosi = "Dosi"
-        case jodo = "Jodo"
-        case koyu = "Koyu"
-        case stbi = "Stbi"
-        case suji = "Suji"
-        case kedo = "Kedo"
         case fuku = "Fuku"
-        case keyo = "Keyo"
-        case stto = "Stto"
-        case reta = "Reta"
-        case stzo = "Stzo"
-        case kato = "Kato"
+        case gobi = "Gobi"
         case hoka = "Hoka"
+        case jodo = "Jodo"
+        case josi = "Josi"
+        case kato = "Kato"
+        case kedo = "Kedo"
+        case keyo = "Keyo"
+        case kigo = "Kigo"
+        case koyu = "Koyu"
+        case mesi = "Mesi"
+        case reta = "Reta"
+        case stbi = "Stbi"
+        case stto = "Stto"
+        case stzo = "Stzo"
+        case suji = "Suji"
     }
 
     /**
-     A word from the custom voice model.
+     The word for the custom voice model.
      */
     public var word: String
 
@@ -61,7 +63,7 @@ public struct Word: Codable, Equatable {
      **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation
      for the word. You can create only a single entry, with or without a single part of speech, for any word; you cannot
      create multiple entries with different parts of speech for the same word. For more information, see [Working with
-     Japanese entries](https://cloud.ibm.com/docs/services/text-to-speech/custom-rules.html#jaNotes).
+     Japanese entries](https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-rules#jaNotes).
      */
     public var partOfSpeech: String?
 
@@ -75,7 +77,7 @@ public struct Word: Codable, Equatable {
     /**
      Initialize a `Word` with member variables.
 
-     - parameter word: A word from the custom voice model.
+     - parameter word: The word for the custom voice model.
      - parameter translation: The phonetic or sounds-like translation for the word. A phonetic translation is based
        on the SSML format for representing the phonetic string of a word either as an IPA or IBM SPR translation. A
        sounds-like translation consists of one or more words that, when combined, sound like the word.
@@ -83,7 +85,7 @@ public struct Word: Codable, Equatable {
        produce the correct intonation for the word. You can create only a single entry, with or without a single part of
        speech, for any word; you cannot create multiple entries with different parts of speech for the same word. For
        more information, see [Working with Japanese
-       entries](https://cloud.ibm.com/docs/services/text-to-speech/custom-rules.html#jaNotes).
+       entries](https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-rules#jaNotes).
 
      - returns: An initialized `Word`.
     */

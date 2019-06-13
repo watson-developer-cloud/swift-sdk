@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import RestKit
 public struct WorkspaceSystemSettings: Codable, Equatable {
 
     /**
-     Workspace settings related to the Watson Assistant tool.
+     Workspace settings related to the Watson Assistant user interface.
      */
     public var tooling: WorkspaceSystemSettingsTooling?
 
@@ -48,7 +48,7 @@ public struct WorkspaceSystemSettings: Codable, Equatable {
     /**
      Initialize a `WorkspaceSystemSettings` with member variables.
 
-     - parameter tooling: Workspace settings related to the Watson Assistant tool.
+     - parameter tooling: Workspace settings related to the Watson Assistant user interface.
      - parameter disambiguation: Workspace settings related to the disambiguation feature.
        **Note:** This feature is available only to Premium users.
      - parameter humanAgentAssist: For internal use only.

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ public struct Filter: Codable, Equatable {
     public var matchingResults: Int?
 
     /**
-     Aggregations returned by the Discovery service.
+     Aggregations returned by Discovery.
      */
     public var aggregations: [QueryAggregation]?
 

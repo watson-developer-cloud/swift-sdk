@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -77,19 +77,17 @@ internal struct UpdateDialogNode: Codable, Equatable {
     /**
      The dialog node ID. This string must conform to the following restrictions:
      - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
-     - It must be no longer than 1024 characters.
      */
     public var dialogNode: String?
 
     /**
-     The description of the dialog node. This string cannot contain carriage return, newline, or tab characters, and it
-     must be no longer than 128 characters.
+     The description of the dialog node. This string cannot contain carriage return, newline, or tab characters.
      */
     public var description: String?
 
     /**
      The condition that will trigger the dialog node. This string cannot contain carriage return, newline, or tab
-     characters, and it must be no longer than 2048 characters.
+     characters.
      */
     public var conditions: String?
 
@@ -105,7 +103,7 @@ internal struct UpdateDialogNode: Codable, Equatable {
 
     /**
      The output of the dialog node. For more information about how to specify dialog node output, see the
-     [documentation](https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#dialog-overview-responses).
+     [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
      */
     public var output: DialogNodeOutput?
 
@@ -127,7 +125,6 @@ internal struct UpdateDialogNode: Codable, Equatable {
     /**
      The alias used to identify the dialog node. This string must conform to the following restrictions:
      - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
-     - It must be no longer than 64 characters.
      */
     public var title: String?
 
@@ -167,8 +164,7 @@ internal struct UpdateDialogNode: Codable, Equatable {
     public var digressOutSlots: String?
 
     /**
-     A label that can be displayed externally to describe the purpose of the node to users. This string must be no
-     longer than 512 characters.
+     A label that can be displayed externally to describe the purpose of the node to users.
      */
     public var userLabel: String?
 
@@ -217,24 +213,22 @@ internal struct UpdateDialogNode: Codable, Equatable {
 
      - parameter dialogNode: The dialog node ID. This string must conform to the following restrictions:
        - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
-       - It must be no longer than 1024 characters.
      - parameter description: The description of the dialog node. This string cannot contain carriage return,
-       newline, or tab characters, and it must be no longer than 128 characters.
+       newline, or tab characters.
      - parameter conditions: The condition that will trigger the dialog node. This string cannot contain carriage
-       return, newline, or tab characters, and it must be no longer than 2048 characters.
+       return, newline, or tab characters.
      - parameter parent: The ID of the parent dialog node. This property is omitted if the dialog node has no parent.
      - parameter previousSibling: The ID of the previous sibling dialog node. This property is omitted if the dialog
        node has no previous sibling.
      - parameter output: The output of the dialog node. For more information about how to specify dialog node output,
        see the
-       [documentation](https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#dialog-overview-responses).
+       [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
      - parameter context: The context for the dialog node.
      - parameter metadata: The metadata for the dialog node.
      - parameter nextStep: The next step to execute following this dialog node.
      - parameter title: The alias used to identify the dialog node. This string must conform to the following
        restrictions:
        - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
-       - It must be no longer than 64 characters.
      - parameter nodeType: How the dialog node is processed.
      - parameter eventName: How an `event_handler` node is processed.
      - parameter variable: The location in the dialog context where output is stored.
@@ -243,7 +237,6 @@ internal struct UpdateDialogNode: Codable, Equatable {
      - parameter digressOut: Whether this dialog node can be returned to after a digression.
      - parameter digressOutSlots: Whether the user can digress to top-level nodes while filling out slots.
      - parameter userLabel: A label that can be displayed externally to describe the purpose of the node to users.
-       This string must be no longer than 512 characters.
      - parameter disabled: For internal use only.
      - parameter created: The timestamp for creation of the object.
      - parameter updated: The timestamp for the most recent update to the object.

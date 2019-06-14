@@ -1,7 +1,7 @@
 // swift-tools-version:4.0
 
 /**
- * Copyright IBM Corporation 2016
+ * (C) Copyright IBM Corp. 2016, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ let package = Package(
         .library(name: "VisualRecognitionV3", targets: ["VisualRecognitionV3"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/watson-developer-cloud/restkit.git", from: "2.0.0")
+        .package(url: "https://github.com/watson-developer-cloud/restkit.git", from: "3.0.0")
     ],
     targets: [
         .target(name: "AssistantV1", dependencies: ["RestKit"]),

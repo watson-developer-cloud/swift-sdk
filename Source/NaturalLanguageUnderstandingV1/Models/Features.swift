@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2017, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ public struct Features: Codable, Equatable {
 
     /**
      Identifies people, cities, organizations, and other entities in the content. See [Entity types and
-     subtypes](https://cloud.ibm.com/docs/services/natural-language-understanding/entity-types.html).
+     subtypes](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-entity-types).
      Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
      Arabic, Chinese, and Dutch are supported only through custom models.
      */
@@ -59,7 +59,7 @@ public struct Features: Codable, Equatable {
     /**
      Recognizes when two entities are related and identifies the type of relation. For example, an `awardedTo` relation
      might connect the entities "Nobel Prize" and "Albert Einstein". See [Relation
-     types](https://cloud.ibm.com/docs/services/natural-language-understanding/relations.html).
+     types](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-relations).
      Supported languages: Arabic, English, German, Japanese, Korean, Spanish. Chinese, Dutch, French, Italian, and
      Portuguese custom models are also supported.
      */
@@ -114,7 +114,8 @@ public struct Features: Codable, Equatable {
        with `entities.emotion` and for keywords with `keywords.emotion`.
        Supported languages: English.
      - parameter entities: Identifies people, cities, organizations, and other entities in the content. See [Entity
-       types and subtypes](https://cloud.ibm.com/docs/services/natural-language-understanding/entity-types.html).
+       types and
+       subtypes](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-entity-types).
        Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
        Arabic, Chinese, and Dutch are supported only through custom models.
      - parameter keywords: Returns important keywords in the content.
@@ -123,7 +124,7 @@ public struct Features: Codable, Equatable {
        prominent page image, and publication date. Supports URL and HTML input types only.
      - parameter relations: Recognizes when two entities are related and identifies the type of relation. For
        example, an `awardedTo` relation might connect the entities "Nobel Prize" and "Albert Einstein". See [Relation
-       types](https://cloud.ibm.com/docs/services/natural-language-understanding/relations.html).
+       types](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-relations).
        Supported languages: Arabic, English, German, Japanese, Korean, Spanish. Chinese, Dutch, French, Italian, and
        Portuguese custom models are also supported.
      - parameter semanticRoles: Parses sentences into subject, action, and object form.

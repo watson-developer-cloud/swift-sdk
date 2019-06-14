@@ -1,4 +1,28 @@
 
+# 2.1.0 (https://github.com/watson-developer-cloud/swift-sdk/compare/2.0.3...2.1.0) (2019-06-08)
+
+### Features
+
+* Add support for insecure connections (975bb68 (https://github.com/watson-developer-cloud/swift-sdk/commit/975bb68))
+* Assistant V1 updated DialogNodeOutputOptionsElementValue PR
+* LTv3 Document Translator API
+* NLU categories explanations
+* STT processing metrics and audio metrics features
+
+### Bug Fixes
+
+* Remove support for insecure connections for Linux (76f15f2 (https://github.com/watson-developer-cloud/swift-sdk/commit/76f15f2))
+
+## 2.0.3 (https://github.com/watson-developer-cloud/swift-sdk/compare/2.0.3...2.0.3) (2019-04-15)
+
+### Bug Fixes
+
+* **All:**
+  * Use bootstrap instead of update in carthage
+  * Use full url in semantic release
+  * Refactor bluemix to cloud.ibm
+  * Add Featured Projects section to README
+
 ## 2.0.2 (https://github.com/watson-developer-cloud/swift-sdk/compare/2.0.1...2.0.2) (2019-04-15)
 
 ### Bug Fixes

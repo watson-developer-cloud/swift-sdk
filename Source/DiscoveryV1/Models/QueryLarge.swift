@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,14 +29,13 @@ internal struct QueryLarge: Codable, Equatable {
 
     /**
      A query search returns all documents in your data set with full enrichments and full text, but with the most
-     relevant documents listed first. Use a query search when you want to find the most relevant search results. You
-     cannot use **natural_language_query** and **query** at the same time.
+     relevant documents listed first. Use a query search when you want to find the most relevant search results.
      */
     public var query: String?
 
     /**
      A natural language query that returns relevant documents by utilizing training data and natural language
-     understanding. You cannot use **natural_language_query** and **query** at the same time.
+     understanding.
      */
     public var naturalLanguageQuery: String?
 
@@ -176,10 +175,9 @@ internal struct QueryLarge: Codable, Equatable {
        searches are better for metadata-type searches and for assessing the concepts in the data set.
      - parameter query: A query search returns all documents in your data set with full enrichments and full text,
        but with the most relevant documents listed first. Use a query search when you want to find the most relevant
-       search results. You cannot use **natural_language_query** and **query** at the same time.
+       search results.
      - parameter naturalLanguageQuery: A natural language query that returns relevant documents by utilizing training
-       data and natural language understanding. You cannot use **natural_language_query** and **query** at the same
-       time.
+       data and natural language understanding.
      - parameter passages: A passages query that returns the most relevant passages from the results.
      - parameter aggregation: An aggregation search that returns an exact answer by combining query search with
        filters. Useful for applications to build lists, tables, and time series. For a full list of possible

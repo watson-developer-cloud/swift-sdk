@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** SpeechModel. */
+/**
+ Information about an available language model.
+ */
 public struct SpeechModel: Codable, Equatable {
 
     /**
@@ -40,7 +42,7 @@ public struct SpeechModel: Codable, Equatable {
     public var url: String
 
     /**
-     Describes the additional service features that are supported with the model.
+     Additional service features that are supported with the model.
      */
     public var supportedFeatures: SupportedFeatures
 

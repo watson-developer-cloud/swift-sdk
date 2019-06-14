@@ -17,6 +17,7 @@ natural-language input and uses machine learning to respond to customers in a wa
   s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => s.version.to_s }
 
   s.source_files          = 'Source/AssistantV1/**/*.swift',
+                            'Source/SupportingFiles/InsecureConnection.swift',
                             'Source/SupportingFiles/Shared.swift'
   s.exclude_files         = 'Source/AssistantV1/Shared.swift'
 

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * (C) Copyright IBM Corp. 2016, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
     // to update the `trainedClassifierId` property below!
 
     private var naturalLanguageClassifier: NaturalLanguageClassifier!
-    private let trainedClassifierId = "6b5ab4x398-nlc-95"
+    private let trainedClassifierId = "0af6f2x556-nlc-473"
     private let trainedClassifierName = "swift-sdk-test-classifier - DO NOT DELETE"
     private let temporaryClassifierName = "swift-sdk-temporary-classifier"
 

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2017
+ * (C) Copyright IBM Corp. 2017, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -538,7 +538,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
     func testAnalyzeTextForCategories() {
         let description = "Analyze text and verify categories returned."
         let expectation = self.expectation(description: description)
-        let features = Features(categories: CategoriesOptions())
+        let features = Features(categories: CategoriesOptions(explanation: true))
         naturalLanguageUnderstanding.analyze(features: features, text: text, returnAnalyzedText: true) {
             response, error in
 
@@ -557,6 +557,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             for category in results.categories! {
                 XCTAssertNotNil(category.label)
                 XCTAssertNotNil(category.score)
+                XCTAssertNotNil(category.explanation?.relevantText)
             }
             expectation.fulfill()
         }

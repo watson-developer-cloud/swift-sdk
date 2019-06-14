@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,8 +34,7 @@ public struct MessageInput: Codable, Equatable {
     public var messageType: String?
 
     /**
-     The text of the user input. This string cannot contain carriage return, newline, or tab characters, and it must be
-     no longer than 2048 characters.
+     The text of the user input. This string cannot contain carriage return, newline, or tab characters.
      */
     public var text: String?
 
@@ -76,7 +75,7 @@ public struct MessageInput: Codable, Equatable {
 
      - parameter messageType: The type of user input. Currently, only text input is supported.
      - parameter text: The text of the user input. This string cannot contain carriage return, newline, or tab
-       characters, and it must be no longer than 2048 characters.
+       characters.
      - parameter options: Optional properties that control how the assistant responds.
      - parameter intents: Intents to use when evaluating the user input. Include intents from the previous response
        to continue using those intents rather than trying to recognize intents in the new input.

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,8 @@ import Foundation
 import RestKit
 
 /**
- The IBM Watson&trade; Assistant service combines machine learning, natural language understanding, and integrated
- dialog tools to create conversation flows between your apps and your users.
+ The IBM Watson&trade; Assistant service combines machine learning, natural language understanding, and an integrated
+ dialog editor to create conversation flows between your apps and your users.
  */
 public class Assistant {
 
@@ -112,6 +112,16 @@ public class Assistant {
             self.authMethod = IAMAccessToken(accessToken: newToken)
         }
     }
+
+    #if !os(Linux)
+    /**
+      Allow network requests to a server without verification of the server certificate.
+      **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
+     */
+    public func disableSSLVerification() {
+        session = InsecureConnection.session()
+    }
+    #endif
 
     /**
      Use the HTTP response and data received by the Watson Assistant v1 service to extract
@@ -316,9 +326,9 @@ public class Assistant {
      This operation is limited to 30 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter name: The name of the workspace. This string cannot contain carriage return, newline, or tab
-       characters, and it must be no longer than 64 characters.
+       characters.
      - parameter description: The description of the workspace. This string cannot contain carriage return, newline,
-       or tab characters, and it must be no longer than 128 characters.
+       or tab characters.
      - parameter language: The language of the workspace.
      - parameter metadata: Any metadata related to the workspace.
      - parameter learningOptOut: Whether training data from the workspace (including artifacts such as intents and
@@ -475,9 +485,9 @@ public class Assistant {
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter name: The name of the workspace. This string cannot contain carriage return, newline, or tab
-       characters, and it must be no longer than 64 characters.
+       characters.
      - parameter description: The description of the workspace. This string cannot contain carriage return, newline,
-       or tab characters, and it must be no longer than 128 characters.
+       or tab characters.
      - parameter language: The language of the workspace.
      - parameter metadata: Any metadata related to the workspace.
      - parameter learningOptOut: Whether training data from the workspace (including artifacts such as intents and
@@ -711,15 +721,16 @@ public class Assistant {
      Create intent.
 
      Create a new intent.
+     If you want to create multiple intents with a single API call, consider using the **[Update
+     workspace](#update-workspace)** method instead.
      This operation is limited to 2000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter intent: The name of the intent. This string must conform to the following restrictions:
        - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.
        - It cannot begin with the reserved prefix `sys-`.
-       - It must be no longer than 128 characters.
      - parameter description: The description of the intent. This string cannot contain carriage return, newline, or
-       tab characters, and it must be no longer than 128 characters.
+       tab characters.
      - parameter examples: An array of user input examples for the intent.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -848,6 +859,8 @@ public class Assistant {
 
      Update an existing intent with new or modified data. You must provide component objects defining the content of the
      updated intent.
+     If you want to update multiple intents with a single API call, consider using the **[Update
+     workspace](#update-workspace)** method instead.
      This operation is limited to 2000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
@@ -855,9 +868,8 @@ public class Assistant {
      - parameter newIntent: The name of the intent. This string must conform to the following restrictions:
        - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.
        - It cannot begin with the reserved prefix `sys-`.
-       - It must be no longer than 128 characters.
      - parameter newDescription: The description of the intent. This string cannot contain carriage return, newline,
-       or tab characters, and it must be no longer than 128 characters.
+       or tab characters.
      - parameter newExamples: An array of user input examples for the intent.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -1052,6 +1064,8 @@ public class Assistant {
      Create user input example.
 
      Add a new user input example to an intent.
+     If you want to add multiple exaples with a single API call, consider using the **[Update intent](#update-intent)**
+     method instead.
      This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
@@ -1059,7 +1073,6 @@ public class Assistant {
      - parameter text: The text of a user input example. This string must conform to the following restrictions:
        - It cannot contain carriage return, newline, or tab characters.
        - It cannot consist of only whitespace characters.
-       - It must be no longer than 1024 characters.
      - parameter mentions: An array of contextual entity mentions.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -1179,6 +1192,8 @@ public class Assistant {
      Update user input example.
 
      Update the text of a user input example.
+     If you want to update multiple examples with a single API call, consider using the **[Update
+     intent](#update-intent)** method instead.
      This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
@@ -1187,7 +1202,6 @@ public class Assistant {
      - parameter newText: The text of the user input example. This string must conform to the following restrictions:
        - It cannot contain carriage return, newline, or tab characters.
        - It cannot consist of only whitespace characters.
-       - It must be no longer than 1024 characters.
      - parameter newMentions: An array of contextual entity mentions.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -1381,14 +1395,15 @@ public class Assistant {
      Create counterexample.
 
      Add a new counterexample to a workspace. Counterexamples are examples that have been marked as irrelevant input.
+     If you want to add multiple counterexamples with a single API call, consider using the **[Update
+     workspace](#update-workspace)** method instead.
      This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter text: The text of a user input marked as irrelevant input. This string must conform to the following
        restrictions:
-       - It cannot contain carriage return, newline, or tab characters
-       - It cannot consist of only whitespace characters
-       - It must be no longer than 1024 characters.
+       - It cannot contain carriage return, newline, or tab characters.
+       - It cannot consist of only whitespace characters.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -1502,15 +1517,16 @@ public class Assistant {
      Update counterexample.
 
      Update the text of a counterexample. Counterexamples are examples that have been marked as irrelevant input.
+     If you want to update multiple counterexamples with a single API call, consider using the **[Update
+     workspace](#update-workspace)** method instead.
      This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter text: The text of a user input counterexample (for example, `What are you wearing?`).
      - parameter newText: The text of a user input marked as irrelevant input. This string must conform to the
        following restrictions:
-       - It cannot contain carriage return, newline, or tab characters
-       - It cannot consist of only whitespace characters
-       - It must be no longer than 1024 characters.
+       - It cannot contain carriage return, newline, or tab characters.
+       - It cannot consist of only whitespace characters.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -1707,16 +1723,17 @@ public class Assistant {
      Create entity.
 
      Create a new entity, or enable a system entity.
+     If you want to create multiple entities with a single API call, consider using the **[Update
+     workspace](#update-workspace)** method instead.
      This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity. This string must conform to the following restrictions:
        - It can contain only Unicode alphanumeric, underscore, and hyphen characters.
-       - It must be no longer than 64 characters.
-       If you specify an entity name beginning with the reserved prefix `sys-`, it must be the name of a system entity
+       - If you specify an entity name beginning with the reserved prefix `sys-`, it must be the name of a system entity
        that you want to enable. (Any entity content specified with the request is ignored.).
      - parameter description: The description of the entity. This string cannot contain carriage return, newline, or
-       tab characters, and it must be no longer than 128 characters.
+       tab characters.
      - parameter metadata: Any metadata related to the entity.
      - parameter fuzzyMatch: Whether to use fuzzy matching for the entity.
      - parameter values: An array of objects describing the entity values.
@@ -1851,6 +1868,8 @@ public class Assistant {
 
      Update an existing entity with new or modified data. You must provide component objects defining the content of the
      updated entity.
+     If you want to update multiple entities with a single API call, consider using the **[Update
+     workspace](#update-workspace)** method instead.
      This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
@@ -1858,9 +1877,8 @@ public class Assistant {
      - parameter newEntity: The name of the entity. This string must conform to the following restrictions:
        - It can contain only Unicode alphanumeric, underscore, and hyphen characters.
        - It cannot begin with the reserved prefix `sys-`.
-       - It must be no longer than 64 characters.
      - parameter newDescription: The description of the entity. This string cannot contain carriage return, newline,
-       or tab characters, and it must be no longer than 128 characters.
+       or tab characters.
      - parameter newMetadata: Any metadata related to the entity.
      - parameter newFuzzyMatch: Whether to use fuzzy matching for the entity.
      - parameter newValues: An array of objects describing the entity values.
@@ -2135,6 +2153,8 @@ public class Assistant {
      Create entity value.
 
      Create a new value for an entity.
+     If you want to create multiple entity values with a single API call, consider using the **[Update
+     entity](#update-entity)** method instead.
      This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
@@ -2142,18 +2162,16 @@ public class Assistant {
      - parameter value: The text of the entity value. This string must conform to the following restrictions:
        - It cannot contain carriage return, newline, or tab characters.
        - It cannot consist of only whitespace characters.
-       - It must be no longer than 64 characters.
      - parameter metadata: Any metadata related to the entity value.
      - parameter valueType: Specifies the type of entity value.
      - parameter synonyms: An array of synonyms for the entity value. A value can specify either synonyms or patterns
        (depending on the value type), but not both. A synonym must conform to the following resrictions:
        - It cannot contain carriage return, newline, or tab characters.
        - It cannot consist of only whitespace characters.
-       - It must be no longer than 64 characters.
      - parameter patterns: An array of patterns for the entity value. A value can specify either synonyms or patterns
-       (depending on the value type), but not both. A pattern is a regular expression no longer than 512 characters. For
-       more information about how to specify a pattern, see the
-       [documentation](https://cloud.ibm.com/docs/services/assistant/entities.html#entities-create-dictionary-based).
+       (depending on the value type), but not both. A pattern is a regular expression; for more information about how to
+       specify a pattern, see the
+       [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-entities#entities-create-dictionary-based).
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -2287,6 +2305,8 @@ public class Assistant {
 
      Update an existing entity value with new or modified data. You must provide component objects defining the content
      of the updated entity value.
+     If you want to update multiple entity values with a single API call, consider using the **[Update
+     entity](#update-entity)** method instead.
      This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
@@ -2295,18 +2315,16 @@ public class Assistant {
      - parameter newValue: The text of the entity value. This string must conform to the following restrictions:
        - It cannot contain carriage return, newline, or tab characters.
        - It cannot consist of only whitespace characters.
-       - It must be no longer than 64 characters.
      - parameter newMetadata: Any metadata related to the entity value.
      - parameter newValueType: Specifies the type of entity value.
      - parameter newSynonyms: An array of synonyms for the entity value. A value can specify either synonyms or
        patterns (depending on the value type), but not both. A synonym must conform to the following resrictions:
        - It cannot contain carriage return, newline, or tab characters.
        - It cannot consist of only whitespace characters.
-       - It must be no longer than 64 characters.
      - parameter newPatterns: An array of patterns for the entity value. A value can specify either synonyms or
-       patterns (depending on the value type), but not both. A pattern is a regular expression no longer than 512
-       characters. For more information about how to specify a pattern, see the
-       [documentation](https://cloud.ibm.com/docs/services/assistant/entities.html#entities-create-dictionary-based).
+       patterns (depending on the value type), but not both. A pattern is a regular expression; for more information
+       about how to specify a pattern, see the
+       [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-entities#entities-create-dictionary-based).
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -2509,6 +2527,8 @@ public class Assistant {
      Create entity value synonym.
 
      Add a new synonym to an entity value.
+     If you want to create multiple synonyms with a single API call, consider using the **[Update
+     entity](#update-entity)** or **[Update entity value](#update-entity-value)** method instead.
      This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
@@ -2517,7 +2537,6 @@ public class Assistant {
      - parameter synonym: The text of the synonym. This string must conform to the following restrictions:
        - It cannot contain carriage return, newline, or tab characters.
        - It cannot consist of only whitespace characters.
-       - It must be no longer than 64 characters.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -2637,6 +2656,8 @@ public class Assistant {
      Update entity value synonym.
 
      Update an existing entity value synonym with new text.
+     If you want to update multiple synonyms with a single API call, consider using the **[Update
+     entity](#update-entity)** or **[Update entity value](#update-entity-value)** method instead.
      This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
@@ -2646,7 +2667,6 @@ public class Assistant {
      - parameter newSynonym: The text of the synonym. This string must conform to the following restrictions:
        - It cannot contain carriage return, newline, or tab characters.
        - It cannot consist of only whitespace characters.
-       - It must be no longer than 64 characters.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -2840,29 +2860,29 @@ public class Assistant {
      Create dialog node.
 
      Create a new dialog node.
+     If you want to create multiple dialog nodes with a single API call, consider using the **[Update
+     workspace](#update-workspace)** method instead.
      This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter dialogNode: The dialog node ID. This string must conform to the following restrictions:
        - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
-       - It must be no longer than 1024 characters.
      - parameter description: The description of the dialog node. This string cannot contain carriage return, newline,
-       or tab characters, and it must be no longer than 128 characters.
+       or tab characters.
      - parameter conditions: The condition that will trigger the dialog node. This string cannot contain carriage
-       return, newline, or tab characters, and it must be no longer than 2048 characters.
+       return, newline, or tab characters.
      - parameter parent: The ID of the parent dialog node. This property is omitted if the dialog node has no parent.
      - parameter previousSibling: The ID of the previous sibling dialog node. This property is omitted if the dialog
        node has no previous sibling.
      - parameter output: The output of the dialog node. For more information about how to specify dialog node output,
        see the
-       [documentation](https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#dialog-overview-responses).
+       [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
      - parameter context: The context for the dialog node.
      - parameter metadata: The metadata for the dialog node.
      - parameter nextStep: The next step to execute following this dialog node.
      - parameter title: The alias used to identify the dialog node. This string must conform to the following
        restrictions:
        - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
-       - It must be no longer than 64 characters.
      - parameter nodeType: How the dialog node is processed.
      - parameter eventName: How an `event_handler` node is processed.
      - parameter variable: The location in the dialog context where output is stored.
@@ -2871,7 +2891,6 @@ public class Assistant {
      - parameter digressOut: Whether this dialog node can be returned to after a digression.
      - parameter digressOutSlots: Whether the user can digress to top-level nodes while filling out slots.
      - parameter userLabel: A label that can be displayed externally to describe the purpose of the node to users.
-       This string must be no longer than 512 characters.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -3019,31 +3038,31 @@ public class Assistant {
      Update dialog node.
 
      Update an existing dialog node with new or modified data.
+     If you want to update multiple dialog nodes with a single API call, consider using the **[Update
+     workspace](#update-workspace)** method instead.
      This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter dialogNode: The dialog node ID (for example, `get_order`).
      - parameter newDialogNode: The dialog node ID. This string must conform to the following restrictions:
        - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
-       - It must be no longer than 1024 characters.
      - parameter newDescription: The description of the dialog node. This string cannot contain carriage return,
-       newline, or tab characters, and it must be no longer than 128 characters.
+       newline, or tab characters.
      - parameter newConditions: The condition that will trigger the dialog node. This string cannot contain carriage
-       return, newline, or tab characters, and it must be no longer than 2048 characters.
+       return, newline, or tab characters.
      - parameter newParent: The ID of the parent dialog node. This property is omitted if the dialog node has no
        parent.
      - parameter newPreviousSibling: The ID of the previous sibling dialog node. This property is omitted if the
        dialog node has no previous sibling.
      - parameter newOutput: The output of the dialog node. For more information about how to specify dialog node
        output, see the
-       [documentation](https://cloud.ibm.com/docs/services/assistant/dialog-overview.html#dialog-overview-responses).
+       [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
      - parameter newContext: The context for the dialog node.
      - parameter newMetadata: The metadata for the dialog node.
      - parameter newNextStep: The next step to execute following this dialog node.
      - parameter newTitle: The alias used to identify the dialog node. This string must conform to the following
        restrictions:
        - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
-       - It must be no longer than 64 characters.
      - parameter newNodeType: How the dialog node is processed.
      - parameter newEventName: How an `event_handler` node is processed.
      - parameter newVariable: The location in the dialog context where output is stored.
@@ -3052,7 +3071,6 @@ public class Assistant {
      - parameter newDigressOut: Whether this dialog node can be returned to after a digression.
      - parameter newDigressOutSlots: Whether the user can digress to top-level nodes while filling out slots.
      - parameter newUserLabel: A label that can be displayed externally to describe the purpose of the node to users.
-       This string must be no longer than 512 characters.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -3202,7 +3220,7 @@ public class Assistant {
        order, prefix the parameter value with a minus sign (`-`).
      - parameter filter: A cacheable parameter that limits the results to those matching the specified filter. For
        more information, see the
-       [documentation](https://cloud.ibm.com/docs/services/assistant/filter-reference.html#filter-reference-syntax).
+       [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-filter-reference#filter-reference).
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -3276,7 +3294,7 @@ public class Assistant {
      - parameter filter: A cacheable parameter that limits the results to those matching the specified filter. You
        must specify a filter query that includes a value for `language`, as well as a value for `workspace_id` or
        `request.context.metadata.deployment`. For more information, see the
-       [documentation](https://cloud.ibm.com/docs/services/assistant/filter-reference.html#filter-reference-syntax).
+       [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-filter-reference#filter-reference).
      - parameter sort: How to sort the returned log events. You can sort by **request_timestamp**. To reverse the sort
        order, prefix the parameter value with a minus sign (`-`).
      - parameter pageLimit: The number of records to return in each page of results.
@@ -3340,7 +3358,7 @@ public class Assistant {
      the customer ID.
      You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request that passes data.
      For more information about personal data and customer IDs, see [Information
-     security](https://cloud.ibm.com/docs/services/assistant/information-security.html).
+     security](https://cloud.ibm.com/docs/services/assistant?topic=assistant-information-security#information-security).
 
      - parameter customerID: The customer ID for which all data is to be deleted.
      - parameter headers: A dictionary of request headers to be sent with this request.

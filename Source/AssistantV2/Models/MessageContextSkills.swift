@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import RestKit
 public struct MessageContextSkills: Codable, Equatable {
 
     /// Additional properties associated with this model.
-    public var additionalProperties: [String: JSON]
+    public var additionalProperties: [String: MessageContextSkill]
 
     /**
      Initialize a `MessageContextSkills`.
@@ -33,7 +33,7 @@ public struct MessageContextSkills: Codable, Equatable {
      - returns: An initialized `MessageContextSkills`.
     */
     public init(
-        additionalProperties: [String: JSON] = [:]
+        additionalProperties: [String: MessageContextSkill] = [:]
     )
     {
         self.additionalProperties = additionalProperties
@@ -41,7 +41,7 @@ public struct MessageContextSkills: Codable, Equatable {
 
     public init(from decoder: Decoder) throws {
         let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
-        additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: [CodingKey]())
+        additionalProperties = try dynamicContainer.decode([String: MessageContextSkill].self, excluding: [CodingKey]())
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -49,4 +49,40 @@ public struct MessageContextSkills: Codable, Equatable {
         try dynamicContainer.encodeIfPresent(additionalProperties)
     }
 
+}
+
+public extension KeyedDecodingContainer where Key == DynamicKeys {
+
+    /// Decode additional properties.
+    func decode(_ type: [String: MessageContextSkill].Type, excluding keys: [CodingKey]) throws -> [String: MessageContextSkill] {
+        var retval: [String: MessageContextSkill] = [:]
+        try self.allKeys.forEach { key in
+            if !keys.contains{ $0.stringValue == key.stringValue} {
+                let value = try self.decode(MessageContextSkill.self, forKey: key)
+                retval[key.stringValue] = value
+            }
+        }
+        return retval
+    }
+}
+
+public extension KeyedEncodingContainer where Key == DynamicKeys {
+
+    /// Encode additional properties.
+    mutating func encode(_ additionalProperties: [String: MessageContextSkill]) throws {
+        try additionalProperties.forEach { key, value in
+            guard let codingKey = DynamicKeys(stringValue: key) else {
+                let description = "Cannot construct CodingKey for \(key)"
+                let context = EncodingError.Context(codingPath: codingPath, debugDescription: description)
+                throw EncodingError.invalidValue(key, context)
+            }
+            try self.encode(value, forKey: codingKey)
+        }
+    }
+
+    /// Encode additional properties if they are not nil.
+    mutating func encodeIfPresent(_ additionalProperties: [String: MessageContextSkill]?) throws {
+        guard let additionalProperties = additionalProperties else { return }
+        try encode(additionalProperties)
+    }
 }

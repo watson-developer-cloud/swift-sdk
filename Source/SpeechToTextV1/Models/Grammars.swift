@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Grammars. */
+/**
+ Information about the grammars from a custom language model.
+ */
 public struct Grammars: Codable, Equatable {
 
     /**

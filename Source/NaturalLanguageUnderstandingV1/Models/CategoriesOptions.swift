@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2017, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,18 +23,26 @@ import Foundation
 public struct CategoriesOptions: Codable, Equatable {
 
     /**
+     Set this to `true` to return explanations for each categorization. **This is available only for English
+     categories.**.
+     */
+    public var explanation: Bool?
+
+    /**
      Maximum number of categories to return.
      */
     public var limit: Int?
 
     /**
-     Enter a [custom model](https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html) ID to
-     override the standard categories model.
+     Enter a [custom
+     model](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-customizing)
+     ID to override the standard categories model.
      */
     public var model: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
+        case explanation = "explanation"
         case limit = "limit"
         case model = "model"
     }
@@ -42,18 +50,22 @@ public struct CategoriesOptions: Codable, Equatable {
     /**
      Initialize a `CategoriesOptions` with member variables.
 
+     - parameter explanation: Set this to `true` to return explanations for each categorization. **This is available
+       only for English categories.**.
      - parameter limit: Maximum number of categories to return.
      - parameter model: Enter a [custom
-       model](https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html) ID to override the
-       standard categories model.
+       model](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-customizing)
+       ID to override the standard categories model.
 
      - returns: An initialized `CategoriesOptions`.
     */
     public init(
+        explanation: Bool? = nil,
         limit: Int? = nil,
         model: String? = nil
     )
     {
+        self.explanation = explanation
         self.limit = limit
         self.model = model
     }

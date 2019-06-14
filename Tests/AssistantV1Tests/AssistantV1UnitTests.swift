@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2018
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,8 +27,11 @@ class AssistantV1UnitTests: XCTestCase {
 
     override func setUp() {
         assistant = Assistant(version: versionDate, accessToken: accessToken)
-
+        #if !os(Linux)
         let configuration = URLSessionConfiguration.ephemeral
+        #else
+        let configuration = URLSessionConfiguration.default
+        #endif
         configuration.protocolClasses = [MockURLProtocol.self]
         let mockSession = URLSession(configuration: configuration)
         assistant.session = mockSession
@@ -1868,4 +1871,38 @@ class AssistantV1UnitTests: XCTestCase {
         }
         waitForExpectations(timeout: timeout)
     }
+
+    // MARK: - Allow Insecure Connections
+
+    #if !os(Linux)
+    func testAllowInsecureConnections() {
+        let assistant = Assistant(version: versionDate, username: "username", password: "password")
+        XCTAssertNil(assistant.session.delegate)
+        assistant.disableSSLVerification()
+        XCTAssertNotNil(assistant.session.delegate)
+    }
+    #endif
+
+    // MARK: - Inject Credentials
+
+    #if os(Linux)
+    func testInjectCredentialsFromFile() {
+        setenv("IBM_CREDENTIALS_FILE", "Source/SupportingFiles/ibm-credentials.env", 1)
+        let assistant = Assistant(version: versionDate)
+        XCTAssertNotNil(assistant)
+        XCTAssert(assistant?.authMethod is IAMAuthentication)
+    }
+    #endif
 }
+
+#if os(Linux)
+extension AssistantV1UnitTests {
+    static var allTests: [(String, (AssistantV1UnitTests) -> () throws -> ())] {
+        let tests: [(String, (AssistantV1UnitTests) -> () throws -> Void)] = [
+            // Inject Credentials
+            ("testInjectCredentialsFromFile", testInjectCredentialsFromFile),
+        ]
+        return tests
+    }
+}
+#endif

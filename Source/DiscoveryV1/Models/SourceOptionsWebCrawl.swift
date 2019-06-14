@@ -73,6 +73,12 @@ public struct SourceOptionsWebCrawl: Codable, Equatable {
      */
     public var overrideRobotsTxt: Bool?
 
+    /**
+     Array of URL's to be excluded while crawling. The crawler will not follow links which contains this string. For
+     example, listing `https://ibm.com/watson` also excludes `https://ibm.com/watson/discovery`.
+     */
+    public var blacklist: [String]?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case url = "url"
@@ -82,6 +88,7 @@ public struct SourceOptionsWebCrawl: Codable, Equatable {
         case maximumHops = "maximum_hops"
         case requestTimeout = "request_timeout"
         case overrideRobotsTxt = "override_robots_txt"
+        case blacklist = "blacklist"
     }
 
     /**
@@ -104,6 +111,9 @@ public struct SourceOptionsWebCrawl: Codable, Equatable {
      - parameter overrideRobotsTxt: When `true`, the crawler will ignore any `robots.txt` encountered by the crawler.
        This should only ever be done when crawling a web site the user owns. This must be be set to `true` when a
        **gateway_id** is specied in the **credentials**.
+     - parameter blacklist: Array of URL's to be excluded while crawling. The crawler will not follow links which
+       contains this string. For example, listing `https://ibm.com/watson` also excludes
+       `https://ibm.com/watson/discovery`.
 
      - returns: An initialized `SourceOptionsWebCrawl`.
     */
@@ -114,7 +124,8 @@ public struct SourceOptionsWebCrawl: Codable, Equatable {
         allowUntrustedCertificate: Bool? = nil,
         maximumHops: Int? = nil,
         requestTimeout: Int? = nil,
-        overrideRobotsTxt: Bool? = nil
+        overrideRobotsTxt: Bool? = nil,
+        blacklist: [String]? = nil
     )
     {
         self.url = url
@@ -124,6 +135,7 @@ public struct SourceOptionsWebCrawl: Codable, Equatable {
         self.maximumHops = maximumHops
         self.requestTimeout = requestTimeout
         self.overrideRobotsTxt = overrideRobotsTxt
+        self.blacklist = blacklist
     }
 
 }

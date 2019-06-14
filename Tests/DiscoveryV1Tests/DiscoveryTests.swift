@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * (C) Copyright IBM Corp. 2016, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 
 import XCTest
 import Foundation
+// Do not import @testable to ensure only public interface is exposed
 import DiscoveryV1
 import RestKit
 
@@ -141,15 +142,7 @@ class DiscoveryTests: XCTestCase {
             ("testGetCollectionWithInvalidID", testGetCollectionWithInvalidID),
             ("testQueryWithInvalidID", testQueryWithInvalidID),
         ]
-        #if os(Linux)
-        let linuxTests: [(String, (DiscoveryTests) -> () throws -> Void)] = [
-            // Inject Credentials
-            ("testInjectCredentialsFromFile", testInjectCredentialsFromFile),
-            ]
-        return tests + linuxTests
-        #else
         return tests
-        #endif
     }
 
     // MARK: - State Management
@@ -2656,16 +2649,4 @@ class DiscoveryTests: XCTestCase {
         }
         waitForExpectations(timeout: timeout)
     }
-
-    // MARK: - Inject Credentials
-
-    #if os(Linux)
-    func testInjectCredentialsFromFile() {
-        setenv("IBM_CREDENTIALS_FILE", "Source/SupportingFiles/ibm-credentials.env", 1)
-        let discovery = Discovery(version: versionDate)
-        XCTAssertNotNil(discovery)
-        XCTAssert(discovery?.authMethod is BasicAuthentication)
-    }
-    #endif
-
 }

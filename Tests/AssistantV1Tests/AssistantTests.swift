@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016, 2017
+ * (C) Copyright IBM Corp. 2016, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@
 
 import XCTest
 import Foundation
+// Do not import @testable to ensure only public interface is exposed
 import AssistantV1
 import RestKit
 
@@ -105,15 +106,7 @@ class AssistantTests: XCTestCase {
             ("testMessageInvalidWorkspaceID", testMessageInvalidWorkspaceID),
             ("testInvalidServiceURL", testInvalidServiceURL),
         ]
-        #if os(Linux)
-        let linuxTests: [(String, (AssistantTests) -> () throws -> Void)] = [
-            // Inject Credentials
-            ("testInjectCredentialsFromFile", testInjectCredentialsFromFile),
-        ]
-        return tests + linuxTests
-        #else
         return tests
-        #endif
     }
 
     /** Instantiate Assistant. */
@@ -2436,16 +2429,4 @@ class AssistantTests: XCTestCase {
         }
         waitForExpectations()
     }
-
-    // MARK: - Inject Credentials
-
-    #if os(Linux)
-    func testInjectCredentialsFromFile() {
-        setenv("IBM_CREDENTIALS_FILE", "Source/SupportingFiles/ibm-credentials.env", 1)
-        let assistant = Assistant(version: versionDate)
-        XCTAssertNotNil(assistant)
-        XCTAssert(assistant?.authMethod is IAMAuthentication)
-    }
-    #endif
-
 }

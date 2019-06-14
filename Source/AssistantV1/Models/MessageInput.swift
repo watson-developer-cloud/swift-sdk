@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,8 +23,7 @@ import RestKit
 public struct MessageInput: Codable, Equatable {
 
     /**
-     The text of the user input. This string cannot contain carriage return, newline, or tab characters, and it must be
-     no longer than 2048 characters.
+     The text of the user input. This string cannot contain carriage return, newline, or tab characters.
      */
     public var text: String?
 
@@ -41,7 +40,7 @@ public struct MessageInput: Codable, Equatable {
      Initialize a `MessageInput` with member variables.
 
      - parameter text: The text of the user input. This string cannot contain carriage return, newline, or tab
-       characters, and it must be no longer than 2048 characters.
+       characters.
 
      - returns: An initialized `MessageInput`.
     */

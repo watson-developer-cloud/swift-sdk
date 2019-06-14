@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +21,8 @@ internal struct UpdateCounterexample: Codable, Equatable {
 
     /**
      The text of a user input marked as irrelevant input. This string must conform to the following restrictions:
-     - It cannot contain carriage return, newline, or tab characters
-     - It cannot consist of only whitespace characters
-     - It must be no longer than 1024 characters.
+     - It cannot contain carriage return, newline, or tab characters.
+     - It cannot consist of only whitespace characters.
      */
     public var text: String?
 
@@ -49,9 +48,8 @@ internal struct UpdateCounterexample: Codable, Equatable {
 
      - parameter text: The text of a user input marked as irrelevant input. This string must conform to the following
        restrictions:
-       - It cannot contain carriage return, newline, or tab characters
-       - It cannot consist of only whitespace characters
-       - It must be no longer than 1024 characters.
+       - It cannot contain carriage return, newline, or tab characters.
+       - It cannot consist of only whitespace characters.
      - parameter created: The timestamp for creation of the object.
      - parameter updated: The timestamp for the most recent update to the object.
 

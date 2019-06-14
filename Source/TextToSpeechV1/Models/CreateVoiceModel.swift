@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** CreateVoiceModel. */
+/**
+ Information about the new custom voice model.
+ */
 internal struct CreateVoiceModel: Codable, Equatable {
 
     /**
@@ -24,8 +26,8 @@ internal struct CreateVoiceModel: Codable, Equatable {
      */
     public enum Language: String {
         case deDe = "de-DE"
-        case enUs = "en-US"
         case enGb = "en-GB"
+        case enUs = "en-US"
         case esEs = "es-ES"
         case esLa = "es-LA"
         case esUs = "es-US"

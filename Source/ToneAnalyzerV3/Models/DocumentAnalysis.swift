@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- An object of type `DocumentAnalysis` that provides the results of the analysis for the full input document.
+ The results of the analysis for the full input content.
  */
 public struct DocumentAnalysis: Codable, Equatable {
 

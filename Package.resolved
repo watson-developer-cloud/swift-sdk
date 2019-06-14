@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/watson-developer-cloud/restkit.git",
         "state": {
           "branch": null,
-          "revision": "41d5ccd2553004afb5a3e8ce40e6e2606d67e0c1",
-          "version": "2.0.0"
+          "revision": "c4fa7c1ff757e261c9acae463f3ecb71e7d8ae93",
+          "version": "3.0.3"
         }
       }
     ]

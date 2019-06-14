@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,13 +23,11 @@ public struct Intent: Codable, Equatable {
      The name of the intent. This string must conform to the following restrictions:
      - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.
      - It cannot begin with the reserved prefix `sys-`.
-     - It must be no longer than 128 characters.
      */
     public var intent: String
 
     /**
-     The description of the intent. This string cannot contain carriage return, newline, or tab characters, and it must
-     be no longer than 128 characters.
+     The description of the intent. This string cannot contain carriage return, newline, or tab characters.
      */
     public var description: String?
 

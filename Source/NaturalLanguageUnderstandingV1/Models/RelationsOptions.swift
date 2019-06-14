@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2017, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,15 +19,16 @@ import Foundation
 /**
  Recognizes when two entities are related and identifies the type of relation. For example, an `awardedTo` relation
  might connect the entities "Nobel Prize" and "Albert Einstein". See [Relation
- types](https://cloud.ibm.com/docs/services/natural-language-understanding/relations.html).
+ types](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-relations).
  Supported languages: Arabic, English, German, Japanese, Korean, Spanish. Chinese, Dutch, French, Italian, and
  Portuguese custom models are also supported.
  */
 public struct RelationsOptions: Codable, Equatable {
 
     /**
-     Enter a [custom model](https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html) ID to
-     override the default model.
+     Enter a [custom
+     model](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-customizing)
+     ID to override the default model.
      */
     public var model: String?
 
@@ -40,8 +41,8 @@ public struct RelationsOptions: Codable, Equatable {
      Initialize a `RelationsOptions` with member variables.
 
      - parameter model: Enter a [custom
-       model](https://cloud.ibm.com/docs/services/natural-language-understanding/customizing.html) ID to override the
-       default model.
+       model](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-customizing)
+       ID to override the default model.
 
      - returns: An initialized `RelationsOptions`.
     */

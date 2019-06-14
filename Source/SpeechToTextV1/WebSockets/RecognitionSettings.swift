@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2016
+ * (C) Copyright IBM Corp. 2016, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -106,6 +106,24 @@ public struct RecognitionSettings: Codable, Equatable {
     /// See [Numeric redaction](https://cloud.ibm.com/docs/services/speech-to-text/output.html#redaction).
     public var redaction: Bool?
 
+    // If `true`, requests processing metrics about the service's transcription of the input audio. The service returns
+    // processing metrics at the interval specified by the `processing_metrics_interval` property. It also returns
+    // processing metrics for transcription events, for example, for final and interim results. By default, the service
+    // returns no processing metrics.
+    public var processingMetrics: Bool?
+
+    // Specifies the interval in real wall-clock seconds at which the service is to return processing metrics. The
+    // parameter is ignored unless the `processing_metrics` property is set to `true`. The property accepts a minimum
+    // value of 0.1 seconds. The level of precision is not restricted, so you can specify values such as 0.25 and 0.125.
+    // The service does not impose a maximum value. If you want to receive processing metrics only for transcription
+    // events instead of at periodic intervals, set the value to a large number. If the value is larger than the
+    // duration of the audio, the service returns processing metrics only for transcription events.
+    public var processingMetricsInterval: Double?
+
+    // If `true`, requests detailed information about the signal characteristics of the input audio. The service returns
+    // audio metrics with the final transcription results. By default, the service returns no audio metrics.
+    public var audioMetrics: Bool?
+
     /**
      Initialize a `RecognitionSettings` object to set the parameters of a Watson Speech to
      Text recognition request.
@@ -137,5 +155,8 @@ public struct RecognitionSettings: Codable, Equatable {
         case speakerLabels = "speaker_labels"
         case grammarName = "grammar_name"
         case redaction = "redaction"
+        case processingMetrics = "processing_metrics"
+        case processingMetricsInterval = "processing_metrics_interval"
+        case audioMetrics = "audio_metrics"
     }
 }

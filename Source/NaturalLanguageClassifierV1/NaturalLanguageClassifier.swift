@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2016, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -100,6 +100,16 @@ public class NaturalLanguageClassifier {
             self.authMethod = IAMAccessToken(accessToken: newToken)
         }
     }
+
+    #if !os(Linux)
+    /**
+      Allow network requests to a server without verification of the server certificate.
+      **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
+     */
+    public func disableSSLVerification() {
+        session = InsecureConnection.session()
+    }
+    #endif
 
     /**
      Use the HTTP response and data received by the Natural Language Classifier service to extract
@@ -259,7 +269,7 @@ public class NaturalLanguageClassifier {
        (`ja`), Korean (`ko`), Brazilian Portuguese (`pt`), and Spanish (`es`).
      - parameter trainingData: Training data in CSV format. Each text value must have at least one class. The data can
        include up to 3,000 classes and 20,000 records. For details, see [Data
-       preparation](https://cloud.ibm.com/docs/services/natural-language-classifier/using-your-data.html).
+       preparation](https://cloud.ibm.com/docs/services/natural-language-classifier?topic=natural-language-classifier-using-your-data).
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */

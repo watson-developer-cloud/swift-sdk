@@ -5,6 +5,8 @@
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Documentation](https://img.shields.io/badge/Documentation-API-blue.svg)](http://watson-developer-cloud.github.io/swift-sdk)
 [![CLA assistant](https://cla-assistant.io/readme/badge/watson-developer-cloud/swift-sdk)](https://cla-assistant.io/watson-developer-cloud/swift-sdk)
+[![wdc-community.slack.com](https://wdc-slack-inviter.mybluemix.net/badge.svg)](http://wdc-slack-inviter.mybluemix.net/)
+
 
 ## Overview
 
@@ -228,6 +230,15 @@ let toneAnalyzer = ToneAnalyzer(
 )
 toneAnalyzer.serviceURL = "https://gateway-fra.watsonplatform.net/tone-analyzer/api"
 ```
+
+## Disable SSL certificate verification
+
+For ICP(IBM Cloud Private), you can disable the SSL certificate verification by:
+```
+service.disableSSLVerification()
+```
+
+Note: `disableSSLVerification()` is currently not supported on Linux.
 
 ## Custom Headers
 There are different headers that can be sent to the Watson services. For example, Watson services log requests and their results for the purpose of improving the services, but you can include the `X-Watson-Learning-Opt-Out` header to opt out of this.

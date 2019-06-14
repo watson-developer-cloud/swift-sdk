@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,8 @@ import Foundation
 import RestKit
 
 /**
- The IBM Watson&trade; Assistant service combines machine learning, natural language understanding, and integrated
- dialog tools to create conversation flows between your apps and your users.
+ The IBM Watson&trade; Assistant service combines machine learning, natural language understanding, and an integrated
+ dialog editor to create conversation flows between your apps and your users.
  */
 public class Assistant {
 
@@ -113,6 +113,16 @@ public class Assistant {
         }
     }
 
+    #if !os(Linux)
+    /**
+      Allow network requests to a server without verification of the server certificate.
+      **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
+     */
+    public func disableSSLVerification() {
+        session = InsecureConnection.session()
+    }
+    #endif
+
     /**
      Use the HTTP response and data received by the Watson Assistant v2 service to extract
      information about the error that occurred.
@@ -154,8 +164,9 @@ public class Assistant {
      Create a new session. A session is used to send user input to a skill and receive responses. It also maintains the
      state of the conversation.
 
-     - parameter assistantID: Unique identifier of the assistant. You can find the assistant ID of an assistant on the
-       **Assistants** tab of the Watson Assistant tool. For information about creating assistants, see the
+     - parameter assistantID: Unique identifier of the assistant. To find the assistant ID in the Watson Assistant
+       user interface, open the assistant settings and click **API Details**. For information about creating assistants,
+       see the
        [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-assistant-add#assistant-add-task).
        **Note:** Currently, the v2 API does not support creating assistants.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -205,8 +216,9 @@ public class Assistant {
 
      Deletes a session explicitly before it times out.
 
-     - parameter assistantID: Unique identifier of the assistant. You can find the assistant ID of an assistant on the
-       **Assistants** tab of the Watson Assistant tool. For information about creating assistants, see the
+     - parameter assistantID: Unique identifier of the assistant. To find the assistant ID in the Watson Assistant
+       user interface, open the assistant settings and click **API Details**. For information about creating assistants,
+       see the
        [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-assistant-add#assistant-add-task).
        **Note:** Currently, the v2 API does not support creating assistants.
      - parameter sessionID: Unique identifier of the session.
@@ -258,8 +270,9 @@ public class Assistant {
      Send user input to an assistant and receive a response.
      There is no rate limit for this operation.
 
-     - parameter assistantID: Unique identifier of the assistant. You can find the assistant ID of an assistant on the
-       **Assistants** tab of the Watson Assistant tool. For information about creating assistants, see the
+     - parameter assistantID: Unique identifier of the assistant. To find the assistant ID in the Watson Assistant
+       user interface, open the assistant settings and click **API Details**. For information about creating assistants,
+       see the
        [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-assistant-add#assistant-add-task).
        **Note:** Currently, the v2 API does not support creating assistants.
      - parameter sessionID: Unique identifier of the session.

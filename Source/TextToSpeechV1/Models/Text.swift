@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,10 @@
 
 import Foundation
 
-/** Text. */
+/**
+ The text to synthesize. Specify either plain text or a subset of SSML. SSML is an XML-based markup language that
+ provides text annotation for speech-synthesis applications. Pass a maximum of 5 KB of input text.
+ */
 internal struct Text: Codable, Equatable {
 
     /**

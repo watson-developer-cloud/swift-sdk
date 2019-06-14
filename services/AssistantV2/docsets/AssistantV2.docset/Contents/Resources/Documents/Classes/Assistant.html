@@ -45,6 +45,17 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Extensions/KeyedDecodingContainer.html">KeyedDecodingContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Extensions/KeyedEncodingContainer.html">KeyedEncodingContainer</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
@@ -162,8 +173,8 @@
 
                 </div>
               </div>
-            <p>The IBM Watson&trade; Assistant service combines machine learning, natural language understanding, and integrated
-dialog tools to create conversation flows between your apps and your users.</p>
+            <p>The IBM Watson&trade; Assistant service combines machine learning, natural language understanding, and an integrated
+dialog editor to create conversation flows between your apps and your users.</p>
 
           </section>
           <section class="section task-group-section">
@@ -480,9 +491,37 @@ in <q>YYYY-MM-DD</q> format.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV20A0C13createSessionyySS_SDyS2SGSgXetcACF"></a>
+                    <a name="/s:11AssistantV20A0C22disableSSLVerificationyyF"></a>
+                    <a name="//apple_ref/swift/Method/disableSSLVerification()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV20A0C22disableSSLVerificationyyF">disableSSLVerification()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Allow network requests to a server without verification of the server certificate.
+<strong>IMPORTANT</strong>: This should ONLY be used if truly intended, as it is unsafe otherwise.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">disableSSLVerification</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV20A0C13createSession11assistantID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0J8ResponseVyAA0dL0VGSg_AJ0J5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/createSession(assistantID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV20A0C13createSessionyySS_SDyS2SGSgXetcACF">createSession(assistantID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11AssistantV20A0C13createSession11assistantID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0J8ResponseVyAA0dL0VGSg_AJ0J5ErrorOSgtctF">createSession(assistantID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -519,9 +558,10 @@ state of the conversation.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Unique identifier of the assistant. You can find the assistant ID of an assistant on the
-<strong>Assistants</strong> tab of the Watson Assistant tool. For information about creating assistants, see the
-<a href="https://console.bluemix.net/docs/services/assistant/assistant-add.html#assistant-add-task">documentation</a>.
+                                  <p>Unique identifier of the assistant. To find the assistant ID in the Watson Assistant
+user interface, open the assistant settings and click <strong>API Details</strong>. For information about creating assistants,
+see the
+<a href="https://cloud.ibm.com/docs/services/assistant?topic=assistant-assistant-add#assistant-add-task">documentation</a>.
 <strong>Note:</strong> Currently, the v2 API does not support creating assistants.</p>
                                 </div>
                               </td>
@@ -559,9 +599,9 @@ state of the conversation.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV20A0C13deleteSessionyySS_SSSDyS2SGSgXetcACF"></a>
+                    <a name="/s:11AssistantV20A0C13deleteSession11assistantID07sessionF07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0K8ResponseVyytGSg_AK0K5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/deleteSession(assistantID:sessionID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV20A0C13deleteSessionyySS_SSSDyS2SGSgXetcACF">deleteSession(assistantID:sessionID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11AssistantV20A0C13deleteSession11assistantID07sessionF07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0K8ResponseVyytGSg_AK0K5ErrorOSgtctF">deleteSession(assistantID:sessionID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -598,9 +638,10 @@ state of the conversation.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Unique identifier of the assistant. You can find the assistant ID of an assistant on the
-<strong>Assistants</strong> tab of the Watson Assistant tool. For information about creating assistants, see the
-<a href="https://console.bluemix.net/docs/services/assistant/assistant-add.html#assistant-add-task">documentation</a>.
+                                  <p>Unique identifier of the assistant. To find the assistant ID in the Watson Assistant
+user interface, open the assistant settings and click <strong>API Details</strong>. For information about creating assistants,
+see the
+<a href="https://cloud.ibm.com/docs/services/assistant?topic=assistant-assistant-add#assistant-add-task">documentation</a>.
 <strong>Note:</strong> Currently, the v2 API does not support creating assistants.</p>
                                 </div>
                               </td>
@@ -650,9 +691,9 @@ state of the conversation.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV20A0C7messageyySS_SSAA12MessageInputVSgAA0D7ContextVSgSDyS2SGSgXetcACF"></a>
+                    <a name="/s:11AssistantV20A0C7message11assistantID07sessionE05input7context7headers17completionHandlerySS_SSAA12MessageInputVSgAA0L7ContextVSgSDyS2SGSgy7RestKit0O8ResponseVyAA0lQ0VGSg_AS0O5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/message(assistantID:sessionID:input:context:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV20A0C7messageyySS_SSAA12MessageInputVSgAA0D7ContextVSgSDyS2SGSgXetcACF">message(assistantID:sessionID:input:context:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11AssistantV20A0C7message11assistantID07sessionE05input7context7headers17completionHandlerySS_SSAA12MessageInputVSgAA0L7ContextVSgSDyS2SGSgy7RestKit0O8ResponseVyAA0lQ0VGSg_AS0O5ErrorOSgtctF">message(assistantID:sessionID:input:context:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -692,9 +733,10 @@ There is no rate limit for this operation.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Unique identifier of the assistant. You can find the assistant ID of an assistant on the
-<strong>Assistants</strong> tab of the Watson Assistant tool. For information about creating assistants, see the
-<a href="https://console.bluemix.net/docs/services/assistant/assistant-add.html#assistant-add-task">documentation</a>.
+                                  <p>Unique identifier of the assistant. To find the assistant ID in the Watson Assistant
+user interface, open the assistant settings and click <strong>API Details</strong>. For information about creating assistants,
+see the
+<a href="https://cloud.ibm.com/docs/services/assistant?topic=assistant-assistant-add#assistant-add-task">documentation</a>.
 <strong>Note:</strong> Currently, the v2 API does not support creating assistants.</p>
                                 </div>
                               </td>
@@ -772,7 +814,7 @@ dialog nodes.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-04-08)</p>
+          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-06-14)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

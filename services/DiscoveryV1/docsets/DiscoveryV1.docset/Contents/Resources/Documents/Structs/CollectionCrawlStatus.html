@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>CollectionCrawlStatus Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/CollectionCrawlStatus" class="dashAnchor"></a>
+    <a title="CollectionCrawlStatus Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">DiscoveryV1 Docs</a></p>
+        <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">DiscoveryV1 Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        CollectionCrawlStatus Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../readme.html">README</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/Discovery.html">Discovery</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/QueryAggregation.html">QueryAggregation</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/AggregationResult.html">AggregationResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Calculation.html">Calculation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Collection.html">Collection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Collection/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CollectionCrawlStatus.html">CollectionCrawlStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CollectionDiskUsage.html">CollectionDiskUsage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CollectionUsage.html">CollectionUsage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Configuration.html">Configuration</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Conversions.html">Conversions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateEventResponse.html">CreateEventResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateEventResponse/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CredentialDetails.html">CredentialDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CredentialDetails/CredentialType.html">– CredentialType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CredentialDetails/SourceVersion.html">– SourceVersion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Credentials.html">Credentials</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Credentials/SourceType.html">– SourceType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Credentials/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CredentialsList.html">CredentialsList</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DeleteCollectionResponse.html">DeleteCollectionResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DeleteCollectionResponse/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DeleteConfigurationResponse.html">DeleteConfigurationResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DeleteConfigurationResponse/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DeleteCredentials.html">DeleteCredentials</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DeleteCredentials/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DeleteDocumentResponse.html">DeleteDocumentResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DeleteDocumentResponse/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DeleteEnvironmentResponse.html">DeleteEnvironmentResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DeleteEnvironmentResponse/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DiskUsage.html">DiskUsage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DocumentAccepted.html">DocumentAccepted</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DocumentAccepted/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DocumentCounts.html">DocumentCounts</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DocumentSnapshot.html">DocumentSnapshot</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DocumentSnapshot/Step.html">– Step</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DocumentStatus.html">DocumentStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DocumentStatus/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DocumentStatus/FileType.html">– FileType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Enrichment.html">Enrichment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/EnrichmentOptions.html">EnrichmentOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/EnrichmentOptions/Language.html">– Language</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Environment.html">Environment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Environment/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Environment/Size.html">– Size</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/EnvironmentDocuments.html">EnvironmentDocuments</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/EventData.html">EventData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Expansion.html">Expansion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Expansions.html">Expansions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Field.html">Field</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Field/FieldType.html">– FieldType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Filter.html">Filter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FontSetting.html">FontSetting</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Gateway.html">Gateway</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Gateway/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GatewayDelete.html">GatewayDelete</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GatewayList.html">GatewayList</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GenericQueryAggregation.html">GenericQueryAggregation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/HTMLSettings.html">HTMLSettings</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Histogram.html">Histogram</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/IndexCapacity.html">IndexCapacity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ListCollectionFieldsResponse.html">ListCollectionFieldsResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ListCollectionsResponse.html">ListCollectionsResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ListConfigurationsResponse.html">ListConfigurationsResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ListEnvironmentsResponse.html">ListEnvironmentsResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogQueryResponse.html">LogQueryResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogQueryResponseResult.html">LogQueryResponseResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogQueryResponseResult/DocumentType.html">– DocumentType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogQueryResponseResult/EventType.html">– EventType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogQueryResponseResult/ResultType.html">– ResultType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogQueryResponseResultDocuments.html">LogQueryResponseResultDocuments</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogQueryResponseResultDocumentsResult.html">LogQueryResponseResultDocumentsResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MetricAggregation.html">MetricAggregation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MetricAggregationResult.html">MetricAggregationResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MetricResponse.html">MetricResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MetricTokenAggregation.html">MetricTokenAggregation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MetricTokenAggregationResult.html">MetricTokenAggregationResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MetricTokenResponse.html">MetricTokenResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Nested.html">Nested</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/NluEnrichmentCategories.html">NluEnrichmentCategories</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/NluEnrichmentConcepts.html">NluEnrichmentConcepts</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/NluEnrichmentEmotion.html">NluEnrichmentEmotion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/NluEnrichmentEntities.html">NluEnrichmentEntities</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/NluEnrichmentFeatures.html">NluEnrichmentFeatures</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/NluEnrichmentKeywords.html">NluEnrichmentKeywords</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/NluEnrichmentRelations.html">NluEnrichmentRelations</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/NluEnrichmentSemanticRoles.html">NluEnrichmentSemanticRoles</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/NluEnrichmentSentiment.html">NluEnrichmentSentiment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/NormalizationOperation.html">NormalizationOperation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/NormalizationOperation/Operation.html">– Operation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Notice.html">Notice</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Notice/Severity.html">– Severity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PDFHeadingDetection.html">PDFHeadingDetection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PDFSettings.html">PDFSettings</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryEntitiesContext.html">QueryEntitiesContext</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryEntitiesEntity.html">QueryEntitiesEntity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryEntitiesResponse.html">QueryEntitiesResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryEntitiesResponseItem.html">QueryEntitiesResponseItem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryEvidence.html">QueryEvidence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryEvidenceEntity.html">QueryEvidenceEntity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryFilterType.html">QueryFilterType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryNoticesResponse.html">QueryNoticesResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryNoticesResult.html">QueryNoticesResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryNoticesResult/FileType.html">– FileType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryPassages.html">QueryPassages</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryRelationsArgument.html">QueryRelationsArgument</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryRelationsEntity.html">QueryRelationsEntity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryRelationsFilter.html">QueryRelationsFilter</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryRelationsRelationship.html">QueryRelationsRelationship</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryRelationsResponse.html">QueryRelationsResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryResponse.html">QueryResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryResult.html">QueryResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryResultMetadata.html">QueryResultMetadata</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RetrievalDetails.html">RetrievalDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RetrievalDetails/DocumentRetrievalStrategy.html">– DocumentRetrievalStrategy</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SduStatus.html">SduStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SduStatusCustomFields.html">SduStatusCustomFields</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SearchStatus.html">SearchStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SearchStatus/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SegmentSettings.html">SegmentSettings</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Source.html">Source</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Source/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SourceOptions.html">SourceOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SourceOptionsBuckets.html">SourceOptionsBuckets</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SourceOptionsFolder.html">SourceOptionsFolder</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SourceOptionsObject.html">SourceOptionsObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SourceOptionsSiteColl.html">SourceOptionsSiteColl</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SourceOptionsWebCrawl.html">SourceOptionsWebCrawl</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SourceOptionsWebCrawl/CrawlSpeed.html">– CrawlSpeed</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SourceSchedule.html">SourceSchedule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SourceSchedule/Frequency.html">– Frequency</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SourceStatus.html">SourceStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SourceStatus/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Term.html">Term</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TestDocument.html">TestDocument</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Timeslice.html">Timeslice</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TokenDictRule.html">TokenDictRule</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TokenDictStatusResponse.html">TokenDictStatusResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TokenDictStatusResponse/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TopHits.html">TopHits</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TopHitsResults.html">TopHitsResults</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TrainingDataSet.html">TrainingDataSet</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TrainingExample.html">TrainingExample</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TrainingExampleList.html">TrainingExampleList</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TrainingQuery.html">TrainingQuery</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TrainingStatus.html">TrainingStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WordHeadingDetection.html">WordHeadingDetection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WordSettings.html">WordSettings</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WordStyle.html">WordStyle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/XPathPatterns.html">XPathPatterns</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11DiscoveryV111WatsonErrora">WatsonError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11DiscoveryV114WatsonResponsea">WatsonResponse</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>CollectionCrawlStatus</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CollectionCrawlStatus</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                </div>
+              </div>
+            <p>Object containing information about the crawl status of this collection.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV121CollectionCrawlStatusV06sourceD0AA06SourceE0VSgvp"></a>
+                    <a name="//apple_ref/swift/Property/sourceCrawl" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV121CollectionCrawlStatusV06sourceD0AA06SourceE0VSgvp">sourceCrawl</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Object containing source crawl status information.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">sourceCrawl</span><span class="p">:</span> <span class="kt"><a href="../Structs/SourceStatus.html">SourceStatus</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-06-14)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

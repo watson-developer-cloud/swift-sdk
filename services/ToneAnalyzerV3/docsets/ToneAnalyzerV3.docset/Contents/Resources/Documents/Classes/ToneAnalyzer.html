@@ -436,9 +436,37 @@ in <q>YYYY-MM-DD</q> format.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ToneAnalyzerV30aB0C4toneyyAA0A7ContentO_SbSgSSSgAHSDyS2SGSgXetcACF"></a>
+                    <a name="/s:14ToneAnalyzerV30aB0C22disableSSLVerificationyyF"></a>
+                    <a name="//apple_ref/swift/Method/disableSSLVerification()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C22disableSSLVerificationyyF">disableSSLVerification()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Allow network requests to a server without verification of the server certificate.
+<strong>IMPORTANT</strong>: This should ONLY be used if truly intended, as it is unsafe otherwise.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">disableSSLVerification</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ToneAnalyzerV30aB0C4tone0D7Content9sentences15contentLanguage06acceptH07headers17completionHandleryAA0aE0O_SbSgSSSgANSDyS2SGSgy7RestKit0M8ResponseVyAA0A8AnalysisVGSg_AQ0M5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/tone(toneContent:sentences:contentLanguage:acceptLanguage:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C4toneyyAA0A7ContentO_SbSgSSSgAHSDyS2SGSgXetcACF">tone(toneContent:sentences:contentLanguage:acceptLanguage:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C4tone0D7Content9sentences15contentLanguage06acceptH07headers17completionHandleryAA0aE0O_SbSgSSSgANSDyS2SGSgy7RestKit0M8ResponseVyAA0A8AnalysisVGSg_AQ0M5ErrorOSgtctF">tone(toneContent:sentences:contentLanguage:acceptLanguage:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -448,7 +476,7 @@ in <q>YYYY-MM-DD</q> format.</p>
                       <div class="abstract">
                         <p>Analyze general tone.</p>
 
-<p>Use the general purpose endpoint to analyze the tone of your input content. The service analyzes the content for
+<p>Use the general-purpose endpoint to analyze the tone of your input content. The service analyzes the content for
 emotional and language tones. The method always analyzes the tone of the full document; by default, it also
 analyzes the tone of each individual sentence of the content.
 You can submit no more than 128 KB of total input content and no more than 1000 individual sentences in JSON, plain
@@ -459,7 +487,7 @@ HTTP specification, the default encoding for plain text and HTML is ISO-8859-1 (
 set). When specifying a content type of plain text or HTML, include the <code>charset</code> parameter to indicate the
 character encoding of the input text; for example: <code>Content-Type: text/plain;charset=utf-8</code>. For <code>text/html</code>, the
 service removes HTML tags and analyzes only the textual content.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/tone-analyzer/using-tone.html#using-the-general-purpose-endpoint">Using the general-purpose
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/tone-analyzer?topic=tone-analyzer-utgpe#utgpe">Using the general-purpose
 endpoint</a>.</p>
 
                       </div>
@@ -575,9 +603,9 @@ languages for <strong>Content-Language</strong> and <strong>Accept-Language</str
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ToneAnalyzerV30aB0C8toneChatyySayAA9UtteranceVG_SSSgAHSDyS2SGSgXetcACF"></a>
+                    <a name="/s:14ToneAnalyzerV30aB0C8toneChat10utterances15contentLanguage06acceptH07headers17completionHandlerySayAA9UtteranceVG_SSSgAMSDyS2SGSgy7RestKit0N8ResponseVyAA0M8AnalysesVGSg_AP0N5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/toneChat(utterances:contentLanguage:acceptLanguage:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C8toneChatyySayAA9UtteranceVG_SSSgAHSDyS2SGSgXetcACF">toneChat(utterances:contentLanguage:acceptLanguage:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C8toneChat10utterances15contentLanguage06acceptH07headers17completionHandlerySayAA9UtteranceVG_SSSgAMSDyS2SGSgy7RestKit0N8ResponseVyAA0M8AnalysesVGSg_AP0N5ErrorOSgtctF">toneChat(utterances:contentLanguage:acceptLanguage:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -585,9 +613,9 @@ languages for <strong>Content-Language</strong> and <strong>Accept-Language</str
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Analyze customer engagement tone.</p>
+                        <p>Analyze customer-engagement tone.</p>
 
-<p>Use the customer engagement endpoint to analyze the tone of customer service and customer support conversations.
+<p>Use the customer-engagement endpoint to analyze the tone of customer service and customer support conversations.
 For each utterance of a conversation, the method reports the most prevalent subset of the following seven tones:
 sad, frustrated, satisfied, excited, polite, impolite, and sympathetic.
 If you submit more than 50 utterances, the service returns a warning for the overall content and analyzes only the
@@ -595,7 +623,7 @@ first 50 utterances. If you submit a single utterance that contains more than 50
 an error for that utterance and does not analyze the utterance. The request fails if all utterances have more than
 500 characters. Per the JSON specification, the default character encoding for JSON content is effectively always
 UTF-8.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/tone-analyzer/using-tone-chat.html#using-the-customer-engagement-endpoint">Using the customer-engagement
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/tone-analyzer?topic=tone-analyzer-utco#utco">Using the customer-engagement
 endpoint</a>.</p>
 
                       </div>
@@ -698,7 +726,7 @@ languages for <strong>Content-Language</strong> and <strong>Accept-Language</str
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-04-08)</p>
+          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-06-14)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

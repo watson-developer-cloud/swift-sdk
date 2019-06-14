@@ -74,10 +74,43 @@
                 <a href="Structs/AudioListing/Status.html">– Status</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/AudioListingContainer.html">AudioListingContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/AudioListingContainer/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/AudioListingDetails.html">AudioListingDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/AudioListingDetails/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/AudioListingDetails/Compression.html">– Compression</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/AudioMetrics.html">AudioMetrics</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/AudioMetricsDetails.html">AudioMetricsDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/AudioMetricsHistogramBin.html">AudioMetricsHistogramBin</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/AudioResource.html">AudioResource</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/AudioResource/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/AudioResourceDetails.html">AudioResourceDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/AudioResourceDetails/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/AudioResourceDetails/Compression.html">– Compression</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/AudioResources.html">AudioResources</a>
@@ -114,6 +147,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/LanguageModels.html">LanguageModels</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ProcessedAudio.html">ProcessedAudio</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ProcessingMetrics.html">ProcessingMetrics</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/RecognitionJob.html">RecognitionJob</a>
@@ -159,6 +198,15 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/SupportedFeatures.html">SupportedFeatures</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/TrainingResponse.html">TrainingResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/TrainingWarning.html">TrainingWarning</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/TrainingWarning/WarningID.html">– WarningID</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/Word.html">Word</a>
@@ -211,14 +259,14 @@
 <p>Beginning with iOS 10+, any application that accesses the microphone must include the <code>NSMicrophoneUsageDescription</code> key in the app&rsquo;s <code>Info.plist</code> file. Otherwise, the app will crash. Find more information about this <a href="https://forums.developer.apple.com/thread/61521">here</a>.</p>
 <h3 id='recognition-request-settings' class='heading'>Recognition Request Settings</h3>
 
-<p>The <code><a href="Structs/RecognitionSettings.html">RecognitionSettings</a></code> class is used to define the audio format and behavior of a recognition request. These settings are transmitted to the service when <a href="https://console.bluemix.net/docs/services/speech-to-text/websockets.html#WSstart">initating a request</a>.</p>
+<p>The <code><a href="Structs/RecognitionSettings.html">RecognitionSettings</a></code> class is used to define the audio format and behavior of a recognition request. These settings are transmitted to the service when <a href="https://cloud.ibm.com/docs/services/speech-to-text/websockets.html#WSstart">initiating a request</a>.</p>
 
 <p>The following example demonstrates how to define a recognition request that transcribes WAV audio data with interim results:</p>
 <pre class="highlight swift"><code><span class="k">var</span> <span class="nv">settings</span> <span class="o">=</span> <span class="kt">RecognitionSettings</span><span class="p">(</span><span class="nv">contentType</span><span class="p">:</span> <span class="s">"audio/wav"</span><span class="p">)</span>
 <span class="n">settings</span><span class="o">.</span><span class="n">interimResults</span> <span class="o">=</span> <span class="kc">true</span>
 </code></pre>
 
-<p>See the <a href="http://watson-developer-cloud.github.io/swift-sdk/services/SpeechToTextV1/Structs/RecognitionSettings.html">class documentation</a> or <a href="https://console.bluemix.net/docs/services/speech-to-text/index.html">service documentation</a> for more information about the available settings.</p>
+<p>See the <a href="http://watson-developer-cloud.github.io/swift-sdk/services/SpeechToTextV1/Structs/RecognitionSettings.html">class documentation</a> or <a href="https://cloud.ibm.com/docs/services/speech-to-text/index.html">service documentation</a> for more information about the available settings.</p>
 <h3 id='microphone-audio-and-compression' class='heading'>Microphone Audio and Compression</h3>
 
 <p>The Speech to Text framework makes it easy to perform speech recognition with microphone audio. The framework internally manages the microphone, starting and stopping it with various method calls (<code>recognizeMicrophone</code> and <code>stopRecognizeMicrophone</code>, or <code>startMicrophone</code> and <code>stopMicrophone</code>).</p>
@@ -310,7 +358,7 @@
 </code></pre>
 <h3 id='session-management-and-advanced-features' class='heading'>Session Management and Advanced Features</h3>
 
-<p>Advanced users may want more customizability than provided by the <code><a href="Classes/SpeechToText.html">SpeechToText</a></code> class. The <code><a href="Classes/SpeechToTextSession.html">SpeechToTextSession</a></code> class exposes more control over the WebSockets connection and also includes several advanced features for accessing the microphone. The <code><a href="Classes/SpeechToTextSession.html">SpeechToTextSession</a></code> class also allows users more control over the AVAudioSession shared instance. Before using <code><a href="Classes/SpeechToTextSession.html">SpeechToTextSession</a></code>, it&rsquo;s helpful to be familiar with the <a href="https://console.bluemix.net/docs/services/speech-to-text/websockets.html">Speech to Text WebSocket interface</a>.</p>
+<p>Advanced users may want more customizability than provided by the <code><a href="Classes/SpeechToText.html">SpeechToText</a></code> class. The <code><a href="Classes/SpeechToTextSession.html">SpeechToTextSession</a></code> class exposes more control over the WebSockets connection and also includes several advanced features for accessing the microphone. The <code><a href="Classes/SpeechToTextSession.html">SpeechToTextSession</a></code> class also allows users more control over the AVAudioSession shared instance. Before using <code><a href="Classes/SpeechToTextSession.html">SpeechToTextSession</a></code>, it&rsquo;s helpful to be familiar with the <a href="https://cloud.ibm.com/docs/services/speech-to-text/websockets.html">Speech to Text WebSocket interface</a>.</p>
 
 <p>The following steps describe how to execute a recognition request with <code><a href="Classes/SpeechToTextSession.html">SpeechToTextSession</a></code>:</p>
 
@@ -387,14 +435,14 @@
 
 <ul>
 <li><a href="https://www.ibm.com/watson/services/speech-to-text/">IBM Watson Speech to Text - Service Page</a></li>
-<li><a href="https://console.bluemix.net/docs/services/speech-to-text/index.html">IBM Watson Speech to Text - Documentation</a></li>
+<li><a href="https://cloud.ibm.com/docs/services/speech-to-text/index.html">IBM Watson Speech to Text - Documentation</a></li>
 <li><a href="https://speech-to-text-demo.ng.bluemix.net/">IBM Watson Speech to Text - Demo</a></li>
 </ul>
 
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-04-08)</p>
+          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-06-14)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

@@ -68,6 +68,9 @@
                 <a href="../Structs/Collection/Status.html">– Status</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/CollectionCrawlStatus.html">CollectionCrawlStatus</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/CollectionDiskUsage.html">CollectionDiskUsage</a>
               </li>
               <li class="nav-group-task">
@@ -99,6 +102,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Credentials/SourceType.html">– SourceType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Credentials/Status.html">– Status</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/CredentialsList.html">CredentialsList</a>
@@ -389,6 +395,12 @@
                 <a href="../Structs/RetrievalDetails/DocumentRetrievalStrategy.html">– DocumentRetrievalStrategy</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/SduStatus.html">SduStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SduStatusCustomFields.html">SduStatusCustomFields</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/SearchStatus.html">SearchStatus</a>
               </li>
               <li class="nav-group-task">
@@ -559,7 +571,8 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Defines the heading level that splits into document segments. Valid values are h1, h2, h3, h4, h5, h6. The content
-of the header field that the segmentation splits at is used as the <strong>title</strong> field for that segmented result.</p>
+of the header field that the segmentation splits at is used as the <strong>title</strong> field for that segmented result. Only
+valid if used with a collection that has <strong>enabled</strong> set to <code>false</code> in the <strong>smart_document_understanding</strong> object.</p>
 
                       </div>
                       <div class="declaration">
@@ -576,9 +589,42 @@ of the header field that the segmentation splits at is used as the <strong>title
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV115SegmentSettingsV7enabled12selectorTagsACSbSg_SaySSGSgtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(enabled:selectorTags:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV115SegmentSettingsV7enabled12selectorTagsACSbSg_SaySSGSgtcfc">init(enabled:selectorTags:)</a>
+                    <a name="/s:11DiscoveryV115SegmentSettingsV15annotatedFieldsSaySSGSgvp"></a>
+                    <a name="//apple_ref/swift/Property/annotatedFields" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV115SegmentSettingsV15annotatedFieldsSaySSGSgvp">annotatedFields</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Defines the annotated smart document understanding fields that the document is split on. The content of the
+annotated field that the segmentation splits at is used as the <strong>title</strong> field for that segmented result. For
+example, if the field <code>sub-title</code> is specified, when a document is uploaded each time the smart documement
+understanding conversion encounters a field of type <code>sub-title</code> the document is split at that point and the content
+of the field used as the title of the remaining content. Thnis split is performed for all instances of the listed
+fields in the uploaded document. Only valid if used with a collection that has <strong>enabled</strong> set to <code>true</code> in the
+<strong>smart_document_understanding</strong> object.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">annotatedFields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV115SegmentSettingsV7enabled12selectorTags15annotatedFieldsACSbSg_SaySSGSgAItcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(enabled:selectorTags:annotatedFields:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV115SegmentSettingsV7enabled12selectorTags15annotatedFieldsACSbSg_SaySSGSgAItcfc">init(enabled:selectorTags:annotatedFields:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -595,7 +641,8 @@ of the header field that the segmentation splits at is used as the <strong>title
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
     <span class="nv">enabled</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">selectorTags</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span>
+    <span class="nv">selectorTags</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">annotatedFields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span>
 <span class="p">)</span></code></pre>
 
                         </div>
@@ -626,7 +673,26 @@ of the header field that the segmentation splits at is used as the <strong>title
                                 <div>
                                   <p>Defines the heading level that splits into document segments. Valid values are h1, h2,
 h3, h4, h5, h6. The content of the header field that the segmentation splits at is used as the <strong>title</strong> field
-for that segmented result.</p>
+for that segmented result. Only valid if used with a collection that has <strong>enabled</strong> set to <code>false</code> in the
+<strong>smart_document_understanding</strong> object.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>annotatedFields</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Defines the annotated smart document understanding fields that the document is
+split on. The content of the annotated field that the segmentation splits at is used as the <strong>title</strong> field for
+that segmented result. For example, if the field <code>sub-title</code> is specified, when a document is uploaded each time
+the smart documement understanding conversion encounters a field of type <code>sub-title</code> the document is split at
+that point and the content of the field used as the title of the remaining content. Thnis split is performed for
+all instances of the listed fields in the uploaded document. Only valid if used with a collection that has
+<strong>enabled</strong> set to <code>true</code> in the <strong>smart_document_understanding</strong> object.</p>
                                 </div>
                               </td>
                             </tr>
@@ -645,7 +711,7 @@ for that segmented result.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-04-08)</p>
+          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-06-14)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

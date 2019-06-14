@@ -68,6 +68,9 @@
                 <a href="Structs/Collection/Status.html">– Status</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/CollectionCrawlStatus.html">CollectionCrawlStatus</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/CollectionDiskUsage.html">CollectionDiskUsage</a>
               </li>
               <li class="nav-group-task">
@@ -99,6 +102,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/Credentials/SourceType.html">– SourceType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Credentials/Status.html">– Status</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/CredentialsList.html">CredentialsList</a>
@@ -389,6 +395,12 @@
                 <a href="Structs/RetrievalDetails/DocumentRetrievalStrategy.html">– DocumentRetrievalStrategy</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/SduStatus.html">SduStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SduStatusCustomFields.html">SduStatusCustomFields</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/SearchStatus.html">SearchStatus</a>
               </li>
               <li class="nav-group-task">
@@ -598,6 +610,38 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Collection</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV121CollectionCrawlStatusV"></a>
+                    <a name="//apple_ref/swift/Struct/CollectionCrawlStatus" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV121CollectionCrawlStatusV">CollectionCrawlStatus</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Object containing information about the crawl status of this collection.</p>
+
+                        <a href="Structs/CollectionCrawlStatus.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CollectionCrawlStatus</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1230,7 +1274,7 @@ Obtain credentials for your source from the administrator of the source.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An object representing the configuration options to use for the <code>elements</code> enrichment.</p>
+                        <p>Options which are specific to a particular enrichment.</p>
 
                         <a href="Structs/EnrichmentOptions.html" class="slightly-smaller">See more</a>
                       </div>
@@ -3250,6 +3294,70 @@ query the city of London in England your query would look for <code>London</code
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:11DiscoveryV19SduStatusV"></a>
+                    <a name="//apple_ref/swift/Struct/SduStatus" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV19SduStatusV">SduStatus</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Object containing smart document understanding information for this collection.</p>
+
+                        <a href="Structs/SduStatus.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SduStatus</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV121SduStatusCustomFieldsV"></a>
+                    <a name="//apple_ref/swift/Struct/SduStatusCustomFields" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV121SduStatusCustomFieldsV">SduStatusCustomFields</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Information about custom smart document understanding fields that exist in this collection.</p>
+
+                        <a href="Structs/SduStatusCustomFields.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SduStatusCustomFields</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:11DiscoveryV112SearchStatusV"></a>
                     <a name="//apple_ref/swift/Struct/SearchStatus" class="dashAnchor"></a>
                     <a class="token" href="#/s:11DiscoveryV112SearchStatusV">SearchStatus</a>
@@ -4112,7 +4220,7 @@ query the city of London in England your query would look for <code>London</code
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-04-08)</p>
+          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-06-14)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

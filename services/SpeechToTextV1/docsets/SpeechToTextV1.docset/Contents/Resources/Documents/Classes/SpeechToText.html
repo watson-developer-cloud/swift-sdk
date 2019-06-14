@@ -75,10 +75,43 @@
                 <a href="../Structs/AudioListing/Status.html">– Status</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/AudioListingContainer.html">AudioListingContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioListingContainer/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioListingDetails.html">AudioListingDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioListingDetails/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioListingDetails/Compression.html">– Compression</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioMetrics.html">AudioMetrics</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioMetricsDetails.html">AudioMetricsDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioMetricsHistogramBin.html">AudioMetricsHistogramBin</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/AudioResource.html">AudioResource</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/AudioResource/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioResourceDetails.html">AudioResourceDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioResourceDetails/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioResourceDetails/Compression.html">– Compression</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/AudioResources.html">AudioResources</a>
@@ -115,6 +148,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/LanguageModels.html">LanguageModels</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ProcessedAudio.html">ProcessedAudio</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ProcessingMetrics.html">ProcessingMetrics</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/RecognitionJob.html">RecognitionJob</a>
@@ -160,6 +199,15 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/SupportedFeatures.html">SupportedFeatures</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TrainingResponse.html">TrainingResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TrainingWarning.html">TrainingWarning</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TrainingWarning/WarningID.html">– WarningID</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Word.html">Word</a>
@@ -498,9 +546,37 @@ In that case, try another initializer that directly passes in the credentials.</
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C10listModelsyySDyS2SGSg_XetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C22disableSSLVerificationyyF"></a>
+                    <a name="//apple_ref/swift/Method/disableSSLVerification()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C22disableSSLVerificationyyF">disableSSLVerification()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Allow network requests to a server without verification of the server certificate.
+<strong>IMPORTANT</strong>: This should ONLY be used if truly intended, as it is unsafe otherwise.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">disableSSLVerification</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SpeechToTextV10abC0C10listModels7headers17completionHandlerySDyS2SGSg_y7RestKit0J8ResponseVyAA0aF0VGSg_AI0J5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/listModels(headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C10listModelsyySDyS2SGSg_XetcACF">listModels(headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C10listModels7headers17completionHandlerySDyS2SGSg_y7RestKit0J8ResponseVyAA0aF0VGSg_AI0J5ErrorOSgtctF">listModels(headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -512,7 +588,8 @@ In that case, try another initializer that directly passes in the credentials.</
 
 <p>Lists all language models that are available for use with the service. The information includes the name of the
 model and its minimum sampling rate in Hertz, among other things.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/models.html">Languages and models</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-models#models">Languages and
+models</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -562,9 +639,9 @@ model and its minimum sampling rate in Hertz, among other things.
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C8getModelyySS_SDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C8getModel7modelID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0L8ResponseVyAA0aF0VGSg_AJ0L5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/getModel(modelID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C8getModelyySS_SDyS2SGSgXetcACF">getModel(modelID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C8getModel7modelID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0L8ResponseVyAA0aF0VGSg_AJ0L5ErrorOSgtctF">getModel(modelID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -576,7 +653,8 @@ model and its minimum sampling rate in Hertz, among other things.
 
 <p>Gets information for a single specified language model that is available for use with the service. The information
 includes the name of the model and its minimum sampling rate in Hertz, among other things.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/models.html">Languages and models</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-models#models">Languages and
+models</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -640,9 +718,9 @@ method.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C9recognizeyy10Foundation4DataV_SSSgA3HSdSgSiSgSaySSGSgAijISbSgA4mhmHSDyS2SGSgXetcACF"></a>
-                    <a name="//apple_ref/swift/Method/recognize(audio:model:languageCustomizationID:acousticCustomizationID:baseModelVersion:customizationWeight:inactivityTimeout:keywords:keywordsThreshold:maxAlternatives:wordAlternativesThreshold:wordConfidence:timestamps:profanityFilter:smartFormatting:speakerLabels:grammarName:redaction:contentType:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C9recognizeyy10Foundation4DataV_SSSgA3HSdSgSiSgSaySSGSgAijISbSgA4mhmHSDyS2SGSgXetcACF">recognize(audio:model:languageCustomizationID:acousticCustomizationID:baseModelVersion:customizationWeight:inactivityTimeout:keywords:keywordsThreshold:maxAlternatives:wordAlternativesThreshold:wordConfidence:timestamps:profanityFilter:smartFormatting:speakerLabels:grammarName:redaction:contentType:headers:completionHandler:)</a>
+                    <a name="/s:14SpeechToTextV10abC0C9recognize5audio5model23languageCustomizationID08acousticiJ016baseModelVersion19customizationWeight17inactivityTimeout8keywords0S9Threshold15maxAlternatives04wordvT00W10Confidence10timestamps15profanityFilter15smartFormatting13speakerLabels11grammarName9redaction0F7Metrics11contentType7headers17completionHandlery10Foundation4DataV_SSSgA2_A2_A2_SdSgSiSgSaySSGSgA3_A4_A3_SbSgA7_A7_A7_A7_A2_A7_A7_A2_SDyS2SGSgy7RestKit12RestResponseVyAA0A18RecognitionResultsVGSg_A10_9RestErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/recognize(audio:model:languageCustomizationID:acousticCustomizationID:baseModelVersion:customizationWeight:inactivityTimeout:keywords:keywordsThreshold:maxAlternatives:wordAlternativesThreshold:wordConfidence:timestamps:profanityFilter:smartFormatting:speakerLabels:grammarName:redaction:audioMetrics:contentType:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C9recognize5audio5model23languageCustomizationID08acousticiJ016baseModelVersion19customizationWeight17inactivityTimeout8keywords0S9Threshold15maxAlternatives04wordvT00W10Confidence10timestamps15profanityFilter15smartFormatting13speakerLabels11grammarName9redaction0F7Metrics11contentType7headers17completionHandlery10Foundation4DataV_SSSgA2_A2_A2_SdSgSiSgSaySSGSgA3_A4_A3_SbSgA7_A7_A7_A7_A2_A7_A7_A2_SDyS2SGSgy7RestKit12RestResponseVyAA0A18RecognitionResultsVGSg_A10_9RestErrorOSgtctF">recognize(audio:model:languageCustomizationID:acousticCustomizationID:baseModelVersion:customizationWeight:inactivityTimeout:keywords:keywordsThreshold:maxAlternatives:wordAlternativesThreshold:wordConfidence:timestamps:profanityFilter:smartFormatting:speakerLabels:grammarName:redaction:audioMetrics:contentType:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -655,8 +733,9 @@ method.</p>
 <p>Sends audio and returns transcription results for a recognition request. You can pass a maximum of 100 MB and a
 minimum of 100 bytes of audio with a request. The service automatically detects the endianness of the incoming
 audio and, for audio that includes multiple channels, downmixes the audio to one-channel mono during transcoding.
-The method returns only final results; to enable interim results, use the WebSocket API.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/http.html#HTTP-basic">Making a basic HTTP
+The method returns only final results; to enable interim results, use the WebSocket API. (With the <code>curl</code> command,
+use the <code>--data-binary</code> option to upload the file for the request.)
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-http#HTTP-basic">Making a basic HTTP
 request</a>.</p>
 <h3 id='streaming-mode' class='heading'>Streaming mode</h3>
 
@@ -668,8 +747,8 @@ connection (status code 400) if it detects no speech for <code>inactivity_timeou
 <strong>See also:</strong></p>
 
 <ul>
-<li><a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#transmission">Audio transmission</a></li>
-<li><a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts">Timeouts</a>
+<li><a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#transmission">Audio transmission</a></li>
+<li><a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#timeouts">Timeouts</a>
 ### Audio formats (content types)
 The service accepts audio in the following formats (MIME types).</li>
 <li>For formats that are labeled <strong>Required</strong>, you must use the <code>Content-Type</code> header with the request to specify the
@@ -699,17 +778,19 @@ The sampling rate of the audio must match the sampling rate of the model for the
 models, at least 16 kHz; for narrowband models, at least 8 kHz. If the sampling rate of the audio is higher than
 the minimum required rate, the service down-samples the audio to the appropriate rate. If the sampling rate of the
 audio is lower than the minimum required rate, the request fails.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/audio-formats.html">Audio formats</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-audio-formats#audio-formats">Audio
+formats</a>.</p>
 <h3 id='multipart-speech-recognition' class='heading'>Multipart speech recognition</h3>
 
 <p><strong>Note:</strong> The Watson SDKs do not support multipart speech recognition.
 The HTTP <code>POST</code> method of the service also supports multipart speech recognition. With multipart requests, you pass
 all audio data as multipart form data. You specify some parameters as request headers and query parameters, but you
-pass JSON metadata as form data to control most aspects of the transcription.
-The multipart approach is intended for use with browsers for which JavaScript is disabled or when the parameters
-used with the request are greater than the 8 KB limit imposed by most HTTP servers and proxies. You can encounter
-this limit, for example, if you want to spot a very large number of keywords.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/http.html#HTTP-multi">Making a multipart HTTP
+pass JSON metadata as form data to control most aspects of the transcription. You can use multipart recognition to
+pass multiple audio files with a single request.
+Use the multipart approach with browsers for which JavaScript is disabled or when the parameters used with the
+request are greater than the 8 KB limit imposed by most HTTP servers and proxies. You can encounter this limit, for
+example, if you want to spot a very large number of keywords.
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-http#HTTP-multi">Making a multipart HTTP
 request</a>.</p></li>
 </ul>
 
@@ -737,6 +818,7 @@ request</a>.</p></li>
     <span class="nv">speakerLabels</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">grammarName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">redaction</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">audioMetrics</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">contentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14SpeechToTextV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SpeechRecognitionResults.html">SpeechRecognitionResults</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14SpeechToTextV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
@@ -767,7 +849,7 @@ request</a>.</p></li>
                               </td>
                               <td>
                                 <div>
-                                  <p>The identifier of the model that is to be used for the recognition request. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/models.html">Languages and
+                                  <p>The identifier of the model that is to be used for the recognition request. See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-models#models">Languages and
 models</a>.</p>
                                 </div>
                               </td>
@@ -783,7 +865,7 @@ models</a>.</p>
                                   <p>The customization ID (GUID) of a custom language model that is to be used
 with the recognition request. The base model of the specified custom language model must match the model
 specified with the <code>model</code> parameter. You must make the request with credentials for the instance of the service
-that owns the custom model. By default, no custom language model is used. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input">Custom
+that owns the custom model. By default, no custom language model is used. See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#custom-input">Custom
 models</a>.
 <strong>Note:</strong> Use this parameter instead of the deprecated <code>customization_id</code> parameter.</p>
                                 </div>
@@ -800,7 +882,7 @@ models</a>.
                                   <p>The customization ID (GUID) of a custom acoustic model that is to be used
 with the recognition request. The base model of the specified custom acoustic model must match the model
 specified with the <code>model</code> parameter. You must make the request with credentials for the instance of the service
-that owns the custom model. By default, no custom acoustic model is used. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input">Custom
+that owns the custom model. By default, no custom acoustic model is used. See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#custom-input">Custom
 models</a>.</p>
                                 </div>
                               </td>
@@ -813,10 +895,10 @@ models</a>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The version of the specified base model that is to be used with recognition
+                                  <p>The version of the specified base model that is to be used with the recognition
 request. Multiple versions of a base model can exist when a model is updated for internal improvements. The
 parameter is intended primarily for use with custom models that have been upgraded for a new base model. The
-default value depends on whether the parameter is used with or without a custom model. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#version">Base model
+default value depends on whether the parameter is used with or without a custom model. See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#version">Base model
 version</a>.</p>
                                 </div>
                               </td>
@@ -838,7 +920,7 @@ was specified when the custom model was trained.
 The default value yields the best performance in general. Assign a higher value if your audio makes frequent use
 of OOV words from the custom model. Use caution when setting the weight: a higher value can improve the accuracy
 of phrases from the custom model&rsquo;s domain, but it can negatively affect performance on non-domain phrases.
-See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input">Custom models</a>.</p>
+See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#custom-input">Custom models</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -852,7 +934,7 @@ See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custo
                                 <div>
                                   <p>The time in seconds after which, if only silence (no speech) is detected in
 streaming audio, the connection is closed with a 400 error. The parameter is useful for stopping audio submission
-from a live microphone when a user simply walks away. Use <code>-1</code> for infinity. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts-inactivity">Inactivity
+from a live microphone when a user simply walks away. Use <code>-1</code> for infinity. See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#timeouts-inactivity">Inactivity
 timeout</a>.</p>
                                 </div>
                               </td>
@@ -868,7 +950,7 @@ timeout</a>.</p>
                                   <p>An array of keyword strings to spot in the audio. Each keyword string can include one or
 more string tokens. Keywords are spotted only in the final results, not in interim hypotheses. If you specify any
 keywords, you must also specify a keywords threshold. You can spot a maximum of 1000 keywords. Omit the parameter
-or specify an empty array if you do not need to spot keywords. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#keyword_spotting">Keyword
+or specify an empty array if you do not need to spot keywords. See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#keyword_spotting">Keyword
 spotting</a>.</p>
                                 </div>
                               </td>
@@ -884,7 +966,7 @@ spotting</a>.</p>
                                   <p>A confidence value that is the lower bound for spotting a keyword. A word is
 considered to match a keyword if its confidence is greater than or equal to the threshold. Specify a probability
 between 0.0 and 1.0. If you specify a threshold, you must also specify one or more keywords. The service performs
-no keyword spotting if you omit either parameter. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#keyword_spotting">Keyword
+no keyword spotting if you omit either parameter. See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#keyword_spotting">Keyword
 spotting</a>.</p>
                                 </div>
                               </td>
@@ -899,7 +981,7 @@ spotting</a>.</p>
                                 <div>
                                   <p>The maximum number of alternative transcripts that the service is to return. By
 default, the service returns a single transcript. If you specify a value of <code>0</code>, the service uses the default
-value, <code>1</code>. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#max_alternatives">Maximum
+value, <code>1</code>. See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#max_alternatives">Maximum
 alternatives</a>.</p>
                                 </div>
                               </td>
@@ -915,7 +997,7 @@ alternatives</a>.</p>
                                   <p>A confidence value that is the lower bound for identifying a hypothesis as
 a possible word alternative (also known as \<q>Confusion Networks\</q>). An alternative word is considered if its
 confidence is greater than or equal to the threshold. Specify a probability between 0.0 and 1.0. By default, the
-service computes no alternative words. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_alternatives">Word
+service computes no alternative words. See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#word_alternatives">Word
 alternatives</a>.</p>
                                 </div>
                               </td>
@@ -929,7 +1011,7 @@ alternatives</a>.</p>
                               <td>
                                 <div>
                                   <p>If <code>true</code>, the service returns a confidence measure in the range of 0.0 to 1.0 for
-each word. By default, the service returns no word confidence scores. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_confidence">Word
+each word. By default, the service returns no word confidence scores. See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#word_confidence">Word
 confidence</a>.</p>
                                 </div>
                               </td>
@@ -943,7 +1025,7 @@ confidence</a>.</p>
                               <td>
                                 <div>
                                   <p>If <code>true</code>, the service returns time alignment for each word. By default, no timestamps
-are returned. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_timestamps">Word
+are returned. See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#word_timestamps">Word
 timestamps</a>.</p>
                                 </div>
                               </td>
@@ -958,7 +1040,7 @@ timestamps</a>.</p>
                                 <div>
                                   <p>If <code>true</code>, the service filters profanity from all output except for keyword results
 by replacing inappropriate words with a series of asterisks. Set the parameter to <code>false</code> to return results with
-no censoring. Applies to US English transcription only. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#profanity_filter">Profanity
+no censoring. Applies to US English transcription only. See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#profanity_filter">Profanity
 filtering</a>.</p>
                                 </div>
                               </td>
@@ -976,7 +1058,8 @@ numbers, currency values, and internet addresses into more readable, conventiona
 transcript of a recognition request. For US English, the service also converts certain keyword strings to
 punctuation symbols. By default, the service performs no smart formatting.
 <strong>Note:</strong> Applies to US English, Japanese, and Spanish transcription only.
-See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#smart_formatting">Smart formatting</a>.</p>
+See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#smart_formatting">Smart
+formatting</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -995,7 +1078,8 @@ participants in a multi-person exchange. By default, the service returns no spea
 <strong>Note:</strong> Applies to US English, Japanese, and Spanish transcription only. To determine whether a language model
 supports speaker labels, you can also use the <strong>Get a model</strong> method and check that the attribute
 <code>speaker_labels</code> is set to <code>true</code>.
-See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#speaker_labels">Speaker labels</a>.</p>
+See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#speaker_labels">Speaker
+labels</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1011,7 +1095,7 @@ See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#spea
 grammar, you must also use the <code>language_customization_id</code> parameter to specify the name of the custom language
 model for which the grammar is defined. The service recognizes only strings that are recognized by the specified
 grammar; it does not recognize other custom words from the model&rsquo;s words resource. See
-<a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#grammars-input">Grammars</a>.</p>
+<a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#grammars-input">Grammars</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1032,7 +1116,22 @@ explicitly disable that feature. To ensure maximum security, the service also di
 the <code>keywords</code> and <code>keywords_threshold</code> parameters) and returns only a single final transcript (forces the
 <code>max_alternatives</code> parameter to be <code>1</code>).
 <strong>Note:</strong> Applies to US English, Japanese, and Korean transcription only.
-See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#redaction">Numeric redaction</a>.</p>
+See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#redaction">Numeric
+redaction</a>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>audioMetrics</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If <code>true</code>, requests detailed information about the signal characteristics of the input
+audio. The service returns audio metrics with the final transcription results. By default, the service returns no
+audio metrics.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1082,9 +1181,9 @@ format, see <strong>Audio formats (content types)</strong> in the method descrip
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C16registerCallbackyySS_SSSgSDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C16registerCallback11callbackURL10userSecret7headers17completionHandlerySS_SSSgSDyS2SGSgy7RestKit0N8ResponseVyAA14RegisterStatusVGSg_AL0N5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/registerCallback(callbackURL:userSecret:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C16registerCallbackyySS_SSSgSDyS2SGSgXetcACF">registerCallback(callbackURL:userSecret:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C16registerCallback11callbackURL10userSecret7headers17completionHandlerySS_SSSgSDyS2SGSgy7RestKit0N8ResponseVyAA14RegisterStatusVGSg_AL0N5ErrorOSgtctF">registerCallback(callbackURL:userSecret:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1114,7 +1213,8 @@ the payload of every callback notification that uses the URL. The signature prov
 integrity for HTTP communications.
 After you successfully register a callback URL, you can use it with an indefinite number of recognition requests.
 You can register a maximum of 20 callback URLS in a one-hour span of time.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/async.html#register">Registering a callback URL</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-async#register">Registering a callback
+URL</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -1196,9 +1296,9 @@ you omit the parameter, the service does not send the header.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C18unregisterCallbackyySS_SDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C18unregisterCallback11callbackURL7headers17completionHandlerySS_SDyS2SGSgy7RestKit0L8ResponseVyytGSg_AJ0L5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/unregisterCallback(callbackURL:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C18unregisterCallbackyySS_SDyS2SGSgXetcACF">unregisterCallback(callbackURL:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C18unregisterCallback11callbackURL7headers17completionHandlerySS_SDyS2SGSgy7RestKit0L8ResponseVyytGSg_AJ0L5ErrorOSgtctF">unregisterCallback(callbackURL:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1210,7 +1310,7 @@ you omit the parameter, the service does not send the header.</p>
 
 <p>Unregisters a callback URL that was previously white-listed with a <strong>Register a callback</strong> request for use with the
 asynchronous interface. Once unregistered, the URL can no longer be used with asynchronous recognition requests.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/async.html#unregister">Unregistering a callback
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-async#unregister">Unregistering a callback
 URL</a>.</p>
 
                       </div>
@@ -1274,9 +1374,9 @@ URL</a>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C9createJobyy10Foundation4DataV_SSSgA3HSiSgA3HSdSgAISaySSGSgAjiJSbSgA4mhmHSDyS2SGSgXetcACF"></a>
-                    <a name="//apple_ref/swift/Method/createJob(audio:model:callbackURL:events:userToken:resultsTtl:languageCustomizationID:acousticCustomizationID:baseModelVersion:customizationWeight:inactivityTimeout:keywords:keywordsThreshold:maxAlternatives:wordAlternativesThreshold:wordConfidence:timestamps:profanityFilter:smartFormatting:speakerLabels:grammarName:redaction:contentType:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C9createJobyy10Foundation4DataV_SSSgA3HSiSgA3HSdSgAISaySSGSgAjiJSbSgA4mhmHSDyS2SGSgXetcACF">createJob(audio:model:callbackURL:events:userToken:resultsTtl:languageCustomizationID:acousticCustomizationID:baseModelVersion:customizationWeight:inactivityTimeout:keywords:keywordsThreshold:maxAlternatives:wordAlternativesThreshold:wordConfidence:timestamps:profanityFilter:smartFormatting:speakerLabels:grammarName:redaction:contentType:headers:completionHandler:)</a>
+                    <a name="/s:14SpeechToTextV10abC0C9createJob5audio5model11callbackURL6events9userToken10resultsTtl23languageCustomizationID08acousticqR016baseModelVersion19customizationWeight17inactivityTimeout8keywords17keywordsThreshold15maxAlternatives25wordAlternativesThreshold14wordConfidence10timestamps15profanityFilter15smartFormatting13speakerLabels11grammarName9redaction17processingMetrics25processingMetricsInterval0G7Metrics11contentType7headers17completionHandlery10Foundation4DataV_SSSgA8_A8_A8_SiSgA8_A8_A8_SdSgA9_SaySSGSgA10_A9_A10_SbSgA13_A13_A13_A13_A8_A13_A13_A10_A13_A8_SDyS2SGSgy7RestKit12RestResponseVyAA011RecognitionF0VGSg_A16_9RestErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/createJob(audio:model:callbackURL:events:userToken:resultsTtl:languageCustomizationID:acousticCustomizationID:baseModelVersion:customizationWeight:inactivityTimeout:keywords:keywordsThreshold:maxAlternatives:wordAlternativesThreshold:wordConfidence:timestamps:profanityFilter:smartFormatting:speakerLabels:grammarName:redaction:processingMetrics:processingMetricsInterval:audioMetrics:contentType:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C9createJob5audio5model11callbackURL6events9userToken10resultsTtl23languageCustomizationID08acousticqR016baseModelVersion19customizationWeight17inactivityTimeout8keywords17keywordsThreshold15maxAlternatives25wordAlternativesThreshold14wordConfidence10timestamps15profanityFilter15smartFormatting13speakerLabels11grammarName9redaction17processingMetrics25processingMetricsInterval0G7Metrics11contentType7headers17completionHandlery10Foundation4DataV_SSSgA8_A8_A8_SiSgA8_A8_A8_SdSgA9_SaySSGSgA10_A9_A10_SbSgA13_A13_A13_A13_A8_A13_A13_A10_A13_A8_SDyS2SGSgy7RestKit12RestResponseVyAA011RecognitionF0VGSg_A16_9RestErrorOSgtctF">createJob(audio:model:callbackURL:events:userToken:resultsTtl:languageCustomizationID:acousticCustomizationID:baseModelVersion:customizationWeight:inactivityTimeout:keywords:keywordsThreshold:maxAlternatives:wordAlternativesThreshold:wordConfidence:timestamps:profanityFilter:smartFormatting:speakerLabels:grammarName:redaction:processingMetrics:processingMetricsInterval:audioMetrics:contentType:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1312,8 +1412,9 @@ the following parameters specific to the asynchronous interface:</li>
 You can pass a maximum of 1 GB and a minimum of 100 bytes of audio with a request. The service automatically
 detects the endianness of the incoming audio and, for audio that includes multiple channels, downmixes the audio to
 one-channel mono during transcoding. The method returns only final results; to enable interim results, use the
-WebSocket API.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/async.html#create">Creating a job</a>.
+WebSocket API. (With the <code>curl</code> command, use the <code>--data-binary</code> option to upload the file for the request.)
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-async#create">Creating a
+job</a>.
 ### Streaming mode
 For requests to transcribe live audio as it becomes available, you must set the <code>Transfer-Encoding</code> header to
 <code>chunked</code> to use streaming mode. In streaming mode, the service closes the connection (status code 408) if it does
@@ -1321,8 +1422,8 @@ not receive at least 15 seconds of audio (including silence) in any 30-second pe
 connection (status code 400) if it detects no speech for <code>inactivity_timeout</code> seconds of streaming audio; use the
 <code>inactivity_timeout</code> parameter to change the default of 30 seconds.
 <strong>See also:</strong></li>
-<li><a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#transmission">Audio transmission</a></li>
-<li><a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts">Timeouts</a>
+<li><a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#transmission">Audio transmission</a></li>
+<li><a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#timeouts">Timeouts</a>
 ### Audio formats (content types)
 The service accepts audio in the following formats (MIME types).</li>
 <li>For formats that are labeled <strong>Required</strong>, you must use the <code>Content-Type</code> header with the request to specify the
@@ -1352,7 +1453,8 @@ The sampling rate of the audio must match the sampling rate of the model for the
 models, at least 16 kHz; for narrowband models, at least 8 kHz. If the sampling rate of the audio is higher than
 the minimum required rate, the service down-samples the audio to the appropriate rate. If the sampling rate of the
 audio is lower than the minimum required rate, the request fails.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/audio-formats.html">Audio formats</a>.</p></li>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-audio-formats#audio-formats">Audio
+formats</a>.</p></li>
 </ul>
 
                       </div>
@@ -1383,6 +1485,9 @@ audio is lower than the minimum required rate, the request fails.
     <span class="nv">speakerLabels</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">grammarName</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">redaction</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">processingMetrics</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">processingMetricsInterval</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">audioMetrics</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">contentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14SpeechToTextV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/RecognitionJob.html">RecognitionJob</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14SpeechToTextV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
@@ -1413,7 +1518,7 @@ audio is lower than the minimum required rate, the request fails.
                               </td>
                               <td>
                                 <div>
-                                  <p>The identifier of the model that is to be used for the recognition request. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/models.html">Languages and
+                                  <p>The identifier of the model that is to be used for the recognition request. See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-models#models">Languages and
 models</a>.</p>
                                 </div>
                               </td>
@@ -1501,7 +1606,7 @@ use a time to live of one week. The parameter is valid with or without a callbac
                                   <p>The customization ID (GUID) of a custom language model that is to be used
 with the recognition request. The base model of the specified custom language model must match the model
 specified with the <code>model</code> parameter. You must make the request with credentials for the instance of the service
-that owns the custom model. By default, no custom language model is used. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input">Custom
+that owns the custom model. By default, no custom language model is used. See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#custom-input">Custom
 models</a>.
 <strong>Note:</strong> Use this parameter instead of the deprecated <code>customization_id</code> parameter.</p>
                                 </div>
@@ -1518,7 +1623,7 @@ models</a>.
                                   <p>The customization ID (GUID) of a custom acoustic model that is to be used
 with the recognition request. The base model of the specified custom acoustic model must match the model
 specified with the <code>model</code> parameter. You must make the request with credentials for the instance of the service
-that owns the custom model. By default, no custom acoustic model is used. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input">Custom
+that owns the custom model. By default, no custom acoustic model is used. See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#custom-input">Custom
 models</a>.</p>
                                 </div>
                               </td>
@@ -1531,10 +1636,10 @@ models</a>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The version of the specified base model that is to be used with recognition
+                                  <p>The version of the specified base model that is to be used with the recognition
 request. Multiple versions of a base model can exist when a model is updated for internal improvements. The
 parameter is intended primarily for use with custom models that have been upgraded for a new base model. The
-default value depends on whether the parameter is used with or without a custom model. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#version">Base model
+default value depends on whether the parameter is used with or without a custom model. See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#version">Base model
 version</a>.</p>
                                 </div>
                               </td>
@@ -1556,7 +1661,7 @@ was specified when the custom model was trained.
 The default value yields the best performance in general. Assign a higher value if your audio makes frequent use
 of OOV words from the custom model. Use caution when setting the weight: a higher value can improve the accuracy
 of phrases from the custom model&rsquo;s domain, but it can negatively affect performance on non-domain phrases.
-See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom-input">Custom models</a>.</p>
+See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#custom-input">Custom models</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1570,7 +1675,7 @@ See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#custo
                                 <div>
                                   <p>The time in seconds after which, if only silence (no speech) is detected in
 streaming audio, the connection is closed with a 400 error. The parameter is useful for stopping audio submission
-from a live microphone when a user simply walks away. Use <code>-1</code> for infinity. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#timeouts-inactivity">Inactivity
+from a live microphone when a user simply walks away. Use <code>-1</code> for infinity. See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#timeouts-inactivity">Inactivity
 timeout</a>.</p>
                                 </div>
                               </td>
@@ -1586,7 +1691,7 @@ timeout</a>.</p>
                                   <p>An array of keyword strings to spot in the audio. Each keyword string can include one or
 more string tokens. Keywords are spotted only in the final results, not in interim hypotheses. If you specify any
 keywords, you must also specify a keywords threshold. You can spot a maximum of 1000 keywords. Omit the parameter
-or specify an empty array if you do not need to spot keywords. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#keyword_spotting">Keyword
+or specify an empty array if you do not need to spot keywords. See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#keyword_spotting">Keyword
 spotting</a>.</p>
                                 </div>
                               </td>
@@ -1602,7 +1707,7 @@ spotting</a>.</p>
                                   <p>A confidence value that is the lower bound for spotting a keyword. A word is
 considered to match a keyword if its confidence is greater than or equal to the threshold. Specify a probability
 between 0.0 and 1.0. If you specify a threshold, you must also specify one or more keywords. The service performs
-no keyword spotting if you omit either parameter. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#keyword_spotting">Keyword
+no keyword spotting if you omit either parameter. See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#keyword_spotting">Keyword
 spotting</a>.</p>
                                 </div>
                               </td>
@@ -1617,7 +1722,7 @@ spotting</a>.</p>
                                 <div>
                                   <p>The maximum number of alternative transcripts that the service is to return. By
 default, the service returns a single transcript. If you specify a value of <code>0</code>, the service uses the default
-value, <code>1</code>. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#max_alternatives">Maximum
+value, <code>1</code>. See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#max_alternatives">Maximum
 alternatives</a>.</p>
                                 </div>
                               </td>
@@ -1633,7 +1738,7 @@ alternatives</a>.</p>
                                   <p>A confidence value that is the lower bound for identifying a hypothesis as
 a possible word alternative (also known as \<q>Confusion Networks\</q>). An alternative word is considered if its
 confidence is greater than or equal to the threshold. Specify a probability between 0.0 and 1.0. By default, the
-service computes no alternative words. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_alternatives">Word
+service computes no alternative words. See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#word_alternatives">Word
 alternatives</a>.</p>
                                 </div>
                               </td>
@@ -1647,7 +1752,7 @@ alternatives</a>.</p>
                               <td>
                                 <div>
                                   <p>If <code>true</code>, the service returns a confidence measure in the range of 0.0 to 1.0 for
-each word. By default, the service returns no word confidence scores. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_confidence">Word
+each word. By default, the service returns no word confidence scores. See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#word_confidence">Word
 confidence</a>.</p>
                                 </div>
                               </td>
@@ -1661,7 +1766,7 @@ confidence</a>.</p>
                               <td>
                                 <div>
                                   <p>If <code>true</code>, the service returns time alignment for each word. By default, no timestamps
-are returned. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#word_timestamps">Word
+are returned. See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#word_timestamps">Word
 timestamps</a>.</p>
                                 </div>
                               </td>
@@ -1676,7 +1781,7 @@ timestamps</a>.</p>
                                 <div>
                                   <p>If <code>true</code>, the service filters profanity from all output except for keyword results
 by replacing inappropriate words with a series of asterisks. Set the parameter to <code>false</code> to return results with
-no censoring. Applies to US English transcription only. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#profanity_filter">Profanity
+no censoring. Applies to US English transcription only. See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#profanity_filter">Profanity
 filtering</a>.</p>
                                 </div>
                               </td>
@@ -1694,7 +1799,8 @@ numbers, currency values, and internet addresses into more readable, conventiona
 transcript of a recognition request. For US English, the service also converts certain keyword strings to
 punctuation symbols. By default, the service performs no smart formatting.
 <strong>Note:</strong> Applies to US English, Japanese, and Spanish transcription only.
-See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#smart_formatting">Smart formatting</a>.</p>
+See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#smart_formatting">Smart
+formatting</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1713,7 +1819,8 @@ participants in a multi-person exchange. By default, the service returns no spea
 <strong>Note:</strong> Applies to US English, Japanese, and Spanish transcription only. To determine whether a language model
 supports speaker labels, you can also use the <strong>Get a model</strong> method and check that the attribute
 <code>speaker_labels</code> is set to <code>true</code>.
-See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#speaker_labels">Speaker labels</a>.</p>
+See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#speaker_labels">Speaker
+labels</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1729,7 +1836,7 @@ See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#spea
 grammar, you must also use the <code>language_customization_id</code> parameter to specify the name of the custom language
 model for which the grammar is defined. The service recognizes only strings that are recognized by the specified
 grammar; it does not recognize other custom words from the model&rsquo;s words resource. See
-<a href="https://cloud.ibm.com/docs/services/speech-to-text/input.html#grammars-input">Grammars</a>.</p>
+<a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-input#grammars-input">Grammars</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1750,7 +1857,56 @@ explicitly disable that feature. To ensure maximum security, the service also di
 the <code>keywords</code> and <code>keywords_threshold</code> parameters) and returns only a single final transcript (forces the
 <code>max_alternatives</code> parameter to be <code>1</code>).
 <strong>Note:</strong> Applies to US English, Japanese, and Korean transcription only.
-See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#redaction">Numeric redaction</a>.</p>
+See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#redaction">Numeric
+redaction</a>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>processingMetrics</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If <code>true</code>, requests processing metrics about the service&rsquo;s transcription of the
+input audio. The service returns processing metrics at the interval specified by the
+<code>processing_metrics_interval</code> parameter. It also returns processing metrics for transcription events, for
+example, for final and interim results. By default, the service returns no processing metrics.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>processingMetricsInterval</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Specifies the interval in real wall-clock seconds at which the service is
+to return processing metrics. The parameter is ignored unless the <code>processing_metrics</code> parameter is set to
+<code>true</code>.
+The parameter accepts a minimum value of 0.1 seconds. The level of precision is not restricted, so you can
+specify values such as 0.25 and 0.125.
+The service does not impose a maximum value. If you want to receive processing metrics only for transcription
+events instead of at periodic intervals, set the value to a large number. If the value is larger than the
+duration of the audio, the service returns processing metrics only for transcription events.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>audioMetrics</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>If <code>true</code>, requests detailed information about the signal characteristics of the input
+audio. The service returns audio metrics with the final transcription results. By default, the service returns no
+audio metrics.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1800,9 +1956,9 @@ format, see <strong>Audio formats (content types)</strong> in the method descrip
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C9checkJobsyySDyS2SGSg_XetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C9checkJobs7headers17completionHandlerySDyS2SGSg_y7RestKit0J8ResponseVyAA011RecognitionF0VGSg_AI0J5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/checkJobs(headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C9checkJobsyySDyS2SGSg_XetcACF">checkJobs(headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C9checkJobs7headers17completionHandlerySDyS2SGSg_y7RestKit0J8ResponseVyAA011RecognitionF0VGSg_AI0J5ErrorOSgtctF">checkJobs(headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1818,7 +1974,7 @@ callback URL and a user token, the user token for the job. To obtain the results
 <code>completed</code> or not one of the latest 100 outstanding jobs, use the <strong>Check a job</strong> method. A job and its results
 remain available until you delete them with the <strong>Delete a job</strong> method or until the job&rsquo;s time to live expires,
 whichever comes first.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/async.html#jobs">Checking the status of the latest
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-async#jobs">Checking the status of the latest
 jobs</a>.</p>
 
                       </div>
@@ -1869,9 +2025,9 @@ jobs</a>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C8checkJobyySS_SDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C8checkJob2id7headers17completionHandlerySS_SDyS2SGSgy7RestKit0K8ResponseVyAA011RecognitionF0VGSg_AJ0K5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/checkJob(id:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C8checkJobyySS_SDyS2SGSgXetcACF">checkJob(id:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C8checkJob2id7headers17completionHandlerySS_SDyS2SGSgy7RestKit0K8ResponseVyAA011RecognitionF0VGSg_AJ0K5ErrorOSgtctF">checkJob(id:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1888,7 +2044,7 @@ You can use the method to retrieve the results of any job, regardless of whether
 URL and the <code>recognitions.completed_with_results</code> event, and you can retrieve the results multiple times for as
 long as they remain available. Use the <strong>Check jobs</strong> method to request information about the most recent jobs
 associated with the calling credentials.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/async.html#job">Checking the status and retrieving the results of a
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-async#job">Checking the status and retrieving the results of a
 job</a>.</p>
 
                       </div>
@@ -1953,9 +2109,9 @@ request with credentials for the instance of the service that owns the job.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C9deleteJobyySS_SDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C9deleteJob2id7headers17completionHandlerySS_SDyS2SGSgy7RestKit0K8ResponseVyytGSg_AJ0K5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/deleteJob(id:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C9deleteJobyySS_SDyS2SGSgXetcACF">deleteJob(id:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C9deleteJob2id7headers17completionHandlerySS_SDyS2SGSgy7RestKit0K8ResponseVyytGSg_AJ0K5ErrorOSgtctF">deleteJob(id:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1968,7 +2124,8 @@ request with credentials for the instance of the service that owns the job.</p>
 <p>Deletes the specified job. You cannot delete a job that the service is actively processing. Once you delete a job,
 its results are no longer available. The service automatically deletes a job and its results when the time to live
 for the results expires. You must use credentials for the instance of the service that owns a job to delete it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/async.html#delete-async">Deleting a job</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-async#delete-async">Deleting a
+job</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -2032,9 +2189,9 @@ request with credentials for the instance of the service that owns the job.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C19createLanguageModelyySS_S2SSgAESDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C19createLanguageModel4name04baseG4Name7dialect11description7headers17completionHandlerySS_S2SSgAKSDyS2SGSgy7RestKit0P8ResponseVyAA0fG0VGSg_AN0P5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/createLanguageModel(name:baseModelName:dialect:description:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C19createLanguageModelyySS_S2SSgAESDyS2SGSgXetcACF">createLanguageModel(name:baseModelName:dialect:description:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C19createLanguageModel4name04baseG4Name7dialect11description7headers17completionHandlerySS_S2SSgAKSDyS2SGSgy7RestKit0P8ResponseVyAA0fG0VGSg_AN0P5ErrorOSgtctF">createLanguageModel(name:baseModelName:dialect:description:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2047,7 +2204,7 @@ request with credentials for the instance of the service that owns the job.</p>
 <p>Creates a new custom language model for a specified base model. The custom language model can be used only with the
 base model for which it is created. The model is owned by the instance of the service whose credentials are used to
 create it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#createModel-language">Create a custom language
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-languageCreate#createModel-language">Create a custom language
 model</a>.</p>
 
                       </div>
@@ -2094,7 +2251,7 @@ name that describes the domain of the custom model, such as <code>Medical custom
                                   <p>The name of the base language model that is to be customized by the new custom
 language model. The new custom model can be used only with the base model that it customizes.
 To determine whether a base model supports language model customization, use the <strong>Get a model</strong> method and check
-that the attribute <code>custom_language_model</code> is set to <code>true</code>. You can also refer to <a href="https://cloud.ibm.com/docs/services/speech-to-text/custom.html#languageSupport">Language support for
+that the attribute <code>custom_language_model</code> is set to <code>true</code>. You can also refer to <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-customization#languageSupport">Language support for
 customization</a>.</p>
                                 </div>
                               </td>
@@ -2167,9 +2324,9 @@ the language of the custom model.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C18listLanguageModelsyySSSg_SDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C18listLanguageModels8language7headers17completionHandlerySSSg_SDyS2SGSgy7RestKit0L8ResponseVyAA0fG0VGSg_AK0L5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/listLanguageModels(language:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C18listLanguageModelsyySSSg_SDyS2SGSgXetcACF">listLanguageModels(language:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C18listLanguageModels8language7headers17completionHandlerySSSg_SDyS2SGSgy7RestKit0L8ResponseVyAA0fG0VGSg_AK0L5ErrorOSgtctF">listLanguageModels(language:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2183,7 +2340,7 @@ the language of the custom model.</p>
 parameter to see all custom language models for the specified language. Omit the parameter to see all custom
 language models for all languages. You must use credentials for the instance of the service that owns a model to
 list information about it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#listModels-language">Listing custom language
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageLanguageModels#listModels-language">Listing custom language
 models</a>.</p>
 
                       </div>
@@ -2249,9 +2406,9 @@ are owned by the requesting credentials.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C16getLanguageModelyySS_SDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C16getLanguageModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0M8ResponseVyAA0fG0VGSg_AJ0M5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/getLanguageModel(customizationID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C16getLanguageModelyySS_SDyS2SGSgXetcACF">getLanguageModel(customizationID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C16getLanguageModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0M8ResponseVyAA0fG0VGSg_AJ0M5ErrorOSgtctF">getLanguageModel(customizationID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2263,7 +2420,7 @@ are owned by the requesting credentials.</p>
 
 <p>Gets information about a specified custom language model. You must use credentials for the instance of the service
 that owns a model to list information about it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#listModels-language">Listing custom language
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageLanguageModels#listModels-language">Listing custom language
 models</a>.</p>
 
                       </div>
@@ -2328,9 +2485,9 @@ request. You must make the request with credentials for the instance of the serv
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C19deleteLanguageModelyySS_SDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C19deleteLanguageModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0M8ResponseVyytGSg_AJ0M5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/deleteLanguageModel(customizationID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C19deleteLanguageModelyySS_SDyS2SGSgXetcACF">deleteLanguageModel(customizationID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C19deleteLanguageModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0M8ResponseVyytGSg_AJ0M5ErrorOSgtctF">deleteLanguageModel(customizationID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2343,7 +2500,7 @@ request. You must make the request with credentials for the instance of the serv
 <p>Deletes an existing custom language model. The custom model cannot be deleted if another request, such as adding a
 corpus or grammar to the model, is currently being processed. You must use credentials for the instance of the
 service that owns a model to delete it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#deleteModel-language">Deleting a custom language
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageLanguageModels#deleteModel-language">Deleting a custom language
 model</a>.</p>
 
                       </div>
@@ -2408,9 +2565,9 @@ request. You must make the request with credentials for the instance of the serv
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C18trainLanguageModelyySS_SSSgSdSgSDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C18trainLanguageModel15customizationID08wordTypeB3Add0H6Weight7headers17completionHandlerySS_SSSgSdSgSDyS2SGSgy7RestKit0Q8ResponseVyytGSg_AN0Q5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/trainLanguageModel(customizationID:wordTypeToAdd:customizationWeight:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C18trainLanguageModelyySS_SSSgSdSgSDyS2SGSgXetcACF">trainLanguageModel(customizationID:wordTypeToAdd:customizationWeight:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C18trainLanguageModel15customizationID08wordTypeB3Add0H6Weight7headers17completionHandlerySS_SSSgSdSgSDyS2SGSgy7RestKit0Q8ResponseVyytGSg_AN0Q5ErrorOSgtctF">trainLanguageModel(customizationID:wordTypeToAdd:customizationWeight:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2433,15 +2590,20 @@ status. Use a loop to check the status every 10 seconds. The method returns a <c
 <code>status</code> and <code>progress</code> fields. A status of <code>available</code> means that the custom model is trained and ready to use.
 The service cannot accept subsequent training requests or requests to add new resources until the existing request
 completes.
-Training can fail to start for the following reasons:</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-languageCreate#trainModel-language">Train the custom language
+model</a>.</p>
+<h3 id='training-failures' class='heading'>Training failures</h3>
+
+<p>Training can fail to start for the following reasons:</p>
 
 <ul>
 <li>The service is currently handling another request for the custom model, such as another training request or a
 request to add a corpus or grammar to the model.</li>
 <li>No training data have been added to the custom model.</li>
-<li><p>One or more words that were added to the custom model have invalid sounds-like pronunciations that you must fix.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#trainModel-language">Train the custom language
-model</a>.</p></li>
+<li><p>The custom model contains one or more invalid corpora, grammars, or words (for example, a custom word has an
+invalid sounds-like pronunciation). You can correct the invalid resources or set the <code>strict</code> parameter to <code>false</code>
+to exclude the invalid resources from the training. The model must contain at least one valid resource for training
+to succeed.</p></li>
 </ul>
 
                       </div>
@@ -2547,9 +2709,9 @@ recognition request by specifying a customization weight for that request.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C18resetLanguageModelyySS_SDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C18resetLanguageModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0M8ResponseVyytGSg_AJ0M5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/resetLanguageModel(customizationID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C18resetLanguageModelyySS_SDyS2SGSgXetcACF">resetLanguageModel(customizationID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C18resetLanguageModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0M8ResponseVyytGSg_AJ0M5ErrorOSgtctF">resetLanguageModel(customizationID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2563,7 +2725,7 @@ recognition request by specifying a customization weight for that request.</p>
 language model initializes the model to its state when it was first created. Metadata such as the name and language
 of the model are preserved, but the model&rsquo;s words resource is removed and must be re-created. You must use
 credentials for the instance of the service that owns a model to reset it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-models.html#resetModel-language">Resetting a custom language
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageLanguageModels#resetModel-language">Resetting a custom language
 model</a>.</p>
 
                       </div>
@@ -2628,9 +2790,9 @@ request. You must make the request with credentials for the instance of the serv
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C20upgradeLanguageModelyySS_SDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C20upgradeLanguageModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0M8ResponseVyytGSg_AJ0M5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/upgradeLanguageModel(customizationID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C20upgradeLanguageModelyySS_SDyS2SGSgXetcACF">upgradeLanguageModel(customizationID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C20upgradeLanguageModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0M8ResponseVyytGSg_AJ0M5ErrorOSgtctF">upgradeLanguageModel(customizationID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2650,7 +2812,7 @@ The method returns a <code><a href="../Structs/LanguageModel.html">LanguageModel
 status every 10 seconds. While it is being upgraded, the custom model has the status <code>upgrading</code>. When the upgrade
 is complete, the model resumes the status that it had prior to upgrade. The service cannot accept subsequent
 requests for the model until the upgrade completes.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/custom-upgrade.html#upgradeLanguage">Upgrading a custom language
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-customUpgrade#upgradeLanguage">Upgrading a custom language
 model</a>.</p>
 
                       </div>
@@ -2715,9 +2877,9 @@ request. You must make the request with credentials for the instance of the serv
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C11listCorporayySS_SDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C11listCorpora15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0L8ResponseVyAA0F0VGSg_AJ0L5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/listCorpora(customizationID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C11listCorporayySS_SDyS2SGSgXetcACF">listCorpora(customizationID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C11listCorpora15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0L8ResponseVyAA0F0VGSg_AJ0L5ErrorOSgtctF">listCorpora(customizationID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2730,7 +2892,7 @@ request. You must make the request with credentials for the instance of the serv
 <p>Lists information about all corpora from a custom language model. The information includes the total number of
 words and out-of-vocabulary (OOV) words, name, and status of each corpus. You must use credentials for the instance
 of the service that owns a model to list its corpora.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-corpora.html#listCorpora">Listing corpora for a custom language
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageCorpora#listCorpora">Listing corpora for a custom language
 model</a>.</p>
 
                       </div>
@@ -2795,9 +2957,9 @@ request. You must make the request with credentials for the instance of the serv
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C9addCorpusyySS_SS10Foundation4DataVSbSgSDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C9addCorpus15customizationID10corpusName0I4File14allowOverwrite7headers17completionHandlerySS_SS10Foundation4DataVSbSgSDyS2SGSgy7RestKit0S8ResponseVyytGSg_AQ0S5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/addCorpus(customizationID:corpusName:corpusFile:allowOverwrite:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C9addCorpusyySS_SS10Foundation4DataVSbSgSDyS2SGSgXetcACF">addCorpus(customizationID:corpusName:corpusFile:allowOverwrite:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C9addCorpus15customizationID10corpusName0I4File14allowOverwrite7headers17completionHandlerySS_SS10Foundation4DataVSbSgSDyS2SGSgy7RestKit0S8ResponseVyytGSg_AQ0S5ErrorOSgtctF">addCorpus(customizationID:corpusName:corpusFile:allowOverwrite:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2830,13 +2992,14 @@ extract OOV words anew. Before doing so, it removes any OOV words associated wit
 model&rsquo;s words resource unless they were also added by another corpus or grammar, or they have been modified in some
 way with the <strong>Add custom words</strong> or <strong>Add a custom word</strong> method.
 The service limits the overall amount of data that you can add to a custom model to a maximum of 10 million total
-words from all sources combined. Also, you can add no more than 30 thousand custom (OOV) words to a model. This
+words from all sources combined. Also, you can add no more than 90 thousand custom (OOV) words to a model. This
 includes words that the service extracts from corpora and grammars, and words that you add directly.
 <strong>See also:</strong></p>
 
 <ul>
-<li><a href="https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#workingCorpora">Working with corpora</a></li>
-<li><p><a href="https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#addCorpora">Add corpora to the custom language
+<li><a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-corporaWords#workingCorpora">Working with
+corpora</a></li>
+<li><p><a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-languageCreate#addCorpus">Add a corpus to the custom language
 model</a>.</p></li>
 </ul>
 
@@ -2905,7 +3068,7 @@ by the user.</li>
 UTF-8 if it contains non-ASCII characters; the service assumes UTF-8 encoding if it encounters non-ASCII
 characters.
 Make sure that you know the character encoding of the file. You must use that encoding when working with the
-words in the custom language model. For more information, see <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#charEncoding">Character
+words in the custom language model. For more information, see <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-corporaWords#charEncoding">Character
 encoding</a>.
 With the <code>curl</code> command, use the <code>--data-binary</code> option to upload the file for the request.</p>
                                 </div>
@@ -2958,9 +3121,9 @@ with the same name does not already exist.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C9getCorpusyySS_SSSDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C9getCorpus15customizationID10corpusName7headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0N8ResponseVyAA0F0VGSg_AK0N5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/getCorpus(customizationID:corpusName:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C9getCorpusyySS_SSSDyS2SGSgXetcACF">getCorpus(customizationID:corpusName:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C9getCorpus15customizationID10corpusName7headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0N8ResponseVyAA0F0VGSg_AK0N5ErrorOSgtctF">getCorpus(customizationID:corpusName:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2973,7 +3136,7 @@ with the same name does not already exist.</p>
 <p>Gets information about a corpus from a custom language model. The information includes the total number of words
 and out-of-vocabulary (OOV) words, name, and status of the corpus. You must use credentials for the instance of the
 service that owns a model to list its corpora.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-corpora.html#listCorpora">Listing corpora for a custom language
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageCorpora#listCorpora">Listing corpora for a custom language
 model</a>.</p>
 
                       </div>
@@ -3051,9 +3214,9 @@ request. You must make the request with credentials for the instance of the serv
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C12deleteCorpusyySS_SSSDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C12deleteCorpus15customizationID10corpusName7headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0N8ResponseVyytGSg_AK0N5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/deleteCorpus(customizationID:corpusName:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C12deleteCorpusyySS_SSSDyS2SGSgXetcACF">deleteCorpus(customizationID:corpusName:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C12deleteCorpus15customizationID10corpusName7headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0N8ResponseVyytGSg_AK0N5ErrorOSgtctF">deleteCorpus(customizationID:corpusName:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3068,7 +3231,7 @@ are associated with the corpus from the custom model&rsquo;s words resource unle
 or grammar, or they were modified in some way with the <strong>Add custom words</strong> or <strong>Add a custom word</strong> method.
 Removing a corpus does not affect the custom model until you train the model with the <strong>Train a custom language
 model</strong> method. You must use credentials for the instance of the service that owns a model to delete its corpora.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-corpora.html#deleteCorpus">Deleting a corpus from a custom language
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageCorpora#deleteCorpus">Deleting a corpus from a custom language
 model</a>.</p>
 
                       </div>
@@ -3146,9 +3309,9 @@ request. You must make the request with credentials for the instance of the serv
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C9listWordsyySS_SSSgAESDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C9listWords15customizationID8wordType4sort7headers17completionHandlerySS_SSSgAJSDyS2SGSgy7RestKit0O8ResponseVyAA0F0VGSg_AM0O5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/listWords(customizationID:wordType:sort:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C9listWordsyySS_SSSgAESDyS2SGSgXetcACF">listWords(customizationID:wordType:sort:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C9listWords15customizationID8wordType4sort7headers17completionHandlerySS_SSSgAJSDyS2SGSgy7RestKit0O8ResponseVyAA0F0VGSg_AM0O5ErrorOSgtctF">listWords(customizationID:wordType:sort:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3163,7 +3326,7 @@ words resource, only custom words that were added or modified by the user, or on
 that were extracted from corpora or are recognized by grammars. You can also indicate the order in which the
 service is to return words; by default, the service lists words in ascending alphabetical order. You must use
 credentials for the instance of the service that owns a model to list information about its words.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-words.html#listWords">Listing words from a custom language
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageWords#listWords">Listing words from a custom language
 model</a>.</p>
 
                       </div>
@@ -3266,9 +3429,9 @@ values with the same count are ordered alphabetically. With the <code>curl</code
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C8addWordsyySS_SayAA10CustomWordVGSDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C8addWords15customizationID5words7headers17completionHandlerySS_SayAA10CustomWordVGSDyS2SGSgy7RestKit0O8ResponseVyytGSg_AN0O5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/addWords(customizationID:words:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C8addWordsyySS_SayAA10CustomWordVGSDyS2SGSgXetcACF">addWords(customizationID:words:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C8addWords15customizationID5words7headers17completionHandlerySS_SayAA10CustomWordVGSDyS2SGSgy7RestKit0O8ResponseVyytGSg_AN0O5ErrorOSgtctF">addWords(customizationID:words:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3281,7 +3444,7 @@ values with the same count are ordered alphabetically. With the <code>curl</code
 <p>Adds one or more custom words to a custom language model. The service populates the words resource for a custom
 model with out-of-vocabulary (OOV) words from each corpus or grammar that is added to the model. You can use this
 method to add additional words or to modify existing words in the words resource. The words resource for a model
-can contain a maximum of 30 thousand custom (OOV) words. This includes words that the service extracts from corpora
+can contain a maximum of 90 thousand custom (OOV) words. This includes words that the service extracts from corpora
 and grammars and words that you add directly.
 You must use credentials for the instance of the service that owns a model to add or modify custom words for the
 model. Adding or modifying custom words does not affect the custom model until you train the model for the new data
@@ -3312,9 +3475,9 @@ You can use the <strong>List custom words</strong> or <strong>List a custom word
 an invalid <code>sounds_like</code> field include an <code>error</code> field that describes the problem. You can use other words-related
 methods to correct errors, eliminate typos, and modify how words are pronounced as needed.
 <strong>See also:</strong></li>
-<li><a href="https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#workingWords">Working with custom
+<li><a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-corporaWords#workingWords">Working with custom
 words</a></li>
-<li><p><a href="https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#addWords">Add words to the custom language
+<li><p><a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-languageCreate#addWords">Add words to the custom language
 model</a>.</p></li>
 </ul>
 
@@ -3394,9 +3557,9 @@ be added to or updated in the custom language model.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C7addWordyySS_S2SSgSaySSGSgAESDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C7addWord15customizationID8wordName0I010soundsLike9displayAs7headers17completionHandlerySS_S2SSgSaySSGSgALSDyS2SGSgy7RestKit0R8ResponseVyytGSg_AQ0R5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/addWord(customizationID:wordName:word:soundsLike:displayAs:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C7addWordyySS_S2SSgSaySSGSgAESDyS2SGSgXetcACF">addWord(customizationID:wordName:word:soundsLike:displayAs:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C7addWord15customizationID8wordName0I010soundsLike9displayAs7headers17completionHandlerySS_S2SSgSaySSGSgALSDyS2SGSgy7RestKit0R8ResponseVyytGSg_AQ0R5ErrorOSgtctF">addWord(customizationID:wordName:word:soundsLike:displayAs:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3409,7 +3572,7 @@ be added to or updated in the custom language model.</p>
 <p>Adds a custom word to a custom language model. The service populates the words resource for a custom model with
 out-of-vocabulary (OOV) words from each corpus or grammar that is added to the model. You can use this method to
 add a word or to modify an existing word in the words resource. The words resource for a model can contain a
-maximum of 30 thousand custom (OOV) words. This includes words that the service extracts from corpora and grammars
+maximum of 90 thousand custom (OOV) words. This includes words that the service extracts from corpora and grammars
 and words that you add directly.
 You must use credentials for the instance of the service that owns a model to add or modify a custom word for the
 model. Adding or modifying a custom word does not affect the custom model until you train the model for the new
@@ -3429,9 +3592,9 @@ If you add a custom word that already exists in the words resource for the custo
 overwrites the existing data for the word. If the service encounters an error, it does not add the word to the
 words resource. Use the <strong>List a custom word</strong> method to review the word that you add.
 <strong>See also:</strong></li>
-<li><a href="https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#workingWords">Working with custom
+<li><a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-corporaWords#workingWords">Working with custom
 words</a></li>
-<li><p><a href="https://cloud.ibm.com/docs/services/speech-to-text/language-create.html#addWords">Add words to the custom language
+<li><p><a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-languageCreate#addWords">Add words to the custom language
 model</a>.</p></li>
 </ul>
 
@@ -3478,7 +3641,7 @@ request. You must make the request with credentials for the instance of the serv
                                 <div>
                                   <p>The custom word that is to be added to or updated in the custom language model. Do not
 include spaces in the word. Use a <code>-</code> (dash) or <code>_</code> (underscore) to connect the tokens of compound words.
-URL-encode the word if it includes non-ASCII characters. For more information, see <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#charEncoding">Character
+URL-encode the word if it includes non-ASCII characters. For more information, see <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-corporaWords#charEncoding">Character
 encoding</a>.</p>
                                 </div>
                               </td>
@@ -3568,9 +3731,9 @@ spelling in corpora training data.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C7getWordyySS_SSSDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C7getWord15customizationID8wordName7headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0N8ResponseVyAA0F0VGSg_AK0N5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/getWord(customizationID:wordName:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C7getWordyySS_SSSDyS2SGSgXetcACF">getWord(customizationID:wordName:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C7getWord15customizationID8wordName7headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0N8ResponseVyAA0F0VGSg_AK0N5ErrorOSgtctF">getWord(customizationID:wordName:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3582,7 +3745,7 @@ spelling in corpora training data.</p>
 
 <p>Gets information about a custom word from a custom language model. You must use credentials for the instance of the
 service that owns a model to list information about its words.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-words.html#listWords">Listing words from a custom language
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageWords#listWords">Listing words from a custom language
 model</a>.</p>
 
                       </div>
@@ -3624,7 +3787,7 @@ request. You must make the request with credentials for the instance of the serv
                               <td>
                                 <div>
                                   <p>The custom word that is to be read from the custom language model. URL-encode the word if
-it includes non-ASCII characters. For more information, see <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#charEncoding">Character
+it includes non-ASCII characters. For more information, see <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-corporaWords#charEncoding">Character
 encoding</a>.</p>
                                 </div>
                               </td>
@@ -3662,9 +3825,9 @@ encoding</a>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C10deleteWordyySS_SSSDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C10deleteWord15customizationID8wordName7headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0N8ResponseVyytGSg_AK0N5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/deleteWord(customizationID:wordName:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C10deleteWordyySS_SSSDyS2SGSgXetcACF">deleteWord(customizationID:wordName:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C10deleteWord15customizationID8wordName7headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0N8ResponseVyytGSg_AK0N5ErrorOSgtctF">deleteWord(customizationID:wordName:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3679,7 +3842,7 @@ words resource via any means. However, if the word also exists in the service&rs
 removes only the custom pronunciation for the word; the word remains in the base vocabulary. Removing a custom word
 does not affect the custom model until you train the model with the <strong>Train a custom language model</strong> method. You
 must use credentials for the instance of the service that owns a model to delete its words.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-words.html#deleteWord">Deleting a word from a custom language
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageWords#deleteWord">Deleting a word from a custom language
 model</a>.</p>
 
                       </div>
@@ -3721,7 +3884,7 @@ request. You must make the request with credentials for the instance of the serv
                               <td>
                                 <div>
                                   <p>The custom word that is to be deleted from the custom language model. URL-encode the word
-if it includes non-ASCII characters. For more information, see <a href="https://cloud.ibm.com/docs/services/speech-to-text/language-resource.html#charEncoding">Character
+if it includes non-ASCII characters. For more information, see <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-corporaWords#charEncoding">Character
 encoding</a>.</p>
                                 </div>
                               </td>
@@ -3759,9 +3922,9 @@ encoding</a>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C12listGrammarsyySS_SDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C12listGrammars15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0L8ResponseVyAA0F0VGSg_AJ0L5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/listGrammars(customizationID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C12listGrammarsyySS_SDyS2SGSgXetcACF">listGrammars(customizationID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C12listGrammars15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0L8ResponseVyAA0F0VGSg_AJ0L5ErrorOSgtctF">listGrammars(customizationID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3774,7 +3937,8 @@ encoding</a>.</p>
 <p>Lists information about all grammars from a custom language model. The information includes the total number of
 out-of-vocabulary (OOV) words, name, and status of each grammar. You must use credentials for the instance of the
 service that owns a model to list its grammars.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/">Listing grammars from a custom language model</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageGrammars#listGrammars">Listing grammars from a custom language
+model</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -3838,9 +4002,9 @@ request. You must make the request with credentials for the instance of the serv
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C10addGrammaryySS_S3SSbSgSDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C10addGrammar15customizationID11grammarName0I4File11contentType14allowOverwrite7headers17completionHandlerySS_S3SSbSgSDyS2SGSgy7RestKit0S8ResponseVyytGSg_AO0S5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/addGrammar(customizationID:grammarName:grammarFile:contentType:allowOverwrite:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C10addGrammaryySS_S3SSbSgSDyS2SGSgXetcACF">addGrammar(customizationID:grammarName:grammarFile:contentType:allowOverwrite:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C10addGrammar15customizationID11grammarName0I4File11contentType14allowOverwrite7headers17completionHandlerySS_S3SSbSgSDyS2SGSgy7RestKit0S8ResponseVyytGSg_AO0S5ErrorOSgtctF">addGrammar(customizationID:grammarName:grammarFile:contentType:allowOverwrite:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3869,13 +4033,15 @@ extract OOV words anew. Before doing so, it removes any OOV words associated wit
 model&rsquo;s words resource unless they were also added by another resource or they have been modified in some way with
 the <strong>Add custom words</strong> or <strong>Add a custom word</strong> method.
 The service limits the overall amount of data that you can add to a custom model to a maximum of 10 million total
-words from all sources combined. Also, you can add no more than 30 thousand OOV words to a model. This includes
+words from all sources combined. Also, you can add no more than 90 thousand OOV words to a model. This includes
 words that the service extracts from corpora and grammars and words that you add directly.
 <strong>See also:</strong></p>
 
 <ul>
-<li><a href="https://cloud.ibm.com/docs/services/speech-to-text/">Working with grammars</a></li>
-<li><p><a href="https://cloud.ibm.com/docs/services/speech-to-text/">Add grammars to the custom language model</a>.</p></li>
+<li><a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-grammarUnderstand#grammarUnderstand">Understanding
+grammars</a></li>
+<li><p><a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-grammarAdd#addGrammar">Add a grammar to the custom language
+model</a>.</p></li>
 </ul>
 
                       </div>
@@ -3943,7 +4109,8 @@ by the user.</li>
                                   <p>A plain text file that contains the grammar in the format specified by the
 <code>Content-Type</code> header. Encode the file in UTF-8 (ASCII is a subset of UTF-8). Using any other encoding can lead
 to issues when compiling the grammar or to unexpected results in decoding. The service ignores an encoding that
-is specified in the header of the grammar.</p>
+is specified in the header of the grammar.
+With the <code>curl</code> command, use the <code>--data-binary</code> option to upload the file for the request.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4012,9 +4179,9 @@ grammar with the same name does not already exist.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C10getGrammaryySS_SSSDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C10getGrammar15customizationID11grammarName7headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0N8ResponseVyAA0F0VGSg_AK0N5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/getGrammar(customizationID:grammarName:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C10getGrammaryySS_SSSDyS2SGSgXetcACF">getGrammar(customizationID:grammarName:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C10getGrammar15customizationID11grammarName7headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0N8ResponseVyAA0F0VGSg_AK0N5ErrorOSgtctF">getGrammar(customizationID:grammarName:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4027,7 +4194,8 @@ grammar with the same name does not already exist.</p>
 <p>Gets information about a grammar from a custom language model. The information includes the total number of
 out-of-vocabulary (OOV) words, name, and status of the grammar. You must use credentials for the instance of the
 service that owns a model to list its grammars.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/">Listing grammars from a custom language model</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageGrammars#listGrammars">Listing grammars from a custom language
+model</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -4104,9 +4272,9 @@ request. You must make the request with credentials for the instance of the serv
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C13deleteGrammaryySS_SSSDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C13deleteGrammar15customizationID11grammarName7headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0N8ResponseVyytGSg_AK0N5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/deleteGrammar(customizationID:grammarName:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C13deleteGrammaryySS_SSSDyS2SGSgXetcACF">deleteGrammar(customizationID:grammarName:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C13deleteGrammar15customizationID11grammarName7headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0N8ResponseVyytGSg_AK0N5ErrorOSgtctF">deleteGrammar(customizationID:grammarName:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4121,7 +4289,7 @@ associated with the grammar from the custom model&rsquo;s words resource unless 
 or they were modified in some way with the <strong>Add custom words</strong> or <strong>Add a custom word</strong> method. Removing a grammar
 does not affect the custom model until you train the model with the <strong>Train a custom language model</strong> method. You
 must use credentials for the instance of the service that owns a model to delete its grammar.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/">Deleting a grammar from a custom language
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageGrammars#deleteGrammar">Deleting a grammar from a custom language
 model</a>.</p>
 
                       </div>
@@ -4199,9 +4367,9 @@ request. You must make the request with credentials for the instance of the serv
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C19createAcousticModelyySS_S2SSgSDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C19createAcousticModel4name04baseG4Name11description7headers17completionHandlerySS_S2SSgSDyS2SGSgy7RestKit0O8ResponseVyAA0fG0VGSg_AM0O5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/createAcousticModel(name:baseModelName:description:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C19createAcousticModelyySS_S2SSgSDyS2SGSgXetcACF">createAcousticModel(name:baseModelName:description:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C19createAcousticModel4name04baseG4Name11description7headers17completionHandlerySS_S2SSgSDyS2SGSgy7RestKit0O8ResponseVyAA0fG0VGSg_AM0O5ErrorOSgtctF">createAcousticModel(name:baseModelName:description:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4214,7 +4382,7 @@ request. You must make the request with credentials for the instance of the serv
 <p>Creates a new custom acoustic model for a specified base model. The custom acoustic model can be used only with the
 base model for which it is created. The model is owned by the instance of the service whose credentials are used to
 create it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-create.html#createModel-acoustic">Create a custom acoustic
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-acoustic#createModel-acoustic">Create a custom acoustic
 model</a>.</p>
 
                       </div>
@@ -4260,7 +4428,7 @@ custom model</code>.</p>
                                 <div>
                                   <p>The name of the base language model that is to be customized by the new custom
 acoustic model. The new custom model can be used only with the base model that it customizes.
-To determine whether a base model supports acoustic model customization, refer to <a href="https://cloud.ibm.com/docs/services/speech-to-text/custom.html#languageSupport">Language support for
+To determine whether a base model supports acoustic model customization, refer to <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-customization#languageSupport">Language support for
 customization</a>.</p>
                                 </div>
                               </td>
@@ -4311,9 +4479,9 @@ the language of the custom model.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C18listAcousticModelsyySSSg_SDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C18listAcousticModels8language7headers17completionHandlerySSSg_SDyS2SGSgy7RestKit0L8ResponseVyAA0fG0VGSg_AK0L5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/listAcousticModels(language:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C18listAcousticModelsyySSSg_SDyS2SGSgXetcACF">listAcousticModels(language:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C18listAcousticModels8language7headers17completionHandlerySSSg_SDyS2SGSgy7RestKit0L8ResponseVyAA0fG0VGSg_AK0L5ErrorOSgtctF">listAcousticModels(language:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4327,7 +4495,7 @@ the language of the custom model.</p>
 parameter to see all custom acoustic models for the specified language. Omit the parameter to see all custom
 acoustic models for all languages. You must use credentials for the instance of the service that owns a model to
 list information about it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#listModels-acoustic">Listing custom acoustic
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAcousticModels#listModels-acoustic">Listing custom acoustic
 models</a>.</p>
 
                       </div>
@@ -4393,9 +4561,9 @@ are owned by the requesting credentials.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C16getAcousticModelyySS_SDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C16getAcousticModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0M8ResponseVyAA0fG0VGSg_AJ0M5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/getAcousticModel(customizationID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C16getAcousticModelyySS_SDyS2SGSgXetcACF">getAcousticModel(customizationID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C16getAcousticModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0M8ResponseVyAA0fG0VGSg_AJ0M5ErrorOSgtctF">getAcousticModel(customizationID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4407,7 +4575,7 @@ are owned by the requesting credentials.</p>
 
 <p>Gets information about a specified custom acoustic model. You must use credentials for the instance of the service
 that owns a model to list information about it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#listModels-acoustic">Listing custom acoustic
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAcousticModels#listModels-acoustic">Listing custom acoustic
 models</a>.</p>
 
                       </div>
@@ -4472,9 +4640,9 @@ request. You must make the request with credentials for the instance of the serv
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C19deleteAcousticModelyySS_SDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C19deleteAcousticModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0M8ResponseVyytGSg_AJ0M5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/deleteAcousticModel(customizationID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C19deleteAcousticModelyySS_SDyS2SGSgXetcACF">deleteAcousticModel(customizationID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C19deleteAcousticModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0M8ResponseVyytGSg_AJ0M5ErrorOSgtctF">deleteAcousticModel(customizationID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4487,7 +4655,7 @@ request. You must make the request with credentials for the instance of the serv
 <p>Deletes an existing custom acoustic model. The custom model cannot be deleted if another request, such as adding an
 audio resource to the model, is currently being processed. You must use credentials for the instance of the service
 that owns a model to delete it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#deleteModel-acoustic">Deleting a custom acoustic
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAcousticModels#deleteModel-acoustic">Deleting a custom acoustic
 model</a>.</p>
 
                       </div>
@@ -4552,9 +4720,9 @@ request. You must make the request with credentials for the instance of the serv
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C18trainAcousticModelyySS_SSSgSDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C18trainAcousticModel15customizationID014customLanguagegI07headers17completionHandlerySS_SSSgSDyS2SGSgy7RestKit0O8ResponseVyytGSg_AL0O5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/trainAcousticModel(customizationID:customLanguageModelID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C18trainAcousticModelyySS_SSSgSDyS2SGSgXetcACF">trainAcousticModel(customizationID:customLanguageModelID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C18trainAcousticModel15customizationID014customLanguagegI07headers17completionHandlerySS_SSSgSDyS2SGSgy7RestKit0O8ResponseVyytGSg_AL0O5ErrorOSgtctF">trainAcousticModel(customizationID:customLanguageModelID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4583,17 +4751,23 @@ language model that is to be used during training. Train with a custom language 
 transcriptions of the audio files that you have added to the custom model or you have either corpora (text files)
 or a list of words that are relevant to the contents of the audio files. Both of the custom models must be based on
 the same version of the same base model for training to succeed.
-Training can fail to start for the following reasons:</p>
+<strong>See also:</strong></p>
 
 <ul>
+<li><a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-acoustic#trainModel-acoustic">Train the custom acoustic
+model</a></li>
+<li><a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-useBoth#useBoth">Using custom acoustic and custom language models
+together</a>
+### Training failures
+Training can fail to start for the following reasons:</li>
 <li>The service is currently handling another request for the custom model, such as another training request or a
 request to add audio resources to the model.</li>
-<li>The custom model contains less than 10 minutes or more than 100 hours of audio data.</li>
-<li>One or more of the custom model&rsquo;s audio resources is invalid.</li>
-<li><p>You passed an incompatible custom language model with the <code>custom_language_model_id</code> query parameter. Both custom
-models must be based on the same version of the same base model.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-create.html#trainModel-acoustic">Train the custom acoustic
-model</a>.</p></li>
+<li>The custom model contains less than 10 minutes or more than 200 hours of audio data.</li>
+<li>You passed an incompatible custom language model with the <code>custom_language_model_id</code> query parameter. Both custom
+models must be based on the same version of the same base model.</li>
+<li><p>The custom model contains one or more invalid audio resources. You can correct the invalid audio resources or set
+the <code>strict</code> parameter to <code>false</code> to exclude the invalid resources from the training. The model must contain at
+least one valid resource for training to succeed.</p></li>
 </ul>
 
                       </div>
@@ -4675,9 +4849,9 @@ acoustic model. The credentials specified with the request must own both custom 
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C18resetAcousticModelyySS_SDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C18resetAcousticModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0M8ResponseVyytGSg_AJ0M5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/resetAcousticModel(customizationID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C18resetAcousticModelyySS_SDyS2SGSgXetcACF">resetAcousticModel(customizationID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C18resetAcousticModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0M8ResponseVyytGSg_AJ0M5ErrorOSgtctF">resetAcousticModel(customizationID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4691,7 +4865,7 @@ acoustic model. The credentials specified with the request must own both custom 
 initializes the model to its state when it was first created. Metadata such as the name and language of the model
 are preserved, but the model&rsquo;s audio resources are removed and must be re-created. You must use credentials for the
 instance of the service that owns a model to reset it.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-models.html#resetModel-acoustic">Resetting a custom acoustic
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAcousticModels#resetModel-acoustic">Resetting a custom acoustic
 model</a>.</p>
 
                       </div>
@@ -4756,9 +4930,9 @@ request. You must make the request with credentials for the instance of the serv
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C20upgradeAcousticModelyySS_SSSgSbSgSDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C20upgradeAcousticModel15customizationID014customLanguagegI05force7headers17completionHandlerySS_SSSgSbSgSDyS2SGSgy7RestKit0P8ResponseVyytGSg_AN0P5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/upgradeAcousticModel(customizationID:customLanguageModelID:force:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C20upgradeAcousticModelyySS_SSSgSbSgSDyS2SGSgXetcACF">upgradeAcousticModel(customizationID:customLanguageModelID:force:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C20upgradeAcousticModel15customizationID014customLanguagegI05force7headers17completionHandlerySS_SSSgSbSgSDyS2SGSgy7RestKit0P8ResponseVyytGSg_AN0P5ErrorOSgtctF">upgradeAcousticModel(customizationID:customLanguageModelID:force:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4783,7 +4957,7 @@ If the custom acoustic model was trained with a separately created custom langua
 <code>custom_language_model_id</code> parameter to specify the GUID of that custom language model. The custom language model
 must be upgraded before the custom acoustic model can be upgraded. Omit the parameter if the custom acoustic model
 was not trained with a custom language model.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/custom-upgrade.html#upgradeAcoustic">Upgrading a custom acoustic
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-customUpgrade#upgradeAcoustic">Upgrading a custom acoustic
 model</a>.</p>
 
                       </div>
@@ -4842,7 +5016,7 @@ custom acoustic model can be upgraded. The credentials specified with the reques
                                   <p>If <code>true</code>, forces the upgrade of a custom acoustic model for which no input data has been
 modified since it was last trained. Use this parameter only to force the upgrade of a custom acoustic model that
 is trained with a custom language model, and only if you receive a 400 response code and the message <code>No input
-data modified since last training</code>. See <a href="https://cloud.ibm.com/docs/services/speech-to-text/custom-upgrade.html#upgradeAcoustic">Upgrading a custom acoustic
+data modified since last training</code>. See <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-customUpgrade#upgradeAcoustic">Upgrading a custom acoustic
 model</a>.</p>
                                 </div>
                               </td>
@@ -4880,9 +5054,9 @@ model</a>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C9listAudioyySS_SDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C9listAudio15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0L8ResponseVyAA0F9ResourcesVGSg_AJ0L5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/listAudio(customizationID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C9listAudioyySS_SDyS2SGSgXetcACF">listAudio(customizationID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C9listAudio15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0L8ResponseVyAA0F9ResourcesVGSg_AJ0L5ErrorOSgtctF">listAudio(customizationID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4897,7 +5071,7 @@ resource and information about its audio data, such as its duration. It also inc
 resource, which is important for checking the service&rsquo;s analysis of the resource in response to a request to add it
 to the custom acoustic model. You must use credentials for the instance of the service that owns a model to list
 its audio resources.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-audio.html#listAudio">Listing audio resources for a custom acoustic
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAudio#listAudio">Listing audio resources for a custom acoustic
 model</a>.</p>
 
                       </div>
@@ -4962,9 +5136,9 @@ request. You must make the request with credentials for the instance of the serv
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C8addAudioyySS_SS10Foundation4DataVSSSgSbSgAHSDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C8addAudio15customizationID9audioName0I8Resource20containedContentType14allowOverwrite07contentN07headers17completionHandlerySS_SS10Foundation4DataVSSSgSbSgAPSDyS2SGSgy7RestKit0W8ResponseVyytGSg_AT0W5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/addAudio(customizationID:audioName:audioResource:containedContentType:allowOverwrite:contentType:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C8addAudioyySS_SS10Foundation4DataVSSSgSbSgAHSDyS2SGSgXetcACF">addAudio(customizationID:audioName:audioResource:containedContentType:allowOverwrite:contentType:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C8addAudio15customizationID9audioName0I8Resource20containedContentType14allowOverwrite07contentN07headers17completionHandlerySS_SS10Foundation4DataVSSSgSbSgAPSDyS2SGSgy7RestKit0W8ResponseVyytGSg_AT0W5ErrorOSgtctF">addAudio(customizationID:audioName:audioResource:containedContentType:allowOverwrite:contentType:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4983,7 +5157,7 @@ files via a single archive file is significantly more efficient than adding each
 audio resources in any format that the service supports for speech recognition.
 You can use this method to add any number of audio resources to a custom model by calling the method once for each
 audio or archive file. But the addition of one audio resource must be fully complete before you can add another.
-You must add a minimum of 10 minutes and a maximum of 100 hours of audio that includes speech, not just silence, to
+You must add a minimum of 10 minutes and a maximum of 200 hours of audio that includes speech, not just silence, to
 a custom acoustic model before you can train it. No audio resource, audio- or archive-type, can be larger than 100
 MB. To add an audio resource that has the same name as an existing audio resource, set the <code>allow_overwrite</code>
 parameter to <code>true</code>; otherwise, the request fails.
@@ -4997,7 +5171,7 @@ To determine the status of the service&rsquo;s analysis of the audio, use the <s
 the status of the audio. The method accepts the customization ID of the custom model and the name of the audio
 resource, and it returns the status of the resource. Use a loop to check the status of the audio every few seconds
 until it becomes <code>ok</code>.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-create.html#addAudio">Add audio to the custom acoustic
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-acoustic#addAudio">Add audio to the custom acoustic
 model</a>.</p>
 <h3 id='content-types-for-audio-type-resources' class='heading'>Content types for audio-type resources</h3>
 
@@ -5026,7 +5200,8 @@ The sampling rate of an audio file must match the sampling rate of the base mode
 broadband models, at least 16 kHz; for narrowband models, at least 8 kHz. If the sampling rate of the audio is
 higher than the minimum required rate, the service down-samples the audio to the appropriate rate. If the sampling
 rate of the audio is lower than the minimum required rate, the service labels the audio file as <code>invalid</code>.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/audio-formats.html">Audio formats</a>.
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-audio-formats#audio-formats">Audio
+formats</a>.
 ### Content types for archive-type resources
 You can add an archive file (<strong>.zip</strong> or <strong>.tar.gz</strong> file) that contains audio files in any format that the
 service supports for speech recognition. For an archive-type resource, use the <code>Content-Type</code> parameter to specify
@@ -5113,7 +5288,8 @@ that matches the language of the custom model and reflects the contents of the r
                               <td>
                                 <div>
                                   <p>The audio resource that is to be added to the custom acoustic model, an individual
-audio file or an archive file.</p>
+audio file or an archive file.
+With the <code>curl</code> command, use the <code>--data-binary</code> option to upload the file for the request.</p>
                                 </div>
                               </td>
                             </tr>
@@ -5199,9 +5375,9 @@ archive-type resources</strong> in the method description.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C8getAudioyySS_SSSDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C8getAudio15customizationID9audioName7headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0N8ResponseVyAA0F7ListingVGSg_AK0N5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/getAudio(customizationID:audioName:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C8getAudioyySS_SSSDyS2SGSgXetcACF">getAudio(customizationID:audioName:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C8getAudio15customizationID9audioName7headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0N8ResponseVyAA0F7ListingVGSg_AK0N5ErrorOSgtctF">getAudio(customizationID:audioName:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -5226,7 +5402,7 @@ service&rsquo;s analysis of a resource that you add to the custom model.</li>
 <li><p>For an archive-type resource, the <code>status</code> field is located in the <code><a href="../Structs/AudioResource.html">AudioResource</a></code> object that is returned in the
 <code>container</code> field.
 You must use credentials for the instance of the service that owns a model to list its audio resources.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-audio.html#listAudio">Listing audio resources for a custom acoustic
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAudio#listAudio">Listing audio resources for a custom acoustic
 model</a>.</p></li>
 </ul>
 
@@ -5305,9 +5481,9 @@ request. You must make the request with credentials for the instance of the serv
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C11deleteAudioyySS_SSSDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C11deleteAudio15customizationID9audioName7headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0N8ResponseVyytGSg_AK0N5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/deleteAudio(customizationID:audioName:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C11deleteAudioyySS_SSSDyS2SGSgXetcACF">deleteAudio(customizationID:audioName:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C11deleteAudio15customizationID9audioName7headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0N8ResponseVyytGSg_AK0N5ErrorOSgtctF">deleteAudio(customizationID:audioName:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -5322,7 +5498,7 @@ the entire archive of files; the current interface does not allow deletion of in
 resource. Removing an audio resource does not affect the custom model until you train the model on its updated data
 by using the <strong>Train a custom acoustic model</strong> method. You must use credentials for the instance of the service
 that owns a model to delete its audio resources.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/acoustic-audio.html#deleteAudio">Deleting an audio resource from a custom acoustic
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAudio#deleteAudio">Deleting an audio resource from a custom acoustic
 model</a>.</p>
 
                       </div>
@@ -5400,9 +5576,9 @@ request. You must make the request with credentials for the instance of the serv
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C14deleteUserDatayySS_SDyS2SGSgXetcACF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C14deleteUserData10customerID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0M8ResponseVyytGSg_AJ0M5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/deleteUserData(customerID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C14deleteUserDatayySS_SDyS2SGSgXetcACF">deleteUserData(customerID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C14deleteUserData10customerID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0M8ResponseVyytGSg_AJ0M5ErrorOSgtctF">deleteUserData(customerID:headers:completionHandler:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -5418,7 +5594,8 @@ the customer ID. You must issue the request with credentials for the same instan
 associate the customer ID with the data.
 You associate a customer ID with data by passing the <code>X-Watson-Metadata</code> header with a request that passes the
 data.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text/information-security.html">Information security</a>.</p>
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-information-security#information-security">Information
+security</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -5887,7 +6064,7 @@ By default, no customer ID is associated with the data.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-04-08)</p>
+          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-06-14)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

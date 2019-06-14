@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ProcessedAudio Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/ProcessedAudio" class="dashAnchor"></a>
+    <a title="ProcessedAudio Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">SpeechToTextV1 Docs</a></p>
+        <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">SpeechToTextV1 Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        ProcessedAudio Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../readme.html">README</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/SpeechToText.html">SpeechToText</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SpeechToTextSession.html">SpeechToTextSession</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/AcousticModel.html">AcousticModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AcousticModel/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AcousticModels.html">AcousticModels</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioDetails.html">AudioDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioDetails/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioDetails/Compression.html">– Compression</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioListing.html">AudioListing</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioListing/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioListingContainer.html">AudioListingContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioListingContainer/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioListingDetails.html">AudioListingDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioListingDetails/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioListingDetails/Compression.html">– Compression</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioMetrics.html">AudioMetrics</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioMetricsDetails.html">AudioMetricsDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioMetricsHistogramBin.html">AudioMetricsHistogramBin</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioResource.html">AudioResource</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioResource/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioResourceDetails.html">AudioResourceDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioResourceDetails/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioResourceDetails/Compression.html">– Compression</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AudioResources.html">AudioResources</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Corpora.html">Corpora</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Corpus.html">Corpus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Corpus/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CustomWord.html">CustomWord</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Grammar.html">Grammar</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Grammar/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Grammars.html">Grammars</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KeywordResult.html">KeywordResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LanguageModel.html">LanguageModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LanguageModel/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LanguageModels.html">LanguageModels</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ProcessedAudio.html">ProcessedAudio</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ProcessingMetrics.html">ProcessingMetrics</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RecognitionJob.html">RecognitionJob</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RecognitionJob/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RecognitionJobs.html">RecognitionJobs</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RecognitionSettings.html">RecognitionSettings</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RecognizeCallback.html">RecognizeCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RegisterStatus.html">RegisterStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RegisterStatus/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeakerLabelsResult.html">SpeakerLabelsResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeechModel.html">SpeechModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeechModels.html">SpeechModels</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeechRecognitionAlternative.html">SpeechRecognitionAlternative</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeechRecognitionResult.html">SpeechRecognitionResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeechRecognitionResults.html">SpeechRecognitionResults</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeechRecognitionResultsAccumulator.html">SpeechRecognitionResultsAccumulator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SupportedFeatures.html">SupportedFeatures</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TrainingResponse.html">TrainingResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TrainingWarning.html">TrainingWarning</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TrainingWarning/WarningID.html">– WarningID</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Word.html">Word</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WordAlternativeResult.html">WordAlternativeResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WordAlternativeResults.html">WordAlternativeResults</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WordConfidence.html">WordConfidence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WordError.html">WordError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WordTimestamp.html">WordTimestamp</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Words.html">Words</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14SpeechToTextV111WatsonErrora">WatsonError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14SpeechToTextV114WatsonResponsea">WatsonResponse</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>ProcessedAudio</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ProcessedAudio</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                </div>
+              </div>
+            <p>Detailed timing information about the service&rsquo;s processing of the input audio.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SpeechToTextV114ProcessedAudioV8receivedSdvp"></a>
+                    <a name="//apple_ref/swift/Property/received" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SpeechToTextV114ProcessedAudioV8receivedSdvp">received</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The seconds of audio that the service has received as of this response. The value of the field is greater than the
+values of the <code><a href="../Structs/ProcessedAudio.html#/s:14SpeechToTextV114ProcessedAudioV13transcriptionSdvp">transcription</a></code> and <code>speaker_labels</code> fields during speech recognition processing, since the service
+first has to receive the audio before it can begin to process it. The final value can also be greater than the
+value of the <code><a href="../Structs/ProcessedAudio.html#/s:14SpeechToTextV114ProcessedAudioV13transcriptionSdvp">transcription</a></code> and <code>speaker_labels</code> fields by a fractional number of seconds.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">received</span><span class="p">:</span> <span class="kt">Double</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SpeechToTextV114ProcessedAudioV12seenByEngineSdvp"></a>
+                    <a name="//apple_ref/swift/Property/seenByEngine" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SpeechToTextV114ProcessedAudioV12seenByEngineSdvp">seenByEngine</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The seconds of audio that the service has passed to its speech-processing engine as of this response. The value of
+the field is greater than the values of the <code><a href="../Structs/ProcessedAudio.html#/s:14SpeechToTextV114ProcessedAudioV13transcriptionSdvp">transcription</a></code> and <code>speaker_labels</code> fields during speech recognition
+processing. The <code><a href="../Structs/ProcessedAudio.html#/s:14SpeechToTextV114ProcessedAudioV8receivedSdvp">received</a></code> and <code>seen_by_engine</code> fields have identical values when the service has finished
+processing all audio. This final value can be greater than the value of the <code><a href="../Structs/ProcessedAudio.html#/s:14SpeechToTextV114ProcessedAudioV13transcriptionSdvp">transcription</a></code> and <code>speaker_labels</code>
+fields by a fractional number of seconds.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">seenByEngine</span><span class="p">:</span> <span class="kt">Double</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SpeechToTextV114ProcessedAudioV13transcriptionSdvp"></a>
+                    <a name="//apple_ref/swift/Property/transcription" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SpeechToTextV114ProcessedAudioV13transcriptionSdvp">transcription</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The seconds of audio that the service has processed for speech recognition as of this response.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">transcription</span><span class="p">:</span> <span class="kt">Double</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SpeechToTextV114ProcessedAudioV13speakerLabelsSdSgvp"></a>
+                    <a name="//apple_ref/swift/Property/speakerLabels" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SpeechToTextV114ProcessedAudioV13speakerLabelsSdSgvp">speakerLabels</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>If speaker labels are requested, the seconds of audio that the service has processed to determine speaker labels as
+of this response. This value often trails the value of the <code><a href="../Structs/ProcessedAudio.html#/s:14SpeechToTextV114ProcessedAudioV13transcriptionSdvp">transcription</a></code> field during speech recognition
+processing. The <code><a href="../Structs/ProcessedAudio.html#/s:14SpeechToTextV114ProcessedAudioV13transcriptionSdvp">transcription</a></code> and <code>speaker_labels</code> fields have identical values when the service has finished
+processing all audio.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">speakerLabels</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-06-14)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

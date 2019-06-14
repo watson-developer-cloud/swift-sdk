@@ -68,6 +68,9 @@
                 <a href="../Structs/Collection/Status.html">– Status</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/CollectionCrawlStatus.html">CollectionCrawlStatus</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/CollectionDiskUsage.html">CollectionDiskUsage</a>
               </li>
               <li class="nav-group-task">
@@ -99,6 +102,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Credentials/SourceType.html">– SourceType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Credentials/Status.html">– Status</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/CredentialsList.html">CredentialsList</a>
@@ -387,6 +393,12 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/RetrievalDetails/DocumentRetrievalStrategy.html">– DocumentRetrievalStrategy</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SduStatus.html">SduStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SduStatusCustomFields.html">SduStatusCustomFields</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/SearchStatus.html">SearchStatus</a>
@@ -746,9 +758,37 @@ when crawling a web site the user owns. This must be be set to <code>true</code>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV121SourceOptionsWebCrawlV3url20limitToStartingHosts10crawlSpeed25allowUntrustedCertificate11maximumHops14requestTimeout17overrideRobotsTxtACSS_SbSgSSSgAKSiSgAmKtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(url:limitToStartingHosts:crawlSpeed:allowUntrustedCertificate:maximumHops:requestTimeout:overrideRobotsTxt:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV121SourceOptionsWebCrawlV3url20limitToStartingHosts10crawlSpeed25allowUntrustedCertificate11maximumHops14requestTimeout17overrideRobotsTxtACSS_SbSgSSSgAKSiSgAmKtcfc">init(url:limitToStartingHosts:crawlSpeed:allowUntrustedCertificate:maximumHops:requestTimeout:overrideRobotsTxt:)</a>
+                    <a name="/s:11DiscoveryV121SourceOptionsWebCrawlV9blacklistSaySSGSgvp"></a>
+                    <a name="//apple_ref/swift/Property/blacklist" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV121SourceOptionsWebCrawlV9blacklistSaySSGSgvp">blacklist</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Array of URL&rsquo;s to be excluded while crawling. The crawler will not follow links which contains this string. For
+example, listing <code>https://ibm.com/watson</code> also excludes <code>https://ibm.com/watson/discovery</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">blacklist</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV121SourceOptionsWebCrawlV3url20limitToStartingHosts10crawlSpeed25allowUntrustedCertificate11maximumHops14requestTimeout17overrideRobotsTxt9blacklistACSS_SbSgSSSgALSiSgAnLSaySSGSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(url:limitToStartingHosts:crawlSpeed:allowUntrustedCertificate:maximumHops:requestTimeout:overrideRobotsTxt:blacklist:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV121SourceOptionsWebCrawlV3url20limitToStartingHosts10crawlSpeed25allowUntrustedCertificate11maximumHops14requestTimeout17overrideRobotsTxt9blacklistACSS_SbSgSSSgALSiSgAnLSaySSGSgtcfc">init(url:limitToStartingHosts:crawlSpeed:allowUntrustedCertificate:maximumHops:requestTimeout:overrideRobotsTxt:blacklist:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -770,7 +810,8 @@ when crawling a web site the user owns. This must be be set to <code>true</code>
     <span class="nv">allowUntrustedCertificate</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">maximumHops</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">requestTimeout</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">overrideRobotsTxt</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+    <span class="nv">overrideRobotsTxt</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">blacklist</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span>
 <span class="p">)</span></code></pre>
 
                         </div>
@@ -873,6 +914,20 @@ This should only ever be done when crawling a web site the user owns. This must 
                                 </div>
                               </td>
                             </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>blacklist</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Array of URL&rsquo;s to be excluded while crawling. The crawler will not follow links which
+contains this string. For example, listing <code>https://ibm.com/watson</code> also excludes
+<code>https://ibm.com/watson/discovery</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
@@ -888,7 +943,7 @@ This should only ever be done when crawling a web site the user owns. This must 
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-04-08)</p>
+          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-06-14)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

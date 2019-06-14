@@ -68,6 +68,9 @@
                 <a href="../Structs/Collection/Status.html">– Status</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/CollectionCrawlStatus.html">CollectionCrawlStatus</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/CollectionDiskUsage.html">CollectionDiskUsage</a>
               </li>
               <li class="nav-group-task">
@@ -99,6 +102,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Credentials/SourceType.html">– SourceType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Credentials/Status.html">– Status</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/CredentialsList.html">CredentialsList</a>
@@ -389,6 +395,12 @@
                 <a href="../Structs/RetrievalDetails/DocumentRetrievalStrategy.html">– DocumentRetrievalStrategy</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/SduStatus.html">SduStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SduStatusCustomFields.html">SduStatusCustomFields</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/SearchStatus.html">SearchStatus</a>
               </li>
               <li class="nav-group-task">
@@ -657,9 +669,39 @@ executed in the order that they appear in the array.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV111ConversionsV3pdf4word4html7segment18jsonNormalizationsAcA11PDFSettingsVSg_AA12WordSettingsVSgAA12HTMLSettingsVSgAA07SegmentL0VSgSayAA22NormalizationOperationVGSgtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(pdf:word:html:segment:jsonNormalizations:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV111ConversionsV3pdf4word4html7segment18jsonNormalizationsAcA11PDFSettingsVSg_AA12WordSettingsVSgAA12HTMLSettingsVSgAA07SegmentL0VSgSayAA22NormalizationOperationVGSgtcfc">init(pdf:word:html:segment:jsonNormalizations:)</a>
+                    <a name="/s:11DiscoveryV111ConversionsV20imageTextRecognitionSbSgvp"></a>
+                    <a name="//apple_ref/swift/Property/imageTextRecognition" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV111ConversionsV20imageTextRecognitionSbSgvp">imageTextRecognition</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>When <code>true</code>, automatic text extraction from images (this includes images embedded in supported document formats,
+for example PDF, and suppported image formats, for example TIFF) is performed on documents uploaded to the
+collection. This field is supported on <strong>Advanced</strong> and higher plans only. <strong>Lite</strong> plans do not support image text
+recognition.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">imageTextRecognition</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV111ConversionsV3pdf4word4html7segment18jsonNormalizations20imageTextRecognitionAcA11PDFSettingsVSg_AA12WordSettingsVSgAA12HTMLSettingsVSgAA07SegmentO0VSgSayAA22NormalizationOperationVGSgSbSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(pdf:word:html:segment:jsonNormalizations:imageTextRecognition:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV111ConversionsV3pdf4word4html7segment18jsonNormalizations20imageTextRecognitionAcA11PDFSettingsVSg_AA12WordSettingsVSgAA12HTMLSettingsVSgAA07SegmentO0VSgSayAA22NormalizationOperationVGSgSbSgtcfc">init(pdf:word:html:segment:jsonNormalizations:imageTextRecognition:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -679,7 +721,8 @@ executed in the order that they appear in the array.</p>
     <span class="nv">word</span><span class="p">:</span> <span class="kt"><a href="../Structs/WordSettings.html">WordSettings</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">html</span><span class="p">:</span> <span class="kt"><a href="../Structs/HTMLSettings.html">HTMLSettings</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">segment</span><span class="p">:</span> <span class="kt"><a href="../Structs/SegmentSettings.html">SegmentSettings</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">jsonNormalizations</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/NormalizationOperation.html">NormalizationOperation</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span>
+    <span class="nv">jsonNormalizations</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/NormalizationOperation.html">NormalizationOperation</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">imageTextRecognition</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
 <span class="p">)</span></code></pre>
 
                         </div>
@@ -749,6 +792,21 @@ normalized form. Operations are executed in the order that they appear in the ar
                                 </div>
                               </td>
                             </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>imageTextRecognition</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>When <code>true</code>, automatic text extraction from images (this includes images
+embedded in supported document formats, for example PDF, and suppported image formats, for example TIFF) is
+performed on documents uploaded to the collection. This field is supported on <strong>Advanced</strong> and higher plans only.
+<strong>Lite</strong> plans do not support image text recognition.</p>
+                                </div>
+                              </td>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
@@ -764,7 +822,7 @@ normalized form. Operations are executed in the order that they appear in the ar
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-04-08)</p>
+          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-06-14)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

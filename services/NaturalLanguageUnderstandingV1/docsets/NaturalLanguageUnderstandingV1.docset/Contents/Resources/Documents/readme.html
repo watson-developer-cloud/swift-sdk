@@ -68,7 +68,13 @@
                 <a href="Structs/CategoriesOptions.html">CategoriesOptions</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/CategoriesRelevantText.html">CategoriesRelevantText</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/CategoriesResult.html">CategoriesResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CategoriesResultExplanation.html">CategoriesResultExplanation</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/ConceptsOptions.html">ConceptsOptions</a>
@@ -260,7 +266,8 @@
 <img src="https://img.shields.io/badge/platform-iOS,%20Linux-blue.svg?style=flat" alt="">
 <a href="https://github.com/Carthage/Carthage"><img src="https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat" alt="Carthage Compatible"></a>
 <a href="http://watson-developer-cloud.github.io/swift-sdk"><img src="https://img.shields.io/badge/Documentation-API-blue.svg" alt="Documentation"></a>
-<a href="https://cla-assistant.io/watson-developer-cloud/swift-sdk"><img src="https://cla-assistant.io/readme/badge/watson-developer-cloud/swift-sdk" alt="CLA assistant"></a></p>
+<a href="https://cla-assistant.io/watson-developer-cloud/swift-sdk"><img src="https://cla-assistant.io/readme/badge/watson-developer-cloud/swift-sdk" alt="CLA assistant"></a>
+<a href="http://wdc-slack-inviter.mybluemix.net/"><img src="https://wdc-slack-inviter.mybluemix.net/badge.svg" alt="wdc-community.slack.com"></a></p>
 <h2 id='overview' class='heading'>Overview</h2>
 
 <p>The Watson Developer Cloud Swift SDK makes it easy for mobile developers to build Watson-powered applications. With the Swift SDK you can leverage the power of Watson&rsquo;s advanced artificial intelligence, machine learning, and deep learning techniques to understand unstructured data and engage with mobile users in new ways.</p>
@@ -309,7 +316,7 @@
 <h2 id='before-you-begin' class='heading'>Before you begin</h2>
 
 <ul>
-<li>You need an <a href="http://console.bluemix.net/registration?target=/developer/watson&cm_sp=WatsonPlatform-WatsonServices-_-OnPageNavLink-IBMWatson_SDKs-_-Swift">IBM Cloud</a> account.</li>
+<li>You need an <a href="http://cloud.ibm.com/registration?target=/developer/watson&cm_sp=WatsonPlatform-WatsonServices-_-OnPageNavLink-IBMWatson_SDKs-_-Swift">IBM Cloud</a> account.</li>
 </ul>
 <h2 id='requirements' class='heading'>Requirements</h2>
 
@@ -331,18 +338,18 @@
 <pre class="highlight ruby"><code><span class="n">use_frameworks!</span>
 
 <span class="n">target</span> <span class="s1">'MyApp'</span> <span class="k">do</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonAssistantV1'</span><span class="p">,</span> <span class="s1">'~&gt; 2.0.1'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonAssistantV2'</span><span class="p">,</span> <span class="s1">'~&gt; 2.0.1'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonCompareComplyV1'</span><span class="p">,</span> <span class="s1">'~&gt; 2.0.1'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonDiscoveryV1'</span><span class="p">,</span> <span class="s1">'~&gt; 2.0.1'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonLanguageTranslatorV3'</span><span class="p">,</span> <span class="s1">'~&gt; 2.0.1'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonNaturalLanguageClassifierV1'</span><span class="p">,</span> <span class="s1">'~&gt; 2.0.1'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonNaturalLanguageUnderstandingV1'</span><span class="p">,</span> <span class="s1">'~&gt; 2.0.1'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonPersonalityInsightsV3'</span><span class="p">,</span> <span class="s1">'~&gt; 2.0.1'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonSpeechToTextV1'</span><span class="p">,</span> <span class="s1">'~&gt; 2.0.1'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonTextToSpeechV1'</span><span class="p">,</span> <span class="s1">'~&gt; 2.0.1'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonToneAnalyzerV3'</span><span class="p">,</span> <span class="s1">'~&gt; 2.0.1'</span>
-    <span class="n">pod</span> <span class="s1">'IBMWatsonVisualRecognitionV3'</span><span class="p">,</span> <span class="s1">'~&gt; 2.0.1'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonAssistantV1'</span><span class="p">,</span> <span class="s1">'~&gt; 2.1.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonAssistantV2'</span><span class="p">,</span> <span class="s1">'~&gt; 2.1.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonCompareComplyV1'</span><span class="p">,</span> <span class="s1">'~&gt; 2.1.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonDiscoveryV1'</span><span class="p">,</span> <span class="s1">'~&gt; 2.1.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonLanguageTranslatorV3'</span><span class="p">,</span> <span class="s1">'~&gt; 2.1.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonNaturalLanguageClassifierV1'</span><span class="p">,</span> <span class="s1">'~&gt; 2.1.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonNaturalLanguageUnderstandingV1'</span><span class="p">,</span> <span class="s1">'~&gt; 2.1.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonPersonalityInsightsV3'</span><span class="p">,</span> <span class="s1">'~&gt; 2.1.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonSpeechToTextV1'</span><span class="p">,</span> <span class="s1">'~&gt; 2.1.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonTextToSpeechV1'</span><span class="p">,</span> <span class="s1">'~&gt; 2.1.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonToneAnalyzerV3'</span><span class="p">,</span> <span class="s1">'~&gt; 2.1.0'</span>
+    <span class="n">pod</span> <span class="s1">'IBMWatsonVisualRecognitionV3'</span><span class="p">,</span> <span class="s1">'~&gt; 2.1.0'</span>
 <span class="k">end</span>
 </code></pre>
 
@@ -359,11 +366,11 @@
 </code></pre>
 
 <p>If your project does not have a Cartfile yet, use the <code>touch Cartfile</code> command in the root directory of your project. To install the IBM Watson Swift SDK using Carthage, add the following to your Cartfile. </p>
-<pre class="highlight plaintext"><code>github "watson-developer-cloud/swift-sdk" ~&gt; 2.0.1
+<pre class="highlight plaintext"><code>github "watson-developer-cloud/swift-sdk" ~&gt; 2.1.0
 </code></pre>
 
 <p>Then run the following command to build the dependencies and frameworks:</p>
-<pre class="highlight shell"><code><span class="nv">$ </span>carthage update <span class="nt">--platform</span> iOS
+<pre class="highlight shell"><code><span class="nv">$ </span>carthage bootstrap <span class="nt">--platform</span> iOS
 </code></pre>
 
 <p>Follow the remaining Carthage installation instructions <a href="https://github.com/Carthage/Carthage#getting-started">here</a>. Note that the above command will download and build all of the services in the IBM Watson Swift SDK. Make sure to drag-and-drop the built frameworks (only for the services your app requires) into your Xcode project and import them in the source files that require them. The following frameworks need to be added to your app:</p>
@@ -379,7 +386,7 @@
 
 <p>Add the following to your <code>Package.swift</code> file to identify the IBM Watson Swift SDK as a dependency. The package manager will clone the Swift SDK when you build your project with <code>swift build</code>.</p>
 <pre class="highlight swift"><code><span class="nv">dependencies</span><span class="p">:</span> <span class="p">[</span>
-    <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/watson-developer-cloud/swift-sdk"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"2.0.1"</span><span class="p">)</span>
+    <span class="o">.</span><span class="nf">package</span><span class="p">(</span><span class="nv">url</span><span class="p">:</span> <span class="s">"https://github.com/watson-developer-cloud/swift-sdk"</span><span class="p">,</span> <span class="nv">from</span><span class="p">:</span> <span class="s">"2.1.0"</span><span class="p">)</span>
 <span class="p">]</span>
 </code></pre>
 <h2 id='authentication' class='heading'>Authentication</h2>
@@ -457,6 +464,13 @@ and password.</p></li>
 <span class="p">)</span>
 <span class="n">toneAnalyzer</span><span class="o">.</span><span class="n">serviceURL</span> <span class="o">=</span> <span class="s">"https://gateway-fra.watsonplatform.net/tone-analyzer/api"</span>
 </code></pre>
+<h2 id='disable-ssl-certificate-verification' class='heading'>Disable SSL certificate verification</h2>
+
+<p>For ICP(IBM Cloud Private), you can disable the SSL certificate verification by:</p>
+<pre class="highlight plaintext"><code>service.disableSSLVerification()
+</code></pre>
+
+<p>Note: <code>disableSSLVerification()</code> is currently not supported on Linux.</p>
 <h2 id='custom-headers' class='heading'>Custom Headers</h2>
 
 <p>There are different headers that can be sent to the Watson services. For example, Watson services log requests and their results for the purpose of improving the services, but you can include the <code>X-Watson-Learning-Opt-Out</code> header to opt out of this.</p>
@@ -467,7 +481,9 @@ and password.</p></li>
 </code></pre>
 
 <p>Each service method also accepts an optional <code>headers</code> parameter which is a dictionary of request headers to be sent with the request.</p>
-<h2 id='sample-applications' class='heading'>Sample Applications</h2>
+<h2 id='featured-projects' class='heading'>Featured Projects</h2>
+
+<p>We love to highlight cool open-source projects that use this SDK! If you&rsquo;d like to get your project added to the list, feel free to make an issue linking us to it.</p>
 
 <ul>
 <li><a href="https://github.com/watson-developer-cloud/simple-chat-swift">Simple Chat (Swift)</a></li>
@@ -513,7 +529,7 @@ available in <a href="https://github.com/watson-developer-cloud/swift-sdk/blob/m
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-04-08)</p>
+          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-06-14)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

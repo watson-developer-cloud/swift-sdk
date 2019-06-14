@@ -319,9 +319,67 @@ option.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV135DialogNodeOutputOptionsElementValueV5inputAcA12MessageInputVSg_tcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(input:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV135DialogNodeOutputOptionsElementValueV5inputAcA12MessageInputVSg_tcfc">init(input:)</a>
+                    <a name="/s:11AssistantV135DialogNodeOutputOptionsElementValueV7intentsSayAA13RuntimeIntentVGSgvp"></a>
+                    <a name="//apple_ref/swift/Property/intents" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV135DialogNodeOutputOptionsElementValueV7intentsSayAA13RuntimeIntentVGSgvp">intents</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An array of intents to be used while processing the input.
+<strong>Note:</strong> This property is supported for backward compatibility with applications that use the v1 <strong>Get response to
+user input</strong> method.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">intents</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/RuntimeIntent.html">RuntimeIntent</a></span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV135DialogNodeOutputOptionsElementValueV8entitiesSayAA13RuntimeEntityVGSgvp"></a>
+                    <a name="//apple_ref/swift/Property/entities" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV135DialogNodeOutputOptionsElementValueV8entitiesSayAA13RuntimeEntityVGSgvp">entities</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An array of entities to be used while processing the user input.
+<strong>Note:</strong> This property is supported for backward compatibility with applications that use the v1 <strong>Get response to
+user input</strong> method.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">entities</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/RuntimeEntity.html">RuntimeEntity</a></span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV135DialogNodeOutputOptionsElementValueV5input7intents8entitiesAcA12MessageInputVSg_SayAA13RuntimeIntentVGSgSayAA0N6EntityVGSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(input:intents:entities:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV135DialogNodeOutputOptionsElementValueV5input7intents8entitiesAcA12MessageInputVSg_SayAA13RuntimeIntentVGSgSayAA0N6EntityVGSgtcfc">init(input:intents:entities:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -337,7 +395,9 @@ option.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
-    <span class="nv">input</span><span class="p">:</span> <span class="kt"><a href="../Structs/MessageInput.html">MessageInput</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+    <span class="nv">input</span><span class="p">:</span> <span class="kt"><a href="../Structs/MessageInput.html">MessageInput</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">intents</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/RuntimeIntent.html">RuntimeIntent</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">entities</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/RuntimeEntity.html">RuntimeEntity</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span>
 <span class="p">)</span></code></pre>
 
                         </div>
@@ -358,6 +418,34 @@ option.</p>
                                 </div>
                               </td>
                             </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>intents</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of intents to be used while processing the input.
+<strong>Note:</strong> This property is supported for backward compatibility with applications that use the v1 <strong>Get response
+to user input</strong> method.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>entities</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of entities to be used while processing the user input.
+<strong>Note:</strong> This property is supported for backward compatibility with applications that use the v1 <strong>Get response
+to user input</strong> method.</p>
+                                </div>
+                              </td>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
@@ -373,7 +461,7 @@ option.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-04-08)</p>
+          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-06-14)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

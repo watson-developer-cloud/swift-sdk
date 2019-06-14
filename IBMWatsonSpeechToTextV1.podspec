@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                  = 'IBMWatsonSpeechToTextV1'
-  s.version               = '2.0.3'
+  s.version               = '2.1.0'
   s.summary               = 'Client framework for the IBM Watson Speech to Text service'
   s.description           = <<-DESC
 The IBM® Speech to Text leverages machine intelligence to transcribe the human voice accurately.

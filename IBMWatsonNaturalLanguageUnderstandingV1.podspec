@@ -9,8 +9,7 @@ including categories, concepts, emotion, entities, keywords, metadata, relations
                             DESC
   s.homepage              = 'https://www.ibm.com/watson/services/natural-language-understanding/'
   s.license               = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }
-  s.authors               = { 'Anthony Oliveri' => 'oliveri@us.ibm.com',
-                              'Mike Kistler'    => 'mkistler@us.ibm.com' }
+  s.authors               = { 'Mike Kistler'    => 'mkistler@us.ibm.com' }
 
   s.module_name           = 'NaturalLanguageUnderstanding'
   s.ios.deployment_target = '10.0'

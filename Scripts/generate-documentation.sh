@@ -36,14 +36,7 @@ cd ..
 # Create folder for generated documentation
 ################################################################################
 
-if [ -d "${outdir}" ]; then
-  echo "The output directory ${outdir} already exists."
-  echo "Please remove the directory and try again."
-  exit
-fi
-
-mkdir ${outdir}
-mkdir ${outdir}/services
+mkdir -p ${outdir}/services
 
 ################################################################################
 # Run Jazzy to generate documentation
@@ -60,6 +53,7 @@ for service in ${services[@]}; do
     --readme Source/${service}/README.md \
     --documentation README.md \
     --github_url https://github.com/watson-developer-cloud/swift-sdk \
+    --copyright "&copy; IBM Corp. 2016-$(date +%Y). (Last updated: $(date +%Y-%m-%d))" \
     --hide-documentation-coverage
 done
 

@@ -9,8 +9,7 @@ scenes, objects, faces, and other content. The response includes keywords that p
                             DESC
   s.homepage              = 'https://www.ibm.com/watson/services/visual-recognition/'
   s.license               = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }
-  s.authors               = { 'Anthony Oliveri' => 'oliveri@us.ibm.com',
-                              'Mike Kistler'    => 'mkistler@us.ibm.com' }
+  s.authors               = { 'Mike Kistler'    => 'mkistler@us.ibm.com' }
 
   s.module_name           = 'VisualRecognition'
   s.ios.deployment_target = '10.0'

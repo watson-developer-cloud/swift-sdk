@@ -15,7 +15,7 @@ The Watson Developer Cloud Swift SDK makes it easy for mobile developers to buil
 There are many resources to help you build your first cognitive application with the Swift SDK:
 
 - Follow the [QuickStart Guide](https://watson-developer-cloud.github.io/swift-sdk/docs/quickstart)
-- Review a [Sample Application](#sample-applications)
+- Review a [Featured Project](#featured-projects)
 - Browse the [Documentation](https://watson-developer-cloud.github.io/swift-sdk/)
 
 ## Contents
@@ -28,7 +28,7 @@ There are many resources to help you build your first cognitive application with
 * [Authentication](#authentication)
 * [Custom Service URLs](#custom-service-urls)
 * [Custom Headers](#custom-headers)
-* [Sample Applications](#sample-applications)
+* [Featured Projects](#featured-projects)
 * [Synchronous Execution](#synchronous-execution)
 * [Objective-C Compatibility](#objective-c-compatibility)
 * [Linux Compatibility](#linux-compatibility)

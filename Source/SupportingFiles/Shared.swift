@@ -34,7 +34,7 @@ internal struct Shared {
         static let icpPrefix = "icp-"
     }
 
-    static let sdkVersion = "2.1.0"
+    static let sdkVersion = "2.1.1"
 
     /// The "User-Agent" header to be sent with every RestRequest
     static let userAgent: String? = {

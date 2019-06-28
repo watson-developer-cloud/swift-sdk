@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                  = 'IBMWatsonToneAnalyzerV3'
-  s.version               = '2.1.0'
+  s.version               = '2.1.1'
   s.summary               = 'Client framework for the IBM Watson Tone Analyzer service'
   s.description           = <<-DESC
 IBM Watson™ Tone Analyzer uses linguistic analysis to detect emotional and language tones in written text.

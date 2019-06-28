@@ -8,7 +8,8 @@ IBM Watson™ Compare and Comply analyzes governing documents to provide details
                             DESC
   s.homepage              = 'https://www.ibm.com/blogs/watson/2018/02/watson-compare-comply/'
   s.license               = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }
-  s.authors               = { 'Anthony Oliveri' => 'oliveri@us.ibm.com' }
+  s.authors               = { 'Jeff Arn' => 'jtarn@us.ibm.com',
+                              'Mike Kistler'    => 'mkistler@us.ibm.com' }
 
   s.module_name           = 'CompareComply'
   s.ios.deployment_target = '10.0'

@@ -9,7 +9,7 @@ The service streams the results back to the client with minimal delay.
                             DESC
   s.homepage              = 'https://www.ibm.com/watson/services/text-to-speech/'
   s.license               = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }
-  s.authors               = { 'Anthony Oliveri' => 'oliveri@us.ibm.com',
+  s.authors               = { 'Jeff Arn' => 'jtarn@us.ibm.com',
                               'Mike Kistler'    => 'mkistler@us.ibm.com' }
 
   s.module_name           = 'TextToSpeech'

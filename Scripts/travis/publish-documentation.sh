@@ -18,15 +18,17 @@ git fetch
 git checkout master
 latestVersion=$(git describe --abbrev=0 --tags)
 
-# Generate the API docs
-./Scripts/generate-documentation.sh
+git clone --quiet --branch=gh-pages git@github.com:watson-developer-cloud/swift-sdk.git gh-pages > /dev/null
 
-# Push newly-generated docs to the gh-pages branch
-git checkout --track origin/gh-pages
-# Delete old docs
-rm -rf css img js services
-cp -r gh-pages/* .
-rm -rf gh-pages/
-git add .
-git commit -m "SDK docs for release ${latestVersion}"
-git push --set-upstream origin gh-pages
+# Delete all the old docs (but not the docs directory -- this is hand written)
+(cd gh-pages && git rm -rf css img index.html js services undocumented.json)
+
+# Generate the API docs
+./Scripts/generate-documentation.sh gh-pages
+
+# Commit and push the newly generated API docs
+pushd gh-pages
+  git add .
+  git commit -m "SDK docs for release ${latestVersion}"
+  git push
+popd

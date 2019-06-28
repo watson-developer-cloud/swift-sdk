@@ -140,6 +140,11 @@ extension SpeechToText {
        By default, no customer ID is associated with the data.
      - parameter compress: Should microphone audio be compressed to Opus format?
        (Opus compression reduces latency and bandwidth.)
+     - parameter configureSession: A Boolean value that specifies whether to configure the AVAudioSession.
+       When `true`, the AVAudioSession is set to a standard configuration for microphone input. When `false`,
+       the current AVAudioSession configuration is used. To use an AVAudioSession configuration other than
+       the standard microphone configuration, set the configuration in your application and specify `false`
+       for the **configureSession** parameter. Default is `true`.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -152,13 +157,16 @@ extension SpeechToText {
         learningOptOut: Bool? = nil,
         customerID: String? = nil,
         compress: Bool = true,
+        configureSession: Bool = true,
         headers: [String: String]? = nil,
         callback: RecognizeCallback)
     {
         // make sure the AVAudioSession shared instance is properly configured
         do {
             let audioSession = AVAudioSession.sharedInstance()
-            try audioSession.setCategory(AVAudioSession.Category.playAndRecord, mode: .default, options: [.defaultToSpeaker, .mixWithOthers])
+            if configureSession {
+                try audioSession.setCategory(AVAudioSession.Category.playAndRecord, mode: .default, options: [.defaultToSpeaker, .mixWithOthers])
+            }
             try audioSession.setActive(true)
         } catch {
             let failureReason = "Failed to setup the AVAudioSession sharedInstance properly."

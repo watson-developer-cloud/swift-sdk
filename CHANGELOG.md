@@ -1,4 +1,10 @@
 
+## 2.1.1 (https://github.com/watson-developer-cloud/swift-sdk/compare/2.1.0...2.1.1) (2019-06-28)
+
+### Bug Fixes
+
+* SpeechToTextV1: Add configureSession parameter to RecognizeMicrophone. (87f5aed (https://github.com/watson-developer-cloud/swift-sdk/commit/87f5aed))
+
 # 2.1.0 (https://github.com/watson-developer-cloud/swift-sdk/compare/2.0.3...2.1.0) (2019-06-08)
 
 ### Features
@@ -53,7 +59,7 @@
 * **AssistantV1:**
   * Some model classes have been merged / simplified
   * The `InputData` class has been renamed to `MessageInput`
-* **SpeechToTextV1:** 
+* **SpeechToTextV1:**
   * The `recognizeWithWebsockets` method has been revised to accept a `RecognizeCallback` object with `onResults` and `onError` callback properties
 
 
@@ -508,7 +514,7 @@ _2017-03-2_
 This update includes:
 
 - Updates for Natural Language Understanding service.
-- Bug fixes for memory leak in text to speech. 
+- Bug fixes for memory leak in text to speech.
 
 ## Version 0.14.0
 _2017-02-10_
@@ -749,7 +755,7 @@ The iOS-sdk version 0.3.0 has many major changes with this new release.  The tea
 **Major updates**
 
 * Added IBM Watson Tone Analyzer
-* Added IBM Watson Visual Recognition 
+* Added IBM Watson Visual Recognition
 * Updated all of the code to use the new Rest-kit and removed NetworkUtils and WatsonGateway.  We still have one service to convert, Alchemy Language, but we anticipate that change coming in the next minor release.
 * Removed many dependencies and reducing the total number to three.  Alamofire, Freddy, and Starscream.
 * You will notice an update to the targets available and now the developer can pick and choose the services to include.

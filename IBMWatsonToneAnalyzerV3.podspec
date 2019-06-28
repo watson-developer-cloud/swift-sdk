@@ -9,7 +9,8 @@ The service can analyze tone at both the document and sentence levels.
                             DESC
   s.homepage              = 'https://www.ibm.com/watson/services/tone-analyzer/'
   s.license               = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }
-  s.authors               = { 'Mike Kistler'    => 'mkistler@us.ibm.com' }
+  s.authors               = { 'Jeff Arn' => 'jtarn@us.ibm.com',
+                              'Mike Kistler'    => 'mkistler@us.ibm.com' }
 
   s.module_name           = 'ToneAnalyzer'
   s.ios.deployment_target = '10.0'

@@ -10,7 +10,8 @@ return information for texts that it is not trained on.
                             DESC
   s.homepage              = 'https://www.ibm.com/watson/services/natural-language-classifier/'
   s.license               = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }
-  s.authors               = { 'Mike Kistler'    => 'mkistler@us.ibm.com' }
+  s.authors               = { 'Jeff Arn' => 'jtarn@us.ibm.com',
+                              'Mike Kistler'    => 'mkistler@us.ibm.com' }
 
   s.module_name           = 'NaturalLanguageClassifier'
   s.ios.deployment_target = '10.0'

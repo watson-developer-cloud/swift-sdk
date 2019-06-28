@@ -10,7 +10,8 @@ as well as public and third-party data.
                             DESC
   s.homepage              = 'https://www.ibm.com/watson/services/discovery/'
   s.license               = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }
-  s.authors               = { 'Mike Kistler'    => 'mkistler@us.ibm.com' }
+  s.authors               = { 'Jeff Arn' => 'jtarn@us.ibm.com',
+                              'Mike Kistler'    => 'mkistler@us.ibm.com' }
 
   s.module_name           = 'Discovery'
   s.ios.deployment_target = '10.0'

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,7 +55,7 @@ public struct Expansions: Codable, Equatable {
        items listed in the **expanded_terms** array.
 
      - returns: An initialized `Expansions`.
-    */
+     */
     public init(
         expansions: [Expansion]
     )

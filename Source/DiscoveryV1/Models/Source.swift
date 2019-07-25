@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -88,7 +88,7 @@ public struct Source: Codable, Equatable {
      - parameter options: The **options** object defines which items to crawl from the source system.
 
      - returns: An initialized `Source`.
-    */
+     */
     public init(
         type: String? = nil,
         credentialID: String? = nil,

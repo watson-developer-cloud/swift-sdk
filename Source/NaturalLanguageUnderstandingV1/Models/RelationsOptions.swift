@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,7 +45,7 @@ public struct RelationsOptions: Codable, Equatable {
        ID to override the default model.
 
      - returns: An initialized `RelationsOptions`.
-    */
+     */
     public init(
         model: String? = nil
     )

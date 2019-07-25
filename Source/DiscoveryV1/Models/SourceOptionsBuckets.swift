@@ -46,7 +46,7 @@ public struct SourceOptionsBuckets: Codable, Equatable {
        documents in the bucket are crawled.
 
      - returns: An initialized `SourceOptionsBuckets`.
-    */
+     */
     public init(
         name: String,
         limit: Int? = nil

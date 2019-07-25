@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,7 +58,7 @@ public struct LogMessage: Codable, Equatable {
      - parameter msg: The text of the log message.
 
      - returns: An initialized `LogMessage`.
-    */
+     */
     public init(
         level: String,
         msg: String,

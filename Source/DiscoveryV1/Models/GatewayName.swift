@@ -37,7 +37,7 @@ internal struct GatewayName: Codable, Equatable {
      - parameter name: User-defined name.
 
      - returns: An initialized `GatewayName`.
-    */
+     */
     public init(
         name: String? = nil
     )

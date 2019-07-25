@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -120,8 +120,8 @@ public class ToneAnalyzer {
 
     #if !os(Linux)
     /**
-      Allow network requests to a server without verification of the server certificate.
-      **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
+     Allow network requests to a server without verification of the server certificate.
+     **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
      */
     public func disableSSLVerification() {
         session = InsecureConnection.session()
@@ -185,6 +185,11 @@ public class ToneAnalyzer {
      - parameter sentences: Indicates whether the service is to return an analysis of each individual sentence in
        addition to its analysis of the full document. If `true` (the default), the service returns results for each
        sentence.
+     - parameter tones: **`2017-09-21`:** Deprecated. The service continues to accept the parameter for
+       backward-compatibility, but the parameter no longer affects the response.
+       **`2016-05-19`:** A comma-separated list of tones for which the service is to return its analysis of the input;
+       the indicated tones apply both to the full document and to individual sentences of the document. You can specify
+       one or more of the valid values. Omit the parameter to request results for all three tones.
      - parameter contentLanguage: The language of the input text for the request: English or French. Regional variants
        are treated as their parent language; for example, `en-US` is interpreted as `en`. The input content must match
        the specified language. Do not submit content that contains both languages. You can use different languages for
@@ -200,6 +205,7 @@ public class ToneAnalyzer {
     public func tone(
         toneContent: ToneContent,
         sentences: Bool? = nil,
+        tones: [String]? = nil,
         contentLanguage: String? = nil,
         acceptLanguage: String? = nil,
         headers: [String: String]? = nil,
@@ -216,8 +222,6 @@ public class ToneAnalyzer {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "tone")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = toneContent.contentType
         if let contentLanguage = contentLanguage {
@@ -232,6 +236,10 @@ public class ToneAnalyzer {
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let sentences = sentences {
             let queryParameter = URLQueryItem(name: "sentences", value: "\(sentences)")
+            queryParameters.append(queryParameter)
+        }
+        if let tones = tones {
+            let queryParameter = URLQueryItem(name: "tones", value: tones.joined(separator: ","))
             queryParameters.append(queryParameter)
         }
 
@@ -299,8 +307,6 @@ public class ToneAnalyzer {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "toneChat")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
         if let contentLanguage = contentLanguage {

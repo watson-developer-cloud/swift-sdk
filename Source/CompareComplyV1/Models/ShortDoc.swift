@@ -44,7 +44,7 @@ public struct ShortDoc: Codable, Equatable {
      - parameter hash: The MD5 hash of the input document.
 
      - returns: An initialized `ShortDoc`.
-    */
+     */
     public init(
         title: String? = nil,
         hash: String? = nil

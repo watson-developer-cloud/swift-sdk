@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -65,7 +65,7 @@ public struct MessageInputOptions: Codable, Equatable {
        response will include the `context` property.
 
      - returns: An initialized `MessageInputOptions`.
-    */
+     */
     public init(
         debug: Bool? = nil,
         restart: Bool? = nil,

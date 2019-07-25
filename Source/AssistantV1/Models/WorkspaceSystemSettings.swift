@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,7 +54,7 @@ public struct WorkspaceSystemSettings: Codable, Equatable {
      - parameter humanAgentAssist: For internal use only.
 
      - returns: An initialized `WorkspaceSystemSettings`.
-    */
+     */
     public init(
         tooling: WorkspaceSystemSettingsTooling? = nil,
         disambiguation: WorkspaceSystemSettingsDisambiguation? = nil,

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -102,8 +102,8 @@ public class VisualRecognition {
 
     #if !os(Linux)
     /**
-      Allow network requests to a server without verification of the server certificate.
-      **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
+     Allow network requests to a server without verification of the server certificate.
+     **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
      */
     public func disableSSLVerification() {
         session = InsecureConnection.session()
@@ -133,16 +133,6 @@ public class VisualRecognition {
             } else if case let .some(.string(message)) = json["error"] {
                 errorMessage = message
             } else if case let .some(.string(message)) = json["message"] {
-                errorMessage = message
-            // ErrorAuthentication
-            } else if case let .some(.string(message)) = json["statusInfo"] {
-                errorMessage = message
-            // ErrorInfo
-            } else if case let .some(.object(errorObj)) = json["error"],    // 404
-                case let .some(.string(message)) = errorObj["description"] {
-                errorMessage = message
-            // ErrorHTML
-            } else if case let .some(.string(message)) = json["Error"] {   // 413
                 errorMessage = message
             } else {
                 errorMessage = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
@@ -238,8 +228,6 @@ public class VisualRecognition {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "classify")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
         if let acceptLanguage = acceptLanguage {
@@ -324,8 +312,6 @@ public class VisualRecognition {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "detectFaces")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
         if let acceptLanguage = acceptLanguage {
@@ -392,10 +378,10 @@ public class VisualRecognition {
         }
         positiveExamples.forEach { (classname, value) in
             let partName = "\(classname)_positive_examples"
-            multipartFormData.append(value, withName: partName, fileName: "\(classname).zip")
+            multipartFormData.append(value, withName: partName, fileName: classname)
         }
         if let negativeExamples = negativeExamples {
-            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename.zip")
+            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename")
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
@@ -407,8 +393,6 @@ public class VisualRecognition {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createClassifier")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
 
@@ -450,8 +434,6 @@ public class VisualRecognition {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listClassifiers")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -496,8 +478,6 @@ public class VisualRecognition {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getClassifier")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -565,11 +545,11 @@ public class VisualRecognition {
         if let positiveExamples = positiveExamples {
             positiveExamples.forEach { (classname, value) in
                 let partName = "\(classname)_positive_examples"
-                multipartFormData.append(value, withName: partName, fileName: "\(classname).zip")
+                multipartFormData.append(value, withName: partName, fileName: classname)
             }
         }
         if let negativeExamples = negativeExamples {
-            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename.zip")
+            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename")
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
@@ -581,8 +561,6 @@ public class VisualRecognition {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateClassifier")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
 
@@ -628,8 +606,6 @@ public class VisualRecognition {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteClassifier")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -676,8 +652,6 @@ public class VisualRecognition {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getCoreMLModel")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/octet-stream"
 
         // construct query parameters
@@ -727,8 +701,6 @@ public class VisualRecognition {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteUserData")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters

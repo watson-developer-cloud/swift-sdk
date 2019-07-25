@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -68,7 +68,7 @@ public struct SegmentSettings: Codable, Equatable {
        **enabled** set to `true` in the **smart_document_understanding** object.
 
      - returns: An initialized `SegmentSettings`.
-    */
+     */
     public init(
         enabled: Bool? = nil,
         selectorTags: [String]? = nil,

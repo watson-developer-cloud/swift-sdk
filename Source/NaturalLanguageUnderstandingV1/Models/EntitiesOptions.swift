@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -72,7 +72,7 @@ public struct EntitiesOptions: Codable, Equatable {
      - parameter emotion: Set this to `true` to analyze emotion for detected keywords.
 
      - returns: An initialized `EntitiesOptions`.
-    */
+     */
     public init(
         limit: Int? = nil,
         mentions: Bool? = nil,

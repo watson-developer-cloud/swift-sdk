@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,7 +60,7 @@ public struct DialogNodeOutputOptionsElementValue: Codable, Equatable {
        to user input** method.
 
      - returns: An initialized `DialogNodeOutputOptionsElementValue`.
-    */
+     */
     public init(
         input: MessageInput? = nil,
         intents: [RuntimeIntent]? = nil,

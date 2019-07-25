@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -127,8 +127,8 @@ public class PersonalityInsights {
 
     #if !os(Linux)
     /**
-      Allow network requests to a server without verification of the server certificate.
-      **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
+     Allow network requests to a server without verification of the server certificate.
+     **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
      */
     public func disableSSLVerification() {
         session = InsecureConnection.session()
@@ -219,6 +219,8 @@ public class PersonalityInsights {
      - parameter rawScores: Indicates whether a raw score in addition to a normalized percentile is returned for each
        characteristic; raw scores are not compared with a sample population. By default, only normalized percentiles are
        returned.
+     - parameter csvHeaders: Indicates whether column labels are returned with a CSV response. By default, no column
+       labels are returned. Applies only when the response type is CSV (`text/csv`).
      - parameter consumptionPreferences: Indicates whether consumption preferences are returned with the results. By
        default, no consumption preferences are returned.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -229,6 +231,7 @@ public class PersonalityInsights {
         contentLanguage: String? = nil,
         acceptLanguage: String? = nil,
         rawScores: Bool? = nil,
+        csvHeaders: Bool? = nil,
         consumptionPreferences: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Profile>?, WatsonError?) -> Void)
@@ -244,8 +247,6 @@ public class PersonalityInsights {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "profile")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = profileContent.contentType
         if let contentLanguage = contentLanguage {
@@ -260,6 +261,10 @@ public class PersonalityInsights {
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let rawScores = rawScores {
             let queryParameter = URLQueryItem(name: "raw_scores", value: "\(rawScores)")
+            queryParameters.append(queryParameter)
+        }
+        if let csvHeaders = csvHeaders {
+            let queryParameter = URLQueryItem(name: "csv_headers", value: "\(csvHeaders)")
             queryParameters.append(queryParameter)
         }
         if let consumptionPreferences = consumptionPreferences {
@@ -347,7 +352,7 @@ public class PersonalityInsights {
         csvHeaders: Bool? = nil,
         consumptionPreferences: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<String>?, WatsonError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Data>?, WatsonError?) -> Void)
     {
         // construct body
         guard let body = profileContent.content else {
@@ -360,8 +365,6 @@ public class PersonalityInsights {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "profileAsCSV")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "text/csv"
         headerParameters["Content-Type"] = profileContent.contentType
         if let contentLanguage = contentLanguage {

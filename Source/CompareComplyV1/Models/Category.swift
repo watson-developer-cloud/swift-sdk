@@ -75,7 +75,7 @@ public struct Category: Codable, Equatable {
        support.
 
      - returns: An initialized `Category`.
-    */
+     */
     public init(
         label: String? = nil,
         provenanceIDs: [String]? = nil

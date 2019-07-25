@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -85,7 +85,7 @@ public struct NluEnrichmentEntities: Codable, Equatable {
        Knowledge Studio, the public model for use with Knowledge Graph `en-news`, or the default public model `alchemy`.
 
      - returns: An initialized `NluEnrichmentEntities`.
-    */
+     */
     public init(
         sentiment: Bool? = nil,
         emotion: Bool? = nil,

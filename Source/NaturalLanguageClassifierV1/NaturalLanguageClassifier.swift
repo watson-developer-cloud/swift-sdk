@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -103,8 +103,8 @@ public class NaturalLanguageClassifier {
 
     #if !os(Linux)
     /**
-      Allow network requests to a server without verification of the server certificate.
-      **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
+     Allow network requests to a server without verification of the server certificate.
+     **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
      */
     public func disableSSLVerification() {
         session = InsecureConnection.session()
@@ -176,8 +176,6 @@ public class NaturalLanguageClassifier {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "classify")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -232,8 +230,6 @@ public class NaturalLanguageClassifier {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "classifyCollection")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -293,8 +289,6 @@ public class NaturalLanguageClassifier {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createClassifier")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
 
@@ -330,8 +324,6 @@ public class NaturalLanguageClassifier {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listClassifiers")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -367,8 +359,6 @@ public class NaturalLanguageClassifier {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getClassifier")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -407,8 +397,6 @@ public class NaturalLanguageClassifier {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteClassifier")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request

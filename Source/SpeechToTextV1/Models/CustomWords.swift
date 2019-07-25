@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ internal struct CustomWords: Codable, Equatable {
        be added to or updated in the custom language model.
 
      - returns: An initialized `CustomWords`.
-    */
+     */
     public init(
         words: [CustomWord]
     )

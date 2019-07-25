@@ -116,7 +116,7 @@ public struct SourceOptionsWebCrawl: Codable, Equatable {
        `https://ibm.com/watson/discovery`.
 
      - returns: An initialized `SourceOptionsWebCrawl`.
-    */
+     */
     public init(
         url: String,
         limitToStartingHosts: Bool? = nil,

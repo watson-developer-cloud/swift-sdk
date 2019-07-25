@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -88,7 +88,7 @@ internal struct QueryRelations: Codable, Equatable {
        maximum number of evidence items per query is 10,000.
 
      - returns: An initialized `QueryRelations`.
-    */
+     */
     public init(
         entities: [QueryRelationsEntity]? = nil,
         context: QueryEntitiesContext? = nil,

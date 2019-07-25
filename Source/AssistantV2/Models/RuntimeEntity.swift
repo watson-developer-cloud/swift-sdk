@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ import Foundation
 import RestKit
 
 /**
- A term from the request that was identified as an entity.
+ The entity value that was recognized in the user input.
  */
 public struct RuntimeEntity: Codable, Equatable {
 
@@ -39,7 +39,7 @@ public struct RuntimeEntity: Codable, Equatable {
     public var value: String
 
     /**
-     A decimal percentage that represents Watson's confidence in the entity.
+     A decimal percentage that represents Watson's confidence in the recognized entity.
      */
     public var confidence: Double?
 
@@ -70,12 +70,12 @@ public struct RuntimeEntity: Codable, Equatable {
      - parameter location: An array of zero-based character offsets that indicate where the detected entity values
        begin and end in the input text.
      - parameter value: The term in the input text that was recognized as an entity value.
-     - parameter confidence: A decimal percentage that represents Watson's confidence in the entity.
+     - parameter confidence: A decimal percentage that represents Watson's confidence in the recognized entity.
      - parameter metadata: Any metadata for the entity.
      - parameter groups: The recognized capture groups for the entity, as defined by the entity pattern.
 
      - returns: An initialized `RuntimeEntity`.
-    */
+     */
     public init(
         entity: String,
         location: [Int],

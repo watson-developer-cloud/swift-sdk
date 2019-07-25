@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ public struct WordHeadingDetection: Codable, Equatable {
      - parameter styles:
 
      - returns: An initialized `WordHeadingDetection`.
-    */
+     */
     public init(
         fonts: [FontSetting]? = nil,
         styles: [WordStyle]? = nil

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -68,7 +68,7 @@ public struct CreateIntent: Codable, Equatable {
      - parameter examples: An array of user input examples for the intent.
 
      - returns: An initialized `CreateIntent`.
-    */
+     */
     public init(
         intent: String,
         description: String? = nil,

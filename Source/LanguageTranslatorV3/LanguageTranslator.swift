@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -117,8 +117,8 @@ public class LanguageTranslator {
 
     #if !os(Linux)
     /**
-      Allow network requests to a server without verification of the server certificate.
-      **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
+     Allow network requests to a server without verification of the server certificate.
+     **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
      */
     public func disableSSLVerification() {
         session = InsecureConnection.session()
@@ -197,8 +197,6 @@ public class LanguageTranslator {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "translate")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -240,8 +238,6 @@ public class LanguageTranslator {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listIdentifiableLanguages")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -290,8 +286,6 @@ public class LanguageTranslator {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "identify")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "text/plain"
 
@@ -341,8 +335,6 @@ public class LanguageTranslator {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listModels")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -388,7 +380,7 @@ public class LanguageTranslator {
      than <b>10 MB</b>. You can upload multiple parallel corpora tmx files. The cumulative file size of all uploaded
      files is limited to <b>250 MB</b>. To successfully train with a parallel corpus you must have at least <b>5,000
      parallel sentences</b> in your corpus.
-     You can have a <b>maxium of 10 custom models per language pair</b>.
+     You can have a <b>maximum of 10 custom models per language pair</b>.
 
      - parameter baseModelID: The model ID of the model to use as the base for customization. To see available models,
        use the `List models` method. Usually all IBM provided models are customizable. In addition, all your models that
@@ -431,8 +423,6 @@ public class LanguageTranslator {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createModel")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
 
@@ -480,8 +470,6 @@ public class LanguageTranslator {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteModel")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -528,8 +516,6 @@ public class LanguageTranslator {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getModel")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -573,8 +559,6 @@ public class LanguageTranslator {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listDocuments")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -660,8 +644,6 @@ public class LanguageTranslator {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "translateDocument")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
 
@@ -704,8 +686,6 @@ public class LanguageTranslator {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getDocumentStatus")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -751,8 +731,6 @@ public class LanguageTranslator {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteDocument")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -807,8 +785,6 @@ public class LanguageTranslator {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getTranslatedDocument")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         if let accept = accept {
             headerParameters["Accept"] = accept
         }

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ public struct MessageContextSkills: Codable, Equatable {
      Initialize a `MessageContextSkills`.
 
      - returns: An initialized `MessageContextSkills`.
-    */
+     */
     public init(
         additionalProperties: [String: MessageContextSkill] = [:]
     )
@@ -49,40 +49,4 @@ public struct MessageContextSkills: Codable, Equatable {
         try dynamicContainer.encodeIfPresent(additionalProperties)
     }
 
-}
-
-public extension KeyedDecodingContainer where Key == DynamicKeys {
-
-    /// Decode additional properties.
-    func decode(_ type: [String: MessageContextSkill].Type, excluding keys: [CodingKey]) throws -> [String: MessageContextSkill] {
-        var retval: [String: MessageContextSkill] = [:]
-        try self.allKeys.forEach { key in
-            if !keys.contains{ $0.stringValue == key.stringValue} {
-                let value = try self.decode(MessageContextSkill.self, forKey: key)
-                retval[key.stringValue] = value
-            }
-        }
-        return retval
-    }
-}
-
-public extension KeyedEncodingContainer where Key == DynamicKeys {
-
-    /// Encode additional properties.
-    mutating func encode(_ additionalProperties: [String: MessageContextSkill]) throws {
-        try additionalProperties.forEach { key, value in
-            guard let codingKey = DynamicKeys(stringValue: key) else {
-                let description = "Cannot construct CodingKey for \(key)"
-                let context = EncodingError.Context(codingPath: codingPath, debugDescription: description)
-                throw EncodingError.invalidValue(key, context)
-            }
-            try self.encode(value, forKey: codingKey)
-        }
-    }
-
-    /// Encode additional properties if they are not nil.
-    mutating func encodeIfPresent(_ additionalProperties: [String: MessageContextSkill]?) throws {
-        guard let additionalProperties = additionalProperties else { return }
-        try encode(additionalProperties)
-    }
 }

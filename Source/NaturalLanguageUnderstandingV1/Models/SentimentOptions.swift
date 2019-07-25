@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2018.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,7 +46,7 @@ public struct SentimentOptions: Codable, Equatable {
      - parameter targets: Sentiment results will be returned for each target string that is found in the document.
 
      - returns: An initialized `SentimentOptions`.
-    */
+     */
     public init(
         document: Bool? = nil,
         targets: [String]? = nil

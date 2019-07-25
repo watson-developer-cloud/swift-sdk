@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -74,7 +74,7 @@ public struct WorkspaceSystemSettingsDisambiguation: Codable, Equatable {
        demonstration purposes.
 
      - returns: An initialized `WorkspaceSystemSettingsDisambiguation`.
-    */
+     */
     public init(
         prompt: String? = nil,
         noneOfTheAbovePrompt: String? = nil,

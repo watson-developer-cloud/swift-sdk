@@ -51,7 +51,7 @@ internal struct FeedbackInput: Codable, Equatable {
      - parameter comment: An optional comment on or description of the feedback.
 
      - returns: An initialized `FeedbackInput`.
-    */
+     */
     public init(
         feedbackData: FeedbackDataInput,
         userID: String? = nil,

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,7 +46,7 @@ public struct MessageContext: Codable, Equatable {
        apply to the dialog skill used by the assistant.
 
      - returns: An initialized `MessageContext`.
-    */
+     */
     public init(
         global: MessageContextGlobal? = nil,
         skills: MessageContextSkills? = nil

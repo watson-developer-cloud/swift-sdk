@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -117,7 +117,7 @@ internal struct Parameters: Codable, Equatable {
      - parameter limitTextCharacters: Sets the maximum number of characters that are processed by the service.
 
      - returns: An initialized `Parameters`.
-    */
+     */
     public init(
         features: Features,
         text: String? = nil,

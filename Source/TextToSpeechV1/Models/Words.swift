@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,7 +47,7 @@ public struct Words: Codable, Equatable {
        lowercase letters. The array is empty if the custom model contains no words.
 
      - returns: An initialized `Words`.
-    */
+     */
     public init(
         words: [Word]
     )

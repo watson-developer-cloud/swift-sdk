@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ public struct MessageContextGlobal: Codable, Equatable {
      - parameter system: Built-in system properties that apply to all skills used by the assistant.
 
      - returns: An initialized `MessageContextGlobal`.
-    */
+     */
     public init(
         system: MessageContextGlobalSystem? = nil
     )

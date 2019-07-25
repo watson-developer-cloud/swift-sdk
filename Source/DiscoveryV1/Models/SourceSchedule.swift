@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -81,7 +81,7 @@ public struct SourceSchedule: Codable, Equatable {
        -  `monthly`: Runs the on the first Sunday of every month between 00:00 and 06:00.
 
      - returns: An initialized `SourceSchedule`.
-    */
+     */
     public init(
         enabled: Bool? = nil,
         timeZone: String? = nil,

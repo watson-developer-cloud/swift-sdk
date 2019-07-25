@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -159,7 +159,7 @@ public struct DialogNodeOutputGeneric: Codable, Equatable {
        conversation. Valid only when **reponse_type**=`connect_to_agent`.
 
      - returns: An initialized `DialogNodeOutputGeneric`.
-    */
+     */
     public init(
         responseType: String,
         values: [DialogNodeOutputTextValuesElement]? = nil,

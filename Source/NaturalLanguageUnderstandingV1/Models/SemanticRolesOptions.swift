@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2018.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,7 +52,7 @@ public struct SemanticRolesOptions: Codable, Equatable {
      - parameter entities: Set this to `true` to return entity information for subjects and objects.
 
      - returns: An initialized `SemanticRolesOptions`.
-    */
+     */
     public init(
         limit: Int? = nil,
         keywords: Bool? = nil,

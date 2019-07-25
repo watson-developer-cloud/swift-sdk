@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,7 +49,7 @@ public struct TrainingExample: Codable, Equatable {
      - parameter relevance: The relevance of the training example.
 
      - returns: An initialized `TrainingExample`.
-    */
+     */
     public init(
         documentID: String? = nil,
         crossReference: String? = nil,

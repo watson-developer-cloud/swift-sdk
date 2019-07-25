@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ public struct DialogNodeOutputTextValuesElement: Codable, Equatable {
        or other special characters, if supported by the channel.
 
      - returns: An initialized `DialogNodeOutputTextValuesElement`.
-    */
+     */
     public init(
         text: String? = nil
     )

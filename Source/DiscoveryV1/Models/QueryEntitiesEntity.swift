@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,7 +44,7 @@ public struct QueryEntitiesEntity: Codable, Equatable {
      - parameter type: The type of the specified entity.
 
      - returns: An initialized `QueryEntitiesEntity`.
-    */
+     */
     public init(
         text: String? = nil,
         type: String? = nil

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ public struct QueryRelationsFilter: Codable, Equatable {
      - parameter documentIDs: A comma-separated list of document IDs to include in the query.
 
      - returns: An initialized `QueryRelationsFilter`.
-    */
+     */
     public init(
         relationTypes: QueryFilterType? = nil,
         entityTypes: QueryFilterType? = nil,

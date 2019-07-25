@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -144,7 +144,7 @@ internal struct UpdateWorkspace: Codable, Equatable {
        input.
 
      - returns: An initialized `UpdateWorkspace`.
-    */
+     */
     public init(
         name: String? = nil,
         description: String? = nil,

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ internal struct TokenDict: Codable, Equatable {
        component `tokens`, any alternate character set `readings`, and which `part_of_speech` the text is from.
 
      - returns: An initialized `TokenDict`.
-    */
+     */
     public init(
         tokenizationRules: [TokenDictRule]? = nil
     )

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2018.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -96,7 +96,7 @@ public struct Configuration: Codable, Equatable {
      - parameter source: Object containing source parameters for the configuration.
 
      - returns: An initialized `Configuration`.
-    */
+     */
     public init(
         name: String,
         configurationID: String? = nil,

@@ -88,7 +88,7 @@ public struct FeedbackDataInput: Codable, Equatable {
      - parameter modelVersion: An optional string identifying the version of the model used.
 
      - returns: An initialized `FeedbackDataInput`.
-    */
+     */
     public init(
         feedbackType: String,
         location: Location,

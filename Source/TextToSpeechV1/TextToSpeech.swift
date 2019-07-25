@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -111,8 +111,8 @@ public class TextToSpeech {
 
     #if !os(Linux)
     /**
-      Allow network requests to a server without verification of the server certificate.
-      **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
+     Allow network requests to a server without verification of the server certificate.
+     **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
      */
     public func disableSSLVerification() {
         session = InsecureConnection.session()
@@ -174,8 +174,6 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listVoices")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -196,15 +194,15 @@ public class TextToSpeech {
      Get a voice.
 
      Gets information about the specified voice. The information includes the name, language, gender, and other details
-     about the voice. Specify a customization ID to obtain information for that custom voice model of the specified
-     voice. To list information about all available voices, use the **List voices** method.
+     about the voice. Specify a customization ID to obtain information for a custom voice model that is defined for the
+     language of the specified voice. To list information about all available voices, use the **List voices** method.
      **See also:** [Listing a specific
      voice](https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-voices#listVoice).
 
      - parameter voice: The voice for which information is to be returned.
      - parameter customizationID: The customization ID (GUID) of a custom voice model for which information is to be
-       returned. You must make the request with service credentials created for the instance of the service that owns
-       the custom model. Omit the parameter to see information about the specified voice with no customization.
+       returned. You must make the request with credentials for the instance of the service that owns the custom model.
+       Omit the parameter to see information about the specified voice with no customization.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -219,8 +217,6 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getVoice")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -310,12 +306,11 @@ public class TextToSpeech {
      - parameter voice: The voice to use for synthesis.
      - parameter customizationID: The customization ID (GUID) of a custom voice model to use for the synthesis. If a
        custom voice model is specified, it is guaranteed to work only if it matches the language of the indicated voice.
-       You must make the request with service credentials created for the instance of the service that owns the custom
-       model. Omit the parameter to use the specified voice with no customization.
+       You must make the request with credentials for the instance of the service that owns the custom model. Omit the
+       parameter to use the specified voice with no customization.
      - parameter accept: The requested format (MIME type) of the audio. You can use the `Accept` header or the
        `accept` parameter to specify the audio format. For more information about specifying an audio format, see
        **Audio formats (accept types)** in the method description.
-       Default: `audio/ogg;codecs=opus`.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -340,8 +335,6 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "synthesize")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Content-Type"] = "application/json"
         if let accept = accept {
             headerParameters["Accept"] = accept
@@ -371,38 +364,7 @@ public class TextToSpeech {
         )
 
         // execute REST request
-        request.response { (response: WatsonResponse<Data>?, error: WatsonError?) in
-            var response = response
-            guard let data = response?.result else {
-                completionHandler(response, error)
-                return
-            }
-            if accept?.lowercased().contains("audio/wav") == true {
-                // repair the WAV header
-                var wav = data
-                guard WAVRepair.isWAVFile(data: wav) else {
-                    let error = WatsonError.other(message: "Expected returned audio to be in WAV format", metadata: nil)
-                    completionHandler(nil, error)
-                    return
-                }
-                WAVRepair.repairWAVHeader(data: &wav)
-                response?.result = wav
-                completionHandler(response, nil)
-            } else if accept?.lowercased().contains("ogg") == true && accept?.lowercased().contains("opus") == true {
-                do {
-                    let decodedAudio = try TextToSpeechDecoder(audioData: data)
-                    response?.result = decodedAudio.pcmDataWithHeaders
-                    completionHandler(response, nil)
-                } catch {
-                    let error = WatsonError.serialization(values: "returned audio")
-                    completionHandler(nil, error)
-                    return
-                }
-            } else {
-                completionHandler(response, nil)
-            }
-        }
-
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -423,8 +385,8 @@ public class TextToSpeech {
      - parameter customizationID: The customization ID (GUID) of a custom voice model for which the pronunciation is
        to be returned. The language of a specified custom model must match the language of the specified voice. If the
        word is not defined in the specified custom model, the service returns the default translation for the custom
-       model's language. You must make the request with service credentials created for the instance of the service that
-       owns the custom model. Omit the parameter to see the translation for the specified voice with no customization.
+       model's language. You must make the request with credentials for the instance of the service that owns the custom
+       model. Omit the parameter to see the translation for the specified voice with no customization.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -441,8 +403,6 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getPronunciation")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -515,8 +475,6 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createVoiceModel")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -546,9 +504,8 @@ public class TextToSpeech {
      **See also:** [Querying all custom
      models](https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customModels#cuModelsQueryAll).
 
-     - parameter language: The language for which custom voice models that are owned by the requesting service
-       credentials are to be returned. Omit the parameter to see all custom voice models that are owned by the
-       requester.
+     - parameter language: The language for which custom voice models that are owned by the requesting credentials are
+       to be returned. Omit the parameter to see all custom voice models that are owned by the requester.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -562,8 +519,6 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listVoiceModels")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -612,7 +567,7 @@ public class TextToSpeech {
      customization](https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customIntro#customIntro).
 
      - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request
-       with service credentials created for the instance of the service that owns the custom model.
+       with credentials for the instance of the service that owns the custom model.
      - parameter name: A new name for the custom voice model.
      - parameter description: A new description for the custom voice model.
      - parameter words: An array of `Word` objects that provides the words and their translations that are to be added
@@ -643,8 +598,6 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateVoiceModel")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -679,7 +632,7 @@ public class TextToSpeech {
      model](https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customModels#cuModelsQuery).
 
      - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request
-       with service credentials created for the instance of the service that owns the custom model.
+       with credentials for the instance of the service that owns the custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -693,8 +646,6 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getVoiceModel")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -726,7 +677,7 @@ public class TextToSpeech {
      model](https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customModels#cuModelsDelete).
 
      - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request
-       with service credentials created for the instance of the service that owns the custom model.
+       with credentials for the instance of the service that owns the custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -740,8 +691,6 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteVoiceModel")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
 
         // construct REST request
         let path = "/v1/customizations/\(customizationID)"
@@ -785,7 +734,7 @@ public class TextToSpeech {
      customization](https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customIntro#customIntro).
 
      - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request
-       with service credentials created for the instance of the service that owns the custom model.
+       with credentials for the instance of the service that owns the custom model.
      - parameter words: The **Add custom words** method accepts an array of `Word` objects. Each object provides a
        word that is to be added or updated for the custom voice model and the word's translation.
        The **List custom words** method returns an array of `Word` objects. Each object shows a word and its translation
@@ -813,8 +762,6 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "addWords")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -849,7 +796,7 @@ public class TextToSpeech {
      model](https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customWords#cuWordsQueryModel).
 
      - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request
-       with service credentials created for the instance of the service that owns the custom model.
+       with credentials for the instance of the service that owns the custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -863,8 +810,6 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listWords")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -909,7 +854,7 @@ public class TextToSpeech {
      customization](https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customIntro#customIntro).
 
      - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request
-       with service credentials created for the instance of the service that owns the custom model.
+       with credentials for the instance of the service that owns the custom model.
      - parameter word: The word that is to be added or updated for the custom voice model.
      - parameter translation: The phonetic or sounds-like translation for the word. A phonetic translation is based on
        the SSML format for representing the phonetic string of a word either as an IPA translation or as an IBM SPR
@@ -944,8 +889,6 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "addWord")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Content-Type"] = "application/json"
 
         // construct REST request
@@ -978,7 +921,7 @@ public class TextToSpeech {
      model](https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customWords#cuWordQueryModel).
 
      - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request
-       with service credentials created for the instance of the service that owns the custom model.
+       with credentials for the instance of the service that owns the custom model.
      - parameter word: The word that is to be queried from the custom voice model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -994,8 +937,6 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getWord")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -1027,7 +968,7 @@ public class TextToSpeech {
      model](https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customWords#cuWordDelete).
 
      - parameter customizationID: The customization ID (GUID) of the custom voice model. You must make the request
-       with service credentials created for the instance of the service that owns the custom model.
+       with credentials for the instance of the service that owns the custom model.
      - parameter word: The word that is to be deleted from the custom voice model.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -1043,8 +984,6 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteWord")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
 
         // construct REST request
         let path = "/v1/customizations/\(customizationID)/words/\(word)"
@@ -1091,8 +1030,6 @@ public class TextToSpeech {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteUserData")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()

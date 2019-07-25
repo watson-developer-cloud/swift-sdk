@@ -38,7 +38,7 @@ public struct MessageContextSkill: Codable, Equatable {
      - parameter userDefined: Arbitrary variables that can be read and written by a particular skill.
 
      - returns: An initialized `MessageContextSkill`.
-    */
+     */
     public init(
         userDefined: [String: JSON]? = nil
     )

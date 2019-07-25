@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,7 +44,8 @@ public struct SpeechRecognitionResults: Codable, Equatable {
     public var speakerLabels: [SpeakerLabelsResult]?
 
     /**
-     If processing metrics are requested, information about the service's processing of the input audio.
+     If processing metrics are requested, information about the service's processing of the input audio. Processing
+     metrics are not available with the synchronous **Recognize audio** method.
      */
     public var processingMetrics: ProcessingMetrics?
 

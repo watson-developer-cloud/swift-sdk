@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -218,7 +218,7 @@ internal struct QueryLarge: Codable, Equatable {
        higher field values. This parameter cannot be used in the same query as the **sort** parameter.
 
      - returns: An initialized `QueryLarge`.
-    */
+     */
     public init(
         filter: String? = nil,
         query: String? = nil,

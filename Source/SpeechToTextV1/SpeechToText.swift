@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -114,8 +114,8 @@ public class SpeechToText {
 
     #if !os(Linux)
     /**
-      Allow network requests to a server without verification of the server certificate.
-      **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
+     Allow network requests to a server without verification of the server certificate.
+     **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
      */
     public func disableSSLVerification() {
         session = InsecureConnection.session()
@@ -177,8 +177,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listModels")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -218,8 +216,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getModel")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -381,6 +377,9 @@ public class SpeechToText {
        `speaker_labels` is set to `true`.
        See [Speaker
        labels](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#speaker_labels).
+     - parameter customizationID: **Deprecated.** Use the `language_customization_id` parameter to specify the
+       customization ID (GUID) of a custom language model that is to be used with the recognition request. Do not
+       specify both parameters with a request.
      - parameter grammarName: The name of a grammar that is to be used with the recognition request. If you specify a
        grammar, you must also use the `language_customization_id` parameter to specify the name of the custom language
        model for which the grammar is defined. The service recognizes only strings that are recognized by the specified
@@ -422,6 +421,7 @@ public class SpeechToText {
         profanityFilter: Bool? = nil,
         smartFormatting: Bool? = nil,
         speakerLabels: Bool? = nil,
+        customizationID: String? = nil,
         grammarName: String? = nil,
         redaction: Bool? = nil,
         audioMetrics: Bool? = nil,
@@ -437,8 +437,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "recognize")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         if let contentType = contentType {
             headerParameters["Content-Type"] = contentType
@@ -504,6 +502,10 @@ public class SpeechToText {
         }
         if let speakerLabels = speakerLabels {
             let queryParameter = URLQueryItem(name: "speaker_labels", value: "\(speakerLabels)")
+            queryParameters.append(queryParameter)
+        }
+        if let customizationID = customizationID {
+            let queryParameter = URLQueryItem(name: "customization_id", value: customizationID)
             queryParameters.append(queryParameter)
         }
         if let grammarName = grammarName {
@@ -583,8 +585,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "registerCallback")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -632,8 +632,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "unregisterCallback")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -828,6 +826,9 @@ public class SpeechToText {
        `speaker_labels` is set to `true`.
        See [Speaker
        labels](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#speaker_labels).
+     - parameter customizationID: **Deprecated.** Use the `language_customization_id` parameter to specify the
+       customization ID (GUID) of a custom language model that is to be used with the recognition request. Do not
+       specify both parameters with a request.
      - parameter grammarName: The name of a grammar that is to be used with the recognition request. If you specify a
        grammar, you must also use the `language_customization_id` parameter to specify the name of the custom language
        model for which the grammar is defined. The service recognizes only strings that are recognized by the specified
@@ -885,6 +886,7 @@ public class SpeechToText {
         profanityFilter: Bool? = nil,
         smartFormatting: Bool? = nil,
         speakerLabels: Bool? = nil,
+        customizationID: String? = nil,
         grammarName: String? = nil,
         redaction: Bool? = nil,
         processingMetrics: Bool? = nil,
@@ -902,8 +904,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createJob")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         if let contentType = contentType {
             headerParameters["Content-Type"] = contentType
@@ -987,6 +987,10 @@ public class SpeechToText {
             let queryParameter = URLQueryItem(name: "speaker_labels", value: "\(speakerLabels)")
             queryParameters.append(queryParameter)
         }
+        if let customizationID = customizationID {
+            let queryParameter = URLQueryItem(name: "customization_id", value: customizationID)
+            queryParameters.append(queryParameter)
+        }
         if let grammarName = grammarName {
             let queryParameter = URLQueryItem(name: "grammar_name", value: grammarName)
             queryParameters.append(queryParameter)
@@ -1048,8 +1052,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "checkJobs")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -1094,8 +1096,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "checkJob")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -1141,8 +1141,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteJob")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
 
         // construct REST request
         let path = "/v1/recognitions/\(id)"
@@ -1217,8 +1215,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createLanguageModel")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -1263,8 +1259,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listLanguageModels")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -1312,8 +1306,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getLanguageModel")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -1359,8 +1351,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteLanguageModel")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -1434,15 +1424,13 @@ public class SpeechToText {
         wordTypeToAdd: String? = nil,
         customizationWeight: Double? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TrainingResponse>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "trainLanguageModel")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -1473,7 +1461,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.response(completionHandler: completionHandler)
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1501,8 +1489,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "resetLanguageModel")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -1555,8 +1541,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "upgradeLanguageModel")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -1602,8 +1586,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listCorpora")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -1664,10 +1646,14 @@ public class SpeechToText {
      - parameter corpusName: The name of the new corpus for the custom language model. Use a localized name that
        matches the language of the custom model and reflects the contents of the corpus.
        * Include a maximum of 128 characters in the name.
-       * Do not include spaces, slashes, or backslashes in the name.
+       * Do not use characters that need to be URL-encoded. For example, do not use spaces, slashes, backslashes,
+       colons, ampersands, double quotes, plus signs, equals signs, questions marks, and so on in the name. (The service
+       does not prevent the use of these characters. But because they must be URL-encoded wherever used, their use is
+       strongly discouraged.)
        * Do not use the name of an existing corpus or grammar that is already defined for the custom model.
        * Do not use the name `user`, which is reserved by the service to denote custom words that are added or modified
        by the user.
+       * Do not use the name `base_lm` or `default_lm`. Both names are reserved for future use by the service.
      - parameter corpusFile: A plain text file that contains the training data for the corpus. Encode the file in
        UTF-8 if it contains non-ASCII characters; the service assumes UTF-8 encoding if it encounters non-ASCII
        characters.
@@ -1702,8 +1688,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "addCorpus")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
 
@@ -1761,8 +1745,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getCorpus")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -1812,8 +1794,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteCorpus")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -1857,7 +1837,7 @@ public class SpeechToText {
        prepend an optional `+` or `-` to an argument to indicate whether the results are to be sorted in ascending or
        descending order. By default, words are sorted in ascending alphabetical order. For alphabetical ordering, the
        lexicographical precedence is numeric values, uppercase letters, and lowercase letters. For count ordering,
-       values with the same count are ordered alphabetically. With the `curl` command, URL encode the `+` symbol as
+       values with the same count are ordered alphabetically. With the `curl` command, URL-encode the `+` symbol as
        `%2B`.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -1874,8 +1854,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listWords")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -1975,8 +1953,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "addWords")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -2078,8 +2054,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "addWord")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -2130,8 +2104,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getWord")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -2183,8 +2155,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteWord")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -2230,8 +2200,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listGrammars")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -2288,10 +2256,14 @@ public class SpeechToText {
      - parameter grammarName: The name of the new grammar for the custom language model. Use a localized name that
        matches the language of the custom model and reflects the contents of the grammar.
        * Include a maximum of 128 characters in the name.
-       * Do not include spaces, slashes, or backslashes in the name.
+       * Do not use characters that need to be URL-encoded. For example, do not use spaces, slashes, backslashes,
+       colons, ampersands, double quotes, plus signs, equals signs, questions marks, and so on in the name. (The service
+       does not prevent the use of these characters. But because they must be URL-encoded wherever used, their use is
+       strongly discouraged.)
        * Do not use the name of an existing grammar or corpus that is already defined for the custom model.
        * Do not use the name `user`, which is reserved by the service to denote custom words that are added or modified
        by the user.
+       * Do not use the name `base_lm` or `default_lm`. Both names are reserved for future use by the service.
      - parameter grammarFile: A plain text file that contains the grammar in the format specified by the
        `Content-Type` header. Encode the file in UTF-8 (ASCII is a subset of UTF-8). Using any other encoding can lead
        to issues when compiling the grammar or to unexpected results in decoding. The service ignores an encoding that
@@ -2329,8 +2301,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "addGrammar")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = contentType
 
@@ -2388,8 +2358,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getGrammar")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -2439,8 +2407,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteGrammar")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -2506,8 +2472,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createAcousticModel")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -2552,8 +2516,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listAcousticModels")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -2601,8 +2563,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getAcousticModel")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -2648,8 +2608,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteAcousticModel")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -2686,8 +2644,9 @@ public class SpeechToText {
      You can monitor the status of the training by using the **Get a custom acoustic model** method to poll the model's
      status. Use a loop to check the status once a minute. The method returns an `AcousticModel` object that includes
      `status` and `progress` fields. A status of `available` indicates that the custom model is trained and ready to
-     use. The service cannot accept subsequent training requests, or requests to add new audio resources, until the
-     existing request completes.
+     use. The service cannot train a model while it is handling another request for the model. The service cannot accept
+     subsequent training requests, or requests to add new audio resources, until the existing training request
+     completes.
      You can use the optional `custom_language_model_id` parameter to specify the GUID of a separately created custom
      language model that is to be used during training. Train with a custom language model if you have verbatim
      transcriptions of the audio files that you have added to the custom model or you have either corpora (text files)
@@ -2723,15 +2682,13 @@ public class SpeechToText {
         customizationID: String,
         customLanguageModelID: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TrainingResponse>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "trainAcousticModel")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -2758,7 +2715,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.response(completionHandler: completionHandler)
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2766,8 +2723,10 @@ public class SpeechToText {
 
      Resets a custom acoustic model by removing all audio resources from the model. Resetting a custom acoustic model
      initializes the model to its state when it was first created. Metadata such as the name and language of the model
-     are preserved, but the model's audio resources are removed and must be re-created. You must use credentials for the
-     instance of the service that owns a model to reset it.
+     are preserved, but the model's audio resources are removed and must be re-created. The service cannot reset a model
+     while it is handling another request for the model. The service cannot accept subsequent requests for the model
+     until the existing reset request completes. You must use credentials for the instance of the service that owns a
+     model to reset it.
      **See also:** [Resetting a custom acoustic
      model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAcousticModels#resetModel-acoustic).
 
@@ -2786,8 +2745,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "resetAcousticModel")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -2821,8 +2778,9 @@ public class SpeechToText {
      monitor the status of the upgrade by using the **Get a custom acoustic model** method to poll the model's status.
      The method returns an `AcousticModel` object that includes `status` and `progress` fields. Use a loop to check the
      status once a minute. While it is being upgraded, the custom model has the status `upgrading`. When the upgrade is
-     complete, the model resumes the status that it had prior to upgrade. The service cannot accept subsequent requests
-     for the model until the upgrade completes.
+     complete, the model resumes the status that it had prior to upgrade. The service cannot upgrade a model while it is
+     handling another request for the model. The service cannot accept subsequent requests for the model until the
+     existing upgrade request completes.
      If the custom acoustic model was trained with a separately created custom language model, you must use the
      `custom_language_model_id` parameter to specify the GUID of that custom language model. The custom language model
      must be upgraded before the custom acoustic model can be upgraded. Omit the parameter if the custom acoustic model
@@ -2855,8 +2813,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "upgradeAcousticModel")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -2916,8 +2872,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listAudio")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -2950,17 +2904,17 @@ public class SpeechToText {
      files via a single archive file is significantly more efficient than adding each file individually. You can add
      audio resources in any format that the service supports for speech recognition.
      You can use this method to add any number of audio resources to a custom model by calling the method once for each
-     audio or archive file. But the addition of one audio resource must be fully complete before you can add another.
-     You must add a minimum of 10 minutes and a maximum of 200 hours of audio that includes speech, not just silence, to
-     a custom acoustic model before you can train it. No audio resource, audio- or archive-type, can be larger than 100
-     MB. To add an audio resource that has the same name as an existing audio resource, set the `allow_overwrite`
-     parameter to `true`; otherwise, the request fails.
+     audio or archive file. You can add multiple different audio resources at the same time. You must add a minimum of
+     10 minutes and a maximum of 200 hours of audio that includes speech, not just silence, to a custom acoustic model
+     before you can train it. No audio resource, audio- or archive-type, can be larger than 100 MB. To add an audio
+     resource that has the same name as an existing audio resource, set the `allow_overwrite` parameter to `true`;
+     otherwise, the request fails.
      The method is asynchronous. It can take several seconds to complete depending on the duration of the audio and, in
      the case of an archive file, the total number of audio files being processed. The service returns a 201 response
      code if the audio is valid. It then asynchronously analyzes the contents of the audio file or files and
      automatically extracts information about the audio such as its length, sampling rate, and encoding. You cannot
-     submit requests to add additional audio resources to a custom acoustic model, or to train the model, until the
-     service's analysis of all audio files for the current request completes.
+     submit requests to train or upgrade the model until the service's analysis of all audio resources for current
+     requests completes.
      To determine the status of the service's analysis of the audio, use the **Get an audio resource** method to poll
      the status of the audio. The method accepts the customization ID of the custom model and the name of the audio
      resource, and it returns the status of the resource. Use a loop to check the status of the audio every few seconds
@@ -3010,18 +2964,18 @@ public class SpeechToText {
      do not need to have the same format.
      Do not use the `Contained-Content-Type` header when adding an audio-type resource.
      ### Naming restrictions for embedded audio files
-      The name of an audio file that is embedded within an archive-type resource must meet the following restrictions:
-     * Include a maximum of 128 characters in the file name; this includes the file extension.
-     * Do not include spaces, slashes, or backslashes in the file name.
-     * Do not use the name of an audio file that has already been added to the custom model as part of an archive-type
-     resource.
+      The name of an audio file that is contained in an archive-type resource can include a maximum of 128 characters.
+     This includes the file extension and all elements of the name (for example, slashes).
 
      - parameter customizationID: The customization ID (GUID) of the custom acoustic model that is to be used for the
        request. You must make the request with credentials for the instance of the service that owns the custom model.
      - parameter audioName: The name of the new audio resource for the custom acoustic model. Use a localized name
        that matches the language of the custom model and reflects the contents of the resource.
        * Include a maximum of 128 characters in the name.
-       * Do not include spaces, slashes, or backslashes in the name.
+       * Do not use characters that need to be URL-encoded. For example, do not use spaces, slashes, backslashes,
+       colons, ampersands, double quotes, plus signs, equals signs, questions marks, and so on in the name. (The service
+       does not prevent the use of these characters. But because they must be URL-encoded wherever used, their use is
+       strongly discouraged.)
        * Do not use the name of an audio resource that has already been added to the custom model.
      - parameter audioResource: The audio resource that is to be added to the custom acoustic model, an individual
        audio file or an archive file.
@@ -3063,8 +3017,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "addAudio")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         if let containedContentType = containedContentType {
             headerParameters["Contained-Content-Type"] = containedContentType
@@ -3137,8 +3089,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getAudio")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -3164,10 +3114,11 @@ public class SpeechToText {
      Delete an audio resource.
 
      Deletes an existing audio resource from a custom acoustic model. Deleting an archive-type audio resource removes
-     the entire archive of files; the current interface does not allow deletion of individual files from an archive
-     resource. Removing an audio resource does not affect the custom model until you train the model on its updated data
-     by using the **Train a custom acoustic model** method. You must use credentials for the instance of the service
-     that owns a model to delete its audio resources.
+     the entire archive of files. The service does not allow deletion of individual files from an archive resource.
+     Removing an audio resource does not affect the custom model until you train the model on its updated data by using
+     the **Train a custom acoustic model** method. You can delete an existing audio resource from a model while a
+     different resource is being added to the model. You must use credentials for the instance of the service that owns
+     a model to delete its audio resources.
      **See also:** [Deleting an audio resource from a custom acoustic
      model](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-manageAudio#deleteAudio).
 
@@ -3188,8 +3139,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteAudio")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -3237,8 +3186,6 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteUserData")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()

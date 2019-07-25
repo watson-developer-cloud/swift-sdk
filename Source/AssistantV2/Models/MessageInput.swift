@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -84,7 +84,7 @@ public struct MessageInput: Codable, Equatable {
      - parameter suggestionID: For internal use only.
 
      - returns: An initialized `MessageInput`.
-    */
+     */
     public init(
         messageType: String? = nil,
         text: String? = nil,

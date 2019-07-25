@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,7 +51,7 @@ public struct NluEnrichmentKeywords: Codable, Equatable {
      - parameter limit: The maximum number of keywords to extract for each instance of the specified field.
 
      - returns: An initialized `NluEnrichmentKeywords`.
-    */
+     */
     public init(
         sentiment: Bool? = nil,
         emotion: Bool? = nil,

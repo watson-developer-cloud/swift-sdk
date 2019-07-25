@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -138,7 +138,7 @@ public struct Features: Codable, Equatable {
      - parameter syntax: Returns tokens and sentences from the input text.
 
      - returns: An initialized `Features`.
-    */
+     */
     public init(
         concepts: ConceptsOptions? = nil,
         emotion: EmotionOptions? = nil,

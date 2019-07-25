@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,7 +54,7 @@ internal struct UpdateCounterexample: Codable, Equatable {
      - parameter updated: The timestamp for the most recent update to the object.
 
      - returns: An initialized `UpdateCounterexample`.
-    */
+     */
     public init(
         text: String? = nil,
         created: Date? = nil,

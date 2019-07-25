@@ -17,7 +17,8 @@
 import Foundation
 
 /**
- If processing metrics are requested, information about the service's processing of the input audio.
+ If processing metrics are requested, information about the service's processing of the input audio. Processing metrics
+ are not available with the synchronous **Recognize audio** method.
  */
 public struct ProcessingMetrics: Codable, Equatable {
 

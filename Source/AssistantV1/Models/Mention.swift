@@ -45,7 +45,7 @@ public struct Mention: Codable, Equatable {
        end in the input text.
 
      - returns: An initialized `Mention`.
-    */
+     */
     public init(
         entity: String,
         location: [Int]

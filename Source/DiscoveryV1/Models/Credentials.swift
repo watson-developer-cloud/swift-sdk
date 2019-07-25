@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -100,7 +100,7 @@ public struct Credentials: Codable, Equatable {
        example, the password provided has expired) and must be corrected before they can be used with a collection.
 
      - returns: An initialized `Credentials`.
-    */
+     */
     public init(
         credentialID: String? = nil,
         sourceType: String? = nil,

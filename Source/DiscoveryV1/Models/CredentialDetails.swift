@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -265,7 +265,7 @@ public struct CredentialDetails: Codable, Equatable {
        documentation](https://cloud.ibm.com/docs/services/cloud-object-storage?topic=cloud-object-storage-using-hmac-credentials#using-hmac-credentials).
 
      - returns: An initialized `CredentialDetails`.
-    */
+     */
     public init(
         credentialType: String? = nil,
         clientID: String? = nil,

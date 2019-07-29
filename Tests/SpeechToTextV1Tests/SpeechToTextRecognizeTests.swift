@@ -516,7 +516,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
             filename: "StockAnnouncement",
             withExtension: "wav",
             format: "audio/wav",
-            substring: "$152.37"
+            substring: "IBM stock"
         )
     }
 

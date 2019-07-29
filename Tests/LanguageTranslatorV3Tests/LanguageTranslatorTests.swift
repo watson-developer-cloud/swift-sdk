@@ -367,7 +367,7 @@ class LanguageTranslatorTests: XCTestCase {
                 return
             }
 
-            XCTAssertGreaterThan(documents.documents.count, 0)
+            XCTAssertNotNil(documents.documents, "Documents array does not exist!")
             expectation.fulfill()
         }
         waitForExpectations()

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2016, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -238,6 +238,8 @@ public class VisualRecognition {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "classify")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
         if let acceptLanguage = acceptLanguage {
@@ -322,6 +324,8 @@ public class VisualRecognition {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "detectFaces")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
         if let acceptLanguage = acceptLanguage {
@@ -403,6 +407,8 @@ public class VisualRecognition {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createClassifier")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
 
@@ -444,6 +450,8 @@ public class VisualRecognition {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listClassifiers")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -488,6 +496,8 @@ public class VisualRecognition {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getClassifier")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -571,6 +581,8 @@ public class VisualRecognition {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateClassifier")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
 
@@ -616,6 +628,8 @@ public class VisualRecognition {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteClassifier")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -662,6 +676,8 @@ public class VisualRecognition {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getCoreMLModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/octet-stream"
 
         // construct query parameters
@@ -711,6 +727,8 @@ public class VisualRecognition {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteUserData")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters

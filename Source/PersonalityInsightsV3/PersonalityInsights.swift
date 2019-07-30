@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2016, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -244,6 +244,8 @@ public class PersonalityInsights {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "profile")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = profileContent.contentType
         if let contentLanguage = contentLanguage {
@@ -358,6 +360,8 @@ public class PersonalityInsights {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "profileAsCSV")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "text/csv"
         headerParameters["Content-Type"] = profileContent.contentType
         if let contentLanguage = contentLanguage {

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2016, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -196,6 +196,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createEnvironment")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -238,6 +240,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listEnvironments")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -280,6 +284,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getEnvironment")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -343,6 +349,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateEnvironment")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -388,6 +396,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteEnvironment")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -435,6 +445,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listFields")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -513,6 +525,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createConfiguration")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -562,6 +576,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listConfigurations")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -611,6 +627,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getConfiguration")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -690,6 +708,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateConfiguration")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -742,6 +762,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteConfiguration")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -836,6 +858,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "testConfigurationInEnvironment")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
 
@@ -909,6 +933,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createCollection")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -958,6 +984,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listCollections")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -1007,6 +1035,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getCollection")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -1068,6 +1098,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateCollection")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -1115,6 +1147,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteCollection")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -1162,6 +1196,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listCollectionFields")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -1210,6 +1246,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listExpansions")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -1278,6 +1316,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createExpansions")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -1328,6 +1368,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteExpansions")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1374,6 +1416,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getTokenizationDictionaryStatus")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -1432,6 +1476,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createTokenizationDictionary")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -1481,6 +1527,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteTokenizationDictionary")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1527,6 +1575,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getStopwordListStatus")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -1586,6 +1636,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createStopwordList")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
 
@@ -1636,6 +1688,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteStopwordList")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1725,6 +1779,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "addDocument")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
 
@@ -1778,6 +1834,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getDocumentStatus")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -1860,6 +1918,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateDocument")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
 
@@ -1912,6 +1972,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteDocument")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -2054,6 +2116,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "query")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
         if let loggingOptOut = loggingOptOut {
@@ -2163,6 +2227,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "queryNotices")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -2372,6 +2438,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "federatedQuery")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
         if let loggingOptOut = loggingOptOut {
@@ -2471,6 +2539,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "federatedQueryNotices")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -2598,6 +2668,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "queryEntities")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -2678,6 +2750,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "queryRelations")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -2727,6 +2801,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listTrainingData")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -2790,6 +2866,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "addTrainingData")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -2839,6 +2917,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteAllTrainingData")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2887,6 +2967,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getTrainingData")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -2936,6 +3018,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteTrainingData")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2984,6 +3068,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listTrainingExamples")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -3049,6 +3135,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createTrainingExample")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -3102,6 +3190,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteTrainingExample")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -3165,6 +3255,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateTrainingExample")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -3218,6 +3310,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getTrainingExample")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -3267,6 +3361,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteUserData")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -3319,6 +3415,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createEvent")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -3377,6 +3475,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "queryLog")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -3443,6 +3543,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getMetricsQuery")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -3503,6 +3605,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getMetricsQueryEvent")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -3562,6 +3666,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getMetricsQueryNoResults")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -3622,6 +3728,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getMetricsEventRate")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -3677,6 +3785,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getMetricsQueryTokenEvent")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -3722,6 +3832,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listCredentials")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -3793,6 +3905,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createCredentials")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -3844,6 +3958,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getCredentials")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -3916,6 +4032,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateCredentials")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -3965,6 +4083,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteCredentials")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -4010,6 +4130,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listGateways")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -4065,6 +4187,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createGateway")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -4114,6 +4238,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getGateway")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -4161,6 +4287,8 @@ public class Discovery {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteGateway")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters

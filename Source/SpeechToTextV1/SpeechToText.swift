@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2016, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -177,6 +177,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listModels")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -216,6 +218,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -433,6 +437,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "recognize")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         if let contentType = contentType {
             headerParameters["Content-Type"] = contentType
@@ -577,6 +583,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "registerCallback")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -624,6 +632,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "unregisterCallback")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -892,6 +902,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createJob")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         if let contentType = contentType {
             headerParameters["Content-Type"] = contentType
@@ -1036,6 +1048,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "checkJobs")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -1080,6 +1094,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "checkJob")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -1125,6 +1141,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteJob")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
 
         // construct REST request
         let path = "/v1/recognitions/\(id)"
@@ -1199,6 +1217,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createLanguageModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -1243,6 +1263,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listLanguageModels")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -1290,6 +1312,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getLanguageModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -1335,6 +1359,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteLanguageModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -1415,6 +1441,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "trainLanguageModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -1473,6 +1501,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "resetLanguageModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -1525,6 +1555,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "upgradeLanguageModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -1570,6 +1602,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listCorpora")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -1672,6 +1706,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "addCorpus")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
 
@@ -1729,6 +1765,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getCorpus")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -1778,6 +1816,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteCorpus")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -1838,6 +1878,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listWords")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -1937,6 +1979,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "addWords")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -2038,6 +2082,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "addWord")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -2088,6 +2134,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getWord")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -2139,6 +2187,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteWord")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -2184,6 +2234,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listGrammars")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -2285,6 +2337,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "addGrammar")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = contentType
 
@@ -2342,6 +2396,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getGrammar")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -2391,6 +2447,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteGrammar")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -2456,6 +2514,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createAcousticModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
 
@@ -2500,6 +2560,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listAcousticModels")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -2547,6 +2609,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getAcousticModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -2592,6 +2656,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteAcousticModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -2673,6 +2739,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "trainAcousticModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -2729,6 +2797,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "resetAcousticModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -2797,6 +2867,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "upgradeAcousticModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct query parameters
@@ -2856,6 +2928,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listAudio")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -3001,6 +3075,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "addAudio")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         if let containedContentType = containedContentType {
             headerParameters["Contained-Content-Type"] = containedContentType
@@ -3073,6 +3149,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getAudio")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -3123,6 +3201,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteAudio")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
@@ -3170,6 +3250,8 @@ public class SpeechToText {
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteUserData")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()

@@ -117,8 +117,8 @@ public class LanguageTranslator {
 
     #if !os(Linux)
     /**
-      Allow network requests to a server without verification of the server certificate.
-      **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
+     Allow network requests to a server without verification of the server certificate.
+     **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
      */
     public func disableSSLVerification() {
         session = InsecureConnection.session()
@@ -388,7 +388,7 @@ public class LanguageTranslator {
      than <b>10 MB</b>. You can upload multiple parallel corpora tmx files. The cumulative file size of all uploaded
      files is limited to <b>250 MB</b>. To successfully train with a parallel corpus you must have at least <b>5,000
      parallel sentences</b> in your corpus.
-     You can have a <b>maxium of 10 custom models per language pair</b>.
+     You can have a <b>maximum of 10 custom models per language pair</b>.
 
      - parameter baseModelID: The model ID of the model to use as the base for customization. To see available models,
        use the `List models` method. Usually all IBM provided models are customizable. In addition, all your models that

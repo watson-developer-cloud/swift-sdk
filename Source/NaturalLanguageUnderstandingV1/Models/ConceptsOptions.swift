@@ -39,7 +39,7 @@ public struct ConceptsOptions: Codable, Equatable {
      - parameter limit: Maximum number of concepts to return.
 
      - returns: An initialized `ConceptsOptions`.
-    */
+     */
     public init(
         limit: Int? = nil
     )

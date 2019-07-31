@@ -88,7 +88,7 @@ public struct Word: Codable, Equatable {
        entries](https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-rules#jaNotes).
 
      - returns: An initialized `Word`.
-    */
+     */
     public init(
         word: String,
         translation: String,

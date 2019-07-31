@@ -45,7 +45,7 @@ public struct Location: Codable, Equatable {
      - parameter end: The element's `end` index.
 
      - returns: An initialized `Location`.
-    */
+     */
     public init(
         begin: Int,
         end: Int

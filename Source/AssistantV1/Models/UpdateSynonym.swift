@@ -53,7 +53,7 @@ internal struct UpdateSynonym: Codable, Equatable {
      - parameter updated: The timestamp for the most recent update to the object.
 
      - returns: An initialized `UpdateSynonym`.
-    */
+     */
     public init(
         synonym: String? = nil,
         created: Date? = nil,

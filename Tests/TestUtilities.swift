@@ -23,6 +23,7 @@ let exampleURL = URL(string: "http://example.com")!
 
 let missingResultMessage = "Missing result from response"
 let missingErrorMessage = "Expected error not received"
+let missingContextMessage = "Expect context from Assistant response"
 func unexpectedErrorMessage(_ error: Error) -> String {
     return "Received an unexpected error: \(error)"
 }

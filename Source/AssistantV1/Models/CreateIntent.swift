@@ -68,7 +68,7 @@ public struct CreateIntent: Codable, Equatable {
      - parameter examples: An array of user input examples for the intent.
 
      - returns: An initialized `CreateIntent`.
-    */
+     */
     public init(
         intent: String,
         description: String? = nil,

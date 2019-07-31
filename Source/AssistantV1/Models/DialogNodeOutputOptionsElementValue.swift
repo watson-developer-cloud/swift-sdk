@@ -60,7 +60,7 @@ public struct DialogNodeOutputOptionsElementValue: Codable, Equatable {
        to user input** method.
 
      - returns: An initialized `DialogNodeOutputOptionsElementValue`.
-    */
+     */
     public init(
         input: MessageInput? = nil,
         intents: [RuntimeIntent]? = nil,

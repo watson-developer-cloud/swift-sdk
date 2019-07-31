@@ -68,7 +68,7 @@ public struct SegmentSettings: Codable, Equatable {
        **enabled** set to `true` in the **smart_document_understanding** object.
 
      - returns: An initialized `SegmentSettings`.
-    */
+     */
     public init(
         enabled: Bool? = nil,
         selectorTags: [String]? = nil,

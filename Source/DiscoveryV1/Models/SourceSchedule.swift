@@ -81,7 +81,7 @@ public struct SourceSchedule: Codable, Equatable {
        -  `monthly`: Runs the on the first Sunday of every month between 00:00 and 06:00.
 
      - returns: An initialized `SourceSchedule`.
-    */
+     */
     public init(
         enabled: Bool? = nil,
         timeZone: String? = nil,

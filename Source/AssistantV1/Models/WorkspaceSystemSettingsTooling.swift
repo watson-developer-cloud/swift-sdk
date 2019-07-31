@@ -38,7 +38,7 @@ public struct WorkspaceSystemSettingsTooling: Codable, Equatable {
        `output.generic` object.
 
      - returns: An initialized `WorkspaceSystemSettingsTooling`.
-    */
+     */
     public init(
         storeGenericResponses: Bool? = nil
     )

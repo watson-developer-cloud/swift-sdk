@@ -102,7 +102,7 @@ public struct CreateValue: Codable, Equatable {
      - parameter updated: The timestamp for the most recent update to the object.
 
      - returns: An initialized `CreateValue`.
-    */
+     */
     public init(
         value: String,
         metadata: [String: JSON]? = nil,

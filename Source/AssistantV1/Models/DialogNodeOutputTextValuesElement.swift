@@ -37,7 +37,7 @@ public struct DialogNodeOutputTextValuesElement: Codable, Equatable {
        or other special characters, if supported by the channel.
 
      - returns: An initialized `DialogNodeOutputTextValuesElement`.
-    */
+     */
     public init(
         text: String? = nil
     )

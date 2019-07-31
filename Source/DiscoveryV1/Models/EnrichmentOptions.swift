@@ -73,7 +73,7 @@ public struct EnrichmentOptions: Codable, Equatable {
        available are: `contract`.
 
      - returns: An initialized `EnrichmentOptions`.
-    */
+     */
     public init(
         features: NluEnrichmentFeatures? = nil,
         language: String? = nil,

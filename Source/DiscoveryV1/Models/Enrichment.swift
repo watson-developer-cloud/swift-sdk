@@ -101,7 +101,7 @@ public struct Enrichment: Codable, Equatable {
      - parameter options: Options which are specific to a particular enrichment.
 
      - returns: An initialized `Enrichment`.
-    */
+     */
     public init(
         destinationField: String,
         sourceField: String,

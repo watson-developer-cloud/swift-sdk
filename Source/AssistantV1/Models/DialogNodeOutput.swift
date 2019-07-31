@@ -50,7 +50,7 @@ public struct DialogNodeOutput: Codable, Equatable {
      - parameter modifiers: Options that modify how specified output is handled.
 
      - returns: An initialized `DialogNodeOutput`.
-    */
+     */
     public init(
         generic: [DialogNodeOutputGeneric]? = nil,
         modifiers: DialogNodeOutputModifiers? = nil,

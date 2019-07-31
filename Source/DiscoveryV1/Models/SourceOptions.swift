@@ -86,7 +86,7 @@ public struct SourceOptions: Codable, Equatable {
        `true`, the **buckets** array must not be specified.
 
      - returns: An initialized `SourceOptions`.
-    */
+     */
     public init(
         folders: [SourceOptionsFolder]? = nil,
         objects: [SourceOptionsObject]? = nil,

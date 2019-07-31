@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * (C) Copyright IBM Corp. 2016, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,7 +56,7 @@ public struct Context: Codable, Equatable {
      - parameter metadata: Metadata related to the message.
 
      - returns: An initialized `Context`.
-    */
+     */
     public init(
         conversationID: String? = nil,
         system: SystemResponse? = nil,

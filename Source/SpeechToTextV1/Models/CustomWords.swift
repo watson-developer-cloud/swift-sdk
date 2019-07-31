@@ -39,7 +39,7 @@ internal struct CustomWords: Codable, Equatable {
        be added to or updated in the custom language model.
 
      - returns: An initialized `CustomWords`.
-    */
+     */
     public init(
         words: [CustomWord]
     )

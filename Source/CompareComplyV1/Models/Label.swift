@@ -45,7 +45,7 @@ public struct Label: Codable, Equatable {
      - parameter party: The identified `party` of the element.
 
      - returns: An initialized `Label`.
-    */
+     */
     public init(
         nature: String,
         party: String

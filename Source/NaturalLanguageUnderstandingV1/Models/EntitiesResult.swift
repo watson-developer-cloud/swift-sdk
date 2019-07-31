@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2018.
+ * (C) Copyright IBM Corp. 2017, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,6 +37,13 @@ public struct EntitiesResult: Codable, Equatable {
     public var relevance: Double?
 
     /**
+     Confidence in the entity identification from 0 to 1. Higher values indicate higher confidence. In standard entities
+     requests, confidence is returned only for English text. All entities requests that use custom models return the
+     confidence score.
+     */
+    public var confidence: Double?
+
+    /**
      Entity mentions and locations.
      */
     public var mentions: [EntityMention]?
@@ -66,6 +73,7 @@ public struct EntitiesResult: Codable, Equatable {
         case type = "type"
         case text = "text"
         case relevance = "relevance"
+        case confidence = "confidence"
         case mentions = "mentions"
         case count = "count"
         case emotion = "emotion"

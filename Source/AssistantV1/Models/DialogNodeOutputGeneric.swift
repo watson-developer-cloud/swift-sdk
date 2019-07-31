@@ -159,7 +159,7 @@ public struct DialogNodeOutputGeneric: Codable, Equatable {
        conversation. Valid only when **reponse_type**=`connect_to_agent`.
 
      - returns: An initialized `DialogNodeOutputGeneric`.
-    */
+     */
     public init(
         responseType: String,
         values: [DialogNodeOutputTextValuesElement]? = nil,

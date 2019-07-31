@@ -114,7 +114,7 @@ public struct NormalizationOperation: Codable, Equatable {
      - parameter destinationField: The destination field for the operation.
 
      - returns: An initialized `NormalizationOperation`.
-    */
+     */
     public init(
         operation: String? = nil,
         sourceField: String? = nil,

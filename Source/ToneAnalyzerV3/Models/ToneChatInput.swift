@@ -38,7 +38,7 @@ internal struct ToneChatInput: Codable, Equatable {
        analyze.
 
      - returns: An initialized `ToneChatInput`.
-    */
+     */
     public init(
         utterances: [Utterance]
     )

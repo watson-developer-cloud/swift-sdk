@@ -81,7 +81,7 @@ public struct Translation: Codable, Equatable {
        entries](https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-rules#jaNotes).
 
      - returns: An initialized `Translation`.
-    */
+     */
     public init(
         translation: String,
         partOfSpeech: String? = nil

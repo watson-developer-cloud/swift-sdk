@@ -47,7 +47,7 @@ internal struct MessageRequest: Codable, Equatable {
        dialog nodes.
 
      - returns: An initialized `MessageRequest`.
-    */
+     */
     public init(
         input: MessageInput? = nil,
         context: MessageContext? = nil

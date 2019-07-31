@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,10 +29,18 @@ public struct EntityMention: Codable, Equatable {
      */
     public var location: [Int]?
 
+    /**
+     Confidence in the entity identification from 0 to 1. Higher values indicate higher confidence. In standard entities
+     requests, confidence is returned only for English text. All entities requests that use custom models return the
+     confidence score.
+     */
+    public var confidence: Double?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case text = "text"
         case location = "location"
+        case confidence = "confidence"
     }
 
 }

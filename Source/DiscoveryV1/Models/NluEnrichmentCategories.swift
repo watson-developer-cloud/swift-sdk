@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ public struct NluEnrichmentCategories: Codable, Equatable {
      Initialize a `NluEnrichmentCategories`.
 
      - returns: An initialized `NluEnrichmentCategories`.
-    */
+     */
     public init(
         additionalProperties: [String: JSON] = [:]
     )

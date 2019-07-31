@@ -108,6 +108,16 @@ public struct DialogRuntimeResponseGeneric: Codable, Equatable {
      */
     public var suggestions: [DialogSuggestion]?
 
+    /**
+     The title or introductory text to show before the response. This text is defined in the search skill configuration.
+     */
+    public var header: String?
+
+    /**
+     An array of objects containing search results.
+     */
+    public var results: [SearchResult]?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case responseType = "response_type"
@@ -122,6 +132,8 @@ public struct DialogRuntimeResponseGeneric: Codable, Equatable {
         case messageToHumanAgent = "message_to_human_agent"
         case topic = "topic"
         case suggestions = "suggestions"
+        case header = "header"
+        case results = "results"
     }
 
 }

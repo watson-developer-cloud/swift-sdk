@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,7 +46,7 @@ public struct SourceOptionsObject: Codable, Equatable {
        in the document object are crawled.
 
      - returns: An initialized `SourceOptionsObject`.
-    */
+     */
     public init(
         name: String,
         limit: Int? = nil

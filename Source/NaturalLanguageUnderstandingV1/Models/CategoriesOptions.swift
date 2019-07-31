@@ -58,7 +58,7 @@ public struct CategoriesOptions: Codable, Equatable {
        ID to override the standard categories model.
 
      - returns: An initialized `CategoriesOptions`.
-    */
+     */
     public init(
         explanation: Bool? = nil,
         limit: Int? = nil,

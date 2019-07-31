@@ -45,7 +45,7 @@ public struct UpdatedLabelsIn: Codable, Equatable {
        matter of the element.
 
      - returns: An initialized `UpdatedLabelsIn`.
-    */
+     */
     public init(
         types: [TypeLabel],
         categories: [Category]

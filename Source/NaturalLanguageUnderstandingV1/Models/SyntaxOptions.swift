@@ -44,7 +44,7 @@ public struct SyntaxOptions: Codable, Equatable {
      - parameter sentences: Set this to `true` to return sentence information.
 
      - returns: An initialized `SyntaxOptions`.
-    */
+     */
     public init(
         tokens: SyntaxOptionsTokens? = nil,
         sentences: Bool? = nil

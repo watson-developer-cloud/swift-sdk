@@ -88,7 +88,7 @@ public struct Source: Codable, Equatable {
      - parameter options: The **options** object defines which items to crawl from the source system.
 
      - returns: An initialized `Source`.
-    */
+     */
     public init(
         type: String? = nil,
         credentialID: String? = nil,

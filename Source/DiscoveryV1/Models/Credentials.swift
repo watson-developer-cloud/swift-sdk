@@ -100,7 +100,7 @@ public struct Credentials: Codable, Equatable {
        example, the password provided has expired) and must be corrected before they can be used with a collection.
 
      - returns: An initialized `Credentials`.
-    */
+     */
     public init(
         credentialID: String? = nil,
         sourceType: String? = nil,

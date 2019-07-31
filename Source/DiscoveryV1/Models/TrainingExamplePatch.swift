@@ -42,7 +42,7 @@ internal struct TrainingExamplePatch: Codable, Equatable {
      - parameter relevance: The relevance value for this example.
 
      - returns: An initialized `TrainingExamplePatch`.
-    */
+     */
     public init(
         crossReference: String? = nil,
         relevance: Int? = nil

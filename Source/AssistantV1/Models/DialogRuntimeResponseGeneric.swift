@@ -157,7 +157,7 @@ public struct DialogRuntimeResponseGeneric: Codable, Equatable {
        users.
 
      - returns: An initialized `DialogRuntimeResponseGeneric`.
-    */
+     */
     public init(
         responseType: String,
         text: String? = nil,

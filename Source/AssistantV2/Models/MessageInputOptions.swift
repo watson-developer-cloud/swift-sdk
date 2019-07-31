@@ -65,7 +65,7 @@ public struct MessageInputOptions: Codable, Equatable {
        response will include the `context` property.
 
      - returns: An initialized `MessageInputOptions`.
-    */
+     */
     public init(
         debug: Bool? = nil,
         restart: Bool? = nil,

@@ -72,7 +72,7 @@ public struct EntitiesOptions: Codable, Equatable {
      - parameter emotion: Set this to `true` to analyze emotion for detected keywords.
 
      - returns: An initialized `EntitiesOptions`.
-    */
+     */
     public init(
         limit: Int? = nil,
         mentions: Bool? = nil,

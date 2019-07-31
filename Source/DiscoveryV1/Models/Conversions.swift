@@ -80,7 +80,7 @@ public struct Conversions: Codable, Equatable {
        **Lite** plans do not support image text recognition.
 
      - returns: An initialized `Conversions`.
-    */
+     */
     public init(
         pdf: PDFSettings? = nil,
         word: WordSettings? = nil,

@@ -113,7 +113,7 @@ internal struct CreateLanguageModel: Codable, Equatable {
        matches the language of the custom model.
 
      - returns: An initialized `CreateLanguageModel`.
-    */
+     */
     public init(
         name: String,
         baseModelName: String,

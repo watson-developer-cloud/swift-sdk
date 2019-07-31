@@ -54,7 +54,7 @@ public struct WorkspaceSystemSettings: Codable, Equatable {
      - parameter humanAgentAssist: For internal use only.
 
      - returns: An initialized `WorkspaceSystemSettings`.
-    */
+     */
     public init(
         tooling: WorkspaceSystemSettingsTooling? = nil,
         disambiguation: WorkspaceSystemSettingsDisambiguation? = nil,

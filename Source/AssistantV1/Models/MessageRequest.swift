@@ -87,7 +87,7 @@ public struct MessageRequest: Codable, Equatable {
      - parameter actions: An array of objects describing any actions requested by the dialog node.
 
      - returns: An initialized `MessageRequest`.
-    */
+     */
     public init(
         input: MessageInput? = nil,
         intents: [RuntimeIntent]? = nil,

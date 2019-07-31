@@ -54,6 +54,13 @@ public struct LanguageModel: Codable, Equatable {
     public var created: String?
 
     /**
+     The date and time in Coordinated Universal Time (UTC) at which the custom language model was last modified. The
+     `created` and `updated` fields are equal when a language model is first added but has yet to be updated. The value
+     is provided in full ISO 8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
+     */
+    public var updated: String?
+
+    /**
      The language identifier of the custom language model (for example, `en-US`).
      */
     public var language: String?
@@ -132,6 +139,7 @@ public struct LanguageModel: Codable, Equatable {
     private enum CodingKeys: String, CodingKey {
         case customizationID = "customization_id"
         case created = "created"
+        case updated = "updated"
         case language = "language"
         case dialect = "dialect"
         case versions = "versions"

@@ -43,7 +43,7 @@ public struct QueryRelationsFilter: Codable, Equatable {
      - parameter documentIDs: A comma-separated list of document IDs to include in the query.
 
      - returns: An initialized `QueryRelationsFilter`.
-    */
+     */
     public init(
         relationTypes: QueryFilterType? = nil,
         entityTypes: QueryFilterType? = nil,

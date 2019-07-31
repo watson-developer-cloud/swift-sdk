@@ -65,7 +65,7 @@ public struct DialogSuggestion: Codable, Equatable {
        property is populated using the value of the dialog node's **user_label** property.
 
      - returns: An initialized `DialogSuggestion`.
-    */
+     */
     public init(
         label: String,
         value: DialogSuggestionValue,

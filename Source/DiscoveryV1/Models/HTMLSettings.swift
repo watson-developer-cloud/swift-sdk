@@ -66,7 +66,7 @@ public struct HTMLSettings: Codable, Equatable {
      - parameter excludeTagAttributes: Array of HTML tag attributes to exclude.
 
      - returns: An initialized `HTMLSettings`.
-    */
+     */
     public init(
         excludeTagsCompletely: [String]? = nil,
         excludeTagsKeepContent: [String]? = nil,

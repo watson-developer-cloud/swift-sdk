@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * Copyright IBM Corporation 2019
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,41 +17,26 @@
 import Foundation
 
 /**
- An intent identified in the user input.
+ An object containing search result metadata from the Discovery service.
  */
-public struct RuntimeIntent: Codable, Equatable {
+public struct SearchResultMetadata: Codable, Equatable {
 
     /**
-     The name of the recognized intent.
+     The confidence score for the given result. For more information about how the confidence is calculated, see the
+     Discovery service [documentation](../discovery#query-your-collection).
      */
-    public var intent: String
+    public var confidence: Double?
 
     /**
-     A decimal percentage that represents Watson's confidence in the intent.
+     An unbounded measure of the relevance of a particular result, dependent on the query and matching document. A
+     higher score indicates a greater match to the query parameters.
      */
-    public var confidence: Double
+    public var score: Double?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case intent = "intent"
         case confidence = "confidence"
-    }
-
-    /**
-     Initialize a `RuntimeIntent` with member variables.
-
-     - parameter intent: The name of the recognized intent.
-     - parameter confidence: A decimal percentage that represents Watson's confidence in the intent.
-
-     - returns: An initialized `RuntimeIntent`.
-     */
-    public init(
-        intent: String,
-        confidence: Double
-    )
-    {
-        self.intent = intent
-        self.confidence = confidence
+        case score = "score"
     }
 
 }

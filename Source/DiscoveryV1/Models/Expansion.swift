@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,7 +48,7 @@ public struct Expansion: Codable, Equatable {
        in this list are expanded.
 
      - returns: An initialized `Expansion`.
-    */
+     */
     public init(
         expandedTerms: [String],
         inputTerms: [String]? = nil

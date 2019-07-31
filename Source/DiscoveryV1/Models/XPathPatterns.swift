@@ -35,7 +35,7 @@ public struct XPathPatterns: Codable, Equatable {
      - parameter xpaths: An array to XPaths.
 
      - returns: An initialized `XPathPatterns`.
-    */
+     */
     public init(
         xpaths: [String]? = nil
     )

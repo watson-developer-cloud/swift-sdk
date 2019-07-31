@@ -141,7 +141,7 @@ public struct ContentItem: Codable, Equatable {
      - parameter forward: Indicates whether this content item is a forwarded/copied version of another content item.
 
      - returns: An initialized `ContentItem`.
-    */
+     */
     public init(
         content: String,
         id: String? = nil,

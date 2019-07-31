@@ -138,7 +138,7 @@ public struct Features: Codable, Equatable {
      - parameter syntax: Returns tokens and sentences from the input text.
 
      - returns: An initialized `Features`.
-    */
+     */
     public init(
         concepts: ConceptsOptions? = nil,
         emotion: EmotionOptions? = nil,

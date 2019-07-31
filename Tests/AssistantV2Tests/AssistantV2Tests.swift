@@ -380,4 +380,95 @@ class AssistantV2Tests: XCTestCase {
 
         waitForExpectations()
     }
+    
+    // MARK: - Search Skill
+    
+    func testAssistantSearchSkill() {
+
+        
+        let sessionExpectationDescription = "Create a session"
+        let sessionExpectation = self.expectation(description: sessionExpectationDescription)
+
+        // setup session
+        var newSessionID: String?
+        assistant.createSession(assistantID: assistantID) {
+            response, error in
+            
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let session = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+            
+            XCTAssertNotNil(session.sessionID)
+            newSessionID = session.sessionID
+            sessionExpectation.fulfill()
+        }
+        
+        waitForExpectations()
+        
+        guard let sessionID = newSessionID else {
+            XCTFail("Failed to get the ID of the newly created session")
+            return
+        }
+        
+        let genericMessages: [String] = [
+            "Hello",
+            "Are you open on christmas",
+            "I\'d like to make an appointment",
+            "Tomorrow at 3pm",
+            "Make that thursday at 2pm"
+        ]
+        
+        // send multiple messages to get assistant going
+        for genericMessage in genericMessages {
+            let genericMessageDescription = "generic message"
+            let genericMessageExpectation = self.expectation(description: genericMessageDescription)
+            let messageInput = MessageInput(messageType: "text", text: genericMessage)
+            
+            assistant.message(assistantID: assistantID, sessionID: sessionID, input: messageInput) {
+                response, error in
+                
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                
+                XCTAssertNotNil(response?.result)
+                genericMessageExpectation.fulfill()
+            }
+            
+            waitForExpectations()
+        }
+        
+        // send a message that triggers search skill
+        let searchSkillMessageDescription = "search skill message"
+        let searchSkillMessageExpectation = self.expectation(description: searchSkillMessageDescription)
+        let searchSkillMessageInput = MessageInput(messageType: "text", text: "who did watson beat in jeopardy?")
+        
+        assistant.message(assistantID: assistantID, sessionID: sessionID, input: searchSkillMessageInput) {
+            response, error in
+            
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            
+            guard let message = response?.result?.output.generic?[0] else {
+                XCTFail(missingResultMessage)
+                return
+            }
+            
+            XCTAssertNotNil(message)
+            XCTAssert(message.responseType == "search")
+            
+            searchSkillMessageExpectation.fulfill()
+        }
+        
+        waitForExpectations()
+    }
+    
 }

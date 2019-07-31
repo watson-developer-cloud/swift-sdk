@@ -218,7 +218,7 @@ internal struct QueryLarge: Codable, Equatable {
        higher field values. This parameter cannot be used in the same query as the **sort** parameter.
 
      - returns: An initialized `QueryLarge`.
-    */
+     */
     public init(
         filter: String? = nil,
         query: String? = nil,

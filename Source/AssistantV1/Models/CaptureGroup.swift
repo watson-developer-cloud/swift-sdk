@@ -45,7 +45,7 @@ public struct CaptureGroup: Codable, Equatable {
        input text.
 
      - returns: An initialized `CaptureGroup`.
-    */
+     */
     public init(
         group: String,
         location: [Int]? = nil

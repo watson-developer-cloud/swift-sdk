@@ -60,7 +60,7 @@ internal struct UpdateExample: Codable, Equatable {
      - parameter updated: The timestamp for the most recent update to the object.
 
      - returns: An initialized `UpdateExample`.
-    */
+     */
     public init(
         text: String? = nil,
         mentions: [Mention]? = nil,

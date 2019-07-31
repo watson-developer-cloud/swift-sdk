@@ -47,7 +47,7 @@ public struct Utterance: Codable, Equatable {
        parameter.
 
      - returns: An initialized `Utterance`.
-    */
+     */
     public init(
         text: String,
         user: String? = nil

@@ -117,7 +117,7 @@ internal struct Parameters: Codable, Equatable {
      - parameter limitTextCharacters: Sets the maximum number of characters that are processed by the service.
 
      - returns: An initialized `Parameters`.
-    */
+     */
     public init(
         features: Features,
         text: String? = nil,

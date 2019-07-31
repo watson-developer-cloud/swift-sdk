@@ -265,7 +265,7 @@ public struct CredentialDetails: Codable, Equatable {
        documentation](https://cloud.ibm.com/docs/services/cloud-object-storage?topic=cloud-object-storage-using-hmac-credentials#using-hmac-credentials).
 
      - returns: An initialized `CredentialDetails`.
-    */
+     */
     public init(
         credentialType: String? = nil,
         clientID: String? = nil,

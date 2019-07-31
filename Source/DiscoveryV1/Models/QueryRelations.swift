@@ -88,7 +88,7 @@ internal struct QueryRelations: Codable, Equatable {
        maximum number of evidence items per query is 10,000.
 
      - returns: An initialized `QueryRelations`.
-    */
+     */
     public init(
         entities: [QueryRelationsEntity]? = nil,
         context: QueryEntitiesContext? = nil,

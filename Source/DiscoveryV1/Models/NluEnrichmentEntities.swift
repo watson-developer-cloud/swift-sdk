@@ -85,7 +85,7 @@ public struct NluEnrichmentEntities: Codable, Equatable {
        Knowledge Studio, the public model for use with Knowledge Graph `en-news`, or the default public model `alchemy`.
 
      - returns: An initialized `NluEnrichmentEntities`.
-    */
+     */
     public init(
         sentiment: Bool? = nil,
         emotion: Bool? = nil,

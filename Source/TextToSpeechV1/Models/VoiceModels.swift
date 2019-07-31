@@ -23,8 +23,8 @@ public struct VoiceModels: Codable, Equatable {
 
     /**
      An array of `VoiceModel` objects that provides information about each available custom voice model. The array is
-     empty if the requesting service credentials own no custom voice models (if no language is specified) or own no
-     custom voice models for the specified language.
+     empty if the requesting credentials own no custom voice models (if no language is specified) or own no custom voice
+     models for the specified language.
      */
     public var customizations: [VoiceModel]
 

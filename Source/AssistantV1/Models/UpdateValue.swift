@@ -102,7 +102,7 @@ internal struct UpdateValue: Codable, Equatable {
      - parameter updated: The timestamp for the most recent update to the object.
 
      - returns: An initialized `UpdateValue`.
-    */
+     */
     public init(
         value: String? = nil,
         metadata: [String: JSON]? = nil,

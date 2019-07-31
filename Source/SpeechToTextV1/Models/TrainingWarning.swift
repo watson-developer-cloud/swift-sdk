@@ -24,7 +24,7 @@ public struct TrainingWarning: Codable, Equatable {
     /**
      An identifier for the type of invalid resources listed in the `description` field.
      */
-    public enum WarningID: String {
+    public enum Code: String {
         case invalidAudioFiles = "invalid_audio_files"
         case invalidCorpusFiles = "invalid_corpus_files"
         case invalidGrammarFiles = "invalid_grammar_files"
@@ -32,21 +32,21 @@ public struct TrainingWarning: Codable, Equatable {
     }
 
     /**
+     An identifier for the type of invalid resources listed in the `description` field.
+     */
+    public var code: String
+
+    /**
      A warning message that lists the invalid resources that are excluded from the custom model's training. The message
      has the following format: `Analysis of the following {resource_type} has not completed successfully:
      [{resource_names}]. They will be excluded from custom {model_type} model training.`.
      */
-    public var description: String
-
-    /**
-     An identifier for the type of invalid resources listed in the `description` field.
-     */
-    public var warningID: String
+    public var message: String
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case description = "description"
-        case warningID = "warning_id"
+        case code = "code"
+        case message = "message"
     }
 
 }

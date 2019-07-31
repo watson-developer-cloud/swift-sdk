@@ -242,7 +242,7 @@ internal struct UpdateDialogNode: Codable, Equatable {
      - parameter updated: The timestamp for the most recent update to the object.
 
      - returns: An initialized `UpdateDialogNode`.
-    */
+     */
     public init(
         dialogNode: String? = nil,
         description: String? = nil,

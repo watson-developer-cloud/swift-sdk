@@ -70,7 +70,7 @@ public struct FontSetting: Codable, Equatable {
      - parameter name: The name of the font.
 
      - returns: An initialized `FontSetting`.
-    */
+     */
     public init(
         level: Int? = nil,
         minSize: Int? = nil,

@@ -31,7 +31,7 @@ public struct MessageContextSkills: Codable, Equatable {
      Initialize a `MessageContextSkills`.
 
      - returns: An initialized `MessageContextSkills`.
-    */
+     */
     public init(
         additionalProperties: [String: MessageContextSkill] = [:]
     )

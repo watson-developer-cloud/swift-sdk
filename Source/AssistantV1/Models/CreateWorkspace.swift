@@ -144,7 +144,7 @@ internal struct CreateWorkspace: Codable, Equatable {
        input.
 
      - returns: An initialized `CreateWorkspace`.
-    */
+     */
     public init(
         name: String? = nil,
         description: String? = nil,

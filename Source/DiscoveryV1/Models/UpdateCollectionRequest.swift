@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,7 +49,7 @@ internal struct UpdateCollectionRequest: Codable, Equatable {
      - parameter configurationID: The ID of the configuration in which the collection is to be updated.
 
      - returns: An initialized `UpdateCollectionRequest`.
-    */
+     */
     public init(
         name: String,
         description: String? = nil,

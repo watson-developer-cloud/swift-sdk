@@ -77,7 +77,7 @@ public struct CustomWord: Codable, Equatable {
        spelling in corpora training data.
 
      - returns: An initialized `CustomWord`.
-    */
+     */
     public init(
         word: String? = nil,
         soundsLike: [String]? = nil,

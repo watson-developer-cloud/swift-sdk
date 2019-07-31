@@ -47,7 +47,7 @@ public struct TypeLabel: Codable, Equatable {
        support.
 
      - returns: An initialized `TypeLabel`.
-    */
+     */
     public init(
         label: Label? = nil,
         provenanceIDs: [String]? = nil

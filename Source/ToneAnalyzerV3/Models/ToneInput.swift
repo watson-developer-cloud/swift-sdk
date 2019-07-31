@@ -37,7 +37,7 @@ public struct ToneInput: Codable, Equatable {
      - parameter text: The input content that the service is to analyze.
 
      - returns: An initialized `ToneInput`.
-    */
+     */
     public init(
         text: String
     )

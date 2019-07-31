@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -66,7 +66,7 @@ internal struct UpdateEnvironmentRequest: Codable, Equatable {
        using a Lite plan. Environment size can only increased and not decreased.
 
      - returns: An initialized `UpdateEnvironmentRequest`.
-    */
+     */
     public init(
         name: String? = nil,
         description: String? = nil,

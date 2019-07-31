@@ -74,7 +74,7 @@ public struct WorkspaceSystemSettingsDisambiguation: Codable, Equatable {
        demonstration purposes.
 
      - returns: An initialized `WorkspaceSystemSettingsDisambiguation`.
-    */
+     */
     public init(
         prompt: String? = nil,
         noneOfTheAbovePrompt: String? = nil,

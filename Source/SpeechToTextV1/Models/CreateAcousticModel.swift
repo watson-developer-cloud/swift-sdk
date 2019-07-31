@@ -93,7 +93,7 @@ internal struct CreateAcousticModel: Codable, Equatable {
        matches the language of the custom model.
 
      - returns: An initialized `CreateAcousticModel`.
-    */
+     */
     public init(
         name: String,
         baseModelName: String,

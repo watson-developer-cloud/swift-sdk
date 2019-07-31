@@ -52,7 +52,7 @@ public struct DialogSuggestionValue: Codable, Equatable {
      - parameter entities: An array of entities to be sent along with the user input.
 
      - returns: An initialized `DialogSuggestionValue`.
-    */
+     */
     public init(
         input: MessageInput? = nil,
         intents: [RuntimeIntent]? = nil,

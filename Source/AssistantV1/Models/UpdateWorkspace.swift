@@ -144,7 +144,7 @@ internal struct UpdateWorkspace: Codable, Equatable {
        input.
 
      - returns: An initialized `UpdateWorkspace`.
-    */
+     */
     public init(
         name: String? = nil,
         description: String? = nil,

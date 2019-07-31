@@ -49,7 +49,7 @@ public struct TrainingExample: Codable, Equatable {
      - parameter relevance: The relevance of the training example.
 
      - returns: An initialized `TrainingExample`.
-    */
+     */
     public init(
         documentID: String? = nil,
         crossReference: String? = nil,

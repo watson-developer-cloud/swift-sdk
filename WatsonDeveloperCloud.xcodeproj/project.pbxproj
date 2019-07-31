@@ -25,6 +25,10 @@
 		12F800581DF71AD9006851D6 /* WatsonCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6C7B3C1D8C960300CD97FA /* WatsonCredentials.swift */; };
 		12F8005C1DF71BA1006851D6 /* Discovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F8005B1DF71BA1006851D6 /* Discovery.swift */; };
 		12F8005E1DF71BED006851D6 /* DiscoveryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F8005D1DF71BED006851D6 /* DiscoveryTests.swift */; };
+		5F2C5BE622E9FA0900A7628D /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2C5BE322E9FA0900A7628D /* SearchResult.swift */; };
+		5F2C5BE722E9FA0900A7628D /* SearchResultHighlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2C5BE422E9FA0900A7628D /* SearchResultHighlight.swift */; };
+		5F2C5BE822E9FA0900A7628D /* SearchResultMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2C5BE522E9FA0900A7628D /* SearchResultMetadata.swift */; };
+		5F2C5BEA22E9FAA100A7628D /* VoiceCustomization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2C5BE922E9FAA000A7628D /* VoiceCustomization.swift */; };
 		6800FC9D2056D76F0078788A /* AssistantV1.h in Headers */ = {isa = PBXBuildFile; fileRef = 6800FC9C2056D7340078788A /* AssistantV1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6800FC9E2056D8360078788A /* AssistantV1.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6877FA9A2056D4F100383B25 /* AssistantV1.framework */; };
 		6800FC9F2056D8CB0078788A /* Assistant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6800FC552056D6830078788A /* Assistant.swift */; };
@@ -881,6 +885,10 @@
 		12F800481DF71921006851D6 /* DiscoveryV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiscoveryV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		12F8005B1DF71BA1006851D6 /* Discovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Discovery.swift; sourceTree = "<group>"; };
 		12F8005D1DF71BED006851D6 /* DiscoveryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryTests.swift; sourceTree = "<group>"; };
+		5F2C5BE322E9FA0900A7628D /* SearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
+		5F2C5BE422E9FA0900A7628D /* SearchResultHighlight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultHighlight.swift; sourceTree = "<group>"; };
+		5F2C5BE522E9FA0900A7628D /* SearchResultMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultMetadata.swift; sourceTree = "<group>"; };
+		5F2C5BE922E9FAA000A7628D /* VoiceCustomization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VoiceCustomization.swift; sourceTree = "<group>"; };
 		6800FC1F2056D6830078788A /* UpdateDialogNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateDialogNode.swift; sourceTree = "<group>"; };
 		6800FC212056D6830078788A /* DialogNodeAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogNodeAction.swift; sourceTree = "<group>"; };
 		6800FC222056D6830078788A /* CreateWorkspace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateWorkspace.swift; sourceTree = "<group>"; };
@@ -1719,6 +1727,7 @@
 				689A16FC203CCDA9002CFC66 /* Translation.swift */,
 				689A16FD203CCDA9002CFC66 /* UpdateVoiceModel.swift */,
 				689A1703203CCDA9002CFC66 /* Voice.swift */,
+				5F2C5BE922E9FAA000A7628D /* VoiceCustomization.swift */,
 				689A16FF203CCDA9002CFC66 /* VoiceModel.swift */,
 				689A1705203CCDA9002CFC66 /* VoiceModels.swift */,
 				689A16FB203CCDA9002CFC66 /* Voices.swift */,
@@ -2560,6 +2569,9 @@
 				CA8E9267223406E2001BFABF /* MessageResponseContext.swift */,
 				922077922152FC5900C8C7E4 /* RuntimeEntity.swift */,
 				9220778E2152FC5900C8C7E4 /* RuntimeIntent.swift */,
+				5F2C5BE322E9FA0900A7628D /* SearchResult.swift */,
+				5F2C5BE422E9FA0900A7628D /* SearchResultHighlight.swift */,
+				5F2C5BE522E9FA0900A7628D /* SearchResultMetadata.swift */,
 				922077862152FC5900C8C7E4 /* SessionResponse.swift */,
 			);
 			path = Models;
@@ -4122,6 +4134,7 @@
 				689A170C203CCDA9002CFC66 /* SupportedFeatures.swift in Sources */,
 				689A170A203CCDA9002CFC66 /* Text.swift in Sources */,
 				689A1706203CCDA9002CFC66 /* CreateVoiceModel.swift in Sources */,
+				5F2C5BEA22E9FAA100A7628D /* VoiceCustomization.swift in Sources */,
 				12F1405B1EB2410400D4047D /* TextToSpeechDecoder.swift in Sources */,
 				689A170F203CCDA9002CFC66 /* Voice.swift in Sources */,
 				689A1708203CCDA9002CFC66 /* Translation.swift in Sources */,
@@ -4616,6 +4629,7 @@
 				CA8E9268223406E2001BFABF /* MessageRequestContext.swift in Sources */,
 				922078512152FCE400C8C7E4 /* RuntimeEntity.swift in Sources */,
 				922078492152FCE400C8C7E4 /* DialogNodeOutputOptionsElement.swift in Sources */,
+				5F2C5BE722E9FA0900A7628D /* SearchResultHighlight.swift in Sources */,
 				CA8E9269223406E2001BFABF /* MessageResponseContext.swift in Sources */,
 				922078522152FCE400C8C7E4 /* MessageContextSkills.swift in Sources */,
 				922078432152FCE400C8C7E4 /* MessageContext.swift in Sources */,
@@ -4625,6 +4639,7 @@
 				922078452152FCE400C8C7E4 /* SessionResponse.swift in Sources */,
 				922078502152FCE400C8C7E4 /* MessageInput.swift in Sources */,
 				922078472152FCE400C8C7E4 /* CaptureGroup.swift in Sources */,
+				5F2C5BE622E9FA0900A7628D /* SearchResult.swift in Sources */,
 				9220784A2152FCE400C8C7E4 /* MessageOutputDebug.swift in Sources */,
 				922078482152FCE400C8C7E4 /* MessageOutput.swift in Sources */,
 				9220784D2152FCE400C8C7E4 /* RuntimeIntent.swift in Sources */,
@@ -4632,6 +4647,7 @@
 				CA8E92892236C638001BFABF /* MessageContextSkill.swift in Sources */,
 				9220784C2152FCE400C8C7E4 /* DialogSuggestionValue.swift in Sources */,
 				9220784E2152FCE400C8C7E4 /* DialogNodeOutputOptionsElementValue.swift in Sources */,
+				5F2C5BE822E9FA0900A7628D /* SearchResultMetadata.swift in Sources */,
 				922078462152FCE400C8C7E4 /* MessageRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -46,7 +46,7 @@ public struct MessageContext: Codable, Equatable {
        apply to the dialog skill used by the assistant.
 
      - returns: An initialized `MessageContext`.
-    */
+     */
     public init(
         global: MessageContextGlobal? = nil,
         skills: MessageContextSkills? = nil

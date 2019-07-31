@@ -27,39 +27,39 @@ import RestKit
 extension VisualRecognition {
 
     /**
-     Classify images.
+      Classify images.
 
-     Classify images with built-in or custom classifiers.
+      Classify images with built-in or custom classifiers.
 
-     - parameter image: An image to classify. Since the service limits images to 10MB, the image will be compressed.
-        For greater control over the image's compression, you should compress the image yourself, save it to a file,
-        and call the other `classify` method.
-     - parameter url: A string with the image URL to analyze. Must be in .jpg, or .png format. The minimum recommended
-        pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB. You can also include images
-        in the `imagesFile` parameter.
-     - parameter threshold: A floating point value that specifies the minimum score a class must have to be displayed
-        in the response. The default threshold for returning scores from a classifier is `0.5`. Set the threshold
-        to `0.0` to ignore the classification score and return all values.
-     - parameter owners: An array of the categories of classifiers to apply. Use `IBM` to classify against the `default`
-        general classifier, and use `me` to classify against your custom classifiers. To analyze the image against
-        both classifier categories, set the value to both `IBM` and `me`. The built-in `default` classifier is
-        used if both `classifierIDs` and `owners` parameters are empty. The `classifierIDs` parameter
-        overrides `owners`, so make sure that `classifierIDs` is empty.
-     - parameter classifierIDs: Specifies which classifiers to apply and overrides the `owners` parameter. You can
-        specify both custom and built-in classifiers. The built-in `default` classifier is used if both
-        `classifier_ids` and `owners` parameters are empty.  The following built-in classifier IDs
-        require no training:
-        - `default`: Returns classes from thousands of general tags.
-        - `food`: (Beta) Enhances specificity and accuracy for images of food items.
-        - `explicit`: (Beta) Evaluates whether the image might be pornographic.
-     - parameter acceptLanguage: Specifies the language of the output class names.  Can be `en` (English), `ar`
-        (Arabic), `de` (German), `es` (Spanish), `it` (Italian), `ja` (Japanese), or `ko` (Korean).  Classes for
-        which no translation is available are omitted.  The response might not be in the specified language under
-        these conditions:
-        - English is returned when the requested language is not supported.
-        - Classes are not returned when there is no translation for them.
-        - Custom classifiers returned with this method return tags in the language of the custom classifier.
-    - parameter completionHandler: A function executed when the request completes with a successful result or error
+      - parameter image: An image to classify. Since the service limits images to 10MB, the image will be compressed.
+         For greater control over the image's compression, you should compress the image yourself, save it to a file,
+         and call the other `classify` method.
+      - parameter url: A string with the image URL to analyze. Must be in .jpg, or .png format. The minimum recommended
+         pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB. You can also include images
+         in the `imagesFile` parameter.
+      - parameter threshold: A floating point value that specifies the minimum score a class must have to be displayed
+         in the response. The default threshold for returning scores from a classifier is `0.5`. Set the threshold
+         to `0.0` to ignore the classification score and return all values.
+      - parameter owners: An array of the categories of classifiers to apply. Use `IBM` to classify against the `default`
+         general classifier, and use `me` to classify against your custom classifiers. To analyze the image against
+         both classifier categories, set the value to both `IBM` and `me`. The built-in `default` classifier is
+         used if both `classifierIDs` and `owners` parameters are empty. The `classifierIDs` parameter
+         overrides `owners`, so make sure that `classifierIDs` is empty.
+      - parameter classifierIDs: Specifies which classifiers to apply and overrides the `owners` parameter. You can
+         specify both custom and built-in classifiers. The built-in `default` classifier is used if both
+         `classifier_ids` and `owners` parameters are empty.  The following built-in classifier IDs
+         require no training:
+         - `default`: Returns classes from thousands of general tags.
+         - `food`: (Beta) Enhances specificity and accuracy for images of food items.
+         - `explicit`: (Beta) Evaluates whether the image might be pornographic.
+      - parameter acceptLanguage: Specifies the language of the output class names.  Can be `en` (English), `ar`
+         (Arabic), `de` (German), `es` (Spanish), `it` (Italian), `ja` (Japanese), or `ko` (Korean).  Classes for
+         which no translation is available are omitted.  The response might not be in the specified language under
+         these conditions:
+         - English is returned when the requested language is not supported.
+         - Classes are not returned when there is no translation for them.
+         - Custom classifiers returned with this method return tags in the language of the custom classifier.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func classify(
         image: UIImage,

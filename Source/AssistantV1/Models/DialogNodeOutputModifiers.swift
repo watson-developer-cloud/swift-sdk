@@ -40,7 +40,7 @@ public struct DialogNodeOutputModifiers: Codable, Equatable {
        specified values.
 
      - returns: An initialized `DialogNodeOutputModifiers`.
-    */
+     */
     public init(
         overwrite: Bool? = nil
     )

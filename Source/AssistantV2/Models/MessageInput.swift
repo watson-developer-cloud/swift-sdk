@@ -84,7 +84,7 @@ public struct MessageInput: Codable, Equatable {
      - parameter suggestionID: For internal use only.
 
      - returns: An initialized `MessageInput`.
-    */
+     */
     public init(
         messageType: String? = nil,
         text: String? = nil,

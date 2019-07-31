@@ -49,7 +49,7 @@ internal struct NewTrainingQuery: Codable, Equatable {
      - parameter examples: Array of training examples.
 
      - returns: An initialized `NewTrainingQuery`.
-    */
+     */
     public init(
         naturalLanguageQuery: String? = nil,
         filter: String? = nil,

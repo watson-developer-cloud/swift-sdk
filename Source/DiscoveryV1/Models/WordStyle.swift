@@ -42,7 +42,7 @@ public struct WordStyle: Codable, Equatable {
      - parameter names: Array of word style names to convert.
 
      - returns: An initialized `WordStyle`.
-    */
+     */
     public init(
         level: Int? = nil,
         names: [String]? = nil

@@ -47,7 +47,7 @@ public struct Words: Codable, Equatable {
        lowercase letters. The array is empty if the custom model contains no words.
 
      - returns: An initialized `Words`.
-    */
+     */
     public init(
         words: [Word]
     )

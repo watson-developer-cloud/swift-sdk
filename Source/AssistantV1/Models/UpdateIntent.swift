@@ -68,7 +68,7 @@ internal struct UpdateIntent: Codable, Equatable {
      - parameter examples: An array of user input examples for the intent.
 
      - returns: An initialized `UpdateIntent`.
-    */
+     */
     public init(
         intent: String? = nil,
         description: String? = nil,

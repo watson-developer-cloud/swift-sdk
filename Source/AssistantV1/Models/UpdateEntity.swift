@@ -83,7 +83,7 @@ internal struct UpdateEntity: Codable, Equatable {
      - parameter values: An array of objects describing the entity values.
 
      - returns: An initialized `UpdateEntity`.
-    */
+     */
     public init(
         entity: String? = nil,
         description: String? = nil,

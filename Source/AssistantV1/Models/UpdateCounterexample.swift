@@ -54,7 +54,7 @@ internal struct UpdateCounterexample: Codable, Equatable {
      - parameter updated: The timestamp for the most recent update to the object.
 
      - returns: An initialized `UpdateCounterexample`.
-    */
+     */
     public init(
         text: String? = nil,
         created: Date? = nil,

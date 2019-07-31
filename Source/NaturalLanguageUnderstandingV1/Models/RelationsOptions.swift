@@ -45,7 +45,7 @@ public struct RelationsOptions: Codable, Equatable {
        ID to override the default model.
 
      - returns: An initialized `RelationsOptions`.
-    */
+     */
     public init(
         model: String? = nil
     )

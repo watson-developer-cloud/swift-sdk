@@ -37,7 +37,7 @@ public struct MessageContextGlobal: Codable, Equatable {
      - parameter system: Built-in system properties that apply to all skills used by the assistant.
 
      - returns: An initialized `MessageContextGlobal`.
-    */
+     */
     public init(
         system: MessageContextGlobalSystem? = nil
     )

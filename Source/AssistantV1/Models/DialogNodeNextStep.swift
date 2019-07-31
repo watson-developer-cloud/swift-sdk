@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -128,7 +128,7 @@ public struct DialogNodeNextStep: Codable, Equatable {
      - parameter selector: Which part of the dialog node to process next.
 
      - returns: An initialized `DialogNodeNextStep`.
-    */
+     */
     public init(
         behavior: String,
         dialogNode: String? = nil,

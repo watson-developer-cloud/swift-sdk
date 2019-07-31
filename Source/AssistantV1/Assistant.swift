@@ -115,8 +115,8 @@ public class Assistant {
 
     #if !os(Linux)
     /**
-      Allow network requests to a server without verification of the server certificate.
-      **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
+     Allow network requests to a server without verification of the server certificate.
+     **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
      */
     public func disableSSLVerification() {
         session = InsecureConnection.session()
@@ -162,6 +162,9 @@ public class Assistant {
      Get response to user input.
 
      Send user input to a workspace and receive a response.
+     **Note:** For most applications, there are significant advantages to using the v2 runtime API instead. These
+     advantages include ease of deployment, automatic state management, versioning, and search capabilities. For more
+     information, see the [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-api-overview).
      There is no rate limit for this operation.
 
      - parameter workspaceID: Unique identifier of the workspace.

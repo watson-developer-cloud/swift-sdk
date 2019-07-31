@@ -74,7 +74,7 @@ internal struct CreateCollectionRequest: Codable, Equatable {
        language code.
 
      - returns: An initialized `CreateCollectionRequest`.
-    */
+     */
     public init(
         name: String,
         description: String? = nil,

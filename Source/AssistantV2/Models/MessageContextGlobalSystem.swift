@@ -62,7 +62,7 @@ public struct MessageContextGlobalSystem: Codable, Equatable {
        skills (for example, triggering the start node of a dialog).
 
      - returns: An initialized `MessageContextGlobalSystem`.
-    */
+     */
     public init(
         timezone: String? = nil,
         userID: String? = nil,

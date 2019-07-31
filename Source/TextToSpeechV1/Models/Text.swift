@@ -38,7 +38,7 @@ internal struct Text: Codable, Equatable {
      - parameter text: The text to synthesize.
 
      - returns: An initialized `Text`.
-    */
+     */
     public init(
         text: String
     )

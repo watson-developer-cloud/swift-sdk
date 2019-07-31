@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -85,7 +85,7 @@ public struct NluEnrichmentFeatures: Codable, Equatable {
      - parameter concepts: An object specifiying the concepts enrichment and related parameters.
 
      - returns: An initialized `NluEnrichmentFeatures`.
-    */
+     */
     public init(
         keywords: NluEnrichmentKeywords? = nil,
         entities: NluEnrichmentEntities? = nil,

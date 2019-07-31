@@ -4,6 +4,7 @@ jobs:
     - stage: test Linux
       script: ./Scripts/travis/test-Linux.sh
       os: linux
+      dist: xenial
     - stage: test macOS
       script: ./Scripts/travis/test-macOS.sh
       os: osx

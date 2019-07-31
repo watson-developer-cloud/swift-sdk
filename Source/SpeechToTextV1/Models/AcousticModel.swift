@@ -54,6 +54,13 @@ public struct AcousticModel: Codable, Equatable {
     public var created: String?
 
     /**
+     The date and time in Coordinated Universal Time (UTC) at which the custom acoustic model was last modified. The
+     `created` and `updated` fields are equal when an acoustic model is first added but has yet to be updated. The value
+     is provided in full ISO 8601 format (YYYY-MM-DDThh:mm:ss.sTZD).
+     */
+    public var updated: String?
+
+    /**
      The language identifier of the custom acoustic model (for example, `en-US`).
      */
     public var language: String?
@@ -115,6 +122,7 @@ public struct AcousticModel: Codable, Equatable {
     private enum CodingKeys: String, CodingKey {
         case customizationID = "customization_id"
         case created = "created"
+        case updated = "updated"
         case language = "language"
         case versions = "versions"
         case owner = "owner"

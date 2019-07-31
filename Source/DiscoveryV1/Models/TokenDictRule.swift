@@ -60,7 +60,7 @@ public struct TokenDictRule: Codable, Equatable {
        set.
 
      - returns: An initialized `TokenDictRule`.
-    */
+     */
     public init(
         text: String,
         tokens: [String],

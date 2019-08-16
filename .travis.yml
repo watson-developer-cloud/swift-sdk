@@ -11,12 +11,12 @@ jobs:
     - stage: release new version
       script: ./Scripts/travis/new-release.sh
       os: osx
-      if: branch = master
+      if: branch = master AND type = push AND fork = false
     - stage: deploy to cocoapods
       script: ./Scripts/travis/deploy-to-cocoapods.sh
       os: osx
-      if: branch = master
+      if: branch = master AND type = push AND fork = false
     - stage: publish documentation
       script: ./Scripts/travis/publish-documentation.sh
       os: osx
-      if: branch = master
+      if: branch = master AND type = push AND fork = false

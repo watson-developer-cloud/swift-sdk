@@ -1,13 +1,12 @@
 osx_image: xcode10.1
 jobs:
   include:
-    - stage: test Linux
+    - stage: Run tests
       script: ./Scripts/travis/test-Linux.sh
       os: linux
       dist: xenial
-    - stage: test macOS
+    - os: osx
       script: ./Scripts/travis/test-macOS.sh
-      os: osx
     - stage: release new version
       script: ./Scripts/travis/new-release.sh
       os: osx

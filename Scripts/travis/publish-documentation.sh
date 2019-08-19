@@ -18,7 +18,7 @@ git fetch
 git checkout master
 latestVersion=$(git describe --abbrev=0 --tags)
 
-git clone --quiet --branch=gh-pages git@github.com:watson-developer-cloud/swift-sdk.git gh-pages > /dev/null
+git clone --quiet --branch=gh-pages https://github.com/watson-developer-cloud/swift-sdk.git gh-pages > /dev/null
 
 # Delete all the old docs (but not the docs directory -- this is hand written)
 (cd gh-pages && git rm -rf css img index.html js services undocumented.json)

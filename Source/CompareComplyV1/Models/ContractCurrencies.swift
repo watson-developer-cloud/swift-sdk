@@ -17,12 +17,12 @@
 import Foundation
 
 /**
- Termination dates identified in the input document.
+ The contract currencies that are declared in the document.
  */
-public struct TerminationDates: Codable, Equatable {
+public struct ContractCurrencies: Codable, Equatable {
 
     /**
-     The confidence level in the identification of the termination date.
+     The confidence level in the identification of the contract currency.
      */
     public enum ConfidenceLevel: String {
         case high = "High"
@@ -31,18 +31,19 @@ public struct TerminationDates: Codable, Equatable {
     }
 
     /**
-     The confidence level in the identification of the termination date.
+     The confidence level in the identification of the contract currency.
      */
     public var confidenceLevel: String?
 
     /**
-     The termination date.
+     The contract currency.
      */
     public var text: String?
 
     /**
-     The normalized form of the termination date, which is listed as a string. This element is optional; it is returned
-     only if normalized text exists.
+     The normalized form of the contract currency, which is listed as a string in
+     [ISO-4217](https://www.iso.org/iso-4217-currency-codes.html) format. This element is optional; it is returned only
+     if normalized text exists.
      */
     public var textNormalized: String?
 

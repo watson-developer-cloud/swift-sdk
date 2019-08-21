@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -65,6 +65,20 @@ public class CompareComply {
         RestRequest.userAgent = Shared.userAgent
     }
     #endif
+
+    /**
+     Create a `CompareComply` object.
+
+     - parameter version: The release date of the version of the API to use. Specify the date
+       in "YYYY-MM-DD" format.
+     - parameter username: The username used to authenticate with the service.
+     - parameter password: The password used to authenticate with the service.
+     */
+    public init(version: String, username: String, password: String) {
+        self.version = version
+        self.authMethod = Shared.getAuthMethod(username: username, password: password)
+        RestRequest.userAgent = Shared.userAgent
+    }
 
     /**
      Create a `CompareComply` object.
@@ -488,7 +502,7 @@ public class CompareComply {
        `model_id`. The only permitted value is `contracts`.
      - parameter modelVersion: An optional string that filters the output to include only feedback with the specified
        `model_version`.
-     - parameter categoryRemoved: An optional string in the form of a comma-separated list of categories. If this is
+     - parameter categoryRemoved: An optional string in the form of a comma-separated list of categories. If it is
        specified, the service filters the output to include only feedback that has at least one category from the list
        removed.
      - parameter categoryAdded: An optional string in the form of a comma-separated list of categories. If this is

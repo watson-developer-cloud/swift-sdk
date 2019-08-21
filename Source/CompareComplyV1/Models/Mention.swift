@@ -17,14 +17,12 @@
 import Foundation
 
 /**
- An array containing one object per section or subsection detected in the input document. Sections and subsections are
- not nested; instead, they are flattened out and can be placed back in order by using the `begin` and `end` values of
- the element and the `level` value of the section.
+ A mention of a party.
  */
-public struct SectionTitles: Codable, Equatable {
+public struct Mention: Codable, Equatable {
 
     /**
-     The text of the section title, if identified.
+     The name of the party.
      */
     public var text: String?
 
@@ -34,23 +32,10 @@ public struct SectionTitles: Codable, Equatable {
      */
     public var location: Location?
 
-    /**
-     An integer indicating the level at which the section is located in the input document. For example, `1` represents
-     a top-level section, `2` represents a subsection within the level `1` section, and so forth.
-     */
-    public var level: Int?
-
-    /**
-     An array of `location` objects that lists the locations of detected section titles.
-     */
-    public var elementLocations: [ElementLocations]?
-
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case text = "text"
         case location = "location"
-        case level = "level"
-        case elementLocations = "element_locations"
     }
 
 }

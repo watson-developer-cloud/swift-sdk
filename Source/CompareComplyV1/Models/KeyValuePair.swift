@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,9 +27,9 @@ public struct KeyValuePair: Codable, Equatable {
     public var key: Key?
 
     /**
-     A value in a key-value pair.
+     A list of values in a key-value pair.
      */
-    public var value: Value?
+    public var value: [Value]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {

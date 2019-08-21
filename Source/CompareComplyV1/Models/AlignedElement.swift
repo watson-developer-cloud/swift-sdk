@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ public struct AlignedElement: Codable, Equatable {
     public var identicalText: Bool?
 
     /**
-     One or more hashed values that you can send to IBM to provide feedback or receive support.
+     Hashed values that you can send to IBM to provide feedback or receive support.
      */
     public var provenanceIDs: [String]?
 

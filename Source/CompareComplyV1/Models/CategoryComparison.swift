@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,6 +40,7 @@ public struct CategoryComparison: Codable, Equatable {
         case insurance = "Insurance"
         case intellectualProperty = "Intellectual Property"
         case liability = "Liability"
+        case orderOfPrecedence = "Order of Precedence"
         case paymentTermsBilling = "Payment Terms & Billing"
         case pricingTaxes = "Pricing & Taxes"
         case privacy = "Privacy"

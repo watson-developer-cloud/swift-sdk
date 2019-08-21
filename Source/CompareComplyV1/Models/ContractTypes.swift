@@ -17,12 +17,12 @@
 import Foundation
 
 /**
- Termination dates identified in the input document.
+ The contract type identified in the input document.
  */
-public struct TerminationDates: Codable, Equatable {
+public struct ContractTypes: Codable, Equatable {
 
     /**
-     The confidence level in the identification of the termination date.
+     The confidence level in the identification of the contract type.
      */
     public enum ConfidenceLevel: String {
         case high = "High"
@@ -31,20 +31,14 @@ public struct TerminationDates: Codable, Equatable {
     }
 
     /**
-     The confidence level in the identification of the termination date.
+     The confidence level in the identification of the contract type.
      */
     public var confidenceLevel: String?
 
     /**
-     The termination date.
+     The contract type.
      */
     public var text: String?
-
-    /**
-     The normalized form of the termination date, which is listed as a string. This element is optional; it is returned
-     only if normalized text exists.
-     */
-    public var textNormalized: String?
 
     /**
      Hashed values that you can send to IBM to provide feedback or receive support.
@@ -61,7 +55,6 @@ public struct TerminationDates: Codable, Equatable {
     private enum CodingKeys: String, CodingKey {
         case confidenceLevel = "confidence_level"
         case text = "text"
-        case textNormalized = "text_normalized"
         case provenanceIDs = "provenance_ids"
         case location = "location"
     }

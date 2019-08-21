@@ -30,6 +30,7 @@ There are many resources to help you build your first cognitive application with
 * [Custom Headers](#custom-headers)
 * [Featured Projects](#featured-projects)
 * [Synchronous Execution](#synchronous-execution)
+* [Handling PNG and CgBI Files in XCode](#handling-png)
 * [Objective-C Compatibility](#objective-c-compatibility)
 * [Linux Compatibility](#linux-compatibility)
 * [Contributing](#contributing)
@@ -280,6 +281,22 @@ assistant.message(workspaceID: workspaceID) { response, error in
 }
 dispatchGroup.wait(timeout: .distantFuture)
 ```
+## Handling PNG and CgBI Files in XCode
+
+When working with iOS projects, you may need to add PNG images to your XCode resource bundle. By default, XCode converts PNG files to Apple's [CgBI file format](http://iphonedevwiki.net/index.php/CgBI_file_format) as an optimization step.
+
+Watson services that accept PNG images as input files (Visual Recognition, Compare and Comply) are not able to process CgBI files. In some cases passing PNGs that have been encoded as CgBI will result in HTTP errors, and in other cases (Visual Recognition) will result in a `200 Success` with no results.
+
+### How to bypass CgBI Encoding for Resource Files
+
+In order to bypass CgBI encoding and keep the PNG files in a format that will operate well with Watson services, select the PNG file in XCode, and modify the `Type` attribute to `Data` in the File Inspector.
+
+Ex:  
+![File inspector example](https://github.com/watson-developer-cloud/swift-sdk/tree/master/docs/images/png-file-inspector.png)
+
+### Future plans for handling CgBI
+
+In the future, we will explore our options to handle conversion between CgBI and PNG within the Swift SDK, but this is currently not available.
 
 ## Objective-C Compatibility
 

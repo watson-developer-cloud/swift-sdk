@@ -358,6 +358,31 @@
 		7AAD66571DCA5D730010481E /* sign.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AAD664F1DCA5D730010481E /* sign.jpg */; };
 		7AAD66581DCA5D730010481E /* VisualRecognitionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAD66501DCA5D730010481E /* VisualRecognitionTests.swift */; };
 		7AF31BFB1D7A414D0040D944 /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */; };
+		7E2C0DA4230DD282002FE627 /* TableTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2C0D9B230DD281002FE627 /* TableTitle.swift */; };
+		7E2C0DA5230DD282002FE627 /* Paragraphs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2C0D9C230DD281002FE627 /* Paragraphs.swift */; };
+		7E2C0DA6230DD282002FE627 /* Contexts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2C0D9D230DD281002FE627 /* Contexts.swift */; };
+		7E2C0DA7230DD282002FE627 /* Interpretation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2C0D9E230DD282002FE627 /* Interpretation.swift */; };
+		7E2C0DA8230DD282002FE627 /* ContractCurrencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2C0D9F230DD282002FE627 /* ContractCurrencies.swift */; };
+		7E2C0DA9230DD282002FE627 /* Mention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2C0DA0230DD282002FE627 /* Mention.swift */; };
+		7E2C0DAA230DD282002FE627 /* ContractTerms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2C0DA1230DD282002FE627 /* ContractTerms.swift */; };
+		7E2C0DAB230DD282002FE627 /* ContractTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2C0DA2230DD282002FE627 /* ContractTypes.swift */; };
+		7E2C0DAC230DD282002FE627 /* PaymentTerms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2C0DA3230DD282002FE627 /* PaymentTerms.swift */; };
+		7E2C0DAE230DD310002FE627 /* TableTestV3.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E2C0DAD230DD310002FE627 /* TableTestV3.png */; };
+		7E2C0DB0230DD973002FE627 /* TableTestV3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7E2C0DAF230DD972002FE627 /* TableTestV3.jpg */; };
+		7E2C0DB4230DE03A002FE627 /* TableTestV3.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 7E2C0DB1230DE03A002FE627 /* TableTestV3.pdf */; };
+		7E2C0DB5230DE03A002FE627 /* TableTestV3.doc in Resources */ = {isa = PBXBuildFile; fileRef = 7E2C0DB2230DE03A002FE627 /* TableTestV3.doc */; };
+		7E2C0DB6230DE03A002FE627 /* TableTestV3.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 7E2C0DB3230DE03A002FE627 /* TableTestV3.bmp */; };
+		7E2C0DBA230DE042002FE627 /* TableTestV3.docx in Resources */ = {isa = PBXBuildFile; fileRef = 7E2C0DB7230DE042002FE627 /* TableTestV3.docx */; };
+		7E2C0DBB230DE042002FE627 /* TableTestV3.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 7E2C0DB8230DE042002FE627 /* TableTestV3.tiff */; };
+		7E2C0DBC230DE042002FE627 /* TableTestV3.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7E2C0DB9230DE042002FE627 /* TableTestV3.gif */; };
+		7E2C0DC5230EEE55002FE627 /* Contract_A.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 7E2C0DBD230EEE54002FE627 /* Contract_A.bmp */; };
+		7E2C0DC6230EEE55002FE627 /* Contract_A.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E2C0DBE230EEE54002FE627 /* Contract_A.png */; };
+		7E2C0DC7230EEE55002FE627 /* Contract_A.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 7E2C0DBF230EEE55002FE627 /* Contract_A.tiff */; };
+		7E2C0DC8230EEE55002FE627 /* Contract_A.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7E2C0DC0230EEE55002FE627 /* Contract_A.jpg */; };
+		7E2C0DC9230EEE55002FE627 /* Contract_A.doc in Resources */ = {isa = PBXBuildFile; fileRef = 7E2C0DC1230EEE55002FE627 /* Contract_A.doc */; };
+		7E2C0DCA230EEE55002FE627 /* Contract_A.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7E2C0DC2230EEE55002FE627 /* Contract_A.gif */; };
+		7E2C0DCB230EEE55002FE627 /* Contract_A.docx in Resources */ = {isa = PBXBuildFile; fileRef = 7E2C0DC3230EEE55002FE627 /* Contract_A.docx */; };
+		7E2C0DCC230EEE55002FE627 /* Contract_A.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 7E2C0DC4230EEE55002FE627 /* Contract_A.pdf */; };
 		92048D90212F7C16004FD822 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92048D8F212F7C16004FD822 /* RestKit.framework */; };
 		92048D91212F7C32004FD822 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92048D8F212F7C16004FD822 /* RestKit.framework */; };
 		92064602212E2880004ACCC9 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 920645F6212E2880004ACCC9 /* libogg.a */; };
@@ -580,7 +605,6 @@
 		92EE4EE7219DF8720008CE33 /* CompareComplyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE4EE6219DF8720008CE33 /* CompareComplyTests.swift */; };
 		92EE4EF9219E25350008CE33 /* TestTable.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 92EE4EF6219E25350008CE33 /* TestTable.pdf */; };
 		92EE4EFA219E25350008CE33 /* contract_B.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 92EE4EF7219E25350008CE33 /* contract_B.pdf */; };
-		92EE4EFB219E25350008CE33 /* contract_A.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 92EE4EF8219E25350008CE33 /* contract_A.pdf */; };
 		92EE4EFD21A470630008CE33 /* SpeechToTextUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EE4EFC21A470630008CE33 /* SpeechToTextUnitTests.swift */; };
 		92FB960221FB852C00FEAD21 /* confirm.abnf in Resources */ = {isa = PBXBuildFile; fileRef = 92FB95FE21FB7FF100FEAD21 /* confirm.abnf */; };
 		CA03C887229C1918009503B9 /* InsecureConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA03C886229C1918009503B9 /* InsecureConnection.swift */; };
@@ -1207,6 +1231,31 @@
 		7AAD664E1DCA5D730010481E /* obama.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = obama.jpg; sourceTree = "<group>"; };
 		7AAD664F1DCA5D730010481E /* sign.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sign.jpg; sourceTree = "<group>"; };
 		7AAD66501DCA5D730010481E /* VisualRecognitionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VisualRecognitionTests.swift; path = Tests/VisualRecognitionV3Tests/VisualRecognitionTests.swift; sourceTree = SOURCE_ROOT; };
+		7E2C0D9B230DD281002FE627 /* TableTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableTitle.swift; sourceTree = "<group>"; };
+		7E2C0D9C230DD281002FE627 /* Paragraphs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Paragraphs.swift; sourceTree = "<group>"; };
+		7E2C0D9D230DD281002FE627 /* Contexts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contexts.swift; sourceTree = "<group>"; };
+		7E2C0D9E230DD282002FE627 /* Interpretation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interpretation.swift; sourceTree = "<group>"; };
+		7E2C0D9F230DD282002FE627 /* ContractCurrencies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContractCurrencies.swift; sourceTree = "<group>"; };
+		7E2C0DA0230DD282002FE627 /* Mention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mention.swift; sourceTree = "<group>"; };
+		7E2C0DA1230DD282002FE627 /* ContractTerms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContractTerms.swift; sourceTree = "<group>"; };
+		7E2C0DA2230DD282002FE627 /* ContractTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContractTypes.swift; sourceTree = "<group>"; };
+		7E2C0DA3230DD282002FE627 /* PaymentTerms.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentTerms.swift; sourceTree = "<group>"; };
+		7E2C0DAD230DD310002FE627 /* TableTestV3.png */ = {isa = PBXFileReference; explicitFileType = compiled; path = TableTestV3.png; sourceTree = "<group>"; };
+		7E2C0DAF230DD972002FE627 /* TableTestV3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = TableTestV3.jpg; sourceTree = "<group>"; };
+		7E2C0DB1230DE03A002FE627 /* TableTestV3.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = TableTestV3.pdf; sourceTree = "<group>"; };
+		7E2C0DB2230DE03A002FE627 /* TableTestV3.doc */ = {isa = PBXFileReference; lastKnownFileType = file; path = TableTestV3.doc; sourceTree = "<group>"; };
+		7E2C0DB3230DE03A002FE627 /* TableTestV3.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = TableTestV3.bmp; sourceTree = "<group>"; };
+		7E2C0DB7230DE042002FE627 /* TableTestV3.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = TableTestV3.docx; sourceTree = "<group>"; };
+		7E2C0DB8230DE042002FE627 /* TableTestV3.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = TableTestV3.tiff; sourceTree = "<group>"; };
+		7E2C0DB9230DE042002FE627 /* TableTestV3.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = TableTestV3.gif; sourceTree = "<group>"; };
+		7E2C0DBD230EEE54002FE627 /* Contract_A.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = Contract_A.bmp; sourceTree = "<group>"; };
+		7E2C0DBE230EEE54002FE627 /* Contract_A.png */ = {isa = PBXFileReference; explicitFileType = compiled; path = Contract_A.png; sourceTree = "<group>"; };
+		7E2C0DBF230EEE55002FE627 /* Contract_A.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = Contract_A.tiff; sourceTree = "<group>"; };
+		7E2C0DC0230EEE55002FE627 /* Contract_A.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Contract_A.jpg; sourceTree = "<group>"; };
+		7E2C0DC1230EEE55002FE627 /* Contract_A.doc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Contract_A.doc; sourceTree = "<group>"; };
+		7E2C0DC2230EEE55002FE627 /* Contract_A.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Contract_A.gif; sourceTree = "<group>"; };
+		7E2C0DC3230EEE55002FE627 /* Contract_A.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = Contract_A.docx; sourceTree = "<group>"; };
+		7E2C0DC4230EEE55002FE627 /* Contract_A.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Contract_A.pdf; sourceTree = "<group>"; };
 		92048D8F212F7C16004FD822 /* RestKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RestKit.framework; path = Carthage/Build/iOS/RestKit.framework; sourceTree = "<group>"; };
 		920645F6212E2880004ACCC9 /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libogg.a; sourceTree = "<group>"; };
 		920645F7212E2880004ACCC9 /* libopus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopus.a; sourceTree = "<group>"; };
@@ -1341,7 +1390,6 @@
 		92EE4EE6219DF8720008CE33 /* CompareComplyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CompareComplyTests.swift; path = CompareComplyV1Tests/CompareComplyTests.swift; sourceTree = "<group>"; };
 		92EE4EF6219E25350008CE33 /* TestTable.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = TestTable.pdf; sourceTree = "<group>"; };
 		92EE4EF7219E25350008CE33 /* contract_B.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = contract_B.pdf; sourceTree = "<group>"; };
-		92EE4EF8219E25350008CE33 /* contract_A.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = contract_A.pdf; sourceTree = "<group>"; };
 		92EE4EFC21A470630008CE33 /* SpeechToTextUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechToTextUnitTests.swift; sourceTree = "<group>"; };
 		92F3F9882193AE7800211747 /* watson_tools.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = watson_tools.mlmodel; sourceTree = "<group>"; };
 		92F3F98E2194AFA300211747 /* watson_sample.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = watson_sample.mlmodel; sourceTree = "<group>"; };
@@ -2468,6 +2516,15 @@
 		920F0A5A219CC1E900070C5B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7E2C0D9D230DD281002FE627 /* Contexts.swift */,
+				7E2C0D9F230DD282002FE627 /* ContractCurrencies.swift */,
+				7E2C0DA1230DD282002FE627 /* ContractTerms.swift */,
+				7E2C0DA2230DD282002FE627 /* ContractTypes.swift */,
+				7E2C0D9E230DD282002FE627 /* Interpretation.swift */,
+				7E2C0DA0230DD282002FE627 /* Mention.swift */,
+				7E2C0D9C230DD281002FE627 /* Paragraphs.swift */,
+				7E2C0DA3230DD282002FE627 /* PaymentTerms.swift */,
+				7E2C0D9B230DD281002FE627 /* TableTitle.swift */,
 				920F0A67219CC1E900070C5B /* Address.swift */,
 				920F0A62219CC1E900070C5B /* AlignedElement.swift */,
 				920F0A85219CC1E900070C5B /* Attribute.swift */,
@@ -2619,9 +2676,24 @@
 		92EE4EF5219E25350008CE33 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7E2C0DBD230EEE54002FE627 /* Contract_A.bmp */,
+				7E2C0DC1230EEE55002FE627 /* Contract_A.doc */,
+				7E2C0DC3230EEE55002FE627 /* Contract_A.docx */,
+				7E2C0DC2230EEE55002FE627 /* Contract_A.gif */,
+				7E2C0DC0230EEE55002FE627 /* Contract_A.jpg */,
+				7E2C0DC4230EEE55002FE627 /* Contract_A.pdf */,
+				7E2C0DBE230EEE54002FE627 /* Contract_A.png */,
+				7E2C0DBF230EEE55002FE627 /* Contract_A.tiff */,
+				7E2C0DB7230DE042002FE627 /* TableTestV3.docx */,
+				7E2C0DB9230DE042002FE627 /* TableTestV3.gif */,
+				7E2C0DB8230DE042002FE627 /* TableTestV3.tiff */,
+				7E2C0DB3230DE03A002FE627 /* TableTestV3.bmp */,
+				7E2C0DB2230DE03A002FE627 /* TableTestV3.doc */,
+				7E2C0DB1230DE03A002FE627 /* TableTestV3.pdf */,
+				7E2C0DAF230DD972002FE627 /* TableTestV3.jpg */,
+				7E2C0DAD230DD310002FE627 /* TableTestV3.png */,
 				92506C0921AE1ADA0008E88D /* cloud-object-storage-credentials-input.json */,
 				92506C0821AE1ADA0008E88D /* cloud-object-storage-credentials-output.json */,
-				92EE4EF8219E25350008CE33 /* contract_A.pdf */,
 				92EE4EF7219E25350008CE33 /* contract_B.pdf */,
 				92EE4EF6219E25350008CE33 /* TestTable.pdf */,
 			);
@@ -3652,12 +3724,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				92EE4EFB219E25350008CE33 /* contract_A.pdf in Resources */,
 				92EE4EF9219E25350008CE33 /* TestTable.pdf in Resources */,
 				92506C0B21AE1ADA0008E88D /* cloud-object-storage-credentials-input.json in Resources */,
 				92506C0A21AE1ADA0008E88D /* cloud-object-storage-credentials-output.json in Resources */,
+				7E2C0DB5230DE03A002FE627 /* TableTestV3.doc in Resources */,
+				7E2C0DC7230EEE55002FE627 /* Contract_A.tiff in Resources */,
+				7E2C0DB6230DE03A002FE627 /* TableTestV3.bmp in Resources */,
+				7E2C0DC9230EEE55002FE627 /* Contract_A.doc in Resources */,
+				7E2C0DC8230EEE55002FE627 /* Contract_A.jpg in Resources */,
 				92EE4EFA219E25350008CE33 /* contract_B.pdf in Resources */,
+				7E2C0DCB230EEE55002FE627 /* Contract_A.docx in Resources */,
+				7E2C0DB4230DE03A002FE627 /* TableTestV3.pdf in Resources */,
+				7E2C0DBC230DE042002FE627 /* TableTestV3.gif in Resources */,
+				7E2C0DBB230DE042002FE627 /* TableTestV3.tiff in Resources */,
 				92882B02220E10B4001BC702 /* ibm-credentials.env in Resources */,
+				7E2C0DBA230DE042002FE627 /* TableTestV3.docx in Resources */,
+				7E2C0DCA230EEE55002FE627 /* Contract_A.gif in Resources */,
+				7E2C0DCC230EEE55002FE627 /* Contract_A.pdf in Resources */,
+				7E2C0DC5230EEE55002FE627 /* Contract_A.bmp in Resources */,
+				7E2C0DAE230DD310002FE627 /* TableTestV3.png in Resources */,
+				7E2C0DC6230EEE55002FE627 /* Contract_A.png in Resources */,
+				7E2C0DB0230DD973002FE627 /* TableTestV3.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4677,11 +4764,15 @@
 				920F0A9F219CC1E900070C5B /* ElementPair.swift in Sources */,
 				920F0AA4219CC1E900070C5B /* Parties.swift in Sources */,
 				920F0A91219CC1E900070C5B /* AlignedElement.swift in Sources */,
+				7E2C0DAB230DD282002FE627 /* ContractTypes.swift in Sources */,
 				920F0ACE219CEE8C00070C5B /* RowHeaderTextsNormalized.swift in Sources */,
 				CA59FDA4224AA0E000E152AE /* KeyValuePair.swift in Sources */,
+				7E2C0DA4230DD282002FE627 /* TableTitle.swift in Sources */,
 				920F0AAB219CC1E900070C5B /* Category.swift in Sources */,
 				920F0A9C219CC1E900070C5B /* FeedbackDataOutput.swift in Sources */,
+				7E2C0DA9230DD282002FE627 /* Mention.swift in Sources */,
 				920F0A98219CC1E900070C5B /* BatchStatus.swift in Sources */,
+				7E2C0DA7230DD282002FE627 /* Interpretation.swift in Sources */,
 				920F0AB0219CC1E900070C5B /* FeedbackDataInput.swift in Sources */,
 				920F0A8F219CC1E900070C5B /* ShortDoc.swift in Sources */,
 				920F0A9E219CC1E900070C5B /* Element.swift in Sources */,
@@ -4692,10 +4783,12 @@
 				CA54269C229ECBC00077618A /* InsecureConnection.swift in Sources */,
 				920F0A8A219CC1E900070C5B /* ClassifyReturn.swift in Sources */,
 				920F0AAD219CC1E900070C5B /* TypeLabel.swift in Sources */,
+				7E2C0DA6230DD282002FE627 /* Contexts.swift in Sources */,
 				920F0AB4219CC1E900070C5B /* Attribute.swift in Sources */,
 				920F0AAA219CC1E900070C5B /* Tables.swift in Sources */,
 				920F0A8C219CC1E900070C5B /* Location.swift in Sources */,
 				920F0AA9219CC1E900070C5B /* SectionTitles.swift in Sources */,
+				7E2C0DAA230DD282002FE627 /* ContractTerms.swift in Sources */,
 				920F0AAC219CC1E900070C5B /* OriginalLabelsOut.swift in Sources */,
 				920F0A96219CC1E900070C5B /* Address.swift in Sources */,
 				920F0A8D219CC1E900070C5B /* FeedbackReturn.swift in Sources */,
@@ -4713,12 +4806,14 @@
 				920F0A9B219CC1E900070C5B /* TerminationDates.swift in Sources */,
 				920F0AB6219CC1E900070C5B /* UpdatedLabelsOut.swift in Sources */,
 				920F0AAE219CC1E900070C5B /* BodyCells.swift in Sources */,
+				7E2C0DA8230DD282002FE627 /* ContractCurrencies.swift in Sources */,
 				CA59FDA6224AA0E000E152AE /* Key.swift in Sources */,
 				920F0ACA219CEE8C00070C5B /* ColumnHeaderTexts.swift in Sources */,
 				920F0AA7219CC1E900070C5B /* Document.swift in Sources */,
 				920F0A9D219CC1E900070C5B /* HTMLReturn.swift in Sources */,
 				920F0A95219CC1E900070C5B /* EffectiveDates.swift in Sources */,
 				CA59FDA7224AA0E000E152AE /* ColumnHeaderIDs.swift in Sources */,
+				7E2C0DA5230DD282002FE627 /* Paragraphs.swift in Sources */,
 				920F0AB8219CC1E900070C5B /* CompareComply.swift in Sources */,
 				920F0A94219CC1E900070C5B /* FeedbackList.swift in Sources */,
 				920F0A99219CC1E900070C5B /* TableReturn.swift in Sources */,
@@ -4727,6 +4822,7 @@
 				CA59FDA9224AB66E00E152AE /* ContractType.swift in Sources */,
 				920F0AAF219CC1E900070C5B /* DocInfo.swift in Sources */,
 				920F0AA2219CC1E900070C5B /* Pagination.swift in Sources */,
+				7E2C0DAC230DD282002FE627 /* PaymentTerms.swift in Sources */,
 				CA59FDA3224AA0E000E152AE /* Value.swift in Sources */,
 				920F0ACC219CEE8C00070C5B /* Batches.swift in Sources */,
 				920F0AA6219CC1E900070C5B /* RowHeaders.swift in Sources */,

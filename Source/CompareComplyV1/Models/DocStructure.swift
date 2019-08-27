@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,10 +32,16 @@ public struct DocStructure: Codable, Equatable {
      */
     public var leadingSentences: [LeadingSentence]?
 
+    /**
+     An array containing one object per paragraph, in parallel with the `section_titles` and `leading_sentences` arrays.
+     */
+    public var paragraphs: [Paragraphs]?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case sectionTitles = "section_titles"
         case leadingSentences = "leading_sentences"
+        case paragraphs = "paragraphs"
     }
 
 }

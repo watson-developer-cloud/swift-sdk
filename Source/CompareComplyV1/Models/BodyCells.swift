@@ -57,17 +57,37 @@ public struct BodyCells: Codable, Equatable {
      */
     public var columnIndexEnd: Int?
 
-    public var rowHeaderIDs: [RowHeaderIDs]?
+    /**
+     An array that contains the `id` value of a row header that is applicable to this body cell.
+     */
+    public var rowHeaderIDs: [String]?
 
-    public var rowHeaderTexts: [RowHeaderTexts]?
+    /**
+     An array that contains the `text` value of a row header that is applicable to this body cell.
+     */
+    public var rowHeaderTexts: [String]?
 
-    public var rowHeaderTextsNormalized: [RowHeaderTextsNormalized]?
+    /**
+     If you provide customization input, the normalized version of the row header texts according to the customization;
+     otherwise, the same value as `row_header_texts`.
+     */
+    public var rowHeaderTextsNormalized: [String]?
 
-    public var columnHeaderIDs: [ColumnHeaderIDs]?
+    /**
+     An array that contains the `id` value of a column header that is applicable to the current cell.
+     */
+    public var columnHeaderIDs: [String]?
 
-    public var columnHeaderTexts: [ColumnHeaderTexts]?
+    /**
+     An array that contains the `text` value of a column header that is applicable to the current cell.
+     */
+    public var columnHeaderTexts: [String]?
 
-    public var columnHeaderTextsNormalized: [ColumnHeaderTextsNormalized]?
+    /**
+     If you provide customization input, the normalized version of the column header texts according to the
+     customization; otherwise, the same value as `column_header_texts`.
+     */
+    public var columnHeaderTextsNormalized: [String]?
 
     public var attributes: [Attribute]?
 

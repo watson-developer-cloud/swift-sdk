@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,34 +17,9 @@
 import Foundation
 
 /**
- List of document attributes.
+ The locations of each paragraph in the input document.
  */
-public struct Attribute: Codable, Equatable {
-
-    /**
-     The type of attribute.
-     */
-    public enum TypeEnum: String {
-        case currency = "Currency"
-        case datetime = "DateTime"
-        case definedterm = "DefinedTerm"
-        case duration = "Duration"
-        case location = "Location"
-        case number = "Number"
-        case organization = "Organization"
-        case percentage = "Percentage"
-        case person = "Person"
-    }
-
-    /**
-     The type of attribute.
-     */
-    public var type: String?
-
-    /**
-     The text associated with the attribute.
-     */
-    public var text: String?
+public struct Paragraphs: Codable, Equatable {
 
     /**
      The numeric location of the identified element in the document, represented with two integers labeled `begin` and
@@ -54,8 +29,6 @@ public struct Attribute: Codable, Equatable {
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case type = "type"
-        case text = "text"
         case location = "location"
     }
 

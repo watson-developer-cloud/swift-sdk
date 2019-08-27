@@ -32,7 +32,7 @@ public struct AlignedElement: Codable, Equatable {
     public var identicalText: Bool?
 
     /**
-     One or more hashed values that you can send to IBM to provide feedback or receive support.
+     Hashed values that you can send to IBM to provide feedback or receive support.
      */
     public var provenanceIDs: [String]?
 

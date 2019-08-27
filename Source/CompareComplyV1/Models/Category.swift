@@ -40,6 +40,7 @@ public struct Category: Codable, Equatable {
         case insurance = "Insurance"
         case intellectualProperty = "Intellectual Property"
         case liability = "Liability"
+        case orderOfPrecedence = "Order of Precedence"
         case paymentTermsBilling = "Payment Terms & Billing"
         case pricingTaxes = "Pricing & Taxes"
         case privacy = "Privacy"
@@ -57,7 +58,7 @@ public struct Category: Codable, Equatable {
     public var label: String?
 
     /**
-     One or more hashed values that you can send to IBM to provide feedback or receive support.
+     Hashed values that you can send to IBM to provide feedback or receive support.
      */
     public var provenanceIDs: [String]?
 
@@ -71,8 +72,7 @@ public struct Category: Codable, Equatable {
      Initialize a `Category` with member variables.
 
      - parameter label: The category of the associated element.
-     - parameter provenanceIDs: One or more hashed values that you can send to IBM to provide feedback or receive
-       support.
+     - parameter provenanceIDs: Hashed values that you can send to IBM to provide feedback or receive support.
 
      - returns: An initialized `Category`.
      */

@@ -31,14 +31,31 @@ public struct ContractAmts: Codable, Equatable {
     }
 
     /**
+     The confidence level in the identification of the contract amount.
+     */
+    public var confidenceLevel: String?
+
+    /**
      The monetary amount.
      */
     public var text: String?
 
     /**
-     The confidence level in the identification of the contract amount.
+     The normalized form of the amount, which is listed as a string. This element is optional; it is returned only if
+     normalized text exists.
      */
-    public var confidenceLevel: String?
+    public var textNormalized: String?
+
+    /**
+     The details of the normalized text, if applicable. This element is optional; it is returned only if normalized text
+     exists.
+     */
+    public var interpretation: Interpretation?
+
+    /**
+     Hashed values that you can send to IBM to provide feedback or receive support.
+     */
+    public var provenanceIDs: [String]?
 
     /**
      The numeric location of the identified element in the document, represented with two integers labeled `begin` and
@@ -48,8 +65,11 @@ public struct ContractAmts: Codable, Equatable {
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case text = "text"
         case confidenceLevel = "confidence_level"
+        case text = "text"
+        case textNormalized = "text_normalized"
+        case interpretation = "interpretation"
+        case provenanceIDs = "provenance_ids"
         case location = "location"
     }
 

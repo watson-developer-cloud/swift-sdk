@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ public struct TypeLabel: Codable, Equatable {
     public var label: Label?
 
     /**
-     One or more hash values that you can send to IBM to provide feedback or receive support.
+     Hashed values that you can send to IBM to provide feedback or receive support.
      */
     public var provenanceIDs: [String]?
 
@@ -43,8 +43,7 @@ public struct TypeLabel: Codable, Equatable {
 
      - parameter label: A pair of `nature` and `party` objects. The `nature` object identifies the effect of the
        element on the identified `party`, and the `party` object identifies the affected party.
-     - parameter provenanceIDs: One or more hash values that you can send to IBM to provide feedback or receive
-       support.
+     - parameter provenanceIDs: Hashed values that you can send to IBM to provide feedback or receive support.
 
      - returns: An initialized `TypeLabel`.
      */

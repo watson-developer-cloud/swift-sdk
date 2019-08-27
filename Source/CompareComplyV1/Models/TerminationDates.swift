@@ -31,14 +31,25 @@ public struct TerminationDates: Codable, Equatable {
     }
 
     /**
+     The confidence level in the identification of the termination date.
+     */
+    public var confidenceLevel: String?
+
+    /**
      The termination date.
      */
     public var text: String?
 
     /**
-     The confidence level in the identification of the termination date.
+     The normalized form of the termination date, which is listed as a string. This element is optional; it is returned
+     only if normalized text exists.
      */
-    public var confidenceLevel: String?
+    public var textNormalized: String?
+
+    /**
+     Hashed values that you can send to IBM to provide feedback or receive support.
+     */
+    public var provenanceIDs: [String]?
 
     /**
      The numeric location of the identified element in the document, represented with two integers labeled `begin` and
@@ -48,8 +59,10 @@ public struct TerminationDates: Codable, Equatable {
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case text = "text"
         case confidenceLevel = "confidence_level"
+        case text = "text"
+        case textNormalized = "text_normalized"
+        case provenanceIDs = "provenance_ids"
         case location = "location"
     }
 

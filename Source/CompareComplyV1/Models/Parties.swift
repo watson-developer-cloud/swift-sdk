@@ -30,14 +30,9 @@ public struct Parties: Codable, Equatable {
     }
 
     /**
-     A string identifying the party.
+     The normalized form of the party's name.
      */
     public var party: String?
-
-    /**
-     A string that identifies the importance of the party.
-     */
-    public var importance: String?
 
     /**
      A string identifying the party's role.
@@ -45,22 +40,33 @@ public struct Parties: Codable, Equatable {
     public var role: String?
 
     /**
-     List of the party's address or addresses.
+     A string that identifies the importance of the party.
+     */
+    public var importance: String?
+
+    /**
+     A list of the party's address or addresses.
      */
     public var addresses: [Address]?
 
     /**
-     List of the names and roles of contacts identified in the input document.
+     A list of the names and roles of contacts identified in the input document.
      */
     public var contacts: [Contact]?
+
+    /**
+     A list of the party's mentions in the input document.
+     */
+    public var mentions: [Mention]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case party = "party"
-        case importance = "importance"
         case role = "role"
+        case importance = "importance"
         case addresses = "addresses"
         case contacts = "contacts"
+        case mentions = "mentions"
     }
 
 }

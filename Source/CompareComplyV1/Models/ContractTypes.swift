@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,34 +17,33 @@
 import Foundation
 
 /**
- List of document attributes.
+ The contract type identified in the input document.
  */
-public struct Attribute: Codable, Equatable {
+public struct ContractTypes: Codable, Equatable {
 
     /**
-     The type of attribute.
+     The confidence level in the identification of the contract type.
      */
-    public enum TypeEnum: String {
-        case currency = "Currency"
-        case datetime = "DateTime"
-        case definedterm = "DefinedTerm"
-        case duration = "Duration"
-        case location = "Location"
-        case number = "Number"
-        case organization = "Organization"
-        case percentage = "Percentage"
-        case person = "Person"
+    public enum ConfidenceLevel: String {
+        case high = "High"
+        case medium = "Medium"
+        case low = "Low"
     }
 
     /**
-     The type of attribute.
+     The confidence level in the identification of the contract type.
      */
-    public var type: String?
+    public var confidenceLevel: String?
 
     /**
-     The text associated with the attribute.
+     The contract type.
      */
     public var text: String?
+
+    /**
+     Hashed values that you can send to IBM to provide feedback or receive support.
+     */
+    public var provenanceIDs: [String]?
 
     /**
      The numeric location of the identified element in the document, represented with two integers labeled `begin` and
@@ -54,8 +53,9 @@ public struct Attribute: Codable, Equatable {
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case type = "type"
+        case confidenceLevel = "confidence_level"
         case text = "text"
+        case provenanceIDs = "provenance_ids"
         case location = "location"
     }
 

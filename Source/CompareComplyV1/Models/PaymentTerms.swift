@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,12 +17,12 @@
 import Foundation
 
 /**
- An effective date.
+ The document's payment duration or durations.
  */
-public struct EffectiveDates: Codable, Equatable {
+public struct PaymentTerms: Codable, Equatable {
 
     /**
-     The confidence level in the identification of the effective date.
+     The confidence level in the identification of the payment term.
      */
     public enum ConfidenceLevel: String {
         case high = "High"
@@ -31,20 +31,26 @@ public struct EffectiveDates: Codable, Equatable {
     }
 
     /**
-     The confidence level in the identification of the effective date.
+     The confidence level in the identification of the payment term.
      */
     public var confidenceLevel: String?
 
     /**
-     The effective date, listed as a string.
+     The payment term (duration).
      */
     public var text: String?
 
     /**
-     The normalized form of the effective date, which is listed as a string. This element is optional; it is returned
-     only if normalized text exists.
+     The normalized form of the payment term, which is listed as a string. This element is optional; it is returned only
+     if normalized text exists.
      */
     public var textNormalized: String?
+
+    /**
+     The details of the normalized text, if applicable. This element is optional; it is returned only if normalized text
+     exists.
+     */
+    public var interpretation: Interpretation?
 
     /**
      Hashed values that you can send to IBM to provide feedback or receive support.
@@ -62,6 +68,7 @@ public struct EffectiveDates: Codable, Equatable {
         case confidenceLevel = "confidence_level"
         case text = "text"
         case textNormalized = "text_normalized"
+        case interpretation = "interpretation"
         case provenanceIDs = "provenance_ids"
         case location = "location"
     }

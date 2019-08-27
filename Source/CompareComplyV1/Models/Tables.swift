@@ -38,6 +38,12 @@ public struct Tables: Codable, Equatable {
     public var sectionTitle: SectionTitle?
 
     /**
+     If identified, the title or caption of the current table of the form `Table x.: ...`. Empty when no title is
+     identified. When exposed, the `title` is also excluded from the `contexts` array of the same table.
+     */
+    public var title: TableTitle?
+
+    /**
      An array of table-level cells that apply as headers to all the other cells in the current table.
      */
     public var tableHeaders: [TableHeaders]?
@@ -55,26 +61,34 @@ public struct Tables: Codable, Equatable {
     public var columnHeaders: [ColumnHeaders]?
 
     /**
-     An array of key-value pairs identified in the current table.
-     */
-    public var keyValuePairs: [KeyValuePair]?
-
-    /**
      An array of cells that are neither table header nor column header nor row header cells, of the current table with
      corresponding row and column header associations.
      */
     public var bodyCells: [BodyCells]?
+
+    /**
+     An array of objects that list text that is related to the table contents and that precedes or follows the current
+     table.
+     */
+    public var contexts: [Contexts]?
+
+    /**
+     An array of key-value pairs identified in the current table.
+     */
+    public var keyValuePairs: [KeyValuePair]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case location = "location"
         case text = "text"
         case sectionTitle = "section_title"
+        case title = "title"
         case tableHeaders = "table_headers"
         case rowHeaders = "row_headers"
         case columnHeaders = "column_headers"
-        case keyValuePairs = "key_value_pairs"
         case bodyCells = "body_cells"
+        case contexts = "contexts"
+        case keyValuePairs = "key_value_pairs"
     }
 
 }

@@ -17,24 +17,26 @@
 import Foundation
 
 /**
- Key-value pairs detected across cell boundaries.
+ If identified, the title or caption of the current table of the form `Table x.: ...`. Empty when no title is
+ identified. When exposed, the `title` is also excluded from the `contexts` array of the same table.
  */
-public struct KeyValuePair: Codable, Equatable {
+public struct TableTitle: Codable, Equatable {
 
     /**
-     A key in a key-value pair.
+     The numeric location of the identified element in the document, represented with two integers labeled `begin` and
+     `end`.
      */
-    public var key: Key?
+    public var location: Location?
 
     /**
-     A list of values in a key-value pair.
+     The text of the identified table title or caption.
      */
-    public var value: [Value]?
+    public var text: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case key = "key"
-        case value = "value"
+        case location = "location"
+        case text = "text"
     }
 
 }

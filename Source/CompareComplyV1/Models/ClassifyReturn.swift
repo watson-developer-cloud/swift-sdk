@@ -43,6 +43,42 @@ public struct ClassifyReturn: Codable, Equatable {
     public var elements: [Element]?
 
     /**
+     The date or dates on which the document becomes effective.
+     */
+    public var effectiveDates: [EffectiveDates]?
+
+    /**
+     The monetary amounts that identify the total amount of the contract that needs to be paid from one party to
+     another.
+     */
+    public var contractAmounts: [ContractAmts]?
+
+    /**
+     The dates on which the document is to be terminated.
+     */
+    public var terminationDates: [TerminationDates]?
+
+    /**
+     The contract type as declared in the document.
+     */
+    public var contractTypes: [ContractTypes]?
+
+    /**
+     The durations of the contract.
+     */
+    public var contractTerms: [ContractTerms]?
+
+    /**
+     The document's payment durations.
+     */
+    public var paymentTerms: [PaymentTerms]?
+
+    /**
+     The contract currencies as declared in the document.
+     */
+    public var contractCurrencies: [ContractCurrencies]?
+
+    /**
      Definition of tables identified in the input document.
      */
     public var tables: [Tables]?
@@ -57,40 +93,22 @@ public struct ClassifyReturn: Codable, Equatable {
      */
     public var parties: [Parties]?
 
-    /**
-     The date or dates on which the document becomes effective.
-     */
-    public var effectiveDates: [EffectiveDates]?
-
-    /**
-     The monetary amounts that identify the total amount of the contract that needs to be paid from one party to
-     another.
-     */
-    public var contractAmounts: [ContractAmts]?
-
-    /**
-     The date or dates on which the document is to be terminated.
-     */
-    public var terminationDates: [TerminationDates]?
-
-    /**
-     The document's contract type or types as declared in the document.
-     */
-    public var contractType: [ContractType]?
-
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case document = "document"
         case modelID = "model_id"
         case modelVersion = "model_version"
         case elements = "elements"
-        case tables = "tables"
-        case documentStructure = "document_structure"
-        case parties = "parties"
         case effectiveDates = "effective_dates"
         case contractAmounts = "contract_amounts"
         case terminationDates = "termination_dates"
-        case contractType = "contract_type"
+        case contractTypes = "contract_types"
+        case contractTerms = "contract_terms"
+        case paymentTerms = "payment_terms"
+        case contractCurrencies = "contract_currencies"
+        case tables = "tables"
+        case documentStructure = "document_structure"
+        case parties = "parties"
     }
 
 }

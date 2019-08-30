@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2018.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,11 +24,11 @@ public struct Class: Codable, Equatable {
     /**
      The name of the class.
      */
-    public var className: String
+    public var `class`: String
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case className = "class"
+        case `class` = "class"
     }
 
 }

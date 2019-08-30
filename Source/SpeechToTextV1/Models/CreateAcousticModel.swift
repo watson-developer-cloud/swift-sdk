@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,8 +36,18 @@ internal struct CreateAcousticModel: Codable, Equatable {
         case enUsBroadbandmodel = "en-US_BroadbandModel"
         case enUsNarrowbandmodel = "en-US_NarrowbandModel"
         case enUsShortformNarrowbandmodel = "en-US_ShortForm_NarrowbandModel"
+        case esArBroadbandmodel = "es-AR_BroadbandModel"
+        case esArNarrowbandmodel = "es-AR_NarrowbandModel"
+        case esClBroadbandmodel = "es-CL_BroadbandModel"
+        case esClNarrowbandmodel = "es-CL_NarrowbandModel"
+        case esCoBroadbandmodel = "es-CO_BroadbandModel"
+        case esCoNarrowbandmodel = "es-CO_NarrowbandModel"
         case esEsBroadbandmodel = "es-ES_BroadbandModel"
         case esEsNarrowbandmodel = "es-ES_NarrowbandModel"
+        case esMxBroadbandmodel = "es-MX_BroadbandModel"
+        case esMxNarrowbandmodel = "es-MX_NarrowbandModel"
+        case esPeBroadbandmodel = "es-PE_BroadbandModel"
+        case esPeNarrowbandmodel = "es-PE_NarrowbandModel"
         case frFrBroadbandmodel = "fr-FR_BroadbandModel"
         case frFrNarrowbandmodel = "fr-FR_NarrowbandModel"
         case jaJpBroadbandmodel = "ja-JP_BroadbandModel"

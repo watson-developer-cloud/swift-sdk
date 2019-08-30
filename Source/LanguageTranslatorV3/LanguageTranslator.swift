@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ public class LanguageTranslator {
     public var defaultHeaders = [String: String]()
 
     var session = URLSession(configuration: URLSessionConfiguration.default)
-    var authMethod: AuthenticationMethod
+    let authenticator: Authenticator
     let version: String
 
     #if os(Linux)
@@ -54,16 +54,13 @@ public class LanguageTranslator {
      */
     public init?(version: String) {
         self.version = version
-        guard let credentials = Shared.extractCredentials(serviceName: "language_translator") else {
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: "Language Translator") else {
             return nil
         }
-        guard let authMethod = Shared.getAuthMethod(from: credentials) else {
-            return nil
-        }
-        if let serviceURL = Shared.getServiceURL(from: credentials) {
+        self.authenticator = authenticator
+        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: "Language Translator") {
             self.serviceURL = serviceURL
         }
-        self.authMethod = authMethod
         RestRequest.userAgent = Shared.userAgent
     }
     #endif
@@ -73,46 +70,12 @@ public class LanguageTranslator {
 
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
-     - parameter username: The username used to authenticate with the service.
-     - parameter password: The password used to authenticate with the service.
+     - parameter authenticator: The Authenticator object used to authenticate requests to the service
      */
-    public init(version: String, username: String, password: String) {
+    public init(version: String, authenticator: Authenticator) {
         self.version = version
-        self.authMethod = Shared.getAuthMethod(username: username, password: password)
+        self.authenticator = authenticator
         RestRequest.userAgent = Shared.userAgent
-    }
-
-    /**
-     Create a `LanguageTranslator` object.
-
-     - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
-     - parameter apiKey: An API key for IAM that can be used to obtain access tokens for the service.
-     - parameter iamUrl: The URL for the IAM service.
-     */
-    public init(version: String, apiKey: String, iamUrl: String? = nil) {
-        self.authMethod = Shared.getAuthMethod(apiKey: apiKey, iamURL: iamUrl)
-        self.version = version
-        RestRequest.userAgent = Shared.userAgent
-    }
-
-    /**
-     Create a `LanguageTranslator` object.
-
-     - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
-     - parameter accessToken: An access token for the service.
-     */
-    public init(version: String, accessToken: String) {
-        self.version = version
-        self.authMethod = IAMAccessToken(accessToken: accessToken)
-        RestRequest.userAgent = Shared.userAgent
-    }
-
-    public func accessToken(_ newToken: String) {
-        if self.authMethod is IAMAccessToken {
-            self.authMethod = IAMAccessToken(accessToken: newToken)
-        }
     }
 
     #if !os(Linux)
@@ -209,7 +172,7 @@ public class LanguageTranslator {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v3/translate",
@@ -251,7 +214,7 @@ public class LanguageTranslator {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + "/v3/identifiable_languages",
@@ -302,7 +265,7 @@ public class LanguageTranslator {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v3/identify",
@@ -322,8 +285,8 @@ public class LanguageTranslator {
 
      - parameter source: Specify a language code to filter results by source language.
      - parameter target: Specify a language code to filter results by target language.
-     - parameter defaultModels: If the default parameter isn't specified, the service will return all models (default
-       and non-default) for each language pair. To return only default models, set this to `true`. To return only
+     - parameter `default`: If the default parameter isn't specified, the service will return all models (default and
+       non-default) for each language pair. To return only default models, set this to `true`. To return only
        non-default models, set this to `false`. There is exactly one default model per language pair, the IBM provided
        base model.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -332,7 +295,7 @@ public class LanguageTranslator {
     public func listModels(
         source: String? = nil,
         target: String? = nil,
-        defaultModels: Bool? = nil,
+        `default`: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<TranslationModels>?, WatsonError?) -> Void)
     {
@@ -356,15 +319,15 @@ public class LanguageTranslator {
             let queryParameter = URLQueryItem(name: "target", value: target)
             queryParameters.append(queryParameter)
         }
-        if let defaultModels = defaultModels {
-            let queryParameter = URLQueryItem(name: "default", value: "\(defaultModels)")
+        if let `default` = `default` {
+            let queryParameter = URLQueryItem(name: "default", value: "\(`default`)")
             queryParameters.append(queryParameter)
         }
 
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + "/v3/models",
@@ -448,7 +411,7 @@ public class LanguageTranslator {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v3/models",
@@ -496,7 +459,7 @@ public class LanguageTranslator {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -544,7 +507,7 @@ public class LanguageTranslator {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -584,7 +547,7 @@ public class LanguageTranslator {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + "/v3/documents",
@@ -672,7 +635,7 @@ public class LanguageTranslator {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v3/documents",
@@ -720,7 +683,7 @@ public class LanguageTranslator {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -766,7 +729,7 @@ public class LanguageTranslator {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -825,7 +788,7 @@ public class LanguageTranslator {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,

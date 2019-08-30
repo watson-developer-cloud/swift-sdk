@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,9 +53,6 @@ public struct RuntimeEntity: Codable, Equatable {
      */
     public var groups: [CaptureGroup]?
 
-    /// Additional properties associated with this model.
-    public var additionalProperties: [String: JSON]
-
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case entity = "entity"
@@ -64,7 +61,6 @@ public struct RuntimeEntity: Codable, Equatable {
         case confidence = "confidence"
         case metadata = "metadata"
         case groups = "groups"
-        static let allValues = [entity, location, value, confidence, metadata, groups]
     }
 
     /**
@@ -86,8 +82,7 @@ public struct RuntimeEntity: Codable, Equatable {
         value: String,
         confidence: Double? = nil,
         metadata: [String: JSON]? = nil,
-        groups: [CaptureGroup]? = nil,
-        additionalProperties: [String: JSON] = [:]
+        groups: [CaptureGroup]? = nil
     )
     {
         self.entity = entity
@@ -96,31 +91,6 @@ public struct RuntimeEntity: Codable, Equatable {
         self.confidence = confidence
         self.metadata = metadata
         self.groups = groups
-        self.additionalProperties = additionalProperties
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        entity = try container.decode(String.self, forKey: .entity)
-        location = try container.decode([Int].self, forKey: .location)
-        value = try container.decode(String.self, forKey: .value)
-        confidence = try container.decodeIfPresent(Double.self, forKey: .confidence)
-        metadata = try container.decodeIfPresent([String: JSON].self, forKey: .metadata)
-        groups = try container.decodeIfPresent([CaptureGroup].self, forKey: .groups)
-        let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
-        additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: CodingKeys.allValues)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(entity, forKey: .entity)
-        try container.encode(location, forKey: .location)
-        try container.encode(value, forKey: .value)
-        try container.encodeIfPresent(confidence, forKey: .confidence)
-        try container.encodeIfPresent(metadata, forKey: .metadata)
-        try container.encodeIfPresent(groups, forKey: .groups)
-        var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
-        try dynamicContainer.encodeIfPresent(additionalProperties)
     }
 
 }

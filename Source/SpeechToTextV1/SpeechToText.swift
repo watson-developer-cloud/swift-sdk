@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,7 +45,7 @@ public class SpeechToText {
     public var defaultHeaders = [String: String]()
 
     var session = URLSession(configuration: URLSessionConfiguration.default)
-    var authMethod: AuthenticationMethod
+    let authenticator: Authenticator
 
     #if os(Linux)
     /**
@@ -60,16 +60,13 @@ public class SpeechToText {
 
      */
     public init?() {
-        guard let credentials = Shared.extractCredentials(serviceName: "speech_to_text") else {
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: "Speech to Text") else {
             return nil
         }
-        guard let authMethod = Shared.getAuthMethod(from: credentials) else {
-            return nil
-        }
-        if let serviceURL = Shared.getServiceURL(from: credentials) {
+        self.authenticator = authenticator
+        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: "Speech to Text") {
             self.serviceURL = serviceURL
         }
-        self.authMethod = authMethod
         RestRequest.userAgent = Shared.userAgent
     }
     #endif
@@ -77,39 +74,11 @@ public class SpeechToText {
     /**
      Create a `SpeechToText` object.
 
-     - parameter username: The username used to authenticate with the service.
-     - parameter password: The password used to authenticate with the service.
+     - parameter authenticator: The Authenticator object used to authenticate requests to the service
      */
-    public init(username: String, password: String) {
-        self.authMethod = Shared.getAuthMethod(username: username, password: password)
+    public init(authenticator: Authenticator) {
+        self.authenticator = authenticator
         RestRequest.userAgent = Shared.userAgent
-    }
-
-    /**
-     Create a `SpeechToText` object.
-
-     - parameter apiKey: An API key for IAM that can be used to obtain access tokens for the service.
-     - parameter iamUrl: The URL for the IAM service.
-     */
-    public init(apiKey: String, iamUrl: String? = nil) {
-        self.authMethod = Shared.getAuthMethod(apiKey: apiKey, iamURL: iamUrl)
-        RestRequest.userAgent = Shared.userAgent
-    }
-
-    /**
-     Create a `SpeechToText` object.
-
-     - parameter accessToken: An access token for the service.
-     */
-    public init(accessToken: String) {
-        self.authMethod = IAMAccessToken(accessToken: accessToken)
-        RestRequest.userAgent = Shared.userAgent
-    }
-
-    public func accessToken(_ newToken: String) {
-        if self.authMethod is IAMAccessToken {
-            self.authMethod = IAMAccessToken(accessToken: newToken)
-        }
     }
 
     #if !os(Linux)
@@ -184,7 +153,7 @@ public class SpeechToText {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + "/v1/models",
@@ -230,7 +199,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -266,7 +235,7 @@ public class SpeechToText {
      format of the audio.
      * For all other formats, you can omit the `Content-Type` header or specify `application/octet-stream` with the
      header to have the service automatically detect the format of the audio. (With the `curl` command, you can specify
-     either `\"Content-Type:\"` or `\"Content-Type: application/octet-stream\"`.)
+     either `"Content-Type:"` or `"Content-Type: application/octet-stream"`.)
      Where indicated, the format that you specify must include the sampling rate and can optionally include the number
      of channels and the endianness of the audio.
      * `audio/alaw` (**Required.** Specify the sampling rate (`rate`) of the audio.)
@@ -304,6 +273,8 @@ public class SpeechToText {
      request](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-http#HTTP-multi).
 
      - parameter audio: The audio to transcribe.
+     - parameter contentType: The format (MIME type) of the audio. For more information about specifying an audio
+       format, see **Audio formats (content types)** in the method description.
      - parameter model: The identifier of the model that is to be used for the recognition request. See [Languages and
        models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-models#models).
      - parameter languageCustomizationID: The customization ID (GUID) of a custom language model that is to be used
@@ -351,7 +322,7 @@ public class SpeechToText {
        value, `1`. See [Maximum
        alternatives](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#max_alternatives).
      - parameter wordAlternativesThreshold: A confidence value that is the lower bound for identifying a hypothesis as
-       a possible word alternative (also known as \"Confusion Networks\"). An alternative word is considered if its
+       a possible word alternative (also known as "Confusion Networks"). An alternative word is considered if its
        confidence is greater than or equal to the threshold. Specify a probability between 0.0 and 1.0. By default, the
        service computes no alternative words. See [Word
        alternatives](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#word_alternatives).
@@ -376,11 +347,14 @@ public class SpeechToText {
        participants in a multi-person exchange. By default, the service returns no speaker labels. Setting
        `speaker_labels` to `true` forces the `timestamps` parameter to be `true`, regardless of whether you specify
        `false` for the parameter.
-       **Note:** Applies to US English, Japanese, and Spanish transcription only. To determine whether a language model
-       supports speaker labels, you can also use the **Get a model** method and check that the attribute
-       `speaker_labels` is set to `true`.
+       **Note:** Applies to US English, Japanese, and Spanish (both broadband and narrowband models) and UK English
+       (narrowband model) transcription only. To determine whether a language model supports speaker labels, you can
+       also use the **Get a model** method and check that the attribute `speaker_labels` is set to `true`.
        See [Speaker
        labels](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#speaker_labels).
+     - parameter customizationID: **Deprecated.** Use the `language_customization_id` parameter to specify the
+       customization ID (GUID) of a custom language model that is to be used with the recognition request. Do not
+       specify both parameters with a request.
      - parameter grammarName: The name of a grammar that is to be used with the recognition request. If you specify a
        grammar, you must also use the `language_customization_id` parameter to specify the name of the custom language
        model for which the grammar is defined. The service recognizes only strings that are recognized by the specified
@@ -400,13 +374,12 @@ public class SpeechToText {
      - parameter audioMetrics: If `true`, requests detailed information about the signal characteristics of the input
        audio. The service returns audio metrics with the final transcription results. By default, the service returns no
        audio metrics.
-     - parameter contentType: The format (MIME type) of the audio. For more information about specifying an audio
-       format, see **Audio formats (content types)** in the method description.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func recognize(
         audio: Data,
+        contentType: String? = nil,
         model: String? = nil,
         languageCustomizationID: String? = nil,
         acousticCustomizationID: String? = nil,
@@ -422,10 +395,10 @@ public class SpeechToText {
         profanityFilter: Bool? = nil,
         smartFormatting: Bool? = nil,
         speakerLabels: Bool? = nil,
+        customizationID: String? = nil,
         grammarName: String? = nil,
         redaction: Bool? = nil,
         audioMetrics: Bool? = nil,
-        contentType: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, WatsonError?) -> Void)
     {
@@ -506,6 +479,10 @@ public class SpeechToText {
             let queryParameter = URLQueryItem(name: "speaker_labels", value: "\(speakerLabels)")
             queryParameters.append(queryParameter)
         }
+        if let customizationID = customizationID {
+            let queryParameter = URLQueryItem(name: "customization_id", value: customizationID)
+            queryParameters.append(queryParameter)
+        }
         if let grammarName = grammarName {
             let queryParameter = URLQueryItem(name: "grammar_name", value: grammarName)
             queryParameters.append(queryParameter)
@@ -522,7 +499,7 @@ public class SpeechToText {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v1/recognize",
@@ -598,7 +575,7 @@ public class SpeechToText {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v1/register_callback",
@@ -642,7 +619,7 @@ public class SpeechToText {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v1/unregister_callback",
@@ -699,7 +676,7 @@ public class SpeechToText {
      format of the audio.
      * For all other formats, you can omit the `Content-Type` header or specify `application/octet-stream` with the
      header to have the service automatically detect the format of the audio. (With the `curl` command, you can specify
-     either `\"Content-Type:\"` or `\"Content-Type: application/octet-stream\"`.)
+     either `"Content-Type:"` or `"Content-Type: application/octet-stream"`.)
      Where indicated, the format that you specify must include the sampling rate and can optionally include the number
      of channels and the endianness of the audio.
      * `audio/alaw` (**Required.** Specify the sampling rate (`rate`) of the audio.)
@@ -726,6 +703,8 @@ public class SpeechToText {
      formats](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-audio-formats#audio-formats).
 
      - parameter audio: The audio to transcribe.
+     - parameter contentType: The format (MIME type) of the audio. For more information about specifying an audio
+       format, see **Audio formats (content types)** in the method description.
      - parameter model: The identifier of the model that is to be used for the recognition request. See [Languages and
        models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-models#models).
      - parameter callbackURL: A URL to which callback notifications are to be sent. The URL must already be
@@ -798,7 +777,7 @@ public class SpeechToText {
        value, `1`. See [Maximum
        alternatives](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#max_alternatives).
      - parameter wordAlternativesThreshold: A confidence value that is the lower bound for identifying a hypothesis as
-       a possible word alternative (also known as \"Confusion Networks\"). An alternative word is considered if its
+       a possible word alternative (also known as "Confusion Networks"). An alternative word is considered if its
        confidence is greater than or equal to the threshold. Specify a probability between 0.0 and 1.0. By default, the
        service computes no alternative words. See [Word
        alternatives](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#word_alternatives).
@@ -823,11 +802,14 @@ public class SpeechToText {
        participants in a multi-person exchange. By default, the service returns no speaker labels. Setting
        `speaker_labels` to `true` forces the `timestamps` parameter to be `true`, regardless of whether you specify
        `false` for the parameter.
-       **Note:** Applies to US English, Japanese, and Spanish transcription only. To determine whether a language model
-       supports speaker labels, you can also use the **Get a model** method and check that the attribute
-       `speaker_labels` is set to `true`.
+       **Note:** Applies to US English, Japanese, and Spanish (both broadband and narrowband models) and UK English
+       (narrowband model) transcription only. To determine whether a language model supports speaker labels, you can
+       also use the **Get a model** method and check that the attribute `speaker_labels` is set to `true`.
        See [Speaker
        labels](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#speaker_labels).
+     - parameter customizationID: **Deprecated.** Use the `language_customization_id` parameter to specify the
+       customization ID (GUID) of a custom language model that is to be used with the recognition request. Do not
+       specify both parameters with a request.
      - parameter grammarName: The name of a grammar that is to be used with the recognition request. If you specify a
        grammar, you must also use the `language_customization_id` parameter to specify the name of the custom language
        model for which the grammar is defined. The service recognizes only strings that are recognized by the specified
@@ -859,13 +841,12 @@ public class SpeechToText {
      - parameter audioMetrics: If `true`, requests detailed information about the signal characteristics of the input
        audio. The service returns audio metrics with the final transcription results. By default, the service returns no
        audio metrics.
-     - parameter contentType: The format (MIME type) of the audio. For more information about specifying an audio
-       format, see **Audio formats (content types)** in the method description.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createJob(
         audio: Data,
+        contentType: String? = nil,
         model: String? = nil,
         callbackURL: String? = nil,
         events: String? = nil,
@@ -885,12 +866,12 @@ public class SpeechToText {
         profanityFilter: Bool? = nil,
         smartFormatting: Bool? = nil,
         speakerLabels: Bool? = nil,
+        customizationID: String? = nil,
         grammarName: String? = nil,
         redaction: Bool? = nil,
         processingMetrics: Bool? = nil,
         processingMetricsInterval: Double? = nil,
         audioMetrics: Bool? = nil,
-        contentType: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<RecognitionJob>?, WatsonError?) -> Void)
     {
@@ -987,6 +968,10 @@ public class SpeechToText {
             let queryParameter = URLQueryItem(name: "speaker_labels", value: "\(speakerLabels)")
             queryParameters.append(queryParameter)
         }
+        if let customizationID = customizationID {
+            let queryParameter = URLQueryItem(name: "customization_id", value: customizationID)
+            queryParameters.append(queryParameter)
+        }
         if let grammarName = grammarName {
             let queryParameter = URLQueryItem(name: "grammar_name", value: grammarName)
             queryParameters.append(queryParameter)
@@ -1011,7 +996,7 @@ public class SpeechToText {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v1/recognitions",
@@ -1055,7 +1040,7 @@ public class SpeechToText {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + "/v1/recognitions",
@@ -1106,7 +1091,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -1152,7 +1137,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -1180,14 +1165,19 @@ public class SpeechToText {
        To determine whether a base model supports language model customization, use the **Get a model** method and check
        that the attribute `custom_language_model` is set to `true`. You can also refer to [Language support for
        customization](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-customization#languageSupport).
-     - parameter dialect: The dialect of the specified language that is to be used with the custom language model. The
-       parameter is meaningful only for Spanish models, for which the service creates a custom language model that is
-       suited for speech in one of the following dialects:
-       * `es-ES` for Castilian Spanish (the default)
-       * `es-LA` for Latin American Spanish
-       * `es-US` for North American (Mexican) Spanish
-       A specified dialect must be valid for the base model. By default, the dialect matches the language of the base
-       model; for example, `en-US` for either of the US English language models.
+     - parameter dialect: The dialect of the specified language that is to be used with the custom language model. For
+       most languages, the dialect matches the language of the base model by default. For example, `en-US` is used for
+       either of the US English language models.
+       For a Spanish language, the service creates a custom language model that is suited for speech in one of the
+       following dialects:
+       * `es-ES` for Castilian Spanish (`es-ES` models)
+       * `es-LA` for Latin American Spanish (`es-AR`, `es-CL`, `es-CO`, and `es-PE` models)
+       * `es-US` for Mexican (North American) Spanish (`es-MX` models)
+       The parameter is meaningful only for Spanish models, for which you can always safely omit the parameter to have
+       the service create the correct mapping.
+       If you specify the `dialect` parameter for non-Spanish language models, its value must match the language of the
+       base model. If you specify the `dialect` for Spanish language models, its value must match one of the defined
+       mappings as indicated (`es-ES`, `es-LA`, or `es-MX`). All dialect values are case-insensitive.
      - parameter description: A description of the new custom language model. Use a localized description that matches
        the language of the custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -1225,7 +1215,7 @@ public class SpeechToText {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v1/customizations",
@@ -1277,7 +1267,7 @@ public class SpeechToText {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + "/v1/customizations",
@@ -1324,7 +1314,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -1371,7 +1361,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -1434,7 +1424,7 @@ public class SpeechToText {
         wordTypeToAdd: String? = nil,
         customizationWeight: Double? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TrainingResponse>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1464,7 +1454,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -1473,7 +1463,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.response(completionHandler: completionHandler)
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -1513,7 +1503,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -1567,7 +1557,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -1614,7 +1604,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -1726,7 +1716,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -1777,7 +1767,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -1828,7 +1818,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -1901,7 +1891,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -1992,7 +1982,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -2095,7 +2085,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "PUT",
             url: serviceURL + encodedPath,
@@ -2146,7 +2136,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -2199,7 +2189,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -2246,7 +2236,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -2357,7 +2347,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -2408,7 +2398,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -2459,7 +2449,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -2522,7 +2512,7 @@ public class SpeechToText {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v1/acoustic_customizations",
@@ -2574,7 +2564,7 @@ public class SpeechToText {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + "/v1/acoustic_customizations",
@@ -2621,7 +2611,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -2668,7 +2658,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -2732,7 +2722,7 @@ public class SpeechToText {
         customizationID: String,
         customLanguageModelID: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TrainingResponse>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2758,7 +2748,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -2767,7 +2757,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.response(completionHandler: completionHandler)
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2809,7 +2799,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -2890,7 +2880,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -2940,7 +2930,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -3038,6 +3028,10 @@ public class SpeechToText {
      - parameter audioResource: The audio resource that is to be added to the custom acoustic model, an individual
        audio file or an archive file.
        With the `curl` command, use the `--data-binary` option to upload the file for the request.
+     - parameter contentType: For an audio-type resource, the format (MIME type) of the audio. For more information,
+       see **Content types for audio-type resources** in the method description.
+       For an archive-type resource, the media type of the archive file. For more information, see **Content types for
+       archive-type resources** in the method description.
      - parameter containedContentType: **For an archive-type resource,** specify the format of the audio files that
        are contained in the archive file if they are of type `audio/alaw`, `audio/basic`, `audio/l16`, or `audio/mulaw`.
        Include the `rate`, `channels`, and `endianness` parameters where necessary. In this case, all audio files that
@@ -3050,10 +3044,6 @@ public class SpeechToText {
      - parameter allowOverwrite: If `true`, the specified audio resource overwrites an existing audio resource with
        the same name. If `false`, the request fails if an audio resource with the same name already exists. The
        parameter has no effect if an audio resource with the same name does not already exist.
-     - parameter contentType: For an audio-type resource, the format (MIME type) of the audio. For more information,
-       see **Content types for audio-type resources** in the method description.
-       For an archive-type resource, the media type of the archive file. For more information, see **Content types for
-       archive-type resources** in the method description.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -3061,9 +3051,9 @@ public class SpeechToText {
         customizationID: String,
         audioName: String,
         audioResource: Data,
+        contentType: String? = nil,
         containedContentType: String? = nil,
         allowOverwrite: Bool? = nil,
-        contentType: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
@@ -3078,11 +3068,11 @@ public class SpeechToText {
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "addAudio")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
-        if let containedContentType = containedContentType {
-            headerParameters["Contained-Content-Type"] = containedContentType
-        }
         if let contentType = contentType {
             headerParameters["Content-Type"] = contentType
+        }
+        if let containedContentType = containedContentType {
+            headerParameters["Contained-Content-Type"] = containedContentType
         }
 
         // construct query parameters
@@ -3100,7 +3090,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -3161,7 +3151,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -3213,7 +3203,7 @@ public class SpeechToText {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -3260,7 +3250,7 @@ public class SpeechToText {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + "/v1/user_data",

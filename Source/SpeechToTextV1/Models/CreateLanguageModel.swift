@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,8 +36,18 @@ internal struct CreateLanguageModel: Codable, Equatable {
         case enUsBroadbandmodel = "en-US_BroadbandModel"
         case enUsNarrowbandmodel = "en-US_NarrowbandModel"
         case enUsShortformNarrowbandmodel = "en-US_ShortForm_NarrowbandModel"
+        case esArBroadbandmodel = "es-AR_BroadbandModel"
+        case esArNarrowbandmodel = "es-AR_NarrowbandModel"
+        case esClBroadbandmodel = "es-CL_BroadbandModel"
+        case esClNarrowbandmodel = "es-CL_NarrowbandModel"
+        case esCoBroadbandmodel = "es-CO_BroadbandModel"
+        case esCoNarrowbandmodel = "es-CO_NarrowbandModel"
         case esEsBroadbandmodel = "es-ES_BroadbandModel"
         case esEsNarrowbandmodel = "es-ES_NarrowbandModel"
+        case esMxBroadbandmodel = "es-MX_BroadbandModel"
+        case esMxNarrowbandmodel = "es-MX_NarrowbandModel"
+        case esPeBroadbandmodel = "es-PE_BroadbandModel"
+        case esPeNarrowbandmodel = "es-PE_NarrowbandModel"
         case frFrBroadbandmodel = "fr-FR_BroadbandModel"
         case frFrNarrowbandmodel = "fr-FR_NarrowbandModel"
         case jaJpBroadbandmodel = "ja-JP_BroadbandModel"
@@ -65,14 +75,19 @@ internal struct CreateLanguageModel: Codable, Equatable {
     public var baseModelName: String
 
     /**
-     The dialect of the specified language that is to be used with the custom language model. The parameter is
-     meaningful only for Spanish models, for which the service creates a custom language model that is suited for speech
-     in one of the following dialects:
-     * `es-ES` for Castilian Spanish (the default)
-     * `es-LA` for Latin American Spanish
-     * `es-US` for North American (Mexican) Spanish
-     A specified dialect must be valid for the base model. By default, the dialect matches the language of the base
-     model; for example, `en-US` for either of the US English language models.
+     The dialect of the specified language that is to be used with the custom language model. For most languages, the
+     dialect matches the language of the base model by default. For example, `en-US` is used for either of the US
+     English language models.
+     For a Spanish language, the service creates a custom language model that is suited for speech in one of the
+     following dialects:
+     * `es-ES` for Castilian Spanish (`es-ES` models)
+     * `es-LA` for Latin American Spanish (`es-AR`, `es-CL`, `es-CO`, and `es-PE` models)
+     * `es-US` for Mexican (North American) Spanish (`es-MX` models)
+     The parameter is meaningful only for Spanish models, for which you can always safely omit the parameter to have the
+     service create the correct mapping.
+     If you specify the `dialect` parameter for non-Spanish language models, its value must match the language of the
+     base model. If you specify the `dialect` for Spanish language models, its value must match one of the defined
+     mappings as indicated (`es-ES`, `es-LA`, or `es-MX`). All dialect values are case-insensitive.
      */
     public var dialect: String?
 
@@ -102,13 +117,18 @@ internal struct CreateLanguageModel: Codable, Equatable {
        that the attribute `custom_language_model` is set to `true`. You can also refer to [Language support for
        customization](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-customization#languageSupport).
      - parameter dialect: The dialect of the specified language that is to be used with the custom language model.
-       The parameter is meaningful only for Spanish models, for which the service creates a custom language model that
-       is suited for speech in one of the following dialects:
-       * `es-ES` for Castilian Spanish (the default)
-       * `es-LA` for Latin American Spanish
-       * `es-US` for North American (Mexican) Spanish
-       A specified dialect must be valid for the base model. By default, the dialect matches the language of the base
-       model; for example, `en-US` for either of the US English language models.
+       For most languages, the dialect matches the language of the base model by default. For example, `en-US` is used
+       for either of the US English language models.
+       For a Spanish language, the service creates a custom language model that is suited for speech in one of the
+       following dialects:
+       * `es-ES` for Castilian Spanish (`es-ES` models)
+       * `es-LA` for Latin American Spanish (`es-AR`, `es-CL`, `es-CO`, and `es-PE` models)
+       * `es-US` for Mexican (North American) Spanish (`es-MX` models)
+       The parameter is meaningful only for Spanish models, for which you can always safely omit the parameter to have
+       the service create the correct mapping.
+       If you specify the `dialect` parameter for non-Spanish language models, its value must match the language of the
+       base model. If you specify the `dialect` for Spanish language models, its value must match one of the defined
+       mappings as indicated (`es-ES`, `es-LA`, or `es-MX`). All dialect values are case-insensitive.
      - parameter description: A description of the new custom language model. Use a localized description that
        matches the language of the custom model.
 

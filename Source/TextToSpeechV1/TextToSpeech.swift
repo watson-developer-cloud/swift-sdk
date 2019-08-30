@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ public class TextToSpeech {
     public var defaultHeaders = [String: String]()
 
     var session = URLSession(configuration: URLSessionConfiguration.default)
-    var authMethod: AuthenticationMethod
+    let authenticator: Authenticator
 
     #if os(Linux)
     /**
@@ -57,16 +57,13 @@ public class TextToSpeech {
 
      */
     public init?() {
-        guard let credentials = Shared.extractCredentials(serviceName: "text_to_speech") else {
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: "Text to Speech") else {
             return nil
         }
-        guard let authMethod = Shared.getAuthMethod(from: credentials) else {
-            return nil
-        }
-        if let serviceURL = Shared.getServiceURL(from: credentials) {
+        self.authenticator = authenticator
+        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: "Text to Speech") {
             self.serviceURL = serviceURL
         }
-        self.authMethod = authMethod
         RestRequest.userAgent = Shared.userAgent
     }
     #endif
@@ -74,39 +71,11 @@ public class TextToSpeech {
     /**
      Create a `TextToSpeech` object.
 
-     - parameter username: The username used to authenticate with the service.
-     - parameter password: The password used to authenticate with the service.
+     - parameter authenticator: The Authenticator object used to authenticate requests to the service
      */
-    public init(username: String, password: String) {
-        self.authMethod = Shared.getAuthMethod(username: username, password: password)
+    public init(authenticator: Authenticator) {
+        self.authenticator = authenticator
         RestRequest.userAgent = Shared.userAgent
-    }
-
-    /**
-     Create a `TextToSpeech` object.
-
-     - parameter apiKey: An API key for IAM that can be used to obtain access tokens for the service.
-     - parameter iamUrl: The URL for the IAM service.
-     */
-    public init(apiKey: String, iamUrl: String? = nil) {
-        self.authMethod = Shared.getAuthMethod(apiKey: apiKey, iamURL: iamUrl)
-        RestRequest.userAgent = Shared.userAgent
-    }
-
-    /**
-     Create a `TextToSpeech` object.
-
-     - parameter accessToken: An access token for the service.
-     */
-    public init(accessToken: String) {
-        self.authMethod = IAMAccessToken(accessToken: accessToken)
-        RestRequest.userAgent = Shared.userAgent
-    }
-
-    public func accessToken(_ newToken: String) {
-        if self.authMethod is IAMAccessToken {
-            self.authMethod = IAMAccessToken(accessToken: newToken)
-        }
     }
 
     #if !os(Linux)
@@ -181,7 +150,7 @@ public class TextToSpeech {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + "/v1/voices",
@@ -238,7 +207,7 @@ public class TextToSpeech {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -303,26 +272,26 @@ public class TextToSpeech {
      ### Warning messages
       If a request includes invalid query parameters, the service returns a `Warnings` response header that provides
      messages about the invalid parameters. The warning includes a descriptive message and a list of invalid argument
-     strings. For example, a message such as `\"Unknown arguments:\"` or `\"Unknown url query arguments:\"` followed by
-     a list of the form `\"{invalid_arg_1}, {invalid_arg_2}.\"` The request succeeds despite the warnings.
+     strings. For example, a message such as `"Unknown arguments:"` or `"Unknown url query arguments:"` followed by a
+     list of the form `"{invalid_arg_1}, {invalid_arg_2}."` The request succeeds despite the warnings.
 
      - parameter text: The text to synthesize.
+     - parameter accept: The requested format (MIME type) of the audio. You can use the `Accept` header or the
+       `accept` parameter to specify the audio format. For more information about specifying an audio format, see
+       **Audio formats (accept types)** in the method description.
      - parameter voice: The voice to use for synthesis.
      - parameter customizationID: The customization ID (GUID) of a custom voice model to use for the synthesis. If a
        custom voice model is specified, it is guaranteed to work only if it matches the language of the indicated voice.
        You must make the request with credentials for the instance of the service that owns the custom model. Omit the
        parameter to use the specified voice with no customization.
-     - parameter accept: The requested format (MIME type) of the audio. You can use the `Accept` header or the
-       `accept` parameter to specify the audio format. For more information about specifying an audio format, see
-       **Audio formats (accept types)** in the method description.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func synthesize(
         text: String,
+        accept: String? = nil,
         voice: String? = nil,
         customizationID: String? = nil,
-        accept: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Data>?, WatsonError?) -> Void)
     {
@@ -360,7 +329,7 @@ public class TextToSpeech {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v1/synthesize",
@@ -370,38 +339,7 @@ public class TextToSpeech {
         )
 
         // execute REST request
-        request.response { (response: WatsonResponse<Data>?, error: WatsonError?) in
-            var response = response
-            guard let data = response?.result else {
-                completionHandler(response, error)
-                return
-            }
-            if accept?.lowercased().contains("audio/wav") == true {
-                // repair the WAV header
-                var wav = data
-                guard WAVRepair.isWAVFile(data: wav) else {
-                    let error = WatsonError.other(message: "Expected returned audio to be in WAV format", metadata: nil)
-                    completionHandler(nil, error)
-                    return
-                }
-                WAVRepair.repairWAVHeader(data: &wav)
-                response?.result = wav
-                completionHandler(response, nil)
-            } else if accept?.lowercased().contains("ogg") == true && accept?.lowercased().contains("opus") == true {
-                do {
-                    let decodedAudio = try TextToSpeechDecoder(audioData: data)
-                    response?.result = decodedAudio.pcmDataWithHeaders
-                    completionHandler(response, nil)
-                } catch {
-                    let error = WatsonError.serialization(values: "returned audio")
-                    completionHandler(nil, error)
-                    return
-                }
-            } else {
-                completionHandler(response, nil)
-            }
-        }
-
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -463,7 +401,7 @@ public class TextToSpeech {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + "/v1/pronunciation",
@@ -522,7 +460,7 @@ public class TextToSpeech {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v1/customizations",
@@ -574,7 +512,7 @@ public class TextToSpeech {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + "/v1/customizations",
@@ -597,9 +535,9 @@ public class TextToSpeech {
      You can define sounds-like or phonetic translations for words. A sounds-like translation consists of one or more
      words that, when combined, sound like the word. Phonetic translations are based on the SSML phoneme format for
      representing a word. You can specify them in standard International Phonetic Alphabet (IPA) representation
-       <code>&lt;phoneme alphabet=\"ipa\" ph=\"t&#601;m&#712;&#593;to\"&gt;&lt;/phoneme&gt;</code>
+       <code>&lt;phoneme alphabet="ipa" ph="t&#601;m&#712;&#593;to"&gt;&lt;/phoneme&gt;</code>
        or in the proprietary IBM Symbolic Phonetic Representation (SPR)
-       <code>&lt;phoneme alphabet=\"ibm\" ph=\"1gAstroEntxrYFXs\"&gt;&lt;/phoneme&gt;</code>
+       <code>&lt;phoneme alphabet="ibm" ph="1gAstroEntxrYFXs"&gt;&lt;/phoneme&gt;</code>
      **Note:** This method is currently a beta release.
      **See also:**
      * [Updating a custom
@@ -654,7 +592,7 @@ public class TextToSpeech {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -703,7 +641,7 @@ public class TextToSpeech {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -749,7 +687,7 @@ public class TextToSpeech {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -770,9 +708,9 @@ public class TextToSpeech {
      You can define sounds-like or phonetic translations for words. A sounds-like translation consists of one or more
      words that, when combined, sound like the word. Phonetic translations are based on the SSML phoneme format for
      representing a word. You can specify them in standard International Phonetic Alphabet (IPA) representation
-       <code>&lt;phoneme alphabet=\"ipa\" ph=\"t&#601;m&#712;&#593;to\"&gt;&lt;/phoneme&gt;</code>
+       <code>&lt;phoneme alphabet="ipa" ph="t&#601;m&#712;&#593;to"&gt;&lt;/phoneme&gt;</code>
        or in the proprietary IBM Symbolic Phonetic Representation (SPR)
-       <code>&lt;phoneme alphabet=\"ibm\" ph=\"1gAstroEntxrYFXs\"&gt;&lt;/phoneme&gt;</code>
+       <code>&lt;phoneme alphabet="ibm" ph="1gAstroEntxrYFXs"&gt;&lt;/phoneme&gt;</code>
      **Note:** This method is currently a beta release.
      **See also:**
      * [Adding multiple words to a custom
@@ -824,7 +762,7 @@ public class TextToSpeech {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -873,7 +811,7 @@ public class TextToSpeech {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -894,9 +832,9 @@ public class TextToSpeech {
      You can define sounds-like or phonetic translations for words. A sounds-like translation consists of one or more
      words that, when combined, sound like the word. Phonetic translations are based on the SSML phoneme format for
      representing a word. You can specify them in standard International Phonetic Alphabet (IPA) representation
-       <code>&lt;phoneme alphabet=\"ipa\" ph=\"t&#601;m&#712;&#593;to\"&gt;&lt;/phoneme&gt;</code>
+       <code>&lt;phoneme alphabet="ipa" ph="t&#601;m&#712;&#593;to"&gt;&lt;/phoneme&gt;</code>
        or in the proprietary IBM Symbolic Phonetic Representation (SPR)
-       <code>&lt;phoneme alphabet=\"ibm\" ph=\"1gAstroEntxrYFXs\"&gt;&lt;/phoneme&gt;</code>
+       <code>&lt;phoneme alphabet="ibm" ph="1gAstroEntxrYFXs"&gt;&lt;/phoneme&gt;</code>
      **Note:** This method is currently a beta release.
      **See also:**
      * [Adding a single word to a custom
@@ -954,7 +892,7 @@ public class TextToSpeech {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "PUT",
             url: serviceURL + encodedPath,
@@ -1004,7 +942,7 @@ public class TextToSpeech {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -1052,7 +990,7 @@ public class TextToSpeech {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -1099,7 +1037,7 @@ public class TextToSpeech {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + "/v1/user_data",

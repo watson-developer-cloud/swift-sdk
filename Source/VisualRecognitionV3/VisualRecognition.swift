@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ public class VisualRecognition {
     public var defaultHeaders = [String: String]()
 
     var session = URLSession(configuration: URLSessionConfiguration.default)
-    var authMethod: AuthenticationMethod
+    let authenticator: Authenticator
     let version: String
 
     #if os(Linux)
@@ -53,16 +53,13 @@ public class VisualRecognition {
      */
     public init?(version: String) {
         self.version = version
-        guard let credentials = Shared.extractCredentials(serviceName: "visual_recognition") else {
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: "Visual Recognition") else {
             return nil
         }
-        guard let authMethod = Shared.getAuthMethod(from: credentials) else {
-            return nil
-        }
-        if let serviceURL = Shared.getServiceURL(from: credentials) {
+        self.authenticator = authenticator
+        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: "Visual Recognition") {
             self.serviceURL = serviceURL
         }
-        self.authMethod = authMethod
         RestRequest.userAgent = Shared.userAgent
     }
     #endif
@@ -72,32 +69,12 @@ public class VisualRecognition {
 
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
-     - parameter apiKey: An API key for IAM that can be used to obtain access tokens for the service.
-     - parameter iamUrl: The URL for the IAM service.
+     - parameter authenticator: The Authenticator object used to authenticate requests to the service
      */
-    public init(version: String, apiKey: String, iamUrl: String? = nil) {
-        self.authMethod = Shared.getAuthMethod(apiKey: apiKey, iamURL: iamUrl)
+    public init(version: String, authenticator: Authenticator) {
         self.version = version
+        self.authenticator = authenticator
         RestRequest.userAgent = Shared.userAgent
-    }
-
-    /**
-     Create a `VisualRecognition` object.
-
-     - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
-     - parameter accessToken: An access token for the service.
-     */
-    public init(version: String, accessToken: String) {
-        self.version = version
-        self.authMethod = IAMAccessToken(accessToken: accessToken)
-        RestRequest.userAgent = Shared.userAgent
-    }
-
-    public func accessToken(_ newToken: String) {
-        if self.authMethod is IAMAccessToken {
-            self.authMethod = IAMAccessToken(accessToken: newToken)
-        }
     }
 
     #if !os(Linux)
@@ -133,16 +110,6 @@ public class VisualRecognition {
             } else if case let .some(.string(message)) = json["error"] {
                 errorMessage = message
             } else if case let .some(.string(message)) = json["message"] {
-                errorMessage = message
-            // ErrorAuthentication
-            } else if case let .some(.string(message)) = json["statusInfo"] {
-                errorMessage = message
-            // ErrorInfo
-            } else if case let .some(.object(errorObj)) = json["error"],    // 404
-                case let .some(.string(message)) = errorObj["description"] {
-                errorMessage = message
-            // ErrorHTML
-            } else if case let .some(.string(message)) = json["Error"] {   // 413
                 errorMessage = message
             } else {
                 errorMessage = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
@@ -253,7 +220,7 @@ public class VisualRecognition {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v3/classify",
@@ -339,7 +306,7 @@ public class VisualRecognition {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v3/detect_faces",
@@ -356,10 +323,14 @@ public class VisualRecognition {
      Create a classifier.
 
      Train a new multi-faceted classifier on the uploaded image data. Create your custom classifier with positive or
-     negative examples. Include at least two sets of examples, either two positive example files or one positive and one
-     negative file. You can upload a maximum of 256 MB per call.
-     Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and class
-     names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.
+     negative example training images. Include at least two sets of examples, either two positive example files or one
+     positive and one negative file. You can upload a maximum of 256 MB per call.
+     **Tips when creating:**
+     - If you set the **X-Watson-Learning-Opt-Out** header parameter to `true` when you create a classifier, the example
+     training images are not stored. Save your training images locally. For more information, see [Data
+     collection](#data-collection).
+     - Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and
+     class names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.
 
      - parameter name: The name of the new classifier. Encode special characters in UTF-8.
      - parameter positiveExamples: A dictionary that contains the value for each classname. The value is a .zip file
@@ -392,10 +363,10 @@ public class VisualRecognition {
         }
         positiveExamples.forEach { (classname, value) in
             let partName = "\(classname)_positive_examples"
-            multipartFormData.append(value, withName: partName, fileName: "\(classname).zip")
+            multipartFormData.append(value, withName: partName, fileName: classname)
         }
         if let negativeExamples = negativeExamples {
-            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename.zip")
+            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename")
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
@@ -419,7 +390,7 @@ public class VisualRecognition {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v3/classifiers",
@@ -465,7 +436,7 @@ public class VisualRecognition {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + "/v3/classifiers",
@@ -512,7 +483,7 @@ public class VisualRecognition {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -532,8 +503,12 @@ public class VisualRecognition {
      classifiers](https://cloud.ibm.com/docs/services/visual-recognition?topic=visual-recognition-customizing#updating-custom-classifiers).
      Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and class
      names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.
-     **Tip:** Don't make retraining calls on a classifier until the status is ready. When you submit retraining requests
-     in parallel, the last request overwrites the previous requests. The retrained property shows the last time the
+     **Tips about retraining:**
+     - You can't update the classifier if the **X-Watson-Learning-Opt-Out** header parameter was set to `true` when the
+     classifier was created. Training images are not stored in that case. Instead, create another classifier. For more
+     information, see [Data collection](#data-collection).
+     - Don't make retraining calls on a classifier until the status is ready. When you submit retraining requests in
+     parallel, the last request overwrites the previous requests. The `retrained` property shows the last time the
      classifier retraining finished.
 
      - parameter classifierID: The ID of the classifier.
@@ -565,11 +540,11 @@ public class VisualRecognition {
         if let positiveExamples = positiveExamples {
             positiveExamples.forEach { (classname, value) in
                 let partName = "\(classname)_positive_examples"
-                multipartFormData.append(value, withName: partName, fileName: "\(classname).zip")
+                multipartFormData.append(value, withName: partName, fileName: classname)
             }
         }
         if let negativeExamples = negativeExamples {
-            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename.zip")
+            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename")
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
@@ -598,7 +573,7 @@ public class VisualRecognition {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -644,7 +619,7 @@ public class VisualRecognition {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -659,7 +634,7 @@ public class VisualRecognition {
     /**
      Retrieve a Core ML model of a classifier.
 
-     Download a Core ML model file (.mlmodel) of a custom classifier that returns <tt>\"core_ml_enabled\": true</tt> in
+     Download a Core ML model file (.mlmodel) of a custom classifier that returns <tt>"core_ml_enabled": true</tt> in
      the classifier details.
 
      - parameter classifierID: The ID of the classifier.
@@ -692,7 +667,7 @@ public class VisualRecognition {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -739,7 +714,7 @@ public class VisualRecognition {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + "/v3/user_data",

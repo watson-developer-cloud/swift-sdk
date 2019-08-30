@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ public class Assistant {
     public var defaultHeaders = [String: String]()
 
     var session = URLSession(configuration: URLSessionConfiguration.default)
-    var authMethod: AuthenticationMethod
+    let authenticator: Authenticator
     let version: String
 
     #if os(Linux)
@@ -52,16 +52,13 @@ public class Assistant {
      */
     public init?(version: String) {
         self.version = version
-        guard let credentials = Shared.extractCredentials(serviceName: "assistant") else {
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: "Assistant") else {
             return nil
         }
-        guard let authMethod = Shared.getAuthMethod(from: credentials) else {
-            return nil
-        }
-        if let serviceURL = Shared.getServiceURL(from: credentials) {
+        self.authenticator = authenticator
+        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: "Assistant") {
             self.serviceURL = serviceURL
         }
-        self.authMethod = authMethod
         RestRequest.userAgent = Shared.userAgent
     }
     #endif
@@ -71,46 +68,12 @@ public class Assistant {
 
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
-     - parameter username: The username used to authenticate with the service.
-     - parameter password: The password used to authenticate with the service.
+     - parameter authenticator: The Authenticator object used to authenticate requests to the service
      */
-    public init(version: String, username: String, password: String) {
+    public init(version: String, authenticator: Authenticator) {
         self.version = version
-        self.authMethod = Shared.getAuthMethod(username: username, password: password)
+        self.authenticator = authenticator
         RestRequest.userAgent = Shared.userAgent
-    }
-
-    /**
-     Create a `Assistant` object.
-
-     - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
-     - parameter apiKey: An API key for IAM that can be used to obtain access tokens for the service.
-     - parameter iamUrl: The URL for the IAM service.
-     */
-    public init(version: String, apiKey: String, iamUrl: String? = nil) {
-        self.authMethod = Shared.getAuthMethod(apiKey: apiKey, iamURL: iamUrl)
-        self.version = version
-        RestRequest.userAgent = Shared.userAgent
-    }
-
-    /**
-     Create a `Assistant` object.
-
-     - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
-     - parameter accessToken: An access token for the service.
-     */
-    public init(version: String, accessToken: String) {
-        self.version = version
-        self.authMethod = IAMAccessToken(accessToken: accessToken)
-        RestRequest.userAgent = Shared.userAgent
-    }
-
-    public func accessToken(_ newToken: String) {
-        if self.authMethod is IAMAccessToken {
-            self.authMethod = IAMAccessToken(accessToken: newToken)
-        }
     }
 
     #if !os(Linux)
@@ -235,7 +198,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -255,7 +218,6 @@ public class Assistant {
      This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter pageLimit: The number of records to return in each page of results.
-     - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned workspaces will be sorted. To reverse the sort order, prefix
        the value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
@@ -266,7 +228,6 @@ public class Assistant {
      */
     public func listWorkspaces(
         pageLimit: Int? = nil,
-        includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
@@ -289,10 +250,6 @@ public class Assistant {
             let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
             queryParameters.append(queryParameter)
         }
-        if let includeCount = includeCount {
-            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
-            queryParameters.append(queryParameter)
-        }
         if let sort = sort {
             let queryParameter = URLQueryItem(name: "sort", value: sort)
             queryParameters.append(queryParameter)
@@ -309,7 +266,7 @@ public class Assistant {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + "/v1/workspaces",
@@ -394,7 +351,7 @@ public class Assistant {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v1/workspaces",
@@ -467,7 +424,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -570,7 +527,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -619,7 +576,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -643,7 +600,6 @@ public class Assistant {
        returned data includes only information about the element itself. If **export**=`true`, all content, including
        subelements, is included.
      - parameter pageLimit: The number of records to return in each page of results.
-     - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned intents will be sorted. To reverse the sort order, prefix the
        value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
@@ -656,7 +612,6 @@ public class Assistant {
         workspaceID: String,
         export: Bool? = nil,
         pageLimit: Int? = nil,
-        includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
@@ -683,10 +638,6 @@ public class Assistant {
             let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
             queryParameters.append(queryParameter)
         }
-        if let includeCount = includeCount {
-            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
-            queryParameters.append(queryParameter)
-        }
         if let sort = sort {
             let queryParameter = URLQueryItem(name: "sort", value: sort)
             queryParameters.append(queryParameter)
@@ -708,7 +659,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -778,7 +729,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -845,7 +796,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -918,7 +869,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -969,7 +920,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -990,7 +941,6 @@ public class Assistant {
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter intent: The intent name.
      - parameter pageLimit: The number of records to return in each page of results.
-     - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned examples will be sorted. To reverse the sort order, prefix the
        value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
@@ -1003,7 +953,6 @@ public class Assistant {
         workspaceID: String,
         intent: String,
         pageLimit: Int? = nil,
-        includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
@@ -1024,10 +973,6 @@ public class Assistant {
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let pageLimit = pageLimit {
             let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
-            queryParameters.append(queryParameter)
-        }
-        if let includeCount = includeCount {
-            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
             queryParameters.append(queryParameter)
         }
         if let sort = sort {
@@ -1051,7 +996,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -1119,7 +1064,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -1179,7 +1124,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -1249,7 +1194,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -1302,7 +1247,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -1322,7 +1267,6 @@ public class Assistant {
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter pageLimit: The number of records to return in each page of results.
-     - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned counterexamples will be sorted. To reverse the sort order,
        prefix the value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
@@ -1334,7 +1278,6 @@ public class Assistant {
     public func listCounterexamples(
         workspaceID: String,
         pageLimit: Int? = nil,
-        includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
@@ -1355,10 +1298,6 @@ public class Assistant {
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let pageLimit = pageLimit {
             let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
-            queryParameters.append(queryParameter)
-        }
-        if let includeCount = includeCount {
-            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
             queryParameters.append(queryParameter)
         }
         if let sort = sort {
@@ -1382,7 +1321,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -1446,7 +1385,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -1504,7 +1443,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -1570,7 +1509,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -1621,7 +1560,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -1645,7 +1584,6 @@ public class Assistant {
        returned data includes only information about the element itself. If **export**=`true`, all content, including
        subelements, is included.
      - parameter pageLimit: The number of records to return in each page of results.
-     - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned entities will be sorted. To reverse the sort order, prefix the
        value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
@@ -1658,7 +1596,6 @@ public class Assistant {
         workspaceID: String,
         export: Bool? = nil,
         pageLimit: Int? = nil,
-        includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
@@ -1685,10 +1622,6 @@ public class Assistant {
             let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
             queryParameters.append(queryParameter)
         }
-        if let includeCount = includeCount {
-            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
-            queryParameters.append(queryParameter)
-        }
         if let sort = sort {
             let queryParameter = URLQueryItem(name: "sort", value: sort)
             queryParameters.append(queryParameter)
@@ -1710,7 +1643,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -1787,7 +1720,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -1854,7 +1787,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -1933,7 +1866,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -1984,7 +1917,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -2050,7 +1983,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -2074,7 +2007,6 @@ public class Assistant {
        returned data includes only information about the element itself. If **export**=`true`, all content, including
        subelements, is included.
      - parameter pageLimit: The number of records to return in each page of results.
-     - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned entity values will be sorted. To reverse the sort order, prefix
        the value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
@@ -2088,7 +2020,6 @@ public class Assistant {
         entity: String,
         export: Bool? = nil,
         pageLimit: Int? = nil,
-        includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
@@ -2115,10 +2046,6 @@ public class Assistant {
             let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
             queryParameters.append(queryParameter)
         }
-        if let includeCount = includeCount {
-            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
-            queryParameters.append(queryParameter)
-        }
         if let sort = sort {
             let queryParameter = URLQueryItem(name: "sort", value: sort)
             queryParameters.append(queryParameter)
@@ -2140,7 +2067,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -2166,7 +2093,7 @@ public class Assistant {
        - It cannot contain carriage return, newline, or tab characters.
        - It cannot consist of only whitespace characters.
      - parameter metadata: Any metadata related to the entity value.
-     - parameter valueType: Specifies the type of entity value.
+     - parameter type: Specifies the type of entity value.
      - parameter synonyms: An array of synonyms for the entity value. A value can specify either synonyms or patterns
        (depending on the value type), but not both. A synonym must conform to the following resrictions:
        - It cannot contain carriage return, newline, or tab characters.
@@ -2183,7 +2110,7 @@ public class Assistant {
         entity: String,
         value: String,
         metadata: [String: JSON]? = nil,
-        valueType: String? = nil,
+        type: String? = nil,
         synonyms: [String]? = nil,
         patterns: [String]? = nil,
         headers: [String: String]? = nil,
@@ -2193,7 +2120,7 @@ public class Assistant {
         let createValueRequest = CreateValue(
             value: value,
             metadata: metadata,
-            valueType: valueType,
+            type: type,
             synonyms: synonyms,
             patterns: patterns)
         guard let body = try? JSON.encoder.encode(createValueRequest) else {
@@ -2223,7 +2150,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -2291,7 +2218,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -2319,7 +2246,7 @@ public class Assistant {
        - It cannot contain carriage return, newline, or tab characters.
        - It cannot consist of only whitespace characters.
      - parameter newMetadata: Any metadata related to the entity value.
-     - parameter newValueType: Specifies the type of entity value.
+     - parameter newType: Specifies the type of entity value.
      - parameter newSynonyms: An array of synonyms for the entity value. A value can specify either synonyms or
        patterns (depending on the value type), but not both. A synonym must conform to the following resrictions:
        - It cannot contain carriage return, newline, or tab characters.
@@ -2337,7 +2264,7 @@ public class Assistant {
         value: String,
         newValue: String? = nil,
         newMetadata: [String: JSON]? = nil,
-        newValueType: String? = nil,
+        newType: String? = nil,
         newSynonyms: [String]? = nil,
         newPatterns: [String]? = nil,
         headers: [String: String]? = nil,
@@ -2347,7 +2274,7 @@ public class Assistant {
         let updateValueRequest = UpdateValue(
             value: newValue,
             metadata: newMetadata,
-            valueType: newValueType,
+            type: newType,
             synonyms: newSynonyms,
             patterns: newPatterns)
         guard let body = try? JSON.encoder.encode(updateValueRequest) else {
@@ -2377,7 +2304,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -2430,7 +2357,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -2452,7 +2379,6 @@ public class Assistant {
      - parameter entity: The name of the entity.
      - parameter value: The text of the entity value.
      - parameter pageLimit: The number of records to return in each page of results.
-     - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned entity value synonyms will be sorted. To reverse the sort
        order, prefix the value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
@@ -2466,7 +2392,6 @@ public class Assistant {
         entity: String,
         value: String,
         pageLimit: Int? = nil,
-        includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
@@ -2487,10 +2412,6 @@ public class Assistant {
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let pageLimit = pageLimit {
             let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
-            queryParameters.append(queryParameter)
-        }
-        if let includeCount = includeCount {
-            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
             queryParameters.append(queryParameter)
         }
         if let sort = sort {
@@ -2514,7 +2435,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -2581,7 +2502,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -2643,7 +2564,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -2712,7 +2633,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -2767,7 +2688,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -2787,7 +2708,6 @@ public class Assistant {
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter pageLimit: The number of records to return in each page of results.
-     - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned dialog nodes will be sorted. To reverse the sort order, prefix
        the value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
@@ -2799,7 +2719,6 @@ public class Assistant {
     public func listDialogNodes(
         workspaceID: String,
         pageLimit: Int? = nil,
-        includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
@@ -2820,10 +2739,6 @@ public class Assistant {
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let pageLimit = pageLimit {
             let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
-            queryParameters.append(queryParameter)
-        }
-        if let includeCount = includeCount {
-            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
             queryParameters.append(queryParameter)
         }
         if let sort = sort {
@@ -2847,7 +2762,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -2886,7 +2801,7 @@ public class Assistant {
      - parameter title: The alias used to identify the dialog node. This string must conform to the following
        restrictions:
        - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
-     - parameter nodeType: How the dialog node is processed.
+     - parameter type: How the dialog node is processed.
      - parameter eventName: How an `event_handler` node is processed.
      - parameter variable: The location in the dialog context where output is stored.
      - parameter actions: An array of objects describing any actions to be invoked by the dialog node.
@@ -2909,7 +2824,7 @@ public class Assistant {
         metadata: [String: JSON]? = nil,
         nextStep: DialogNodeNextStep? = nil,
         title: String? = nil,
-        nodeType: String? = nil,
+        type: String? = nil,
         eventName: String? = nil,
         variable: String? = nil,
         actions: [DialogNodeAction]? = nil,
@@ -2932,7 +2847,7 @@ public class Assistant {
             metadata: metadata,
             nextStep: nextStep,
             title: title,
-            nodeType: nodeType,
+            type: type,
             eventName: eventName,
             variable: variable,
             actions: actions,
@@ -2967,7 +2882,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -3025,7 +2940,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -3066,7 +2981,7 @@ public class Assistant {
      - parameter newTitle: The alias used to identify the dialog node. This string must conform to the following
        restrictions:
        - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
-     - parameter newNodeType: How the dialog node is processed.
+     - parameter newType: How the dialog node is processed.
      - parameter newEventName: How an `event_handler` node is processed.
      - parameter newVariable: The location in the dialog context where output is stored.
      - parameter newActions: An array of objects describing any actions to be invoked by the dialog node.
@@ -3090,7 +3005,7 @@ public class Assistant {
         newMetadata: [String: JSON]? = nil,
         newNextStep: DialogNodeNextStep? = nil,
         newTitle: String? = nil,
-        newNodeType: String? = nil,
+        newType: String? = nil,
         newEventName: String? = nil,
         newVariable: String? = nil,
         newActions: [DialogNodeAction]? = nil,
@@ -3113,7 +3028,7 @@ public class Assistant {
             metadata: newMetadata,
             nextStep: newNextStep,
             title: newTitle,
-            nodeType: newNodeType,
+            type: newType,
             eventName: newEventName,
             variable: newVariable,
             actions: newActions,
@@ -3148,7 +3063,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -3199,7 +3114,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -3275,7 +3190,7 @@ public class Assistant {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -3342,7 +3257,7 @@ public class Assistant {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + "/v1/logs",
@@ -3389,7 +3304,7 @@ public class Assistant {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + "/v1/user_data",

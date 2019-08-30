@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ public struct CreateValue: Codable, Equatable {
     /**
      Specifies the type of entity value.
      */
-    public enum ValueType: String {
+    public enum TypeEnum: String {
         case synonyms = "synonyms"
         case patterns = "patterns"
     }
@@ -43,7 +43,7 @@ public struct CreateValue: Codable, Equatable {
     /**
      Specifies the type of entity value.
      */
-    public var valueType: String?
+    public var type: String?
 
     /**
      An array of synonyms for the entity value. A value can specify either synonyms or patterns (depending on the value
@@ -75,7 +75,7 @@ public struct CreateValue: Codable, Equatable {
     private enum CodingKeys: String, CodingKey {
         case value = "value"
         case metadata = "metadata"
-        case valueType = "type"
+        case type = "type"
         case synonyms = "synonyms"
         case patterns = "patterns"
         case created = "created"
@@ -89,7 +89,7 @@ public struct CreateValue: Codable, Equatable {
        - It cannot contain carriage return, newline, or tab characters.
        - It cannot consist of only whitespace characters.
      - parameter metadata: Any metadata related to the entity value.
-     - parameter valueType: Specifies the type of entity value.
+     - parameter type: Specifies the type of entity value.
      - parameter synonyms: An array of synonyms for the entity value. A value can specify either synonyms or patterns
        (depending on the value type), but not both. A synonym must conform to the following resrictions:
        - It cannot contain carriage return, newline, or tab characters.
@@ -106,7 +106,7 @@ public struct CreateValue: Codable, Equatable {
     public init(
         value: String,
         metadata: [String: JSON]? = nil,
-        valueType: String? = nil,
+        type: String? = nil,
         synonyms: [String]? = nil,
         patterns: [String]? = nil,
         created: Date? = nil,
@@ -115,7 +115,7 @@ public struct CreateValue: Codable, Equatable {
     {
         self.value = value
         self.metadata = metadata
-        self.valueType = valueType
+        self.type = type
         self.synonyms = synonyms
         self.patterns = patterns
         self.created = created

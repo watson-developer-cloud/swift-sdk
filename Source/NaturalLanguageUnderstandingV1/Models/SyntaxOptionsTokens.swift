@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corporation 2019
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,6 +35,23 @@ public struct SyntaxOptionsTokens: Codable, Equatable {
     private enum CodingKeys: String, CodingKey {
         case lemma = "lemma"
         case partOfSpeech = "part_of_speech"
+    }
+
+    /**
+     Initialize a `SyntaxOptionsTokens` with member variables.
+
+     - parameter lemma: Set this to `true` to return the lemma for each token.
+     - parameter partOfSpeech: Set this to `true` to return the part of speech for each token.
+
+     - returns: An initialized `SyntaxOptionsTokens`.
+     */
+    public init(
+        lemma: Bool? = nil,
+        partOfSpeech: Bool? = nil
+    )
+    {
+        self.lemma = lemma
+        self.partOfSpeech = partOfSpeech
     }
 
 }

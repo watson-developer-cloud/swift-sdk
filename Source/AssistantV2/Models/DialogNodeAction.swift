@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ public struct DialogNodeAction: Codable, Equatable {
     /**
      The type of action to invoke.
      */
-    public enum ActionType: String {
+    public enum TypeEnum: String {
         case client = "client"
         case server = "server"
         case webAction = "web-action"
@@ -38,7 +38,7 @@ public struct DialogNodeAction: Codable, Equatable {
     /**
      The type of action to invoke.
      */
-    public var actionType: String?
+    public var type: String?
 
     /**
      A map of key/value pairs to be provided to the action.
@@ -58,7 +58,7 @@ public struct DialogNodeAction: Codable, Equatable {
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case name = "name"
-        case actionType = "type"
+        case type = "type"
         case parameters = "parameters"
         case resultVariable = "result_variable"
         case credentials = "credentials"

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ public class Discovery {
     public var defaultHeaders = [String: String]()
 
     var session = URLSession(configuration: URLSessionConfiguration.default)
-    var authMethod: AuthenticationMethod
+    let authenticator: Authenticator
     let version: String
 
     #if os(Linux)
@@ -54,16 +54,13 @@ public class Discovery {
      */
     public init?(version: String) {
         self.version = version
-        guard let credentials = Shared.extractCredentials(serviceName: "discovery") else {
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: "Discovery") else {
             return nil
         }
-        guard let authMethod = Shared.getAuthMethod(from: credentials) else {
-            return nil
-        }
-        if let serviceURL = Shared.getServiceURL(from: credentials) {
+        self.authenticator = authenticator
+        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: "Discovery") {
             self.serviceURL = serviceURL
         }
-        self.authMethod = authMethod
         RestRequest.userAgent = Shared.userAgent
     }
     #endif
@@ -73,46 +70,12 @@ public class Discovery {
 
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
-     - parameter username: The username used to authenticate with the service.
-     - parameter password: The password used to authenticate with the service.
+     - parameter authenticator: The Authenticator object used to authenticate requests to the service
      */
-    public init(version: String, username: String, password: String) {
+    public init(version: String, authenticator: Authenticator) {
         self.version = version
-        self.authMethod = Shared.getAuthMethod(username: username, password: password)
+        self.authenticator = authenticator
         RestRequest.userAgent = Shared.userAgent
-    }
-
-    /**
-     Create a `Discovery` object.
-
-     - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
-     - parameter apiKey: An API key for IAM that can be used to obtain access tokens for the service.
-     - parameter iamUrl: The URL for the IAM service.
-     */
-    public init(version: String, apiKey: String, iamUrl: String? = nil) {
-        self.authMethod = Shared.getAuthMethod(apiKey: apiKey, iamURL: iamUrl)
-        self.version = version
-        RestRequest.userAgent = Shared.userAgent
-    }
-
-    /**
-     Create a `Discovery` object.
-
-     - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
-     - parameter accessToken: An access token for the service.
-     */
-    public init(version: String, accessToken: String) {
-        self.version = version
-        self.authMethod = IAMAccessToken(accessToken: accessToken)
-        RestRequest.userAgent = Shared.userAgent
-    }
-
-    public func accessToken(_ newToken: String) {
-        if self.authMethod is IAMAccessToken {
-            self.authMethod = IAMAccessToken(accessToken: newToken)
-        }
     }
 
     #if !os(Linux)
@@ -208,7 +171,7 @@ public class Discovery {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v1/environments",
@@ -255,7 +218,7 @@ public class Discovery {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + "/v1/environments",
@@ -300,7 +263,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -366,7 +329,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "PUT",
             url: serviceURL + encodedPath,
@@ -412,7 +375,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -462,7 +425,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -542,7 +505,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -596,7 +559,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -643,7 +606,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -725,7 +688,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "PUT",
             url: serviceURL + encodedPath,
@@ -778,7 +741,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -801,18 +764,17 @@ public class Discovery {
      - parameter configuration: The configuration to use to process the document. If this part is provided, then the
        provided configuration is used to process the document. If the **configuration_id** is also provided (both are
        present at the same time), then request is rejected. The maximum supported configuration size is 1 MB.
-       Configuration parts larger than 1 MB are rejected.
-       See the `GET /configurations/{configuration_id}` operation for an example configuration.
+       Configuration parts larger than 1 MB are rejected. See the `GET /configurations/{configuration_id}` operation for
+       an example configuration.
      - parameter file: The content of the document to ingest. The maximum supported file size when adding a file to a
        collection is 50 megabytes, the maximum supported file size when testing a confiruration is 1 megabyte. Files
        larger than the supported size are rejected.
      - parameter filename: The filename for file.
      - parameter fileContentType: The content type of file.
      - parameter metadata: The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are
-       rejected.
-       Example:  ``` {
-         \"Creator\": \"Johnny Appleseed\",
-         \"Subject\": \"Apples\"
+       rejected. Example:  ``` {
+         "Creator": "Johnny Appleseed",
+         "Subject": "Apples"
        } ```.
      - parameter step: Specify to only run the input document through the given step instead of running the input
        document through the entire ingestion workflow. Valid values are `convert`, `enrich`, and `normalize`.
@@ -883,7 +845,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -950,7 +912,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -1004,7 +966,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -1051,7 +1013,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -1115,7 +1077,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "PUT",
             url: serviceURL + encodedPath,
@@ -1163,7 +1125,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -1212,7 +1174,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -1262,7 +1224,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -1278,8 +1240,7 @@ public class Discovery {
      Create or update expansion list.
 
      Create or replace the Expansion list for this collection. The maximum number of expanded terms per collection is
-     `500`.
-     The current expansion list is replaced with the uploaded content.
+     `500`. The current expansion list is replaced with the uploaded content.
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
@@ -1333,7 +1294,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -1383,7 +1344,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -1432,7 +1393,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -1493,7 +1454,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -1542,7 +1503,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -1591,7 +1552,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -1653,7 +1614,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -1703,7 +1664,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -1741,10 +1702,9 @@ public class Discovery {
      - parameter filename: The filename for file.
      - parameter fileContentType: The content type of file.
      - parameter metadata: The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are
-       rejected.
-       Example:  ``` {
-         \"Creator\": \"Johnny Appleseed\",
-         \"Subject\": \"Apples\"
+       rejected. Example:  ``` {
+         "Creator": "Johnny Appleseed",
+         "Subject": "Apples"
        } ```.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -1796,7 +1756,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -1850,7 +1810,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -1879,10 +1839,9 @@ public class Discovery {
      - parameter filename: The filename for file.
      - parameter fileContentType: The content type of file.
      - parameter metadata: The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are
-       rejected.
-       Example:  ``` {
-         \"Creator\": \"Johnny Appleseed\",
-         \"Subject\": \"Apples\"
+       rejected. Example:  ``` {
+         "Creator": "Johnny Appleseed",
+         "Subject": "Apples"
        } ```.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -1935,7 +1894,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -1988,7 +1947,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -2020,7 +1979,7 @@ public class Discovery {
        filters. Useful for applications to build lists, tables, and time series. For a full list of possible
        aggregations, see the Query reference.
      - parameter count: Number of results to return.
-     - parameter returnFields: A comma-separated list of the portion of the document hierarchy to return.
+     - parameter `return`: A comma-separated list of the portion of the document hierarchy to return.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
        results that are returned is 10 and the offset is 8, it returns the last two results.
      - parameter sort: A comma-separated list of fields in the document to sort on. You can optionally specify a sort
@@ -2053,7 +2012,7 @@ public class Discovery {
        **date** or **number** format. When a **date** type field is specified returned results are biased towards field
        values closer to the current date. When a **number** type field is specified, returned results are biased towards
        higher field values. This parameter cannot be used in the same query as the **sort** parameter.
-     - parameter loggingOptOut: If `true`, queries are not stored in the Discovery **Logs** endpoint.
+     - parameter xWatsonLoggingOptOut: If `true`, queries are not stored in the Discovery **Logs** endpoint.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -2066,7 +2025,7 @@ public class Discovery {
         passages: Bool? = nil,
         aggregation: String? = nil,
         count: Int? = nil,
-        returnFields: String? = nil,
+        `return`: String? = nil,
         offset: Int? = nil,
         sort: String? = nil,
         highlight: Bool? = nil,
@@ -2080,7 +2039,7 @@ public class Discovery {
         similarDocumentIDs: String? = nil,
         similarFields: String? = nil,
         bias: String? = nil,
-        loggingOptOut: Bool? = nil,
+        xWatsonLoggingOptOut: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<QueryResponse>?, WatsonError?) -> Void)
     {
@@ -2092,7 +2051,7 @@ public class Discovery {
             passages: passages,
             aggregation: aggregation,
             count: count,
-            returnFields: returnFields,
+            `return`: `return`,
             offset: offset,
             sort: sort,
             highlight: highlight,
@@ -2120,8 +2079,8 @@ public class Discovery {
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
-        if let loggingOptOut = loggingOptOut {
-            headerParameters["X-Watson-Logging-Opt-Out"] = "\(loggingOptOut)"
+        if let xWatsonLoggingOptOut = xWatsonLoggingOptOut {
+            headerParameters["X-Watson-Logging-Opt-Out"] = "\(xWatsonLoggingOptOut)"
         }
 
         // construct query parameters
@@ -2136,7 +2095,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -2171,7 +2130,7 @@ public class Discovery {
        aggregations, see the Query reference.
      - parameter count: Number of results to return. The maximum for the **count** and **offset** values together in
        any one query is **10000**.
-     - parameter returnFields: A comma-separated list of the portion of the document hierarchy to return.
+     - parameter `return`: A comma-separated list of the portion of the document hierarchy to return.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
        results that are returned is 10 and the offset is 8, it returns the last two results. The maximum for the
        **count** and **offset** values together in any one query is **10000**.
@@ -2208,7 +2167,7 @@ public class Discovery {
         passages: Bool? = nil,
         aggregation: String? = nil,
         count: Int? = nil,
-        returnFields: [String]? = nil,
+        `return`: [String]? = nil,
         offset: Int? = nil,
         sort: [String]? = nil,
         highlight: Bool? = nil,
@@ -2258,8 +2217,8 @@ public class Discovery {
             let queryParameter = URLQueryItem(name: "count", value: "\(count)")
             queryParameters.append(queryParameter)
         }
-        if let returnFields = returnFields {
-            let queryParameter = URLQueryItem(name: "return", value: returnFields.joined(separator: ","))
+        if let `return` = `return` {
+            let queryParameter = URLQueryItem(name: "return", value: `return`.joined(separator: ","))
             queryParameters.append(queryParameter)
         }
         if let offset = offset {
@@ -2311,7 +2270,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -2343,7 +2302,7 @@ public class Discovery {
        filters. Useful for applications to build lists, tables, and time series. For a full list of possible
        aggregations, see the Query reference.
      - parameter count: Number of results to return.
-     - parameter returnFields: A comma-separated list of the portion of the document hierarchy to return.
+     - parameter `return`: A comma-separated list of the portion of the document hierarchy to return.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
        results that are returned is 10 and the offset is 8, it returns the last two results.
      - parameter sort: A comma-separated list of fields in the document to sort on. You can optionally specify a sort
@@ -2376,7 +2335,7 @@ public class Discovery {
        **date** or **number** format. When a **date** type field is specified returned results are biased towards field
        values closer to the current date. When a **number** type field is specified, returned results are biased towards
        higher field values. This parameter cannot be used in the same query as the **sort** parameter.
-     - parameter loggingOptOut: If `true`, queries are not stored in the Discovery **Logs** endpoint.
+     - parameter xWatsonLoggingOptOut: If `true`, queries are not stored in the Discovery **Logs** endpoint.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -2388,7 +2347,7 @@ public class Discovery {
         passages: Bool? = nil,
         aggregation: String? = nil,
         count: Int? = nil,
-        returnFields: String? = nil,
+        `return`: String? = nil,
         offset: Int? = nil,
         sort: String? = nil,
         highlight: Bool? = nil,
@@ -2402,7 +2361,7 @@ public class Discovery {
         similarDocumentIDs: String? = nil,
         similarFields: String? = nil,
         bias: String? = nil,
-        loggingOptOut: Bool? = nil,
+        xWatsonLoggingOptOut: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<QueryResponse>?, WatsonError?) -> Void)
     {
@@ -2414,7 +2373,7 @@ public class Discovery {
             passages: passages,
             aggregation: aggregation,
             count: count,
-            returnFields: returnFields,
+            `return`: `return`,
             offset: offset,
             sort: sort,
             highlight: highlight,
@@ -2442,8 +2401,8 @@ public class Discovery {
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
-        if let loggingOptOut = loggingOptOut {
-            headerParameters["X-Watson-Logging-Opt-Out"] = "\(loggingOptOut)"
+        if let xWatsonLoggingOptOut = xWatsonLoggingOptOut {
+            headerParameters["X-Watson-Logging-Opt-Out"] = "\(xWatsonLoggingOptOut)"
         }
 
         // construct query parameters
@@ -2458,7 +2417,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -2492,7 +2451,7 @@ public class Discovery {
        aggregations, see the Query reference.
      - parameter count: Number of results to return. The maximum for the **count** and **offset** values together in
        any one query is **10000**.
-     - parameter returnFields: A comma-separated list of the portion of the document hierarchy to return.
+     - parameter `return`: A comma-separated list of the portion of the document hierarchy to return.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
        results that are returned is 10 and the offset is 8, it returns the last two results. The maximum for the
        **count** and **offset** values together in any one query is **10000**.
@@ -2523,7 +2482,7 @@ public class Discovery {
         naturalLanguageQuery: String? = nil,
         aggregation: String? = nil,
         count: Int? = nil,
-        returnFields: [String]? = nil,
+        `return`: [String]? = nil,
         offset: Int? = nil,
         sort: [String]? = nil,
         highlight: Bool? = nil,
@@ -2567,8 +2526,8 @@ public class Discovery {
             let queryParameter = URLQueryItem(name: "count", value: "\(count)")
             queryParameters.append(queryParameter)
         }
-        if let returnFields = returnFields {
-            let queryParameter = URLQueryItem(name: "return", value: returnFields.joined(separator: ","))
+        if let `return` = `return` {
+            let queryParameter = URLQueryItem(name: "return", value: `return`.joined(separator: ","))
             queryParameters.append(queryParameter)
         }
         if let offset = offset {
@@ -2608,7 +2567,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -2685,7 +2644,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -2767,7 +2726,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -2817,7 +2776,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -2883,7 +2842,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -2932,7 +2891,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -2983,7 +2942,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -3033,7 +2992,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -3084,7 +3043,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -3152,7 +3111,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -3205,7 +3164,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -3272,7 +3231,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "PUT",
             url: serviceURL + encodedPath,
@@ -3326,7 +3285,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -3372,7 +3331,7 @@ public class Discovery {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + "/v1/user_data",
@@ -3388,7 +3347,7 @@ public class Discovery {
      Create event.
 
      The **Events** API can be used to create log entries that are associated with specific queries. For example, you
-     can record which documents in the results set were \"clicked\" by a user and when that click occured.
+     can record which documents in the results set were "clicked" by a user and when that click occured.
 
      - parameter type: The event type to be created.
      - parameter data: Query event data object.
@@ -3427,7 +3386,7 @@ public class Discovery {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v1/events",
@@ -3506,7 +3465,7 @@ public class Discovery {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + "/v1/logs",
@@ -3566,7 +3525,7 @@ public class Discovery {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + "/v1/metrics/number_of_queries",
@@ -3581,8 +3540,8 @@ public class Discovery {
     /**
      Number of queries with an event over time.
 
-     Total number of queries using the **natural_language_query** parameter that have a corresponding \"click\" event
-     over a specified time window. This metric requires having integrated event tracking in your application using the
+     Total number of queries using the **natural_language_query** parameter that have a corresponding "click" event over
+     a specified time window. This metric requires having integrated event tracking in your application using the
      **Events** API.
 
      - parameter startTime: Metric is computed from data recorded after this timestamp; must be in
@@ -3628,7 +3587,7 @@ public class Discovery {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + "/v1/metrics/number_of_queries_with_event",
@@ -3689,7 +3648,7 @@ public class Discovery {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + "/v1/metrics/number_of_queries_with_no_search_results",
@@ -3704,7 +3663,7 @@ public class Discovery {
     /**
      Percentage of queries with an associated event.
 
-     The percentage of queries using the **natural_language_query** parameter that have a corresponding \"click\" event
+     The percentage of queries using the **natural_language_query** parameter that have a corresponding "click" event
      over a specified time window.  This metric requires having integrated event tracking in your application using the
      **Events** API.
 
@@ -3751,7 +3710,7 @@ public class Discovery {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + "/v1/metrics/event_rate",
@@ -3766,9 +3725,9 @@ public class Discovery {
     /**
      Most frequent query tokens with an event.
 
-     The most frequent query tokens parsed from the **natural_language_query** parameter and their corresponding
-     \"click\" event rate within the recording period (queries and events are stored for 30 days). A query token is an
-     individual word or unigram within the query string.
+     The most frequent query tokens parsed from the **natural_language_query** parameter and their corresponding "click"
+     event rate within the recording period (queries and events are stored for 30 days). A query token is an individual
+     word or unigram within the query string.
 
      - parameter count: Number of results to return. The maximum for the **count** and **offset** values together in
        any one query is **10000**.
@@ -3800,7 +3759,7 @@ public class Discovery {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + "/v1/metrics/top_query_tokens_with_event_rate",
@@ -3848,7 +3807,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -3922,7 +3881,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -3974,7 +3933,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -4049,7 +4008,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "PUT",
             url: serviceURL + encodedPath,
@@ -4099,7 +4058,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,
@@ -4146,7 +4105,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -4204,7 +4163,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -4254,7 +4213,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -4303,7 +4262,7 @@ public class Discovery {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ public struct MessageOutput: Codable, Equatable {
      Output intended for any channel. It is the responsibility of the client application to implement the supported
      response types.
      */
-    public var generic: [DialogRuntimeResponseGeneric]?
+    public var generic: [RuntimeResponseGeneric]?
 
     /**
      An array of intents recognized in the user input, sorted in descending order of confidence.

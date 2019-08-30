@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,7 +45,7 @@ public class PersonalityInsights {
     public var defaultHeaders = [String: String]()
 
     var session = URLSession(configuration: URLSessionConfiguration.default)
-    var authMethod: AuthenticationMethod
+    let authenticator: Authenticator
     let version: String
 
     #if os(Linux)
@@ -64,16 +64,13 @@ public class PersonalityInsights {
      */
     public init?(version: String) {
         self.version = version
-        guard let credentials = Shared.extractCredentials(serviceName: "personality_insights") else {
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: "Personality Insights") else {
             return nil
         }
-        guard let authMethod = Shared.getAuthMethod(from: credentials) else {
-            return nil
-        }
-        if let serviceURL = Shared.getServiceURL(from: credentials) {
+        self.authenticator = authenticator
+        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: "Personality Insights") {
             self.serviceURL = serviceURL
         }
-        self.authMethod = authMethod
         RestRequest.userAgent = Shared.userAgent
     }
     #endif
@@ -83,46 +80,12 @@ public class PersonalityInsights {
 
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
-     - parameter username: The username used to authenticate with the service.
-     - parameter password: The password used to authenticate with the service.
+     - parameter authenticator: The Authenticator object used to authenticate requests to the service
      */
-    public init(version: String, username: String, password: String) {
+    public init(version: String, authenticator: Authenticator) {
         self.version = version
-        self.authMethod = Shared.getAuthMethod(username: username, password: password)
+        self.authenticator = authenticator
         RestRequest.userAgent = Shared.userAgent
-    }
-
-    /**
-     Create a `PersonalityInsights` object.
-
-     - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
-     - parameter apiKey: An API key for IAM that can be used to obtain access tokens for the service.
-     - parameter iamUrl: The URL for the IAM service.
-     */
-    public init(version: String, apiKey: String, iamUrl: String? = nil) {
-        self.authMethod = Shared.getAuthMethod(apiKey: apiKey, iamURL: iamUrl)
-        self.version = version
-        RestRequest.userAgent = Shared.userAgent
-    }
-
-    /**
-     Create a `PersonalityInsights` object.
-
-     - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
-     - parameter accessToken: An access token for the service.
-     */
-    public init(version: String, accessToken: String) {
-        self.version = version
-        self.authMethod = IAMAccessToken(accessToken: accessToken)
-        RestRequest.userAgent = Shared.userAgent
-    }
-
-    public func accessToken(_ newToken: String) {
-        if self.authMethod is IAMAccessToken {
-            self.authMethod = IAMAccessToken(accessToken: newToken)
-        }
     }
 
     #if !os(Linux)
@@ -219,6 +182,8 @@ public class PersonalityInsights {
      - parameter rawScores: Indicates whether a raw score in addition to a normalized percentile is returned for each
        characteristic; raw scores are not compared with a sample population. By default, only normalized percentiles are
        returned.
+     - parameter csvHeaders: Indicates whether column labels are returned with a CSV response. By default, no column
+       labels are returned. Applies only when the response type is CSV (`text/csv`).
      - parameter consumptionPreferences: Indicates whether consumption preferences are returned with the results. By
        default, no consumption preferences are returned.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -229,6 +194,7 @@ public class PersonalityInsights {
         contentLanguage: String? = nil,
         acceptLanguage: String? = nil,
         rawScores: Bool? = nil,
+        csvHeaders: Bool? = nil,
         consumptionPreferences: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Profile>?, WatsonError?) -> Void)
@@ -262,6 +228,10 @@ public class PersonalityInsights {
             let queryParameter = URLQueryItem(name: "raw_scores", value: "\(rawScores)")
             queryParameters.append(queryParameter)
         }
+        if let csvHeaders = csvHeaders {
+            let queryParameter = URLQueryItem(name: "csv_headers", value: "\(csvHeaders)")
+            queryParameters.append(queryParameter)
+        }
         if let consumptionPreferences = consumptionPreferences {
             let queryParameter = URLQueryItem(name: "consumption_preferences", value: "\(consumptionPreferences)")
             queryParameters.append(queryParameter)
@@ -270,7 +240,7 @@ public class PersonalityInsights {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v3/profile",
@@ -347,7 +317,7 @@ public class PersonalityInsights {
         csvHeaders: Bool? = nil,
         consumptionPreferences: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<String>?, WatsonError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Data>?, WatsonError?) -> Void)
     {
         // construct body
         guard let body = profileContent.content else {
@@ -390,7 +360,7 @@ public class PersonalityInsights {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v3/profile",

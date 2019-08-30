@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ public class NaturalLanguageClassifier {
     public var defaultHeaders = [String: String]()
 
     var session = URLSession(configuration: URLSessionConfiguration.default)
-    var authMethod: AuthenticationMethod
+    let authenticator: Authenticator
 
     #if os(Linux)
     /**
@@ -49,16 +49,13 @@ public class NaturalLanguageClassifier {
 
      */
     public init?() {
-        guard let credentials = Shared.extractCredentials(serviceName: "natural_language_classifier") else {
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: "Natural Language Classifier") else {
             return nil
         }
-        guard let authMethod = Shared.getAuthMethod(from: credentials) else {
-            return nil
-        }
-        if let serviceURL = Shared.getServiceURL(from: credentials) {
+        self.authenticator = authenticator
+        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: "Natural Language Classifier") {
             self.serviceURL = serviceURL
         }
-        self.authMethod = authMethod
         RestRequest.userAgent = Shared.userAgent
     }
     #endif
@@ -66,39 +63,11 @@ public class NaturalLanguageClassifier {
     /**
      Create a `NaturalLanguageClassifier` object.
 
-     - parameter username: The username used to authenticate with the service.
-     - parameter password: The password used to authenticate with the service.
+     - parameter authenticator: The Authenticator object used to authenticate requests to the service
      */
-    public init(username: String, password: String) {
-        self.authMethod = Shared.getAuthMethod(username: username, password: password)
+    public init(authenticator: Authenticator) {
+        self.authenticator = authenticator
         RestRequest.userAgent = Shared.userAgent
-    }
-
-    /**
-     Create a `NaturalLanguageClassifier` object.
-
-     - parameter apiKey: An API key for IAM that can be used to obtain access tokens for the service.
-     - parameter iamUrl: The URL for the IAM service.
-     */
-    public init(apiKey: String, iamUrl: String? = nil) {
-        self.authMethod = Shared.getAuthMethod(apiKey: apiKey, iamURL: iamUrl)
-        RestRequest.userAgent = Shared.userAgent
-    }
-
-    /**
-     Create a `NaturalLanguageClassifier` object.
-
-     - parameter accessToken: An access token for the service.
-     */
-    public init(accessToken: String) {
-        self.authMethod = IAMAccessToken(accessToken: accessToken)
-        RestRequest.userAgent = Shared.userAgent
-    }
-
-    public func accessToken(_ newToken: String) {
-        if self.authMethod is IAMAccessToken {
-            self.authMethod = IAMAccessToken(accessToken: newToken)
-        }
     }
 
     #if !os(Linux)
@@ -189,7 +158,7 @@ public class NaturalLanguageClassifier {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -245,7 +214,7 @@ public class NaturalLanguageClassifier {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + encodedPath,
@@ -262,9 +231,9 @@ public class NaturalLanguageClassifier {
 
      Sends data to create and train a classifier and returns information about the new classifier.
 
-     - parameter metadata: Metadata in JSON format. The metadata identifies the language of the data, and an optional
-       name to identify the classifier. Specify the language with the 2-letter primary language code as assigned in ISO
-       standard 639.
+     - parameter trainingMetadata: Metadata in JSON format. The metadata identifies the language of the data, and an
+       optional name to identify the classifier. Specify the language with the 2-letter primary language code as
+       assigned in ISO standard 639.
        Supported languages are English (`en`), Arabic (`ar`), French (`fr`), German, (`de`), Italian (`it`), Japanese
        (`ja`), Korean (`ko`), Brazilian Portuguese (`pt`), and Spanish (`es`).
      - parameter trainingData: Training data in CSV format. Each text value must have at least one class. The data can
@@ -274,14 +243,14 @@ public class NaturalLanguageClassifier {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createClassifier(
-        metadata: Data,
+        trainingMetadata: Data,
         trainingData: Data,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Classifier>?, WatsonError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
-        multipartFormData.append(metadata, withName: "training_metadata", fileName: "filename")
+        multipartFormData.append(trainingMetadata, withName: "training_metadata", fileName: "filename")
         multipartFormData.append(trainingData, withName: "training_data", fileName: "filename")
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
@@ -301,7 +270,7 @@ public class NaturalLanguageClassifier {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
             url: serviceURL + "/v1/classifiers",
@@ -337,7 +306,7 @@ public class NaturalLanguageClassifier {
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + "/v1/classifiers",
@@ -379,7 +348,7 @@ public class NaturalLanguageClassifier {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + encodedPath,
@@ -419,7 +388,7 @@ public class NaturalLanguageClassifier {
         }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceURL + encodedPath,

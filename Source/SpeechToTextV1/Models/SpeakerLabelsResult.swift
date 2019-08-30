@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,7 +49,7 @@ public struct SpeakerLabelsResult: Codable, Equatable {
      that the service guarantees not to send any further updates for the current or any preceding results; `false` means
      that the service might send further updates to the results.
      */
-    public var finalResults: Bool
+    public var `final`: Bool
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
@@ -57,7 +57,7 @@ public struct SpeakerLabelsResult: Codable, Equatable {
         case to = "to"
         case speaker = "speaker"
         case confidence = "confidence"
-        case finalResults = "final"
+        case `final` = "final"
     }
 
 }

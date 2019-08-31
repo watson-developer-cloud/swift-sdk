@@ -63,44 +63,6 @@ internal struct Shared {
         return "\(sdk)/\(sdkVersion) \(operatingSystem)/\(operatingSystemVersion)"
     }()
 
-    /// For Basic Authentication, switch to using IAM tokens for "apikey" usernames,
-    /// but only for api keys that are not for ICP (which currently does not support IAM token authentication)
-    static func getAuthMethod(username: String, password: String) -> AuthenticationMethod {
-        if username == Constant.apiKey && !password.starts(with: Constant.icpPrefix) {
-            return IAMAuthentication(apiKey: password, url: nil)
-        } else {
-            return BasicAuthentication(username: username, password: password)
-        }
-    }
-
-    /// For IAM Authentication, switch to using Basic Authentication for ICP api keys
-    /// This is a workaround that is needed until ICP (IBM Cloud Private) supports IAM tokens
-    static func getAuthMethod(apiKey: String, iamURL: String?) -> AuthenticationMethod {
-        if apiKey.starts(with: Constant.icpPrefix) {
-            return BasicAuthentication(username: Constant.apiKey, password: apiKey)
-        } else {
-            return IAMAuthentication(apiKey: apiKey, url: iamURL)
-        }
-    }
-
-    /// Get the auth method based on the provided credentials
-    static func getAuthMethod(from credentials: [String: String]) -> AuthenticationMethod? {
-        // Get the appropriate auth method for the provided credentials
-        if let apiKey = (credentials[Constant.apiKey] ?? credentials[Constant.iamApiKey]) {
-            let iamURL = credentials[Constant.iamURL]
-            return getAuthMethod(apiKey: apiKey, iamURL: iamURL)
-        } else if let username = credentials[Constant.username],
-            let password = credentials[Constant.password] {
-            return getAuthMethod(username: username, password: password)
-        }
-        return nil
-    }
-
-    /// Get the service's base URL if it is present in the credentials
-    static func getServiceURL(from credentials: [String: String]) -> String? {
-        return credentials[Constant.serviceURL]
-    }
-
     /// These headers must be sent with every request in order to collect SDK metrics
     static func getSDKHeaders(serviceName: String, serviceVersion: String, methodName: String) -> [String: String] {
         let serviceInfo = "service_name=\(serviceName);service_version=\(serviceVersion);operation_id=\(methodName);async=true"

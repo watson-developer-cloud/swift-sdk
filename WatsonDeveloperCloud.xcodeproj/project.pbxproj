@@ -383,6 +383,10 @@
 		7E2C0DCA230EEE55002FE627 /* Contract_A.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7E2C0DC2230EEE55002FE627 /* Contract_A.gif */; };
 		7E2C0DCB230EEE55002FE627 /* Contract_A.docx in Resources */ = {isa = PBXBuildFile; fileRef = 7E2C0DC3230EEE55002FE627 /* Contract_A.docx */; };
 		7E2C0DCC230EEE55002FE627 /* Contract_A.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 7E2C0DC4230EEE55002FE627 /* Contract_A.pdf */; };
+		7EC735D82319CC4100A73810 /* DialogSuggestionResponseGeneric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC735D52319CC4100A73810 /* DialogSuggestionResponseGeneric.swift */; };
+		7EC735D92319CC4100A73810 /* DialogSuggestionOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC735D62319CC4100A73810 /* DialogSuggestionOutput.swift */; };
+		7EC735DA2319CC4100A73810 /* RuntimeResponseGeneric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC735D72319CC4100A73810 /* RuntimeResponseGeneric.swift */; };
+		7EC735DC2319DDB400A73810 /* RuntimeResponseGeneric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC735DB2319DDB400A73810 /* RuntimeResponseGeneric.swift */; };
 		92048D90212F7C16004FD822 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92048D8F212F7C16004FD822 /* RestKit.framework */; };
 		92048D91212F7C32004FD822 /* RestKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92048D8F212F7C16004FD822 /* RestKit.framework */; };
 		92064602212E2880004ACCC9 /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 920645F6212E2880004ACCC9 /* libogg.a */; };
@@ -1256,6 +1260,10 @@
 		7E2C0DC2230EEE55002FE627 /* Contract_A.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Contract_A.gif; sourceTree = "<group>"; };
 		7E2C0DC3230EEE55002FE627 /* Contract_A.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = Contract_A.docx; sourceTree = "<group>"; };
 		7E2C0DC4230EEE55002FE627 /* Contract_A.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Contract_A.pdf; sourceTree = "<group>"; };
+		7EC735D52319CC4100A73810 /* DialogSuggestionResponseGeneric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogSuggestionResponseGeneric.swift; sourceTree = "<group>"; };
+		7EC735D62319CC4100A73810 /* DialogSuggestionOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogSuggestionOutput.swift; sourceTree = "<group>"; };
+		7EC735D72319CC4100A73810 /* RuntimeResponseGeneric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuntimeResponseGeneric.swift; sourceTree = "<group>"; };
+		7EC735DB2319DDB400A73810 /* RuntimeResponseGeneric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuntimeResponseGeneric.swift; sourceTree = "<group>"; };
 		92048D8F212F7C16004FD822 /* RestKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RestKit.framework; path = Carthage/Build/iOS/RestKit.framework; sourceTree = "<group>"; };
 		920645F6212E2880004ACCC9 /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libogg.a; sourceTree = "<group>"; };
 		920645F7212E2880004ACCC9 /* libopus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libopus.a; sourceTree = "<group>"; };
@@ -1965,6 +1973,8 @@
 				6800FC382056D6830078788A /* DialogNodeVisitedDetails.swift */,
 				CADA96882110ABB400B5BD84 /* DialogRuntimeResponseGeneric.swift */,
 				CADA96872110ABB400B5BD84 /* DialogSuggestion.swift */,
+				7EC735D62319CC4100A73810 /* DialogSuggestionOutput.swift */,
+				7EC735D52319CC4100A73810 /* DialogSuggestionResponseGeneric.swift */,
 				CADA96832110ABB300B5BD84 /* DialogSuggestionValue.swift */,
 				6800FC2D2056D6830078788A /* Entity.swift */,
 				6800FC352056D6830078788A /* EntityCollection.swift */,
@@ -1987,6 +1997,7 @@
 				6800FC422056D6830078788A /* Pagination.swift */,
 				6800FC452056D6830078788A /* RuntimeEntity.swift */,
 				6800FC342056D6830078788A /* RuntimeIntent.swift */,
+				7EC735D72319CC4100A73810 /* RuntimeResponseGeneric.swift */,
 				6800FC532056D6830078788A /* Synonym.swift */,
 				6800FC502056D6830078788A /* SynonymCollection.swift */,
 				6800FC4C2056D6830078788A /* SystemResponse.swift */,
@@ -2626,6 +2637,7 @@
 				CA8E9267223406E2001BFABF /* MessageResponseContext.swift */,
 				922077922152FC5900C8C7E4 /* RuntimeEntity.swift */,
 				9220778E2152FC5900C8C7E4 /* RuntimeIntent.swift */,
+				7EC735DB2319DDB400A73810 /* RuntimeResponseGeneric.swift */,
 				5F2C5BE322E9FA0900A7628D /* SearchResult.swift */,
 				5F2C5BE422E9FA0900A7628D /* SearchResultHighlight.swift */,
 				5F2C5BE522E9FA0900A7628D /* SearchResultMetadata.swift */,
@@ -4416,6 +4428,7 @@
 				6800FCCF2056D8D50078788A /* UpdateWorkspace.swift in Sources */,
 				6800FCA02056D8D50078788A /* CaptureGroup.swift in Sources */,
 				CADA96922110ABB500B5BD84 /* DialogSuggestionValue.swift in Sources */,
+				7EC735DA2319CC4100A73810 /* RuntimeResponseGeneric.swift in Sources */,
 				6800FCAF2056D8D50078788A /* DialogNodeNextStep.swift in Sources */,
 				6800FCAE2056D8D50078788A /* DialogNodeCollection.swift in Sources */,
 				92EAA86821BF053600A4714C /* MessageContextMetadata.swift in Sources */,
@@ -4437,6 +4450,7 @@
 				6800FCC32056D8D50078788A /* RuntimeEntity.swift in Sources */,
 				CADA96902110ABB500B5BD84 /* WorkspaceSystemSettingsTooling.swift in Sources */,
 				CADA969A2110ABB500B5BD84 /* EntityMention.swift in Sources */,
+				7EC735D92319CC4100A73810 /* DialogSuggestionOutput.swift in Sources */,
 				6800FCAD2056D8D50078788A /* DialogNodeAction.swift in Sources */,
 				6800FCB82056D8D50078788A /* IntentCollection.swift in Sources */,
 				6800FCC62056D8D50078788A /* SynonymCollection.swift in Sources */,
@@ -4449,6 +4463,7 @@
 				CADA96962110ABB500B5BD84 /* DialogSuggestion.swift in Sources */,
 				6800FC9F2056D8CB0078788A /* Assistant.swift in Sources */,
 				CA8E9264223406C4001BFABF /* Mention.swift in Sources */,
+				7EC735D82319CC4100A73810 /* DialogSuggestionResponseGeneric.swift in Sources */,
 				6800FCC72056D8D50078788A /* SystemResponse.swift in Sources */,
 				92BF69AE213F129A00FE6325 /* Shared.swift in Sources */,
 				6800FCB22056D8D50078788A /* EntityCollection.swift in Sources */,
@@ -4712,6 +4727,7 @@
 				922078412152FCE000C8C7E4 /* Assistant.swift in Sources */,
 				922078572152FCE400C8C7E4 /* MessageResponse.swift in Sources */,
 				9220784F2152FCE400C8C7E4 /* DialogRuntimeResponseGeneric.swift in Sources */,
+				7EC735DC2319DDB400A73810 /* RuntimeResponseGeneric.swift in Sources */,
 				922078442152FCE400C8C7E4 /* DialogSuggestion.swift in Sources */,
 				CA8E9268223406E2001BFABF /* MessageRequestContext.swift in Sources */,
 				922078512152FCE400C8C7E4 /* RuntimeEntity.swift in Sources */,

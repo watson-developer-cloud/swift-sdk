@@ -19,6 +19,7 @@
 import XCTest
 import Foundation
 import ToneAnalyzerV3
+import RestKit
 
 class ToneAnalyzerTests: XCTestCase {
 
@@ -62,11 +63,13 @@ class ToneAnalyzerTests: XCTestCase {
     /** Instantiate Tone Analyzer. */
     func instantiateToneAnalyzer() {
         if let apiKey = WatsonCredentials.ToneAnalyzerAPIKey {
-            toneAnalyzer = ToneAnalyzer(version: versionDate, apiKey: apiKey)
+            let authenticator = IAMAuthenticator.init(apiKey: apiKey)
+            toneAnalyzer = ToneAnalyzer(version: versionDate, authenticator: authenticator)
         } else {
             let username = WatsonCredentials.ToneAnalyzerUsername
             let password = WatsonCredentials.ToneAnalyzerPassword
-            toneAnalyzer = ToneAnalyzer(version: versionDate, username: username, password: password)
+            let authenticator = BasicAuthenticator.init(username: username, password: password)
+            toneAnalyzer = ToneAnalyzer(version: versionDate, authenticator: authenticator)
         }
         if let url = WatsonCredentials.ToneAnalyzerURL {
             toneAnalyzer.serviceURL = url

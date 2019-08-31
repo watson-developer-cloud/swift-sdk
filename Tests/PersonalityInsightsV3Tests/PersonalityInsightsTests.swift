@@ -18,6 +18,7 @@
 
 import XCTest
 import PersonalityInsightsV3
+import RestKit
 
 class PersonalityInsightsTests: XCTestCase {
 
@@ -52,11 +53,13 @@ class PersonalityInsightsTests: XCTestCase {
 
     func instantiatePersonalityInsights() {
         if let apiKey = WatsonCredentials.PersonalityInsightsV3APIKey {
-            personalityInsights = PersonalityInsights(version: versionDate, apiKey: apiKey)
+            let authenticator = IAMAuthenticator.init(apiKey: apiKey)
+            personalityInsights = PersonalityInsights(version: versionDate, authenticator: authenticator)
         } else {
             let username = WatsonCredentials.PersonalityInsightsV3Username
             let password = WatsonCredentials.PersonalityInsightsV3Password
-            personalityInsights = PersonalityInsights(version: versionDate, username: username, password: password)
+            let authenticator = BasicAuthenticator.init(username: username, password: password)
+            personalityInsights = PersonalityInsights(version: versionDate, authenticator: authenticator)
         }
         if let url = WatsonCredentials.PersonalityInsightsV3URL {
             personalityInsights.serviceURL = url

@@ -26,7 +26,8 @@ class AssistantV1UnitTests: XCTestCase {
     private let workspaceID = "test workspace"
 
     override func setUp() {
-        assistant = Assistant(version: versionDate, accessToken: accessToken)
+        
+        assistant = Assistant(version: versionDate, authenticator: defaultTestAuthenticator)
         #if !os(Linux)
         let configuration = URLSessionConfiguration.ephemeral
         #else
@@ -137,7 +138,7 @@ class AssistantV1UnitTests: XCTestCase {
         let expectation = self.expectation(description: "listWorkspaces")
         assistant.listWorkspaces(
             pageLimit: 10,
-            includeCount: true,
+            
             sort: "alphabetical",
             cursor: "mouse",
             includeAudit: true) {
@@ -347,7 +348,7 @@ class AssistantV1UnitTests: XCTestCase {
             workspaceID: self.workspaceID,
             export: true,
             pageLimit: 10,
-            includeCount: true,
+            
             sort: "alphabetical",
             cursor: "mouse",
             includeAudit: true) {
@@ -529,7 +530,7 @@ class AssistantV1UnitTests: XCTestCase {
             workspaceID: self.workspaceID,
             intent: intent,
             pageLimit: 10,
-            includeCount: true,
+            
             sort: "alphabetical",
             cursor: "mouse",
             includeAudit: true) {
@@ -718,7 +719,7 @@ class AssistantV1UnitTests: XCTestCase {
         assistant.listCounterexamples(
             workspaceID: self.workspaceID,
             pageLimit: 10,
-            includeCount: true,
+            
             sort: "alphabetical",
             cursor: "mouse",
             includeAudit: true) {
@@ -887,7 +888,7 @@ class AssistantV1UnitTests: XCTestCase {
             workspaceID: self.workspaceID,
             export: true,
             pageLimit: 10,
-            includeCount: true,
+            
             sort: "alphabetical",
             cursor: "mouse",
             includeAudit: true) {
@@ -1121,7 +1122,7 @@ class AssistantV1UnitTests: XCTestCase {
             entity: entity,
             export: true,
             pageLimit: 10,
-            includeCount: true,
+            
             sort: "alphabetical",
             cursor: "mouse",
             includeAudit: true) {
@@ -1159,7 +1160,6 @@ class AssistantV1UnitTests: XCTestCase {
                 XCTAssertEqual(decodedBody.metadata, metadata)
                 XCTAssertEqual(decodedBody.patterns, patterns)
                 XCTAssertEqual(decodedBody.synonyms, synonyms)
-                XCTAssertEqual(decodedBody.valueType, valueType)
             } catch {
                 XCTFail(missingBodyMessage(error))
             }
@@ -1173,7 +1173,6 @@ class AssistantV1UnitTests: XCTestCase {
             entity: entity,
             value: value,
             metadata: metadata,
-            valueType: valueType,
             synonyms: synonyms,
             patterns: patterns) {
                 _, _ in
@@ -1246,7 +1245,6 @@ class AssistantV1UnitTests: XCTestCase {
 
                 XCTAssertEqual(decodedBody.value, newValue)
                 XCTAssertEqual(decodedBody.metadata, newMetadata)
-                XCTAssertEqual(decodedBody.valueType, newType)
                 XCTAssertEqual(decodedBody.synonyms, newSynonyms)
                 XCTAssertEqual(decodedBody.patterns, newPatterns)
             } catch {
@@ -1263,7 +1261,6 @@ class AssistantV1UnitTests: XCTestCase {
             value: value,
             newValue: newValue,
             newMetadata: newMetadata,
-            newValueType: newType,
             newSynonyms: newSynonyms,
             newPatterns: newPatterns) {
                 _, _ in
@@ -1339,7 +1336,7 @@ class AssistantV1UnitTests: XCTestCase {
             entity: entity,
             value: value,
             pageLimit: 10,
-            includeCount: true,
+            
             sort: "alphabetical",
             cursor: "mouse",
             includeAudit: true) {
@@ -1538,7 +1535,7 @@ class AssistantV1UnitTests: XCTestCase {
         assistant.listDialogNodes(
             workspaceID: self.workspaceID,
             pageLimit: 10,
-            includeCount: true,
+            
             sort: "alphabetical",
             cursor: "mouse",
             includeAudit: true) {
@@ -1595,7 +1592,6 @@ class AssistantV1UnitTests: XCTestCase {
                 XCTAssertEqual(decodedBody.nextStep, nextStep)
                 XCTAssertEqual(decodedBody.actions, actions)
                 XCTAssertEqual(decodedBody.title, title)
-                XCTAssertEqual(decodedBody.nodeType, nodeType)
                 XCTAssertEqual(decodedBody.eventName, eventName)
                 XCTAssertEqual(decodedBody.variable, variable)
                 XCTAssertEqual(decodedBody.digressIn, digressIn)
@@ -1622,7 +1618,6 @@ class AssistantV1UnitTests: XCTestCase {
             metadata: metadata,
             nextStep: nextStep,
             title: title,
-            nodeType: nodeType,
             eventName: eventName,
             variable: variable,
             actions: actions,
@@ -1714,7 +1709,6 @@ class AssistantV1UnitTests: XCTestCase {
                 XCTAssertEqual(decodedBody.metadata, newMetadata)
                 XCTAssertEqual(decodedBody.nextStep, newNextStep)
                 XCTAssertEqual(decodedBody.title, newTitle)
-                XCTAssertEqual(decodedBody.nodeType, newType)
                 XCTAssertEqual(decodedBody.eventName, newEventName)
                 XCTAssertEqual(decodedBody.variable, newVariable)
                 XCTAssertEqual(decodedBody.actions, newActions)
@@ -1743,7 +1737,7 @@ class AssistantV1UnitTests: XCTestCase {
             newMetadata: newMetadata,
             newNextStep: newNextStep,
             newTitle: newTitle,
-            newNodeType: newType,
+            newType: newType,
             newEventName: newEventName,
             newVariable: newVariable,
             newActions: newActions,
@@ -1876,7 +1870,8 @@ class AssistantV1UnitTests: XCTestCase {
 
     #if !os(Linux)
     func testAllowInsecureConnections() {
-        let assistant = Assistant(version: versionDate, username: "username", password: "password")
+        let authenticator = BasicAuthenticator.init(username: "username", password: "password")
+        let assistant = Assistant(version: versionDate, authenticator: authenticator)
         XCTAssertNil(assistant.session.delegate)
         assistant.disableSSLVerification()
         XCTAssertNotNil(assistant.session.delegate)

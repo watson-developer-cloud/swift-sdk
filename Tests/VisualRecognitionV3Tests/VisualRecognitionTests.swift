@@ -57,7 +57,6 @@ class VisualRecognitionTests: XCTestCase {
             ("testDetectFacesByImage1", testDetectFacesByImage1),
             ("testDetectFacesByImage2", testDetectFacesByImage2),
             // Negative tests
-            ("testAuthenticationError", testAuthenticationError),
             ("testCreateClassifierWithInvalidPositiveExamples", testCreateClassifierWithInvalidPositiveExamples),
             ("testClassifyByInvalidURL", testClassifyByInvalidURL),
             ("testDetectFacesByInvalidURL", testDetectFacesByInvalidURL),
@@ -81,7 +80,8 @@ class VisualRecognitionTests: XCTestCase {
             XCTFail("Missing credentials for Visual Recognition service")
             return
         }
-        visualRecognition = VisualRecognition(version: versionDate, apiKey: apiKey)
+        let authenticator = IAMAuthenticator.init(apiKey: apiKey)
+        visualRecognition = VisualRecognition(version: versionDate, authenticator: authenticator)
         if let url = WatsonCredentials.VisualRecognitionURL {
             visualRecognition.serviceURL = url
         }
@@ -588,7 +588,7 @@ class VisualRecognitionTests: XCTestCase {
                 return
             }
             XCTAssertGreaterThan(classes.count, 0)
-            for cls in classes where cls.className == "person" {
+            for cls in classes where cls.class == "person" {
                 containsPersonClass = true
                 classifierScore = cls.score
                 break
@@ -647,7 +647,7 @@ class VisualRecognitionTests: XCTestCase {
                 return
             }
             XCTAssertGreaterThan(classes.count, 0)
-            for cls in classes where cls.className == "person" {
+            for cls in classes where cls.class == "person" {
                 containsPersonClass = true
                 classifierScore = cls.score
                 break
@@ -696,7 +696,7 @@ class VisualRecognitionTests: XCTestCase {
             let classifier = image?.classifiers.first
             XCTAssertEqual(classifier?.classifierID, self.classifierID)
             XCTAssertEqual(classifier?.classes.count, 1)
-            XCTAssertEqual(classifier?.classes.first?.className, "turtles")
+            XCTAssertEqual(classifier?.classes.first?.class, "turtles")
             if let score = classifier?.classes.first?.score {
                 XCTAssertGreaterThan(score, 0.5)
             }
@@ -742,7 +742,7 @@ class VisualRecognitionTests: XCTestCase {
             let classifier = image?.classifiers.first
             XCTAssertEqual(classifier?.classifierID, self.classifierID)
             XCTAssertEqual(classifier?.classes.count, 1)
-            XCTAssertEqual(classifier?.classes.first?.className, "turtles")
+            XCTAssertEqual(classifier?.classes.first?.class, "turtles")
             if let score = classifier?.classes.first?.score {
                 XCTAssertGreaterThan(score, 0.5)
             }
@@ -792,7 +792,7 @@ class VisualRecognitionTests: XCTestCase {
                     XCTAssertEqual(classifier.name, "default")
 
                     XCTAssertGreaterThan(classifier.classes.count, 0)
-                    for cls in classifier.classes where cls.className == "car" {
+                    for cls in classifier.classes where cls.class == "car" {
                         containsCarClass = true
                         classifierScore = cls.score
                     }
@@ -804,7 +804,7 @@ class VisualRecognitionTests: XCTestCase {
                     // verify the image's custom classifier
                     XCTAssertEqual(classifier.classifierID, self.classifierID)
                     XCTAssertEqual(classifier.classes.count, 1)
-                    XCTAssertEqual(classifier.classes.first?.className, "turtles")
+                    XCTAssertEqual(classifier.classes.first?.class, "turtles")
                     if let score = classifier.classes.first?.score {
                         XCTAssertGreaterThan(score, 0.5)
                     }
@@ -851,7 +851,7 @@ class VisualRecognitionTests: XCTestCase {
                 return
             }
             XCTAssertGreaterThan(classes.count, 0)
-            for cls in classes where cls.className == "car" {
+            for cls in classes where cls.class == "car" {
                 containsPersonClass = true
                 classifierScore = cls.score
                 break
@@ -910,7 +910,7 @@ class VisualRecognitionTests: XCTestCase {
                 return
             }
             XCTAssertGreaterThan(classes.count, 0)
-            for cls in classes where cls.className == "car" {
+            for cls in classes where cls.class == "car" {
                 containsPersonClass = true
                 classifierScore = cls.score
                 break
@@ -957,7 +957,7 @@ class VisualRecognitionTests: XCTestCase {
             let classifier = image?.classifiers.first
             XCTAssertEqual(classifier?.classifierID, self.classifierID)
             XCTAssertEqual(classifier?.classes.count, 1)
-            XCTAssertEqual(classifier?.classes.first?.className, "turtles")
+            XCTAssertEqual(classifier?.classes.first?.class, "turtles")
             if let score = classifier?.classes.first?.score {
                 XCTAssertGreaterThan(score, 0.5)
             }
@@ -1003,7 +1003,7 @@ class VisualRecognitionTests: XCTestCase {
             let classifier = image?.classifiers.first
             XCTAssertEqual(classifier?.classifierID, self.classifierID)
             XCTAssertEqual(classifier?.classes.count, 1)
-            XCTAssertEqual(classifier?.classes.first?.className, "turtles")
+            XCTAssertEqual(classifier?.classes.first?.class, "turtles")
             if let score = classifier?.classes.first?.score {
                 XCTAssertGreaterThan(score, 0.5)
             }
@@ -1058,7 +1058,7 @@ class VisualRecognitionTests: XCTestCase {
                     XCTAssertEqual(classifier.name, "default")
 
                     XCTAssertGreaterThan(classifier.classes.count, 0)
-                    for cls in classifier.classes where cls.className == "car" {
+                    for cls in classifier.classes where cls.class == "car" {
                         containsCarClass = true
                         classifierScore = cls.score
                     }
@@ -1070,7 +1070,7 @@ class VisualRecognitionTests: XCTestCase {
                     // verify the image's custom classifier
                     XCTAssertEqual(classifier.classifierID, self.classifierID)
                     XCTAssertEqual(classifier.classes.count, 1)
-                    XCTAssertEqual(classifier.classes.first?.className, "turtles")
+                    XCTAssertEqual(classifier.classes.first?.class, "turtles")
                     if let score = classifier.classes.first?.score {
                         XCTAssertGreaterThan(score, 0.5)
                     }
@@ -1121,7 +1121,7 @@ class VisualRecognitionTests: XCTestCase {
                         XCTAssertGreaterThan(classifier.classes.count, 0)
                         for cls in classifier.classes {
                             let classes = ["car", "vehicle", "sedan", "Parking Garage (Indoor)"]
-                            if classes.contains(cls.className) {
+                            if classes.contains(cls.class) {
                                 containsCarClass = true
                                 classifierScore = cls.score
                             }
@@ -1299,24 +1299,6 @@ class VisualRecognitionTests: XCTestCase {
     }
 
     // MARK: - Negative Tests
-
-    /** Invalid API Key. */
-    func testAuthenticationError() {
-        let apiKey = "let-me-in-let-me-in"
-        visualRecognition = VisualRecognition(version: versionDate, apiKey: apiKey)
-        visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
-        visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
-
-        let expectation = self.expectation(description: "Invalid API Key")
-
-        visualRecognition.getClassifier(classifierID: "foo-bar-baz") {
-            _, error in
-            if error == nil {
-                XCTFail(missingErrorMessage)
-            }
-            expectation.fulfill()        }
-        waitForExpectations()
-    }
 
     /** Test creating a classifier with a single image for positive examples. */
     func testCreateClassifierWithInvalidPositiveExamples() {

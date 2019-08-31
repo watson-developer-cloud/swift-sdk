@@ -20,6 +20,7 @@
 
 import XCTest
 import VisualRecognitionV3
+import RestKit
 
 class VisualRecognitionCoreMLTests: XCTestCase {
 
@@ -40,7 +41,8 @@ class VisualRecognitionCoreMLTests: XCTestCase {
             XCTFail("Missing credentials for Visual Recognition service")
             return
         }
-        visualRecognition = VisualRecognition(version: versionDate, apiKey: apiKey)
+        let authenticator = IAMAuthenticator.init(apiKey: apiKey)
+        visualRecognition = VisualRecognition(version: versionDate, authenticator: authenticator)
         if let url = WatsonCredentials.VisualRecognitionURL {
             visualRecognition.serviceURL = url
         }
@@ -82,7 +84,7 @@ class VisualRecognitionCoreMLTests: XCTestCase {
             }
 
             // ensure the model is included in list of local models
-            XCTAssertEqual(localModels.count, 1)
+            XCTAssertGreaterThan(localModels.count, 0)
             XCTAssert(localModels.contains(classifierID))
 
             // delete the local model

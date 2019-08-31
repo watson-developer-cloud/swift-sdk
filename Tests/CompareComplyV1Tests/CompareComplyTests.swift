@@ -103,7 +103,8 @@ class CompareComplyTests: XCTestCase {
     /** Instantiate CompareComply. */
     func instantiateCompareComply() {
         let version = "2018-11-15"
-        compareComply = CompareComply(version: version, apiKey: WatsonCredentials.CompareComplyV1APIKey)
+        let authenticator = IAMAuthenticator.init(apiKey: WatsonCredentials.CompareComplyV1APIKey)
+        compareComply = CompareComply(version: version, authenticator: authenticator)
         if let url = WatsonCredentials.CompareComplyURL {
             compareComply.serviceURL = url
         }
@@ -139,9 +140,7 @@ class CompareComplyTests: XCTestCase {
             return
         }
 
-        compareComply.convertToHTML(
-            file: file,
-            filename: "contract_A.pdf") {
+        compareComply.convertToHTML(file: file, fileContentType: "application/pdf") {
                 response, error in
 
                 if let error = error {
@@ -172,9 +171,7 @@ class CompareComplyTests: XCTestCase {
     func testConvertToHtmlUsingPNG() {
         let expectation = self.expectation(description: "convert PDF document to HTML")
         
-        compareComply.convertToHTML(
-            file: contractAPNGFile,
-            filename: "Contract_A.png") {
+        compareComply.convertToHTML(file: contractAPNGFile, fileContentType: "image/png") {
                 response, error in
                 
                 if let error = error {
@@ -206,9 +203,7 @@ class CompareComplyTests: XCTestCase {
     func testConvertToHtmlUsingJPG() {
         let expectation = self.expectation(description: "convert PDF document to HTML")
         
-        compareComply.convertToHTML(
-            file: contractAJPGFile,
-            filename: "Contract_A.jpg") {
+        compareComply.convertToHTML(file: contractAJPGFile, fileContentType: "image/jpg") {
                 response, error in
                 
                 if let error = error {
@@ -240,9 +235,7 @@ class CompareComplyTests: XCTestCase {
     func testConvertToHtmlUsingBMP() {
         let expectation = self.expectation(description: "convert PDF document to HTML")
         
-        compareComply.convertToHTML(
-            file: contractABMPFile,
-            filename: "Contract_A.bmp") {
+        compareComply.convertToHTML(file: contractABMPFile, fileContentType: "image/bmp") {
                 response, error in
                 
                 if let error = error {
@@ -274,9 +267,7 @@ class CompareComplyTests: XCTestCase {
     func testConvertToHtmlUsingGIF() {
         let expectation = self.expectation(description: "convert PDF document to HTML")
         
-        compareComply.convertToHTML(
-            file: contractAGIFFile,
-            filename: "Contract_A.gif") {
+        compareComply.convertToHTML(file: contractAGIFFile, fileContentType: "image/gif") {
                 response, error in
                 
                 if let error = error {
@@ -308,9 +299,7 @@ class CompareComplyTests: XCTestCase {
     func testConvertToHtmlUsingTIFF() {
         let expectation = self.expectation(description: "convert PDF document to HTML")
         
-        compareComply.convertToHTML(
-            file: contractATIFFFile,
-            filename: "Contract_A.tiff") {
+        compareComply.convertToHTML(file: contractATIFFFile, fileContentType: "image/tiff") {
                 response, error in
                 
                 if let error = error {
@@ -342,9 +331,7 @@ class CompareComplyTests: XCTestCase {
     func testConvertToHtmlUsingDOCX() {
         let expectation = self.expectation(description: "convert PDF document to HTML")
         
-        compareComply.convertToHTML(
-            file: contractADOCXFile,
-            filename: "Contract_A.docx") {
+        compareComply.convertToHTML(file: contractADOCXFile, fileContentType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
                 response, error in
                 
                 if let error = error {
@@ -376,9 +363,7 @@ class CompareComplyTests: XCTestCase {
     func testConvertToHtmlUsingDOC() {
         let expectation = self.expectation(description: "convert PDF document to HTML")
         
-        compareComply.convertToHTML(
-            file: contractADOCFile,
-            filename: "Contract_A.doc") {
+        compareComply.convertToHTML(file: contractADOCFile, fileContentType: "application/msword") {
                 response, error in
                 
                 if let error = error {

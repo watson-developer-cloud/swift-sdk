@@ -49,11 +49,13 @@ class AssistantV2Tests: XCTestCase {
     /** Instantiate Assistant. */
     func instantiateAssistant() {
         if let apiKey = WatsonCredentials.AssistantAPIKey {
-            assistant = Assistant(version: versionDate, apiKey: apiKey)
+            let authenticator = IAMAuthenticator.init(apiKey: apiKey)
+            assistant = Assistant(version: versionDate, authenticator: authenticator)
         } else {
             let username = WatsonCredentials.AssistantV2Username
             let password = WatsonCredentials.AssistantV2Password
-            assistant = Assistant(version: versionDate, username: username, password: password)
+            let authenticator = BasicAuthenticator.init(username: username, password: password)
+            assistant = Assistant(version: versionDate, authenticator: authenticator)
         }
         if let url = WatsonCredentials.AssistantV2URL {
             assistant.serviceURL = url
@@ -63,7 +65,7 @@ class AssistantV2Tests: XCTestCase {
     }
 
     /** Wait for expectations. */
-    func waitForExpectations(timeout: TimeInterval = 10.0) {
+    func waitForExpectations(timeout: Time¨Interval = 10.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }

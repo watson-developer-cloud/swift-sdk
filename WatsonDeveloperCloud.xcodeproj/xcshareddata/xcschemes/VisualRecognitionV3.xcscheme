@@ -55,6 +55,9 @@
                <Test
                   Identifier = "VisualRecognitionTests/testUpdateClassifierWithPositiveExample()">
                </Test>
+               <Test
+                  Identifier = "VisualRecognitionUnitTests/testDownloadClassifierWithoutCoreMLModel()">
+               </Test>
             </SkippedTests>
          </TestableReference>
       </Testables>

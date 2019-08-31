@@ -22,6 +22,7 @@ import XCTest
 import Foundation
 import UIKit
 import VisualRecognitionV3
+import RestKit
 
 class VisualRecognitionUIImageTests: XCTestCase {
 
@@ -51,7 +52,8 @@ class VisualRecognitionUIImageTests: XCTestCase {
             XCTFail("Missing credentials for Visual Recognition service")
             return
         }
-        visualRecognition = VisualRecognition(version: versionDate, apiKey: apiKey)
+        let authenticator = IAMAuthenticator.init(apiKey: apiKey)
+        visualRecognition = VisualRecognition(version: versionDate, authenticator: authenticator)
         if let url = WatsonCredentials.VisualRecognitionURL {
             visualRecognition.serviceURL = url
         }
@@ -99,7 +101,7 @@ class VisualRecognitionUIImageTests: XCTestCase {
                 return
             }
             XCTAssertGreaterThan(classes.count, 0)
-            for cls in classes where cls.className == "car" {
+            for cls in classes where cls.class == "car" {
                 containsPersonClass = true
                 classifierScore = cls.score
                 break

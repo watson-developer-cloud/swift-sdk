@@ -44,11 +44,13 @@ class DiscoveryTests: XCTestCase {
 
     func instantiateDiscovery() {
         if let apiKey = WatsonCredentials.DiscoveryAPIKey {
-            discovery = Discovery(version: versionDate, apiKey: apiKey)
+            let authenticator = IAMAuthenticator.init(apiKey: apiKey)
+            discovery = Discovery(version: versionDate, authenticator: authenticator)
         } else {
             let username = WatsonCredentials.DiscoveryUsername
             let password = WatsonCredentials.DiscoveryPassword
-            discovery = Discovery(version: versionDate, username: username, password: password)
+            let authenticator = BasicAuthenticator.init(username: username, password: password)
+            discovery = Discovery(version: versionDate, authenticator: authenticator)
         }
         if let url = WatsonCredentials.DiscoveryURL {
             discovery.serviceURL = url
@@ -507,8 +509,8 @@ class DiscoveryTests: XCTestCase {
 
             XCTAssertNotNil(result.fields)
             XCTAssertGreaterThan(result.fields!.count, 0)
-            XCTAssertNotNil(result.fields?.first?.fieldName)
-            XCTAssertNotNil(result.fields?.first?.fieldType)
+            XCTAssertNotNil(result.fields?.first?.field)
+            XCTAssertNotNil(result.fields?.first?.type)
             expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
@@ -958,8 +960,8 @@ class DiscoveryTests: XCTestCase {
 
             XCTAssertNotNil(result.fields)
             XCTAssertGreaterThan(result.fields!.count, 0)
-            XCTAssertNotNil(result.fields?.first?.fieldName)
-            XCTAssertNotNil(result.fields?.first?.fieldType)
+            XCTAssertNotNil(result.fields?.first?.field)
+            XCTAssertNotNil(result.fields?.first?.type)
             expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
@@ -1303,7 +1305,7 @@ class DiscoveryTests: XCTestCase {
             filter: "enriched_text.concepts.text:\"Technology\"",
             query: "enriched_text.concepts.text:\"Cloud computing\"",
             count: 5,
-            returnFields: ["enriched_text"].joined(separator: ","),
+            return: ["enriched_text"].joined(separator: ","),
             offset: 1,
             sort: ["enriched_text.sentiment.document.score"].joined(separator: ","),
             highlight: true,

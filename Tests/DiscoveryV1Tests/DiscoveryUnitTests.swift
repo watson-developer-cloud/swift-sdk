@@ -24,7 +24,7 @@ class DiscoveryUnitTests: XCTestCase {
     private let timeout = 1.0
 
     override func setUp() {
-        discovery = Discovery(version: versionDate, accessToken: accessToken)
+        discovery = Discovery(version: versionDate, authenticator: defaultTestAuthenticator)
         #if !os(Linux)
         let configuration = URLSessionConfiguration.ephemeral
         #else

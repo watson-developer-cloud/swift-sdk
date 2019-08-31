@@ -33,7 +33,7 @@ class VisualRecognitionUnitTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        visualRecognition = VisualRecognition(version: versionDate, accessToken: accessToken)
+        visualRecognition = VisualRecognition(version: versionDate, authenticator: defaultTestAuthenticator)
         createMockSession(for: visualRecognition)
     }
 
@@ -418,9 +418,9 @@ class VisualRecognitionUnitTests: XCTestCase {
 
                 let expectation: XCTestExpectation
 
-                init(version: String, accessToken: String, expectation: XCTestExpectation) {
+                init(version: String, authenticator: Authenticator, expectation: XCTestExpectation) {
                     self.expectation = expectation
-                    super.init(version: version, accessToken: accessToken)
+                    super.init(version: version, authenticator: authenticator)
                 }
 
                 override func getClassifier(
@@ -468,7 +468,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             }
 
             let classifierExpectation = self.expectation(description: "getClassifier() should get called")
-            let visualRecognition = MockVisualRecognition(version: versionDate, accessToken: accessToken, expectation: classifierExpectation)
+            let visualRecognition = MockVisualRecognition(version: versionDate, authenticator: defaultTestAuthenticator, expectation: classifierExpectation)
             createMockSession(for: visualRecognition)
 
             // If there is a newer version of the CoreML model available in the VisualRecognition service,
@@ -491,9 +491,9 @@ class VisualRecognitionUnitTests: XCTestCase {
 
                 let expectation: XCTestExpectation
 
-                init(version: String, accessToken: String, expectation: XCTestExpectation) {
+                init(version: String, authenticator: Authenticator, expectation: XCTestExpectation) {
                     self.expectation = expectation
-                    super.init(version: version, accessToken: accessToken)
+                    super.init(version: version, authenticator: authenticator)
                 }
 
                 override func getClassifier(
@@ -527,7 +527,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             }
 
             let classifierExpectation = self.expectation(description: "getClassifier() should get called")
-            let visualRecognition = MockVisualRecognition(version: versionDate, accessToken: accessToken, expectation: classifierExpectation)
+            let visualRecognition = MockVisualRecognition(version: versionDate, authenticator: defaultTestAuthenticator, expectation: classifierExpectation)
             createMockSession(for: visualRecognition)
 
             // If the local copy of the CoreML model is at least as updated as
@@ -654,6 +654,11 @@ class VisualRecognitionUnitTests: XCTestCase {
                 return
             }
             let newLocation = appSupport.appendingPathComponent(name + ".mlmodelc", isDirectory: false)
+            
+            if fileManager.fileExists(atPath: newLocation.relativePath) {
+                try fileManager.removeItem(at: newLocation)
+            }
+            
             try fileManager.copyItem(at: modelURL, to: newLocation)
         } catch {
             XCTFail(error.localizedDescription)

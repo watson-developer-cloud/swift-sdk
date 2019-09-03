@@ -89,8 +89,8 @@ To build your project using the `3.0.0` preview, modify the depedencies section 
 
 ```
 dependencies: [
-    .package(url: "https://github.com/watson-developer-cloud/restkit.git", from: "preview/4.0.0-rc1"),
-    .package(url: "https://github.com/watson-developer-cloud/swift-sdk.git", from: "preview/3.0.0-rc1")
+    .package(url: "https://github.com/watson-developer-cloud/restkit.git", .branch: "preview/4.0.0-rc1"),
+    .package(url: "https://github.com/watson-developer-cloud/swift-sdk.git", .branch: "preview/3.0.0-rc1")
 ],
 ```
 

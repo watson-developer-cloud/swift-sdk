@@ -24,13 +24,14 @@ There are many resources to help you build your first cognitive application with
 
 * [Before you begin](#before-you-begin)
 * [Requirements](#requirements)
+* [Version 3.0.0 Preview](#3.0.0-preview)
 * [Installation](#installation)
 * [Authentication](#authentication)
 * [Custom Service URLs](#custom-service-urls)
 * [Custom Headers](#custom-headers)
 * [Featured Projects](#featured-projects)
 * [Synchronous Execution](#synchronous-execution)
-* [Handling PNG and CgBI Files in XCode](#handling-png)
+* [Handling PNG and CgBI Files in XCode](#How-to-bypass-CgBI-Encoding-for-Resource-Files)
 * [Objective-C Compatibility](#objective-c-compatibility)
 * [Linux Compatibility](#linux-compatibility)
 * [Contributing](#contributing)
@@ -60,6 +61,48 @@ This SDK provides classes and methods to access the following Watson services.
 - Xcode 9.3+
 - Swift 4.2+
 - iOS 10.0+
+
+## 3.0.0 Preview
+
+We have made a preview of the upcoming `3.0.0` release of the SDK available to use! Version `3.0.0` introduces a new authentication scheme for all services, as well as breaking changes to the API response models returned by the Swift SDK.
+
+### Install the 3.0.0 preview
+
+#### Carthage
+
+See the [Carthage](#installation) section of the `Installation` guide.
+
+To build your project using the `3.0.0` preview, modify the Watson entries in your `Cartfile` like so:
+
+```
+github "watson-developer-cloud/swift-sdk" "preview-3.0.0-rc1"
+github "watson-developer-cloud/restkit" "preview-4.0.0-rc1"
+```
+
+Then run `carthage update` to rebuild your dependencies.
+
+#### Swift Package Manager
+
+See the [Swift Package Manager](#installation) section of the `Installation` guide.
+
+To build your project using the `3.0.0` preview, modify the depedencies section in your `Package.swift` like so:
+
+```
+dependencies: [
+    .package(url: "https://github.com/watson-developer-cloud/restkit.git", from: "preview/4.0.0-rc1"),
+    .package(url: "https://github.com/watson-developer-cloud/swift-sdk.git", from: "preview/3.0.0-rc1")
+],
+```
+
+Then rebuild your project to get the latest SDK
+
+#### Cocoapods
+
+We currently have not released a preview binary for Cocoapods. If you would like the preview release to be available via Cocoapods, please let us know in an issue!
+
+## Migrating to version `3.0.0`
+
+Version `3.0.0` introduced breaking changes that affect all frameworks of the Swift SDK. Please refer to [the migration guide](https://github.com/watson-developer-cloud/swift-sdk/blob/master/docs/3.0.0-migration-guide.md) for information on how to get up and running with the new version.
 
 ## Installation
 
@@ -292,7 +335,7 @@ Watson services that accept PNG images as input files (Visual Recognition, Compa
 In order to bypass CgBI encoding and keep the PNG files in a format that will operate well with Watson services, select the PNG file in XCode, and modify the `Type` attribute to `Data` in the File Inspector.
 
 Ex:  
-![File inspector example](https://github.com/watson-developer-cloud/swift-sdk/tree/master/docs/images/png-file-inspector.png)
+![File inspector example](https://raw.githubusercontent.com/watson-developer-cloud/swift-sdk/master/docs/images/png-file-inspector.png)
 
 ### Future plans for handling CgBI
 

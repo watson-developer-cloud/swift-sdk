@@ -19,6 +19,7 @@
 import XCTest
 import Foundation
 import SpeechToTextV1
+import RestKit
 
 class SpeechToTextTests: XCTestCase {
 
@@ -36,11 +37,13 @@ class SpeechToTextTests: XCTestCase {
 
     func instantiateSpeechToText() {
         if let apiKey = WatsonCredentials.SpeechToTextAPIKey {
-            speechToText = SpeechToText(apiKey: apiKey)
+            let authenticator = IAMAuthenticator.init(apiKey: apiKey)
+            speechToText = SpeechToText(authenticator: authenticator)
         } else {
             let username = WatsonCredentials.SpeechToTextUsername
             let password = WatsonCredentials.SpeechToTextPassword
-            speechToText = SpeechToText(username: username, password: password)
+            let authenticator = BasicAuthenticator.init(username: username, password: password)
+            speechToText = SpeechToText(authenticator: authenticator)
         }
         if let url = WatsonCredentials.SpeechToTextURL {
             speechToText.serviceURL = url
@@ -187,8 +190,7 @@ class SpeechToTextTests: XCTestCase {
             customizationID: acousticModel.customizationID,
             audioName: "audio",
             audioResource: audio,
-            allowOverwrite: true,
-            contentType: "audio/wav")
+            contentType: "audio/wav", allowOverwrite: true)
         {
             _, error in
             if let error = error {
@@ -332,7 +334,7 @@ class SpeechToTextTests: XCTestCase {
     func testRecognizeSessionless() {
         let expectation = self.expectation(description: "recognizeSessionless")
         let audio = try! Data(contentsOf: Bundle(for: type(of: self)).url(forResource: "SpeechSample", withExtension: "wav")!)
-        speechToText.recognize(audio: audio, model: "en-US_BroadbandModel", contentType: "audio/wav") {
+        speechToText.recognize(audio: audio, contentType: "audio/wav", model: "en-US_BroadbandModel") {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -344,7 +346,7 @@ class SpeechToTextTests: XCTestCase {
             }
             XCTAssertNotNil(recognitionResults.results)
             XCTAssertGreaterThan(recognitionResults.results!.count, 0)
-            XCTAssertTrue(recognitionResults.results!.first!.finalResults)
+            XCTAssertTrue(recognitionResults.results!.first!.final)
             XCTAssertGreaterThan(recognitionResults.results!.first!.alternatives.count, 0)
             XCTAssertTrue(recognitionResults.results!.first!.alternatives.first!.transcript.contains("tornadoes"))
             expectation.fulfill()
@@ -360,7 +362,7 @@ class SpeechToTextTests: XCTestCase {
         let expectation1 = self.expectation(description: "createJob")
         let audio = try! Data(contentsOf: Bundle(for: type(of: self)).url(forResource: "SpeechSample", withExtension: "wav")!)
         var job: RecognitionJob!
-        speechToText.createJob(audio: audio, model: "en-US_BroadbandModel", contentType: "audio/wav") {
+        speechToText.createJob(audio: audio, contentType: "audio/wav", model: "en-US_BroadbandModel") {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -458,7 +460,7 @@ class SpeechToTextTests: XCTestCase {
         let keywords = ["rain", "tornadoes"]
 
         let expectation1 = self.expectation(description: "createJob")
-        speechToText.createJob(audio: audio, model: "en-US_BroadbandModel", resultsTtl: 600, inactivityTimeout: -1, keywords: keywords, keywordsThreshold: 0.75, maxAlternatives: 3, wordAlternativesThreshold: 0.25, wordConfidence: true, timestamps: true, profanityFilter: false, smartFormatting: true, contentType: "audio/wav") {
+        speechToText.createJob(audio: audio, contentType: "audio/wav", model: "en-US_BroadbandModel", resultsTtl: 600, inactivityTimeout: -1, keywords: keywords, keywordsThreshold: 0.75, maxAlternatives: 3, wordAlternativesThreshold: 0.25, wordConfidence: true, timestamps: true, profanityFilter: false, smartFormatting: true) {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -530,7 +532,7 @@ class SpeechToTextTests: XCTestCase {
         var jobID: String!
 
         let expectation1 = self.expectation(description: "createJob")
-        speechToText.createJob(audio: audio, model: "en-US_BroadbandModel", processingMetrics: true, processingMetricsInterval: 0.5, contentType: "audio/wav") {
+        speechToText.createJob(audio: audio, contentType: "audio/wav", model: "en-US_BroadbandModel", processingMetrics: true, processingMetricsInterval: 0.5) {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -1108,7 +1110,7 @@ class SpeechToTextTests: XCTestCase {
         // add audio resource to acoustic model
         let expectation1 = self.expectation(description: "addAudio")
         let audio = try! Data(contentsOf: Bundle(for: type(of: self)).url(forResource: "SpeechSample", withExtension: "wav")!)
-        speechToText.addAudio(customizationID: acousticModel.customizationID, audioName: "audio", audioResource: audio, allowOverwrite: true, contentType: "audio/wav") {
+        speechToText.addAudio(customizationID: acousticModel.customizationID, audioName: "audio", audioResource: audio, contentType: "audio/wav", allowOverwrite: true) {
             _, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))

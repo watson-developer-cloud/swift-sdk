@@ -26,14 +26,14 @@ class SpeechToTextUnitTests: XCTestCase {
     private let workspaceID = "test workspace"
 
     override func setUp() {
-        speechToText = SpeechToText(accessToken: accessToken)
+        speechToText = SpeechToText(authenticator: defaultTestAuthenticator)
     }
 
     // MARK: - URLs
 
     func testWebsocketsURLSetsServiceURL() {
         let apiKey = "your-api-key"
-        let speechToTextSession = SpeechToTextSession(apiKey: apiKey)
+        let speechToTextSession = SpeechToTextSession(authenticator: defaultTestAuthenticator)
 
         // Default URLs value
         XCTAssertEqual(speechToTextSession.websocketsURL, "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize")
@@ -58,7 +58,7 @@ class SpeechToTextUnitTests: XCTestCase {
 
     func testWebsocketsURLSetsTokenURL() {
         let apiKey = "your-api-key"
-        let speechToTextSession = SpeechToTextSession(apiKey: apiKey)
+        let speechToTextSession = SpeechToTextSession(authenticator: defaultTestAuthenticator)
 
         // Default URLs value
         XCTAssertEqual(speechToTextSession.websocketsURL, "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize")
@@ -92,8 +92,7 @@ class SpeechToTextUnitTests: XCTestCase {
 
         // API Key authentication
         var sttSession = SpeechToTextSession(
-            apiKey: "1234",
-            iamUrl: iamUrl,
+            authenticator: defaultTestAuthenticator,
             model: model,
             baseModelVersion: baseModelVersion,
             languageCustomizationID: languageCustomizationID,
@@ -107,8 +106,7 @@ class SpeechToTextUnitTests: XCTestCase {
 
         // Same as above, but with Basic Auth instead of API Key in the initializer
         sttSession = SpeechToTextSession(
-            username: "Anthony",
-            password: "hunter2",
+            authenticator: defaultTestAuthenticator,
             model: model,
             baseModelVersion: baseModelVersion,
             languageCustomizationID: languageCustomizationID,

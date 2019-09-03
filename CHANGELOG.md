@@ -1,4 +1,27 @@
 
+## 3.0.0 (Preview) (https://github.com/watson-developer-cloud/swift-sdk/compare/2.2.0...2.3.0) (2019-09-03)
+
+### Breaking Changes
+
+* Authentication: new authentication scheme for all Watson services implemented
+* All services: breaking changes to model property names for service responses
+
+## 2.3.0 (https://github.com/watson-developer-cloud/swift-sdk/compare/2.2.0...2.3.0) (2019-08-23)
+
+### Features
+
+* CompareComplyV1: Add new contract entities
+
+### Bug Fixes
+
+* CompareComplyV1: Fix inconsistencies with Swift models and the API response
+
+## 2.2.0 (https://github.com/watson-developer-cloud/swift-sdk/compare/2.1.1...2.2.0) (2019-07-31)
+
+### Features
+
+* AssistantV1: add models for Assistant Search Skill
+
 ## 2.1.1 (https://github.com/watson-developer-cloud/swift-sdk/compare/2.1.0...2.1.1) (2019-06-28)
 
 ### Bug Fixes

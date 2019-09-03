@@ -31,7 +31,7 @@ There are many resources to help you build your first cognitive application with
 * [Custom Headers](#custom-headers)
 * [Featured Projects](#featured-projects)
 * [Synchronous Execution](#synchronous-execution)
-* [Handling PNG and CgBI Files in XCode](#handling-png)
+* [Handling PNG and CgBI Files in XCode](#How-to-bypass-CgBI-Encoding-for-Resource-Files)
 * [Objective-C Compatibility](#objective-c-compatibility)
 * [Linux Compatibility](#linux-compatibility)
 * [Contributing](#contributing)
@@ -335,7 +335,7 @@ Watson services that accept PNG images as input files (Visual Recognition, Compa
 In order to bypass CgBI encoding and keep the PNG files in a format that will operate well with Watson services, select the PNG file in XCode, and modify the `Type` attribute to `Data` in the File Inspector.
 
 Ex:  
-![File inspector example](https://github.com/watson-developer-cloud/swift-sdk/tree/master/docs/images/png-file-inspector.png)
+![File inspector example](https://raw.githubusercontent.com/watson-developer-cloud/swift-sdk/master/docs/images/png-file-inspector.png)
 
 ### Future plans for handling CgBI
 

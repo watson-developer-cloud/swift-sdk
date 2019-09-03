@@ -30,7 +30,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
     internal var onDisconnect: (() -> Void)?
 
     internal let url: URL
-    private let authMethod: AuthenticationMethod
+    private let authenticator: Authenticator
     private let maxConnectAttempts: Int
     private var connectAttempts: Int
     private let defaultHeaders: [String: String]
@@ -40,14 +40,14 @@ internal class SpeechToTextSocket: WebSocketDelegate {
 
     internal init(
         url: URL,
-        authMethod: AuthenticationMethod,
+        authenticator: Authenticator,
         defaultHeaders: [String: String])
     {
         var request = URLRequest(url: url)
         request.timeoutInterval = 30
         self.socket = WebSocket(request: request)
         self.url = url
-        self.authMethod = authMethod
+        self.authenticator = authenticator
         self.maxConnectAttempts = 1
         self.connectAttempts = 0
         self.defaultHeaders = defaultHeaders
@@ -88,7 +88,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
             request.addValue(value, forHTTPHeaderField: key)
         }
 
-        authMethod.authenticate(request: request) {
+        authenticator.authenticate(request: request) {
             request, error in
             if let request = request {
                 // initialize socket and connect
@@ -264,10 +264,6 @@ internal class SpeechToTextSocket: WebSocketDelegate {
             return
         }
         if isAuthenticationFailure(error: error) {
-            if let basicAuth = authMethod as? BasicAuthentication {
-                // Clear the token to force a refresh (new token fetch)
-                basicAuth.token = nil
-            }
             self.connectAttempts += 1
             self.connect()
             return

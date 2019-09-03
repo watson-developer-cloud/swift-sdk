@@ -24,7 +24,7 @@ There are many resources to help you build your first cognitive application with
 
 * [Before you begin](#before-you-begin)
 * [Requirements](#requirements)
-* [Version 3.0.0 Preview](#3.0.0-preview)
+* [Version 3.0.0 Preview](#300-preview)
 * [Installation](#installation)
 * [Authentication](#authentication)
 * [Custom Service URLs](#custom-service-urls)

@@ -39,11 +39,13 @@ class SpeechToTextRecognizeTests: XCTestCase {
 
     func instantiateSpeechToText() {
         if let apiKey = WatsonCredentials.SpeechToTextAPIKey {
-            speechToText = SpeechToText(apiKey: apiKey)
+            let authenticator = IAMAuthenticator.init(apiKey: apiKey)
+            speechToText = SpeechToText(authenticator: authenticator)
         } else {
             let username = WatsonCredentials.SpeechToTextUsername
             let password = WatsonCredentials.SpeechToTextPassword
-            speechToText = SpeechToText(username: username, password: password)
+            let authenticator = BasicAuthenticator.init(username: username, password: password)
+            speechToText = SpeechToText(authenticator: authenticator)
         }
         if let url = WatsonCredentials.SpeechToTextURL {
             speechToText.serviceURL = url
@@ -124,7 +126,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
             self.validateSTTResults(results: results, settings: settings)
             XCTAssertNotNil(results.results)
             XCTAssertEqual(results.results!.count, 1)
-            XCTAssert(results.results!.last?.finalResults == true)
+            XCTAssert(results.results!.last?.final == true)
             let transcript = results.results!.last?.alternatives.last?.transcript
             XCTAssertNotNil(transcript)
             XCTAssertGreaterThan(transcript!.count, 0)
@@ -182,7 +184,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
         callback.onResults = { results in
             self.validateSTTResults(results: results, settings: settings)
             XCTAssertNotNil(results.results)
-            if results.results!.last?.finalResults == true {
+            if results.results!.last?.final == true {
                 let transcript = results.results!.last?.alternatives.last?.transcript
                 XCTAssertNotNil(transcript)
                 XCTAssertGreaterThan(transcript!.count, 0)
@@ -242,7 +244,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
                 gotAudioMetrics = true
             }
             // Check final results
-            if results.results?.last?.finalResults == true {
+            if results.results?.last?.final == true {
                 let transcript = results.results!.last?.alternatives.last?.transcript
                 XCTAssertNotNil(transcript)
                 XCTAssertGreaterThan(transcript!.count, 0)
@@ -296,7 +298,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
                 self.validateSTTResults(results: results, settings: settings)
                 XCTAssertNotNil(results.results)
                 XCTAssertEqual(results.results!.count, 1)
-                XCTAssert(results.results!.last?.finalResults == true)
+                XCTAssert(results.results!.last?.final == true)
                 let transcript = results.results!.last?.alternatives.last?.transcript
                 XCTAssertNotNil(transcript)
                 XCTAssertGreaterThan(transcript!.count, 0)
@@ -360,7 +362,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
             }
             callback.onResults = { results in
                 self.validateSTTResults(results: results, settings: settings)
-                if results.results?.last?.finalResults == true {
+                if results.results?.last?.final == true {
                     let transcript = results.results!.last?.alternatives.last?.transcript
                     XCTAssertNotNil(transcript)
                     XCTAssertGreaterThan(transcript!.count, 0)
@@ -429,7 +431,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
                 self.validateSTTResults(results: results, settings: settings)
                 XCTAssertNotNil(results.results)
                 XCTAssertEqual(results.results!.count, 1)
-                XCTAssert(results.results!.last?.finalResults == true)
+                XCTAssert(results.results!.last?.final == true)
                 let transcript = results.results!.last?.alternatives.last?.transcript
                 XCTAssertNotNil(transcript)
                 XCTAssertGreaterThan(transcript!.count, 0)
@@ -495,7 +497,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
                 self.validateSTTResults(results: results, settings: settings)
                 XCTAssertNotNil(results.results)
                 XCTAssertEqual(results.results!.count, 1)
-                XCTAssert(results.results!.last?.finalResults == true)
+                XCTAssert(results.results!.last?.final == true)
                 let transcript = results.results!.last?.alternatives.last?.transcript
                 XCTAssertNotNil(transcript)
                 XCTAssertGreaterThan(transcript!.count, 0)
@@ -545,7 +547,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
         callback.onResults = { results in
             self.validateSTTResults(results: results, settings: settings)
             XCTAssertNotNil(results.results)
-            if results.results!.last?.finalResults == true {
+            if results.results!.last?.final == true {
                 let transcript = results.results!.last?.alternatives.last?.transcript
                 XCTAssertNotNil(transcript)
                 XCTAssertGreaterThan(transcript!.count, 0)
@@ -771,8 +773,8 @@ class SpeechToTextRecognizeTests: XCTestCase {
 
     func validateSTTResult(result: SpeechRecognitionResult, settings: RecognitionSettings) {
 
-        XCTAssertNotNil(result.finalResults)
-        let final = result.finalResults
+        XCTAssertNotNil(result.final)
+        let final = result.final
 
         XCTAssertNotNil(result.alternatives)
         var alternativesWithConfidence = 0

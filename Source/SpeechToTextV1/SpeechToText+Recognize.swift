@@ -73,7 +73,7 @@ extension SpeechToText {
     {
         // create SpeechToTextSession
         let session = SpeechToTextSession(
-            authMethod: authMethod,
+            authenticator: authenticator,
             model: model,
             baseModelVersion: baseModelVersion,
             languageCustomizationID: languageCustomizationID,
@@ -180,7 +180,7 @@ extension SpeechToText {
 
         // create SpeechToTextSession
         let session = SpeechToTextSession(
-            authMethod: authMethod,
+            authenticator: authenticator,
             model: model,
             baseModelVersion: baseModelVersion,
             languageCustomizationID: languageCustomizationID,

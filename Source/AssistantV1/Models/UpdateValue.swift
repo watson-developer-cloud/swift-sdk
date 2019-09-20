@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import IBMSwiftSDKCore
 
 /** UpdateValue. */
 internal struct UpdateValue: Codable, Equatable {

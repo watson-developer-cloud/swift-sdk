@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import IBMSwiftSDKCore
 
 /**
  The output of the dialog node. For more information about how to specify dialog node output, see the

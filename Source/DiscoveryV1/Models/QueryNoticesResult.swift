@@ -15,9 +15,11 @@
  **/
 
 import Foundation
-import RestKit
+import IBMSwiftSDKCore
 
-/** QueryNoticesResult. */
+/**
+ Query result object.
+ */
 public struct QueryNoticesResult: Codable, Equatable {
 
     /**

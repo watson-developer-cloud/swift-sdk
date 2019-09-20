@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import IBMSwiftSDKCore
 
 /** UpdateDialogNode. */
 internal struct UpdateDialogNode: Codable, Equatable {

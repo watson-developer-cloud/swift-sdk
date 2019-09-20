@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** TrainingStatus. */
+/**
+ Training status details.
+ */
 public struct TrainingStatus: Codable, Equatable {
 
     /**

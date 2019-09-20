@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** DocumentAccepted. */
+/**
+ Information returned after an uploaded document is accepted.
+ */
 public struct DocumentAccepted: Codable, Equatable {
 
     /**

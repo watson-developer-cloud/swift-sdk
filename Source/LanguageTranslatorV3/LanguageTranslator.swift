@@ -16,7 +16,7 @@
 // swiftlint:disable file_length
 
 import Foundation
-import RestKit
+import IBMSwiftSDKCore
 
 /**
  IBM Watson&trade; Language Translator translates text from one language to another. The service offers multiple IBM
@@ -27,15 +27,18 @@ import RestKit
 public class LanguageTranslator {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://gateway.watsonplatform.net/language-translator/api"
+    public var serviceURL: String? = "https://gateway.watsonplatform.net/language-translator/api"
+
+    /// Service identifiers
     internal let serviceName = "LanguageTranslator"
     internal let serviceVersion = "v3"
+    internal let serviceSdkName = "language_translator"
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
     var session = URLSession(configuration: URLSessionConfiguration.default)
-    let authenticator: Authenticator
+    public let authenticator: Authenticator
     let version: String
 
     #if os(Linux)
@@ -54,13 +57,15 @@ public class LanguageTranslator {
      */
     public init?(version: String) {
         self.version = version
-        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: "Language Translator") else {
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
             return nil
         }
         self.authenticator = authenticator
-        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: "Language Translator") {
+
+        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
             self.serviceURL = serviceURL
         }
+
         RestRequest.userAgent = Shared.userAgent
     }
     #endif
@@ -170,12 +175,19 @@ public class LanguageTranslator {
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + "/v3/translate",
+            url: serviceEndpoint + "/v3/translate",
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -212,12 +224,19 @@ public class LanguageTranslator {
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + "/v3/identifiable_languages",
+            url: serviceEndpoint + "/v3/identifiable_languages",
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -263,12 +282,19 @@ public class LanguageTranslator {
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + "/v3/identify",
+            url: serviceEndpoint + "/v3/identify",
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -325,12 +351,19 @@ public class LanguageTranslator {
         }
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + "/v3/models",
+            url: serviceEndpoint + "/v3/models",
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -409,12 +442,19 @@ public class LanguageTranslator {
         }
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + "/v3/models",
+            url: serviceEndpoint + "/v3/models",
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -457,12 +497,19 @@ public class LanguageTranslator {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -505,12 +552,19 @@ public class LanguageTranslator {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -545,12 +599,19 @@ public class LanguageTranslator {
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + "/v3/documents",
+            url: serviceEndpoint + "/v3/documents",
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -633,12 +694,19 @@ public class LanguageTranslator {
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + "/v3/documents",
+            url: serviceEndpoint + "/v3/documents",
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -681,12 +749,19 @@ public class LanguageTranslator {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -727,12 +802,19 @@ public class LanguageTranslator {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -786,12 +868,19 @@ public class LanguageTranslator {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )

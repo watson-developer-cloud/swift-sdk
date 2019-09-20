@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import IBMSwiftSDKCore
 
 /**
  The dialog output that will be returned from the Watson Assistant service if the user selects the corresponding option.

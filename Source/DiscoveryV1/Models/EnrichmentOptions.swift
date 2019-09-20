@@ -39,6 +39,9 @@ public struct EnrichmentOptions: Codable, Equatable {
         case sv = "sv"
     }
 
+    /**
+     Object containing Natural Language Understanding features to be used.
+     */
     public var features: NluEnrichmentFeatures?
 
     /**
@@ -64,7 +67,7 @@ public struct EnrichmentOptions: Codable, Equatable {
     /**
      Initialize a `EnrichmentOptions` with member variables.
 
-     - parameter features:
+     - parameter features: Object containing Natural Language Understanding features to be used.
      - parameter language: ISO 639-1 code indicating the language to use for the analysis. This code overrides the
        automatic language detection performed by the service. Valid codes are `ar` (Arabic), `en` (English), `fr`
        (French), `de` (German), `it` (Italian), `pt` (Portuguese), `ru` (Russian), `es` (Spanish), and `sv` (Swedish).

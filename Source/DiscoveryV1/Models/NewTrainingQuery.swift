@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** NewTrainingQuery. */
+/**
+ Training query to add.
+ */
 internal struct NewTrainingQuery: Codable, Equatable {
 
     /**

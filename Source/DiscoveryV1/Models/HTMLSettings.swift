@@ -31,8 +31,14 @@ public struct HTMLSettings: Codable, Equatable {
      */
     public var excludeTagsKeepContent: [String]?
 
+    /**
+     Object containing an array of XPaths.
+     */
     public var keepContent: XPathPatterns?
 
+    /**
+     Object containing an array of XPaths.
+     */
     public var excludeContent: XPathPatterns?
 
     /**
@@ -60,8 +66,8 @@ public struct HTMLSettings: Codable, Equatable {
 
      - parameter excludeTagsCompletely: Array of HTML tags that are excluded completely.
      - parameter excludeTagsKeepContent: Array of HTML tags which are excluded but still retain content.
-     - parameter keepContent:
-     - parameter excludeContent:
+     - parameter keepContent: Object containing an array of XPaths.
+     - parameter excludeContent: Object containing an array of XPaths.
      - parameter keepTagAttributes: An array of HTML tag attributes to keep in the converted document.
      - parameter excludeTagAttributes: Array of HTML tag attributes to exclude.
 

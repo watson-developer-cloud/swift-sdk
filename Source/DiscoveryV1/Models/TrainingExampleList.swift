@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** TrainingExampleList. */
+/**
+ Object containing an array of training examples.
+ */
 public struct TrainingExampleList: Codable, Equatable {
 
     /**

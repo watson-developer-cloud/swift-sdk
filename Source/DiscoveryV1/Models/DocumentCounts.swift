@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** DocumentCounts. */
+/**
+ Object containing collection document count information.
+ */
 public struct DocumentCounts: Codable, Equatable {
 
     /**

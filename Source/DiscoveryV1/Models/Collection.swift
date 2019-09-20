@@ -71,6 +71,9 @@ public struct Collection: Codable, Equatable {
      */
     public var language: String?
 
+    /**
+     Object containing collection document count information.
+     */
     public var documentCounts: DocumentCounts?
 
     /**
@@ -78,6 +81,9 @@ public struct Collection: Codable, Equatable {
      */
     public var diskUsage: CollectionDiskUsage?
 
+    /**
+     Training status details.
+     */
     public var trainingStatus: TrainingStatus?
 
     /**

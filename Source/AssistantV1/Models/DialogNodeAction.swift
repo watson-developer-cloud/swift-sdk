@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import IBMSwiftSDKCore
 
 /** DialogNodeAction. */
 public struct DialogNodeAction: Codable, Equatable {

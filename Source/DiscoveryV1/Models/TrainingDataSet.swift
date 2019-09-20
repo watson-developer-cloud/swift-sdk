@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** TrainingDataSet. */
+/**
+ Training information for a specific collection.
+ */
 public struct TrainingDataSet: Codable, Equatable {
 
     /**

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** DeleteCollectionResponse. */
+/**
+ Response object returned when deleting a colleciton.
+ */
 public struct DeleteCollectionResponse: Codable, Equatable {
 
     /**

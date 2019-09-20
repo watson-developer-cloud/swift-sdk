@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import IBMSwiftSDKCore
 
 /**
  An object containing segments of text from search results with query-matching text highlighted using HTML <em> tags.
@@ -68,40 +68,5 @@ public struct SearchResultHighlight: Codable, Equatable {
         var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
         try dynamicContainer.encodeIfPresent(additionalProperties)
     }
-}
 
-public extension KeyedDecodingContainer where Key == DynamicKeys {
-
-    /// Decode additional properties.
-    func decode(_ type: [String: [String]].Type, excluding keys: [CodingKey]) throws -> [String: [String]] {
-        var retval: [String: [String]] = [:]
-        try self.allKeys.forEach { key in
-            if !keys.contains{ $0.stringValue == key.stringValue} {
-                let value = try self.decode([String].self, forKey: key)
-                retval[key.stringValue] = value
-            }
-        }
-        return retval
-    }
-}
-
-public extension KeyedEncodingContainer where Key == DynamicKeys {
-
-    /// Encode additional properties.
-    mutating func encode(_ additionalProperties: [String: [String]]) throws {
-        try additionalProperties.forEach { key, value in
-            guard let codingKey = DynamicKeys(stringValue: key) else {
-                let description = "Cannot construct CodingKey for \(key)"
-                let context = EncodingError.Context(codingPath: codingPath, debugDescription: description)
-                throw EncodingError.invalidValue(key, context)
-            }
-            try self.encode(value, forKey: codingKey)
-        }
-    }
-
-    /// Encode additional properties if they are not nil.
-    mutating func encodeIfPresent(_ additionalProperties: [String: [String]]?) throws {
-        guard let additionalProperties = additionalProperties else { return }
-        try encode(additionalProperties)
-    }
 }

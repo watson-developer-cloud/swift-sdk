@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** TrainingQuery. */
+/**
+ Training query details.
+ */
 public struct TrainingQuery: Codable, Equatable {
 
     /**

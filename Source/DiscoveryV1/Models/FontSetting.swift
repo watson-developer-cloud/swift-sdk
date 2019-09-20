@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** FontSetting. */
+/**
+ Font matching configuration.
+ */
 public struct FontSetting: Codable, Equatable {
 
     /**

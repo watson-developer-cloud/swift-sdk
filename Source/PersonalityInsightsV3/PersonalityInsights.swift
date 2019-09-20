@@ -16,7 +16,7 @@
 // swiftlint:disable file_length
 
 import Foundation
-import RestKit
+import IBMSwiftSDKCore
 
 /**
  The IBM Watson&trade; Personality Insights service enables applications to derive insights from social media,
@@ -37,15 +37,18 @@ import RestKit
 public class PersonalityInsights {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://gateway.watsonplatform.net/personality-insights/api"
+    public var serviceURL: String? = "https://gateway.watsonplatform.net/personality-insights/api"
+
+    /// Service identifiers
     internal let serviceName = "PersonalityInsights"
     internal let serviceVersion = "v3"
+    internal let serviceSdkName = "personality_insights"
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
     var session = URLSession(configuration: URLSessionConfiguration.default)
-    let authenticator: Authenticator
+    public let authenticator: Authenticator
     let version: String
 
     #if os(Linux)
@@ -64,13 +67,15 @@ public class PersonalityInsights {
      */
     public init?(version: String) {
         self.version = version
-        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: "Personality Insights") else {
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
             return nil
         }
         self.authenticator = authenticator
-        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: "Personality Insights") {
+
+        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
             self.serviceURL = serviceURL
         }
+
         RestRequest.userAgent = Shared.userAgent
     }
     #endif
@@ -182,6 +187,8 @@ public class PersonalityInsights {
      - parameter rawScores: Indicates whether a raw score in addition to a normalized percentile is returned for each
        characteristic; raw scores are not compared with a sample population. By default, only normalized percentiles are
        returned.
+     - parameter csvHeaders: Indicates whether column labels are returned with a CSV response. By default, no column
+       labels are returned. Applies only when the response type is CSV (`text/csv`).
      - parameter consumptionPreferences: Indicates whether consumption preferences are returned with the results. By
        default, no consumption preferences are returned.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -192,6 +199,7 @@ public class PersonalityInsights {
         contentLanguage: String? = nil,
         acceptLanguage: String? = nil,
         rawScores: Bool? = nil,
+        csvHeaders: Bool? = nil,
         consumptionPreferences: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Profile>?, WatsonError?) -> Void)
@@ -225,18 +233,29 @@ public class PersonalityInsights {
             let queryParameter = URLQueryItem(name: "raw_scores", value: "\(rawScores)")
             queryParameters.append(queryParameter)
         }
+        if let csvHeaders = csvHeaders {
+            let queryParameter = URLQueryItem(name: "csv_headers", value: "\(csvHeaders)")
+            queryParameters.append(queryParameter)
+        }
         if let consumptionPreferences = consumptionPreferences {
             let queryParameter = URLQueryItem(name: "consumption_preferences", value: "\(consumptionPreferences)")
             queryParameters.append(queryParameter)
         }
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + "/v3/profile",
+            url: serviceEndpoint + "/v3/profile",
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -310,7 +329,7 @@ public class PersonalityInsights {
         csvHeaders: Bool? = nil,
         consumptionPreferences: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<String>?, WatsonError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Data>?, WatsonError?) -> Void)
     {
         // construct body
         guard let body = profileContent.content else {
@@ -351,12 +370,19 @@ public class PersonalityInsights {
         }
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + "/v3/profile",
+            url: serviceEndpoint + "/v3/profile",
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body

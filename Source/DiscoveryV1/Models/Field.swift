@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Field. */
+/**
+ Object containing field details.
+ */
 public struct Field: Codable, Equatable {
 
     /**

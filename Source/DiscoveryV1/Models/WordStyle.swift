@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** WordStyle. */
+/**
+ Microsoft Word styles to convert into a specified HTML head level.
+ */
 public struct WordStyle: Codable, Equatable {
 
     /**

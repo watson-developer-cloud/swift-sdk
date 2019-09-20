@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import IBMSwiftSDKCore
 
 /**
  Column-level cells, each applicable as a header to other cells in the same column as itself, of the current table.

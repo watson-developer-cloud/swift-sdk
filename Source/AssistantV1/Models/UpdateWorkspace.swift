@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import IBMSwiftSDKCore
 
 /** UpdateWorkspace. */
 internal struct UpdateWorkspace: Codable, Equatable {

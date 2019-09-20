@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** TrainingExamplePatch. */
+/**
+ Training example to add.
+ */
 internal struct TrainingExamplePatch: Codable, Equatable {
 
     /**

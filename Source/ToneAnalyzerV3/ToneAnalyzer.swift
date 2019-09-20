@@ -16,7 +16,7 @@
 // swiftlint:disable file_length
 
 import Foundation
-import RestKit
+import IBMSwiftSDKCore
 
 /**
  The IBM Watson&trade; Tone Analyzer service uses linguistic analysis to detect emotional and language tones in written
@@ -30,15 +30,18 @@ import RestKit
 public class ToneAnalyzer {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://gateway.watsonplatform.net/tone-analyzer/api"
+    public var serviceURL: String? = "https://gateway.watsonplatform.net/tone-analyzer/api"
+
+    /// Service identifiers
     internal let serviceName = "ToneAnalyzer"
     internal let serviceVersion = "v3"
+    internal let serviceSdkName = "tone_analyzer"
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
     var session = URLSession(configuration: URLSessionConfiguration.default)
-    let authenticator: Authenticator
+    public let authenticator: Authenticator
     let version: String
 
     #if os(Linux)
@@ -57,13 +60,15 @@ public class ToneAnalyzer {
      */
     public init?(version: String) {
         self.version = version
-        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: "Tone Analyzer") else {
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
             return nil
         }
         self.authenticator = authenticator
-        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: "Tone Analyzer") {
+
+        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
             self.serviceURL = serviceURL
         }
+
         RestRequest.userAgent = Shared.userAgent
     }
     #endif
@@ -148,6 +153,11 @@ public class ToneAnalyzer {
      - parameter sentences: Indicates whether the service is to return an analysis of each individual sentence in
        addition to its analysis of the full document. If `true` (the default), the service returns results for each
        sentence.
+     - parameter tones: **`2017-09-21`:** Deprecated. The service continues to accept the parameter for
+       backward-compatibility, but the parameter no longer affects the response.
+       **`2016-05-19`:** A comma-separated list of tones for which the service is to return its analysis of the input;
+       the indicated tones apply both to the full document and to individual sentences of the document. You can specify
+       one or more of the valid values. Omit the parameter to request results for all three tones.
      - parameter contentLanguage: The language of the input text for the request: English or French. Regional variants
        are treated as their parent language; for example, `en-US` is interpreted as `en`. The input content must match
        the specified language. Do not submit content that contains both languages. You can use different languages for
@@ -163,6 +173,7 @@ public class ToneAnalyzer {
     public func tone(
         toneContent: ToneContent,
         sentences: Bool? = nil,
+        tones: [String]? = nil,
         contentLanguage: String? = nil,
         acceptLanguage: String? = nil,
         headers: [String: String]? = nil,
@@ -197,14 +208,25 @@ public class ToneAnalyzer {
             let queryParameter = URLQueryItem(name: "sentences", value: "\(sentences)")
             queryParameters.append(queryParameter)
         }
+        if let tones = tones {
+            let queryParameter = URLQueryItem(name: "tones", value: tones.joined(separator: ","))
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + "/v3/tone",
+            url: serviceEndpoint + "/v3/tone",
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -278,12 +300,19 @@ public class ToneAnalyzer {
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + "/v3/tone_chat",
+            url: serviceEndpoint + "/v3/tone_chat",
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body

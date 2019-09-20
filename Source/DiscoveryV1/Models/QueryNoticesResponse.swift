@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** QueryNoticesResponse. */
+/**
+ Object containing notice query results.
+ */
 public struct QueryNoticesResponse: Codable, Equatable {
 
     /**

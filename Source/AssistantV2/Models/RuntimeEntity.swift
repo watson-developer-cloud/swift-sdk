@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import IBMSwiftSDKCore
 
 /**
  The entity value that was recognized in the user input.

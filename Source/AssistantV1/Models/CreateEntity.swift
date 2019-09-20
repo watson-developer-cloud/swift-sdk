@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import IBMSwiftSDKCore
 
 /** CreateEntity. */
 public struct CreateEntity: Codable, Equatable {

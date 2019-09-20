@@ -16,7 +16,7 @@
 // swiftlint:disable file_length
 
 import Foundation
-import RestKit
+import IBMSwiftSDKCore
 
 /**
  The IBM Watson&trade; Assistant service combines machine learning, natural language understanding, and an integrated
@@ -25,15 +25,18 @@ import RestKit
 public class Assistant {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://gateway.watsonplatform.net/assistant/api"
+    public var serviceURL: String? = "https://gateway.watsonplatform.net/assistant/api"
+
+    /// Service identifiers
     internal let serviceName = "Conversation"
     internal let serviceVersion = "v1"
+    internal let serviceSdkName = "assistant"
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
     var session = URLSession(configuration: URLSessionConfiguration.default)
-    let authenticator: Authenticator
+    public let authenticator: Authenticator
     let version: String
 
     #if os(Linux)
@@ -52,13 +55,15 @@ public class Assistant {
      */
     public init?(version: String) {
         self.version = version
-        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: "Assistant") else {
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
             return nil
         }
         self.authenticator = authenticator
-        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: "Assistant") {
+
+        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
             self.serviceURL = serviceURL
         }
+
         RestRequest.userAgent = Shared.userAgent
     }
     #endif
@@ -196,12 +201,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -264,12 +276,19 @@ public class Assistant {
         }
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + "/v1/workspaces",
+            url: serviceEndpoint + "/v1/workspaces",
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -349,12 +368,19 @@ public class Assistant {
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + "/v1/workspaces",
+            url: serviceEndpoint + "/v1/workspaces",
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -422,12 +448,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -525,12 +558,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -574,12 +614,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -657,12 +704,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -727,12 +781,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -794,12 +855,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -867,12 +935,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -918,12 +993,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -994,12 +1076,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1062,12 +1151,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -1122,12 +1218,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1192,12 +1295,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -1245,12 +1355,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1319,12 +1436,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1383,12 +1507,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -1441,12 +1572,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1507,12 +1645,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -1558,12 +1703,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1641,12 +1793,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1718,12 +1877,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -1785,12 +1951,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1864,12 +2037,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -1915,12 +2095,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1981,12 +2168,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2065,12 +2259,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2148,12 +2349,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -2216,12 +2424,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2302,12 +2517,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -2355,12 +2577,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2433,12 +2662,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2500,12 +2736,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -2562,12 +2805,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2631,12 +2881,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -2686,12 +2943,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2760,12 +3024,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2880,12 +3151,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -2938,12 +3216,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -3061,12 +3346,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -3112,12 +3404,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -3188,12 +3487,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -3255,12 +3561,19 @@ public class Assistant {
         }
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + "/v1/logs",
+            url: serviceEndpoint + "/v1/logs",
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -3302,12 +3615,19 @@ public class Assistant {
         queryParameters.append(URLQueryItem(name: "customer_id", value: customerID))
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + "/v1/user_data",
+            url: serviceEndpoint + "/v1/user_data",
             headerParameters: headerParameters,
             queryItems: queryParameters
         )

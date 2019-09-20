@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import IBMSwiftSDKCore
 
 /** CreateValue. */
 public struct CreateValue: Codable, Equatable {

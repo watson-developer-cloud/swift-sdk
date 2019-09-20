@@ -16,25 +16,27 @@
 // swiftlint:disable file_length
 
 import Foundation
-import RestKit
+import IBMSwiftSDKCore
 
 /**
- The IBM Watson&trade; Visual Recognition service uses deep learning algorithms to identify scenes, objects, and faces
- in images you upload to the service. You can create and train a custom classifier to identify subjects that suit your
- needs.
+ The IBM Watson&trade; Visual Recognition service uses deep learning algorithms to identify scenes and objects in images
+ that you upload to the service. You can create and train a custom classifier to identify subjects that suit your needs.
  */
 public class VisualRecognition {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://gateway.watsonplatform.net/visual-recognition/api"
+    public var serviceURL: String? = "https://gateway.watsonplatform.net/visual-recognition/api"
+
+    /// Service identifiers
     internal let serviceName = "WatsonVisionCombined"
     internal let serviceVersion = "v3"
+    internal let serviceSdkName = "visual_recognition"
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
     var session = URLSession(configuration: URLSessionConfiguration.default)
-    let authenticator: Authenticator
+    public let authenticator: Authenticator
     let version: String
 
     #if os(Linux)
@@ -53,13 +55,15 @@ public class VisualRecognition {
      */
     public init?(version: String) {
         self.version = version
-        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: "Visual Recognition") else {
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
             return nil
         }
         self.authenticator = authenticator
-        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: "Visual Recognition") {
+
+        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
             self.serviceURL = serviceURL
         }
+
         RestRequest.userAgent = Shared.userAgent
     }
     #endif
@@ -110,16 +114,6 @@ public class VisualRecognition {
             } else if case let .some(.string(message)) = json["error"] {
                 errorMessage = message
             } else if case let .some(.string(message)) = json["message"] {
-                errorMessage = message
-            // ErrorAuthentication
-            } else if case let .some(.string(message)) = json["statusInfo"] {
-                errorMessage = message
-            // ErrorInfo
-            } else if case let .some(.object(errorObj)) = json["error"],    // 404
-                case let .some(.string(message)) = errorObj["description"] {
-                errorMessage = message
-            // ErrorHTML
-            } else if case let .some(.string(message)) = json["Error"] {   // 413
                 errorMessage = message
             } else {
                 errorMessage = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
@@ -228,98 +222,19 @@ public class VisualRecognition {
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
-        let request = RestRequest(
-            session: session,
-            authenticator: authenticator,
-            errorResponseDecoder: errorResponseDecoder,
-            method: "POST",
-            url: serviceURL + "/v3/classify",
-            headerParameters: headerParameters,
-            queryItems: queryParameters,
-            messageBody: body
-        )
 
-        // execute REST request
-        request.responseObject(completionHandler: completionHandler)
-    }
-
-    /**
-     Detect faces in images.
-
-     **Important:** On April 2, 2018, the identity information in the response to calls to the Face model was removed.
-     The identity information refers to the `name` of the person, `score`, and `type_hierarchy` knowledge graph. For
-     details about the enhanced Face model, see the [Release
-     notes](https://cloud.ibm.com/docs/services/visual-recognition?topic=visual-recognition-release-notes#2april2018).
-     Analyze and get data about faces in images. Responses can include estimated age and gender. This feature uses a
-     built-in model, so no training is necessary. The **Detect faces** method does not support general biometric facial
-     recognition.
-     Supported image formats include .gif, .jpg, .png, and .tif. The maximum image size is 10 MB. The minimum
-     recommended pixel density is 32X32 pixels, but the service tends to perform better with images that are at least
-     224 x 224 pixels.
-
-     - parameter imagesFile: An image file (gif, .jpg, .png, .tif.) or .zip file with images. Limit the .zip file to
-       100 MB. You can include a maximum of 15 images in a request.
-       Encode the image and .zip file names in UTF-8 if they contain non-ASCII characters. The service assumes UTF-8
-       encoding if it encounters non-ASCII characters.
-       You can also include an image with the **url** parameter.
-     - parameter imagesFilename: The filename for imagesFile.
-     - parameter imagesFileContentType: The content type of imagesFile.
-     - parameter url: The URL of an image to analyze. Must be in .gif, .jpg, .png, or .tif format. The minimum
-       recommended pixel density is 32X32 pixels, but the service tends to perform better with images that are at least
-       224 x 224 pixels. The maximum image size is 10 MB. Redirects are followed, so you can use a shortened URL.
-       You can also include images with the **images_file** parameter.
-     - parameter acceptLanguage: The desired language of parts of the response. See the response for details.
-     - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter completionHandler: A function executed when the request completes with a successful result or error
-     */
-    public func detectFaces(
-        imagesFile: Data? = nil,
-        imagesFilename: String? = nil,
-        imagesFileContentType: String? = nil,
-        url: String? = nil,
-        acceptLanguage: String? = nil,
-        headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<DetectedFaces>?, WatsonError?) -> Void)
-    {
-        // construct body
-        let multipartFormData = MultipartFormData()
-        if let imagesFile = imagesFile {
-            multipartFormData.append(imagesFile, withName: "images_file", mimeType: imagesFileContentType, fileName: imagesFilename ?? "filename")
-        }
-        if let url = url {
-            if let urlData = url.data(using: .utf8) {
-                multipartFormData.append(urlData, withName: "url")
-            }
-        }
-        guard let body = try? multipartFormData.toData() else {
-            completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
             return
         }
 
-        // construct header parameters
-        var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "detectFaces")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
-        headerParameters["Accept"] = "application/json"
-        headerParameters["Content-Type"] = multipartFormData.contentType
-        if let acceptLanguage = acceptLanguage {
-            headerParameters["Accept-Language"] = acceptLanguage
-        }
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + "/v3/detect_faces",
+            url: serviceEndpoint + "/v3/classify",
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -373,10 +288,10 @@ public class VisualRecognition {
         }
         positiveExamples.forEach { (classname, value) in
             let partName = "\(classname)_positive_examples"
-            multipartFormData.append(value, withName: partName, fileName: "\(classname).zip")
+            multipartFormData.append(value, withName: partName, fileName: classname)
         }
         if let negativeExamples = negativeExamples {
-            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename.zip")
+            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename")
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
@@ -398,12 +313,19 @@ public class VisualRecognition {
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + "/v3/classifiers",
+            url: serviceEndpoint + "/v3/classifiers",
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -444,12 +366,19 @@ public class VisualRecognition {
         }
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + "/v3/classifiers",
+            url: serviceEndpoint + "/v3/classifiers",
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -491,12 +420,19 @@ public class VisualRecognition {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -550,11 +486,11 @@ public class VisualRecognition {
         if let positiveExamples = positiveExamples {
             positiveExamples.forEach { (classname, value) in
                 let partName = "\(classname)_positive_examples"
-                multipartFormData.append(value, withName: partName, fileName: "\(classname).zip")
+                multipartFormData.append(value, withName: partName, fileName: classname)
             }
         }
         if let negativeExamples = negativeExamples {
-            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename.zip")
+            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename")
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
@@ -581,12 +517,19 @@ public class VisualRecognition {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -627,12 +570,19 @@ public class VisualRecognition {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -675,12 +625,19 @@ public class VisualRecognition {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -722,12 +679,19 @@ public class VisualRecognition {
         queryParameters.append(URLQueryItem(name: "customer_id", value: customerID))
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + "/v3/user_data",
+            url: serviceEndpoint + "/v3/user_data",
             headerParameters: headerParameters,
             queryItems: queryParameters
         )

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -115,16 +115,6 @@ public class VisualRecognition {
                 errorMessage = message
             } else if case let .some(.string(message)) = json["message"] {
                 errorMessage = message
-            // ErrorAuthentication
-            } else if case let .some(.string(message)) = json["statusInfo"] {
-                errorMessage = message
-            // ErrorInfo
-            } else if case let .some(.object(errorObj)) = json["error"],    // 404
-                case let .some(.string(message)) = errorObj["description"] {
-                errorMessage = message
-            // ErrorHTML
-            } else if case let .some(.string(message)) = json["Error"] {   // 413
-                errorMessage = message
             } else {
                 errorMessage = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
             }
@@ -200,13 +190,17 @@ public class VisualRecognition {
             }
         }
         if let owners = owners {
-            if let ownersData = owners.joined(separator: ",").data(using: .utf8) {
-                multipartFormData.append(ownersData, withName: "owners")
+            for item in owners {
+                if let itemData = item.data(using: .utf8) {
+                    multipartFormData.append(item: Data, withName: "owners")
+                }
             }
         }
         if let classifierIDs = classifierIDs {
-            if let classifierIDsData = classifierIDs.joined(separator: ",").data(using: .utf8) {
-                multipartFormData.append(classifierIDsData, withName: "classifier_ids")
+            for item in classifierIDs {
+                if let itemData = item.data(using: .utf8) {
+                    multipartFormData.append(item: Data, withName: "classifier_ids")
+                }
             }
         }
         guard let body = try? multipartFormData.toData() else {
@@ -298,10 +292,10 @@ public class VisualRecognition {
         }
         positiveExamples.forEach { (classname, value) in
             let partName = "\(classname)_positive_examples"
-            multipartFormData.append(value, withName: partName, fileName: "\(classname).zip")
+            multipartFormData.append(value, withName: partName, fileName: classname)
         }
         if let negativeExamples = negativeExamples {
-            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename.zip")
+            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename")
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
@@ -496,11 +490,11 @@ public class VisualRecognition {
         if let positiveExamples = positiveExamples {
             positiveExamples.forEach { (classname, value) in
                 let partName = "\(classname)_positive_examples"
-                multipartFormData.append(value, withName: partName, fileName: "\(classname).zip")
+                multipartFormData.append(value, withName: partName, fileName: classname)
             }
         }
         if let negativeExamples = negativeExamples {
-            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename.zip")
+            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename")
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))

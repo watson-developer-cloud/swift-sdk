@@ -16,7 +16,7 @@
 
 import Foundation
 import XCTest
-import VisualRecognitionV3
+import VisualRecognitionV4
 
 let car: Data = loadResource(name: "car", ext: "png")
 let cars: Data = loadResource(name: "cars", ext: "zip")
@@ -35,9 +35,12 @@ let carURL = "https://raw.githubusercontent.com/watson-developer-cloud/java-sdk"
 let signURL = "https://raw.githubusercontent.com/watson-developer-cloud/java-sdk/" +
 "master/visual-recognition/src/test/resources/visual_recognition/open.png"
 
+let giraffeCollectionID = "d31d6534-3458-40c4-b6de-2185a5f3cbe4"
+let giraffeURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Giraffe_Mikumi_National_Park.jpg/220px-Giraffe_Mikumi_National_Park.jpg"
+
 func loadResource(name: String, ext: String) -> Data {
     #if os(Linux)
-    let url = URL(fileURLWithPath: "Tests/VisualRecognitionV4Tests/Resources/" + name + "." + ext)
+    let url = URL(fileURLWithPath: "Tests/VisualRecognitionV3Tests/Resources/" + name + "." + ext)
     #else
     let bundle = Bundle(for: VisualRecognitionTests.self)
     guard let url = bundle.url(forResource: name, withExtension: ext) else {

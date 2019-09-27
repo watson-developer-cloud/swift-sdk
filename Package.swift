@@ -40,6 +40,7 @@ let package = Package(
         .library(name: "PersonalityInsightsV3", targets: ["PersonalityInsightsV3"]),
         .library(name: "ToneAnalyzerV3", targets: ["ToneAnalyzerV3"]),
         .library(name: "VisualRecognitionV3", targets: ["VisualRecognitionV3"]),
+        .library(name: "VisualRecognitionV4", targets: ["VisualRecognitionV4"]),
     ],
     dependencies: [
         .package(url: "https://github.com/IBM/swift-sdk-core", .branch("feat/error-handling"))
@@ -65,5 +66,7 @@ let package = Package(
         .testTarget(name: "ToneAnalyzerV3Tests", dependencies: ["ToneAnalyzerV3"]),
         .target(name: "VisualRecognitionV3", dependencies: ["IBMSwiftSDKCore"]),
         .testTarget(name: "VisualRecognitionV3Tests", dependencies: ["VisualRecognitionV3"]),
+        .target(name: "VisualRecognitionV4", dependencies: ["IBMSwiftSDKCore"]),
+        .testTarget(name: "VisualRecognitionV4Tests", dependencies: ["VisualRecognitionV4"]),
     ]
 )

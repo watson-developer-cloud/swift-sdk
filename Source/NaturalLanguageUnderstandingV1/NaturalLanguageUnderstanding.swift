@@ -57,11 +57,10 @@ public class NaturalLanguageUnderstanding {
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
      */
-    public init?(version: String) {
+    public init(version: String) throws {
         self.version = version
-        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
-            return nil
-        }
+
+        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
         self.authenticator = authenticator
 
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {

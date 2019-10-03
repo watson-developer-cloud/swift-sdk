@@ -2,12 +2,12 @@
   "object": {
     "pins": [
       {
-        "package": "IBMWatsonRestKit",
-        "repositoryURL": "https://github.com/watson-developer-cloud/restkit.git",
+        "package": "IBMSwiftSDKCore",
+        "repositoryURL": "https://github.com/IBM/swift-sdk-core",
         "state": {
-          "branch": null,
-          "revision": "c4fa7c1ff757e261c9acae463f3ecb71e7d8ae93",
-          "version": "3.0.3"
+          "branch": "feat/error-handling",
+          "revision": "a692fa87730f51ec90c47680617b88e35892078e",
+          "version": null
         }
       }
     ]

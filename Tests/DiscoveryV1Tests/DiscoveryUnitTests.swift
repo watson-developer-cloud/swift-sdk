@@ -39,9 +39,8 @@ class DiscoveryUnitTests: XCTestCase {
     #if os(Linux)
     func testInjectCredentialsFromFile() {
         setenv("IBM_CREDENTIALS_FILE", "Source/SupportingFiles/ibm-credentials.env", 1)
-        let discovery = Discovery(version: versionDate)
+        let discovery: Discovery? = try? Discovery(version: versionDate)
         XCTAssertNotNil(discovery)
-        XCTAssert(discovery?.authMethod is BasicAuthentication)
     }
     #endif
 }

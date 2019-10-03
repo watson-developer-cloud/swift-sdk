@@ -345,10 +345,9 @@ class VisualRecognitionUnitTests: XCTestCase {
     #if os(Linux)
     func testInjectCredentialsFromFile() {
         setenv("IBM_CREDENTIALS_FILE", "Source/SupportingFiles/ibm-credentials.env", 1)
-        let visualRecognition = VisualRecognition(version: versionDate)
+        let visualRecognition: VisualRecognition? = try? VisualRecognition(version: versionDate)
         XCTAssertNotNil(visualRecognition)
-        XCTAssertEqual("https://test.us-south.containers.cloud.ibm.com/visual-recognition/api", visualRecognition?.serviceURL)
-        XCTAssert(visualRecognition?.authMethod is IAMAuthentication)
+        XCTAssertEqual("https://gateway.watsonplatform.net/visual-recognition/api", visualRecognition?.serviceURL)
     }
     #endif
 

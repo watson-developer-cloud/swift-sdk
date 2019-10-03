@@ -1882,9 +1882,8 @@ class AssistantV1UnitTests: XCTestCase {
     #if os(Linux)
     func testInjectCredentialsFromFile() {
         setenv("IBM_CREDENTIALS_FILE", "Source/SupportingFiles/ibm-credentials.env", 1)
-        let assistant = Assistant(version: versionDate)
+        let assistant = try? Assistant(version: versionDate)
         XCTAssertNotNil(assistant)
-        XCTAssert(assistant?.authMethod is IAMAuthentication)
     }
     #endif
 }

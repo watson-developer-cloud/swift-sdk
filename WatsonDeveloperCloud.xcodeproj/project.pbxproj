@@ -352,6 +352,8 @@
 		7E2C0DCA230EEE55002FE627 /* Contract_A.gif in Resources */ = {isa = PBXBuildFile; fileRef = 7E2C0DC2230EEE55002FE627 /* Contract_A.gif */; };
 		7E2C0DCB230EEE55002FE627 /* Contract_A.docx in Resources */ = {isa = PBXBuildFile; fileRef = 7E2C0DC3230EEE55002FE627 /* Contract_A.docx */; };
 		7E2C0DCC230EEE55002FE627 /* Contract_A.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 7E2C0DC4230EEE55002FE627 /* Contract_A.pdf */; };
+		7E34336F2346A385004427C4 /* Completions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E34336D2346A384004427C4 /* Completions.swift */; };
+		7E3433702346A385004427C4 /* CollQueryLarge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E34336E2346A384004427C4 /* CollQueryLarge.swift */; };
 		7E48B6B7233535A70009F2B7 /* FedQueryLarge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E48B6B6233535A60009F2B7 /* FedQueryLarge.swift */; };
 		7E48B6B9233539EB0009F2B7 /* IBMSwiftSDKCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E48B6B8233539EB0009F2B7 /* IBMSwiftSDKCore.framework */; };
 		7E48B6BA233539EB0009F2B7 /* IBMSwiftSDKCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E48B6B8233539EB0009F2B7 /* IBMSwiftSDKCore.framework */; };
@@ -1166,6 +1168,8 @@
 		7E2C0DC2230EEE55002FE627 /* Contract_A.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = Contract_A.gif; sourceTree = "<group>"; };
 		7E2C0DC3230EEE55002FE627 /* Contract_A.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = Contract_A.docx; sourceTree = "<group>"; };
 		7E2C0DC4230EEE55002FE627 /* Contract_A.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Contract_A.pdf; sourceTree = "<group>"; };
+		7E34336D2346A384004427C4 /* Completions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Completions.swift; sourceTree = "<group>"; };
+		7E34336E2346A384004427C4 /* CollQueryLarge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollQueryLarge.swift; sourceTree = "<group>"; };
 		7E48B6B6233535A60009F2B7 /* FedQueryLarge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FedQueryLarge.swift; sourceTree = "<group>"; };
 		7E48B6B8233539EB0009F2B7 /* IBMSwiftSDKCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IBMSwiftSDKCore.framework; path = Carthage/Build/iOS/IBMSwiftSDKCore.framework; sourceTree = "<group>"; };
 		7E96EC3B233907660039388E /* GenericQueryAggregation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericQueryAggregation.swift; sourceTree = "<group>"; };
@@ -1908,13 +1912,14 @@
 		68AF8EAA206968CC00D552E3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				7E96EC3B233907660039388E /* GenericQueryAggregation.swift */,
 				68AF8EE8206968CC00D552E3 /* AggregationResult.swift */,
 				68AF8ED5206968CC00D552E3 /* Calculation.swift */,
 				68AF8EBA206968CC00D552E3 /* Collection.swift */,
 				CAEBE47522A6B99500F86C3A /* CollectionCrawlStatus.swift */,
 				68AF8ED3206968CC00D552E3 /* CollectionDiskUsage.swift */,
 				68AF8ED2206968CC00D552E3 /* CollectionUsage.swift */,
+				7E34336E2346A384004427C4 /* CollQueryLarge.swift */,
+				7E34336D2346A384004427C4 /* Completions.swift */,
 				68AF8EFC206968CC00D552E3 /* Configuration.swift */,
 				68AF8EC5206968CC00D552E3 /* Conversions.swift */,
 				68AF8EF3206968CC00D552E3 /* CreateCollectionRequest.swift */,
@@ -1948,6 +1953,7 @@
 				92261EA021EFFFE800A1A620 /* GatewayDelete.swift */,
 				92261EA221EFFFE800A1A620 /* GatewayList.swift */,
 				92261EA121EFFFE800A1A620 /* GatewayName.swift */,
+				7E96EC3B233907660039388E /* GenericQueryAggregation.swift */,
 				68AF8ECB206968CC00D552E3 /* Histogram.swift */,
 				68AF8EE0206968CC00D552E3 /* HTMLSettings.swift */,
 				68AF8EB1206968CC00D552E3 /* IndexCapacity.swift */,
@@ -4106,6 +4112,7 @@
 				68AF8F5E2069690300D552E3 /* Collection.swift in Sources */,
 				68AF8F562069690300D552E3 /* EnrichmentOptions.swift in Sources */,
 				CADA95A020FCD66600B5BD84 /* Credentials.swift in Sources */,
+				7E34336F2346A385004427C4 /* Completions.swift in Sources */,
 				68AF8F722069690300D552E3 /* QueryResponse.swift in Sources */,
 				CADA959A20FCD66600B5BD84 /* Source.swift in Sources */,
 				68AF8F792069690300D552E3 /* Calculation.swift in Sources */,
@@ -4177,6 +4184,7 @@
 				68AF8F692069690300D552E3 /* Conversions.swift in Sources */,
 				68AF8F9C2069690300D552E3 /* DocumentStatus.swift in Sources */,
 				683955092077E613009E1C8A /* Timeslice.swift in Sources */,
+				7E3433702346A385004427C4 /* CollQueryLarge.swift in Sources */,
 				7E96EC3C233907660039388E /* GenericQueryAggregation.swift in Sources */,
 				928204CC2124BC200013315B /* LogQueryResponse.swift in Sources */,
 				683955052077E613009E1C8A /* Nested.swift in Sources */,

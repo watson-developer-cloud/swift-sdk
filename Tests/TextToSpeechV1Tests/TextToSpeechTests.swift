@@ -38,7 +38,7 @@ class TextToSpeechTests: XCTestCase {
         "fr-FR_ReneeVoice",
         "it-IT_FrancescaVoice",
         "ja-JP_EmiVoice",
-        "pt-BR_IsabelaVoice",
+        "pt-BR_IsabelaVoice"
     ]
     private let litePlanMessage = "This feature is not available for the IBM Cloud Lite plan."
 
@@ -67,7 +67,7 @@ class TextToSpeechTests: XCTestCase {
             ("testAddMultipleWordsWithBadIDs", testAddMultipleWordsWithBadIDs),
             ("testDeleteWordWithBadIDs", testDeleteWordWithBadIDs),
             ("testGetWordWithBadIDs", testGetWordWithBadIDs),
-            ("testAddWordWithBadIDs", testAddWordWithBadIDs),
+            ("testAddWordWithBadIDs", testAddWordWithBadIDs)
         ]
     }
 

@@ -25,7 +25,7 @@ class AssistantV1UnitTests: XCTestCase {
     private let workspaceID = "test workspace"
 
     override func setUp() {
-        
+
         assistant = Assistant(version: versionDate, authenticator: defaultTestAuthenticator)
         #if !os(Linux)
         let configuration = URLSessionConfiguration.ephemeral
@@ -137,7 +137,7 @@ class AssistantV1UnitTests: XCTestCase {
         let expectation = self.expectation(description: "listWorkspaces")
         assistant.listWorkspaces(
             pageLimit: 10,
-            
+
             sort: "alphabetical",
             cursor: "mouse",
             includeAudit: true) {
@@ -347,7 +347,7 @@ class AssistantV1UnitTests: XCTestCase {
             workspaceID: self.workspaceID,
             export: true,
             pageLimit: 10,
-            
+
             sort: "alphabetical",
             cursor: "mouse",
             includeAudit: true) {
@@ -529,7 +529,7 @@ class AssistantV1UnitTests: XCTestCase {
             workspaceID: self.workspaceID,
             intent: intent,
             pageLimit: 10,
-            
+
             sort: "alphabetical",
             cursor: "mouse",
             includeAudit: true) {
@@ -718,7 +718,7 @@ class AssistantV1UnitTests: XCTestCase {
         assistant.listCounterexamples(
             workspaceID: self.workspaceID,
             pageLimit: 10,
-            
+
             sort: "alphabetical",
             cursor: "mouse",
             includeAudit: true) {
@@ -887,7 +887,7 @@ class AssistantV1UnitTests: XCTestCase {
             workspaceID: self.workspaceID,
             export: true,
             pageLimit: 10,
-            
+
             sort: "alphabetical",
             cursor: "mouse",
             includeAudit: true) {
@@ -1121,7 +1121,7 @@ class AssistantV1UnitTests: XCTestCase {
             entity: entity,
             export: true,
             pageLimit: 10,
-            
+
             sort: "alphabetical",
             cursor: "mouse",
             includeAudit: true) {
@@ -1335,7 +1335,7 @@ class AssistantV1UnitTests: XCTestCase {
             entity: entity,
             value: value,
             pageLimit: 10,
-            
+
             sort: "alphabetical",
             cursor: "mouse",
             includeAudit: true) {
@@ -1534,7 +1534,7 @@ class AssistantV1UnitTests: XCTestCase {
         assistant.listDialogNodes(
             workspaceID: self.workspaceID,
             pageLimit: 10,
-            
+
             sort: "alphabetical",
             cursor: "mouse",
             includeAudit: true) {
@@ -1890,10 +1890,10 @@ class AssistantV1UnitTests: XCTestCase {
 
 #if os(Linux)
 extension AssistantV1UnitTests {
-    static var allTests: [(String, (AssistantV1UnitTests) -> () throws -> ())] {
+    static var allTests: [(String, (AssistantV1UnitTests) -> () throws -> Void)] {
         let tests: [(String, (AssistantV1UnitTests) -> () throws -> Void)] = [
             // Inject Credentials
-            ("testInjectCredentialsFromFile", testInjectCredentialsFromFile),
+            ("testInjectCredentialsFromFile", testInjectCredentialsFromFile)
         ]
         return tests
     }

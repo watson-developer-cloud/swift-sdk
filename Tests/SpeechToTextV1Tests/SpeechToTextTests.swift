@@ -170,8 +170,7 @@ class SpeechToTextTests: XCTestCase {
             customizationID: languageModel.customizationID,
             corpusName: "swift-test-corpus",
             corpusFile: fileData,
-            allowOverwrite: true)
-        {
+            allowOverwrite: true) {
             _, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -189,8 +188,7 @@ class SpeechToTextTests: XCTestCase {
             customizationID: acousticModel.customizationID,
             audioName: "audio",
             audioResource: audio,
-            contentType: "audio/wav", allowOverwrite: true)
-        {
+            contentType: "audio/wav", allowOverwrite: true) {
             _, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -902,8 +900,7 @@ class SpeechToTextTests: XCTestCase {
             grammarName: grammarName,
             grammarFile: grammarFile.absoluteString,
             contentType: "application/srgs",
-            allowOverwrite: true)
-        {
+            allowOverwrite: true) {
             _, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))

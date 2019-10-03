@@ -97,7 +97,7 @@ class AssistantTests: XCTestCase {
             // Negative Tests
             ("testMessageUnknownWorkspace", testMessageUnknownWorkspace),
             ("testMessageInvalidWorkspaceID", testMessageInvalidWorkspaceID),
-            ("testInvalidServiceURL", testInvalidServiceURL),
+            ("testInvalidServiceURL", testInvalidServiceURL)
         ]
         return tests
     }
@@ -267,8 +267,7 @@ class AssistantTests: XCTestCase {
             intents: intents,
             entities: entities,
             context: context,
-            output: output)
-        {
+            output: output) {
             response, error in
 
             if let error = error {
@@ -344,8 +343,7 @@ class AssistantTests: XCTestCase {
             intents: intents,
             entities: entities,
             context: context,
-            output: output)
-        {
+            output: output) {
             response, error in
 
             if let error = error {
@@ -375,8 +373,7 @@ class AssistantTests: XCTestCase {
             intents: intents,
             entities: entities,
             context: context,
-            output: output)
-        {
+            output: output) {
             response, error in
 
             if let error = error {
@@ -557,8 +554,7 @@ class AssistantTests: XCTestCase {
             intents: [workspaceIntent],
             entities: [workspaceEntity],
             dialogNodes: [workspaceDialogNode],
-            counterexamples: [workspaceCounterexample])
-        {
+            counterexamples: [workspaceCounterexample]) {
             response, error in
 
             if let error = error {
@@ -1452,14 +1448,14 @@ class AssistantTests: XCTestCase {
         waitForExpectations()
     }
 
-    func testCreateAndDeleteEntity(){
+    func testCreateAndDeleteEntity() {
         let description = "Create an Entity"
         let expectation = self.expectation(description: description)
 
         let entityName = "swift-sdk-test-entity" + UUID().uuidString
         let entityDescription = "This is a test entity"
 
-        assistant.createEntity(workspaceID: workspaceID, entity: entityName, description: entityDescription){
+        assistant.createEntity(workspaceID: workspaceID, entity: entityName, description: entityDescription) {
             response, error in
 
             if let error = error {
@@ -1492,14 +1488,14 @@ class AssistantTests: XCTestCase {
         waitForExpectations()
     }
 
-    func testCreateUpdateAndDeleteEntity(){
+    func testCreateUpdateAndDeleteEntity() {
         let description = "Create an Entity"
         let expectation = self.expectation(description: description)
 
         let entityName = "swift-sdk-test-entity" + UUID().uuidString
         let entityDescription = "This is a test entity"
 
-        assistant.createEntity(workspaceID: workspaceID, entity: entityName, description: entityDescription){
+        assistant.createEntity(workspaceID: workspaceID, entity: entityName, description: entityDescription) {
             response, error in
 
             if let error = error {
@@ -1526,8 +1522,7 @@ class AssistantTests: XCTestCase {
             workspaceID: workspaceID,
             entity: entityName,
             newEntity: updatedEntityName,
-            newDescription: updatedEntityDescription)
-        {
+            newDescription: updatedEntityDescription) {
             response, error in
 
             if let error = error {
@@ -1644,7 +1639,7 @@ class AssistantTests: XCTestCase {
             workspaceID: workspaceID,
             entity: entityName,
             export: true,
-            
+
             includeAudit: true) {
                 response, error in
 
@@ -1668,7 +1663,7 @@ class AssistantTests: XCTestCase {
         waitForExpectations()
     }
 
-    func testCreateUpdateAndDeleteValue(){
+    func testCreateUpdateAndDeleteValue() {
         let description = "Create a value for an entity"
         let expectation = self.expectation(description: description)
 
@@ -1700,8 +1695,7 @@ class AssistantTests: XCTestCase {
             entity: entityName,
             value: valueName,
             newValue: updatedValueName,
-            newMetadata: ["oldname": .string(valueName)])
-        {
+            newMetadata: ["oldname": .string(valueName)]) {
             response, error in
 
             if let error = error {
@@ -1925,7 +1919,7 @@ class AssistantTests: XCTestCase {
         let expectation2 = self.expectation(description: description2)
 
         let updatedSynonym = "new-" + newSynonym
-        assistant.updateSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: newSynonym, newSynonym: updatedSynonym){
+        assistant.updateSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: newSynonym, newSynonym: updatedSynonym) {
             response, error in
 
             if let error = error {
@@ -1997,8 +1991,7 @@ class AssistantTests: XCTestCase {
             description: "Reply affirmatively",
             conditions: "#order_pizza",
             metadata: dialogMetadata,
-            title: "Order Pizza")
-        {
+            title: "Order Pizza") {
             response, error in
 
             if let error = error {
@@ -2066,8 +2059,7 @@ class AssistantTests: XCTestCase {
         assistant.updateDialogNode(
             workspaceID: workspaceID,
             dialogNode: "test-node",
-            newDialogNode: "test-node-updated")
-        {
+            newDialogNode: "test-node-updated") {
             response, error in
 
             if let error = error {

@@ -53,7 +53,7 @@ class LanguageTranslatorTests: XCTestCase {
             ("testListDocuments", testListDocuments),
             ("testDocumentsCRUD", testDocumentsCRUD),
             // Negative Tests
-            ("testGetModelDoesntExist", testGetModelDoesntExist),
+            ("testGetModelDoesntExist", testGetModelDoesntExist)
         ]
     }
 
@@ -311,7 +311,7 @@ class LanguageTranslatorTests: XCTestCase {
 
     func testListIdentifiableLanguages() {
         let expectation = self.expectation(description: "List identifiable languages.")
-        languageTranslator.listIdentifiableLanguages() {
+        languageTranslator.listIdentifiableLanguages {
             response, error in
 
             if let error = error {
@@ -441,7 +441,7 @@ class LanguageTranslatorTests: XCTestCase {
             sleep(15)
             let expectation = self.expectation(description: "Get document status.")
             languageTranslator.getDocumentStatus(documentID: documentID) {
-                response, error in
+                response, _ in
                 status = response?.result?.status ?? "unknown"
                 expectation.fulfill()
             }

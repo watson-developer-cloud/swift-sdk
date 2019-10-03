@@ -22,8 +22,8 @@ import NaturalLanguageClassifierV1
 
 class NaturalLanguageClassifierTests: XCTestCase {
 
-    // Several tests depend upon an already-trained classifier. If the classifier does not exist then 
-    // create a classifier using the `trained_meta.txt` and `weather_data_train.csv` files. Be sure 
+    // Several tests depend upon an already-trained classifier. If the classifier does not exist then
+    // create a classifier using the `trained_meta.txt` and `weather_data_train.csv` files. Be sure
     // to update the `trainedClassifierId` property below!
 
     private var naturalLanguageClassifier: NaturalLanguageClassifier!

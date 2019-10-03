@@ -54,7 +54,7 @@ class VisualRecognitionTests: XCTestCase {
             // Negative tests
             ("testCreateClassifierWithInvalidPositiveExamples", testCreateClassifierWithInvalidPositiveExamples),
             ("testClassifyByInvalidURL", testClassifyByInvalidURL),
-            ("testGetUnknownClassifier", testGetUnknownClassifier),
+            ("testGetUnknownClassifier", testGetUnknownClassifier)
         ]
         return tests
     }
@@ -605,8 +605,7 @@ class VisualRecognitionTests: XCTestCase {
             threshold: 0.5,
             owners: ["IBM"],
             classifierIDs: ["default"],
-            acceptLanguage: "en")
-        {
+            acceptLanguage: "en") {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -662,8 +661,7 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.classify(
             url: carURL,
             classifierIDs: [classifierID],
-            acceptLanguage: "en")
-        {
+            acceptLanguage: "en") {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -708,8 +706,7 @@ class VisualRecognitionTests: XCTestCase {
             threshold: 0.5,
             owners: ["me"],
             classifierIDs: [classifierID],
-            acceptLanguage: "en")
-        {
+            acceptLanguage: "en") {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -868,8 +865,7 @@ class VisualRecognitionTests: XCTestCase {
             imagesFilename: "car.png",
             threshold: 0.5,
             owners: ["IBM"],
-            classifierIDs: ["default"])
-        {
+            classifierIDs: ["default"]) {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -969,8 +965,7 @@ class VisualRecognitionTests: XCTestCase {
             imagesFilename: "car.png",
             threshold: 0.5,
             owners: ["me"],
-            classifierIDs: [classifierID])
-        {
+            classifierIDs: [classifierID]) {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -1013,8 +1008,7 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.classify(
             imagesFile: car,
             imagesFilename: "car.png",
-            classifierIDs: ["default", classifierID])
-        {
+            classifierIDs: ["default", classifierID]) {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -1081,8 +1075,7 @@ class VisualRecognitionTests: XCTestCase {
         visualRecognition.classify(
             imagesFile: carz,
             imagesFilename: "cars.zip",
-            classifierIDs: ["default", classifierID])
-        {
+            classifierIDs: ["default", classifierID]) {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -1145,8 +1138,7 @@ class VisualRecognitionTests: XCTestCase {
     func testCreateClassifierWithInvalidPositiveExamples() {
         let expectation = self.expectation(description: "Create classifier with invalid positive example.")
 
-        visualRecognition.createClassifier(name: "invalidClassifier", positiveExamples: ["obama": obama])
-        {
+        visualRecognition.createClassifier(name: "invalidClassifier", positiveExamples: ["obama": obama]) {
             _, error in
             if error == nil {
                 XCTFail(missingErrorMessage)
@@ -1175,7 +1167,7 @@ class VisualRecognitionTests: XCTestCase {
     func testGetUnknownClassifier() {
         let expectation = self.expectation(description: "Get information about an unknown classifier.")
 
-        visualRecognition.getClassifier(classifierID: "foo-bar-baz")  {
+        visualRecognition.getClassifier(classifierID: "foo-bar-baz") {
             _, error in
             if error == nil {
                 XCTFail(missingErrorMessage)

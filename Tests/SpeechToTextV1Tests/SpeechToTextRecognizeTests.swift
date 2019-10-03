@@ -82,7 +82,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
             ("testTranscribeDataWithSpeakerLabelsOpus", testTranscribeDataWithSpeakerLabelsOpus),
             ("testTranscribeDataWithSpeakerLabelsFLAC", testTranscribeDataWithSpeakerLabelsFLAC),
             ("testResultsAccumulator", testResultsAccumulator),
-            ("testTranscribeStreaming", testTranscribeStreaming),
+            ("testTranscribeStreaming", testTranscribeStreaming)
         ]
     }
 
@@ -825,8 +825,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
         transcription: SpeechRecognitionAlternative,
         best: Bool,
         final: Bool,
-        settings: RecognitionSettings)
-    {
+        settings: RecognitionSettings) {
         XCTAssertNotNil(transcription.transcript)
         XCTAssertGreaterThan(transcription.transcript.count, 0)
 

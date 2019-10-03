@@ -67,8 +67,7 @@ extension VisualRecognition {
         owners: [String]? = nil,
         classifierIDs: [String]? = nil,
         acceptLanguage: String? = nil,
-        completionHandler: @escaping (WatsonResponse<ClassifiedImages>?, WatsonError?) -> Void)
-    {
+        completionHandler: @escaping (WatsonResponse<ClassifiedImages>?, WatsonError?) -> Void) {
         // convert UIImage to Data
         guard let imageData = getImageData(image: image) else {
             let error = WatsonError.serialization(values: "image to data")
@@ -102,8 +101,7 @@ extension VisualRecognition {
         image: UIImage,
         classifierIDs: [String] = ["default"],
         threshold: Double? = nil,
-        completionHandler: @escaping (ClassifiedImages?, WatsonError?) -> Void)
-    {
+        completionHandler: @escaping (ClassifiedImages?, WatsonError?) -> Void) {
         // convert UIImage to Data
         guard let imageData = getImageData(image: image) else {
             let error = WatsonError.serialization(values: "image to data")

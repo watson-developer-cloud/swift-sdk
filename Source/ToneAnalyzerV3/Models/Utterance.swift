@@ -51,8 +51,7 @@ public struct Utterance: Codable, Equatable {
     public init(
         text: String,
         user: String? = nil
-    )
-    {
+    ) {
         self.text = text
         self.user = user
     }

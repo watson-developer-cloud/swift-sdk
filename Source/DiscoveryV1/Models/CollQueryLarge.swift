@@ -19,7 +19,7 @@ import Foundation
 /**
  Object that describes a long query.
  */
-internal struct FedQueryLarge: Codable, Equatable {
+internal struct CollQueryLarge: Codable, Equatable {
 
     /**
      A cacheable query that excludes documents that don't mention the query content. Filter searches are better for
@@ -139,9 +139,11 @@ internal struct FedQueryLarge: Codable, Equatable {
     public var bias: String?
 
     /**
-     A comma-separated list of collection IDs to be queried against.
+     When `true` and the **natural_language_query** parameter is used, the **natural_languge_query** parameter is spell
+     checked. The most likely correction is retunred in the **suggested_query** field of the response (if one exists).
+     **Important:** this parameter is only valid when using the Cloud Pak version of Discovery.
      */
-    public var collectionIDs: String
+    public var spellingSuggestions: Bool?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
@@ -164,13 +166,12 @@ internal struct FedQueryLarge: Codable, Equatable {
         case similarDocumentIDs = "similar.document_ids"
         case similarFields = "similar.fields"
         case bias = "bias"
-        case collectionIDs = "collection_ids"
+        case spellingSuggestions = "spelling_suggestions"
     }
 
     /**
-     Initialize a `FedQueryLarge` with member variables.
+     Initialize a `CollQueryLarge` with member variables.
 
-     - parameter collectionIDs: A comma-separated list of collection IDs to be queried against.
      - parameter filter: A cacheable query that excludes documents that don't mention the query content. Filter
        searches are better for metadata-type searches and for assessing the concepts in the data set.
      - parameter query: A query search returns all documents in your data set with full enrichments and full text,
@@ -214,11 +215,14 @@ internal struct FedQueryLarge: Codable, Equatable {
        **date** or **number** format. When a **date** type field is specified returned results are biased towards field
        values closer to the current date. When a **number** type field is specified, returned results are biased towards
        higher field values. This parameter cannot be used in the same query as the **sort** parameter.
+     - parameter spellingSuggestions: When `true` and the **natural_language_query** parameter is used, the
+       **natural_languge_query** parameter is spell checked. The most likely correction is retunred in the
+       **suggested_query** field of the response (if one exists).
+       **Important:** this parameter is only valid when using the Cloud Pak version of Discovery.
 
-     - returns: An initialized `FedQueryLarge`.
+     - returns: An initialized `CollQueryLarge`.
      */
     public init(
-        collectionIDs: String,
         filter: String? = nil,
         query: String? = nil,
         naturalLanguageQuery: String? = nil,
@@ -237,10 +241,10 @@ internal struct FedQueryLarge: Codable, Equatable {
         similar: Bool? = nil,
         similarDocumentIDs: String? = nil,
         similarFields: String? = nil,
-        bias: String? = nil
+        bias: String? = nil,
+        spellingSuggestions: Bool? = nil
     )
     {
-        self.collectionIDs = collectionIDs
         self.filter = filter
         self.query = query
         self.naturalLanguageQuery = naturalLanguageQuery
@@ -260,6 +264,7 @@ internal struct FedQueryLarge: Codable, Equatable {
         self.similarDocumentIDs = similarDocumentIDs
         self.similarFields = similarFields
         self.bias = bias
+        self.spellingSuggestions = spellingSuggestions
     }
 
 }

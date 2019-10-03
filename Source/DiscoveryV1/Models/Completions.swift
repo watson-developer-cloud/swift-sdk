@@ -17,33 +17,18 @@
 import Foundation
 
 /**
- Input for the customer-engagement endpoint.
+ An object containing an array of autocompletion suggestions.
  */
-internal struct ToneChatInput: Codable, Equatable {
+public struct Completions: Codable, Equatable {
 
     /**
-     An array of `Utterance` objects that provides the input content that the service is to analyze.
+     Array of autcomplete suggestion based on the provided prefix.
      */
-    public var utterances: [Utterance]
+    public var completions: [String]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case utterances = "utterances"
-    }
-
-    /**
-     Initialize a `ToneChatInput` with member variables.
-
-     - parameter utterances: An array of `Utterance` objects that provides the input content that the service is to
-       analyze.
-
-     - returns: An initialized `ToneChatInput`.
-     */
-    public init(
-        utterances: [Utterance]
-    )
-    {
-        self.utterances = utterances
+        case completions = "completions"
     }
 
 }

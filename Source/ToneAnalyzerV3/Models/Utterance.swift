@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,7 +51,8 @@ public struct Utterance: Codable, Equatable {
     public init(
         text: String,
         user: String? = nil
-    ) {
+    )
+    {
         self.text = text
         self.user = user
     }

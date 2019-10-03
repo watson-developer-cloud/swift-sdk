@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import IBMSwiftSDKCore
 /**
  The IBM Watson&trade; Assistant service combines machine learning, natural language understanding, and an integrated
  dialog editor to create conversation flows between your apps and your users.
+ The Assistant v1 API provides authoring methods your application can use to create or update a workspace.
  */
 public class Assistant {
 
@@ -53,10 +54,11 @@ public class Assistant {
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
      */
-    public init(version: String) throws {
+    public init?(version: String) {
         self.version = version
-
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
+            return nil
+        }
         self.authenticator = authenticator
 
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
@@ -129,8 +131,8 @@ public class Assistant {
      Get response to user input.
 
      Send user input to a workspace and receive a response.
-     **Note:** For most applications, there are significant advantages to using the v2 runtime API instead. These
-     advantages include ease of deployment, automatic state management, versioning, and search capabilities. For more
+     **Important:** This method has been superseded by the new v2 runtime API. The v2 API offers significant advantages,
+     including ease of deployment, automatic state management, versioning, and search capabilities. For more
      information, see the [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-api-overview).
      There is no rate limit for this operation.
 

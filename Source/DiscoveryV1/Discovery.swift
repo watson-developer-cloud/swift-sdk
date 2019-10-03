@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,9 +55,11 @@ public class Discovery {
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
      */
-    public init(version: String) throws {
+    public init?(version: String) {
         self.version = version
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
+            return nil
+        }
         self.authenticator = authenticator
 
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
@@ -2118,6 +2120,10 @@ public class Discovery {
        **date** or **number** format. When a **date** type field is specified returned results are biased towards field
        values closer to the current date. When a **number** type field is specified, returned results are biased towards
        higher field values. This parameter cannot be used in the same query as the **sort** parameter.
+     - parameter spellingSuggestions: When `true` and the **natural_language_query** parameter is used, the
+       **natural_languge_query** parameter is spell checked. The most likely correction is retunred in the
+       **suggested_query** field of the response (if one exists).
+       **Important:** this parameter is only valid when using the Cloud Pak version of Discovery.
      - parameter xWatsonLoggingOptOut: If `true`, queries are not stored in the Discovery **Logs** endpoint.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -2144,12 +2150,13 @@ public class Discovery {
         similarDocumentIDs: String? = nil,
         similarFields: String? = nil,
         bias: String? = nil,
+        spellingSuggestions: Bool? = nil,
         xWatsonLoggingOptOut: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<QueryResponse>?, WatsonError?) -> Void)
     {
         // construct body
-        let queryRequest = QueryLarge(
+        let queryRequest = CollQueryLarge(
             filter: filter,
             query: query,
             naturalLanguageQuery: naturalLanguageQuery,
@@ -2168,7 +2175,8 @@ public class Discovery {
             similar: similar,
             similarDocumentIDs: similarDocumentIDs,
             similarFields: similarFields,
-            bias: bias)
+            bias: bias,
+            spellingSuggestions: spellingSuggestions)
         guard let body = try? JSON.encoder.encodeIfPresent(queryRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -2685,6 +2693,79 @@ public class Discovery {
 
         // construct REST request
         let path = "/v1/environments/\(environmentID)/notices"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Get Autocomplete Suggestions.
+
+     Returns completion query suggestions for the specified prefix.  /n/n **Important:** this method is only valid when
+     using the Cloud Pak version of Discovery.
+
+     - parameter environmentID: The ID of the environment.
+     - parameter collectionID: The ID of the collection.
+     - parameter `prefix`: The prefix to use for autocompletion. For example, the prefix `Ho` could autocomplete to
+       `Hot`, `Housing`, or `How do I upgrade`. Possible completions are.
+     - parameter field: The field in the result documents that autocompletion suggestions are identified from.
+     - parameter count: The number of autocompletion suggestions to return.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func getAutocompletion(
+        environmentID: String,
+        collectionID: String,
+        `prefix`: String,
+        field: String? = nil,
+        count: Int? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Completions>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getAutocompletion")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        queryParameters.append(URLQueryItem(name: "prefix", value: `prefix`))
+        if let field = field {
+            let queryParameter = URLQueryItem(name: "field", value: field)
+            queryParameters.append(queryParameter)
+        }
+        if let count = count {
+            let queryParameter = URLQueryItem(name: "count", value: "\(count)")
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/autocompletion"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return

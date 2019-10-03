@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,8 +59,10 @@ public class TextToSpeech {
      In that case, try another initializer that directly passes in the credentials.
 
      */
-    public init() throws {
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
+    public init?() {
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
+            return nil
+        }
         self.authenticator = authenticator
 
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
@@ -250,40 +252,32 @@ public class TextToSpeech {
       The service can return audio in the following formats (MIME types).
      * Where indicated, you can optionally specify the sampling rate (`rate`) of the audio. You must specify a sampling
      rate for the `audio/l16` and `audio/mulaw` formats. A specified sampling rate must lie in the range of 8 kHz to 192
-     kHz.
+     kHz. Some formats restrict the sampling rate to certain values, as noted.
      * For the `audio/l16` format, you can optionally specify the endianness (`endianness`) of the audio:
      `endianness=big-endian` or `endianness=little-endian`.
      Use the `Accept` header or the `accept` parameter to specify the requested format of the response audio. If you
      omit an audio format altogether, the service returns the audio in Ogg format with the Opus codec
      (`audio/ogg;codecs=opus`). The service always returns single-channel audio.
-     * `audio/basic`
-       The service returns audio with a sampling rate of 8000 Hz.
-     * `audio/flac`
-       You can optionally specify the `rate` of the audio. The default sampling rate is 22,050 Hz.
-     * `audio/l16`
-       You must specify the `rate` of the audio. You can optionally specify the `endianness` of the audio. The default
-     endianness is `little-endian`.
-     * `audio/mp3`
-       You can optionally specify the `rate` of the audio. The default sampling rate is 22,050 Hz.
-     * `audio/mpeg`
-       You can optionally specify the `rate` of the audio. The default sampling rate is 22,050 Hz.
-     * `audio/mulaw`
-       You must specify the `rate` of the audio.
-     * `audio/ogg`
-       The service returns the audio in the `vorbis` codec. You can optionally specify the `rate` of the audio. The
-     default sampling rate is 22,050 Hz.
-     * `audio/ogg;codecs=opus`
-       You can optionally specify the `rate` of the audio. The default sampling rate is 22,050 Hz.
-     * `audio/ogg;codecs=vorbis`
-       You can optionally specify the `rate` of the audio. The default sampling rate is 22,050 Hz.
-     * `audio/wav`
-       You can optionally specify the `rate` of the audio. The default sampling rate is 22,050 Hz.
-     * `audio/webm`
-       The service returns the audio in the `opus` codec. The service returns audio with a sampling rate of 48,000 Hz.
-     * `audio/webm;codecs=opus`
-       The service returns audio with a sampling rate of 48,000 Hz.
-     * `audio/webm;codecs=vorbis`
-       You can optionally specify the `rate` of the audio. The default sampling rate is 22,050 Hz.
+     * `audio/basic` - The service returns audio with a sampling rate of 8000 Hz.
+     * `audio/flac` - You can optionally specify the `rate` of the audio. The default sampling rate is 22,050 Hz.
+     * `audio/l16` - You must specify the `rate` of the audio. You can optionally specify the `endianness` of the audio.
+     The default endianness is `little-endian`.
+     * `audio/mp3` - You can optionally specify the `rate` of the audio. The default sampling rate is 22,050 Hz.
+     * `audio/mpeg` - You can optionally specify the `rate` of the audio. The default sampling rate is 22,050 Hz.
+     * `audio/mulaw` - You must specify the `rate` of the audio.
+     * `audio/ogg` - The service returns the audio in the `vorbis` codec. You can optionally specify the `rate` of the
+     audio. The default sampling rate is 22,050 Hz.
+     * `audio/ogg;codecs=opus` - You can optionally specify the `rate` of the audio. Only the following values are valid
+     sampling rates: `48000`, `24000`, `16000`, `12000`, or `8000`. If you specify a value other than one of these, the
+     service returns an error. The default sampling rate is 48,000 Hz.
+     * `audio/ogg;codecs=vorbis` - You can optionally specify the `rate` of the audio. The default sampling rate is
+     22,050 Hz.
+     * `audio/wav` - You can optionally specify the `rate` of the audio. The default sampling rate is 22,050 Hz.
+     * `audio/webm` - The service returns the audio in the `opus` codec. The service returns audio with a sampling rate
+     of 48,000 Hz.
+     * `audio/webm;codecs=opus` - The service returns audio with a sampling rate of 48,000 Hz.
+     * `audio/webm;codecs=vorbis` - You can optionally specify the `rate` of the audio. The default sampling rate is
+     22,050 Hz.
      For more information about specifying an audio format, including additional details about some of the formats, see
      [Audio formats](https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-audioFormats#audioFormats).
      ### Warning messages
@@ -363,38 +357,7 @@ public class TextToSpeech {
         )
 
         // execute REST request
-        request.response { (response: WatsonResponse<Data>?, error: WatsonError?) in
-            var response = response
-            guard let data = response?.result else {
-                completionHandler(response, error)
-                return
-            }
-            if accept?.lowercased().contains("audio/wav") == true {
-                // repair the WAV header
-                var wav = data
-                guard WAVRepair.isWAVFile(data: wav) else {
-                    let error = WatsonError.other(message: "Expected returned audio to be in WAV format", metadata: nil)
-                    completionHandler(nil, error)
-                    return
-                }
-                WAVRepair.repairWAVHeader(data: &wav)
-                response?.result = wav
-                completionHandler(response, nil)
-            } else if accept?.lowercased().contains("ogg") == true && accept?.lowercased().contains("opus") == true {
-                do {
-                    let decodedAudio = try TextToSpeechDecoder(audioData: data)
-                    response?.result = decodedAudio.pcmDataWithHeaders
-                    completionHandler(response, nil)
-                } catch {
-                    let error = WatsonError.serialization(values: "returned audio")
-                    completionHandler(nil, error)
-                    return
-                }
-            } else {
-                completionHandler(response, nil)
-            }
-        }
-
+        request.response(completionHandler: completionHandler)
     }
 
     /**

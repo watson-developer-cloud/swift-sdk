@@ -51,10 +51,8 @@ public class NaturalLanguageClassifier {
      In that case, try another initializer that directly passes in the credentials.
 
      */
-    public init?() {
-        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
-            return nil
-        }
+    public init() throws {
+        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
         self.authenticator = authenticator
 
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {

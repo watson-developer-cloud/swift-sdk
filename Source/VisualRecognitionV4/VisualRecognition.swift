@@ -55,7 +55,7 @@ public class VisualRecognition {
      */
     public init(version: String) throws {
         self.version = version
-        
+
         let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
         self.authenticator = authenticator
 
@@ -161,16 +161,17 @@ public class VisualRecognition {
     {
         // construct body
         let multipartFormData = MultipartFormData()
-        for item in collectionIDs {
-            if let itemData = item.data(using: .utf8) {
-                multipartFormData.append(itemData, withName: "collection_ids")
-            }
+
+        // HAND EDIT: join collectionIDs into CSV string
+        if let csvCollectionIDsData = collectionIDs.joined(separator: ",").data(using: .utf8) {
+            multipartFormData.append(csvCollectionIDsData, withName: "collection_ids")
         }
-        for item in features {
-            if let itemData = item.data(using: .utf8) {
-                multipartFormData.append(itemData, withName: "features")
-            }
+
+        // HAND EDIT: join features into CSV string
+        if let csvFeaturesData = features.joined(separator: ",").data(using: .utf8) {
+            multipartFormData.append(csvFeaturesData, withName: "features")
         }
+
         if let imagesFile = imagesFile {
             for item in imagesFile {
                 multipartFormData.append(item.data, withName: "images_file", mimeType: item.contentType, fileName: item.filename)

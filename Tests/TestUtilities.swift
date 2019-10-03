@@ -80,7 +80,6 @@ class MockURLProtocol: URLProtocol {
 
 }
 
-
 // MARK: - Analyzing request bodies
 
 /**

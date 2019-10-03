@@ -76,7 +76,7 @@ class SpeechToTextUnitTests: XCTestCase {
         XCTAssertEqual(speechToTextSession.tokenURL, "https://example.com/authorization/api/v1/token")
     }
 
-    // MARK - Websockets
+    // MARK: - Websockets
 
     // Check that instantiating a SpeechToTextSession creates the correct SpeechToTextSocket
     func testSpeechToTextSessionSocket() {

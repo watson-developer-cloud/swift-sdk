@@ -13,5 +13,5 @@ openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_i
 pod repo update master --silent # Gets the latest version of RestKit
 carthage bootstrap --platform iOS
 
-./Scripts/pod-lint.sh
+# ./Scripts/pod-lint.sh
 ./Scripts/run-tests.sh

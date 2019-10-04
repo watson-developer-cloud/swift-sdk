@@ -21,7 +21,6 @@ The service can analyze tone at both the document and sentence levels.
                             'Source/SupportingFiles/Shared.swift'
   s.exclude_files         = 'Source/ToneAnalyzerV3/Shared.swift'
 
-  s.swift_version         = '4.2'
-  s.dependency              'IBMWatsonRestKit', '~> 3.0.0'
-
+  s.swift_version         = ['4.2', '5.0', '5.1']
+  s.dependency              'IBMSwiftSDKCore', '~> 1.0.0'
 end

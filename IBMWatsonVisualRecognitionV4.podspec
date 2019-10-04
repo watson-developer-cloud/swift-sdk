@@ -21,7 +21,7 @@ scenes, objects, and other content. The response includes keywords that provide 
                             'Source/SupportingFiles/Shared.swift'
   s.exclude_files         = 'Source/VisualRecognitionV4/Shared.swift'
 
-  s.swift_version         = '5.0'
-  s.dependency              'IBMSwiftSDKCore', '~> 3.0.0'
+  s.swift_version         = ['4.2', '5.0', '5.1']
+  s.dependency              'IBMSwiftSDKCore', '~> 1.0.0'
 
 end

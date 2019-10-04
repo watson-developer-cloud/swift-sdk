@@ -26,8 +26,8 @@ of the audio signal. It continuously returns and retroactively updates a transcr
                             '**/opus_header.h',
                             '**/opus_header.c'
 
-  s.swift_version         = '4.2'
-  s.dependency              'IBMWatsonRestKit', '~> 3.0.0'
+  s.swift_version         = ['4.2', '5.0', '5.1']
+  s.dependency              'IBMSwiftSDKCore', '~> 1.0.0'
   s.dependency              'Starscream', '3.0.5'
   s.vendored_libraries    = 'Source/SupportingFiles/Dependencies/Libraries/*.a'
 

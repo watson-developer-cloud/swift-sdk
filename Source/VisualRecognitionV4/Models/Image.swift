@@ -39,7 +39,8 @@ public struct Image: Codable, Equatable {
     /**
      Details about an error.
      */
-    public var errors: Error?
+    // HAND EDIT - make this an optional array per what returns from the service
+    public var errors: [Error]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {

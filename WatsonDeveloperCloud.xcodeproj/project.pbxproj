@@ -327,6 +327,7 @@
 		7AAD66571DCA5D730010481E /* sign.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AAD664F1DCA5D730010481E /* sign.jpg */; };
 		7AAD66581DCA5D730010481E /* VisualRecognitionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAD66501DCA5D730010481E /* VisualRecognitionTests.swift */; };
 		7AF31BFB1D7A414D0040D944 /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */; };
+		7E12A8CF23477FD00008906B /* DiscoveryTest+CPD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E12A8CE23477FD00008906B /* DiscoveryTest+CPD.swift */; };
 		7E2C0DA4230DD282002FE627 /* TableTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2C0D9B230DD281002FE627 /* TableTitle.swift */; };
 		7E2C0DA5230DD282002FE627 /* Paragraphs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2C0D9C230DD281002FE627 /* Paragraphs.swift */; };
 		7E2C0DA6230DD282002FE627 /* Contexts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2C0D9D230DD281002FE627 /* Contexts.swift */; };
@@ -1208,6 +1209,7 @@
 		7AAD664E1DCA5D730010481E /* obama.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = obama.jpg; sourceTree = "<group>"; };
 		7AAD664F1DCA5D730010481E /* sign.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sign.jpg; sourceTree = "<group>"; };
 		7AAD66501DCA5D730010481E /* VisualRecognitionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VisualRecognitionTests.swift; path = Tests/VisualRecognitionV3Tests/VisualRecognitionTests.swift; sourceTree = SOURCE_ROOT; };
+		7E12A8CE23477FD00008906B /* DiscoveryTest+CPD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiscoveryTest+CPD.swift"; sourceTree = "<group>"; };
 		7E2C0D9B230DD281002FE627 /* TableTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableTitle.swift; sourceTree = "<group>"; };
 		7E2C0D9C230DD281002FE627 /* Paragraphs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Paragraphs.swift; sourceTree = "<group>"; };
 		7E2C0D9D230DD281002FE627 /* Contexts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contexts.swift; sourceTree = "<group>"; };
@@ -1917,6 +1919,7 @@
 			children = (
 				92261EAB21F1296000A1A620 /* Resources */,
 				12F8005D1DF71BED006851D6 /* DiscoveryTests.swift */,
+				7E12A8CE23477FD00008906B /* DiscoveryTest+CPD.swift */,
 				CAEBE47222A4148C00F86C3A /* DiscoveryUnitTests.swift */,
 			);
 			name = Tests;
@@ -4505,6 +4508,7 @@
 				920A2435214ADFB20077F10D /* SharedTests.swift in Sources */,
 				12F800581DF71AD9006851D6 /* WatsonCredentials.swift in Sources */,
 				920A2441214B0E390077F10D /* Shared.swift in Sources */,
+				7E12A8CF23477FD00008906B /* DiscoveryTest+CPD.swift in Sources */,
 				CAEBE47322A4148C00F86C3A /* DiscoveryUnitTests.swift in Sources */,
 				12F8005E1DF71BED006851D6 /* DiscoveryTests.swift in Sources */,
 			);

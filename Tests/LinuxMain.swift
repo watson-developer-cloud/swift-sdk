@@ -30,7 +30,7 @@ XCTMain([
     testCase(PersonalityInsightsTests.allTests),
     testCase(ToneAnalyzerTests.allTests),
     testCase(VisualRecognitionTests.allTests),
-    testCase(VisualRecognitionUnitTests.allTests)
+    testCase(VisualRecognitionUnitTests.allTests),
     testCase(VisualRecognitionV4Tests.allTests)
 
     // the following tests are currently disabled because their

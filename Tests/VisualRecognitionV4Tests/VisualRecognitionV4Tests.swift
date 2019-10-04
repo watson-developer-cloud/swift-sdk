@@ -21,7 +21,7 @@ import Foundation
 // Do not import @testable to ensure only public interface is exposed
 import VisualRecognitionV4
 
-class VisualRecognitionTests: XCTestCase {
+class VisualRecognitionV4Tests: XCTestCase {
 
     private static let timeout: TimeInterval = 45.0
 
@@ -32,8 +32,8 @@ class VisualRecognitionTests: XCTestCase {
     private let trainingDummyImageID = "220px-Giraffe_Mikumi_National_P_c7d642d31b0dc4aa8c223ac119e1cc6d"
     private let giraffeImageURL = giraffeURL
 
-    static var allTests: [(String, (VisualRecognitionTests) -> () throws -> Void)] {
-        let tests: [(String, (VisualRecognitionTests) -> () throws -> Void)] = [
+    static var allTests: [(String, (VisualRecognitionV4Tests) -> () throws -> Void)] {
+        let tests: [(String, (VisualRecognitionV4Tests) -> () throws -> Void)] = [
             ("testMultipleClassifierIDsWithURL", testMultipleClassifierIDsWithURL),
             ("testAnalyzeIndividualImageByURL", testAnalyzeIndividualImageByURL),
             ("testAnalyzeIndividualImageByURL", testAnalyzeIndividualImageByURL),

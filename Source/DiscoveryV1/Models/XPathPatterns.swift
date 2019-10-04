@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** XPathPatterns. */
+/**
+ Object containing an array of XPaths.
+ */
 public struct XPathPatterns: Codable, Equatable {
 
     /**

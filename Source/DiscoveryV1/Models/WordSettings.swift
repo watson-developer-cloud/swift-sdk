@@ -21,6 +21,9 @@ import Foundation
  */
 public struct WordSettings: Codable, Equatable {
 
+    /**
+     Object containing heading detection conversion settings for Microsoft Word documents.
+     */
     public var heading: WordHeadingDetection?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -31,7 +34,7 @@ public struct WordSettings: Codable, Equatable {
     /**
      Initialize a `WordSettings` with member variables.
 
-     - parameter heading:
+     - parameter heading: Object containing heading detection conversion settings for Microsoft Word documents.
 
      - returns: An initialized `WordSettings`.
      */

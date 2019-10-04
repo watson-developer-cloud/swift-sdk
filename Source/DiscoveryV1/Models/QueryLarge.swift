@@ -58,7 +58,7 @@ internal struct QueryLarge: Codable, Equatable {
     /**
      A comma-separated list of the portion of the document hierarchy to return.
      */
-    public var returnFields: String?
+    public var `return`: String?
 
     /**
      The number of query results to skip at the beginning. For example, if the total number of results that are returned
@@ -111,12 +111,6 @@ internal struct QueryLarge: Codable, Equatable {
     public var deduplicateField: String?
 
     /**
-     A comma-separated list of collection IDs to be queried against. Required when querying multiple collections,
-     invalid when performing a single collection query.
-     */
-    public var collectionIDs: String?
-
-    /**
      When `true`, results are returned based on their similarity to the document IDs specified in the
      **similar.document_ids** parameter.
      */
@@ -152,7 +146,7 @@ internal struct QueryLarge: Codable, Equatable {
         case passages = "passages"
         case aggregation = "aggregation"
         case count = "count"
-        case returnFields = "return"
+        case `return` = "return"
         case offset = "offset"
         case sort = "sort"
         case highlight = "highlight"
@@ -161,7 +155,6 @@ internal struct QueryLarge: Codable, Equatable {
         case passagesCharacters = "passages.characters"
         case deduplicate = "deduplicate"
         case deduplicateField = "deduplicate.field"
-        case collectionIDs = "collection_ids"
         case similar = "similar"
         case similarDocumentIDs = "similar.document_ids"
         case similarFields = "similar.fields"
@@ -183,7 +176,7 @@ internal struct QueryLarge: Codable, Equatable {
        filters. Useful for applications to build lists, tables, and time series. For a full list of possible
        aggregations, see the Query reference.
      - parameter count: Number of results to return.
-     - parameter returnFields: A comma-separated list of the portion of the document hierarchy to return.
+     - parameter `return`: A comma-separated list of the portion of the document hierarchy to return.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
        results that are returned is 10 and the offset is 8, it returns the last two results.
      - parameter sort: A comma-separated list of fields in the document to sort on. You can optionally specify a sort
@@ -202,8 +195,6 @@ internal struct QueryLarge: Codable, Equatable {
      - parameter deduplicateField: When specified, duplicate results based on the field specified are removed from
        the returned results. Duplicate comparison is limited to the current query only, **offset** is not considered.
        This parameter is currently Beta functionality.
-     - parameter collectionIDs: A comma-separated list of collection IDs to be queried against. Required when
-       querying multiple collections, invalid when performing a single collection query.
      - parameter similar: When `true`, results are returned based on their similarity to the document IDs specified
        in the **similar.document_ids** parameter.
      - parameter similarDocumentIDs: A comma-separated list of document IDs to find similar documents.
@@ -226,7 +217,7 @@ internal struct QueryLarge: Codable, Equatable {
         passages: Bool? = nil,
         aggregation: String? = nil,
         count: Int? = nil,
-        returnFields: String? = nil,
+        `return`: String? = nil,
         offset: Int? = nil,
         sort: String? = nil,
         highlight: Bool? = nil,
@@ -235,7 +226,6 @@ internal struct QueryLarge: Codable, Equatable {
         passagesCharacters: Int? = nil,
         deduplicate: Bool? = nil,
         deduplicateField: String? = nil,
-        collectionIDs: String? = nil,
         similar: Bool? = nil,
         similarDocumentIDs: String? = nil,
         similarFields: String? = nil,
@@ -248,7 +238,7 @@ internal struct QueryLarge: Codable, Equatable {
         self.passages = passages
         self.aggregation = aggregation
         self.count = count
-        self.returnFields = returnFields
+        self.`return` = `return`
         self.offset = offset
         self.sort = sort
         self.highlight = highlight
@@ -257,7 +247,6 @@ internal struct QueryLarge: Codable, Equatable {
         self.passagesCharacters = passagesCharacters
         self.deduplicate = deduplicate
         self.deduplicateField = deduplicateField
-        self.collectionIDs = collectionIDs
         self.similar = similar
         self.similarDocumentIDs = similarDocumentIDs
         self.similarFields = similarFields

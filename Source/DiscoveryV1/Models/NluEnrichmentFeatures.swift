@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** NluEnrichmentFeatures. */
+/**
+ Object containing Natural Language Understanding features to be used.
+ */
 public struct NluEnrichmentFeatures: Codable, Equatable {
 
     /**

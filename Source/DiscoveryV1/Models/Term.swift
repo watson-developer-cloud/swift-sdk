@@ -44,6 +44,9 @@ public struct Term: Codable, Equatable {
      */
     public var field: String?
 
+    /**
+     The number of terms identified.
+     */
     public var count: Int?
 
     // Map each property name to the key that shall be used for encoding/decoding.

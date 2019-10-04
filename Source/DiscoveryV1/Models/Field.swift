@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,15 @@
 
 import Foundation
 
-/** Field. */
+/**
+ Object containing field details.
+ */
 public struct Field: Codable, Equatable {
 
     /**
      The type of the field.
      */
-    public enum FieldType: String {
+    public enum TypeEnum: String {
         case nested = "nested"
         case string = "string"
         case date = "date"
@@ -39,17 +41,17 @@ public struct Field: Codable, Equatable {
     /**
      The name of the field.
      */
-    public var fieldName: String?
+    public var field: String?
 
     /**
      The type of the field.
      */
-    public var fieldType: String?
+    public var type: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case fieldName = "field"
-        case fieldType = "type"
+        case field = "field"
+        case type = "type"
     }
 
 }

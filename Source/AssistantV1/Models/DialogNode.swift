@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import IBMSwiftSDKCore
 
 /** DialogNode. */
 public struct DialogNode: Codable, Equatable {
@@ -23,7 +23,7 @@ public struct DialogNode: Codable, Equatable {
     /**
      How the dialog node is processed.
      */
-    public enum NodeType: String {
+    public enum TypeEnum: String {
         case standard = "standard"
         case eventHandler = "event_handler"
         case frame = "frame"
@@ -131,7 +131,7 @@ public struct DialogNode: Codable, Equatable {
     /**
      How the dialog node is processed.
      */
-    public var nodeType: String?
+    public var type: String?
 
     /**
      How an `event_handler` node is processed.
@@ -195,7 +195,7 @@ public struct DialogNode: Codable, Equatable {
         case metadata = "metadata"
         case nextStep = "next_step"
         case title = "title"
-        case nodeType = "type"
+        case type = "type"
         case eventName = "event_name"
         case variable = "variable"
         case actions = "actions"
@@ -229,7 +229,7 @@ public struct DialogNode: Codable, Equatable {
      - parameter title: The alias used to identify the dialog node. This string must conform to the following
        restrictions:
        - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
-     - parameter nodeType: How the dialog node is processed.
+     - parameter type: How the dialog node is processed.
      - parameter eventName: How an `event_handler` node is processed.
      - parameter variable: The location in the dialog context where output is stored.
      - parameter actions: An array of objects describing any actions to be invoked by the dialog node.
@@ -254,7 +254,7 @@ public struct DialogNode: Codable, Equatable {
         metadata: [String: JSON]? = nil,
         nextStep: DialogNodeNextStep? = nil,
         title: String? = nil,
-        nodeType: String? = nil,
+        type: String? = nil,
         eventName: String? = nil,
         variable: String? = nil,
         actions: [DialogNodeAction]? = nil,
@@ -277,7 +277,7 @@ public struct DialogNode: Codable, Equatable {
         self.metadata = metadata
         self.nextStep = nextStep
         self.title = title
-        self.nodeType = nodeType
+        self.type = type
         self.eventName = eventName
         self.variable = variable
         self.actions = actions

@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import IBMSwiftSDKCore
 
 /** DialogNodeAction. */
 public struct DialogNodeAction: Codable, Equatable {
@@ -23,7 +23,7 @@ public struct DialogNodeAction: Codable, Equatable {
     /**
      The type of action to invoke.
      */
-    public enum ActionType: String {
+    public enum TypeEnum: String {
         case client = "client"
         case server = "server"
         case cloudFunction = "cloud_function"
@@ -38,7 +38,7 @@ public struct DialogNodeAction: Codable, Equatable {
     /**
      The type of action to invoke.
      */
-    public var actionType: String?
+    public var type: String?
 
     /**
      A map of key/value pairs to be provided to the action.
@@ -58,7 +58,7 @@ public struct DialogNodeAction: Codable, Equatable {
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case name = "name"
-        case actionType = "type"
+        case type = "type"
         case parameters = "parameters"
         case resultVariable = "result_variable"
         case credentials = "credentials"
@@ -69,7 +69,7 @@ public struct DialogNodeAction: Codable, Equatable {
 
      - parameter name: The name of the action.
      - parameter resultVariable: The location in the dialog context where the result of the action is stored.
-     - parameter actionType: The type of action to invoke.
+     - parameter type: The type of action to invoke.
      - parameter parameters: A map of key/value pairs to be provided to the action.
      - parameter credentials: The name of the context variable that the client application will use to pass in
        credentials for the action.
@@ -79,14 +79,14 @@ public struct DialogNodeAction: Codable, Equatable {
     public init(
         name: String,
         resultVariable: String,
-        actionType: String? = nil,
+        type: String? = nil,
         parameters: [String: JSON]? = nil,
         credentials: String? = nil
     )
     {
         self.name = name
         self.resultVariable = resultVariable
-        self.actionType = actionType
+        self.type = type
         self.parameters = parameters
         self.credentials = credentials
     }

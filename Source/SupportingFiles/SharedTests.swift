@@ -15,64 +15,9 @@
  **/
 
 import XCTest
-import RestKit
+import IBMSwiftSDKCore
 
 class SharedTests: XCTestCase {
-
-    func testGetAuthMethodFromBasicAuth() {
-        let authMethod1 = Shared.getAuthMethod(username: "user", password: "password")
-        XCTAssert(authMethod1 is BasicAuthentication)
-
-        let authMethod2 = Shared.getAuthMethod(username: "apikey", password: "icp-s53f18as793f")
-        XCTAssert(authMethod2 is BasicAuthentication)
-
-        let authMethod3 = Shared.getAuthMethod(username: "apikey", password: "password")
-        XCTAssert(authMethod3 is IAMAuthentication)
-    }
-
-    func testGetAuthMethodFromIAMAuth() {
-        let authMethod1 = Shared.getAuthMethod(apiKey: "1234", iamURL: nil)
-        XCTAssert(authMethod1 is IAMAuthentication)
-
-        let authMethod2 = Shared.getAuthMethod(apiKey: "icp-as34567as45a76sdf", iamURL: nil)
-        XCTAssert(authMethod2 is BasicAuthentication)
-    }
-
-    func testGetAuthMethodFromCredentials() {
-        var credentials: [String: String] = [
-            "username": "me"
-        ]
-
-        // Missing credentials
-        var authMethod = Shared.getAuthMethod(from: credentials)
-        XCTAssertNil(authMethod)
-
-        // Username and password
-        credentials["password"] = "hunter2"
-        authMethod = Shared.getAuthMethod(from: credentials)
-        XCTAssert(authMethod is BasicAuthentication)
-
-        // API Key
-        credentials = [
-            "apikey": "1234",
-            "iam_url": "https://cloud.ibm.com/iam"
-        ]
-        authMethod = Shared.getAuthMethod(from: credentials)
-        XCTAssert(authMethod is IAMAuthentication)
-    }
-
-    func testGetServiceURLFromCredentials() {
-        var credentials: [String: String] = [:]
-        XCTAssertNil(Shared.getServiceURL(from: credentials))
-
-        credentials["useless_key"] = "useless_value"
-        XCTAssertNil(Shared.getServiceURL(from: credentials))
-
-        let serviceURL = "https://cloud.ibm.com/test"
-        credentials["url"] = serviceURL
-        XCTAssertEqual(Shared.getServiceURL(from: credentials), serviceURL)
-    }
-
     func testHeaders() {
         let serviceName = "test-service"
         let serviceVersion = "v9"

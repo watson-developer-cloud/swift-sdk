@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** CreateCollectionRequest. */
+/**
+ Object containing specification for a new collection.
+ */
 internal struct CreateCollectionRequest: Codable, Equatable {
 
     /**

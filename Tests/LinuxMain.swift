@@ -10,6 +10,7 @@ import XCTest
 @testable import PersonalityInsightsV3Tests
 @testable import ToneAnalyzerV3Tests
 @testable import VisualRecognitionV3Tests
+@testable import VisualRecognitionV4Tests
 
 // the following tests are currently disabled becuase
 // their dependencies do not build with Swift Package Manager
@@ -30,6 +31,7 @@ XCTMain([
     testCase(ToneAnalyzerTests.allTests),
     testCase(VisualRecognitionTests.allTests),
     testCase(VisualRecognitionUnitTests.allTests),
+    testCase(VisualRecognitionV4Tests.allTests)
 
     // the following tests are currently disabled because their
     // dependencies do not build with Swift Package Manager

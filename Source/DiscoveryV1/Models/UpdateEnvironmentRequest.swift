@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** UpdateEnvironmentRequest. */
+/**
+ Object containing environment update information.
+ */
 internal struct UpdateEnvironmentRequest: Codable, Equatable {
 
     /**

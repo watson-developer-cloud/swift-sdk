@@ -22,8 +22,8 @@ import NaturalLanguageClassifierV1
 
 class NaturalLanguageClassifierTests: XCTestCase {
 
-    // Several tests depend upon an already-trained classifier. If the classifier does not exist then 
-    // create a classifier using the `trained_meta.txt` and `weather_data_train.csv` files. Be sure 
+    // Several tests depend upon an already-trained classifier. If the classifier does not exist then
+    // create a classifier using the `trained_meta.txt` and `weather_data_train.csv` files. Be sure
     // to update the `trainedClassifierId` property below!
 
     private var naturalLanguageClassifier: NaturalLanguageClassifier!
@@ -63,11 +63,13 @@ class NaturalLanguageClassifierTests: XCTestCase {
 
     func instantiateNaturalLanguageClassifier() {
         if let apiKey = WatsonCredentials.NaturalLanguageClassifierAPIKey {
-            naturalLanguageClassifier = NaturalLanguageClassifier(apiKey: apiKey)
+            let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
+            naturalLanguageClassifier = NaturalLanguageClassifier(authenticator: authenticator)
         } else {
             let username = WatsonCredentials.NaturalLanguageClassifierUsername
             let password = WatsonCredentials.NaturalLanguageClassifierPassword
-            naturalLanguageClassifier = NaturalLanguageClassifier(username: username, password: password)
+            let authenticator = WatsonBasicAuthenticator.init(username: username, password: password)
+            naturalLanguageClassifier = NaturalLanguageClassifier(authenticator: authenticator)
         }
         if let url = WatsonCredentials.NaturalLanguageClassifierURL {
             naturalLanguageClassifier.serviceURL = url
@@ -112,7 +114,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
 
     func testCreateAndDelete() {
         let expectation = self.expectation(description: "Create and delete a classifier")
-        naturalLanguageClassifier.createClassifier(metadata: metadataFile, trainingData: trainingFile) {
+        naturalLanguageClassifier.createClassifier(trainingMetadata: metadataFile, trainingData: trainingFile) {
             response, error in
 
             if let error = error {
@@ -140,7 +142,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
 
     func testCreateAndDeleteClassifierWithoutOptionalName() {
         let expectation = self.expectation(description: "Create and delete a classifier with no name.")
-        naturalLanguageClassifier.createClassifier(metadata: metadataFileMissingName, trainingData: trainingFile) {
+        naturalLanguageClassifier.createClassifier(trainingMetadata: metadataFileMissingName, trainingData: trainingFile) {
             response, error in
 
             if let error = error {
@@ -262,7 +264,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
     func testCreateClassifierWithMissingMetadata() {
         let expectation = self.expectation(description: "Create a classifier with missing metadata")
         naturalLanguageClassifier.createClassifier(
-            metadata: metadataFileEmpty,
+            trainingMetadata: metadataFileEmpty,
             trainingData: trainingFile
         ) {
                 _, error in

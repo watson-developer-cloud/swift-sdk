@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import IBMSwiftSDKCore
 
 /** Value. */
 public struct Value: Codable, Equatable {
@@ -23,7 +23,7 @@ public struct Value: Codable, Equatable {
     /**
      Specifies the type of entity value.
      */
-    public enum ValueType: String {
+    public enum TypeEnum: String {
         case synonyms = "synonyms"
         case patterns = "patterns"
     }
@@ -43,7 +43,7 @@ public struct Value: Codable, Equatable {
     /**
      Specifies the type of entity value.
      */
-    public var valueType: String
+    public var type: String
 
     /**
      An array of synonyms for the entity value. A value can specify either synonyms or patterns (depending on the value
@@ -75,7 +75,7 @@ public struct Value: Codable, Equatable {
     private enum CodingKeys: String, CodingKey {
         case value = "value"
         case metadata = "metadata"
-        case valueType = "type"
+        case type = "type"
         case synonyms = "synonyms"
         case patterns = "patterns"
         case created = "created"

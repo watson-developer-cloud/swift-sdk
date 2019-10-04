@@ -16,7 +16,7 @@
 // swiftlint:disable file_length
 
 import Foundation
-import RestKit
+import IBMSwiftSDKCore
 
 /**
  The IBM&reg; Text to Speech service provides APIs that use IBM's speech-synthesis capabilities to synthesize text into
@@ -34,15 +34,18 @@ import RestKit
 public class TextToSpeech {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://stream.watsonplatform.net/text-to-speech/api"
+    public var serviceURL: String? = "https://stream.watsonplatform.net/text-to-speech/api"
+
+    /// Service identifiers
     internal let serviceName = "TextToSpeech"
     internal let serviceVersion = "v1"
+    internal let serviceSdkName = "text_to_speech"
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
     var session = URLSession(configuration: URLSessionConfiguration.default)
-    var authMethod: AuthenticationMethod
+    public let authenticator: Authenticator
 
     #if os(Linux)
     /**
@@ -56,17 +59,14 @@ public class TextToSpeech {
      In that case, try another initializer that directly passes in the credentials.
 
      */
-    public init?() {
-        guard let credentials = Shared.extractCredentials(serviceName: "text_to_speech") else {
-            return nil
-        }
-        guard let authMethod = Shared.getAuthMethod(from: credentials) else {
-            return nil
-        }
-        if let serviceURL = Shared.getServiceURL(from: credentials) {
+    public init() throws {
+        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
+        self.authenticator = authenticator
+
+        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
             self.serviceURL = serviceURL
         }
-        self.authMethod = authMethod
+
         RestRequest.userAgent = Shared.userAgent
     }
     #endif
@@ -74,39 +74,11 @@ public class TextToSpeech {
     /**
      Create a `TextToSpeech` object.
 
-     - parameter username: The username used to authenticate with the service.
-     - parameter password: The password used to authenticate with the service.
+     - parameter authenticator: The Authenticator object used to authenticate requests to the service
      */
-    public init(username: String, password: String) {
-        self.authMethod = Shared.getAuthMethod(username: username, password: password)
+    public init(authenticator: Authenticator) {
+        self.authenticator = authenticator
         RestRequest.userAgent = Shared.userAgent
-    }
-
-    /**
-     Create a `TextToSpeech` object.
-
-     - parameter apiKey: An API key for IAM that can be used to obtain access tokens for the service.
-     - parameter iamUrl: The URL for the IAM service.
-     */
-    public init(apiKey: String, iamUrl: String? = nil) {
-        self.authMethod = Shared.getAuthMethod(apiKey: apiKey, iamURL: iamUrl)
-        RestRequest.userAgent = Shared.userAgent
-    }
-
-    /**
-     Create a `TextToSpeech` object.
-
-     - parameter accessToken: An access token for the service.
-     */
-    public init(accessToken: String) {
-        self.authMethod = IAMAccessToken(accessToken: accessToken)
-        RestRequest.userAgent = Shared.userAgent
-    }
-
-    public func accessToken(_ newToken: String) {
-        if self.authMethod is IAMAccessToken {
-            self.authMethod = IAMAccessToken(accessToken: newToken)
-        }
     }
 
     #if !os(Linux)
@@ -179,12 +151,19 @@ public class TextToSpeech {
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + "/v1/voices",
+            url: serviceEndpoint + "/v1/voices",
             headerParameters: headerParameters
         )
 
@@ -236,12 +215,19 @@ public class TextToSpeech {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -264,65 +250,57 @@ public class TextToSpeech {
       The service can return audio in the following formats (MIME types).
      * Where indicated, you can optionally specify the sampling rate (`rate`) of the audio. You must specify a sampling
      rate for the `audio/l16` and `audio/mulaw` formats. A specified sampling rate must lie in the range of 8 kHz to 192
-     kHz.
+     kHz. Some formats restrict the sampling rate to certain values, as noted.
      * For the `audio/l16` format, you can optionally specify the endianness (`endianness`) of the audio:
      `endianness=big-endian` or `endianness=little-endian`.
      Use the `Accept` header or the `accept` parameter to specify the requested format of the response audio. If you
      omit an audio format altogether, the service returns the audio in Ogg format with the Opus codec
      (`audio/ogg;codecs=opus`). The service always returns single-channel audio.
-     * `audio/basic`
-       The service returns audio with a sampling rate of 8000 Hz.
-     * `audio/flac`
-       You can optionally specify the `rate` of the audio. The default sampling rate is 22,050 Hz.
-     * `audio/l16`
-       You must specify the `rate` of the audio. You can optionally specify the `endianness` of the audio. The default
-     endianness is `little-endian`.
-     * `audio/mp3`
-       You can optionally specify the `rate` of the audio. The default sampling rate is 22,050 Hz.
-     * `audio/mpeg`
-       You can optionally specify the `rate` of the audio. The default sampling rate is 22,050 Hz.
-     * `audio/mulaw`
-       You must specify the `rate` of the audio.
-     * `audio/ogg`
-       The service returns the audio in the `vorbis` codec. You can optionally specify the `rate` of the audio. The
-     default sampling rate is 22,050 Hz.
-     * `audio/ogg;codecs=opus`
-       You can optionally specify the `rate` of the audio. The default sampling rate is 22,050 Hz.
-     * `audio/ogg;codecs=vorbis`
-       You can optionally specify the `rate` of the audio. The default sampling rate is 22,050 Hz.
-     * `audio/wav`
-       You can optionally specify the `rate` of the audio. The default sampling rate is 22,050 Hz.
-     * `audio/webm`
-       The service returns the audio in the `opus` codec. The service returns audio with a sampling rate of 48,000 Hz.
-     * `audio/webm;codecs=opus`
-       The service returns audio with a sampling rate of 48,000 Hz.
-     * `audio/webm;codecs=vorbis`
-       You can optionally specify the `rate` of the audio. The default sampling rate is 22,050 Hz.
+     * `audio/basic` - The service returns audio with a sampling rate of 8000 Hz.
+     * `audio/flac` - You can optionally specify the `rate` of the audio. The default sampling rate is 22,050 Hz.
+     * `audio/l16` - You must specify the `rate` of the audio. You can optionally specify the `endianness` of the audio.
+     The default endianness is `little-endian`.
+     * `audio/mp3` - You can optionally specify the `rate` of the audio. The default sampling rate is 22,050 Hz.
+     * `audio/mpeg` - You can optionally specify the `rate` of the audio. The default sampling rate is 22,050 Hz.
+     * `audio/mulaw` - You must specify the `rate` of the audio.
+     * `audio/ogg` - The service returns the audio in the `vorbis` codec. You can optionally specify the `rate` of the
+     audio. The default sampling rate is 22,050 Hz.
+     * `audio/ogg;codecs=opus` - You can optionally specify the `rate` of the audio. Only the following values are valid
+     sampling rates: `48000`, `24000`, `16000`, `12000`, or `8000`. If you specify a value other than one of these, the
+     service returns an error. The default sampling rate is 48,000 Hz.
+     * `audio/ogg;codecs=vorbis` - You can optionally specify the `rate` of the audio. The default sampling rate is
+     22,050 Hz.
+     * `audio/wav` - You can optionally specify the `rate` of the audio. The default sampling rate is 22,050 Hz.
+     * `audio/webm` - The service returns the audio in the `opus` codec. The service returns audio with a sampling rate
+     of 48,000 Hz.
+     * `audio/webm;codecs=opus` - The service returns audio with a sampling rate of 48,000 Hz.
+     * `audio/webm;codecs=vorbis` - You can optionally specify the `rate` of the audio. The default sampling rate is
+     22,050 Hz.
      For more information about specifying an audio format, including additional details about some of the formats, see
      [Audio formats](https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-audioFormats#audioFormats).
      ### Warning messages
       If a request includes invalid query parameters, the service returns a `Warnings` response header that provides
      messages about the invalid parameters. The warning includes a descriptive message and a list of invalid argument
-     strings. For example, a message such as `\"Unknown arguments:\"` or `\"Unknown url query arguments:\"` followed by
-     a list of the form `\"{invalid_arg_1}, {invalid_arg_2}.\"` The request succeeds despite the warnings.
+     strings. For example, a message such as `"Unknown arguments:"` or `"Unknown url query arguments:"` followed by a
+     list of the form `"{invalid_arg_1}, {invalid_arg_2}."` The request succeeds despite the warnings.
 
      - parameter text: The text to synthesize.
+     - parameter accept: The requested format (MIME type) of the audio. You can use the `Accept` header or the
+       `accept` parameter to specify the audio format. For more information about specifying an audio format, see
+       **Audio formats (accept types)** in the method description.
      - parameter voice: The voice to use for synthesis.
      - parameter customizationID: The customization ID (GUID) of a custom voice model to use for the synthesis. If a
        custom voice model is specified, it is guaranteed to work only if it matches the language of the indicated voice.
        You must make the request with credentials for the instance of the service that owns the custom model. Omit the
        parameter to use the specified voice with no customization.
-     - parameter accept: The requested format (MIME type) of the audio. You can use the `Accept` header or the
-       `accept` parameter to specify the audio format. For more information about specifying an audio format, see
-       **Audio formats (accept types)** in the method description.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func synthesize(
         text: String,
+        accept: String? = nil,
         voice: String? = nil,
         customizationID: String? = nil,
-        accept: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Data>?, WatsonError?) -> Void)
     {
@@ -358,12 +336,19 @@ public class TextToSpeech {
         }
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + "/v1/synthesize",
+            url: serviceEndpoint + "/v1/synthesize",
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -461,12 +446,19 @@ public class TextToSpeech {
         }
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + "/v1/pronunciation",
+            url: serviceEndpoint + "/v1/pronunciation",
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -520,12 +512,19 @@ public class TextToSpeech {
         headerParameters["Content-Type"] = "application/json"
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + "/v1/customizations",
+            url: serviceEndpoint + "/v1/customizations",
             headerParameters: headerParameters,
             messageBody: body
         )
@@ -572,12 +571,19 @@ public class TextToSpeech {
         }
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + "/v1/customizations",
+            url: serviceEndpoint + "/v1/customizations",
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -597,9 +603,9 @@ public class TextToSpeech {
      You can define sounds-like or phonetic translations for words. A sounds-like translation consists of one or more
      words that, when combined, sound like the word. Phonetic translations are based on the SSML phoneme format for
      representing a word. You can specify them in standard International Phonetic Alphabet (IPA) representation
-       <code>&lt;phoneme alphabet=\"ipa\" ph=\"t&#601;m&#712;&#593;to\"&gt;&lt;/phoneme&gt;</code>
+       <code>&lt;phoneme alphabet="ipa" ph="t&#601;m&#712;&#593;to"&gt;&lt;/phoneme&gt;</code>
        or in the proprietary IBM Symbolic Phonetic Representation (SPR)
-       <code>&lt;phoneme alphabet=\"ibm\" ph=\"1gAstroEntxrYFXs\"&gt;&lt;/phoneme&gt;</code>
+       <code>&lt;phoneme alphabet="ibm" ph="1gAstroEntxrYFXs"&gt;&lt;/phoneme&gt;</code>
      **Note:** This method is currently a beta release.
      **See also:**
      * [Updating a custom
@@ -652,12 +658,19 @@ public class TextToSpeech {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             messageBody: body
         )
@@ -701,12 +714,19 @@ public class TextToSpeech {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters
         )
 
@@ -747,12 +767,19 @@ public class TextToSpeech {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters
         )
 
@@ -770,9 +797,9 @@ public class TextToSpeech {
      You can define sounds-like or phonetic translations for words. A sounds-like translation consists of one or more
      words that, when combined, sound like the word. Phonetic translations are based on the SSML phoneme format for
      representing a word. You can specify them in standard International Phonetic Alphabet (IPA) representation
-       <code>&lt;phoneme alphabet=\"ipa\" ph=\"t&#601;m&#712;&#593;to\"&gt;&lt;/phoneme&gt;</code>
+       <code>&lt;phoneme alphabet="ipa" ph="t&#601;m&#712;&#593;to"&gt;&lt;/phoneme&gt;</code>
        or in the proprietary IBM Symbolic Phonetic Representation (SPR)
-       <code>&lt;phoneme alphabet=\"ibm\" ph=\"1gAstroEntxrYFXs\"&gt;&lt;/phoneme&gt;</code>
+       <code>&lt;phoneme alphabet="ibm" ph="1gAstroEntxrYFXs"&gt;&lt;/phoneme&gt;</code>
      **Note:** This method is currently a beta release.
      **See also:**
      * [Adding multiple words to a custom
@@ -822,12 +849,19 @@ public class TextToSpeech {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             messageBody: body
         )
@@ -871,12 +905,19 @@ public class TextToSpeech {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters
         )
 
@@ -894,9 +935,9 @@ public class TextToSpeech {
      You can define sounds-like or phonetic translations for words. A sounds-like translation consists of one or more
      words that, when combined, sound like the word. Phonetic translations are based on the SSML phoneme format for
      representing a word. You can specify them in standard International Phonetic Alphabet (IPA) representation
-       <code>&lt;phoneme alphabet=\"ipa\" ph=\"t&#601;m&#712;&#593;to\"&gt;&lt;/phoneme&gt;</code>
+       <code>&lt;phoneme alphabet="ipa" ph="t&#601;m&#712;&#593;to"&gt;&lt;/phoneme&gt;</code>
        or in the proprietary IBM Symbolic Phonetic Representation (SPR)
-       <code>&lt;phoneme alphabet=\"ibm\" ph=\"1gAstroEntxrYFXs\"&gt;&lt;/phoneme&gt;</code>
+       <code>&lt;phoneme alphabet="ibm" ph="1gAstroEntxrYFXs"&gt;&lt;/phoneme&gt;</code>
      **Note:** This method is currently a beta release.
      **See also:**
      * [Adding a single word to a custom
@@ -952,12 +993,19 @@ public class TextToSpeech {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "PUT",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             messageBody: body
         )
@@ -1002,12 +1050,19 @@ public class TextToSpeech {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters
         )
 
@@ -1050,12 +1105,19 @@ public class TextToSpeech {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters
         )
 
@@ -1097,12 +1159,19 @@ public class TextToSpeech {
         queryParameters.append(URLQueryItem(name: "customer_id", value: customerID))
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + "/v1/user_data",
+            url: serviceEndpoint + "/v1/user_data",
             headerParameters: headerParameters,
             queryItems: queryParameters
         )

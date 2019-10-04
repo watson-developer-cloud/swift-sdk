@@ -53,8 +53,8 @@ public struct NluEnrichmentEntities: Codable, Equatable {
     public var sentenceLocations: Bool?
 
     /**
-     The enrichement model to use with entity extraction. May be a custom model provided by Watson Knowledge Studio, the
-     public model for use with Knowledge Graph `en-news`, or the default public model `alchemy`.
+     The enrichement model to use with entity extraction. May be a custom model provided by Watson Knowledge Studio, or
+     the default public model `alchemy`.
      */
     public var model: String?
 
@@ -82,7 +82,7 @@ public struct NluEnrichmentEntities: Codable, Equatable {
      - parameter sentenceLocations: When `true`, a list of sentence locations for each instance of each identified
        entity is recorded. The default is `false`.
      - parameter model: The enrichement model to use with entity extraction. May be a custom model provided by Watson
-       Knowledge Studio, the public model for use with Knowledge Graph `en-news`, or the default public model `alchemy`.
+       Knowledge Studio, or the default public model `alchemy`.
 
      - returns: An initialized `NluEnrichmentEntities`.
      */

@@ -53,18 +53,20 @@ class LanguageTranslatorTests: XCTestCase {
             ("testListDocuments", testListDocuments),
             ("testDocumentsCRUD", testDocumentsCRUD),
             // Negative Tests
-            ("testGetModelDoesntExist", testGetModelDoesntExist),
+            ("testGetModelDoesntExist", testGetModelDoesntExist)
         ]
     }
 
     /** Instantiate Language Translator. */
     func instantiateLanguageTranslator() {
         if let apiKey = WatsonCredentials.LanguageTranslatorV3APIKey {
-            languageTranslator = LanguageTranslator(version: versionDate, apiKey: apiKey)
+            let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
+            languageTranslator = LanguageTranslator(version: versionDate, authenticator: authenticator)
         } else {
             let username = WatsonCredentials.LanguageTranslatorV3Username
             let password = WatsonCredentials.LanguageTranslatorV3Password
-            languageTranslator = LanguageTranslator(version: versionDate, username: username, password: password)
+            let authenticator = WatsonBasicAuthenticator.init(username: username, password: password)
+            languageTranslator = LanguageTranslator(version: versionDate, authenticator: authenticator)
         }
         if let url = WatsonCredentials.LanguageTranslatorV3URL {
             languageTranslator.serviceURL = url
@@ -77,7 +79,7 @@ class LanguageTranslatorTests: XCTestCase {
     func deleteStaleCustomModels() {
         let description = "Delete any stale custom models previously created by unit tests."
         let expectation = self.expectation(description: description)
-        languageTranslator.listModels(defaultModels: false) {
+        languageTranslator.listModels(default: false) {
             response, error in
 
             if let error = error {
@@ -175,7 +177,7 @@ class LanguageTranslatorTests: XCTestCase {
 
     func testListModelsDefault() {
         let expectation = self.expectation(description: "List models, filtered by default models.")
-        languageTranslator.listModels(defaultModels: true) {
+        languageTranslator.listModels(default: true) {
             response, error in
 
             if let error = error {
@@ -276,7 +278,7 @@ class LanguageTranslatorTests: XCTestCase {
             XCTAssertEqual(translation.wordCount, 1)
             XCTAssertEqual(translation.characterCount, 5)
             XCTAssertEqual(translation.translations.count, 1)
-            XCTAssertEqual(translation.translations.first?.translationOutput, "Hola")
+            XCTAssertEqual(translation.translations.first?.translation, "Hola")
             expectation.fulfill()
         }
         waitForExpectations()
@@ -299,7 +301,7 @@ class LanguageTranslatorTests: XCTestCase {
             XCTAssertEqual(translation.wordCount, 1)
             XCTAssertEqual(translation.characterCount, 5)
             XCTAssertEqual(translation.translations.count, 1)
-            XCTAssertEqual(translation.translations.first?.translationOutput, "Hola")
+            XCTAssertEqual(translation.translations.first?.translation, "Hola")
             expectation.fulfill()
         }
         waitForExpectations()
@@ -309,7 +311,7 @@ class LanguageTranslatorTests: XCTestCase {
 
     func testListIdentifiableLanguages() {
         let expectation = self.expectation(description: "List identifiable languages.")
-        languageTranslator.listIdentifiableLanguages() {
+        languageTranslator.listIdentifiableLanguages {
             response, error in
 
             if let error = error {
@@ -439,7 +441,7 @@ class LanguageTranslatorTests: XCTestCase {
             sleep(15)
             let expectation = self.expectation(description: "Get document status.")
             languageTranslator.getDocumentStatus(documentID: documentID) {
-                response, error in
+                response, _ in
                 status = response?.result?.status ?? "unknown"
                 expectation.fulfill()
             }

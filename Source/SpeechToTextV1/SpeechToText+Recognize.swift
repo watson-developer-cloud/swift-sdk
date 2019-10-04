@@ -19,14 +19,18 @@
 
 import Foundation
 import AVFoundation
-import RestKit
+import IBMSwiftSDKCore
 
 private var microphoneSession: SpeechToTextSession?
 
 extension SpeechToText {
 
     /// The URL that shall be used to stream audio for transcription.
-    internal var websocketsURL: String {
+    internal var websocketsURL: String? {
+        guard let serviceURL = serviceURL else {
+            return nil
+        }
+
         return serviceURL
             .replacingOccurrences(of: "http", with: "ws", options: .anchored, range: nil)
             + "/v1/recognize"
@@ -73,7 +77,7 @@ extension SpeechToText {
     {
         // create SpeechToTextSession
         let session = SpeechToTextSession(
-            authMethod: authMethod,
+            authenticator: authenticator,
             model: model,
             baseModelVersion: baseModelVersion,
             languageCustomizationID: languageCustomizationID,
@@ -83,6 +87,11 @@ extension SpeechToText {
         )
 
         // set url
+        guard let websocketsURL = websocketsURL else {
+            callback.onError?(WatsonError.noEndpoint)
+            return
+        }
+
         session.websocketsURL = websocketsURL
 
         // set headers
@@ -180,7 +189,7 @@ extension SpeechToText {
 
         // create SpeechToTextSession
         let session = SpeechToTextSession(
-            authMethod: authMethod,
+            authenticator: authenticator,
             model: model,
             baseModelVersion: baseModelVersion,
             languageCustomizationID: languageCustomizationID,
@@ -190,6 +199,11 @@ extension SpeechToText {
         )
 
         // set url
+        guard let websocketsURL = websocketsURL else {
+            callback.onError?(WatsonError.noEndpoint)
+            return
+        }
+
         session.websocketsURL = websocketsURL
 
         // set headers

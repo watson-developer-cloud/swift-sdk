@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** CreateEnvironmentRequest. */
+/**
+ Object containing information about a new environment.
+ */
 internal struct CreateEnvironmentRequest: Codable, Equatable {
 
     /**

@@ -16,7 +16,7 @@
 // swiftlint:disable file_length
 
 import Foundation
-import RestKit
+import IBMSwiftSDKCore
 
 /**
  The IBM Watson&trade; Tone Analyzer service uses linguistic analysis to detect emotional and language tones in written
@@ -30,15 +30,18 @@ import RestKit
 public class ToneAnalyzer {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://gateway.watsonplatform.net/tone-analyzer/api"
+    public var serviceURL: String? = "https://gateway.watsonplatform.net/tone-analyzer/api"
+
+    /// Service identifiers
     internal let serviceName = "ToneAnalyzer"
     internal let serviceVersion = "v3"
+    internal let serviceSdkName = "tone_analyzer"
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
     var session = URLSession(configuration: URLSessionConfiguration.default)
-    var authMethod: AuthenticationMethod
+    public let authenticator: Authenticator
     let version: String
 
     #if os(Linux)
@@ -55,18 +58,16 @@ public class ToneAnalyzer {
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
      */
-    public init?(version: String) {
+    public init(version: String) throws {
         self.version = version
-        guard let credentials = Shared.extractCredentials(serviceName: "tone_analyzer") else {
-            return nil
-        }
-        guard let authMethod = Shared.getAuthMethod(from: credentials) else {
-            return nil
-        }
-        if let serviceURL = Shared.getServiceURL(from: credentials) {
+
+        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
+        self.authenticator = authenticator
+
+        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
             self.serviceURL = serviceURL
         }
-        self.authMethod = authMethod
+
         RestRequest.userAgent = Shared.userAgent
     }
     #endif
@@ -76,46 +77,12 @@ public class ToneAnalyzer {
 
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
-     - parameter username: The username used to authenticate with the service.
-     - parameter password: The password used to authenticate with the service.
+     - parameter authenticator: The Authenticator object used to authenticate requests to the service
      */
-    public init(version: String, username: String, password: String) {
+    public init(version: String, authenticator: Authenticator) {
         self.version = version
-        self.authMethod = Shared.getAuthMethod(username: username, password: password)
+        self.authenticator = authenticator
         RestRequest.userAgent = Shared.userAgent
-    }
-
-    /**
-     Create a `ToneAnalyzer` object.
-
-     - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
-     - parameter apiKey: An API key for IAM that can be used to obtain access tokens for the service.
-     - parameter iamUrl: The URL for the IAM service.
-     */
-    public init(version: String, apiKey: String, iamUrl: String? = nil) {
-        self.authMethod = Shared.getAuthMethod(apiKey: apiKey, iamURL: iamUrl)
-        self.version = version
-        RestRequest.userAgent = Shared.userAgent
-    }
-
-    /**
-     Create a `ToneAnalyzer` object.
-
-     - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
-     - parameter accessToken: An access token for the service.
-     */
-    public init(version: String, accessToken: String) {
-        self.version = version
-        self.authMethod = IAMAccessToken(accessToken: accessToken)
-        RestRequest.userAgent = Shared.userAgent
-    }
-
-    public func accessToken(_ newToken: String) {
-        if self.authMethod is IAMAccessToken {
-            self.authMethod = IAMAccessToken(accessToken: newToken)
-        }
     }
 
     #if !os(Linux)
@@ -203,8 +170,7 @@ public class ToneAnalyzer {
         contentLanguage: String? = nil,
         acceptLanguage: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ToneAnalysis>?, WatsonError?) -> Void)
-    {
+        completionHandler: @escaping (WatsonResponse<ToneAnalysis>?, WatsonError?) -> Void) {
         // construct body
         guard let body = toneContent.content else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
@@ -236,12 +202,19 @@ public class ToneAnalyzer {
         }
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + "/v3/tone",
+            url: serviceEndpoint + "/v3/tone",
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -284,8 +257,7 @@ public class ToneAnalyzer {
         contentLanguage: String? = nil,
         acceptLanguage: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<UtteranceAnalyses>?, WatsonError?) -> Void)
-    {
+        completionHandler: @escaping (WatsonResponse<UtteranceAnalyses>?, WatsonError?) -> Void) {
         // construct body
         let toneChatRequest = ToneChatInput(
             utterances: utterances)
@@ -315,12 +287,19 @@ public class ToneAnalyzer {
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + "/v3/tone_chat",
+            url: serviceEndpoint + "/v3/tone_chat",
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body

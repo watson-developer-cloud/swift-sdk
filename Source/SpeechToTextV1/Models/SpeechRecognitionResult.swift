@@ -25,7 +25,7 @@ public struct SpeechRecognitionResult: Codable, Equatable {
      An indication of whether the transcription results are final. If `true`, the results for this utterance are not
      updated further; no additional results are sent for a `result_index` once its results are indicated as final.
      */
-    public var finalResults: Bool
+    public var `final`: Bool
 
     /**
      An array of alternative transcripts. The `alternatives` array can include additional requested output such as word
@@ -49,7 +49,7 @@ public struct SpeechRecognitionResult: Codable, Equatable {
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case finalResults = "final"
+        case `final` = "final"
         case alternatives = "alternatives"
         case keywordsResult = "keywords_result"
         case wordAlternatives = "word_alternatives"

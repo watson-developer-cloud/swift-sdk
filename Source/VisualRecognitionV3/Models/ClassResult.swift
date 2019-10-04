@@ -28,7 +28,7 @@ public struct ClassResult: Codable, Equatable {
      response might not be in the specified language when the requested language is not supported or when there is no
      translation for the class name.
      */
-    public var className: String
+    public var `class`: String
 
     /**
      Confidence score for the property in the range of 0 to 1. A higher score indicates greater likelihood that the
@@ -44,7 +44,7 @@ public struct ClassResult: Codable, Equatable {
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case className = "class"
+        case `class` = "class"
         case score = "score"
         case typeHierarchy = "type_hierarchy"
     }

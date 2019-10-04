@@ -19,7 +19,7 @@
 
 import Foundation
 import AVFoundation
-import RestKit
+import IBMSwiftSDKCore
 
 /**
  The IBM Watson Speech to Text service enables you to add speech transcription capabilities to
@@ -105,7 +105,7 @@ public class SpeechToTextSession {
         )!
         var socket = SpeechToTextSocket(
             url: url,
-            authMethod: authMethod,
+            authenticator: authenticator,
             defaultHeaders: self.defaultHeaders
         )
         socket.onDisconnect = { [weak self] in
@@ -123,7 +123,7 @@ public class SpeechToTextSession {
     private var compress: Bool = true
     private let domain = "com.ibm.watson.developer-cloud.SpeechToTextV1"
 
-    private let authMethod: AuthenticationMethod
+    private let authenticator: Authenticator
     private let model: String?
     private let baseModelVersion: String?
     private let languageCustomizationID: String?
@@ -131,8 +131,8 @@ public class SpeechToTextSession {
     private let learningOptOut: Bool?
     private let customerID: String?
 
-    internal init(
-        authMethod: AuthenticationMethod,
+    public init(
+        authenticator: Authenticator,
         model: String? = nil,
         baseModelVersion: String? = nil,
         languageCustomizationID: String? = nil,
@@ -140,7 +140,7 @@ public class SpeechToTextSession {
         learningOptOut: Bool? = nil,
         customerID: String? = nil)
     {
-        self.authMethod = authMethod
+        self.authenticator = authenticator
         self.model = model
         self.baseModelVersion = baseModelVersion
         self.languageCustomizationID = languageCustomizationID
@@ -158,108 +158,11 @@ public class SpeechToTextSession {
     }
 
     /**
-     Create a `SpeechToTextSession` object.
-
-     - parameter username: The username used to authenticate with the service.
-     - parameter password: The password used to authenticate with the service.
-     - parameter model: The language and sample rate of the audio. For supported models, visit
-        https://cloud.ibm.com/docs/services/speech-to-text/input.html#models.
-     - parameter baseModelVersion: The version of the specified base model that is to be used for all requests sent
-       over the connection. Multiple versions of a base model can exist when a model is updated for internal improvements.
-       The parameter is intended primarily for use with custom models that have been upgraded for a new base model.
-       The default value depends on whether the parameter is used with or without a custom model. See
-       [Base model version](https://cloud.ibm.com/docs/services/speech-to-text/input.html#version).
-     - parameter languageCustomizationID: The customization ID (GUID) of a custom language model that is to be used
-       with the recognition request. The base model of the specified custom language model must match the model
-       specified with the `model` parameter. You must make the request with service credentials created for the instance
-       of the service that owns the custom model. By default, no custom language model is used. See [Custom
-       models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
-     - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model
-       that is to be used with the recognition request. The base model of the specified custom
-       acoustic model must match the model specified with the `model` parameter. By default, no
-       custom acoustic model is used.
-     - parameter learningOptOut: If `true`, then this request will not be logged for training.
-     - parameter customerID: Associates a customer ID with all data that is passed over the connection.
-       By default, no customer ID is associated with the data.
-     */
-    public convenience init(
-        username: String,
-        password: String,
-        model: String? = nil,
-        baseModelVersion: String? = nil,
-        languageCustomizationID: String? = nil,
-        acousticCustomizationID: String? = nil,
-        learningOptOut: Bool? = nil,
-        customerID: String? = nil)
-    {
-        let authMethod = BasicAuthentication(username: username, password: password)
-        self.init(
-            authMethod: authMethod,
-            model: model,
-            baseModelVersion: baseModelVersion,
-            languageCustomizationID: languageCustomizationID,
-            acousticCustomizationID: acousticCustomizationID,
-            learningOptOut: learningOptOut,
-            customerID: customerID)
-    }
-
-    /**
-     Create a `SpeechToTextSession` object.
-
-     - parameter apiKey: An API key for IAM that can be used to obtain access tokens for the service.
-     - parameter iamUrl: The URL for the IAM service.
-     - parameter model: The language and sample rate of the audio. For supported models, visit
-       https://cloud.ibm.com/docs/services/speech-to-text/input.html#models.
-     - parameter baseModelVersion: The version of the specified base model that is to be used for all requests sent
-       over the connection. Multiple versions of a base model can exist when a model is updated for internal improvements.
-       The parameter is intended primarily for use with custom models that have been upgraded for a new base model.
-       The default value depends on whether the parameter is used with or without a custom model. See
-       [Base model version](https://cloud.ibm.com/docs/services/speech-to-text/input.html#version).
-     - parameter languageCustomizationID: The customization ID (GUID) of a custom language model that is to be used
-       with the recognition request. The base model of the specified custom language model must match the model
-       specified with the `model` parameter. You must make the request with service credentials created for the instance
-       of the service that owns the custom model. By default, no custom language model is used. See [Custom
-       models](https://cloud.ibm.com/docs/services/speech-to-text/input.html#custom).
-     - parameter acousticCustomizationID: The customization ID (GUID) of a custom acoustic model
-       that is to be used with the recognition request. The base model of the specified custom
-       acoustic model must match the model specified with the `model` parameter. By default, no
-       custom acoustic model is used.
-     - parameter learningOptOut: If `true`, then this request will not be logged for training.
-     - parameter customerID: Associates a customer ID with all data that is passed over the connection.
-       By default, no customer ID is associated with the data.
-     */
-    public convenience init(
-        apiKey: String,
-        iamUrl: String? = nil,
-        model: String? = nil,
-        baseModelVersion: String? = nil,
-        languageCustomizationID: String? = nil,
-        acousticCustomizationID: String? = nil,
-        learningOptOut: Bool? = nil,
-        customerID: String? = nil)
-    {
-        let authMethod = IAMAuthentication(apiKey: apiKey, url: iamUrl)
-        self.init(
-            authMethod: authMethod,
-            model: model,
-            baseModelVersion: baseModelVersion,
-            languageCustomizationID: languageCustomizationID,
-            acousticCustomizationID: acousticCustomizationID,
-            learningOptOut: learningOptOut,
-            customerID: customerID
-        )
-    }
-
-    /**
      Connect to the Speech to Text service.
 
      If set, the `onConnect()` callback will be invoked after the session connects to the service.
      */
     public func connect() {
-        // Make sure that the tokenURL is set in the authMethod, if needed
-        if let basicAuth = authMethod as? BasicAuthentication {
-            basicAuth.tokenURL = tokenURL + "?url=" + serviceURL
-        }
         socket.connect()
     }
 

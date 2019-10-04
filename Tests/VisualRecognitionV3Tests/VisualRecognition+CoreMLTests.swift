@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2018.
+ * (C) Copyright IBM Corp. 2016, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,7 +40,8 @@ class VisualRecognitionCoreMLTests: XCTestCase {
             XCTFail("Missing credentials for Visual Recognition service")
             return
         }
-        visualRecognition = VisualRecognition(version: versionDate, apiKey: apiKey)
+        let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
+        visualRecognition = VisualRecognition(version: versionDate, authenticator: authenticator)
         if let url = WatsonCredentials.VisualRecognitionURL {
             visualRecognition.serviceURL = url
         }
@@ -82,7 +83,7 @@ class VisualRecognitionCoreMLTests: XCTestCase {
             }
 
             // ensure the model is included in list of local models
-            XCTAssertEqual(localModels.count, 1)
+            XCTAssertGreaterThan(localModels.count, 0)
             XCTAssert(localModels.contains(classifierID))
 
             // delete the local model

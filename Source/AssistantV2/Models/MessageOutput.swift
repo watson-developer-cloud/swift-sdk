@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import IBMSwiftSDKCore
 
 /**
  Assistant output to be rendered or processed by the client.
@@ -26,7 +26,7 @@ public struct MessageOutput: Codable, Equatable {
      Output intended for any channel. It is the responsibility of the client application to implement the supported
      response types.
      */
-    public var generic: [DialogRuntimeResponseGeneric]?
+    public var generic: [RuntimeResponseGeneric]?
 
     /**
      An array of intents recognized in the user input, sorted in descending order of confidence.

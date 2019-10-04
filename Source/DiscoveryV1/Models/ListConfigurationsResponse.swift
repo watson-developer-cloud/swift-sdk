@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,13 @@
 
 import Foundation
 
-/** ListConfigurationsResponse. */
+/**
+ Object containing an array of available configurations.
+ */
 public struct ListConfigurationsResponse: Codable, Equatable {
 
     /**
-     An array of Configurations that are available for the service instance.
+     An array of configurations that are available for the service instance.
      */
     public var configurations: [Configuration]?
 

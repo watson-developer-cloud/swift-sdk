@@ -16,7 +16,10 @@
 
 import Foundation
 
-/** Enrichment. */
+/**
+ Enrichment step to perform on the document. Each enrichment is performed on the specified field in the order that they
+ are listed in the configuration.
+ */
 public struct Enrichment: Codable, Equatable {
 
     /**
@@ -52,7 +55,7 @@ public struct Enrichment: Codable, Equatable {
      [the
      documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-element-classification#element-classification).
      */
-    public var enrichmentName: String
+    public var enrichment: String
 
     /**
      If true, then most errors generated during the enrichment process will be treated as warnings and will not cause
@@ -71,7 +74,7 @@ public struct Enrichment: Codable, Equatable {
         case destinationField = "destination_field"
         case sourceField = "source_field"
         case overwrite = "overwrite"
-        case enrichmentName = "enrichment"
+        case enrichment = "enrichment"
         case ignoreDownstreamErrors = "ignore_downstream_errors"
         case options = "options"
     }
@@ -85,7 +88,7 @@ public struct Enrichment: Codable, Equatable {
      - parameter sourceField: Field to be enriched.
        Arrays can be specified as the **source_field** if the **enrichment** service for this enrichment is set to
        `natural_language_undstanding`.
-     - parameter enrichmentName: Name of the enrichment service to call. Current options are
+     - parameter enrichment: Name of the enrichment service to call. Current options are
        `natural_language_understanding` and `elements`.
         When using `natual_language_understanding`, the **options** object must contain Natural Language Understanding
        options.
@@ -105,7 +108,7 @@ public struct Enrichment: Codable, Equatable {
     public init(
         destinationField: String,
         sourceField: String,
-        enrichmentName: String,
+        enrichment: String,
         description: String? = nil,
         overwrite: Bool? = nil,
         ignoreDownstreamErrors: Bool? = nil,
@@ -114,7 +117,7 @@ public struct Enrichment: Codable, Equatable {
     {
         self.destinationField = destinationField
         self.sourceField = sourceField
-        self.enrichmentName = enrichmentName
+        self.enrichment = enrichment
         self.description = description
         self.overwrite = overwrite
         self.ignoreDownstreamErrors = ignoreDownstreamErrors

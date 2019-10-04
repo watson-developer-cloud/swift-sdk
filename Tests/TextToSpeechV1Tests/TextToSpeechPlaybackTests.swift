@@ -43,11 +43,13 @@ class TextToSpeechPlaybackTests: XCTestCase {
     /** Instantiate Text to Speech instance. */
     func instantiateTextToSpeech() {
         if let apiKey = WatsonCredentials.TextToSpeechAPIKey {
-            textToSpeech = TextToSpeech(apiKey: apiKey)
+            let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
+            textToSpeech = TextToSpeech(authenticator: authenticator)
         } else {
             let username = WatsonCredentials.TextToSpeechUsername
             let password = WatsonCredentials.TextToSpeechPassword
-            textToSpeech = TextToSpeech(username: username, password: password)
+            let authenticator = WatsonBasicAuthenticator.init(username: username, password: password)
+            textToSpeech = TextToSpeech(authenticator: authenticator)
         }
         if let url = WatsonCredentials.TextToSpeechURL {
             textToSpeech.serviceURL = url
@@ -101,7 +103,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
 
-        textToSpeech.synthesize(text: text, voice: "en-US_LisaVoice", accept: "audio/wav") {
+        textToSpeech.synthesize(text: text, accept: "audio/wav", voice: "en-US_LisaVoice") {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -132,7 +134,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
 
-        textToSpeech.synthesize(text: germanText, voice: "de-DE_DieterVoice", accept: "audio/wav") {
+        textToSpeech.synthesize(text: germanText, accept: "audio/wav", voice: "de-DE_DieterVoice") {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -163,7 +165,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
         let description = "Synthesize text to spoken audio."
         let expectation = self.expectation(description: description)
 
-        textToSpeech.synthesize(text: japaneseText, voice: "ja-JP_EmiVoice", accept: "audio/wav") {
+        textToSpeech.synthesize(text: japaneseText, accept: "audio/wav", voice: "ja-JP_EmiVoice") {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))

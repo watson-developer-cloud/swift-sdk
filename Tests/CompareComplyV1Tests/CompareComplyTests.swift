@@ -17,7 +17,6 @@
 import XCTest
 import Foundation
 import CompareComplyV1
-import RestKit
 
 class CompareComplyTests: XCTestCase {
 
@@ -96,14 +95,15 @@ class CompareComplyTests: XCTestCase {
             ("testExtractTablesUsingDOC", testExtractTablesUsingDOC),
             ("testCompareDocuments", testCompareDocuments),
             ("testFeedbackOperations", testFeedbackOperations),
-            ("testBatchOperations", testBatchOperations),
+            ("testBatchOperations", testBatchOperations)
         ]
     }
 
     /** Instantiate CompareComply. */
     func instantiateCompareComply() {
         let version = "2018-11-15"
-        compareComply = CompareComply(version: version, apiKey: WatsonCredentials.CompareComplyV1APIKey)
+        let authenticator = WatsonIAMAuthenticator.init(apiKey: WatsonCredentials.CompareComplyV1APIKey)
+        compareComply = CompareComply(version: version, authenticator: authenticator)
         if let url = WatsonCredentials.CompareComplyURL {
             compareComply.serviceURL = url
         }
@@ -128,7 +128,7 @@ class CompareComplyTests: XCTestCase {
             XCTAssertNil(error, "Timeout")
         }
     }
-    
+
     // MARK: HTML Conversion tests
 
     func testConvertToHtmlUsingPDF() {
@@ -139,9 +139,7 @@ class CompareComplyTests: XCTestCase {
             return
         }
 
-        compareComply.convertToHTML(
-            file: file,
-            filename: "contract_A.pdf") {
+        compareComply.convertToHTML(file: file, fileContentType: "application/pdf") {
                 response, error in
 
                 if let error = error {
@@ -152,7 +150,7 @@ class CompareComplyTests: XCTestCase {
                     XCTFail(missingResultMessage)
                     return
                 }
-                
+
                 XCTAssertNotNil(result.html)
 
                 XCTAssertNotNil(result.numPages)
@@ -168,15 +166,13 @@ class CompareComplyTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
     func testConvertToHtmlUsingPNG() {
         let expectation = self.expectation(description: "convert PDF document to HTML")
-        
-        compareComply.convertToHTML(
-            file: contractAPNGFile,
-            filename: "Contract_A.png") {
+
+        compareComply.convertToHTML(file: contractAPNGFile, fileContentType: "image/png") {
                 response, error in
-                
+
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
                     return
@@ -185,15 +181,15 @@ class CompareComplyTests: XCTestCase {
                     XCTFail(missingResultMessage)
                     return
                 }
-                
+
                 XCTAssertNotNil(result.html)
-                
+
                 XCTAssertNotNil(result.numPages)
                 if let numPages = result.numPages,
                     let numberOfPages = Int(numPages) {
                     XCTAssert(numberOfPages == 1)
                 }
-                
+
                 XCTAssertNotNil(result.title)
                 if let title = result.title {
                     XCTAssert(title.contains("no title"))
@@ -202,15 +198,13 @@ class CompareComplyTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
     func testConvertToHtmlUsingJPG() {
         let expectation = self.expectation(description: "convert PDF document to HTML")
-        
-        compareComply.convertToHTML(
-            file: contractAJPGFile,
-            filename: "Contract_A.jpg") {
+
+        compareComply.convertToHTML(file: contractAJPGFile, fileContentType: "image/jpg") {
                 response, error in
-                
+
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
                     return
@@ -219,15 +213,15 @@ class CompareComplyTests: XCTestCase {
                     XCTFail(missingResultMessage)
                     return
                 }
-                
+
                 XCTAssertNotNil(result.html)
-                
+
                 XCTAssertNotNil(result.numPages)
                 if let numPages = result.numPages,
                     let numberOfPages = Int(numPages) {
                     XCTAssert(numberOfPages == 1)
                 }
-                
+
                 XCTAssertNotNil(result.title)
                 if let title = result.title {
                     XCTAssert(title.contains("no title"))
@@ -239,12 +233,10 @@ class CompareComplyTests: XCTestCase {
 
     func testConvertToHtmlUsingBMP() {
         let expectation = self.expectation(description: "convert PDF document to HTML")
-        
-        compareComply.convertToHTML(
-            file: contractABMPFile,
-            filename: "Contract_A.bmp") {
+
+        compareComply.convertToHTML(file: contractABMPFile, fileContentType: "image/bmp") {
                 response, error in
-                
+
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
                     return
@@ -253,15 +245,15 @@ class CompareComplyTests: XCTestCase {
                     XCTFail(missingResultMessage)
                     return
                 }
-                
+
                 XCTAssertNotNil(result.html)
-                
+
                 XCTAssertNotNil(result.numPages)
                 if let numPages = result.numPages,
                     let numberOfPages = Int(numPages) {
                     XCTAssert(numberOfPages == 1)
                 }
-                
+
                 XCTAssertNotNil(result.title)
                 if let title = result.title {
                     XCTAssert(title.contains("no title"))
@@ -273,12 +265,10 @@ class CompareComplyTests: XCTestCase {
 
     func testConvertToHtmlUsingGIF() {
         let expectation = self.expectation(description: "convert PDF document to HTML")
-        
-        compareComply.convertToHTML(
-            file: contractAGIFFile,
-            filename: "Contract_A.gif") {
+
+        compareComply.convertToHTML(file: contractAGIFFile, fileContentType: "image/gif") {
                 response, error in
-                
+
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
                     return
@@ -287,15 +277,15 @@ class CompareComplyTests: XCTestCase {
                     XCTFail(missingResultMessage)
                     return
                 }
-                
+
                 XCTAssertNotNil(result.html)
-                
+
                 XCTAssertNotNil(result.numPages)
                 if let numPages = result.numPages,
                     let numberOfPages = Int(numPages) {
                     XCTAssert(numberOfPages == 1)
                 }
-                
+
                 XCTAssertNotNil(result.title)
                 if let title = result.title {
                     XCTAssert(title.contains("no title"))
@@ -304,15 +294,13 @@ class CompareComplyTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
     func testConvertToHtmlUsingTIFF() {
         let expectation = self.expectation(description: "convert PDF document to HTML")
-        
-        compareComply.convertToHTML(
-            file: contractATIFFFile,
-            filename: "Contract_A.tiff") {
+
+        compareComply.convertToHTML(file: contractATIFFFile, fileContentType: "image/tiff") {
                 response, error in
-                
+
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
                     return
@@ -321,15 +309,15 @@ class CompareComplyTests: XCTestCase {
                     XCTFail(missingResultMessage)
                     return
                 }
-                
+
                 XCTAssertNotNil(result.html)
-                
+
                 XCTAssertNotNil(result.numPages)
                 if let numPages = result.numPages,
                     let numberOfPages = Int(numPages) {
                     XCTAssert(numberOfPages == 1)
                 }
-                
+
                 XCTAssertNotNil(result.title)
                 if let title = result.title {
                     XCTAssert(title.contains("no title"))
@@ -341,12 +329,10 @@ class CompareComplyTests: XCTestCase {
 
     func testConvertToHtmlUsingDOCX() {
         let expectation = self.expectation(description: "convert PDF document to HTML")
-        
-        compareComply.convertToHTML(
-            file: contractADOCXFile,
-            filename: "Contract_A.docx") {
+
+        compareComply.convertToHTML(file: contractADOCXFile, fileContentType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
                 response, error in
-                
+
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
                     return
@@ -355,15 +341,15 @@ class CompareComplyTests: XCTestCase {
                     XCTFail(missingResultMessage)
                     return
                 }
-                
+
                 XCTAssertNotNil(result.html)
-                
+
                 XCTAssertNotNil(result.numPages)
                 if let numPages = result.numPages,
                     let numberOfPages = Int(numPages) {
                     XCTAssert(numberOfPages == 4)
                 }
-                
+
                 XCTAssertNotNil(result.title)
                 if let title = result.title {
                     XCTAssert(title.contains("no title"))
@@ -372,15 +358,13 @@ class CompareComplyTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
     func testConvertToHtmlUsingDOC() {
         let expectation = self.expectation(description: "convert PDF document to HTML")
-        
-        compareComply.convertToHTML(
-            file: contractADOCFile,
-            filename: "Contract_A.doc") {
+
+        compareComply.convertToHTML(file: contractADOCFile, fileContentType: "application/msword") {
                 response, error in
-                
+
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
                     return
@@ -389,15 +373,15 @@ class CompareComplyTests: XCTestCase {
                     XCTFail(missingResultMessage)
                     return
                 }
-                
+
                 XCTAssertNotNil(result.html)
-                
+
                 XCTAssertNotNil(result.numPages)
                 if let numPages = result.numPages,
                     let numberOfPages = Int(numPages) {
                     XCTAssert(numberOfPages == 4)
                 }
-                
+
                 XCTAssertNotNil(result.title)
                 if let title = result.title {
                     XCTAssert(title.contains("no title"))
@@ -406,7 +390,7 @@ class CompareComplyTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
     // MARK: Classify Elements tests
 
     func testClassifyElementsUsingPDF() {
@@ -446,15 +430,15 @@ class CompareComplyTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
     func testClassifyElementsUsingPNG() {
         let expectation = self.expectation(description: "Classify elements")
-        
+
         compareComply.classifyElements(
             file: contractAPNGFile,
             fileContentType: "image/png") {
                 response, error in
-                
+
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
                     return
@@ -463,7 +447,7 @@ class CompareComplyTests: XCTestCase {
                     XCTFail(missingResultMessage)
                     return
                 }
-                
+
                 XCTAssertNotNil(result.contractAmounts)
                 XCTAssertNotNil(result.document)
                 XCTAssertNotNil(result.document?.title)
@@ -472,27 +456,27 @@ class CompareComplyTests: XCTestCase {
                 XCTAssertNotNil(result.modelID)
                 XCTAssertNotNil(result.modelVersion)
                 XCTAssertNotNil(result.parties)
-                
+
                 if let title = result.document?.title {
                     XCTAssert(title.contains("no title"))
                 }
                 if let modelID = result.modelID {
                     XCTAssertEqual(modelID, "contracts")
                 }
-                
+
                 expectation.fulfill()
         }
         waitForExpectations()
     }
-    
+
     func testClassifyElementsUsingJPG() {
         let expectation = self.expectation(description: "Classify elements")
-        
+
         compareComply.classifyElements(
             file: contractAJPGFile,
             fileContentType: "image/jpg") {
                 response, error in
-                
+
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
                     return
@@ -501,7 +485,7 @@ class CompareComplyTests: XCTestCase {
                     XCTFail(missingResultMessage)
                     return
                 }
-                
+
                 XCTAssertNotNil(result.contractAmounts)
                 XCTAssertNotNil(result.document)
                 XCTAssertNotNil(result.document?.title)
@@ -510,27 +494,27 @@ class CompareComplyTests: XCTestCase {
                 XCTAssertNotNil(result.modelID)
                 XCTAssertNotNil(result.modelVersion)
                 XCTAssertNotNil(result.parties)
-                
+
                 if let title = result.document?.title {
                     XCTAssert(title.contains("no title"))
                 }
                 if let modelID = result.modelID {
                     XCTAssertEqual(modelID, "contracts")
                 }
-                
+
                 expectation.fulfill()
         }
         waitForExpectations()
     }
-    
+
     func testClassifyElementsUsingBMP() {
         let expectation = self.expectation(description: "Classify elements")
-        
+
         compareComply.classifyElements(
             file: contractABMPFile,
             fileContentType: "image/bmp") {
                 response, error in
-                
+
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
                     return
@@ -539,7 +523,7 @@ class CompareComplyTests: XCTestCase {
                     XCTFail(missingResultMessage)
                     return
                 }
-                
+
                 XCTAssertNotNil(result.contractAmounts)
                 XCTAssertNotNil(result.document)
                 XCTAssertNotNil(result.document?.title)
@@ -548,27 +532,27 @@ class CompareComplyTests: XCTestCase {
                 XCTAssertNotNil(result.modelID)
                 XCTAssertNotNil(result.modelVersion)
                 XCTAssertNotNil(result.parties)
-                
+
                 if let title = result.document?.title {
                     XCTAssert(title.contains("no title"))
                 }
                 if let modelID = result.modelID {
                     XCTAssertEqual(modelID, "contracts")
                 }
-                
+
                 expectation.fulfill()
         }
         waitForExpectations()
     }
-    
+
     func testClassifyElementsUsingGIF() {
         let expectation = self.expectation(description: "Classify elements")
-        
+
         compareComply.classifyElements(
             file: contractAGIFFile,
             fileContentType: "image/gif") {
                 response, error in
-                
+
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
                     return
@@ -577,7 +561,7 @@ class CompareComplyTests: XCTestCase {
                     XCTFail(missingResultMessage)
                     return
                 }
-                
+
                 XCTAssertNotNil(result.contractAmounts)
                 XCTAssertNotNil(result.document)
                 XCTAssertNotNil(result.document?.title)
@@ -586,27 +570,27 @@ class CompareComplyTests: XCTestCase {
                 XCTAssertNotNil(result.modelID)
                 XCTAssertNotNil(result.modelVersion)
                 XCTAssertNotNil(result.parties)
-                
+
                 if let title = result.document?.title {
                     XCTAssert(title.contains("no title"))
                 }
                 if let modelID = result.modelID {
                     XCTAssertEqual(modelID, "contracts")
                 }
-                
+
                 expectation.fulfill()
         }
         waitForExpectations()
     }
-    
+
     func testClassifyElementsUsingTIFF() {
         let expectation = self.expectation(description: "Classify elements")
-        
+
         compareComply.classifyElements(
             file: contractATIFFFile,
             fileContentType: "image/tiff") {
                 response, error in
-                
+
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
                     return
@@ -615,7 +599,7 @@ class CompareComplyTests: XCTestCase {
                     XCTFail(missingResultMessage)
                     return
                 }
-                
+
                 XCTAssertNotNil(result.contractAmounts)
                 XCTAssertNotNil(result.document)
                 XCTAssertNotNil(result.document?.title)
@@ -624,27 +608,27 @@ class CompareComplyTests: XCTestCase {
                 XCTAssertNotNil(result.modelID)
                 XCTAssertNotNil(result.modelVersion)
                 XCTAssertNotNil(result.parties)
-                
+
                 if let title = result.document?.title {
                     XCTAssert(title.contains("no title"))
                 }
                 if let modelID = result.modelID {
                     XCTAssertEqual(modelID, "contracts")
                 }
-                
+
                 expectation.fulfill()
         }
         waitForExpectations()
     }
-    
+
     func testClassifyElementsUsingDOCX() {
         let expectation = self.expectation(description: "Classify elements")
-        
+
         compareComply.classifyElements(
             file: contractADOCXFile,
             fileContentType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
                 response, error in
-                
+
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
                     return
@@ -653,7 +637,7 @@ class CompareComplyTests: XCTestCase {
                     XCTFail(missingResultMessage)
                     return
                 }
-                
+
                 XCTAssertNotNil(result.contractAmounts)
                 XCTAssertNotNil(result.document)
                 XCTAssertNotNil(result.document?.title)
@@ -662,27 +646,27 @@ class CompareComplyTests: XCTestCase {
                 XCTAssertNotNil(result.modelID)
                 XCTAssertNotNil(result.modelVersion)
                 XCTAssertNotNil(result.parties)
-                
+
                 if let title = result.document?.title {
                     XCTAssert(title.contains("no title"))
                 }
                 if let modelID = result.modelID {
                     XCTAssertEqual(modelID, "contracts")
                 }
-                
+
                 expectation.fulfill()
         }
         waitForExpectations()
     }
-    
+
     func testClassifyElementsUsingDOC() {
         let expectation = self.expectation(description: "Classify elements")
-        
+
         compareComply.classifyElements(
             file: contractADOCFile,
             fileContentType: "application/msword") {
                 response, error in
-                
+
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
                     return
@@ -691,7 +675,7 @@ class CompareComplyTests: XCTestCase {
                     XCTFail(missingResultMessage)
                     return
                 }
-                
+
                 XCTAssertNotNil(result.contractAmounts)
                 XCTAssertNotNil(result.document)
                 XCTAssertNotNil(result.document?.title)
@@ -700,21 +684,21 @@ class CompareComplyTests: XCTestCase {
                 XCTAssertNotNil(result.modelID)
                 XCTAssertNotNil(result.modelVersion)
                 XCTAssertNotNil(result.parties)
-                
+
                 if let title = result.document?.title {
                     XCTAssert(title.contains("no title"))
                 }
                 if let modelID = result.modelID {
                     XCTAssertEqual(modelID, "contracts")
                 }
-                
+
                 expectation.fulfill()
         }
         waitForExpectations()
     }
 
     // MARK: Table Extraction tests
-    
+
     func testExtractTablesUsingPNG() {
         let expectation = self.expectation(description: "Extract tables")
 
@@ -746,15 +730,15 @@ class CompareComplyTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
     func testExtractTablesUsingJPG() {
         let expectation = self.expectation(description: "Extract tables")
-        
+
         compareComply.extractTables(
             file: testTableJPGFile,
             fileContentType: "image/jpg") {
                 response, error in
-                
+
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
                     return
@@ -763,30 +747,30 @@ class CompareComplyTests: XCTestCase {
                     XCTFail(missingResultMessage)
                     return
                 }
-                
+
                 XCTAssertNotNil(result.document)
                 XCTAssertNotNil(result.modelID)
                 XCTAssertNotNil(result.tables)
-                
+
                 if let table = result.tables?[0] {
                     XCTAssertEqual(table.rowHeaders?.count, 5)
                     XCTAssertEqual(table.columnHeaders?.count, 5)
                     XCTAssertEqual(table.bodyCells?.count, 20)
                 }
-                
+
                 expectation.fulfill()
         }
         waitForExpectations()
     }
-    
+
     func testExtractTablesUsingBMP() {
         let expectation = self.expectation(description: "Extract tables")
-        
+
         compareComply.extractTables(
             file: testTableBMPFile,
             fileContentType: "image/bmp") {
                 response, error in
-                
+
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
                     return
@@ -795,30 +779,30 @@ class CompareComplyTests: XCTestCase {
                     XCTFail(missingResultMessage)
                     return
                 }
-                
+
                 XCTAssertNotNil(result.document)
                 XCTAssertNotNil(result.modelID)
                 XCTAssertNotNil(result.tables)
-                
+
                 if let table = result.tables?[0] {
                     XCTAssertEqual(table.rowHeaders?.count, 5)
                     XCTAssertEqual(table.columnHeaders?.count, 5)
                     XCTAssertEqual(table.bodyCells?.count, 20)
                 }
-                
+
                 expectation.fulfill()
         }
         waitForExpectations()
     }
-    
+
     func testExtractTablesUsingGIF() {
         let expectation = self.expectation(description: "Extract tables")
-        
+
         compareComply.extractTables(
             file: testTableGIFFile,
             fileContentType: "image/gif") {
                 response, error in
-                
+
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
                     return
@@ -827,30 +811,30 @@ class CompareComplyTests: XCTestCase {
                     XCTFail(missingResultMessage)
                     return
                 }
-                
+
                 XCTAssertNotNil(result.document)
                 XCTAssertNotNil(result.modelID)
                 XCTAssertNotNil(result.tables)
-                
+
                 if let table = result.tables?[0] {
                     XCTAssertEqual(table.rowHeaders?.count, 5)
                     XCTAssertEqual(table.columnHeaders?.count, 5)
                     XCTAssertEqual(table.bodyCells?.count, 20)
                 }
-                
+
                 expectation.fulfill()
         }
         waitForExpectations()
     }
-    
+
     func testExtractTablesUsingTIFF() {
         let expectation = self.expectation(description: "Extract tables")
-        
+
         compareComply.extractTables(
             file: testTableTIFFFile,
             fileContentType: "image/tiff") {
                 response, error in
-                
+
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
                     return
@@ -859,30 +843,30 @@ class CompareComplyTests: XCTestCase {
                     XCTFail(missingResultMessage)
                     return
                 }
-                
+
                 XCTAssertNotNil(result.document)
                 XCTAssertNotNil(result.modelID)
                 XCTAssertNotNil(result.tables)
-                
+
                 if let table = result.tables?[0] {
                     XCTAssertEqual(table.rowHeaders?.count, 5)
                     XCTAssertEqual(table.columnHeaders?.count, 5)
                     XCTAssertEqual(table.bodyCells?.count, 20)
                 }
-                
+
                 expectation.fulfill()
         }
         waitForExpectations()
     }
-    
+
     func testExtractTablesUsingPDF() {
         let expectation = self.expectation(description: "Extract tables")
-        
+
         compareComply.extractTables(
             file: testTablePDFFile,
             fileContentType: "application/pdf") {
                 response, error in
-                
+
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
                     return
@@ -891,30 +875,30 @@ class CompareComplyTests: XCTestCase {
                     XCTFail(missingResultMessage)
                     return
                 }
-                
+
                 XCTAssertNotNil(result.document)
                 XCTAssertNotNil(result.modelID)
                 XCTAssertNotNil(result.tables)
-                
+
                 if let table = result.tables?[0] {
                     XCTAssertEqual(table.rowHeaders?.count, 4)
                     XCTAssertEqual(table.columnHeaders?.count, 8)
                     XCTAssertEqual(table.bodyCells?.count, 16)
                 }
-                
+
                 expectation.fulfill()
         }
         waitForExpectations()
     }
-    
+
     func testExtractTablesUsingDOCX() {
         let expectation = self.expectation(description: "Extract tables")
-        
+
         compareComply.extractTables(
             file: testTableDOCXFile,
             fileContentType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
                 response, error in
-                
+
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
                     return
@@ -923,30 +907,30 @@ class CompareComplyTests: XCTestCase {
                     XCTFail(missingResultMessage)
                     return
                 }
-                
+
                 XCTAssertNotNil(result.document)
                 XCTAssertNotNil(result.modelID)
                 XCTAssertNotNil(result.tables)
-                
+
                 if let table = result.tables?[0] {
                     XCTAssertEqual(table.rowHeaders?.count, 4)
                     XCTAssertEqual(table.columnHeaders?.count, 8)
                     XCTAssertEqual(table.bodyCells?.count, 16)
                 }
-                
+
                 expectation.fulfill()
         }
         waitForExpectations()
     }
-    
+
     func testExtractTablesUsingDOC() {
         let expectation = self.expectation(description: "Extract tables")
-        
+
         compareComply.extractTables(
             file: testTableDOCFile,
             fileContentType: "application/msword") {
                 response, error in
-                
+
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
                     return
@@ -955,22 +939,22 @@ class CompareComplyTests: XCTestCase {
                     XCTFail(missingResultMessage)
                     return
                 }
-                
+
                 XCTAssertNotNil(result.document)
                 XCTAssertNotNil(result.modelID)
                 XCTAssertNotNil(result.tables)
-                
+
                 if let table = result.tables?[0] {
                     XCTAssertEqual(table.rowHeaders?.count, 0)
                     XCTAssertEqual(table.columnHeaders?.count, 7)
                     XCTAssertEqual(table.bodyCells?.count, 21)
                 }
-                
+
                 expectation.fulfill()
         }
         waitForExpectations()
     }
-    
+
     // MARK: Document Comparison tests
 
     func testCompareDocuments() {
@@ -1003,7 +987,7 @@ class CompareComplyTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
     // MARK: Add Feedback tests
 
     func testFeedbackOperations() {
@@ -1117,7 +1101,7 @@ class CompareComplyTests: XCTestCase {
         waitForExpectations()
 
         let expectation3 = self.expectation(description: "List feedback")
-        compareComply.listFeedback() {
+        compareComply.listFeedback {
             response, error in
 
             if let error = error {
@@ -1222,7 +1206,7 @@ class CompareComplyTests: XCTestCase {
         // Add a teardown block to delete the Feedback entry
         addTeardownBlock {
             if newFeedbackID != nil {
-                self.compareComply.deleteFeedback(feedbackID: newFeedbackID) {_,_ in }
+                self.compareComply.deleteFeedback(feedbackID: newFeedbackID) {_, _ in }
             }
         }
         let userID = "Anthony"
@@ -1316,7 +1300,7 @@ class CompareComplyTests: XCTestCase {
         // Add a teardown block to delete the Feedback entry
         addTeardownBlock {
             if newFeedbackID != nil {
-                self.compareComply.deleteFeedback(feedbackID: newFeedbackID) {_,_ in }
+                self.compareComply.deleteFeedback(feedbackID: newFeedbackID) {_, _ in }
             }
         }
         let userID = "Anthony"
@@ -1365,7 +1349,7 @@ class CompareComplyTests: XCTestCase {
         waitForExpectations()
     }
     #endif
-    
+
     // MARK: Batch Operations tests
 
     func testBatchOperations() {
@@ -1463,7 +1447,7 @@ class CompareComplyTests: XCTestCase {
 
         let expectation4 = self.expectation(description: "List batches")
 
-        compareComply.listBatches() {
+        compareComply.listBatches {
             response, error in
 
             if let error = error {

@@ -16,6 +16,7 @@
 
 import Foundation
 import XCTest
+import IBMSwiftSDKCore
 
 let exampleURL = URL(string: "http://example.com")!
 
@@ -33,8 +34,8 @@ func missingBodyMessage(_ error: Error) -> String {
 
 // MARK: - Service instantiation
 
-let accessToken = "my_access_token"
-let versionDate = "2019-03-29"
+let defaultTestAuthenticator = IAMAuthenticator.init(apiKey: "asdf")
+let versionDate = "2019-08-29"
 
 // MARK: - Mocking requests
 
@@ -78,7 +79,6 @@ class MockURLProtocol: URLProtocol {
     }
 
 }
-
 
 // MARK: - Analyzing request bodies
 

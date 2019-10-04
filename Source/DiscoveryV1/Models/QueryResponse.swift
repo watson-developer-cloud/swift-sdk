@@ -58,6 +58,11 @@ public struct QueryResponse: Codable, Equatable {
      */
     public var retrievalDetails: RetrievalDetails?
 
+    /**
+     The suggestions for a misspelled natural language query.
+     */
+    public var suggestedQuery: String?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case matchingResults = "matching_results"
@@ -67,6 +72,7 @@ public struct QueryResponse: Codable, Equatable {
         case duplicatesRemoved = "duplicates_removed"
         case sessionToken = "session_token"
         case retrievalDetails = "retrieval_details"
+        case suggestedQuery = "suggested_query"
     }
 
 }

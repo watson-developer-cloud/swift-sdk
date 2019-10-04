@@ -15,13 +15,26 @@
  **/
 
 import Foundation
-import RestKit
+import IBMSwiftSDKCore
 
 /**
  An output object that includes the response to the user, the dialog nodes that were triggered, and messages from the
  log.
  */
 public struct OutputData: Codable, Equatable {
+
+    /**
+     An array of the nodes that were triggered to create the response, in the order in which they were visited. This
+     information is useful for debugging and for tracing the path taken through the node tree.
+     */
+    public var nodesVisited: [String]?
+
+    /**
+     An array of objects containing detailed diagnostic information about the nodes that were triggered during
+     processing of the input message. Included only if **nodes_visited_details** is set to `true` in the message
+     request.
+     */
+    public var nodesVisitedDetails: [DialogNodeVisitedDetails]?
 
     /**
      An array of up to 50 messages logged with the request.
@@ -37,32 +50,19 @@ public struct OutputData: Codable, Equatable {
      Output intended for any channel. It is the responsibility of the client application to implement the supported
      response types.
      */
-    public var generic: [DialogRuntimeResponseGeneric]?
-
-    /**
-     An array of the nodes that were triggered to create the response, in the order in which they were visited. This
-     information is useful for debugging and for tracing the path taken through the node tree.
-     */
-    public var nodesVisited: [String]?
-
-    /**
-     An array of objects containing detailed diagnostic information about the nodes that were triggered during
-     processing of the input message. Included only if **nodes_visited_details** is set to `true` in the message
-     request.
-     */
-    public var nodesVisitedDetails: [DialogNodeVisitedDetails]?
+    public var generic: [RuntimeResponseGeneric]?
 
     /// Additional properties associated with this model.
     public var additionalProperties: [String: JSON]
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
+        case nodesVisited = "nodes_visited"
+        case nodesVisitedDetails = "nodes_visited_details"
         case logMessages = "log_messages"
         case text = "text"
         case generic = "generic"
-        case nodesVisited = "nodes_visited"
-        case nodesVisitedDetails = "nodes_visited_details"
-        static let allValues = [logMessages, text, generic, nodesVisited, nodesVisitedDetails]
+        static let allValues = [nodesVisited, nodesVisitedDetails, logMessages, text, generic]
     }
 
     /**
@@ -70,52 +70,52 @@ public struct OutputData: Codable, Equatable {
 
      - parameter logMessages: An array of up to 50 messages logged with the request.
      - parameter text: An array of responses to the user.
-     - parameter generic: Output intended for any channel. It is the responsibility of the client application to
-       implement the supported response types.
      - parameter nodesVisited: An array of the nodes that were triggered to create the response, in the order in
        which they were visited. This information is useful for debugging and for tracing the path taken through the node
        tree.
      - parameter nodesVisitedDetails: An array of objects containing detailed diagnostic information about the nodes
        that were triggered during processing of the input message. Included only if **nodes_visited_details** is set to
        `true` in the message request.
+     - parameter generic: Output intended for any channel. It is the responsibility of the client application to
+       implement the supported response types.
 
      - returns: An initialized `OutputData`.
      */
     public init(
         logMessages: [LogMessage],
         text: [String],
-        generic: [DialogRuntimeResponseGeneric]? = nil,
         nodesVisited: [String]? = nil,
         nodesVisitedDetails: [DialogNodeVisitedDetails]? = nil,
+        generic: [RuntimeResponseGeneric]? = nil,
         additionalProperties: [String: JSON] = [:]
     )
     {
         self.logMessages = logMessages
         self.text = text
-        self.generic = generic
         self.nodesVisited = nodesVisited
         self.nodesVisitedDetails = nodesVisitedDetails
+        self.generic = generic
         self.additionalProperties = additionalProperties
     }
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        logMessages = try container.decode([LogMessage].self, forKey: .logMessages)
-        text = try container.decode([String].self, forKey: .text)
-        generic = try container.decodeIfPresent([DialogRuntimeResponseGeneric].self, forKey: .generic)
         nodesVisited = try container.decodeIfPresent([String].self, forKey: .nodesVisited)
         nodesVisitedDetails = try container.decodeIfPresent([DialogNodeVisitedDetails].self, forKey: .nodesVisitedDetails)
+        logMessages = try container.decode([LogMessage].self, forKey: .logMessages)
+        text = try container.decode([String].self, forKey: .text)
+        generic = try container.decodeIfPresent([RuntimeResponseGeneric].self, forKey: .generic)
         let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
         additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: CodingKeys.allValues)
     }
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(nodesVisited, forKey: .nodesVisited)
+        try container.encodeIfPresent(nodesVisitedDetails, forKey: .nodesVisitedDetails)
         try container.encode(logMessages, forKey: .logMessages)
         try container.encode(text, forKey: .text)
         try container.encodeIfPresent(generic, forKey: .generic)
-        try container.encodeIfPresent(nodesVisited, forKey: .nodesVisited)
-        try container.encodeIfPresent(nodesVisitedDetails, forKey: .nodesVisitedDetails)
         var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
         try dynamicContainer.encodeIfPresent(additionalProperties)
     }

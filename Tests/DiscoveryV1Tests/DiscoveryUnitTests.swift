@@ -15,7 +15,6 @@
  **/
 
 import XCTest
-import RestKit
 @testable import DiscoveryV1
 
 class DiscoveryUnitTests: XCTestCase {
@@ -24,7 +23,7 @@ class DiscoveryUnitTests: XCTestCase {
     private let timeout = 1.0
 
     override func setUp() {
-        discovery = Discovery(version: versionDate, accessToken: accessToken)
+        discovery = Discovery(version: versionDate, authenticator: defaultTestAuthenticator)
         #if !os(Linux)
         let configuration = URLSessionConfiguration.ephemeral
         #else
@@ -40,9 +39,8 @@ class DiscoveryUnitTests: XCTestCase {
     #if os(Linux)
     func testInjectCredentialsFromFile() {
         setenv("IBM_CREDENTIALS_FILE", "Source/SupportingFiles/ibm-credentials.env", 1)
-        let discovery = Discovery(version: versionDate)
+        let discovery: Discovery? = try? Discovery(version: versionDate)
         XCTAssertNotNil(discovery)
-        XCTAssert(discovery?.authMethod is BasicAuthentication)
     }
     #endif
 }
@@ -50,10 +48,10 @@ class DiscoveryUnitTests: XCTestCase {
 #if os(Linux)
 extension DiscoveryUnitTests {
 
-    static var allTests: [(String, (DiscoveryUnitTests) -> () throws -> ())] {
+    static var allTests: [(String, (DiscoveryUnitTests) -> () throws -> Void)] {
         let tests: [(String, (DiscoveryUnitTests) -> () throws -> Void)] = [
             // Inject Credentials
-            ("testInjectCredentialsFromFile", testInjectCredentialsFromFile),
+            ("testInjectCredentialsFromFile", testInjectCredentialsFromFile)
         ]
         return tests
     }

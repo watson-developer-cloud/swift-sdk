@@ -15,7 +15,6 @@
  **/
 
 import XCTest
-import RestKit
 @testable import AssistantV1
 
 class AssistantV1UnitTests: XCTestCase {
@@ -26,7 +25,8 @@ class AssistantV1UnitTests: XCTestCase {
     private let workspaceID = "test workspace"
 
     override func setUp() {
-        assistant = Assistant(version: versionDate, accessToken: accessToken)
+
+        assistant = Assistant(version: versionDate, authenticator: defaultTestAuthenticator)
         #if !os(Linux)
         let configuration = URLSessionConfiguration.ephemeral
         #else
@@ -40,7 +40,7 @@ class AssistantV1UnitTests: XCTestCase {
     // MARK: - errorResponseDecoder
 
     func testErrorResponseDecoder() {
-        let testJSON: [String: JSON] = ["error": JSON.string("failed")]
+        let testJSON: [String: WatsonJSON] = ["error": WatsonJSON.string("failed")]
         let testData = try! JSONEncoder().encode(testJSON)
         let testResponse = HTTPURLResponse(url: exampleURL, statusCode: 500, httpVersion: nil, headerFields: nil)!
 
@@ -137,7 +137,7 @@ class AssistantV1UnitTests: XCTestCase {
         let expectation = self.expectation(description: "listWorkspaces")
         assistant.listWorkspaces(
             pageLimit: 10,
-            includeCount: true,
+
             sort: "alphabetical",
             cursor: "mouse",
             includeAudit: true) {
@@ -155,7 +155,7 @@ class AssistantV1UnitTests: XCTestCase {
         let entities = [CreateEntity(entity: "entity")]
         let dialogNodes = [DialogNode(dialogNode: "Best node")]
         let counterExamples = [Counterexample(text: "no u")]
-        let metadata: [String: JSON] = ["key": JSON.string("value")]
+        let metadata: [String: WatsonJSON] = ["key": WatsonJSON.string("value")]
         let learningOptOut = true
         let systemSettings = WorkspaceSystemSettings(tooling: nil, disambiguation: nil, humanAgentAssist: nil)
 
@@ -242,7 +242,7 @@ class AssistantV1UnitTests: XCTestCase {
         let entities = [CreateEntity(entity: "entity")]
         let dialogNodes = [DialogNode(dialogNode: "Best node")]
         let counterExamples = [Counterexample(text: "no u")]
-        let metadata: [String: JSON] = ["key": JSON.string("value")]
+        let metadata: [String: WatsonJSON] = ["key": WatsonJSON.string("value")]
         let learningOptOut = true
         let systemSettings = WorkspaceSystemSettings(tooling: nil, disambiguation: nil, humanAgentAssist: nil)
 
@@ -347,7 +347,7 @@ class AssistantV1UnitTests: XCTestCase {
             workspaceID: self.workspaceID,
             export: true,
             pageLimit: 10,
-            includeCount: true,
+
             sort: "alphabetical",
             cursor: "mouse",
             includeAudit: true) {
@@ -529,7 +529,7 @@ class AssistantV1UnitTests: XCTestCase {
             workspaceID: self.workspaceID,
             intent: intent,
             pageLimit: 10,
-            includeCount: true,
+
             sort: "alphabetical",
             cursor: "mouse",
             includeAudit: true) {
@@ -718,7 +718,7 @@ class AssistantV1UnitTests: XCTestCase {
         assistant.listCounterexamples(
             workspaceID: self.workspaceID,
             pageLimit: 10,
-            includeCount: true,
+
             sort: "alphabetical",
             cursor: "mouse",
             includeAudit: true) {
@@ -887,7 +887,7 @@ class AssistantV1UnitTests: XCTestCase {
             workspaceID: self.workspaceID,
             export: true,
             pageLimit: 10,
-            includeCount: true,
+
             sort: "alphabetical",
             cursor: "mouse",
             includeAudit: true) {
@@ -900,7 +900,7 @@ class AssistantV1UnitTests: XCTestCase {
     func testCreateEntity() {
         let entity = "entity"
         let description = "The best entity there ever was"
-        let metadata = ["key": JSON.string("value")]
+        let metadata = ["key": WatsonJSON.string("value")]
         let values = [CreateValue(value: "value")]
         let fuzzyMatch = true
 
@@ -979,7 +979,7 @@ class AssistantV1UnitTests: XCTestCase {
         let entity = "entity"
         let newEntity = "new entity"
         let newDescription = "The best entity there ever was"
-        let newMetadata = ["key": JSON.string("value")]
+        let newMetadata = ["key": WatsonJSON.string("value")]
         let newValues = [CreateValue(value: "value")]
         let newFuzzyMatch = true
 
@@ -1121,7 +1121,7 @@ class AssistantV1UnitTests: XCTestCase {
             entity: entity,
             export: true,
             pageLimit: 10,
-            includeCount: true,
+
             sort: "alphabetical",
             cursor: "mouse",
             includeAudit: true) {
@@ -1134,7 +1134,7 @@ class AssistantV1UnitTests: XCTestCase {
     func testCreateValue() {
         let entity = "entity"
         let value = "value"
-        let metadata = ["key": JSON.string("value")]
+        let metadata = ["key": WatsonJSON.string("value")]
         let synonyms = ["synonym"]
         let patterns = ["pattern"]
         let valueType = "my value"
@@ -1159,7 +1159,6 @@ class AssistantV1UnitTests: XCTestCase {
                 XCTAssertEqual(decodedBody.metadata, metadata)
                 XCTAssertEqual(decodedBody.patterns, patterns)
                 XCTAssertEqual(decodedBody.synonyms, synonyms)
-                XCTAssertEqual(decodedBody.valueType, valueType)
             } catch {
                 XCTFail(missingBodyMessage(error))
             }
@@ -1173,7 +1172,6 @@ class AssistantV1UnitTests: XCTestCase {
             entity: entity,
             value: value,
             metadata: metadata,
-            valueType: valueType,
             synonyms: synonyms,
             patterns: patterns) {
                 _, _ in
@@ -1222,7 +1220,7 @@ class AssistantV1UnitTests: XCTestCase {
         let entity = "entity"
         let value = "value"
         let newValue = "new value"
-        let newMetadata = ["key": JSON.string("value")]
+        let newMetadata = ["key": WatsonJSON.string("value")]
         let newType = "new type"
         let newSynonyms = ["new synonym"]
         let newPatterns = ["new pattern"]
@@ -1246,7 +1244,6 @@ class AssistantV1UnitTests: XCTestCase {
 
                 XCTAssertEqual(decodedBody.value, newValue)
                 XCTAssertEqual(decodedBody.metadata, newMetadata)
-                XCTAssertEqual(decodedBody.valueType, newType)
                 XCTAssertEqual(decodedBody.synonyms, newSynonyms)
                 XCTAssertEqual(decodedBody.patterns, newPatterns)
             } catch {
@@ -1263,7 +1260,6 @@ class AssistantV1UnitTests: XCTestCase {
             value: value,
             newValue: newValue,
             newMetadata: newMetadata,
-            newValueType: newType,
             newSynonyms: newSynonyms,
             newPatterns: newPatterns) {
                 _, _ in
@@ -1339,7 +1335,7 @@ class AssistantV1UnitTests: XCTestCase {
             entity: entity,
             value: value,
             pageLimit: 10,
-            includeCount: true,
+
             sort: "alphabetical",
             cursor: "mouse",
             includeAudit: true) {
@@ -1538,7 +1534,7 @@ class AssistantV1UnitTests: XCTestCase {
         assistant.listDialogNodes(
             workspaceID: self.workspaceID,
             pageLimit: 10,
-            includeCount: true,
+
             sort: "alphabetical",
             cursor: "mouse",
             includeAudit: true) {
@@ -1555,10 +1551,10 @@ class AssistantV1UnitTests: XCTestCase {
         let parent = "parent"
         let previousSibling = "brother"
         let generic = DialogNodeOutputGeneric(responseType: "json")
-        let additionalProperties = ["key": JSON.string("value")]
+        let additionalProperties = ["key": WatsonJSON.string("value")]
         let output = DialogNodeOutput(generic: [generic], modifiers: nil, additionalProperties: additionalProperties)
-        let context = ["key1": JSON.string("value1")]
-        let metadata = ["key2": JSON.string("value2")]
+        let context = ["key1": WatsonJSON.string("value1")]
+        let metadata = ["key2": WatsonJSON.string("value2")]
         let nextStep = DialogNodeNextStep(behavior: "jump")
         let actions = [DialogNodeAction(name: "action", resultVariable: "nothing")]
         let title = "title"
@@ -1595,7 +1591,6 @@ class AssistantV1UnitTests: XCTestCase {
                 XCTAssertEqual(decodedBody.nextStep, nextStep)
                 XCTAssertEqual(decodedBody.actions, actions)
                 XCTAssertEqual(decodedBody.title, title)
-                XCTAssertEqual(decodedBody.nodeType, nodeType)
                 XCTAssertEqual(decodedBody.eventName, eventName)
                 XCTAssertEqual(decodedBody.variable, variable)
                 XCTAssertEqual(decodedBody.digressIn, digressIn)
@@ -1622,7 +1617,6 @@ class AssistantV1UnitTests: XCTestCase {
             metadata: metadata,
             nextStep: nextStep,
             title: title,
-            nodeType: nodeType,
             eventName: eventName,
             variable: variable,
             actions: actions,
@@ -1674,10 +1668,10 @@ class AssistantV1UnitTests: XCTestCase {
         let newParent = "newParent"
         let newPreviousSibling = "newPreviousSibling"
         let generic = DialogNodeOutputGeneric(responseType: "json")
-        let additionalProperties = ["key": JSON.string("value")]
+        let additionalProperties = ["key": WatsonJSON.string("value")]
         let newOutput = DialogNodeOutput(generic: [generic], modifiers: nil, additionalProperties: additionalProperties)
-        let newContext = ["key1": JSON.string("value1")]
-        let newMetadata = ["key2": JSON.string("value2")]
+        let newContext = ["key1": WatsonJSON.string("value1")]
+        let newMetadata = ["key2": WatsonJSON.string("value2")]
         let newNextStep = DialogNodeNextStep(behavior: "jump")
         let newTitle = "newTitle"
         let newType = "newType"
@@ -1714,7 +1708,6 @@ class AssistantV1UnitTests: XCTestCase {
                 XCTAssertEqual(decodedBody.metadata, newMetadata)
                 XCTAssertEqual(decodedBody.nextStep, newNextStep)
                 XCTAssertEqual(decodedBody.title, newTitle)
-                XCTAssertEqual(decodedBody.nodeType, newType)
                 XCTAssertEqual(decodedBody.eventName, newEventName)
                 XCTAssertEqual(decodedBody.variable, newVariable)
                 XCTAssertEqual(decodedBody.actions, newActions)
@@ -1743,7 +1736,7 @@ class AssistantV1UnitTests: XCTestCase {
             newMetadata: newMetadata,
             newNextStep: newNextStep,
             newTitle: newTitle,
-            newNodeType: newType,
+            newType: newType,
             newEventName: newEventName,
             newVariable: newVariable,
             newActions: newActions,
@@ -1876,7 +1869,8 @@ class AssistantV1UnitTests: XCTestCase {
 
     #if !os(Linux)
     func testAllowInsecureConnections() {
-        let assistant = Assistant(version: versionDate, username: "username", password: "password")
+        let authenticator = WatsonBasicAuthenticator.init(username: "username", password: "password")
+        let assistant = Assistant(version: versionDate, authenticator: authenticator)
         XCTAssertNil(assistant.session.delegate)
         assistant.disableSSLVerification()
         XCTAssertNotNil(assistant.session.delegate)
@@ -1888,19 +1882,18 @@ class AssistantV1UnitTests: XCTestCase {
     #if os(Linux)
     func testInjectCredentialsFromFile() {
         setenv("IBM_CREDENTIALS_FILE", "Source/SupportingFiles/ibm-credentials.env", 1)
-        let assistant = Assistant(version: versionDate)
+        let assistant = try? Assistant(version: versionDate)
         XCTAssertNotNil(assistant)
-        XCTAssert(assistant?.authMethod is IAMAuthentication)
     }
     #endif
 }
 
 #if os(Linux)
 extension AssistantV1UnitTests {
-    static var allTests: [(String, (AssistantV1UnitTests) -> () throws -> ())] {
+    static var allTests: [(String, (AssistantV1UnitTests) -> () throws -> Void)] {
         let tests: [(String, (AssistantV1UnitTests) -> () throws -> Void)] = [
             // Inject Credentials
-            ("testInjectCredentialsFromFile", testInjectCredentialsFromFile),
+            ("testInjectCredentialsFromFile", testInjectCredentialsFromFile)
         ]
         return tests
     }

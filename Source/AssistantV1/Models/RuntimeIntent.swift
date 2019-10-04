@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  An intent identified in the user input.
@@ -32,14 +31,10 @@ public struct RuntimeIntent: Codable, Equatable {
      */
     public var confidence: Double
 
-    /// Additional properties associated with this model.
-    public var additionalProperties: [String: JSON]
-
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case intent = "intent"
         case confidence = "confidence"
-        static let allValues = [intent, confidence]
     }
 
     /**
@@ -52,29 +47,11 @@ public struct RuntimeIntent: Codable, Equatable {
      */
     public init(
         intent: String,
-        confidence: Double,
-        additionalProperties: [String: JSON] = [:]
+        confidence: Double
     )
     {
         self.intent = intent
         self.confidence = confidence
-        self.additionalProperties = additionalProperties
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        intent = try container.decode(String.self, forKey: .intent)
-        confidence = try container.decode(Double.self, forKey: .confidence)
-        let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
-        additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: CodingKeys.allValues)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(intent, forKey: .intent)
-        try container.encode(confidence, forKey: .confidence)
-        var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
-        try dynamicContainer.encodeIfPresent(additionalProperties)
     }
 
 }

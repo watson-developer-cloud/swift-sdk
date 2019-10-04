@@ -16,7 +16,7 @@
 // swiftlint:disable file_length
 
 import Foundation
-import RestKit
+import IBMSwiftSDKCore
 
 /**
  The IBM&reg; Speech to Text service provides APIs that use IBM's speech-recognition capabilities to produce transcripts
@@ -37,15 +37,18 @@ import RestKit
 public class SpeechToText {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://stream.watsonplatform.net/speech-to-text/api"
+    public var serviceURL: String? = "https://stream.watsonplatform.net/speech-to-text/api"
+
+    /// Service identifiers
     internal let serviceName = "SpeechToText"
     internal let serviceVersion = "v1"
+    internal let serviceSdkName = "speech_to_text"
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
     var session = URLSession(configuration: URLSessionConfiguration.default)
-    var authMethod: AuthenticationMethod
+    public let authenticator: Authenticator
 
     #if os(Linux)
     /**
@@ -59,17 +62,14 @@ public class SpeechToText {
      In that case, try another initializer that directly passes in the credentials.
 
      */
-    public init?() {
-        guard let credentials = Shared.extractCredentials(serviceName: "speech_to_text") else {
-            return nil
-        }
-        guard let authMethod = Shared.getAuthMethod(from: credentials) else {
-            return nil
-        }
-        if let serviceURL = Shared.getServiceURL(from: credentials) {
+    public init() throws {
+        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
+        self.authenticator = authenticator
+
+        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
             self.serviceURL = serviceURL
         }
-        self.authMethod = authMethod
+
         RestRequest.userAgent = Shared.userAgent
     }
     #endif
@@ -77,39 +77,11 @@ public class SpeechToText {
     /**
      Create a `SpeechToText` object.
 
-     - parameter username: The username used to authenticate with the service.
-     - parameter password: The password used to authenticate with the service.
+     - parameter authenticator: The Authenticator object used to authenticate requests to the service
      */
-    public init(username: String, password: String) {
-        self.authMethod = Shared.getAuthMethod(username: username, password: password)
+    public init(authenticator: Authenticator) {
+        self.authenticator = authenticator
         RestRequest.userAgent = Shared.userAgent
-    }
-
-    /**
-     Create a `SpeechToText` object.
-
-     - parameter apiKey: An API key for IAM that can be used to obtain access tokens for the service.
-     - parameter iamUrl: The URL for the IAM service.
-     */
-    public init(apiKey: String, iamUrl: String? = nil) {
-        self.authMethod = Shared.getAuthMethod(apiKey: apiKey, iamURL: iamUrl)
-        RestRequest.userAgent = Shared.userAgent
-    }
-
-    /**
-     Create a `SpeechToText` object.
-
-     - parameter accessToken: An access token for the service.
-     */
-    public init(accessToken: String) {
-        self.authMethod = IAMAccessToken(accessToken: accessToken)
-        RestRequest.userAgent = Shared.userAgent
-    }
-
-    public func accessToken(_ newToken: String) {
-        if self.authMethod is IAMAccessToken {
-            self.authMethod = IAMAccessToken(accessToken: newToken)
-        }
     }
 
     #if !os(Linux)
@@ -182,12 +154,19 @@ public class SpeechToText {
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + "/v1/models",
+            url: serviceEndpoint + "/v1/models",
             headerParameters: headerParameters
         )
 
@@ -228,12 +207,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters
         )
 
@@ -266,7 +252,7 @@ public class SpeechToText {
      format of the audio.
      * For all other formats, you can omit the `Content-Type` header or specify `application/octet-stream` with the
      header to have the service automatically detect the format of the audio. (With the `curl` command, you can specify
-     either `\"Content-Type:\"` or `\"Content-Type: application/octet-stream\"`.)
+     either `"Content-Type:"` or `"Content-Type: application/octet-stream"`.)
      Where indicated, the format that you specify must include the sampling rate and can optionally include the number
      of channels and the endianness of the audio.
      * `audio/alaw` (**Required.** Specify the sampling rate (`rate`) of the audio.)
@@ -304,6 +290,8 @@ public class SpeechToText {
      request](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-http#HTTP-multi).
 
      - parameter audio: The audio to transcribe.
+     - parameter contentType: The format (MIME type) of the audio. For more information about specifying an audio
+       format, see **Audio formats (content types)** in the method description.
      - parameter model: The identifier of the model that is to be used for the recognition request. See [Languages and
        models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-models#models).
      - parameter languageCustomizationID: The customization ID (GUID) of a custom language model that is to be used
@@ -351,7 +339,7 @@ public class SpeechToText {
        value, `1`. See [Maximum
        alternatives](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#max_alternatives).
      - parameter wordAlternativesThreshold: A confidence value that is the lower bound for identifying a hypothesis as
-       a possible word alternative (also known as \"Confusion Networks\"). An alternative word is considered if its
+       a possible word alternative (also known as "Confusion Networks"). An alternative word is considered if its
        confidence is greater than or equal to the threshold. Specify a probability between 0.0 and 1.0. By default, the
        service computes no alternative words. See [Word
        alternatives](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#word_alternatives).
@@ -376,9 +364,9 @@ public class SpeechToText {
        participants in a multi-person exchange. By default, the service returns no speaker labels. Setting
        `speaker_labels` to `true` forces the `timestamps` parameter to be `true`, regardless of whether you specify
        `false` for the parameter.
-       **Note:** Applies to US English, Japanese, and Spanish transcription only. To determine whether a language model
-       supports speaker labels, you can also use the **Get a model** method and check that the attribute
-       `speaker_labels` is set to `true`.
+       **Note:** Applies to US English, Japanese, and Spanish (both broadband and narrowband models) and UK English
+       (narrowband model) transcription only. To determine whether a language model supports speaker labels, you can
+       also use the **Get a model** method and check that the attribute `speaker_labels` is set to `true`.
        See [Speaker
        labels](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#speaker_labels).
      - parameter grammarName: The name of a grammar that is to be used with the recognition request. If you specify a
@@ -400,13 +388,12 @@ public class SpeechToText {
      - parameter audioMetrics: If `true`, requests detailed information about the signal characteristics of the input
        audio. The service returns audio metrics with the final transcription results. By default, the service returns no
        audio metrics.
-     - parameter contentType: The format (MIME type) of the audio. For more information about specifying an audio
-       format, see **Audio formats (content types)** in the method description.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func recognize(
         audio: Data,
+        contentType: String? = nil,
         model: String? = nil,
         languageCustomizationID: String? = nil,
         acousticCustomizationID: String? = nil,
@@ -425,7 +412,6 @@ public class SpeechToText {
         grammarName: String? = nil,
         redaction: Bool? = nil,
         audioMetrics: Bool? = nil,
-        contentType: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, WatsonError?) -> Void)
     {
@@ -520,12 +506,19 @@ public class SpeechToText {
         }
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + "/v1/recognize",
+            url: serviceEndpoint + "/v1/recognize",
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -596,12 +589,19 @@ public class SpeechToText {
         }
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + "/v1/register_callback",
+            url: serviceEndpoint + "/v1/register_callback",
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -640,12 +640,19 @@ public class SpeechToText {
         queryParameters.append(URLQueryItem(name: "callback_url", value: callbackURL))
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + "/v1/unregister_callback",
+            url: serviceEndpoint + "/v1/unregister_callback",
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -699,7 +706,7 @@ public class SpeechToText {
      format of the audio.
      * For all other formats, you can omit the `Content-Type` header or specify `application/octet-stream` with the
      header to have the service automatically detect the format of the audio. (With the `curl` command, you can specify
-     either `\"Content-Type:\"` or `\"Content-Type: application/octet-stream\"`.)
+     either `"Content-Type:"` or `"Content-Type: application/octet-stream"`.)
      Where indicated, the format that you specify must include the sampling rate and can optionally include the number
      of channels and the endianness of the audio.
      * `audio/alaw` (**Required.** Specify the sampling rate (`rate`) of the audio.)
@@ -726,6 +733,8 @@ public class SpeechToText {
      formats](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-audio-formats#audio-formats).
 
      - parameter audio: The audio to transcribe.
+     - parameter contentType: The format (MIME type) of the audio. For more information about specifying an audio
+       format, see **Audio formats (content types)** in the method description.
      - parameter model: The identifier of the model that is to be used for the recognition request. See [Languages and
        models](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-models#models).
      - parameter callbackURL: A URL to which callback notifications are to be sent. The URL must already be
@@ -798,7 +807,7 @@ public class SpeechToText {
        value, `1`. See [Maximum
        alternatives](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#max_alternatives).
      - parameter wordAlternativesThreshold: A confidence value that is the lower bound for identifying a hypothesis as
-       a possible word alternative (also known as \"Confusion Networks\"). An alternative word is considered if its
+       a possible word alternative (also known as "Confusion Networks"). An alternative word is considered if its
        confidence is greater than or equal to the threshold. Specify a probability between 0.0 and 1.0. By default, the
        service computes no alternative words. See [Word
        alternatives](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#word_alternatives).
@@ -823,9 +832,9 @@ public class SpeechToText {
        participants in a multi-person exchange. By default, the service returns no speaker labels. Setting
        `speaker_labels` to `true` forces the `timestamps` parameter to be `true`, regardless of whether you specify
        `false` for the parameter.
-       **Note:** Applies to US English, Japanese, and Spanish transcription only. To determine whether a language model
-       supports speaker labels, you can also use the **Get a model** method and check that the attribute
-       `speaker_labels` is set to `true`.
+       **Note:** Applies to US English, Japanese, and Spanish (both broadband and narrowband models) and UK English
+       (narrowband model) transcription only. To determine whether a language model supports speaker labels, you can
+       also use the **Get a model** method and check that the attribute `speaker_labels` is set to `true`.
        See [Speaker
        labels](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#speaker_labels).
      - parameter grammarName: The name of a grammar that is to be used with the recognition request. If you specify a
@@ -859,13 +868,12 @@ public class SpeechToText {
      - parameter audioMetrics: If `true`, requests detailed information about the signal characteristics of the input
        audio. The service returns audio metrics with the final transcription results. By default, the service returns no
        audio metrics.
-     - parameter contentType: The format (MIME type) of the audio. For more information about specifying an audio
-       format, see **Audio formats (content types)** in the method description.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createJob(
         audio: Data,
+        contentType: String? = nil,
         model: String? = nil,
         callbackURL: String? = nil,
         events: String? = nil,
@@ -890,7 +898,6 @@ public class SpeechToText {
         processingMetrics: Bool? = nil,
         processingMetricsInterval: Double? = nil,
         audioMetrics: Bool? = nil,
-        contentType: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<RecognitionJob>?, WatsonError?) -> Void)
     {
@@ -1009,12 +1016,19 @@ public class SpeechToText {
         }
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + "/v1/recognitions",
+            url: serviceEndpoint + "/v1/recognitions",
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -1053,12 +1067,19 @@ public class SpeechToText {
         headerParameters["Accept"] = "application/json"
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + "/v1/recognitions",
+            url: serviceEndpoint + "/v1/recognitions",
             headerParameters: headerParameters
         )
 
@@ -1104,12 +1125,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters
         )
 
@@ -1150,12 +1178,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters
         )
 
@@ -1180,14 +1215,19 @@ public class SpeechToText {
        To determine whether a base model supports language model customization, use the **Get a model** method and check
        that the attribute `custom_language_model` is set to `true`. You can also refer to [Language support for
        customization](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-customization#languageSupport).
-     - parameter dialect: The dialect of the specified language that is to be used with the custom language model. The
-       parameter is meaningful only for Spanish models, for which the service creates a custom language model that is
-       suited for speech in one of the following dialects:
-       * `es-ES` for Castilian Spanish (the default)
-       * `es-LA` for Latin American Spanish
-       * `es-US` for North American (Mexican) Spanish
-       A specified dialect must be valid for the base model. By default, the dialect matches the language of the base
-       model; for example, `en-US` for either of the US English language models.
+     - parameter dialect: The dialect of the specified language that is to be used with the custom language model. For
+       most languages, the dialect matches the language of the base model by default. For example, `en-US` is used for
+       either of the US English language models.
+       For a Spanish language, the service creates a custom language model that is suited for speech in one of the
+       following dialects:
+       * `es-ES` for Castilian Spanish (`es-ES` models)
+       * `es-LA` for Latin American Spanish (`es-AR`, `es-CL`, `es-CO`, and `es-PE` models)
+       * `es-US` for Mexican (North American) Spanish (`es-MX` models)
+       The parameter is meaningful only for Spanish models, for which you can always safely omit the parameter to have
+       the service create the correct mapping.
+       If you specify the `dialect` parameter for non-Spanish language models, its value must match the language of the
+       base model. If you specify the `dialect` for Spanish language models, its value must match one of the defined
+       mappings as indicated (`es-ES`, `es-LA`, or `es-MX`). All dialect values are case-insensitive.
      - parameter description: A description of the new custom language model. Use a localized description that matches
        the language of the custom model.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -1223,12 +1263,19 @@ public class SpeechToText {
         headerParameters["Content-Type"] = "application/json"
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + "/v1/customizations",
+            url: serviceEndpoint + "/v1/customizations",
             headerParameters: headerParameters,
             messageBody: body
         )
@@ -1275,12 +1322,19 @@ public class SpeechToText {
         }
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + "/v1/customizations",
+            url: serviceEndpoint + "/v1/customizations",
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1322,12 +1376,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters
         )
 
@@ -1369,12 +1430,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters
         )
 
@@ -1462,12 +1530,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1511,12 +1586,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters
         )
 
@@ -1565,12 +1647,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters
         )
 
@@ -1612,12 +1701,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters
         )
 
@@ -1724,12 +1820,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -1775,12 +1878,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters
         )
 
@@ -1826,12 +1936,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters
         )
 
@@ -1899,12 +2016,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1990,12 +2114,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             messageBody: body
         )
@@ -2093,12 +2224,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "PUT",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             messageBody: body
         )
@@ -2144,12 +2282,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters
         )
 
@@ -2197,12 +2342,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters
         )
 
@@ -2244,12 +2396,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters
         )
 
@@ -2355,12 +2514,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -2406,12 +2572,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters
         )
 
@@ -2457,12 +2630,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters
         )
 
@@ -2520,12 +2700,19 @@ public class SpeechToText {
         headerParameters["Content-Type"] = "application/json"
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + "/v1/acoustic_customizations",
+            url: serviceEndpoint + "/v1/acoustic_customizations",
             headerParameters: headerParameters,
             messageBody: body
         )
@@ -2572,12 +2759,19 @@ public class SpeechToText {
         }
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + "/v1/acoustic_customizations",
+            url: serviceEndpoint + "/v1/acoustic_customizations",
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2619,12 +2813,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters
         )
 
@@ -2666,12 +2867,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters
         )
 
@@ -2756,12 +2964,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2807,12 +3022,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters
         )
 
@@ -2888,12 +3110,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2938,12 +3167,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters
         )
 
@@ -3038,6 +3274,10 @@ public class SpeechToText {
      - parameter audioResource: The audio resource that is to be added to the custom acoustic model, an individual
        audio file or an archive file.
        With the `curl` command, use the `--data-binary` option to upload the file for the request.
+     - parameter contentType: For an audio-type resource, the format (MIME type) of the audio. For more information,
+       see **Content types for audio-type resources** in the method description.
+       For an archive-type resource, the media type of the archive file. For more information, see **Content types for
+       archive-type resources** in the method description.
      - parameter containedContentType: **For an archive-type resource,** specify the format of the audio files that
        are contained in the archive file if they are of type `audio/alaw`, `audio/basic`, `audio/l16`, or `audio/mulaw`.
        Include the `rate`, `channels`, and `endianness` parameters where necessary. In this case, all audio files that
@@ -3050,10 +3290,6 @@ public class SpeechToText {
      - parameter allowOverwrite: If `true`, the specified audio resource overwrites an existing audio resource with
        the same name. If `false`, the request fails if an audio resource with the same name already exists. The
        parameter has no effect if an audio resource with the same name does not already exist.
-     - parameter contentType: For an audio-type resource, the format (MIME type) of the audio. For more information,
-       see **Content types for audio-type resources** in the method description.
-       For an archive-type resource, the media type of the archive file. For more information, see **Content types for
-       archive-type resources** in the method description.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -3061,9 +3297,9 @@ public class SpeechToText {
         customizationID: String,
         audioName: String,
         audioResource: Data,
+        contentType: String? = nil,
         containedContentType: String? = nil,
         allowOverwrite: Bool? = nil,
-        contentType: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
     {
@@ -3078,11 +3314,11 @@ public class SpeechToText {
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "addAudio")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
-        if let containedContentType = containedContentType {
-            headerParameters["Contained-Content-Type"] = containedContentType
-        }
         if let contentType = contentType {
             headerParameters["Content-Type"] = contentType
+        }
+        if let containedContentType = containedContentType {
+            headerParameters["Contained-Content-Type"] = containedContentType
         }
 
         // construct query parameters
@@ -3098,12 +3334,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -3159,12 +3402,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters
         )
 
@@ -3211,12 +3461,19 @@ public class SpeechToText {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters
         )
 
@@ -3258,12 +3515,19 @@ public class SpeechToText {
         queryParameters.append(URLQueryItem(name: "customer_id", value: customerID))
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + "/v1/user_data",
+            url: serviceEndpoint + "/v1/user_data",
             headerParameters: headerParameters,
             queryItems: queryParameters
         )

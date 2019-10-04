@@ -16,7 +16,7 @@
 // swiftlint:disable file_length
 
 import Foundation
-import RestKit
+import IBMSwiftSDKCore
 
 /**
  IBM Watson&trade; Discovery is a cognitive search and content analytics engine that you can add to applications to
@@ -27,15 +27,18 @@ import RestKit
 public class Discovery {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://gateway.watsonplatform.net/discovery/api"
+    public var serviceURL: String? = "https://gateway.watsonplatform.net/discovery/api"
+
+    /// Service identifiers
     internal let serviceName = "Discovery"
     internal let serviceVersion = "v1"
+    internal let serviceSdkName = "discovery"
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
     var session = URLSession(configuration: URLSessionConfiguration.default)
-    var authMethod: AuthenticationMethod
+    public let authenticator: Authenticator
     let version: String
 
     #if os(Linux)
@@ -52,18 +55,15 @@ public class Discovery {
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
      */
-    public init?(version: String) {
+    public init(version: String) throws {
         self.version = version
-        guard let credentials = Shared.extractCredentials(serviceName: "discovery") else {
-            return nil
-        }
-        guard let authMethod = Shared.getAuthMethod(from: credentials) else {
-            return nil
-        }
-        if let serviceURL = Shared.getServiceURL(from: credentials) {
+        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
+        self.authenticator = authenticator
+
+        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
             self.serviceURL = serviceURL
         }
-        self.authMethod = authMethod
+
         RestRequest.userAgent = Shared.userAgent
     }
     #endif
@@ -73,46 +73,12 @@ public class Discovery {
 
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
-     - parameter username: The username used to authenticate with the service.
-     - parameter password: The password used to authenticate with the service.
+     - parameter authenticator: The Authenticator object used to authenticate requests to the service
      */
-    public init(version: String, username: String, password: String) {
+    public init(version: String, authenticator: Authenticator) {
         self.version = version
-        self.authMethod = Shared.getAuthMethod(username: username, password: password)
+        self.authenticator = authenticator
         RestRequest.userAgent = Shared.userAgent
-    }
-
-    /**
-     Create a `Discovery` object.
-
-     - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
-     - parameter apiKey: An API key for IAM that can be used to obtain access tokens for the service.
-     - parameter iamUrl: The URL for the IAM service.
-     */
-    public init(version: String, apiKey: String, iamUrl: String? = nil) {
-        self.authMethod = Shared.getAuthMethod(apiKey: apiKey, iamURL: iamUrl)
-        self.version = version
-        RestRequest.userAgent = Shared.userAgent
-    }
-
-    /**
-     Create a `Discovery` object.
-
-     - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
-     - parameter accessToken: An access token for the service.
-     */
-    public init(version: String, accessToken: String) {
-        self.version = version
-        self.authMethod = IAMAccessToken(accessToken: accessToken)
-        RestRequest.userAgent = Shared.userAgent
-    }
-
-    public func accessToken(_ newToken: String) {
-        if self.authMethod is IAMAccessToken {
-            self.authMethod = IAMAccessToken(accessToken: newToken)
-        }
     }
 
     #if !os(Linux)
@@ -206,12 +172,19 @@ public class Discovery {
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + "/v1/environments",
+            url: serviceEndpoint + "/v1/environments",
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -253,12 +226,19 @@ public class Discovery {
         }
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + "/v1/environments",
+            url: serviceEndpoint + "/v1/environments",
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -298,12 +278,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -364,12 +351,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "PUT",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -410,12 +404,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -460,12 +461,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -540,12 +548,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -594,12 +609,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -641,12 +663,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -723,12 +752,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "PUT",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -776,120 +812,21 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
-        )
-
-        // execute REST request
-        request.responseObject(completionHandler: completionHandler)
-    }
-
-    /**
-     Test configuration.
-
-     **Deprecated** This method is no longer supported and is scheduled to be removed from service on July 31st 2019.
-      Runs a sample document through the default or your configuration and returns diagnostic information designed to
-     help you understand how the document was processed. The document is not added to the index.
-
-     - parameter environmentID: The ID of the environment.
-     - parameter configuration: The configuration to use to process the document. If this part is provided, then the
-       provided configuration is used to process the document. If the **configuration_id** is also provided (both are
-       present at the same time), then request is rejected. The maximum supported configuration size is 1 MB.
-       Configuration parts larger than 1 MB are rejected.
-       See the `GET /configurations/{configuration_id}` operation for an example configuration.
-     - parameter file: The content of the document to ingest. The maximum supported file size when adding a file to a
-       collection is 50 megabytes, the maximum supported file size when testing a confiruration is 1 megabyte. Files
-       larger than the supported size are rejected.
-     - parameter filename: The filename for file.
-     - parameter fileContentType: The content type of file.
-     - parameter metadata: The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are
-       rejected.
-       Example:  ``` {
-         \"Creator\": \"Johnny Appleseed\",
-         \"Subject\": \"Apples\"
-       } ```.
-     - parameter step: Specify to only run the input document through the given step instead of running the input
-       document through the entire ingestion workflow. Valid values are `convert`, `enrich`, and `normalize`.
-     - parameter configurationID: The ID of the configuration to use to process the document. If the **configuration**
-       form part is also provided (both are present at the same time), then the request will be rejected.
-     - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter completionHandler: A function executed when the request completes with a successful result or error
-     */
-    public func testConfigurationInEnvironment(
-        environmentID: String,
-        configuration: String? = nil,
-        file: Data? = nil,
-        filename: String? = nil,
-        fileContentType: String? = nil,
-        metadata: String? = nil,
-        step: String? = nil,
-        configurationID: String? = nil,
-        headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<TestDocument>?, WatsonError?) -> Void)
-    {
-        // construct body
-        let multipartFormData = MultipartFormData()
-        if let configuration = configuration {
-            if let configurationData = configuration.data(using: .utf8) {
-                multipartFormData.append(configurationData, withName: "configuration")
-            }
-        }
-        if let file = file {
-            multipartFormData.append(file, withName: "file", mimeType: fileContentType, fileName: filename ?? "filename")
-        }
-        if let metadata = metadata {
-            if let metadataData = metadata.data(using: .utf8) {
-                multipartFormData.append(metadataData, withName: "metadata")
-            }
-        }
-        guard let body = try? multipartFormData.toData() else {
-            completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
-            return
-        }
-
-        // construct header parameters
-        var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "testConfigurationInEnvironment")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
-        headerParameters["Accept"] = "application/json"
-        headerParameters["Content-Type"] = multipartFormData.contentType
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-        if let step = step {
-            let queryParameter = URLQueryItem(name: "step", value: step)
-            queryParameters.append(queryParameter)
-        }
-        if let configurationID = configurationID {
-            let queryParameter = URLQueryItem(name: "configuration_id", value: configurationID)
-            queryParameters.append(queryParameter)
-        }
-
-        // construct REST request
-        let path = "/v1/environments/\(environmentID)/preview"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
-            return
-        }
-        let request = RestRequest(
-            session: session,
-            authMethod: authMethod,
-            errorResponseDecoder: errorResponseDecoder,
-            method: "POST",
-            url: serviceURL + encodedPath,
-            headerParameters: headerParameters,
-            queryItems: queryParameters,
-            messageBody: body
         )
 
         // execute REST request
@@ -948,12 +885,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -1002,12 +946,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1049,12 +1000,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1113,12 +1071,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "PUT",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -1161,12 +1126,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1210,12 +1182,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1260,12 +1239,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1278,8 +1264,7 @@ public class Discovery {
      Create or update expansion list.
 
      Create or replace the Expansion list for this collection. The maximum number of expanded terms per collection is
-     `500`.
-     The current expansion list is replaced with the uploaded content.
+     `500`. The current expansion list is replaced with the uploaded content.
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
@@ -1331,12 +1316,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -1381,12 +1373,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1430,12 +1429,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1491,12 +1497,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -1540,12 +1553,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1589,12 +1609,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1651,12 +1678,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -1701,12 +1735,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1741,10 +1782,9 @@ public class Discovery {
      - parameter filename: The filename for file.
      - parameter fileContentType: The content type of file.
      - parameter metadata: The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are
-       rejected.
-       Example:  ``` {
-         \"Creator\": \"Johnny Appleseed\",
-         \"Subject\": \"Apples\"
+       rejected. Example:  ``` {
+         "Creator": "Johnny Appleseed",
+         "Subject": "Apples"
        } ```.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -1794,12 +1834,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -1848,12 +1895,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1879,10 +1933,9 @@ public class Discovery {
      - parameter filename: The filename for file.
      - parameter fileContentType: The content type of file.
      - parameter metadata: The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are
-       rejected.
-       Example:  ``` {
-         \"Creator\": \"Johnny Appleseed\",
-         \"Subject\": \"Apples\"
+       rejected. Example:  ``` {
+         "Creator": "Johnny Appleseed",
+         "Subject": "Apples"
        } ```.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -1933,12 +1986,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -1986,12 +2046,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2020,7 +2087,7 @@ public class Discovery {
        filters. Useful for applications to build lists, tables, and time series. For a full list of possible
        aggregations, see the Query reference.
      - parameter count: Number of results to return.
-     - parameter returnFields: A comma-separated list of the portion of the document hierarchy to return.
+     - parameter `return`: A comma-separated list of the portion of the document hierarchy to return.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
        results that are returned is 10 and the offset is 8, it returns the last two results.
      - parameter sort: A comma-separated list of fields in the document to sort on. You can optionally specify a sort
@@ -2039,8 +2106,6 @@ public class Discovery {
      - parameter deduplicateField: When specified, duplicate results based on the field specified are removed from the
        returned results. Duplicate comparison is limited to the current query only, **offset** is not considered. This
        parameter is currently Beta functionality.
-     - parameter collectionIDs: A comma-separated list of collection IDs to be queried against. Required when querying
-       multiple collections, invalid when performing a single collection query.
      - parameter similar: When `true`, results are returned based on their similarity to the document IDs specified in
        the **similar.document_ids** parameter.
      - parameter similarDocumentIDs: A comma-separated list of document IDs to find similar documents.
@@ -2053,7 +2118,11 @@ public class Discovery {
        **date** or **number** format. When a **date** type field is specified returned results are biased towards field
        values closer to the current date. When a **number** type field is specified, returned results are biased towards
        higher field values. This parameter cannot be used in the same query as the **sort** parameter.
-     - parameter loggingOptOut: If `true`, queries are not stored in the Discovery **Logs** endpoint.
+     - parameter spellingSuggestions: When `true` and the **natural_language_query** parameter is used, the
+       **natural_languge_query** parameter is spell checked. The most likely correction is retunred in the
+       **suggested_query** field of the response (if one exists).
+       **Important:** this parameter is only valid when using the Cloud Pak version of Discovery.
+     - parameter xWatsonLoggingOptOut: If `true`, queries are not stored in the Discovery **Logs** endpoint.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -2066,7 +2135,7 @@ public class Discovery {
         passages: Bool? = nil,
         aggregation: String? = nil,
         count: Int? = nil,
-        returnFields: String? = nil,
+        `return`: String? = nil,
         offset: Int? = nil,
         sort: String? = nil,
         highlight: Bool? = nil,
@@ -2075,24 +2144,24 @@ public class Discovery {
         passagesCharacters: Int? = nil,
         deduplicate: Bool? = nil,
         deduplicateField: String? = nil,
-        collectionIDs: String? = nil,
         similar: Bool? = nil,
         similarDocumentIDs: String? = nil,
         similarFields: String? = nil,
         bias: String? = nil,
-        loggingOptOut: Bool? = nil,
+        spellingSuggestions: Bool? = nil,
+        xWatsonLoggingOptOut: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<QueryResponse>?, WatsonError?) -> Void)
     {
         // construct body
-        let queryRequest = QueryLarge(
+        let queryRequest = CollQueryLarge(
             filter: filter,
             query: query,
             naturalLanguageQuery: naturalLanguageQuery,
             passages: passages,
             aggregation: aggregation,
             count: count,
-            returnFields: returnFields,
+            `return`: `return`,
             offset: offset,
             sort: sort,
             highlight: highlight,
@@ -2101,11 +2170,11 @@ public class Discovery {
             passagesCharacters: passagesCharacters,
             deduplicate: deduplicate,
             deduplicateField: deduplicateField,
-            collectionIDs: collectionIDs,
             similar: similar,
             similarDocumentIDs: similarDocumentIDs,
             similarFields: similarFields,
-            bias: bias)
+            bias: bias,
+            spellingSuggestions: spellingSuggestions)
         guard let body = try? JSON.encoder.encodeIfPresent(queryRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -2120,8 +2189,8 @@ public class Discovery {
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
-        if let loggingOptOut = loggingOptOut {
-            headerParameters["X-Watson-Logging-Opt-Out"] = "\(loggingOptOut)"
+        if let xWatsonLoggingOptOut = xWatsonLoggingOptOut {
+            headerParameters["X-Watson-Logging-Opt-Out"] = "\(xWatsonLoggingOptOut)"
         }
 
         // construct query parameters
@@ -2134,12 +2203,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -2171,7 +2247,7 @@ public class Discovery {
        aggregations, see the Query reference.
      - parameter count: Number of results to return. The maximum for the **count** and **offset** values together in
        any one query is **10000**.
-     - parameter returnFields: A comma-separated list of the portion of the document hierarchy to return.
+     - parameter `return`: A comma-separated list of the portion of the document hierarchy to return.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
        results that are returned is 10 and the offset is 8, it returns the last two results. The maximum for the
        **count** and **offset** values together in any one query is **10000**.
@@ -2208,7 +2284,7 @@ public class Discovery {
         passages: Bool? = nil,
         aggregation: String? = nil,
         count: Int? = nil,
-        returnFields: [String]? = nil,
+        `return`: [String]? = nil,
         offset: Int? = nil,
         sort: [String]? = nil,
         highlight: Bool? = nil,
@@ -2258,8 +2334,8 @@ public class Discovery {
             let queryParameter = URLQueryItem(name: "count", value: "\(count)")
             queryParameters.append(queryParameter)
         }
-        if let returnFields = returnFields {
-            let queryParameter = URLQueryItem(name: "return", value: returnFields.joined(separator: ","))
+        if let `return` = `return` {
+            let queryParameter = URLQueryItem(name: "return", value: `return`.joined(separator: ","))
             queryParameters.append(queryParameter)
         }
         if let offset = offset {
@@ -2309,12 +2385,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2331,6 +2414,7 @@ public class Discovery {
      documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-query-concepts#query-concepts).
 
      - parameter environmentID: The ID of the environment.
+     - parameter collectionIDs: A comma-separated list of collection IDs to be queried against.
      - parameter filter: A cacheable query that excludes documents that don't mention the query content. Filter
        searches are better for metadata-type searches and for assessing the concepts in the data set.
      - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
@@ -2343,7 +2427,7 @@ public class Discovery {
        filters. Useful for applications to build lists, tables, and time series. For a full list of possible
        aggregations, see the Query reference.
      - parameter count: Number of results to return.
-     - parameter returnFields: A comma-separated list of the portion of the document hierarchy to return.
+     - parameter `return`: A comma-separated list of the portion of the document hierarchy to return.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
        results that are returned is 10 and the offset is 8, it returns the last two results.
      - parameter sort: A comma-separated list of fields in the document to sort on. You can optionally specify a sort
@@ -2362,8 +2446,6 @@ public class Discovery {
      - parameter deduplicateField: When specified, duplicate results based on the field specified are removed from the
        returned results. Duplicate comparison is limited to the current query only, **offset** is not considered. This
        parameter is currently Beta functionality.
-     - parameter collectionIDs: A comma-separated list of collection IDs to be queried against. Required when querying
-       multiple collections, invalid when performing a single collection query.
      - parameter similar: When `true`, results are returned based on their similarity to the document IDs specified in
        the **similar.document_ids** parameter.
      - parameter similarDocumentIDs: A comma-separated list of document IDs to find similar documents.
@@ -2376,19 +2458,20 @@ public class Discovery {
        **date** or **number** format. When a **date** type field is specified returned results are biased towards field
        values closer to the current date. When a **number** type field is specified, returned results are biased towards
        higher field values. This parameter cannot be used in the same query as the **sort** parameter.
-     - parameter loggingOptOut: If `true`, queries are not stored in the Discovery **Logs** endpoint.
+     - parameter xWatsonLoggingOptOut: If `true`, queries are not stored in the Discovery **Logs** endpoint.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func federatedQuery(
         environmentID: String,
+        collectionIDs: String,
         filter: String? = nil,
         query: String? = nil,
         naturalLanguageQuery: String? = nil,
         passages: Bool? = nil,
         aggregation: String? = nil,
         count: Int? = nil,
-        returnFields: String? = nil,
+        `return`: String? = nil,
         offset: Int? = nil,
         sort: String? = nil,
         highlight: Bool? = nil,
@@ -2397,24 +2480,24 @@ public class Discovery {
         passagesCharacters: Int? = nil,
         deduplicate: Bool? = nil,
         deduplicateField: String? = nil,
-        collectionIDs: String? = nil,
         similar: Bool? = nil,
         similarDocumentIDs: String? = nil,
         similarFields: String? = nil,
         bias: String? = nil,
-        loggingOptOut: Bool? = nil,
+        xWatsonLoggingOptOut: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<QueryResponse>?, WatsonError?) -> Void)
     {
         // construct body
-        let federatedQueryRequest = QueryLarge(
+        let federatedQueryRequest = FedQueryLarge(
+            collectionIDs: collectionIDs,
             filter: filter,
             query: query,
             naturalLanguageQuery: naturalLanguageQuery,
             passages: passages,
             aggregation: aggregation,
             count: count,
-            returnFields: returnFields,
+            `return`: `return`,
             offset: offset,
             sort: sort,
             highlight: highlight,
@@ -2423,7 +2506,6 @@ public class Discovery {
             passagesCharacters: passagesCharacters,
             deduplicate: deduplicate,
             deduplicateField: deduplicateField,
-            collectionIDs: collectionIDs,
             similar: similar,
             similarDocumentIDs: similarDocumentIDs,
             similarFields: similarFields,
@@ -2442,8 +2524,8 @@ public class Discovery {
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
-        if let loggingOptOut = loggingOptOut {
-            headerParameters["X-Watson-Logging-Opt-Out"] = "\(loggingOptOut)"
+        if let xWatsonLoggingOptOut = xWatsonLoggingOptOut {
+            headerParameters["X-Watson-Logging-Opt-Out"] = "\(xWatsonLoggingOptOut)"
         }
 
         // construct query parameters
@@ -2456,12 +2538,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -2492,7 +2581,7 @@ public class Discovery {
        aggregations, see the Query reference.
      - parameter count: Number of results to return. The maximum for the **count** and **offset** values together in
        any one query is **10000**.
-     - parameter returnFields: A comma-separated list of the portion of the document hierarchy to return.
+     - parameter `return`: A comma-separated list of the portion of the document hierarchy to return.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
        results that are returned is 10 and the offset is 8, it returns the last two results. The maximum for the
        **count** and **offset** values together in any one query is **10000**.
@@ -2523,7 +2612,7 @@ public class Discovery {
         naturalLanguageQuery: String? = nil,
         aggregation: String? = nil,
         count: Int? = nil,
-        returnFields: [String]? = nil,
+        `return`: [String]? = nil,
         offset: Int? = nil,
         sort: [String]? = nil,
         highlight: Bool? = nil,
@@ -2567,8 +2656,8 @@ public class Discovery {
             let queryParameter = URLQueryItem(name: "count", value: "\(count)")
             queryParameters.append(queryParameter)
         }
-        if let returnFields = returnFields {
-            let queryParameter = URLQueryItem(name: "return", value: returnFields.joined(separator: ","))
+        if let `return` = `return` {
+            let queryParameter = URLQueryItem(name: "return", value: `return`.joined(separator: ","))
             queryParameters.append(queryParameter)
         }
         if let offset = offset {
@@ -2606,12 +2695,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2621,159 +2717,72 @@ public class Discovery {
     }
 
     /**
-     Knowledge Graph entity query.
+     Get Autocomplete Suggestions.
 
-     See the [Knowledge Graph documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-kg#kg) for
-     more details.
+     Returns completion query suggestions for the specified prefix.  /n/n **Important:** this method is only valid when
+     using the Cloud Pak version of Discovery.
 
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
-     - parameter feature: The entity query feature to perform. Supported features are `disambiguate` and
-       `similar_entities`.
-     - parameter entity: A text string that appears within the entity text field.
-     - parameter context: Entity text to provide context for the queried entity and rank based on that association.
-       For example, if you wanted to query the city of London in England your query would look for `London` with the
-       context of `England`.
-     - parameter count: The number of results to return. The default is `10`. The maximum is `1000`.
-     - parameter evidenceCount: The number of evidence items to return for each result. The default is `0`. The
-       maximum number of evidence items per query is 10,000.
+     - parameter `prefix`: The prefix to use for autocompletion. For example, the prefix `Ho` could autocomplete to
+       `Hot`, `Housing`, or `How do I upgrade`. Possible completions are.
+     - parameter field: The field in the result documents that autocompletion suggestions are identified from.
+     - parameter count: The number of autocompletion suggestions to return.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
-    public func queryEntities(
+    public func getAutocompletion(
         environmentID: String,
         collectionID: String,
-        feature: String? = nil,
-        entity: QueryEntitiesEntity? = nil,
-        context: QueryEntitiesContext? = nil,
+        `prefix`: String,
+        field: String? = nil,
         count: Int? = nil,
-        evidenceCount: Int? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<QueryEntitiesResponse>?, WatsonError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Completions>?, WatsonError?) -> Void)
     {
-        // construct body
-        let queryEntitiesRequest = QueryEntities(
-            feature: feature,
-            entity: entity,
-            context: context,
-            count: count,
-            evidenceCount: evidenceCount)
-        guard let body = try? JSON.encoder.encode(queryEntitiesRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
-            return
-        }
-
         // construct header parameters
         var headerParameters = defaultHeaders
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "queryEntities")
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getAutocompletion")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
-        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        queryParameters.append(URLQueryItem(name: "prefix", value: `prefix`))
+        if let field = field {
+            let queryParameter = URLQueryItem(name: "field", value: field)
+            queryParameters.append(queryParameter)
+        }
+        if let count = count {
+            let queryParameter = URLQueryItem(name: "count", value: "\(count)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
-        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/query_entities"
+        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/autocompletion"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
-        let request = RestRequest(
-            session: session,
-            authMethod: authMethod,
-            errorResponseDecoder: errorResponseDecoder,
-            method: "POST",
-            url: serviceURL + encodedPath,
-            headerParameters: headerParameters,
-            queryItems: queryParameters,
-            messageBody: body
-        )
 
-        // execute REST request
-        request.responseObject(completionHandler: completionHandler)
-    }
-
-    /**
-     Knowledge Graph relationship query.
-
-     See the [Knowledge Graph documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-kg#kg) for
-     more details.
-
-     - parameter environmentID: The ID of the environment.
-     - parameter collectionID: The ID of the collection.
-     - parameter entities: An array of entities to find relationships for.
-     - parameter context: Entity text to provide context for the queried entity and rank based on that association.
-       For example, if you wanted to query the city of London in England your query would look for `London` with the
-       context of `England`.
-     - parameter sort: The sorting method for the relationships, can be `score` or `frequency`. `frequency` is the
-       number of unique times each entity is identified. The default is `score`. This parameter cannot be used in the
-       same query as the **bias** parameter.
-     - parameter filter:
-     - parameter count: The number of results to return. The default is `10`. The maximum is `1000`.
-     - parameter evidenceCount: The number of evidence items to return for each result. The default is `0`. The
-       maximum number of evidence items per query is 10,000.
-     - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter completionHandler: A function executed when the request completes with a successful result or error
-     */
-    public func queryRelations(
-        environmentID: String,
-        collectionID: String,
-        entities: [QueryRelationsEntity]? = nil,
-        context: QueryEntitiesContext? = nil,
-        sort: String? = nil,
-        filter: QueryRelationsFilter? = nil,
-        count: Int? = nil,
-        evidenceCount: Int? = nil,
-        headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<QueryRelationsResponse>?, WatsonError?) -> Void)
-    {
-        // construct body
-        let queryRelationsRequest = QueryRelations(
-            entities: entities,
-            context: context,
-            sort: sort,
-            filter: filter,
-            count: count,
-            evidenceCount: evidenceCount)
-        guard let body = try? JSON.encoder.encode(queryRelationsRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
             return
         }
 
-        // construct header parameters
-        var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "queryRelations")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
-        headerParameters["Accept"] = "application/json"
-        headerParameters["Content-Type"] = "application/json"
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v1/environments/\(environmentID)/collections/\(collectionID)/query_relations"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
-            return
-        }
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
-            method: "POST",
-            url: serviceURL + encodedPath,
+            method: "GET",
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
-            queryItems: queryParameters,
-            messageBody: body
+            queryItems: queryParameters
         )
 
         // execute REST request
@@ -2815,12 +2824,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2881,12 +2897,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -2930,12 +2953,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2981,12 +3011,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -3031,12 +3068,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -3082,12 +3126,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -3150,12 +3201,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -3203,12 +3261,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -3270,12 +3335,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "PUT",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -3324,12 +3396,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -3370,12 +3449,19 @@ public class Discovery {
         queryParameters.append(URLQueryItem(name: "customer_id", value: customerID))
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + "/v1/user_data",
+            url: serviceEndpoint + "/v1/user_data",
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -3388,7 +3474,7 @@ public class Discovery {
      Create event.
 
      The **Events** API can be used to create log entries that are associated with specific queries. For example, you
-     can record which documents in the results set were \"clicked\" by a user and when that click occured.
+     can record which documents in the results set were "clicked" by a user and when that click occured.
 
      - parameter type: The event type to be created.
      - parameter data: Query event data object.
@@ -3425,12 +3511,19 @@ public class Discovery {
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + "/v1/events",
+            url: serviceEndpoint + "/v1/events",
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -3504,12 +3597,19 @@ public class Discovery {
         }
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + "/v1/logs",
+            url: serviceEndpoint + "/v1/logs",
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -3564,12 +3664,19 @@ public class Discovery {
         }
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + "/v1/metrics/number_of_queries",
+            url: serviceEndpoint + "/v1/metrics/number_of_queries",
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -3581,8 +3688,8 @@ public class Discovery {
     /**
      Number of queries with an event over time.
 
-     Total number of queries using the **natural_language_query** parameter that have a corresponding \"click\" event
-     over a specified time window. This metric requires having integrated event tracking in your application using the
+     Total number of queries using the **natural_language_query** parameter that have a corresponding "click" event over
+     a specified time window. This metric requires having integrated event tracking in your application using the
      **Events** API.
 
      - parameter startTime: Metric is computed from data recorded after this timestamp; must be in
@@ -3626,12 +3733,19 @@ public class Discovery {
         }
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + "/v1/metrics/number_of_queries_with_event",
+            url: serviceEndpoint + "/v1/metrics/number_of_queries_with_event",
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -3687,12 +3801,19 @@ public class Discovery {
         }
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + "/v1/metrics/number_of_queries_with_no_search_results",
+            url: serviceEndpoint + "/v1/metrics/number_of_queries_with_no_search_results",
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -3704,7 +3825,7 @@ public class Discovery {
     /**
      Percentage of queries with an associated event.
 
-     The percentage of queries using the **natural_language_query** parameter that have a corresponding \"click\" event
+     The percentage of queries using the **natural_language_query** parameter that have a corresponding "click" event
      over a specified time window.  This metric requires having integrated event tracking in your application using the
      **Events** API.
 
@@ -3749,12 +3870,19 @@ public class Discovery {
         }
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + "/v1/metrics/event_rate",
+            url: serviceEndpoint + "/v1/metrics/event_rate",
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -3766,9 +3894,9 @@ public class Discovery {
     /**
      Most frequent query tokens with an event.
 
-     The most frequent query tokens parsed from the **natural_language_query** parameter and their corresponding
-     \"click\" event rate within the recording period (queries and events are stored for 30 days). A query token is an
-     individual word or unigram within the query string.
+     The most frequent query tokens parsed from the **natural_language_query** parameter and their corresponding "click"
+     event rate within the recording period (queries and events are stored for 30 days). A query token is an individual
+     word or unigram within the query string.
 
      - parameter count: Number of results to return. The maximum for the **count** and **offset** values together in
        any one query is **10000**.
@@ -3798,12 +3926,19 @@ public class Discovery {
         }
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + "/v1/metrics/top_query_tokens_with_event_rate",
+            url: serviceEndpoint + "/v1/metrics/top_query_tokens_with_event_rate",
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -3846,12 +3981,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -3920,12 +4062,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -3972,12 +4121,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -4047,12 +4203,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "PUT",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -4097,12 +4260,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -4144,12 +4314,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -4202,12 +4379,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -4252,12 +4436,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -4301,12 +4492,19 @@ public class Discovery {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )

@@ -16,24 +16,28 @@
 // swiftlint:disable file_length
 
 import Foundation
-import RestKit
+import IBMSwiftSDKCore
 
 /**
  The IBM Watson&trade; Assistant service combines machine learning, natural language understanding, and an integrated
  dialog editor to create conversation flows between your apps and your users.
+ The Assistant v1 API provides authoring methods your application can use to create or update a workspace.
  */
 public class Assistant {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL = "https://gateway.watsonplatform.net/assistant/api"
+    public var serviceURL: String? = "https://gateway.watsonplatform.net/assistant/api"
+
+    /// Service identifiers
     internal let serviceName = "Conversation"
     internal let serviceVersion = "v1"
+    internal let serviceSdkName = "assistant"
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()
 
     var session = URLSession(configuration: URLSessionConfiguration.default)
-    var authMethod: AuthenticationMethod
+    public let authenticator: Authenticator
     let version: String
 
     #if os(Linux)
@@ -50,18 +54,16 @@ public class Assistant {
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
      */
-    public init?(version: String) {
+    public init(version: String) throws {
         self.version = version
-        guard let credentials = Shared.extractCredentials(serviceName: "assistant") else {
-            return nil
-        }
-        guard let authMethod = Shared.getAuthMethod(from: credentials) else {
-            return nil
-        }
-        if let serviceURL = Shared.getServiceURL(from: credentials) {
+
+        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
+        self.authenticator = authenticator
+
+        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
             self.serviceURL = serviceURL
         }
-        self.authMethod = authMethod
+
         RestRequest.userAgent = Shared.userAgent
     }
     #endif
@@ -71,46 +73,12 @@ public class Assistant {
 
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
-     - parameter username: The username used to authenticate with the service.
-     - parameter password: The password used to authenticate with the service.
+     - parameter authenticator: The Authenticator object used to authenticate requests to the service
      */
-    public init(version: String, username: String, password: String) {
+    public init(version: String, authenticator: Authenticator) {
         self.version = version
-        self.authMethod = Shared.getAuthMethod(username: username, password: password)
+        self.authenticator = authenticator
         RestRequest.userAgent = Shared.userAgent
-    }
-
-    /**
-     Create a `Assistant` object.
-
-     - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
-     - parameter apiKey: An API key for IAM that can be used to obtain access tokens for the service.
-     - parameter iamUrl: The URL for the IAM service.
-     */
-    public init(version: String, apiKey: String, iamUrl: String? = nil) {
-        self.authMethod = Shared.getAuthMethod(apiKey: apiKey, iamURL: iamUrl)
-        self.version = version
-        RestRequest.userAgent = Shared.userAgent
-    }
-
-    /**
-     Create a `Assistant` object.
-
-     - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
-     - parameter accessToken: An access token for the service.
-     */
-    public init(version: String, accessToken: String) {
-        self.version = version
-        self.authMethod = IAMAccessToken(accessToken: accessToken)
-        RestRequest.userAgent = Shared.userAgent
-    }
-
-    public func accessToken(_ newToken: String) {
-        if self.authMethod is IAMAccessToken {
-            self.authMethod = IAMAccessToken(accessToken: newToken)
-        }
     }
 
     #if !os(Linux)
@@ -162,8 +130,8 @@ public class Assistant {
      Get response to user input.
 
      Send user input to a workspace and receive a response.
-     **Note:** For most applications, there are significant advantages to using the v2 runtime API instead. These
-     advantages include ease of deployment, automatic state management, versioning, and search capabilities. For more
+     **Important:** This method has been superseded by the new v2 runtime API. The v2 API offers significant advantages,
+     including ease of deployment, automatic state management, versioning, and search capabilities. For more
      information, see the [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-api-overview).
      There is no rate limit for this operation.
 
@@ -233,12 +201,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -255,7 +230,6 @@ public class Assistant {
      This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter pageLimit: The number of records to return in each page of results.
-     - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned workspaces will be sorted. To reverse the sort order, prefix
        the value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
@@ -266,7 +240,6 @@ public class Assistant {
      */
     public func listWorkspaces(
         pageLimit: Int? = nil,
-        includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
@@ -289,10 +262,6 @@ public class Assistant {
             let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
             queryParameters.append(queryParameter)
         }
-        if let includeCount = includeCount {
-            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
-            queryParameters.append(queryParameter)
-        }
         if let sort = sort {
             let queryParameter = URLQueryItem(name: "sort", value: sort)
             queryParameters.append(queryParameter)
@@ -307,12 +276,19 @@ public class Assistant {
         }
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + "/v1/workspaces",
+            url: serviceEndpoint + "/v1/workspaces",
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -392,12 +368,19 @@ public class Assistant {
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + "/v1/workspaces",
+            url: serviceEndpoint + "/v1/workspaces",
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -465,12 +448,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -568,12 +558,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -617,12 +614,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -643,7 +647,6 @@ public class Assistant {
        returned data includes only information about the element itself. If **export**=`true`, all content, including
        subelements, is included.
      - parameter pageLimit: The number of records to return in each page of results.
-     - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned intents will be sorted. To reverse the sort order, prefix the
        value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
@@ -656,7 +659,6 @@ public class Assistant {
         workspaceID: String,
         export: Bool? = nil,
         pageLimit: Int? = nil,
-        includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
@@ -683,10 +685,6 @@ public class Assistant {
             let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
             queryParameters.append(queryParameter)
         }
-        if let includeCount = includeCount {
-            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
-            queryParameters.append(queryParameter)
-        }
         if let sort = sort {
             let queryParameter = URLQueryItem(name: "sort", value: sort)
             queryParameters.append(queryParameter)
@@ -706,12 +704,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -776,12 +781,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -843,12 +855,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -916,12 +935,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -967,12 +993,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -990,7 +1023,6 @@ public class Assistant {
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter intent: The intent name.
      - parameter pageLimit: The number of records to return in each page of results.
-     - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned examples will be sorted. To reverse the sort order, prefix the
        value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
@@ -1003,7 +1035,6 @@ public class Assistant {
         workspaceID: String,
         intent: String,
         pageLimit: Int? = nil,
-        includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
@@ -1026,10 +1057,6 @@ public class Assistant {
             let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
             queryParameters.append(queryParameter)
         }
-        if let includeCount = includeCount {
-            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
-            queryParameters.append(queryParameter)
-        }
         if let sort = sort {
             let queryParameter = URLQueryItem(name: "sort", value: sort)
             queryParameters.append(queryParameter)
@@ -1049,12 +1076,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1117,12 +1151,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -1177,12 +1218,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1247,12 +1295,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -1300,12 +1355,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1322,7 +1384,6 @@ public class Assistant {
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter pageLimit: The number of records to return in each page of results.
-     - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned counterexamples will be sorted. To reverse the sort order,
        prefix the value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
@@ -1334,7 +1395,6 @@ public class Assistant {
     public func listCounterexamples(
         workspaceID: String,
         pageLimit: Int? = nil,
-        includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
@@ -1357,10 +1417,6 @@ public class Assistant {
             let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
             queryParameters.append(queryParameter)
         }
-        if let includeCount = includeCount {
-            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
-            queryParameters.append(queryParameter)
-        }
         if let sort = sort {
             let queryParameter = URLQueryItem(name: "sort", value: sort)
             queryParameters.append(queryParameter)
@@ -1380,12 +1436,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1444,12 +1507,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -1502,12 +1572,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1568,12 +1645,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -1619,12 +1703,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1645,7 +1736,6 @@ public class Assistant {
        returned data includes only information about the element itself. If **export**=`true`, all content, including
        subelements, is included.
      - parameter pageLimit: The number of records to return in each page of results.
-     - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned entities will be sorted. To reverse the sort order, prefix the
        value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
@@ -1658,7 +1748,6 @@ public class Assistant {
         workspaceID: String,
         export: Bool? = nil,
         pageLimit: Int? = nil,
-        includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
@@ -1685,10 +1774,6 @@ public class Assistant {
             let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
             queryParameters.append(queryParameter)
         }
-        if let includeCount = includeCount {
-            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
-            queryParameters.append(queryParameter)
-        }
         if let sort = sort {
             let queryParameter = URLQueryItem(name: "sort", value: sort)
             queryParameters.append(queryParameter)
@@ -1708,12 +1793,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1785,12 +1877,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -1852,12 +1951,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -1931,12 +2037,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -1982,12 +2095,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2048,12 +2168,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2074,7 +2201,6 @@ public class Assistant {
        returned data includes only information about the element itself. If **export**=`true`, all content, including
        subelements, is included.
      - parameter pageLimit: The number of records to return in each page of results.
-     - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned entity values will be sorted. To reverse the sort order, prefix
        the value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
@@ -2088,7 +2214,6 @@ public class Assistant {
         entity: String,
         export: Bool? = nil,
         pageLimit: Int? = nil,
-        includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
@@ -2115,10 +2240,6 @@ public class Assistant {
             let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
             queryParameters.append(queryParameter)
         }
-        if let includeCount = includeCount {
-            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
-            queryParameters.append(queryParameter)
-        }
         if let sort = sort {
             let queryParameter = URLQueryItem(name: "sort", value: sort)
             queryParameters.append(queryParameter)
@@ -2138,12 +2259,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2166,7 +2294,7 @@ public class Assistant {
        - It cannot contain carriage return, newline, or tab characters.
        - It cannot consist of only whitespace characters.
      - parameter metadata: Any metadata related to the entity value.
-     - parameter valueType: Specifies the type of entity value.
+     - parameter type: Specifies the type of entity value.
      - parameter synonyms: An array of synonyms for the entity value. A value can specify either synonyms or patterns
        (depending on the value type), but not both. A synonym must conform to the following resrictions:
        - It cannot contain carriage return, newline, or tab characters.
@@ -2183,7 +2311,7 @@ public class Assistant {
         entity: String,
         value: String,
         metadata: [String: JSON]? = nil,
-        valueType: String? = nil,
+        type: String? = nil,
         synonyms: [String]? = nil,
         patterns: [String]? = nil,
         headers: [String: String]? = nil,
@@ -2193,7 +2321,7 @@ public class Assistant {
         let createValueRequest = CreateValue(
             value: value,
             metadata: metadata,
-            valueType: valueType,
+            type: type,
             synonyms: synonyms,
             patterns: patterns)
         guard let body = try? JSON.encoder.encode(createValueRequest) else {
@@ -2221,12 +2349,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -2289,12 +2424,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2319,7 +2461,7 @@ public class Assistant {
        - It cannot contain carriage return, newline, or tab characters.
        - It cannot consist of only whitespace characters.
      - parameter newMetadata: Any metadata related to the entity value.
-     - parameter newValueType: Specifies the type of entity value.
+     - parameter newType: Specifies the type of entity value.
      - parameter newSynonyms: An array of synonyms for the entity value. A value can specify either synonyms or
        patterns (depending on the value type), but not both. A synonym must conform to the following resrictions:
        - It cannot contain carriage return, newline, or tab characters.
@@ -2337,7 +2479,7 @@ public class Assistant {
         value: String,
         newValue: String? = nil,
         newMetadata: [String: JSON]? = nil,
-        newValueType: String? = nil,
+        newType: String? = nil,
         newSynonyms: [String]? = nil,
         newPatterns: [String]? = nil,
         headers: [String: String]? = nil,
@@ -2347,7 +2489,7 @@ public class Assistant {
         let updateValueRequest = UpdateValue(
             value: newValue,
             metadata: newMetadata,
-            valueType: newValueType,
+            type: newType,
             synonyms: newSynonyms,
             patterns: newPatterns)
         guard let body = try? JSON.encoder.encode(updateValueRequest) else {
@@ -2375,12 +2517,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -2428,12 +2577,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2452,7 +2608,6 @@ public class Assistant {
      - parameter entity: The name of the entity.
      - parameter value: The text of the entity value.
      - parameter pageLimit: The number of records to return in each page of results.
-     - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned entity value synonyms will be sorted. To reverse the sort
        order, prefix the value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
@@ -2466,7 +2621,6 @@ public class Assistant {
         entity: String,
         value: String,
         pageLimit: Int? = nil,
-        includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
@@ -2489,10 +2643,6 @@ public class Assistant {
             let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
             queryParameters.append(queryParameter)
         }
-        if let includeCount = includeCount {
-            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
-            queryParameters.append(queryParameter)
-        }
         if let sort = sort {
             let queryParameter = URLQueryItem(name: "sort", value: sort)
             queryParameters.append(queryParameter)
@@ -2512,12 +2662,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2579,12 +2736,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -2641,12 +2805,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2710,12 +2881,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -2765,12 +2943,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2787,7 +2972,6 @@ public class Assistant {
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter pageLimit: The number of records to return in each page of results.
-     - parameter includeCount: Whether to include information about the number of records returned.
      - parameter sort: The attribute by which returned dialog nodes will be sorted. To reverse the sort order, prefix
        the value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
@@ -2799,7 +2983,6 @@ public class Assistant {
     public func listDialogNodes(
         workspaceID: String,
         pageLimit: Int? = nil,
-        includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
@@ -2822,10 +3005,6 @@ public class Assistant {
             let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
             queryParameters.append(queryParameter)
         }
-        if let includeCount = includeCount {
-            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
-            queryParameters.append(queryParameter)
-        }
         if let sort = sort {
             let queryParameter = URLQueryItem(name: "sort", value: sort)
             queryParameters.append(queryParameter)
@@ -2845,12 +3024,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -2886,7 +3072,7 @@ public class Assistant {
      - parameter title: The alias used to identify the dialog node. This string must conform to the following
        restrictions:
        - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
-     - parameter nodeType: How the dialog node is processed.
+     - parameter type: How the dialog node is processed.
      - parameter eventName: How an `event_handler` node is processed.
      - parameter variable: The location in the dialog context where output is stored.
      - parameter actions: An array of objects describing any actions to be invoked by the dialog node.
@@ -2909,7 +3095,7 @@ public class Assistant {
         metadata: [String: JSON]? = nil,
         nextStep: DialogNodeNextStep? = nil,
         title: String? = nil,
-        nodeType: String? = nil,
+        type: String? = nil,
         eventName: String? = nil,
         variable: String? = nil,
         actions: [DialogNodeAction]? = nil,
@@ -2932,7 +3118,7 @@ public class Assistant {
             metadata: metadata,
             nextStep: nextStep,
             title: title,
-            nodeType: nodeType,
+            type: type,
             eventName: eventName,
             variable: variable,
             actions: actions,
@@ -2965,12 +3151,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -3023,12 +3216,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -3066,7 +3266,7 @@ public class Assistant {
      - parameter newTitle: The alias used to identify the dialog node. This string must conform to the following
        restrictions:
        - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
-     - parameter newNodeType: How the dialog node is processed.
+     - parameter newType: How the dialog node is processed.
      - parameter newEventName: How an `event_handler` node is processed.
      - parameter newVariable: The location in the dialog context where output is stored.
      - parameter newActions: An array of objects describing any actions to be invoked by the dialog node.
@@ -3090,7 +3290,7 @@ public class Assistant {
         newMetadata: [String: JSON]? = nil,
         newNextStep: DialogNodeNextStep? = nil,
         newTitle: String? = nil,
-        newNodeType: String? = nil,
+        newType: String? = nil,
         newEventName: String? = nil,
         newVariable: String? = nil,
         newActions: [DialogNodeAction]? = nil,
@@ -3113,7 +3313,7 @@ public class Assistant {
             metadata: newMetadata,
             nextStep: newNextStep,
             title: newTitle,
-            nodeType: newNodeType,
+            type: newType,
             eventName: newEventName,
             variable: newVariable,
             actions: newActions,
@@ -3146,12 +3346,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "POST",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
@@ -3197,12 +3404,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -3273,12 +3487,19 @@ public class Assistant {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return
         }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + encodedPath,
+            url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -3340,12 +3561,19 @@ public class Assistant {
         }
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
-            url: serviceURL + "/v1/logs",
+            url: serviceEndpoint + "/v1/logs",
             headerParameters: headerParameters,
             queryItems: queryParameters
         )
@@ -3387,12 +3615,19 @@ public class Assistant {
         queryParameters.append(URLQueryItem(name: "customer_id", value: customerID))
 
         // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
-            url: serviceURL + "/v1/user_data",
+            url: serviceEndpoint + "/v1/user_data",
             headerParameters: headerParameters,
             queryItems: queryParameters
         )

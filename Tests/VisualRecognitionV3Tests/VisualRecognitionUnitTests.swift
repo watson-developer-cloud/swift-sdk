@@ -17,7 +17,6 @@
 // swiftlint:disable function_body_length force_try force_unwrapping file_length
 
 import XCTest
-import RestKit
 #if os(iOS) || os(macOS) || os(tvOS) || os(watchOS)
 import CoreML
 #endif
@@ -33,7 +32,7 @@ class VisualRecognitionUnitTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        visualRecognition = VisualRecognition(version: versionDate, accessToken: accessToken)
+        visualRecognition = VisualRecognition(version: versionDate, authenticator: defaultTestAuthenticator)
         createMockSession(for: visualRecognition)
     }
 
@@ -51,9 +50,9 @@ class VisualRecognitionUnitTests: XCTestCase {
     // MARK: errorResponseDecoder
 
     func testErrorResponseDecoder403() {
-        let testJSON: [String: JSON] = [
-            "status": JSON.string("403"),
-            "statusInfo": JSON.string("forbidden"),
+        let testJSON: [String: WatsonJSON] = [
+            "status": WatsonJSON.string("403"),
+            "statusInfo": WatsonJSON.string("forbidden")
         ]
         let testData = try! JSONEncoder().encode(testJSON)
         let testResponse = HTTPURLResponse(url: exampleURL, statusCode: 403, httpVersion: nil, headerFields: nil)!
@@ -71,21 +70,21 @@ class VisualRecognitionUnitTests: XCTestCase {
     }
 
     func testErrorResponseDecoder404() {
-        let testJSON: [String: JSON] = [
-            "error": JSON.object([
-                "description": JSON.string("not found"),
-                "error_id": JSON.string("42"),
-            ]),
+        let testWatsonJSON: [String: WatsonJSON] = [
+            "error": WatsonJSON.object([
+                "description": WatsonJSON.string("not found"),
+                "error_id": WatsonJSON.string("42")
+            ])
         ]
-        let testData = try! JSONEncoder().encode(testJSON)
+        let testData = try! JSONEncoder().encode(testWatsonJSON)
         let testResponse = HTTPURLResponse(url: exampleURL, statusCode: 404, httpVersion: nil, headerFields: nil)!
 
         let error = visualRecognition.errorResponseDecoder(data: testData, response: testResponse)
         if case let .http(statusCode, message, metadata) = error {
             XCTAssertEqual(statusCode, 404)
             XCTAssertNotNil(message)
-            XCTAssertNotNil(metadata?["response"] as? [String: JSON])
-            let response = metadata?["response"] as? [String: JSON]
+            XCTAssertNotNil(metadata?["response"] as? [String: WatsonJSON])
+            let response = metadata?["response"] as? [String: WatsonJSON]
             XCTAssertNotNil(response?["error"])
             if case let .some(.object(responseError)) = response?["error"] {
                 XCTAssertNotNil(responseError["description"])
@@ -97,8 +96,8 @@ class VisualRecognitionUnitTests: XCTestCase {
     }
 
     func testErrorResponseDecoder413() {
-        let testJSON: [String: JSON] = ["Error": JSON.string("failed")]
-        let testData = try! JSONEncoder().encode(testJSON)
+        let testWatsonJSON: [String: WatsonJSON] = ["Error": WatsonJSON.string("failed")]
+        let testData = try! JSONEncoder().encode(testWatsonJSON)
         let testResponse = HTTPURLResponse(url: exampleURL, statusCode: 413, httpVersion: nil, headerFields: nil)!
 
         let error = visualRecognition.errorResponseDecoder(data: testData, response: testResponse)
@@ -109,8 +108,8 @@ class VisualRecognitionUnitTests: XCTestCase {
     }
 
     func testErrorResponseDecoderDefault() {
-        let testJSON: [String: JSON] = ["error": JSON.string("failed")]
-        let testData = try! JSONEncoder().encode(testJSON)
+        let testWatsonJSON: [String: WatsonJSON] = ["error": WatsonJSON.string("failed")]
+        let testData = try! JSONEncoder().encode(testWatsonJSON)
         let testResponse = HTTPURLResponse(url: exampleURL, statusCode: 500, httpVersion: nil, headerFields: nil)!
 
         let error = visualRecognition.errorResponseDecoder(data: testData, response: testResponse)
@@ -120,7 +119,7 @@ class VisualRecognitionUnitTests: XCTestCase {
         }
     }
 
-    func testErrorResponseDecoderBadJSON() {
+    func testErrorResponseDecoderBadWatsonJSON() {
         let testData = Data()
         let testResponse = HTTPURLResponse(url: exampleURL, statusCode: 500, httpVersion: nil, headerFields: nil)!
 
@@ -292,38 +291,6 @@ class VisualRecognitionUnitTests: XCTestCase {
         waitForExpectations(timeout: timeout)
     }
 
-    // MARK: Faces
-
-    func testDetectFaces() {
-        MockURLProtocol.requestHandler = { request in
-            XCTAssertEqual(request.httpMethod, "POST")
-            XCTAssertEqual(request.url?.lastPathComponent, "detect_faces")
-            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
-            XCTAssertNotNil(request.httpBodyStream)
-
-            let headers = request.allHTTPHeaderFields
-            XCTAssertNotNil(headers)
-            if let headers = headers {
-                XCTAssertNotNil(headers["Accept-Language"])
-                if let acceptLanguage = headers["Accept-Language"] {
-                    XCTAssertEqual(acceptLanguage, "en")
-                }
-            }
-
-            let bodyFieldsCount = numberOfFieldsInMultiPartFormBody(request: request)
-            XCTAssertEqual(bodyFieldsCount, 2)
-
-            return (dummyResponse, Data())
-        }
-
-        let expectation = self.expectation(description: "detectFaces")
-        visualRecognition.detectFaces(imagesFile: faces, url: "http://example.com", acceptLanguage: "en") {
-            _, _ in
-            expectation.fulfill()
-        }
-        waitForExpectations(timeout: timeout)
-    }
-
     // MARK: Core ML model
 
     func testGetCoreMlModel() {
@@ -378,10 +345,9 @@ class VisualRecognitionUnitTests: XCTestCase {
     #if os(Linux)
     func testInjectCredentialsFromFile() {
         setenv("IBM_CREDENTIALS_FILE", "Source/SupportingFiles/ibm-credentials.env", 1)
-        let visualRecognition = VisualRecognition(version: versionDate)
+        let visualRecognition: VisualRecognition? = try? VisualRecognition(version: versionDate)
         XCTAssertNotNil(visualRecognition)
-        XCTAssertEqual("https://test.us-south.containers.cloud.ibm.com/visual-recognition/api", visualRecognition?.serviceURL)
-        XCTAssert(visualRecognition?.authMethod is IAMAuthentication)
+        XCTAssertEqual("https://gateway.watsonplatform.net/visual-recognition/api", visualRecognition?.serviceURL)
     }
     #endif
 
@@ -418,19 +384,19 @@ class VisualRecognitionUnitTests: XCTestCase {
 
                 let expectation: XCTestExpectation
 
-                init(version: String, accessToken: String, expectation: XCTestExpectation) {
+                init(version: String, authenticator: WatsonAuthenticator, expectation: XCTestExpectation) {
                     self.expectation = expectation
-                    super.init(version: version, accessToken: accessToken)
+                    super.init(version: version, authenticator: authenticator)
                 }
 
                 override func getClassifier(
                     classifierID: String,
                     headers: [String: String]?,
-                    completionHandler: @escaping (RestResponse<Classifier>?, WatsonError?) -> Void) {
+                    completionHandler: @escaping (WatsonResponse<Classifier>?, WatsonError?) -> Void) {
 
                     expectation.fulfill()
 
-                    var response: RestResponse<Classifier> = RestResponse(statusCode: 200)
+                    var response: WatsonResponse<Classifier> = WatsonResponse(statusCode: 200)
                     response.result = Classifier(
                         classifierID: classifierID,
                         name: classifierID,
@@ -468,7 +434,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             }
 
             let classifierExpectation = self.expectation(description: "getClassifier() should get called")
-            let visualRecognition = MockVisualRecognition(version: versionDate, accessToken: accessToken, expectation: classifierExpectation)
+            let visualRecognition = MockVisualRecognition(version: versionDate, authenticator: defaultTestAuthenticator, expectation: classifierExpectation)
             createMockSession(for: visualRecognition)
 
             // If there is a newer version of the CoreML model available in the VisualRecognition service,
@@ -491,20 +457,20 @@ class VisualRecognitionUnitTests: XCTestCase {
 
                 let expectation: XCTestExpectation
 
-                init(version: String, accessToken: String, expectation: XCTestExpectation) {
+                init(version: String, authenticator: WatsonAuthenticator, expectation: XCTestExpectation) {
                     self.expectation = expectation
-                    super.init(version: version, accessToken: accessToken)
+                    super.init(version: version, authenticator: authenticator)
                 }
 
                 override func getClassifier(
                     classifierID: String,
                     headers: [String: String]?,
-                    completionHandler: @escaping (RestResponse<Classifier>?, WatsonError?) -> Void) {
+                    completionHandler: @escaping (WatsonResponse<Classifier>?, WatsonError?) -> Void) {
 
                     expectation.fulfill()
 
                     let oldDate = Date(timeIntervalSinceReferenceDate: 0)
-                    var response: RestResponse<Classifier> = RestResponse(statusCode: 200)
+                    var response: WatsonResponse<Classifier> = WatsonResponse(statusCode: 200)
                     response.result = Classifier(
                         classifierID: classifierID,
                         name: classifierID,
@@ -527,7 +493,7 @@ class VisualRecognitionUnitTests: XCTestCase {
             }
 
             let classifierExpectation = self.expectation(description: "getClassifier() should get called")
-            let visualRecognition = MockVisualRecognition(version: versionDate, accessToken: accessToken, expectation: classifierExpectation)
+            let visualRecognition = MockVisualRecognition(version: versionDate, authenticator: defaultTestAuthenticator, expectation: classifierExpectation)
             createMockSession(for: visualRecognition)
 
             // If the local copy of the CoreML model is at least as updated as
@@ -654,6 +620,11 @@ class VisualRecognitionUnitTests: XCTestCase {
                 return
             }
             let newLocation = appSupport.appendingPathComponent(name + ".mlmodelc", isDirectory: false)
+
+            if fileManager.fileExists(atPath: newLocation.relativePath) {
+                try fileManager.removeItem(at: newLocation)
+            }
+
             try fileManager.copyItem(at: modelURL, to: newLocation)
         } catch {
             XCTFail(error.localizedDescription)
@@ -700,30 +671,6 @@ class VisualRecognitionUnitTests: XCTestCase {
         waitForExpectations(timeout: timeout)
     }
 
-    func testDetectFacesWithImage() {
-        let image = UIImage(data: obama)!
-
-        MockURLProtocol.requestHandler = { request in
-            XCTAssertEqual(request.httpMethod, "POST")
-            XCTAssertEqual(request.url?.lastPathComponent, "detect_faces")
-            XCTAssertTrue(request.url?.query?.contains("version=\(versionDate)") ?? false)
-            XCTAssertNotNil(request.httpBodyStream)
-            XCTAssertNotNil(request.allHTTPHeaderFields)
-
-            let bodyFieldsCount = numberOfFieldsInMultiPartFormBody(request: request)
-            XCTAssertEqual(bodyFieldsCount, 1)
-
-            return (dummyResponse, Data())
-        }
-
-        let expectation = self.expectation(description: "detectFacesWithImage")
-        visualRecognition.detectFaces(image: image) {
-            _, _ in
-            expectation.fulfill()
-        }
-        waitForExpectations(timeout: timeout)
-    }
-
     func testClassifyWithLocalModelUIImage() {
         if #available(iOS 11.0, tvOS 11.0, watchOS 4.0, *) {
             let classifierIDs = ["1"]
@@ -757,10 +704,10 @@ class VisualRecognitionUnitTests: XCTestCase {
 
 #if os(Linux)
 extension VisualRecognitionUnitTests {
-    static var allTests: [(String, (VisualRecognitionUnitTests) -> () throws -> ())] {
-        let tests: [(String, (VisualRecognitionUnitTests) -> () throws -> ())] = [
+    static var allTests: [(String, (VisualRecognitionUnitTests) -> () throws -> Void)] {
+        let tests: [(String, (VisualRecognitionUnitTests) -> () throws -> Void)] = [
             // Inject Credentials
-            ("testInjectCredentialsFromFile", testInjectCredentialsFromFile),
+            ("testInjectCredentialsFromFile", testInjectCredentialsFromFile)
         ]
         return tests
     }

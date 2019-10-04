@@ -22,7 +22,7 @@ as well as public and third-party data.
                             'Source/SupportingFiles/Shared.swift'
   s.exclude_files         = 'Source/DiscoveryV1/Shared.swift'
 
-  s.swift_version         = '4.2'
-  s.dependency              'IBMWatsonRestKit', '~> 3.0.0'
+  s.swift_version         = ['4.2', '5.0', '5.1']
+  s.dependency              'IBMSwiftSDKCore', '~> 1.0.0'
 
 end

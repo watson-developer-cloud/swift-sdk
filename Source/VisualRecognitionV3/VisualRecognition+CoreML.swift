@@ -19,7 +19,7 @@
 import Foundation
 import CoreML
 import Vision
-import RestKit
+import IBMSwiftSDKCore
 
 @available(iOS 11.0, macOS 10.13, tvOS 11.0, watchOS 4.0, *)
 extension VisualRecognition {
@@ -47,8 +47,7 @@ extension VisualRecognition {
      */
     public func updateLocalModel(
         classifierID: String,
-        completionHandler: @escaping (WatsonResponse<Classifier>?, WatsonError?) -> Void)
-    {
+        completionHandler: @escaping (WatsonResponse<Classifier>?, WatsonError?) -> Void) {
         // setup date formatter '2017-12-04T19:44:27.419Z'
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
@@ -142,8 +141,7 @@ extension VisualRecognition {
         imageData: Data,
         classifierIDs: [String] = ["default"],
         threshold: Double? = nil,
-        completionHandler: @escaping (ClassifiedImages?, WatsonError?) -> Void)
-    {
+        completionHandler: @escaping (ClassifiedImages?, WatsonError?) -> Void) {
         // ensure a classifier id was provided
         guard !classifierIDs.isEmpty else {
             let error = WatsonError.other(message: "Please provide at least one classifierID.", metadata: nil)
@@ -332,8 +330,7 @@ extension VisualRecognition {
      */
     internal func downloadClassifier(
         classifierID: String,
-        completionHandler: @escaping (WatsonResponse<Classifier>?, WatsonError?) -> Void)
-    {
+        completionHandler: @escaping (WatsonResponse<Classifier>?, WatsonError?) -> Void) {
         // construct header parameters
         var headerParameters = defaultHeaders
         headerParameters["Accept"] = "application/octet-stream"
@@ -342,10 +339,15 @@ extension VisualRecognition {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
 
+        guard let serviceURL = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
         // construct REST request
         let request = RestRequest(
             session: session,
-            authMethod: authMethod,
+            authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceURL + "/v3/classifiers/\(classifierID)/core_ml_model",

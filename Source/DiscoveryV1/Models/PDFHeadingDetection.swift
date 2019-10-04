@@ -16,9 +16,14 @@
 
 import Foundation
 
-/** PDFHeadingDetection. */
+/**
+ Object containing heading detection conversion settings for PDF documents.
+ */
 public struct PDFHeadingDetection: Codable, Equatable {
 
+    /**
+     Array of font matching configurations.
+     */
     public var fonts: [FontSetting]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -29,7 +34,7 @@ public struct PDFHeadingDetection: Codable, Equatable {
     /**
      Initialize a `PDFHeadingDetection` with member variables.
 
-     - parameter fonts:
+     - parameter fonts: Array of font matching configurations.
 
      - returns: An initialized `PDFHeadingDetection`.
      */

@@ -19,7 +19,6 @@
 import XCTest
 import Foundation
 import AssistantV2
-import RestKit
 
 class AssistantV2Tests: XCTestCase {
 
@@ -42,18 +41,20 @@ class AssistantV2Tests: XCTestCase {
             ("testDeleteSession", testDeleteSession),
             ("testDeleteSessionWithInvalidSessionID", testDeleteSessionWithInvalidSessionID),
             ("testMessage", testMessage),
-            ("testMessageWithInvalidSessionID", testMessageWithInvalidSessionID),
+            ("testMessageWithInvalidSessionID", testMessageWithInvalidSessionID)
         ]
     }
 
     /** Instantiate Assistant. */
     func instantiateAssistant() {
         if let apiKey = WatsonCredentials.AssistantAPIKey {
-            assistant = Assistant(version: versionDate, apiKey: apiKey)
+            let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
+            assistant = Assistant(version: versionDate, authenticator: authenticator)
         } else {
             let username = WatsonCredentials.AssistantV2Username
             let password = WatsonCredentials.AssistantV2Password
-            assistant = Assistant(version: versionDate, username: username, password: password)
+            let authenticator = WatsonBasicAuthenticator.init(username: username, password: password)
+            assistant = Assistant(version: versionDate, authenticator: authenticator)
         }
         if let url = WatsonCredentials.AssistantV2URL {
             assistant.serviceURL = url
@@ -141,7 +142,7 @@ class AssistantV2Tests: XCTestCase {
         let description2 = "Delete the newly created session"
         let expectation2 = self.expectation(description: description2)
         assistant.deleteSession(assistantID: assistantID, sessionID: sessionID) {
-            response, error in
+            _, error in
 
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -318,7 +319,7 @@ class AssistantV2Tests: XCTestCase {
         let global = MessageContextGlobal(system: system)
 
         // build user-defined context variables, put in skill-specific context for main skill
-        var userDefinedContext: [String: JSON] = [:]
+        var userDefinedContext: [String: WatsonJSON] = [:]
         userDefinedContext["account_number"] = .string("123456")
         let mainSkillContext = MessageContextSkill(userDefined: userDefinedContext)
         let skills = MessageContextSkills(additionalProperties: ["main skill": mainSkillContext])
@@ -380,12 +381,11 @@ class AssistantV2Tests: XCTestCase {
 
         waitForExpectations()
     }
-    
+
     // MARK: - Search Skill
-    
+
     func testAssistantSearchSkill() {
 
-        
         let sessionExpectationDescription = "Create a session"
         let sessionExpectation = self.expectation(description: sessionExpectationDescription)
 
@@ -393,7 +393,7 @@ class AssistantV2Tests: XCTestCase {
         var newSessionID: String?
         assistant.createSession(assistantID: assistantID) {
             response, error in
-            
+
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
                 return
@@ -402,19 +402,19 @@ class AssistantV2Tests: XCTestCase {
                 XCTFail(missingResultMessage)
                 return
             }
-            
+
             XCTAssertNotNil(session.sessionID)
             newSessionID = session.sessionID
             sessionExpectation.fulfill()
         }
-        
+
         waitForExpectations()
-        
+
         guard let sessionID = newSessionID else {
             XCTFail("Failed to get the ID of the newly created session")
             return
         }
-        
+
         let genericMessages: [String] = [
             "Hello",
             "Are you open on christmas",
@@ -422,53 +422,53 @@ class AssistantV2Tests: XCTestCase {
             "Tomorrow at 3pm",
             "Make that thursday at 2pm"
         ]
-        
+
         // send multiple messages to get assistant going
         for genericMessage in genericMessages {
             let genericMessageDescription = "generic message"
             let genericMessageExpectation = self.expectation(description: genericMessageDescription)
             let messageInput = MessageInput(messageType: "text", text: genericMessage)
-            
+
             assistant.message(assistantID: assistantID, sessionID: sessionID, input: messageInput) {
                 response, error in
-                
+
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
                     return
                 }
-                
+
                 XCTAssertNotNil(response?.result)
                 genericMessageExpectation.fulfill()
             }
-            
+
             waitForExpectations()
         }
-        
+
         // send a message that triggers search skill
         let searchSkillMessageDescription = "search skill message"
         let searchSkillMessageExpectation = self.expectation(description: searchSkillMessageDescription)
         let searchSkillMessageInput = MessageInput(messageType: "text", text: "who did watson beat in jeopardy?")
-        
+
         assistant.message(assistantID: assistantID, sessionID: sessionID, input: searchSkillMessageInput) {
             response, error in
-            
+
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
                 return
             }
-            
+
             guard let message = response?.result?.output.generic?[0] else {
                 XCTFail(missingResultMessage)
                 return
             }
-            
+
             XCTAssertNotNil(message)
             XCTAssert(message.responseType == "search")
-            
+
             searchSkillMessageExpectation.fulfill()
         }
-        
+
         waitForExpectations()
     }
-    
+
 }

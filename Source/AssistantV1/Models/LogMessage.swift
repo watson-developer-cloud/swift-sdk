@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /**
  Log message details.
@@ -41,14 +40,10 @@ public struct LogMessage: Codable, Equatable {
      */
     public var msg: String
 
-    /// Additional properties associated with this model.
-    public var additionalProperties: [String: JSON]
-
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case level = "level"
         case msg = "msg"
-        static let allValues = [level, msg]
     }
 
     /**
@@ -61,29 +56,11 @@ public struct LogMessage: Codable, Equatable {
      */
     public init(
         level: String,
-        msg: String,
-        additionalProperties: [String: JSON] = [:]
+        msg: String
     )
     {
         self.level = level
         self.msg = msg
-        self.additionalProperties = additionalProperties
-    }
-
-    public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        level = try container.decode(String.self, forKey: .level)
-        msg = try container.decode(String.self, forKey: .msg)
-        let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
-        additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: CodingKeys.allValues)
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(level, forKey: .level)
-        try container.encode(msg, forKey: .msg)
-        var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
-        try dynamicContainer.encodeIfPresent(additionalProperties)
     }
 
 }

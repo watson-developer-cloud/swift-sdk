@@ -15,7 +15,7 @@
  **/
 
 import Foundation
-import RestKit
+import IBMSwiftSDKCore
 
 /**
  JSON, plain text, or HTML input that contains the content to be analyzed. For JSON input, provide an object of type

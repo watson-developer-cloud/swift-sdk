@@ -16,11 +16,19 @@
 
 import Foundation
 
-/** WordHeadingDetection. */
+/**
+ Object containing heading detection conversion settings for Microsoft Word documents.
+ */
 public struct WordHeadingDetection: Codable, Equatable {
 
+    /**
+     Array of font matching configurations.
+     */
     public var fonts: [FontSetting]?
 
+    /**
+     Array of Microsoft Word styles to convert.
+     */
     public var styles: [WordStyle]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
@@ -32,8 +40,8 @@ public struct WordHeadingDetection: Codable, Equatable {
     /**
      Initialize a `WordHeadingDetection` with member variables.
 
-     - parameter fonts:
-     - parameter styles:
+     - parameter fonts: Array of font matching configurations.
+     - parameter styles: Array of Microsoft Word styles to convert.
 
      - returns: An initialized `WordHeadingDetection`.
      */

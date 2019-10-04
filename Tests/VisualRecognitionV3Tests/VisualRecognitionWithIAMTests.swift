@@ -24,8 +24,7 @@ class VisualRecognitionWithIAMTests: XCTestCase {
 
     static var allTests: [(String, (VisualRecognitionWithIAMTests) -> () throws -> Void)] {
         return [
-            ("testAccessWithAPIKey", testAccessWithAPIKey),
-            ("testAccessWithAccessToken", testAccessWithAccessToken),
+            ("testAccessWithAPIKey", testAccessWithAPIKey)
         ]
     }
 
@@ -84,7 +83,8 @@ class VisualRecognitionWithIAMTests: XCTestCase {
             XCTFail("Missing credentials for Visual Recognition service")
             return
         }
-        let visualRecognition = VisualRecognition(version: versionDate, apiKey: apiKey)
+        let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
+        let visualRecognition = VisualRecognition(version: versionDate, authenticator: authenticator)
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
 
@@ -121,108 +121,5 @@ class VisualRecognitionWithIAMTests: XCTestCase {
             expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
-    }
-
-    /** Access service using access token obtained using IAM API Key.  */
-    func testAccessWithAccessToken() {
-        guard let apiKey = WatsonCredentials.VisualRecognitionAPIKey else {
-            XCTFail("Missing credentials for Visual Recognition service")
-            return
-        }
-        // Obtain an access token using the IAM API Key
-        var tokenInfo = getTokenInfo(apiKey: apiKey)
-        guard let accessToken = tokenInfo?["access_token"] as? String else {
-            XCTFail("Failed to obtain access token")
-            return
-        }
-
-        // Pass the access token as the credentials when instantiating the service
-
-        let visualRecognition = VisualRecognition(version: versionDate, accessToken: accessToken)
-        visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
-        visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
-
-        // Verify access to the service using the access token
-
-        let expectation = self.expectation(description: "Access VR service with access token")
-        visualRecognition.classify(url: obamaURL, acceptLanguage: "en") {
-            response, error in
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let classifiedImages = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
-
-            // verify classified images object
-            XCTAssertNil(classifiedImages.warnings)
-            XCTAssertEqual(classifiedImages.images.count, 1)
-
-            // verify the image's metadata
-            let image = classifiedImages.images.first
-            XCTAssertEqual(image?.sourceURL, self.obamaURL)
-            XCTAssertEqual(image?.resolvedURL, self.obamaURL)
-            XCTAssertNil(image?.image)
-            XCTAssertNil(image?.error)
-            XCTAssertEqual(image?.classifiers.count, 1)
-
-            // verify the image's classifier
-            let classifier = image?.classifiers.first
-            XCTAssertEqual(classifier?.classifierID, "default")
-            XCTAssertEqual(classifier?.name, "default")
-
-            expectation.fulfill()
-        }
-        waitForExpectations(timeout: timeout)
-
-        // Obtain a new access token using the refresh token returned with the first access token
-
-        tokenInfo = getTokenInfo(apiKey: apiKey, refreshToken: tokenInfo?["refresh_token"] as? String ?? "bogus")
-        guard let newToken = tokenInfo?["access_token"] as? String else {
-            XCTFail("Failed to obtain access token")
-            return
-        }
-
-        // Update the access token to be used for requests by the service
-
-        visualRecognition.accessToken(newToken)
-
-        // Verify access to the service using the refreshed access token
-
-        let expectation2 = self.expectation(description: "Access VR service with refreshed access token")
-        visualRecognition.classify(url: trumpURL, acceptLanguage: "en") {
-            response, error in
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let classifiedImages = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
-
-            // verify classified images object
-            XCTAssertNil(classifiedImages.warnings)
-            XCTAssertEqual(classifiedImages.images.count, 1)
-
-            // verify the image's metadata
-            let image = classifiedImages.images.first
-            XCTAssertEqual(image?.sourceURL, self.trumpURL)
-            XCTAssertEqual(image?.resolvedURL, self.trumpURL)
-            XCTAssertNil(image?.image)
-            XCTAssertNil(image?.error)
-            XCTAssertEqual(image?.classifiers.count, 1)
-
-            // verify the image's classifier
-            let classifier = image?.classifiers.first
-            XCTAssertEqual(classifier?.classifierID, "default")
-            XCTAssertEqual(classifier?.name, "default")
-
-            expectation2.fulfill()
-        }
-        waitForExpectations(timeout: timeout)
-
     }
 }

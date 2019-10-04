@@ -20,7 +20,6 @@ import XCTest
 import Foundation
 // Do not import @testable to ensure only public interface is exposed
 import DiscoveryV1
-import RestKit
 
 class DiscoveryTests: XCTestCase {
 
@@ -44,11 +43,13 @@ class DiscoveryTests: XCTestCase {
 
     func instantiateDiscovery() {
         if let apiKey = WatsonCredentials.DiscoveryAPIKey {
-            discovery = Discovery(version: versionDate, apiKey: apiKey)
+            let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
+            discovery = Discovery(version: versionDate, authenticator: authenticator)
         } else {
             let username = WatsonCredentials.DiscoveryUsername
             let password = WatsonCredentials.DiscoveryPassword
-            discovery = Discovery(version: versionDate, username: username, password: password)
+            let authenticator = WatsonBasicAuthenticator.init(username: username, password: password)
+            discovery = Discovery(version: versionDate, authenticator: authenticator)
         }
         if let url = WatsonCredentials.DiscoveryURL {
             discovery.serviceURL = url
@@ -83,8 +84,6 @@ class DiscoveryTests: XCTestCase {
             ("testListConfigurationsByName", testListConfigurationsByName),
             ("testConfigurationCRUD", testConfigurationCRUD),
             ("testConfigurationWithSource", testConfigurationWithSource),
-            // Test Configuration in Environment
-            ("testConfigurationInEnvironment", testConfigurationInEnvironment),
             // Collections
             ("testListCollections", testListCollections),
             ("testListCollectionsByName", testListCollectionsByName),
@@ -140,7 +139,7 @@ class DiscoveryTests: XCTestCase {
             ("testGetEnvironmentWithInvalidID", testGetEnvironmentWithInvalidID),
             ("testGetConfigurationWithInvalidID", testGetConfigurationWithInvalidID),
             ("testGetCollectionWithInvalidID", testGetCollectionWithInvalidID),
-            ("testQueryWithInvalidID", testQueryWithInvalidID),
+            ("testQueryWithInvalidID", testQueryWithInvalidID)
         ]
         return tests
     }
@@ -276,8 +275,7 @@ class DiscoveryTests: XCTestCase {
             name: "swift-sdk-test-" + UUID().uuidString,
             description: "A collection created while testing the Swift SDK. Safe to delete.",
             configurationID: configurationID,
-            language: language)
-        {
+            language: language) {
             response, error in
 
             if let error = error {
@@ -305,8 +303,7 @@ class DiscoveryTests: XCTestCase {
             environmentID: environmentID,
             collectionID: collectionID,
             file: document,
-            filename: "KennedySpeech.html")
-        {
+            filename: "KennedySpeech.html") {
             response, error in
 
             if let error = error {
@@ -507,8 +504,8 @@ class DiscoveryTests: XCTestCase {
 
             XCTAssertNotNil(result.fields)
             XCTAssertGreaterThan(result.fields!.count, 0)
-            XCTAssertNotNil(result.fields?.first?.fieldName)
-            XCTAssertNotNil(result.fields?.first?.fieldType)
+            XCTAssertNotNil(result.fields?.first?.field)
+            XCTAssertNotNil(result.fields?.first?.type)
             expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
@@ -740,42 +737,6 @@ class DiscoveryTests: XCTestCase {
         waitForExpectations(timeout: timeout)
     }
 
-    // MARK: - Test Configuration in Environment
-
-    func testConfigurationInEnvironment() {
-        let environmentID = environment.environmentID!
-        let configuration = lookupOrCreateTestConfiguration(environmentID: environmentID)
-        let expectation = self.expectation(description: "testConfigurationInEnvironment")
-        discovery.testConfigurationInEnvironment(
-            environmentID: environmentID,
-            file: document,
-            filename: "KennedySpeech.html",
-            metadata: "{ \"Creator\": \"John F. Kennedy\" }",
-            configurationID: configuration.configurationID)
-        {
-            response, error in
-
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let result = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
-
-            XCTAssertEqual(result.status, "completed")
-            XCTAssertEqual(result.originalMediaType, "text/html")
-            XCTAssertNotNil(result.snapshots)
-            XCTAssertGreaterThan(result.snapshots!.count, 0)
-            XCTAssertEqual(result.snapshots!.first!.step, "html_input")
-            XCTAssertNotNil(result.snapshots!.first!.snapshot)
-            XCTAssertGreaterThan(result.snapshots!.first!.snapshot!.count, 0)
-            expectation.fulfill()
-        }
-        waitForExpectations(timeout: timeout)
-    }
-
     // MARK: - Collections
 
     func testListCollections() {
@@ -840,8 +801,7 @@ class DiscoveryTests: XCTestCase {
             name: collectionName,
             description: "A collection created while testing the Swift SDK. Safe to delete.",
             configurationID: configuration.configurationID!,
-            language: "en")
-        {
+            language: "en") {
             response, error in
 
             if let error = error {
@@ -958,8 +918,8 @@ class DiscoveryTests: XCTestCase {
 
             XCTAssertNotNil(result.fields)
             XCTAssertGreaterThan(result.fields!.count, 0)
-            XCTAssertNotNil(result.fields?.first?.fieldName)
-            XCTAssertNotNil(result.fields?.first?.fieldType)
+            XCTAssertNotNil(result.fields?.first?.field)
+            XCTAssertNotNil(result.fields?.first?.type)
             expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
@@ -976,8 +936,7 @@ class DiscoveryTests: XCTestCase {
         discovery.createExpansions(
             environmentID: environmentID,
             collectionID: collectionID,
-            expansions: [expansion])
-        {
+            expansions: [expansion]) {
             response, error in
 
             if let error = error {
@@ -1106,7 +1065,7 @@ class DiscoveryTests: XCTestCase {
 
         let expectation3 = self.expectation(description: "deleteTokenizationDictionary")
         discovery.deleteTokenizationDictionary(environmentID: environmentID, collectionID: collectionID) {
-            response, error in
+            _, error in
 
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -1191,8 +1150,7 @@ class DiscoveryTests: XCTestCase {
             collectionID: collectionID,
             file: document,
             filename: "KennedySpeech.html",
-            metadata: metadata)
-        {
+            metadata: metadata) {
             response, error in
 
             if let error = error {
@@ -1218,8 +1176,7 @@ class DiscoveryTests: XCTestCase {
         discovery.getDocumentStatus(
             environmentID: environmentID,
             collectionID: collectionID,
-            documentID: documentID)
-        {
+            documentID: documentID) {
             response, error in
 
             if let error = error {
@@ -1247,8 +1204,7 @@ class DiscoveryTests: XCTestCase {
             environmentID: environmentID,
             collectionID: collectionID,
             documentID: documentID,
-            metadata: newMetadata)
-        {
+            metadata: newMetadata) {
             response, error in
 
             if let error = error {
@@ -1273,8 +1229,7 @@ class DiscoveryTests: XCTestCase {
         discovery.deleteDocument(
             environmentID: environmentID,
             collectionID: collectionID,
-            documentID: documentID)
-        {
+            documentID: documentID) {
             response, error in
 
             if let error = error {
@@ -1303,13 +1258,12 @@ class DiscoveryTests: XCTestCase {
             filter: "enriched_text.concepts.text:\"Technology\"",
             query: "enriched_text.concepts.text:\"Cloud computing\"",
             count: 5,
-            returnFields: ["enriched_text"].joined(separator: ","),
+            return: ["enriched_text"].joined(separator: ","),
             offset: 1,
             sort: ["enriched_text.sentiment.document.score"].joined(separator: ","),
             highlight: true,
             deduplicate: true,
-            deduplicateField: "title")
-        {
+            deduplicateField: "title") {
             response, error in
 
             if let error = error {
@@ -1341,8 +1295,7 @@ class DiscoveryTests: XCTestCase {
             environmentID: newsEnvironmentID,
             collectionID: newsCollectionID,
             naturalLanguageQuery: "Kubernetes",
-            count: 5)
-        {
+            count: 5) {
             response, error in
 
             if let error = error {
@@ -1377,8 +1330,7 @@ class DiscoveryTests: XCTestCase {
             passages: true,
             passagesFields: "text",
             passagesCount: 1,
-            passagesCharacters: 400)
-        {
+            passagesCharacters: 400) {
             response, error in
 
             if let error = error {
@@ -1406,8 +1358,7 @@ class DiscoveryTests: XCTestCase {
             query: "enriched_text.concepts.text:\"Cloud computing\"",
             similar: true,
             similarDocumentIDs: nil,
-            similarFields: "text")
-        {
+            similarFields: "text") {
             response, error in
 
             if let error = error {
@@ -1433,8 +1384,7 @@ class DiscoveryTests: XCTestCase {
             collectionID: newsCollectionID,
             query: "enriched_text.concepts.text:\"Cloud computing\"",
             aggregation: "term(enriched_text.concepts.text,count:10)",
-            count: 1)
-        {
+            count: 1) {
             response, error in
 
             if let error = error {
@@ -1474,8 +1424,7 @@ class DiscoveryTests: XCTestCase {
             collectionID: newsCollectionID,
             query: "enriched_text.concepts.text:\"Cloud computing\"",
             aggregation: "filter(enriched_text.concepts.text:\"cloud computing\")",
-            count: 1)
-        {
+            count: 1) {
             response, error in
 
             if let error = error {
@@ -1510,8 +1459,7 @@ class DiscoveryTests: XCTestCase {
             collectionID: newsCollectionID,
             query: "enriched_text.concepts.text:\"Cloud computing\"",
             aggregation: "nested(enriched_text.entities)",
-            count: 1)
-        {
+            count: 1) {
             response, error in
 
             if let error = error {
@@ -1546,8 +1494,7 @@ class DiscoveryTests: XCTestCase {
             collectionID: newsCollectionID,
             query: "enriched_text.concepts.text:\"Cloud computing\"",
             aggregation: "histogram(enriched_text.concepts.relevance,interval:1)",
-            count: 1)
-        {
+            count: 1) {
             response, error in
 
             if let error = error {
@@ -1587,8 +1534,7 @@ class DiscoveryTests: XCTestCase {
             collectionID: newsCollectionID,
             query: "enriched_text.concepts.text:\"Cloud computing\"",
             aggregation: "timeslice(publication_date,12hours)",
-            count: 1)
-        {
+            count: 1) {
             response, error in
 
             if let error = error {
@@ -1627,8 +1573,7 @@ class DiscoveryTests: XCTestCase {
             collectionID: newsCollectionID,
             query: "enriched_text.concepts.text:\"Cloud computing\"",
             aggregation: "top_hits(1)",
-            count: 1)
-        {
+            count: 1) {
             response, error in
 
             if let error = error {
@@ -1666,8 +1611,7 @@ class DiscoveryTests: XCTestCase {
             collectionID: newsCollectionID,
             query: "enriched_text.concepts.text:\"Cloud computing\"",
             aggregation: "unique_count(enriched_text.keywords.text)",
-            count: 1)
-        {
+            count: 1) {
             response, error in
 
             if let error = error {
@@ -1702,8 +1646,7 @@ class DiscoveryTests: XCTestCase {
             collectionID: newsCollectionID,
             query: "enriched_text.concepts.text:\"Cloud computing\"",
             aggregation: "max(enriched_text.entities.count)",
-            count: 1)
-        {
+            count: 1) {
             response, error in
 
             if let error = error {
@@ -1738,8 +1681,7 @@ class DiscoveryTests: XCTestCase {
             collectionID: newsCollectionID,
             query: "enriched_text.concepts.text:\"Cloud computing\"",
             aggregation: "min(enriched_text.entities.count)",
-            count: 1)
-        {
+            count: 1) {
             response, error in
 
             if let error = error {
@@ -1774,8 +1716,7 @@ class DiscoveryTests: XCTestCase {
             collectionID: newsCollectionID,
             query: "enriched_text.concepts.text:\"Cloud computing\"",
             aggregation: "average(enriched_text.entities.count)",
-            count: 1)
-        {
+            count: 1) {
             response, error in
 
             if let error = error {
@@ -1810,8 +1751,7 @@ class DiscoveryTests: XCTestCase {
             collectionID: newsCollectionID,
             query: "enriched_text.concepts.text:\"Cloud computing\"",
             aggregation: "sum(enriched_text.entities.count)",
-            count: 1)
-        {
+            count: 1) {
             response, error in
 
             if let error = error {
@@ -2102,8 +2042,7 @@ class DiscoveryTests: XCTestCase {
             collectionID: collectionID,
             naturalLanguageQuery: "1962 State of the Union",
             filter: "text:politics",
-            examples: [example])
-        {
+            examples: [example]) {
             response, error in
 
             if let error = error {
@@ -2208,8 +2147,7 @@ class DiscoveryTests: XCTestCase {
             collectionID: collectionID,
             naturalLanguageQuery: "1962 State of the Union",
             filter: "text:politics",
-            examples: [example])
-        {
+            examples: [example]) {
             response, error in
 
             if let error = error {
@@ -2275,8 +2213,7 @@ class DiscoveryTests: XCTestCase {
             environmentID: environmentID,
             collectionID: collectionID,
             naturalLanguageQuery: "1962 State of the Union",
-            filter: "text:politics")
-        {
+            filter: "text:politics") {
             response, error in
 
             if let error = error {
@@ -2300,8 +2237,7 @@ class DiscoveryTests: XCTestCase {
             collectionID: collectionID,
             queryID: queryID,
             documentID: documentID,
-            relevance: 4)
-        {
+            relevance: 4) {
             response, error in
 
             if let error = error {

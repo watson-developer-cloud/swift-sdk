@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import RestKit
 
 /** DialogSuggestion. */
 public struct DialogSuggestion: Codable, Equatable {
@@ -36,7 +35,7 @@ public struct DialogSuggestion: Codable, Equatable {
      The dialog output that will be returned from the Watson Assistant service if the user selects the corresponding
      option.
      */
-    public var output: [String: JSON]?
+    public var output: DialogSuggestionOutput?
 
     /**
      The ID of the dialog node that the **label** property is taken from. The **label** property is populated using the
@@ -69,7 +68,7 @@ public struct DialogSuggestion: Codable, Equatable {
     public init(
         label: String,
         value: DialogSuggestionValue,
-        output: [String: JSON]? = nil,
+        output: DialogSuggestionOutput? = nil,
         dialogNode: String? = nil
     )
     {

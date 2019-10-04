@@ -19,7 +19,6 @@
 import XCTest
 import Foundation
 import NaturalLanguageUnderstandingV1
-import RestKit
 
 class NaturalLanguageUnderstandingTests: XCTestCase {
 
@@ -53,18 +52,20 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             ("testAnalyzeTextForCategories", testAnalyzeTextForCategories),
             ("testCustomModel", testCustomModel),
             ("testDeleteModel", testDeleteModel),
-            ("testListModels", testListModels),
+            ("testListModels", testListModels)
         ]
     }
 
     /** Instantiate Natural Language Understanding instance. */
     func instantiateNaturalLanguageUnderstanding() {
         if let apiKey = WatsonCredentials.NaturalLanguageUnderstandingAPIKey {
-            naturalLanguageUnderstanding = NaturalLanguageUnderstanding(version: versionDate, apiKey: apiKey)
+            let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
+            naturalLanguageUnderstanding = NaturalLanguageUnderstanding(version: versionDate, authenticator: authenticator)
         } else {
             let username = WatsonCredentials.NaturalLanguageUnderstandingUsername
             let password = WatsonCredentials.NaturalLanguageUnderstandingPassword
-            naturalLanguageUnderstanding = NaturalLanguageUnderstanding(version: versionDate, username: username, password: password)
+            let authenticator = WatsonBasicAuthenticator.init(username: username, password: password)
+            naturalLanguageUnderstanding = NaturalLanguageUnderstanding(version: versionDate, authenticator: authenticator)
         }
         if let url = WatsonCredentials.NaturalLanguageUnderstandingURL {
             naturalLanguageUnderstanding.serviceURL = url
@@ -336,7 +337,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
                 XCTAssertNil(results.entities)
                 return
             }
-            XCTAssertEqual(2, entityResults.count)
+            XCTAssertEqual(1, entityResults.count)
             for result in entityResults {
                 XCTAssertNotNil(result.count)
                 XCTAssertNotNil(result.relevance)

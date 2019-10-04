@@ -30,10 +30,8 @@ let sign: Data = loadResource(name: "sign", ext: "jpg")
 
 let obamaURL = "https://www.whitehouse.gov/sites/whitehouse.gov/files/images/" +
 "Administration/People/president_official_portrait_lores.jpg"
-let carURL = "https://raw.githubusercontent.com/watson-developer-cloud/java-sdk" +
-"/master/visual-recognition/src/test/resources/visual_recognition/car.png"
-let signURL = "https://raw.githubusercontent.com/watson-developer-cloud/java-sdk/" +
-"master/visual-recognition/src/test/resources/visual_recognition/open.png"
+let carURL = "https://raw.githubusercontent.com/watson-developer-cloud/java-sdk/master/visual-recognition/src/test/resources/visual_recognition/v4/turtle_to_classify.jpg"
+let signURL = "https://raw.githubusercontent.com/watson-developer-cloud/java-sdk/master/visual-recognition/src/test/resources/visual_recognition/v4/turtle_to_classify.jpg"
 
 func loadResource(name: String, ext: String) -> Data {
     #if os(Linux)

@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** NormalizationOperation. */
+/**
+ Object containing normalization operations.
+ */
 public struct NormalizationOperation: Codable, Equatable {
 
     /**

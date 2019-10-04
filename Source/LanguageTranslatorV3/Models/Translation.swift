@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * (C) Copyright IBM Corp. 2018, 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,11 +22,11 @@ public struct Translation: Codable, Equatable {
     /**
      Translation output in UTF-8.
      */
-    public var translationOutput: String
+    public var translation: String
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case translationOutput = "translation"
+        case translation = "translation"
     }
 
 }

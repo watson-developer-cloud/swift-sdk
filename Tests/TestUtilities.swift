@@ -34,7 +34,7 @@ func missingBodyMessage(_ error: Error) -> String {
 
 // MARK: - Service instantiation
 
-let defaultTestAuthenticator = WatsonIAMAuthenticator.init(apiKey: "asdf")
+let defaultTestAuthenticator = IAMAuthenticator.init(apiKey: "asdf")
 let versionDate = "2019-08-29"
 
 // MARK: - Mocking requests

@@ -1,5 +1,354 @@
 
-## 3.0.0 (Preview) (https://github.com/watson-developer-cloud/swift-sdk/compare/2.2.0...2.3.0) (2019-09-03)
+## 3.0.0 (Preview) (https://github.com/watson-developer-cloud/swift-sdk/compare/2.3.0...3.0.0) (2019-10-04)
+
+### Breaking Changes
+
+* Authentication: new authentication scheme for all Watson services implemented 
+
+#### AssistantV1
+
+`Assistant.swift`
+* `init` now accepts an `Authenticator` instead of raw credentials
+* Linux environment `init` is now a throwable `init` instead of an `init?`
+* `listExamples()` no longer accepts the `includeCount` parameter
+* `listCounterexamples()` no longer accepts the `includeCount` parameter
+* `listEntities()` no longer accepts the `includeCount` parameter
+* `listValues()` no longer accepts the `includeCount` parameter
+* `listSynonyms()` no longer accepts the `includeCount` parameter
+* `updateValue()` parameter `newValueType` renamed to `newType`
+* `createDialogNode()` parameter `nodeType` renamed to `type`
+* `updateDialogNode()` parameter `newNodeType` renamed to `newType`
+
+#### AssistantV1 Models
+
+`CreateValue.swift`
+* `ValueType` enum renamed to `TypeEnum`
+* `valueType` string named to `type`
+
+`DialogNode.swift`
+* `NodeType` enum renamed to `TypeEnum`
+* `nodeType` string renamed to `type`
+
+`DialogNodeAction.swift`
+* `ActionType` enum renamed to `TypeEnum`
+* `actionType` string renamed to `type`
+
+`DialogNodeOutputGeneric.swift`
+* `searchSkill` case added to `ResponseType` enum
+* `QueryType` enum added
+* `query` string added
+* `queryType` string added
+* `filter` string added
+* `discoveryVersion` string added
+
+`DialogSuggestion.swift`
+* `output` type changed from `[String: JSON]?` to `DialogSuggestionOutput?`
+
+`DialogSuggestionOutput.swift`
+* New model added
+
+`DialogSuggestionResponseGeneric.swift`
+* New model added
+
+`LogMessage.swift`
+* `additionalProperties` removed
+
+`RuntimeEntity.swift`
+* `additionalProperties` removed
+
+`RuntimeIntent.swift`
+* `additionalProperties` removed
+
+`DialogRuntimeResponseGeneric.swift`
+* File and model renamed to `RuntimeResponseGeneric`
+
+`UpdateDialogNode.swift`
+* `NodeType` enum renamed to `TypeEnum`
+* `nodeType` string renamed to `type`
+
+`UpdateValue.swift`
+* `ValueType` enum renamed to `TypeEnum`
+* `valueType` string renamed to `type`
+
+`Value.swift`
+* `ValueType` enum renamed to `TypeEnum`
+* `valueType` string renamed to `type`
+
+#### AssistantV2
+
+`Assistant.swift`
+* `init` now accepts an `Authenticator` instead of raw credentials
+* Linux environment `init` is now a throwable `init` instead of an `init?` 
+
+#### AssistantV2 Models
+
+`DialogNodeAction.swift`
+* `ActionType` enum renamed to `TypeEnum`
+* `actionType` string renamed to `type`
+
+`MessageOutput.swift`
+* `generic` type changed from `[DialogRuntimeResponseGeneric]?` to `[RuntimeResponseGeneric]?`
+
+`MessageRequestContext.swift`
+* Model removed
+
+`MessageResponseContext.swift`
+* Model removed
+
+`DialogRuntimeResponseGeneric.swift`
+* Model and file renamed to `RuntimeResponseGeneric`
+
+#### CompareComplyV1
+
+`CompareComply.swift`
+* `init` now accepts an `Authenticator` instead of raw credentials
+* Linux environment `init` is now a throwable `init` instead of an `init?` 
+
+#### CompareComplyV1 Models
+
+`ColumnHeaderTextsNormalized.swift`
+* Model removed
+
+`RowHeaderTexts.swift`
+* Model removed
+
+`RowHeaderTextsNormalized.swift`
+* Model removed
+
+#### DiscoveryV1
+
+`Discovery.swift`
+* `init` now accepts an `Authenticator` instead of raw credentials
+* Linux environment `init` is now a throwable `init` instead of an `init?`
+* `testConfigurationInEnvironment()` method removed
+* `query()` renamed parameter `returnFields` to `return`
+* `query()` renamed parameter `loggingOptOut` to `xWatsonLoggingOptOut`
+* `query()` removed parameter `collectionIDs`
+* `query()` added `spellingSuggestions` parameter
+* `queryNotices()` renamed parameter `returnFields` to `return`
+* `federatedQuery()` renamed parameter `returnFields` to `return`
+* `getAutocompletion()` method added (CloudPakForData only)
+* `queryRelations()` method removed
+
+#### DiscoveryV1 Models
+
+`CollQueryLarge.swift`
+* Model added
+
+`Completions.swift`
+* Model added (CloudPakForData only)
+
+`DocumentSnapshot.swift`
+* Model removed
+
+`Enrichment.swift`
+* `enrichmentName` string renamed to `enrichment`
+
+`FedQueryLarge.swift`
+* Model added
+
+`Field.swift`
+* `FieldType` enum renamed to `TypeEnum`
+* `fieldName` string renamed to `field`
+
+`QueryEntities.swift`
+* Model removed
+
+`QueryEntitiesContext.swift`
+* Model removed
+
+`QueryEntitiesEntity.swift`
+* Model removed
+
+`QueryEntitiesResponse.swift`
+* Model removed
+
+`QueryEvidence.swift`
+* Model removed
+
+`QueryFilterType.swift`
+* Model removed
+
+`QueryLarge.swift`
+* `returnFields` string renamed to `return`
+
+`QueryRelations.swift`
+* Model removed
+
+`QueryRelationsEntity.swift`
+* Model removed
+
+`QueryRelationsFilter.swift`
+* Model removed
+
+`QueryRelationsRelationship.swift`
+* Model removed
+
+`QueryResponse.swift`
+* `suggestedQuery` string added
+
+`TestDocument.swift`
+* Model removed
+
+#### LanguageTranslatorV3
+
+`LanguageTranslator.swift`
+* `init` now accepts an `Authenticator` instead of raw credentials
+* Linux environment `init` is now a throwable `init` instead of an `init?`
+* `listModels()` parameter `defaultModels` renamed to `default`
+
+#### LanguageTranslatorV3 Models
+
+`Translation.swift`
+* `translationOutput` string renamed to `translation`
+
+#### NaturalLanguageClassifierV1
+
+`NaturalLanguageClassifier.swift`
+* `init` now accepts an `Authenticator` instead of raw credentials
+* Linux environment `init` is now a throwable `init` instead of an `init?`
+* `createClassifier()` parameter `metadata` renamed to `trainingMetadata`
+
+#### NaturalLanguageClassifierV1 Models
+
+`AnalysisResultsSentiment.swift`
+* Model removed
+
+`DocumentEmotionResultsEmotion.swift`
+* Model removed
+
+`EntitiesResultEmotion.swift`
+* Model removed
+
+`EntitiesResultSentiment.swift`
+* Model removed
+
+`KeywordsResultEmotion.swift`
+* Model removed
+
+`KeywordsResultSentiment.swift`
+* Model removed
+
+`MetadataResult.swift`
+* Model removed
+
+`ParametersFeatures.swift`
+* Model removed
+
+`SemanticRolesAction.swift`
+* Model removed
+
+`SemanticRolesSubject.swift`
+* Model removed
+
+`SntaxOptions.swift`
+* `init()` method added
+
+`TargetedEmotionResultsEmotion.swift`
+* Model removed
+
+#### NaturalLanguageUnderstandingV1
+
+`NaturalLanguageUnderstanding.swift`
+* `init` now accepts an `Authenticator` instead of raw credentials
+* Linux environment `init` is now a throwable `init` instead of an `init?`
+
+#### PersonalityInsightsV3
+
+`PersonalityInsights.swift`
+* `init` now accepts an `Authenticator` instead of raw credentials
+* Linux environment `init` is now a throwable `init` instead of an `init?`
+
+#### SpeechToTextV1
+
+`SpeechToText.swift`
+* `init` now accepts an `Authenticator` instead of raw credentials
+* Linux environment `init` is now a throwable `init` instead of an `init?`
+* `recognize()` parameter `contentType` added
+* `createJob()` parameter `contentType` added
+* `addAudio()` parameter `contentType` added
+
+`SpeechToTextSession.swift` (WebSockets)
+* `init` now accepts an `Authenticator` instead of raw credentials
+* removed all `init` methods that accepted credentials
+
+`SpeechToTextSocket.swift` (WebSockets)
+* `init` now accepts an `Authenticator` instead of raw credentials
+
+#### SpeechToTextV1 Models
+
+`AudioListingContainer.swift`
+* Model removed
+
+`AudioListingDetails.swift`
+* Model removed
+
+`AudioResourceDetails.swift`
+* Model removed
+
+`CreateAcousticModel.swift`
+* New model IDs added
+
+`CreateLanguageModel.swift`
+* New model IDs added
+
+`SpeakerLabelsResult.swift`
+* `finalResults` bool renamed to `final`
+
+`SpeechRecognitionResult.swift`
+* `finalResults` bool renamed to `final`
+
+#### TextToSpeechV1
+
+`TextToSpeech.swift`
+* `init` now accepts an `Authenticator` instead of raw credentials
+* Linux environment `init` is now a throwable `init` instead of an `init?`
+* `synthesize()` parameter `accept` added
+
+#### TextToSpeechV1 Models
+
+`VoiceCustomization.swift`
+* Model removed
+
+#### ToneAnalyzerV3
+
+`ToneAnalyzer.swift`
+* `init` now accepts an `Authenticator` instead of raw credentials
+* Linux environment `init` is now a throwable `init` instead of an `init?`
+
+
+#### VisualRecognitionV3
+
+`VisualRecognition.swift`
+* `init` now accepts an `Authenticator` instead of raw credentials
+* Linux environment `init` is now a throwable `init` instead of an `init?`
+* `detectFaces()` removed
+
+`VisualRecognition+CoreML.swift`
+* `init` now accepts an `Authenticator` instead of raw credentials
+
+`VisualRecognition+UIImage.swift`
+* `detectFaces()` removed
+
+#### VisualRecognitionV3 Models
+
+`Class.swift`
+* `className` string renamed to `class`
+
+`ClassResult.swift`
+* `className` String renamed to `class`
+
+`FaceGender.swift`
+* Model removed
+
+`DetectedFaces.swift`
+* Model removed
+
+#### VisualRecognitionV4
+
+VisualRecognitionV4 added :tada:
+
+`
 
 ### Breaking Changes
 

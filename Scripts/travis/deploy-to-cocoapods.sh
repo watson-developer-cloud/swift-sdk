@@ -17,6 +17,7 @@ declare -a allPods=(
   "IBMWatsonTextToSpeechV1.podspec"
   "IBMWatsonToneAnalyzerV3.podspec"
   "IBMWatsonVisualRecognitionV3.podspec"
+  "IBMWatsonVisualRecognitionV4.podspec"
 )
 
 for podspec in "${allPods[@]}"

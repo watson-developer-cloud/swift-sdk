@@ -9,6 +9,7 @@ declare -a allPods=(
   "IBMWatsonAssistantV2.podspec"
   "IBMWatsonCompareComplyV1.podspec"
   "IBMWatsonDiscoveryV1.podspec"
+  "IBMWatsonDiscoveryV2.podspec"
   "IBMWatsonLanguageTranslatorV3.podspec"
   "IBMWatsonNaturalLanguageClassifierV1.podspec"
   "IBMWatsonNaturalLanguageUnderstandingV1.podspec"

@@ -8,6 +8,7 @@ pod lib lint IBMWatsonAssistantV1.podspec
 pod lib lint IBMWatsonAssistantV2.podspec
 pod lib lint IBMWatsonCompareComplyV1.podspec
 pod lib lint IBMWatsonDiscoveryV1.podspec
+pod lib lint IBMWatsonDiscoveryV2.podspec
 pod lib lint IBMWatsonLanguageTranslatorV3.podspec
 pod lib lint IBMWatsonNaturalLanguageClassifierV1.podspec
 pod lib lint IBMWatsonNaturalLanguageUnderstandingV1.podspec
@@ -27,3 +28,4 @@ find Source/SupportingFiles/Dependencies/Source -maxdepth 1 -type f -delete
 
 pod lib lint IBMWatsonToneAnalyzerV3.podspec
 pod lib lint IBMWatsonVisualRecognitionV3.podspec
+pod lib lint IBMWatsonVisualRecognitionV4.podspec

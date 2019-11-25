@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ import Foundation
 
 /**
  Workspace settings related to the disambiguation feature.
- **Note:** This feature is available only to Premium users.
+ **Note:** This feature is available only to Plus and Premium users.
  */
 public struct WorkspaceSystemSettingsDisambiguation: Codable, Equatable {
 
@@ -53,12 +53,31 @@ public struct WorkspaceSystemSettingsDisambiguation: Codable, Equatable {
      */
     public var sensitivity: String?
 
+    /**
+     Whether the order in which disambiguation suggestions are presented should be randomized (but still influenced by
+     relative confidence).
+     */
+    public var randomize: Bool?
+
+    /**
+     The maximum number of disambigation suggestions that can be included in a `suggestion` response.
+     */
+    public var maxSuggestions: Int?
+
+    /**
+     For internal use only.
+     */
+    public var suggestionTextPolicy: String?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case prompt = "prompt"
         case noneOfTheAbovePrompt = "none_of_the_above_prompt"
         case enabled = "enabled"
         case sensitivity = "sensitivity"
+        case randomize = "randomize"
+        case maxSuggestions = "max_suggestions"
+        case suggestionTextPolicy = "suggestion_text_policy"
     }
 
     /**
@@ -72,6 +91,11 @@ public struct WorkspaceSystemSettingsDisambiguation: Codable, Equatable {
      - parameter sensitivity: The sensitivity of the disambiguation feature to intent detection conflicts. Set to
        **high** if you want the disambiguation feature to be triggered more often. This can be useful for testing or
        demonstration purposes.
+     - parameter randomize: Whether the order in which disambiguation suggestions are presented should be randomized
+       (but still influenced by relative confidence).
+     - parameter maxSuggestions: The maximum number of disambigation suggestions that can be included in a
+       `suggestion` response.
+     - parameter suggestionTextPolicy: For internal use only.
 
      - returns: An initialized `WorkspaceSystemSettingsDisambiguation`.
      */
@@ -79,13 +103,19 @@ public struct WorkspaceSystemSettingsDisambiguation: Codable, Equatable {
         prompt: String? = nil,
         noneOfTheAbovePrompt: String? = nil,
         enabled: Bool? = nil,
-        sensitivity: String? = nil
+        sensitivity: String? = nil,
+        randomize: Bool? = nil,
+        maxSuggestions: Int? = nil,
+        suggestionTextPolicy: String? = nil
     )
     {
         self.prompt = prompt
         self.noneOfTheAbovePrompt = noneOfTheAbovePrompt
         self.enabled = enabled
         self.sensitivity = sensitivity
+        self.randomize = randomize
+        self.maxSuggestions = maxSuggestions
+        self.suggestionTextPolicy = suggestionTextPolicy
     }
 
 }

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,8 +59,10 @@ public class TextToSpeech {
      In that case, try another initializer that directly passes in the credentials.
 
      */
-    public init() throws {
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
+    public init?() {
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
+            return nil
+        }
         self.authenticator = authenticator
 
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
@@ -355,38 +357,7 @@ public class TextToSpeech {
         )
 
         // execute REST request
-        request.response { (response: WatsonResponse<Data>?, error: WatsonError?) in
-            var response = response
-            guard let data = response?.result else {
-                completionHandler(response, error)
-                return
-            }
-            if accept?.lowercased().contains("audio/wav") == true {
-                // repair the WAV header
-                var wav = data
-                guard WAVRepair.isWAVFile(data: wav) else {
-                    let error = WatsonError.other(message: "Expected returned audio to be in WAV format", metadata: nil)
-                    completionHandler(nil, error)
-                    return
-                }
-                WAVRepair.repairWAVHeader(data: &wav)
-                response?.result = wav
-                completionHandler(response, nil)
-            } else if accept?.lowercased().contains("ogg") == true && accept?.lowercased().contains("opus") == true {
-                do {
-                    let decodedAudio = try TextToSpeechDecoder(audioData: data)
-                    response?.result = decodedAudio.pcmDataWithHeaders
-                    completionHandler(response, nil)
-                } catch {
-                    let error = WatsonError.serialization(values: "returned audio")
-                    completionHandler(nil, error)
-                    return
-                }
-            } else {
-                completionHandler(response, nil)
-            }
-        }
-
+        request.response(completionHandler: completionHandler)
     }
 
     /**

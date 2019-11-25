@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,6 +28,7 @@ public struct DialogNodeAction: Codable, Equatable {
         case server = "server"
         case cloudFunction = "cloud_function"
         case webAction = "web_action"
+        case webhook = "webhook"
     }
 
     /**

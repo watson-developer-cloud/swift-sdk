@@ -24,17 +24,17 @@ public struct ImageDetails: Codable, Equatable {
     /**
      The identifier of the image.
      */
-    public var imageID: String
+    public var imageID: String?
 
     /**
      Date and time in Coordinated Universal Time (UTC) that the image was most recently updated.
      */
-    public var updated: Date
+    public var updated: Date?
 
     /**
      Date and time in Coordinated Universal Time (UTC) that the image was created.
      */
-    public var created: Date
+    public var created: Date?
 
     /**
      The source type of the image.
@@ -44,17 +44,14 @@ public struct ImageDetails: Codable, Equatable {
     /**
      Height and width of an image.
      */
-    public var dimensions: ImageDimensions
+    public var dimensions: ImageDimensions?
 
-    /**
-     Details about an error.
-     */
-    public var errors: Error?
+    public var errors: [Error]?
 
     /**
      Training data for all objects.
      */
-    public var trainingData: TrainingDataObjects
+    public var trainingData: TrainingDataObjects?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {

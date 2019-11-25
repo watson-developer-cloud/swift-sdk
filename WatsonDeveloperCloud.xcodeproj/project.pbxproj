@@ -369,6 +369,11 @@
 		7E48B6C2233539EB0009F2B7 /* IBMSwiftSDKCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E48B6B8233539EB0009F2B7 /* IBMSwiftSDKCore.framework */; };
 		7E48B6C3233539EB0009F2B7 /* IBMSwiftSDKCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E48B6B8233539EB0009F2B7 /* IBMSwiftSDKCore.framework */; };
 		7E48B6C4233539EB0009F2B7 /* IBMSwiftSDKCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E48B6B8233539EB0009F2B7 /* IBMSwiftSDKCore.framework */; };
+		7E70D5C72388491E00CC8C80 /* WebhookHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70D5C42388491D00CC8C80 /* WebhookHeader.swift */; };
+		7E70D5C82388491E00CC8C80 /* WorkspaceSystemSettingsOffTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70D5C52388491E00CC8C80 /* WorkspaceSystemSettingsOffTopic.swift */; };
+		7E70D5C92388491E00CC8C80 /* Webhook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70D5C62388491E00CC8C80 /* Webhook.swift */; };
+		7E70D5CC238C1DF000CC8C80 /* TrainingEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70D5CA238C1DF000CC8C80 /* TrainingEvents.swift */; };
+		7E70D5CD238C1DF000CC8C80 /* TrainingEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70D5CB238C1DF000CC8C80 /* TrainingEvent.swift */; };
 		7E96EC3C233907660039388E /* GenericQueryAggregation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E96EC3B233907660039388E /* GenericQueryAggregation.swift */; };
 		7E96EC3F23391C0A0039388E /* WordTimestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E96EC3D23391C0A0039388E /* WordTimestamp.swift */; };
 		7E96EC4023391C0A0039388E /* WordConfidence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E96EC3E23391C0A0039388E /* WordConfidence.swift */; };
@@ -1318,6 +1323,11 @@
 		7E34336E2346A384004427C4 /* CollQueryLarge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollQueryLarge.swift; sourceTree = "<group>"; };
 		7E48B6B6233535A60009F2B7 /* FedQueryLarge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FedQueryLarge.swift; sourceTree = "<group>"; };
 		7E48B6B8233539EB0009F2B7 /* IBMSwiftSDKCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IBMSwiftSDKCore.framework; path = Carthage/Build/iOS/IBMSwiftSDKCore.framework; sourceTree = "<group>"; };
+		7E70D5C42388491D00CC8C80 /* WebhookHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebhookHeader.swift; sourceTree = "<group>"; };
+		7E70D5C52388491E00CC8C80 /* WorkspaceSystemSettingsOffTopic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceSystemSettingsOffTopic.swift; sourceTree = "<group>"; };
+		7E70D5C62388491E00CC8C80 /* Webhook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Webhook.swift; sourceTree = "<group>"; };
+		7E70D5CA238C1DF000CC8C80 /* TrainingEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingEvents.swift; sourceTree = "<group>"; };
+		7E70D5CB238C1DF000CC8C80 /* TrainingEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingEvent.swift; sourceTree = "<group>"; };
 		7E96EC3B233907660039388E /* GenericQueryAggregation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericQueryAggregation.swift; sourceTree = "<group>"; };
 		7E96EC3D23391C0A0039388E /* WordTimestamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordTimestamp.swift; sourceTree = "<group>"; };
 		7E96EC3E23391C0A0039388E /* WordConfidence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordConfidence.swift; sourceTree = "<group>"; };
@@ -2159,10 +2169,13 @@
 				6800FC4A2056D6830078788A /* UpdateWorkspace.swift */,
 				6800FC4F2056D6830078788A /* Value.swift */,
 				6800FC432056D6830078788A /* ValueCollection.swift */,
+				7E70D5C62388491E00CC8C80 /* Webhook.swift */,
+				7E70D5C42388491D00CC8C80 /* WebhookHeader.swift */,
 				6800FC362056D6830078788A /* Workspace.swift */,
 				6800FC482056D6830078788A /* WorkspaceCollection.swift */,
 				CADA968E2110ABB500B5BD84 /* WorkspaceSystemSettings.swift */,
 				CADA96802110ABB300B5BD84 /* WorkspaceSystemSettingsDisambiguation.swift */,
+				7E70D5C52388491E00CC8C80 /* WorkspaceSystemSettingsOffTopic.swift */,
 				CADA96812110ABB300B5BD84 /* WorkspaceSystemSettingsTooling.swift */,
 			);
 			path = Models;
@@ -2731,6 +2744,8 @@
 				7ED7522B233BE99B0050A2EB /* ObjectTrainingStatus.swift */,
 				7ED7522A233BE99B0050A2EB /* TrainingDataObject.swift */,
 				7ED75236233BE99C0050A2EB /* TrainingDataObjects.swift */,
+				7E70D5CB238C1DF000CC8C80 /* TrainingEvent.swift */,
+				7E70D5CA238C1DF000CC8C80 /* TrainingEvents.swift */,
 				7EF035CE23462D38000E727E /* TrainingStatus.swift */,
 				7EF035CD23462D38000E727E /* Warning.swift */,
 			);
@@ -4893,6 +4908,7 @@
 				7EC735DA2319CC4100A73810 /* RuntimeResponseGeneric.swift in Sources */,
 				6800FCAF2056D8D50078788A /* DialogNodeNextStep.swift in Sources */,
 				6800FCAE2056D8D50078788A /* DialogNodeCollection.swift in Sources */,
+				7E70D5C92388491E00CC8C80 /* Webhook.swift in Sources */,
 				92EAA86821BF053600A4714C /* MessageContextMetadata.swift in Sources */,
 				CADA96982110ABB500B5BD84 /* DialogNodeOutputModifiers.swift in Sources */,
 				6800FCC12056D8D50078788A /* OutputData.swift in Sources */,
@@ -4902,10 +4918,12 @@
 				CADA96932110ABB500B5BD84 /* DialogNodeOutputOptionsElement.swift in Sources */,
 				6800FCD12056D8D50078788A /* ValueCollection.swift in Sources */,
 				CADA96952110ABB500B5BD84 /* DialogNodeOutputOptionsElementValue.swift in Sources */,
+				7E70D5C82388491E00CC8C80 /* WorkspaceSystemSettingsOffTopic.swift in Sources */,
 				6800FCA32056D8D50078788A /* CounterexampleCollection.swift in Sources */,
 				CADA968F2110ABB500B5BD84 /* WorkspaceSystemSettingsDisambiguation.swift in Sources */,
 				6800FCA12056D8D50078788A /* Context.swift in Sources */,
 				6800FCCB2056D8D50078788A /* UpdateExample.swift in Sources */,
+				7E70D5C72388491E00CC8C80 /* WebhookHeader.swift in Sources */,
 				CADA96912110ABB500B5BD84 /* DialogNodeOutput.swift in Sources */,
 				6800FCB42056D8D50078788A /* Example.swift in Sources */,
 				6800FCC32056D8D50078788A /* RuntimeEntity.swift in Sources */,
@@ -5256,8 +5274,10 @@
 				7ED75243233BE99C0050A2EB /* TrainingDataObject.swift in Sources */,
 				7ED7525A233BE99D0050A2EB /* ImageSummary.swift in Sources */,
 				7ED75258233BE99C0050A2EB /* FileWithMetadata.swift in Sources */,
+				7E70D5CC238C1DF000CC8C80 /* TrainingEvents.swift in Sources */,
 				7ED7524A233BE99C0050A2EB /* AnalyzeResponse.swift in Sources */,
 				7ED75252233BE99C0050A2EB /* ErrorTarget.swift in Sources */,
+				7E70D5CD238C1DF000CC8C80 /* TrainingEvent.swift in Sources */,
 				7ED75248233BE99C0050A2EB /* ObjectDetail.swift in Sources */,
 				7ED75265233D0A320050A2EB /* VisualRecognition+UIImage.swift in Sources */,
 				7EF035D023462D38000E727E /* TrainingStatus.swift in Sources */,

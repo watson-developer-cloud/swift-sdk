@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,10 +53,11 @@ public class VisualRecognition {
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
      */
-    public init(version: String) throws {
+    public init?(version: String) {
         self.version = version
-
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
+            return nil
+        }
         self.authenticator = authenticator
 
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
@@ -113,16 +114,6 @@ public class VisualRecognition {
             } else if case let .some(.string(message)) = json["error"] {
                 errorMessage = message
             } else if case let .some(.string(message)) = json["message"] {
-                errorMessage = message
-            // ErrorAuthentication
-            } else if case let .some(.string(message)) = json["statusInfo"] {
-                errorMessage = message
-            // ErrorInfo
-            } else if case let .some(.object(errorObj)) = json["error"],    // 404
-                case let .some(.string(message)) = errorObj["description"] {
-                errorMessage = message
-            // ErrorHTML
-            } else if case let .some(.string(message)) = json["Error"] {   // 413
                 errorMessage = message
             } else {
                 errorMessage = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
@@ -181,7 +172,8 @@ public class VisualRecognition {
         classifierIDs: [String]? = nil,
         acceptLanguage: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ClassifiedImages>?, WatsonError?) -> Void) {
+        completionHandler: @escaping (WatsonResponse<ClassifiedImages>?, WatsonError?) -> Void)
+    {
         // construct body
         let multipartFormData = MultipartFormData()
         if let imagesFile = imagesFile {
@@ -197,17 +189,20 @@ public class VisualRecognition {
                 multipartFormData.append(thresholdData, withName: "threshold")
             }
         }
-
-        // HAND EDIT: concat owners into csv data
-        if let csvOwners = owners?.joined(separator: ",").data(using: .utf8) {
-            multipartFormData.append(csvOwners, withName: "owners")
+        if let owners = owners {
+            for item in owners {
+                if let itemData = item.data(using: .utf8) {
+                    multipartFormData.append(itemData, withName: "owners")
+                }
+            }
         }
-
-        // HAND EDIT: concat classifier IDs into csv data
-        if let csvClassifierIDs = classifierIDs?.joined(separator: ",").data(using: .utf8) {
-            multipartFormData.append(csvClassifierIDs, withName: "classifier_ids")
+        if let classifierIDs = classifierIDs {
+            for item in classifierIDs {
+                if let itemData = item.data(using: .utf8) {
+                    multipartFormData.append(itemData, withName: "classifier_ids")
+                }
+            }
         }
-
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
             return
@@ -288,7 +283,8 @@ public class VisualRecognition {
         negativeExamples: Data? = nil,
         negativeExamplesFilename: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Classifier>?, WatsonError?) -> Void) {
+        completionHandler: @escaping (WatsonResponse<Classifier>?, WatsonError?) -> Void)
+    {
         // construct body
         let multipartFormData = MultipartFormData()
         if let nameData = name.data(using: .utf8) {
@@ -296,10 +292,10 @@ public class VisualRecognition {
         }
         positiveExamples.forEach { (classname, value) in
             let partName = "\(classname)_positive_examples"
-            multipartFormData.append(value, withName: partName, fileName: "\(classname).zip")
+            multipartFormData.append(value, withName: partName, fileName: classname)
         }
         if let negativeExamples = negativeExamples {
-            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename.zip")
+            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename")
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
@@ -354,7 +350,8 @@ public class VisualRecognition {
     public func listClassifiers(
         verbose: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Classifiers>?, WatsonError?) -> Void) {
+        completionHandler: @escaping (WatsonResponse<Classifiers>?, WatsonError?) -> Void)
+    {
         // construct header parameters
         var headerParameters = defaultHeaders
         if let headers = headers {
@@ -406,7 +403,8 @@ public class VisualRecognition {
     public func getClassifier(
         classifierID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Classifier>?, WatsonError?) -> Void) {
+        completionHandler: @escaping (WatsonResponse<Classifier>?, WatsonError?) -> Void)
+    {
         // construct header parameters
         var headerParameters = defaultHeaders
         if let headers = headers {
@@ -485,17 +483,18 @@ public class VisualRecognition {
         negativeExamples: Data? = nil,
         negativeExamplesFilename: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Classifier>?, WatsonError?) -> Void) {
+        completionHandler: @escaping (WatsonResponse<Classifier>?, WatsonError?) -> Void)
+    {
         // construct body
         let multipartFormData = MultipartFormData()
         if let positiveExamples = positiveExamples {
             positiveExamples.forEach { (classname, value) in
                 let partName = "\(classname)_positive_examples"
-                multipartFormData.append(value, withName: partName, fileName: "\(classname).zip")
+                multipartFormData.append(value, withName: partName, fileName: classname)
             }
         }
         if let negativeExamples = negativeExamples {
-            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename.zip")
+            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename")
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
@@ -554,7 +553,8 @@ public class VisualRecognition {
     public func deleteClassifier(
         classifierID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void) {
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
+    {
         // construct header parameters
         var headerParameters = defaultHeaders
         if let headers = headers {
@@ -608,7 +608,8 @@ public class VisualRecognition {
     public func getCoreMLModel(
         classifierID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Data>?, WatsonError?) -> Void) {
+        completionHandler: @escaping (WatsonResponse<Data>?, WatsonError?) -> Void)
+    {
         // construct header parameters
         var headerParameters = defaultHeaders
         if let headers = headers {
@@ -665,7 +666,8 @@ public class VisualRecognition {
     public func deleteUserData(
         customerID: String,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void) {
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
+    {
         // construct header parameters
         var headerParameters = defaultHeaders
         if let headers = headers {

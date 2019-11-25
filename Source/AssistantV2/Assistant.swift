@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,10 +55,11 @@ public class Assistant {
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
      */
-    public init(version: String) throws {
+    public init?(version: String) {
         self.version = version
-
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
+            return nil
+        }
         self.authenticator = authenticator
 
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
@@ -131,7 +132,9 @@ public class Assistant {
      Create a session.
 
      Create a new session. A session is used to send user input to a skill and receive responses. It also maintains the
-     state of the conversation.
+     state of the conversation. A session persists until it is deleted, or until it times out because of inactivity.
+     (For more information, see the
+     [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-assistant-settings).
 
      - parameter assistantID: Unique identifier of the assistant. To find the assistant ID in the Watson Assistant
        user interface, open the assistant settings and click **API Details**. For information about creating assistants,
@@ -154,7 +157,6 @@ public class Assistant {
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createSession")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
-        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -190,7 +192,8 @@ public class Assistant {
     /**
      Delete session.
 
-     Deletes a session explicitly before it times out.
+     Deletes a session explicitly before it times out. (For more information about the session inactivity timeout, see
+     the [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-assistant-settings)).
 
      - parameter assistantID: Unique identifier of the assistant. To find the assistant ID in the Watson Assistant
        user interface, open the assistant settings and click **API Details**. For information about creating assistants,

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,8 +21,8 @@ import IBMSwiftSDKCore
 public struct DialogSuggestion: Codable, Equatable {
 
     /**
-     The user-facing label for the disambiguation option. This label is taken from the **user_label** property of the
-     corresponding dialog node.
+     The user-facing label for the disambiguation option. This label is taken from the **title** or **user_label**
+     property of the corresponding dialog node, depending on the disambiguation options.
      */
     public var label: String
 

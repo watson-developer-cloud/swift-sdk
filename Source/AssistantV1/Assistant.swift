@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,10 +54,11 @@ public class Assistant {
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
      */
-    public init(version: String) throws {
+    public init?(version: String) {
         self.version = version
-
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
+            return nil
+        }
         self.authenticator = authenticator
 
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
@@ -319,6 +320,7 @@ public class Assistant {
      - parameter dialogNodes: An array of objects describing the dialog nodes in the workspace.
      - parameter counterexamples: An array of objects defining input examples that have been marked as irrelevant
        input.
+     - parameter webhooks:
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -333,6 +335,7 @@ public class Assistant {
         entities: [CreateEntity]? = nil,
         dialogNodes: [DialogNode]? = nil,
         counterexamples: [Counterexample]? = nil,
+        webhooks: [Webhook]? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Workspace>?, WatsonError?) -> Void)
     {
@@ -347,7 +350,8 @@ public class Assistant {
             intents: intents,
             entities: entities,
             dialogNodes: dialogNodes,
-            counterexamples: counterexamples)
+            counterexamples: counterexamples,
+            webhooks: webhooks)
         guard let body = try? JSON.encoder.encodeIfPresent(createWorkspaceRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -492,6 +496,7 @@ public class Assistant {
      - parameter dialogNodes: An array of objects describing the dialog nodes in the workspace.
      - parameter counterexamples: An array of objects defining input examples that have been marked as irrelevant
        input.
+     - parameter webhooks:
      - parameter append: Whether the new data is to be appended to the existing data in the workspace. If
        **append**=`false`, elements included in the new data completely replace the corresponding existing elements,
        including all subelements. For example, if the new data includes **entities** and **append**=`false`, all
@@ -513,6 +518,7 @@ public class Assistant {
         entities: [CreateEntity]? = nil,
         dialogNodes: [DialogNode]? = nil,
         counterexamples: [Counterexample]? = nil,
+        webhooks: [Webhook]? = nil,
         append: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Workspace>?, WatsonError?) -> Void)
@@ -528,7 +534,8 @@ public class Assistant {
             intents: intents,
             entities: entities,
             dialogNodes: dialogNodes,
-            counterexamples: counterexamples)
+            counterexamples: counterexamples,
+            webhooks: webhooks)
         guard let body = try? JSON.encoder.encodeIfPresent(updateWorkspaceRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -3080,6 +3087,7 @@ public class Assistant {
      - parameter digressOut: Whether this dialog node can be returned to after a digression.
      - parameter digressOutSlots: Whether the user can digress to top-level nodes while filling out slots.
      - parameter userLabel: A label that can be displayed externally to describe the purpose of the node to users.
+     - parameter disambiguationOptOut: Whether the dialog node should be excluded from disambiguation suggestions.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -3103,6 +3111,7 @@ public class Assistant {
         digressOut: String? = nil,
         digressOutSlots: String? = nil,
         userLabel: String? = nil,
+        disambiguationOptOut: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<DialogNode>?, WatsonError?) -> Void)
     {
@@ -3125,7 +3134,8 @@ public class Assistant {
             digressIn: digressIn,
             digressOut: digressOut,
             digressOutSlots: digressOutSlots,
-            userLabel: userLabel)
+            userLabel: userLabel,
+            disambiguationOptOut: disambiguationOptOut)
         guard let body = try? JSON.encoder.encode(createDialogNodeRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -3274,6 +3284,7 @@ public class Assistant {
      - parameter newDigressOut: Whether this dialog node can be returned to after a digression.
      - parameter newDigressOutSlots: Whether the user can digress to top-level nodes while filling out slots.
      - parameter newUserLabel: A label that can be displayed externally to describe the purpose of the node to users.
+     - parameter newDisambiguationOptOut: Whether the dialog node should be excluded from disambiguation suggestions.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -3298,6 +3309,7 @@ public class Assistant {
         newDigressOut: String? = nil,
         newDigressOutSlots: String? = nil,
         newUserLabel: String? = nil,
+        newDisambiguationOptOut: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<DialogNode>?, WatsonError?) -> Void)
     {
@@ -3320,7 +3332,8 @@ public class Assistant {
             digressIn: newDigressIn,
             digressOut: newDigressOut,
             digressOutSlots: newDigressOutSlots,
-            userLabel: newUserLabel)
+            userLabel: newUserLabel,
+            disambiguationOptOut: newDisambiguationOptOut)
         guard let body = try? JSON.encoder.encode(updateDialogNodeRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
@@ -3516,8 +3529,9 @@ public class Assistant {
      specified, the limit is 120 requests per minute. For more information, see **Rate limiting**.
 
      - parameter filter: A cacheable parameter that limits the results to those matching the specified filter. You
-       must specify a filter query that includes a value for `language`, as well as a value for `workspace_id` or
-       `request.context.metadata.deployment`. For more information, see the
+       must specify a filter query that includes a value for `language`, as well as a value for
+       `request.context.system.assistant_id`, `workspace_id`, or `request.context.metadata.deployment`. For more
+       information, see the
        [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-filter-reference#filter-reference).
      - parameter sort: How to sort the returned log events. You can sort by **request_timestamp**. To reverse the sort
        order, prefix the parameter value with a minus sign (`-`).

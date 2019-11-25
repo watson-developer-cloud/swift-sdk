@@ -108,8 +108,8 @@ public struct RuntimeResponseGeneric: Codable, Equatable {
 
     /**
      An array of objects describing the possible matching dialog nodes from which the user can choose.
-     **Note:** The **suggestions** property is part of the disambiguation feature, which is only available for Premium
-     users.
+     **Note:** The **suggestions** property is part of the disambiguation feature, which is only available for Plus and
+     Premium users.
      */
     public var suggestions: [DialogSuggestion]?
 
@@ -153,8 +153,8 @@ public struct RuntimeResponseGeneric: Codable, Equatable {
        property is populated using the value of the dialog node's **user_label** property.
      - parameter suggestions: An array of objects describing the possible matching dialog nodes from which the user
        can choose.
-       **Note:** The **suggestions** property is part of the disambiguation feature, which is only available for Premium
-       users.
+       **Note:** The **suggestions** property is part of the disambiguation feature, which is only available for Plus
+       and Premium users.
 
      - returns: An initialized `RuntimeResponseGeneric`.
      */

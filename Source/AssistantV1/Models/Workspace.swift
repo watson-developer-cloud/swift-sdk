@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -102,6 +102,8 @@ public struct Workspace: Codable, Equatable {
      */
     public var counterexamples: [Counterexample]?
 
+    public var webhooks: [Webhook]?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case name = "name"
@@ -118,6 +120,7 @@ public struct Workspace: Codable, Equatable {
         case entities = "entities"
         case dialogNodes = "dialog_nodes"
         case counterexamples = "counterexamples"
+        case webhooks = "webhooks"
     }
 
 }

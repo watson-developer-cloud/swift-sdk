@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2019.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -102,6 +102,8 @@ internal struct CreateWorkspace: Codable, Equatable {
      */
     public var counterexamples: [Counterexample]?
 
+    public var webhooks: [Webhook]?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case name = "name"
@@ -118,6 +120,7 @@ internal struct CreateWorkspace: Codable, Equatable {
         case entities = "entities"
         case dialogNodes = "dialog_nodes"
         case counterexamples = "counterexamples"
+        case webhooks = "webhooks"
     }
 
     /**
@@ -142,6 +145,7 @@ internal struct CreateWorkspace: Codable, Equatable {
      - parameter dialogNodes: An array of objects describing the dialog nodes in the workspace.
      - parameter counterexamples: An array of objects defining input examples that have been marked as irrelevant
        input.
+     - parameter webhooks:
 
      - returns: An initialized `CreateWorkspace`.
      */
@@ -159,7 +163,8 @@ internal struct CreateWorkspace: Codable, Equatable {
         intents: [CreateIntent]? = nil,
         entities: [CreateEntity]? = nil,
         dialogNodes: [DialogNode]? = nil,
-        counterexamples: [Counterexample]? = nil
+        counterexamples: [Counterexample]? = nil,
+        webhooks: [Webhook]? = nil
     )
     {
         self.name = name
@@ -176,6 +181,7 @@ internal struct CreateWorkspace: Codable, Equatable {
         self.entities = entities
         self.dialogNodes = dialogNodes
         self.counterexamples = counterexamples
+        self.webhooks = webhooks
     }
 
 }

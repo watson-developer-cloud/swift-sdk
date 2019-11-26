@@ -27,6 +27,7 @@ class VisualRecognitionUIImageTests: XCTestCase {
 
     private var visualRecognition: VisualRecognition!
     private let classifierID = WatsonCredentials.VisualRecognitionClassifierID
+    private let giraffeCollectionID = WatsonCredentials.VisualRecognitionV4GiraffeCollectionID
 
     private var car: UIImage {
         let bundle = Bundle(for: type(of: self))
@@ -47,11 +48,7 @@ class VisualRecognitionUIImageTests: XCTestCase {
     }
 
     func instantiateVisualRecognition() {
-        guard let apiKey = WatsonCredentials.VisualRecognitionAPIKey else {
-            XCTFail("Missing credentials for Visual Recognition service")
-            return
-        }
-        let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
+        let authenticator = WatsonIAMAuthenticator.init(apiKey: WatsonCredentials.VisualRecognitionV4APIKey)
         visualRecognition = VisualRecognition(version: versionDate, authenticator: authenticator)
         if let url = WatsonCredentials.VisualRecognitionURL {
             visualRecognition.serviceURL = url

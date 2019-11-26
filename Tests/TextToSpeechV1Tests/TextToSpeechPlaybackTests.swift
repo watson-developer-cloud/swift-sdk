@@ -42,15 +42,10 @@ class TextToSpeechPlaybackTests: XCTestCase {
 
     /** Instantiate Text to Speech instance. */
     func instantiateTextToSpeech() {
-        if let apiKey = WatsonCredentials.TextToSpeechAPIKey {
-            let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
-            textToSpeech = TextToSpeech(authenticator: authenticator)
-        } else {
-            let username = WatsonCredentials.TextToSpeechUsername
-            let password = WatsonCredentials.TextToSpeechPassword
-            let authenticator = WatsonBasicAuthenticator.init(username: username, password: password)
-            textToSpeech = TextToSpeech(authenticator: authenticator)
-        }
+
+        let authenticator = WatsonIAMAuthenticator.init(apiKey: WatsonCredentials.TextToSpeechAPIKey)
+        textToSpeech = TextToSpeech(authenticator: authenticator)
+
         if let url = WatsonCredentials.TextToSpeechURL {
             textToSpeech.serviceURL = url
         }

@@ -38,25 +38,24 @@ class DiscoveryTests: XCTestCase {
     
     func instantiateDiscovery() {
         // TODO: CP4D authenticator
-        let username = WatsonCredentials.DiscoveryV2CPDUsername!
-        let password = WatsonCredentials.DiscoveryV2CPDPassword!
-        let url = WatsonCredentials.DiscoveryV2CPDURL!
+        let username = WatsonCredentials.DiscoveryV2CPDUsername
+        let password = WatsonCredentials.DiscoveryV2CPDPassword
+        let url = WatsonCredentials.DiscoveryV2CPDURL
         
         let authenticator = WatsonCloudPakForDataAuthenticator.init(username: username, password: password, url: url)
         authenticator.disableSSLVerification()
         
         discovery = Discovery(version: "2019-11-30", authenticator: authenticator)
         
-        discovery.serviceURL = WatsonCredentials.DiscoveryV2ServiceURL!
-        // discovery.serviceURL = "http://localhost:9000"
+        discovery.serviceURL = WatsonCredentials.DiscoveryV2ServiceURL
         
         discovery.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         discovery.defaultHeaders["X-Watson-Test"] = "true"
         
         discovery.disableSSLVerification()
         
-        projectID = WatsonCredentials.DiscoveryV2TestProjectID!
-        collectionID = WatsonCredentials.DiscoveryV2TestCollectionID!
+        projectID = WatsonCredentials.DiscoveryV2TestProjectID
+        collectionID = WatsonCredentials.DiscoveryV2TestCollectionID
     }
     
     func loadDocument(name: String, ext: String) -> Data? {
@@ -730,7 +729,7 @@ class DiscoveryTests: XCTestCase {
         let trainingExample = TrainingExample(documentID: testDocumentID, collectionID: collectionID, relevance: 1)
         
         let createTrainingQueryExpectation = self.expectation(description: "createTrainingQuery")
-        discovery.createTrainingQuery(projectID: projectID, naturalLanguageQuery: "test", filter: nil, examples: [trainingExample], headers: nil) {
+        discovery.createTrainingQuery(projectID: projectID, naturalLanguageQuery: "test", examples: [trainingExample], filter: nil, headers: nil) {
             response, error in
             
             if let error = error {
@@ -753,7 +752,7 @@ class DiscoveryTests: XCTestCase {
         waitForExpectations(timeout: timeout)
         
         let updateTrainingQueryExpectation = self.expectation(description: "updateTrainingQuery")
-        discovery.updateTrainingQuery(projectID: projectID, queryID: queryID, naturalLanguageQuery: "updated", filter: nil, examples: [trainingExample], headers: nil) { response, error in
+        discovery.updateTrainingQuery(projectID: projectID, queryID: queryID, naturalLanguageQuery: "updated", examples: [trainingExample], filter: nil, headers: nil) { response, error in
             if let error = error {
                 debugPrint(error.localizedDescription)
                 XCTFail(unexpectedErrorMessage(error))

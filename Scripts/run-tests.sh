@@ -8,7 +8,7 @@
 ####################
 
 # the device to build for
-DESTINATION="OS=12.1,name=iPhone X"
+DESTINATION="OS=13.0,name=iPhone 11"
 
 # Build an array of tests to suppress
 # this environment variable is set within

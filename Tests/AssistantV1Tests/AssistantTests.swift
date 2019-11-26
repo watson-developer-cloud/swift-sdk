@@ -104,15 +104,10 @@ class AssistantTests: XCTestCase {
 
     /** Instantiate Assistant. */
     func instantiateAssistant() {
-        if let apiKey = WatsonCredentials.AssistantAPIKey {
-            let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
-            assistant = Assistant(version: versionDate, authenticator: authenticator)
-        } else {
-            let username = WatsonCredentials.AssistantUsername
-            let password = WatsonCredentials.AssistantPassword
-            let authenticator = WatsonBasicAuthenticator.init(username: username, password: password)
-            assistant = Assistant(version: versionDate, authenticator: authenticator)
-        }
+
+        let authenticator = WatsonIAMAuthenticator.init(apiKey: WatsonCredentials.AssistantAPIKey)
+        assistant = Assistant(version: versionDate, authenticator: authenticator)
+
         if let url = WatsonCredentials.AssistantURL {
             assistant.serviceURL = url
         }
@@ -132,9 +127,8 @@ class AssistantTests: XCTestCase {
         let description1 = "Start a conversation."
         let expectation1 = self.expectation(description: description1)
 
-        let result1 = ["Hi. It looks like a nice drive today. What would you like me to do?  "]
+        let result1 = ["Hello, I’m a demo customer care virtual assistant to show you the basics.  I can help with directions to my store, hours of operation and booking an in-store appointment"]
 
-        var context: Context?
         assistant.message(workspaceID: workspaceID, nodesVisitedDetails: true) {
             response, error in
 
@@ -166,64 +160,7 @@ class AssistantTests: XCTestCase {
             // verify output
             XCTAssertTrue(message.output.logMessages.isEmpty)
             XCTAssertEqual(message.output.text, result1)
-            XCTAssertNotNil(message.output.nodesVisited)
-            XCTAssertEqual(message.output.nodesVisited!.count, 1)
-            XCTAssertNotNil(message.output.nodesVisitedDetails)
-            XCTAssertNotNil(message.output.nodesVisitedDetails!.first)
-            XCTAssertNotNil(message.output.nodesVisitedDetails!.first!.dialogNode)
-
-            context = message.context
             expectation1.fulfill()
-        }
-        waitForExpectations()
-
-        let description2 = "Continue a conversation."
-        let expectation2 = self.expectation(description: description2)
-
-        let input = MessageInput(text: "Turn on the radio.")
-        let result2 = ["Sure thing! Which genre would you prefer? Jazz is my personal favorite."]
-
-        assistant.message(workspaceID: workspaceID, input: input, context: context!) {
-            response, error in
-
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let message = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
-
-            // verify input
-            XCTAssertEqual(message.input.text, input.text)
-
-            // verify context
-            XCTAssertEqual(message.context.conversationID, context!.conversationID)
-            XCTAssertNotNil(message.context.system)
-            XCTAssertNotNil(message.context.system!.additionalProperties)
-            XCTAssertFalse(message.context.system!.additionalProperties.isEmpty)
-
-            // verify entities
-            XCTAssertEqual(message.entities.count, 1)
-            XCTAssertEqual(message.entities[0].entity, "appliance")
-            XCTAssertEqual(message.entities[0].location[0], 12)
-            XCTAssertEqual(message.entities[0].location[1], 17)
-            XCTAssertEqual(message.entities[0].value, "music")
-
-            // verify intents
-            XCTAssertEqual(message.intents.count, 1)
-            XCTAssertEqual(message.intents[0].intent, "turn_on")
-            XCTAssert(message.intents[0].confidence >= 0.80)
-            XCTAssert(message.intents[0].confidence <= 1.00)
-
-            // verify output
-            XCTAssertTrue(message.output.logMessages.isEmpty)
-            XCTAssertEqual(message.output.text, result2)
-            XCTAssertNotNil(message.output.nodesVisited)
-            XCTAssertEqual(message.output.nodesVisited!.count, 3)
-
-            expectation2.fulfill()
         }
         waitForExpectations()
     }
@@ -457,12 +394,7 @@ class AssistantTests: XCTestCase {
                 XCTFail("Additional property \"foo\" expected but not present.")
                 return
             }
-            guard case let .boolean(reprompt) = additionalProperties["reprompt"]! else {
-                XCTFail("Additional property \"reprompt\" expected but not present.")
-                return
-            }
             XCTAssertEqual(bar, "bar")
-            XCTAssertTrue(reprompt)
             expectation2.fulfill()
         }
         waitForExpectations()
@@ -685,7 +617,8 @@ class AssistantTests: XCTestCase {
         let workspaceName = "swift-sdk-test-workspace"
         let workspaceDescription = "temporary workspace for the swift sdk unit tests"
         let workspaceLanguage = "en"
-        assistant.createWorkspace(name: workspaceName, description: workspaceDescription, language: workspaceLanguage) {
+        let webhook = Webhook(url: "https://watson-sdk-test-hook.ng.bluemix.net", name: "test webhook")
+        assistant.createWorkspace(name: workspaceName, description: workspaceDescription, language: workspaceLanguage, webhooks: [webhook]) {
             response, error in
 
             if let error = error {
@@ -700,6 +633,7 @@ class AssistantTests: XCTestCase {
             XCTAssertEqual(workspace.name, workspaceName)
             XCTAssertEqual(workspace.description, workspaceDescription)
             XCTAssertEqual(workspace.language, workspaceLanguage)
+            XCTAssertEqual(workspace.webhooks, [webhook])
             XCTAssertNotNil(workspace.workspaceID)
 
             newWorkspace = workspace.workspaceID
@@ -898,7 +832,7 @@ class AssistantTests: XCTestCase {
         let description = "Get details of a specific intent."
         let expectation = self.expectation(description: description)
 
-        assistant.getIntent(workspaceID: workspaceID, intent: "weather", export: true, includeAudit: true) {
+        assistant.getIntent(workspaceID: workspaceID, intent: "Cancel", export: true, includeAudit: true) {
             response, error in
 
             if let error = error {
@@ -995,7 +929,7 @@ class AssistantTests: XCTestCase {
         let description = "List all the examples of an intent."
         let expectation = self.expectation(description: description)
 
-        assistant.listExamples(workspaceID: workspaceID, intent: "weather", includeAudit: true) {
+        assistant.listExamples(workspaceID: workspaceID, intent: "Cancel", includeAudit: true) {
             response, error in
 
             if let error = error {
@@ -1024,7 +958,7 @@ class AssistantTests: XCTestCase {
         let description = "List all the examples for an intent with pageLimit specified as 1."
         let expectation = self.expectation(description: description)
 
-        assistant.listExamples(workspaceID: workspaceID, intent: "weather", pageLimit: 1, includeAudit: true) {
+        assistant.listExamples(workspaceID: workspaceID, intent: "Cancel", pageLimit: 1, includeAudit: true) {
             response, error in
 
             if let error = error {
@@ -1056,7 +990,7 @@ class AssistantTests: XCTestCase {
         let expectation = self.expectation(description: description)
 
         let newExample = "swift-sdk-test-example" + UUID().uuidString
-        assistant.createExample(workspaceID: workspaceID, intent: "weather", text: newExample) {
+        assistant.createExample(workspaceID: workspaceID, intent: "Cancel", text: newExample) {
             response, error in
 
             if let error = error {
@@ -1076,7 +1010,7 @@ class AssistantTests: XCTestCase {
         let description2 = "Delete the new example."
         let expectation2 = self.expectation(description: description2)
 
-        assistant.deleteExample(workspaceID: workspaceID, intent: "weather", text: newExample) {
+        assistant.deleteExample(workspaceID: workspaceID, intent: "Cancel", text: newExample) {
             _, error in
 
             if let error = error {
@@ -1092,8 +1026,8 @@ class AssistantTests: XCTestCase {
         let description = "Get details of a specific example."
         let expectation = self.expectation(description: description)
 
-        let exampleText = "tell me the weather"
-        assistant.getExample(workspaceID: workspaceID, intent: "weather", text: exampleText, includeAudit: true) {
+        let exampleText = "cancel that"
+        assistant.getExample(workspaceID: workspaceID, intent: "Cancel", text: exampleText, includeAudit: true) {
             response, error in
 
             if let error = error {
@@ -1118,7 +1052,7 @@ class AssistantTests: XCTestCase {
         let expectation = self.expectation(description: description)
 
         let newExample = "swift-sdk-test-example" + UUID().uuidString
-        assistant.createExample(workspaceID: workspaceID, intent: "weather", text: newExample) {
+        assistant.createExample(workspaceID: workspaceID, intent: "Cancel", text: newExample) {
             response, error in
 
             if let error = error {
@@ -1139,7 +1073,7 @@ class AssistantTests: XCTestCase {
         let expectation2 = self.expectation(description: description2)
 
         let updatedText = "updated-" + newExample
-        assistant.updateExample(workspaceID: workspaceID, intent: "weather", text: newExample, newText: updatedText) {
+        assistant.updateExample(workspaceID: workspaceID, intent: "Cancel", text: newExample, newText: updatedText) {
             response, error in
 
             if let error = error {
@@ -1159,7 +1093,7 @@ class AssistantTests: XCTestCase {
         let description3 = "Delete the new example."
         let expectation3 = self.expectation(description: description3)
 
-        assistant.deleteExample(workspaceID: workspaceID, intent: "weather", text: updatedText) {
+        assistant.deleteExample(workspaceID: workspaceID, intent: "Cancel", text: updatedText) {
             _, error in
 
             if let error = error {
@@ -1274,7 +1208,7 @@ class AssistantTests: XCTestCase {
         let description = "Get details of a specific counterexample."
         let expectation = self.expectation(description: description)
 
-        let example = "when will it be funny"
+        let example = "Baseball is my favorite sport"
         assistant.getCounterexample(workspaceID: workspaceID, text: example, includeAudit: true) {
             response, error in
 
@@ -1600,7 +1534,7 @@ class AssistantTests: XCTestCase {
     func testListMentions() {
         let description = "List all the mentions for an entity."
         let expectation = self.expectation(description: description)
-        let entityName = "appliance"
+        let entityName = "holiday"
         assistant.listMentions(
             workspaceID: workspaceID,
             entity: entityName,
@@ -1634,7 +1568,7 @@ class AssistantTests: XCTestCase {
     func testListAllValues() {
         let description = "List all the values for an entity."
         let expectation = self.expectation(description: description)
-        let entityName = "appliance"
+        let entityName = "holiday"
         assistant.listValues(
             workspaceID: workspaceID,
             entity: entityName,
@@ -1667,7 +1601,7 @@ class AssistantTests: XCTestCase {
         let description = "Create a value for an entity"
         let expectation = self.expectation(description: description)
 
-        let entityName = "appliance"
+        let entityName = "holiday"
         let valueName = "swift-sdk-test-value" + UUID().uuidString
         assistant.createValue(workspaceID: workspaceID, entity: entityName, value: valueName) {
             response, error in
@@ -1732,7 +1666,7 @@ class AssistantTests: XCTestCase {
         let description = "Get a value for an entity."
         let expectation = self.expectation(description: description)
 
-        let entityName = "appliance"
+        let entityName = "holiday"
 
         assistant.listValues(workspaceID: workspaceID, entity: entityName) {
             response, error in
@@ -1775,7 +1709,7 @@ class AssistantTests: XCTestCase {
         let description = "List all the synonyms for an entity and value."
         let expectation = self.expectation(description: description)
 
-        assistant.listSynonyms(workspaceID: workspaceID, entity: "appliance", value: "lights", includeAudit: true) {
+        assistant.listSynonyms(workspaceID: workspaceID, entity: "holiday", value: "new years", includeAudit: true) {
             response, error in
 
             if let error = error {
@@ -1804,7 +1738,7 @@ class AssistantTests: XCTestCase {
         let description = "List all the synonyms for an entity and value with pageLimit specified as 1."
         let expectation = self.expectation(description: description)
 
-        assistant.listSynonyms(workspaceID: workspaceID, entity: "appliance", value: "lights", pageLimit: 1, includeAudit: true) {
+        assistant.listSynonyms(workspaceID: workspaceID, entity: "holiday", value: "new years", pageLimit: 1, includeAudit: true) {
             response, error in
 
             if let error = error {
@@ -1836,7 +1770,7 @@ class AssistantTests: XCTestCase {
         let expectation = self.expectation(description: description)
 
         let newSynonym = "swift-sdk-test-synonym" + UUID().uuidString
-        assistant.createSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: newSynonym) {
+        assistant.createSynonym(workspaceID: workspaceID, entity: "holiday", value: "new years", synonym: newSynonym) {
             response, error in
 
             if let error = error {
@@ -1856,7 +1790,7 @@ class AssistantTests: XCTestCase {
         let description2 = "Delete the new synonym."
         let expectation2 = self.expectation(description: description2)
 
-        assistant.deleteSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: newSynonym) {
+        assistant.deleteSynonym(workspaceID: workspaceID, entity: "holiday", value: "new years", synonym: newSynonym) {
             _, error in
 
             if let error = error {
@@ -1872,8 +1806,8 @@ class AssistantTests: XCTestCase {
         let description = "Get details of a specific synonym."
         let expectation = self.expectation(description: description)
 
-        let synonymName = "headlight"
-        assistant.getSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: synonymName, includeAudit: true) {
+        let synonymName = "jan 1"
+        assistant.getSynonym(workspaceID: workspaceID, entity: "holiday", value: "new years", synonym: synonymName, includeAudit: true) {
             response, error in
 
             if let error = error {
@@ -1898,7 +1832,7 @@ class AssistantTests: XCTestCase {
         let expectation = self.expectation(description: description)
 
         let newSynonym = "swift-sdk-test-synonym" + UUID().uuidString
-        assistant.createSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: newSynonym) {
+        assistant.createSynonym(workspaceID: workspaceID, entity: "holiday", value: "new years", synonym: newSynonym) {
             response, error in
 
             if let error = error {
@@ -1919,7 +1853,7 @@ class AssistantTests: XCTestCase {
         let expectation2 = self.expectation(description: description2)
 
         let updatedSynonym = "new-" + newSynonym
-        assistant.updateSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: newSynonym, newSynonym: updatedSynonym) {
+        assistant.updateSynonym(workspaceID: workspaceID, entity: "holiday", value: "new years", synonym: newSynonym, newSynonym: updatedSynonym) {
             response, error in
 
             if let error = error {
@@ -1939,7 +1873,7 @@ class AssistantTests: XCTestCase {
         let description3 = "Delete the new synonym."
         let expectation3 = self.expectation(description: description3)
 
-        assistant.deleteSynonym(workspaceID: workspaceID, entity: "appliance", value: "lights", synonym: updatedSynonym) {
+        assistant.deleteSynonym(workspaceID: workspaceID, entity: "holiday", value: "new years", synonym: updatedSynonym) {
             _, error in
 
             if let error = error {

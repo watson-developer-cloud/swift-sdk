@@ -26,10 +26,10 @@ class VisualRecognitionV4Tests: XCTestCase {
     private static let timeout: TimeInterval = 45.0
 
     private var visualRecognition: VisualRecognition!
-    private let collectionID = WatsonCredentials.VisualRecognitionClassifierID
-    private let analyzeGirafeeCollectionID = giraffeCollectionID
-    private let trainingDummyCollectionID = "ee7b901b-5819-43c5-afb4-99579960cec1"
-    private let trainingDummyImageID = "220px-Giraffe_Mikumi_National_P_c7d642d31b0dc4aa8c223ac119e1cc6d"
+    private let collectionID = WatsonCredentials.VisualRecognitionV4CollectionID
+    private let giraffeCollectionID = WatsonCredentials.VisualRecognitionV4GiraffeCollectionID
+    private let trainingDummyCollectionID = WatsonCredentials.VisualRecognitionV4TrainingDummyCollectionID
+    private let trainingDummyImageID = "pexels-photo-802112_54cb1e9f79ebad77276fddf92c139f95"
     private let giraffeImageURL = giraffeURL
 
     static var allTests: [(String, (VisualRecognitionV4Tests) -> () throws -> Void)] {
@@ -58,11 +58,7 @@ class VisualRecognitionV4Tests: XCTestCase {
 
     /** Instantiate Visual Recognition. */
     func instantiateVisualRecognition() {
-        guard let apiKey = WatsonCredentials.VisualRecognitionAPIKey else {
-            XCTFail("Missing credentials for Visual Recognition service")
-            return
-        }
-        let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
+        let authenticator = WatsonIAMAuthenticator.init(apiKey: WatsonCredentials.VisualRecognitionV4APIKey)
         visualRecognition = VisualRecognition(version: versionDate, authenticator: authenticator)
         if let url = WatsonCredentials.VisualRecognitionURL {
             visualRecognition.serviceURL = url
@@ -86,7 +82,7 @@ class VisualRecognitionV4Tests: XCTestCase {
         let expectation = self.expectation(description: "Analyze an individual image by URL with multiple classifier IDs")
 
         visualRecognition.analyze(
-            collectionIDs: [analyzeGirafeeCollectionID, trainingDummyCollectionID],
+            collectionIDs: [collectionID, giraffeCollectionID],
             features: ["objects"],
             imageURL: [giraffeImageURL],
             threshold: 0.16
@@ -118,7 +114,7 @@ class VisualRecognitionV4Tests: XCTestCase {
         let expectation = self.expectation(description: "Analyze an individual image by URL")
 
         visualRecognition.analyze(
-            collectionIDs: [analyzeGirafeeCollectionID],
+            collectionIDs: [collectionID],
             features: ["objects"],
             imageURL: [giraffeImageURL],
             threshold: 0.16
@@ -152,7 +148,7 @@ class VisualRecognitionV4Tests: XCTestCase {
         let testImages = [giraffeImageURL, obamaURL, carURL]
 
         visualRecognition.analyze(
-            collectionIDs: [analyzeGirafeeCollectionID],
+            collectionIDs: [collectionID],
             features: ["objects"],
             imageURL: testImages,
             threshold: 0.16
@@ -218,7 +214,7 @@ class VisualRecognitionV4Tests: XCTestCase {
         let testFile = FileWithMetadata(data: obama, filename: "obama.jpg", contentType: "image/jpg")
 
         visualRecognition.analyze(
-            collectionIDs: [analyzeGirafeeCollectionID],
+            collectionIDs: [collectionID],
             features: ["objects"],
             imagesFile: [testFile],
             threshold: 0.16
@@ -255,7 +251,7 @@ class VisualRecognitionV4Tests: XCTestCase {
         let signFile = FileWithMetadata(data: sign, filename: "sign.jpg", contentType: "image/jpg")
 
         visualRecognition.analyze(
-            collectionIDs: [analyzeGirafeeCollectionID],
+            collectionIDs: [collectionID],
             features: ["objects"],
             imagesFile: [obamaFile, personFile, signFile],
             threshold: 0.16
@@ -472,7 +468,7 @@ class VisualRecognitionV4Tests: XCTestCase {
 
         let testFile = FileWithMetadata(data: obama, filename: "obama.jpg", contentType: "image/jpg")
 
-        visualRecognition.addImages(collectionID: analyzeGirafeeCollectionID, imagesFile: [testFile]) {
+        visualRecognition.addImages(collectionID: collectionID, imagesFile: [testFile]) {
             response, error in
 
             // make sure we didn't get an error
@@ -506,7 +502,7 @@ class VisualRecognitionV4Tests: XCTestCase {
         /** List images test **/
         let listImageExpectation = self.expectation(description: "list images in a collection.")
 
-        visualRecognition.listImages(collectionID: analyzeGirafeeCollectionID) { response, error in
+        visualRecognition.listImages(collectionID: collectionID) { response, error in
             // make sure we didn't get an error
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -530,7 +526,7 @@ class VisualRecognitionV4Tests: XCTestCase {
         /** Get Image Details test **/
         let getImageDetailsExpectation = self.expectation(description: "Get details about an image.")
 
-        visualRecognition.getImageDetails(collectionID: analyzeGirafeeCollectionID, imageID: testImageID) { response, error in
+        visualRecognition.getImageDetails(collectionID: collectionID, imageID: testImageID) { response, error in
             // make sure we didn't get an error
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -554,7 +550,7 @@ class VisualRecognitionV4Tests: XCTestCase {
         /** Get a JPG representation of an Image test **/
         let jpgRepresentationExpectation = self.expectation(description: "Get a JPG representation of an image in a collection.")
 
-        visualRecognition.getJpegImage(collectionID: analyzeGirafeeCollectionID, imageID: testImageID) { response, error in
+        visualRecognition.getJpegImage(collectionID: collectionID, imageID: testImageID) { response, error in
             // make sure we didn't get an error
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -570,7 +566,7 @@ class VisualRecognitionV4Tests: XCTestCase {
         /** Get Image Details test **/
         let deleteImageExpectation = self.expectation(description: "Delete an image from a collection.")
 
-        visualRecognition.deleteImage(collectionID: analyzeGirafeeCollectionID, imageID: testImageID) { _, error in
+        visualRecognition.deleteImage(collectionID: collectionID, imageID: testImageID) { _, error in
             // make sure we didn't get an error
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))

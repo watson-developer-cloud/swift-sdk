@@ -32,8 +32,6 @@ let obamaURL = "https://www.whitehouse.gov/sites/whitehouse.gov/files/images/" +
 "Administration/People/president_official_portrait_lores.jpg"
 let carURL = "https://raw.githubusercontent.com/watson-developer-cloud/java-sdk/master/visual-recognition/src/test/resources/visual_recognition/v4/turtle_to_classify.jpg"
 let signURL = "https://raw.githubusercontent.com/watson-developer-cloud/java-sdk/master/visual-recognition/src/test/resources/visual_recognition/v4/turtle_to_classify.jpg"
-
-let giraffeCollectionID = "d31d6534-3458-40c4-b6de-2185a5f3cbe4"
 let giraffeURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Giraffe_Mikumi_National_Park.jpg/220px-Giraffe_Mikumi_National_Park.jpg"
 
 func loadResource(name: String, ext: String) -> Data {

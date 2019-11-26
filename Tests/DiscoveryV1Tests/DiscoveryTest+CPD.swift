@@ -40,18 +40,10 @@ class DiscoveryCPDTests: XCTestCase {
     }
 
     func instantiateDiscovery() {
-        if let bearerToken = WatsonCredentials.DiscoveryCPDToken {
-            let authenticator = WatsonBearerTokenAuthenticator.init(bearerToken: bearerToken)
-            discovery = Discovery(version: versionDate, authenticator: authenticator)
-        } else {
-            let username = WatsonCredentials.DiscoveryUsername
-            let password = WatsonCredentials.DiscoveryPassword
-            let authenticator = WatsonBasicAuthenticator.init(username: username, password: password)
-            discovery = Discovery(version: versionDate, authenticator: authenticator)
-        }
-        if let url = WatsonCredentials.DiscoveryCPDURL {
-            discovery.serviceURL = url
-        }
+        let authenticator = WatsonBearerTokenAuthenticator.init(bearerToken: WatsonCredentials.DiscoveryCPDToken)
+        discovery = Discovery(version: versionDate, authenticator: authenticator)
+
+        discovery.serviceURL = WatsonCredentials.DiscoveryCPDURL
         discovery.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         discovery.defaultHeaders["X-Watson-Test"] = "true"
         

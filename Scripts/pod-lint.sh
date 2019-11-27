@@ -7,8 +7,8 @@
 pod lib lint IBMWatsonAssistantV1.podspec
 pod lib lint IBMWatsonAssistantV2.podspec
 pod lib lint IBMWatsonCompareComplyV1.podspec
-pod lib lint IBMWatsonDiscoveryV1.podspec
-pod lib lint IBMWatsonDiscoveryV2.podspec
+pod lib lint IBMWatsonDiscoveryV1.podspec --allow-warnings
+pod lib lint IBMWatsonDiscoveryV2.podspec --allow-warnings
 pod lib lint IBMWatsonLanguageTranslatorV3.podspec
 pod lib lint IBMWatsonNaturalLanguageClassifierV1.podspec
 pod lib lint IBMWatsonNaturalLanguageUnderstandingV1.podspec

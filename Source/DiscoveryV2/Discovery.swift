@@ -27,7 +27,7 @@ import IBMSwiftSDKCore
 public class Discovery {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL: String? = nil
+    public var serviceURL: String?
 
     /// Service identifiers
     internal let serviceName = "Discovery"
@@ -57,7 +57,7 @@ public class Discovery {
      */
     public init(version: String) throws {
         self.version = version
-        
+
         let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
         self.authenticator = authenticator
 

@@ -53,7 +53,7 @@ class LanguageTranslatorTests: XCTestCase {
             ("testListDocuments", testListDocuments),
             ("testDocumentsCRUD", testDocumentsCRUD),
             // Negative Tests
-            ("testGetModelDoesntExist", testGetModelDoesntExist)
+            ("testGetModelDoesntExist", testGetModelDoesntExist),
         ]
     }
 

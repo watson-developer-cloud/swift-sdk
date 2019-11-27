@@ -52,7 +52,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             ("testAnalyzeTextForCategories", testAnalyzeTextForCategories),
             ("testCustomModel", testCustomModel),
             ("testDeleteModel", testDeleteModel),
-            ("testListModels", testListModels)
+            ("testListModels", testListModels),
         ]
     }
 

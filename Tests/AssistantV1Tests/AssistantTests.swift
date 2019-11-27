@@ -97,7 +97,7 @@ class AssistantTests: XCTestCase {
             // Negative Tests
             ("testMessageUnknownWorkspace", testMessageUnknownWorkspace),
             ("testMessageInvalidWorkspaceID", testMessageInvalidWorkspaceID),
-            ("testInvalidServiceURL", testInvalidServiceURL)
+            ("testInvalidServiceURL", testInvalidServiceURL),
         ]
         return tests
     }

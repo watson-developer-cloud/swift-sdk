@@ -77,7 +77,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
             ("testTranscribeDataWithSpeakerLabelsOpus", testTranscribeDataWithSpeakerLabelsOpus),
             ("testTranscribeDataWithSpeakerLabelsFLAC", testTranscribeDataWithSpeakerLabelsFLAC),
             ("testResultsAccumulator", testResultsAccumulator),
-            ("testTranscribeStreaming", testTranscribeStreaming)
+            ("testTranscribeStreaming", testTranscribeStreaming),
         ]
     }
 

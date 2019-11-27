@@ -377,6 +377,7 @@
 		7E96EC3C233907660039388E /* GenericQueryAggregation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E96EC3B233907660039388E /* GenericQueryAggregation.swift */; };
 		7E96EC3F23391C0A0039388E /* WordTimestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E96EC3D23391C0A0039388E /* WordTimestamp.swift */; };
 		7E96EC4023391C0A0039388E /* WordConfidence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E96EC3E23391C0A0039388E /* WordConfidence.swift */; };
+		7E974916238EEE0C002864D2 /* DiscoveryV2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC4FFBA2379EAE100F9A970 /* DiscoveryV2Tests.swift */; };
 		7EC4FF172379E41300F9A970 /* IBMSwiftSDKCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E48B6B8233539EB0009F2B7 /* IBMSwiftSDKCore.framework */; };
 		7EC4FF212379E44600F9A970 /* Discovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC4FF202379E44600F9A970 /* Discovery.swift */; };
 		7EC4FF5F2379E48400F9A970 /* Completions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC4FF252379E48000F9A970 /* Completions.swift */; };
@@ -445,7 +446,6 @@
 		7EC4FFA42379EA6800F9A970 /* WatsonCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6C7B3C1D8C960300CD97FA /* WatsonCredentials.swift */; };
 		7EC4FFA52379EA6800F9A970 /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BF69AD213F129A00FE6325 /* Shared.swift */; };
 		7EC4FFB72379EA8F00F9A970 /* DiscoveryV2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EC4FF1E2379E41300F9A970 /* DiscoveryV2.framework */; };
-		7EC4FFBB2379EAE100F9A970 /* DiscoveryV2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC4FFBA2379EAE100F9A970 /* DiscoveryV2Tests.swift */; };
 		7EC735D82319CC4100A73810 /* DialogSuggestionResponseGeneric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC735D52319CC4100A73810 /* DialogSuggestionResponseGeneric.swift */; };
 		7EC735D92319CC4100A73810 /* DialogSuggestionOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC735D62319CC4100A73810 /* DialogSuggestionOutput.swift */; };
 		7EC735DA2319CC4100A73810 /* RuntimeResponseGeneric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC735D72319CC4100A73810 /* RuntimeResponseGeneric.swift */; };
@@ -1395,7 +1395,7 @@
 		7EC4FF992379E4F500F9A970 /* DiscoveryV2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DiscoveryV2.h; path = Source/SupportingFiles/DiscoveryV2.h; sourceTree = "<group>"; };
 		7EC4FFB52379EA6800F9A970 /* DiscoveryV2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiscoveryV2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC4FFB62379EA6800F9A970 /* DiscoveryV1Tests copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "DiscoveryV1Tests copy-Info.plist"; path = "/Users/jeffarn/Programming/sdks/swift-sdk/DiscoveryV1Tests copy-Info.plist"; sourceTree = "<absolute>"; };
-		7EC4FFBA2379EAE100F9A970 /* DiscoveryV2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DiscoveryV2Tests.swift; path = ../../../Tests/DiscoveryV2Tests/DiscoveryV2Tests.swift; sourceTree = "<group>"; };
+		7EC4FFBA2379EAE100F9A970 /* DiscoveryV2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DiscoveryV2Tests.swift; path = Tests/DiscoveryV2Tests/DiscoveryV2Tests.swift; sourceTree = SOURCE_ROOT; };
 		7EC735D52319CC4100A73810 /* DialogSuggestionResponseGeneric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogSuggestionResponseGeneric.swift; sourceTree = "<group>"; };
 		7EC735D62319CC4100A73810 /* DialogSuggestionOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialogSuggestionOutput.swift; sourceTree = "<group>"; };
 		7EC735D72319CC4100A73810 /* RuntimeResponseGeneric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuntimeResponseGeneric.swift; sourceTree = "<group>"; };
@@ -5260,7 +5260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7EC4FFA22379EA6800F9A970 /* TestUtilities.swift in Sources */,
-				7EC4FFBB2379EAE100F9A970 /* DiscoveryV2Tests.swift in Sources */,
+				7E974916238EEE0C002864D2 /* DiscoveryV2Tests.swift in Sources */,
 				7EC4FFA32379EA6800F9A970 /* SharedTests.swift in Sources */,
 				7EC4FFA42379EA6800F9A970 /* WatsonCredentials.swift in Sources */,
 				7EC4FFA52379EA6800F9A970 /* Shared.swift in Sources */,

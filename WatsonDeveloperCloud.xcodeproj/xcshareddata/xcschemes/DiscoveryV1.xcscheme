@@ -75,6 +75,15 @@
                <Test
                   Identifier = "DiscoveryCPDTests/testAutoComplete()">
                </Test>
+               <Test
+                  Identifier = "DiscoveryTests/testCollectionsCRUD()">
+               </Test>
+               <Test
+                  Identifier = "DiscoveryTests/testGetEnvironment()">
+               </Test>
+               <Test
+                  Identifier = "DiscoveryTests/testTokenizationDictionaryOperations()">
+               </Test>
             </SkippedTests>
          </TestableReference>
       </Testables>

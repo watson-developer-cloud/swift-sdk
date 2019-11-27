@@ -41,7 +41,7 @@ class AssistantV2Tests: XCTestCase {
             ("testDeleteSession", testDeleteSession),
             ("testDeleteSessionWithInvalidSessionID", testDeleteSessionWithInvalidSessionID),
             ("testMessage", testMessage),
-            ("testMessageWithInvalidSessionID", testMessageWithInvalidSessionID)
+            ("testMessageWithInvalidSessionID", testMessageWithInvalidSessionID),
         ]
     }
 
@@ -415,7 +415,7 @@ class AssistantV2Tests: XCTestCase {
             "Are you open on christmas",
             "I\'d like to make an appointment",
             "Tomorrow at 3pm",
-            "Make that thursday at 2pm"
+            "Make that thursday at 2pm",
         ]
 
         // send multiple messages to get assistant going

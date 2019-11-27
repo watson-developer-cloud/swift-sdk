@@ -58,7 +58,7 @@ class SpeechToTextTests: XCTestCase {
             ("testCustomWords", testCustomWords),
             ("testAcousticModels", testAcousticModels),
             ("testCustomAudioResources", testCustomAudioResources),
-            ("testGrammarsOperations", testGrammarsOperations)
+            ("testGrammarsOperations", testGrammarsOperations),
         ]
     }
 

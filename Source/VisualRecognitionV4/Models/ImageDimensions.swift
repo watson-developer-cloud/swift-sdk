@@ -24,13 +24,11 @@ public struct ImageDimensions: Codable, Equatable {
     /**
      Height in pixels of the image.
      */
-    // HAND EDIT - make this optional for cases when error is returned inline
     public var height: Int?
 
     /**
      Width in pixels of the image.
      */
-    // HAND EDIT - make this optional for cases when error is returned inline
     public var width: Int?
 
     // Map each property name to the key that shall be used for encoding/decoding.

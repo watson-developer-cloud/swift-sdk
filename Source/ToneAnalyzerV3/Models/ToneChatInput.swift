@@ -41,7 +41,8 @@ internal struct ToneChatInput: Codable, Equatable {
      */
     public init(
         utterances: [Utterance]
-    ) {
+    )
+    {
         self.utterances = utterances
     }
 

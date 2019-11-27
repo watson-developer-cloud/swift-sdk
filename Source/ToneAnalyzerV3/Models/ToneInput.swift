@@ -40,7 +40,8 @@ public struct ToneInput: Codable, Equatable {
      */
     public init(
         text: String
-    ) {
+    )
+    {
         self.text = text
     }
 

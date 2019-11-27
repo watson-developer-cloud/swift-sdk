@@ -41,21 +41,16 @@ class AssistantV2Tests: XCTestCase {
             ("testDeleteSession", testDeleteSession),
             ("testDeleteSessionWithInvalidSessionID", testDeleteSessionWithInvalidSessionID),
             ("testMessage", testMessage),
-            ("testMessageWithInvalidSessionID", testMessageWithInvalidSessionID)
+            ("testMessageWithInvalidSessionID", testMessageWithInvalidSessionID),
         ]
     }
 
     /** Instantiate Assistant. */
     func instantiateAssistant() {
-        if let apiKey = WatsonCredentials.AssistantAPIKey {
-            let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
-            assistant = Assistant(version: versionDate, authenticator: authenticator)
-        } else {
-            let username = WatsonCredentials.AssistantV2Username
-            let password = WatsonCredentials.AssistantV2Password
-            let authenticator = WatsonBasicAuthenticator.init(username: username, password: password)
-            assistant = Assistant(version: versionDate, authenticator: authenticator)
-        }
+
+        let authenticator = WatsonIAMAuthenticator.init(apiKey: WatsonCredentials.AssistantAPIKey)
+        assistant = Assistant(version: versionDate, authenticator: authenticator)
+
         if let url = WatsonCredentials.AssistantV2URL {
             assistant.serviceURL = url
         }
@@ -420,7 +415,7 @@ class AssistantV2Tests: XCTestCase {
             "Are you open on christmas",
             "I\'d like to make an appointment",
             "Tomorrow at 3pm",
-            "Make that thursday at 2pm"
+            "Make that thursday at 2pm",
         ]
 
         // send multiple messages to get assistant going

@@ -42,15 +42,9 @@ class DiscoveryTests: XCTestCase {
     }
 
     func instantiateDiscovery() {
-        if let apiKey = WatsonCredentials.DiscoveryAPIKey {
-            let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
-            discovery = Discovery(version: versionDate, authenticator: authenticator)
-        } else {
-            let username = WatsonCredentials.DiscoveryUsername
-            let password = WatsonCredentials.DiscoveryPassword
-            let authenticator = WatsonBasicAuthenticator.init(username: username, password: password)
-            discovery = Discovery(version: versionDate, authenticator: authenticator)
-        }
+        let authenticator = WatsonIAMAuthenticator.init(apiKey: WatsonCredentials.DiscoveryAPIKey)
+        discovery = Discovery(version: versionDate, authenticator: authenticator)
+
         if let url = WatsonCredentials.DiscoveryURL {
             discovery.serviceURL = url
         }
@@ -139,7 +133,7 @@ class DiscoveryTests: XCTestCase {
             ("testGetEnvironmentWithInvalidID", testGetEnvironmentWithInvalidID),
             ("testGetConfigurationWithInvalidID", testGetConfigurationWithInvalidID),
             ("testGetCollectionWithInvalidID", testGetCollectionWithInvalidID),
-            ("testQueryWithInvalidID", testQueryWithInvalidID)
+            ("testQueryWithInvalidID", testQueryWithInvalidID),
         ]
         return tests
     }

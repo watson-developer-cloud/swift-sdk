@@ -32,7 +32,7 @@ class ToneAnalyzerTests: XCTestCase {
             ("testGetToneCustom", testGetToneCustom),
             ("testToneChat", testToneChat),
             ("testGetToneEmptyString", testGetToneEmptyString),
-            ("testToneChatEmptyArray", testToneChatEmptyArray)
+            ("testToneChatEmptyArray", testToneChatEmptyArray),
         ]
     }
 
@@ -47,7 +47,7 @@ class ToneAnalyzerTests: XCTestCase {
         Utterance(text: "Thanks for reaching out. Can you give me some more detail about the issue?", user: "agent"),
         Utterance(text: "I put my charger in my phone last night to charge and it isn't working. " +
             "Which is ridiculous, it's a new charger, I bought it yesterday.", user: "customer"),
-        Utterance(text: "I'm sorry you're having issues with charging. What kind of charger do you have?", user: "agent")
+        Utterance(text: "I'm sorry you're having issues with charging. What kind of charger do you have?", user: "agent"),
     ]
 
     // MARK: - Test Configuration
@@ -61,15 +61,9 @@ class ToneAnalyzerTests: XCTestCase {
 
     /** Instantiate Tone Analyzer. */
     func instantiateToneAnalyzer() {
-        if let apiKey = WatsonCredentials.ToneAnalyzerAPIKey {
-            let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
-            toneAnalyzer = ToneAnalyzer(version: versionDate, authenticator: authenticator)
-        } else {
-            let username = WatsonCredentials.ToneAnalyzerUsername
-            let password = WatsonCredentials.ToneAnalyzerPassword
-            let authenticator = WatsonBasicAuthenticator.init(username: username, password: password)
-            toneAnalyzer = ToneAnalyzer(version: versionDate, authenticator: authenticator)
-        }
+        let authenticator = WatsonIAMAuthenticator.init(apiKey: WatsonCredentials.ToneAnalyzerAPIKey)
+        toneAnalyzer = ToneAnalyzer(version: versionDate, authenticator: authenticator)
+
         if let url = WatsonCredentials.ToneAnalyzerURL {
             toneAnalyzer.serviceURL = url
         }

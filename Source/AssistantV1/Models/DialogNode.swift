@@ -169,6 +169,11 @@ public struct DialogNode: Codable, Equatable {
     public var userLabel: String?
 
     /**
+     Whether the dialog node should be excluded from disambiguation suggestions.
+     */
+    public var disambiguationOptOut: Bool?
+
+    /**
      For internal use only.
      */
     public var disabled: Bool?
@@ -203,6 +208,7 @@ public struct DialogNode: Codable, Equatable {
         case digressOut = "digress_out"
         case digressOutSlots = "digress_out_slots"
         case userLabel = "user_label"
+        case disambiguationOptOut = "disambiguation_opt_out"
         case disabled = "disabled"
         case created = "created"
         case updated = "updated"
@@ -237,6 +243,7 @@ public struct DialogNode: Codable, Equatable {
      - parameter digressOut: Whether this dialog node can be returned to after a digression.
      - parameter digressOutSlots: Whether the user can digress to top-level nodes while filling out slots.
      - parameter userLabel: A label that can be displayed externally to describe the purpose of the node to users.
+     - parameter disambiguationOptOut: Whether the dialog node should be excluded from disambiguation suggestions.
      - parameter disabled: For internal use only.
      - parameter created: The timestamp for creation of the object.
      - parameter updated: The timestamp for the most recent update to the object.
@@ -262,6 +269,7 @@ public struct DialogNode: Codable, Equatable {
         digressOut: String? = nil,
         digressOutSlots: String? = nil,
         userLabel: String? = nil,
+        disambiguationOptOut: Bool? = nil,
         disabled: Bool? = nil,
         created: Date? = nil,
         updated: Date? = nil
@@ -285,6 +293,7 @@ public struct DialogNode: Codable, Equatable {
         self.digressOut = digressOut
         self.digressOutSlots = digressOutSlots
         self.userLabel = userLabel
+        self.disambiguationOptOut = disambiguationOptOut
         self.disabled = disabled
         self.created = created
         self.updated = updated

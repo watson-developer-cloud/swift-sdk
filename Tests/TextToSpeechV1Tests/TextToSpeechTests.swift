@@ -38,7 +38,7 @@ class TextToSpeechTests: XCTestCase {
         "fr-FR_ReneeVoice",
         "it-IT_FrancescaVoice",
         "ja-JP_EmiVoice",
-        "pt-BR_IsabelaVoice"
+        "pt-BR_IsabelaVoice",
     ]
     private let litePlanMessage = "This feature is not available for the IBM Cloud Lite plan."
 
@@ -67,7 +67,7 @@ class TextToSpeechTests: XCTestCase {
             ("testAddMultipleWordsWithBadIDs", testAddMultipleWordsWithBadIDs),
             ("testDeleteWordWithBadIDs", testDeleteWordWithBadIDs),
             ("testGetWordWithBadIDs", testGetWordWithBadIDs),
-            ("testAddWordWithBadIDs", testAddWordWithBadIDs)
+            ("testAddWordWithBadIDs", testAddWordWithBadIDs),
         ]
     }
 
@@ -82,15 +82,9 @@ class TextToSpeechTests: XCTestCase {
 
     /** Instantiate Text to Speech instance. */
     func instantiateTextToSpeech() {
-        if let apiKey = WatsonCredentials.TextToSpeechAPIKey {
-            let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
-            textToSpeech = TextToSpeech(authenticator: authenticator)
-        } else {
-            let username = WatsonCredentials.TextToSpeechUsername
-            let password = WatsonCredentials.TextToSpeechPassword
-            let authenticator = WatsonBasicAuthenticator.init(username: username, password: password)
-            textToSpeech = TextToSpeech(authenticator: authenticator)
-        }
+        let authenticator = WatsonIAMAuthenticator.init(apiKey: WatsonCredentials.TextToSpeechAPIKey)
+        textToSpeech = TextToSpeech(authenticator: authenticator)
+
         if let url = WatsonCredentials.TextToSpeechURL {
             textToSpeech.serviceURL = url
         }

@@ -53,21 +53,15 @@ class LanguageTranslatorTests: XCTestCase {
             ("testListDocuments", testListDocuments),
             ("testDocumentsCRUD", testDocumentsCRUD),
             // Negative Tests
-            ("testGetModelDoesntExist", testGetModelDoesntExist)
+            ("testGetModelDoesntExist", testGetModelDoesntExist),
         ]
     }
 
     /** Instantiate Language Translator. */
     func instantiateLanguageTranslator() {
-        if let apiKey = WatsonCredentials.LanguageTranslatorV3APIKey {
-            let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
-            languageTranslator = LanguageTranslator(version: versionDate, authenticator: authenticator)
-        } else {
-            let username = WatsonCredentials.LanguageTranslatorV3Username
-            let password = WatsonCredentials.LanguageTranslatorV3Password
-            let authenticator = WatsonBasicAuthenticator.init(username: username, password: password)
-            languageTranslator = LanguageTranslator(version: versionDate, authenticator: authenticator)
-        }
+        let authenticator = WatsonIAMAuthenticator.init(apiKey: WatsonCredentials.LanguageTranslatorV3APIKey)
+        languageTranslator = LanguageTranslator(version: versionDate, authenticator: authenticator)
+
         if let url = WatsonCredentials.LanguageTranslatorV3URL {
             languageTranslator.serviceURL = url
         }

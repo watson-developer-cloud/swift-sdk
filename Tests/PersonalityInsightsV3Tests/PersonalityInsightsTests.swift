@@ -37,7 +37,7 @@ class PersonalityInsightsTests: XCTestCase {
             ("testProfileAsCsvContent", testProfileAsCsvContent),
             ("testProfileAsCsvText", testProfileAsCsvText),
             ("testNeedsAndConsumptionPreferences", testNeedsAndConsumptionPreferences),
-            ("testProfileWithShortText", testProfileWithShortText)
+            ("testProfileWithShortText", testProfileWithShortText),
         ]
     }
 
@@ -51,15 +51,9 @@ class PersonalityInsightsTests: XCTestCase {
     }
 
     func instantiatePersonalityInsights() {
-        if let apiKey = WatsonCredentials.PersonalityInsightsV3APIKey {
-            let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
-            personalityInsights = PersonalityInsights(version: versionDate, authenticator: authenticator)
-        } else {
-            let username = WatsonCredentials.PersonalityInsightsV3Username
-            let password = WatsonCredentials.PersonalityInsightsV3Password
-            let authenticator = WatsonBasicAuthenticator.init(username: username, password: password)
-            personalityInsights = PersonalityInsights(version: versionDate, authenticator: authenticator)
-        }
+        let authenticator = WatsonIAMAuthenticator.init(apiKey: WatsonCredentials.PersonalityInsightsV3APIKey)
+        personalityInsights = PersonalityInsights(version: versionDate, authenticator: authenticator)
+
         if let url = WatsonCredentials.PersonalityInsightsV3URL {
             personalityInsights.serviceURL = url
         }

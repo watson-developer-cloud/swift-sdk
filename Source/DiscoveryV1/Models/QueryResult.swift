@@ -42,11 +42,6 @@ public struct QueryResult: Codable, Equatable {
      */
     public var resultMetadata: QueryResultMetadata?
 
-    /**
-     Automatically extracted result title.
-     */
-    public var title: String?
-
     /// Additional properties associated with this model.
     public var additionalProperties: [String: JSON]
 
@@ -56,8 +51,7 @@ public struct QueryResult: Codable, Equatable {
         case metadata = "metadata"
         case collectionID = "collection_id"
         case resultMetadata = "result_metadata"
-        case title = "title"
-        static let allValues = [id, metadata, collectionID, resultMetadata, title]
+        static let allValues = [id, metadata, collectionID, resultMetadata]
     }
 
     public init(from decoder: Decoder) throws {
@@ -66,7 +60,6 @@ public struct QueryResult: Codable, Equatable {
         metadata = try container.decodeIfPresent([String: JSON].self, forKey: .metadata)
         collectionID = try container.decodeIfPresent(String.self, forKey: .collectionID)
         resultMetadata = try container.decodeIfPresent(QueryResultMetadata.self, forKey: .resultMetadata)
-        title = try container.decodeIfPresent(String.self, forKey: .title)
         let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
         additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: CodingKeys.allValues)
     }
@@ -77,7 +70,6 @@ public struct QueryResult: Codable, Equatable {
         try container.encodeIfPresent(metadata, forKey: .metadata)
         try container.encodeIfPresent(collectionID, forKey: .collectionID)
         try container.encodeIfPresent(resultMetadata, forKey: .resultMetadata)
-        try container.encodeIfPresent(title, forKey: .title)
         var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
         try dynamicContainer.encodeIfPresent(additionalProperties)
     }

@@ -62,15 +62,9 @@ class NaturalLanguageClassifierTests: XCTestCase {
     }
 
     func instantiateNaturalLanguageClassifier() {
-        if let apiKey = WatsonCredentials.NaturalLanguageClassifierAPIKey {
-            let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
-            naturalLanguageClassifier = NaturalLanguageClassifier(authenticator: authenticator)
-        } else {
-            let username = WatsonCredentials.NaturalLanguageClassifierUsername
-            let password = WatsonCredentials.NaturalLanguageClassifierPassword
-            let authenticator = WatsonBasicAuthenticator.init(username: username, password: password)
-            naturalLanguageClassifier = NaturalLanguageClassifier(authenticator: authenticator)
-        }
+        let authenticator = WatsonIAMAuthenticator.init(apiKey: WatsonCredentials.NaturalLanguageClassifierAPIKey)
+        naturalLanguageClassifier = NaturalLanguageClassifier(authenticator: authenticator)
+
         if let url = WatsonCredentials.NaturalLanguageClassifierURL {
             naturalLanguageClassifier.serviceURL = url
         }

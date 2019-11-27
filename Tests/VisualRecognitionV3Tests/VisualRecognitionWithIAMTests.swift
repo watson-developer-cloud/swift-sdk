@@ -24,7 +24,7 @@ class VisualRecognitionWithIAMTests: XCTestCase {
 
     static var allTests: [(String, (VisualRecognitionWithIAMTests) -> () throws -> Void)] {
         return [
-            ("testAccessWithAPIKey", testAccessWithAPIKey)
+            ("testAccessWithAPIKey", testAccessWithAPIKey),
         ]
     }
 
@@ -79,11 +79,7 @@ class VisualRecognitionWithIAMTests: XCTestCase {
 
     /** Access service using IAM API Key credentials  */
     func testAccessWithAPIKey() {
-        guard let apiKey = WatsonCredentials.VisualRecognitionAPIKey else {
-            XCTFail("Missing credentials for Visual Recognition service")
-            return
-        }
-        let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
+        let authenticator = WatsonIAMAuthenticator.init(apiKey: WatsonCredentials.VisualRecognitionV3APIKey)
         let visualRecognition = VisualRecognition(version: versionDate, authenticator: authenticator)
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"

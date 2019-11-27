@@ -54,7 +54,7 @@ class VisualRecognitionTests: XCTestCase {
             // Negative tests
             ("testCreateClassifierWithInvalidPositiveExamples", testCreateClassifierWithInvalidPositiveExamples),
             ("testClassifyByInvalidURL", testClassifyByInvalidURL),
-            ("testGetUnknownClassifier", testGetUnknownClassifier)
+            ("testGetUnknownClassifier", testGetUnknownClassifier),
         ]
         return tests
     }
@@ -70,11 +70,7 @@ class VisualRecognitionTests: XCTestCase {
 
     /** Instantiate Visual Recognition. */
     func instantiateVisualRecognition() {
-        guard let apiKey = WatsonCredentials.VisualRecognitionAPIKey else {
-            XCTFail("Missing credentials for Visual Recognition service")
-            return
-        }
-        let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
+        let authenticator = WatsonIAMAuthenticator.init(apiKey: WatsonCredentials.VisualRecognitionV3APIKey)
         visualRecognition = VisualRecognition(version: versionDate, authenticator: authenticator)
         if let url = WatsonCredentials.VisualRecognitionURL {
             visualRecognition.serviceURL = url
@@ -688,7 +684,7 @@ class VisualRecognitionTests: XCTestCase {
             let classifier = image?.classifiers.first
             XCTAssertEqual(classifier?.classifierID, self.classifierID)
             XCTAssertEqual(classifier?.classes.count, 1)
-            XCTAssertEqual(classifier?.classes.first?.class, "turtles")
+            XCTAssertEqual(classifier?.classes.first?.class, "turtle")
             if let score = classifier?.classes.first?.score {
                 XCTAssertGreaterThan(score, 0.5)
             }
@@ -733,7 +729,7 @@ class VisualRecognitionTests: XCTestCase {
             let classifier = image?.classifiers.first
             XCTAssertEqual(classifier?.classifierID, self.classifierID)
             XCTAssertEqual(classifier?.classes.count, 1)
-            XCTAssertEqual(classifier?.classes.first?.class, "turtles")
+            XCTAssertEqual(classifier?.classes.first?.class, "turtle")
             if let score = classifier?.classes.first?.score {
                 XCTAssertGreaterThan(score, 0.5)
             }
@@ -785,7 +781,7 @@ class VisualRecognitionTests: XCTestCase {
                     for cls in classifier.classes where cls.class == "car" {
                         classifierScore = cls.score
                     }
-                    
+
                     if let score = classifierScore {
                         XCTAssertGreaterThan(score, 0.5)
                     }
@@ -793,7 +789,7 @@ class VisualRecognitionTests: XCTestCase {
                     // verify the image's custom classifier
                     XCTAssertEqual(classifier.classifierID, self.classifierID)
                     XCTAssertEqual(classifier.classes.count, 1)
-                    XCTAssertEqual(classifier.classes.first?.class, "turtles")
+                    XCTAssertEqual(classifier.classes.first?.class, "turtle")
                     if let score = classifier.classes.first?.score {
                         XCTAssertGreaterThan(score, 0.5)
                     }
@@ -945,7 +941,7 @@ class VisualRecognitionTests: XCTestCase {
             let classifier = image?.classifiers.first
             XCTAssertEqual(classifier?.classifierID, self.classifierID)
             XCTAssertEqual(classifier?.classes.count, 1)
-            XCTAssertEqual(classifier?.classes.first?.class, "turtles")
+            XCTAssertEqual(classifier?.classes.first?.class, "turtle")
             if let score = classifier?.classes.first?.score {
                 XCTAssertGreaterThan(score, 0.5)
             }
@@ -990,7 +986,7 @@ class VisualRecognitionTests: XCTestCase {
             let classifier = image?.classifiers.first
             XCTAssertEqual(classifier?.classifierID, self.classifierID)
             XCTAssertEqual(classifier?.classes.count, 1)
-            XCTAssertEqual(classifier?.classes.first?.class, "turtles")
+            XCTAssertEqual(classifier?.classes.first?.class, "turtle")
             if let score = classifier?.classes.first?.score {
                 XCTAssertGreaterThan(score, 0.5)
             }
@@ -1056,7 +1052,7 @@ class VisualRecognitionTests: XCTestCase {
                     // verify the image's custom classifier
                     XCTAssertEqual(classifier.classifierID, self.classifierID)
                     XCTAssertEqual(classifier.classes.count, 1)
-                    XCTAssertEqual(classifier.classes.first?.class, "turtles")
+                    XCTAssertEqual(classifier.classes.first?.class, "turtle")
                     if let score = classifier.classes.first?.score {
                         XCTAssertGreaterThan(score, 0.5)
                     }

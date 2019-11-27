@@ -170,7 +170,8 @@ public class ToneAnalyzer {
         contentLanguage: String? = nil,
         acceptLanguage: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ToneAnalysis>?, WatsonError?) -> Void) {
+        completionHandler: @escaping (WatsonResponse<ToneAnalysis>?, WatsonError?) -> Void)
+    {
         // construct body
         guard let body = toneContent.content else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
@@ -257,7 +258,8 @@ public class ToneAnalyzer {
         contentLanguage: String? = nil,
         acceptLanguage: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<UtteranceAnalyses>?, WatsonError?) -> Void) {
+        completionHandler: @escaping (WatsonResponse<UtteranceAnalyses>?, WatsonError?) -> Void)
+    {
         // construct body
         let toneChatRequest = ToneChatInput(
             utterances: utterances)

@@ -31,7 +31,7 @@ XCTMain([
     testCase(ToneAnalyzerTests.allTests),
     testCase(VisualRecognitionTests.allTests),
     testCase(VisualRecognitionUnitTests.allTests),
-    testCase(VisualRecognitionV4Tests.allTests)
+    testCase(VisualRecognitionV4Tests.allTests),
 
     // the following tests are currently disabled because their
     // dependencies do not build with Swift Package Manager

@@ -37,9 +37,8 @@ public struct Image: Codable, Equatable {
     public var objects: DetectedObjects
 
     /**
-     Details about an error.
+     A container for the problems in the request.
      */
-    // HAND EDIT - make this an optional array per what returns from the service
     public var errors: [Error]?
 
     // Map each property name to the key that shall be used for encoding/decoding.

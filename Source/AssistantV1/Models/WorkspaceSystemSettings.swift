@@ -29,7 +29,7 @@ public struct WorkspaceSystemSettings: Codable, Equatable {
 
     /**
      Workspace settings related to the disambiguation feature.
-     **Note:** This feature is available only to Premium users.
+     **Note:** This feature is available only to Plus and Premium users.
      */
     public var disambiguation: WorkspaceSystemSettingsDisambiguation?
 
@@ -38,11 +38,17 @@ public struct WorkspaceSystemSettings: Codable, Equatable {
      */
     public var humanAgentAssist: [String: JSON]?
 
+    /**
+     Workspace settings related to detection of irrelevant input.
+     */
+    public var offTopic: WorkspaceSystemSettingsOffTopic?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case tooling = "tooling"
         case disambiguation = "disambiguation"
         case humanAgentAssist = "human_agent_assist"
+        case offTopic = "off_topic"
     }
 
     /**
@@ -50,20 +56,23 @@ public struct WorkspaceSystemSettings: Codable, Equatable {
 
      - parameter tooling: Workspace settings related to the Watson Assistant user interface.
      - parameter disambiguation: Workspace settings related to the disambiguation feature.
-       **Note:** This feature is available only to Premium users.
+       **Note:** This feature is available only to Plus and Premium users.
      - parameter humanAgentAssist: For internal use only.
+     - parameter offTopic: Workspace settings related to detection of irrelevant input.
 
      - returns: An initialized `WorkspaceSystemSettings`.
      */
     public init(
         tooling: WorkspaceSystemSettingsTooling? = nil,
         disambiguation: WorkspaceSystemSettingsDisambiguation? = nil,
-        humanAgentAssist: [String: JSON]? = nil
+        humanAgentAssist: [String: JSON]? = nil,
+        offTopic: WorkspaceSystemSettingsOffTopic? = nil
     )
     {
         self.tooling = tooling
         self.disambiguation = disambiguation
         self.humanAgentAssist = humanAgentAssist
+        self.offTopic = offTopic
     }
 
 }

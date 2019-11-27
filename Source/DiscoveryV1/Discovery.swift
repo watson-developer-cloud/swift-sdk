@@ -1777,7 +1777,7 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
      - parameter file: The content of the document to ingest. The maximum supported file size when adding a file to a
-       collection is 50 megabytes, the maximum supported file size when testing a confiruration is 1 megabyte. Files
+       collection is 50 megabytes, the maximum supported file size when testing a configuration is 1 megabyte. Files
        larger than the supported size are rejected.
      - parameter filename: The filename for file.
      - parameter fileContentType: The content type of file.
@@ -1928,7 +1928,7 @@ public class Discovery {
      - parameter collectionID: The ID of the collection.
      - parameter documentID: The ID of the document.
      - parameter file: The content of the document to ingest. The maximum supported file size when adding a file to a
-       collection is 50 megabytes, the maximum supported file size when testing a confiruration is 1 megabyte. Files
+       collection is 50 megabytes, the maximum supported file size when testing a configuration is 1 megabyte. Files
        larger than the supported size are rejected.
      - parameter filename: The filename for file.
      - parameter fileContentType: The content type of file.

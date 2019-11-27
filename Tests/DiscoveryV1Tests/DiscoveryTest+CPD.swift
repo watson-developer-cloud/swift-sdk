@@ -40,21 +40,13 @@ class DiscoveryCPDTests: XCTestCase {
     }
 
     func instantiateDiscovery() {
-        if let bearerToken = WatsonCredentials.DiscoveryCPDToken {
-            let authenticator = WatsonBearerTokenAuthenticator.init(bearerToken: bearerToken)
-            discovery = Discovery(version: versionDate, authenticator: authenticator)
-        } else {
-            let username = WatsonCredentials.DiscoveryUsername
-            let password = WatsonCredentials.DiscoveryPassword
-            let authenticator = WatsonBasicAuthenticator.init(username: username, password: password)
-            discovery = Discovery(version: versionDate, authenticator: authenticator)
-        }
-        if let url = WatsonCredentials.DiscoveryCPDURL {
-            discovery.serviceURL = url
-        }
+        let authenticator = WatsonBearerTokenAuthenticator.init(bearerToken: WatsonCredentials.DiscoveryCPDToken)
+        discovery = Discovery(version: versionDate, authenticator: authenticator)
+
+        discovery.serviceURL = WatsonCredentials.DiscoveryCPDURL
         discovery.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         discovery.defaultHeaders["X-Watson-Test"] = "true"
-        
+
         discovery.disableSSLVerification()
     }
 
@@ -73,25 +65,25 @@ class DiscoveryCPDTests: XCTestCase {
 
     func testAutoComplete() {
         let expectation = self.expectation(description: "Auto complete a statement.")
-        
+
         discovery.getAutocompletion(environmentID: "default", collectionID: "a6eb02e5-6288-1727-0000-016d91863f52", prefix: "ho") { response, error in
             // check for no error
             if let error = error {
                 XCTFail("test failed due to \(error.localizedDescription)")
                 return
             }
-            
+
             guard let result = response?.result else {
                 XCTFail("no result")
                 return
             }
-            
+
             XCTAssertEqual(result.completions?.count, 2)
-            
+
             expectation.fulfill()
         }
-        
+
         waitForExpectations(timeout: 15)
     }
-    
+
 }

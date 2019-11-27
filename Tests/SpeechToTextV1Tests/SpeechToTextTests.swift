@@ -35,15 +35,9 @@ class SpeechToTextTests: XCTestCase {
     }
 
     func instantiateSpeechToText() {
-        if let apiKey = WatsonCredentials.SpeechToTextAPIKey {
-            let authenticator = WatsonIAMAuthenticator.init(apiKey: apiKey)
-            speechToText = SpeechToText(authenticator: authenticator)
-        } else {
-            let username = WatsonCredentials.SpeechToTextUsername
-            let password = WatsonCredentials.SpeechToTextPassword
-            let authenticator = WatsonBasicAuthenticator.init(username: username, password: password)
-            speechToText = SpeechToText(authenticator: authenticator)
-        }
+        let authenticator = WatsonIAMAuthenticator.init(apiKey: WatsonCredentials.SpeechToTextAPIKey)
+        speechToText = SpeechToText(authenticator: authenticator)
+
         if let url = WatsonCredentials.SpeechToTextURL {
             speechToText.serviceURL = url
         }
@@ -64,7 +58,7 @@ class SpeechToTextTests: XCTestCase {
             ("testCustomWords", testCustomWords),
             ("testAcousticModels", testAcousticModels),
             ("testCustomAudioResources", testCustomAudioResources),
-            ("testGrammarsOperations", testGrammarsOperations)
+            ("testGrammarsOperations", testGrammarsOperations),
         ]
     }
 

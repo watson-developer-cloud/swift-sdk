@@ -28,6 +28,7 @@ public struct DialogNodeAction: Codable, Equatable {
         case server = "server"
         case cloudFunction = "cloud_function"
         case webAction = "web_action"
+        case webhook = "webhook"
     }
 
     /**

@@ -52,7 +52,7 @@ class VisualRecognitionUnitTests: XCTestCase {
     func testErrorResponseDecoder403() {
         let testJSON: [String: WatsonJSON] = [
             "status": WatsonJSON.string("403"),
-            "statusInfo": WatsonJSON.string("forbidden")
+            "statusInfo": WatsonJSON.string("forbidden"),
         ]
         let testData = try! JSONEncoder().encode(testJSON)
         let testResponse = HTTPURLResponse(url: exampleURL, statusCode: 403, httpVersion: nil, headerFields: nil)!
@@ -73,8 +73,8 @@ class VisualRecognitionUnitTests: XCTestCase {
         let testWatsonJSON: [String: WatsonJSON] = [
             "error": WatsonJSON.object([
                 "description": WatsonJSON.string("not found"),
-                "error_id": WatsonJSON.string("42")
-            ])
+                "error_id": WatsonJSON.string("42"),
+            ]),
         ]
         let testData = try! JSONEncoder().encode(testWatsonJSON)
         let testResponse = HTTPURLResponse(url: exampleURL, statusCode: 404, httpVersion: nil, headerFields: nil)!
@@ -707,7 +707,7 @@ extension VisualRecognitionUnitTests {
     static var allTests: [(String, (VisualRecognitionUnitTests) -> () throws -> Void)] {
         let tests: [(String, (VisualRecognitionUnitTests) -> () throws -> Void)] = [
             // Inject Credentials
-            ("testInjectCredentialsFromFile", testInjectCredentialsFromFile)
+            ("testInjectCredentialsFromFile", testInjectCredentialsFromFile),
         ]
         return tests
     }

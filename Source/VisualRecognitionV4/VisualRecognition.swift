@@ -21,10 +21,6 @@ import IBMSwiftSDKCore
 /**
  Provide images to the IBM Watson&trade; Visual Recognition service for analysis. The service detects objects based on a
  set of images with training data.
- **Beta:** The Visual Recognition v4 API and Object Detection model are beta features. For more information about beta
- features, see the [Release
- notes](https://cloud.ibm.com/docs/services/visual-recognition?topic=visual-recognition-release-notes#beta).
- {: important}
  */
 public class VisualRecognition {
 
@@ -801,7 +797,9 @@ public class VisualRecognition {
 
      - parameter collectionID: The identifier of the collection.
      - parameter imageID: The identifier of the image.
-     - parameter size: Specify the image size.
+     - parameter size: The image size. Specify `thumbnail` to return a version that maintains the original aspect
+       ratio but is no larger than 200 pixels in the larger dimension. For example, an original 800 x 1000 image is
+       resized to 160 x 200 pixels.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -978,6 +976,69 @@ public class VisualRecognition {
             headerParameters: headerParameters,
             queryItems: queryParameters,
             messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Get training usage.
+
+     Information about the completed training events. You can use this information to determine how close you are to the
+     training limits for the month.
+
+     - parameter startTime: The earliest day to include training events. Specify dates in YYYY-MM-DD format. If empty
+       or not specified, the earliest training event is included.
+     - parameter endTime: The most recent day to include training events. Specify dates in YYYY-MM-DD format. All
+       events for the day are included. If empty or not specified, the current day is used. Specify the same value as
+       `start_time` to request events for a single day.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func getTrainingUsage(
+        startTime: String? = nil,
+        endTime: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<TrainingEvents>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getTrainingUsage")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let startTime = startTime {
+            let queryParameter = URLQueryItem(name: "start_time", value: startTime)
+            queryParameters.append(queryParameter)
+        }
+        if let endTime = endTime {
+            let queryParameter = URLQueryItem(name: "end_time", value: endTime)
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceEndpoint + "/v4/training_usage",
+            headerParameters: headerParameters,
+            queryItems: queryParameters
         )
 
         // execute REST request

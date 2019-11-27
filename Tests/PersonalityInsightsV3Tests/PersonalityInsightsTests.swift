@@ -37,7 +37,7 @@ class PersonalityInsightsTests: XCTestCase {
             ("testProfileAsCsvContent", testProfileAsCsvContent),
             ("testProfileAsCsvText", testProfileAsCsvText),
             ("testNeedsAndConsumptionPreferences", testNeedsAndConsumptionPreferences),
-            ("testProfileWithShortText", testProfileWithShortText)
+            ("testProfileWithShortText", testProfileWithShortText),
         ]
     }
 

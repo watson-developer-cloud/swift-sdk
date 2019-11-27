@@ -95,7 +95,7 @@ class CompareComplyTests: XCTestCase {
             ("testExtractTablesUsingDOC", testExtractTablesUsingDOC),
             ("testCompareDocuments", testCompareDocuments),
             ("testFeedbackOperations", testFeedbackOperations),
-            ("testBatchOperations", testBatchOperations)
+            ("testBatchOperations", testBatchOperations),
         ]
     }
 

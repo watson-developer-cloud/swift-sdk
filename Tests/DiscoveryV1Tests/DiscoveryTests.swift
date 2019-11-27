@@ -133,7 +133,7 @@ class DiscoveryTests: XCTestCase {
             ("testGetEnvironmentWithInvalidID", testGetEnvironmentWithInvalidID),
             ("testGetConfigurationWithInvalidID", testGetConfigurationWithInvalidID),
             ("testGetCollectionWithInvalidID", testGetCollectionWithInvalidID),
-            ("testQueryWithInvalidID", testQueryWithInvalidID)
+            ("testQueryWithInvalidID", testQueryWithInvalidID),
         ]
         return tests
     }

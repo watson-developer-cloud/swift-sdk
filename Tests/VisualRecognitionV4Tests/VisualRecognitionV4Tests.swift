@@ -42,7 +42,7 @@ class VisualRecognitionV4Tests: XCTestCase {
             ("testAnalyzeMultipleImageByFile", testAnalyzeMultipleImageByFile),
             ("testImageManagementCRUD", testImageManagementCRUD),
             ("testTrainCollection", testTrainCollection),
-            ("testTrainCollection", testTrainCollection)
+            ("testTrainCollection", testTrainCollection),
         ]
         return tests
     }
@@ -65,7 +65,7 @@ class VisualRecognitionV4Tests: XCTestCase {
         }
         visualRecognition.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         visualRecognition.defaultHeaders["X-Watson-Test"] = "true"
-        
+
         // Test only
         // visualRecognition.serviceURL = "http://localhost:8008"
     }
@@ -109,7 +109,7 @@ class VisualRecognitionV4Tests: XCTestCase {
 
         waitForExpectations()
     }
-    
+
     func testAnalyzeIndividualImageByURL() {
         let expectation = self.expectation(description: "Analyze an individual image by URL")
 
@@ -173,7 +173,7 @@ class VisualRecognitionV4Tests: XCTestCase {
             var sourceImagesFound: [String: Bool] = [
                 "giraffe": false,
                 "obama": false,
-                "car": false
+                "car": false,
             ]
 
             for analyzedImage in result.images {
@@ -276,7 +276,7 @@ class VisualRecognitionV4Tests: XCTestCase {
             var sourceImagesFound: [String: Bool] = [
                 "obama": false,
                 "person": false,
-                "sign": false
+                "sign": false,
             ]
 
             for analyzedImage in result.images {

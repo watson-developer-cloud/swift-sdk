@@ -1893,7 +1893,7 @@ extension AssistantV1UnitTests {
     static var allTests: [(String, (AssistantV1UnitTests) -> () throws -> Void)] {
         let tests: [(String, (AssistantV1UnitTests) -> () throws -> Void)] = [
             // Inject Credentials
-            ("testInjectCredentialsFromFile", testInjectCredentialsFromFile)
+            ("testInjectCredentialsFromFile", testInjectCredentialsFromFile),
         ]
         return tests
     }

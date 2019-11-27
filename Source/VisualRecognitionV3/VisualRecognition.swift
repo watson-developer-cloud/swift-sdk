@@ -55,7 +55,7 @@ public class VisualRecognition {
      */
     public init(version: String) throws {
         self.version = version
-        
+
         let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
         self.authenticator = authenticator
 

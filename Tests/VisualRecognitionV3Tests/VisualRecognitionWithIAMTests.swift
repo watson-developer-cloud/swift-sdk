@@ -24,7 +24,7 @@ class VisualRecognitionWithIAMTests: XCTestCase {
 
     static var allTests: [(String, (VisualRecognitionWithIAMTests) -> () throws -> Void)] {
         return [
-            ("testAccessWithAPIKey", testAccessWithAPIKey)
+            ("testAccessWithAPIKey", testAccessWithAPIKey),
         ]
     }
 

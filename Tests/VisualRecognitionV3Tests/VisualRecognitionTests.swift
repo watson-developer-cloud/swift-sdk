@@ -54,7 +54,7 @@ class VisualRecognitionTests: XCTestCase {
             // Negative tests
             ("testCreateClassifierWithInvalidPositiveExamples", testCreateClassifierWithInvalidPositiveExamples),
             ("testClassifyByInvalidURL", testClassifyByInvalidURL),
-            ("testGetUnknownClassifier", testGetUnknownClassifier)
+            ("testGetUnknownClassifier", testGetUnknownClassifier),
         ]
         return tests
     }
@@ -781,7 +781,7 @@ class VisualRecognitionTests: XCTestCase {
                     for cls in classifier.classes where cls.class == "car" {
                         classifierScore = cls.score
                     }
-                    
+
                     if let score = classifierScore {
                         XCTAssertGreaterThan(score, 0.5)
                     }

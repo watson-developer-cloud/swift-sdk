@@ -51,7 +51,7 @@ extension DiscoveryUnitTests {
     static var allTests: [(String, (DiscoveryUnitTests) -> () throws -> Void)] {
         let tests: [(String, (DiscoveryUnitTests) -> () throws -> Void)] = [
             // Inject Credentials
-            ("testInjectCredentialsFromFile", testInjectCredentialsFromFile)
+            ("testInjectCredentialsFromFile", testInjectCredentialsFromFile),
         ]
         return tests
     }

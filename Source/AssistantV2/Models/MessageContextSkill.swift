@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2019, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,23 +27,32 @@ public struct MessageContextSkill: Codable, Equatable {
      */
     public var userDefined: [String: JSON]?
 
+    /**
+     For internal use only.
+     */
+    public var system: [String: JSON]?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case userDefined = "user_defined"
+        case system = "system"
     }
 
     /**
      Initialize a `MessageContextSkill` with member variables.
 
      - parameter userDefined: Arbitrary variables that can be read and written by a particular skill.
+     - parameter system: For internal use only.
 
      - returns: An initialized `MessageContextSkill`.
      */
     public init(
-        userDefined: [String: JSON]? = nil
+        userDefined: [String: JSON]? = nil,
+        system: [String: JSON]? = nil
     )
     {
         self.userDefined = userDefined
+        self.system = system
     }
 
 }

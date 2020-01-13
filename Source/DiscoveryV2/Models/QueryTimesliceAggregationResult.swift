@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2019, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ public struct QueryTimesliceAggregationResult: Codable, Equatable {
     public var keyAsString: String
 
     /**
-     Numeric date value of the upper bound for the timeslice interval in UNIX miliseconds since epoch.
+     Numeric date value of the upper bound for the timeslice interval in UNIX milliseconds since epoch.
      */
     public var key: Int
 

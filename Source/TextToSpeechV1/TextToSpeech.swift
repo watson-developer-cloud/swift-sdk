@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * (C) Copyright IBM Corp. 2016, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,8 +59,10 @@ public class TextToSpeech {
      In that case, try another initializer that directly passes in the credentials.
 
      */
-    public init() throws {
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
+    public init?() {
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
+            return nil
+        }
         self.authenticator = authenticator
 
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
@@ -355,38 +357,7 @@ public class TextToSpeech {
         )
 
         // execute REST request
-        request.response { (response: WatsonResponse<Data>?, error: WatsonError?) in
-            var response = response
-            guard let data = response?.result else {
-                completionHandler(response, error)
-                return
-            }
-            if accept?.lowercased().contains("audio/wav") == true {
-                // repair the WAV header
-                var wav = data
-                guard WAVRepair.isWAVFile(data: wav) else {
-                    let error = WatsonError.other(message: "Expected returned audio to be in WAV format", metadata: nil)
-                    completionHandler(nil, error)
-                    return
-                }
-                WAVRepair.repairWAVHeader(data: &wav)
-                response?.result = wav
-                completionHandler(response, nil)
-            } else if accept?.lowercased().contains("ogg") == true && accept?.lowercased().contains("opus") == true {
-                do {
-                    let decodedAudio = try TextToSpeechDecoder(audioData: data)
-                    response?.result = decodedAudio.pcmDataWithHeaders
-                    completionHandler(response, nil)
-                } catch {
-                    let error = WatsonError.serialization(values: "returned audio")
-                    completionHandler(nil, error)
-                    return
-                }
-            } else {
-                completionHandler(response, nil)
-            }
-        }
-
+        request.response(completionHandler: completionHandler)
     }
 
     /**
@@ -395,7 +366,8 @@ public class TextToSpeech {
      Gets the phonetic pronunciation for the specified word. You can request the pronunciation for a specific format.
      You can also request the pronunciation for a specific voice to see the default translation for the language of that
      voice or for a specific custom voice model to see the translation for that voice model.
-     **Note:** This method is currently a beta release.
+     **Note:** This method is currently a beta release. The method does not support the Arabic, Chinese, and Dutch
+     languages.
      **See also:** [Querying a word from a
      language](https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customWords#cuWordsQueryLanguage).
 
@@ -473,7 +445,8 @@ public class TextToSpeech {
      Creates a new empty custom voice model. You must specify a name for the new custom model. You can optionally
      specify the language and a description for the new model. The model is owned by the instance of the service whose
      credentials are used to create it.
-     **Note:** This method is currently a beta release.
+     **Note:** This method is currently a beta release. The service does not support voice model customization for the
+     Arabic, Chinese, and Dutch languages.
      **See also:** [Creating a custom
      model](https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customModels#cuModelsCreate).
 

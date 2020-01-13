@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * (C) Copyright IBM Corp. 2016, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,8 +62,10 @@ public class SpeechToText {
      In that case, try another initializer that directly passes in the credentials.
 
      */
-    public init() throws {
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
+    public init?() {
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
+            return nil
+        }
         self.authenticator = authenticator
 
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
@@ -369,6 +371,9 @@ public class SpeechToText {
        also use the **Get a model** method and check that the attribute `speaker_labels` is set to `true`.
        See [Speaker
        labels](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#speaker_labels).
+     - parameter customizationID: **Deprecated.** Use the `language_customization_id` parameter to specify the
+       customization ID (GUID) of a custom language model that is to be used with the recognition request. Do not
+       specify both parameters with a request.
      - parameter grammarName: The name of a grammar that is to be used with the recognition request. If you specify a
        grammar, you must also use the `language_customization_id` parameter to specify the name of the custom language
        model for which the grammar is defined. The service recognizes only strings that are recognized by the specified
@@ -388,6 +393,26 @@ public class SpeechToText {
      - parameter audioMetrics: If `true`, requests detailed information about the signal characteristics of the input
        audio. The service returns audio metrics with the final transcription results. By default, the service returns no
        audio metrics.
+       See [Audio
+       metrics](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-metrics#audio_metrics).
+     - parameter endOfPhraseSilenceTime: If `true`, specifies the duration of the pause interval at which the service
+       splits a transcript into multiple final results. If the service detects pauses or extended silence before it
+       reaches the end of the audio stream, its response can include multiple final results. Silence indicates a point
+       at which the speaker pauses between spoken words or phrases.
+       Specify a value for the pause interval in the range of 0.0 to 120.0.
+       * A value greater than 0 specifies the interval that the service is to use for speech recognition.
+       * A value of 0 indicates that the service is to use the default interval. It is equivalent to omitting the
+       parameter.
+       The default pause interval for most languages is 0.8 seconds; the default for Chinese is 0.6 seconds.
+       See [End of phrase silence
+       time](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#silence_time).
+     - parameter splitTranscriptAtPhraseEnd: If `true`, directs the service to split the transcript into multiple
+       final results based on semantic features of the input, for example, at the conclusion of meaningful phrases such
+       as sentences. The service bases its understanding of semantic features on the base language model that you use
+       with a request. Custom language models and grammars can also influence how and where the service splits a
+       transcript. By default, the service splits transcripts based solely on the pause interval.
+       See [Split transcript at phrase
+       end](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#split_transcript).
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -409,9 +434,12 @@ public class SpeechToText {
         profanityFilter: Bool? = nil,
         smartFormatting: Bool? = nil,
         speakerLabels: Bool? = nil,
+        customizationID: String? = nil,
         grammarName: String? = nil,
         redaction: Bool? = nil,
         audioMetrics: Bool? = nil,
+        endOfPhraseSilenceTime: Double? = nil,
+        splitTranscriptAtPhraseEnd: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<SpeechRecognitionResults>?, WatsonError?) -> Void)
     {
@@ -492,6 +520,10 @@ public class SpeechToText {
             let queryParameter = URLQueryItem(name: "speaker_labels", value: "\(speakerLabels)")
             queryParameters.append(queryParameter)
         }
+        if let customizationID = customizationID {
+            let queryParameter = URLQueryItem(name: "customization_id", value: customizationID)
+            queryParameters.append(queryParameter)
+        }
         if let grammarName = grammarName {
             let queryParameter = URLQueryItem(name: "grammar_name", value: grammarName)
             queryParameters.append(queryParameter)
@@ -502,6 +534,14 @@ public class SpeechToText {
         }
         if let audioMetrics = audioMetrics {
             let queryParameter = URLQueryItem(name: "audio_metrics", value: "\(audioMetrics)")
+            queryParameters.append(queryParameter)
+        }
+        if let endOfPhraseSilenceTime = endOfPhraseSilenceTime {
+            let queryParameter = URLQueryItem(name: "end_of_phrase_silence_time", value: "\(endOfPhraseSilenceTime)")
+            queryParameters.append(queryParameter)
+        }
+        if let splitTranscriptAtPhraseEnd = splitTranscriptAtPhraseEnd {
+            let queryParameter = URLQueryItem(name: "split_transcript_at_phrase_end", value: "\(splitTranscriptAtPhraseEnd)")
             queryParameters.append(queryParameter)
         }
 
@@ -837,6 +877,9 @@ public class SpeechToText {
        also use the **Get a model** method and check that the attribute `speaker_labels` is set to `true`.
        See [Speaker
        labels](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#speaker_labels).
+     - parameter customizationID: **Deprecated.** Use the `language_customization_id` parameter to specify the
+       customization ID (GUID) of a custom language model that is to be used with the recognition request. Do not
+       specify both parameters with a request.
      - parameter grammarName: The name of a grammar that is to be used with the recognition request. If you specify a
        grammar, you must also use the `language_customization_id` parameter to specify the name of the custom language
        model for which the grammar is defined. The service recognizes only strings that are recognized by the specified
@@ -857,6 +900,8 @@ public class SpeechToText {
        input audio. The service returns processing metrics at the interval specified by the
        `processing_metrics_interval` parameter. It also returns processing metrics for transcription events, for
        example, for final and interim results. By default, the service returns no processing metrics.
+       See [Processing
+       metrics](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-metrics#processing_metrics).
      - parameter processingMetricsInterval: Specifies the interval in real wall-clock seconds at which the service is
        to return processing metrics. The parameter is ignored unless the `processing_metrics` parameter is set to
        `true`.
@@ -865,9 +910,31 @@ public class SpeechToText {
        The service does not impose a maximum value. If you want to receive processing metrics only for transcription
        events instead of at periodic intervals, set the value to a large number. If the value is larger than the
        duration of the audio, the service returns processing metrics only for transcription events.
+       See [Processing
+       metrics](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-metrics#processing_metrics).
      - parameter audioMetrics: If `true`, requests detailed information about the signal characteristics of the input
        audio. The service returns audio metrics with the final transcription results. By default, the service returns no
        audio metrics.
+       See [Audio
+       metrics](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-metrics#audio_metrics).
+     - parameter endOfPhraseSilenceTime: If `true`, specifies the duration of the pause interval at which the service
+       splits a transcript into multiple final results. If the service detects pauses or extended silence before it
+       reaches the end of the audio stream, its response can include multiple final results. Silence indicates a point
+       at which the speaker pauses between spoken words or phrases.
+       Specify a value for the pause interval in the range of 0.0 to 120.0.
+       * A value greater than 0 specifies the interval that the service is to use for speech recognition.
+       * A value of 0 indicates that the service is to use the default interval. It is equivalent to omitting the
+       parameter.
+       The default pause interval for most languages is 0.8 seconds; the default for Chinese is 0.6 seconds.
+       See [End of phrase silence
+       time](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#silence_time).
+     - parameter splitTranscriptAtPhraseEnd: If `true`, directs the service to split the transcript into multiple
+       final results based on semantic features of the input, for example, at the conclusion of meaningful phrases such
+       as sentences. The service bases its understanding of semantic features on the base language model that you use
+       with a request. Custom language models and grammars can also influence how and where the service splits a
+       transcript. By default, the service splits transcripts based solely on the pause interval.
+       See [Split transcript at phrase
+       end](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-output#split_transcript).
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -893,11 +960,14 @@ public class SpeechToText {
         profanityFilter: Bool? = nil,
         smartFormatting: Bool? = nil,
         speakerLabels: Bool? = nil,
+        customizationID: String? = nil,
         grammarName: String? = nil,
         redaction: Bool? = nil,
         processingMetrics: Bool? = nil,
         processingMetricsInterval: Double? = nil,
         audioMetrics: Bool? = nil,
+        endOfPhraseSilenceTime: Double? = nil,
+        splitTranscriptAtPhraseEnd: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<RecognitionJob>?, WatsonError?) -> Void)
     {
@@ -994,6 +1064,10 @@ public class SpeechToText {
             let queryParameter = URLQueryItem(name: "speaker_labels", value: "\(speakerLabels)")
             queryParameters.append(queryParameter)
         }
+        if let customizationID = customizationID {
+            let queryParameter = URLQueryItem(name: "customization_id", value: customizationID)
+            queryParameters.append(queryParameter)
+        }
         if let grammarName = grammarName {
             let queryParameter = URLQueryItem(name: "grammar_name", value: grammarName)
             queryParameters.append(queryParameter)
@@ -1012,6 +1086,14 @@ public class SpeechToText {
         }
         if let audioMetrics = audioMetrics {
             let queryParameter = URLQueryItem(name: "audio_metrics", value: "\(audioMetrics)")
+            queryParameters.append(queryParameter)
+        }
+        if let endOfPhraseSilenceTime = endOfPhraseSilenceTime {
+            let queryParameter = URLQueryItem(name: "end_of_phrase_silence_time", value: "\(endOfPhraseSilenceTime)")
+            queryParameters.append(queryParameter)
+        }
+        if let splitTranscriptAtPhraseEnd = splitTranscriptAtPhraseEnd {
+            let queryParameter = URLQueryItem(name: "split_transcript_at_phrase_end", value: "\(splitTranscriptAtPhraseEnd)")
             queryParameters.append(queryParameter)
         }
 
@@ -1204,7 +1286,7 @@ public class SpeechToText {
      Creates a new custom language model for a specified base model. The custom language model can be used only with the
      base model for which it is created. The model is owned by the instance of the service whose credentials are used to
      create it.
-     You can create a maximum of 1024 custom language models, per credential. The service returns an error if you
+     You can create a maximum of 1024 custom language models per owning credentials. The service returns an error if you
      attempt to create more than 1024 models. You do not lose any models, but you cannot create any more until your
      model count is below the limit.
      **See also:** [Create a custom language
@@ -1505,7 +1587,7 @@ public class SpeechToText {
         wordTypeToAdd: String? = nil,
         customizationWeight: Double? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TrainingResponse>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1551,7 +1633,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.response(completionHandler: completionHandler)
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**
@@ -2659,7 +2741,7 @@ public class SpeechToText {
      Creates a new custom acoustic model for a specified base model. The custom acoustic model can be used only with the
      base model for which it is created. The model is owned by the instance of the service whose credentials are used to
      create it.
-     You can create a maximum of 1024 custom acoustic models, per credential. The service returns an error if you
+     You can create a maximum of 1024 custom acoustic models per owning credentials. The service returns an error if you
      attempt to create more than 1024 models. You do not lose any models, but you cannot create any more until your
      model count is below the limit.
      **See also:** [Create a custom acoustic
@@ -2946,7 +3028,7 @@ public class SpeechToText {
         customizationID: String,
         customLanguageModelID: String? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<TrainingResponse>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -2988,7 +3070,7 @@ public class SpeechToText {
         )
 
         // execute REST request
-        request.response(completionHandler: completionHandler)
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**

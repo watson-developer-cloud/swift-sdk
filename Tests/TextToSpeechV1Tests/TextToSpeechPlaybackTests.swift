@@ -26,8 +26,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
     private var textToSpeech: TextToSpeech!
     private let playAudio = true
     private let text = "Swift at IBM is awesome. You should try it!"
-    private let germanText = "Erst denken, dann handeln."
-    private let japaneseText = "こんにちは"
+
     private let ssmlString = "<speak xml:lang=\"En-US\" version=\"1.0\">" +
     "<say-as interpret-as=\"letters\">Hello</say-as></speak>"
     private let failedToInitializeAudioPlayerMessage = "Failed to initialize an AVAudioPlayer with the received data"
@@ -92,98 +91,80 @@ class TextToSpeechPlaybackTests: XCTestCase {
         }
         waitForExpectations()
     }
-
-    /** Synthesize text to spoken audio using the Lisa voice. */
-    func testSynthesizeLisa() {
-        let description = "Synthesize text to spoken audio."
-        let expectation = self.expectation(description: description)
-
-        textToSpeech.synthesize(text: text, accept: "audio/wav", voice: "en-US_LisaVoice") {
-            response, error in
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let data = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
-            XCTAssertGreaterThan(data.count, 0)
-            do {
-                let audioPlayer = try AVAudioPlayer(data: data)
-                audioPlayer.prepareToPlay()
-                audioPlayer.play()
-                if self.playAudio {
-                    sleep(3)
+    
+    func testSynthesizeAllVoices() {
+        let voices: [String : String] = [
+            "ar-AR_OmarVoice": "تقوم خدمة I B M النص إلى خدمة الكلام بتحويل النص المكتوب إلى صوت طبيعي في مجموعة متنوعة من اللغات والأصوات.",
+            "pt-BR_IsabelaVoice": "Consciente do seu patrimônio espiritual e moral, a União é fundamentada nos valores indivisíveis ",
+            "pt-BR_IsabelaV3Voice": "Consciente do seu patrimônio espiritual e moral, a União é fundamentada nos valores indivisíveis ",
+            "zh-CN_LiNaVoice": "基于海量数据的云计算、大数据、人工智能、区块链等新兴技术",
+            "zh-CN_WangWeiVoice": "基于海量数据的云计算、大数据、人工智能、区块链等新兴技术",
+            "zh-CN_ZhangJingVoice": "基于海量数据的云计算、大数据、人工智能、区块链等新兴技术",
+            "nl-NL_EmmaVoice": "In dem Bewusstsein ihres geistig-religiösen und sittlichen Erbes ",
+            "nl-NL_LiamVoice": "In dem Bewusstsein ihres geistig-religiösen und sittlichen Erbes ",
+            "en-GB_KateVoice": "Conscious of its spiritual and moral heritage, the Union is founded on the indivisible,",
+            "en-GB_KateV3Voice": "Conscious of its spiritual and moral heritage, the Union is founded on the indivisible,",
+            "en-US_AllisonVoice": "Conscious of its spiritual and moral heritage, the Union is founded on the indivisible,",
+            "en-US_AllisonV3Voice": "Conscious of its spiritual and moral heritage, the Union is founded on the indivisible,",
+            "en-US_LisaVoice": "Conscious of its spiritual and moral heritage, the Union is founded on the indivisible,",
+            "en-US_LisaV3Voice": "Conscious of its spiritual and moral heritage, the Union is founded on the indivisible,",
+            "en-US_MichaelVoice": "Conscious of its spiritual and moral heritage, the Union is founded on the indivisible,",
+            "en-US_MichaelV3Voice": "Conscious of its spiritual and moral heritage, the Union is founded on the indivisible,",
+            "fr-FR_ReneeVoice": "Consciente de son patrimoine spirituel et moral, l'Union",
+            "fr-FR_ReneeV3Voice": "Consciente de son patrimoine spirituel et moral, l'Union",
+            "de-DE_BirgitVoice": "In dem Bewusstsein ihres geistig-religiösen und sittlichen",
+            "de-DE_BirgitV3Voice": "In dem Bewusstsein ihres geistig-religiösen und sittlichen",
+            "de-DE_DieterVoice": "In dem Bewusstsein ihres geistig-religiösen und sittlichen",
+            "de-DE_DieterV3Voice": "In dem Bewusstsein ihres geistig-religiösen und sittlichen",
+            "it-IT_FrancescaVoice": "L'Unione contribuisce alla salvaguardia e allo sviluppo di questi valori comuni nel rispetto della diversità delle culture e delle tradizioni dei popoli d'Europa",
+            "it-IT_FrancescaV3Voice": "L'Unione contribuisce alla salvaguardia e allo sviluppo di questi valori comuni nel rispetto della diversità delle culture e delle tradizioni dei popoli d'Europa",
+            "ja-JP_EmiVoice": "こちらでは配送手続きのご予約・変更を承っております",
+            "ja-JP_EmiV3Voice": "こちらでは配送手続きのご予約・変更を承っております",
+            "es-ES_EnriqueVoice": "Consciente de su patrimonio espiritual y moral, la Unión está ",
+            "es-ES_EnriqueV3Voice": "Consciente de su patrimonio espiritual y moral, la Unión está ",
+            "es-ES_LauraVoice": "Consciente de su patrimonio espiritual y moral, la Unión está ",
+            "es-ES_LauraV3Voice": "Consciente de su patrimonio espiritual y moral, la Unión está ",
+            "es-LA_SofiaVoice": "Consciente de su patrimonio espiritual y moral, la Unión está ",
+            "es-LA_SofiaV3Voice": "Consciente de su patrimonio espiritual y moral, la Unión está ",
+            "es-US_SofiaVoice": "Consciente de su patrimonio espiritual y moral, la Unión está ",
+            "es-US_SofiaV3Voice": "Consciente de su patrimonio espiritual y moral, la Unión está ß"
+        ]
+            
+        // test all voices
+        for (voice, sampleText) in voices {
+            let voiceDescription = "Test of the \(voice) voice."
+            let voiceExpectation = self.expectation(description: voiceDescription)
+            
+            textToSpeech.synthesize(text: sampleText, accept: "audio/wav", voice: voice) {
+                response, error in
+                
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
                 }
-            } catch {
-                XCTFail(self.failedToInitializeAudioPlayerMessage)
-            }
-            expectation.fulfill()
-        }
-        waitForExpectations()
-    }
-
-    /** Synthesize text to spoken audio using the Dieter voice. */
-    func testSynthesizeDieter() {
-        let description = "Synthesize text to spoken audio."
-        let expectation = self.expectation(description: description)
-
-        textToSpeech.synthesize(text: germanText, accept: "audio/wav", voice: "de-DE_DieterVoice") {
-            response, error in
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let data = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
-            XCTAssertGreaterThan(data.count, 0)
-            do {
-                let audioPlayer = try AVAudioPlayer(data: data)
-                audioPlayer.prepareToPlay()
-                audioPlayer.play()
-                if self.playAudio {
-                    sleep(2)
+                
+                guard let data = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
                 }
-            } catch {
-                XCTFail(self.failedToInitializeAudioPlayerMessage)
-            }
-            expectation.fulfill()
-        }
-        waitForExpectations()
-    }
-
-    /** Synthesize text to spoken audio using the Emi voice. */
-    func testSynthesizeEmi() {
-        let description = "Synthesize text to spoken audio."
-        let expectation = self.expectation(description: description)
-
-        textToSpeech.synthesize(text: japaneseText, accept: "audio/wav", voice: "ja-JP_EmiVoice") {
-            response, error in
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let data = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
-            XCTAssertGreaterThan(data.count, 0)
-            do {
-                let audioPlayer = try AVAudioPlayer(data: data)
-                audioPlayer.prepareToPlay()
-                audioPlayer.play()
-                if self.playAudio {
-                    sleep(2)
+                
+                XCTAssertGreaterThan(data.count, 0)
+                
+                do {
+                    let audioPlayer = try AVAudioPlayer(data: data)
+                    audioPlayer.prepareToPlay()
+                    audioPlayer.play()
+                    if self.playAudio {
+                        sleep(3)
+                    }
+                } catch {
+                    XCTFail(self.failedToInitializeAudioPlayerMessage)
                 }
-            } catch {
-                XCTFail(self.failedToInitializeAudioPlayerMessage)
+                voiceExpectation.fulfill()
             }
-            expectation.fulfill()
+            
+            waitForExpectations()
         }
-        waitForExpectations()
     }
 
     /** Synthesize SSML to spoken audio. */

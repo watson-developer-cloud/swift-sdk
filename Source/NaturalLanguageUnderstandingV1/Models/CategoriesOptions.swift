@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2019.
+ * (C) Copyright IBM Corp. 2017, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,18 +33,10 @@ public struct CategoriesOptions: Codable, Equatable {
      */
     public var limit: Int?
 
-    /**
-     Enter a [custom
-     model](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-customizing)
-     ID to override the standard categories model.
-     */
-    public var model: String?
-
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case explanation = "explanation"
         case limit = "limit"
-        case model = "model"
     }
 
     /**
@@ -53,21 +45,16 @@ public struct CategoriesOptions: Codable, Equatable {
      - parameter explanation: Set this to `true` to return explanations for each categorization. **This is available
        only for English categories.**.
      - parameter limit: Maximum number of categories to return.
-     - parameter model: Enter a [custom
-       model](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-customizing)
-       ID to override the standard categories model.
 
      - returns: An initialized `CategoriesOptions`.
      */
     public init(
         explanation: Bool? = nil,
-        limit: Int? = nil,
-        model: String? = nil
+        limit: Int? = nil
     )
     {
         self.explanation = explanation
         self.limit = limit
-        self.model = model
     }
 
 }

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2019, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ public struct QueryLargePassages: Codable, Equatable {
     public var enabled: Bool?
 
     /**
-     When `true`, passages will be returned whithin their respective result.
+     When `true`, passages will be returned within their respective result.
      */
     public var perDocument: Bool?
 
@@ -67,7 +67,7 @@ public struct QueryLargePassages: Codable, Equatable {
      Initialize a `QueryLargePassages` with member variables.
 
      - parameter enabled: A passages query that returns the most relevant passages from the results.
-     - parameter perDocument: When `true`, passages will be returned whithin their respective result.
+     - parameter perDocument: When `true`, passages will be returned within their respective result.
      - parameter maxPerDocument: Maximum number of passages to return per result.
      - parameter fields: A list of fields that passages are drawn from. If this parameter not specified, then all
        top-level fields are included.

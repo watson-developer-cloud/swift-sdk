@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2019, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,10 +53,11 @@ public class VisualRecognition {
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
      */
-    public init(version: String) throws {
+    public init?(version: String) {
         self.version = version
-
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
+            return nil
+        }
         self.authenticator = authenticator
 
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
@@ -161,17 +162,16 @@ public class VisualRecognition {
     {
         // construct body
         let multipartFormData = MultipartFormData()
-
-        // HAND EDIT: join collectionIDs into CSV string
-        if let csvCollectionIDsData = collectionIDs.joined(separator: ",").data(using: .utf8) {
-            multipartFormData.append(csvCollectionIDsData, withName: "collection_ids")
+        for item in collectionIDs {
+            if let itemData = item.data(using: .utf8) {
+                multipartFormData.append(itemData, withName: "collection_ids")
+            }
         }
-
-        // HAND EDIT: join features into CSV string
-        if let csvFeaturesData = features.joined(separator: ",").data(using: .utf8) {
-            multipartFormData.append(csvFeaturesData, withName: "features")
+        for item in features {
+            if let itemData = item.data(using: .utf8) {
+                multipartFormData.append(itemData, withName: "features")
+            }
         }
-
         if let imagesFile = imagesFile {
             for item in imagesFile {
                 multipartFormData.append(item.data, withName: "images_file", mimeType: item.contentType, fileName: item.filename)

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * (C) Copyright IBM Corp. 2016, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,22 @@ import Foundation
  Component results for a speech recognition request.
  */
 public struct SpeechRecognitionResult: Codable, Equatable {
+
+    /**
+     If the `split_transcript_at_phrase_end` parameter is `true`, describes the reason for the split:
+     * `end_of_data` - The end of the input audio stream.
+     * `full_stop` - A full semantic stop, such as for the conclusion of a grammatical sentence. The insertion of splits
+     is influenced by the base language model and biased by custom language models and grammars.
+     * `reset` - The amount of audio that is currently being processed exceeds the two-minute maximum. The service
+     splits the transcript to avoid excessive memory use.
+     * `silence` - A pause or silence that is at least as long as the pause interval.
+     */
+    public enum EndOfUtterance: String {
+        case endOfData = "end_of_data"
+        case fullStop = "full_stop"
+        case reset = "reset"
+        case silence = "silence"
+    }
 
     /**
      An indication of whether the transcription results are final. If `true`, the results for this utterance are not
@@ -47,12 +63,24 @@ public struct SpeechRecognitionResult: Codable, Equatable {
      */
     public var wordAlternatives: [WordAlternativeResults]?
 
+    /**
+     If the `split_transcript_at_phrase_end` parameter is `true`, describes the reason for the split:
+     * `end_of_data` - The end of the input audio stream.
+     * `full_stop` - A full semantic stop, such as for the conclusion of a grammatical sentence. The insertion of splits
+     is influenced by the base language model and biased by custom language models and grammars.
+     * `reset` - The amount of audio that is currently being processed exceeds the two-minute maximum. The service
+     splits the transcript to avoid excessive memory use.
+     * `silence` - A pause or silence that is at least as long as the pause interval.
+     */
+    public var endOfUtterance: String?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case `final` = "final"
         case alternatives = "alternatives"
         case keywordsResult = "keywords_result"
         case wordAlternatives = "word_alternatives"
+        case endOfUtterance = "end_of_utterance"
     }
 
 }

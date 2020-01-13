@@ -100,6 +100,8 @@ public class SpeechToTextSession {
             baseModelVersion: baseModelVersion,
             languageCustomizationID: languageCustomizationID,
             acousticCustomizationID: acousticCustomizationID,
+            endOfPhraseSilenceTime: endOfPhraseSilenceTime,
+            splitTranscriptAtPhraseEnd: splitTranscriptAtPhraseEnd,
             learningOptOut: learningOptOut,
             customerID: customerID
         )!
@@ -130,6 +132,8 @@ public class SpeechToTextSession {
     private let acousticCustomizationID: String?
     private let learningOptOut: Bool?
     private let customerID: String?
+    private let endOfPhraseSilenceTime: Double?
+    private let splitTranscriptAtPhraseEnd: Bool?
 
     public init(
         authenticator: Authenticator,
@@ -138,6 +142,8 @@ public class SpeechToTextSession {
         languageCustomizationID: String? = nil,
         acousticCustomizationID: String? = nil,
         learningOptOut: Bool? = nil,
+        endOfPhraseSilenceTime: Double? = nil,
+        splitTranscriptAtPhraseEnd: Bool? = nil,
         customerID: String? = nil)
     {
         self.authenticator = authenticator
@@ -146,6 +152,8 @@ public class SpeechToTextSession {
         self.languageCustomizationID = languageCustomizationID
         self.acousticCustomizationID = acousticCustomizationID
         self.learningOptOut = learningOptOut
+        self.endOfPhraseSilenceTime = endOfPhraseSilenceTime
+        self.splitTranscriptAtPhraseEnd = splitTranscriptAtPhraseEnd
         self.customerID = customerID
 
         recorder = SpeechToTextRecorder()

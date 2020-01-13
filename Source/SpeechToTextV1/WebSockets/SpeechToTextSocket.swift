@@ -164,6 +164,8 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         baseModelVersion: String?,
         languageCustomizationID: String?,
         acousticCustomizationID: String?,
+        endOfPhraseSilenceTime: Double? = nil,
+        splitTranscriptAtPhraseEnd: Bool? = nil,
         learningOptOut: Bool?,
         customerID: String?) -> URL?
     {
@@ -183,6 +185,14 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         if let learningOptOut = learningOptOut {
             let value = "\(learningOptOut)"
             queryParameters.append(URLQueryItem(name: "x-watson-learning-opt-out", value: value))
+        }
+        if let endOfPhraseSilenceTime = endOfPhraseSilenceTime {
+            let queryParameter = URLQueryItem(name: "end_of_phrase_silence_time", value: "\(endOfPhraseSilenceTime)")
+            queryParameters.append(queryParameter)
+        }
+        if let splitTranscriptAtPhraseEnd = splitTranscriptAtPhraseEnd {
+            let queryParameter = URLQueryItem(name: "split_transcript_at_phrase_end", value: "\(splitTranscriptAtPhraseEnd)")
+            queryParameters.append(queryParameter)
         }
         if let customerID = customerID {
             let value = "customer_id=\(customerID)"

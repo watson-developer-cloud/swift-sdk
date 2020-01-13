@@ -71,6 +71,8 @@ extension SpeechToText {
         languageCustomizationID: String? = nil,
         acousticCustomizationID: String? = nil,
         learningOptOut: Bool? = nil,
+        endOfPhraseSilenceTime: Double? = nil,
+        splitTranscriptAtPhraseEnd: Bool? = nil,
         customerID: String? = nil,
         headers: [String: String]? = nil,
         callback: RecognizeCallback)
@@ -83,6 +85,8 @@ extension SpeechToText {
             languageCustomizationID: languageCustomizationID,
             acousticCustomizationID: acousticCustomizationID,
             learningOptOut: learningOptOut,
+            endOfPhraseSilenceTime: endOfPhraseSilenceTime,
+            splitTranscriptAtPhraseEnd: splitTranscriptAtPhraseEnd,
             customerID: customerID
         )
 

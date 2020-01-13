@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * (C) Copyright IBM Corp. 2016, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,10 +53,11 @@ public class VisualRecognition {
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
      */
-    public init(version: String) throws {
+    public init?(version: String) {
         self.version = version
-
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
+            return nil
+        }
         self.authenticator = authenticator
 
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
@@ -113,16 +114,6 @@ public class VisualRecognition {
             } else if case let .some(.string(message)) = json["error"] {
                 errorMessage = message
             } else if case let .some(.string(message)) = json["message"] {
-                errorMessage = message
-            // ErrorAuthentication
-            } else if case let .some(.string(message)) = json["statusInfo"] {
-                errorMessage = message
-            // ErrorInfo
-            } else if case let .some(.object(errorObj)) = json["error"],    // 404
-                case let .some(.string(message)) = errorObj["description"] {
-                errorMessage = message
-            // ErrorHTML
-            } else if case let .some(.string(message)) = json["Error"] {   // 413
                 errorMessage = message
             } else {
                 errorMessage = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
@@ -198,17 +189,20 @@ public class VisualRecognition {
                 multipartFormData.append(thresholdData, withName: "threshold")
             }
         }
-
-        // HAND EDIT: concat owners into csv data
-        if let csvOwners = owners?.joined(separator: ",").data(using: .utf8) {
-            multipartFormData.append(csvOwners, withName: "owners")
+        if let owners = owners {
+            for item in owners {
+                if let itemData = item.data(using: .utf8) {
+                    multipartFormData.append(itemData, withName: "owners")
+                }
+            }
         }
-
-        // HAND EDIT: concat classifier IDs into csv data
-        if let csvClassifierIDs = classifierIDs?.joined(separator: ",").data(using: .utf8) {
-            multipartFormData.append(csvClassifierIDs, withName: "classifier_ids")
+        if let classifierIDs = classifierIDs {
+            for item in classifierIDs {
+                if let itemData = item.data(using: .utf8) {
+                    multipartFormData.append(itemData, withName: "classifier_ids")
+                }
+            }
         }
-
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
             return
@@ -272,7 +266,8 @@ public class VisualRecognition {
        of images that depict the visual subject of a class in the new classifier. You can include more than one positive
        example file in a call.
        Specify the parameter name by appending `_positive_examples` to the class name. For example,
-       `goldenretriever_positive_examples` creates the class **goldenretriever**.
+       `goldenretriever_positive_examples` creates the class **goldenretriever**. The string cannot contain the
+       following characters: ``$ * - { } \ | / ' " ` [ ]``.
        Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The
        maximum number of images is 10,000 images or 100 MB per .zip file.
        Encode special characters in the file name in UTF-8.
@@ -298,10 +293,10 @@ public class VisualRecognition {
         }
         positiveExamples.forEach { (classname, value) in
             let partName = "\(classname)_positive_examples"
-            multipartFormData.append(value, withName: partName, fileName: "\(classname).zip")
+            multipartFormData.append(value, withName: partName, fileName: classname)
         }
         if let negativeExamples = negativeExamples {
-            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename.zip")
+            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename")
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
@@ -472,7 +467,8 @@ public class VisualRecognition {
        of images that depict the visual subject of a class in the classifier. The positive examples create or update
        classes in the classifier. You can include more than one positive example file in a call.
        Specify the parameter name by appending `_positive_examples` to the class name. For example,
-       `goldenretriever_positive_examples` creates the class `goldenretriever`.
+       `goldenretriever_positive_examples` creates the class `goldenretriever`. The string cannot contain the following
+       characters: ``$ * - { } \ | / ' " ` [ ]``.
        Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The
        maximum number of images is 10,000 images or 100 MB per .zip file.
        Encode special characters in the file name in UTF-8.
@@ -496,11 +492,11 @@ public class VisualRecognition {
         if let positiveExamples = positiveExamples {
             positiveExamples.forEach { (classname, value) in
                 let partName = "\(classname)_positive_examples"
-                multipartFormData.append(value, withName: partName, fileName: "\(classname).zip")
+                multipartFormData.append(value, withName: partName, fileName: classname)
             }
         }
         if let negativeExamples = negativeExamples {
-            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename.zip")
+            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename")
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))

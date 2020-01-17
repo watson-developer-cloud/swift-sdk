@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.description           = <<-DESC
 IBM Watson™ Language Translator can identify the language of text and translate it into different languages programmatically.
                             DESC
-  s.homepage              = 'https://www.ibm.com/watson/services/language-translator/'
+  s.homepage              = 'https://www.ibm.com/cloud/watson-language-translator'
   s.license               = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }
   s.authors               = { 'Jeff Arn' => 'jtarn@us.ibm.com',
                               'Mike Kistler'    => 'mkistler@us.ibm.com' }

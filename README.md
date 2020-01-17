@@ -24,7 +24,6 @@ There are many resources to help you build your first cognitive application with
 
 * [Before you begin](#before-you-begin)
 * [Requirements](#requirements)
-* [Version 3.0.0 Preview](#300-preview)
 * [Installation](#installation)
 * [Authentication](#authentication)
 * [Custom Service URLs](#custom-service-urls)
@@ -62,44 +61,6 @@ This SDK provides classes and methods to access the following Watson services.
 - Swift 4.2+
 - iOS 10.0+
 
-## 3.0.0 Preview
-
-We have made a preview of the upcoming `3.0.0` release of the SDK available to use! Version `3.0.0` introduces a new authentication scheme for all services, as well as breaking changes to the API response models returned by the Swift SDK.
-
-### Install the 3.0.0 preview
-
-#### Carthage
-
-See the [Carthage](#installation) section of the `Installation` guide.
-
-To build your project using the `3.0.0` preview, modify the Watson entries in your `Cartfile` like so:
-
-```
-github "watson-developer-cloud/swift-sdk" "preview-3.0.0-rc1"
-github "watson-developer-cloud/restkit" "preview-4.0.0-rc1"
-```
-
-Then run `carthage update` to rebuild your dependencies.
-
-#### Swift Package Manager
-
-See the [Swift Package Manager](#installation) section of the `Installation` guide.
-
-To build your project using the `3.0.0` preview, modify the depedencies section in your `Package.swift` like so:
-
-```
-dependencies: [
-    .package(url: "https://github.com/watson-developer-cloud/restkit.git", .branch: "preview/4.0.0-rc1"),
-    .package(url: "https://github.com/watson-developer-cloud/swift-sdk.git", .branch: "preview/3.0.0-rc1")
-],
-```
-
-Then rebuild your project to get the latest SDK
-
-#### Cocoapods
-
-We currently have not released a preview binary for Cocoapods. If you would like the preview release to be available via Cocoapods, please let us know in an issue!
-
 ## Migrating to version `3.0.0`
 
 Version `3.0.0` introduced breaking changes that affect all frameworks of the Swift SDK. Please refer to [the migration guide](https://github.com/watson-developer-cloud/swift-sdk/blob/master/docs/3.0.0-migration-guide.md) for information on how to get up and running with the new version.
@@ -122,18 +83,18 @@ If your project does not yet have a Podfile, use the `pod init` command in the r
 use_frameworks!
 
 target 'MyApp' do
-    pod 'IBMWatsonAssistantV1', '~> 3.0.0'
-    pod 'IBMWatsonAssistantV2', '~> 3.0.0'
-    pod 'IBMWatsonCompareComplyV1', '~> 3.0.0'
-    pod 'IBMWatsonDiscoveryV1', '~> 3.0.0'
-    pod 'IBMWatsonLanguageTranslatorV3', '~> 3.0.0'
-    pod 'IBMWatsonNaturalLanguageClassifierV1', '~> 3.0.0'
-    pod 'IBMWatsonNaturalLanguageUnderstandingV1', '~> 3.0.0'
-    pod 'IBMWatsonPersonalityInsightsV3', '~> 3.0.0'
-    pod 'IBMWatsonSpeechToTextV1', '~> 3.0.0'
-    pod 'IBMWatsonTextToSpeechV1', '~> 3.0.0'
-    pod 'IBMWatsonToneAnalyzerV3', '~> 3.0.0'
-    pod 'IBMWatsonVisualRecognitionV3', '~> 3.0.0'
+    pod 'IBMWatsonAssistantV1', '~> 3.1.0'
+    pod 'IBMWatsonAssistantV2', '~> 3.1.0'
+    pod 'IBMWatsonCompareComplyV1', '~> 3.1.0'
+    pod 'IBMWatsonDiscoveryV1', '~> 3.1.0'
+    pod 'IBMWatsonLanguageTranslatorV3', '~> 3.1.0'
+    pod 'IBMWatsonNaturalLanguageClassifierV1', '~> 3.1.0'
+    pod 'IBMWatsonNaturalLanguageUnderstandingV1', '~> 3.1.0'
+    pod 'IBMWatsonPersonalityInsightsV3', '~> 3.1.0'
+    pod 'IBMWatsonSpeechToTextV1', '~> 3.1.0'
+    pod 'IBMWatsonTextToSpeechV1', '~> 3.1.0'
+    pod 'IBMWatsonToneAnalyzerV3', '~> 3.1.0'
+    pod 'IBMWatsonVisualRecognitionV3', '~> 3.1.0'
 end
 ```
 
@@ -156,7 +117,7 @@ $ brew install carthage
 If your project does not have a Cartfile yet, use the `touch Cartfile` command in the root directory of your project. To install the IBM Watson Swift SDK using Carthage, add the following to your Cartfile.
 
 ```
-github "watson-developer-cloud/swift-sdk" ~> 3.0.0
+github "watson-developer-cloud/swift-sdk" ~> 3.1.0
 ```
 
 Then run the following command to build the dependencies and frameworks:
@@ -179,10 +140,9 @@ Add the following to your `Package.swift` file to identify the IBM Watson Swift 
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "3.0.0")
+    .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "3.1.0")
 ]
 ```
-
 
 ## Authentication
 

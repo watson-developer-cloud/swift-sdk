@@ -3,6 +3,7 @@
 # This script runs a linter on every pod in the Swift SDK.
 # This must be run to ensure that every pod is ready to be published to Cocoapods.
 # The flag --allow-warnings is required for pods that have build warnings (like deprecation notices).
+set -e
 
 pod lib lint IBMWatsonAssistantV1.podspec
 pod lib lint IBMWatsonAssistantV2.podspec

@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
 With the IBM Watson™ Assistant service, you can build a solution that understands
 natural-language input and uses machine learning to respond to customers in a way that simulates a conversation between humans.
                             DESC
-  s.homepage              = 'https://www.ibm.com/watson/ai-assistant/'
+  s.homepage              = 'https://www.ibm.com/cloud/watson-assistant'
   s.license               = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }
   s.authors               = { 'Jeff Arn' => 'jtarn@us.ibm.com',
                               'Mike Kistler'    => 'mkistler@us.ibm.com' }

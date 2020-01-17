@@ -1,7 +1,7 @@
 {
   "branch": "master",
   "verifyConditions": [],
-  "tagFormat": "${version}",
+  "tagFormat": "v${version}",
   "prepare": [
     "@semantic-release/git",
     {

@@ -70,7 +70,6 @@ class DiscoveryTests: XCTestCase {
             // Environments
             ("testListEnvironments", testListEnvironments),
             ("testListEnvironmentsByName", testListEnvironmentsByName),
-            ("testGetEnvironment", testGetEnvironment),
             ("testEnvironmentCRUD", testEnvironmentCRUD),
             ("testListFields", testListFields),
             // Configurations
@@ -356,27 +355,6 @@ class DiscoveryTests: XCTestCase {
 
             XCTAssertNotNil(result.environments)
             XCTAssertGreaterThan(result.environments!.count, 0)
-            expectation.fulfill()
-        }
-        waitForExpectations(timeout: timeout)
-    }
-
-    func testGetEnvironment() {
-        let expectation = self.expectation(description: "getEnvironment")
-        discovery.getEnvironment(environmentID: environment.environmentID!) {
-            response, error in
-
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let result = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
-
-            XCTAssertEqual(self.environment.environmentID, result.environmentID)
-            XCTAssertEqual(self.environment.name, result.name)
             expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
@@ -1037,6 +1015,8 @@ class DiscoveryTests: XCTestCase {
         waitForExpectations(timeout: timeout)
 
         let expectation2 = self.expectation(description: "getTokenizationDictionaryStatus")
+        // NOTE: this is needed as a workaround to errors returned from getStatus before a creation event has resolved in the backend
+        sleep(200)
         discovery.getTokenizationDictionaryStatus(environmentID: environmentID, collectionID: collectionID) {
             response, error in
 
@@ -1055,7 +1035,7 @@ class DiscoveryTests: XCTestCase {
             expectation2.fulfill()
         }
 
-        waitForExpectations(timeout: timeout)
+        waitForExpectations(timeout: 300.0)
 
         let expectation3 = self.expectation(description: "deleteTokenizationDictionary")
         discovery.deleteTokenizationDictionary(environmentID: environmentID, collectionID: collectionID) {

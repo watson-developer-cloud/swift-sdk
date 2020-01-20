@@ -1,17 +1,175 @@
 osx_image: xcode10.1
+before_install:
 addons:
 homebrew:
   packages:
   - carthage
 jobs:
   include:
+  - stage: Validate Pods
+    script: "./Scripts/pod-lint.sh"
+    os: osx
+    osx_image: xcode11
   - stage: Run tests
     script: "./Scripts/travis/test-Linux.sh"
     os: linux
     dist: xenial
   - os: osx
-    script: "./Scripts/travis/test-macOS.sh"
+    language: objective-c
     osx_image: xcode11
+    before_install:
+      - brew install carthage || true
+      - openssl aes-256-cbc -K $encrypted_451e23e8cd1f_key -iv $encrypted_451e23e8cd1f_iv -in Source/SupportingFiles/WatsonCredentials.swift.enc -out Source/SupportingFiles/WatsonCredentials.swift -d
+      - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json.enc -out Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json -d
+      - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-output.json.enc -out Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-output.json -d
+    install: carthage bootstrap --platform iOS --no-use-binaries --cache-builds
+    xcode_project: WatsonDeveloperCloud.xcodeproj
+    xcode_destination: platform=iOS Simulator,OS=13.0,name=iPhone 11
+    xcode_scheme: AssistantV1
+  - os: osx
+    language: objective-c
+    osx_image: xcode11
+    before_install:
+      - brew install carthage || true
+      - openssl aes-256-cbc -K $encrypted_451e23e8cd1f_key -iv $encrypted_451e23e8cd1f_iv -in Source/SupportingFiles/WatsonCredentials.swift.enc -out Source/SupportingFiles/WatsonCredentials.swift -d
+      - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json.enc -out Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json -d
+      - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-output.json.enc -out Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-output.json -d
+    install: carthage bootstrap --platform iOS --no-use-binaries --cache-builds
+    xcode_project: WatsonDeveloperCloud.xcodeproj
+    xcode_destination: platform=iOS Simulator,OS=13.0,name=iPhone 11
+    xcode_scheme: AssistantV2
+  - os: osx
+    language: objective-c
+    osx_image: xcode11
+    before_install:
+      - brew install carthage || true
+      - openssl aes-256-cbc -K $encrypted_451e23e8cd1f_key -iv $encrypted_451e23e8cd1f_iv -in Source/SupportingFiles/WatsonCredentials.swift.enc -out Source/SupportingFiles/WatsonCredentials.swift -d
+      - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json.enc -out Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json -d
+      - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-output.json.enc -out Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-output.json -d
+    install: carthage bootstrap --platform iOS --no-use-binaries --cache-builds
+    xcode_project: WatsonDeveloperCloud.xcodeproj
+    xcode_destination: platform=iOS Simulator,OS=13.0,name=iPhone 11
+    xcode_scheme: CompareComplyV1
+  - os: osx
+    language: objective-c
+    osx_image: xcode11
+    before_install:
+      - brew install carthage || true
+      - openssl aes-256-cbc -K $encrypted_451e23e8cd1f_key -iv $encrypted_451e23e8cd1f_iv -in Source/SupportingFiles/WatsonCredentials.swift.enc -out Source/SupportingFiles/WatsonCredentials.swift -d
+      - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json.enc -out Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json -d
+      - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-output.json.enc -out Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-output.json -d
+    install: carthage bootstrap --platform iOS --no-use-binaries --cache-builds
+    xcode_project: WatsonDeveloperCloud.xcodeproj
+    xcode_destination: platform=iOS Simulator,OS=13.0,name=iPhone 11
+    xcode_scheme: DiscoveryV1
+  - os: osx
+    language: objective-c
+    osx_image: xcode11
+    before_install:
+      - brew install carthage || true
+      - openssl aes-256-cbc -K $encrypted_451e23e8cd1f_key -iv $encrypted_451e23e8cd1f_iv -in Source/SupportingFiles/WatsonCredentials.swift.enc -out Source/SupportingFiles/WatsonCredentials.swift -d
+      - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json.enc -out Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json -d
+      - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-output.json.enc -out Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-output.json -d
+    install: carthage bootstrap --platform iOS --no-use-binaries --cache-builds
+    xcode_project: WatsonDeveloperCloud.xcodeproj
+    xcode_destination: platform=iOS Simulator,OS=13.0,name=iPhone 11
+    xcode_scheme: LanguageTranslatorV3
+  - os: osx
+    language: objective-c
+    osx_image: xcode11
+    before_install:
+      - brew install carthage || true
+      - openssl aes-256-cbc -K $encrypted_451e23e8cd1f_key -iv $encrypted_451e23e8cd1f_iv -in Source/SupportingFiles/WatsonCredentials.swift.enc -out Source/SupportingFiles/WatsonCredentials.swift -d
+      - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json.enc -out Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json -d
+      - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-output.json.enc -out Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-output.json -d
+    install: carthage bootstrap --platform iOS --no-use-binaries --cache-builds
+    xcode_project: WatsonDeveloperCloud.xcodeproj
+    xcode_destination: platform=iOS Simulator,OS=13.0,name=iPhone 11
+    xcode_scheme: NaturalLanguageClassifierV1
+  - os: osx
+    language: objective-c
+    osx_image: xcode11
+    before_install:
+      - brew install carthage || true
+      - openssl aes-256-cbc -K $encrypted_451e23e8cd1f_key -iv $encrypted_451e23e8cd1f_iv -in Source/SupportingFiles/WatsonCredentials.swift.enc -out Source/SupportingFiles/WatsonCredentials.swift -d
+      - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json.enc -out Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json -d
+      - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-output.json.enc -out Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-output.json -d
+    install: carthage bootstrap --platform iOS --no-use-binaries --cache-builds
+    xcode_project: WatsonDeveloperCloud.xcodeproj
+    xcode_destination: platform=iOS Simulator,OS=13.0,name=iPhone 11
+    xcode_scheme: NaturalLanguageUnderstandingV1
+  - os: osx
+    language: objective-c
+    osx_image: xcode11
+    before_install:
+      - brew install carthage || true
+      - openssl aes-256-cbc -K $encrypted_451e23e8cd1f_key -iv $encrypted_451e23e8cd1f_iv -in Source/SupportingFiles/WatsonCredentials.swift.enc -out Source/SupportingFiles/WatsonCredentials.swift -d
+      - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json.enc -out Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json -d
+      - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-output.json.enc -out Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-output.json -d
+    install: carthage bootstrap --platform iOS --no-use-binaries --cache-builds
+    xcode_project: WatsonDeveloperCloud.xcodeproj
+    xcode_destination: platform=iOS Simulator,OS=13.0,name=iPhone 11
+    xcode_scheme: PersonalityInsightsV3
+  - os: osx
+    language: objective-c
+    osx_image: xcode11
+    before_install:
+      - brew install carthage || true
+      - openssl aes-256-cbc -K $encrypted_451e23e8cd1f_key -iv $encrypted_451e23e8cd1f_iv -in Source/SupportingFiles/WatsonCredentials.swift.enc -out Source/SupportingFiles/WatsonCredentials.swift -d
+      - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json.enc -out Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json -d
+      - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-output.json.enc -out Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-output.json -d
+    install: carthage bootstrap --platform iOS --no-use-binaries --cache-builds
+    xcode_project: WatsonDeveloperCloud.xcodeproj
+    xcode_destination: platform=iOS Simulator,OS=13.0,name=iPhone 11
+    xcode_scheme: SpeechToTextV1
+  - os: osx
+    language: objective-c
+    osx_image: xcode11
+    before_install:
+      - brew install carthage || true
+      - openssl aes-256-cbc -K $encrypted_451e23e8cd1f_key -iv $encrypted_451e23e8cd1f_iv -in Source/SupportingFiles/WatsonCredentials.swift.enc -out Source/SupportingFiles/WatsonCredentials.swift -d
+      - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json.enc -out Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json -d
+      - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-output.json.enc -out Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-output.json -d
+    install: carthage bootstrap --platform iOS --no-use-binaries --cache-builds
+    xcode_project: WatsonDeveloperCloud.xcodeproj
+    xcode_destination: platform=iOS Simulator,OS=13.0,name=iPhone 11
+    xcode_scheme: TextToSpeechV1
+  - os: osx
+    language: objective-c
+    osx_image: xcode11
+    before_install:
+      - brew install carthage || true
+      - openssl aes-256-cbc -K $encrypted_451e23e8cd1f_key -iv $encrypted_451e23e8cd1f_iv -in Source/SupportingFiles/WatsonCredentials.swift.enc -out Source/SupportingFiles/WatsonCredentials.swift -d
+      - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json.enc -out Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json -d
+      - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-output.json.enc -out Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-output.json -d
+    install: carthage bootstrap --platform iOS --no-use-binaries --cache-builds
+    xcode_project: WatsonDeveloperCloud.xcodeproj
+    xcode_destination: platform=iOS Simulator,OS=13.0,name=iPhone 11
+    xcode_scheme: ToneAnalyzerV3
+  - os: osx
+    language: objective-c
+    osx_image: xcode11
+    before_install:
+      - brew install carthage || true
+      - openssl aes-256-cbc -K $encrypted_451e23e8cd1f_key -iv $encrypted_451e23e8cd1f_iv -in Source/SupportingFiles/WatsonCredentials.swift.enc -out Source/SupportingFiles/WatsonCredentials.swift -d
+      - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json.enc -out Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json -d
+      - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-output.json.enc -out Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-output.json -d
+    install: carthage bootstrap --platform iOS --no-use-binaries --cache-builds
+    xcode_project: WatsonDeveloperCloud.xcodeproj
+    xcode_destination: platform=iOS Simulator,OS=13.0,name=iPhone 11
+    xcode_scheme: VisualRecognitionV3
+  - os: osx
+    language: objective-c
+    osx_image: xcode11
+    before_install:
+      - brew install carthage || true
+      - openssl aes-256-cbc -K $encrypted_451e23e8cd1f_key -iv $encrypted_451e23e8cd1f_iv -in Source/SupportingFiles/WatsonCredentials.swift.enc -out Source/SupportingFiles/WatsonCredentials.swift -d
+      - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json.enc -out Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json -d
+      - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-output.json.enc -out Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-output.json -d
+    install: carthage bootstrap --platform iOS --no-use-binaries --cache-builds
+    xcode_project: WatsonDeveloperCloud.xcodeproj
+    xcode_destination: platform=iOS Simulator,OS=13.0,name=iPhone 11
+    xcode_scheme: VisualRecognitionV4
   - stage: release new version
     script: "./Scripts/travis/new-release.sh"
     os: osx

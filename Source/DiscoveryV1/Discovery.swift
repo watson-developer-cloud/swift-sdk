@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * (C) Copyright IBM Corp. 2016, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -1046,7 +1046,7 @@ public class Discovery {
             name: name,
             description: description,
             configurationID: configurationID)
-        guard let body = try? JSON.encoder.encodeIfPresent(updateCollectionRequest) else {
+        guard let body = try? JSON.encoder.encode(updateCollectionRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
@@ -2510,7 +2510,7 @@ public class Discovery {
             similarDocumentIDs: similarDocumentIDs,
             similarFields: similarFields,
             bias: bias)
-        guard let body = try? JSON.encoder.encodeIfPresent(federatedQueryRequest) else {
+        guard let body = try? JSON.encoder.encode(federatedQueryRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
@@ -3474,7 +3474,7 @@ public class Discovery {
      Create event.
 
      The **Events** API can be used to create log entries that are associated with specific queries. For example, you
-     can record which documents in the results set were "clicked" by a user and when that click occured.
+     can record which documents in the results set were "clicked" by a user and when that click occurred.
 
      - parameter type: The event type to be created.
      - parameter data: Query event data object.

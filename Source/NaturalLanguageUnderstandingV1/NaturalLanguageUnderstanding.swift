@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2019.
+ * (C) Copyright IBM Corp. 2017, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import IBMSwiftSDKCore
  analysis by default, so the results can ignore most advertisements and other unwanted content.
  You can create [custom
  models](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-customizing)
- with Watson Knowledge Studio to detect custom entities, relations, and categories in Natural Language Understanding.
+ with Watson Knowledge Studio to detect custom entities and relations in Natural Language Understanding.
  */
 public class NaturalLanguageUnderstanding {
 
@@ -143,6 +143,9 @@ public class NaturalLanguageUnderstanding {
      - Semantic roles
      - Sentiment
      - Syntax (Experimental).
+     If a language for the input text is not specified with the `language` parameter, the service [automatically detects
+     the
+     language](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-detectable-languages).
 
      - parameter features: Specific features to analyze the document for.
      - parameter text: The plain text to analyze. One of the `text`, `html`, or `url` parameters is required.

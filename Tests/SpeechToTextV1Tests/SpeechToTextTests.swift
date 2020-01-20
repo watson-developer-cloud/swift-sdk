@@ -325,7 +325,7 @@ class SpeechToTextTests: XCTestCase {
     func testRecognizeSessionless() {
         let expectation = self.expectation(description: "recognizeSessionless")
         let audio = try! Data(contentsOf: Bundle(for: type(of: self)).url(forResource: "SpeechSample", withExtension: "wav")!)
-        speechToText.recognize(audio: audio, contentType: "audio/wav", model: "en-US_BroadbandModel") {
+        speechToText.recognize(audio: audio, contentType: "audio/wav", model: "en-US_BroadbandModel", endOfPhraseSilenceTime: 5.0, splitTranscriptAtPhraseEnd: true) {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))

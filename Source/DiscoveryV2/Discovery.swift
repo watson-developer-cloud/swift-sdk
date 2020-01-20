@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2019, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import IBMSwiftSDKCore
 public class Discovery {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL: String?
+    public var serviceURL: String? = nil
 
     /// Service identifiers
     internal let serviceName = "Discovery"
@@ -57,7 +57,7 @@ public class Discovery {
      */
     public init(version: String) throws {
         self.version = version
-
+        
         let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
         self.authenticator = authenticator
 
@@ -608,13 +608,13 @@ public class Discovery {
       **Note:** Documents can be added with a specific **document_id** by using the
      **_/v2/projects/{project_id}/collections/{collection_id}/documents** method.
      **Note:** This operation only works on collections created to accept direct file uploads. It cannot be used to
-     modify a collection that conects to an external source such as Microsoft SharePoint.
+     modify a collection that connects to an external source such as Microsoft SharePoint.
 
      - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
        administrative tooling.
      - parameter collectionID: The ID of the collection.
      - parameter file: The content of the document to ingest. The maximum supported file size when adding a file to a
-       collection is 50 megabytes, the maximum supported file size when testing a confiruration is 1 megabyte. Files
+       collection is 50 megabytes, the maximum supported file size when testing a configuration is 1 megabyte. Files
        larger than the supported size are rejected.
      - parameter filename: The filename for file.
      - parameter fileContentType: The content type of file.
@@ -709,14 +709,14 @@ public class Discovery {
      **Note:** When uploading a new document with this method it automatically replaces any document stored with the
      same **document_id** if it exists.
      **Note:** This operation only works on collections created to accept direct file uploads. It cannot be used to
-     modify a collection that conects to an external source such as Microsoft SharePoint.
+     modify a collection that connects to an external source such as Microsoft SharePoint.
 
      - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
        administrative tooling.
      - parameter collectionID: The ID of the collection.
      - parameter documentID: The ID of the document.
      - parameter file: The content of the document to ingest. The maximum supported file size when adding a file to a
-       collection is 50 megabytes, the maximum supported file size when testing a confiruration is 1 megabyte. Files
+       collection is 50 megabytes, the maximum supported file size when testing a configuration is 1 megabyte. Files
        larger than the supported size are rejected.
      - parameter filename: The filename for file.
      - parameter fileContentType: The content type of file.
@@ -808,7 +808,7 @@ public class Discovery {
      If the given document ID is invalid, or if the document is not found, then the a success response is returned (HTTP
      status code `200`) with the status set to 'deleted'.
      **Note:** This operation only works on collections created to accept direct file uploads. It cannot be used to
-     modify a collection that conects to an external source such as Microsoft SharePoint.
+     modify a collection that connects to an external source such as Microsoft SharePoint.
 
      - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
        administrative tooling.
@@ -1005,7 +1005,7 @@ public class Discovery {
             naturalLanguageQuery: naturalLanguageQuery,
             examples: examples,
             filter: filter)
-        guard let body = try? JSON.encoder.encodeIfPresent(createTrainingQueryRequest) else {
+        guard let body = try? JSON.encoder.encode(createTrainingQueryRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }

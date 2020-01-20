@@ -1,12 +1,12 @@
 Pod::Spec.new do |s|
 
   s.name                  = 'IBMWatsonCompareComplyV1'
-  s.version               = '3.0.0'
+  s.version               = '3.1.0'
   s.summary               = 'Client framework for the IBM Watson Compare & Comply service'
   s.description           = <<-DESC
 IBM Watson™ Compare and Comply analyzes governing documents to provide details about critical aspects of the documents.
                             DESC
-  s.homepage              = 'https://www.ibm.com/blogs/watson/2018/02/watson-compare-comply/'
+  s.homepage              = 'https://www.ibm.com/cloud/compare-and-comply'
   s.license               = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }
   s.authors               = { 'Jeff Arn' => 'jtarn@us.ibm.com',
                               'Mike Kistler'    => 'mkistler@us.ibm.com' }

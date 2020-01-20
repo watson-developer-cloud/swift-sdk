@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2019, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -78,7 +78,7 @@ public struct DocumentStatus: Codable, Equatable {
     public var completed: Date?
 
     /**
-     The number of words in the source document, present only if status=available.
+     An estimate of the number of words in the source document. Returned only if `status` is `available`.
      */
     public var wordCount: Int?
 

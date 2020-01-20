@@ -1,5 +1,5 @@
-/**
- * (C) Copyright IBM Corp. 2017, 2019.
+  /**
+ * (C) Copyright IBM Corp. 2017, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,14 +49,12 @@ public struct CategoriesOptions: Codable, Equatable {
 
     /**
      Initialize a `CategoriesOptions` with member variables.
-
      - parameter explanation: Set this to `true` to return explanations for each categorization. **This is available
        only for English categories.**.
      - parameter limit: Maximum number of categories to return.
      - parameter model: Enter a [custom
        model](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-customizing)
        ID to override the standard categories model.
-
      - returns: An initialized `CategoriesOptions`.
      */
     public init(

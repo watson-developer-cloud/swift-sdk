@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * (C) Copyright IBM Corp. 2016, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -114,14 +114,14 @@ public class VisualRecognition {
                 errorMessage = message
             } else if case let .some(.string(message)) = json["message"] {
                 errorMessage = message
-            // ErrorAuthentication
+                // ErrorAuthentication
             } else if case let .some(.string(message)) = json["statusInfo"] {
                 errorMessage = message
-            // ErrorInfo
+                // ErrorInfo
             } else if case let .some(.object(errorObj)) = json["error"],    // 404
                 case let .some(.string(message)) = errorObj["description"] {
                 errorMessage = message
-            // ErrorHTML
+                // ErrorHTML
             } else if case let .some(.string(message)) = json["Error"] {   // 413
                 errorMessage = message
             } else {
@@ -272,7 +272,8 @@ public class VisualRecognition {
        of images that depict the visual subject of a class in the new classifier. You can include more than one positive
        example file in a call.
        Specify the parameter name by appending `_positive_examples` to the class name. For example,
-       `goldenretriever_positive_examples` creates the class **goldenretriever**.
+       `goldenretriever_positive_examples` creates the class **goldenretriever**. The string cannot contain the
+       following characters: ``$ * - { } \ | / ' " ` [ ]``.
        Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The
        maximum number of images is 10,000 images or 100 MB per .zip file.
        Encode special characters in the file name in UTF-8.
@@ -472,7 +473,8 @@ public class VisualRecognition {
        of images that depict the visual subject of a class in the classifier. The positive examples create or update
        classes in the classifier. You can include more than one positive example file in a call.
        Specify the parameter name by appending `_positive_examples` to the class name. For example,
-       `goldenretriever_positive_examples` creates the class `goldenretriever`.
+       `goldenretriever_positive_examples` creates the class `goldenretriever`. The string cannot contain the following
+       characters: ``$ * - { } \ | / ' " ` [ ]``.
        Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The
        maximum number of images is 10,000 images or 100 MB per .zip file.
        Encode special characters in the file name in UTF-8.

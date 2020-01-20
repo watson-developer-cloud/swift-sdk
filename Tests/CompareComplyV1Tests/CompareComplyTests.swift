@@ -123,7 +123,7 @@ class CompareComplyTests: XCTestCase {
         return data
     }
 
-    func waitForExpectations(timeout: TimeInterval = 20.0) {
+    func waitForExpectations(timeout: TimeInterval = 40.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }

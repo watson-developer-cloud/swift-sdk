@@ -83,7 +83,6 @@ class DiscoveryTests: XCTestCase {
             ("testCollectionsCRUD", testCollectionsCRUD),
             ("testListCollectionFields", testListCollectionFields),
             ("testExpansionsCRUD", testExpansionsCRUD),
-            ("testTokenizationDictionaryOperations", testTokenizationDictionaryOperations),
             // Stopwords List
             ("testStopwordListOperations", testStopwordListOperations),
             // Documents
@@ -956,98 +955,6 @@ class DiscoveryTests: XCTestCase {
             }
             expectation3.fulfill()
         }
-        waitForExpectations(timeout: timeout)
-    }
-
-    func testTokenizationDictionaryOperations() {
-        // Need to make sure the new collection gets deleted even after a test failure
-        continueAfterFailure = true
-
-        let environmentID = environment.environmentID!
-        let configuration = lookupOrCreateTestConfiguration(environmentID: environmentID)
-        let collection = createTestCollection(environmentID: environmentID, configurationID: configuration.configurationID!, language: "ja")
-        let collectionID = collection.collectionID!
-
-        // Need to remove the Japanese collection created specifically for this test
-        defer {
-            continueAfterFailure = false
-
-            let expectation4 = self.expectation(description: "Delete Japanese collection")
-            discovery.deleteCollection(environmentID: environmentID, collectionID: collectionID) {
-                response, error in
-
-                if let error = error {
-                    XCTFail(unexpectedErrorMessage(error))
-                    return
-                }
-                guard let result = response?.result else {
-                    XCTFail(missingResultMessage)
-                    return
-                }
-
-                XCTAssertEqual(result.status, "deleted")
-                expectation4.fulfill()
-            }
-
-            waitForExpectations(timeout: timeout)
-        }
-
-        let expectation = self.expectation(description: "createTokenizationDictionary")
-        let tokenizationRule = TokenDictRule(text: "すしネコ", tokens: ["すし", "ネコ"], partOfSpeech: "カスタム名詞", readings: ["寿司", "ネコ"])
-        discovery.createTokenizationDictionary(environmentID: environmentID, collectionID: collectionID, tokenizationRules: [tokenizationRule]) {
-            response, error in
-
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let result = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
-
-            XCTAssert(result.type == "tokenization_dictionary")
-            XCTAssert(result.status == "pending")
-
-            expectation.fulfill()
-        }
-
-        waitForExpectations(timeout: timeout)
-
-        let expectation2 = self.expectation(description: "getTokenizationDictionaryStatus")
-        // NOTE: this is needed as a workaround to errors returned from getStatus before a creation event has resolved in the backend
-        sleep(200)
-        discovery.getTokenizationDictionaryStatus(environmentID: environmentID, collectionID: collectionID) {
-            response, error in
-
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let result = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
-
-            XCTAssert(result.type == "tokenization_dictionary")
-            XCTAssert(result.status == "active" || result.status == "pending")
-
-            expectation2.fulfill()
-        }
-
-        waitForExpectations(timeout: 300.0)
-
-        let expectation3 = self.expectation(description: "deleteTokenizationDictionary")
-        discovery.deleteTokenizationDictionary(environmentID: environmentID, collectionID: collectionID) {
-            _, error in
-
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            expectation3.fulfill()
-        }
-
         waitForExpectations(timeout: timeout)
     }
 

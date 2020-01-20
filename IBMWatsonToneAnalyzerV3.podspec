@@ -14,7 +14,7 @@ The service can analyze tone at both the document and sentence levels.
 
   s.module_name           = 'ToneAnalyzer'
   s.ios.deployment_target = '10.0'
-  s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => s.version.to_s }
+  s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => "v#{s.version}" }
 
   s.source_files          = 'Source/ToneAnalyzerV3/**/*.swift',
                             'Source/SupportingFiles/InsecureConnection.swift',

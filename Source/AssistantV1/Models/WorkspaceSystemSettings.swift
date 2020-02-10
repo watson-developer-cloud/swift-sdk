@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,6 +39,11 @@ public struct WorkspaceSystemSettings: Codable, Equatable {
     public var humanAgentAssist: [String: JSON]?
 
     /**
+     Workspace settings related to the behavior of system entities.
+     */
+    public var systemEntities: WorkspaceSystemSettingsSystemEntities?
+
+    /**
      Workspace settings related to detection of irrelevant input.
      */
     public var offTopic: WorkspaceSystemSettingsOffTopic?
@@ -48,6 +53,7 @@ public struct WorkspaceSystemSettings: Codable, Equatable {
         case tooling = "tooling"
         case disambiguation = "disambiguation"
         case humanAgentAssist = "human_agent_assist"
+        case systemEntities = "system_entities"
         case offTopic = "off_topic"
     }
 
@@ -58,6 +64,7 @@ public struct WorkspaceSystemSettings: Codable, Equatable {
      - parameter disambiguation: Workspace settings related to the disambiguation feature.
        **Note:** This feature is available only to Plus and Premium users.
      - parameter humanAgentAssist: For internal use only.
+     - parameter systemEntities: Workspace settings related to the behavior of system entities.
      - parameter offTopic: Workspace settings related to detection of irrelevant input.
 
      - returns: An initialized `WorkspaceSystemSettings`.
@@ -66,12 +73,14 @@ public struct WorkspaceSystemSettings: Codable, Equatable {
         tooling: WorkspaceSystemSettingsTooling? = nil,
         disambiguation: WorkspaceSystemSettingsDisambiguation? = nil,
         humanAgentAssist: [String: JSON]? = nil,
+        systemEntities: WorkspaceSystemSettingsSystemEntities? = nil,
         offTopic: WorkspaceSystemSettingsOffTopic? = nil
     )
     {
         self.tooling = tooling
         self.disambiguation = disambiguation
         self.humanAgentAssist = humanAgentAssist
+        self.systemEntities = systemEntities
         self.offTopic = offTopic
     }
 

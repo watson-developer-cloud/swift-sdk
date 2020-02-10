@@ -374,6 +374,15 @@
 		7E70D5C92388491E00CC8C80 /* Webhook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70D5C62388491E00CC8C80 /* Webhook.swift */; };
 		7E70D5CC238C1DF000CC8C80 /* TrainingEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70D5CA238C1DF000CC8C80 /* TrainingEvents.swift */; };
 		7E70D5CD238C1DF000CC8C80 /* TrainingEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70D5CB238C1DF000CC8C80 /* TrainingEvent.swift */; };
+		7E8BE2FA23F1A6D800624184 /* RuntimeEntityRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8BE2F723F1A6D800624184 /* RuntimeEntityRole.swift */; };
+		7E8BE2FB23F1A6D800624184 /* RuntimeEntityInterpretation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8BE2F823F1A6D800624184 /* RuntimeEntityInterpretation.swift */; };
+		7E8BE2FC23F1A6D800624184 /* WorkspaceSystemSettingsSystemEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8BE2F923F1A6D800624184 /* WorkspaceSystemSettingsSystemEntities.swift */; };
+		7E8BE30023F1A6EA00624184 /* RuntimeEntityInterpretation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8BE2FD23F1A6EA00624184 /* RuntimeEntityInterpretation.swift */; };
+		7E8BE30123F1A6EA00624184 /* RuntimeEntityAlternative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8BE2FE23F1A6EA00624184 /* RuntimeEntityAlternative.swift */; };
+		7E8BE30223F1A6EA00624184 /* RuntimeEntityRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8BE2FF23F1A6EA00624184 /* RuntimeEntityRole.swift */; };
+		7E8BE30623F1A70600624184 /* ObjectMetadataList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8BE30323F1A70500624184 /* ObjectMetadataList.swift */; };
+		7E8BE30723F1A70600624184 /* UpdateObjectMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8BE30423F1A70500624184 /* UpdateObjectMetadata.swift */; };
+		7E8BE30823F1A70600624184 /* ObjectMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8BE30523F1A70600624184 /* ObjectMetadata.swift */; };
 		7E96EC3C233907660039388E /* GenericQueryAggregation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E96EC3B233907660039388E /* GenericQueryAggregation.swift */; };
 		7E96EC3F23391C0A0039388E /* WordTimestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E96EC3D23391C0A0039388E /* WordTimestamp.swift */; };
 		7E96EC4023391C0A0039388E /* WordConfidence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E96EC3E23391C0A0039388E /* WordConfidence.swift */; };
@@ -1328,6 +1337,15 @@
 		7E70D5C62388491E00CC8C80 /* Webhook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Webhook.swift; sourceTree = "<group>"; };
 		7E70D5CA238C1DF000CC8C80 /* TrainingEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingEvents.swift; sourceTree = "<group>"; };
 		7E70D5CB238C1DF000CC8C80 /* TrainingEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingEvent.swift; sourceTree = "<group>"; };
+		7E8BE2F723F1A6D800624184 /* RuntimeEntityRole.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuntimeEntityRole.swift; sourceTree = "<group>"; };
+		7E8BE2F823F1A6D800624184 /* RuntimeEntityInterpretation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuntimeEntityInterpretation.swift; sourceTree = "<group>"; };
+		7E8BE2F923F1A6D800624184 /* WorkspaceSystemSettingsSystemEntities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceSystemSettingsSystemEntities.swift; sourceTree = "<group>"; };
+		7E8BE2FD23F1A6EA00624184 /* RuntimeEntityInterpretation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuntimeEntityInterpretation.swift; sourceTree = "<group>"; };
+		7E8BE2FE23F1A6EA00624184 /* RuntimeEntityAlternative.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuntimeEntityAlternative.swift; sourceTree = "<group>"; };
+		7E8BE2FF23F1A6EA00624184 /* RuntimeEntityRole.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuntimeEntityRole.swift; sourceTree = "<group>"; };
+		7E8BE30323F1A70500624184 /* ObjectMetadataList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectMetadataList.swift; sourceTree = "<group>"; };
+		7E8BE30423F1A70500624184 /* UpdateObjectMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateObjectMetadata.swift; sourceTree = "<group>"; };
+		7E8BE30523F1A70600624184 /* ObjectMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectMetadata.swift; sourceTree = "<group>"; };
 		7E96EC3B233907660039388E /* GenericQueryAggregation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericQueryAggregation.swift; sourceTree = "<group>"; };
 		7E96EC3D23391C0A0039388E /* WordTimestamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordTimestamp.swift; sourceTree = "<group>"; };
 		7E96EC3E23391C0A0039388E /* WordConfidence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordConfidence.swift; sourceTree = "<group>"; };
@@ -2154,6 +2172,8 @@
 				6800FC272056D6830078788A /* OutputData.swift */,
 				6800FC422056D6830078788A /* Pagination.swift */,
 				6800FC452056D6830078788A /* RuntimeEntity.swift */,
+				7E8BE2F823F1A6D800624184 /* RuntimeEntityInterpretation.swift */,
+				7E8BE2F723F1A6D800624184 /* RuntimeEntityRole.swift */,
 				6800FC342056D6830078788A /* RuntimeIntent.swift */,
 				7EC735D72319CC4100A73810 /* RuntimeResponseGeneric.swift */,
 				6800FC532056D6830078788A /* Synonym.swift */,
@@ -2176,6 +2196,7 @@
 				CADA968E2110ABB500B5BD84 /* WorkspaceSystemSettings.swift */,
 				CADA96802110ABB300B5BD84 /* WorkspaceSystemSettingsDisambiguation.swift */,
 				7E70D5C52388491E00CC8C80 /* WorkspaceSystemSettingsOffTopic.swift */,
+				7E8BE2F923F1A6D800624184 /* WorkspaceSystemSettingsSystemEntities.swift */,
 				CADA96812110ABB300B5BD84 /* WorkspaceSystemSettingsTooling.swift */,
 			);
 			path = Models;
@@ -2741,12 +2762,15 @@
 				7ED7523D233BE99C0050A2EB /* ImageSummaryList.swift */,
 				7ED7522C233BE99B0050A2EB /* Location.swift */,
 				7ED7522F233BE99B0050A2EB /* ObjectDetail.swift */,
+				7E8BE30523F1A70600624184 /* ObjectMetadata.swift */,
+				7E8BE30323F1A70500624184 /* ObjectMetadataList.swift */,
 				7ED7522B233BE99B0050A2EB /* ObjectTrainingStatus.swift */,
 				7ED7522A233BE99B0050A2EB /* TrainingDataObject.swift */,
 				7ED75236233BE99C0050A2EB /* TrainingDataObjects.swift */,
 				7E70D5CB238C1DF000CC8C80 /* TrainingEvent.swift */,
 				7E70D5CA238C1DF000CC8C80 /* TrainingEvents.swift */,
 				7EF035CE23462D38000E727E /* TrainingStatus.swift */,
+				7E8BE30423F1A70500624184 /* UpdateObjectMetadata.swift */,
 				7EF035CD23462D38000E727E /* Warning.swift */,
 			);
 			path = Models;
@@ -2943,6 +2967,9 @@
 				922077872152FC5900C8C7E4 /* MessageRequest.swift */,
 				922077982152FC5900C8C7E4 /* MessageResponse.swift */,
 				922077922152FC5900C8C7E4 /* RuntimeEntity.swift */,
+				7E8BE2FE23F1A6EA00624184 /* RuntimeEntityAlternative.swift */,
+				7E8BE2FD23F1A6EA00624184 /* RuntimeEntityInterpretation.swift */,
+				7E8BE2FF23F1A6EA00624184 /* RuntimeEntityRole.swift */,
 				9220778E2152FC5900C8C7E4 /* RuntimeIntent.swift */,
 				7EC735DB2319DDB400A73810 /* RuntimeResponseGeneric.swift */,
 				5F2C5BE322E9FA0900A7628D /* SearchResult.swift */,
@@ -4893,14 +4920,17 @@
 				CA8E9265223406C4001BFABF /* Log.swift in Sources */,
 				6800FCBF2056D8D50078788A /* MessageRequest.swift in Sources */,
 				6800FCCA2056D8D50078788A /* UpdateEntity.swift in Sources */,
+				7E8BE2FB23F1A6D800624184 /* RuntimeEntityInterpretation.swift in Sources */,
 				6800FCBD2056D8D50078788A /* LogPagination.swift in Sources */,
 				6800FCAA2056D8D50078788A /* CreateValue.swift in Sources */,
 				6800FCAB2056D8D50078788A /* CreateWorkspace.swift in Sources */,
 				6800FCCD2056D8D50078788A /* UpdateSynonym.swift in Sources */,
 				6800FCD32056D8D50078788A /* Workspace.swift in Sources */,
 				CADA969B2110ABB500B5BD84 /* EntityMentionCollection.swift in Sources */,
+				7E8BE2FA23F1A6D800624184 /* RuntimeEntityRole.swift in Sources */,
 				6800FCC82056D8D50078788A /* UpdateCounterexample.swift in Sources */,
 				6800FCC52056D8D50078788A /* Synonym.swift in Sources */,
+				7E8BE2FC23F1A6D800624184 /* WorkspaceSystemSettingsSystemEntities.swift in Sources */,
 				6800FCC42056D8D50078788A /* RuntimeIntent.swift in Sources */,
 				6800FCCF2056D8D50078788A /* UpdateWorkspace.swift in Sources */,
 				6800FCA02056D8D50078788A /* CaptureGroup.swift in Sources */,
@@ -5286,7 +5316,9 @@
 				7ED7524B233BE99C0050A2EB /* DetectedObjects.swift in Sources */,
 				7ED751EB233BE94E0050A2EB /* Shared.swift in Sources */,
 				7ED75259233BE99C0050A2EB /* CollectionObjects.swift in Sources */,
+				7E8BE30823F1A70600624184 /* ObjectMetadata.swift in Sources */,
 				7ED75254233BE99C0050A2EB /* BaseTrainingDataObjects.swift in Sources */,
+				7E8BE30723F1A70600624184 /* UpdateObjectMetadata.swift in Sources */,
 				7ED75250233BE99C0050A2EB /* Collection.swift in Sources */,
 				7ED75257233BE99C0050A2EB /* Image.swift in Sources */,
 				7ED7524F233BE99C0050A2EB /* TrainingDataObjects.swift in Sources */,
@@ -5300,6 +5332,7 @@
 				7ED75247233BE99C0050A2EB /* ImageSource.swift in Sources */,
 				7ED75249233BE99C0050A2EB /* ImageDetails.swift in Sources */,
 				7ED75244233BE99C0050A2EB /* ObjectTrainingStatus.swift in Sources */,
+				7E8BE30623F1A70600624184 /* ObjectMetadataList.swift in Sources */,
 				7ED7525E233BE9EE0050A2EB /* InsecureConnection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5327,12 +5360,14 @@
 				922078552152FCE400C8C7E4 /* MessageInputOptions.swift in Sources */,
 				922078532152FCE400C8C7E4 /* DialogLogMessage.swift in Sources */,
 				922078412152FCE000C8C7E4 /* Assistant.swift in Sources */,
+				7E8BE30223F1A6EA00624184 /* RuntimeEntityRole.swift in Sources */,
 				922078572152FCE400C8C7E4 /* MessageResponse.swift in Sources */,
 				7EC735DC2319DDB400A73810 /* RuntimeResponseGeneric.swift in Sources */,
 				922078442152FCE400C8C7E4 /* DialogSuggestion.swift in Sources */,
 				922078512152FCE400C8C7E4 /* RuntimeEntity.swift in Sources */,
 				922078492152FCE400C8C7E4 /* DialogNodeOutputOptionsElement.swift in Sources */,
 				5F2C5BE722E9FA0900A7628D /* SearchResultHighlight.swift in Sources */,
+				7E8BE30023F1A6EA00624184 /* RuntimeEntityInterpretation.swift in Sources */,
 				922078522152FCE400C8C7E4 /* MessageContextSkills.swift in Sources */,
 				922078432152FCE400C8C7E4 /* MessageContext.swift in Sources */,
 				922078562152FCE400C8C7E4 /* DialogNodesVisited.swift in Sources */,
@@ -5342,6 +5377,7 @@
 				922078502152FCE400C8C7E4 /* MessageInput.swift in Sources */,
 				922078472152FCE400C8C7E4 /* CaptureGroup.swift in Sources */,
 				5F2C5BE622E9FA0900A7628D /* SearchResult.swift in Sources */,
+				7E8BE30123F1A6EA00624184 /* RuntimeEntityAlternative.swift in Sources */,
 				9220784A2152FCE400C8C7E4 /* MessageOutputDebug.swift in Sources */,
 				922078482152FCE400C8C7E4 /* MessageOutput.swift in Sources */,
 				9220784D2152FCE400C8C7E4 /* RuntimeIntent.swift in Sources */,

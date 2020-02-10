@@ -17,19 +17,32 @@
 import Foundation
 
 /**
- An abstract aggregation type produced by Discovery to analyze the input provided.
+ Workspace settings related to the behavior of system entities.
  */
-public struct QueryAggregation: Codable, Equatable {
+public struct WorkspaceSystemSettingsSystemEntities: Codable, Equatable {
 
     /**
-     The type of aggregation command used. Options include: term, histogram, timeslice, nested, filter, min, max, sum,
-     average, unique_count, and top_hits.
+     Whether the new system entities are enabled for the workspace.
      */
-    public var type: String
+    public var enabled: Bool?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case type = "type"
+        case enabled = "enabled"
+    }
+
+    /**
+     Initialize a `WorkspaceSystemSettingsSystemEntities` with member variables.
+
+     - parameter enabled: Whether the new system entities are enabled for the workspace.
+
+     - returns: An initialized `WorkspaceSystemSettingsSystemEntities`.
+     */
+    public init(
+        enabled: Bool? = nil
+    )
+    {
+        self.enabled = enabled
     }
 
 }

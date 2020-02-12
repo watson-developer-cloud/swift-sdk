@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -103,7 +103,7 @@ internal struct UpdateDialogNode: Codable, Equatable {
 
     /**
      The output of the dialog node. For more information about how to specify dialog node output, see the
-     [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
+     [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
      */
     public var output: DialogNodeOutput?
 
@@ -228,7 +228,7 @@ internal struct UpdateDialogNode: Codable, Equatable {
        node has no previous sibling.
      - parameter output: The output of the dialog node. For more information about how to specify dialog node output,
        see the
-       [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
+       [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
      - parameter context: The context for the dialog node.
      - parameter metadata: The metadata for the dialog node.
      - parameter nextStep: The next step to execute following this dialog node.

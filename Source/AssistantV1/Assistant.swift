@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,10 +54,11 @@ public class Assistant {
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
      */
-    public init(version: String) throws {
+    public init?(version: String) {
         self.version = version
-
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
+            return nil
+        }
         self.authenticator = authenticator
 
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
@@ -132,7 +133,7 @@ public class Assistant {
      Send user input to a workspace and receive a response.
      **Important:** This method has been superseded by the new v2 runtime API. The v2 API offers significant advantages,
      including ease of deployment, automatic state management, versioning, and search capabilities. For more
-     information, see the [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-api-overview).
+     information, see the [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-api-overview).
      There is no rate limit for this operation.
 
      - parameter workspaceID: Unique identifier of the workspace.
@@ -320,6 +321,8 @@ public class Assistant {
      - parameter counterexamples: An array of objects defining input examples that have been marked as irrelevant
        input.
      - parameter webhooks:
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
+       response.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -335,6 +338,7 @@ public class Assistant {
         dialogNodes: [DialogNode]? = nil,
         counterexamples: [Counterexample]? = nil,
         webhooks: [Webhook]? = nil,
+        includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Workspace>?, WatsonError?) -> Void)
     {
@@ -369,6 +373,10 @@ public class Assistant {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
 
@@ -496,12 +504,14 @@ public class Assistant {
      - parameter counterexamples: An array of objects defining input examples that have been marked as irrelevant
        input.
      - parameter webhooks:
-     - parameter append: Whether the new data is to be appended to the existing data in the workspace. If
+     - parameter append: Whether the new data is to be appended to the existing data in the object. If
        **append**=`false`, elements included in the new data completely replace the corresponding existing elements,
-       including all subelements. For example, if the new data includes **entities** and **append**=`false`, all
-       existing entities in the workspace are discarded and replaced with the new entities.
+       including all subelements. For example, if the new data for a workspace includes **entities** and
+       **append**=`false`, all existing entities in the workspace are discarded and replaced with the new entities.
        If **append**=`true`, existing elements are preserved, and the new elements are added. If any elements in the new
        data collide with existing elements, the update request fails.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
+       response.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -519,6 +529,7 @@ public class Assistant {
         counterexamples: [Counterexample]? = nil,
         webhooks: [Webhook]? = nil,
         append: Bool? = nil,
+        includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Workspace>?, WatsonError?) -> Void)
     {
@@ -555,6 +566,10 @@ public class Assistant {
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let append = append {
             let queryParameter = URLQueryItem(name: "append", value: "\(append)")
+            queryParameters.append(queryParameter)
+        }
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
             queryParameters.append(queryParameter)
         }
 
@@ -746,6 +761,8 @@ public class Assistant {
      - parameter description: The description of the intent. This string cannot contain carriage return, newline, or
        tab characters.
      - parameter examples: An array of user input examples for the intent.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
+       response.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -754,6 +771,7 @@ public class Assistant {
         intent: String,
         description: String? = nil,
         examples: [Example]? = nil,
+        includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Intent>?, WatsonError?) -> Void)
     {
@@ -780,6 +798,10 @@ public class Assistant {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents"
@@ -899,6 +921,14 @@ public class Assistant {
      - parameter newDescription: The description of the intent. This string cannot contain carriage return, newline,
        or tab characters.
      - parameter newExamples: An array of user input examples for the intent.
+     - parameter append: Whether the new data is to be appended to the existing data in the object. If
+       **append**=`false`, elements included in the new data completely replace the corresponding existing elements,
+       including all subelements. For example, if the new data for the intent includes **examples** and
+       **append**=`false`, all existing examples for the intent are discarded and replaced with the new examples.
+       If **append**=`true`, existing elements are preserved, and the new elements are added. If any elements in the new
+       data collide with existing elements, the update request fails.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
+       response.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -908,6 +938,8 @@ public class Assistant {
         newIntent: String? = nil,
         newDescription: String? = nil,
         newExamples: [Example]? = nil,
+        append: Bool? = nil,
+        includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Intent>?, WatsonError?) -> Void)
     {
@@ -934,6 +966,14 @@ public class Assistant {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let append = append {
+            let queryParameter = URLQueryItem(name: "append", value: "\(append)")
+            queryParameters.append(queryParameter)
+        }
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)"
@@ -1117,6 +1157,8 @@ public class Assistant {
        - It cannot contain carriage return, newline, or tab characters.
        - It cannot consist of only whitespace characters.
      - parameter mentions: An array of contextual entity mentions.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
+       response.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -1125,6 +1167,7 @@ public class Assistant {
         intent: String,
         text: String,
         mentions: [Mention]? = nil,
+        includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Example>?, WatsonError?) -> Void)
     {
@@ -1150,6 +1193,10 @@ public class Assistant {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples"
@@ -1260,6 +1307,8 @@ public class Assistant {
        - It cannot contain carriage return, newline, or tab characters.
        - It cannot consist of only whitespace characters.
      - parameter newMentions: An array of contextual entity mentions.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
+       response.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -1269,6 +1318,7 @@ public class Assistant {
         text: String,
         newText: String? = nil,
         newMentions: [Mention]? = nil,
+        includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Example>?, WatsonError?) -> Void)
     {
@@ -1294,6 +1344,10 @@ public class Assistant {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples/\(text)"
@@ -1476,12 +1530,15 @@ public class Assistant {
        restrictions:
        - It cannot contain carriage return, newline, or tab characters.
        - It cannot consist of only whitespace characters.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
+       response.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func createCounterexample(
         workspaceID: String,
         text: String,
+        includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Counterexample>?, WatsonError?) -> Void)
     {
@@ -1506,6 +1563,10 @@ public class Assistant {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/counterexamples"
@@ -1613,6 +1674,8 @@ public class Assistant {
        following restrictions:
        - It cannot contain carriage return, newline, or tab characters.
        - It cannot consist of only whitespace characters.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
+       response.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -1620,6 +1683,7 @@ public class Assistant {
         workspaceID: String,
         text: String,
         newText: String? = nil,
+        includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Counterexample>?, WatsonError?) -> Void)
     {
@@ -1644,6 +1708,10 @@ public class Assistant {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/counterexamples/\(text)"
@@ -1838,6 +1906,8 @@ public class Assistant {
      - parameter metadata: Any metadata related to the entity.
      - parameter fuzzyMatch: Whether to use fuzzy matching for the entity.
      - parameter values: An array of objects describing the entity values.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
+       response.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -1848,6 +1918,7 @@ public class Assistant {
         metadata: [String: JSON]? = nil,
         fuzzyMatch: Bool? = nil,
         values: [CreateValue]? = nil,
+        includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Entity>?, WatsonError?) -> Void)
     {
@@ -1876,6 +1947,10 @@ public class Assistant {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities"
@@ -1997,6 +2072,14 @@ public class Assistant {
      - parameter newMetadata: Any metadata related to the entity.
      - parameter newFuzzyMatch: Whether to use fuzzy matching for the entity.
      - parameter newValues: An array of objects describing the entity values.
+     - parameter append: Whether the new data is to be appended to the existing data in the entity. If
+       **append**=`false`, elements included in the new data completely replace the corresponding existing elements,
+       including all subelements. For example, if the new data for the entity includes **values** and
+       **append**=`false`, all existing values for the entity are discarded and replaced with the new values.
+       If **append**=`true`, existing elements are preserved, and the new elements are added. If any elements in the new
+       data collide with existing elements, the update request fails.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
+       response.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -2008,6 +2091,8 @@ public class Assistant {
         newMetadata: [String: JSON]? = nil,
         newFuzzyMatch: Bool? = nil,
         newValues: [CreateValue]? = nil,
+        append: Bool? = nil,
+        includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Entity>?, WatsonError?) -> Void)
     {
@@ -2036,6 +2121,14 @@ public class Assistant {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let append = append {
+            let queryParameter = URLQueryItem(name: "append", value: "\(append)")
+            queryParameters.append(queryParameter)
+        }
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)"
@@ -2308,7 +2401,9 @@ public class Assistant {
      - parameter patterns: An array of patterns for the entity value. A value can specify either synonyms or patterns
        (depending on the value type), but not both. A pattern is a regular expression; for more information about how to
        specify a pattern, see the
-       [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-entities#entities-create-dictionary-based).
+       [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-entities#entities-create-dictionary-based).
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
+       response.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -2320,6 +2415,7 @@ public class Assistant {
         type: String? = nil,
         synonyms: [String]? = nil,
         patterns: [String]? = nil,
+        includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Value>?, WatsonError?) -> Void)
     {
@@ -2348,6 +2444,10 @@ public class Assistant {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values"
@@ -2475,7 +2575,15 @@ public class Assistant {
      - parameter newPatterns: An array of patterns for the entity value. A value can specify either synonyms or
        patterns (depending on the value type), but not both. A pattern is a regular expression; for more information
        about how to specify a pattern, see the
-       [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-entities#entities-create-dictionary-based).
+       [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-entities#entities-create-dictionary-based).
+     - parameter append: Whether the new data is to be appended to the existing data in the entity value. If
+       **append**=`false`, elements included in the new data completely replace the corresponding existing elements,
+       including all subelements. For example, if the new data for the entity value includes **synonyms** and
+       **append**=`false`, all existing synonyms for the entity value are discarded and replaced with the new synonyms.
+       If **append**=`true`, existing elements are preserved, and the new elements are added. If any elements in the new
+       data collide with existing elements, the update request fails.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
+       response.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -2488,6 +2596,8 @@ public class Assistant {
         newType: String? = nil,
         newSynonyms: [String]? = nil,
         newPatterns: [String]? = nil,
+        append: Bool? = nil,
+        includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Value>?, WatsonError?) -> Void)
     {
@@ -2516,6 +2626,14 @@ public class Assistant {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let append = append {
+            let queryParameter = URLQueryItem(name: "append", value: "\(append)")
+            queryParameters.append(queryParameter)
+        }
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)"
@@ -2703,6 +2821,8 @@ public class Assistant {
      - parameter synonym: The text of the synonym. This string must conform to the following restrictions:
        - It cannot contain carriage return, newline, or tab characters.
        - It cannot consist of only whitespace characters.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
+       response.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -2711,6 +2831,7 @@ public class Assistant {
         entity: String,
         value: String,
         synonym: String,
+        includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Synonym>?, WatsonError?) -> Void)
     {
@@ -2735,6 +2856,10 @@ public class Assistant {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms"
@@ -2847,6 +2972,8 @@ public class Assistant {
      - parameter newSynonym: The text of the synonym. This string must conform to the following restrictions:
        - It cannot contain carriage return, newline, or tab characters.
        - It cannot consist of only whitespace characters.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
+       response.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -2856,6 +2983,7 @@ public class Assistant {
         value: String,
         synonym: String,
         newSynonym: String? = nil,
+        includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Synonym>?, WatsonError?) -> Void)
     {
@@ -2880,6 +3008,10 @@ public class Assistant {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms/\(synonym)"
@@ -3071,7 +3203,7 @@ public class Assistant {
        node has no previous sibling.
      - parameter output: The output of the dialog node. For more information about how to specify dialog node output,
        see the
-       [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
+       [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
      - parameter context: The context for the dialog node.
      - parameter metadata: The metadata for the dialog node.
      - parameter nextStep: The next step to execute following this dialog node.
@@ -3087,6 +3219,8 @@ public class Assistant {
      - parameter digressOutSlots: Whether the user can digress to top-level nodes while filling out slots.
      - parameter userLabel: A label that can be displayed externally to describe the purpose of the node to users.
      - parameter disambiguationOptOut: Whether the dialog node should be excluded from disambiguation suggestions.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
+       response.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -3111,6 +3245,7 @@ public class Assistant {
         digressOutSlots: String? = nil,
         userLabel: String? = nil,
         disambiguationOptOut: Bool? = nil,
+        includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<DialogNode>?, WatsonError?) -> Void)
     {
@@ -3153,6 +3288,10 @@ public class Assistant {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/dialog_nodes"
@@ -3268,7 +3407,7 @@ public class Assistant {
        dialog node has no previous sibling.
      - parameter newOutput: The output of the dialog node. For more information about how to specify dialog node
        output, see the
-       [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
+       [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
      - parameter newContext: The context for the dialog node.
      - parameter newMetadata: The metadata for the dialog node.
      - parameter newNextStep: The next step to execute following this dialog node.
@@ -3284,6 +3423,8 @@ public class Assistant {
      - parameter newDigressOutSlots: Whether the user can digress to top-level nodes while filling out slots.
      - parameter newUserLabel: A label that can be displayed externally to describe the purpose of the node to users.
      - parameter newDisambiguationOptOut: Whether the dialog node should be excluded from disambiguation suggestions.
+     - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
+       response.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -3309,6 +3450,7 @@ public class Assistant {
         newDigressOutSlots: String? = nil,
         newUserLabel: String? = nil,
         newDisambiguationOptOut: Bool? = nil,
+        includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<DialogNode>?, WatsonError?) -> Void)
     {
@@ -3351,6 +3493,10 @@ public class Assistant {
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let includeAudit = includeAudit {
+            let queryParameter = URLQueryItem(name: "include_audit", value: "\(includeAudit)")
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/dialog_nodes/\(dialogNode)"
@@ -3449,7 +3595,7 @@ public class Assistant {
        order, prefix the parameter value with a minus sign (`-`).
      - parameter filter: A cacheable parameter that limits the results to those matching the specified filter. For
        more information, see the
-       [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-filter-reference#filter-reference).
+       [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-filter-reference#filter-reference).
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter cursor: A token identifying the page of results to retrieve.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -3531,7 +3677,7 @@ public class Assistant {
        must specify a filter query that includes a value for `language`, as well as a value for
        `request.context.system.assistant_id`, `workspace_id`, or `request.context.metadata.deployment`. For more
        information, see the
-       [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-filter-reference#filter-reference).
+       [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-filter-reference#filter-reference).
      - parameter sort: How to sort the returned log events. You can sort by **request_timestamp**. To reverse the sort
        order, prefix the parameter value with a minus sign (`-`).
      - parameter pageLimit: The number of records to return in each page of results.
@@ -3602,7 +3748,7 @@ public class Assistant {
      the customer ID.
      You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request that passes data.
      For more information about personal data and customer IDs, see [Information
-     security](https://cloud.ibm.com/docs/services/assistant?topic=assistant-information-security#information-security).
+     security](https://cloud.ibm.com/docs/assistant?topic=assistant-information-security#information-security).
      This operation is limited to 4 requests per minute. For more information, see **Rate limiting**.
 
      - parameter customerID: The customer ID for which all data is to be deleted.

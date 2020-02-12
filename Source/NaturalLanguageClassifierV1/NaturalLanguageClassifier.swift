@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,8 +51,10 @@ public class NaturalLanguageClassifier {
      In that case, try another initializer that directly passes in the credentials.
 
      */
-    public init() throws {
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
+    public init?() {
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
+            return nil
+        }
         self.authenticator = authenticator
 
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
@@ -255,7 +257,7 @@ public class NaturalLanguageClassifier {
        (`ja`), Korean (`ko`), Brazilian Portuguese (`pt`), and Spanish (`es`).
      - parameter trainingData: Training data in CSV format. Each text value must have at least one class. The data can
        include up to 3,000 classes and 20,000 records. For details, see [Data
-       preparation](https://cloud.ibm.com/docs/services/natural-language-classifier?topic=natural-language-classifier-using-your-data).
+       preparation](https://cloud.ibm.com/docs/natural-language-classifier?topic=natural-language-classifier-using-your-data).
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */

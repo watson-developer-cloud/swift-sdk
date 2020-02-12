@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,10 +58,11 @@ public class ToneAnalyzer {
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
      */
-    public init(version: String) throws {
+    public init?(version: String) {
         self.version = version
-
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
+            return nil
+        }
         self.authenticator = authenticator
 
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
@@ -145,13 +146,18 @@ public class ToneAnalyzer {
      character encoding of the input text; for example: `Content-Type: text/plain;charset=utf-8`. For `text/html`, the
      service removes HTML tags and analyzes only the textual content.
      **See also:** [Using the general-purpose
-     endpoint](https://cloud.ibm.com/docs/services/tone-analyzer?topic=tone-analyzer-utgpe#utgpe).
+     endpoint](https://cloud.ibm.com/docs/tone-analyzer?topic=tone-analyzer-utgpe#utgpe).
 
      - parameter toneContent: JSON, plain text, or HTML input that contains the content to be analyzed. For JSON
        input, provide an object of type `ToneInput`.
      - parameter sentences: Indicates whether the service is to return an analysis of each individual sentence in
        addition to its analysis of the full document. If `true` (the default), the service returns results for each
        sentence.
+     - parameter tones: **`2017-09-21`:** Deprecated. The service continues to accept the parameter for
+       backward-compatibility, but the parameter no longer affects the response.
+       **`2016-05-19`:** A comma-separated list of tones for which the service is to return its analysis of the input;
+       the indicated tones apply both to the full document and to individual sentences of the document. You can specify
+       one or more of the valid values. Omit the parameter to request results for all three tones.
      - parameter contentLanguage: The language of the input text for the request: English or French. Regional variants
        are treated as their parent language; for example, `en-US` is interpreted as `en`. The input content must match
        the specified language. Do not submit content that contains both languages. You can use different languages for
@@ -167,6 +173,7 @@ public class ToneAnalyzer {
     public func tone(
         toneContent: ToneContent,
         sentences: Bool? = nil,
+        tones: [String]? = nil,
         contentLanguage: String? = nil,
         acceptLanguage: String? = nil,
         headers: [String: String]? = nil,
@@ -199,6 +206,10 @@ public class ToneAnalyzer {
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let sentences = sentences {
             let queryParameter = URLQueryItem(name: "sentences", value: "\(sentences)")
+            queryParameters.append(queryParameter)
+        }
+        if let tones = tones {
+            let queryParameter = URLQueryItem(name: "tones", value: tones.joined(separator: ","))
             queryParameters.append(queryParameter)
         }
 
@@ -237,7 +248,7 @@ public class ToneAnalyzer {
      500 characters. Per the JSON specification, the default character encoding for JSON content is effectively always
      UTF-8.
      **See also:** [Using the customer-engagement
-     endpoint](https://cloud.ibm.com/docs/services/tone-analyzer?topic=tone-analyzer-utco#utco).
+     endpoint](https://cloud.ibm.com/docs/tone-analyzer?topic=tone-analyzer-utco#utco).
 
      - parameter utterances: An array of `Utterance` objects that provides the input content that the service is to
        analyze.

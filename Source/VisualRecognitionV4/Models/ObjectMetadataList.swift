@@ -17,7 +17,24 @@
 import Foundation
 
 /**
- Returns information from the document, including author name, title, RSS/ATOM feeds, prominent page image, and
- publication date. Supports URL and HTML input types only.
+ List of objects.
  */
-public typealias MetadataOptions = JSON
+public struct ObjectMetadataList: Codable, Equatable {
+
+    /**
+     Number of unique named objects in the collection.
+     */
+    public var objectCount: Int
+
+    /**
+     The objects in the collection.
+     */
+    public var objects: [ObjectMetadata]?
+
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case objectCount = "object_count"
+        case objects = "objects"
+    }
+
+}

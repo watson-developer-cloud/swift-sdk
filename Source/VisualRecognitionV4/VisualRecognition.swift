@@ -928,8 +928,8 @@ public class VisualRecognition {
         completionHandler: @escaping (WatsonResponse<UpdateObjectMetadata>?, WatsonError?) -> Void)
     {
         // construct body
-        let updateObjectMetadataRequest = UpdateObjectMetadata(
-            object: newObject)
+        // HAND EDIT: cannot use UpdateObjectMetadata struct due to required count property
+        let updateObjectMetadataRequest = ["object": newObject]
         guard let body = try? JSON.encoder.encode(updateObjectMetadataRequest) else {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return

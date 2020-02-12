@@ -278,6 +278,69 @@ class AssistantV2Tests: XCTestCase {
         }
         waitForExpectations()
     }
+    
+    func testMessageWithSystemEntity() {
+        let description1 = "Create a session"
+        let expectation1 = self.expectation(description: description1)
+        var newSessionID: String?
+        assistant.createSession(assistantID: assistantID) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let session = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssertNotNil(session.sessionID)
+            newSessionID = session.sessionID
+            expectation1.fulfill()
+        }
+
+        waitForExpectations()
+        
+        let message1Expectation = self.expectation(description: "message 1")
+        assistant.message(assistantID: assistantID, sessionID: newSessionID!) {
+                response, error in
+            
+            if let error = error {
+                XCTFail(error.localizedDescription)
+                return
+            }
+            
+            guard let result = response?.result else {
+                XCTFail("no response")
+                return
+            }
+            
+            message1Expectation.fulfill()
+        }
+            
+        waitForExpectations()
+        
+    let message2Expectation = self.expectation(description: "message 2")
+    let messageInput = MessageInput(messageType: MessageInput.MessageType.text.rawValue, text: "are you open on christmas")
+    assistant.message(assistantID: assistantID, sessionID: newSessionID!, input: messageInput, context: nil) {
+            response, error in
+            
+            if let error = error {
+                XCTFail(error.localizedDescription)
+                return
+            }
+            
+            guard let result = response?.result else {
+                XCTFail("no response")
+                return
+            }
+            
+            message2Expectation.fulfill()
+        }
+        
+        waitForExpectations()
+    }
 
     // MARK: - Skill Contexts
 

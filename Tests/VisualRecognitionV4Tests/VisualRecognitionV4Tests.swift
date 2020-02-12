@@ -582,6 +582,34 @@ class VisualRecognitionV4Tests: XCTestCase {
     // MARK: - Test Training a Collection
 
     func testTrainCollection() {
+        let addDataExpectation = self.expectation(description: "add data")
+
+        let location = Location(top: 15, left: 15, width: 20, height: 10)
+        let testBaseObject = TrainingDataObject(object: "test", location: location)
+
+        visualRecognition.addImageTrainingData(collectionID: trainingDummyCollectionID, imageID: trainingDummyImageID, objects: [testBaseObject]) {
+            response, error in
+
+            // make sure we didn't get an error
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+
+            // make sure there are collections in the result
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssertEqual(result.objects?.first?.location, location)
+            XCTAssertEqual(result.objects?.first?.object, "test")
+
+            addDataExpectation.fulfill()
+        }
+
+        waitForExpectations()
+        
         let expectation = self.expectation(description: "Train a collection")
 
         visualRecognition.train(collectionID: trainingDummyCollectionID) { response, error in
@@ -632,6 +660,132 @@ class VisualRecognitionV4Tests: XCTestCase {
             expectation.fulfill()
         }
 
+        waitForExpectations()
+    }
+    
+    func testObjectMetadataCRUD() {
+        var testObject: String!
+        
+        let expectation = self.expectation(description: "Train a collection")
+
+        let location = Location(top: 15, left: 15, width: 20, height: 10)
+        let testBaseObject = TrainingDataObject(object: "test", location: location)
+
+        visualRecognition.addImageTrainingData(collectionID: trainingDummyCollectionID, imageID: trainingDummyImageID, objects: [testBaseObject]) {
+            response, error in
+
+            // make sure we didn't get an error
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+
+            // make sure there are collections in the result
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssertEqual(result.objects?.first?.location, location)
+            XCTAssertEqual(result.objects?.first?.object, "test")
+            
+            testObject = "test"
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations()
+        
+        let listExpectation = self.expectation(description: "list object metadata")
+
+        visualRecognition.listObjectMetadata(collectionID: trainingDummyCollectionID) {
+            response, error in
+
+            // make sure we didn't get an error
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+
+            // make sure there are collections in the result
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+            
+            XCTAssertNotNil(result.objects?.first)
+            
+            testObject = result.objects?.first?.object
+            
+            listExpectation.fulfill()
+        }
+        
+        waitForExpectations()
+        
+        let updateExpectation = self.expectation(description: "update object metadata")
+        
+        visualRecognition.updateObjectMetadata(collectionID: trainingDummyCollectionID, object: testObject, newObject: "updated") {
+            response, error in
+            
+            // make sure we didn't get an error
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+
+            // make sure there are collections in the result
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+            
+            XCTAssertEqual(result.object, "updated")
+            
+            testObject = result.object!
+            
+            updateExpectation.fulfill()
+        }
+        
+        waitForExpectations()
+        
+        let getExpectation = self.expectation(description: "get object metadata")
+        
+        visualRecognition.getObjectMetadata(collectionID: trainingDummyCollectionID, object: testObject) {
+            response, error in
+            
+            // make sure we didn't get an error
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+
+            // make sure there are collections in the result
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+            
+            XCTAssertEqual(result.object, testObject)
+            
+            getExpectation.fulfill()
+        }
+        
+        waitForExpectations()
+        
+        let deleteExpectation = self.expectation(description: "delete object metadata")
+        
+        visualRecognition.deleteObject(collectionID: trainingDummyCollectionID, object: testObject) {
+            response, error in
+            
+            // make sure we didn't get an error
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            
+            deleteExpectation.fulfill()
+        }
+        
         waitForExpectations()
     }
 }

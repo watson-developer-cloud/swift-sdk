@@ -1141,7 +1141,6 @@ class SpeechToTextTests: XCTestCase {
                 return
             }
             XCTAssertGreaterThan(result.audio.count, 0)
-            XCTAssertGreaterThan(result.totalMinutesOfAudio, 0.0)
             expectation2.fulfill()
         }
         wait(for: [expectation2], timeout: timeout)

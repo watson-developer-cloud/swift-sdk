@@ -777,6 +777,9 @@ class SpeechToTextTests: XCTestCase {
         }
         wait(for: [expectation3], timeout: timeout)
 
+        // we need to make sure the custom model is ready
+        waitUntil(languageModel, is: "ready")
+
         // delete the corpus we added
         let expectation4 = self.expectation(description: "deleteCorpus")
         speechToText.deleteCorpus(customizationID: id, corpusName: corpusName) {
@@ -798,6 +801,9 @@ class SpeechToTextTests: XCTestCase {
         guard let languageModel = lookupOrCreateTestLanguageModel() else {
             return
         }
+
+        // make sure the language model is ready
+        waitUntil(languageModel, is: "ready")
 
         // add an array of words
         let expectation2 = self.expectation(description: "addWords")
@@ -886,6 +892,10 @@ class SpeechToTextTests: XCTestCase {
         guard let languageModel = lookupOrCreateTestLanguageModel() else {
             return
         }
+
+        // we want the language model to be ready
+        waitUntil(languageModel, is: "ready")
+
         let customizationID = languageModel.customizationID
         let grammarName = "swift-sdk-test-grammar"
         let grammarFile = Bundle(for: type(of: self)).url(forResource: "confirm", withExtension: "abnf")!
@@ -1032,6 +1042,9 @@ class SpeechToTextTests: XCTestCase {
         // add data before training
         addTrainingData(to: acousticModel)
 
+        // we need to make sure that the acoustic model is ready
+        waitUntil(acousticModel, is: "ready")
+
         // train the acoustic model
         let expectation4 = self.expectation(description: "trainAcousticModel")
         speechToText.trainAcousticModel(customizationID: acousticModel.customizationID) {
@@ -1096,6 +1109,9 @@ class SpeechToTextTests: XCTestCase {
         guard let acousticModel = lookupOrCreateTestAcousticModel() else {
             return
         }
+
+        // we want to make sure the acoustic model is ready
+        waitUntil(acousticModel, is: "ready")
 
         // add audio resource to acoustic model
         let expectation1 = self.expectation(description: "addAudio")

@@ -14,7 +14,7 @@ from digital communications such as email, text messages, tweets, and forum post
 
   s.module_name           = 'PersonalityInsights'
   s.ios.deployment_target = '10.0'
-  s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => s.version.to_s }
+  s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => "v#{s.version}" }
 
   s.source_files          = 'Source/PersonalityInsightsV3/**/*.swift',
                             'Source/SupportingFiles/InsecureConnection.swift',

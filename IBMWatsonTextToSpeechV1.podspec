@@ -14,7 +14,7 @@ The service streams the results back to the client with minimal delay.
 
   s.module_name           = 'TextToSpeech'
   s.ios.deployment_target = '10.0'
-  s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => s.version.to_s }
+  s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => "v#{s.version}" }
 
   s.source_files          = 'Source/TextToSpeechV1/**/*.swift',
                             'Source/SupportingFiles/InsecureConnection.swift',

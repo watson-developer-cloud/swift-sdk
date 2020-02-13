@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2018, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ func missingBodyMessage(_ error: Error) -> String {
 // MARK: - Service instantiation
 
 let defaultTestAuthenticator = WatsonIAMAuthenticator.init(apiKey: "asdf")
-let versionDate = "2019-12-01"
+let versionDate = "2020-02-10"
 
 // MARK: - Mocking requests
 

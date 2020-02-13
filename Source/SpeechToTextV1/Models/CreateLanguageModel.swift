@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2018, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ internal struct CreateLanguageModel: Codable, Equatable {
      can be used only with the base model that it customizes.
      To determine whether a base model supports language model customization, use the **Get a model** method and check
      that the attribute `custom_language_model` is set to `true`. You can also refer to [Language support for
-     customization](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-customization#languageSupport).
+     customization](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-customization#languageSupport).
      */
     public enum BaseModelName: String {
         case deDeBroadbandmodel = "de-DE_BroadbandModel"
@@ -70,7 +70,7 @@ internal struct CreateLanguageModel: Codable, Equatable {
      can be used only with the base model that it customizes.
      To determine whether a base model supports language model customization, use the **Get a model** method and check
      that the attribute `custom_language_model` is set to `true`. You can also refer to [Language support for
-     customization](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-customization#languageSupport).
+     customization](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-customization#languageSupport).
      */
     public var baseModelName: String
 
@@ -115,7 +115,7 @@ internal struct CreateLanguageModel: Codable, Equatable {
        language model. The new custom model can be used only with the base model that it customizes.
        To determine whether a base model supports language model customization, use the **Get a model** method and check
        that the attribute `custom_language_model` is set to `true`. You can also refer to [Language support for
-       customization](https://cloud.ibm.com/docs/services/speech-to-text?topic=speech-to-text-customization#languageSupport).
+       customization](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-customization#languageSupport).
      - parameter dialect: The dialect of the specified language that is to be used with the custom language model.
        For most languages, the dialect matches the language of the base model by default. For example, `en-US` is used
        for either of the US English language models.

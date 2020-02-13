@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * (C) Copyright IBM Corp. 2016, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ public struct Translation: Codable, Equatable {
      **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation
      for the word. You can create only a single entry, with or without a single part of speech, for any word; you cannot
      create multiple entries with different parts of speech for the same word. For more information, see [Working with
-     Japanese entries](https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-rules#jaNotes).
+     Japanese entries](https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-rules#jaNotes).
      */
     public enum PartOfSpeech: String {
         case dosi = "Dosi"
@@ -58,7 +58,7 @@ public struct Translation: Codable, Equatable {
      **Japanese only.** The part of speech for the word. The service uses the value to produce the correct intonation
      for the word. You can create only a single entry, with or without a single part of speech, for any word; you cannot
      create multiple entries with different parts of speech for the same word. For more information, see [Working with
-     Japanese entries](https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-rules#jaNotes).
+     Japanese entries](https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-rules#jaNotes).
      */
     public var partOfSpeech: String?
 
@@ -78,7 +78,7 @@ public struct Translation: Codable, Equatable {
        produce the correct intonation for the word. You can create only a single entry, with or without a single part of
        speech, for any word; you cannot create multiple entries with different parts of speech for the same word. For
        more information, see [Working with Japanese
-       entries](https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-rules#jaNotes).
+       entries](https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-rules#jaNotes).
 
      - returns: An initialized `Translation`.
      */

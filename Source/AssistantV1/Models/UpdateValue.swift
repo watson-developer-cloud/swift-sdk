@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2018, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,7 +57,7 @@ internal struct UpdateValue: Codable, Equatable {
      An array of patterns for the entity value. A value can specify either synonyms or patterns (depending on the value
      type), but not both. A pattern is a regular expression; for more information about how to specify a pattern, see
      the
-     [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-entities#entities-create-dictionary-based).
+     [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-entities#entities-create-dictionary-based).
      */
     public var patterns: [String]?
 
@@ -97,7 +97,7 @@ internal struct UpdateValue: Codable, Equatable {
      - parameter patterns: An array of patterns for the entity value. A value can specify either synonyms or patterns
        (depending on the value type), but not both. A pattern is a regular expression; for more information about how to
        specify a pattern, see the
-       [documentation](https://cloud.ibm.com/docs/services/assistant?topic=assistant-entities#entities-create-dictionary-based).
+       [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-entities#entities-create-dictionary-based).
      - parameter created: The timestamp for creation of the object.
      - parameter updated: The timestamp for the most recent update to the object.
 

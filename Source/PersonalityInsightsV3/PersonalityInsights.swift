@@ -27,10 +27,9 @@ import IBMSwiftSDKCore
  personality characteristics. The service can infer consumption preferences based on the results of its analysis and,
  for JSON content that is timestamped, can report temporal behavior.
  * For information about the meaning of the models that the service uses to describe personality characteristics, see
- [Personality
- models](https://cloud.ibm.com/docs/services/personality-insights?topic=personality-insights-models#models).
+ [Personality models](https://cloud.ibm.com/docs/personality-insights?topic=personality-insights-models#models).
  * For information about the meaning of the consumption preferences, see [Consumption
- preferences](https://cloud.ibm.com/docs/services/personality-insights?topic=personality-insights-preferences#preferences).
+ preferences](https://cloud.ibm.com/docs/personality-insights?topic=personality-insights-preferences#preferences).
  **Note:** Request logging is disabled for the Personality Insights service. Regardless of whether you set the
  `X-Watson-Learning-Opt-Out` request header, the service does not log or retain data from requests and responses.
  */
@@ -144,10 +143,9 @@ public class PersonalityInsights {
      content, but it requires much less text to produce an accurate profile. The service can analyze text in Arabic,
      English, Japanese, Korean, or Spanish. It can return its results in a variety of languages.
      **See also:**
-     * [Requesting a
-     profile](https://cloud.ibm.com/docs/services/personality-insights?topic=personality-insights-input#input)
+     * [Requesting a profile](https://cloud.ibm.com/docs/personality-insights?topic=personality-insights-input#input)
      * [Providing sufficient
-     input](https://cloud.ibm.com/docs/services/personality-insights?topic=personality-insights-input#sufficient)
+     input](https://cloud.ibm.com/docs/personality-insights?topic=personality-insights-input#sufficient)
      ### Content types
       You can provide input content as plain text (`text/plain`), HTML (`text/html`), or JSON (`application/json`) by
      specifying the **Content-Type** parameter. The default is `text/plain`.
@@ -157,21 +155,21 @@ public class PersonalityInsights {
      When specifying a content type of plain text or HTML, include the `charset` parameter to indicate the character
      encoding of the input text; for example, `Content-Type: text/plain;charset=utf-8`.
      **See also:** [Specifying request and response
-     formats](https://cloud.ibm.com/docs/services/personality-insights?topic=personality-insights-input#formats)
+     formats](https://cloud.ibm.com/docs/personality-insights?topic=personality-insights-input#formats)
      ### Accept types
       You must request a response as JSON (`application/json`) or comma-separated values (`text/csv`) by specifying the
      **Accept** parameter. CSV output includes a fixed number of columns. Set the **csv_headers** parameter to `true` to
      request optional column headers for CSV output.
      **See also:**
      * [Understanding a JSON
-     profile](https://cloud.ibm.com/docs/services/personality-insights?topic=personality-insights-output#output)
+     profile](https://cloud.ibm.com/docs/personality-insights?topic=personality-insights-output#output)
      * [Understanding a CSV
-     profile](https://cloud.ibm.com/docs/services/personality-insights?topic=personality-insights-outputCSV#outputCSV).
+     profile](https://cloud.ibm.com/docs/personality-insights?topic=personality-insights-outputCSV#outputCSV).
 
      - parameter profileContent: A maximum of 20 MB of content to analyze, though the service requires much less text;
        for more information, see [Providing sufficient
-       input](https://cloud.ibm.com/docs/services/personality-insights?topic=personality-insights-input#sufficient). For
-       JSON input, provide an object of type `Content`.
+       input](https://cloud.ibm.com/docs/personality-insights?topic=personality-insights-input#sufficient). For JSON
+       input, provide an object of type `Content`.
      - parameter contentLanguage: The language of the input text for the request: Arabic, English, Japanese, Korean,
        or Spanish. Regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`.
        The effect of the **Content-Language** parameter depends on the **Content-Type** parameter. When **Content-Type**
@@ -264,10 +262,9 @@ public class PersonalityInsights {
      content, but it requires much less text to produce an accurate profile. The service can analyze text in Arabic,
      English, Japanese, Korean, or Spanish. It can return its results in a variety of languages.
      **See also:**
-     * [Requesting a
-     profile](https://cloud.ibm.com/docs/services/personality-insights?topic=personality-insights-input#input)
+     * [Requesting a profile](https://cloud.ibm.com/docs/personality-insights?topic=personality-insights-input#input)
      * [Providing sufficient
-     input](https://cloud.ibm.com/docs/services/personality-insights?topic=personality-insights-input#sufficient)
+     input](https://cloud.ibm.com/docs/personality-insights?topic=personality-insights-input#sufficient)
      ### Content types
       You can provide input content as plain text (`text/plain`), HTML (`text/html`), or JSON (`application/json`) by
      specifying the **Content-Type** parameter. The default is `text/plain`.
@@ -277,21 +274,21 @@ public class PersonalityInsights {
      When specifying a content type of plain text or HTML, include the `charset` parameter to indicate the character
      encoding of the input text; for example, `Content-Type: text/plain;charset=utf-8`.
      **See also:** [Specifying request and response
-     formats](https://cloud.ibm.com/docs/services/personality-insights?topic=personality-insights-input#formats)
+     formats](https://cloud.ibm.com/docs/personality-insights?topic=personality-insights-input#formats)
      ### Accept types
       You must request a response as JSON (`application/json`) or comma-separated values (`text/csv`) by specifying the
      **Accept** parameter. CSV output includes a fixed number of columns. Set the **csv_headers** parameter to `true` to
      request optional column headers for CSV output.
      **See also:**
      * [Understanding a JSON
-     profile](https://cloud.ibm.com/docs/services/personality-insights?topic=personality-insights-output#output)
+     profile](https://cloud.ibm.com/docs/personality-insights?topic=personality-insights-output#output)
      * [Understanding a CSV
-     profile](https://cloud.ibm.com/docs/services/personality-insights?topic=personality-insights-outputCSV#outputCSV).
+     profile](https://cloud.ibm.com/docs/personality-insights?topic=personality-insights-outputCSV#outputCSV).
 
      - parameter profileContent: A maximum of 20 MB of content to analyze, though the service requires much less text;
        for more information, see [Providing sufficient
-       input](https://cloud.ibm.com/docs/services/personality-insights?topic=personality-insights-input#sufficient). For
-       JSON input, provide an object of type `Content`.
+       input](https://cloud.ibm.com/docs/personality-insights?topic=personality-insights-input#sufficient). For JSON
+       input, provide an object of type `Content`.
      - parameter contentLanguage: The language of the input text for the request: Arabic, English, Japanese, Korean,
        or Spanish. Regional variants are treated as their parent language; for example, `en-US` is interpreted as `en`.
        The effect of the **Content-Language** parameter depends on the **Content-Type** parameter. When **Content-Type**

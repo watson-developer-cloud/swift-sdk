@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2018, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,6 +53,28 @@ public struct RuntimeEntity: Codable, Equatable {
      */
     public var groups: [CaptureGroup]?
 
+    /**
+     An object containing detailed information about the entity recognized in the user input. This property is included
+     only if the new system entities are enabled for the skill.
+     For more information about how the new system entities are interpreted, see the
+     [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-beta-system-entities).
+     */
+    public var interpretation: RuntimeEntityInterpretation?
+
+    /**
+     An array of possible alternative values that the user might have intended instead of the value returned in the
+     **value** property. This property is returned only for `@sys-time` and `@sys-date` entities when the user's input
+     is ambiguous.
+     This property is included only if the new system entities are enabled for the skill.
+     */
+    public var alternatives: [RuntimeEntityAlternative]?
+
+    /**
+     An object describing the role played by a system entity that is specifies the beginning or end of a range
+     recognized in the user input. This property is included only if the new system entities are enabled for the skill.
+     */
+    public var role: RuntimeEntityRole?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case entity = "entity"
@@ -61,6 +83,9 @@ public struct RuntimeEntity: Codable, Equatable {
         case confidence = "confidence"
         case metadata = "metadata"
         case groups = "groups"
+        case interpretation = "interpretation"
+        case alternatives = "alternatives"
+        case role = "role"
     }
 
     /**
@@ -73,6 +98,17 @@ public struct RuntimeEntity: Codable, Equatable {
      - parameter confidence: A decimal percentage that represents Watson's confidence in the recognized entity.
      - parameter metadata: Any metadata for the entity.
      - parameter groups: The recognized capture groups for the entity, as defined by the entity pattern.
+     - parameter interpretation: An object containing detailed information about the entity recognized in the user
+       input. This property is included only if the new system entities are enabled for the skill.
+       For more information about how the new system entities are interpreted, see the
+       [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-beta-system-entities).
+     - parameter alternatives: An array of possible alternative values that the user might have intended instead of
+       the value returned in the **value** property. This property is returned only for `@sys-time` and `@sys-date`
+       entities when the user's input is ambiguous.
+       This property is included only if the new system entities are enabled for the skill.
+     - parameter role: An object describing the role played by a system entity that is specifies the beginning or end
+       of a range recognized in the user input. This property is included only if the new system entities are enabled
+       for the skill.
 
      - returns: An initialized `RuntimeEntity`.
      */
@@ -82,7 +118,10 @@ public struct RuntimeEntity: Codable, Equatable {
         value: String,
         confidence: Double? = nil,
         metadata: [String: JSON]? = nil,
-        groups: [CaptureGroup]? = nil
+        groups: [CaptureGroup]? = nil,
+        interpretation: RuntimeEntityInterpretation? = nil,
+        alternatives: [RuntimeEntityAlternative]? = nil,
+        role: RuntimeEntityRole? = nil
     )
     {
         self.entity = entity
@@ -91,6 +130,9 @@ public struct RuntimeEntity: Codable, Equatable {
         self.confidence = confidence
         self.metadata = metadata
         self.groups = groups
+        self.interpretation = interpretation
+        self.alternatives = alternatives
+        self.role = role
     }
 
 }

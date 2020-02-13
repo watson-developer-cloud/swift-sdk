@@ -457,7 +457,7 @@ public class VisualRecognition {
 
      Update a custom classifier by adding new positive or negative classes or by adding new images to existing classes.
      You must supply at least one set of positive or negative examples. For details, see [Updating custom
-     classifiers](https://cloud.ibm.com/docs/services/visual-recognition?topic=visual-recognition-customizing#updating-custom-classifiers).
+     classifiers](https://cloud.ibm.com/docs/visual-recognition?topic=visual-recognition-customizing#updating-custom-classifiers).
      Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and class
      names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.
      **Tips about retraining:**
@@ -665,7 +665,7 @@ public class VisualRecognition {
      the customer ID.
      You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request that passes data.
      For more information about personal data and customer IDs, see [Information
-     security](https://cloud.ibm.com/docs/services/visual-recognition?topic=visual-recognition-information-security).
+     security](https://cloud.ibm.com/docs/visual-recognition?topic=visual-recognition-information-security).
 
      - parameter customerID: The customer ID for which all data is to be deleted.
      - parameter headers: A dictionary of request headers to be sent with this request.

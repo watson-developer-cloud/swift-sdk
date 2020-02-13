@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2018, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,8 +20,8 @@ import IBMSwiftSDKCore
 /**
  A maximum of 20 MB of content to analyze, though the service requires much less text; for more information, see
  [Providing sufficient
- input](https://cloud.ibm.com/docs/services/personality-insights?topic=personality-insights-input#sufficient). For JSON
- input, provide an object of type `Content`.
+ input](https://cloud.ibm.com/docs/personality-insights?topic=personality-insights-input#sufficient). For JSON input,
+ provide an object of type `Content`.
  */
 public enum ProfileContent {
 

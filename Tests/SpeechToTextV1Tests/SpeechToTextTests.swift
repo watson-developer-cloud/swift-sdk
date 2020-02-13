@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * (C) Copyright IBM Corp. 2016, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -777,6 +777,9 @@ class SpeechToTextTests: XCTestCase {
         }
         wait(for: [expectation3], timeout: timeout)
 
+        // we need to make sure the custom model is ready
+        waitUntil(languageModel, is: "ready")
+
         // delete the corpus we added
         let expectation4 = self.expectation(description: "deleteCorpus")
         speechToText.deleteCorpus(customizationID: id, corpusName: corpusName) {
@@ -798,6 +801,9 @@ class SpeechToTextTests: XCTestCase {
         guard let languageModel = lookupOrCreateTestLanguageModel() else {
             return
         }
+
+        // make sure the language model is ready
+        waitUntil(languageModel, is: "ready")
 
         // add an array of words
         let expectation2 = self.expectation(description: "addWords")
@@ -886,6 +892,10 @@ class SpeechToTextTests: XCTestCase {
         guard let languageModel = lookupOrCreateTestLanguageModel() else {
             return
         }
+
+        // we want the language model to be ready
+        waitUntil(languageModel, is: "ready")
+
         let customizationID = languageModel.customizationID
         let grammarName = "swift-sdk-test-grammar"
         let grammarFile = Bundle(for: type(of: self)).url(forResource: "confirm", withExtension: "abnf")!
@@ -1032,6 +1042,9 @@ class SpeechToTextTests: XCTestCase {
         // add data before training
         addTrainingData(to: acousticModel)
 
+        // we need to make sure that the acoustic model is ready
+        waitUntil(acousticModel, is: "ready")
+
         // train the acoustic model
         let expectation4 = self.expectation(description: "trainAcousticModel")
         speechToText.trainAcousticModel(customizationID: acousticModel.customizationID) {
@@ -1097,6 +1110,9 @@ class SpeechToTextTests: XCTestCase {
             return
         }
 
+        // we want to make sure the acoustic model is ready
+        waitUntil(acousticModel, is: "ready")
+
         // add audio resource to acoustic model
         let expectation1 = self.expectation(description: "addAudio")
         let audio = try! Data(contentsOf: Bundle(for: type(of: self)).url(forResource: "SpeechSample", withExtension: "wav")!)
@@ -1125,7 +1141,6 @@ class SpeechToTextTests: XCTestCase {
                 return
             }
             XCTAssertGreaterThan(result.audio.count, 0)
-            XCTAssertGreaterThan(result.totalMinutesOfAudio, 0.0)
             expectation2.fulfill()
         }
         wait(for: [expectation2], timeout: timeout)

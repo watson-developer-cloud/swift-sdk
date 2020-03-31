@@ -2,7 +2,7 @@ This document contains information and guidelines about contributing to this pro
 
 # Asking Questions
 
-We don't use GitHub as a support forum. For any usage questions that are not specific to the project itself, please ask on [dW Answers][dw] or [Stack Overflow][stackoverflow]. By doing so, you'll be more likely to quickly solve your problem, and you'll also allow anyone else with the same question to find the answer.
+We don't use GitHub as a support forum. If you have issues with the APIs or have a question about the Watson services, see [Stack Overflow](https://stackoverflow.com/questions/tagged/ibm-watson+swift).
 
 # Reporting Issues
 

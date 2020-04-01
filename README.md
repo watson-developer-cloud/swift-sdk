@@ -256,6 +256,10 @@ naturalLanguageClassifier.defaultHeaders = ["X-Watson-Learning-Opt-Out": "true"]
 
 Each service method also accepts an optional `headers` parameter which is a dictionary of request headers to be sent with the request.
 
+## Questions
+
+If you have issues with the APIs or have a question about the Watson services, see [Stack Overflow](https://stackoverflow.com/questions/tagged/ibm-watson+swift).
+
 ## Featured Projects
 
 We love to highlight cool open-source projects that use this SDK! If you'd like to get your project added to the list, feel free to make an issue linking us to it.

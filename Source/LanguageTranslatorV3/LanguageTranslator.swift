@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,10 +55,11 @@ public class LanguageTranslator {
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
      */
-    public init(version: String) throws {
+    public init?(version: String) {
         self.version = version
-
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
+            return nil
+        }
         self.authenticator = authenticator
 
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
@@ -130,13 +131,17 @@ public class LanguageTranslator {
     /**
      Translate.
 
-     Translates the input text from the source language to the target language.
+     Translates the input text from the source language to the target language. A target language or translation model
+     ID is required. The service attempts to detect the language of the source text if it is not specified.
 
      - parameter text: Input text in UTF-8 encoding. Multiple entries will result in multiple translations in the
        response.
-     - parameter modelID: A globally unique string that identifies the underlying model that is used for translation.
-     - parameter source: Translation source language code.
-     - parameter target: Translation target language code.
+     - parameter modelID: The model to use for translation. For example, `en-de` selects the IBM provided base model
+       for English to German translation. A model ID overrides the source and target parameters and is required if you
+       use a custom model. If no model ID is specified, you must specify a target language.
+     - parameter source: Language code that specifies the language of the source document.
+     - parameter target: Language code that specifies the target language for translation. Required if model ID is not
+       specified.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -627,13 +632,16 @@ public class LanguageTranslator {
 
      - parameter file: The contents of the source file to translate.
        [Supported file
-       types](https://cloud.ibm.com/docs/services/language-translator?topic=language-translator-document-translator-tutorial#supported-file-formats)
+       types](https://cloud.ibm.com/docs/language-translator?topic=language-translator-document-translator-tutorial#supported-file-formats)
        Maximum file size: **20 MB**.
      - parameter filename: The filename for file.
      - parameter fileContentType: The content type of file.
-     - parameter modelID: The model to use for translation. `model_id` or both `source` and `target` are required.
+     - parameter modelID: The model to use for translation. For example, `en-de` selects the IBM provided base model
+       for English to German translation. A model ID overrides the source and target parameters and is required if you
+       use a custom model. If no model ID is specified, you must specify a target language.
      - parameter source: Language code that specifies the language of the source document.
-     - parameter target: Language code that specifies the target language for translation.
+     - parameter target: Language code that specifies the target language for translation. Required if model ID is not
+       specified.
      - parameter documentID: To use a previously submitted document as the source for a new translation, enter the
        `document_id` of the document.
      - parameter headers: A dictionary of request headers to be sent with this request.

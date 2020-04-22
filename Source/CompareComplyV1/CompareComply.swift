@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,10 +53,11 @@ public class CompareComply {
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
      */
-    public init(version: String) throws {
+    public init?(version: String) {
         self.version = version
-
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
+            return nil
+        }
         self.authenticator = authenticator
 
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
@@ -780,9 +781,9 @@ public class CompareComply {
 
      Run Compare and Comply methods over a collection of input documents.
      **Important:** Batch processing requires the use of the [IBM Cloud Object Storage
-     service](https://cloud.ibm.com/docs/services/cloud-object-storage?topic=cloud-object-storage-about#about-ibm-cloud-object-storage).
+     service](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-about#about-ibm-cloud-object-storage).
      The use of IBM Cloud Object Storage with Compare and Comply is discussed at [Using batch
-     processing](https://cloud.ibm.com/docs/services/compare-comply?topic=compare-comply-batching#before-you-batch).
+     processing](https://cloud.ibm.com/docs/compare-comply?topic=compare-comply-batching#before-you-batch).
 
      - parameter function: The Compare and Comply method to run across the submitted input documents.
      - parameter inputCredentialsFile: A JSON file containing the input Cloud Object Storage credentials. At a

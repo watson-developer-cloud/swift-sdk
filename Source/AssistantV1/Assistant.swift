@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,10 +54,11 @@ public class Assistant {
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
      */
-    public init(version: String) throws {
+    public init?(version: String) {
         self.version = version
-
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
+            return nil
+        }
         self.authenticator = authenticator
 
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
@@ -1146,7 +1147,7 @@ public class Assistant {
      Create user input example.
 
      Add a new user input example to an intent.
-     If you want to add multiple exaples with a single API call, consider using the **[Update intent](#update-intent)**
+     If you want to add multiple examples with a single API call, consider using the **[Update intent](#update-intent)**
      method instead.
      This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
@@ -3218,6 +3219,7 @@ public class Assistant {
      - parameter digressOutSlots: Whether the user can digress to top-level nodes while filling out slots.
      - parameter userLabel: A label that can be displayed externally to describe the purpose of the node to users.
      - parameter disambiguationOptOut: Whether the dialog node should be excluded from disambiguation suggestions.
+       Valid only when **type**=`standard` or `frame`.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -3422,6 +3424,7 @@ public class Assistant {
      - parameter newDigressOutSlots: Whether the user can digress to top-level nodes while filling out slots.
      - parameter newUserLabel: A label that can be displayed externally to describe the purpose of the node to users.
      - parameter newDisambiguationOptOut: Whether the dialog node should be excluded from disambiguation suggestions.
+       Valid only when **type**=`standard` or `frame`.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
      - parameter headers: A dictionary of request headers to be sent with this request.

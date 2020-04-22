@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -98,13 +98,13 @@ public struct DialogSuggestionResponseGeneric: Codable, Equatable {
     public var messageToHumanAgent: String?
 
     /**
-     A label identifying the topic of the conversation, derived from the **user_label** property of the relevant node.
+     A label identifying the topic of the conversation, derived from the **title** property of the relevant node.
      */
     public var topic: String?
 
     /**
      The ID of the dialog node that the **topic** property is taken from. The **topic** property is populated using the
-     value of the dialog node's **user_label** property.
+     value of the dialog node's **title** property.
      */
     public var dialogNode: String?
 
@@ -142,10 +142,10 @@ public struct DialogSuggestionResponseGeneric: Codable, Equatable {
      - parameter options: An array of objects describing the options from which the user can choose.
      - parameter messageToHumanAgent: A message to be sent to the human agent who will be taking over the
        conversation.
-     - parameter topic: A label identifying the topic of the conversation, derived from the **user_label** property
-       of the relevant node.
+     - parameter topic: A label identifying the topic of the conversation, derived from the **title** property of the
+       relevant node.
      - parameter dialogNode: The ID of the dialog node that the **topic** property is taken from. The **topic**
-       property is populated using the value of the dialog node's **user_label** property.
+       property is populated using the value of the dialog node's **title** property.
 
      - returns: An initialized `DialogSuggestionResponseGeneric`.
      */

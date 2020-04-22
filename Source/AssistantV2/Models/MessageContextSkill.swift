@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ public struct MessageContextSkill: Codable, Equatable {
     public var userDefined: [String: JSON]?
 
     /**
-     For internal use only.
+     System context data used by the skill.
      */
     public var system: [String: JSON]?
 
@@ -42,7 +42,7 @@ public struct MessageContextSkill: Codable, Equatable {
      Initialize a `MessageContextSkill` with member variables.
 
      - parameter userDefined: Arbitrary variables that can be read and written by a particular skill.
-     - parameter system: For internal use only.
+     - parameter system: System context data used by the skill.
 
      - returns: An initialized `MessageContextSkill`.
      */

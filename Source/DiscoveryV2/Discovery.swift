@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,10 +55,11 @@ public class Discovery {
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
      */
-    public init(version: String) throws {
+    public init?(version: String) {
         self.version = version
-        
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
+            return nil
+        }
         self.authenticator = authenticator
 
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
@@ -186,7 +187,7 @@ public class Discovery {
      Query a project.
 
      By using this method, you can construct queries. For details, see the [Discovery
-     documentation](https://cloud.ibm.com/docs/services/discovery-data?topic=discovery-data-query-concepts).
+     documentation](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-query-concepts).
 
      - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
        administrative tooling.

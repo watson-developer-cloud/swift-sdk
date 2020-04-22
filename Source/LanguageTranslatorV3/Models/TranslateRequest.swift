@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,17 +25,19 @@ internal struct TranslateRequest: Codable, Equatable {
     public var text: [String]
 
     /**
-     A globally unique string that identifies the underlying model that is used for translation.
+     The model to use for translation. For example, `en-de` selects the IBM provided base model for English to German
+     translation. A model ID overrides the source and target parameters and is required if you use a custom model. If no
+     model ID is specified, you must specify a target language.
      */
     public var modelID: String?
 
     /**
-     Translation source language code.
+     Language code that specifies the language of the source document.
      */
     public var source: String?
 
     /**
-     Translation target language code.
+     Language code that specifies the target language for translation. Required if model ID is not specified.
      */
     public var target: String?
 
@@ -52,9 +54,12 @@ internal struct TranslateRequest: Codable, Equatable {
 
      - parameter text: Input text in UTF-8 encoding. Multiple entries will result in multiple translations in the
        response.
-     - parameter modelID: A globally unique string that identifies the underlying model that is used for translation.
-     - parameter source: Translation source language code.
-     - parameter target: Translation target language code.
+     - parameter modelID: The model to use for translation. For example, `en-de` selects the IBM provided base model
+       for English to German translation. A model ID overrides the source and target parameters and is required if you
+       use a custom model. If no model ID is specified, you must specify a target language.
+     - parameter source: Language code that specifies the language of the source document.
+     - parameter target: Language code that specifies the target language for translation. Required if model ID is
+       not specified.
 
      - returns: An initialized `TranslateRequest`.
      */

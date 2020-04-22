@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ public struct EnvironmentDocuments: Codable, Equatable {
     /**
      Number of documents indexed for the environment.
      */
-    public var indexed: Int?
+    public var available: Int?
 
     /**
      Total number of documents allowed in the environment's capacity.
@@ -33,7 +33,7 @@ public struct EnvironmentDocuments: Codable, Equatable {
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case indexed = "indexed"
+        case available = "available"
         case maximumAllowed = "maximum_allowed"
     }
 

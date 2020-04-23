@@ -124,6 +124,49 @@ public struct RecognitionSettings: Codable, Equatable {
     // audio metrics with the final transcription results. By default, the service returns no audio metrics.
     public var audioMetrics: Bool?
 
+    /// If `true`, specifies the duration of the pause interval at which the service
+    /// splits a transcript into multiple final results. If the service detects pauses or extended silence before it
+    /// reaches the end of the audio stream, its response can include multiple final results. Silence indicates a point
+    /// at which the speaker pauses between spoken words or phrases.
+    /// Specify a value for the pause interval in the range of 0.0 to 120.0.
+    /// * A value greater than 0 specifies the interval that the service is to use for speech recognition.
+    /// * A value of 0 indicates that the service is to use the default interval. It is equivalent to omitting the
+    /// parameter.
+    /// The default pause interval for most languages is 0.8 seconds; the default for Chinese is 0.6 seconds.
+    /// See [End of phrase silence time](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-output#silence_time).
+    public var endOfPhraseSilenceTime: Double?
+
+    /// If `true`, directs the service to split the transcript into multiple
+    /// final results based on semantic features of the input, for example, at the conclusion of meaningful phrases such
+    /// as sentences. The service bases its understanding of semantic features on the base language model that you use
+    /// with a request. Custom language models and grammars can also influence how and where the service splits a
+    /// transcript. By default, the service splits transcripts based solely on the pause interval.
+    /// See [Split transcript at phrase](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-output#split_transcript).
+    public var splitTranscriptAtPhraseEnd: Bool?
+
+    /// The sensitivity of speech activity detection that the service is to
+    /// perform. Use the parameter to suppress word insertions from music, coughing, and other non-speech events. The
+    /// service biases the audio it passes for speech recognition by evaluating the input audio against prior models of
+    /// speech and non-speech activity.
+    /// Specify a value between 0.0 and 1.0:
+    /// * 0.0 suppresses all audio (no speech is transcribed).
+    /// * 0.5 (the default) provides a reasonable compromise for the level of sensitivity.
+    /// * 1.0 suppresses no audio (speech detection sensitivity is disabled).
+    /// The values increase on a monotonic curve. See [Speech Activity
+    /// Detection](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-input#detection).
+    public var speechDetectorSensitivity: Double?
+
+    /// The level to which the service is to suppress background audio based on
+    /// its volume to prevent it from being transcribed as speech. Use the parameter to suppress side conversations or
+    /// background noise.
+    /// Specify a value in the range of 0.0 to 1.0:
+    /// * 0.0 (the default) provides no suppression (background audio suppression is disabled).
+    /// * 0.5 provides a reasonable level of audio suppression for general usage.
+    /// * 1.0 suppresses all audio (no audio is transcribed).
+    /// The values increase on a monotonic curve. See [Speech Activity
+    /// Detection](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-input#detection).
+    public var backgroundAudioSuppression: Double?
+
     /**
      Initialize a `RecognitionSettings` object to set the parameters of a Watson Speech to
      Text recognition request.

@@ -617,6 +617,72 @@ class SpeechToTextRecognizeTests: XCTestCase {
             return
         }
     }
+    
+    // MARK: - All settings
+    
+    func testTranscribeDataWithAllSettingsWAV() {
+        transcribeDataWithAllSettings(filename: "SpeechSample", withExtension: "wav", format: "audio/wav")
+    }
+
+    func testTranscribeDataWithAllSettingsOpus() {
+        transcribeDataWithAllSettings(filename: "SpeechSample", withExtension: "ogg", format: "audio/ogg;codecs=opus")
+    }
+
+    func testTranscribeDataWithAllSettingsFLAC() {
+        transcribeDataWithAllSettings(filename: "SpeechSample", withExtension: "flac", format: "audio/flac")
+    }
+
+    func testTranscribeDataWithAllSettingsNoFormat() {
+        transcribeDataWithAllSettings(filename: "SpeechSample", withExtension: "ogg", format: nil)
+    }
+    
+    func transcribeDataWithAllSettings(filename: String, withExtension: String, format: String?) {
+        let description = "Transcribe an audio file."
+        let expectation = self.expectation(description: description)
+        var expectationFulfilled = false
+
+        let bundle = Bundle(for: type(of: self))
+        guard let file = bundle.url(forResource: filename, withExtension: withExtension) else {
+            XCTFail(cannotLocateFileMessage(filename, withExtension))
+            return
+        }
+
+        do {
+            let audio = try Data(contentsOf: file)
+
+            var settings = RecognitionSettings(contentType: format)
+            settings.inactivityTimeout = -1
+            settings.interimResults = true
+            settings.wordConfidence = true
+            settings.timestamps = true
+            settings.filterProfanity = true
+            settings.speakerLabels = true
+            settings.redaction = true
+            settings.audioMetrics = true
+            settings.endOfPhraseSilenceTime = 10
+            settings.splitTranscriptAtPhraseEnd = true
+            settings.backgroundAudioSuppression = 1.0
+
+            var callback = RecognizeCallback()
+            callback.onError = { error in
+                XCTFail(unexpectedErrorMessage(error))
+            }
+            callback.onResults = { results in
+                XCTAssertNotNil(results.speakerLabels)
+                if !expectationFulfilled && results.speakerLabels!.count > 0 {
+                    self.validateSTTSpeakerLabels(speakerLabels: results.speakerLabels!)
+                    expectationFulfilled = true
+                    expectation.fulfill()
+                }
+            }
+            speechToText.recognizeUsingWebSocket(audio: audio, settings: settings, model: "en-US_NarrowbandModel", learningOptOut: true, callback: callback)
+            wait(for: [expectation], timeout: timeout)
+        } catch {
+            XCTFail(cannotReadFileMessage(filename, withExtension))
+            return
+        }
+    }
+
 
     // MARK: - callbacks
 

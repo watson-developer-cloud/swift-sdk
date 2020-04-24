@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2019.
+ * (C) Copyright IBM Corp. 2017, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ import Foundation
 
 /**
  Identifies people, cities, organizations, and other entities in the content. See [Entity types and
- subtypes](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-entity-types).
+ subtypes](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-entity-types).
  Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish. Arabic,
  Chinese, and Dutch are supported only through custom models.
  */
@@ -36,7 +36,7 @@ public struct EntitiesOptions: Codable, Equatable {
 
     /**
      Enter a [custom
-     model](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-customizing)
+     model](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-customizing)
      ID to override the standard entity detection model.
      */
     public var model: String?
@@ -66,7 +66,7 @@ public struct EntitiesOptions: Codable, Equatable {
      - parameter limit: Maximum number of entities to return.
      - parameter mentions: Set this to `true` to return locations of entity mentions.
      - parameter model: Enter a [custom
-       model](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-customizing)
+       model](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-customizing)
        ID to override the standard entity detection model.
      - parameter sentiment: Set this to `true` to return sentiment information for detected entities.
      - parameter emotion: Set this to `true` to analyze emotion for detected keywords.

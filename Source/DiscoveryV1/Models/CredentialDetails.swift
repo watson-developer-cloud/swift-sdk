@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2018, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -168,7 +168,7 @@ public struct CredentialDetails: Codable, Equatable {
      The access key ID associated with the cloud object store. Only valid, and required, with a **credential_type** of
      `aws4_hmac`. This value is never returned and is only used when creating or modifying **credentials**. For more
      infomation, see the [cloud object store
-     documentation](https://cloud.ibm.com/docs/services/cloud-object-storage?topic=cloud-object-storage-using-hmac-credentials#using-hmac-credentials).
+     documentation](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-using-hmac-credentials#using-hmac-credentials).
      */
     public var accessKeyID: String?
 
@@ -176,7 +176,7 @@ public struct CredentialDetails: Codable, Equatable {
      The secret access key associated with the cloud object store. Only valid, and required, with a **credential_type**
      of `aws4_hmac`. This value is never returned and is only used when creating or modifying **credentials**. For more
      infomation, see the [cloud object store
-     documentation](https://cloud.ibm.com/docs/services/cloud-object-storage?topic=cloud-object-storage-using-hmac-credentials#using-hmac-credentials).
+     documentation](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-using-hmac-credentials#using-hmac-credentials).
      */
     public var secretAccessKey: String?
 
@@ -258,11 +258,11 @@ public struct CredentialDetails: Codable, Equatable {
      - parameter accessKeyID: The access key ID associated with the cloud object store. Only valid, and required,
        with a **credential_type** of `aws4_hmac`. This value is never returned and is only used when creating or
        modifying **credentials**. For more infomation, see the [cloud object store
-       documentation](https://cloud.ibm.com/docs/services/cloud-object-storage?topic=cloud-object-storage-using-hmac-credentials#using-hmac-credentials).
+       documentation](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-using-hmac-credentials#using-hmac-credentials).
      - parameter secretAccessKey: The secret access key associated with the cloud object store. Only valid, and
        required, with a **credential_type** of `aws4_hmac`. This value is never returned and is only used when creating
        or modifying **credentials**. For more infomation, see the [cloud object store
-       documentation](https://cloud.ibm.com/docs/services/cloud-object-storage?topic=cloud-object-storage-using-hmac-credentials#using-hmac-credentials).
+       documentation](https://cloud.ibm.com/docs/cloud-object-storage?topic=cloud-object-storage-using-hmac-credentials#using-hmac-credentials).
 
      - returns: An initialized `CredentialDetails`.
      */

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2018, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,7 +53,7 @@ public struct Enrichment: Codable, Equatable {
       When using `elements` the **options** object must contain Element Classification options. Additionally, when using
      the `elements` enrichment the configuration specified and files ingested must meet all the criteria specified in
      [the
-     documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-element-classification#element-classification).
+     documentation](https://cloud.ibm.com/docs/discovery?topic=discovery-element-classification#element-classification).
      */
     public var enrichment: String
 
@@ -95,7 +95,7 @@ public struct Enrichment: Codable, Equatable {
         When using `elements` the **options** object must contain Element Classification options. Additionally, when
        using the `elements` enrichment the configuration specified and files ingested must meet all the criteria
        specified in [the
-       documentation](https://cloud.ibm.com/docs/services/discovery?topic=discovery-element-classification#element-classification).
+       documentation](https://cloud.ibm.com/docs/discovery?topic=discovery-element-classification#element-classification).
      - parameter description: Describes what the enrichment step does.
      - parameter overwrite: Indicates that the enrichments will overwrite the destination_field field if it already
        exists.

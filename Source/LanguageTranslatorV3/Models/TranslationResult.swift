@@ -30,6 +30,17 @@ public struct TranslationResult: Codable, Equatable {
     public var characterCount: Int
 
     /**
+     The language code of the source text if the source language was automatically detected.
+     */
+    public var detectedLanguage: String?
+
+    /**
+     A score between 0 and 1 indicating the confidence of source language detection. A higher value indicates greater
+     confidence. This is returned only when the service automatically detects the source language.
+     */
+    public var detectedLanguageConfidence: Double?
+
+    /**
      List of translation output in UTF-8, corresponding to the input text entries.
      */
     public var translations: [Translation]
@@ -38,6 +49,8 @@ public struct TranslationResult: Codable, Equatable {
     private enum CodingKeys: String, CodingKey {
         case wordCount = "word_count"
         case characterCount = "character_count"
+        case detectedLanguage = "detected_language"
+        case detectedLanguageConfidence = "detected_language_confidence"
         case translations = "translations"
     }
 

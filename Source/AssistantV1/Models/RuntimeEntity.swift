@@ -62,6 +62,14 @@ public struct RuntimeEntity: Codable, Equatable {
     public var interpretation: RuntimeEntityInterpretation?
 
     /**
+     An array of possible alternative values that the user might have intended instead of the value returned in the
+     **value** property. This property is returned only for `@sys-time` and `@sys-date` entities when the user's input
+     is ambiguous.
+     This property is included only if the new system entities are enabled for the workspace.
+     */
+    public var alternatives: [RuntimeEntityAlternative]?
+
+    /**
      An object describing the role played by a system entity that is specifies the beginning or end of a range
      recognized in the user input. This property is included only if the new system entities are enabled for the
      workspace.
@@ -77,6 +85,7 @@ public struct RuntimeEntity: Codable, Equatable {
         case metadata = "metadata"
         case groups = "groups"
         case interpretation = "interpretation"
+        case alternatives = "alternatives"
         case role = "role"
     }
 
@@ -94,6 +103,10 @@ public struct RuntimeEntity: Codable, Equatable {
        input. This property is included only if the new system entities are enabled for the workspace.
        For more information about how the new system entities are interpreted, see the
        [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-beta-system-entities).
+     - parameter alternatives: An array of possible alternative values that the user might have intended instead of
+       the value returned in the **value** property. This property is returned only for `@sys-time` and `@sys-date`
+       entities when the user's input is ambiguous.
+       This property is included only if the new system entities are enabled for the workspace.
      - parameter role: An object describing the role played by a system entity that is specifies the beginning or end
        of a range recognized in the user input. This property is included only if the new system entities are enabled
        for the workspace.
@@ -108,6 +121,7 @@ public struct RuntimeEntity: Codable, Equatable {
         metadata: [String: JSON]? = nil,
         groups: [CaptureGroup]? = nil,
         interpretation: RuntimeEntityInterpretation? = nil,
+        alternatives: [RuntimeEntityAlternative]? = nil,
         role: RuntimeEntityRole? = nil
     )
     {
@@ -118,6 +132,7 @@ public struct RuntimeEntity: Codable, Equatable {
         self.metadata = metadata
         self.groups = groups
         self.interpretation = interpretation
+        self.alternatives = alternatives
         self.role = role
     }
 

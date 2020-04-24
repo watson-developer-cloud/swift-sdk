@@ -329,6 +329,7 @@
 		7AF31BFB1D7A414D0040D944 /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */; };
 		7E0ECA8C237B515A00236E6D /* GenericQueryAggregation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0ECA8B237B515A00236E6D /* GenericQueryAggregation.swift */; };
 		7E12A8CF23477FD00008906B /* DiscoveryTest+CPD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E12A8CE23477FD00008906B /* DiscoveryTest+CPD.swift */; };
+		7E1C22232450CF8700D00CF5 /* RuntimeEntityAlternative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C22222450CF8700D00CF5 /* RuntimeEntityAlternative.swift */; };
 		7E2C0DA4230DD282002FE627 /* TableTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2C0D9B230DD281002FE627 /* TableTitle.swift */; };
 		7E2C0DA5230DD282002FE627 /* Paragraphs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2C0D9C230DD281002FE627 /* Paragraphs.swift */; };
 		7E2C0DA6230DD282002FE627 /* Contexts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2C0D9D230DD281002FE627 /* Contexts.swift */; };
@@ -1303,6 +1304,7 @@
 		7AAD66501DCA5D730010481E /* VisualRecognitionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VisualRecognitionTests.swift; path = Tests/VisualRecognitionV3Tests/VisualRecognitionTests.swift; sourceTree = SOURCE_ROOT; };
 		7E0ECA8B237B515A00236E6D /* GenericQueryAggregation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericQueryAggregation.swift; sourceTree = "<group>"; };
 		7E12A8CE23477FD00008906B /* DiscoveryTest+CPD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiscoveryTest+CPD.swift"; sourceTree = "<group>"; };
+		7E1C22222450CF8700D00CF5 /* RuntimeEntityAlternative.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuntimeEntityAlternative.swift; sourceTree = "<group>"; };
 		7E2C0D9B230DD281002FE627 /* TableTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableTitle.swift; sourceTree = "<group>"; };
 		7E2C0D9C230DD281002FE627 /* Paragraphs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Paragraphs.swift; sourceTree = "<group>"; };
 		7E2C0D9D230DD281002FE627 /* Contexts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contexts.swift; sourceTree = "<group>"; };
@@ -2172,6 +2174,7 @@
 				6800FC272056D6830078788A /* OutputData.swift */,
 				6800FC422056D6830078788A /* Pagination.swift */,
 				6800FC452056D6830078788A /* RuntimeEntity.swift */,
+				7E1C22222450CF8700D00CF5 /* RuntimeEntityAlternative.swift */,
 				7EDC39BD23F4443F00B13747 /* RuntimeEntityInterpretation.swift */,
 				7EDC39BE23F4443F00B13747 /* RuntimeEntityRole.swift */,
 				6800FC342056D6830078788A /* RuntimeIntent.swift */,
@@ -4957,6 +4960,7 @@
 				6800FCB42056D8D50078788A /* Example.swift in Sources */,
 				6800FCC32056D8D50078788A /* RuntimeEntity.swift in Sources */,
 				CADA96902110ABB500B5BD84 /* WorkspaceSystemSettingsTooling.swift in Sources */,
+				7E1C22232450CF8700D00CF5 /* RuntimeEntityAlternative.swift in Sources */,
 				CADA969A2110ABB500B5BD84 /* EntityMention.swift in Sources */,
 				7EC735D92319CC4100A73810 /* DialogSuggestionOutput.swift in Sources */,
 				6800FCAD2056D8D50078788A /* DialogNodeAction.swift in Sources */,

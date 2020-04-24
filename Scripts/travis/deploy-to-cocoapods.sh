@@ -2,6 +2,10 @@
 
 set -e
 
+# needed to resolve a caching issue
+# that can break deployments on `pod trunk push`
+rm -rf ~/.cocoapods/repos
+
 git pull # Needed to get the new version created by semantic-release
 
 declare -a allPods=(

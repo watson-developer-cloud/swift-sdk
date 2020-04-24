@@ -35,7 +35,7 @@ public struct CategoriesOptions: Codable, Equatable {
 
     /**
      Enter a [custom
-     model](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-customizing)
+     model](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-customizing)
      ID to override the standard categories model.
      */
     public var model: String?
@@ -53,7 +53,7 @@ public struct CategoriesOptions: Codable, Equatable {
        only for English categories.**.
      - parameter limit: Maximum number of categories to return.
      - parameter model: Enter a [custom
-       model](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-customizing)
+       model](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-customizing)
        ID to override the standard categories model.
      - returns: An initialized `CategoriesOptions`.
      */

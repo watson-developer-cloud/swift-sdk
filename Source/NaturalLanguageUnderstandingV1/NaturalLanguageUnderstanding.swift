@@ -23,7 +23,7 @@ import IBMSwiftSDKCore
  Language Understanding will give you results for the features you request. The service cleans HTML content before
  analysis by default, so the results can ignore most advertisements and other unwanted content.
  You can create [custom
- models](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-customizing)
+ models](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-customizing)
  with Watson Knowledge Studio to detect custom entities and relations in Natural Language Understanding.
  */
 public class NaturalLanguageUnderstanding {
@@ -145,7 +145,7 @@ public class NaturalLanguageUnderstanding {
      - Syntax (Experimental).
      If a language for the input text is not specified with the `language` parameter, the service [automatically detects
      the
-     language](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-detectable-languages).
+     language](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-detectable-languages).
 
      - parameter features: Specific features to analyze the document for.
      - parameter text: The plain text to analyze. One of the `text`, `html`, or `url` parameters is required.
@@ -153,17 +153,17 @@ public class NaturalLanguageUnderstanding {
      - parameter url: The webpage to analyze. One of the `text`, `html`, or `url` parameters is required.
      - parameter clean: Set this to `false` to disable webpage cleaning. To learn more about webpage cleaning, see the
        [Analyzing
-       webpages](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-analyzing-webpages)
+       webpages](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-analyzing-webpages)
        documentation.
      - parameter xpath: An [XPath
-       query](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-analyzing-webpages#xpath)
+       query](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-analyzing-webpages#xpath)
        to perform on `html` or `url` input. Results of the query will be appended to the cleaned webpage text before it
        is analyzed. To analyze only the results of the XPath query, set the `clean` parameter to `false`.
      - parameter fallbackToRaw: Whether to use raw HTML content if text cleaning fails.
      - parameter returnAnalyzedText: Whether or not to return the analyzed text.
      - parameter language: ISO 639-1 code that specifies the language of your text. This overrides automatic language
        detection. Language support differs depending on the features you include in your analysis. See [Language
-       support](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-language-support)
+       support](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-language-support)
        for more information.
      - parameter limitTextCharacters: Sets the maximum number of characters that are processed by the service.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -241,7 +241,7 @@ public class NaturalLanguageUnderstanding {
      List models.
 
      Lists Watson Knowledge Studio [custom entities and relations
-     models](https://cloud.ibm.com/docs/services/natural-language-understanding?topic=natural-language-understanding-customizing)
+     models](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-customizing)
      that are deployed to your Natural Language Understanding service.
 
      - parameter headers: A dictionary of request headers to be sent with this request.

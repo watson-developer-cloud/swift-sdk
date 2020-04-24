@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2019, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ class VisualRecognitionV4Tests: XCTestCase {
     private let collectionID = WatsonCredentials.VisualRecognitionV4CollectionID
     private let giraffeCollectionID = WatsonCredentials.VisualRecognitionV4GiraffeCollectionID
     private let trainingDummyCollectionID = WatsonCredentials.VisualRecognitionV4TrainingDummyCollectionID
-    private let trainingDummyImageID = "pexels-photo-802112_54cb1e9f79ebad77276fddf92c139f95"
+    private let trainingDummyImageID = "1280px-Giraffe_Ithala_KZN_South_4b75885f184a39650eab62a086601068"
     private let giraffeImageURL = giraffeURL
 
     static var allTests: [(String, (VisualRecognitionV4Tests) -> () throws -> Void)] {

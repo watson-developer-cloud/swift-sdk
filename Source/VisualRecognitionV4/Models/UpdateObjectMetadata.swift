@@ -30,7 +30,7 @@ public struct UpdateObjectMetadata: Codable, Equatable {
     /**
      Number of bounding boxes in the collection with the updated object name.
      */
-    public var count: Int
+    public var count: Int?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
@@ -49,7 +49,7 @@ public struct UpdateObjectMetadata: Codable, Equatable {
      */
     public init(
         object: String,
-        count: Int
+        count: Int? = nil
     )
     {
         self.object = object

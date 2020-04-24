@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2019, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,12 +32,18 @@ public struct QueryTopHitsAggregation: Codable, Equatable {
      */
     public var size: Int
 
+    /**
+     Identifier specified in the query request of this aggregation.
+     */
+    public var name: String?
+
     public var hits: QueryTopHitsAggregationResult?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case type = "type"
         case size = "size"
+        case name = "name"
         case hits = "hits"
     }
 

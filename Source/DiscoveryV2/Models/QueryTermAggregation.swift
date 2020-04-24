@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2019, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,6 +38,11 @@ public struct QueryTermAggregation: Codable, Equatable {
     public var count: Int?
 
     /**
+     Identifier specified in the query request of this aggregation.
+     */
+    public var name: String?
+
+    /**
      Array of top values for the field.
      */
     public var results: [QueryTermAggregationResult]?
@@ -47,6 +52,7 @@ public struct QueryTermAggregation: Codable, Equatable {
         case type = "type"
         case field = "field"
         case count = "count"
+        case name = "name"
         case results = "results"
     }
 

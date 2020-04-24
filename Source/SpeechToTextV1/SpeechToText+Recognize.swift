@@ -77,6 +77,13 @@ extension SpeechToText {
         headers: [String: String]? = nil,
         callback: RecognizeCallback)
     {
+        if endOfPhraseSilenceTime != nil {
+            print("Warning: endOfPhraseSilenceTime as a top level param is non-functional. Please define it in RecognitionSettings")
+        }
+        if splitTranscriptAtPhraseEnd != nil {
+            print("Warning: splitTranscriptAtPhraseEnd as a top level param is non-functional. Please define it in RecognitionSettings")
+        }
+
         // create SpeechToTextSession
         let session = SpeechToTextSession(
             authenticator: authenticator,

@@ -63,6 +63,12 @@ public struct DocumentStatus: Codable, Equatable {
     public var source: String
 
     /**
+     A score between 0 and 1 indicating the confidence of source language detection. A higher value indicates greater
+     confidence. This is returned only when the service automatically detects the source language.
+     */
+    public var detectedLanguageConfidence: Double?
+
+    /**
      Translation target language code.
      */
     public var target: String
@@ -95,6 +101,7 @@ public struct DocumentStatus: Codable, Equatable {
         case modelID = "model_id"
         case baseModelID = "base_model_id"
         case source = "source"
+        case detectedLanguageConfidence = "detected_language_confidence"
         case target = "target"
         case created = "created"
         case completed = "completed"

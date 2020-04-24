@@ -29,7 +29,7 @@ import IBMSwiftSDKCore
  translations for words. A sounds-like translation consists of one or more words that, when combined, sound like the
  word. A phonetic translation is based on the SSML phoneme format for representing a word. You can specify a phonetic
  translation in standard International Phonetic Alphabet (IPA) representation or in the proprietary IBM Symbolic
- Phonetic Representation (SPR).
+ Phonetic Representation (SPR). The Arabic, Chinese, Dutch, and Korean languages support only IPA.
  */
 public class TextToSpeech {
 
@@ -290,9 +290,9 @@ public class TextToSpeech {
        **Audio formats (accept types)** in the method description.
      - parameter voice: The voice to use for synthesis.
      - parameter customizationID: The customization ID (GUID) of a custom voice model to use for the synthesis. If a
-       custom voice model is specified, it is guaranteed to work only if it matches the language of the indicated voice.
-       You must make the request with credentials for the instance of the service that owns the custom model. Omit the
-       parameter to use the specified voice with no customization.
+       custom voice model is specified, it works only if it matches the language of the indicated voice. You must make
+       the request with credentials for the instance of the service that owns the custom model. Omit the parameter to
+       use the specified voice with no customization.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -395,16 +395,15 @@ public class TextToSpeech {
      Gets the phonetic pronunciation for the specified word. You can request the pronunciation for a specific format.
      You can also request the pronunciation for a specific voice to see the default translation for the language of that
      voice or for a specific custom voice model to see the translation for that voice model.
-     **Note:** This method is currently a beta release. The method does not support the Arabic, Chinese, and Dutch
-     languages.
+     **Note:** This method is currently a beta release.
      **See also:** [Querying a word from a
      language](https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customWords#cuWordsQueryLanguage).
 
      - parameter text: The word for which the pronunciation is requested.
      - parameter voice: A voice that specifies the language in which the pronunciation is to be returned. All voices
        for the same language (for example, `en-US`) return the same translation.
-     - parameter format: The phoneme format in which to return the pronunciation. Omit the parameter to obtain the
-       pronunciation in the default format.
+     - parameter format: The phoneme format in which to return the pronunciation. The Arabic, Chinese, Dutch, and
+       Korean languages support only IPA. Omit the parameter to obtain the pronunciation in the default format.
      - parameter customizationID: The customization ID (GUID) of a custom voice model for which the pronunciation is
        to be returned. The language of a specified custom model must match the language of the specified voice. If the
        word is not defined in the specified custom model, the service returns the default translation for the custom
@@ -474,14 +473,14 @@ public class TextToSpeech {
      Creates a new empty custom voice model. You must specify a name for the new custom model. You can optionally
      specify the language and a description for the new model. The model is owned by the instance of the service whose
      credentials are used to create it.
-     **Note:** This method is currently a beta release. The service does not support voice model customization for the
-     Arabic, Chinese, and Dutch languages.
+     **Note:** This method is currently a beta release.
      **See also:** [Creating a custom
      model](https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customModels#cuModelsCreate).
 
      - parameter name: The name of the new custom voice model.
-     - parameter language: The language of the new custom voice model. Omit the parameter to use the the default
-       language, `en-US`.
+     - parameter language: The language of the new custom voice model. You create a custom voice model for a specific
+       language, not for a specific voice. A custom model can be used with any voice, standard or neural, for its
+       specified language. Omit the parameter to use the the default language, `en-US`.
      - parameter description: A description of the new custom voice model. Specifying a description is recommended.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -954,7 +953,8 @@ public class TextToSpeech {
      - parameter word: The word that is to be added or updated for the custom voice model.
      - parameter translation: The phonetic or sounds-like translation for the word. A phonetic translation is based on
        the SSML format for representing the phonetic string of a word either as an IPA translation or as an IBM SPR
-       translation. A sounds-like is one or more words that, when combined, sound like the word.
+       translation. The Arabic, Chinese, Dutch, and Korean languages support only IPA. A sounds-like is one or more
+       words that, when combined, sound like the word.
      - parameter partOfSpeech: **Japanese only.** The part of speech for the word. The service uses the value to
        produce the correct intonation for the word. You can create only a single entry, with or without a single part of
        speech, for any word; you cannot create multiple entries with different parts of speech for the same word. For

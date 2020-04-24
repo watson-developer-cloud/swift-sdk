@@ -169,7 +169,8 @@ public struct DialogNode: Codable, Equatable {
     public var userLabel: String?
 
     /**
-     Whether the dialog node should be excluded from disambiguation suggestions.
+     Whether the dialog node should be excluded from disambiguation suggestions. Valid only when **type**=`standard` or
+     `frame`.
      */
     public var disambiguationOptOut: Bool?
 
@@ -244,6 +245,7 @@ public struct DialogNode: Codable, Equatable {
      - parameter digressOutSlots: Whether the user can digress to top-level nodes while filling out slots.
      - parameter userLabel: A label that can be displayed externally to describe the purpose of the node to users.
      - parameter disambiguationOptOut: Whether the dialog node should be excluded from disambiguation suggestions.
+       Valid only when **type**=`standard` or `frame`.
      - parameter disabled: For internal use only.
      - parameter created: The timestamp for creation of the object.
      - parameter updated: The timestamp for the most recent update to the object.

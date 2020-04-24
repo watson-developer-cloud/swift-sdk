@@ -186,7 +186,7 @@ public class Discovery {
      Query a project.
 
      By using this method, you can construct queries. For details, see the [Discovery
-     documentation](https://cloud.ibm.com/docs/services/discovery-data?topic=discovery-data-query-concepts).
+     documentation](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-query-concepts).
 
      - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
        administrative tooling.

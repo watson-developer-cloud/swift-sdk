@@ -31,4 +31,4 @@ compareComply.classifyElements(file: contractA) {
 The following links provide more information about the IBM Watson Compare and Comply service:
 
 * [IBM Watson Compare & Comply - Service Page](https://www.ibm.com/cloud/compare-and-comply)
-* [IBM Watson Compare & Comply - Documentation](https://cloud.ibm.com/docs/services/compare-comply/index.html#about)
+* [IBM Watson Compare & Comply - Documentation](https://cloud.ibm.com/docs/compare-comply?topic=compare-comply-about#about)

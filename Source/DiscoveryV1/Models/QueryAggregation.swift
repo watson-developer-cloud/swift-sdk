@@ -19,7 +19,7 @@ import Foundation
 /** An aggregation produced by the Discovery service to analyze the input provided. */
 public enum QueryAggregation: Codable, Equatable {
 
-    // reference: https://cloud.ibm.com/docs/services/discovery/query-reference.html#aggregations
+    // reference: https://cloud.ibm.com/docs/discovery?topic=discovery-query-reference#aggregations
 
     case term(Term)
     case filter(Filter)

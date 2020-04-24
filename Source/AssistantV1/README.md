@@ -95,4 +95,4 @@ assistant.message(
 The following links provide more information about the IBM Watson Assistant service:
 
 * [IBM Watson Assistant - Service Page](https://www.ibm.com/cloud/watson-assistant/)
-* [IBM Watson Assistant - Documentation](https://cloud.ibm.com/docs/services/assistant/index.html#about)
+* [IBM Watson Assistant - Documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-index#about)

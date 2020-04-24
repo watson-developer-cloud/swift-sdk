@@ -21,7 +21,7 @@ import Foundation
  use a default value provided by the Watson Speech to Text service.
 
  For more information about the Speech to Text service parameters, visit:
- https://cloud.ibm.com/docs/services/speech-to-text/input.html
+ https://cloud.ibm.com/docs/speech-to-text/input.html
  */
 public struct RecognitionSettings: Codable, Equatable {
 
@@ -30,7 +30,7 @@ public struct RecognitionSettings: Codable, Equatable {
 
     /// The format of the audio data. Endianness is automatically detected by the Speech to Text
     /// service. For more information about the supported formats, visit:
-    /// https://cloud.ibm.com/docs/services/speech-to-text/audio-formats.html
+    /// https://cloud.ibm.com/docs/speech-to-text/audio-formats.html
     public var contentType: String?
 
     /// If you specify a customization ID when you open the connection, you can use the customization
@@ -91,7 +91,7 @@ public struct RecognitionSettings: Codable, Equatable {
     /// grammar, you must also use the `language_customization_id` parameter to specify the name of the custom language
     /// model for which the grammar is defined. The service recognizes only strings that are recognized by the specified
     /// grammar; it does not recognize other custom words from the model's words resource. See
-    /// [Grammars](https://cloud.ibm.com/docs/services/speech-to-text/output.html).
+    /// [Grammars](https://cloud.ibm.com/docs/speech-to-text/output.html).
     public var grammarName: String?
 
     /// If `true`, the service redacts, or masks, numeric data from final transcripts. The feature
@@ -103,7 +103,7 @@ public struct RecognitionSettings: Codable, Equatable {
     /// the `keywords` and `keywords_threshold` parameters) and returns only a single final transcript (forces the
     /// `max_alternatives` parameter to be `1`).
     /// **Note:** Applies to US English, Japanese, and Korean transcription only.
-    /// See [Numeric redaction](https://cloud.ibm.com/docs/services/speech-to-text/output.html#redaction).
+    /// See [Numeric redaction](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-output#redaction).
     public var redaction: Bool?
 
     // If `true`, requests processing metrics about the service's transcription of the input audio. The service returns
@@ -172,7 +172,7 @@ public struct RecognitionSettings: Codable, Equatable {
      Text recognition request.
      - parameter contentType: The format of the audio data. Endianness is automatically detected
         by the Speech to Text service. For more information about the supported formats, visit:
-        https://cloud.ibm.com/docs/services/speech-to-text/audio-formats.html
+        https://cloud.ibm.com/docs/speech-to-text/audio-formats.html
      - returns: An initialized `RecognitionSettings` object with the given `contentType`.
         Configure additional parameters for the recognition request by directly modifying
         the returned object's properties.

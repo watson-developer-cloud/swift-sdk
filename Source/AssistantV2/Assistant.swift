@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,10 +55,11 @@ public class Assistant {
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
      */
-    public init(version: String) throws {
+    public init?(version: String) {
         self.version = version
-
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
+            return nil
+        }
         self.authenticator = authenticator
 
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
@@ -155,7 +156,6 @@ public class Assistant {
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createSession")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
-        headerParameters["Content-Type"] = "application/json"
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -249,9 +249,10 @@ public class Assistant {
     }
 
     /**
-     Send user input to assistant.
+     Send user input to assistant (stateful).
 
-     Send user input to an assistant and receive a response.
+     Send user input to an assistant and receive a response, with conversation state (including context data) stored by
+     Watson Assistant for the duration of the session.
      There is no rate limit for this operation.
 
      - parameter assistantID: Unique identifier of the assistant. To find the assistant ID in the Watson Assistant
@@ -260,9 +261,10 @@ public class Assistant {
        **Note:** Currently, the v2 API does not support creating assistants.
      - parameter sessionID: Unique identifier of the session.
      - parameter input: An input object that includes the input text.
-     - parameter context: State information for the conversation. The context is stored by the assistant on a
-       per-session basis. You can use this property to set or modify context variables, which can also be accessed by
-       dialog nodes.
+     - parameter context: Context data for the conversation. You can use this property to set or modify context
+       variables, which can also be accessed by dialog nodes. The context is stored by the assistant on a per-session
+       basis.
+       **Note:** The total size of the context data stored for a stateful session cannot exceed 100KB.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -299,6 +301,83 @@ public class Assistant {
 
         // construct REST request
         let path = "/v2/assistants/\(assistantID)/sessions/\(sessionID)/message"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "POST",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Send user input to assistant (stateless).
+
+     Send user input to an assistant and receive a response, with conversation state (including context data) managed by
+     your application.
+     There is no rate limit for this operation.
+
+     - parameter assistantID: Unique identifier of the assistant. To find the assistant ID in the Watson Assistant
+       user interface, open the assistant settings and click **API Details**. For information about creating assistants,
+       see the [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-assistant-add#assistant-add-task).
+       **Note:** Currently, the v2 API does not support creating assistants.
+     - parameter input: An input object that includes the input text.
+     - parameter context: Context data for the conversation. You can use this property to set or modify context
+       variables, which can also be accessed by dialog nodes. The context is not stored by the assistant. To maintain
+       session state, include the context from the previous response.
+       **Note:** The total size of the context data for a stateless session cannot exceed 250KB.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func messageStateless(
+        assistantID: String,
+        input: MessageInputStateless? = nil,
+        context: MessageContextStateless? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<MessageResponseStateless>?, WatsonError?) -> Void)
+    {
+        // construct body
+        let messageStatelessRequest = MessageRequestStateless(
+            input: input,
+            context: context)
+        guard let body = try? JSON.encoder.encodeIfPresent(messageStatelessRequest) else {
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "messageStateless")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v2/assistants/\(assistantID)/message"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
             completionHandler(nil, WatsonError.urlEncoding(path: path))
             return

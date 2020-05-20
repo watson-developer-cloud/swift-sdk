@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,14 +22,15 @@ import IBMSwiftSDKCore
  The IBM&reg; Text to Speech service provides APIs that use IBM's speech-synthesis capabilities to synthesize text into
  natural-sounding speech in a variety of languages, dialects, and voices. The service supports at least one male or
  female voice, sometimes both, for each language. The audio is streamed back to the client with minimal delay.
- For speech synthesis, the service supports a synchronous HTTP Representational State Transfer (REST) interface. It also
- supports a WebSocket interface that provides both plain text and SSML input, including the SSML &lt;mark&gt; element
- and word timings. SSML is an XML-based markup language that provides text annotation for speech-synthesis applications.
- The service also offers a customization interface. You can use the interface to define sounds-like or phonetic
- translations for words. A sounds-like translation consists of one or more words that, when combined, sound like the
- word. A phonetic translation is based on the SSML phoneme format for representing a word. You can specify a phonetic
- translation in standard International Phonetic Alphabet (IPA) representation or in the proprietary IBM Symbolic
- Phonetic Representation (SPR). The Arabic, Chinese, Dutch, and Korean languages support only IPA.
+ For speech synthesis, the service supports a synchronous HTTP Representational State Transfer (REST) interface and a
+ WebSocket interface. Both interfaces support plain text and SSML input. SSML is an XML-based markup language that
+ provides text annotation for speech-synthesis applications. The WebSocket interface also supports the SSML
+ <code>&lt;mark&gt;</code> element and word timings.
+ The service offers a customization interface that you can use to define sounds-like or phonetic translations for words.
+ A sounds-like translation consists of one or more words that, when combined, sound like the word. A phonetic
+ translation is based on the SSML phoneme format for representing a word. You can specify a phonetic translation in
+ standard International Phonetic Alphabet (IPA) representation or in the proprietary IBM Symbolic Phonetic
+ Representation (SPR). The Arabic, Chinese, Dutch, and Korean languages support only IPA.
  */
 public class TextToSpeech {
 
@@ -59,8 +60,10 @@ public class TextToSpeech {
      In that case, try another initializer that directly passes in the credentials.
 
      */
-    public init() throws {
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
+    public init?() {
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
+            return nil
+        }
         self.authenticator = authenticator
 
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
@@ -355,38 +358,7 @@ public class TextToSpeech {
         )
 
         // execute REST request
-        request.response { (response: WatsonResponse<Data>?, error: WatsonError?) in
-            var response = response
-            guard let data = response?.result else {
-                completionHandler(response, error)
-                return
-            }
-            if accept?.lowercased().contains("audio/wav") == true {
-                // repair the WAV header
-                var wav = data
-                guard WAVRepair.isWAVFile(data: wav) else {
-                    let error = WatsonError.other(message: "Expected returned audio to be in WAV format", metadata: nil)
-                    completionHandler(nil, error)
-                    return
-                }
-                WAVRepair.repairWAVHeader(data: &wav)
-                response?.result = wav
-                completionHandler(response, nil)
-            } else if accept?.lowercased().contains("ogg") == true && accept?.lowercased().contains("opus") == true {
-                do {
-                    let decodedAudio = try TextToSpeechDecoder(audioData: data)
-                    response?.result = decodedAudio.pcmDataWithHeaders
-                    completionHandler(response, nil)
-                } catch {
-                    let error = WatsonError.serialization(values: "returned audio")
-                    completionHandler(nil, error)
-                    return
-                }
-            } else {
-                completionHandler(response, nil)
-            }
-        }
-
+        request.response(completionHandler: completionHandler)
     }
 
     /**

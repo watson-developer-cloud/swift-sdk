@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,6 +54,11 @@ public struct MessageOutput: Codable, Equatable {
      */
     public var userDefined: [String: JSON]?
 
+    /**
+     Properties describing any spelling corrections in the user input that was received.
+     */
+    public var spelling: MessageOutputSpelling?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case generic = "generic"
@@ -62,6 +67,7 @@ public struct MessageOutput: Codable, Equatable {
         case actions = "actions"
         case debug = "debug"
         case userDefined = "user_defined"
+        case spelling = "spelling"
     }
 
 }

@@ -17,36 +17,25 @@
 import Foundation
 
 /**
- An aggregation produced by  Discovery to analyze the input provided.
+ A stateless response from the Watson Assistant service.
  */
-public struct QueryAggregation: Codable, Equatable {
+public struct MessageResponseStateless: Codable, Equatable {
 
     /**
-     The type of aggregation command used. For example: term, filter, max, min, etc.
+     Assistant output to be rendered or processed by the client.
      */
-    public var type: String?
+    public var output: MessageOutput
 
     /**
-     Array of aggregation results.
+     Context data for the conversation. You can use this property to access context variables. The context is not stored
+     by the assistant; to maintain session state, include the context from the response in the next message.
      */
-    public var results: [AggregationResult]?
-
-    /**
-     Number of matching results.
-     */
-    public var matchingResults: Int?
-
-    /**
-     Aggregations returned by Discovery.
-     */
-    public var aggregations: [QueryAggregation]?
+    public var context: MessageContextStateless
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case type = "type"
-        case results = "results"
-        case matchingResults = "matching_results"
-        case aggregations = "aggregations"
+        case output = "output"
+        case context = "context"
     }
 
 }

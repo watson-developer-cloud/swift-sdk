@@ -19,7 +19,7 @@ import Foundation
 /**
  An input object that includes the input text.
  */
-public struct MessageInput: Codable, Equatable {
+public struct MessageInputStateless: Codable, Equatable {
 
     /**
      The type of user input. Currently, only text input is supported.
@@ -58,7 +58,7 @@ public struct MessageInput: Codable, Equatable {
     /**
      Optional properties that control how the assistant responds.
      */
-    public var options: MessageInputOptions?
+    public var options: MessageInputOptionsStateless?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
@@ -71,7 +71,7 @@ public struct MessageInput: Codable, Equatable {
     }
 
     /**
-     Initialize a `MessageInput` with member variables.
+     Initialize a `MessageInputStateless` with member variables.
 
      - parameter messageType: The type of user input. Currently, only text input is supported.
      - parameter text: The text of the user input. This string cannot contain carriage return, newline, or tab
@@ -83,7 +83,7 @@ public struct MessageInput: Codable, Equatable {
      - parameter suggestionID: For internal use only.
      - parameter options: Optional properties that control how the assistant responds.
 
-     - returns: An initialized `MessageInput`.
+     - returns: An initialized `MessageInputStateless`.
      */
     public init(
         messageType: String? = nil,
@@ -91,7 +91,7 @@ public struct MessageInput: Codable, Equatable {
         intents: [RuntimeIntent]? = nil,
         entities: [RuntimeEntity]? = nil,
         suggestionID: String? = nil,
-        options: MessageInputOptions? = nil
+        options: MessageInputOptionsStateless? = nil
     )
     {
         self.messageType = messageType

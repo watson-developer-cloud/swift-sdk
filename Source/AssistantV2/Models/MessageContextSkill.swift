@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,8 @@ import Foundation
 import IBMSwiftSDKCore
 
 /**
- Contains information specific to a particular skill used by the Assistant.
+ Contains information specific to a particular skill used by the Assistant. The property name must be the same as the
+ name of the skill (for example, `main skill`).
  */
 public struct MessageContextSkill: Codable, Equatable {
 
@@ -30,7 +31,7 @@ public struct MessageContextSkill: Codable, Equatable {
     /**
      System context data used by the skill.
      */
-    public var system: [String: JSON]?
+    public var system: MessageContextSkillSystem?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
@@ -48,7 +49,7 @@ public struct MessageContextSkill: Codable, Equatable {
      */
     public init(
         userDefined: [String: JSON]? = nil,
-        system: [String: JSON]? = nil
+        system: MessageContextSkillSystem? = nil
     )
     {
         self.userDefined = userDefined

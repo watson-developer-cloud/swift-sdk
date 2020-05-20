@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,7 +49,7 @@ public struct SearchResult: Codable, Equatable {
     public var url: String?
 
     /**
-     An object containing segments of text from search results with query-matching text highlighted using HTML <em>
+     An object containing segments of text from search results with query-matching text highlighted using HTML `<em>`
      tags.
      */
     public var highlight: SearchResultHighlight?

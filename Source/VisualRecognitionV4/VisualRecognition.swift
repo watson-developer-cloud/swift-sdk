@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,10 +53,11 @@ public class VisualRecognition {
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
      */
-    public init(version: String) throws {
+    public init?(version: String) {
         self.version = version
-
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
+            return nil
+        }
         self.authenticator = authenticator
 
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
@@ -161,17 +162,16 @@ public class VisualRecognition {
     {
         // construct body
         let multipartFormData = MultipartFormData()
-
-        // HAND EDIT: join collectionIDs into CSV string
-        if let csvCollectionIDsData = collectionIDs.joined(separator: ",").data(using: .utf8) {
-            multipartFormData.append(csvCollectionIDsData, withName: "collection_ids")
+        for item in collectionIDs {
+            if let itemData = item.data(using: .utf8) {
+                multipartFormData.append(itemData, withName: "collection_ids")
+            }
         }
-
-        // HAND EDIT: join features into CSV string
-        if let csvFeaturesData = features.joined(separator: ",").data(using: .utf8) {
-            multipartFormData.append(csvFeaturesData, withName: "features")
+        for item in features {
+            if let itemData = item.data(using: .utf8) {
+                multipartFormData.append(itemData, withName: "features")
+            }
         }
-
         if let imagesFile = imagesFile {
             for item in imagesFile {
                 multipartFormData.append(item.data, withName: "images_file", mimeType: item.contentType, fileName: item.filename)
@@ -515,6 +515,70 @@ public class VisualRecognition {
             authenticator: authenticator,
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.response(completionHandler: completionHandler)
+    }
+
+    /**
+     Get a model.
+
+     Download a model that you can deploy to detect objects in images. The collection must include a generated model,
+     which is indicated in the response for the collection details as `"rscnn_ready": true`. If the value is `false`,
+     train or retrain the collection to generate the model.
+     Currently, the model format is specific to Android apps. For more information about how to deploy the model to your
+     app, see the [Watson Visual Recognition on Android](https://github.com/matt-ny/rscnn) project in GitHub.
+
+     - parameter collectionID: The identifier of the collection.
+     - parameter feature: The feature for the model.
+     - parameter modelFormat: The format of the returned model.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func getModelFile(
+        collectionID: String,
+        feature: String,
+        modelFormat: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Data>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getModelFile")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/octet-stream"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        queryParameters.append(URLQueryItem(name: "feature", value: feature))
+        queryParameters.append(URLQueryItem(name: "model_format", value: modelFormat))
+
+        // construct REST request
+        let path = "/v4/collections/\(collectionID)/model"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
             url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
             queryItems: queryParameters

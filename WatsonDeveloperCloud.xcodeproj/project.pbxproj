@@ -375,6 +375,15 @@
 		7E70D5C92388491E00CC8C80 /* Webhook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70D5C62388491E00CC8C80 /* Webhook.swift */; };
 		7E70D5CC238C1DF000CC8C80 /* TrainingEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70D5CA238C1DF000CC8C80 /* TrainingEvents.swift */; };
 		7E70D5CD238C1DF000CC8C80 /* TrainingEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70D5CB238C1DF000CC8C80 /* TrainingEvent.swift */; };
+		7E8B21272475973700BE7EFA /* MessageContextSkillSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8B211E2475973500BE7EFA /* MessageContextSkillSystem.swift */; };
+		7E8B21282475973700BE7EFA /* MessageInputStateless.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8B211F2475973600BE7EFA /* MessageInputStateless.swift */; };
+		7E8B21292475973700BE7EFA /* MessageInputOptionsSpelling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8B21202475973600BE7EFA /* MessageInputOptionsSpelling.swift */; };
+		7E8B212A2475973700BE7EFA /* MessageOutputSpelling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8B21212475973600BE7EFA /* MessageOutputSpelling.swift */; };
+		7E8B212B2475973700BE7EFA /* MessageRequestStateless.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8B21222475973600BE7EFA /* MessageRequestStateless.swift */; };
+		7E8B212C2475973700BE7EFA /* MessageContextStateless.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8B21232475973600BE7EFA /* MessageContextStateless.swift */; };
+		7E8B212D2475973700BE7EFA /* MessageResponseStateless.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8B21242475973700BE7EFA /* MessageResponseStateless.swift */; };
+		7E8B212E2475973700BE7EFA /* MessageContextGlobalStateless.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8B21252475973700BE7EFA /* MessageContextGlobalStateless.swift */; };
+		7E8B212F2475973700BE7EFA /* MessageInputOptionsStateless.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E8B21262475973700BE7EFA /* MessageInputOptionsStateless.swift */; };
 		7E96EC3C233907660039388E /* GenericQueryAggregation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E96EC3B233907660039388E /* GenericQueryAggregation.swift */; };
 		7E96EC3F23391C0A0039388E /* WordTimestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E96EC3D23391C0A0039388E /* WordTimestamp.swift */; };
 		7E96EC4023391C0A0039388E /* WordConfidence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E96EC3E23391C0A0039388E /* WordConfidence.swift */; };
@@ -1339,6 +1348,15 @@
 		7E70D5C62388491E00CC8C80 /* Webhook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Webhook.swift; sourceTree = "<group>"; };
 		7E70D5CA238C1DF000CC8C80 /* TrainingEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingEvents.swift; sourceTree = "<group>"; };
 		7E70D5CB238C1DF000CC8C80 /* TrainingEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingEvent.swift; sourceTree = "<group>"; };
+		7E8B211E2475973500BE7EFA /* MessageContextSkillSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageContextSkillSystem.swift; sourceTree = "<group>"; };
+		7E8B211F2475973600BE7EFA /* MessageInputStateless.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageInputStateless.swift; sourceTree = "<group>"; };
+		7E8B21202475973600BE7EFA /* MessageInputOptionsSpelling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageInputOptionsSpelling.swift; sourceTree = "<group>"; };
+		7E8B21212475973600BE7EFA /* MessageOutputSpelling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageOutputSpelling.swift; sourceTree = "<group>"; };
+		7E8B21222475973600BE7EFA /* MessageRequestStateless.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageRequestStateless.swift; sourceTree = "<group>"; };
+		7E8B21232475973600BE7EFA /* MessageContextStateless.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageContextStateless.swift; sourceTree = "<group>"; };
+		7E8B21242475973700BE7EFA /* MessageResponseStateless.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageResponseStateless.swift; sourceTree = "<group>"; };
+		7E8B21252475973700BE7EFA /* MessageContextGlobalStateless.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageContextGlobalStateless.swift; sourceTree = "<group>"; };
+		7E8B21262475973700BE7EFA /* MessageInputOptionsStateless.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageInputOptionsStateless.swift; sourceTree = "<group>"; };
 		7E96EC3B233907660039388E /* GenericQueryAggregation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericQueryAggregation.swift; sourceTree = "<group>"; };
 		7E96EC3D23391C0A0039388E /* WordTimestamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordTimestamp.swift; sourceTree = "<group>"; };
 		7E96EC3E23391C0A0039388E /* WordConfidence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordConfidence.swift; sourceTree = "<group>"; };
@@ -2960,15 +2978,24 @@
 				9220778D2152FC5900C8C7E4 /* DialogSuggestionValue.swift */,
 				922077842152FC5900C8C7E4 /* MessageContext.swift */,
 				922077952152FC5900C8C7E4 /* MessageContextGlobal.swift */,
+				7E8B21252475973700BE7EFA /* MessageContextGlobalStateless.swift */,
 				9220778C2152FC5900C8C7E4 /* MessageContextGlobalSystem.swift */,
 				CA8E92882236C638001BFABF /* MessageContextSkill.swift */,
 				922077932152FC5900C8C7E4 /* MessageContextSkills.swift */,
+				7E8B211E2475973500BE7EFA /* MessageContextSkillSystem.swift */,
+				7E8B21232475973600BE7EFA /* MessageContextStateless.swift */,
 				922077912152FC5900C8C7E4 /* MessageInput.swift */,
 				922077962152FC5900C8C7E4 /* MessageInputOptions.swift */,
+				7E8B21202475973600BE7EFA /* MessageInputOptionsSpelling.swift */,
+				7E8B21262475973700BE7EFA /* MessageInputOptionsStateless.swift */,
+				7E8B211F2475973600BE7EFA /* MessageInputStateless.swift */,
 				922077892152FC5900C8C7E4 /* MessageOutput.swift */,
 				9220778B2152FC5900C8C7E4 /* MessageOutputDebug.swift */,
+				7E8B21212475973600BE7EFA /* MessageOutputSpelling.swift */,
 				922077872152FC5900C8C7E4 /* MessageRequest.swift */,
+				7E8B21222475973600BE7EFA /* MessageRequestStateless.swift */,
 				922077982152FC5900C8C7E4 /* MessageResponse.swift */,
+				7E8B21242475973700BE7EFA /* MessageResponseStateless.swift */,
 				922077922152FC5900C8C7E4 /* RuntimeEntity.swift */,
 				7EDC39C423F4445000B13747 /* RuntimeEntityAlternative.swift */,
 				7EDC39C323F4445000B13747 /* RuntimeEntityInterpretation.swift */,
@@ -5365,6 +5392,8 @@
 				922078532152FCE400C8C7E4 /* DialogLogMessage.swift in Sources */,
 				922078412152FCE000C8C7E4 /* Assistant.swift in Sources */,
 				922078572152FCE400C8C7E4 /* MessageResponse.swift in Sources */,
+				7E8B212C2475973700BE7EFA /* MessageContextStateless.swift in Sources */,
+				7E8B212A2475973700BE7EFA /* MessageOutputSpelling.swift in Sources */,
 				7EC735DC2319DDB400A73810 /* RuntimeResponseGeneric.swift in Sources */,
 				922078442152FCE400C8C7E4 /* DialogSuggestion.swift in Sources */,
 				922078512152FCE400C8C7E4 /* RuntimeEntity.swift in Sources */,
@@ -5372,13 +5401,17 @@
 				5F2C5BE722E9FA0900A7628D /* SearchResultHighlight.swift in Sources */,
 				922078522152FCE400C8C7E4 /* MessageContextSkills.swift in Sources */,
 				922078432152FCE400C8C7E4 /* MessageContext.swift in Sources */,
+				7E8B212D2475973700BE7EFA /* MessageResponseStateless.swift in Sources */,
 				922078562152FCE400C8C7E4 /* DialogNodesVisited.swift in Sources */,
 				924EE7BA21505D7A0048C0E5 /* Shared.swift in Sources */,
 				922078422152FCE400C8C7E4 /* DialogNodeAction.swift in Sources */,
 				922078452152FCE400C8C7E4 /* SessionResponse.swift in Sources */,
+				7E8B212B2475973700BE7EFA /* MessageRequestStateless.swift in Sources */,
 				922078502152FCE400C8C7E4 /* MessageInput.swift in Sources */,
 				922078472152FCE400C8C7E4 /* CaptureGroup.swift in Sources */,
 				5F2C5BE622E9FA0900A7628D /* SearchResult.swift in Sources */,
+				7E8B21292475973700BE7EFA /* MessageInputOptionsSpelling.swift in Sources */,
+				7E8B21272475973700BE7EFA /* MessageContextSkillSystem.swift in Sources */,
 				9220784A2152FCE400C8C7E4 /* MessageOutputDebug.swift in Sources */,
 				922078482152FCE400C8C7E4 /* MessageOutput.swift in Sources */,
 				9220784D2152FCE400C8C7E4 /* RuntimeIntent.swift in Sources */,
@@ -5386,7 +5419,10 @@
 				CA8E92892236C638001BFABF /* MessageContextSkill.swift in Sources */,
 				7EDC39C723F4445000B13747 /* RuntimeEntityAlternative.swift in Sources */,
 				7EDC39C623F4445000B13747 /* RuntimeEntityInterpretation.swift in Sources */,
+				7E8B212E2475973700BE7EFA /* MessageContextGlobalStateless.swift in Sources */,
 				9220784C2152FCE400C8C7E4 /* DialogSuggestionValue.swift in Sources */,
+				7E8B212F2475973700BE7EFA /* MessageInputOptionsStateless.swift in Sources */,
+				7E8B21282475973700BE7EFA /* MessageInputStateless.swift in Sources */,
 				9220784E2152FCE400C8C7E4 /* DialogNodeOutputOptionsElementValue.swift in Sources */,
 				5F2C5BE822E9FA0900A7628D /* SearchResultMetadata.swift in Sources */,
 				922078462152FCE400C8C7E4 /* MessageRequest.swift in Sources */,

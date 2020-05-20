@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -131,8 +131,8 @@ public struct DialogNodeOutputGeneric: Codable, Equatable {
     /**
      The text of the search query. This can be either a natural-language query or a query that uses the Discovery query
      language syntax, depending on the value of the **query_type** property. For more information, see the [Discovery
-     service documentation](https://cloud.ibm.com/docs/discovery/query-operators.html#query-operators). Required when
-     **response_type**=`search_skill`.
+     service documentation](https://cloud.ibm.com/docs/discovery?topic=discovery-query-operators#query-operators).
+     Required when **response_type**=`search_skill`.
      */
     public var query: String?
 
@@ -144,7 +144,7 @@ public struct DialogNodeOutputGeneric: Codable, Equatable {
     /**
      An optional filter that narrows the set of documents to be searched. For more information, see the [Discovery
      service documentation]([Discovery service
-     documentation](https://cloud.ibm.com/docs/discovery/query-parameters.html#filter).
+     documentation](https://cloud.ibm.com/docs/discovery?topic=discovery-query-parameters#filter).
      */
     public var filter: String?
 
@@ -204,12 +204,12 @@ public struct DialogNodeOutputGeneric: Codable, Equatable {
      - parameter query: The text of the search query. This can be either a natural-language query or a query that
        uses the Discovery query language syntax, depending on the value of the **query_type** property. For more
        information, see the [Discovery service
-       documentation](https://cloud.ibm.com/docs/discovery/query-operators.html#query-operators). Required when
-       **response_type**=`search_skill`.
+       documentation](https://cloud.ibm.com/docs/discovery?topic=discovery-query-operators#query-operators). Required
+       when **response_type**=`search_skill`.
      - parameter queryType: The type of the search query. Required when **response_type**=`search_skill`.
      - parameter filter: An optional filter that narrows the set of documents to be searched. For more information,
        see the [Discovery service documentation]([Discovery service
-       documentation](https://cloud.ibm.com/docs/discovery/query-parameters.html#filter).
+       documentation](https://cloud.ibm.com/docs/discovery?topic=discovery-query-parameters#filter).
      - parameter discoveryVersion: The version of the Discovery service API to use for the query.
 
      - returns: An initialized `DialogNodeOutputGeneric`.

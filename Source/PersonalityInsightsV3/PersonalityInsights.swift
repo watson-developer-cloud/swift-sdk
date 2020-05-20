@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,10 +64,11 @@ public class PersonalityInsights {
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
      */
-    public init(version: String) throws {
+    public init?(version: String) {
         self.version = version
-
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
+            return nil
+        }
         self.authenticator = authenticator
 
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
@@ -184,6 +185,8 @@ public class PersonalityInsights {
      - parameter rawScores: Indicates whether a raw score in addition to a normalized percentile is returned for each
        characteristic; raw scores are not compared with a sample population. By default, only normalized percentiles are
        returned.
+     - parameter csvHeaders: Indicates whether column labels are returned with a CSV response. By default, no column
+       labels are returned. Applies only when the response type is CSV (`text/csv`).
      - parameter consumptionPreferences: Indicates whether consumption preferences are returned with the results. By
        default, no consumption preferences are returned.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -194,6 +197,7 @@ public class PersonalityInsights {
         contentLanguage: String? = nil,
         acceptLanguage: String? = nil,
         rawScores: Bool? = nil,
+        csvHeaders: Bool? = nil,
         consumptionPreferences: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Profile>?, WatsonError?) -> Void)
@@ -225,6 +229,10 @@ public class PersonalityInsights {
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let rawScores = rawScores {
             let queryParameter = URLQueryItem(name: "raw_scores", value: "\(rawScores)")
+            queryParameters.append(queryParameter)
+        }
+        if let csvHeaders = csvHeaders {
+            let queryParameter = URLQueryItem(name: "csv_headers", value: "\(csvHeaders)")
             queryParameters.append(queryParameter)
         }
         if let consumptionPreferences = consumptionPreferences {
@@ -318,7 +326,7 @@ public class PersonalityInsights {
         csvHeaders: Bool? = nil,
         consumptionPreferences: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<String>?, WatsonError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Data>?, WatsonError?) -> Void)
     {
         // construct body
         guard let body = profileContent.content else {

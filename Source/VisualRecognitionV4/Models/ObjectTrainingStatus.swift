@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,6 +42,11 @@ public struct ObjectTrainingStatus: Codable, Equatable {
     public var latestFailed: Bool
 
     /**
+     Whether the model can be downloaded after the training status is `ready`.
+     */
+    public var rscnnReady: Bool
+
+    /**
      Details about the training. If training is in progress, includes information about the status. If training is not
      in progress, includes a success message or information about why training failed.
      */
@@ -53,6 +58,7 @@ public struct ObjectTrainingStatus: Codable, Equatable {
         case inProgress = "in_progress"
         case dataChanged = "data_changed"
         case latestFailed = "latest_failed"
+        case rscnnReady = "rscnn_ready"
         case description = "description"
     }
 
@@ -63,6 +69,7 @@ public struct ObjectTrainingStatus: Codable, Equatable {
      - parameter inProgress: Whether training is in progress.
      - parameter dataChanged: Whether there are changes to the training data since the most recent training.
      - parameter latestFailed: Whether the most recent training failed.
+     - parameter rscnnReady: Whether the model can be downloaded after the training status is `ready`.
      - parameter description: Details about the training. If training is in progress, includes information about the
        status. If training is not in progress, includes a success message or information about why training failed.
 
@@ -73,6 +80,7 @@ public struct ObjectTrainingStatus: Codable, Equatable {
         inProgress: Bool,
         dataChanged: Bool,
         latestFailed: Bool,
+        rscnnReady: Bool,
         description: String
     )
     {
@@ -80,6 +88,7 @@ public struct ObjectTrainingStatus: Codable, Equatable {
         self.inProgress = inProgress
         self.dataChanged = dataChanged
         self.latestFailed = latestFailed
+        self.rscnnReady = rscnnReady
         self.description = description
     }
 

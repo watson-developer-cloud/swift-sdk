@@ -457,6 +457,35 @@ class VisualRecognitionV4Tests: XCTestCase {
 
         waitForExpectations()
     }
+    
+    // MARK: - Downloading model files locally
+    
+    func testGetModelFile() {
+        let description = "Get Model File"
+        let modelFileExpectation = self.expectation(description: description)
+        
+        visualRecognition.getModelFile(collectionID: collectionID, feature: "objects", modelFormat: "rscnn", headers: nil) {
+            response, error in
+            
+            // make sure we didn't get an error
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+
+            // make sure we got a response
+            guard let modelData = response?.result else {
+                XCTFail("No model data returned")
+                return
+            }
+            
+            // we expect the model to contain data
+            XCTAssertFalse(modelData.isEmpty)
+            
+            modelFileExpectation.fulfill()
+        }
+        waitForExpectations()
+    }
 
     // MARK: - Managing images in a collection
 

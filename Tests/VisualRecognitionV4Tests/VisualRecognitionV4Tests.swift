@@ -29,7 +29,7 @@ class VisualRecognitionV4Tests: XCTestCase {
     private let collectionID = WatsonCredentials.VisualRecognitionV4CollectionID
     private let giraffeCollectionID = WatsonCredentials.VisualRecognitionV4GiraffeCollectionID
     private let trainingDummyCollectionID = WatsonCredentials.VisualRecognitionV4TrainingDummyCollectionID
-    private let trainingDummyImageID = "1280px-Giraffe_Ithala_KZN_South_4b75885f184a39650eab62a086601068"
+    private let trainingDummyImageID = "MV5BZWJhZTdmMjQtNWQxOC00YzMwLTg_005ade9d99ec84c2dfe56f634998f7b8"
     private let giraffeImageURL = giraffeURL
 
     static var allTests: [(String, (VisualRecognitionV4Tests) -> () throws -> Void)] {

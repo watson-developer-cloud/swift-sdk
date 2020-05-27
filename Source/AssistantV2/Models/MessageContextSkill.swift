@@ -31,7 +31,7 @@ public struct MessageContextSkill: Codable, Equatable {
     /**
      System context data used by the skill.
      */
-    public var system: MessageContextSkillSystem?
+    public var system: [String: JSON]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
@@ -49,7 +49,7 @@ public struct MessageContextSkill: Codable, Equatable {
      */
     public init(
         userDefined: [String: JSON]? = nil,
-        system: MessageContextSkillSystem? = nil
+        system: [String: JSON]? = nil
     )
     {
         self.userDefined = userDefined

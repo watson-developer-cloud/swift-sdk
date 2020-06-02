@@ -63,7 +63,7 @@ This SDK provides classes and methods to access the following Watson services.
 
 ## Migrating to version `3.0.0`
 
-Version `3.0.0` introduced breaking changes that affect all frameworks of the Swift SDK. Please refer to [the migration guide](https://github.com/watson-developer-cloud/swift-sdk/blob/master/docs/3.0.0-migration-guide.md) for information on how to get up and running with the new version.
+Version `3.0.0` introduced breaking changes that affect all frameworks of the Swift SDK. Please refer to [the migration guide](https://github.com/watson-developer-cloud/swift-sdk/blob/master/MIGRATION-V3.md) for information on how to get up and running with the new version.
 
 ## Installation
 

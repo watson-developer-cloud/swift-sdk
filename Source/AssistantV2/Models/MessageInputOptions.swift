@@ -90,12 +90,12 @@ public struct MessageInputOptions: Codable, Equatable {
      - returns: An initialized `MessageInputOptions`.
      */
     public init(
+        debug: Bool? = nil,
         restart: Bool? = nil,
         alternateIntents: Bool? = nil,
-        spelling: MessageInputOptionsSpelling? = nil,
-        debug: Bool? = nil,
         returnContext: Bool? = nil,
-        export: Bool? = nil
+        export: Bool? = nil,
+        spelling: MessageInputOptionsSpelling? = nil
     )
     {
         self.restart = restart

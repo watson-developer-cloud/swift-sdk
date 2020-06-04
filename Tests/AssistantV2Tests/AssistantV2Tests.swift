@@ -238,7 +238,8 @@ class AssistantV2Tests: XCTestCase {
         let description3 = "Continue a conversation."
         let expectation3 = self.expectation(description: description3)
 
-        let messageInput = MessageInput(messageType: MessageInput.MessageType.text.rawValue, text: "I'm good, how are you?")
+        let messageInputOptions = MessageInputOptions(debug: false, restart: false, alternateIntents: false, returnContext: true, export: false, spelling: nil)
+        let messageInput = MessageInput(messageType: MessageInput.MessageType.text.rawValue, text: "I'm good, how are you?", options: messageInputOptions)
 
         assistant.message(assistantID: assistantID, sessionID: sessionID, input: messageInput, context: nil) {
             response, error in
@@ -273,7 +274,7 @@ class AssistantV2Tests: XCTestCase {
             XCTAssertEqual(intents[0].intent, "General_Greetings")
 
             // verify context
-            XCTAssertNil(context)
+            XCTAssertNotNil(context)
 
             expectation3.fulfill()
         }

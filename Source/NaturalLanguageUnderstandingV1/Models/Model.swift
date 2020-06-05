@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2018.
+ * (C) Copyright IBM Corp. 2017, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,6 +47,11 @@ public struct Model: Codable, Equatable {
     /**
      The model version, if it was manually provided in Watson Knowledge Studio.
      */
+    public var modelVersion: String?
+
+    /**
+     (Deprecated — use `model_version`) The model version, if it was manually provided in Watson Knowledge Studio.
+     */
     public var version: String?
 
     /**
@@ -66,6 +71,7 @@ public struct Model: Codable, Equatable {
         case language = "language"
         case description = "description"
         case workspaceID = "workspace_id"
+        case modelVersion = "model_version"
         case version = "version"
         case versionDescription = "version_description"
         case created = "created"

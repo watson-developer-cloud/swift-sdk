@@ -41,6 +41,7 @@ class AssistantV2Tests: XCTestCase {
             ("testDeleteSession", testDeleteSession),
             ("testDeleteSessionWithInvalidSessionID", testDeleteSessionWithInvalidSessionID),
             ("testMessage", testMessage),
+            ("testMessageStateless", testMessageStateless),
             ("testMessageWithInvalidSessionID", testMessageWithInvalidSessionID),
         ]
     }
@@ -237,7 +238,8 @@ class AssistantV2Tests: XCTestCase {
         let description3 = "Continue a conversation."
         let expectation3 = self.expectation(description: description3)
 
-        let messageInput = MessageInput(messageType: MessageInput.MessageType.text.rawValue, text: "I'm good, how are you?")
+        let messageInputOptions = MessageInputOptions(debug: false, restart: false, alternateIntents: false, returnContext: true, export: false, spelling: nil)
+        let messageInput = MessageInput(messageType: MessageInput.MessageType.text.rawValue, text: "I'm good, how are you?", options: messageInputOptions)
 
         assistant.message(assistantID: assistantID, sessionID: sessionID, input: messageInput, context: nil) {
             response, error in
@@ -272,10 +274,41 @@ class AssistantV2Tests: XCTestCase {
             XCTAssertEqual(intents[0].intent, "General_Greetings")
 
             // verify context
-            XCTAssertNil(context)
+            XCTAssertNotNil(context)
 
             expectation3.fulfill()
         }
+        waitForExpectations()
+    }
+    
+    func testMessageStateless() {
+        let description = "Test message stateless"
+        let statelessMessageExpectation = self.expectation(description: description)
+        
+        let testInput: MessageInputStateless = MessageInputStateless(messageType: "text", text: "This is a test", intents: nil, entities: nil, suggestionID: nil, options: nil)
+        
+        let testGlobalContext: MessageContextGlobalStateless = MessageContextGlobalStateless(system: nil, sessionID: nil)
+        let testContext: MessageContextStateless = MessageContextStateless(global: testGlobalContext, skills: nil)
+        
+        assistant.messageStateless(assistantID: assistantID, input: testInput, context: testContext, headers: nil) {
+            response, error in
+            
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            
+            guard let messageResponse = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+            
+            XCTAssertNotNil(messageResponse.output)
+            XCTAssertNotNil(messageResponse.context)
+            
+            statelessMessageExpectation.fulfill()
+        }
+        
         waitForExpectations()
     }
     

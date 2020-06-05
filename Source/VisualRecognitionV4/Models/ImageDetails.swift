@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2019, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,6 +46,9 @@ public struct ImageDetails: Codable, Equatable {
      */
     public var dimensions: ImageDimensions?
 
+    /**
+     Details about the errors.
+     */
     public var errors: [Error]?
 
     /**

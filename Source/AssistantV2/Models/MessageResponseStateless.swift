@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +17,9 @@
 import Foundation
 
 /**
- A response from the Watson Assistant service.
+ A stateless response from the Watson Assistant service.
  */
-public struct MessageResponse: Codable, Equatable {
+public struct MessageResponseStateless: Codable, Equatable {
 
     /**
      Assistant output to be rendered or processed by the client.
@@ -27,11 +27,10 @@ public struct MessageResponse: Codable, Equatable {
     public var output: MessageOutput
 
     /**
-     Context data for the conversation. You can use this property to access context variables. The context is stored by
-     the assistant on a per-session basis.
-     **Note:** The context is included in message responses only if **return_context**=`true` in the message request.
+     Context data for the conversation. You can use this property to access context variables. The context is not stored
+     by the assistant; to maintain session state, include the context from the response in the next message.
      */
-    public var context: MessageContext?
+    public var context: MessageContextStateless
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {

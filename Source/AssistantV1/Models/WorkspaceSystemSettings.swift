@@ -39,6 +39,19 @@ public struct WorkspaceSystemSettings: Codable, Equatable {
     public var humanAgentAssist: [String: JSON]?
 
     /**
+     Whether spelling correction is enabled for the workspace.
+     */
+    public var spellingSuggestions: Bool?
+
+    /**
+     Whether autocorrection is enabled for the workspace. If spelling correction is enabled and this property is
+     `false`, any suggested corrections are returned in the **suggested_text** property of the message response. If this
+     property is `true`, any corrections are automatically applied to the user input, and the original text is returned
+     in the **original_text** property of the message response.
+     */
+    public var spellingAutoCorrect: Bool?
+
+    /**
      Workspace settings related to the behavior of system entities.
      */
     public var systemEntities: WorkspaceSystemSettingsSystemEntities?
@@ -53,6 +66,8 @@ public struct WorkspaceSystemSettings: Codable, Equatable {
         case tooling = "tooling"
         case disambiguation = "disambiguation"
         case humanAgentAssist = "human_agent_assist"
+        case spellingSuggestions = "spelling_suggestions"
+        case spellingAutoCorrect = "spelling_auto_correct"
         case systemEntities = "system_entities"
         case offTopic = "off_topic"
     }
@@ -64,6 +79,11 @@ public struct WorkspaceSystemSettings: Codable, Equatable {
      - parameter disambiguation: Workspace settings related to the disambiguation feature.
        **Note:** This feature is available only to Plus and Premium users.
      - parameter humanAgentAssist: For internal use only.
+     - parameter spellingSuggestions: Whether spelling correction is enabled for the workspace.
+     - parameter spellingAutoCorrect: Whether autocorrection is enabled for the workspace. If spelling correction is
+       enabled and this property is `false`, any suggested corrections are returned in the **suggested_text** property
+       of the message response. If this property is `true`, any corrections are automatically applied to the user input,
+       and the original text is returned in the **original_text** property of the message response.
      - parameter systemEntities: Workspace settings related to the behavior of system entities.
      - parameter offTopic: Workspace settings related to detection of irrelevant input.
 
@@ -73,6 +93,8 @@ public struct WorkspaceSystemSettings: Codable, Equatable {
         tooling: WorkspaceSystemSettingsTooling? = nil,
         disambiguation: WorkspaceSystemSettingsDisambiguation? = nil,
         humanAgentAssist: [String: JSON]? = nil,
+        spellingSuggestions: Bool? = nil,
+        spellingAutoCorrect: Bool? = nil,
         systemEntities: WorkspaceSystemSettingsSystemEntities? = nil,
         offTopic: WorkspaceSystemSettingsOffTopic? = nil
     )
@@ -80,6 +102,8 @@ public struct WorkspaceSystemSettings: Codable, Equatable {
         self.tooling = tooling
         self.disambiguation = disambiguation
         self.humanAgentAssist = humanAgentAssist
+        self.spellingSuggestions = spellingSuggestions
+        self.spellingAutoCorrect = spellingAutoCorrect
         self.systemEntities = systemEntities
         self.offTopic = offTopic
     }

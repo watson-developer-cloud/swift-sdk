@@ -18,7 +18,8 @@ import Foundation
 import IBMSwiftSDKCore
 
 /**
- Contains information specific to a particular skill used by the Assistant.
+ Contains information specific to a particular skill used by the Assistant. The property name must be the same as the
+ name of the skill (for example, `main skill`).
  */
 public struct MessageContextSkill: Codable, Equatable {
 

@@ -29,7 +29,7 @@ class VisualRecognitionV4Tests: XCTestCase {
     private let collectionID = WatsonCredentials.VisualRecognitionV4CollectionID
     private let giraffeCollectionID = WatsonCredentials.VisualRecognitionV4GiraffeCollectionID
     private let trainingDummyCollectionID = WatsonCredentials.VisualRecognitionV4TrainingDummyCollectionID
-    private let trainingDummyImageID = "1280px-Giraffe_Ithala_KZN_South_4b75885f184a39650eab62a086601068"
+    private let trainingDummyImageID = "MV5BZWJhZTdmMjQtNWQxOC00YzMwLTg_005ade9d99ec84c2dfe56f634998f7b8"
     private let giraffeImageURL = giraffeURL
 
     static var allTests: [(String, (VisualRecognitionV4Tests) -> () throws -> Void)] {
@@ -455,6 +455,35 @@ class VisualRecognitionV4Tests: XCTestCase {
             deleteCollectionExpectation.fulfill()
         }
 
+        waitForExpectations()
+    }
+    
+    // MARK: - Downloading model files locally
+    
+    func testGetModelFile() {
+        let description = "Get Model File"
+        let modelFileExpectation = self.expectation(description: description)
+        
+        visualRecognition.getModelFile(collectionID: collectionID, feature: "objects", modelFormat: "rscnn", headers: nil) {
+            response, error in
+            
+            // make sure we didn't get an error
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+
+            // make sure we got a response
+            guard let modelData = response?.result else {
+                XCTFail("No model data returned")
+                return
+            }
+            
+            // we expect the model to contain data
+            XCTAssertFalse(modelData.isEmpty)
+            
+            modelFileExpectation.fulfill()
+        }
         waitForExpectations()
     }
 

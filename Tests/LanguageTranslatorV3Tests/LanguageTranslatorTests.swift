@@ -257,7 +257,7 @@ class LanguageTranslatorTests: XCTestCase {
 
     func testTranslateStringWithModelID() {
         let expectation = self.expectation(description: "Translate text string using model id.")
-        languageTranslator.translate(text: ["Hello"], modelID: "en-es") {
+        languageTranslator.translate(text: ["hello"], modelID: "en-es") {
             response, error in
 
             if let error = error {
@@ -272,7 +272,7 @@ class LanguageTranslatorTests: XCTestCase {
             XCTAssertEqual(translation.wordCount, 1)
             XCTAssertEqual(translation.characterCount, 5)
             XCTAssertEqual(translation.translations.count, 1)
-            XCTAssertEqual(translation.translations.first?.translation, "Hola")
+            XCTAssertEqual(translation.translations.first?.translation, "hola")
             expectation.fulfill()
         }
         waitForExpectations()
@@ -280,7 +280,7 @@ class LanguageTranslatorTests: XCTestCase {
 
     func testTranslateStringWithSourceAndTarget() {
         let expectation = self.expectation(description: "Translate text string using source and target.")
-        languageTranslator.translate(text: ["Hello"], source: "en", target: "es") {
+        languageTranslator.translate(text: ["hello"], source: "en", target: "es") {
             response, error in
 
             if let error = error {
@@ -295,7 +295,7 @@ class LanguageTranslatorTests: XCTestCase {
             XCTAssertEqual(translation.wordCount, 1)
             XCTAssertEqual(translation.characterCount, 5)
             XCTAssertEqual(translation.translations.count, 1)
-            XCTAssertEqual(translation.translations.first?.translation, "Hola")
+            XCTAssertEqual(translation.translations.first?.translation, "hola")
             expectation.fulfill()
         }
         waitForExpectations()

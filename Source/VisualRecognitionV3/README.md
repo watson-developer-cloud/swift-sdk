@@ -1,29 +1,36 @@
-# Visual Recognition
+# Visual Recognition V3
 
-The IBM Watson Visual Recognition service uses deep learning algorithms to analyze images (.jpg or .png) for scenes, objects, faces, text, and other content, and return keywords that provide information about that content. The service comes with a set of built-in classes so that you can analyze images with high accuracy right out of the box. You can also train custom classifiers to create specialized classes.
+* [IBM Watson Visual Recognition V3 - API Reference](https://cloud.ibm.com/apidocs/visual-recognition/visual-recognition-v3?code=swift)
+* [IBM Watson Visual Recognition V3 - Documentation](https://cloud.ibm.com/docs/services/visual-recognition/index.html)
+* [IBM Watson Visual Recognition V3 - Service Page](https://www.ibm.com/watson/services/visual-recognition/)
+
+The IBM Watson Visual Recognition V3 service uses deep learning algorithms to analyze images (.jpg or .png) for scenes, objects, text, and other content, and return keywords that provide information about that content. The service comes with a set of built-in classes so that you can analyze images with high accuracy right out of the box. You can also train custom classifiers to create specialized classes.
 
 The following example demonstrates how to use the Visual Recognition service:
 
 ```swift
 import VisualRecognitionV3
 
-let apiKey = "your-apikey-here"
-let version = "YYYY-MM-DD" // use today's date for the most recent version
-let visualRecognition = VisualRecognition(version: version, apiKey: apiKey)
+let authenticator = WatsonIAMAuthenticator(apiKey: "{apikey}")
+let visualRecognition = VisualRecognition(version: "2018-03-19", authenticator: authenticator)
+visualRecognition.serviceURL = "{url}"
 
-let imageURL = Bundle.main.url(forResource: "profile-picture", withExtension: "jpg")!
-visualRecognition.classify(imagesFile: imageURL) { response, error in
-	if let error = error {
-        print(error)
-    }
-    guard let classifiedImages = response?.result else {
-        print("Failed to classify the image")
-        return
-    }
-    print(classifiedImages)
+let url = Bundle.main.url(forResource: "fruitbowl", withExtension: "jpg")
+let fruitbowl = try? Data(contentsOf: url!)
+
+visualRecognition.classify(imagesFile: fruitbowl, threshold: 0.6, owners: ["me"]) {
+  response, error in
+
+  guard let result = response?.result else {
+    print(error?.localizedDescription ?? "unknown error")
+    return
+  }
+
+  print(result)
 }
 ```
 
+For details on all API operations, including Swift examples, [see the API reference.](https://cloud.ibm.com/apidocs/visual-recognition/visual-recognition-v3?code=swift)
 
 ## Using Core ML
 
@@ -80,7 +87,4 @@ You may also choose to include a Core ML model with your application, enabling i
 
 The following links provide more information about the IBM Watson Visual Recognition service:
 
-* [IBM Watson Visual Recognition - Service Page](https://www.ibm.com/watson/services/visual-recognition/)
-* [IBM Watson Visual Recognition - Documentation](https://cloud.ibm.com/docs/services/visual-recognition/index.html)
-* [IBM Watson Visual Recognition - Demo](https://visual-recognition-demo.ng.bluemix.net/)
 

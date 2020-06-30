@@ -1,46 +1,38 @@
 # Natural Language Understanding
 
+* [IBM Watson Natural Language Understanding - API Reference](https://cloud.ibm.com/apidocs/natural-language-understanding?code=swift)
+* [IBM Watson Natural Language Understanding - Documentation](https://cloud.ibm.com/docs/services/natural-language-understanding/index.html)
+* [IBM Watson Natural Language Understanding - Service Page](https://www.ibm.com/watson/services/natural-language-understanding/)
+
 The IBM Natural Language Understanding service explores various features of text content. Provide text, raw HTML, or a public URL, and IBM Watson Natural Language Understanding will give you results for the features you request. The service cleans HTML content before analysis by default, so the results can ignore most advertisements and other unwanted content.
-
-Natural Language Understanding has the following features:
-
-- Concepts
-- Entities
-- Keywords
-- Categories
-- Sentiment
-- Emotion
-- Relations
-- Semantic Roles
 
 The following example demonstrates how to use the service:
 
 ```swift
 import NaturalLanguageUnderstandingV1
 
-let apiKey = "your-api-key"
-let version = "YYYY-MM-DD" // use today's date for the most recent version
-let naturalLanguageUnderstanding = NaturalLanguageUnderstanding(version: version, apiKey: apiKey)
+let authenticator = WatsonIAMAuthenticator(apiKey: "{apikey}")
+let naturalLanguageUnderstanding = NaturalLanguageUnderstanding(version: "2019-07-12", authenticator: authenticator)
+naturalLanguageUnderstanding.serviceURL = "{url}"
 
-let features = Features(concepts: ConceptsOptions(limit: 5))
-let text = "your-text"
-naturalLanguageUnderstanding.analyze(features: features, text: text) { response, error in
-	if let error = error {
-        print(error)
-    }
-    guard let results = response?.result else {
-        print("Failed to analyze")
-        return
-    }
-    print(results)
+let text = "IBM is an American multinational technology " +
+  "company headquartered in Armonk, New York, " +
+  "United States, with operations in over 170 countries."
+
+let features = Features(
+  entities: EntitiesOptions(limit: 2, sentiment: true, emotion: true),
+  keywords: KeywordsOptions(limit: 2, sentiment: true, emotion: true)
+)
+naturalLanguageUnderstanding.analyze(features: features, text: text) {
+  response, error in
+
+  guard let analysis = response?.result else {
+    print(error?.localizedDescription ?? "unknown error")
+    return
+  }
+
+  print(analysis)
 }
 ```
 
-### 500 errors
-Note that **you are required to include at least one feature in your request.** You will receive a 500 error if you do not include any features in your request.
-
-The following links provide more information about the Natural Language Understanding service:
-
-* [IBM Watson Natural Language Understanding - Service Page](https://www.ibm.com/watson/services/natural-language-understanding/)
-* [IBM Watson Natural Language Understanding - Documentation](https://cloud.ibm.com/docs/services/natural-language-understanding/index.html)
-* [IBM Watson Natural Language Understanding - Demo](https://natural-language-understanding-demo.ng.bluemix.net/)
+For details on all API operations, including Swift examples, [see the API reference.](https://cloud.ibm.com/apidocs/natural-language-understanding?code=swift)

@@ -1,0 +1,16 @@
+copyright: Copyright 2020 IBM
+author: IBM
+github_url: https://github.com/watson-developer-cloud/swift-sdk
+clean: true
+output: ../../gh-pages/services/DiscoveryV2
+module: DiscoveryV2
+module_version: "3.5.0"
+documentation: ../../Source/DiscoveryV2/README.md
+readme: ../../Source/DiscoveryV2/README.md
+build_tool_arguments:
+  - "-project"
+  - "WatsonDeveloperCloud.xcodeproj"
+  - "-scheme"
+  - "DiscoveryV2"
+  - "-destination"
+  - "platform=iOS Simulator,name=iPhone 11" 

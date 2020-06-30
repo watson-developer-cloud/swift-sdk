@@ -1,0 +1,16 @@
+copyright: Copyright 2020 IBM
+author: IBM
+github_url: https://github.com/watson-developer-cloud/swift-sdk
+clean: true
+output: ../../gh-pages/services/SpeechToTextV1
+module: SpeechToTextV1
+module_version: "3.5.0"
+documentation: ../../Source/SpeechToTextV1/README.md
+readme: ../../Source/SpeechToTextV1/README.md
+build_tool_arguments:
+  - "-project"
+  - "WatsonDeveloperCloud.xcodeproj"
+  - "-scheme"
+  - "SpeechToTextV1"
+  - "-destination"
+  - "platform=iOS Simulator,name=iPhone 11" 

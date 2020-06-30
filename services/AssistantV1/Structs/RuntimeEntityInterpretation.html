@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>RuntimeEntityInterpretation Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/RuntimeEntityInterpretation" class="dashAnchor"></a>
+    <a title="RuntimeEntityInterpretation Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">AssistantV1 3.5.0 Docs</a> (81% documented)</p>
+        <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">AssistantV1 Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        RuntimeEntityInterpretation Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/Assistant.html">Assistant</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/CaptureGroup.html">CaptureGroup</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Context.html">Context</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Counterexample.html">Counterexample</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CounterexampleCollection.html">CounterexampleCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateEntity.html">CreateEntity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateIntent.html">CreateIntent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateValue.html">CreateValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateValue/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNode.html">DialogNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNode/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNode/EventName.html">– EventName</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNode/DigressIn.html">– DigressIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNode/DigressOut.html">– DigressOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNode/DigressOutSlots.html">– DigressOutSlots</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeAction.html">DialogNodeAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeAction/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeCollection.html">DialogNodeCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeNextStep.html">DialogNodeNextStep</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeNextStep/Behavior.html">– Behavior</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeNextStep/Selector.html">– Selector</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeOutput.html">DialogNodeOutput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeOutputGeneric.html">DialogNodeOutputGeneric</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeOutputGeneric/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeOutputGeneric/SelectionPolicy.html">– SelectionPolicy</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeOutputGeneric/Preference.html">– Preference</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeOutputGeneric/QueryType.html">– QueryType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeOutputModifiers.html">DialogNodeOutputModifiers</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeOutputOptionsElement.html">DialogNodeOutputOptionsElement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeOutputOptionsElementValue.html">DialogNodeOutputOptionsElementValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeOutputTextValuesElement.html">DialogNodeOutputTextValuesElement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeVisitedDetails.html">DialogNodeVisitedDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogSuggestion.html">DialogSuggestion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogSuggestionOutput.html">DialogSuggestionOutput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogSuggestionResponseGeneric.html">DialogSuggestionResponseGeneric</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogSuggestionResponseGeneric/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogSuggestionResponseGeneric/Preference.html">– Preference</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogSuggestionValue.html">DialogSuggestionValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Entity.html">Entity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/EntityCollection.html">EntityCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/EntityMention.html">EntityMention</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/EntityMentionCollection.html">EntityMentionCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Example.html">Example</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ExampleCollection.html">ExampleCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Intent.html">Intent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/IntentCollection.html">IntentCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Log.html">Log</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogCollection.html">LogCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogMessage.html">LogMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogMessage/Level.html">– Level</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogPagination.html">LogPagination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Mention.html">Mention</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MessageContextMetadata.html">MessageContextMetadata</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MessageInput.html">MessageInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MessageRequest.html">MessageRequest</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/MessageResponse.html">MessageResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/OutputData.html">OutputData</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Pagination.html">Pagination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeEntity.html">RuntimeEntity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeEntityAlternative.html">RuntimeEntityAlternative</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeEntityInterpretation.html">RuntimeEntityInterpretation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeEntityInterpretation/Granularity.html">– Granularity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeEntityRole.html">RuntimeEntityRole</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeEntityRole/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeIntent.html">RuntimeIntent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeResponseGeneric.html">RuntimeResponseGeneric</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeResponseGeneric/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeResponseGeneric/Preference.html">– Preference</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Synonym.html">Synonym</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SynonymCollection.html">SynonymCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SystemResponse.html">SystemResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Value.html">Value</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Value/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ValueCollection.html">ValueCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Webhook.html">Webhook</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WebhookHeader.html">WebhookHeader</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Workspace.html">Workspace</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Workspace/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WorkspaceCollection.html">WorkspaceCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WorkspaceSystemSettings.html">WorkspaceSystemSettings</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WorkspaceSystemSettingsDisambiguation.html">WorkspaceSystemSettingsDisambiguation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WorkspaceSystemSettingsDisambiguation/Sensitivity.html">– Sensitivity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WorkspaceSystemSettingsOffTopic.html">WorkspaceSystemSettingsOffTopic</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WorkspaceSystemSettingsSystemEntities.html">WorkspaceSystemSettingsSystemEntities</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/WorkspaceSystemSettingsTooling.html">WorkspaceSystemSettingsTooling</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11AssistantV119WatsonAuthenticatora">WatsonAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11AssistantV124WatsonBasicAuthenticatora">WatsonBasicAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11AssistantV130WatsonBearerTokenAuthenticatora">WatsonBearerTokenAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11AssistantV134WatsonCloudPakForDataAuthenticatora">WatsonCloudPakForDataAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11AssistantV111WatsonErrora">WatsonError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11AssistantV122WatsonIAMAuthenticatora">WatsonIAMAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11AssistantV110WatsonJSONa">WatsonJSON</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11AssistantV125WatsonNoAuthAuthenticatora">WatsonNoAuthAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11AssistantV114WatsonResponsea">WatsonResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11AssistantV130WatsonTokenSourceAuthenticatora">WatsonTokenSourceAuthenticator</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>RuntimeEntityInterpretation</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RuntimeEntityInterpretation</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                </div>
+              </div>
+            <p>RuntimeEntityInterpretation.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV127RuntimeEntityInterpretationV11GranularityO"></a>
+                    <a name="//apple_ref/swift/Enum/Granularity" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV127RuntimeEntityInterpretationV11GranularityO">Granularity</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The precision or duration of a time range specified by a recognized <code>@sys-time</code> or <code>@sys-date</code> entity.</p>
+
+                        <a href="../Structs/RuntimeEntityInterpretation/Granularity.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Granularity</span> <span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV127RuntimeEntityInterpretationV12calendarTypeSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/calendarType" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV127RuntimeEntityInterpretationV12calendarTypeSSSgvp">calendarType</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The calendar used to represent a recognized date (for example, <code>Gregorian</code>).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">calendarType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV127RuntimeEntityInterpretationV12datetimeLinkSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/datetimeLink" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV127RuntimeEntityInterpretationV12datetimeLinkSSSgvp">datetimeLink</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A unique identifier used to associate a recognized time and date. If the user input contains a date and time that
+are mentioned together (for example, <code>Today at 5</code>, the same <strong>datetime_link</strong> value is returned for both the
+<code>@sys-date</code> and <code>@sys-time</code> entities).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">datetimeLink</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV127RuntimeEntityInterpretationV8festivalSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/festival" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV127RuntimeEntityInterpretationV8festivalSSSgvp">festival</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A locale-specific holiday name (such as <code>thanksgiving</code> or <code>christmas</code>). This property is included when a
+<code>@sys-date</code> entity is recognized based on a holiday name in the user input.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">festival</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV127RuntimeEntityInterpretationV11granularitySSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/granularity" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV127RuntimeEntityInterpretationV11granularitySSSgvp">granularity</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The precision or duration of a time range specified by a recognized <code>@sys-time</code> or <code>@sys-date</code> entity.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">granularity</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV127RuntimeEntityInterpretationV9rangeLinkSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/rangeLink" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV127RuntimeEntityInterpretationV9rangeLinkSSSgvp">rangeLink</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A unique identifier used to associate multiple recognized <code>@sys-date</code>, <code>@sys-time</code>, or <code>@sys-number</code> entities that
+are recognized as a range of values in the user&rsquo;s input (for example, <code>from July 4 until July 14</code> or <code>from 20 to
+25</code>).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">rangeLink</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV127RuntimeEntityInterpretationV13rangeModifierSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/rangeModifier" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV127RuntimeEntityInterpretationV13rangeModifierSSSgvp">rangeModifier</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The word in the user input that indicates that a <code>sys-date</code> or <code>sys-time</code> entity is part of an implied range where
+only one date or time is specified (for example, <code>since</code> or <code>until</code>).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">rangeModifier</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV127RuntimeEntityInterpretationV11relativeDaySdSgvp"></a>
+                    <a name="//apple_ref/swift/Property/relativeDay" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV127RuntimeEntityInterpretationV11relativeDaySdSgvp">relativeDay</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A recognized mention of a relative day, represented numerically as an offset from the current date (for example,
+<code>-1</code> for <code>yesterday</code> or <code>10</code> for <code>in ten days</code>).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">relativeDay</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV127RuntimeEntityInterpretationV13relativeMonthSdSgvp"></a>
+                    <a name="//apple_ref/swift/Property/relativeMonth" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV127RuntimeEntityInterpretationV13relativeMonthSdSgvp">relativeMonth</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A recognized mention of a relative month, represented numerically as an offset from the current month (for example,
+<code>1</code> for <code>next month</code> or <code>-3</code> for <code>three months ago</code>).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">relativeMonth</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV127RuntimeEntityInterpretationV12relativeWeekSdSgvp"></a>
+                    <a name="//apple_ref/swift/Property/relativeWeek" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV127RuntimeEntityInterpretationV12relativeWeekSdSgvp">relativeWeek</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A recognized mention of a relative week, represented numerically as an offset from the current week (for example,
+<code>2</code> for <code>in two weeks</code> or <code>-1</code> for `last week).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">relativeWeek</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV127RuntimeEntityInterpretationV15relativeWeekendSdSgvp"></a>
+                    <a name="//apple_ref/swift/Property/relativeWeekend" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV127RuntimeEntityInterpretationV15relativeWeekendSdSgvp">relativeWeekend</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A recognized mention of a relative date range for a weekend, represented numerically as an offset from the current
+weekend (for example, <code>0</code> for <code>this weekend</code> or <code>-1</code> for <code>last weekend</code>).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">relativeWeekend</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV127RuntimeEntityInterpretationV12relativeYearSdSgvp"></a>
+                    <a name="//apple_ref/swift/Property/relativeYear" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV127RuntimeEntityInterpretationV12relativeYearSdSgvp">relativeYear</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A recognized mention of a relative year, represented numerically as an offset from the current year (for example,
+<code>1</code> for <code>next year</code> or <code>-5</code> for <code>five years ago</code>).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">relativeYear</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV127RuntimeEntityInterpretationV11specificDaySdSgvp"></a>
+                    <a name="//apple_ref/swift/Property/specificDay" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV127RuntimeEntityInterpretationV11specificDaySdSgvp">specificDay</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A recognized mention of a specific date, represented numerically as the date within the month (for example, <code>30</code>
+for <code>June 30</code>.).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">specificDay</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV127RuntimeEntityInterpretationV17specificDayOfWeekSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/specificDayOfWeek" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV127RuntimeEntityInterpretationV17specificDayOfWeekSSSgvp">specificDayOfWeek</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A recognized mention of a specific day of the week as a lowercase string (for example, <code>monday</code>).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">specificDayOfWeek</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV127RuntimeEntityInterpretationV13specificMonthSdSgvp"></a>
+                    <a name="//apple_ref/swift/Property/specificMonth" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV127RuntimeEntityInterpretationV13specificMonthSdSgvp">specificMonth</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A recognized mention of a specific month, represented numerically (for example, <code>7</code> for <code>July</code>).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">specificMonth</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV127RuntimeEntityInterpretationV15specificQuarterSdSgvp"></a>
+                    <a name="//apple_ref/swift/Property/specificQuarter" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV127RuntimeEntityInterpretationV15specificQuarterSdSgvp">specificQuarter</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A recognized mention of a specific quarter, represented numerically (for example, <code>3</code> for <code>the third quarter</code>).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">specificQuarter</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV127RuntimeEntityInterpretationV12specificYearSdSgvp"></a>
+                    <a name="//apple_ref/swift/Property/specificYear" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV127RuntimeEntityInterpretationV12specificYearSdSgvp">specificYear</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A recognized mention of a specific year (for example, <code>2016</code>).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">specificYear</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV127RuntimeEntityInterpretationV12numericValueSdSgvp"></a>
+                    <a name="//apple_ref/swift/Property/numericValue" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV127RuntimeEntityInterpretationV12numericValueSdSgvp">numericValue</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A recognized numeric value, represented as an integer or double.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">numericValue</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV127RuntimeEntityInterpretationV7subtypeSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/subtype" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV127RuntimeEntityInterpretationV7subtypeSSSgvp">subtype</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The type of numeric value recognized in the user input (<code>integer</code> or <code>rational</code>).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">subtype</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV127RuntimeEntityInterpretationV9partOfDaySSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/partOfDay" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV127RuntimeEntityInterpretationV9partOfDaySSSgvp">partOfDay</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A recognized term for a time that was mentioned as a part of the day in the user&rsquo;s input (for example, <code>morning</code> or
+<code>afternoon</code>).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">partOfDay</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV127RuntimeEntityInterpretationV12relativeHourSdSgvp"></a>
+                    <a name="//apple_ref/swift/Property/relativeHour" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV127RuntimeEntityInterpretationV12relativeHourSdSgvp">relativeHour</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A recognized mention of a relative hour, represented numerically as an offset from the current hour (for example,
+<code>3</code> for <code>in three hours</code> or <code>-1</code> for <code>an hour ago</code>).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">relativeHour</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV127RuntimeEntityInterpretationV14relativeMinuteSdSgvp"></a>
+                    <a name="//apple_ref/swift/Property/relativeMinute" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV127RuntimeEntityInterpretationV14relativeMinuteSdSgvp">relativeMinute</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A recognized mention of a relative time, represented numerically as an offset in minutes from the current time (for
+example, <code>5</code> for <code>in five minutes</code> or <code>-15</code> for <code>fifteen minutes ago</code>).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">relativeMinute</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV127RuntimeEntityInterpretationV14relativeSecondSdSgvp"></a>
+                    <a name="//apple_ref/swift/Property/relativeSecond" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV127RuntimeEntityInterpretationV14relativeSecondSdSgvp">relativeSecond</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A recognized mention of a relative time, represented numerically as an offset in seconds from the current time (for
+example, <code>10</code> for <code>in ten seconds</code> or <code>-30</code> for <code>thirty seconds ago</code>).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">relativeSecond</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV127RuntimeEntityInterpretationV12specificHourSdSgvp"></a>
+                    <a name="//apple_ref/swift/Property/specificHour" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV127RuntimeEntityInterpretationV12specificHourSdSgvp">specificHour</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A recognized specific hour mentioned as part of a time value (for example, <code>10</code> for <code>10:15 AM</code>.).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">specificHour</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV127RuntimeEntityInterpretationV14specificMinuteSdSgvp"></a>
+                    <a name="//apple_ref/swift/Property/specificMinute" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV127RuntimeEntityInterpretationV14specificMinuteSdSgvp">specificMinute</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A recognized specific minute mentioned as part of a time value (for example, <code>15</code> for <code>10:15 AM</code>.).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">specificMinute</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV127RuntimeEntityInterpretationV14specificSecondSdSgvp"></a>
+                    <a name="//apple_ref/swift/Property/specificSecond" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV127RuntimeEntityInterpretationV14specificSecondSdSgvp">specificSecond</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A recognized specific second mentioned as part of a time value (for example, <code>30</code> for <code>10:15:30 AM</code>.).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">specificSecond</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV127RuntimeEntityInterpretationV8timezoneSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/timezone" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV127RuntimeEntityInterpretationV8timezoneSSSgvp">timezone</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A recognized time zone mentioned as part of a time value (for example, <code>EST</code>).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">timezone</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV127RuntimeEntityInterpretationV12calendarType12datetimeLink8festival11granularity05rangeI00L8Modifier11relativeDay0N5Month0N4Week0N7Weekend0N4Year08specificO00to2OfQ00tP00T7Quarter0tS012numericValue7subtype04partuO00N4Hour0N6Minute0N6Second0T4Hour0T6Minute0T6Second8timezoneACSSSg_A2_A2_A2_A2_A2_SdSgA3_A3_A3_A3_A3_A2_A3_A3_A3_A3_A2_A2_A3_A3_A3_A3_A3_A3_A2_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(calendarType:datetimeLink:festival:granularity:rangeLink:rangeModifier:relativeDay:relativeMonth:relativeWeek:relativeWeekend:relativeYear:specificDay:specificDayOfWeek:specificMonth:specificQuarter:specificYear:numericValue:subtype:partOfDay:relativeHour:relativeMinute:relativeSecond:specificHour:specificMinute:specificSecond:timezone:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV127RuntimeEntityInterpretationV12calendarType12datetimeLink8festival11granularity05rangeI00L8Modifier11relativeDay0N5Month0N4Week0N7Weekend0N4Year08specificO00to2OfQ00tP00T7Quarter0tS012numericValue7subtype04partuO00N4Hour0N6Minute0N6Second0T4Hour0T6Minute0T6Second8timezoneACSSSg_A2_A2_A2_A2_A2_SdSgA3_A3_A3_A3_A3_A2_A3_A3_A3_A3_A2_A2_A3_A3_A3_A3_A3_A3_A2_tcfc">init(calendarType:<wbr>datetimeLink:<wbr>festival:<wbr>granularity:<wbr>rangeLink:<wbr>rangeModifier:<wbr>relativeDay:<wbr>relativeMonth:<wbr>relativeWeek:<wbr>relativeWeekend:<wbr>relativeYear:<wbr>specificDay:<wbr>specificDayOfWeek:<wbr>specificMonth:<wbr>specificQuarter:<wbr>specificYear:<wbr>numericValue:<wbr>subtype:<wbr>partOfDay:<wbr>relativeHour:<wbr>relativeMinute:<wbr>relativeSecond:<wbr>specificHour:<wbr>specificMinute:<wbr>specificSecond:<wbr>timezone:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initialize a <code>RuntimeEntityInterpretation</code> with member variables.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
+    <span class="nv">calendarType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">datetimeLink</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">festival</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">granularity</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">rangeLink</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">rangeModifier</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">relativeDay</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">relativeMonth</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">relativeWeek</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">relativeWeekend</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">relativeYear</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">specificDay</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">specificDayOfWeek</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">specificMonth</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">specificQuarter</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">specificYear</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">numericValue</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">subtype</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">partOfDay</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">relativeHour</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">relativeMinute</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">relativeSecond</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">specificHour</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">specificMinute</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">specificSecond</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">timezone</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>calendarType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The calendar used to represent a recognized date (for example, <code>Gregorian</code>).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>datetimeLink</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A unique identifier used to associate a recognized time and date. If the user input
+contains a date and time that are mentioned together (for example, <code>Today at 5</code>, the same <strong>datetime_link</strong> value
+is returned for both the <code>@sys-date</code> and <code>@sys-time</code> entities).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>festival</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A locale-specific holiday name (such as <code>thanksgiving</code> or <code>christmas</code>). This property is
+included when a <code>@sys-date</code> entity is recognized based on a holiday name in the user input.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>granularity</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The precision or duration of a time range specified by a recognized <code>@sys-time</code> or
+<code>@sys-date</code> entity.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rangeLink</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A unique identifier used to associate multiple recognized <code>@sys-date</code>, <code>@sys-time</code>, or
+<code>@sys-number</code> entities that are recognized as a range of values in the user&rsquo;s input (for example, <code>from July 4
+until July 14</code> or <code>from 20 to 25</code>).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rangeModifier</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The word in the user input that indicates that a <code>sys-date</code> or <code>sys-time</code> entity is
+part of an implied range where only one date or time is specified (for example, <code>since</code> or <code>until</code>).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>relativeDay</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A recognized mention of a relative day, represented numerically as an offset from the
+current date (for example, <code>-1</code> for <code>yesterday</code> or <code>10</code> for <code>in ten days</code>).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>relativeMonth</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A recognized mention of a relative month, represented numerically as an offset from
+the current month (for example, <code>1</code> for <code>next month</code> or <code>-3</code> for <code>three months ago</code>).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>relativeWeek</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A recognized mention of a relative week, represented numerically as an offset from the
+current week (for example, <code>2</code> for <code>in two weeks</code> or <code>-1</code> for `last week).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>relativeWeekend</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A recognized mention of a relative date range for a weekend, represented
+numerically as an offset from the current weekend (for example, <code>0</code> for <code>this weekend</code> or <code>-1</code> for <code>last
+weekend</code>).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>relativeYear</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A recognized mention of a relative year, represented numerically as an offset from the
+current year (for example, <code>1</code> for <code>next year</code> or <code>-5</code> for <code>five years ago</code>).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>specificDay</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A recognized mention of a specific date, represented numerically as the date within the
+month (for example, <code>30</code> for <code>June 30</code>.).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>specificDayOfWeek</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A recognized mention of a specific day of the week as a lowercase string (for
+example, <code>monday</code>).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>specificMonth</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A recognized mention of a specific month, represented numerically (for example, <code>7</code>
+for <code>July</code>).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>specificQuarter</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A recognized mention of a specific quarter, represented numerically (for example,
+<code>3</code> for <code>the third quarter</code>).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>specificYear</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A recognized mention of a specific year (for example, <code>2016</code>).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>numericValue</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A recognized numeric value, represented as an integer or double.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>subtype</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The type of numeric value recognized in the user input (<code>integer</code> or <code>rational</code>).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>partOfDay</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A recognized term for a time that was mentioned as a part of the day in the user&rsquo;s input
+(for example, <code>morning</code> or <code>afternoon</code>).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>relativeHour</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A recognized mention of a relative hour, represented numerically as an offset from the
+current hour (for example, <code>3</code> for <code>in three hours</code> or <code>-1</code> for <code>an hour ago</code>).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>relativeMinute</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A recognized mention of a relative time, represented numerically as an offset in
+minutes from the current time (for example, <code>5</code> for <code>in five minutes</code> or <code>-15</code> for <code>fifteen minutes ago</code>).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>relativeSecond</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A recognized mention of a relative time, represented numerically as an offset in
+seconds from the current time (for example, <code>10</code> for <code>in ten seconds</code> or <code>-30</code> for <code>thirty seconds ago</code>).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>specificHour</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A recognized specific hour mentioned as part of a time value (for example, <code>10</code> for
+<code>10:15 AM</code>.).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>specificMinute</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A recognized specific minute mentioned as part of a time value (for example, <code>15</code>
+for <code>10:15 AM</code>.).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>specificSecond</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A recognized specific second mentioned as part of a time value (for example, <code>30</code>
+for <code>10:15:30 AM</code>.).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>timezone</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A recognized time zone mentioned as part of a time value (for example, <code>EST</code>).</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An initialized <code>RuntimeEntityInterpretation</code>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>Copyright 2020 IBM</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

@@ -13,7 +13,7 @@
     <a title="VisualRecognitionV3  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">VisualRecognitionV3 Docs</a></p>
+        <p><a href="index.html">VisualRecognitionV3 3.5.0 Docs</a> (81% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -27,14 +27,6 @@
     <div class="content-wrapper">
       <nav class="sidebar">
         <ul class="nav-groups">
-          <li class="nav-group-name">
-            <a href="Guides.html">Guides</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="readme.html">README</a>
-              </li>
-            </ul>
-          </li>
           <li class="nav-group-name">
             <a href="Classes.html">Classes</a>
             <ul class="nav-group-tasks">
@@ -71,25 +63,7 @@
                 <a href="Structs/Classifiers.html">Classifiers</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/DetectedFaces.html">DetectedFaces</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Structs/ErrorInfo.html">ErrorInfo</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/Face.html">Face</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/FaceAge.html">FaceAge</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/FaceGender.html">FaceGender</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/FaceLocation.html">FaceLocation</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/ImageWithFaces.html">ImageWithFaces</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/WarningInfo.html">WarningInfo</a>
@@ -100,10 +74,34 @@
             <a href="Typealiases.html">Type Aliases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="Typealiases.html#/s:19VisualRecognitionV319WatsonAuthenticatora">WatsonAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:19VisualRecognitionV324WatsonBasicAuthenticatora">WatsonBasicAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:19VisualRecognitionV330WatsonBearerTokenAuthenticatora">WatsonBearerTokenAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:19VisualRecognitionV334WatsonCloudPakForDataAuthenticatora">WatsonCloudPakForDataAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Typealiases.html#/s:19VisualRecognitionV311WatsonErrora">WatsonError</a>
               </li>
               <li class="nav-group-task">
+                <a href="Typealiases.html#/s:19VisualRecognitionV322WatsonIAMAuthenticatora">WatsonIAMAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:19VisualRecognitionV310WatsonJSONa">WatsonJSON</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:19VisualRecognitionV325WatsonNoAuthAuthenticatora">WatsonNoAuthAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Typealiases.html#/s:19VisualRecognitionV314WatsonResponsea">WatsonResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:19VisualRecognitionV330WatsonTokenSourceAuthenticatora">WatsonTokenSourceAuthenticator</a>
               </li>
             </ul>
           </li>
@@ -113,29 +111,39 @@
         <section>
           <section class="section">
             
-            <h1 id='visual-recognition' class='heading'>Visual Recognition</h1>
+            <h1 id='visual-recognition-v3' class='heading'>Visual Recognition V3</h1>
 
-<p>The IBM Watson Visual Recognition service uses deep learning algorithms to analyze images (.jpg or .png) for scenes, objects, faces, text, and other content, and return keywords that provide information about that content. The service comes with a set of built-in classes so that you can analyze images with high accuracy right out of the box. You can also train custom classifiers to create specialized classes.</p>
+<ul>
+<li><a href="https://cloud.ibm.com/apidocs/visual-recognition/visual-recognition-v3?code=swift">IBM Watson Visual Recognition V3 - API Reference</a></li>
+<li><a href="https://cloud.ibm.com/docs/services/visual-recognition/index.html">IBM Watson Visual Recognition V3 - Documentation</a></li>
+<li><a href="https://www.ibm.com/watson/services/visual-recognition/">IBM Watson Visual Recognition V3 - Service Page</a></li>
+</ul>
+
+<p>The IBM Watson Visual Recognition V3 service uses deep learning algorithms to analyze images (.jpg or .png) for scenes, objects, text, and other content, and return keywords that provide information about that content. The service comes with a set of built-in classes so that you can analyze images with high accuracy right out of the box. You can also train custom classifiers to create specialized classes.</p>
 
 <p>The following example demonstrates how to use the Visual Recognition service:</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">VisualRecognitionV3</span>
 
-<span class="k">let</span> <span class="nv">apiKey</span> <span class="o">=</span> <span class="s">"your-apikey-here"</span>
-<span class="k">let</span> <span class="nv">version</span> <span class="o">=</span> <span class="s">"YYYY-MM-DD"</span> <span class="c1">// use today's date for the most recent version</span>
-<span class="k">let</span> <span class="nv">visualRecognition</span> <span class="o">=</span> <span class="kt">VisualRecognition</span><span class="p">(</span><span class="nv">version</span><span class="p">:</span> <span class="n">version</span><span class="p">,</span> <span class="nv">apiKey</span><span class="p">:</span> <span class="n">apiKey</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">authenticator</span> <span class="o">=</span> <span class="kt">WatsonIAMAuthenticator</span><span class="p">(</span><span class="nv">apiKey</span><span class="p">:</span> <span class="s">"{apikey}"</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">visualRecognition</span> <span class="o">=</span> <span class="kt">VisualRecognition</span><span class="p">(</span><span class="nv">version</span><span class="p">:</span> <span class="s">"2018-03-19"</span><span class="p">,</span> <span class="nv">authenticator</span><span class="p">:</span> <span class="n">authenticator</span><span class="p">)</span>
+<span class="n">visualRecognition</span><span class="o">.</span><span class="n">serviceURL</span> <span class="o">=</span> <span class="s">"{url}"</span>
 
-<span class="k">let</span> <span class="nv">imageURL</span> <span class="o">=</span> <span class="kt">Bundle</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="nf">url</span><span class="p">(</span><span class="nv">forResource</span><span class="p">:</span> <span class="s">"profile-picture"</span><span class="p">,</span> <span class="nv">withExtension</span><span class="p">:</span> <span class="s">"jpg"</span><span class="p">)</span><span class="o">!</span>
-<span class="n">visualRecognition</span><span class="o">.</span><span class="nf">classify</span><span class="p">(</span><span class="nv">imagesFile</span><span class="p">:</span> <span class="n">imageURL</span><span class="p">)</span> <span class="p">{</span> <span class="n">response</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
-    <span class="k">if</span> <span class="k">let</span> <span class="nv">error</span> <span class="o">=</span> <span class="n">error</span> <span class="p">{</span>
-        <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
-    <span class="p">}</span>
-    <span class="k">guard</span> <span class="k">let</span> <span class="nv">classifiedImages</span> <span class="o">=</span> <span class="n">response</span><span class="p">?</span><span class="o">.</span><span class="n">result</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="nf">print</span><span class="p">(</span><span class="s">"Failed to classify the image"</span><span class="p">)</span>
-        <span class="k">return</span>
-    <span class="p">}</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">classifiedImages</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">url</span> <span class="o">=</span> <span class="kt">Bundle</span><span class="o">.</span><span class="n">main</span><span class="o">.</span><span class="nf">url</span><span class="p">(</span><span class="nv">forResource</span><span class="p">:</span> <span class="s">"fruitbowl"</span><span class="p">,</span> <span class="nv">withExtension</span><span class="p">:</span> <span class="s">"jpg"</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">fruitbowl</span> <span class="o">=</span> <span class="k">try</span><span class="p">?</span> <span class="kt">Data</span><span class="p">(</span><span class="nv">contentsOf</span><span class="p">:</span> <span class="n">url</span><span class="o">!</span><span class="p">)</span>
+
+<span class="n">visualRecognition</span><span class="o">.</span><span class="nf">classify</span><span class="p">(</span><span class="nv">imagesFile</span><span class="p">:</span> <span class="n">fruitbowl</span><span class="p">,</span> <span class="nv">threshold</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span> <span class="nv">owners</span><span class="p">:</span> <span class="p">[</span><span class="s">"me"</span><span class="p">])</span> <span class="p">{</span>
+  <span class="n">response</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
+
+  <span class="k">guard</span> <span class="k">let</span> <span class="nv">result</span> <span class="o">=</span> <span class="n">response</span><span class="p">?</span><span class="o">.</span><span class="n">result</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">?</span><span class="o">.</span><span class="n">localizedDescription</span> <span class="p">??</span> <span class="s">"unknown error"</span><span class="p">)</span>
+    <span class="k">return</span>
+  <span class="p">}</span>
+
+  <span class="nf">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre>
+
+<p>For details on all API operations, including Swift examples, <a href="https://cloud.ibm.com/apidocs/visual-recognition/visual-recognition-v3?code=swift">see the API reference.</a></p>
 <h2 id='using-core-ml' class='heading'>Using Core ML</h2>
 
 <p>The Watson Swift SDK supports offline image classification using Apple Core ML. Classifiers must be trained or updated with the <code>coreMLEnabled</code> flag set to true. Once the classifier&rsquo;s <code>coreMLStatus</code> is <code>ready</code> then a Core ML model is available to download and use for offline classification.</p>
@@ -181,17 +189,11 @@
 
 <p>The following links provide more information about the IBM Watson Visual Recognition service:</p>
 
-<ul>
-<li><a href="https://www.ibm.com/watson/services/visual-recognition/">IBM Watson Visual Recognition - Service Page</a></li>
-<li><a href="https://cloud.ibm.com/docs/services/visual-recognition/index.html">IBM Watson Visual Recognition - Documentation</a></li>
-<li><a href="https://visual-recognition-demo.ng.bluemix.net/">IBM Watson Visual Recognition - Demo</a></li>
-</ul>
-
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-06-14)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Copyright 2020 IBM</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

@@ -1,96 +1,152 @@
 {
   "warnings": [
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/SupportingFiles/Shared.swift",
-      "line": 20,
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 21,
       "symbol": "WatsonResponse",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/SupportingFiles/Shared.swift",
-      "line": 21,
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 22,
       "symbol": "WatsonError",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ToneAnalyzerV3/Models/ToneChatScore.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 23,
+      "symbol": "WatsonJSON",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 26,
+      "symbol": "WatsonAuthenticator",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 27,
+      "symbol": "WatsonIAMAuthenticator",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 28,
+      "symbol": "WatsonBasicAuthenticator",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 29,
+      "symbol": "WatsonCloudPakForDataAuthenticator",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 30,
+      "symbol": "WatsonTokenSourceAuthenticator",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 31,
+      "symbol": "WatsonBearerTokenAuthenticator",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 32,
+      "symbol": "WatsonNoAuthAuthenticator",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/ToneAnalyzerV3/Models/ToneChatScore.swift",
       "line": 29,
       "symbol": "ToneChatScore.ToneID.excited",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ToneAnalyzerV3/Models/ToneChatScore.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/ToneAnalyzerV3/Models/ToneChatScore.swift",
       "line": 30,
       "symbol": "ToneChatScore.ToneID.frustrated",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ToneAnalyzerV3/Models/ToneChatScore.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/ToneAnalyzerV3/Models/ToneChatScore.swift",
       "line": 31,
       "symbol": "ToneChatScore.ToneID.impolite",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ToneAnalyzerV3/Models/ToneChatScore.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/ToneAnalyzerV3/Models/ToneChatScore.swift",
       "line": 32,
       "symbol": "ToneChatScore.ToneID.polite",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ToneAnalyzerV3/Models/ToneChatScore.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/ToneAnalyzerV3/Models/ToneChatScore.swift",
       "line": 33,
       "symbol": "ToneChatScore.ToneID.sad",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ToneAnalyzerV3/Models/ToneChatScore.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/ToneAnalyzerV3/Models/ToneChatScore.swift",
       "line": 34,
       "symbol": "ToneChatScore.ToneID.satisfied",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ToneAnalyzerV3/Models/ToneChatScore.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/ToneAnalyzerV3/Models/ToneChatScore.swift",
       "line": 35,
       "symbol": "ToneChatScore.ToneID.sympathetic",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ToneAnalyzerV3/Models/ToneContent.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/ToneAnalyzerV3/Models/ToneContent.swift",
       "line": 26,
       "symbol": "ToneContent.toneInput(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ToneAnalyzerV3/Models/ToneContent.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/ToneAnalyzerV3/Models/ToneContent.swift",
       "line": 27,
       "symbol": "ToneContent.text(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ToneAnalyzerV3/Models/ToneContent.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/ToneAnalyzerV3/Models/ToneContent.swift",
       "line": 28,
       "symbol": "ToneContent.html(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/ToneAnalyzerV3/ToneAnalyzer.swift",
-      "line": 115,
-      "symbol": "ToneAnalyzer.accessToken(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/ToneAnalyzerV3/ToneAnalyzer.swift",
+      "line": 44,
+      "symbol": "ToneAnalyzer.authenticator",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     }
   ],
-  "source_directory": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk"
+  "source_directory": "/Users/jeffarn/Programming/sdks/swift-sdk"
 }

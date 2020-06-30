@@ -14,7 +14,7 @@
     <a title="SpeechRecognitionResult Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">SpeechToTextV1 Docs</a></p>
+        <p><a href="../index.html">SpeechToTextV1 3.5.0 Docs</a> (83% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -28,14 +28,6 @@
     <div class="content-wrapper">
       <nav class="sidebar">
         <ul class="nav-groups">
-          <li class="nav-group-name">
-            <a href="../Guides.html">Guides</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="../readme.html">README</a>
-              </li>
-            </ul>
-          </li>
           <li class="nav-group-name">
             <a href="../Classes.html">Classes</a>
             <ul class="nav-group-tasks">
@@ -75,21 +67,6 @@
                 <a href="../Structs/AudioListing/Status.html">– Status</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/AudioListingContainer.html">AudioListingContainer</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/AudioListingContainer/Status.html">– Status</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/AudioListingDetails.html">AudioListingDetails</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/AudioListingDetails/TypeEnum.html">– TypeEnum</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/AudioListingDetails/Compression.html">– Compression</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/AudioMetrics.html">AudioMetrics</a>
               </li>
               <li class="nav-group-task">
@@ -103,15 +80,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/AudioResource/Status.html">– Status</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/AudioResourceDetails.html">AudioResourceDetails</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/AudioResourceDetails/TypeEnum.html">– TypeEnum</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/AudioResourceDetails/Compression.html">– Compression</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/AudioResources.html">AudioResources</a>
@@ -192,6 +160,9 @@
                 <a href="../Structs/SpeechRecognitionResult.html">SpeechRecognitionResult</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/SpeechRecognitionResult/EndOfUtterance.html">– EndOfUtterance</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/SpeechRecognitionResults.html">SpeechRecognitionResults</a>
               </li>
               <li class="nav-group-task">
@@ -207,7 +178,7 @@
                 <a href="../Structs/TrainingWarning.html">TrainingWarning</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/TrainingWarning/WarningID.html">– WarningID</a>
+                <a href="../Structs/TrainingWarning/Code.html">– Code</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Word.html">Word</a>
@@ -236,10 +207,34 @@
             <a href="../Typealiases.html">Type Aliases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14SpeechToTextV119WatsonAuthenticatora">WatsonAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14SpeechToTextV124WatsonBasicAuthenticatora">WatsonBasicAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14SpeechToTextV130WatsonBearerTokenAuthenticatora">WatsonBearerTokenAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14SpeechToTextV134WatsonCloudPakForDataAuthenticatora">WatsonCloudPakForDataAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Typealiases.html#/s:14SpeechToTextV111WatsonErrora">WatsonError</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14SpeechToTextV122WatsonIAMAuthenticatora">WatsonIAMAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14SpeechToTextV110WatsonJSONa">WatsonJSON</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14SpeechToTextV125WatsonNoAuthAuthenticatora">WatsonNoAuthAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Typealiases.html#/s:14SpeechToTextV114WatsonResponsea">WatsonResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14SpeechToTextV130WatsonTokenSourceAuthenticatora">WatsonTokenSourceAuthenticator</a>
               </li>
             </ul>
           </li>
@@ -264,9 +259,46 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10A17RecognitionResultV12finalResultsSbvp"></a>
-                    <a name="//apple_ref/swift/Property/finalResults" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10A17RecognitionResultV12finalResultsSbvp">finalResults</a>
+                    <a name="/s:14SpeechToTextV10A17RecognitionResultV14EndOfUtteranceO"></a>
+                    <a name="//apple_ref/swift/Enum/EndOfUtterance" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SpeechToTextV10A17RecognitionResultV14EndOfUtteranceO">EndOfUtterance</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>If the <code>split_transcript_at_phrase_end</code> parameter is <code>true</code>, describes the reason for the split:</p>
+
+<ul>
+<li><code>end_of_data</code> - The end of the input audio stream.</li>
+<li><code>full_stop</code> - A full semantic stop, such as for the conclusion of a grammatical sentence. The insertion of splits
+is influenced by the base language model and biased by custom language models and grammars.</li>
+<li><code>reset</code> - The amount of audio that is currently being processed exceeds the two-minute maximum. The service
+splits the transcript to avoid excessive memory use.</li>
+<li><code>silence</code> - A pause or silence that is at least as long as the pause interval.</li>
+</ul>
+
+                        <a href="../Structs/SpeechRecognitionResult/EndOfUtterance.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">EndOfUtterance</span> <span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SpeechToTextV10A17RecognitionResultV5finalSbvp"></a>
+                    <a name="//apple_ref/swift/Property/final" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SpeechToTextV10A17RecognitionResultV5finalSbvp">final</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -282,7 +314,7 @@ updated further; no additional results are sent for a <code>result_index</code> 
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">finalResults</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">final</span><span class="p">:</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -375,13 +407,49 @@ specified.</p>
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SpeechToTextV10A17RecognitionResultV14endOfUtteranceSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/endOfUtterance" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SpeechToTextV10A17RecognitionResultV14endOfUtteranceSSSgvp">endOfUtterance</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>If the <code>split_transcript_at_phrase_end</code> parameter is <code>true</code>, describes the reason for the split:</p>
+
+<ul>
+<li><code>end_of_data</code> - The end of the input audio stream.</li>
+<li><code>full_stop</code> - A full semantic stop, such as for the conclusion of a grammatical sentence. The insertion of splits
+is influenced by the base language model and biased by custom language models and grammars.</li>
+<li><code>reset</code> - The amount of audio that is currently being processed exceeds the two-minute maximum. The service
+splits the transcript to avoid excessive memory use.</li>
+<li><code>silence</code> - A pause or silence that is at least as long as the pause interval.</li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">endOfUtterance</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-06-14)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Copyright 2020 IBM</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

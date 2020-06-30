@@ -14,7 +14,7 @@
     <a title="RecognitionSettings Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">SpeechToTextV1 Docs</a></p>
+        <p><a href="../index.html">SpeechToTextV1 3.5.0 Docs</a> (83% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -28,14 +28,6 @@
     <div class="content-wrapper">
       <nav class="sidebar">
         <ul class="nav-groups">
-          <li class="nav-group-name">
-            <a href="../Guides.html">Guides</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="../readme.html">README</a>
-              </li>
-            </ul>
-          </li>
           <li class="nav-group-name">
             <a href="../Classes.html">Classes</a>
             <ul class="nav-group-tasks">
@@ -75,21 +67,6 @@
                 <a href="../Structs/AudioListing/Status.html">– Status</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/AudioListingContainer.html">AudioListingContainer</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/AudioListingContainer/Status.html">– Status</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/AudioListingDetails.html">AudioListingDetails</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/AudioListingDetails/TypeEnum.html">– TypeEnum</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/AudioListingDetails/Compression.html">– Compression</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/AudioMetrics.html">AudioMetrics</a>
               </li>
               <li class="nav-group-task">
@@ -103,15 +80,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/AudioResource/Status.html">– Status</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/AudioResourceDetails.html">AudioResourceDetails</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/AudioResourceDetails/TypeEnum.html">– TypeEnum</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/AudioResourceDetails/Compression.html">– Compression</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/AudioResources.html">AudioResources</a>
@@ -192,6 +160,9 @@
                 <a href="../Structs/SpeechRecognitionResult.html">SpeechRecognitionResult</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/SpeechRecognitionResult/EndOfUtterance.html">– EndOfUtterance</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/SpeechRecognitionResults.html">SpeechRecognitionResults</a>
               </li>
               <li class="nav-group-task">
@@ -207,7 +178,7 @@
                 <a href="../Structs/TrainingWarning.html">TrainingWarning</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/TrainingWarning/WarningID.html">– WarningID</a>
+                <a href="../Structs/TrainingWarning/Code.html">– Code</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Word.html">Word</a>
@@ -236,10 +207,34 @@
             <a href="../Typealiases.html">Type Aliases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14SpeechToTextV119WatsonAuthenticatora">WatsonAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14SpeechToTextV124WatsonBasicAuthenticatora">WatsonBasicAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14SpeechToTextV130WatsonBearerTokenAuthenticatora">WatsonBearerTokenAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14SpeechToTextV134WatsonCloudPakForDataAuthenticatora">WatsonCloudPakForDataAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Typealiases.html#/s:14SpeechToTextV111WatsonErrora">WatsonError</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14SpeechToTextV122WatsonIAMAuthenticatora">WatsonIAMAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14SpeechToTextV110WatsonJSONa">WatsonJSON</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14SpeechToTextV125WatsonNoAuthAuthenticatora">WatsonNoAuthAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Typealiases.html#/s:14SpeechToTextV114WatsonResponsea">WatsonResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14SpeechToTextV130WatsonTokenSourceAuthenticatora">WatsonTokenSourceAuthenticator</a>
               </li>
             </ul>
           </li>
@@ -787,9 +782,157 @@ See <a href="https://cloud.ibm.com/docs/services/speech-to-text/output.html#reda
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:14SpeechToTextV119RecognitionSettingsV22endOfPhraseSilenceTimeSdSgvp"></a>
+                    <a name="//apple_ref/swift/Property/endOfPhraseSilenceTime" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SpeechToTextV119RecognitionSettingsV22endOfPhraseSilenceTimeSdSgvp">endOfPhraseSilenceTime</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>If <code>true</code>, specifies the duration of the pause interval at which the service
+splits a transcript into multiple final results. If the service detects pauses or extended silence before it
+reaches the end of the audio stream, its response can include multiple final results. Silence indicates a point
+at which the speaker pauses between spoken words or phrases.
+Specify a value for the pause interval in the range of 0.0 to 120.0.</p>
+
+<ul>
+<li>A value greater than 0 specifies the interval that the service is to use for speech recognition.</li>
+<li>A value of 0 indicates that the service is to use the default interval. It is equivalent to omitting the
+parameter.
+The default pause interval for most languages is 0.8 seconds; the default for Chinese is 0.6 seconds.
+See <a href="https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-output#silence_time">End of phrase silence time</a>.</li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">endOfPhraseSilenceTime</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SpeechToTextV119RecognitionSettingsV26splitTranscriptAtPhraseEndSbSgvp"></a>
+                    <a name="//apple_ref/swift/Property/splitTranscriptAtPhraseEnd" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SpeechToTextV119RecognitionSettingsV26splitTranscriptAtPhraseEndSbSgvp">splitTranscriptAtPhraseEnd</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>If <code>true</code>, directs the service to split the transcript into multiple
+final results based on semantic features of the input, for example, at the conclusion of meaningful phrases such
+as sentences. The service bases its understanding of semantic features on the base language model that you use
+with a request. Custom language models and grammars can also influence how and where the service splits a
+transcript. By default, the service splits transcripts based solely on the pause interval.
+See <a href="https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-output#split_transcript">Split transcript at phrase</a>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">splitTranscriptAtPhraseEnd</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SpeechToTextV119RecognitionSettingsV25speechDetectorSensitivitySdSgvp"></a>
+                    <a name="//apple_ref/swift/Property/speechDetectorSensitivity" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SpeechToTextV119RecognitionSettingsV25speechDetectorSensitivitySdSgvp">speechDetectorSensitivity</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The sensitivity of speech activity detection that the service is to
+perform. Use the parameter to suppress word insertions from music, coughing, and other non-speech events. The
+service biases the audio it passes for speech recognition by evaluating the input audio against prior models of
+speech and non-speech activity.
+Specify a value between 0.0 and 1.0:</p>
+
+<ul>
+<li>0.0 suppresses all audio (no speech is transcribed).</li>
+<li>0.5 (the default) provides a reasonable compromise for the level of sensitivity.</li>
+<li>1.0 suppresses no audio (speech detection sensitivity is disabled).
+The values increase on a monotonic curve. See <a href="https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-input#detection">Speech Activity
+Detection</a>.</li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">speechDetectorSensitivity</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SpeechToTextV119RecognitionSettingsV26backgroundAudioSuppressionSdSgvp"></a>
+                    <a name="//apple_ref/swift/Property/backgroundAudioSuppression" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SpeechToTextV119RecognitionSettingsV26backgroundAudioSuppressionSdSgvp">backgroundAudioSuppression</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The level to which the service is to suppress background audio based on
+its volume to prevent it from being transcribed as speech. Use the parameter to suppress side conversations or
+background noise.
+Specify a value in the range of 0.0 to 1.0:</p>
+
+<ul>
+<li>0.0 (the default) provides no suppression (background audio suppression is disabled).</li>
+<li>0.5 provides a reasonable level of audio suppression for general usage.</li>
+<li>1.0 suppresses all audio (no audio is transcribed).
+The values increase on a monotonic curve. See <a href="https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-input#detection">Speech Activity
+Detection</a>.</li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">backgroundAudioSuppression</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:14SpeechToTextV119RecognitionSettingsV11contentTypeACSSSg_tcfc"></a>
                     <a name="//apple_ref/swift/Method/init(contentType:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV119RecognitionSettingsV11contentTypeACSSSg_tcfc">init(contentType:)</a>
+                    <a class="token" href="#/s:14SpeechToTextV119RecognitionSettingsV11contentTypeACSSSg_tcfc">init(contentType:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -844,8 +987,8 @@ the returned object&rsquo;s properties.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-06-14)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Copyright 2020 IBM</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

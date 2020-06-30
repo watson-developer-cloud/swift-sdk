@@ -1,61 +1,117 @@
 {
   "warnings": [
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
       "line": 28,
       "symbol": "Classifier.Status.nonExistent",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
       "line": 29,
       "symbol": "Classifier.Status.training",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
       "line": 30,
       "symbol": "Classifier.Status.failed",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
       "line": 31,
       "symbol": "Classifier.Status.available",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/NaturalLanguageClassifierV1/Models/Classifier.swift",
       "line": 32,
       "symbol": "Classifier.Status.unavailable",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/NaturalLanguageClassifierV1/NaturalLanguageClassifier.swift",
-      "line": 98,
-      "symbol": "NaturalLanguageClassifier.accessToken(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/NaturalLanguageClassifierV1/NaturalLanguageClassifier.swift",
+      "line": 40,
+      "symbol": "NaturalLanguageClassifier.authenticator",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/SupportingFiles/Shared.swift",
-      "line": 20,
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 21,
       "symbol": "WatsonResponse",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/SupportingFiles/Shared.swift",
-      "line": 21,
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 22,
       "symbol": "WatsonError",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 23,
+      "symbol": "WatsonJSON",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 26,
+      "symbol": "WatsonAuthenticator",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 27,
+      "symbol": "WatsonIAMAuthenticator",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 28,
+      "symbol": "WatsonBasicAuthenticator",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 29,
+      "symbol": "WatsonCloudPakForDataAuthenticator",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 30,
+      "symbol": "WatsonTokenSourceAuthenticator",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 31,
+      "symbol": "WatsonBearerTokenAuthenticator",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 32,
+      "symbol": "WatsonNoAuthAuthenticator",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     }
   ],
-  "source_directory": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk"
+  "source_directory": "/Users/jeffarn/Programming/sdks/swift-sdk"
 }

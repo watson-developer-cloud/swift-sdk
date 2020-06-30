@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Structures  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Section/Structures" class="dashAnchor"></a>
+    <a title="Structures  Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="index.html">VisualRecognitionV4 3.5.0 Docs</a> (83% documented)</p>
+        <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="index.html">VisualRecognitionV4 Reference</a>
+        <img id="carat" src="img/carat.png" />
+        Structures  Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Classes/VisualRecognition.html">VisualRecognition</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/AnalyzeResponse.html">AnalyzeResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Collection.html">Collection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CollectionObjects.html">CollectionObjects</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CollectionsList.html">CollectionsList</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DetectedObjects.html">DetectedObjects</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Error.html">Error</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Error/Code.html">– Code</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ErrorTarget.html">ErrorTarget</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ErrorTarget/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/FileWithMetadata.html">FileWithMetadata</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Image.html">Image</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ImageDetails.html">ImageDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ImageDetailsList.html">ImageDetailsList</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ImageDimensions.html">ImageDimensions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ImageSource.html">ImageSource</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ImageSource/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ImageSummary.html">ImageSummary</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ImageSummaryList.html">ImageSummaryList</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Location.html">Location</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ObjectDetail.html">ObjectDetail</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ObjectMetadata.html">ObjectMetadata</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ObjectMetadataList.html">ObjectMetadataList</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ObjectTrainingStatus.html">ObjectTrainingStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/TrainingDataObject.html">TrainingDataObject</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/TrainingDataObjects.html">TrainingDataObjects</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/TrainingEvent.html">TrainingEvent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/TrainingEvent/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/TrainingEvent/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/TrainingEvents.html">TrainingEvents</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/TrainingStatus.html">TrainingStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/UpdateObjectMetadata.html">UpdateObjectMetadata</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Warning.html">Warning</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Warning/Code.html">– Code</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:19VisualRecognitionV419WatsonAuthenticatora">WatsonAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:19VisualRecognitionV424WatsonBasicAuthenticatora">WatsonBasicAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:19VisualRecognitionV430WatsonBearerTokenAuthenticatora">WatsonBearerTokenAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:19VisualRecognitionV434WatsonCloudPakForDataAuthenticatora">WatsonCloudPakForDataAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:19VisualRecognitionV411WatsonErrora">WatsonError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:19VisualRecognitionV422WatsonIAMAuthenticatora">WatsonIAMAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:19VisualRecognitionV410WatsonJSONa">WatsonJSON</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:19VisualRecognitionV425WatsonNoAuthAuthenticatora">WatsonNoAuthAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:19VisualRecognitionV414WatsonResponsea">WatsonResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:19VisualRecognitionV430WatsonTokenSourceAuthenticatora">WatsonTokenSourceAuthenticator</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Structures</h1>
+            <p>The following structures are available globally.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV415AnalyzeResponseV"></a>
+                    <a name="//apple_ref/swift/Struct/AnalyzeResponse" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV415AnalyzeResponseV">AnalyzeResponse</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Results for all images.</p>
+
+                        <a href="Structs/AnalyzeResponse.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AnalyzeResponse</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV410CollectionV"></a>
+                    <a name="//apple_ref/swift/Struct/Collection" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV410CollectionV">Collection</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Details about a collection.</p>
+
+                        <a href="Structs/Collection.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Collection</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV417CollectionObjectsV"></a>
+                    <a name="//apple_ref/swift/Struct/CollectionObjects" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV417CollectionObjectsV">CollectionObjects</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The objects in a collection that are detected in an image.</p>
+
+                        <a href="Structs/CollectionObjects.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CollectionObjects</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV415CollectionsListV"></a>
+                    <a name="//apple_ref/swift/Struct/CollectionsList" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV415CollectionsListV">CollectionsList</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A container for the list of collections.</p>
+
+                        <a href="Structs/CollectionsList.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CollectionsList</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV415DetectedObjectsV"></a>
+                    <a name="//apple_ref/swift/Struct/DetectedObjects" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV415DetectedObjectsV">DetectedObjects</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Container for the list of collections that have objects detected in an image.</p>
+
+                        <a href="Structs/DetectedObjects.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DetectedObjects</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV45ErrorV"></a>
+                    <a name="//apple_ref/swift/Struct/Error" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV45ErrorV">Error</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Details about an error.</p>
+
+                        <a href="Structs/Error.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Error</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV411ErrorTargetV"></a>
+                    <a name="//apple_ref/swift/Struct/ErrorTarget" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV411ErrorTargetV">ErrorTarget</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Details about the specific area of the problem.</p>
+
+                        <a href="Structs/ErrorTarget.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ErrorTarget</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV416FileWithMetadataV"></a>
+                    <a name="//apple_ref/swift/Struct/FileWithMetadata" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV416FileWithMetadataV">FileWithMetadata</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A file with its associated metadata.</p>
+
+                        <a href="Structs/FileWithMetadata.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">FileWithMetadata</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV45ImageV"></a>
+                    <a name="//apple_ref/swift/Struct/Image" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV45ImageV">Image</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Details about an image.</p>
+
+                        <a href="Structs/Image.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Image</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV412ImageDetailsV"></a>
+                    <a name="//apple_ref/swift/Struct/ImageDetails" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV412ImageDetailsV">ImageDetails</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Details about an image.</p>
+
+                        <a href="Structs/ImageDetails.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ImageDetails</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV416ImageDetailsListV"></a>
+                    <a name="//apple_ref/swift/Struct/ImageDetailsList" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV416ImageDetailsListV">ImageDetailsList</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List of information about the images.</p>
+
+                        <a href="Structs/ImageDetailsList.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ImageDetailsList</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV415ImageDimensionsV"></a>
+                    <a name="//apple_ref/swift/Struct/ImageDimensions" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV415ImageDimensionsV">ImageDimensions</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Height and width of an image.</p>
+
+                        <a href="Structs/ImageDimensions.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ImageDimensions</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV411ImageSourceV"></a>
+                    <a name="//apple_ref/swift/Struct/ImageSource" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV411ImageSourceV">ImageSource</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The source type of the image.</p>
+
+                        <a href="Structs/ImageSource.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ImageSource</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV412ImageSummaryV"></a>
+                    <a name="//apple_ref/swift/Struct/ImageSummary" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV412ImageSummaryV">ImageSummary</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Basic information about an image.</p>
+
+                        <a href="Structs/ImageSummary.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ImageSummary</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV416ImageSummaryListV"></a>
+                    <a name="//apple_ref/swift/Struct/ImageSummaryList" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV416ImageSummaryListV">ImageSummaryList</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List of images.</p>
+
+                        <a href="Structs/ImageSummaryList.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ImageSummaryList</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV48LocationV"></a>
+                    <a name="//apple_ref/swift/Struct/Location" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV48LocationV">Location</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Defines the location of the bounding box around the object.</p>
+
+                        <a href="Structs/Location.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Location</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV412ObjectDetailV"></a>
+                    <a name="//apple_ref/swift/Struct/ObjectDetail" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV412ObjectDetailV">ObjectDetail</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Details about an object in the collection.</p>
+
+                        <a href="Structs/ObjectDetail.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ObjectDetail</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV414ObjectMetadataV"></a>
+                    <a name="//apple_ref/swift/Struct/ObjectMetadata" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV414ObjectMetadataV">ObjectMetadata</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Basic information about an object.</p>
+
+                        <a href="Structs/ObjectMetadata.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ObjectMetadata</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV418ObjectMetadataListV"></a>
+                    <a name="//apple_ref/swift/Struct/ObjectMetadataList" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV418ObjectMetadataListV">ObjectMetadataList</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List of objects.</p>
+
+                        <a href="Structs/ObjectMetadataList.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ObjectMetadataList</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV420ObjectTrainingStatusV"></a>
+                    <a name="//apple_ref/swift/Struct/ObjectTrainingStatus" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV420ObjectTrainingStatusV">ObjectTrainingStatus</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Training status for the objects in the collection.</p>
+
+                        <a href="Structs/ObjectTrainingStatus.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ObjectTrainingStatus</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV418TrainingDataObjectV"></a>
+                    <a name="//apple_ref/swift/Struct/TrainingDataObject" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV418TrainingDataObjectV">TrainingDataObject</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Details about the training data.</p>
+
+                        <a href="Structs/TrainingDataObject.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TrainingDataObject</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV419TrainingDataObjectsV"></a>
+                    <a name="//apple_ref/swift/Struct/TrainingDataObjects" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV419TrainingDataObjectsV">TrainingDataObjects</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Training data for all objects.</p>
+
+                        <a href="Structs/TrainingDataObjects.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TrainingDataObjects</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV413TrainingEventV"></a>
+                    <a name="//apple_ref/swift/Struct/TrainingEvent" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV413TrainingEventV">TrainingEvent</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Details about the training event.</p>
+
+                        <a href="Structs/TrainingEvent.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TrainingEvent</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV414TrainingEventsV"></a>
+                    <a name="//apple_ref/swift/Struct/TrainingEvents" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV414TrainingEventsV">TrainingEvents</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Details about the training events.</p>
+
+                        <a href="Structs/TrainingEvents.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TrainingEvents</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV414TrainingStatusV"></a>
+                    <a name="//apple_ref/swift/Struct/TrainingStatus" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV414TrainingStatusV">TrainingStatus</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Training status information for the collection.</p>
+
+                        <a href="Structs/TrainingStatus.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TrainingStatus</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV420UpdateObjectMetadataV"></a>
+                    <a name="//apple_ref/swift/Struct/UpdateObjectMetadata" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV420UpdateObjectMetadataV">UpdateObjectMetadata</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Basic information about an updated object.</p>
+
+                        <a href="Structs/UpdateObjectMetadata.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">UpdateObjectMetadata</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV47WarningV"></a>
+                    <a name="//apple_ref/swift/Struct/Warning" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV47WarningV">Warning</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Details about a problem.</p>
+
+                        <a href="Structs/Warning.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Warning</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>Copyright 2020 IBM</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

@@ -14,7 +14,7 @@
     <a title="TextToSpeech Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">TextToSpeechV1 Docs</a></p>
+        <p><a href="../index.html">TextToSpeechV1 3.5.0 Docs</a> (57% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -28,14 +28,6 @@
     <div class="content-wrapper">
       <nav class="sidebar">
         <ul class="nav-groups">
-          <li class="nav-group-name">
-            <a href="../Guides.html">Guides</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="../readme.html">README</a>
-              </li>
-            </ul>
-          </li>
           <li class="nav-group-name">
             <a href="../Classes.html">Classes</a>
             <ul class="nav-group-tasks">
@@ -86,10 +78,34 @@
             <a href="../Typealiases.html">Type Aliases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14TextToSpeechV119WatsonAuthenticatora">WatsonAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14TextToSpeechV124WatsonBasicAuthenticatora">WatsonBasicAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14TextToSpeechV130WatsonBearerTokenAuthenticatora">WatsonBearerTokenAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14TextToSpeechV134WatsonCloudPakForDataAuthenticatora">WatsonCloudPakForDataAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14TextToSpeechV122WatsonIAMAuthenticatora">WatsonIAMAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14TextToSpeechV110WatsonJSONa">WatsonJSON</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14TextToSpeechV125WatsonNoAuthAuthenticatora">WatsonNoAuthAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14TextToSpeechV130WatsonTokenSourceAuthenticatora">WatsonTokenSourceAuthenticator</a>
               </li>
             </ul>
           </li>
@@ -108,14 +124,15 @@
             <p>The IBM&reg; Text to Speech service provides APIs that use IBM&rsquo;s speech-synthesis capabilities to synthesize text into
 natural-sounding speech in a variety of languages, dialects, and voices. The service supports at least one male or
 female voice, sometimes both, for each language. The audio is streamed back to the client with minimal delay.
-For speech synthesis, the service supports a synchronous HTTP Representational State Transfer (REST) interface. It also
-supports a WebSocket interface that provides both plain text and SSML input, including the SSML &lt;mark&gt; element
-and word timings. SSML is an XML-based markup language that provides text annotation for speech-synthesis applications.
-The service also offers a customization interface. You can use the interface to define sounds-like or phonetic
-translations for words. A sounds-like translation consists of one or more words that, when combined, sound like the
-word. A phonetic translation is based on the SSML phoneme format for representing a word. You can specify a phonetic
-translation in standard International Phonetic Alphabet (IPA) representation or in the proprietary IBM Symbolic
-Phonetic Representation (SPR).</p>
+For speech synthesis, the service supports a synchronous HTTP Representational State Transfer (REST) interface and a
+WebSocket interface. Both interfaces support plain text and SSML input. SSML is an XML-based markup language that
+provides text annotation for speech-synthesis applications. The WebSocket interface also supports the SSML
+<code>&lt;mark&gt;</code> element and word timings.
+The service offers a customization interface that you can use to define sounds-like or phonetic translations for words.
+A sounds-like translation consists of one or more words that, when combined, sound like the word. A phonetic
+translation is based on the SSML phoneme format for representing a word. You can specify a phonetic translation in
+standard International Phonetic Alphabet (IPA) representation or in the proprietary IBM Symbolic Phonetic
+Representation (SPR). The Arabic, Chinese, Dutch, and Korean languages support only IPA.</p>
 
           </section>
           <section class="section task-group-section">
@@ -124,9 +141,9 @@ Phonetic Representation (SPR).</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C10serviceURLSSvp"></a>
+                    <a name="/s:14TextToSpeechV10abC0C10serviceURLSSSgvp"></a>
                     <a name="//apple_ref/swift/Property/serviceURL" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C10serviceURLSSvp">serviceURL</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C10serviceURLSSSgvp">serviceURL</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -141,7 +158,7 @@ Phonetic Representation (SPR).</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -178,6 +195,33 @@ Phonetic Representation (SPR).</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:14TextToSpeechV10abC0C13authenticator15IBMSwiftSDKCore13Authenticator_pvp"></a>
+                    <a name="//apple_ref/swift/Property/authenticator" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C13authenticator15IBMSwiftSDKCore13Authenticator_pvp">authenticator</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">authenticator</span><span class="p">:</span> <span class="kt">Authenticator</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/"></a>
                     <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
                     <a class="token" href="#/">init()</a>
@@ -204,9 +248,9 @@ In that case, try another initializer that directly passes in the credentials.</
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C8username8passwordACSS_SStcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(username:password:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C8username8passwordACSS_SStcfc">init(username:password:)</a>
+                    <a name="/s:14TextToSpeechV10abC0C13authenticatorAC15IBMSwiftSDKCore13Authenticator_p_tcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(authenticator:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C13authenticatorAC15IBMSwiftSDKCore13Authenticator_p_tcfc">init(authenticator:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -221,7 +265,7 @@ In that case, try another initializer that directly passes in the credentials.</
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">username</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">authenticator</span><span class="p">:</span> <span class="kt">Authenticator</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -232,160 +276,17 @@ In that case, try another initializer that directly passes in the credentials.</
                             <tr>
                               <td>
                                 <code>
-                                <em>username</em>
+                                <em>authenticator</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The username used to authenticate with the service.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>password</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The password used to authenticate with the service.</p>
+                                  <p>The Authenticator object used to authenticate requests to the service</p>
                                 </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:14TextToSpeechV10abC0C6apiKey6iamUrlACSS_SSSgtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(apiKey:iamUrl:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C6apiKey6iamUrlACSS_SSSgtcfc">init(apiKey:iamUrl:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Create a <code>TextToSpeech</code> object.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">apiKey</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">iamUrl</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>apiKey</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An API key for IAM that can be used to obtain access tokens for the service.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>iamUrl</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The URL for the IAM service.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:14TextToSpeechV10abC0C11accessTokenACSS_tcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(accessToken:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C11accessTokenACSS_tcfc">init(accessToken:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Create a <code>TextToSpeech</code> object.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">accessToken</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>accessToken</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An access token for the service.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:14TextToSpeechV10abC0C11accessTokenyySSF"></a>
-                    <a name="//apple_ref/swift/Method/accessToken(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C11accessTokenyySSF">accessToken(_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">accessToken</span><span class="p">(</span><span class="n">_</span> <span class="nv">newToken</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
-
-                        </div>
                       </div>
                     </section>
                   </div>
@@ -421,9 +322,9 @@ In that case, try another initializer that directly passes in the credentials.</
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C10listVoices7headers17completionHandlerySDyS2SGSg_y7RestKit0J8ResponseVyAA0F0VGSg_AI0J5ErrorOSgtctF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C10listVoices7headers17completionHandlerySDyS2SGSg_y15IBMSwiftSDKCore12RestResponseVyAA0F0VGSg_AI0L5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/listVoices(headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C10listVoices7headers17completionHandlerySDyS2SGSg_y7RestKit0J8ResponseVyAA0F0VGSg_AI0J5ErrorOSgtctF">listVoices(headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C10listVoices7headers17completionHandlerySDyS2SGSg_y15IBMSwiftSDKCore12RestResponseVyAA0F0VGSg_AI0L5ErrorOSgtctF">listVoices(headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -435,7 +336,7 @@ In that case, try another initializer that directly passes in the credentials.</
 
 <p>Lists all voices available for use with the service. The information includes the name, language, gender, and other
 details about the voice. To see information about a specific voice, use the <strong>Get a voice</strong> method.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-voices#listVoices">Listing all available
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-voices#listVoices">Listing all available
 voices</a>.</p>
 
                       </div>
@@ -486,9 +387,9 @@ voices</a>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C8getVoice5voice15customizationID7headers17completionHandlerySS_SSSgSDyS2SGSgy7RestKit0M8ResponseVyAA0F0VGSg_AL0M5ErrorOSgtctF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C8getVoice5voice15customizationID7headers17completionHandlerySS_SSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0F0VGSg_AL0O5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/getVoice(voice:customizationID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C8getVoice5voice15customizationID7headers17completionHandlerySS_SSSgSDyS2SGSgy7RestKit0M8ResponseVyAA0F0VGSg_AL0M5ErrorOSgtctF">getVoice(voice:customizationID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C8getVoice5voice15customizationID7headers17completionHandlerySS_SSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0F0VGSg_AL0O5ErrorOSgtctF">getVoice(voice:<wbr>customizationID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -499,9 +400,9 @@ voices</a>.</p>
                         <p>Get a voice.</p>
 
 <p>Gets information about the specified voice. The information includes the name, language, gender, and other details
-about the voice. Specify a customization ID to obtain information for that custom voice model of the specified
-voice. To list information about all available voices, use the <strong>List voices</strong> method.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-voices#listVoice">Listing a specific
+about the voice. Specify a customization ID to obtain information for a custom voice model that is defined for the
+language of the specified voice. To list information about all available voices, use the <strong>List voices</strong> method.
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-voices#listVoice">Listing a specific
 voice</a>.</p>
 
                       </div>
@@ -542,8 +443,8 @@ voice</a>.</p>
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of a custom voice model for which information is to be
-returned. You must make the request with service credentials created for the instance of the service that owns
-the custom model. Omit the parameter to see information about the specified voice with no customization.</p>
+returned. You must make the request with credentials for the instance of the service that owns the custom model.
+Omit the parameter to see information about the specified voice with no customization.</p>
                                 </div>
                               </td>
                             </tr>
@@ -580,9 +481,9 @@ the custom model. Omit the parameter to see information about the specified voic
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C10synthesize4text5voice15customizationID6accept7headers17completionHandlerySS_SSSgA2KSDyS2SGSgy7RestKit0N8ResponseVy10Foundation4DataVGSg_AN0N5ErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/synthesize(text:voice:customizationID:accept:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C10synthesize4text5voice15customizationID6accept7headers17completionHandlerySS_SSSgA2KSDyS2SGSgy7RestKit0N8ResponseVy10Foundation4DataVGSg_AN0N5ErrorOSgtctF">synthesize(text:voice:customizationID:accept:headers:completionHandler:)</a>
+                    <a name="/s:14TextToSpeechV10abC0C10synthesize4text6accept5voice15customizationID7headers17completionHandlerySS_SSSgA2KSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVy10Foundation4DataVGSg_AN0P5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/synthesize(text:accept:voice:customizationID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C10synthesize4text6accept5voice15customizationID7headers17completionHandlerySS_SSSgA2KSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVy10Foundation4DataVGSg_AN0P5ErrorOSgtctF">synthesize(text:<wbr>accept:<wbr>voice:<wbr>customizationID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -597,7 +498,7 @@ language for the input text on the specified voice. Use a voice that matches the
 The method accepts a maximum of 5 KB of input text in the body of the request, and 8 KB for the URL and headers.
 The 5 KB limit includes any SSML tags that you specify. The service returns the synthesized audio stream as an
 array of bytes.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-usingHTTP#usingHTTP">The HTTP
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-usingHTTP#usingHTTP">The HTTP
 interface</a>.</p>
 <h3 id='audio-formats-accept-types' class='heading'>Audio formats (accept types)</h3>
 
@@ -606,48 +507,40 @@ interface</a>.</p>
 <ul>
 <li>Where indicated, you can optionally specify the sampling rate (<code>rate</code>) of the audio. You must specify a sampling
 rate for the <code>audio/l16</code> and <code>audio/mulaw</code> formats. A specified sampling rate must lie in the range of 8 kHz to 192
-kHz.</li>
+kHz. Some formats restrict the sampling rate to certain values, as noted.</li>
 <li>For the <code>audio/l16</code> format, you can optionally specify the endianness (<code>endianness</code>) of the audio:
 <code>endianness=big-endian</code> or <code>endianness=little-endian</code>.
 Use the <code>Accept</code> header or the <code>accept</code> parameter to specify the requested format of the response audio. If you
 omit an audio format altogether, the service returns the audio in Ogg format with the Opus codec
 (<code>audio/ogg;codecs=opus</code>). The service always returns single-channel audio.</li>
-<li><code>audio/basic</code>
-The service returns audio with a sampling rate of 8000 Hz.</li>
-<li><code>audio/flac</code>
-You can optionally specify the <code>rate</code> of the audio. The default sampling rate is 22,050 Hz.</li>
-<li><code>audio/l16</code>
-You must specify the <code>rate</code> of the audio. You can optionally specify the <code>endianness</code> of the audio. The default
-endianness is <code>little-endian</code>.</li>
-<li><code>audio/mp3</code>
-You can optionally specify the <code>rate</code> of the audio. The default sampling rate is 22,050 Hz.</li>
-<li><code>audio/mpeg</code>
-You can optionally specify the <code>rate</code> of the audio. The default sampling rate is 22,050 Hz.</li>
-<li><code>audio/mulaw</code>
-You must specify the <code>rate</code> of the audio.</li>
-<li><code>audio/ogg</code>
-The service returns the audio in the <code>vorbis</code> codec. You can optionally specify the <code>rate</code> of the audio. The
-default sampling rate is 22,050 Hz.</li>
-<li><code>audio/ogg;codecs=opus</code>
-You can optionally specify the <code>rate</code> of the audio. The default sampling rate is 22,050 Hz.</li>
-<li><code>audio/ogg;codecs=vorbis</code>
-You can optionally specify the <code>rate</code> of the audio. The default sampling rate is 22,050 Hz.</li>
-<li><code>audio/wav</code>
-You can optionally specify the <code>rate</code> of the audio. The default sampling rate is 22,050 Hz.</li>
-<li><code>audio/webm</code>
-The service returns the audio in the <code>opus</code> codec. The service returns audio with a sampling rate of 48,000 Hz.</li>
-<li><code>audio/webm;codecs=opus</code>
-The service returns audio with a sampling rate of 48,000 Hz.</li>
-<li><p><code>audio/webm;codecs=vorbis</code>
-You can optionally specify the <code>rate</code> of the audio. The default sampling rate is 22,050 Hz.
+<li><code>audio/basic</code> - The service returns audio with a sampling rate of 8000 Hz.</li>
+<li><code>audio/flac</code> - You can optionally specify the <code>rate</code> of the audio. The default sampling rate is 22,050 Hz.</li>
+<li><code>audio/l16</code> - You must specify the <code>rate</code> of the audio. You can optionally specify the <code>endianness</code> of the audio.
+The default endianness is <code>little-endian</code>.</li>
+<li><code>audio/mp3</code> - You can optionally specify the <code>rate</code> of the audio. The default sampling rate is 22,050 Hz.</li>
+<li><code>audio/mpeg</code> - You can optionally specify the <code>rate</code> of the audio. The default sampling rate is 22,050 Hz.</li>
+<li><code>audio/mulaw</code> - You must specify the <code>rate</code> of the audio.</li>
+<li><code>audio/ogg</code> - The service returns the audio in the <code>vorbis</code> codec. You can optionally specify the <code>rate</code> of the
+audio. The default sampling rate is 22,050 Hz.</li>
+<li><code>audio/ogg;codecs=opus</code> - You can optionally specify the <code>rate</code> of the audio. Only the following values are valid
+sampling rates: <code>48000</code>, <code>24000</code>, <code>16000</code>, <code>12000</code>, or <code>8000</code>. If you specify a value other than one of these, the
+service returns an error. The default sampling rate is 48,000 Hz.</li>
+<li><code>audio/ogg;codecs=vorbis</code> - You can optionally specify the <code>rate</code> of the audio. The default sampling rate is
+22,050 Hz.</li>
+<li><code>audio/wav</code> - You can optionally specify the <code>rate</code> of the audio. The default sampling rate is 22,050 Hz.</li>
+<li><code>audio/webm</code> - The service returns the audio in the <code>opus</code> codec. The service returns audio with a sampling rate
+of 48,000 Hz.</li>
+<li><code>audio/webm;codecs=opus</code> - The service returns audio with a sampling rate of 48,000 Hz.</li>
+<li><p><code>audio/webm;codecs=vorbis</code> - You can optionally specify the <code>rate</code> of the audio. The default sampling rate is
+22,050 Hz.
 For more information about specifying an audio format, including additional details about some of the formats, see
-<a href="https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-audioFormats#audioFormats">Audio formats</a>.</p>
+<a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-audioFormats#audioFormats">Audio formats</a>.</p>
 <h3 id='warning-messages' class='heading'>Warning messages</h3>
 
 <p>If a request includes invalid query parameters, the service returns a <code>Warnings</code> response header that provides
 messages about the invalid parameters. The warning includes a descriptive message and a list of invalid argument
-strings. For example, a message such as <code>\&quot;Unknown arguments:\&quot;</code> or <code>\&quot;Unknown url query arguments:\&quot;</code> followed by
-a list of the form <code>\&quot;{invalid_arg_1}, {invalid_arg_2}.\&quot;</code> The request succeeds despite the warnings.</p></li>
+strings. For example, a message such as <code>&quot;Unknown arguments:&quot;</code> or <code>&quot;Unknown url query arguments:&quot;</code> followed by a
+list of the form <code>&quot;{invalid_arg_1}, {invalid_arg_2}.&quot;</code> The request succeeds despite the warnings.</p></li>
 </ul>
 
                       </div>
@@ -657,9 +550,9 @@ a list of the form <code>\&quot;{invalid_arg_1}, {invalid_arg_2}.\&quot;</code> 
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">synthesize</span><span class="p">(</span>
     <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">accept</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">voice</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">accept</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt">Data</span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -684,6 +577,20 @@ a list of the form <code>\&quot;{invalid_arg_1}, {invalid_arg_2}.\&quot;</code> 
                             <tr>
                               <td>
                                 <code>
+                                <em>accept</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The requested format (MIME type) of the audio. You can use the <code>Accept</code> header or the
+<code>accept</code> parameter to specify the audio format. For more information about specifying an audio format, see
+<strong>Audio formats (accept types)</strong> in the method description.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>voice</em>
                                 </code>
                               </td>
@@ -702,24 +609,9 @@ a list of the form <code>\&quot;{invalid_arg_1}, {invalid_arg_2}.\&quot;</code> 
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of a custom voice model to use for the synthesis. If a
-custom voice model is specified, it is guaranteed to work only if it matches the language of the indicated voice.
-You must make the request with service credentials created for the instance of the service that owns the custom
-model. Omit the parameter to use the specified voice with no customization.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>accept</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The requested format (MIME type) of the audio. You can use the <code>Accept</code> header or the
-<code>accept</code> parameter to specify the audio format. For more information about specifying an audio format, see
-<strong>Audio formats (accept types)</strong> in the method description.
-Default: <code>audio/ogg;codecs=opus</code>.</p>
+custom voice model is specified, it works only if it matches the language of the indicated voice. You must make
+the request with credentials for the instance of the service that owns the custom model. Omit the parameter to
+use the specified voice with no customization.</p>
                                 </div>
                               </td>
                             </tr>
@@ -756,9 +648,9 @@ Default: <code>audio/ogg;codecs=opus</code>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C16getPronunciation4text5voice6format15customizationID7headers17completionHandlerySS_SSSgA2KSDyS2SGSgy7RestKit0O8ResponseVyAA0F0VGSg_AN0O5ErrorOSgtctF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C16getPronunciation4text5voice6format15customizationID7headers17completionHandlerySS_SSSgA2KSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0F0VGSg_AN0Q5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/getPronunciation(text:voice:format:customizationID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C16getPronunciation4text5voice6format15customizationID7headers17completionHandlerySS_SSSgA2KSDyS2SGSgy7RestKit0O8ResponseVyAA0F0VGSg_AN0O5ErrorOSgtctF">getPronunciation(text:voice:format:customizationID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C16getPronunciation4text5voice6format15customizationID7headers17completionHandlerySS_SSSgA2KSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0F0VGSg_AN0Q5ErrorOSgtctF">getPronunciation(text:<wbr>voice:<wbr>format:<wbr>customizationID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -772,7 +664,7 @@ Default: <code>audio/ogg;codecs=opus</code>.</p>
 You can also request the pronunciation for a specific voice to see the default translation for the language of that
 voice or for a specific custom voice model to see the translation for that voice model.
 <strong>Note:</strong> This method is currently a beta release.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customWords#cuWordsQueryLanguage">Querying a word from a
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customWords#cuWordsQueryLanguage">Querying a word from a
 language</a>.</p>
 
                       </div>
@@ -827,8 +719,8 @@ for the same language (for example, <code>en-US</code>) return the same translat
                               </td>
                               <td>
                                 <div>
-                                  <p>The phoneme format in which to return the pronunciation. Omit the parameter to obtain the
-pronunciation in the default format.</p>
+                                  <p>The phoneme format in which to return the pronunciation. The Arabic, Chinese, Dutch, and
+Korean languages support only IPA. Omit the parameter to obtain the pronunciation in the default format.</p>
                                 </div>
                               </td>
                             </tr>
@@ -843,8 +735,8 @@ pronunciation in the default format.</p>
                                   <p>The customization ID (GUID) of a custom voice model for which the pronunciation is
 to be returned. The language of a specified custom model must match the language of the specified voice. If the
 word is not defined in the specified custom model, the service returns the default translation for the custom
-model&rsquo;s language. You must make the request with service credentials created for the instance of the service that
-owns the custom model. Omit the parameter to see the translation for the specified voice with no customization.</p>
+model&rsquo;s language. You must make the request with credentials for the instance of the service that owns the custom
+model. Omit the parameter to see the translation for the specified voice with no customization.</p>
                                 </div>
                               </td>
                             </tr>
@@ -881,9 +773,9 @@ owns the custom model. Omit the parameter to see the translation for the specifi
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C16createVoiceModel4name8language11description7headers17completionHandlerySS_SSSgAJSDyS2SGSgy7RestKit0N8ResponseVyAA0fG0VGSg_AM0N5ErrorOSgtctF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C16createVoiceModel4name8language11description7headers17completionHandlerySS_SSSgAJSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AM0P5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/createVoiceModel(name:language:description:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C16createVoiceModel4name8language11description7headers17completionHandlerySS_SSSgAJSDyS2SGSgy7RestKit0N8ResponseVyAA0fG0VGSg_AM0N5ErrorOSgtctF">createVoiceModel(name:language:description:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C16createVoiceModel4name8language11description7headers17completionHandlerySS_SSSgAJSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AM0P5ErrorOSgtctF">createVoiceModel(name:<wbr>language:<wbr>description:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -897,7 +789,7 @@ owns the custom model. Omit the parameter to see the translation for the specifi
 specify the language and a description for the new model. The model is owned by the instance of the service whose
 credentials are used to create it.
 <strong>Note:</strong> This method is currently a beta release.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customModels#cuModelsCreate">Creating a custom
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customModels#cuModelsCreate">Creating a custom
 model</a>.</p>
 
                       </div>
@@ -938,8 +830,9 @@ model</a>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The language of the new custom voice model. Omit the parameter to use the the default
-language, <code>en-US</code>.</p>
+                                  <p>The language of the new custom voice model. You create a custom voice model for a specific
+language, not for a specific voice. A custom model can be used with any voice, standard or neural, for its
+specified language. Omit the parameter to use the the default language, <code>en-US</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -988,9 +881,9 @@ language, <code>en-US</code>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C15listVoiceModels8language7headers17completionHandlerySSSg_SDyS2SGSgy7RestKit0L8ResponseVyAA0fG0VGSg_AK0L5ErrorOSgtctF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C15listVoiceModels8language7headers17completionHandlerySSSg_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AK0N5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/listVoiceModels(language:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C15listVoiceModels8language7headers17completionHandlerySSSg_SDyS2SGSgy7RestKit0L8ResponseVyAA0fG0VGSg_AK0L5ErrorOSgtctF">listVoiceModels(language:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C15listVoiceModels8language7headers17completionHandlerySSSg_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AK0N5ErrorOSgtctF">listVoiceModels(language:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1005,7 +898,7 @@ service. Specify a language to list the voice models for that language only. To 
 metadata for a specific voice model, use the <strong>List a custom model</strong> method. You must use credentials for the
 instance of the service that owns a model to list information about it.
 <strong>Note:</strong> This method is currently a beta release.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customModels#cuModelsQueryAll">Querying all custom
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customModels#cuModelsQueryAll">Querying all custom
 models</a>.</p>
 
                       </div>
@@ -1032,9 +925,8 @@ models</a>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The language for which custom voice models that are owned by the requesting service
-credentials are to be returned. Omit the parameter to see all custom voice models that are owned by the
-requester.</p>
+                                  <p>The language for which custom voice models that are owned by the requesting credentials are
+to be returned. Omit the parameter to see all custom voice models that are owned by the requester.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1071,9 +963,9 @@ requester.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C16updateVoiceModel15customizationID4name11description5words7headers17completionHandlerySS_SSSgAKSayAA4WordVGSgSDyS2SGSgy7RestKit0Q8ResponseVyytGSg_AR0Q5ErrorOSgtctF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C16updateVoiceModel15customizationID4name11description5words7headers17completionHandlerySS_SSSgAKSayAA4WordVGSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AR0S5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/updateVoiceModel(customizationID:name:description:words:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C16updateVoiceModel15customizationID4name11description5words7headers17completionHandlerySS_SSSgAKSayAA4WordVGSgSDyS2SGSgy7RestKit0Q8ResponseVyytGSg_AR0Q5ErrorOSgtctF">updateVoiceModel(customizationID:name:description:words:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C16updateVoiceModel15customizationID4name11description5words7headers17completionHandlerySS_SSSgAKSayAA4WordVGSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AR0S5ErrorOSgtctF">updateVoiceModel(customizationID:<wbr>name:<wbr>description:<wbr>words:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1091,18 +983,18 @@ it.
 You can define sounds-like or phonetic translations for words. A sounds-like translation consists of one or more
 words that, when combined, sound like the word. Phonetic translations are based on the SSML phoneme format for
 representing a word. You can specify them in standard International Phonetic Alphabet (IPA) representation
-  <code>&lt;phoneme alphabet=\<q>ipa\</q> ph=\<q>t&#601;m&#712;&#593;to\</q>&gt;&lt;/phoneme&gt;</code>
+  <code>&lt;phoneme alphabet=&quot;ipa&quot; ph=&quot;t&#601;m&#712;&#593;to&quot;&gt;&lt;/phoneme&gt;</code>
   or in the proprietary IBM Symbolic Phonetic Representation (SPR)
-  <code>&lt;phoneme alphabet=\<q>ibm\</q> ph=\<q>1gAstroEntxrYFXs\</q>&gt;&lt;/phoneme&gt;</code>
+  <code>&lt;phoneme alphabet=&quot;ibm&quot; ph=&quot;1gAstroEntxrYFXs&quot;&gt;&lt;/phoneme&gt;</code>
 <strong>Note:</strong> This method is currently a beta release.
 <strong>See also:</strong></p>
 
 <ul>
-<li><a href="https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customModels#cuModelsUpdate">Updating a custom
+<li><a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customModels#cuModelsUpdate">Updating a custom
 model</a></li>
-<li><a href="https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customWords#cuJapaneseAdd">Adding words to a Japanese custom
+<li><a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customWords#cuJapaneseAdd">Adding words to a Japanese custom
 model</a></li>
-<li><p><a href="https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customIntro#customIntro">Understanding
+<li><p><a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customIntro#customIntro">Understanding
 customization</a>.</p></li>
 </ul>
 
@@ -1134,7 +1026,7 @@ customization</a>.</p></li>
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom voice model. You must make the request
-with service credentials created for the instance of the service that owns the custom model.</p>
+with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1208,9 +1100,9 @@ or updated for the custom voice model. Pass an empty array to make no additions 
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C13getVoiceModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0M8ResponseVyAA0fG0VGSg_AJ0M5ErrorOSgtctF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C13getVoiceModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AJ0O5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/getVoiceModel(customizationID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C13getVoiceModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0M8ResponseVyAA0fG0VGSg_AJ0M5ErrorOSgtctF">getVoiceModel(customizationID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C13getVoiceModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AJ0O5ErrorOSgtctF">getVoiceModel(customizationID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1224,7 +1116,7 @@ or updated for the custom voice model. Pass an empty array to make no additions 
 of the voice model, the output includes the words and their translations as defined in the model. To see just the
 metadata for a voice model, use the <strong>List custom models</strong> method.
 <strong>Note:</strong> This method is currently a beta release.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customModels#cuModelsQuery">Querying a custom
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customModels#cuModelsQuery">Querying a custom
 model</a>.</p>
 
                       </div>
@@ -1252,7 +1144,7 @@ model</a>.</p>
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom voice model. You must make the request
-with service credentials created for the instance of the service that owns the custom model.</p>
+with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1289,9 +1181,9 @@ with service credentials created for the instance of the service that owns the c
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C16deleteVoiceModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0M8ResponseVyytGSg_AJ0M5ErrorOSgtctF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C16deleteVoiceModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AJ0O5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/deleteVoiceModel(customizationID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C16deleteVoiceModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0M8ResponseVyytGSg_AJ0M5ErrorOSgtctF">deleteVoiceModel(customizationID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C16deleteVoiceModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AJ0O5ErrorOSgtctF">deleteVoiceModel(customizationID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1304,7 +1196,7 @@ with service credentials created for the instance of the service that owns the c
 <p>Deletes the specified custom voice model. You must use credentials for the instance of the service that owns a
 model to delete it.
 <strong>Note:</strong> This method is currently a beta release.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customModels#cuModelsDelete">Deleting a custom
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customModels#cuModelsDelete">Deleting a custom
 model</a>.</p>
 
                       </div>
@@ -1332,7 +1224,7 @@ model</a>.</p>
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom voice model. You must make the request
-with service credentials created for the instance of the service that owns the custom model.</p>
+with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1369,9 +1261,9 @@ with service credentials created for the instance of the service that owns the c
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C8addWords15customizationID5words7headers17completionHandlerySS_SayAA4WordVGSDyS2SGSgy7RestKit0N8ResponseVyytGSg_AN0N5ErrorOSgtctF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C8addWords15customizationID5words7headers17completionHandlerySS_SayAA4WordVGSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AN0P5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/addWords(customizationID:words:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C8addWords15customizationID5words7headers17completionHandlerySS_SayAA4WordVGSDyS2SGSgy7RestKit0N8ResponseVyytGSg_AN0N5ErrorOSgtctF">addWords(customizationID:words:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C8addWords15customizationID5words7headers17completionHandlerySS_SayAA4WordVGSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AN0P5ErrorOSgtctF">addWords(customizationID:<wbr>words:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1388,18 +1280,18 @@ words to it.
 You can define sounds-like or phonetic translations for words. A sounds-like translation consists of one or more
 words that, when combined, sound like the word. Phonetic translations are based on the SSML phoneme format for
 representing a word. You can specify them in standard International Phonetic Alphabet (IPA) representation
-  <code>&lt;phoneme alphabet=\<q>ipa\</q> ph=\<q>t&#601;m&#712;&#593;to\</q>&gt;&lt;/phoneme&gt;</code>
+  <code>&lt;phoneme alphabet=&quot;ipa&quot; ph=&quot;t&#601;m&#712;&#593;to&quot;&gt;&lt;/phoneme&gt;</code>
   or in the proprietary IBM Symbolic Phonetic Representation (SPR)
-  <code>&lt;phoneme alphabet=\<q>ibm\</q> ph=\<q>1gAstroEntxrYFXs\</q>&gt;&lt;/phoneme&gt;</code>
+  <code>&lt;phoneme alphabet=&quot;ibm&quot; ph=&quot;1gAstroEntxrYFXs&quot;&gt;&lt;/phoneme&gt;</code>
 <strong>Note:</strong> This method is currently a beta release.
 <strong>See also:</strong></p>
 
 <ul>
-<li><a href="https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customWords#cuWordsAdd">Adding multiple words to a custom
+<li><a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customWords#cuWordsAdd">Adding multiple words to a custom
 model</a></li>
-<li><a href="https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customWords#cuJapaneseAdd">Adding words to a Japanese custom
+<li><a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customWords#cuJapaneseAdd">Adding words to a Japanese custom
 model</a></li>
-<li><p><a href="https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customIntro#customIntro">Understanding
+<li><p><a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customIntro#customIntro">Understanding
 customization</a>.</p></li>
 </ul>
 
@@ -1429,7 +1321,7 @@ customization</a>.</p></li>
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom voice model. You must make the request
-with service credentials created for the instance of the service that owns the custom model.</p>
+with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1482,9 +1374,9 @@ lowercase letters. The array is empty if the custom model contains no words.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C9listWords15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0L8ResponseVyAA0F0VGSg_AJ0L5ErrorOSgtctF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C9listWords15customizationID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0F0VGSg_AJ0N5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/listWords(customizationID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C9listWords15customizationID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0L8ResponseVyAA0F0VGSg_AJ0L5ErrorOSgtctF">listWords(customizationID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C9listWords15customizationID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0F0VGSg_AJ0N5ErrorOSgtctF">listWords(customizationID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1498,7 +1390,7 @@ lowercase letters. The array is empty if the custom model contains no words.</p>
 translations as they are defined in the model. You must use credentials for the instance of the service that owns a
 model to list its words.
 <strong>Note:</strong> This method is currently a beta release.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customWords#cuWordsQueryModel">Querying all words from a custom
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customWords#cuWordsQueryModel">Querying all words from a custom
 model</a>.</p>
 
                       </div>
@@ -1526,7 +1418,7 @@ model</a>.</p>
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom voice model. You must make the request
-with service credentials created for the instance of the service that owns the custom model.</p>
+with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1563,9 +1455,9 @@ with service credentials created for the instance of the service that owns the c
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C7addWord15customizationID4word11translation06partOfC07headers17completionHandlerySS_S3SSgSDyS2SGSgy7RestKit0P8ResponseVyytGSg_AN0P5ErrorOSgtctF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C7addWord15customizationID4word11translation06partOfC07headers17completionHandlerySS_S3SSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AN0R5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/addWord(customizationID:word:translation:partOfSpeech:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C7addWord15customizationID4word11translation06partOfC07headers17completionHandlerySS_S3SSgSDyS2SGSgy7RestKit0P8ResponseVyytGSg_AN0P5ErrorOSgtctF">addWord(customizationID:word:translation:partOfSpeech:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C7addWord15customizationID4word11translation06partOfC07headers17completionHandlerySS_S3SSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AN0R5ErrorOSgtctF">addWord(customizationID:<wbr>word:<wbr>translation:<wbr>partOfSpeech:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1582,18 +1474,18 @@ to it.
 You can define sounds-like or phonetic translations for words. A sounds-like translation consists of one or more
 words that, when combined, sound like the word. Phonetic translations are based on the SSML phoneme format for
 representing a word. You can specify them in standard International Phonetic Alphabet (IPA) representation
-  <code>&lt;phoneme alphabet=\<q>ipa\</q> ph=\<q>t&#601;m&#712;&#593;to\</q>&gt;&lt;/phoneme&gt;</code>
+  <code>&lt;phoneme alphabet=&quot;ipa&quot; ph=&quot;t&#601;m&#712;&#593;to&quot;&gt;&lt;/phoneme&gt;</code>
   or in the proprietary IBM Symbolic Phonetic Representation (SPR)
-  <code>&lt;phoneme alphabet=\<q>ibm\</q> ph=\<q>1gAstroEntxrYFXs\</q>&gt;&lt;/phoneme&gt;</code>
+  <code>&lt;phoneme alphabet=&quot;ibm&quot; ph=&quot;1gAstroEntxrYFXs&quot;&gt;&lt;/phoneme&gt;</code>
 <strong>Note:</strong> This method is currently a beta release.
 <strong>See also:</strong></p>
 
 <ul>
-<li><a href="https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customWords#cuWordAdd">Adding a single word to a custom
+<li><a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customWords#cuWordAdd">Adding a single word to a custom
 model</a></li>
-<li><a href="https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customWords#cuJapaneseAdd">Adding words to a Japanese custom
+<li><a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customWords#cuJapaneseAdd">Adding words to a Japanese custom
 model</a></li>
-<li><p><a href="https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customIntro#customIntro">Understanding
+<li><p><a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customIntro#customIntro">Understanding
 customization</a>.</p></li>
 </ul>
 
@@ -1625,7 +1517,7 @@ customization</a>.</p></li>
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom voice model. You must make the request
-with service credentials created for the instance of the service that owns the custom model.</p>
+with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1651,7 +1543,8 @@ with service credentials created for the instance of the service that owns the c
                                 <div>
                                   <p>The phonetic or sounds-like translation for the word. A phonetic translation is based on
 the SSML format for representing the phonetic string of a word either as an IPA translation or as an IBM SPR
-translation. A sounds-like is one or more words that, when combined, sound like the word.</p>
+translation. The Arabic, Chinese, Dutch, and Korean languages support only IPA. A sounds-like is one or more
+words that, when combined, sound like the word.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1666,7 +1559,7 @@ translation. A sounds-like is one or more words that, when combined, sound like 
                                   <p><strong>Japanese only.</strong> The part of speech for the word. The service uses the value to
 produce the correct intonation for the word. You can create only a single entry, with or without a single part of
 speech, for any word; you cannot create multiple entries with different parts of speech for the same word. For
-more information, see <a href="https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-rules#jaNotes">Working with Japanese
+more information, see <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-rules#jaNotes">Working with Japanese
 entries</a>.</p>
                                 </div>
                               </td>
@@ -1704,9 +1597,9 @@ entries</a>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C7getWord15customizationID4word7headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0M8ResponseVyAA11TranslationVGSg_AK0M5ErrorOSgtctF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C7getWord15customizationID4word7headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA11TranslationVGSg_AK0O5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/getWord(customizationID:word:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C7getWord15customizationID4word7headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0M8ResponseVyAA11TranslationVGSg_AK0M5ErrorOSgtctF">getWord(customizationID:word:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C7getWord15customizationID4word7headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA11TranslationVGSg_AK0O5ErrorOSgtctF">getWord(customizationID:<wbr>word:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1719,7 +1612,7 @@ entries</a>.</p>
 <p>Gets the translation for a single word from the specified custom model. The output shows the translation as it is
 defined in the model. You must use credentials for the instance of the service that owns a model to list its words.
 <strong>Note:</strong> This method is currently a beta release.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customWords#cuWordQueryModel">Querying a single word from a custom
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customWords#cuWordQueryModel">Querying a single word from a custom
 model</a>.</p>
 
                       </div>
@@ -1748,7 +1641,7 @@ model</a>.</p>
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom voice model. You must make the request
-with service credentials created for the instance of the service that owns the custom model.</p>
+with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1797,9 +1690,9 @@ with service credentials created for the instance of the service that owns the c
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C10deleteWord15customizationID4word7headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0M8ResponseVyytGSg_AK0M5ErrorOSgtctF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C10deleteWord15customizationID4word7headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AK0O5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/deleteWord(customizationID:word:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C10deleteWord15customizationID4word7headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0M8ResponseVyytGSg_AK0M5ErrorOSgtctF">deleteWord(customizationID:word:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C10deleteWord15customizationID4word7headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AK0O5ErrorOSgtctF">deleteWord(customizationID:<wbr>word:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1812,7 +1705,7 @@ with service credentials created for the instance of the service that owns the c
 <p>Deletes a single word from the specified custom voice model. You must use credentials for the instance of the
 service that owns a model to delete its words.
 <strong>Note:</strong> This method is currently a beta release.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-customWords#cuWordDelete">Deleting a word from a custom
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customWords#cuWordDelete">Deleting a word from a custom
 model</a>.</p>
 
                       </div>
@@ -1841,7 +1734,7 @@ model</a>.</p>
                               <td>
                                 <div>
                                   <p>The customization ID (GUID) of the custom voice model. You must make the request
-with service credentials created for the instance of the service that owns the custom model.</p>
+with credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1890,9 +1783,9 @@ with service credentials created for the instance of the service that owns the c
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C14deleteUserData10customerID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0M8ResponseVyytGSg_AJ0M5ErrorOSgtctF"></a>
+                    <a name="/s:14TextToSpeechV10abC0C14deleteUserData10customerID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AJ0O5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/deleteUserData(customerID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C14deleteUserData10customerID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0M8ResponseVyytGSg_AJ0M5ErrorOSgtctF">deleteUserData(customerID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C14deleteUserData10customerID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AJ0O5ErrorOSgtctF">deleteUserData(customerID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1908,7 +1801,7 @@ the customer ID. You must issue the request with credentials for the same instan
 associate the customer ID with the data.
 You associate a customer ID with data by passing the <code>X-Watson-Metadata</code> header with a request that passes the
 data.
-<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/services/text-to-speech?topic=text-to-speech-information-security#information-security">Information
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-information-security#information-security">Information
 security</a>.</p>
 
                       </div>
@@ -1974,8 +1867,8 @@ security</a>.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-06-14)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Copyright 2020 IBM</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

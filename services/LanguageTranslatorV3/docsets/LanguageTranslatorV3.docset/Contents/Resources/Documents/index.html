@@ -13,7 +13,7 @@
     <a title="LanguageTranslatorV3  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">LanguageTranslatorV3 Docs</a></p>
+        <p><a href="index.html">LanguageTranslatorV3 3.5.0 Docs</a> (73% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -27,14 +27,6 @@
     <div class="content-wrapper">
       <nav class="sidebar">
         <ul class="nav-groups">
-          <li class="nav-group-name">
-            <a href="Guides.html">Guides</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="readme.html">README</a>
-              </li>
-            </ul>
-          </li>
           <li class="nav-group-name">
             <a href="Classes.html">Classes</a>
             <ul class="nav-group-tasks">
@@ -91,10 +83,34 @@
             <a href="Typealiases.html">Type Aliases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="Typealiases.html#/s:20LanguageTranslatorV319WatsonAuthenticatora">WatsonAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:20LanguageTranslatorV324WatsonBasicAuthenticatora">WatsonBasicAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:20LanguageTranslatorV330WatsonBearerTokenAuthenticatora">WatsonBearerTokenAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:20LanguageTranslatorV334WatsonCloudPakForDataAuthenticatora">WatsonCloudPakForDataAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Typealiases.html#/s:20LanguageTranslatorV311WatsonErrora">WatsonError</a>
               </li>
               <li class="nav-group-task">
+                <a href="Typealiases.html#/s:20LanguageTranslatorV322WatsonIAMAuthenticatora">WatsonIAMAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:20LanguageTranslatorV310WatsonJSONa">WatsonJSON</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:20LanguageTranslatorV325WatsonNoAuthAuthenticatora">WatsonNoAuthAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Typealiases.html#/s:20LanguageTranslatorV314WatsonResponsea">WatsonResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:20LanguageTranslatorV330WatsonTokenSourceAuthenticatora">WatsonTokenSourceAuthenticator</a>
               </li>
             </ul>
           </li>
@@ -106,44 +122,40 @@
             
             <h1 id='language-translator-v3' class='heading'>Language Translator V3</h1>
 
+<ul>
+<li><a href="https://cloud.ibm.com/apidocs/language-translator?code=swift">IBM Watson Language Translator - API Reference</a></li>
+<li><a href="https://cloud.ibm.com/docs/services/language-translator/index.html">IBM Watson Language Translator - Documentation</a></li>
+<li><a href="https://www.ibm.com/watson/services/language-translator/">IBM Watson Language Translator - Service Page</a></li>
+</ul>
+
 <p>The IBM Watson Language Translator service lets you select a domain, customize it, then identify or select the language of text, and then translate the text from one supported language to another.</p>
 
 <p>The following example demonstrates how to use the Language Translator service:</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">LanguageTranslatorV3</span>
 
-<span class="k">let</span> <span class="nv">apiKey</span> <span class="o">=</span> <span class="s">"your-api-key"</span>
-<span class="k">let</span> <span class="nv">version</span> <span class="o">=</span> <span class="s">"YYYY-MM-DD"</span> <span class="c1">// use today's date for the most recent version</span>
-<span class="k">let</span> <span class="nv">languageTranslator</span> <span class="o">=</span> <span class="kt">LanguageTranslator</span><span class="p">(</span><span class="nv">version</span><span class="p">:</span> <span class="n">version</span><span class="p">,</span> <span class="nv">apiKey</span><span class="p">:</span> <span class="n">apiKey</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">authenticator</span> <span class="o">=</span> <span class="kt">WatsonIAMAuthenticator</span><span class="p">(</span><span class="nv">apiKey</span><span class="p">:</span> <span class="s">"{apikey}"</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">languageTranslator</span> <span class="o">=</span> <span class="kt">LanguageTranslator</span><span class="p">(</span><span class="nv">version</span><span class="p">:</span> <span class="s">"2018-05-01"</span><span class="p">,</span> <span class="nv">authenticator</span><span class="p">:</span> <span class="n">authenticator</span><span class="p">)</span>
+<span class="n">languageTranslator</span><span class="o">.</span><span class="n">serviceURL</span> <span class="o">=</span> <span class="s">"{url}"</span>
 
-<span class="n">languageTranslator</span><span class="o">.</span><span class="nf">translate</span><span class="p">(</span>
-    <span class="nv">text</span><span class="p">:</span> <span class="p">[</span><span class="s">"Hello"</span><span class="p">],</span>
-    <span class="nv">source</span><span class="p">:</span> <span class="s">"en"</span><span class="p">,</span>
-    <span class="nv">target</span><span class="p">:</span> <span class="s">"es"</span><span class="p">)</span> <span class="p">{</span> <span class="n">response</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
+<span class="n">languageTranslator</span><span class="o">.</span><span class="nf">translate</span><span class="p">(</span><span class="nv">text</span><span class="p">:</span> <span class="p">[</span><span class="s">"Hello"</span><span class="p">],</span> <span class="nv">modelID</span><span class="p">:</span> <span class="s">"en-es"</span><span class="p">)</span> <span class="p">{</span>
+  <span class="n">response</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
 
-    <span class="k">if</span> <span class="k">let</span> <span class="nv">error</span> <span class="o">=</span> <span class="n">error</span> <span class="p">{</span>
-        <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
-    <span class="p">}</span>
-    <span class="k">guard</span> <span class="k">let</span> <span class="nv">translation</span> <span class="o">=</span> <span class="n">response</span><span class="p">?</span><span class="o">.</span><span class="n">result</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="nf">print</span><span class="p">(</span><span class="s">"Failed to translate"</span><span class="p">)</span>
-        <span class="k">return</span>
-    <span class="p">}</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">translation</span><span class="o">.</span><span class="n">translations</span><span class="p">)</span>
+  <span class="k">guard</span> <span class="k">let</span> <span class="nv">translation</span> <span class="o">=</span> <span class="n">response</span><span class="p">?</span><span class="o">.</span><span class="n">result</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">error</span><span class="p">?</span><span class="o">.</span><span class="n">localizedDescription</span> <span class="p">??</span> <span class="s">"unknown error"</span><span class="p">)</span>
+    <span class="k">return</span>
+  <span class="p">}</span>
+
+  <span class="nf">print</span><span class="p">(</span><span class="n">translation</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre>
 
-<p>The following links provide more information about the IBM Watson Language Translator service:</p>
-
-<ul>
-<li><a href="https://www.ibm.com/watson/services/language-translator/">IBM Watson Language Translator - Service Page</a></li>
-<li><a href="https://cloud.ibm.com/docs/services/language-translator/index.html">IBM Watson Language Translator - Documentation</a></li>
-<li><a href="https://language-translator-demo.ng.bluemix.net/">IBM Watson Language Translator - Demo</a></li>
-</ul>
+<p>For details on all API operations, including Swift examples, <a href="https://cloud.ibm.com/apidocs/language-translator?code=swift">see the API reference.</a></p>
 
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-06-14)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Copyright 2020 IBM</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

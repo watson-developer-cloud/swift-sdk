@@ -14,7 +14,7 @@
     <a title="Discovery Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">DiscoveryV1 Docs</a></p>
+        <p><a href="../index.html">DiscoveryV1 3.5.0 Docs</a> (81% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -28,14 +28,6 @@
     <div class="content-wrapper">
       <nav class="sidebar">
         <ul class="nav-groups">
-          <li class="nav-group-name">
-            <a href="../Guides.html">Guides</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="../readme.html">README</a>
-              </li>
-            </ul>
-          </li>
           <li class="nav-group-name">
             <a href="../Classes.html">Classes</a>
             <ul class="nav-group-tasks">
@@ -75,6 +67,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/CollectionUsage.html">CollectionUsage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Completions.html">Completions</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Configuration.html">Configuration</a>
@@ -152,12 +147,6 @@
                 <a href="../Structs/DocumentCounts.html">DocumentCounts</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/DocumentSnapshot.html">DocumentSnapshot</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/DocumentSnapshot/Step.html">– Step</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/DocumentStatus.html">DocumentStatus</a>
               </li>
               <li class="nav-group-task">
@@ -200,7 +189,7 @@
                 <a href="../Structs/Field.html">Field</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/Field/FieldType.html">– FieldType</a>
+                <a href="../Structs/Field/TypeEnum.html">– TypeEnum</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Filter.html">Filter</a>
@@ -332,27 +321,6 @@
                 <a href="../Structs/PDFSettings.html">PDFSettings</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/QueryEntitiesContext.html">QueryEntitiesContext</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/QueryEntitiesEntity.html">QueryEntitiesEntity</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/QueryEntitiesResponse.html">QueryEntitiesResponse</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/QueryEntitiesResponseItem.html">QueryEntitiesResponseItem</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/QueryEvidence.html">QueryEvidence</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/QueryEvidenceEntity.html">QueryEvidenceEntity</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/QueryFilterType.html">QueryFilterType</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/QueryNoticesResponse.html">QueryNoticesResponse</a>
               </li>
               <li class="nav-group-task">
@@ -363,21 +331,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/QueryPassages.html">QueryPassages</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/QueryRelationsArgument.html">QueryRelationsArgument</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/QueryRelationsEntity.html">QueryRelationsEntity</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/QueryRelationsFilter.html">QueryRelationsFilter</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/QueryRelationsRelationship.html">QueryRelationsRelationship</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/QueryRelationsResponse.html">QueryRelationsResponse</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/QueryResponse.html">QueryResponse</a>
@@ -452,9 +405,6 @@
                 <a href="../Structs/Term.html">Term</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/TestDocument.html">TestDocument</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/Timeslice.html">Timeslice</a>
               </li>
               <li class="nav-group-task">
@@ -505,10 +455,34 @@
             <a href="../Typealiases.html">Type Aliases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11DiscoveryV119WatsonAuthenticatora">WatsonAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11DiscoveryV124WatsonBasicAuthenticatora">WatsonBasicAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11DiscoveryV130WatsonBearerTokenAuthenticatora">WatsonBearerTokenAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11DiscoveryV134WatsonCloudPakForDataAuthenticatora">WatsonCloudPakForDataAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Typealiases.html#/s:11DiscoveryV111WatsonErrora">WatsonError</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11DiscoveryV122WatsonIAMAuthenticatora">WatsonIAMAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11DiscoveryV110WatsonJSONa">WatsonJSON</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11DiscoveryV125WatsonNoAuthAuthenticatora">WatsonNoAuthAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Typealiases.html#/s:11DiscoveryV114WatsonResponsea">WatsonResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11DiscoveryV130WatsonTokenSourceAuthenticatora">WatsonTokenSourceAuthenticator</a>
               </li>
             </ul>
           </li>
@@ -536,9 +510,9 @@ filtering of results.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C10serviceURLSSvp"></a>
+                    <a name="/s:11DiscoveryV10A0C10serviceURLSSSgvp"></a>
                     <a name="//apple_ref/swift/Property/serviceURL" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C10serviceURLSSvp">serviceURL</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C10serviceURLSSSgvp">serviceURL</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -553,7 +527,7 @@ filtering of results.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -590,9 +564,36 @@ filtering of results.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:11DiscoveryV10A0C13authenticator15IBMSwiftSDKCore13Authenticator_pvp"></a>
+                    <a name="//apple_ref/swift/Property/authenticator" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C13authenticator15IBMSwiftSDKCore13Authenticator_pvp">authenticator</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">authenticator</span><span class="p">:</span> <span class="kt">Authenticator</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/"></a>
                     <a name="//apple_ref/swift/Method/init(version:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">init(version:)</a>
+                    <a class="token" href="#/">init(version:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -616,9 +617,9 @@ In that case, try another initializer that directly passes in the credentials.</
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C7version8username8passwordACSS_S2Stcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(version:username:password:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C7version8username8passwordACSS_S2Stcfc">init(version:username:password:)</a>
+                    <a name="/s:11DiscoveryV10A0C7version13authenticatorACSS_15IBMSwiftSDKCore13Authenticator_ptcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(version:authenticator:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C7version13authenticatorACSS_15IBMSwiftSDKCore13Authenticator_ptcfc">init(version:<wbr>authenticator:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -633,7 +634,7 @@ In that case, try another initializer that directly passes in the credentials.</
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">version</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">username</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">version</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">authenticator</span><span class="p">:</span> <span class="kt">Authenticator</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -650,193 +651,24 @@ In that case, try another initializer that directly passes in the credentials.</
                               <td>
                                 <div>
                                   <p>The release date of the version of the API to use. Specify the date
-in <q>YYYY-MM-DD</q> format.</p>
+in &ldquo;YYYY-MM-DD&rdquo; format.</p>
                                 </div>
                               </td>
                             </tr>
                             <tr>
                               <td>
                                 <code>
-                                <em>username</em>
+                                <em>authenticator</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The username used to authenticate with the service.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>password</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The password used to authenticate with the service.</p>
+                                  <p>The Authenticator object used to authenticate requests to the service</p>
                                 </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11DiscoveryV10A0C7version6apiKey6iamUrlACSS_S2SSgtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(version:apiKey:iamUrl:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C7version6apiKey6iamUrlACSS_S2SSgtcfc">init(version:apiKey:iamUrl:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Create a <code>Discovery</code> object.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">version</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">apiKey</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">iamUrl</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>version</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The release date of the version of the API to use. Specify the date
-in <q>YYYY-MM-DD</q> format.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>apiKey</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An API key for IAM that can be used to obtain access tokens for the service.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>iamUrl</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The URL for the IAM service.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11DiscoveryV10A0C7version11accessTokenACSS_SStcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(version:accessToken:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C7version11accessTokenACSS_SStcfc">init(version:accessToken:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Create a <code>Discovery</code> object.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">version</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">accessToken</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>version</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The release date of the version of the API to use. Specify the date
-in <q>YYYY-MM-DD</q> format.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>accessToken</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An access token for the service.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11DiscoveryV10A0C11accessTokenyySSF"></a>
-                    <a name="//apple_ref/swift/Method/accessToken(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C11accessTokenyySSF">accessToken(_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">accessToken</span><span class="p">(</span><span class="n">_</span> <span class="nv">newToken</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
-
-                        </div>
                       </div>
                     </section>
                   </div>
@@ -872,9 +704,9 @@ in <q>YYYY-MM-DD</q> format.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C17createEnvironment4name11description4size7headers17completionHandlerySS_SSSgAJSDyS2SGSgy7RestKit0K8ResponseVyAA0D0VGSg_AM0K5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C17createEnvironment4name11description4size7headers17completionHandlerySS_SSSgAJSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AM0M5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/createEnvironment(name:description:size:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C17createEnvironment4name11description4size7headers17completionHandlerySS_SSSgAJSDyS2SGSgy7RestKit0K8ResponseVyAA0D0VGSg_AM0K5ErrorOSgtctF">createEnvironment(name:description:size:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C17createEnvironment4name11description4size7headers17completionHandlerySS_SSSgAJSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AM0M5ErrorOSgtctF">createEnvironment(name:<wbr>description:<wbr>size:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -976,9 +808,9 @@ other plans the default is <code>S</code>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C16listEnvironments4name7headers17completionHandlerySSSg_SDyS2SGSgy7RestKit0I8ResponseVyAA04ListdK0VGSg_AK0I5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C16listEnvironments4name7headers17completionHandlerySSSg_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA04ListdL0VGSg_AK0K5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/listEnvironments(name:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C16listEnvironments4name7headers17completionHandlerySSSg_SDyS2SGSgy7RestKit0I8ResponseVyAA04ListdK0VGSg_AK0I5ErrorOSgtctF">listEnvironments(name:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C16listEnvironments4name7headers17completionHandlerySSSg_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA04ListdL0VGSg_AK0K5ErrorOSgtctF">listEnvironments(name:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1051,9 +883,9 @@ other plans the default is <code>S</code>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C14getEnvironment13environmentID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0J8ResponseVyAA0D0VGSg_AJ0J5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C14getEnvironment13environmentID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AJ0L5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/getEnvironment(environmentID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C14getEnvironment13environmentID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0J8ResponseVyAA0D0VGSg_AJ0J5ErrorOSgtctF">getEnvironment(environmentID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C14getEnvironment13environmentID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AJ0L5ErrorOSgtctF">getEnvironment(environmentID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1124,9 +956,9 @@ other plans the default is <code>S</code>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C17updateEnvironment13environmentID4name11description4size7headers17completionHandlerySS_SSSgA2KSDyS2SGSgy7RestKit0M8ResponseVyAA0D0VGSg_AN0M5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C17updateEnvironment13environmentID4name11description4size7headers17completionHandlerySS_SSSgA2KSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AN0O5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/updateEnvironment(environmentID:name:description:size:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C17updateEnvironment13environmentID4name11description4size7headers17completionHandlerySS_SSSgA2KSDyS2SGSgy7RestKit0M8ResponseVyAA0D0VGSg_AN0M5ErrorOSgtctF">updateEnvironment(environmentID:name:description:size:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C17updateEnvironment13environmentID4name11description4size7headers17completionHandlerySS_SSSgA2KSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AN0O5ErrorOSgtctF">updateEnvironment(environmentID:<wbr>name:<wbr>description:<wbr>size:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1240,9 +1072,9 @@ using a Lite plan. Environment size can only increased and not decreased.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C17deleteEnvironment13environmentID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0J8ResponseVyAA06DeletedL0VGSg_AJ0J5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C17deleteEnvironment13environmentID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA06DeletedM0VGSg_AJ0L5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/deleteEnvironment(environmentID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C17deleteEnvironment13environmentID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0J8ResponseVyAA06DeletedL0VGSg_AJ0J5ErrorOSgtctF">deleteEnvironment(environmentID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C17deleteEnvironment13environmentID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA06DeletedM0VGSg_AJ0L5ErrorOSgtctF">deleteEnvironment(environmentID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1313,9 +1145,9 @@ using a Lite plan. Environment size can only increased and not decreased.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C10listFields13environmentID13collectionIDs7headers17completionHandlerySS_SaySSGSDyS2SGSgy7RestKit0L8ResponseVyAA014ListCollectiondN0VGSg_AL0L5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C10listFields13environmentID13collectionIDs7headers17completionHandlerySS_SaySSGSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA014ListCollectiondO0VGSg_AL0N5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/listFields(environmentID:collectionIDs:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C10listFields13environmentID13collectionIDs7headers17completionHandlerySS_SaySSGSDyS2SGSgy7RestKit0L8ResponseVyAA014ListCollectiondN0VGSg_AL0L5ErrorOSgtctF">listFields(environmentID:collectionIDs:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C10listFields13environmentID13collectionIDs7headers17completionHandlerySS_SaySSGSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA014ListCollectiondO0VGSg_AL0N5ErrorOSgtctF">listFields(environmentID:<wbr>collectionIDs:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1401,9 +1233,9 @@ using a Lite plan. Environment size can only increased and not decreased.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C19createConfiguration13environmentID4name11description11conversions11enrichments14normalizations6source7headers17completionHandlerySS_S2SSgAA11ConversionsVSgSayAA10EnrichmentVGSgSayAA22NormalizationOperationVGSgAA6SourceVSgSDyS2SGSgy7RestKit0U8ResponseVyAA0D0VGSg_A3_0U5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C19createConfiguration13environmentID4name11description11conversions11enrichments14normalizations6source7headers17completionHandlerySS_S2SSgAA11ConversionsVSgSayAA10EnrichmentVGSgSayAA22NormalizationOperationVGSgAA6SourceVSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_A3_0W5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/createConfiguration(environmentID:name:description:conversions:enrichments:normalizations:source:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C19createConfiguration13environmentID4name11description11conversions11enrichments14normalizations6source7headers17completionHandlerySS_S2SSgAA11ConversionsVSgSayAA10EnrichmentVGSgSayAA22NormalizationOperationVGSgAA6SourceVSgSDyS2SGSgy7RestKit0U8ResponseVyAA0D0VGSg_A3_0U5ErrorOSgtctF">createConfiguration(environmentID:name:description:conversions:enrichments:normalizations:source:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C19createConfiguration13environmentID4name11description11conversions11enrichments14normalizations6source7headers17completionHandlerySS_S2SSgAA11ConversionsVSgSayAA10EnrichmentVGSgSayAA22NormalizationOperationVGSgAA6SourceVSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_A3_0W5ErrorOSgtctF">createConfiguration(environmentID:<wbr>name:<wbr>description:<wbr>conversions:<wbr>enrichments:<wbr>normalizations:<wbr>source:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1561,9 +1393,9 @@ normalized form. Operations are executed in the order that they appear in the ar
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C18listConfigurations13environmentID4name7headers17completionHandlerySS_SSSgSDyS2SGSgy7RestKit0K8ResponseVyAA04ListdM0VGSg_AL0K5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C18listConfigurations13environmentID4name7headers17completionHandlerySS_SSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA04ListdN0VGSg_AL0M5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/listConfigurations(environmentID:name:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C18listConfigurations13environmentID4name7headers17completionHandlerySS_SSSgSDyS2SGSgy7RestKit0K8ResponseVyAA04ListdM0VGSg_AL0K5ErrorOSgtctF">listConfigurations(environmentID:name:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C18listConfigurations13environmentID4name7headers17completionHandlerySS_SSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA04ListdN0VGSg_AL0M5ErrorOSgtctF">listConfigurations(environmentID:<wbr>name:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1649,9 +1481,9 @@ normalized form. Operations are executed in the order that they appear in the ar
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C16getConfiguration13environmentID013configurationF07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0K8ResponseVyAA0D0VGSg_AK0K5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C16getConfiguration13environmentID013configurationF07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AK0M5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/getConfiguration(environmentID:configurationID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C16getConfiguration13environmentID013configurationF07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0K8ResponseVyAA0D0VGSg_AK0K5ErrorOSgtctF">getConfiguration(environmentID:configurationID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C16getConfiguration13environmentID013configurationF07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AK0M5ErrorOSgtctF">getConfiguration(environmentID:<wbr>configurationID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1735,9 +1567,9 @@ normalized form. Operations are executed in the order that they appear in the ar
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C19updateConfiguration13environmentID013configurationF04name11description11conversions11enrichments14normalizations6source7headers17completionHandlerySS_S3SSgAA11ConversionsVSgSayAA10EnrichmentVGSgSayAA22NormalizationOperationVGSgAA6SourceVSgSDyS2SGSgy7RestKit0V8ResponseVyAA0D0VGSg_A4_0V5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C19updateConfiguration13environmentID013configurationF04name11description11conversions11enrichments14normalizations6source7headers17completionHandlerySS_S3SSgAA11ConversionsVSgSayAA10EnrichmentVGSgSayAA22NormalizationOperationVGSgAA6SourceVSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_A4_0X5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/updateConfiguration(environmentID:configurationID:name:description:conversions:enrichments:normalizations:source:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C19updateConfiguration13environmentID013configurationF04name11description11conversions11enrichments14normalizations6source7headers17completionHandlerySS_S3SSgAA11ConversionsVSgSayAA10EnrichmentVGSgSayAA22NormalizationOperationVGSgAA6SourceVSgSDyS2SGSgy7RestKit0V8ResponseVyAA0D0VGSg_A4_0V5ErrorOSgtctF">updateConfiguration(environmentID:configurationID:name:description:conversions:enrichments:normalizations:source:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C19updateConfiguration13environmentID013configurationF04name11description11conversions11enrichments14normalizations6source7headers17completionHandlerySS_S3SSgAA11ConversionsVSgSayAA10EnrichmentVGSgSayAA22NormalizationOperationVGSgAA6SourceVSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_A4_0X5ErrorOSgtctF">updateConfiguration(environmentID:<wbr>configurationID:<wbr>name:<wbr>description:<wbr>conversions:<wbr>enrichments:<wbr>normalizations:<wbr>source:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1911,9 +1743,9 @@ normalized form. Operations are executed in the order that they appear in the ar
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C19deleteConfiguration13environmentID013configurationF07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0K8ResponseVyAA06DeletedM0VGSg_AK0K5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C19deleteConfiguration13environmentID013configurationF07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA06DeletedN0VGSg_AK0M5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/deleteConfiguration(environmentID:configurationID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C19deleteConfiguration13environmentID013configurationF07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0K8ResponseVyAA06DeletedM0VGSg_AK0K5ErrorOSgtctF">deleteConfiguration(environmentID:configurationID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C19deleteConfiguration13environmentID013configurationF07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA06DeletedN0VGSg_AK0M5ErrorOSgtctF">deleteConfiguration(environmentID:<wbr>configurationID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2002,190 +1834,9 @@ configuration as it existed at the time the document was submitted.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C30testConfigurationInEnvironment13environmentID13configuration4file8filename0J11ContentType8metadata4step0iH07headers17completionHandlerySS_SSSg10Foundation4DataVSgA5OSDyS2SGSgy7RestKit0U8ResponseVyAA12TestDocumentVGSg_AV0U5ErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/testConfigurationInEnvironment(environmentID:configuration:file:filename:fileContentType:metadata:step:configurationID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C30testConfigurationInEnvironment13environmentID13configuration4file8filename0J11ContentType8metadata4step0iH07headers17completionHandlerySS_SSSg10Foundation4DataVSgA5OSDyS2SGSgy7RestKit0U8ResponseVyAA12TestDocumentVGSg_AV0U5ErrorOSgtctF">testConfigurationInEnvironment(environmentID:configuration:file:filename:fileContentType:metadata:step:configurationID:headers:completionHandler:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Test configuration.</p>
-
-<p><strong>Deprecated</strong> This method is no longer supported and is scheduled to be removed from service on July 31st 2019.
- Runs a sample document through the default or your configuration and returns diagnostic information designed to
-help you understand how the document was processed. The document is not added to the index.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">testConfigurationInEnvironment</span><span class="p">(</span>
-    <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">configuration</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">file</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">filename</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">fileContentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">metadata</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">step</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/TestDocument.html">TestDocument</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>environmentID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The ID of the environment.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>configuration</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The configuration to use to process the document. If this part is provided, then the
-provided configuration is used to process the document. If the <strong>configuration_id</strong> is also provided (both are
-present at the same time), then request is rejected. The maximum supported configuration size is 1 MB.
-Configuration parts larger than 1 MB are rejected.
-See the <code>GET /configurations/{configuration_id}</code> operation for an example configuration.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>file</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The content of the document to ingest. The maximum supported file size when adding a file to a
-collection is 50 megabytes, the maximum supported file size when testing a confiruration is 1 megabyte. Files
-larger than the supported size are rejected.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>filename</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The filename for file.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>fileContentType</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The content type of file.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>metadata</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are
-rejected.
-Example:  <code>{
-\&quot;Creator\&quot;: \&quot;Johnny Appleseed\&quot;,
-\&quot;Subject\&quot;: \&quot;Apples\&quot;
-}</code>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>step</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Specify to only run the input document through the given step instead of running the input
-document through the entire ingestion workflow. Valid values are <code>convert</code>, <code>enrich</code>, and <code>normalize</code>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>configurationID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The ID of the configuration to use to process the document. If the <strong>configuration</strong>
-form part is also provided (both are present at the same time), then the request will be rejected.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>headers</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A dictionary of request headers to be sent with this request.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>completionHandler</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed when the request completes with a successful result or error</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11DiscoveryV10A0C16createCollection13environmentID4name11description013configurationF08language7headers17completionHandlerySS_S2SSgA2LSDyS2SGSgy7RestKit0N8ResponseVyAA0D0VGSg_AO0N5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C16createCollection13environmentID4name11description013configurationF08language7headers17completionHandlerySS_S2SSgA2LSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AO0P5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/createCollection(environmentID:name:description:configurationID:language:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C16createCollection13environmentID4name11description013configurationF08language7headers17completionHandlerySS_S2SSgA2LSDyS2SGSgy7RestKit0N8ResponseVyAA0D0VGSg_AO0N5ErrorOSgtctF">createCollection(environmentID:name:description:configurationID:language:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C16createCollection13environmentID4name11description013configurationF08language7headers17completionHandlerySS_S2SSgA2LSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AO0P5ErrorOSgtctF">createCollection(environmentID:<wbr>name:<wbr>description:<wbr>configurationID:<wbr>language:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2309,9 +1960,9 @@ language code.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C15listCollections13environmentID4name7headers17completionHandlerySS_SSSgSDyS2SGSgy7RestKit0K8ResponseVyAA04ListdM0VGSg_AL0K5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C15listCollections13environmentID4name7headers17completionHandlerySS_SSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA04ListdN0VGSg_AL0M5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/listCollections(environmentID:name:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C15listCollections13environmentID4name7headers17completionHandlerySS_SSSgSDyS2SGSgy7RestKit0K8ResponseVyAA04ListdM0VGSg_AL0K5ErrorOSgtctF">listCollections(environmentID:name:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C15listCollections13environmentID4name7headers17completionHandlerySS_SSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA04ListdN0VGSg_AL0M5ErrorOSgtctF">listCollections(environmentID:<wbr>name:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2397,9 +2048,9 @@ language code.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C13getCollection13environmentID010collectionF07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0K8ResponseVyAA0D0VGSg_AK0K5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C13getCollection13environmentID010collectionF07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AK0M5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/getCollection(environmentID:collectionID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C13getCollection13environmentID010collectionF07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0K8ResponseVyAA0D0VGSg_AK0K5ErrorOSgtctF">getCollection(environmentID:collectionID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C13getCollection13environmentID010collectionF07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AK0M5ErrorOSgtctF">getCollection(environmentID:<wbr>collectionID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2483,9 +2134,9 @@ language code.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C16updateCollection13environmentID010collectionF04name11description013configurationF07headers17completionHandlerySS_S3SSgALSDyS2SGSgy7RestKit0N8ResponseVyAA0D0VGSg_AO0N5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C16updateCollection13environmentID010collectionF04name11description013configurationF07headers17completionHandlerySS_S3SSgALSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AO0P5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/updateCollection(environmentID:collectionID:name:description:configurationID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C16updateCollection13environmentID010collectionF04name11description013configurationF07headers17completionHandlerySS_S3SSgALSDyS2SGSgy7RestKit0N8ResponseVyAA0D0VGSg_AO0N5ErrorOSgtctF">updateCollection(environmentID:collectionID:name:description:configurationID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C16updateCollection13environmentID010collectionF04name11description013configurationF07headers17completionHandlerySS_S3SSgALSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AO0P5ErrorOSgtctF">updateCollection(environmentID:<wbr>collectionID:<wbr>name:<wbr>description:<wbr>configurationID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2608,9 +2259,9 @@ language code.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C16deleteCollection13environmentID010collectionF07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0K8ResponseVyAA06DeletedM0VGSg_AK0K5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C16deleteCollection13environmentID010collectionF07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA06DeletedN0VGSg_AK0M5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/deleteCollection(environmentID:collectionID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C16deleteCollection13environmentID010collectionF07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0K8ResponseVyAA06DeletedM0VGSg_AK0K5ErrorOSgtctF">deleteCollection(environmentID:collectionID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C16deleteCollection13environmentID010collectionF07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA06DeletedN0VGSg_AK0M5ErrorOSgtctF">deleteCollection(environmentID:<wbr>collectionID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2694,9 +2345,9 @@ language code.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C20listCollectionFields13environmentID010collectionG07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0L8ResponseVyAA04ListdeN0VGSg_AK0L5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C20listCollectionFields13environmentID010collectionG07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA04ListdeO0VGSg_AK0N5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/listCollectionFields(environmentID:collectionID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C20listCollectionFields13environmentID010collectionG07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0L8ResponseVyAA04ListdeN0VGSg_AK0L5ErrorOSgtctF">listCollectionFields(environmentID:collectionID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C20listCollectionFields13environmentID010collectionG07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA04ListdeO0VGSg_AK0N5ErrorOSgtctF">listCollectionFields(environmentID:<wbr>collectionID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2782,9 +2433,9 @@ language code.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C14listExpansions13environmentID010collectionF07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0K8ResponseVyAA0D0VGSg_AK0K5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C14listExpansions13environmentID010collectionF07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AK0M5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/listExpansions(environmentID:collectionID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C14listExpansions13environmentID010collectionF07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0K8ResponseVyAA0D0VGSg_AK0K5ErrorOSgtctF">listExpansions(environmentID:collectionID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C14listExpansions13environmentID010collectionF07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AK0M5ErrorOSgtctF">listExpansions(environmentID:<wbr>collectionID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2871,9 +2522,9 @@ with empty expansion arrays is returned.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C16createExpansions13environmentID010collectionF010expansions7headers17completionHandlerySS_SSSayAA9ExpansionVGSDyS2SGSgy7RestKit0M8ResponseVyAA0D0VGSg_AO0M5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C16createExpansions13environmentID010collectionF010expansions7headers17completionHandlerySS_SSSayAA9ExpansionVGSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AO0O5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/createExpansions(environmentID:collectionID:expansions:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C16createExpansions13environmentID010collectionF010expansions7headers17completionHandlerySS_SSSayAA9ExpansionVGSDyS2SGSgy7RestKit0M8ResponseVyAA0D0VGSg_AO0M5ErrorOSgtctF">createExpansions(environmentID:collectionID:expansions:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C16createExpansions13environmentID010collectionF010expansions7headers17completionHandlerySS_SSSayAA9ExpansionVGSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AO0O5ErrorOSgtctF">createExpansions(environmentID:<wbr>collectionID:<wbr>expansions:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2884,8 +2535,7 @@ with empty expansion arrays is returned.</p>
                         <p>Create or update expansion list.</p>
 
 <p>Create or replace the Expansion list for this collection. The maximum number of expanded terms per collection is
-<code>500</code>.
-The current expansion list is replaced with the uploaded content.</p>
+<code>500</code>. The current expansion list is replaced with the uploaded content.</p>
 
                       </div>
                       <div class="declaration">
@@ -2983,9 +2633,9 @@ items listed in the <strong>expanded_terms</strong> array.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C16deleteExpansions13environmentID010collectionF07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0K8ResponseVyytGSg_AK0K5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C16deleteExpansions13environmentID010collectionF07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AK0M5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/deleteExpansions(environmentID:collectionID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C16deleteExpansions13environmentID010collectionF07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0K8ResponseVyytGSg_AK0K5ErrorOSgtctF">deleteExpansions(environmentID:collectionID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C16deleteExpansions13environmentID010collectionF07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AK0M5ErrorOSgtctF">deleteExpansions(environmentID:<wbr>collectionID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3072,9 +2722,9 @@ for a collection.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C31getTokenizationDictionaryStatus13environmentID010collectionH07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0M8ResponseVyAA09TokenDictfO0VGSg_AK0M5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C31getTokenizationDictionaryStatus13environmentID010collectionH07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA09TokenDictfP0VGSg_AK0O5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/getTokenizationDictionaryStatus(environmentID:collectionID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C31getTokenizationDictionaryStatus13environmentID010collectionH07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0M8ResponseVyAA09TokenDictfO0VGSg_AK0M5ErrorOSgtctF">getTokenizationDictionaryStatus(environmentID:collectionID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C31getTokenizationDictionaryStatus13environmentID010collectionH07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA09TokenDictfP0VGSg_AK0O5ErrorOSgtctF">getTokenizationDictionaryStatus(environmentID:<wbr>collectionID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3160,9 +2810,9 @@ for a collection.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C28createTokenizationDictionary13environmentID010collectionG017tokenizationRules7headers17completionHandlerySS_SSSayAA13TokenDictRuleVGSgSDyS2SGSgy7RestKit0Q8ResponseVyAA0no6StatusS0VGSg_AP0Q5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C28createTokenizationDictionary13environmentID010collectionG017tokenizationRules7headers17completionHandlerySS_SSSayAA13TokenDictRuleVGSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0no6StatusT0VGSg_AP0S5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/createTokenizationDictionary(environmentID:collectionID:tokenizationRules:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C28createTokenizationDictionary13environmentID010collectionG017tokenizationRules7headers17completionHandlerySS_SSSayAA13TokenDictRuleVGSgSDyS2SGSgy7RestKit0Q8ResponseVyAA0no6StatusS0VGSg_AP0Q5ErrorOSgtctF">createTokenizationDictionary(environmentID:collectionID:tokenizationRules:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C28createTokenizationDictionary13environmentID010collectionG017tokenizationRules7headers17completionHandlerySS_SSSayAA13TokenDictRuleVGSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0no6StatusT0VGSg_AP0S5ErrorOSgtctF">createTokenizationDictionary(environmentID:<wbr>collectionID:<wbr>tokenizationRules:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3262,9 +2912,9 @@ component <code>tokens</code>, any alternate character set <code>readings</code>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C28deleteTokenizationDictionary13environmentID010collectionG07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0L8ResponseVyytGSg_AK0L5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C28deleteTokenizationDictionary13environmentID010collectionG07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AK0N5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/deleteTokenizationDictionary(environmentID:collectionID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C28deleteTokenizationDictionary13environmentID010collectionG07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0L8ResponseVyytGSg_AK0L5ErrorOSgtctF">deleteTokenizationDictionary(environmentID:collectionID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C28deleteTokenizationDictionary13environmentID010collectionG07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AK0N5ErrorOSgtctF">deleteTokenizationDictionary(environmentID:<wbr>collectionID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3350,9 +3000,9 @@ component <code>tokens</code>, any alternate character set <code>readings</code>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C21getStopwordListStatus13environmentID010collectionH07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0M8ResponseVyAA09TokenDictfO0VGSg_AK0M5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C21getStopwordListStatus13environmentID010collectionH07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA09TokenDictfP0VGSg_AK0O5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/getStopwordListStatus(environmentID:collectionID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C21getStopwordListStatus13environmentID010collectionH07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0M8ResponseVyAA09TokenDictfO0VGSg_AK0M5ErrorOSgtctF">getStopwordListStatus(environmentID:collectionID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C21getStopwordListStatus13environmentID010collectionH07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA09TokenDictfP0VGSg_AK0O5ErrorOSgtctF">getStopwordListStatus(environmentID:<wbr>collectionID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3438,9 +3088,9 @@ component <code>tokens</code>, any alternate character set <code>readings</code>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C18createStopwordList13environmentID010collectionG012stopwordFile0I8Filename7headers17completionHandlerySS_SS10Foundation4DataVSSSDyS2SGSgy7RestKit0Q8ResponseVyAA015TokenDictStatusS0VGSg_AP0Q5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C18createStopwordList13environmentID010collectionG012stopwordFile0I8Filename7headers17completionHandlerySS_SS10Foundation4DataVSSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA015TokenDictStatusT0VGSg_AP0S5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/createStopwordList(environmentID:collectionID:stopwordFile:stopwordFilename:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C18createStopwordList13environmentID010collectionG012stopwordFile0I8Filename7headers17completionHandlerySS_SS10Foundation4DataVSSSDyS2SGSgy7RestKit0Q8ResponseVyAA015TokenDictStatusS0VGSg_AP0Q5ErrorOSgtctF">createStopwordList(environmentID:collectionID:stopwordFile:stopwordFilename:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C18createStopwordList13environmentID010collectionG012stopwordFile0I8Filename7headers17completionHandlerySS_SS10Foundation4DataVSSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA015TokenDictStatusT0VGSg_AP0S5ErrorOSgtctF">createStopwordList(environmentID:<wbr>collectionID:<wbr>stopwordFile:<wbr>stopwordFilename:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3552,9 +3202,9 @@ component <code>tokens</code>, any alternate character set <code>readings</code>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C18deleteStopwordList13environmentID010collectionG07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0L8ResponseVyytGSg_AK0L5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C18deleteStopwordList13environmentID010collectionG07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AK0N5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/deleteStopwordList(environmentID:collectionID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C18deleteStopwordList13environmentID010collectionG07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0L8ResponseVyytGSg_AK0L5ErrorOSgtctF">deleteStopwordList(environmentID:collectionID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C18deleteStopwordList13environmentID010collectionG07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AK0N5ErrorOSgtctF">deleteStopwordList(environmentID:<wbr>collectionID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3641,9 +3291,9 @@ used for the collection.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C11addDocument13environmentID010collectionF04file8filename0H11ContentType8metadata7headers17completionHandlerySS_SS10Foundation4DataVSgSSSgA2QSDyS2SGSgy7RestKit0R8ResponseVyAA0D8AcceptedVGSg_AT0R5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C11addDocument13environmentID010collectionF04file8filename0H11ContentType8metadata7headers17completionHandlerySS_SS10Foundation4DataVSgSSSgA2QSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D8AcceptedVGSg_AT0T5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/addDocument(environmentID:collectionID:file:filename:fileContentType:metadata:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C11addDocument13environmentID010collectionF04file8filename0H11ContentType8metadata7headers17completionHandlerySS_SS10Foundation4DataVSgSSSgA2QSDyS2SGSgy7RestKit0R8ResponseVyAA0D8AcceptedVGSg_AT0R5ErrorOSgtctF">addDocument(environmentID:collectionID:file:filename:fileContentType:metadata:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C11addDocument13environmentID010collectionF04file8filename0H11ContentType8metadata7headers17completionHandlerySS_SS10Foundation4DataVSgSSSgA2QSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D8AcceptedVGSg_AT0T5ErrorOSgtctF">addDocument(environmentID:<wbr>collectionID:<wbr>file:<wbr>filename:<wbr>fileContentType:<wbr>metadata:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3724,7 +3374,7 @@ document. If the <strong>Content-Type</strong> parameter is missing or is one of
                               <td>
                                 <div>
                                   <p>The content of the document to ingest. The maximum supported file size when adding a file to a
-collection is 50 megabytes, the maximum supported file size when testing a confiruration is 1 megabyte. Files
+collection is 50 megabytes, the maximum supported file size when testing a configuration is 1 megabyte. Files
 larger than the supported size are rejected.</p>
                                 </div>
                               </td>
@@ -3762,10 +3412,9 @@ larger than the supported size are rejected.</p>
                               <td>
                                 <div>
                                   <p>The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are
-rejected.
-Example:  <code>{
-\&quot;Creator\&quot;: \&quot;Johnny Appleseed\&quot;,
-\&quot;Subject\&quot;: \&quot;Apples\&quot;
+rejected. Example:  <code>{
+&quot;Creator&quot;: &quot;Johnny Appleseed&quot;,
+&quot;Subject&quot;: &quot;Apples&quot;
 }</code>.</p>
                                 </div>
                               </td>
@@ -3803,9 +3452,9 @@ Example:  <code>{
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C17getDocumentStatus13environmentID010collectionG008documentG07headers17completionHandlerySS_S2SSDyS2SGSgy7RestKit0M8ResponseVyAA0dE0VGSg_AL0M5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C17getDocumentStatus13environmentID010collectionG008documentG07headers17completionHandlerySS_S2SSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0dE0VGSg_AL0O5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/getDocumentStatus(environmentID:collectionID:documentID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C17getDocumentStatus13environmentID010collectionG008documentG07headers17completionHandlerySS_S2SSDyS2SGSgy7RestKit0M8ResponseVyAA0dE0VGSg_AL0M5ErrorOSgtctF">getDocumentStatus(environmentID:collectionID:documentID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C17getDocumentStatus13environmentID010collectionG008documentG07headers17completionHandlerySS_S2SSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0dE0VGSg_AL0O5ErrorOSgtctF">getDocumentStatus(environmentID:<wbr>collectionID:<wbr>documentID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3906,9 +3555,9 @@ when the document was ingested. Use the query API to retrieve the actual documen
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C14updateDocument13environmentID010collectionF008documentF04file8filename0I11ContentType8metadata7headers17completionHandlerySS_S2S10Foundation4DataVSgSSSgA2RSDyS2SGSgy7RestKit0S8ResponseVyAA0D8AcceptedVGSg_AU0S5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C14updateDocument13environmentID010collectionF008documentF04file8filename0I11ContentType8metadata7headers17completionHandlerySS_S2S10Foundation4DataVSgSSSgA2RSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D8AcceptedVGSg_AU0U5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/updateDocument(environmentID:collectionID:documentID:file:filename:fileContentType:metadata:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C14updateDocument13environmentID010collectionF008documentF04file8filename0I11ContentType8metadata7headers17completionHandlerySS_S2S10Foundation4DataVSgSSSgA2RSDyS2SGSgy7RestKit0S8ResponseVyAA0D8AcceptedVGSg_AU0S5ErrorOSgtctF">updateDocument(environmentID:collectionID:documentID:file:filename:fileContentType:metadata:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C14updateDocument13environmentID010collectionF008documentF04file8filename0I11ContentType8metadata7headers17completionHandlerySS_S2S10Foundation4DataVSgSSSgA2RSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D8AcceptedVGSg_AU0U5ErrorOSgtctF">updateDocument(environmentID:<wbr>collectionID:<wbr>documentID:<wbr>file:<wbr>filename:<wbr>fileContentType:<wbr>metadata:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3990,7 +3639,7 @@ same <strong>document_id</strong> if it exists.</p>
                               <td>
                                 <div>
                                   <p>The content of the document to ingest. The maximum supported file size when adding a file to a
-collection is 50 megabytes, the maximum supported file size when testing a confiruration is 1 megabyte. Files
+collection is 50 megabytes, the maximum supported file size when testing a configuration is 1 megabyte. Files
 larger than the supported size are rejected.</p>
                                 </div>
                               </td>
@@ -4028,10 +3677,9 @@ larger than the supported size are rejected.</p>
                               <td>
                                 <div>
                                   <p>The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are
-rejected.
-Example:  <code>{
-\&quot;Creator\&quot;: \&quot;Johnny Appleseed\&quot;,
-\&quot;Subject\&quot;: \&quot;Apples\&quot;
+rejected. Example:  <code>{
+&quot;Creator&quot;: &quot;Johnny Appleseed&quot;,
+&quot;Subject&quot;: &quot;Apples&quot;
 }</code>.</p>
                                 </div>
                               </td>
@@ -4069,9 +3717,9 @@ Example:  <code>{
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C14deleteDocument13environmentID010collectionF008documentF07headers17completionHandlerySS_S2SSDyS2SGSgy7RestKit0L8ResponseVyAA06DeletedN0VGSg_AL0L5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C14deleteDocument13environmentID010collectionF008documentF07headers17completionHandlerySS_S2SSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA06DeletedO0VGSg_AL0N5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/deleteDocument(environmentID:collectionID:documentID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C14deleteDocument13environmentID010collectionF008documentF07headers17completionHandlerySS_S2SSDyS2SGSgy7RestKit0L8ResponseVyAA06DeletedN0VGSg_AL0L5ErrorOSgtctF">deleteDocument(environmentID:collectionID:documentID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C14deleteDocument13environmentID010collectionF008documentF07headers17completionHandlerySS_S2SSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA06DeletedO0VGSg_AL0N5ErrorOSgtctF">deleteDocument(environmentID:<wbr>collectionID:<wbr>documentID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4171,9 +3819,9 @@ status code <code>200</code>) with the status set to &lsquo;deleted&rsquo;.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C5query13environmentID010collectionE06filterAD20naturalLanguageQuery8passages11aggregation5count12returnFields6offset4sort9highlight0kO00K5Count0K10Characters11deduplicate0U5Field0F3IDs7similar0x8DocumentW00xO04bias13loggingOptOut7headers17completionHandlerySS_S2SSgA1_A1_SbSgA1_SiSgA1_A3_A1_A2_A1_A3_A3_A2_A1_A1_A2_A1_A1_A1_A2_SDyS2SGSgy7RestKit12RestResponseVyAA0J8ResponseVGSg_A6_9RestErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/query(environmentID:collectionID:filter:query:naturalLanguageQuery:passages:aggregation:count:returnFields:offset:sort:highlight:passagesFields:passagesCount:passagesCharacters:deduplicate:deduplicateField:collectionIDs:similar:similarDocumentIDs:similarFields:bias:loggingOptOut:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C5query13environmentID010collectionE06filterAD20naturalLanguageQuery8passages11aggregation5count12returnFields6offset4sort9highlight0kO00K5Count0K10Characters11deduplicate0U5Field0F3IDs7similar0x8DocumentW00xO04bias13loggingOptOut7headers17completionHandlerySS_S2SSgA1_A1_SbSgA1_SiSgA1_A3_A1_A2_A1_A3_A3_A2_A1_A1_A2_A1_A1_A1_A2_SDyS2SGSgy7RestKit12RestResponseVyAA0J8ResponseVGSg_A6_9RestErrorOSgtctF">query(environmentID:collectionID:filter:query:naturalLanguageQuery:passages:aggregation:count:returnFields:offset:sort:highlight:passagesFields:passagesCount:passagesCharacters:deduplicate:deduplicateField:collectionIDs:similar:similarDocumentIDs:similarFields:bias:loggingOptOut:headers:completionHandler:)</a>
+                    <a name="/s:11DiscoveryV10A0C5query13environmentID010collectionE06filterAD20naturalLanguageQuery8passages11aggregation5count6return6offset4sort9highlight0K6Fields0K5Count0K10Characters11deduplicate0U5Field7similar0W11DocumentIDs0wR04bias19spellingSuggestions20xWatsonLoggingOptOut7headers17completionHandlerySS_S2SSgA1_A1_SbSgA1_SiSgA1_A3_A1_A2_A1_A3_A3_A2_A1_A2_A1_A1_A1_A2_A2_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0J8ResponseVGSg_A6_9RestErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/query(environmentID:collectionID:filter:query:naturalLanguageQuery:passages:aggregation:count:return:offset:sort:highlight:passagesFields:passagesCount:passagesCharacters:deduplicate:deduplicateField:similar:similarDocumentIDs:similarFields:bias:spellingSuggestions:xWatsonLoggingOptOut:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C5query13environmentID010collectionE06filterAD20naturalLanguageQuery8passages11aggregation5count6return6offset4sort9highlight0K6Fields0K5Count0K10Characters11deduplicate0U5Field7similar0W11DocumentIDs0wR04bias19spellingSuggestions20xWatsonLoggingOptOut7headers17completionHandlerySS_S2SSgA1_A1_SbSgA1_SiSgA1_A3_A1_A2_A1_A3_A3_A2_A1_A2_A1_A1_A1_A2_A2_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0J8ResponseVGSg_A6_9RestErrorOSgtctF">query(environmentID:<wbr>collectionID:<wbr>filter:<wbr>query:<wbr>naturalLanguageQuery:<wbr>passages:<wbr>aggregation:<wbr>count:<wbr>return:<wbr>offset:<wbr>sort:<wbr>highlight:<wbr>passagesFields:<wbr>passagesCount:<wbr>passagesCharacters:<wbr>deduplicate:<wbr>deduplicateField:<wbr>similar:<wbr>similarDocumentIDs:<wbr>similarFields:<wbr>bias:<wbr>spellingSuggestions:<wbr>xWatsonLoggingOptOut:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4183,7 +3831,7 @@ status code <code>200</code>) with the status set to &lsquo;deleted&rsquo;.</p>
                       <div class="abstract">
                         <p>Query a collection.</p>
 
-<p>By using this method, you can construct long queries. For details, see the <a href="https://cloud.ibm.com/docs/services/discovery?topic=discovery-query-concepts#query-concepts">Discovery
+<p>By using this method, you can construct long queries. For details, see the <a href="https://cloud.ibm.com/docs/discovery?topic=discovery-query-concepts#query-concepts">Discovery
 documentation</a>.</p>
 
                       </div>
@@ -4200,7 +3848,7 @@ documentation</a>.</p>
     <span class="nv">passages</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">aggregation</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">returnFields</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="p">`</span><span class="nv">return</span><span class="p">`:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">offset</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">highlight</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -4209,12 +3857,12 @@ documentation</a>.</p>
     <span class="nv">passagesCharacters</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">deduplicate</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">deduplicateField</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">collectionIDs</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">similar</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">similarDocumentIDs</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">similarFields</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">bias</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">loggingOptOut</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">spellingSuggestions</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">xWatsonLoggingOptOut</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/QueryResponse.html">QueryResponse</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -4329,18 +3977,6 @@ aggregations, see the Query reference.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>returnFields</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A comma-separated list of the portion of the document hierarchy to return.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
                                 <em>offset</em>
                                 </code>
                               </td>
@@ -4447,19 +4083,6 @@ parameter is currently Beta functionality.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>collectionIDs</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A comma-separated list of collection IDs to be queried against. Required when querying
-multiple collections, invalid when performing a single collection query.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
                                 <em>similar</em>
                                 </code>
                               </td>
@@ -4516,7 +4139,22 @@ higher field values. This parameter cannot be used in the same query as the <str
                             <tr>
                               <td>
                                 <code>
-                                <em>loggingOptOut</em>
+                                <em>spellingSuggestions</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>When <code>true</code> and the <strong>natural_language_query</strong> parameter is used, the
+<strong>natural_languge_query</strong> parameter is spell checked. The most likely correction is retunred in the
+<strong>suggested_query</strong> field of the response (if one exists).
+<strong>Important:</strong> this parameter is only valid when using the Cloud Pak version of Discovery.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>xWatsonLoggingOptOut</em>
                                 </code>
                               </td>
                               <td>
@@ -4558,9 +4196,9 @@ higher field values. This parameter cannot be used in the same query as the <str
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C12queryNotices13environmentID010collectionF06filter0C020naturalLanguageQuery8passages11aggregation5count12returnFields6offset4sort9highlight0lP00L5Count0L10Characters16deduplicateField7similar0X11DocumentIDs0xP07headers17completionHandlerySS_S2SSgA2ZSbSgAZSiSgSaySSGSgA0_A2_A_A2_A0_A0_AZA_A2_A2_SDyS2SGSgy7RestKit12RestResponseVyAA0kD8ResponseVGSg_A5_9RestErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/queryNotices(environmentID:collectionID:filter:query:naturalLanguageQuery:passages:aggregation:count:returnFields:offset:sort:highlight:passagesFields:passagesCount:passagesCharacters:deduplicateField:similar:similarDocumentIDs:similarFields:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C12queryNotices13environmentID010collectionF06filter0C020naturalLanguageQuery8passages11aggregation5count12returnFields6offset4sort9highlight0lP00L5Count0L10Characters16deduplicateField7similar0X11DocumentIDs0xP07headers17completionHandlerySS_S2SSgA2ZSbSgAZSiSgSaySSGSgA0_A2_A_A2_A0_A0_AZA_A2_A2_SDyS2SGSgy7RestKit12RestResponseVyAA0kD8ResponseVGSg_A5_9RestErrorOSgtctF">queryNotices(environmentID:collectionID:filter:query:naturalLanguageQuery:passages:aggregation:count:returnFields:offset:sort:highlight:passagesFields:passagesCount:passagesCharacters:deduplicateField:similar:similarDocumentIDs:similarFields:headers:completionHandler:)</a>
+                    <a name="/s:11DiscoveryV10A0C12queryNotices13environmentID010collectionF06filter0C020naturalLanguageQuery8passages11aggregation5count6return6offset4sort9highlight0L6Fields0L5Count0L10Characters16deduplicateField7similar0X11DocumentIDs0xS07headers17completionHandlerySS_S2SSgA2ZSbSgAZSiSgSaySSGSgA0_A2_A_A2_A0_A0_AZA_A2_A2_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0kD8ResponseVGSg_A5_9RestErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/queryNotices(environmentID:collectionID:filter:query:naturalLanguageQuery:passages:aggregation:count:return:offset:sort:highlight:passagesFields:passagesCount:passagesCharacters:deduplicateField:similar:similarDocumentIDs:similarFields:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C12queryNotices13environmentID010collectionF06filter0C020naturalLanguageQuery8passages11aggregation5count6return6offset4sort9highlight0L6Fields0L5Count0L10Characters16deduplicateField7similar0X11DocumentIDs0xS07headers17completionHandlerySS_S2SSgA2ZSbSgAZSiSgSaySSGSgA0_A2_A_A2_A0_A0_AZA_A2_A2_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0kD8ResponseVGSg_A5_9RestErrorOSgtctF">queryNotices(environmentID:<wbr>collectionID:<wbr>filter:<wbr>query:<wbr>naturalLanguageQuery:<wbr>passages:<wbr>aggregation:<wbr>count:<wbr>return:<wbr>offset:<wbr>sort:<wbr>highlight:<wbr>passagesFields:<wbr>passagesCount:<wbr>passagesCharacters:<wbr>deduplicateField:<wbr>similar:<wbr>similarDocumentIDs:<wbr>similarFields:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4571,9 +4209,9 @@ higher field values. This parameter cannot be used in the same query as the <str
                         <p>Query system notices.</p>
 
 <p>Queries for notices (errors or warnings) that might have been generated by the system. Notices are generated when
-ingesting documents and performing relevance training. See the <a href="https://cloud.ibm.com/docs/services/discovery?topic=discovery-query-concepts#query-concepts">Discovery
-documentation</a> for
-more details on the query language.</p>
+ingesting documents and performing relevance training. See the <a href="https://cloud.ibm.com/docs/discovery?topic=discovery-query-concepts#query-concepts">Discovery
+documentation</a> for more details
+on the query language.</p>
 
                       </div>
                       <div class="declaration">
@@ -4589,7 +4227,7 @@ more details on the query language.</p>
     <span class="nv">passages</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">aggregation</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">returnFields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="p">`</span><span class="nv">return</span><span class="p">`:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">offset</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">sort</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">highlight</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -4708,18 +4346,6 @@ aggregations, see the Query reference.</p>
                                 <div>
                                   <p>Number of results to return. The maximum for the <strong>count</strong> and <strong>offset</strong> values together in
 any one query is <strong>10000</strong>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>returnFields</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A comma-separated list of the portion of the document hierarchy to return.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4890,9 +4516,9 @@ identify similar documents. If not specified, the entire document is used for co
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C14federatedQuery13environmentID6filter5query015naturalLanguageD08passages11aggregation5count12returnFields6offset4sort9highlight0kO00K5Count0K10Characters11deduplicate0U5Field13collectionIDs7similar0y8DocumentX00yO04bias13loggingOptOut7headers17completionHandlerySS_SSSgA1_A1_SbSgA1_SiSgA1_A3_A1_A2_A1_A3_A3_A2_A1_A1_A2_A1_A1_A1_A2_SDyS2SGSgy7RestKit12RestResponseVyAA0D8ResponseVGSg_A6_9RestErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/federatedQuery(environmentID:filter:query:naturalLanguageQuery:passages:aggregation:count:returnFields:offset:sort:highlight:passagesFields:passagesCount:passagesCharacters:deduplicate:deduplicateField:collectionIDs:similar:similarDocumentIDs:similarFields:bias:loggingOptOut:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C14federatedQuery13environmentID6filter5query015naturalLanguageD08passages11aggregation5count12returnFields6offset4sort9highlight0kO00K5Count0K10Characters11deduplicate0U5Field13collectionIDs7similar0y8DocumentX00yO04bias13loggingOptOut7headers17completionHandlerySS_SSSgA1_A1_SbSgA1_SiSgA1_A3_A1_A2_A1_A3_A3_A2_A1_A1_A2_A1_A1_A1_A2_SDyS2SGSgy7RestKit12RestResponseVyAA0D8ResponseVGSg_A6_9RestErrorOSgtctF">federatedQuery(environmentID:filter:query:naturalLanguageQuery:passages:aggregation:count:returnFields:offset:sort:highlight:passagesFields:passagesCount:passagesCharacters:deduplicate:deduplicateField:collectionIDs:similar:similarDocumentIDs:similarFields:bias:loggingOptOut:headers:completionHandler:)</a>
+                    <a name="/s:11DiscoveryV10A0C14federatedQuery13environmentID13collectionIDs6filter5query015naturalLanguageD08passages11aggregation5count6return6offset4sort9highlight0M6Fields0M5Count0M10Characters11deduplicate0W5Field7similar0y8DocumentH00yT04bias20xWatsonLoggingOptOut7headers17completionHandlerySS_S2SSgA1_A1_SbSgA1_SiSgA1_A3_A1_A2_A1_A3_A3_A2_A1_A2_A1_A1_A1_A2_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D8ResponseVGSg_A6_9RestErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/federatedQuery(environmentID:collectionIDs:filter:query:naturalLanguageQuery:passages:aggregation:count:return:offset:sort:highlight:passagesFields:passagesCount:passagesCharacters:deduplicate:deduplicateField:similar:similarDocumentIDs:similarFields:bias:xWatsonLoggingOptOut:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C14federatedQuery13environmentID13collectionIDs6filter5query015naturalLanguageD08passages11aggregation5count6return6offset4sort9highlight0M6Fields0M5Count0M10Characters11deduplicate0W5Field7similar0y8DocumentH00yT04bias20xWatsonLoggingOptOut7headers17completionHandlerySS_S2SSgA1_A1_SbSgA1_SiSgA1_A3_A1_A2_A1_A3_A3_A2_A1_A2_A1_A1_A1_A2_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D8ResponseVGSg_A6_9RestErrorOSgtctF">federatedQuery(environmentID:<wbr>collectionIDs:<wbr>filter:<wbr>query:<wbr>naturalLanguageQuery:<wbr>passages:<wbr>aggregation:<wbr>count:<wbr>return:<wbr>offset:<wbr>sort:<wbr>highlight:<wbr>passagesFields:<wbr>passagesCount:<wbr>passagesCharacters:<wbr>deduplicate:<wbr>deduplicateField:<wbr>similar:<wbr>similarDocumentIDs:<wbr>similarFields:<wbr>bias:<wbr>xWatsonLoggingOptOut:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4903,8 +4529,7 @@ identify similar documents. If not specified, the entire document is used for co
                         <p>Query multiple collections.</p>
 
 <p>By using this method, you can construct long queries that search multiple collection. For details, see the
-<a href="https://cloud.ibm.com/docs/services/discovery?topic=discovery-query-concepts#query-concepts">Discovery
-documentation</a>.</p>
+<a href="https://cloud.ibm.com/docs/discovery?topic=discovery-query-concepts#query-concepts">Discovery documentation</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -4913,13 +4538,14 @@ documentation</a>.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">federatedQuery</span><span class="p">(</span>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">collectionIDs</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">filter</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">query</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">naturalLanguageQuery</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">passages</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">aggregation</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">returnFields</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="p">`</span><span class="nv">return</span><span class="p">`:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">offset</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">highlight</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -4928,12 +4554,11 @@ documentation</a>.</p>
     <span class="nv">passagesCharacters</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">deduplicate</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">deduplicateField</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">collectionIDs</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">similar</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">similarDocumentIDs</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">similarFields</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">bias</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">loggingOptOut</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">xWatsonLoggingOptOut</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/QueryResponse.html">QueryResponse</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -4952,6 +4577,18 @@ documentation</a>.</p>
                               <td>
                                 <div>
                                   <p>The ID of the environment.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>collectionIDs</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A comma-separated list of collection IDs to be queried against.</p>
                                 </div>
                               </td>
                             </tr>
@@ -5030,18 +4667,6 @@ aggregations, see the Query reference.</p>
                               <td>
                                 <div>
                                   <p>Number of results to return.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>returnFields</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A comma-separated list of the portion of the document hierarchy to return.</p>
                                 </div>
                               </td>
                             </tr>
@@ -5154,19 +4779,6 @@ parameter is currently Beta functionality.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>collectionIDs</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A comma-separated list of collection IDs to be queried against. Required when querying
-multiple collections, invalid when performing a single collection query.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
                                 <em>similar</em>
                                 </code>
                               </td>
@@ -5223,7 +4835,7 @@ higher field values. This parameter cannot be used in the same query as the <str
                             <tr>
                               <td>
                                 <code>
-                                <em>loggingOptOut</em>
+                                <em>xWatsonLoggingOptOut</em>
                                 </code>
                               </td>
                               <td>
@@ -5265,9 +4877,9 @@ higher field values. This parameter cannot be used in the same query as the <str
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C21federatedQueryNotices13environmentID13collectionIDs6filter5query015naturalLanguageD011aggregation5count12returnFields6offset4sort9highlight16deduplicateField7similar0w8DocumentI00wQ07headers17completionHandlerySS_SaySSGSSSgA3WSiSgAVSgAxYSbSgAwz2YSDyS2SGSgy7RestKit12RestResponseVyAA0dE8ResponseVGSg_A1_9RestErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/federatedQueryNotices(environmentID:collectionIDs:filter:query:naturalLanguageQuery:aggregation:count:returnFields:offset:sort:highlight:deduplicateField:similar:similarDocumentIDs:similarFields:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C21federatedQueryNotices13environmentID13collectionIDs6filter5query015naturalLanguageD011aggregation5count12returnFields6offset4sort9highlight16deduplicateField7similar0w8DocumentI00wQ07headers17completionHandlerySS_SaySSGSSSgA3WSiSgAVSgAxYSbSgAwz2YSDyS2SGSgy7RestKit12RestResponseVyAA0dE8ResponseVGSg_A1_9RestErrorOSgtctF">federatedQueryNotices(environmentID:collectionIDs:filter:query:naturalLanguageQuery:aggregation:count:returnFields:offset:sort:highlight:deduplicateField:similar:similarDocumentIDs:similarFields:headers:completionHandler:)</a>
+                    <a name="/s:11DiscoveryV10A0C21federatedQueryNotices13environmentID13collectionIDs6filter5query015naturalLanguageD011aggregation5count6return6offset4sort9highlight16deduplicateField7similar0v8DocumentI00V6Fields7headers17completionHandlerySS_SaySSGSSSgA3WSiSgAVSgAxYSbSgAwz2YSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0dE8ResponseVGSg_A1_9RestErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/federatedQueryNotices(environmentID:collectionIDs:filter:query:naturalLanguageQuery:aggregation:count:return:offset:sort:highlight:deduplicateField:similar:similarDocumentIDs:similarFields:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C21federatedQueryNotices13environmentID13collectionIDs6filter5query015naturalLanguageD011aggregation5count6return6offset4sort9highlight16deduplicateField7similar0v8DocumentI00V6Fields7headers17completionHandlerySS_SaySSGSSSgA3WSiSgAVSgAxYSbSgAwz2YSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0dE8ResponseVGSg_A1_9RestErrorOSgtctF">federatedQueryNotices(environmentID:<wbr>collectionIDs:<wbr>filter:<wbr>query:<wbr>naturalLanguageQuery:<wbr>aggregation:<wbr>count:<wbr>return:<wbr>offset:<wbr>sort:<wbr>highlight:<wbr>deduplicateField:<wbr>similar:<wbr>similarDocumentIDs:<wbr>similarFields:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -5278,9 +4890,9 @@ higher field values. This parameter cannot be used in the same query as the <str
                         <p>Query multiple collection system notices.</p>
 
 <p>Queries for notices (errors or warnings) that might have been generated by the system. Notices are generated when
-ingesting documents and performing relevance training. See the <a href="https://cloud.ibm.com/docs/services/discovery?topic=discovery-query-concepts#query-concepts">Discovery
-documentation</a> for
-more details on the query language.</p>
+ingesting documents and performing relevance training. See the <a href="https://cloud.ibm.com/docs/discovery?topic=discovery-query-concepts#query-concepts">Discovery
+documentation</a> for more details
+on the query language.</p>
 
                       </div>
                       <div class="declaration">
@@ -5295,7 +4907,7 @@ more details on the query language.</p>
     <span class="nv">naturalLanguageQuery</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">aggregation</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">returnFields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="p">`</span><span class="nv">return</span><span class="p">`:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">offset</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">sort</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">highlight</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -5399,18 +5011,6 @@ aggregations, see the Query reference.</p>
                                 <div>
                                   <p>Number of results to return. The maximum for the <strong>count</strong> and <strong>offset</strong> values together in
 any one query is <strong>10000</strong>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>returnFields</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A comma-separated list of the portion of the document hierarchy to return.</p>
                                 </div>
                               </td>
                             </tr>
@@ -5543,9 +5143,9 @@ identify similar documents. If not specified, the entire document is used for co
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C13queryEntities13environmentID010collectionF07feature6entity7context5count13evidenceCount7headers17completionHandlerySS_S2SSgAA05QueryD6EntityVSgAA0qD7ContextVSgSiSgAUSDyS2SGSgy7RestKit0T8ResponseVyAA0qdV0VGSg_AX0T5ErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/queryEntities(environmentID:collectionID:feature:entity:context:count:evidenceCount:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C13queryEntities13environmentID010collectionF07feature6entity7context5count13evidenceCount7headers17completionHandlerySS_S2SSgAA05QueryD6EntityVSgAA0qD7ContextVSgSiSgAUSDyS2SGSgy7RestKit0T8ResponseVyAA0qdV0VGSg_AX0T5ErrorOSgtctF">queryEntities(environmentID:collectionID:feature:entity:context:count:evidenceCount:headers:completionHandler:)</a>
+                    <a name="/s:11DiscoveryV10A0C17getAutocompletion13environmentID010collectionF06prefix5field5count7headers17completionHandlerySS_S3SSgSiSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA11CompletionsVGSg_AP0P5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/getAutocompletion(environmentID:collectionID:prefix:field:count:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C17getAutocompletion13environmentID010collectionF06prefix5field5count7headers17completionHandlerySS_S3SSgSiSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA11CompletionsVGSg_AP0P5ErrorOSgtctF">getAutocompletion(environmentID:<wbr>collectionID:<wbr>prefix:<wbr>field:<wbr>count:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -5553,26 +5153,24 @@ identify similar documents. If not specified, the entire document is used for co
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Knowledge Graph entity query.</p>
+                        <p>Get Autocomplete Suggestions.</p>
 
-<p>See the <a href="https://cloud.ibm.com/docs/services/discovery?topic=discovery-kg#kg">Knowledge Graph documentation</a> for
-more details.</p>
+<p>Returns completion query suggestions for the specified prefix.  /n/n <strong>Important:</strong> this method is only valid when
+using the Cloud Pak version of Discovery.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">queryEntities</span><span class="p">(</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getAutocompletion</span><span class="p">(</span>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">feature</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">entity</span><span class="p">:</span> <span class="kt"><a href="../Structs/QueryEntitiesEntity.html">QueryEntitiesEntity</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">context</span><span class="p">:</span> <span class="kt"><a href="../Structs/QueryEntitiesContext.html">QueryEntitiesContext</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="p">`</span><span class="nv">prefix</span><span class="p">`:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">field</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">evidenceCount</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/QueryEntitiesResponse.html">QueryEntitiesResponse</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Completions.html">Completions</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -5607,39 +5205,12 @@ more details.</p>
                             <tr>
                               <td>
                                 <code>
-                                <em>feature</em>
+                                <em>field</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>The entity query feature to perform. Supported features are <code>disambiguate</code> and
-<code>similar_entities</code>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>entity</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A text string that appears within the entity text field.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>context</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Entity text to provide context for the queried entity and rank based on that association.
-For example, if you wanted to query the city of London in England your query would look for <code>London</code> with the
-context of <code>England</code>.</p>
+                                  <p>The field in the result documents that autocompletion suggestions are identified from.</p>
                                 </div>
                               </td>
                             </tr>
@@ -5651,20 +5222,7 @@ context of <code>England</code>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The number of results to return. The default is <code>10</code>. The maximum is <code>1000</code>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>evidenceCount</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The number of evidence items to return for each result. The default is <code>0</code>. The
-maximum number of evidence items per query is 10,000.</p>
+                                  <p>The number of autocompletion suggestions to return.</p>
                                 </div>
                               </td>
                             </tr>
@@ -5701,181 +5259,9 @@ maximum number of evidence items per query is 10,000.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C14queryRelations13environmentID010collectionF08entities7context4sort6filter5count13evidenceCount7headers17completionHandlerySS_SSSayAA05QueryD6EntityVGSgAA0R15EntitiesContextVSgSSSgAA0rD6FilterVSgSiSgAZSDyS2SGSgy7RestKit0W8ResponseVyAA0rdY0VGSg_A1_0W5ErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/queryRelations(environmentID:collectionID:entities:context:sort:filter:count:evidenceCount:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C14queryRelations13environmentID010collectionF08entities7context4sort6filter5count13evidenceCount7headers17completionHandlerySS_SSSayAA05QueryD6EntityVGSgAA0R15EntitiesContextVSgSSSgAA0rD6FilterVSgSiSgAZSDyS2SGSgy7RestKit0W8ResponseVyAA0rdY0VGSg_A1_0W5ErrorOSgtctF">queryRelations(environmentID:collectionID:entities:context:sort:filter:count:evidenceCount:headers:completionHandler:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Knowledge Graph relationship query.</p>
-
-<p>See the <a href="https://cloud.ibm.com/docs/services/discovery?topic=discovery-kg#kg">Knowledge Graph documentation</a> for
-more details.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">queryRelations</span><span class="p">(</span>
-    <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">entities</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/QueryRelationsEntity.html">QueryRelationsEntity</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">context</span><span class="p">:</span> <span class="kt"><a href="../Structs/QueryEntitiesContext.html">QueryEntitiesContext</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">filter</span><span class="p">:</span> <span class="kt"><a href="../Structs/QueryRelationsFilter.html">QueryRelationsFilter</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">evidenceCount</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/QueryRelationsResponse.html">QueryRelationsResponse</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>environmentID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The ID of the environment.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>collectionID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The ID of the collection.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>entities</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An array of entities to find relationships for.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>context</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Entity text to provide context for the queried entity and rank based on that association.
-For example, if you wanted to query the city of London in England your query would look for <code>London</code> with the
-context of <code>England</code>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>sort</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The sorting method for the relationships, can be <code>score</code> or <code>frequency</code>. <code>frequency</code> is the
-number of unique times each entity is identified. The default is <code>score</code>. This parameter cannot be used in the
-same query as the <strong>bias</strong> parameter.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>filter</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p></p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>count</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The number of results to return. The default is <code>10</code>. The maximum is <code>1000</code>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>evidenceCount</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The number of evidence items to return for each result. The default is <code>0</code>. The
-maximum number of evidence items per query is 10,000.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>headers</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A dictionary of request headers to be sent with this request.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>completionHandler</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed when the request completes with a successful result or error</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11DiscoveryV10A0C16listTrainingData13environmentID010collectionG07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0L8ResponseVyAA0dE3SetVGSg_AK0L5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C16listTrainingData13environmentID010collectionG07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0dE3SetVGSg_AK0N5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/listTrainingData(environmentID:collectionID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C16listTrainingData13environmentID010collectionG07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0L8ResponseVyAA0dE3SetVGSg_AK0L5ErrorOSgtctF">listTrainingData(environmentID:collectionID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C16listTrainingData13environmentID010collectionG07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0dE3SetVGSg_AK0N5ErrorOSgtctF">listTrainingData(environmentID:<wbr>collectionID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -5961,9 +5347,9 @@ maximum number of evidence items per query is 10,000.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C15addTrainingData13environmentID010collectionG020naturalLanguageQuery6filter8examples7headers17completionHandlerySS_S2SSgALSayAA0D7ExampleVGSgSDyS2SGSgy7RestKit0R8ResponseVyAA0dK0VGSg_AS0R5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C15addTrainingData13environmentID010collectionG020naturalLanguageQuery6filter8examples7headers17completionHandlerySS_S2SSgALSayAA0D7ExampleVGSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0dK0VGSg_AS0T5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/addTrainingData(environmentID:collectionID:naturalLanguageQuery:filter:examples:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C15addTrainingData13environmentID010collectionG020naturalLanguageQuery6filter8examples7headers17completionHandlerySS_S2SSgALSayAA0D7ExampleVGSgSDyS2SGSgy7RestKit0R8ResponseVyAA0dK0VGSg_AS0R5ErrorOSgtctF">addTrainingData(environmentID:collectionID:naturalLanguageQuery:filter:examples:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C15addTrainingData13environmentID010collectionG020naturalLanguageQuery6filter8examples7headers17completionHandlerySS_S2SSgALSayAA0D7ExampleVGSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0dK0VGSg_AS0T5ErrorOSgtctF">addTrainingData(environmentID:<wbr>collectionID:<wbr>naturalLanguageQuery:<wbr>filter:<wbr>examples:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -6088,9 +5474,9 @@ maximum number of evidence items per query is 10,000.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C21deleteAllTrainingData13environmentID010collectionH07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0M8ResponseVyytGSg_AK0M5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C21deleteAllTrainingData13environmentID010collectionH07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AK0O5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/deleteAllTrainingData(environmentID:collectionID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C21deleteAllTrainingData13environmentID010collectionH07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0M8ResponseVyytGSg_AK0M5ErrorOSgtctF">deleteAllTrainingData(environmentID:collectionID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C21deleteAllTrainingData13environmentID010collectionH07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AK0O5ErrorOSgtctF">deleteAllTrainingData(environmentID:<wbr>collectionID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -6176,9 +5562,9 @@ maximum number of evidence items per query is 10,000.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C15getTrainingData13environmentID010collectionG005queryG07headers17completionHandlerySS_S2SSDyS2SGSgy7RestKit0M8ResponseVyAA0D5QueryVGSg_AL0M5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C15getTrainingData13environmentID010collectionG005queryG07headers17completionHandlerySS_S2SSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D5QueryVGSg_AL0O5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/getTrainingData(environmentID:collectionID:queryID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C15getTrainingData13environmentID010collectionG005queryG07headers17completionHandlerySS_S2SSDyS2SGSgy7RestKit0M8ResponseVyAA0D5QueryVGSg_AL0M5ErrorOSgtctF">getTrainingData(environmentID:collectionID:queryID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C15getTrainingData13environmentID010collectionG005queryG07headers17completionHandlerySS_S2SSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D5QueryVGSg_AL0O5ErrorOSgtctF">getTrainingData(environmentID:<wbr>collectionID:<wbr>queryID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -6277,9 +5663,9 @@ maximum number of evidence items per query is 10,000.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C18deleteTrainingData13environmentID010collectionG005queryG07headers17completionHandlerySS_S2SSDyS2SGSgy7RestKit0M8ResponseVyytGSg_AL0M5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C18deleteTrainingData13environmentID010collectionG005queryG07headers17completionHandlerySS_S2SSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AL0O5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/deleteTrainingData(environmentID:collectionID:queryID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C18deleteTrainingData13environmentID010collectionG005queryG07headers17completionHandlerySS_S2SSDyS2SGSgy7RestKit0M8ResponseVyytGSg_AL0M5ErrorOSgtctF">deleteTrainingData(environmentID:collectionID:queryID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C18deleteTrainingData13environmentID010collectionG005queryG07headers17completionHandlerySS_S2SSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AL0O5ErrorOSgtctF">deleteTrainingData(environmentID:<wbr>collectionID:<wbr>queryID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -6378,9 +5764,9 @@ maximum number of evidence items per query is 10,000.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C20listTrainingExamples13environmentID010collectionG005queryG07headers17completionHandlerySS_S2SSDyS2SGSgy7RestKit0M8ResponseVyAA0D11ExampleListVGSg_AL0M5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C20listTrainingExamples13environmentID010collectionG005queryG07headers17completionHandlerySS_S2SSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D11ExampleListVGSg_AL0O5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/listTrainingExamples(environmentID:collectionID:queryID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C20listTrainingExamples13environmentID010collectionG005queryG07headers17completionHandlerySS_S2SSDyS2SGSgy7RestKit0M8ResponseVyAA0D11ExampleListVGSg_AL0M5ErrorOSgtctF">listTrainingExamples(environmentID:collectionID:queryID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C20listTrainingExamples13environmentID010collectionG005queryG07headers17completionHandlerySS_S2SSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D11ExampleListVGSg_AL0O5ErrorOSgtctF">listTrainingExamples(environmentID:<wbr>collectionID:<wbr>queryID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -6479,9 +5865,9 @@ maximum number of evidence items per query is 10,000.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C21createTrainingExample13environmentID010collectionG005queryG008documentG014crossReference9relevance7headers17completionHandlerySS_S3SSgAMSiSgSDyS2SGSgy7RestKit0Q8ResponseVyAA0dE0VGSg_AQ0Q5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C21createTrainingExample13environmentID010collectionG005queryG008documentG014crossReference9relevance7headers17completionHandlerySS_S3SSgAMSiSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0dE0VGSg_AQ0S5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/createTrainingExample(environmentID:collectionID:queryID:documentID:crossReference:relevance:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C21createTrainingExample13environmentID010collectionG005queryG008documentG014crossReference9relevance7headers17completionHandlerySS_S3SSgAMSiSgSDyS2SGSgy7RestKit0Q8ResponseVyAA0dE0VGSg_AQ0Q5ErrorOSgtctF">createTrainingExample(environmentID:collectionID:queryID:documentID:crossReference:relevance:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C21createTrainingExample13environmentID010collectionG005queryG008documentG014crossReference9relevance7headers17completionHandlerySS_S3SSgAMSiSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0dE0VGSg_AQ0S5ErrorOSgtctF">createTrainingExample(environmentID:<wbr>collectionID:<wbr>queryID:<wbr>documentID:<wbr>crossReference:<wbr>relevance:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -6619,9 +6005,9 @@ maximum number of evidence items per query is 10,000.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C21deleteTrainingExample13environmentID010collectionG005queryG007exampleG07headers17completionHandlerySS_S3SSDyS2SGSgy7RestKit0N8ResponseVyytGSg_AM0N5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C21deleteTrainingExample13environmentID010collectionG005queryG007exampleG07headers17completionHandlerySS_S3SSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AM0P5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/deleteTrainingExample(environmentID:collectionID:queryID:exampleID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C21deleteTrainingExample13environmentID010collectionG005queryG007exampleG07headers17completionHandlerySS_S3SSDyS2SGSgy7RestKit0N8ResponseVyytGSg_AM0N5ErrorOSgtctF">deleteTrainingExample(environmentID:collectionID:queryID:exampleID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C21deleteTrainingExample13environmentID010collectionG005queryG007exampleG07headers17completionHandlerySS_S3SSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AM0P5ErrorOSgtctF">deleteTrainingExample(environmentID:<wbr>collectionID:<wbr>queryID:<wbr>exampleID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -6733,9 +6119,9 @@ maximum number of evidence items per query is 10,000.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C21updateTrainingExample13environmentID010collectionG005queryG007exampleG014crossReference9relevance7headers17completionHandlerySS_S4SSgSiSgSDyS2SGSgy7RestKit0Q8ResponseVyAA0dE0VGSg_AQ0Q5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C21updateTrainingExample13environmentID010collectionG005queryG007exampleG014crossReference9relevance7headers17completionHandlerySS_S4SSgSiSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0dE0VGSg_AQ0S5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/updateTrainingExample(environmentID:collectionID:queryID:exampleID:crossReference:relevance:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C21updateTrainingExample13environmentID010collectionG005queryG007exampleG014crossReference9relevance7headers17completionHandlerySS_S4SSgSiSgSDyS2SGSgy7RestKit0Q8ResponseVyAA0dE0VGSg_AQ0Q5ErrorOSgtctF">updateTrainingExample(environmentID:collectionID:queryID:exampleID:crossReference:relevance:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C21updateTrainingExample13environmentID010collectionG005queryG007exampleG014crossReference9relevance7headers17completionHandlerySS_S4SSgSiSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0dE0VGSg_AQ0S5ErrorOSgtctF">updateTrainingExample(environmentID:<wbr>collectionID:<wbr>queryID:<wbr>exampleID:<wbr>crossReference:<wbr>relevance:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -6873,9 +6259,9 @@ maximum number of evidence items per query is 10,000.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C18getTrainingExample13environmentID010collectionG005queryG007exampleG07headers17completionHandlerySS_S3SSDyS2SGSgy7RestKit0N8ResponseVyAA0dE0VGSg_AM0N5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C18getTrainingExample13environmentID010collectionG005queryG007exampleG07headers17completionHandlerySS_S3SSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0dE0VGSg_AM0P5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/getTrainingExample(environmentID:collectionID:queryID:exampleID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C18getTrainingExample13environmentID010collectionG005queryG007exampleG07headers17completionHandlerySS_S3SSDyS2SGSgy7RestKit0N8ResponseVyAA0dE0VGSg_AM0N5ErrorOSgtctF">getTrainingExample(environmentID:collectionID:queryID:exampleID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C18getTrainingExample13environmentID010collectionG005queryG007exampleG07headers17completionHandlerySS_S3SSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0dE0VGSg_AM0P5ErrorOSgtctF">getTrainingExample(environmentID:<wbr>collectionID:<wbr>queryID:<wbr>exampleID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -6987,9 +6373,9 @@ maximum number of evidence items per query is 10,000.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C14deleteUserData10customerID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0K8ResponseVyytGSg_AJ0K5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C14deleteUserData10customerID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AJ0M5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/deleteUserData(customerID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C14deleteUserData10customerID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0K8ResponseVyytGSg_AJ0K5ErrorOSgtctF">deleteUserData(customerID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C14deleteUserData10customerID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AJ0M5ErrorOSgtctF">deleteUserData(customerID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -7002,7 +6388,7 @@ maximum number of evidence items per query is 10,000.</p>
 <p>Deletes all data associated with a specified customer ID. The method has no effect if no data is associated with
 the customer ID.
 You associate a customer ID with data by passing the <strong>X-Watson-Metadata</strong> header with a request that passes data.
-For more information about personal data and customer IDs, see <a href="https://cloud.ibm.com/docs/services/discovery?topic=discovery-information-security#information-security">Information
+For more information about personal data and customer IDs, see <a href="https://cloud.ibm.com/docs/discovery?topic=discovery-information-security#information-security">Information
 security</a>.</p>
 
                       </div>
@@ -7066,9 +6452,9 @@ security</a>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C11createEvent4type4data7headers17completionHandlerySS_AA0D4DataVSDyS2SGSgy7RestKit0K8ResponseVyAA06CreatedM0VGSg_AM0K5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C11createEvent4type4data7headers17completionHandlerySS_AA0D4DataVSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA06CreatedN0VGSg_AM0M5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/createEvent(type:data:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C11createEvent4type4data7headers17completionHandlerySS_AA0D4DataVSDyS2SGSgy7RestKit0K8ResponseVyAA06CreatedM0VGSg_AM0K5ErrorOSgtctF">createEvent(type:data:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C11createEvent4type4data7headers17completionHandlerySS_AA0D4DataVSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA06CreatedN0VGSg_AM0M5ErrorOSgtctF">createEvent(type:<wbr>data:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -7079,7 +6465,7 @@ security</a>.</p>
                         <p>Create event.</p>
 
 <p>The <strong>Events</strong> API can be used to create log entries that are associated with specific queries. For example, you
-can record which documents in the results set were \<q>clicked\</q> by a user and when that click occured.</p>
+can record which documents in the results set were &ldquo;clicked&rdquo; by a user and when that click occurred.</p>
 
                       </div>
                       <div class="declaration">
@@ -7155,9 +6541,9 @@ can record which documents in the results set were \<q>clicked\</q> by a user an
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C8queryLog6filter0C05count6offset4sort7headers17completionHandlerySSSg_ALSiSgAMSaySSGSgSDyS2SGSgy7RestKit0L8ResponseVyAA0d5QueryN0VGSg_AR0L5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C8queryLog6filter0C05count6offset4sort7headers17completionHandlerySSSg_ALSiSgAMSaySSGSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0d5QueryO0VGSg_AR0N5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/queryLog(filter:query:count:offset:sort:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C8queryLog6filter0C05count6offset4sort7headers17completionHandlerySSSg_ALSiSgAMSaySSGSgSDyS2SGSgy7RestKit0L8ResponseVyAA0d5QueryN0VGSg_AR0L5ErrorOSgtctF">queryLog(filter:query:count:offset:sort:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C8queryLog6filter0C05count6offset4sort7headers17completionHandlerySSSg_ALSiSgAMSaySSGSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0d5QueryO0VGSg_AR0N5ErrorOSgtctF">queryLog(filter:<wbr>query:<wbr>count:<wbr>offset:<wbr>sort:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -7290,9 +6676,9 @@ direction if no prefix is specified.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C15getMetricsQuery9startTime03endG010resultType7headers17completionHandlery10Foundation4DateVSg_AMSSSgSDyS2SGSgy7RestKit0P8ResponseVyAA06MetricR0VGSg_AQ0P5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C15getMetricsQuery9startTime03endG010resultType7headers17completionHandlery10Foundation4DateVSg_AMSSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA06MetricS0VGSg_AQ0R5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/getMetricsQuery(startTime:endTime:resultType:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C15getMetricsQuery9startTime03endG010resultType7headers17completionHandlery10Foundation4DateVSg_AMSSSgSDyS2SGSgy7RestKit0P8ResponseVyAA06MetricR0VGSg_AQ0P5ErrorOSgtctF">getMetricsQuery(startTime:endTime:resultType:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C15getMetricsQuery9startTime03endG010resultType7headers17completionHandlery10Foundation4DateVSg_AMSSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA06MetricS0VGSg_AQ0R5ErrorOSgtctF">getMetricsQuery(startTime:<wbr>endTime:<wbr>resultType:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -7393,9 +6779,9 @@ direction if no prefix is specified.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C20getMetricsQueryEvent9startTime03endH010resultType7headers17completionHandlery10Foundation4DateVSg_AMSSSgSDyS2SGSgy7RestKit0Q8ResponseVyAA06MetricS0VGSg_AQ0Q5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C20getMetricsQueryEvent9startTime03endH010resultType7headers17completionHandlery10Foundation4DateVSg_AMSSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA06MetricT0VGSg_AQ0S5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/getMetricsQueryEvent(startTime:endTime:resultType:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C20getMetricsQueryEvent9startTime03endH010resultType7headers17completionHandlery10Foundation4DateVSg_AMSSSgSDyS2SGSgy7RestKit0Q8ResponseVyAA06MetricS0VGSg_AQ0Q5ErrorOSgtctF">getMetricsQueryEvent(startTime:endTime:resultType:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C20getMetricsQueryEvent9startTime03endH010resultType7headers17completionHandlery10Foundation4DateVSg_AMSSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA06MetricT0VGSg_AQ0S5ErrorOSgtctF">getMetricsQueryEvent(startTime:<wbr>endTime:<wbr>resultType:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -7405,8 +6791,8 @@ direction if no prefix is specified.</p>
                       <div class="abstract">
                         <p>Number of queries with an event over time.</p>
 
-<p>Total number of queries using the <strong>natural_language_query</strong> parameter that have a corresponding \<q>click\</q> event
-over a specified time window. This metric requires having integrated event tracking in your application using the
+<p>Total number of queries using the <strong>natural_language_query</strong> parameter that have a corresponding &ldquo;click&rdquo; event over
+a specified time window. This metric requires having integrated event tracking in your application using the
 <strong>Events</strong> API.</p>
 
                       </div>
@@ -7498,9 +6884,9 @@ over a specified time window. This metric requires having integrated event track
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C24getMetricsQueryNoResults9startTime03endI010resultType7headers17completionHandlery10Foundation4DateVSg_AMSSSgSDyS2SGSgy7RestKit0R8ResponseVyAA06MetricT0VGSg_AQ0R5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C24getMetricsQueryNoResults9startTime03endI010resultType7headers17completionHandlery10Foundation4DateVSg_AMSSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA06MetricU0VGSg_AQ0T5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/getMetricsQueryNoResults(startTime:endTime:resultType:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C24getMetricsQueryNoResults9startTime03endI010resultType7headers17completionHandlery10Foundation4DateVSg_AMSSSgSDyS2SGSgy7RestKit0R8ResponseVyAA06MetricT0VGSg_AQ0R5ErrorOSgtctF">getMetricsQueryNoResults(startTime:endTime:resultType:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C24getMetricsQueryNoResults9startTime03endI010resultType7headers17completionHandlery10Foundation4DateVSg_AMSSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA06MetricU0VGSg_AQ0T5ErrorOSgtctF">getMetricsQueryNoResults(startTime:<wbr>endTime:<wbr>resultType:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -7602,9 +6988,9 @@ specified time window.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C19getMetricsEventRate9startTime03endH010resultType7headers17completionHandlery10Foundation4DateVSg_AMSSSgSDyS2SGSgy7RestKit0Q8ResponseVyAA06MetricS0VGSg_AQ0Q5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C19getMetricsEventRate9startTime03endH010resultType7headers17completionHandlery10Foundation4DateVSg_AMSSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA06MetricT0VGSg_AQ0S5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/getMetricsEventRate(startTime:endTime:resultType:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C19getMetricsEventRate9startTime03endH010resultType7headers17completionHandlery10Foundation4DateVSg_AMSSSgSDyS2SGSgy7RestKit0Q8ResponseVyAA06MetricS0VGSg_AQ0Q5ErrorOSgtctF">getMetricsEventRate(startTime:endTime:resultType:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C19getMetricsEventRate9startTime03endH010resultType7headers17completionHandlery10Foundation4DateVSg_AMSSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA06MetricT0VGSg_AQ0S5ErrorOSgtctF">getMetricsEventRate(startTime:<wbr>endTime:<wbr>resultType:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -7614,7 +7000,7 @@ specified time window.</p>
                       <div class="abstract">
                         <p>Percentage of queries with an associated event.</p>
 
-<p>The percentage of queries using the <strong>natural_language_query</strong> parameter that have a corresponding \<q>click\</q> event
+<p>The percentage of queries using the <strong>natural_language_query</strong> parameter that have a corresponding &ldquo;click&rdquo; event
 over a specified time window.  This metric requires having integrated event tracking in your application using the
 <strong>Events</strong> API.</p>
 
@@ -7707,9 +7093,9 @@ over a specified time window.  This metric requires having integrated event trac
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C25getMetricsQueryTokenEvent5count7headers17completionHandlerySiSg_SDyS2SGSgy7RestKit0L8ResponseVyAA06MetricfN0VGSg_AK0L5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C25getMetricsQueryTokenEvent5count7headers17completionHandlerySiSg_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA06MetricfO0VGSg_AK0N5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/getMetricsQueryTokenEvent(count:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C25getMetricsQueryTokenEvent5count7headers17completionHandlerySiSg_SDyS2SGSgy7RestKit0L8ResponseVyAA06MetricfN0VGSg_AK0L5ErrorOSgtctF">getMetricsQueryTokenEvent(count:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C25getMetricsQueryTokenEvent5count7headers17completionHandlerySiSg_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA06MetricfO0VGSg_AK0N5ErrorOSgtctF">getMetricsQueryTokenEvent(count:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -7719,9 +7105,9 @@ over a specified time window.  This metric requires having integrated event trac
                       <div class="abstract">
                         <p>Most frequent query tokens with an event.</p>
 
-<p>The most frequent query tokens parsed from the <strong>natural_language_query</strong> parameter and their corresponding
-\<q>click\</q> event rate within the recording period (queries and events are stored for 30 days). A query token is an
-individual word or unigram within the query string.</p>
+<p>The most frequent query tokens parsed from the <strong>natural_language_query</strong> parameter and their corresponding &ldquo;click&rdquo;
+event rate within the recording period (queries and events are stored for 30 days). A query token is an individual
+word or unigram within the query string.</p>
 
                       </div>
                       <div class="declaration">
@@ -7785,9 +7171,9 @@ any one query is <strong>10000</strong>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C15listCredentials13environmentID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0J8ResponseVyAA0D4ListVGSg_AJ0J5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C15listCredentials13environmentID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D4ListVGSg_AJ0L5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/listCredentials(environmentID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C15listCredentials13environmentID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0J8ResponseVyAA0D4ListVGSg_AJ0J5ErrorOSgtctF">listCredentials(environmentID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C15listCredentials13environmentID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D4ListVGSg_AJ0L5ErrorOSgtctF">listCredentials(environmentID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -7861,9 +7247,9 @@ any one query is <strong>10000</strong>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C17createCredentials13environmentID10sourceType17credentialDetails6status7headers17completionHandlerySS_SSSgAA010CredentialJ0VSgAKSDyS2SGSgy7RestKit0P8ResponseVyAA0D0VGSg_AQ0P5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C17createCredentials13environmentID10sourceType17credentialDetails6status7headers17completionHandlerySS_SSSgAA010CredentialJ0VSgAKSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AQ0R5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/createCredentials(environmentID:sourceType:credentialDetails:status:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C17createCredentials13environmentID10sourceType17credentialDetails6status7headers17completionHandlerySS_SSSgAA010CredentialJ0VSgAKSDyS2SGSgy7RestKit0P8ResponseVyAA0D0VGSg_AQ0P5ErrorOSgtctF">createCredentials(environmentID:sourceType:credentialDetails:status:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C17createCredentials13environmentID10sourceType17credentialDetails6status7headers17completionHandlerySS_SSSgAA010CredentialJ0VSgAKSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AQ0R5ErrorOSgtctF">createCredentials(environmentID:<wbr>sourceType:<wbr>credentialDetails:<wbr>status:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -7988,9 +7374,9 @@ the password provided has expired) and must be corrected before they can be used
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C14getCredentials13environmentID010credentialF07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0K8ResponseVyAA0D0VGSg_AK0K5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C14getCredentials13environmentID010credentialF07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AK0M5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/getCredentials(environmentID:credentialID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C14getCredentials13environmentID010credentialF07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0K8ResponseVyAA0D0VGSg_AK0K5ErrorOSgtctF">getCredentials(environmentID:credentialID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C14getCredentials13environmentID010credentialF07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AK0M5ErrorOSgtctF">getCredentials(environmentID:<wbr>credentialID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -8078,9 +7464,9 @@ the source system.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C17updateCredentials13environmentID010credentialF010sourceType0G7Details6status7headers17completionHandlerySS_S2SSgAA010CredentialJ0VSgALSDyS2SGSgy7RestKit0P8ResponseVyAA0D0VGSg_AR0P5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C17updateCredentials13environmentID010credentialF010sourceType0G7Details6status7headers17completionHandlerySS_S2SSgAA010CredentialJ0VSgALSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AR0R5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/updateCredentials(environmentID:credentialID:sourceType:credentialDetails:status:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C17updateCredentials13environmentID010credentialF010sourceType0G7Details6status7headers17completionHandlerySS_S2SSgAA010CredentialJ0VSgALSDyS2SGSgy7RestKit0P8ResponseVyAA0D0VGSg_AR0P5ErrorOSgtctF">updateCredentials(environmentID:credentialID:sourceType:credentialDetails:status:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C17updateCredentials13environmentID010credentialF010sourceType0G7Details6status7headers17completionHandlerySS_S2SSgAA010CredentialJ0VSgALSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AR0R5ErrorOSgtctF">updateCredentials(environmentID:<wbr>credentialID:<wbr>sourceType:<wbr>credentialDetails:<wbr>status:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -8217,9 +7603,9 @@ the password provided has expired) and must be corrected before they can be used
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C17deleteCredentials13environmentID010credentialF07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0K8ResponseVyAA06DeleteD0VGSg_AK0K5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C17deleteCredentials13environmentID010credentialF07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA06DeleteD0VGSg_AK0M5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/deleteCredentials(environmentID:credentialID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C17deleteCredentials13environmentID010credentialF07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0K8ResponseVyAA06DeleteD0VGSg_AK0K5ErrorOSgtctF">deleteCredentials(environmentID:credentialID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C17deleteCredentials13environmentID010credentialF07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA06DeleteD0VGSg_AK0M5ErrorOSgtctF">deleteCredentials(environmentID:<wbr>credentialID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -8305,9 +7691,9 @@ the password provided has expired) and must be corrected before they can be used
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C12listGateways13environmentID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0J8ResponseVyAA11GatewayListVGSg_AJ0J5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C12listGateways13environmentID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA11GatewayListVGSg_AJ0L5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/listGateways(environmentID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C12listGateways13environmentID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0J8ResponseVyAA11GatewayListVGSg_AJ0J5ErrorOSgtctF">listGateways(environmentID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C12listGateways13environmentID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA11GatewayListVGSg_AJ0L5ErrorOSgtctF">listGateways(environmentID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -8380,9 +7766,9 @@ the password provided has expired) and must be corrected before they can be used
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C13createGateway13environmentID4name7headers17completionHandlerySS_SSSgSDyS2SGSgy7RestKit0K8ResponseVyAA0D0VGSg_AL0K5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C13createGateway13environmentID4name7headers17completionHandlerySS_SSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AL0M5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/createGateway(environmentID:name:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C13createGateway13environmentID4name7headers17completionHandlerySS_SSSgSDyS2SGSgy7RestKit0K8ResponseVyAA0D0VGSg_AL0K5ErrorOSgtctF">createGateway(environmentID:name:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C13createGateway13environmentID4name7headers17completionHandlerySS_SSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AL0M5ErrorOSgtctF">createGateway(environmentID:<wbr>name:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -8468,9 +7854,9 @@ the password provided has expired) and must be corrected before they can be used
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C10getGateway13environmentID07gatewayF07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0K8ResponseVyAA0D0VGSg_AK0K5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C10getGateway13environmentID07gatewayF07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AK0M5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/getGateway(environmentID:gatewayID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C10getGateway13environmentID07gatewayF07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0K8ResponseVyAA0D0VGSg_AK0K5ErrorOSgtctF">getGateway(environmentID:gatewayID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C10getGateway13environmentID07gatewayF07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AK0M5ErrorOSgtctF">getGateway(environmentID:<wbr>gatewayID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -8556,9 +7942,9 @@ the password provided has expired) and must be corrected before they can be used
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C13deleteGateway13environmentID07gatewayF07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0K8ResponseVyAA0D6DeleteVGSg_AK0K5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C13deleteGateway13environmentID07gatewayF07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D6DeleteVGSg_AK0M5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/deleteGateway(environmentID:gatewayID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C13deleteGateway13environmentID07gatewayF07headers17completionHandlerySS_SSSDyS2SGSgy7RestKit0K8ResponseVyAA0D6DeleteVGSg_AK0K5ErrorOSgtctF">deleteGateway(environmentID:gatewayID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C13deleteGateway13environmentID07gatewayF07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D6DeleteVGSg_AK0M5ErrorOSgtctF">deleteGateway(environmentID:<wbr>gatewayID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -8646,8 +8032,8 @@ the password provided has expired) and must be corrected before they can be used
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-06-14)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Copyright 2020 IBM</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

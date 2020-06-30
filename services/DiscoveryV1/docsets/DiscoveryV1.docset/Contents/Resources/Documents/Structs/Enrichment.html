@@ -14,7 +14,7 @@
     <a title="Enrichment Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">DiscoveryV1 Docs</a></p>
+        <p><a href="../index.html">DiscoveryV1 3.5.0 Docs</a> (81% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -28,14 +28,6 @@
     <div class="content-wrapper">
       <nav class="sidebar">
         <ul class="nav-groups">
-          <li class="nav-group-name">
-            <a href="../Guides.html">Guides</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="../readme.html">README</a>
-              </li>
-            </ul>
-          </li>
           <li class="nav-group-name">
             <a href="../Classes.html">Classes</a>
             <ul class="nav-group-tasks">
@@ -75,6 +67,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/CollectionUsage.html">CollectionUsage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Completions.html">Completions</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Configuration.html">Configuration</a>
@@ -152,12 +147,6 @@
                 <a href="../Structs/DocumentCounts.html">DocumentCounts</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/DocumentSnapshot.html">DocumentSnapshot</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/DocumentSnapshot/Step.html">– Step</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/DocumentStatus.html">DocumentStatus</a>
               </li>
               <li class="nav-group-task">
@@ -200,7 +189,7 @@
                 <a href="../Structs/Field.html">Field</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/Field/FieldType.html">– FieldType</a>
+                <a href="../Structs/Field/TypeEnum.html">– TypeEnum</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Filter.html">Filter</a>
@@ -332,27 +321,6 @@
                 <a href="../Structs/PDFSettings.html">PDFSettings</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/QueryEntitiesContext.html">QueryEntitiesContext</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/QueryEntitiesEntity.html">QueryEntitiesEntity</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/QueryEntitiesResponse.html">QueryEntitiesResponse</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/QueryEntitiesResponseItem.html">QueryEntitiesResponseItem</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/QueryEvidence.html">QueryEvidence</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/QueryEvidenceEntity.html">QueryEvidenceEntity</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/QueryFilterType.html">QueryFilterType</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/QueryNoticesResponse.html">QueryNoticesResponse</a>
               </li>
               <li class="nav-group-task">
@@ -363,21 +331,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/QueryPassages.html">QueryPassages</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/QueryRelationsArgument.html">QueryRelationsArgument</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/QueryRelationsEntity.html">QueryRelationsEntity</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/QueryRelationsFilter.html">QueryRelationsFilter</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/QueryRelationsRelationship.html">QueryRelationsRelationship</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/QueryRelationsResponse.html">QueryRelationsResponse</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/QueryResponse.html">QueryResponse</a>
@@ -452,9 +405,6 @@
                 <a href="../Structs/Term.html">Term</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/TestDocument.html">TestDocument</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/Timeslice.html">Timeslice</a>
               </li>
               <li class="nav-group-task">
@@ -505,10 +455,34 @@
             <a href="../Typealiases.html">Type Aliases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11DiscoveryV119WatsonAuthenticatora">WatsonAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11DiscoveryV124WatsonBasicAuthenticatora">WatsonBasicAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11DiscoveryV130WatsonBearerTokenAuthenticatora">WatsonBearerTokenAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11DiscoveryV134WatsonCloudPakForDataAuthenticatora">WatsonCloudPakForDataAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Typealiases.html#/s:11DiscoveryV111WatsonErrora">WatsonError</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11DiscoveryV122WatsonIAMAuthenticatora">WatsonIAMAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11DiscoveryV110WatsonJSONa">WatsonJSON</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11DiscoveryV125WatsonNoAuthAuthenticatora">WatsonNoAuthAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Typealiases.html#/s:11DiscoveryV114WatsonResponsea">WatsonResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:11DiscoveryV130WatsonTokenSourceAuthenticatora">WatsonTokenSourceAuthenticator</a>
               </li>
             </ul>
           </li>
@@ -524,7 +498,8 @@
 
                 </div>
               </div>
-            <p>Enrichment.</p>
+            <p>Enrichment step to perform on the document. Each enrichment is performed on the specified field in the order that they
+are listed in the configuration.</p>
 
           </section>
           <section class="section task-group-section">
@@ -645,9 +620,9 @@ Arrays can be specified as the <strong>source_field</strong> if the <strong>enri
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV110EnrichmentV14enrichmentNameSSvp"></a>
-                    <a name="//apple_ref/swift/Property/enrichmentName" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV110EnrichmentV14enrichmentNameSSvp">enrichmentName</a>
+                    <a name="/s:11DiscoveryV110EnrichmentV10enrichmentSSvp"></a>
+                    <a name="//apple_ref/swift/Property/enrichment" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV110EnrichmentV10enrichmentSSvp">enrichment</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -660,7 +635,7 @@ Arrays can be specified as the <strong>source_field</strong> if the <strong>enri
 options.
  When using <code>elements</code> the <strong>options</strong> object must contain Element Classification options. Additionally, when using
 the <code>elements</code> enrichment the configuration specified and files ingested must meet all the criteria specified in
-<a href="https://cloud.ibm.com/docs/services/discovery?topic=discovery-element-classification#element-classification">the
+<a href="https://cloud.ibm.com/docs/discovery?topic=discovery-element-classification#element-classification">the
 documentation</a>.</p>
 
                       </div>
@@ -668,7 +643,7 @@ documentation</a>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">enrichmentName</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">enrichment</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -733,9 +708,9 @@ the document to fail processing.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV110EnrichmentV16destinationField06sourceE014enrichmentName11description9overwrite22ignoreDownstreamErrors7optionsACSS_S3SSgSbSgAlA0C7OptionsVSgtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(destinationField:sourceField:enrichmentName:description:overwrite:ignoreDownstreamErrors:options:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV110EnrichmentV16destinationField06sourceE014enrichmentName11description9overwrite22ignoreDownstreamErrors7optionsACSS_S3SSgSbSgAlA0C7OptionsVSgtcfc">init(destinationField:sourceField:enrichmentName:description:overwrite:ignoreDownstreamErrors:options:)</a>
+                    <a name="/s:11DiscoveryV110EnrichmentV16destinationField06sourceE010enrichment11description9overwrite22ignoreDownstreamErrors7optionsACSS_S3SSgSbSgAlA0C7OptionsVSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(destinationField:sourceField:enrichment:description:overwrite:ignoreDownstreamErrors:options:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV110EnrichmentV16destinationField06sourceE010enrichment11description9overwrite22ignoreDownstreamErrors7optionsACSS_S3SSgSbSgAlA0C7OptionsVSgtcfc">init(destinationField:<wbr>sourceField:<wbr>enrichment:<wbr>description:<wbr>overwrite:<wbr>ignoreDownstreamErrors:<wbr>options:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -753,7 +728,7 @@ the document to fail processing.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
     <span class="nv">destinationField</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">sourceField</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">enrichmentName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">enrichment</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">overwrite</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">ignoreDownstreamErrors</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -797,7 +772,7 @@ Arrays can be specified as the <strong>source_field</strong> if the <strong>enri
                             <tr>
                               <td>
                                 <code>
-                                <em>enrichmentName</em>
+                                <em>enrichment</em>
                                 </code>
                               </td>
                               <td>
@@ -808,7 +783,7 @@ When using <code>natual_language_understanding</code>, the <strong>options</stro
 options.
 When using <code>elements</code> the <strong>options</strong> object must contain Element Classification options. Additionally, when
 using the <code>elements</code> enrichment the configuration specified and files ingested must meet all the criteria
-specified in <a href="https://cloud.ibm.com/docs/services/discovery?topic=discovery-element-classification#element-classification">the
+specified in <a href="https://cloud.ibm.com/docs/discovery?topic=discovery-element-classification#element-classification">the
 documentation</a>.</p>
                                 </div>
                               </td>
@@ -878,8 +853,8 @@ treated as warnings and will not cause the document to fail processing.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-06-14)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Copyright 2020 IBM</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

@@ -14,7 +14,7 @@
     <a title="VisualRecognition Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">VisualRecognitionV3 Docs</a></p>
+        <p><a href="../index.html">VisualRecognitionV3 3.5.0 Docs</a> (81% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -28,14 +28,6 @@
     <div class="content-wrapper">
       <nav class="sidebar">
         <ul class="nav-groups">
-          <li class="nav-group-name">
-            <a href="../Guides.html">Guides</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a href="../readme.html">README</a>
-              </li>
-            </ul>
-          </li>
           <li class="nav-group-name">
             <a href="../Classes.html">Classes</a>
             <ul class="nav-group-tasks">
@@ -72,25 +64,7 @@
                 <a href="../Structs/Classifiers.html">Classifiers</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/DetectedFaces.html">DetectedFaces</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/ErrorInfo.html">ErrorInfo</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/Face.html">Face</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/FaceAge.html">FaceAge</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/FaceGender.html">FaceGender</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/FaceLocation.html">FaceLocation</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/ImageWithFaces.html">ImageWithFaces</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/WarningInfo.html">WarningInfo</a>
@@ -101,10 +75,34 @@
             <a href="../Typealiases.html">Type Aliases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:19VisualRecognitionV319WatsonAuthenticatora">WatsonAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:19VisualRecognitionV324WatsonBasicAuthenticatora">WatsonBasicAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:19VisualRecognitionV330WatsonBearerTokenAuthenticatora">WatsonBearerTokenAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:19VisualRecognitionV334WatsonCloudPakForDataAuthenticatora">WatsonCloudPakForDataAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Typealiases.html#/s:19VisualRecognitionV311WatsonErrora">WatsonError</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:19VisualRecognitionV322WatsonIAMAuthenticatora">WatsonIAMAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:19VisualRecognitionV310WatsonJSONa">WatsonJSON</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:19VisualRecognitionV325WatsonNoAuthAuthenticatora">WatsonNoAuthAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Typealiases.html#/s:19VisualRecognitionV314WatsonResponsea">WatsonResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:19VisualRecognitionV330WatsonTokenSourceAuthenticatora">WatsonTokenSourceAuthenticator</a>
               </li>
             </ul>
           </li>
@@ -120,9 +118,8 @@
 
                 </div>
               </div>
-            <p>The IBM Watson&trade; Visual Recognition service uses deep learning algorithms to identify scenes, objects, and faces
-in images you upload to the service. You can create and train a custom classifier to identify subjects that suit your
-needs.</p>
+            <p>The IBM Watson&trade; Visual Recognition service uses deep learning algorithms to identify scenes and objects in images
+that you upload to the service. You can create and train a custom classifier to identify subjects that suit your needs.</p>
 
           </section>
           <section class="section task-group-section">
@@ -131,9 +128,9 @@ needs.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C10serviceURLSSvp"></a>
+                    <a name="/s:19VisualRecognitionV30aB0C10serviceURLSSSgvp"></a>
                     <a name="//apple_ref/swift/Property/serviceURL" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C10serviceURLSSvp">serviceURL</a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C10serviceURLSSSgvp">serviceURL</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -148,7 +145,7 @@ needs.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
 
                         </div>
                       </div>
@@ -185,9 +182,36 @@ needs.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:19VisualRecognitionV30aB0C13authenticator15IBMSwiftSDKCore13Authenticator_pvp"></a>
+                    <a name="//apple_ref/swift/Property/authenticator" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C13authenticator15IBMSwiftSDKCore13Authenticator_pvp">authenticator</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">let</span> <span class="nv">authenticator</span><span class="p">:</span> <span class="kt">Authenticator</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/"></a>
                     <a name="//apple_ref/swift/Method/init(version:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">init(version:)</a>
+                    <a class="token" href="#/">init(version:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -211,9 +235,9 @@ In that case, try another initializer that directly passes in the credentials.</
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C7version6apiKey6iamUrlACSS_S2SSgtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(version:apiKey:iamUrl:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C7version6apiKey6iamUrlACSS_S2SSgtcfc">init(version:apiKey:iamUrl:)</a>
+                    <a name="/s:19VisualRecognitionV30aB0C7version13authenticatorACSS_15IBMSwiftSDKCore13Authenticator_ptcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(version:authenticator:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C7version13authenticatorACSS_15IBMSwiftSDKCore13Authenticator_ptcfc">init(version:<wbr>authenticator:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -228,7 +252,7 @@ In that case, try another initializer that directly passes in the credentials.</
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">version</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">apiKey</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">iamUrl</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">version</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">authenticator</span><span class="p">:</span> <span class="kt">Authenticator</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -245,122 +269,24 @@ In that case, try another initializer that directly passes in the credentials.</
                               <td>
                                 <div>
                                   <p>The release date of the version of the API to use. Specify the date
-in <q>YYYY-MM-DD</q> format.</p>
+in &ldquo;YYYY-MM-DD&rdquo; format.</p>
                                 </div>
                               </td>
                             </tr>
                             <tr>
                               <td>
                                 <code>
-                                <em>apiKey</em>
+                                <em>authenticator</em>
                                 </code>
                               </td>
                               <td>
                                 <div>
-                                  <p>An API key for IAM that can be used to obtain access tokens for the service.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>iamUrl</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The URL for the IAM service.</p>
+                                  <p>The Authenticator object used to authenticate requests to the service</p>
                                 </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:19VisualRecognitionV30aB0C7version11accessTokenACSS_SStcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(version:accessToken:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C7version11accessTokenACSS_SStcfc">init(version:accessToken:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Create a <code>VisualRecognition</code> object.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">version</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">accessToken</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>version</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The release date of the version of the API to use. Specify the date
-in <q>YYYY-MM-DD</q> format.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>accessToken</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An access token for the service.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:19VisualRecognitionV30aB0C11accessTokenyySSF"></a>
-                    <a name="//apple_ref/swift/Method/accessToken(_:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C11accessTokenyySSF">accessToken(_:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">accessToken</span><span class="p">(</span><span class="n">_</span> <span class="nv">newToken</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span></code></pre>
-
-                        </div>
                       </div>
                     </section>
                   </div>
@@ -396,9 +322,9 @@ in <q>YYYY-MM-DD</q> format.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C8classify10imagesFile0E8Filename0eF11ContentType3url9threshold6owners13classifierIDs14acceptLanguage7headers17completionHandlery10Foundation4DataVSg_SSSgA2SSdSgSaySSGSgAvSSDyS2SGSgy7RestKit0V8ResponseVyAA16ClassifiedImagesVGSg_AY0V5ErrorOSgtctF"></a>
+                    <a name="/s:19VisualRecognitionV30aB0C8classify10imagesFile0E8Filename0eF11ContentType3url9threshold6owners13classifierIDs14acceptLanguage7headers17completionHandlery10Foundation4DataVSg_SSSgA2SSdSgSaySSGSgAvSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA16ClassifiedImagesVGSg_AY0X5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/classify(imagesFile:imagesFilename:imagesFileContentType:url:threshold:owners:classifierIDs:acceptLanguage:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C8classify10imagesFile0E8Filename0eF11ContentType3url9threshold6owners13classifierIDs14acceptLanguage7headers17completionHandlery10Foundation4DataVSg_SSSgA2SSdSgSaySSGSgAvSSDyS2SGSgy7RestKit0V8ResponseVyAA16ClassifiedImagesVGSg_AY0V5ErrorOSgtctF">classify(imagesFile:imagesFilename:imagesFileContentType:url:threshold:owners:classifierIDs:acceptLanguage:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C8classify10imagesFile0E8Filename0eF11ContentType3url9threshold6owners13classifierIDs14acceptLanguage7headers17completionHandlery10Foundation4DataVSg_SSSgA2SSdSgSaySSGSgAvSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA16ClassifiedImagesVGSg_AY0X5ErrorOSgtctF">classify(imagesFile:<wbr>imagesFilename:<wbr>imagesFileContentType:<wbr>url:<wbr>threshold:<wbr>owners:<wbr>classifierIDs:<wbr>acceptLanguage:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -588,152 +514,9 @@ The following built-in classifier IDs require no training:
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C11detectFaces10imagesFile0F8Filename0fG11ContentType3url14acceptLanguage7headers17completionHandlery10Foundation4DataVSg_SSSgA3PSDyS2SGSgy7RestKit0S8ResponseVyAA08DetectedE0VGSg_AS0S5ErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/detectFaces(imagesFile:imagesFilename:imagesFileContentType:url:acceptLanguage:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C11detectFaces10imagesFile0F8Filename0fG11ContentType3url14acceptLanguage7headers17completionHandlery10Foundation4DataVSg_SSSgA3PSDyS2SGSgy7RestKit0S8ResponseVyAA08DetectedE0VGSg_AS0S5ErrorOSgtctF">detectFaces(imagesFile:imagesFilename:imagesFileContentType:url:acceptLanguage:headers:completionHandler:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Detect faces in images.</p>
-
-<p><strong>Important:</strong> On April 2, 2018, the identity information in the response to calls to the Face model was removed.
-The identity information refers to the <code>name</code> of the person, <code>score</code>, and <code>type_hierarchy</code> knowledge graph. For
-details about the enhanced Face model, see the <a href="https://cloud.ibm.com/docs/services/visual-recognition?topic=visual-recognition-release-notes#2april2018">Release
-notes</a>.
-Analyze and get data about faces in images. Responses can include estimated age and gender. This feature uses a
-built-in model, so no training is necessary. The <strong>Detect faces</strong> method does not support general biometric facial
-recognition.
-Supported image formats include .gif, .jpg, .png, and .tif. The maximum image size is 10 MB. The minimum
-recommended pixel density is 32X32 pixels, but the service tends to perform better with images that are at least
-224 x 224 pixels.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">detectFaces</span><span class="p">(</span>
-    <span class="nv">imagesFile</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">imagesFilename</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">imagesFileContentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">url</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV314WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/DetectedFaces.html">DetectedFaces</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV311WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>imagesFile</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An image file (gif, .jpg, .png, .tif.) or .zip file with images. Limit the .zip file to
-100 MB. You can include a maximum of 15 images in a request.
-Encode the image and .zip file names in UTF-8 if they contain non-ASCII characters. The service assumes UTF-8
-encoding if it encounters non-ASCII characters.
-You can also include an image with the <strong>url</strong> parameter.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>imagesFilename</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The filename for imagesFile.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>imagesFileContentType</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The content type of imagesFile.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>url</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The URL of an image to analyze. Must be in .gif, .jpg, .png, or .tif format. The minimum
-recommended pixel density is 32X32 pixels, but the service tends to perform better with images that are at least
-224 x 224 pixels. The maximum image size is 10 MB. Redirects are followed, so you can use a shortened URL.
-You can also include images with the <strong>images_file</strong> parameter.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>acceptLanguage</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The desired language of parts of the response. See the response for details.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>headers</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A dictionary of request headers to be sent with this request.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>completionHandler</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed when the request completes with a successful result or error</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:19VisualRecognitionV30aB0C16createClassifier4name16positiveExamples08negativeH00iH8Filename7headers17completionHandlerySS_SDySS10Foundation4DataVGAMSgSSSgSDyS2SGSgy7RestKit0P8ResponseVyAA0E0VGSg_AS0P5ErrorOSgtctF"></a>
+                    <a name="/s:19VisualRecognitionV30aB0C16createClassifier4name16positiveExamples08negativeH00iH8Filename7headers17completionHandlerySS_SDySS10Foundation4DataVGAMSgSSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0E0VGSg_AS0R5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/createClassifier(name:positiveExamples:negativeExamples:negativeExamplesFilename:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16createClassifier4name16positiveExamples08negativeH00iH8Filename7headers17completionHandlerySS_SDySS10Foundation4DataVGAMSgSSSgSDyS2SGSgy7RestKit0P8ResponseVyAA0E0VGSg_AS0P5ErrorOSgtctF">createClassifier(name:positiveExamples:negativeExamples:negativeExamplesFilename:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16createClassifier4name16positiveExamples08negativeH00iH8Filename7headers17completionHandlerySS_SDySS10Foundation4DataVGAMSgSSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0E0VGSg_AS0R5ErrorOSgtctF">createClassifier(name:<wbr>positiveExamples:<wbr>negativeExamples:<wbr>negativeExamplesFilename:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -744,10 +527,17 @@ You can also include images with the <strong>images_file</strong> parameter.</p>
                         <p>Create a classifier.</p>
 
 <p>Train a new multi-faceted classifier on the uploaded image data. Create your custom classifier with positive or
-negative examples. Include at least two sets of examples, either two positive example files or one positive and one
-negative file. You can upload a maximum of 256 MB per call.
-Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and class
-names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.</p>
+negative example training images. Include at least two sets of examples, either two positive example files or one
+positive and one negative file. You can upload a maximum of 256 MB per call.
+<strong>Tips when creating:</strong></p>
+
+<ul>
+<li>If you set the <strong>X-Watson-Learning-Opt-Out</strong> header parameter to <code>true</code> when you create a classifier, the example
+training images are not stored. Save your training images locally. For more information, see <a href="#data-collection">Data
+collection</a>.</li>
+<li><p>Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and
+class names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.</p></li>
+</ul>
 
                       </div>
                       <div class="declaration">
@@ -792,7 +582,8 @@ names). The service assumes UTF-8 encoding if it encounters non-ASCII characters
 of images that depict the visual subject of a class in the new classifier. You can include more than one positive
 example file in a call.
 Specify the parameter name by appending <code>_positive_examples</code> to the class name. For example,
-<code>goldenretriever_positive_examples</code> creates the class <strong>goldenretriever</strong>.
+<code>goldenretriever_positive_examples</code> creates the class <strong>goldenretriever</strong>. The string cannot contain the
+following characters: <code>$ * - { } \ | / &#39; &quot; ` [ ]</code>.
 Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The
 maximum number of images is 10,000 images or 100 MB per .zip file.
 Encode special characters in the file name in UTF-8.</p>
@@ -858,9 +649,9 @@ Encode special characters in the file name in UTF-8.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C15listClassifiers7verbose7headers17completionHandlerySbSg_SDyS2SGSgy7RestKit0J8ResponseVyAA0E0VGSg_AK0J5ErrorOSgtctF"></a>
+                    <a name="/s:19VisualRecognitionV30aB0C15listClassifiers7verbose7headers17completionHandlerySbSg_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0E0VGSg_AK0L5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/listClassifiers(verbose:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C15listClassifiers7verbose7headers17completionHandlerySbSg_SDyS2SGSgy7RestKit0J8ResponseVyAA0E0VGSg_AK0J5ErrorOSgtctF">listClassifiers(verbose:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C15listClassifiers7verbose7headers17completionHandlerySbSg_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0E0VGSg_AK0L5ErrorOSgtctF">listClassifiers(verbose:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -932,9 +723,9 @@ brief list of classifiers.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C13getClassifier12classifierID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0K8ResponseVyAA0E0VGSg_AJ0K5ErrorOSgtctF"></a>
+                    <a name="/s:19VisualRecognitionV30aB0C13getClassifier12classifierID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0E0VGSg_AJ0M5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/getClassifier(classifierID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C13getClassifier12classifierID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0K8ResponseVyAA0E0VGSg_AJ0K5ErrorOSgtctF">getClassifier(classifierID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C13getClassifier12classifierID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0E0VGSg_AJ0M5ErrorOSgtctF">getClassifier(classifierID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1007,9 +798,9 @@ brief list of classifiers.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C16updateClassifier12classifierID16positiveExamples08negativeI00jI8Filename7headers17completionHandlerySS_SDySS10Foundation4DataVGSgAMSgSSSgSDyS2SGSgy7RestKit0Q8ResponseVyAA0E0VGSg_AT0Q5ErrorOSgtctF"></a>
+                    <a name="/s:19VisualRecognitionV30aB0C16updateClassifier12classifierID16positiveExamples08negativeI00jI8Filename7headers17completionHandlerySS_SDySS10Foundation4DataVGSgAMSgSSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0E0VGSg_AT0S5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/updateClassifier(classifierID:positiveExamples:negativeExamples:negativeExamplesFilename:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16updateClassifier12classifierID16positiveExamples08negativeI00jI8Filename7headers17completionHandlerySS_SDySS10Foundation4DataVGSgAMSgSSSgSDyS2SGSgy7RestKit0Q8ResponseVyAA0E0VGSg_AT0Q5ErrorOSgtctF">updateClassifier(classifierID:positiveExamples:negativeExamples:negativeExamplesFilename:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16updateClassifier12classifierID16positiveExamples08negativeI00jI8Filename7headers17completionHandlerySS_SDySS10Foundation4DataVGSgAMSgSSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0E0VGSg_AT0S5ErrorOSgtctF">updateClassifier(classifierID:<wbr>positiveExamples:<wbr>negativeExamples:<wbr>negativeExamplesFilename:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1020,13 +811,20 @@ brief list of classifiers.</p>
                         <p>Update a classifier.</p>
 
 <p>Update a custom classifier by adding new positive or negative classes or by adding new images to existing classes.
-You must supply at least one set of positive or negative examples. For details, see <a href="https://cloud.ibm.com/docs/services/visual-recognition?topic=visual-recognition-customizing#updating-custom-classifiers">Updating custom
+You must supply at least one set of positive or negative examples. For details, see <a href="https://cloud.ibm.com/docs/visual-recognition?topic=visual-recognition-customizing#updating-custom-classifiers">Updating custom
 classifiers</a>.
 Encode all names in UTF-8 if they contain non-ASCII characters (.zip and image file names, and classifier and class
 names). The service assumes UTF-8 encoding if it encounters non-ASCII characters.
-<strong>Tip:</strong> Don&rsquo;t make retraining calls on a classifier until the status is ready. When you submit retraining requests
-in parallel, the last request overwrites the previous requests. The retrained property shows the last time the
-classifier retraining finished.</p>
+<strong>Tips about retraining:</strong></p>
+
+<ul>
+<li>You can&rsquo;t update the classifier if the <strong>X-Watson-Learning-Opt-Out</strong> header parameter was set to <code>true</code> when the
+classifier was created. Training images are not stored in that case. Instead, create another classifier. For more
+information, see <a href="#data-collection">Data collection</a>.</li>
+<li><p>Don&rsquo;t make retraining calls on a classifier until the status is ready. When you submit retraining requests in
+parallel, the last request overwrites the previous requests. The <code>retrained</code> property shows the last time the
+classifier retraining finished.</p></li>
+</ul>
 
                       </div>
                       <div class="declaration">
@@ -1071,7 +869,8 @@ classifier retraining finished.</p>
 of images that depict the visual subject of a class in the classifier. The positive examples create or update
 classes in the classifier. You can include more than one positive example file in a call.
 Specify the parameter name by appending <code>_positive_examples</code> to the class name. For example,
-<code>goldenretriever_positive_examples</code> creates the class <code>goldenretriever</code>.
+<code>goldenretriever_positive_examples</code> creates the class <code>goldenretriever</code>. The string cannot contain the following
+characters: <code>$ * - { } \ | / &#39; &quot; ` [ ]</code>.
 Include at least 10 images in .jpg or .png format. The minimum recommended image resolution is 32X32 pixels. The
 maximum number of images is 10,000 images or 100 MB per .zip file.
 Encode special characters in the file name in UTF-8.</p>
@@ -1137,9 +936,9 @@ Encode special characters in the file name in UTF-8.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C16deleteClassifier12classifierID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0K8ResponseVyytGSg_AJ0K5ErrorOSgtctF"></a>
+                    <a name="/s:19VisualRecognitionV30aB0C16deleteClassifier12classifierID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AJ0M5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/deleteClassifier(classifierID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16deleteClassifier12classifierID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0K8ResponseVyytGSg_AJ0K5ErrorOSgtctF">deleteClassifier(classifierID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16deleteClassifier12classifierID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AJ0M5ErrorOSgtctF">deleteClassifier(classifierID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1210,9 +1009,9 @@ Encode special characters in the file name in UTF-8.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C14getCoreMLModel12classifierID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0L8ResponseVy10Foundation4DataVGSg_AJ0L5ErrorOSgtctF"></a>
+                    <a name="/s:19VisualRecognitionV30aB0C14getCoreMLModel12classifierID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVy10Foundation4DataVGSg_AJ0N5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/getCoreMLModel(classifierID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C14getCoreMLModel12classifierID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0L8ResponseVy10Foundation4DataVGSg_AJ0L5ErrorOSgtctF">getCoreMLModel(classifierID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C14getCoreMLModel12classifierID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVy10Foundation4DataVGSg_AJ0N5ErrorOSgtctF">getCoreMLModel(classifierID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1222,7 +1021,7 @@ Encode special characters in the file name in UTF-8.</p>
                       <div class="abstract">
                         <p>Retrieve a Core ML model of a classifier.</p>
 
-<p>Download a Core ML model file (.mlmodel) of a custom classifier that returns <tt>\<q>core_ml_enabled\</q>: true</tt> in
+<p>Download a Core ML model file (.mlmodel) of a custom classifier that returns <tt>&ldquo;core_ml_enabled&rdquo;: true</tt> in
 the classifier details.</p>
 
                       </div>
@@ -1286,9 +1085,9 @@ the classifier details.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C14deleteUserData10customerID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0L8ResponseVyytGSg_AJ0L5ErrorOSgtctF"></a>
+                    <a name="/s:19VisualRecognitionV30aB0C14deleteUserData10customerID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AJ0N5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/deleteUserData(customerID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C14deleteUserData10customerID7headers17completionHandlerySS_SDyS2SGSgy7RestKit0L8ResponseVyytGSg_AJ0L5ErrorOSgtctF">deleteUserData(customerID:headers:completionHandler:)</a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C14deleteUserData10customerID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AJ0N5ErrorOSgtctF">deleteUserData(customerID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1301,7 +1100,7 @@ the classifier details.</p>
 <p>Deletes all data associated with a specified customer ID. The method has no effect if no data is associated with
 the customer ID.
 You associate a customer ID with data by passing the <code>X-Watson-Metadata</code> header with a request that passes data.
-For more information about personal data and customer IDs, see <a href="https://cloud.ibm.com/docs/services/visual-recognition?topic=visual-recognition-information-security">Information
+For more information about personal data and customer IDs, see <a href="https://cloud.ibm.com/docs/visual-recognition?topic=visual-recognition-information-security">Information
 security</a>.</p>
 
                       </div>
@@ -1368,9 +1167,11 @@ security</a>.</p>
               <div class="task-name-container">
                 <a name="/Core%20ML"></a>
                 <a name="//apple_ref/swift/Section/Core ML" class="dashAnchor"></a>
-                <a href="#/Core%20ML">
-                  <h3 class="section-name">Core ML</h3>
-                </a>
+                <div class="section-name-container">
+                  <a class="section-name-link" href="#/Core%20ML"></a>
+                  <h3 class="section-name"><p>Core ML</p>
+</h3>
+                </div>
               </div>
               <ul>
                 <li class="item">
@@ -1378,7 +1179,7 @@ security</a>.</p>
                     <code>
                     <a name="/s:19VisualRecognitionV30aB0C13getLocalModel12classifierIDSo7MLModelCSS_tKF"></a>
                     <a name="//apple_ref/swift/Method/getLocalModel(classifierID:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C13getLocalModel12classifierIDSo7MLModelCSS_tKF">getLocalModel(classifierID:)</a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C13getLocalModel12classifierIDSo7MLModelCSS_tKF">getLocalModel(classifierID:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1426,9 +1227,9 @@ security</a>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C16updateLocalModel12classifierID17completionHandlerySS_y7RestKit0K8ResponseVyAA10ClassifierVGSg_AG0K5ErrorOSgtctF"></a>
+                    <a name="/s:19VisualRecognitionV30aB0C16updateLocalModel12classifierID17completionHandlerySS_y15IBMSwiftSDKCore12RestResponseVyAA10ClassifierVGSg_AG0M5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/updateLocalModel(classifierID:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16updateLocalModel12classifierID17completionHandlerySS_y7RestKit0K8ResponseVyAA10ClassifierVGSg_AG0K5ErrorOSgtctF">updateLocalModel(classifierID:completionHandler:)</a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16updateLocalModel12classifierID17completionHandlerySS_y15IBMSwiftSDKCore12RestResponseVyAA10ClassifierVGSg_AG0M5ErrorOSgtctF">updateLocalModel(classifierID:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1522,7 +1323,7 @@ If both the response and error are <code>nil</code>, then the Core ML model alre
                     <code>
                     <a name="/s:19VisualRecognitionV30aB0C16deleteLocalModel12classifierIDySS_tKF"></a>
                     <a name="//apple_ref/swift/Method/deleteLocalModel(classifierID:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16deleteLocalModel12classifierIDySS_tKF">deleteLocalModel(classifierID:)</a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C16deleteLocalModel12classifierIDySS_tKF">deleteLocalModel(classifierID:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1566,9 +1367,9 @@ If both the response and error are <code>nil</code>, then the Core ML model alre
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C22classifyWithLocalModel9imageData13classifierIDs9threshold17completionHandlery10Foundation0I0V_SaySSGSdSgyAA16ClassifiedImagesVSg_7RestKit0R5ErrorOSgtctF"></a>
+                    <a name="/s:19VisualRecognitionV30aB0C22classifyWithLocalModel9imageData13classifierIDs9threshold17completionHandlery10Foundation0I0V_SaySSGSdSgyAA16ClassifiedImagesVSg_15IBMSwiftSDKCore9RestErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/classifyWithLocalModel(imageData:classifierIDs:threshold:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C22classifyWithLocalModel9imageData13classifierIDs9threshold17completionHandlery10Foundation0I0V_SaySSGSdSgyAA16ClassifiedImagesVSg_7RestKit0R5ErrorOSgtctF">classifyWithLocalModel(imageData:classifierIDs:threshold:completionHandler:)</a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C22classifyWithLocalModel9imageData13classifierIDs9threshold17completionHandlery10Foundation0I0V_SaySSGSdSgyAA16ClassifiedImagesVSg_15IBMSwiftSDKCore9RestErrorOSgtctF">classifyWithLocalModel(imageData:<wbr>classifierIDs:<wbr>threshold:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1615,7 +1416,7 @@ If both the response and error are <code>nil</code>, then the Core ML model alre
                               </td>
                               <td>
                                 <div>
-                                  <p>A list of the classifier ids to use. <q>default</q> is the id of the
+                                  <p>A list of the classifier ids to use. &ldquo;default&rdquo; is the id of the
 built-in classifier.</p>
                                 </div>
                               </td>
@@ -1650,16 +1451,12 @@ built-in classifier.</p>
                     </section>
                   </div>
                 </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C8classify5image9threshold6owners13classifierIDs14acceptLanguage17completionHandlerySo7UIImageC_SdSgSaySSGSgAOSSSgy7RestKit0O8ResponseVyAA16ClassifiedImagesVGSg_AQ0O5ErrorOSgtctF"></a>
+                    <a name="/s:19VisualRecognitionV30aB0C8classify5image9threshold6owners13classifierIDs14acceptLanguage17completionHandlerySo7UIImageC_SdSgSaySSGSgAOSSSgy15IBMSwiftSDKCore12RestResponseVyAA16ClassifiedImagesVGSg_AQ0Q5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/classify(image:threshold:owners:classifierIDs:acceptLanguage:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C8classify5image9threshold6owners13classifierIDs14acceptLanguage17completionHandlerySo7UIImageC_SdSgSaySSGSgAOSSSgy7RestKit0O8ResponseVyAA16ClassifiedImagesVGSg_AQ0O5ErrorOSgtctF">classify(image:threshold:owners:classifierIDs:acceptLanguage:completionHandler:)</a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C8classify5image9threshold6owners13classifierIDs14acceptLanguage17completionHandlerySo7UIImageC_SdSgSaySSGSgAOSSSgy15IBMSwiftSDKCore12RestResponseVyAA16ClassifiedImagesVGSg_AQ0Q5ErrorOSgtctF">classify(image:<wbr>threshold:<wbr>owners:<wbr>classifierIDs:<wbr>acceptLanguage:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1811,81 +1608,9 @@ these conditions:
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:19VisualRecognitionV30aB0C11detectFaces5image17completionHandlerySo7UIImageC_y7RestKit0J8ResponseVyAA08DetectedE0VGSg_AI0J5ErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/detectFaces(image:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C11detectFaces5image17completionHandlerySo7UIImageC_y7RestKit0J8ResponseVyAA08DetectedE0VGSg_AI0J5ErrorOSgtctF">detectFaces(image:completionHandler:)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Detect faces in images.</p>
-
-<p>Analyze and get data about faces in images. Responses can include estimated age and gender, and the service can
-identify celebrities. This feature uses a built-in classifier, so you do not train it on custom classifiers. The
-Detect faces method does not support general biometric facial recognition.</p>
-
-<ul>
-<li>url: A string with the image URL to analyze. Must be in .jpg, or .png format. The minimum recommended
-pixel density is 32X32 pixels per inch, and the maximum image size is 10 MB. You can also include images
-in the <code>imagesFile</code> parameter.</li>
-</ul>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">detectFaces</span><span class="p">(</span>
-    <span class="nv">image</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">,</span>
-    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV314WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/DetectedFaces.html">DetectedFaces</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:19VisualRecognitionV311WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>imagesFile</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An image file (.jpg, .png) or .zip file with images. Include no more than 15 images. You
-can also include images with the <code>url</code> parameter.  All faces are detected, but if there are more than 10 faces
-in an image, age and gender confidence scores might return scores of 0.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>completionHandler</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>A function executed when the request completes with a successful result or error</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:19VisualRecognitionV30aB0C22classifyWithLocalModel5image13classifierIDs9threshold17completionHandlerySo7UIImageC_SaySSGSdSgyAA16ClassifiedImagesVSg_7RestKit0Q5ErrorOSgtctF"></a>
+                    <a name="/s:19VisualRecognitionV30aB0C22classifyWithLocalModel5image13classifierIDs9threshold17completionHandlerySo7UIImageC_SaySSGSdSgyAA16ClassifiedImagesVSg_15IBMSwiftSDKCore9RestErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/classifyWithLocalModel(image:classifierIDs:threshold:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV30aB0C22classifyWithLocalModel5image13classifierIDs9threshold17completionHandlerySo7UIImageC_SaySSGSdSgyAA16ClassifiedImagesVSg_7RestKit0Q5ErrorOSgtctF">classifyWithLocalModel(image:classifierIDs:threshold:completionHandler:)</a>
+                    <a class="token" href="#/s:19VisualRecognitionV30aB0C22classifyWithLocalModel5image13classifierIDs9threshold17completionHandlerySo7UIImageC_SaySSGSdSgyAA16ClassifiedImagesVSg_15IBMSwiftSDKCore9RestErrorOSgtctF">classifyWithLocalModel(image:<wbr>classifierIDs:<wbr>threshold:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1900,7 +1625,7 @@ in an image, age and gender confidence scores might return scores of 0.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">@available(iOS 11.0, tvOS 11.0, watchOS 4.0, *)</span>
+                          <pre class="highlight swift"><code><span class="kd">@available</span><span class="p">(</span><span class="n">iOS</span> <span class="mf">11.0</span><span class="p">,</span> <span class="n">tvOS</span> <span class="mf">11.0</span><span class="p">,</span> <span class="n">watchOS</span> <span class="mf">4.0</span><span class="p">,</span> <span class="o">*</span><span class="p">)</span>
 <span class="kd">public</span> <span class="kd">func</span> <span class="nf">classifyWithLocalModel</span><span class="p">(</span>
     <span class="nv">image</span><span class="p">:</span> <span class="kt">UIImage</span><span class="p">,</span>
     <span class="nv">classifierIDs</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">"default"</span><span class="p">],</span>
@@ -1933,7 +1658,7 @@ in an image, age and gender confidence scores might return scores of 0.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A list of the classifier ids to use. <q>default</q> is the id of the
+                                  <p>A list of the classifier ids to use. &ldquo;default&rdquo; is the id of the
 built-in classifier.</p>
                                 </div>
                               </td>
@@ -1985,8 +1710,8 @@ built-in classifier.</p>
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2019 <a class="link" href="https://www.ibm.com/watson/services/visual-recognition/" target="_blank" rel="external">Anthony Oliveri and Mike Kistler</a>. All rights reserved. (Last updated: 2019-06-14)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Copyright 2020 IBM</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

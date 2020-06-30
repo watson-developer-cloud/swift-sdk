@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ContractTerms Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/ContractTerms" class="dashAnchor"></a>
+    <a title="ContractTerms Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">CompareComplyV1 3.5.0 Docs</a> (77% documented)</p>
+        <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">CompareComplyV1 Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        ContractTerms Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/CompareComply.html">CompareComply</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/Address.html">Address</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AlignedElement.html">AlignedElement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Attribute.html">Attribute</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Attribute/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BatchStatus.html">BatchStatus</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BatchStatus/Function.html">– Function</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Batches.html">Batches</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BodyCells.html">BodyCells</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Category.html">Category</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Category/Label.html">– Label</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CategoryComparison.html">CategoryComparison</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CategoryComparison/Label.html">– Label</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ClassifyReturn.html">ClassifyReturn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ColumnHeaders.html">ColumnHeaders</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CompareReturn.html">CompareReturn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Contact.html">Contact</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Contexts.html">Contexts</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ContractAmts.html">ContractAmts</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ContractAmts/ConfidenceLevel.html">– ConfidenceLevel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ContractCurrencies.html">ContractCurrencies</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ContractCurrencies/ConfidenceLevel.html">– ConfidenceLevel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ContractTerms.html">ContractTerms</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ContractTerms/ConfidenceLevel.html">– ConfidenceLevel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ContractTypes.html">ContractTypes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ContractTypes/ConfidenceLevel.html">– ConfidenceLevel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DocCounts.html">DocCounts</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DocInfo.html">DocInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DocStructure.html">DocStructure</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Document.html">Document</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/EffectiveDates.html">EffectiveDates</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/EffectiveDates/ConfidenceLevel.html">– ConfidenceLevel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Element.html">Element</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ElementLocations.html">ElementLocations</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ElementPair.html">ElementPair</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FeedbackDataInput.html">FeedbackDataInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FeedbackDataOutput.html">FeedbackDataOutput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FeedbackDeleted.html">FeedbackDeleted</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FeedbackList.html">FeedbackList</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/FeedbackReturn.html">FeedbackReturn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/GetFeedback.html">GetFeedback</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/HTMLReturn.html">HTMLReturn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Interpretation.html">Interpretation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Key.html">Key</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/KeyValuePair.html">KeyValuePair</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Label.html">Label</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LeadingSentence.html">LeadingSentence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Location.html">Location</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Mention.html">Mention</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/OriginalLabelsIn.html">OriginalLabelsIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/OriginalLabelsOut.html">OriginalLabelsOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/OriginalLabelsOut/Modification.html">– Modification</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Pagination.html">Pagination</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Paragraphs.html">Paragraphs</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Parties.html">Parties</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Parties/Importance.html">– Importance</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PaymentTerms.html">PaymentTerms</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PaymentTerms/ConfidenceLevel.html">– ConfidenceLevel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RowHeaders.html">RowHeaders</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SectionTitle.html">SectionTitle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SectionTitles.html">SectionTitles</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ShortDoc.html">ShortDoc</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TableHeaders.html">TableHeaders</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TableReturn.html">TableReturn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TableTitle.html">TableTitle</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Tables.html">Tables</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TerminationDates.html">TerminationDates</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TerminationDates/ConfidenceLevel.html">– ConfidenceLevel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TypeLabel.html">TypeLabel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/TypeLabelComparison.html">TypeLabelComparison</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UnalignedElement.html">UnalignedElement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdatedLabelsIn.html">UpdatedLabelsIn</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdatedLabelsOut.html">UpdatedLabelsOut</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/UpdatedLabelsOut/Modification.html">– Modification</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Value.html">Value</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:15CompareComplyV119WatsonAuthenticatora">WatsonAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:15CompareComplyV124WatsonBasicAuthenticatora">WatsonBasicAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:15CompareComplyV130WatsonBearerTokenAuthenticatora">WatsonBearerTokenAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:15CompareComplyV134WatsonCloudPakForDataAuthenticatora">WatsonCloudPakForDataAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:15CompareComplyV111WatsonErrora">WatsonError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:15CompareComplyV122WatsonIAMAuthenticatora">WatsonIAMAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:15CompareComplyV110WatsonJSONa">WatsonJSON</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:15CompareComplyV125WatsonNoAuthAuthenticatora">WatsonNoAuthAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:15CompareComplyV114WatsonResponsea">WatsonResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:15CompareComplyV130WatsonTokenSourceAuthenticatora">WatsonTokenSourceAuthenticator</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>ContractTerms</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ContractTerms</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                </div>
+              </div>
+            <p>The duration or durations of the contract.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV113ContractTermsV15ConfidenceLevelO"></a>
+                    <a name="//apple_ref/swift/Enum/ConfidenceLevel" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV113ContractTermsV15ConfidenceLevelO">ConfidenceLevel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The confidence level in the identification of the contract term.</p>
+
+                        <a href="../Structs/ContractTerms/ConfidenceLevel.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">ConfidenceLevel</span> <span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV113ContractTermsV15confidenceLevelSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/confidenceLevel" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV113ContractTermsV15confidenceLevelSSSgvp">confidenceLevel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The confidence level in the identification of the contract term.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">confidenceLevel</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV113ContractTermsV4textSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/text" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV113ContractTermsV4textSSSgvp">text</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The contract term (duration).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV113ContractTermsV14textNormalizedSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/textNormalized" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV113ContractTermsV14textNormalizedSSSgvp">textNormalized</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The normalized form of the contract term, which is listed as a string. This element is optional; it is returned
+only if normalized text exists.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">textNormalized</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV113ContractTermsV14interpretationAA14InterpretationVSgvp"></a>
+                    <a name="//apple_ref/swift/Property/interpretation" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV113ContractTermsV14interpretationAA14InterpretationVSgvp">interpretation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The details of the normalized text, if applicable. This element is optional; it is returned only if normalized text
+exists.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">interpretation</span><span class="p">:</span> <span class="kt"><a href="../Structs/Interpretation.html">Interpretation</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV113ContractTermsV13provenanceIDsSaySSGSgvp"></a>
+                    <a name="//apple_ref/swift/Property/provenanceIDs" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV113ContractTermsV13provenanceIDsSaySSGSgvp">provenanceIDs</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Hashed values that you can send to IBM to provide feedback or receive support.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">provenanceIDs</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV113ContractTermsV8locationAA8LocationVSgvp"></a>
+                    <a name="//apple_ref/swift/Property/location" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV113ContractTermsV8locationAA8LocationVSgvp">location</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The numeric location of the identified element in the document, represented with two integers labeled <code>begin</code> and
+<code>end</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">location</span><span class="p">:</span> <span class="kt"><a href="../Structs/Location.html">Location</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>Copyright 2020 IBM</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

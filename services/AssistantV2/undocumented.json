@@ -1,159 +1,446 @@
 {
   "warnings": [
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/AssistantV2/Assistant.swift",
-      "line": 110,
-      "symbol": "Assistant.accessToken(_:)",
-      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Assistant.swift",
+      "line": 41,
+      "symbol": "Assistant.authenticator",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/AssistantV2/Models/DialogLogMessage.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/DialogLogMessage.swift",
       "line": 28,
       "symbol": "DialogLogMessage.Level.info",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/AssistantV2/Models/DialogLogMessage.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/DialogLogMessage.swift",
       "line": 29,
       "symbol": "DialogLogMessage.Level.error",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/AssistantV2/Models/DialogLogMessage.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/DialogLogMessage.swift",
       "line": 30,
       "symbol": "DialogLogMessage.Level.warn",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/AssistantV2/Models/DialogNodeAction.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/DialogNodeAction.swift",
       "line": 27,
-      "symbol": "DialogNodeAction.ActionType.client",
+      "symbol": "DialogNodeAction.TypeEnum.client",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/AssistantV2/Models/DialogNodeAction.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/DialogNodeAction.swift",
       "line": 28,
-      "symbol": "DialogNodeAction.ActionType.server",
+      "symbol": "DialogNodeAction.TypeEnum.server",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/AssistantV2/Models/DialogNodeAction.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/DialogNodeAction.swift",
       "line": 29,
-      "symbol": "DialogNodeAction.ActionType.webAction",
+      "symbol": "DialogNodeAction.TypeEnum.webAction",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/AssistantV2/Models/DialogNodeAction.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/DialogNodeAction.swift",
       "line": 30,
-      "symbol": "DialogNodeAction.ActionType.cloudFunction",
+      "symbol": "DialogNodeAction.TypeEnum.cloudFunction",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/AssistantV2/Models/DialogRuntimeResponseGeneric.swift",
-      "line": 29,
-      "symbol": "DialogRuntimeResponseGeneric.ResponseType.text",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/AssistantV2/Models/DialogRuntimeResponseGeneric.swift",
-      "line": 30,
-      "symbol": "DialogRuntimeResponseGeneric.ResponseType.pause",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/AssistantV2/Models/DialogRuntimeResponseGeneric.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/MessageContextGlobalSystem.swift",
       "line": 31,
-      "symbol": "DialogRuntimeResponseGeneric.ResponseType.image",
+      "symbol": "MessageContextGlobalSystem.Locale.enUs",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/AssistantV2/Models/DialogRuntimeResponseGeneric.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/MessageContextGlobalSystem.swift",
       "line": 32,
-      "symbol": "DialogRuntimeResponseGeneric.ResponseType.option",
+      "symbol": "MessageContextGlobalSystem.Locale.enCa",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/AssistantV2/Models/DialogRuntimeResponseGeneric.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/MessageContextGlobalSystem.swift",
       "line": 33,
-      "symbol": "DialogRuntimeResponseGeneric.ResponseType.connectToAgent",
+      "symbol": "MessageContextGlobalSystem.Locale.enGb",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/AssistantV2/Models/DialogRuntimeResponseGeneric.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/MessageContextGlobalSystem.swift",
       "line": 34,
-      "symbol": "DialogRuntimeResponseGeneric.ResponseType.suggestion",
+      "symbol": "MessageContextGlobalSystem.Locale.arAr",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/AssistantV2/Models/DialogRuntimeResponseGeneric.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/MessageContextGlobalSystem.swift",
       "line": 35,
-      "symbol": "DialogRuntimeResponseGeneric.ResponseType.search",
+      "symbol": "MessageContextGlobalSystem.Locale.csCz",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/AssistantV2/Models/DialogRuntimeResponseGeneric.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/MessageContextGlobalSystem.swift",
+      "line": 36,
+      "symbol": "MessageContextGlobalSystem.Locale.deDe",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/MessageContextGlobalSystem.swift",
+      "line": 37,
+      "symbol": "MessageContextGlobalSystem.Locale.esEs",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/MessageContextGlobalSystem.swift",
+      "line": 38,
+      "symbol": "MessageContextGlobalSystem.Locale.frFr",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/MessageContextGlobalSystem.swift",
+      "line": 39,
+      "symbol": "MessageContextGlobalSystem.Locale.itIt",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/MessageContextGlobalSystem.swift",
+      "line": 40,
+      "symbol": "MessageContextGlobalSystem.Locale.jaJp",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/MessageContextGlobalSystem.swift",
+      "line": 41,
+      "symbol": "MessageContextGlobalSystem.Locale.koKr",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/MessageContextGlobalSystem.swift",
       "line": 42,
-      "symbol": "DialogRuntimeResponseGeneric.Preference.dropdown",
+      "symbol": "MessageContextGlobalSystem.Locale.nlNl",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/AssistantV2/Models/DialogRuntimeResponseGeneric.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/MessageContextGlobalSystem.swift",
       "line": 43,
-      "symbol": "DialogRuntimeResponseGeneric.Preference.button",
+      "symbol": "MessageContextGlobalSystem.Locale.ptBr",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/AssistantV2/Models/MessageInput.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/MessageContextGlobalSystem.swift",
+      "line": 44,
+      "symbol": "MessageContextGlobalSystem.Locale.zhCn",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/MessageContextGlobalSystem.swift",
+      "line": 45,
+      "symbol": "MessageContextGlobalSystem.Locale.zhTw",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/MessageInput.swift",
       "line": 28,
       "symbol": "MessageInput.MessageType.text",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/AssistantV2/Models/MessageOutputDebug.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/MessageInputStateless.swift",
+      "line": 28,
+      "symbol": "MessageInputStateless.MessageType.text",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/MessageOutputDebug.swift",
       "line": 29,
       "symbol": "MessageOutputDebug.BranchExitedReason.completed",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/AssistantV2/Models/MessageOutputDebug.swift",
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/MessageOutputDebug.swift",
       "line": 30,
       "symbol": "MessageOutputDebug.BranchExitedReason.fallback",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/SupportingFiles/Shared.swift",
-      "line": 20,
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/RuntimeEntityInterpretation.swift",
+      "line": 26,
+      "symbol": "RuntimeEntityInterpretation.Granularity.day",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/RuntimeEntityInterpretation.swift",
+      "line": 27,
+      "symbol": "RuntimeEntityInterpretation.Granularity.fortnight",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/RuntimeEntityInterpretation.swift",
+      "line": 28,
+      "symbol": "RuntimeEntityInterpretation.Granularity.hour",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/RuntimeEntityInterpretation.swift",
+      "line": 29,
+      "symbol": "RuntimeEntityInterpretation.Granularity.instant",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/RuntimeEntityInterpretation.swift",
+      "line": 30,
+      "symbol": "RuntimeEntityInterpretation.Granularity.minute",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/RuntimeEntityInterpretation.swift",
+      "line": 31,
+      "symbol": "RuntimeEntityInterpretation.Granularity.month",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/RuntimeEntityInterpretation.swift",
+      "line": 32,
+      "symbol": "RuntimeEntityInterpretation.Granularity.quarter",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/RuntimeEntityInterpretation.swift",
+      "line": 33,
+      "symbol": "RuntimeEntityInterpretation.Granularity.second",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/RuntimeEntityInterpretation.swift",
+      "line": 34,
+      "symbol": "RuntimeEntityInterpretation.Granularity.week",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/RuntimeEntityInterpretation.swift",
+      "line": 35,
+      "symbol": "RuntimeEntityInterpretation.Granularity.weekend",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/RuntimeEntityInterpretation.swift",
+      "line": 36,
+      "symbol": "RuntimeEntityInterpretation.Granularity.year",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/RuntimeEntityRole.swift",
+      "line": 29,
+      "symbol": "RuntimeEntityRole.TypeEnum.dateFrom",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/RuntimeEntityRole.swift",
+      "line": 30,
+      "symbol": "RuntimeEntityRole.TypeEnum.dateTo",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/RuntimeEntityRole.swift",
+      "line": 31,
+      "symbol": "RuntimeEntityRole.TypeEnum.numberFrom",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/RuntimeEntityRole.swift",
+      "line": 32,
+      "symbol": "RuntimeEntityRole.TypeEnum.numberTo",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/RuntimeEntityRole.swift",
+      "line": 33,
+      "symbol": "RuntimeEntityRole.TypeEnum.timeFrom",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/RuntimeEntityRole.swift",
+      "line": 34,
+      "symbol": "RuntimeEntityRole.TypeEnum.timeTo",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/RuntimeResponseGeneric.swift",
+      "line": 29,
+      "symbol": "RuntimeResponseGeneric.ResponseType.text",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/RuntimeResponseGeneric.swift",
+      "line": 30,
+      "symbol": "RuntimeResponseGeneric.ResponseType.pause",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/RuntimeResponseGeneric.swift",
+      "line": 31,
+      "symbol": "RuntimeResponseGeneric.ResponseType.image",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/RuntimeResponseGeneric.swift",
+      "line": 32,
+      "symbol": "RuntimeResponseGeneric.ResponseType.option",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/RuntimeResponseGeneric.swift",
+      "line": 33,
+      "symbol": "RuntimeResponseGeneric.ResponseType.connectToAgent",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/RuntimeResponseGeneric.swift",
+      "line": 34,
+      "symbol": "RuntimeResponseGeneric.ResponseType.suggestion",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/RuntimeResponseGeneric.swift",
+      "line": 35,
+      "symbol": "RuntimeResponseGeneric.ResponseType.search",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/RuntimeResponseGeneric.swift",
+      "line": 42,
+      "symbol": "RuntimeResponseGeneric.Preference.dropdown",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/AssistantV2/Models/RuntimeResponseGeneric.swift",
+      "line": 43,
+      "symbol": "RuntimeResponseGeneric.Preference.button",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 21,
       "symbol": "WatsonResponse",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk/Source/SupportingFiles/Shared.swift",
-      "line": 21,
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 22,
       "symbol": "WatsonError",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 23,
+      "symbol": "WatsonJSON",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 26,
+      "symbol": "WatsonAuthenticator",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 27,
+      "symbol": "WatsonIAMAuthenticator",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 28,
+      "symbol": "WatsonBasicAuthenticator",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 29,
+      "symbol": "WatsonCloudPakForDataAuthenticator",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 30,
+      "symbol": "WatsonTokenSourceAuthenticator",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 31,
+      "symbol": "WatsonBearerTokenAuthenticator",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "line": 32,
+      "symbol": "WatsonNoAuthAuthenticator",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     }
   ],
-  "source_directory": "/Users/mkistler/Projects/watson-swift/wdc-swift-sdk"
+  "source_directory": "/Users/jeffarn/Programming/sdks/swift-sdk"
 }

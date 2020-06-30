@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Locale Enumeration Reference</title>
+    <link rel="stylesheet" type="text/css" href="../../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../../js/jquery.min.js" defer></script>
+    <script src="../../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Enum/Locale" class="dashAnchor"></a>
+    <a title="Locale Enumeration Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../../index.html">AssistantV2 3.5.0 Docs</a> (78% documented)</p>
+        <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../../index.html">AssistantV2 Reference</a>
+        <img id="carat" src="../../img/carat.png" />
+        Locale Enumeration Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Classes/Assistant.html">Assistant</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Extensions/KeyedDecodingContainer.html">KeyedDecodingContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Extensions/KeyedEncodingContainer.html">KeyedEncodingContainer</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Structs/CaptureGroup.html">CaptureGroup</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DialogLogMessage.html">DialogLogMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DialogLogMessage/Level.html">– Level</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DialogNodeAction.html">DialogNodeAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DialogNodeAction/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DialogNodeOutputOptionsElement.html">DialogNodeOutputOptionsElement</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DialogNodeOutputOptionsElementValue.html">DialogNodeOutputOptionsElementValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DialogNodesVisited.html">DialogNodesVisited</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DialogSuggestion.html">DialogSuggestion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DialogSuggestionValue.html">DialogSuggestionValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MessageContext.html">MessageContext</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MessageContextGlobal.html">MessageContextGlobal</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MessageContextGlobalStateless.html">MessageContextGlobalStateless</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MessageContextGlobalSystem.html">MessageContextGlobalSystem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MessageContextGlobalSystem/Locale.html">– Locale</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MessageContextSkill.html">MessageContextSkill</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MessageContextSkillSystem.html">MessageContextSkillSystem</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MessageContextSkills.html">MessageContextSkills</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MessageContextStateless.html">MessageContextStateless</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MessageInput.html">MessageInput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MessageInput/MessageType.html">– MessageType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MessageInputOptions.html">MessageInputOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MessageInputOptionsSpelling.html">MessageInputOptionsSpelling</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MessageInputOptionsStateless.html">MessageInputOptionsStateless</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MessageInputStateless.html">MessageInputStateless</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MessageInputStateless/MessageType.html">– MessageType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MessageOutput.html">MessageOutput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MessageOutputDebug.html">MessageOutputDebug</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MessageOutputDebug/BranchExitedReason.html">– BranchExitedReason</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MessageOutputSpelling.html">MessageOutputSpelling</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MessageResponse.html">MessageResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/MessageResponseStateless.html">MessageResponseStateless</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/RuntimeEntity.html">RuntimeEntity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/RuntimeEntityAlternative.html">RuntimeEntityAlternative</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/RuntimeEntityInterpretation.html">RuntimeEntityInterpretation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/RuntimeEntityInterpretation/Granularity.html">– Granularity</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/RuntimeEntityRole.html">RuntimeEntityRole</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/RuntimeEntityRole/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/RuntimeIntent.html">RuntimeIntent</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/RuntimeResponseGeneric.html">RuntimeResponseGeneric</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/RuntimeResponseGeneric/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/RuntimeResponseGeneric/Preference.html">– Preference</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/SearchResult.html">SearchResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/SearchResultHighlight.html">SearchResultHighlight</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/SearchResultMetadata.html">SearchResultMetadata</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/SessionResponse.html">SessionResponse</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Typealiases.html#/s:11AssistantV219WatsonAuthenticatora">WatsonAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Typealiases.html#/s:11AssistantV224WatsonBasicAuthenticatora">WatsonBasicAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Typealiases.html#/s:11AssistantV230WatsonBearerTokenAuthenticatora">WatsonBearerTokenAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Typealiases.html#/s:11AssistantV234WatsonCloudPakForDataAuthenticatora">WatsonCloudPakForDataAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Typealiases.html#/s:11AssistantV211WatsonErrora">WatsonError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Typealiases.html#/s:11AssistantV222WatsonIAMAuthenticatora">WatsonIAMAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Typealiases.html#/s:11AssistantV210WatsonJSONa">WatsonJSON</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Typealiases.html#/s:11AssistantV225WatsonNoAuthAuthenticatora">WatsonNoAuthAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Typealiases.html#/s:11AssistantV214WatsonResponsea">WatsonResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Typealiases.html#/s:11AssistantV230WatsonTokenSourceAuthenticatora">WatsonTokenSourceAuthenticator</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>Locale</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Locale</span> <span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                </div>
+              </div>
+            <p>The language code for localization in the user input. The specified locale overrides the default for the assistant,
+and is used for interpreting entity values in user input such as date values. For example, <code>04/03/2018</code> might be
+interpreted either as April 3 or March 4, depending on the locale.
+ This property is included only if the new system entities are enabled for the skill.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4enUsyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/enUs" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4enUsyA2EmF">enUs</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">enUs</span> <span class="o">=</span> <span class="s">"en-us"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4enCayA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/enCa" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4enCayA2EmF">enCa</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">enCa</span> <span class="o">=</span> <span class="s">"en-ca"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4enGbyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/enGb" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4enGbyA2EmF">enGb</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">enGb</span> <span class="o">=</span> <span class="s">"en-gb"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4arAryA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/arAr" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4arAryA2EmF">arAr</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">arAr</span> <span class="o">=</span> <span class="s">"ar-ar"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4csCzyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/csCz" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4csCzyA2EmF">csCz</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">csCz</span> <span class="o">=</span> <span class="s">"cs-cz"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4deDeyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/deDe" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4deDeyA2EmF">deDe</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">deDe</span> <span class="o">=</span> <span class="s">"de-de"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4esEsyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/esEs" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4esEsyA2EmF">esEs</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">esEs</span> <span class="o">=</span> <span class="s">"es-es"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4frFryA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/frFr" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4frFryA2EmF">frFr</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">frFr</span> <span class="o">=</span> <span class="s">"fr-fr"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4itItyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/itIt" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4itItyA2EmF">itIt</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">itIt</span> <span class="o">=</span> <span class="s">"it-it"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4jaJpyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/jaJp" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4jaJpyA2EmF">jaJp</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">jaJp</span> <span class="o">=</span> <span class="s">"ja-jp"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4koKryA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/koKr" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4koKryA2EmF">koKr</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">koKr</span> <span class="o">=</span> <span class="s">"ko-kr"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4nlNlyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/nlNl" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4nlNlyA2EmF">nlNl</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">nlNl</span> <span class="o">=</span> <span class="s">"nl-nl"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4ptBryA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/ptBr" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4ptBryA2EmF">ptBr</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">ptBr</span> <span class="o">=</span> <span class="s">"pt-br"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4zhCnyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/zhCn" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4zhCnyA2EmF">zhCn</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">zhCn</span> <span class="o">=</span> <span class="s">"zh-cn"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4zhTwyA2EmF"></a>
+                    <a name="//apple_ref/swift/Element/zhTw" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV226MessageContextGlobalSystemV6LocaleO4zhTwyA2EmF">zhTw</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="k">case</span> <span class="n">zhTw</span> <span class="o">=</span> <span class="s">"zh-tw"</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>Copyright 2020 IBM</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

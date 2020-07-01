@@ -1,8 +1,8 @@
 # Tone Analyzer
 
 * [IBM Watson Tone Analyzer - API Reference](https://cloud.ibm.com/apidocs/tone-analyzer?code=swift)
-* [IBM Watson Tone Analyzer - Documentation](https://cloud.ibm.com/docs/services/tone-analyzer/index.html)
-* [IBM Watson Tone Analyzer - Service Page](https://www.ibm.com/watson/services/tone-analyzer/)
+* [IBM Watson Tone Analyzer - Documentation](https://cloud.ibm.com/docs/tone-analyzer/index.html)
+* [IBM Watson Tone Analyzer - Service Page](https://www.ibm.com/cloud/watson-tone-analyzer)
 
 The IBM Watson Tone Analyzer service can be used to discover, understand, and revise the language tones in text. The service uses linguistic analysis to detect three types of tones from written text: emotions, social tendencies, and writing style.
 

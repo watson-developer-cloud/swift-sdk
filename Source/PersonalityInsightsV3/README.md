@@ -1,8 +1,8 @@
 # Personality Insights
 
 * [IBM Watson Personality Insights - API Reference](https://cloud.ibm.com/apidocs/personality-insights?code=swift)
-* [IBM Watson Personality Insights - Documentation](https://cloud.ibm.com/docs/services/personality-insights/index.html)
-* [IBM Watson Personality Insights - Service Page](https://www.ibm.com/watson/services/personality-insights/)
+* [IBM Watson Personality Insights - Documentation](https://cloud.ibm.com/docs/personality-insights/index.html)
+* [IBM Watson Personality Insights - Service Page](https://www.ibm.com/cloud/watson-personality-insights)
 
 The IBM Watson Personality Insights service enables applications to derive insights from social media, enterprise data, or other digital communications. The service uses linguistic analytics to infer personality and social characteristics, including Big Five, Needs, and Values, from text.
 

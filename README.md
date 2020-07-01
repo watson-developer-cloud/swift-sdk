@@ -203,7 +203,7 @@ let assistant = Assistant(version: "{version}", authenticator: authenticator)
 
 The SDK can extract service credentails from the environment, e.g. the VCAP_SERVICES environment variable, or a local credentials file.
 
-To use credentials stored in a local file, go to the Manage tab of your service instance on IBM Cloud, and click on the button to download the credentials. The file will be called ibm-credentials.env. Add this file to a location that is accessible from your project. For iOS apps, make sure to add it to the application target.
+To use credentials stored in a local file, go to the Manage tab of your service instance on IBM Cloud, and click on the button to download the credentials. The file will be called `ibm-credentials.env`. Add this file to a location that is accessible from your project. For iOS apps, make sure to add it to the application target.
 
 ```swift
 let assistant = Assistant(version: "your-version") // by calling the init method without an authenticator, the SDK will search for environment variables
@@ -211,7 +211,7 @@ let assistant = Assistant(version: "your-version") // by calling the init method
 ...
 ```
 
-If your project is using multiple Watson services, you can merge the contents of the ibm-credentials.env files into a single file. Lines in the file can be added, deleted, or reordered, but the content of each line must not be changed.
+If your project is using multiple Watson services, you can merge the contents of the `ibm-credentials.env` files into a single file. Lines in the file can be added, deleted, or reordered, but the content of each line must not be changed.
 
 #### Further info on authentication methods
 
@@ -221,7 +221,7 @@ To see further details and additional, but less common, forms of authentication,
 
 You can set a custom service URL by modifying the `serviceURL` property. A custom service URL may be required when running an  instance in a particular region or connecting through a proxy.
 
-For example, here is how to connect to a Tone Analyzer instance that is hosted in Germany:
+For example, here is how to connect to a Watson Assistant instance that is hosted in Germany:
 
 ```swift
 let authenticator = WatsonIAMAuthenticator(apiKey: "{apikey}")

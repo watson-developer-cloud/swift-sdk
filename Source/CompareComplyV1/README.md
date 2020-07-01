@@ -1,7 +1,7 @@
 # Compare and Comply
 
 * [IBM Watson Compare & Comply - API Reference](https://cloud.ibm.com/apidocs/compare-comply?code=swift)
-* [IBM Watson Compare & Comply - Documentation](https://cloud.ibm.com/docs/services/compare-comply/index.html#about)
+* [IBM Watson Compare & Comply - Documentation](https://cloud.ibm.com/docs/compare-comply/index.html#about)
 * [IBM Watson Compare & Comply - Service Page](https://www.ibm.com/cloud/compare-and-comply)
 
 Watson Compare & Comply extracts data and elements from your contracts and other governing documents to streamline business processes.

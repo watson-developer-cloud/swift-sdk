@@ -2,7 +2,7 @@
 
 * [IBM Watson Assistant V2 - API Reference](https://cloud.ibm.com/apidocs/assistant/assistant-v2?code=swift)
 * [IBM Watson Assistant V2 - Service Page](https://www.ibm.com/cloud/watson-assistant/)
-* [IBM Watson Assistant V2 - Documentation](https://cloud.ibm.com/docs/services/assistant/index.html#about)
+* [IBM Watson Assistant V2 - Documentation](https://cloud.ibm.com/docs/assistant/index.html#about)
 
 With the IBM Watson Assistant service you can create cognitive agents -- virtual agents
 that combine machine learning, natural language understanding, and integrated dialog scripting tools to provide conversation flows between your apps and your users.

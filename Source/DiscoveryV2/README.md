@@ -1,8 +1,8 @@
 # Discovery V2
 
 * [IBM Discovery V2 - API Reference](https://cloud.ibm.com/apidocs/discovery-data?code=swift)
-* [IBM Discovery V2 - Documentation](https://cloud.ibm.com/docs/services/discovery/index.html)
-* [IBM Discovery V2 - Service Page](https://www.ibm.com/watson/services/discovery/)
+* [IBM Discovery V2 - Documentation](https://cloud.ibm.com/docs/discovery/index.html)
+* [IBM Discovery V2 - Service Page](https://www.ibm.com/cloud/watson-discovery)
 
 **IMPORTANT:** `DiscoveryV2` is only available on [IBM Cloud Pak for Data.](https://www.ibm.com/products/cloud-pak-for-data) If you are using Discovery on the public IBM Cloud, see `DiscoveryV1`.
 

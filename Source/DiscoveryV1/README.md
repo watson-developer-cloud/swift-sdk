@@ -1,8 +1,8 @@
 # Discovery V1
 
 * [IBM Discovery V1 - API Reference](https://cloud.ibm.com/apidocs/discovery?code=swift)
-* [IBM Discovery V1 - Documentation](https://cloud.ibm.com/docs/services/discovery/index.html)
-* [IBM Discovery V1 - Service Page](https://www.ibm.com/watson/services/discovery/)
+* [IBM Discovery V1 - Documentation](https://cloud.ibm.com/docs/discovery/index.html)
+* [IBM Discovery V1 - Service Page](https://www.ibm.com/cloud/watson-discovery)
 
 IBM Watson Discovery makes it possible to rapidly build cognitive, cloud-based exploration applications that unlock actionable insights hidden in unstructured data — including your own proprietary data, as well as public and third-party data. With Discovery, it only takes a few steps to prepare your unstructured data, create a query that will pinpoint the information you need, and then integrate those insights into your new application or existing solution.
 

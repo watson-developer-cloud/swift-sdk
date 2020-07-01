@@ -1,8 +1,8 @@
 # Text to Speech
 
 * [IBM Watson Text To Speech - API Reference](https://cloud.ibm.com/apidocs/text-to-speech?code=swift)
-* [IBM Watson Text To Speech - Documentation](https://cloud.ibm.com/docs/services/text-to-speech/index.html)
-* [IBM Watson Text To Speech - Service Page](https://www.ibm.com/watson/services/text-to-speech/)
+* [IBM Watson Text To Speech - Documentation](https://cloud.ibm.com/docs/text-to-speech/index.html)
+* [IBM Watson Text To Speech - Service Page](https://www.ibm.com/cloud/watson-text-to-speech)
 
 The IBM Watson Text to Speech service synthesizes natural-sounding speech from input text in a variety of languages and voices that speak with appropriate cadence and intonation.
 

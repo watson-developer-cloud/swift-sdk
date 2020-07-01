@@ -1,8 +1,8 @@
 # Language Translator V3
 
 * [IBM Watson Language Translator - API Reference](https://cloud.ibm.com/apidocs/language-translator?code=swift)
-* [IBM Watson Language Translator - Documentation](https://cloud.ibm.com/docs/services/language-translator/index.html)
-* [IBM Watson Language Translator - Service Page](https://www.ibm.com/watson/services/language-translator/)
+* [IBM Watson Language Translator - Documentation](https://cloud.ibm.com/docs/language-translator/index.html)
+* [IBM Watson Language Translator - Service Page](https://www.ibm.com/cloud/watson-language-translator)
 
 The IBM Watson Language Translator service lets you select a domain, customize it, then identify or select the language of text, and then translate the text from one supported language to another.
 

@@ -1,7 +1,7 @@
 # Watson Assistant V1
 
 * [IBM Watson Assistant - API Reference (includes Swift code examples)](https://cloud.ibm.com/apidocs/assistant/assistant-v1?code=swift)
-* [IBM Watson Assistant - Documentation](https://cloud.ibm.com/docs/services/assistant/index.html#about)
+* [IBM Watson Assistant - Documentation](https://cloud.ibm.com/docs/assistant/index.html#about)
 * [IBM Watson Assistant - Service Page](https://www.ibm.com/cloud/watson-assistant/)
 
 With the IBM Watson Assistant service you can create cognitive agents -- virtual agents

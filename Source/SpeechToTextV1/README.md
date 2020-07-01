@@ -1,8 +1,8 @@
 # Speech to Text
 
 * [IBM Watson Speech to Text - API Reference](https://cloud.ibm.com/apidocs/speech-to-text?code=swift)
-* [IBM Watson Speech to Text - Documentation](https://cloud.ibm.com/docs/services/speech-to-text/index.html)
-* [IBM Watson Speech to Text - Service Page](https://www.ibm.com/watson/services/speech-to-text/)
+* [IBM Watson Speech to Text - Documentation](https://cloud.ibm.com/docs/speech-to-text/index.html)
+* [IBM Watson Speech to Text - Service Page](https://www.ibm.com/cloud/watson-speech-to-text)
 
 The IBM Watson Speech to Text service enables you to add speech transcription capabilities to your application. It uses machine intelligence to combine information about grammar and language structure to generate an accurate transcription. Transcriptions are supported for various audio formats and languages.
 

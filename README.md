@@ -26,6 +26,7 @@ There are many resources to help you build your first cognitive application with
 * [Installation](#installation)
 * [Authentication](#authentication)
 * [Custom Service URLs](#custom-service-urls)
+* [Obtaining Transaction IDs](#obtaining-transaction-ids)
 * [Custom Headers](#custom-headers)
 * [Featured Projects](#featured-projects)
 * [Synchronous Execution](#synchronous-execution)
@@ -242,6 +243,34 @@ assistant.disableSSLVerification()
 ```
 
 Note: `disableSSLVerification()` is currently not supported on Linux.
+
+## Obtaining Transaction IDs
+
+When debugging an issue with IBM support, you may be asked to provide a `transaction ID` to help IBM identify an API call that needs to be debugged.
+
+Every SDK call returns a response with a transaction ID in the `x-global-transaction-id` header. This transaction ID is useful for troubleshooting and accessing relevant logs from your service instance.
+
+You can access the header following the pattern below:
+
+```swift
+import AssistantV1
+
+let authenticator = WatsonIAMAuthenticator(apiKey: "{apikey}")
+let assistant = Assistant(version: "2020-04-01", authenticator: authenticator)
+assistant.serviceURL = "{url}"
+
+let workspaceID = getWorkspaceID()
+let input = MessageInput(text: "Hello")
+
+// let's say this request isn't working and you need the transaction ID
+assistant.message(workspaceID: "{workspace_id}", input: input) {
+  response, error in
+
+  print(response?.headers["x-global-transaction-id"]!)
+
+  ...
+}
+```
 
 ## Custom Headers
 There are different headers that can be sent to the Watson services. For example, Watson services log requests and their results for the purpose of improving the services, but you can include the `X-Watson-Learning-Opt-Out` header to opt out of this.

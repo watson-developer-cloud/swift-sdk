@@ -14,7 +14,6 @@ The Watson Developer Cloud Swift SDK makes it easy for mobile developers to buil
 
 There are many resources to help you build your first cognitive application with the Swift SDK:
 
-- Follow the [QuickStart Guide](https://watson-developer-cloud.github.io/swift-sdk/docs/quickstart)
 - Review a [Featured Project](#featured-projects)
 - Browse the [Documentation](https://watson-developer-cloud.github.io/swift-sdk/)
 
@@ -27,6 +26,7 @@ There are many resources to help you build your first cognitive application with
 * [Installation](#installation)
 * [Authentication](#authentication)
 * [Custom Service URLs](#custom-service-urls)
+* [Obtaining Transaction IDs](#obtaining-transaction-ids)
 * [Custom Headers](#custom-headers)
 * [Featured Projects](#featured-projects)
 * [Synchronous Execution](#synchronous-execution)
@@ -60,10 +60,6 @@ This SDK provides classes and methods to access the following Watson services.
 - Xcode 9.3+
 - Swift 4.2+
 - iOS 10.0+
-
-## Migrating to version `3.0.0`
-
-Version `3.0.0` introduced breaking changes that affect all frameworks of the Swift SDK. Please refer to [the migration guide](https://github.com/watson-developer-cloud/swift-sdk/blob/master/MIGRATION-V3.md) for information on how to get up and running with the new version.
 
 ## Installation
 
@@ -127,7 +123,7 @@ $ carthage bootstrap --platform iOS
 ```
 
 Follow the remaining Carthage installation instructions [here](https://github.com/Carthage/Carthage#getting-started). Note that the above command will download and build all of the services in the IBM Watson Swift SDK. Make sure to drag-and-drop the built frameworks (only for the services your app requires) into your Xcode project and import them in the source files that require them. The following frameworks need to be added to your app:
-1. `RestKit.framework`
+1. `IBMSwiftSDKCore.framework`
 1. Whichever services your app will be using (`AssistantV1.framework`, `DiscoveryV1.framework`, etc.)
 1. (**Speech to Text only**) `Starscream.framework`
 
@@ -146,11 +142,12 @@ dependencies: [
 
 ## Authentication
 
-The Identity and Access Management (IAM) service of the IBM Cloud is the primary method of authentication to IBM Cloud services.
-Some service instances may use an alternate form of authentication, such as basic authentication (username and password).
+In order to use an IBM Watson service in a Swift application, you will need to authenticate. The following describes the typical path you need to take to do so.
 
-### Getting credentials
-To find out which authentication to use, view the service credentials. You find the service credentials for authentication the same way for all Watson services:
+### Step 1: Getting credentials
+Credentials to use an IBM Watson service are obtained via IBM Cloud. You will need an active account and a service instance for the service that you wish to use prior to authenticating in your Swift app.
+
+You can access the service credentials for your instance by taking the following steps:
 
 1. Go to the IBM Cloud [Dashboard](https://cloud.ibm.com/) page.
 1. Either click an existing Watson service instance in your [resource list](https://cloud.ibm.com/resources) or click [**Create resource > AI**](https://cloud.ibm.com/catalog?category=ai) and create a service instance.
@@ -158,91 +155,122 @@ To find out which authentication to use, view the service credentials. You find 
 
 On this page, you will see your credentials to use in the SDK to access your service instance.
 
-### Supplying credentials
+### Step 2: Authenticating in Code
 
-The SDK provides separate init methods for each form of authentication that may be used by instances of the service.
+The Watson Swift SDK manages authentication using an `Authenticator` class. There are multiple types of Authenticators depending on your preferred method.
 
-- For service instances that use **[IAM](#iam)** authentication, the SDK provides two init methods -- one that accepts an apikey and another
-that accepts an access token created from an apikey. If you use the init method that supplies the apikey, the SDK will obtain an
-access token and refresh it when needed. If you initialize the SDK with the method that supplies an access token, you will need
-to periodically refresh the token as they expire after a short time. Learn more about [IAM](link).
+#### WatsonIAMAuthenticator (most common)
 
-- For service instances that use basic authentication (username and password), use the init method that specifies the username
-and password.
+The `WatsonIAMAuthenticator` allows you to authenticate with using an IAM API key. This is the most common form of authentication within IBM Cloud. The `WatsonIAMAuthenticator` requires an `apikey` string in its initialization method.
 
-#### Credentials in the environment or a local credentials file
+Example:
+
+```swift
+let authenticator = WatsonIAMAuthenticator(apiKey: "{apikey}")
+let assistant = Assistant(version: "{version}", authenticator: authenticator)
+
+...
+```
+
+#### WatsonBearerTokenAuthenticator
+
+You may want to provide a bearer token to authenticate with a service. On IBM Cloud this would be done using the IAM service to generate a token based on your service credentials. On Cloud Pak for Data this would be available within an individual service instance.
+
+To authenticate in a Swift app using an access token, you can use the `WatsonBearerTokenAuthenticator`, and provide the token.
+
+Example:
+
+```swift
+let authenticator = WatsonBearerTokenAuthenticator(bearerToken: "{token}")
+let assistant = Assistant(version: "{version}", authenticator: authenticator)
+
+...
+```
+
+#### WatsonCloudPakForDataAuthenticator
+
+If you are using IBM Cloud Pak for Data (CP4D) instead of the public IBM Cloud, you can use the `WatsonCloudPakForDataAuthenticator` to authenticate with your CP4D cluster. As opposed to `WatsonBearerTokenAuthenticator` which accepts a bearer token, the `WatsonCloudPakForDataAuthenticator` accepts the username and password for the CP4D cluster itself.
+
+Example:
+
+```swift
+let authenticator = WatsonCloudPakForDataAuthenticator(username: "{username}", password: "{password}", url: "https://{cpd_cluster_host}{:port}")
+let assistant = Assistant(version: "{version}", authenticator: authenticator)
+
+...
+```
+
+#### Detecting authentication from environment variables
 
 The SDK can extract service credentails from the environment, e.g. the VCAP_SERVICES environment variable, or a local credentials file.
 
-To use credentials stored in a local file, go to the **Manage** tab of your service instance on IBM Cloud, and click on the button to download the credentials. The file will be called `ibm-credentials.env`. Add this file to a location that is accessible from your project. For iOS apps, make sure to add it to the application target.
+To use credentials stored in a local file, go to the Manage tab of your service instance on IBM Cloud, and click on the button to download the credentials. The file will be called `ibm-credentials.env`. Add this file to a location that is accessible from your project. For iOS apps, make sure to add it to the application target.
 
 ```swift
-let discovery = Discovery(version: "your-version")
+let assistant = Assistant(version: "your-version") // by calling the init method without an authenticator, the SDK will search for environment variables
+
+...
 ```
 
-If your project is using multiple Watson services, you can merge the contents of the `ibm-credentials.env` files into a single file. Lines in the file can be added, deleted, or reordered, but the content of each line **must not** be changed.
+If your project is using multiple Watson services, you can merge the contents of the `ibm-credentials.env` files into a single file. Lines in the file can be added, deleted, or reordered, but the content of each line must not be changed.
 
-#### Copy-Pasting Credentials
+#### Further info on authentication methods
 
-Copy the credentials from IBM Cloud and store them within your project. Then pass those values to the service initializer that accepts the type of credentials you have.
-
-##### IAM
-
-Some services use token-based Identity and Access Management (IAM) authentication. IAM authentication uses a service API key to get an access token that is passed with the call. Access tokens are valid for approximately one hour and must be regenerated.
-
-You supply either an IAM service **API key** or an **access token**:
-
-- Use the API key to have the SDK manage the lifecycle of the access token. The SDK requests an access token, ensures that the access token is valid, and refreshes it if necessary.
-- Use the access token if you want to manage the lifecycle yourself. For details, see [Authenticating with IAM tokens](https://cloud.ibm.com/docs/services/watson/getting-started-iam.html). If you want to switch to API key, override your stored IAM credentials with an IAM API key.
-
-###### Supplying the IAM API key
-```swift
-let discovery = Discovery(version: "your-version", apiKey: "your-apikey")
-```
-
-If you are supplying an API key for IBM Cloud Private (ICP), use basic authentication instead, with `"apikey"` for the `username` and the api key (prefixed with `icp-`) for the `password`. See the [Username and Password](#username-and-password) section.
-
-###### Supplying the accessToken
-```swift
-let discovery = Discovery(version: "your-version", accessToken: "your-accessToken")
-```
-###### Updating the accessToken
-```swift
-discovery.accessToken("new-accessToken")
-```
-
-
-##### Username and Password
-
-```swift
-let discovery = Discovery(version: "your-version", username: "your-username", password: "your-password")
-```
-
-
+To see further details and additional, but less common, forms of authentication, see the [IBM Swift SDK Core code for Authenticator.](https://github.com/IBM/swift-sdk-core/tree/master/Sources/IBMSwiftSDKCore/Authentication)
 
 ## Custom Service URLs
 
 You can set a custom service URL by modifying the `serviceURL` property. A custom service URL may be required when running an  instance in a particular region or connecting through a proxy.
 
-For example, here is how to connect to a Tone Analyzer instance that is hosted in Germany:
+For example, here is how to connect to a Watson Assistant instance that is hosted in Germany:
 
 ```swift
-let toneAnalyzer = ToneAnalyzer(
-    version: "yyyy-mm-dd",
-    username: "your-username",
-    password: "your-password"
-)
-toneAnalyzer.serviceURL = "https://gateway-fra.watsonplatform.net/tone-analyzer/api"
+let authenticator = WatsonIAMAuthenticator(apiKey: "{apikey}")
+let assistant = Assistant(version: "{version}", authenticator: authenticator)
+
+assistant.serviceURL = "https://gateway-fra.watsonplatform.net/conversation/api"
 ```
 
 ## Disable SSL certificate verification
 
-For ICP(IBM Cloud Private), you can disable the SSL certificate verification by:
-```
-service.disableSSLVerification()
+For Watson Cloud Pak for Data (CP4D), you may need to disable SSL hostname verification if you are using self-signed certificates. Each service class has a `disableSSLVerification` method which allows you to do so.
+
+``` swift
+let authenticator = WatsonCloudPakForDataAuthenticator(username: "{username}", password: "{password}", url: "https://{cpd_cluster_host}{:port}")
+let assistant = Assistant(version: "{version}", authenticator: authenticator)
+
+assistant.disableSSLVerification()
 ```
 
 Note: `disableSSLVerification()` is currently not supported on Linux.
+
+## Obtaining Transaction IDs
+
+When debugging an issue with IBM support, you may be asked to provide a `transaction ID` to help IBM identify an API call that needs to be debugged.
+
+Every SDK call returns a response with a transaction ID in the `x-global-transaction-id` header. This transaction ID is useful for troubleshooting and accessing relevant logs from your service instance.
+
+You can access the header following the pattern below:
+
+```swift
+import AssistantV1
+
+let authenticator = WatsonIAMAuthenticator(apiKey: "{apikey}")
+let assistant = Assistant(version: "2020-04-01", authenticator: authenticator)
+assistant.serviceURL = "{url}"
+
+let workspaceID = getWorkspaceID()
+let input = MessageInput(text: "Hello")
+
+// let's say this request isn't working and you need the transaction ID
+assistant.message(workspaceID: "{workspace_id}", input: input) {
+  response, error in
+
+  print(response?.headers["x-global-transaction-id"]!)
+
+  ...
+}
+```
 
 ## Custom Headers
 There are different headers that can be sent to the Watson services. For example, Watson services log requests and their results for the purpose of improving the services, but you can include the `X-Watson-Learning-Opt-Out` header to opt out of this.
@@ -250,8 +278,10 @@ There are different headers that can be sent to the Watson services. For example
 We have exposed a `defaultHeaders` public property in each class to allow users to easily customize their headers:
 
 ```swift
-let naturalLanguageClassifier = NaturalLanguageClassifier(username: username, password: password)
-naturalLanguageClassifier.defaultHeaders = ["X-Watson-Learning-Opt-Out": "true"]
+let authenticator = WatsonIAMAuthenticator(apiKey: "{apikey}")
+let assistant = Assistant(version: "{version}", authenticator: authenticator)
+
+assistant.defaultHeaders = ["X-Watson-Learning-Opt-Out": "true"]
 ```
 
 Each service method also accepts an optional `headers` parameter which is a dictionary of request headers to be sent with the request.

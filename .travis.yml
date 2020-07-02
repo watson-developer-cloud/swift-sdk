@@ -283,3 +283,8 @@ jobs:
     os: osx
     osx_image: xcode11
     if: branch = master AND type = push AND fork = false
+  - stage: publish documentation	
+    script: "./Scripts/travis/publish-documentation.sh"	
+    os: osx	
+    osx_image: xcode11	
+    if: branch = master AND type = push AND fork = false

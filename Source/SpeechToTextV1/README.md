@@ -1,27 +1,123 @@
 # Speech to Text
 
+* [IBM Watson Speech to Text - API Reference](https://cloud.ibm.com/apidocs/speech-to-text?code=swift)
+* [IBM Watson Speech to Text - Documentation](https://cloud.ibm.com/docs/speech-to-text/index.html)
+* [IBM Watson Speech to Text - Service Page](https://www.ibm.com/cloud/watson-speech-to-text)
+
 The IBM Watson Speech to Text service enables you to add speech transcription capabilities to your application. It uses machine intelligence to combine information about grammar and language structure to generate an accurate transcription. Transcriptions are supported for various audio formats and languages.
 
-The `SpeechToText` class is the SDK's primary interface for performing speech recognition requests. It supports the transcription of audio files, audio data, and streaming microphone data. Advanced users, however, may instead wish to use the `SpeechToTextSession` class that exposes more control over the WebSockets session.
+**IMPORTANT:** Please be sure to include both `SpeechToTextV1.framework` and `Starscream.framework` in your application. Starscream is a recursive dependency that adds support for WebSockets sessions.
 
-Please be sure to include both `SpeechToTextV1.framework` and `Starscream.framework` in your application. Starscream is a recursive dependency that adds support for WebSockets sessions.
-
-Beginning with iOS 10+, any application that accesses the microphone must include the `NSMicrophoneUsageDescription` key in the app's `Info.plist` file. Otherwise, the app will crash. Find more information about this [here](https://forums.developer.apple.com/thread/61521).
-
-### Recognition Request Settings
-
-The `RecognitionSettings` class is used to define the audio format and behavior of a recognition request. These settings are transmitted to the service when [initiating a request](https://cloud.ibm.com/docs/services/speech-to-text/websockets.html#WSstart).
-
-The following example demonstrates how to define a recognition request that transcribes WAV audio data with interim results:
+The following example shows how to transcribe an audio file using the standard API endpoint.
 
 ```swift
-var settings = RecognitionSettings(contentType: "audio/wav")
-settings.interimResults = true
+import SpeechToTextV1
+
+let authenticator = WatsonIAMAuthenticator(apiKey: "{apikey}")
+let speechToText = SpeechToText(authenticator: authenticator)
+speechToText.serviceURL = "{url}"
+
+let url = Bundle.main.url(forResource: "audio-file2", withExtension: "flac")
+var audio = try! Data(contentsOf: url!)
+
+speechToText.recognize(
+  audio: audio,
+  keywords: ["colorado", "tornado", "tornadoes"],
+  keywordsThreshold: 0.5,
+  wordAlternativesThreshold: 0.90,
+  contentType: "audio/flac")
+{
+  response, error in
+
+  guard let results = response?.result else {
+    print(error?.localizedDescription ?? "unknown error")
+    return
+  }
+
+  print(results)
+}
 ```
 
-See the [class documentation](http://watson-developer-cloud.github.io/swift-sdk/services/SpeechToTextV1/Structs/RecognitionSettings.html) or [service documentation](https://cloud.ibm.com/docs/services/speech-to-text/index.html) for more information about the available settings.
+For details on all API operations, including Swift examples, [see the API reference.](https://cloud.ibm.com/apidocs/speech-to-text?code=swift)
 
-### Microphone Audio and Compression
+
+## Recognizing audio using websockets
+
+The Swift SDK extends the `Starcream` library to offer websocket support for recognizing audio.
+
+You can transcribe audio using web sockets by calling the `recognizeUsingWebSockets` method on the `SpeechToText` class, as shown in this example.
+
+```swift
+import SpeechToTextV1
+
+let authenticator = WatsonIAMAuthenticator(apiKey: "{apikey}")
+let speechToText = SpeechToText(authenticator: authenticator)
+speechToText.serviceURL = "{url}"
+
+let url = Bundle.main.url(forResource: "audio-file2", withExtension: "flac")
+var audio = try! Data(contentsOf: url!
+
+let settings = RecognitionSettings(contentType: "audio/ogg;codecs=opus")
+
+var callback = RecognizeCallback()
+
+// register error handler
+callback.onError = { error in
+    // handle error in some way
+}
+
+// register result handler
+callback.onResults = { results in
+    // process results in some way
+}
+
+speechToText.recognizeUsingWebSocket(audio: fileData, settings: settings, callback: callback)
+```
+
+In the above example, the `RecognitionSettings` struct is used to define the settings for the recognition request. Additional the `RecognizeCallback` struct allows you to register event handlers for web socket events.
+
+## Recognizing audio from microphone
+
+If you'd like to record audio from a device microphone and trascribe it using Speech to Text, you can use the SDK provided `recognizeMicrophone` method, as shown in this example.
+
+```swift
+import SpeechToTextV1
+
+let authenticator = WatsonIAMAuthenticator(apiKey: "{apikey}")
+let speechToText = SpeechToText(authenticator: authenticator)
+speechToText.serviceURL = "{url}"
+
+var accumulator = SpeechRecognitionResultsAccumulator()
+
+// this function can be called from a button press or similar action
+// based on user input
+func startStreaming() {
+    var settings = RecognitionSettings(contentType: "audio/ogg;codecs=opus")
+    settings.interimResults = true
+    speechToText.recognizeMicrophone(settings: settings) { response, error in
+    	if let error = error {
+    		print(error)
+	    }
+	    guard let results = response?.result else {
+	        print("Failed to recognize the audio")
+	        return
+	    }
+        accumulator.add(results: results)
+        print(accumulator.bestTranscript)
+    }
+}
+
+// this function can be called when the user releases a button or a similar action
+func stopStreaming() {
+    speechToText.stopRecognizeMicrophone()
+}
+```
+
+The above example uses the `recognizeMicrophone` method within a function, which can be called from a button click or user input. How you call it is up to you, but the above provides a typical example of how you would record while responding to a UI action.
+
+## Advanced Usage
+
+### Microphone Audio and Compression in detail
 
 The Speech to Text framework makes it easy to perform speech recognition with microphone audio. The framework internally manages the microphone, starting and stopping it with various method calls (`recognizeMicrophone` and `stopRecognizeMicrophone`, or `startMicrophone` and `stopMicrophone`).
 
@@ -43,7 +139,7 @@ let settings = RecognitionSettings(contentType: "audio/ogg;codecs=opus")
 let settings = RecognitionSettings(contentType: "audio/l16;rate=16000;channels=1")
 ```
 
-### Recognition Results Accumulator
+### Recognition Results Accumulator in detail
 
 The Speech to Text service may not always return the entire transcription in a single response. Instead, the transcription may be streamed over multiple responses, each with a chunk of the overall results. This is especially common for long audio files, since the entire transcription may contain a significant amount of text.
 
@@ -58,67 +154,6 @@ To use the accumulator, initialize an instance of the object then add results as
 var accumulator = SpeechRecognitionResultsAccumulator()
 accumulator.add(results: results)
 print(accumulator.bestTranscript)
-```
-
-### Transcribe Recorded Audio
-
-The following example demonstrates how to use the Speech to Text service to transcribe a WAV audio file.
-
-```swift
-import SpeechToTextV1
-
-let apiKey = "your-api-key"
-let speechToText = SpeechToText(apiKey: apiKey)
-
-var accumulator = SpeechRecognitionResultsAccumulator()
-
-let audioFile = Bundle.main.url(forResource: "filename", withExtension: "wav")!
-let settings = RecognitionSettings(contentType: "audio/wav")
-settings.interimResults = true
-speechToText.recognize(audio: audioFile, settings: settings) { response, error in
-	if let error = error {
-        print(error)
-    }
-    guard let results = response?.result else {
-        print("Failed to recognize the audio")
-        return
-    }
-    accumulator.add(results: results)
-    print(accumulator.bestTranscript)
-}
-```
-
-### Transcribe Microphone Audio
-
-Audio can be streamed from the microphone to the Speech to Text service for real-time transcriptions. The following example demonstrates how to use the Speech to Text service to transcribe microphone audio:
-
-```swift
-import SpeechToTextV1
-
-let apiKey = "your-api-key"
-let speechToText = SpeechToText(apiKey: apiKey)
-
-var accumulator = SpeechRecognitionResultsAccumulator()
-
-func startStreaming() {
-    var settings = RecognitionSettings(contentType: "audio/ogg;codecs=opus")
-    settings.interimResults = true
-    speechToText.recognizeMicrophone(settings: settings) { response, error in
-    	if let error = error {
-    		print(error)
-	    }
-	    guard let results = response?.result else {
-	        print("Failed to recognize the audio")
-	        return
-	    }
-        accumulator.add(results: results)
-        print(accumulator.bestTranscript)
-    }
-}
-
-func stopStreaming() {
-    speechToText.stopRecognizeMicrophone()
-}
 ```
 
 ### Session Management and Advanced Features
@@ -151,8 +186,8 @@ The following example demonstrates how to use `SpeechToTextSession` to transcrib
 ```swift
 import SpeechToTextV1
 
-let apiKey = "your-api-key"
-let speechToTextSession = SpeechToTextSession(apiKey: apiKey)
+let authenticator = WatsonIAMAuthenticator(apiKey: "{apikey}")
+let speechToTextSession = SpeechToTextSession(authenticator: authenticator)
 
 var accumulator = SpeechRecognitionResultsAccumulator()
 
@@ -192,11 +227,3 @@ func stopStreaming() {
     speechToTextSession.disconnect()
 }
 ```
-
-### Additional Information
-
-There are a number of ways that Speech to Text can be customized to suit your particular application. For example, you can define custom words or upload audio to train an acoustic model. The following links provide more information about the IBM Speech to Text service:
-
-* [IBM Watson Speech to Text - Service Page](https://www.ibm.com/watson/services/speech-to-text/)
-* [IBM Watson Speech to Text - Documentation](https://cloud.ibm.com/docs/services/speech-to-text/index.html)
-* [IBM Watson Speech to Text - Demo](https://speech-to-text-demo.ng.bluemix.net/)

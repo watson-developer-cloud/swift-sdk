@@ -12,6 +12,7 @@ services=(
   AssistantV2
   CompareComplyV1
   DiscoveryV1
+  DiscoveryV2
   LanguageTranslatorV3
   NaturalLanguageClassifierV1
   NaturalLanguageUnderstandingV1
@@ -20,6 +21,7 @@ services=(
   TextToSpeechV1
   ToneAnalyzerV3
   VisualRecognitionV3
+  VisualRecognitionV4
 )
 
 ################################################################################
@@ -44,17 +46,7 @@ mkdir -p ${outdir}/services
 
 for service in ${services[@]}; do
   mkdir ${outdir}/services/${service}
-  xcodebuild_arguments=-project,WatsonDeveloperCloud.xcodeproj,-scheme,${service}
-  jazzy \
-    --module ${service} \
-    --xcodebuild-arguments $xcodebuild_arguments \
-    --output ${outdir}/services/${service} \
-    --clean \
-    --readme Source/${service}/README.md \
-    --documentation README.md \
-    --github_url https://github.com/watson-developer-cloud/swift-sdk \
-    --copyright "&copy; IBM Corp. 2016-$(date +%Y). (Last updated: $(date +%Y-%m-%d))" \
-    --hide-documentation-coverage
+  jazzy --config "Scripts/jazzy-config/${service}.jazzy.yaml"
 done
 
 ################################################################################

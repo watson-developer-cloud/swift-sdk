@@ -1,0 +1,16 @@
+copyright: Copyright 2020 IBM
+author: IBM
+github_url: https://github.com/watson-developer-cloud/swift-sdk
+clean: true
+output: ../../gh-pages/services/PersonalityInsightsV3
+module: PersonalityInsightsV3
+module_version: "3.5.0"
+documentation: ../../Source/PersonalityInsightsV3/README.md
+readme: ../../Source/PersonalityInsightsV3/README.md
+build_tool_arguments:
+  - "-project"
+  - "WatsonDeveloperCloud.xcodeproj"
+  - "-scheme"
+  - "PersonalityInsightsV3"
+  - "-destination"
+  - "platform=iOS Simulator,name=iPhone 11" 

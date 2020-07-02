@@ -4,7 +4,7 @@ github_url: https://github.com/watson-developer-cloud/swift-sdk
 clean: true
 output: ../../gh-pages/services/ToneAnalyzerV3
 module: ToneAnalyzerV3
-module_version: "3.5.0"
+module_version: "3.5.1"
 documentation: ../../Source/ToneAnalyzerV3/README.md
 readme: ../../Source/ToneAnalyzerV3/README.md
 build_tool_arguments:

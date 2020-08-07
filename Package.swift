@@ -43,9 +43,9 @@ let package = Package(
         .library(name: "VisualRecognitionV3", targets: ["VisualRecognitionV3"]),
         .library(name: "VisualRecognitionV4", targets: ["VisualRecognitionV4"]),
     ],
-    dependencies: [
-        .package(url: "https://github.com/IBM/swift-sdk-core", from: "1.0.0"),
-    ],
+   dependencies: [
+       .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "3.5.1")
+   ],
     targets: [
         .target(name: "AssistantV1", dependencies: ["IBMSwiftSDKCore"]),
         .testTarget(name: "AssistantV1Tests", dependencies: ["AssistantV1"]),

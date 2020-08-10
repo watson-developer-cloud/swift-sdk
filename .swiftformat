@@ -1,0 +1,4 @@
+--rules indent
+--ifdef noindent
+--indent 4
+--swiftversion 5.2

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,14 +62,14 @@ internal struct CreateEnvironmentRequest: Codable, Equatable {
     }
 
     /**
-     Initialize a `CreateEnvironmentRequest` with member variables.
+      Initialize a `CreateEnvironmentRequest` with member variables.
 
-     - parameter name: Name that identifies the environment.
-     - parameter description: Description of the environment.
-     - parameter size: Size of the environment. In the Lite plan the default and only accepted value is `LT`, in all
-       other plans the default is `S`.
+      - parameter name: Name that identifies the environment.
+      - parameter description: Description of the environment.
+      - parameter size: Size of the environment. In the Lite plan the default and only accepted value is `LT`, in all
+        other plans the default is `S`.
 
-     - returns: An initialized `CreateEnvironmentRequest`.
+      - returns: An initialized `CreateEnvironmentRequest`.
      */
     public init(
         name: String,

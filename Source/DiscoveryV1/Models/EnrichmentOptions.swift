@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -65,17 +65,17 @@ public struct EnrichmentOptions: Codable, Equatable {
     }
 
     /**
-     Initialize a `EnrichmentOptions` with member variables.
+      Initialize a `EnrichmentOptions` with member variables.
 
-     - parameter features: Object containing Natural Language Understanding features to be used.
-     - parameter language: ISO 639-1 code indicating the language to use for the analysis. This code overrides the
-       automatic language detection performed by the service. Valid codes are `ar` (Arabic), `en` (English), `fr`
-       (French), `de` (German), `it` (Italian), `pt` (Portuguese), `ru` (Russian), `es` (Spanish), and `sv` (Swedish).
-       **Note:** Not all features support all languages, automatic detection is recommended.
-     - parameter model: *For use with `elements` enrichments only.* The element extraction model to use. Models
-       available are: `contract`.
+      - parameter features: Object containing Natural Language Understanding features to be used.
+      - parameter language: ISO 639-1 code indicating the language to use for the analysis. This code overrides the
+        automatic language detection performed by the service. Valid codes are `ar` (Arabic), `en` (English), `fr`
+        (French), `de` (German), `it` (Italian), `pt` (Portuguese), `ru` (Russian), `es` (Spanish), and `sv` (Swedish).
+        **Note:** Not all features support all languages, automatic detection is recommended.
+      - parameter model: *For use with `elements` enrichments only.* The element extraction model to use. Models
+        available are: `contract`.
 
-     - returns: An initialized `EnrichmentOptions`.
+      - returns: An initialized `EnrichmentOptions`.
      */
     public init(
         features: NluEnrichmentFeatures? = nil,

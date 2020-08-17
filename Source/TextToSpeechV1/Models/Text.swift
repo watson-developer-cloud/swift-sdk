@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,11 +33,11 @@ internal struct Text: Codable, Equatable {
     }
 
     /**
-     Initialize a `Text` with member variables.
+      Initialize a `Text` with member variables.
 
-     - parameter text: The text to synthesize.
+      - parameter text: The text to synthesize.
 
-     - returns: An initialized `Text`.
+      - returns: An initialized `Text`.
      */
     public init(
         text: String

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,11 +32,11 @@ internal struct BaseTrainingDataObjects: Codable, Equatable {
     }
 
     /**
-     Initialize a `BaseTrainingDataObjects` with member variables.
+      Initialize a `BaseTrainingDataObjects` with member variables.
 
-     - parameter objects: Training data for specific objects.
+      - parameter objects: Training data for specific objects.
 
-     - returns: An initialized `BaseTrainingDataObjects`.
+      - returns: An initialized `BaseTrainingDataObjects`.
      */
     public init(
         objects: [TrainingDataObject]? = nil

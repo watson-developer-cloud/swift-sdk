@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,13 +38,13 @@ public struct Mention: Codable, Equatable {
     }
 
     /**
-     Initialize a `Mention` with member variables.
+      Initialize a `Mention` with member variables.
 
-     - parameter entity: The name of the entity.
-     - parameter location: An array of zero-based character offsets that indicate where the entity mentions begin and
-       end in the input text.
+      - parameter entity: The name of the entity.
+      - parameter location: An array of zero-based character offsets that indicate where the entity mentions begin and
+        end in the input text.
 
-     - returns: An initialized `Mention`.
+      - returns: An initialized `Mention`.
      */
     public init(
         entity: String,

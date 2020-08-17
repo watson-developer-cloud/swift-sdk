@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,13 +44,13 @@ public struct NluEnrichmentKeywords: Codable, Equatable {
     }
 
     /**
-     Initialize a `NluEnrichmentKeywords` with member variables.
+      Initialize a `NluEnrichmentKeywords` with member variables.
 
-     - parameter sentiment: When `true`, sentiment analysis of keywords will be performed on the specified field.
-     - parameter emotion: When `true`, emotion detection of keywords will be performed on the specified field.
-     - parameter limit: The maximum number of keywords to extract for each instance of the specified field.
+      - parameter sentiment: When `true`, sentiment analysis of keywords will be performed on the specified field.
+      - parameter emotion: When `true`, emotion detection of keywords will be performed on the specified field.
+      - parameter limit: The maximum number of keywords to extract for each instance of the specified field.
 
-     - returns: An initialized `NluEnrichmentKeywords`.
+      - returns: An initialized `NluEnrichmentKeywords`.
      */
     public init(
         sentiment: Bool? = nil,

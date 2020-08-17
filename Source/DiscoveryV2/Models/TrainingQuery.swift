@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,16 +62,16 @@ public struct TrainingQuery: Codable, Equatable {
     }
 
     /**
-     Initialize a `TrainingQuery` with member variables.
+      Initialize a `TrainingQuery` with member variables.
 
-     - parameter naturalLanguageQuery: The natural text query for the training query.
-     - parameter examples: Array of training examples.
-     - parameter queryID: The query ID associated with the training query.
-     - parameter filter: The filter used on the collection before the **natural_language_query** is applied.
-     - parameter created: The date and time the query was created.
-     - parameter updated: The date and time the query was updated.
+      - parameter naturalLanguageQuery: The natural text query for the training query.
+      - parameter examples: Array of training examples.
+      - parameter queryID: The query ID associated with the training query.
+      - parameter filter: The filter used on the collection before the **natural_language_query** is applied.
+      - parameter created: The date and time the query was created.
+      - parameter updated: The date and time the query was updated.
 
-     - returns: An initialized `TrainingQuery`.
+      - returns: An initialized `TrainingQuery`.
      */
     public init(
         naturalLanguageQuery: String,

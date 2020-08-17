@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,14 +60,14 @@ internal struct UpdateEnvironmentRequest: Codable, Equatable {
     }
 
     /**
-     Initialize a `UpdateEnvironmentRequest` with member variables.
+      Initialize a `UpdateEnvironmentRequest` with member variables.
 
-     - parameter name: Name that identifies the environment.
-     - parameter description: Description of the environment.
-     - parameter size: Size that the environment should be increased to. Environment size cannot be modified when
-       using a Lite plan. Environment size can only increased and not decreased.
+      - parameter name: Name that identifies the environment.
+      - parameter description: Description of the environment.
+      - parameter size: Size that the environment should be increased to. Environment size cannot be modified when
+        using a Lite plan. Environment size can only increased and not decreased.
 
-     - returns: An initialized `UpdateEnvironmentRequest`.
+      - returns: An initialized `UpdateEnvironmentRequest`.
      */
     public init(
         name: String? = nil,

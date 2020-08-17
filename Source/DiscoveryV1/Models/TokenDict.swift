@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,12 +33,12 @@ internal struct TokenDict: Codable, Equatable {
     }
 
     /**
-     Initialize a `TokenDict` with member variables.
+      Initialize a `TokenDict` with member variables.
 
-     - parameter tokenizationRules: An array of tokenization rules. Each rule contains, the original `text` string,
-       component `tokens`, any alternate character set `readings`, and which `part_of_speech` the text is from.
+      - parameter tokenizationRules: An array of tokenization rules. Each rule contains, the original `text` string,
+        component `tokens`, any alternate character set `readings`, and which `part_of_speech` the text is from.
 
-     - returns: An initialized `TokenDict`.
+      - returns: An initialized `TokenDict`.
      */
     public init(
         tokenizationRules: [TokenDictRule]? = nil

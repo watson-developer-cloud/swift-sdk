@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -84,22 +84,22 @@ public struct Credentials: Codable, Equatable {
     }
 
     /**
-     Initialize a `Credentials` with member variables.
+      Initialize a `Credentials` with member variables.
 
-     - parameter credentialID: Unique identifier for this set of credentials.
-     - parameter sourceType: The source that this credentials object connects to.
-       -  `box` indicates the credentials are used to connect an instance of Enterprise Box.
-       -  `salesforce` indicates the credentials are used to connect to Salesforce.
-       -  `sharepoint` indicates the credentials are used to connect to Microsoft SharePoint Online.
-       -  `web_crawl` indicates the credentials are used to perform a web crawl.
-       =  `cloud_object_storage` indicates the credentials are used to connect to an IBM Cloud Object Store.
-     - parameter credentialDetails: Object containing details of the stored credentials.
-       Obtain credentials for your source from the administrator of the source.
-     - parameter status: The current status of this set of credentials. `connected` indicates that the credentials
-       are available to use with the source configuration of a collection. `invalid` refers to the credentials (for
-       example, the password provided has expired) and must be corrected before they can be used with a collection.
+      - parameter credentialID: Unique identifier for this set of credentials.
+      - parameter sourceType: The source that this credentials object connects to.
+        -  `box` indicates the credentials are used to connect an instance of Enterprise Box.
+        -  `salesforce` indicates the credentials are used to connect to Salesforce.
+        -  `sharepoint` indicates the credentials are used to connect to Microsoft SharePoint Online.
+        -  `web_crawl` indicates the credentials are used to perform a web crawl.
+        =  `cloud_object_storage` indicates the credentials are used to connect to an IBM Cloud Object Store.
+      - parameter credentialDetails: Object containing details of the stored credentials.
+        Obtain credentials for your source from the administrator of the source.
+      - parameter status: The current status of this set of credentials. `connected` indicates that the credentials
+        are available to use with the source configuration of a collection. `invalid` refers to the credentials (for
+        example, the password provided has expired) and must be corrected before they can be used with a collection.
 
-     - returns: An initialized `Credentials`.
+      - returns: An initialized `Credentials`.
      */
     public init(
         credentialID: String? = nil,

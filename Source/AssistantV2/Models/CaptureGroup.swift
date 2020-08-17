@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,13 +36,13 @@ public struct CaptureGroup: Codable, Equatable {
     }
 
     /**
-     Initialize a `CaptureGroup` with member variables.
+      Initialize a `CaptureGroup` with member variables.
 
-     - parameter group: A recognized capture group for the entity.
-     - parameter location: Zero-based character offsets that indicate where the entity value begins and ends in the
-       input text.
+      - parameter group: A recognized capture group for the entity.
+      - parameter location: Zero-based character offsets that indicate where the entity value begins and ends in the
+        input text.
 
-     - returns: An initialized `CaptureGroup`.
+      - returns: An initialized `CaptureGroup`.
      */
     public init(
         group: String,

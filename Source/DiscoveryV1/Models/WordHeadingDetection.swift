@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,12 +38,12 @@ public struct WordHeadingDetection: Codable, Equatable {
     }
 
     /**
-     Initialize a `WordHeadingDetection` with member variables.
+      Initialize a `WordHeadingDetection` with member variables.
 
-     - parameter fonts: Array of font matching configurations.
-     - parameter styles: Array of Microsoft Word styles to convert.
+      - parameter fonts: Array of font matching configurations.
+      - parameter styles: Array of Microsoft Word styles to convert.
 
-     - returns: An initialized `WordHeadingDetection`.
+      - returns: An initialized `WordHeadingDetection`.
      */
     public init(
         fonts: [FontSetting]? = nil,

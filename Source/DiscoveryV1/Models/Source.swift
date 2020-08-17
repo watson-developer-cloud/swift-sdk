@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -73,21 +73,21 @@ public struct Source: Codable, Equatable {
     }
 
     /**
-     Initialize a `Source` with member variables.
+      Initialize a `Source` with member variables.
 
-     - parameter type: The type of source to connect to.
-       -  `box` indicates the configuration is to connect an instance of Enterprise Box.
-       -  `salesforce` indicates the configuration is to connect to Salesforce.
-       -  `sharepoint` indicates the configuration is to connect to Microsoft SharePoint Online.
-       -  `web_crawl` indicates the configuration is to perform a web page crawl.
-       -  `cloud_object_storage` indicates the configuration is to connect to a cloud object store.
-     - parameter credentialID: The **credential_id** of the credentials to use to connect to the source. Credentials
-       are defined using the **credentials** method. The **source_type** of the credentials used must match the **type**
-       field specified in this object.
-     - parameter schedule: Object containing the schedule information for the source.
-     - parameter options: The **options** object defines which items to crawl from the source system.
+      - parameter type: The type of source to connect to.
+        -  `box` indicates the configuration is to connect an instance of Enterprise Box.
+        -  `salesforce` indicates the configuration is to connect to Salesforce.
+        -  `sharepoint` indicates the configuration is to connect to Microsoft SharePoint Online.
+        -  `web_crawl` indicates the configuration is to perform a web page crawl.
+        -  `cloud_object_storage` indicates the configuration is to connect to a cloud object store.
+      - parameter credentialID: The **credential_id** of the credentials to use to connect to the source. Credentials
+        are defined using the **credentials** method. The **source_type** of the credentials used must match the **type**
+        field specified in this object.
+      - parameter schedule: Object containing the schedule information for the source.
+      - parameter options: The **options** object defines which items to crawl from the source system.
 
-     - returns: An initialized `Source`.
+      - returns: An initialized `Source`.
      */
     public init(
         type: String? = nil,

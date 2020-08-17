@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,16 +62,16 @@ public struct FontSetting: Codable, Equatable {
     }
 
     /**
-     Initialize a `FontSetting` with member variables.
+      Initialize a `FontSetting` with member variables.
 
-     - parameter level: The HTML heading level that any content with the matching font is converted to.
-     - parameter minSize: The minimum size of the font to match.
-     - parameter maxSize: The maximum size of the font to match.
-     - parameter bold: When `true`, the font is matched if it is bold.
-     - parameter italic: When `true`, the font is matched if it is italic.
-     - parameter name: The name of the font.
+      - parameter level: The HTML heading level that any content with the matching font is converted to.
+      - parameter minSize: The minimum size of the font to match.
+      - parameter maxSize: The maximum size of the font to match.
+      - parameter bold: When `true`, the font is matched if it is bold.
+      - parameter italic: When `true`, the font is matched if it is italic.
+      - parameter name: The name of the font.
 
-     - returns: An initialized `FontSetting`.
+      - returns: An initialized `FontSetting`.
      */
     public init(
         level: Int? = nil,

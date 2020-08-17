@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,13 +33,13 @@ public struct DialogNodeOutputModifiers: Codable, Equatable {
     }
 
     /**
-     Initialize a `DialogNodeOutputModifiers` with member variables.
+      Initialize a `DialogNodeOutputModifiers` with member variables.
 
-     - parameter overwrite: Whether values in the output will overwrite output values in an array specified by
-       previously executed dialog nodes. If this option is set to `false`, new values will be appended to previously
-       specified values.
+      - parameter overwrite: Whether values in the output will overwrite output values in an array specified by
+        previously executed dialog nodes. If this option is set to `false`, new values will be appended to previously
+        specified values.
 
-     - returns: An initialized `DialogNodeOutputModifiers`.
+      - returns: An initialized `DialogNodeOutputModifiers`.
      */
     public init(
         overwrite: Bool? = nil

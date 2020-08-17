@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -68,24 +68,24 @@ public struct SourceOptions: Codable, Equatable {
     }
 
     /**
-     Initialize a `SourceOptions` with member variables.
+      Initialize a `SourceOptions` with member variables.
 
-     - parameter folders: Array of folders to crawl from the Box source. Only valid, and required, when the **type**
-       field of the **source** object is set to `box`.
-     - parameter objects: Array of Salesforce document object types to crawl from the Salesforce source. Only valid,
-       and required, when the **type** field of the **source** object is set to `salesforce`.
-     - parameter siteCollections: Array of Microsoft SharePointoint Online site collections to crawl from the
-       SharePoint source. Only valid and required when the **type** field of the **source** object is set to
-       `sharepoint`.
-     - parameter urls: Array of Web page URLs to begin crawling the web from. Only valid and required when the
-       **type** field of the **source** object is set to `web_crawl`.
-     - parameter buckets: Array of cloud object store buckets to begin crawling. Only valid and required when the
-       **type** field of the **source** object is set to `cloud_object_store`, and the **crawl_all_buckets** field is
-       `false` or not specified.
-     - parameter crawlAllBuckets: When `true`, all buckets in the specified cloud object store are crawled. If set to
-       `true`, the **buckets** array must not be specified.
+      - parameter folders: Array of folders to crawl from the Box source. Only valid, and required, when the **type**
+        field of the **source** object is set to `box`.
+      - parameter objects: Array of Salesforce document object types to crawl from the Salesforce source. Only valid,
+        and required, when the **type** field of the **source** object is set to `salesforce`.
+      - parameter siteCollections: Array of Microsoft SharePointoint Online site collections to crawl from the
+        SharePoint source. Only valid and required when the **type** field of the **source** object is set to
+        `sharepoint`.
+      - parameter urls: Array of Web page URLs to begin crawling the web from. Only valid and required when the
+        **type** field of the **source** object is set to `web_crawl`.
+      - parameter buckets: Array of cloud object store buckets to begin crawling. Only valid and required when the
+        **type** field of the **source** object is set to `cloud_object_store`, and the **crawl_all_buckets** field is
+        `false` or not specified.
+      - parameter crawlAllBuckets: When `true`, all buckets in the specified cloud object store are crawled. If set to
+        `true`, the **buckets** array must not be specified.
 
-     - returns: An initialized `SourceOptions`.
+      - returns: An initialized `SourceOptions`.
      */
     public init(
         folders: [SourceOptionsFolder]? = nil,

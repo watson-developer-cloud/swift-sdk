@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ import Foundation
 /**
  A stateful message request formatted for the Watson Assistant service.
  */
-internal struct MessageRequest: Codable, Equatable {
+public struct MessageRequest: Codable, Equatable {
 
     /**
      An input object that includes the input text.
@@ -40,15 +40,15 @@ internal struct MessageRequest: Codable, Equatable {
     }
 
     /**
-     Initialize a `MessageRequest` with member variables.
+      Initialize a `MessageRequest` with member variables.
 
-     - parameter input: An input object that includes the input text.
-     - parameter context: Context data for the conversation. You can use this property to set or modify context
-       variables, which can also be accessed by dialog nodes. The context is stored by the assistant on a per-session
-       basis.
-       **Note:** The total size of the context data stored for a stateful session cannot exceed 100KB.
+      - parameter input: An input object that includes the input text.
+      - parameter context: Context data for the conversation. You can use this property to set or modify context
+        variables, which can also be accessed by dialog nodes. The context is stored by the assistant on a per-session
+        basis.
+        **Note:** The total size of the context data stored for a stateful session cannot exceed 100KB.
 
-     - returns: An initialized `MessageRequest`.
+      - returns: An initialized `MessageRequest`.
      */
     public init(
         input: MessageInput? = nil,

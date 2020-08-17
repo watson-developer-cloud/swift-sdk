@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -71,22 +71,22 @@ public struct MessageRequest: Codable, Equatable {
     }
 
     /**
-     Initialize a `MessageRequest` with member variables.
+      Initialize a `MessageRequest` with member variables.
 
-     - parameter input: An input object that includes the input text.
-     - parameter intents: Intents to use when evaluating the user input. Include intents from the previous response
-       to continue using those intents rather than trying to recognize intents in the new input.
-     - parameter entities: Entities to use when evaluating the message. Include entities from the previous response
-       to continue using those entities rather than detecting entities in the new input.
-     - parameter alternateIntents: Whether to return more than one intent. A value of `true` indicates that all
-       matching intents are returned.
-     - parameter context: State information for the conversation. To maintain state, include the context from the
-       previous response.
-     - parameter output: An output object that includes the response to the user, the dialog nodes that were
-       triggered, and messages from the log.
-     - parameter actions: An array of objects describing any actions requested by the dialog node.
+      - parameter input: An input object that includes the input text.
+      - parameter intents: Intents to use when evaluating the user input. Include intents from the previous response
+        to continue using those intents rather than trying to recognize intents in the new input.
+      - parameter entities: Entities to use when evaluating the message. Include entities from the previous response
+        to continue using those entities rather than detecting entities in the new input.
+      - parameter alternateIntents: Whether to return more than one intent. A value of `true` indicates that all
+        matching intents are returned.
+      - parameter context: State information for the conversation. To maintain state, include the context from the
+        previous response.
+      - parameter output: An output object that includes the response to the user, the dialog nodes that were
+        triggered, and messages from the log.
+      - parameter actions: An array of objects describing any actions requested by the dialog node.
 
-     - returns: An initialized `MessageRequest`.
+      - returns: An initialized `MessageRequest`.
      */
     public init(
         input: MessageInput? = nil,

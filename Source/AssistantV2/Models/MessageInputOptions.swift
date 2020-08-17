@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,33 +69,33 @@ public struct MessageInputOptions: Codable, Equatable {
     }
 
     /**
-     Initialize a `MessageInputOptions` with member variables.
+      Initialize a `MessageInputOptions` with member variables.
 
-     - parameter restart: Whether to restart dialog processing at the root of the dialog, regardless of any
-       previously visited nodes. **Note:** This does not affect `turn_count` or any other context variables.
-     - parameter alternateIntents: Whether to return more than one intent. Set to `true` to return all matching
-       intents.
-     - parameter spelling: Spelling correction options for the message. Any options specified on an individual
-       message override the settings configured for the skill.
-     - parameter debug: Whether to return additional diagnostic information. Set to `true` to return additional
-       information in the `output.debug` property. If you also specify **return_context**=`true`, the returned skill
-       context includes the `system.state` property.
-     - parameter returnContext: Whether to return session context with the response. If you specify `true`, the
-       response includes the `context` property. If you also specify **debug**=`true`, the returned skill context
-       includes the `system.state` property.
-     - parameter export: Whether to return session context, including full conversation state. If you specify `true`,
-       the response includes the `context` property, and the skill context includes the `system.state` property.
-       **Note:** If **export**=`true`, the context is returned regardless of the value of **return_context**.
+      - parameter restart: Whether to restart dialog processing at the root of the dialog, regardless of any
+        previously visited nodes. **Note:** This does not affect `turn_count` or any other context variables.
+      - parameter alternateIntents: Whether to return more than one intent. Set to `true` to return all matching
+        intents.
+      - parameter spelling: Spelling correction options for the message. Any options specified on an individual
+        message override the settings configured for the skill.
+      - parameter debug: Whether to return additional diagnostic information. Set to `true` to return additional
+        information in the `output.debug` property. If you also specify **return_context**=`true`, the returned skill
+        context includes the `system.state` property.
+      - parameter returnContext: Whether to return session context with the response. If you specify `true`, the
+        response includes the `context` property. If you also specify **debug**=`true`, the returned skill context
+        includes the `system.state` property.
+      - parameter export: Whether to return session context, including full conversation state. If you specify `true`,
+        the response includes the `context` property, and the skill context includes the `system.state` property.
+        **Note:** If **export**=`true`, the context is returned regardless of the value of **return_context**.
 
-     - returns: An initialized `MessageInputOptions`.
+      - returns: An initialized `MessageInputOptions`.
      */
     public init(
-        debug: Bool? = nil,
         restart: Bool? = nil,
         alternateIntents: Bool? = nil,
+        spelling: MessageInputOptionsSpelling? = nil,
+        debug: Bool? = nil,
         returnContext: Bool? = nil,
-        export: Bool? = nil,
-        spelling: MessageInputOptionsSpelling? = nil
+        export: Bool? = nil
     )
     {
         self.restart = restart

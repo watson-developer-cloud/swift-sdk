@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,11 +32,11 @@ public struct WorkspaceSystemSettingsOffTopic: Codable, Equatable {
     }
 
     /**
-     Initialize a `WorkspaceSystemSettingsOffTopic` with member variables.
+      Initialize a `WorkspaceSystemSettingsOffTopic` with member variables.
 
-     - parameter enabled: Whether enhanced irrelevance detection is enabled for the workspace.
+      - parameter enabled: Whether enhanced irrelevance detection is enabled for the workspace.
 
-     - returns: An initialized `WorkspaceSystemSettingsOffTopic`.
+      - returns: An initialized `WorkspaceSystemSettingsOffTopic`.
      */
     public init(
         enabled: Bool? = nil

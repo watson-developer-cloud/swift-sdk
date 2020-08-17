@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,14 +40,14 @@ public struct Expansion: Codable, Equatable {
     }
 
     /**
-     Initialize a `Expansion` with member variables.
+      Initialize a `Expansion` with member variables.
 
-     - parameter expandedTerms: A list of terms that this expansion will be expanded to. If specified without
-       **input_terms**, it also functions as the input term list.
-     - parameter inputTerms: A list of terms that will be expanded for this expansion. If specified, only the items
-       in this list are expanded.
+      - parameter expandedTerms: A list of terms that this expansion will be expanded to. If specified without
+        **input_terms**, it also functions as the input term list.
+      - parameter inputTerms: A list of terms that will be expanded for this expansion. If specified, only the items
+        in this list are expanded.
 
-     - returns: An initialized `Expansion`.
+      - returns: An initialized `Expansion`.
      */
     public init(
         expandedTerms: [String],

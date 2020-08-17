@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,11 +32,11 @@ internal struct GatewayName: Codable, Equatable {
     }
 
     /**
-     Initialize a `GatewayName` with member variables.
+      Initialize a `GatewayName` with member variables.
 
-     - parameter name: User-defined name.
+      - parameter name: User-defined name.
 
-     - returns: An initialized `GatewayName`.
+      - returns: An initialized `GatewayName`.
      */
     public init(
         name: String? = nil

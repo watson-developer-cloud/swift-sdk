@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,14 +38,14 @@ public struct MessageContext: Codable, Equatable {
     }
 
     /**
-     Initialize a `MessageContext` with member variables.
+      Initialize a `MessageContext` with member variables.
 
-     - parameter global: Session context data that is shared by all skills used by the Assistant.
-     - parameter skills: Information specific to particular skills used by the assistant.
-       **Note:** Currently, only a single child property is supported, containing variables that apply to the dialog
-       skill used by the assistant.
+      - parameter global: Session context data that is shared by all skills used by the Assistant.
+      - parameter skills: Information specific to particular skills used by the assistant.
+        **Note:** Currently, only a single child property is supported, containing variables that apply to the dialog
+        skill used by the assistant.
 
-     - returns: An initialized `MessageContext`.
+      - returns: An initialized `MessageContext`.
      */
     public init(
         global: MessageContextGlobal? = nil,

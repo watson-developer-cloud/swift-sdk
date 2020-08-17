@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,12 +38,12 @@ internal struct TrainingExamplePatch: Codable, Equatable {
     }
 
     /**
-     Initialize a `TrainingExamplePatch` with member variables.
+      Initialize a `TrainingExamplePatch` with member variables.
 
-     - parameter crossReference: The example to add.
-     - parameter relevance: The relevance value for this example.
+      - parameter crossReference: The example to add.
+      - parameter relevance: The relevance value for this example.
 
-     - returns: An initialized `TrainingExamplePatch`.
+      - returns: An initialized `TrainingExamplePatch`.
      */
     public init(
         crossReference: String? = nil,

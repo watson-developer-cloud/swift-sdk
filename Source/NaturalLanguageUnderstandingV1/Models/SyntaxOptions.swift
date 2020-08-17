@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,12 +38,12 @@ public struct SyntaxOptions: Codable, Equatable {
     }
 
     /**
-     Initialize a `SyntaxOptions` with member variables.
+      Initialize a `SyntaxOptions` with member variables.
 
-     - parameter tokens: Tokenization options.
-     - parameter sentences: Set this to `true` to return sentence information.
+      - parameter tokens: Tokenization options.
+      - parameter sentences: Set this to `true` to return sentence information.
 
-     - returns: An initialized `SyntaxOptions`.
+      - returns: An initialized `SyntaxOptions`.
      */
     public init(
         tokens: SyntaxOptionsTokens? = nil,

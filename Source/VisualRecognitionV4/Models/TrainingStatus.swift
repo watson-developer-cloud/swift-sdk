@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,11 +32,11 @@ public struct TrainingStatus: Codable, Equatable {
     }
 
     /**
-     Initialize a `TrainingStatus` with member variables.
+      Initialize a `TrainingStatus` with member variables.
 
-     - parameter objects: Training status for the objects in the collection.
+      - parameter objects: Training status for the objects in the collection.
 
-     - returns: An initialized `TrainingStatus`.
+      - returns: An initialized `TrainingStatus`.
      */
     public init(
         objects: ObjectTrainingStatus

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,12 +69,12 @@ public struct Category: Codable, Equatable {
     }
 
     /**
-     Initialize a `Category` with member variables.
+      Initialize a `Category` with member variables.
 
-     - parameter label: The category of the associated element.
-     - parameter provenanceIDs: Hashed values that you can send to IBM to provide feedback or receive support.
+      - parameter label: The category of the associated element.
+      - parameter provenanceIDs: Hashed values that you can send to IBM to provide feedback or receive support.
 
-     - returns: An initialized `Category`.
+      - returns: An initialized `Category`.
      */
     public init(
         label: String? = nil,

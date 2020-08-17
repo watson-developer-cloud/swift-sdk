@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,12 +33,12 @@ internal struct CustomWords: Codable, Equatable {
     }
 
     /**
-     Initialize a `CustomWords` with member variables.
+      Initialize a `CustomWords` with member variables.
 
-     - parameter words: An array of `CustomWord` objects that provides information about each custom word that is to
-       be added to or updated in the custom language model.
+      - parameter words: An array of `CustomWord` objects that provides information about each custom word that is to
+        be added to or updated in the custom language model.
 
-     - returns: An initialized `CustomWords`.
+      - returns: An initialized `CustomWords`.
      */
     public init(
         words: [CustomWord]

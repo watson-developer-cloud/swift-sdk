@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,8 +22,7 @@ public struct DialogNodeOutputGeneric: Codable, Equatable {
     /**
      The type of response returned by the dialog node. The specified response type must be supported by the client
      application or channel.
-     **Note:** The **search_skill** response type is available only for Plus and Premium users, and is used only by the
-     v2 runtime API.
+     **Note:** The **search_skill** response type is used only by the v2 runtime API.
      */
     public enum ResponseType: String {
         case text = "text"
@@ -63,8 +62,7 @@ public struct DialogNodeOutputGeneric: Codable, Equatable {
     /**
      The type of response returned by the dialog node. The specified response type must be supported by the client
      application or channel.
-     **Note:** The **search_skill** response type is available only for Plus and Premium users, and is used only by the
-     v2 runtime API.
+     **Note:** The **search_skill** response type is used only by the v2 runtime API.
      */
     public var responseType: String
 
@@ -174,45 +172,44 @@ public struct DialogNodeOutputGeneric: Codable, Equatable {
     }
 
     /**
-     Initialize a `DialogNodeOutputGeneric` with member variables.
+      Initialize a `DialogNodeOutputGeneric` with member variables.
 
-     - parameter responseType: The type of response returned by the dialog node. The specified response type must be
-       supported by the client application or channel.
-       **Note:** The **search_skill** response type is available only for Plus and Premium users, and is used only by
-       the v2 runtime API.
-     - parameter values: A list of one or more objects defining text responses. Required when
-       **response_type**=`text`.
-     - parameter selectionPolicy: How a response is selected from the list, if more than one response is specified.
-       Valid only when **response_type**=`text`.
-     - parameter delimiter: The delimiter to use as a separator between responses when
-       `selection_policy`=`multiline`.
-     - parameter time: How long to pause, in milliseconds. The valid values are from 0 to 10000. Valid only when
-       **response_type**=`pause`.
-     - parameter typing: Whether to send a "user is typing" event during the pause. Ignored if the channel does not
-       support this event. Valid only when **response_type**=`pause`.
-     - parameter source: The URL of the image. Required when **response_type**=`image`.
-     - parameter title: An optional title to show before the response. Valid only when **response_type**=`image` or
-       `option`.
-     - parameter description: An optional description to show with the response. Valid only when
-       **response_type**=`image` or `option`.
-     - parameter preference: The preferred type of control to display, if supported by the channel. Valid only when
-       **response_type**=`option`.
-     - parameter options: An array of objects describing the options from which the user can choose. You can include
-       up to 20 options. Required when **response_type**=`option`.
-     - parameter messageToHumanAgent: An optional message to be sent to the human agent who will be taking over the
-       conversation. Valid only when **reponse_type**=`connect_to_agent`.
-     - parameter query: The text of the search query. This can be either a natural-language query or a query that
-       uses the Discovery query language syntax, depending on the value of the **query_type** property. For more
-       information, see the [Discovery service
-       documentation](https://cloud.ibm.com/docs/discovery?topic=discovery-query-operators#query-operators). Required
-       when **response_type**=`search_skill`.
-     - parameter queryType: The type of the search query. Required when **response_type**=`search_skill`.
-     - parameter filter: An optional filter that narrows the set of documents to be searched. For more information,
-       see the [Discovery service documentation]([Discovery service
-       documentation](https://cloud.ibm.com/docs/discovery?topic=discovery-query-parameters#filter).
-     - parameter discoveryVersion: The version of the Discovery service API to use for the query.
+      - parameter responseType: The type of response returned by the dialog node. The specified response type must be
+        supported by the client application or channel.
+        **Note:** The **search_skill** response type is used only by the v2 runtime API.
+      - parameter values: A list of one or more objects defining text responses. Required when
+        **response_type**=`text`.
+      - parameter selectionPolicy: How a response is selected from the list, if more than one response is specified.
+        Valid only when **response_type**=`text`.
+      - parameter delimiter: The delimiter to use as a separator between responses when
+        `selection_policy`=`multiline`.
+      - parameter time: How long to pause, in milliseconds. The valid values are from 0 to 10000. Valid only when
+        **response_type**=`pause`.
+      - parameter typing: Whether to send a "user is typing" event during the pause. Ignored if the channel does not
+        support this event. Valid only when **response_type**=`pause`.
+      - parameter source: The URL of the image. Required when **response_type**=`image`.
+      - parameter title: An optional title to show before the response. Valid only when **response_type**=`image` or
+        `option`.
+      - parameter description: An optional description to show with the response. Valid only when
+        **response_type**=`image` or `option`.
+      - parameter preference: The preferred type of control to display, if supported by the channel. Valid only when
+        **response_type**=`option`.
+      - parameter options: An array of objects describing the options from which the user can choose. You can include
+        up to 20 options. Required when **response_type**=`option`.
+      - parameter messageToHumanAgent: An optional message to be sent to the human agent who will be taking over the
+        conversation. Valid only when **reponse_type**=`connect_to_agent`.
+      - parameter query: The text of the search query. This can be either a natural-language query or a query that
+        uses the Discovery query language syntax, depending on the value of the **query_type** property. For more
+        information, see the [Discovery service
+        documentation](https://cloud.ibm.com/docs/discovery?topic=discovery-query-operators#query-operators). Required
+        when **response_type**=`search_skill`.
+      - parameter queryType: The type of the search query. Required when **response_type**=`search_skill`.
+      - parameter filter: An optional filter that narrows the set of documents to be searched. For more information,
+        see the [Discovery service documentation]([Discovery service
+        documentation](https://cloud.ibm.com/docs/discovery?topic=discovery-query-parameters#filter).
+      - parameter discoveryVersion: The version of the Discovery service API to use for the query.
 
-     - returns: An initialized `DialogNodeOutputGeneric`.
+      - returns: An initialized `DialogNodeOutputGeneric`.
      */
     public init(
         responseType: String,

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,13 +33,13 @@ public struct NluEnrichmentRelations: Codable, Equatable {
     }
 
     /**
-     Initialize a `NluEnrichmentRelations` with member variables.
+      Initialize a `NluEnrichmentRelations` with member variables.
 
-     - parameter model: *For use with `natural_language_understanding` enrichments only.* The enrichement model to
-       use with relationship extraction. May be a custom model provided by Watson Knowledge Studio, the default public
-       model is`en-news`.
+      - parameter model: *For use with `natural_language_understanding` enrichments only.* The enrichement model to
+        use with relationship extraction. May be a custom model provided by Watson Knowledge Studio, the default public
+        model is`en-news`.
 
-     - returns: An initialized `NluEnrichmentRelations`.
+      - returns: An initialized `NluEnrichmentRelations`.
      */
     public init(
         model: String? = nil

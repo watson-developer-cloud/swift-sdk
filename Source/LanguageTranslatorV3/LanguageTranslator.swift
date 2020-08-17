@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,15 +19,15 @@ import Foundation
 import IBMSwiftSDKCore
 
 /**
- IBM Watson&trade; Language Translator translates text from one language to another. The service offers multiple IBM
- provided translation models that you can customize based on your unique terminology and language. Use Language
+ IBM Watson&trade; Language Translator translates text from one language to another. The service offers multiple
+ IBM-provided translation models that you can customize based on your unique terminology and language. Use Language
  Translator to take news from across the globe and present it in your language, communicate with your customers in their
  own language, and more.
  */
 public class LanguageTranslator {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL: String? = "https://gateway.watsonplatform.net/language-translator/api"
+    public var serviceURL: String? = "https://api.us-south.language-translator.watson.cloud.ibm.com"
 
     /// Service identifiers
     internal let serviceName = "LanguageTranslator"
@@ -55,10 +55,11 @@ public class LanguageTranslator {
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
      */
-    public init(version: String) throws {
+    public init?(version: String) {
         self.version = version
-
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
+            return nil
+        }
         self.authenticator = authenticator
 
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
@@ -84,8 +85,8 @@ public class LanguageTranslator {
 
     #if !os(Linux)
     /**
-     Allow network requests to a server without verification of the server certificate.
-     **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
+      Allow network requests to a server without verification of the server certificate.
+      **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
      */
     public func disableSSLVerification() {
         session = InsecureConnection.session()
@@ -128,17 +129,68 @@ public class LanguageTranslator {
     }
 
     /**
+     List supported languages.
+
+     Lists all supported languages. The method returns an array of supported languages with information about each
+     language. Languages are listed in alphabetical order by language code (for example, `af`, `ar`).
+
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func listLanguages(
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Languages>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listLanguages")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceEndpoint + "/v3/languages",
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
      Translate.
 
-     Translates the input text from the source language to the target language. A target language or translation model
-     ID is required. The service attempts to detect the language of the source text if it is not specified.
+     Translates the input text from the source language to the target language. Specify a model ID that indicates the
+     source and target languages, or specify the source and target languages individually. You can omit the source
+     language to have the service attempt to detect the language from the input text. If you omit the source language,
+     the request must contain sufficient input text for the service to identify the source language.
 
-     - parameter text: Input text in UTF-8 encoding. Multiple entries will result in multiple translations in the
-       response.
-     - parameter modelID: The model to use for translation. For example, `en-de` selects the IBM provided base model
-       for English to German translation. A model ID overrides the source and target parameters and is required if you
-       use a custom model. If no model ID is specified, you must specify a target language.
-     - parameter source: Language code that specifies the language of the source document.
+     - parameter text: Input text in UTF-8 encoding. Multiple entries result in multiple translations in the response.
+     - parameter modelID: The model to use for translation. For example, `en-de` selects the IBM-provided base model
+       for English-to-German translation. A model ID overrides the `source` and `target` parameters and is required if
+       you use a custom model. If no model ID is specified, you must specify at least a target language.
+     - parameter source: Language code that specifies the language of the input text. If omitted, the service derives
+       the source language from the input text. The input must contain sufficient text for the service to identify the
+       language reliably.
      - parameter target: Language code that specifies the target language for translation. Required if model ID is not
        specified.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -314,10 +366,10 @@ public class LanguageTranslator {
 
      - parameter source: Specify a language code to filter results by source language.
      - parameter target: Specify a language code to filter results by target language.
-     - parameter `default`: If the default parameter isn't specified, the service will return all models (default and
-       non-default) for each language pair. To return only default models, set this to `true`. To return only
-       non-default models, set this to `false`. There is exactly one default model per language pair, the IBM provided
-       base model.
+     - parameter `default`: If the `default` parameter isn't specified, the service returns all models (default and
+       non-default) for each language pair. To return only default models, set this parameter to `true`. To return only
+       non-default models, set this parameter to `false`. There is exactly one default model, the IBM-provided base
+       model, per language pair.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -378,29 +430,74 @@ public class LanguageTranslator {
     /**
      Create model.
 
-     Uploads Translation Memory eXchange (TMX) files to customize a translation model.
-     You can either customize a model with a forced glossary or with a corpus that contains parallel sentences. To
-     create a model that is customized with a parallel corpus <b>and</b> a forced glossary, proceed in two steps:
-     customize with a parallel corpus first and then customize the resulting model with a glossary. Depending on the
-     type of customization and the size of the uploaded corpora, training can range from minutes for a glossary to
-     several hours for a large parallel corpus. You can upload a single forced glossary file and this file must be less
-     than <b>10 MB</b>. You can upload multiple parallel corpora tmx files. The cumulative file size of all uploaded
-     files is limited to <b>250 MB</b>. To successfully train with a parallel corpus you must have at least <b>5,000
-     parallel sentences</b> in your corpus.
-     You can have a <b>maximum of 10 custom models per language pair</b>.
+     Uploads training files to customize a translation model. You can customize a model with a forced glossary or with a
+     parallel corpus:
+     * Use a *forced glossary* to force certain terms and phrases to be translated in a specific way. You can upload
+     only a single forced glossary file for a model. The size of a forced glossary file for a custom model is limited to
+     10 MB.
+     * Use a *parallel corpus* when you want your custom model to learn from general translation patterns in parallel
+     sentences in your samples. What your model learns from a parallel corpus can improve translation results for input
+     text that the model has not been trained on. You can upload multiple parallel corpora files with a request. To
+     successfully train with parallel corpora, the corpora files must contain a cumulative total of at least 5000
+     parallel sentences. The cumulative size of all uploaded corpus files for a custom model is limited to 250 MB.
+     Depending on the type of customization and the size of the uploaded files, training time can range from minutes for
+     a glossary to several hours for a large parallel corpus. To create a model that is customized with a parallel
+     corpus and a forced glossary, customize the model with a parallel corpus first and then customize the resulting
+     model with a forced glossary.
+     You can create a maximum of 10 custom models per language pair. For more information about customizing a
+     translation model, including the formatting and character restrictions for data files, see [Customizing your
+     model](https://cloud.ibm.com/docs/language-translator?topic=language-translator-customizing).
+     #### Supported file formats
+      You can provide your training data for customization in the following document formats:
+     * **TMX** (`.tmx`) - Translation Memory eXchange (TMX) is an XML specification for the exchange of translation
+     memories.
+     * **XLIFF** (`.xliff`) - XML Localization Interchange File Format (XLIFF) is an XML specification for the exchange
+     of translation memories.
+     * **CSV** (`.csv`) - Comma-separated values (CSV) file with two columns for aligned sentences and phrases. The
+     first row contains the language code.
+     * **TSV** (`.tsv` or `.tab`) - Tab-separated values (TSV) file with two columns for aligned sentences and phrases.
+     The first row contains the language code.
+     * **JSON** (`.json`) - Custom JSON format for specifying aligned sentences and phrases.
+     * **Microsoft Excel** (`.xls` or `.xlsx`) - Excel file with the first two columns for aligned sentences and
+     phrases. The first row contains the language code.
+     You must encode all text data in UTF-8 format. For more information, see [Supported document formats for training
+     data](https://cloud.ibm.com/docs/language-translator?topic=language-translator-customizing#supported-document-formats-for-training-data).
+     #### Specifying file formats
+      You can indicate the format of a file by including the file extension with the file name. Use the file extensions
+     shown in **Supported file formats**.
+     Alternatively, you can omit the file extension and specify one of the following `content-type` specifications for
+     the file:
+     * **TMX** - `application/x-tmx+xml`
+     * **XLIFF** - `application/xliff+xml`
+     * **CSV** - `text/csv`
+     * **TSV** - `text/tab-separated-values`
+     * **JSON** - `application/json`
+     * **Microsoft Excel** - `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`
+     For example, with `curl`, use the following `content-type` specification to indicate the format of a CSV file named
+     **glossary**:
+     `--form "forced_glossary=@glossary;type=text/csv"`.
 
-     - parameter baseModelID: The model ID of the model to use as the base for customization. To see available models,
-       use the `List models` method. Usually all IBM provided models are customizable. In addition, all your models that
-       have been created via parallel corpus customization, can be further customized with a forced glossary.
-     - parameter forcedGlossary: A TMX file with your customizations. The customizations in the file completely
-       overwrite the domain translaton data, including high frequency or high confidence phrase translations. You can
-       upload only one glossary with a file size less than 10 MB per call. A forced glossary should contain single words
-       or short phrases.
-     - parameter parallelCorpus: A TMX file with parallel sentences for source and target language. You can upload
-       multiple parallel_corpus files in one request. All uploaded parallel_corpus files combined, your parallel corpus
-       must contain at least 5,000 parallel sentences to train successfully.
+     - parameter baseModelID: The ID of the translation model to use as the base for customization. To see available
+       models and IDs, use the `List models` method. Most models that are provided with the service are customizable. In
+       addition, all models that you create with parallel corpora customization can be further customized with a forced
+       glossary.
+     - parameter forcedGlossary: A file with forced glossary terms for the source and target languages. The
+       customizations in the file completely overwrite the domain translation data, including high frequency or high
+       confidence phrase translations.
+       You can upload only one glossary file for a custom model, and the glossary can have a maximum size of 10 MB. A
+       forced glossary must contain single words or short phrases. For more information, see **Supported file formats**
+       in the method description.
+       *With `curl`, use `--form forced_glossary=@{filename}`.*.
+     - parameter parallelCorpus: A file with parallel sentences for the source and target languages. You can upload
+       multiple parallel corpus files in one request by repeating the parameter. All uploaded parallel corpus files
+       combined must contain at least 5000 parallel sentences to train successfully. You can provide a maximum of
+       500,000 parallel sentences across all corpora.
+       A single entry in a corpus file can contain a maximum of 80 words. All corpora files for a custom model can have
+       a cumulative maximum size of 250 MB. For more information, see **Supported file formats** in the method
+       description.
+       *With `curl`, use `--form parallel_corpus=@{filename}`.*.
      - parameter name: An optional model name that you can use to identify the model. Valid characters are letters,
-       numbers, dashes, underscores, spaces and apostrophes. The maximum length is 32 characters.
+       numbers, dashes, underscores, spaces, and apostrophes. The maximum length of the name is 32 characters.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -525,7 +622,7 @@ public class LanguageTranslator {
      Get model details.
 
      Gets information about a translation model, including training status for custom models. Use this API call to poll
-     the status of your customization request. A successfully completed training will have a status of `available`.
+     the status of your customization request. A successfully completed training has a status of `available`.
 
      - parameter modelID: Model ID of the model to get.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -635,10 +732,12 @@ public class LanguageTranslator {
        Maximum file size: **20 MB**.
      - parameter filename: The filename for file.
      - parameter fileContentType: The content type of file.
-     - parameter modelID: The model to use for translation. For example, `en-de` selects the IBM provided base model
-       for English to German translation. A model ID overrides the source and target parameters and is required if you
-       use a custom model. If no model ID is specified, you must specify a target language.
-     - parameter source: Language code that specifies the language of the source document.
+     - parameter modelID: The model to use for translation. For example, `en-de` selects the IBM-provided base model
+       for English-to-German translation. A model ID overrides the `source` and `target` parameters and is required if
+       you use a custom model. If no model ID is specified, you must specify at least a target language.
+     - parameter source: Language code that specifies the language of the source document. If omitted, the service
+       derives the source language from the input text. The input must contain sufficient text for the service to
+       identify the language reliably.
      - parameter target: Language code that specifies the target language for translation. Required if model ID is not
        specified.
      - parameter documentID: To use a previously submitted document as the source for a new translation, enter the

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,12 +32,12 @@ public struct WorkspaceSystemSettingsTooling: Codable, Equatable {
     }
 
     /**
-     Initialize a `WorkspaceSystemSettingsTooling` with member variables.
+      Initialize a `WorkspaceSystemSettingsTooling` with member variables.
 
-     - parameter storeGenericResponses: Whether the dialog JSON editor displays text responses within the
-       `output.generic` object.
+      - parameter storeGenericResponses: Whether the dialog JSON editor displays text responses within the
+        `output.generic` object.
 
-     - returns: An initialized `WorkspaceSystemSettingsTooling`.
+      - returns: An initialized `WorkspaceSystemSettingsTooling`.
      */
     public init(
         storeGenericResponses: Bool? = nil

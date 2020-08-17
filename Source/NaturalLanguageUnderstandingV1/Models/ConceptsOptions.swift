@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,11 +34,11 @@ public struct ConceptsOptions: Codable, Equatable {
     }
 
     /**
-     Initialize a `ConceptsOptions` with member variables.
+      Initialize a `ConceptsOptions` with member variables.
 
-     - parameter limit: Maximum number of concepts to return.
+      - parameter limit: Maximum number of concepts to return.
 
-     - returns: An initialized `ConceptsOptions`.
+      - returns: An initialized `ConceptsOptions`.
      */
     public init(
         limit: Int? = nil

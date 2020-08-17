@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,19 +69,19 @@ internal struct BaseCollection: Codable, Equatable {
     }
 
     /**
-     Initialize a `BaseCollection` with member variables.
+      Initialize a `BaseCollection` with member variables.
 
-     - parameter collectionID: The identifier of the collection.
-     - parameter name: The name of the collection. The name can contain alphanumeric, underscore, hyphen, and dot
-       characters. It cannot begin with the reserved prefix `sys-`.
-     - parameter description: The description of the collection.
-     - parameter created: Date and time in Coordinated Universal Time (UTC) that the collection was created.
-     - parameter updated: Date and time in Coordinated Universal Time (UTC) that the collection was most recently
-       updated.
-     - parameter imageCount: Number of images in the collection.
-     - parameter trainingStatus: Training status information for the collection.
+      - parameter collectionID: The identifier of the collection.
+      - parameter name: The name of the collection. The name can contain alphanumeric, underscore, hyphen, and dot
+        characters. It cannot begin with the reserved prefix `sys-`.
+      - parameter description: The description of the collection.
+      - parameter created: Date and time in Coordinated Universal Time (UTC) that the collection was created.
+      - parameter updated: Date and time in Coordinated Universal Time (UTC) that the collection was most recently
+        updated.
+      - parameter imageCount: Number of images in the collection.
+      - parameter trainingStatus: Training status information for the collection.
 
-     - returns: An initialized `BaseCollection`.
+      - returns: An initialized `BaseCollection`.
      */
     public init(
         collectionID: String? = nil,

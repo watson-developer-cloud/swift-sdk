@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,7 +44,7 @@ public struct QueryLargePassages: Codable, Equatable {
 
     /**
      The maximum number of passages to return. The search returns fewer passages if the requested total is not found.
-     The default is `10`. The maximum is `100`.
+     The maximum is `100`.
      */
     public var count: Int?
 
@@ -64,18 +64,18 @@ public struct QueryLargePassages: Codable, Equatable {
     }
 
     /**
-     Initialize a `QueryLargePassages` with member variables.
+      Initialize a `QueryLargePassages` with member variables.
 
-     - parameter enabled: A passages query that returns the most relevant passages from the results.
-     - parameter perDocument: When `true`, passages will be returned within their respective result.
-     - parameter maxPerDocument: Maximum number of passages to return per result.
-     - parameter fields: A list of fields that passages are drawn from. If this parameter not specified, then all
-       top-level fields are included.
-     - parameter count: The maximum number of passages to return. The search returns fewer passages if the requested
-       total is not found. The default is `10`. The maximum is `100`.
-     - parameter characters: The approximate number of characters that any one passage will have.
+      - parameter enabled: A passages query that returns the most relevant passages from the results.
+      - parameter perDocument: When `true`, passages will be returned within their respective result.
+      - parameter maxPerDocument: Maximum number of passages to return per result.
+      - parameter fields: A list of fields that passages are drawn from. If this parameter not specified, then all
+        top-level fields are included.
+      - parameter count: The maximum number of passages to return. The search returns fewer passages if the requested
+        total is not found. The maximum is `100`.
+      - parameter characters: The approximate number of characters that any one passage will have.
 
-     - returns: An initialized `QueryLargePassages`.
+      - returns: An initialized `QueryLargePassages`.
      */
     public init(
         enabled: Bool? = nil,

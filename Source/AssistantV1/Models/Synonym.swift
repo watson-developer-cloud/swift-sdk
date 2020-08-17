@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,15 +44,15 @@ public struct Synonym: Codable, Equatable {
     }
 
     /**
-     Initialize a `Synonym` with member variables.
+      Initialize a `Synonym` with member variables.
 
-     - parameter synonym: The text of the synonym. This string must conform to the following restrictions:
-       - It cannot contain carriage return, newline, or tab characters.
-       - It cannot consist of only whitespace characters.
-     - parameter created: The timestamp for creation of the object.
-     - parameter updated: The timestamp for the most recent update to the object.
+      - parameter synonym: The text of the synonym. This string must conform to the following restrictions:
+        - It cannot contain carriage return, newline, or tab characters.
+        - It cannot consist of only whitespace characters.
+      - parameter created: The timestamp for creation of the object.
+      - parameter updated: The timestamp for the most recent update to the object.
 
-     - returns: An initialized `Synonym`.
+      - returns: An initialized `Synonym`.
      */
     public init(
         synonym: String,

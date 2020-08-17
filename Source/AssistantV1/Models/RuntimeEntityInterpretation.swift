@@ -213,60 +213,60 @@ public struct RuntimeEntityInterpretation: Codable, Equatable {
     }
 
     /**
-     Initialize a `RuntimeEntityInterpretation` with member variables.
+      Initialize a `RuntimeEntityInterpretation` with member variables.
 
-     - parameter calendarType: The calendar used to represent a recognized date (for example, `Gregorian`).
-     - parameter datetimeLink: A unique identifier used to associate a recognized time and date. If the user input
-       contains a date and time that are mentioned together (for example, `Today at 5`, the same **datetime_link** value
-       is returned for both the `@sys-date` and `@sys-time` entities).
-     - parameter festival: A locale-specific holiday name (such as `thanksgiving` or `christmas`). This property is
-       included when a `@sys-date` entity is recognized based on a holiday name in the user input.
-     - parameter granularity: The precision or duration of a time range specified by a recognized `@sys-time` or
-       `@sys-date` entity.
-     - parameter rangeLink: A unique identifier used to associate multiple recognized `@sys-date`, `@sys-time`, or
-       `@sys-number` entities that are recognized as a range of values in the user's input (for example, `from July 4
-       until July 14` or `from 20 to 25`).
-     - parameter rangeModifier: The word in the user input that indicates that a `sys-date` or `sys-time` entity is
-       part of an implied range where only one date or time is specified (for example, `since` or `until`).
-     - parameter relativeDay: A recognized mention of a relative day, represented numerically as an offset from the
-       current date (for example, `-1` for `yesterday` or `10` for `in ten days`).
-     - parameter relativeMonth: A recognized mention of a relative month, represented numerically as an offset from
-       the current month (for example, `1` for `next month` or `-3` for `three months ago`).
-     - parameter relativeWeek: A recognized mention of a relative week, represented numerically as an offset from the
-       current week (for example, `2` for `in two weeks` or `-1` for `last week).
-     - parameter relativeWeekend: A recognized mention of a relative date range for a weekend, represented
-       numerically as an offset from the current weekend (for example, `0` for `this weekend` or `-1` for `last
-       weekend`).
-     - parameter relativeYear: A recognized mention of a relative year, represented numerically as an offset from the
-       current year (for example, `1` for `next year` or `-5` for `five years ago`).
-     - parameter specificDay: A recognized mention of a specific date, represented numerically as the date within the
-       month (for example, `30` for `June 30`.).
-     - parameter specificDayOfWeek: A recognized mention of a specific day of the week as a lowercase string (for
-       example, `monday`).
-     - parameter specificMonth: A recognized mention of a specific month, represented numerically (for example, `7`
-       for `July`).
-     - parameter specificQuarter: A recognized mention of a specific quarter, represented numerically (for example,
-       `3` for `the third quarter`).
-     - parameter specificYear: A recognized mention of a specific year (for example, `2016`).
-     - parameter numericValue: A recognized numeric value, represented as an integer or double.
-     - parameter subtype: The type of numeric value recognized in the user input (`integer` or `rational`).
-     - parameter partOfDay: A recognized term for a time that was mentioned as a part of the day in the user's input
-       (for example, `morning` or `afternoon`).
-     - parameter relativeHour: A recognized mention of a relative hour, represented numerically as an offset from the
-       current hour (for example, `3` for `in three hours` or `-1` for `an hour ago`).
-     - parameter relativeMinute: A recognized mention of a relative time, represented numerically as an offset in
-       minutes from the current time (for example, `5` for `in five minutes` or `-15` for `fifteen minutes ago`).
-     - parameter relativeSecond: A recognized mention of a relative time, represented numerically as an offset in
-       seconds from the current time (for example, `10` for `in ten seconds` or `-30` for `thirty seconds ago`).
-     - parameter specificHour: A recognized specific hour mentioned as part of a time value (for example, `10` for
-       `10:15 AM`.).
-     - parameter specificMinute: A recognized specific minute mentioned as part of a time value (for example, `15`
-       for `10:15 AM`.).
-     - parameter specificSecond: A recognized specific second mentioned as part of a time value (for example, `30`
-       for `10:15:30 AM`.).
-     - parameter timezone: A recognized time zone mentioned as part of a time value (for example, `EST`).
+      - parameter calendarType: The calendar used to represent a recognized date (for example, `Gregorian`).
+      - parameter datetimeLink: A unique identifier used to associate a recognized time and date. If the user input
+        contains a date and time that are mentioned together (for example, `Today at 5`, the same **datetime_link** value
+        is returned for both the `@sys-date` and `@sys-time` entities).
+      - parameter festival: A locale-specific holiday name (such as `thanksgiving` or `christmas`). This property is
+        included when a `@sys-date` entity is recognized based on a holiday name in the user input.
+      - parameter granularity: The precision or duration of a time range specified by a recognized `@sys-time` or
+        `@sys-date` entity.
+      - parameter rangeLink: A unique identifier used to associate multiple recognized `@sys-date`, `@sys-time`, or
+        `@sys-number` entities that are recognized as a range of values in the user's input (for example, `from July 4
+        until July 14` or `from 20 to 25`).
+      - parameter rangeModifier: The word in the user input that indicates that a `sys-date` or `sys-time` entity is
+        part of an implied range where only one date or time is specified (for example, `since` or `until`).
+      - parameter relativeDay: A recognized mention of a relative day, represented numerically as an offset from the
+        current date (for example, `-1` for `yesterday` or `10` for `in ten days`).
+      - parameter relativeMonth: A recognized mention of a relative month, represented numerically as an offset from
+        the current month (for example, `1` for `next month` or `-3` for `three months ago`).
+      - parameter relativeWeek: A recognized mention of a relative week, represented numerically as an offset from the
+        current week (for example, `2` for `in two weeks` or `-1` for `last week).
+      - parameter relativeWeekend: A recognized mention of a relative date range for a weekend, represented
+        numerically as an offset from the current weekend (for example, `0` for `this weekend` or `-1` for `last
+        weekend`).
+      - parameter relativeYear: A recognized mention of a relative year, represented numerically as an offset from the
+        current year (for example, `1` for `next year` or `-5` for `five years ago`).
+      - parameter specificDay: A recognized mention of a specific date, represented numerically as the date within the
+        month (for example, `30` for `June 30`.).
+      - parameter specificDayOfWeek: A recognized mention of a specific day of the week as a lowercase string (for
+        example, `monday`).
+      - parameter specificMonth: A recognized mention of a specific month, represented numerically (for example, `7`
+        for `July`).
+      - parameter specificQuarter: A recognized mention of a specific quarter, represented numerically (for example,
+        `3` for `the third quarter`).
+      - parameter specificYear: A recognized mention of a specific year (for example, `2016`).
+      - parameter numericValue: A recognized numeric value, represented as an integer or double.
+      - parameter subtype: The type of numeric value recognized in the user input (`integer` or `rational`).
+      - parameter partOfDay: A recognized term for a time that was mentioned as a part of the day in the user's input
+        (for example, `morning` or `afternoon`).
+      - parameter relativeHour: A recognized mention of a relative hour, represented numerically as an offset from the
+        current hour (for example, `3` for `in three hours` or `-1` for `an hour ago`).
+      - parameter relativeMinute: A recognized mention of a relative time, represented numerically as an offset in
+        minutes from the current time (for example, `5` for `in five minutes` or `-15` for `fifteen minutes ago`).
+      - parameter relativeSecond: A recognized mention of a relative time, represented numerically as an offset in
+        seconds from the current time (for example, `10` for `in ten seconds` or `-30` for `thirty seconds ago`).
+      - parameter specificHour: A recognized specific hour mentioned as part of a time value (for example, `10` for
+        `10:15 AM`.).
+      - parameter specificMinute: A recognized specific minute mentioned as part of a time value (for example, `15`
+        for `10:15 AM`.).
+      - parameter specificSecond: A recognized specific second mentioned as part of a time value (for example, `30`
+        for `10:15:30 AM`.).
+      - parameter timezone: A recognized time zone mentioned as part of a time value (for example, `EST`).
 
-     - returns: An initialized `RuntimeEntityInterpretation`.
+      - returns: An initialized `RuntimeEntityInterpretation`.
      */
     public init(
         calendarType: String? = nil,

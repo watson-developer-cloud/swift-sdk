@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ import IBMSwiftSDKCore
 public class NaturalLanguageUnderstanding {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL: String? = "https://gateway.watsonplatform.net/natural-language-understanding/api"
+    public var serviceURL: String? = "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com"
 
     /// Service identifiers
     internal let serviceName = "NaturalLanguageUnderstanding"
@@ -57,10 +57,11 @@ public class NaturalLanguageUnderstanding {
      - parameter version: The release date of the version of the API to use. Specify the date
        in "YYYY-MM-DD" format.
      */
-    public init(version: String) throws {
+    public init?(version: String) {
         self.version = version
-
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
+        guard let authenticator = ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName) else {
+            return nil
+        }
         self.authenticator = authenticator
 
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
@@ -86,8 +87,8 @@ public class NaturalLanguageUnderstanding {
 
     #if !os(Linux)
     /**
-     Allow network requests to a server without verification of the server certificate.
-     **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
+      Allow network requests to a server without verification of the server certificate.
+      **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
      */
     public func disableSSLVerification() {
         session = InsecureConnection.session()
@@ -142,7 +143,7 @@ public class NaturalLanguageUnderstanding {
      - Relations
      - Semantic roles
      - Sentiment
-     - Syntax (Experimental).
+     - Syntax.
      If a language for the input text is not specified with the `language` parameter, the service [automatically detects
      the
      language](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-detectable-languages).
@@ -151,10 +152,9 @@ public class NaturalLanguageUnderstanding {
      - parameter text: The plain text to analyze. One of the `text`, `html`, or `url` parameters is required.
      - parameter html: The HTML file to analyze. One of the `text`, `html`, or `url` parameters is required.
      - parameter url: The webpage to analyze. One of the `text`, `html`, or `url` parameters is required.
-     - parameter clean: Set this to `false` to disable webpage cleaning. To learn more about webpage cleaning, see the
-       [Analyzing
-       webpages](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-analyzing-webpages)
-       documentation.
+     - parameter clean: Set this to `false` to disable webpage cleaning. For more information about webpage cleaning,
+       see [Analyzing
+       webpages](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-analyzing-webpages).
      - parameter xpath: An [XPath
        query](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-analyzing-webpages#xpath)
        to perform on `html` or `url` input. Results of the query will be appended to the cleaned webpage text before it
@@ -162,9 +162,9 @@ public class NaturalLanguageUnderstanding {
      - parameter fallbackToRaw: Whether to use raw HTML content if text cleaning fails.
      - parameter returnAnalyzedText: Whether or not to return the analyzed text.
      - parameter language: ISO 639-1 code that specifies the language of your text. This overrides automatic language
-       detection. Language support differs depending on the features you include in your analysis. See [Language
-       support](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-language-support)
-       for more information.
+       detection. Language support differs depending on the features you include in your analysis. For more information,
+       see [Language
+       support](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-language-support).
      - parameter limitTextCharacters: Sets the maximum number of characters that are processed by the service.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error

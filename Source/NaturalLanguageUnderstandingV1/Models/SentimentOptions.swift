@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2018.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,12 +40,12 @@ public struct SentimentOptions: Codable, Equatable {
     }
 
     /**
-     Initialize a `SentimentOptions` with member variables.
+      Initialize a `SentimentOptions` with member variables.
 
-     - parameter document: Set this to `false` to hide document-level sentiment results.
-     - parameter targets: Sentiment results will be returned for each target string that is found in the document.
+      - parameter document: Set this to `false` to hide document-level sentiment results.
+      - parameter targets: Sentiment results will be returned for each target string that is found in the document.
 
-     - returns: An initialized `SentimentOptions`.
+      - returns: An initialized `SentimentOptions`.
      */
     public init(
         document: Bool? = nil,

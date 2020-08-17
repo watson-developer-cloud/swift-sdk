@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,7 @@ public struct DialogSuggestionResponseGeneric: Codable, Equatable {
     /**
      The type of response returned by the dialog node. The specified response type must be supported by the client
      application or channel.
-     **Note:** The **suggestion** response type is part of the disambiguation feature, which is only available for Plus
-     and Premium users. The **search_skill** response type is available only for Plus and Premium users, and is used
-     only by the v2 runtime API.
+     **Note:** The **search_skill** response type is is used only by the v2 runtime API.
      */
     public enum ResponseType: String {
         case text = "text"
@@ -46,9 +44,7 @@ public struct DialogSuggestionResponseGeneric: Codable, Equatable {
     /**
      The type of response returned by the dialog node. The specified response type must be supported by the client
      application or channel.
-     **Note:** The **suggestion** response type is part of the disambiguation feature, which is only available for Plus
-     and Premium users. The **search_skill** response type is available only for Plus and Premium users, and is used
-     only by the v2 runtime API.
+     **Note:** The **search_skill** response type is is used only by the v2 runtime API.
      */
     public var responseType: String
 
@@ -125,29 +121,27 @@ public struct DialogSuggestionResponseGeneric: Codable, Equatable {
     }
 
     /**
-     Initialize a `DialogSuggestionResponseGeneric` with member variables.
+      Initialize a `DialogSuggestionResponseGeneric` with member variables.
 
-     - parameter responseType: The type of response returned by the dialog node. The specified response type must be
-       supported by the client application or channel.
-       **Note:** The **suggestion** response type is part of the disambiguation feature, which is only available for
-       Plus and Premium users. The **search_skill** response type is available only for Plus and Premium users, and is
-       used only by the v2 runtime API.
-     - parameter text: The text of the response.
-     - parameter time: How long to pause, in milliseconds.
-     - parameter typing: Whether to send a "user is typing" event during the pause.
-     - parameter source: The URL of the image.
-     - parameter title: The title or introductory text to show before the response.
-     - parameter description: The description to show with the the response.
-     - parameter preference: The preferred type of control to display.
-     - parameter options: An array of objects describing the options from which the user can choose.
-     - parameter messageToHumanAgent: A message to be sent to the human agent who will be taking over the
-       conversation.
-     - parameter topic: A label identifying the topic of the conversation, derived from the **title** property of the
-       relevant node.
-     - parameter dialogNode: The ID of the dialog node that the **topic** property is taken from. The **topic**
-       property is populated using the value of the dialog node's **title** property.
+      - parameter responseType: The type of response returned by the dialog node. The specified response type must be
+        supported by the client application or channel.
+        **Note:** The **search_skill** response type is is used only by the v2 runtime API.
+      - parameter text: The text of the response.
+      - parameter time: How long to pause, in milliseconds.
+      - parameter typing: Whether to send a "user is typing" event during the pause.
+      - parameter source: The URL of the image.
+      - parameter title: The title or introductory text to show before the response.
+      - parameter description: The description to show with the the response.
+      - parameter preference: The preferred type of control to display.
+      - parameter options: An array of objects describing the options from which the user can choose.
+      - parameter messageToHumanAgent: A message to be sent to the human agent who will be taking over the
+        conversation.
+      - parameter topic: A label identifying the topic of the conversation, derived from the **title** property of the
+        relevant node.
+      - parameter dialogNode: The ID of the dialog node that the **topic** property is taken from. The **topic**
+        property is populated using the value of the dialog node's **title** property.
 
-     - returns: An initialized `DialogSuggestionResponseGeneric`.
+      - returns: An initialized `DialogSuggestionResponseGeneric`.
      */
     public init(
         responseType: String,

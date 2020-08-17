@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -83,25 +83,25 @@ public struct CreateValue: Codable, Equatable {
     }
 
     /**
-     Initialize a `CreateValue` with member variables.
+      Initialize a `CreateValue` with member variables.
 
-     - parameter value: The text of the entity value. This string must conform to the following restrictions:
-       - It cannot contain carriage return, newline, or tab characters.
-       - It cannot consist of only whitespace characters.
-     - parameter metadata: Any metadata related to the entity value.
-     - parameter type: Specifies the type of entity value.
-     - parameter synonyms: An array of synonyms for the entity value. A value can specify either synonyms or patterns
-       (depending on the value type), but not both. A synonym must conform to the following resrictions:
-       - It cannot contain carriage return, newline, or tab characters.
-       - It cannot consist of only whitespace characters.
-     - parameter patterns: An array of patterns for the entity value. A value can specify either synonyms or patterns
-       (depending on the value type), but not both. A pattern is a regular expression; for more information about how to
-       specify a pattern, see the
-       [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-entities#entities-create-dictionary-based).
-     - parameter created: The timestamp for creation of the object.
-     - parameter updated: The timestamp for the most recent update to the object.
+      - parameter value: The text of the entity value. This string must conform to the following restrictions:
+        - It cannot contain carriage return, newline, or tab characters.
+        - It cannot consist of only whitespace characters.
+      - parameter metadata: Any metadata related to the entity value.
+      - parameter type: Specifies the type of entity value.
+      - parameter synonyms: An array of synonyms for the entity value. A value can specify either synonyms or patterns
+        (depending on the value type), but not both. A synonym must conform to the following resrictions:
+        - It cannot contain carriage return, newline, or tab characters.
+        - It cannot consist of only whitespace characters.
+      - parameter patterns: An array of patterns for the entity value. A value can specify either synonyms or patterns
+        (depending on the value type), but not both. A pattern is a regular expression; for more information about how to
+        specify a pattern, see the
+        [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-entities#entities-create-dictionary-based).
+      - parameter created: The timestamp for creation of the object.
+      - parameter updated: The timestamp for the most recent update to the object.
 
-     - returns: An initialized `CreateValue`.
+      - returns: An initialized `CreateValue`.
      */
     public init(
         value: String,

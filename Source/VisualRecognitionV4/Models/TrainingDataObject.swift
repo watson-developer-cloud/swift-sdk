@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,12 +38,12 @@ public struct TrainingDataObject: Codable, Equatable {
     }
 
     /**
-     Initialize a `TrainingDataObject` with member variables.
+      Initialize a `TrainingDataObject` with member variables.
 
-     - parameter object: The name of the object.
-     - parameter location: Defines the location of the bounding box around the object.
+      - parameter object: The name of the object.
+      - parameter location: Defines the location of the bounding box around the object.
 
-     - returns: An initialized `TrainingDataObject`.
+      - returns: An initialized `TrainingDataObject`.
      */
     public init(
         object: String? = nil,

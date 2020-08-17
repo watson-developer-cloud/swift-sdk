@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,11 +32,11 @@ public struct ToneInput: Codable, Equatable {
     }
 
     /**
-     Initialize a `ToneInput` with member variables.
+      Initialize a `ToneInput` with member variables.
 
-     - parameter text: The input content that the service is to analyze.
+      - parameter text: The input content that the service is to analyze.
 
-     - returns: An initialized `ToneInput`.
+      - returns: An initialized `ToneInput`.
      */
     public init(
         text: String

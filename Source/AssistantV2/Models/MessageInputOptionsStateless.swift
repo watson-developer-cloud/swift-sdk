@@ -53,18 +53,18 @@ public struct MessageInputOptionsStateless: Codable, Equatable {
     }
 
     /**
-     Initialize a `MessageInputOptionsStateless` with member variables.
+      Initialize a `MessageInputOptionsStateless` with member variables.
 
-     - parameter restart: Whether to restart dialog processing at the root of the dialog, regardless of any
-       previously visited nodes. **Note:** This does not affect `turn_count` or any other context variables.
-     - parameter alternateIntents: Whether to return more than one intent. Set to `true` to return all matching
-       intents.
-     - parameter spelling: Spelling correction options for the message. Any options specified on an individual
-       message override the settings configured for the skill.
-     - parameter debug: Whether to return additional diagnostic information. Set to `true` to return additional
-       information in the `output.debug` property.
+      - parameter restart: Whether to restart dialog processing at the root of the dialog, regardless of any
+        previously visited nodes. **Note:** This does not affect `turn_count` or any other context variables.
+      - parameter alternateIntents: Whether to return more than one intent. Set to `true` to return all matching
+        intents.
+      - parameter spelling: Spelling correction options for the message. Any options specified on an individual
+        message override the settings configured for the skill.
+      - parameter debug: Whether to return additional diagnostic information. Set to `true` to return additional
+        information in the `output.debug` property.
 
-     - returns: An initialized `MessageInputOptionsStateless`.
+      - returns: An initialized `MessageInputOptionsStateless`.
      */
     public init(
         restart: Bool? = nil,

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import Foundation
 public struct TokenResult: Codable, Equatable {
 
     /**
-     The part of speech of the token. For descriptions of the values, see [Universal Dependencies POS
+     The part of speech of the token. For more information about the values, see [Universal Dependencies POS
      tags](https://universaldependencies.org/u/pos/).
      */
     public enum PartOfSpeech: String {
@@ -49,7 +49,7 @@ public struct TokenResult: Codable, Equatable {
     public var text: String?
 
     /**
-     The part of speech of the token. For descriptions of the values, see [Universal Dependencies POS
+     The part of speech of the token. For more information about the values, see [Universal Dependencies POS
      tags](https://universaldependencies.org/u/pos/).
      */
     public var partOfSpeech: String?

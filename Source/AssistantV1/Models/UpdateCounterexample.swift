@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,16 +44,16 @@ internal struct UpdateCounterexample: Codable, Equatable {
     }
 
     /**
-     Initialize a `UpdateCounterexample` with member variables.
+      Initialize a `UpdateCounterexample` with member variables.
 
-     - parameter text: The text of a user input marked as irrelevant input. This string must conform to the following
-       restrictions:
-       - It cannot contain carriage return, newline, or tab characters.
-       - It cannot consist of only whitespace characters.
-     - parameter created: The timestamp for creation of the object.
-     - parameter updated: The timestamp for the most recent update to the object.
+      - parameter text: The text of a user input marked as irrelevant input. This string must conform to the following
+        restrictions:
+        - It cannot contain carriage return, newline, or tab characters.
+        - It cannot consist of only whitespace characters.
+      - parameter created: The timestamp for creation of the object.
+      - parameter updated: The timestamp for the most recent update to the object.
 
-     - returns: An initialized `UpdateCounterexample`.
+      - returns: An initialized `UpdateCounterexample`.
      */
     public init(
         text: String? = nil,

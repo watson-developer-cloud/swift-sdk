@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,12 +38,12 @@ public struct ShortDoc: Codable, Equatable {
     }
 
     /**
-     Initialize a `ShortDoc` with member variables.
+      Initialize a `ShortDoc` with member variables.
 
-     - parameter title: The title of the input document, if identified.
-     - parameter hash: The MD5 hash of the input document.
+      - parameter title: The title of the input document, if identified.
+      - parameter hash: The MD5 hash of the input document.
 
-     - returns: An initialized `ShortDoc`.
+      - returns: An initialized `ShortDoc`.
      */
     public init(
         title: String? = nil,

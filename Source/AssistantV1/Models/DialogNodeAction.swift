@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -66,16 +66,16 @@ public struct DialogNodeAction: Codable, Equatable {
     }
 
     /**
-     Initialize a `DialogNodeAction` with member variables.
+      Initialize a `DialogNodeAction` with member variables.
 
-     - parameter name: The name of the action.
-     - parameter resultVariable: The location in the dialog context where the result of the action is stored.
-     - parameter type: The type of action to invoke.
-     - parameter parameters: A map of key/value pairs to be provided to the action.
-     - parameter credentials: The name of the context variable that the client application will use to pass in
-       credentials for the action.
+      - parameter name: The name of the action.
+      - parameter resultVariable: The location in the dialog context where the result of the action is stored.
+      - parameter type: The type of action to invoke.
+      - parameter parameters: A map of key/value pairs to be provided to the action.
+      - parameter credentials: The name of the context variable that the client application will use to pass in
+        credentials for the action.
 
-     - returns: An initialized `DialogNodeAction`.
+      - returns: An initialized `DialogNodeAction`.
      */
     public init(
         name: String,

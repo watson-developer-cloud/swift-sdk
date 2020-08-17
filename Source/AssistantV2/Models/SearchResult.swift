@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,8 +21,7 @@ public struct SearchResult: Codable, Equatable {
 
     /**
      The unique identifier of the document in the Discovery service collection.
-     This property is included in responses from search skills, which are a beta feature available only to Plus or
-     Premium plan users.
+     This property is included in responses from search skills, which are available only to Plus or Premium plan users.
      */
     public var id: String
 

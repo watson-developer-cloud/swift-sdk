@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -70,20 +70,20 @@ public struct EventData: Codable, Equatable {
     }
 
     /**
-     Initialize a `EventData` with member variables.
+      Initialize a `EventData` with member variables.
 
-     - parameter environmentID: The **environment_id** associated with the query that the event is associated with.
-     - parameter sessionToken: The session token that was returned as part of the query results that this event is
-       associated with.
-     - parameter collectionID: The **collection_id** of the document that this event is associated with.
-     - parameter documentID: The **document_id** of the document that this event is associated with.
-     - parameter clientTimestamp: The optional timestamp for the event that was created. If not provided, the time
-       that the event was created in the log was used.
-     - parameter displayRank: The rank of the result item which the event is associated with.
-     - parameter queryID: The query identifier stored in the log. The query and any events associated with that query
-       are stored with the same **query_id**.
+      - parameter environmentID: The **environment_id** associated with the query that the event is associated with.
+      - parameter sessionToken: The session token that was returned as part of the query results that this event is
+        associated with.
+      - parameter collectionID: The **collection_id** of the document that this event is associated with.
+      - parameter documentID: The **document_id** of the document that this event is associated with.
+      - parameter clientTimestamp: The optional timestamp for the event that was created. If not provided, the time
+        that the event was created in the log was used.
+      - parameter displayRank: The rank of the result item which the event is associated with.
+      - parameter queryID: The query identifier stored in the log. The query and any events associated with that query
+        are stored with the same **query_id**.
 
-     - returns: An initialized `EventData`.
+      - returns: An initialized `EventData`.
      */
     public init(
         environmentID: String,

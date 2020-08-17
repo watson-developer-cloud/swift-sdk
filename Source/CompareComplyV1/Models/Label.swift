@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,12 +39,12 @@ public struct Label: Codable, Equatable {
     }
 
     /**
-     Initialize a `Label` with member variables.
+      Initialize a `Label` with member variables.
 
-     - parameter nature: The identified `nature` of the element.
-     - parameter party: The identified `party` of the element.
+      - parameter nature: The identified `nature` of the element.
+      - parameter party: The identified `party` of the element.
 
-     - returns: An initialized `Label`.
+      - returns: An initialized `Label`.
      */
     public init(
         nature: String,

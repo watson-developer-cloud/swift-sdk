@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -76,20 +76,20 @@ public struct Word: Codable, Equatable {
     }
 
     /**
-     Initialize a `Word` with member variables.
+      Initialize a `Word` with member variables.
 
-     - parameter word: The word for the custom voice model. The maximum length of a word is 49 characters.
-     - parameter translation: The phonetic or sounds-like translation for the word. A phonetic translation is based
-       on the SSML format for representing the phonetic string of a word either as an IPA or IBM SPR translation. The
-       Arabic, Chinese, Dutch, and Korean languages support only IPA. A sounds-like translation consists of one or more
-       words that, when combined, sound like the word. The maximum length of a translation is 499 characters.
-     - parameter partOfSpeech: **Japanese only.** The part of speech for the word. The service uses the value to
-       produce the correct intonation for the word. You can create only a single entry, with or without a single part of
-       speech, for any word; you cannot create multiple entries with different parts of speech for the same word. For
-       more information, see [Working with Japanese
-       entries](https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-rules#jaNotes).
+      - parameter word: The word for the custom voice model. The maximum length of a word is 49 characters.
+      - parameter translation: The phonetic or sounds-like translation for the word. A phonetic translation is based
+        on the SSML format for representing the phonetic string of a word either as an IPA or IBM SPR translation. The
+        Arabic, Chinese, Dutch, and Korean languages support only IPA. A sounds-like translation consists of one or more
+        words that, when combined, sound like the word. The maximum length of a translation is 499 characters.
+      - parameter partOfSpeech: **Japanese only.** The part of speech for the word. The service uses the value to
+        produce the correct intonation for the word. You can create only a single entry, with or without a single part of
+        speech, for any word; you cannot create multiple entries with different parts of speech for the same word. For
+        more information, see [Working with Japanese
+        entries](https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-rules#jaNotes).
 
-     - returns: An initialized `Word`.
+      - returns: An initialized `Word`.
      */
     public init(
         word: String,

@@ -38,14 +38,14 @@ public struct MessageContextStateless: Codable, Equatable {
     }
 
     /**
-     Initialize a `MessageContextStateless` with member variables.
+      Initialize a `MessageContextStateless` with member variables.
 
-     - parameter global: Session context data that is shared by all skills used by the Assistant.
-     - parameter skills: Information specific to particular skills used by the assistant.
-       **Note:** Currently, only a single child property is supported, containing variables that apply to the dialog
-       skill used by the assistant.
+      - parameter global: Session context data that is shared by all skills used by the Assistant.
+      - parameter skills: Information specific to particular skills used by the assistant.
+        **Note:** Currently, only a single child property is supported, containing variables that apply to the dialog
+        skill used by the assistant.
 
-     - returns: An initialized `MessageContextStateless`.
+      - returns: An initialized `MessageContextStateless`.
      */
     public init(
         global: MessageContextGlobalStateless? = nil,

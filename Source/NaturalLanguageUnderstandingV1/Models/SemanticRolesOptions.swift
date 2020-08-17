@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2018.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,13 +45,13 @@ public struct SemanticRolesOptions: Codable, Equatable {
     }
 
     /**
-     Initialize a `SemanticRolesOptions` with member variables.
+      Initialize a `SemanticRolesOptions` with member variables.
 
-     - parameter limit: Maximum number of semantic_roles results to return.
-     - parameter keywords: Set this to `true` to return keyword information for subjects and objects.
-     - parameter entities: Set this to `true` to return entity information for subjects and objects.
+      - parameter limit: Maximum number of semantic_roles results to return.
+      - parameter keywords: Set this to `true` to return keyword information for subjects and objects.
+      - parameter entities: Set this to `true` to return entity information for subjects and objects.
 
-     - returns: An initialized `SemanticRolesOptions`.
+      - returns: An initialized `SemanticRolesOptions`.
      */
     public init(
         limit: Int? = nil,

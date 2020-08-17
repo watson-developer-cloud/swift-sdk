@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,13 +39,13 @@ public struct SourceOptionsObject: Codable, Equatable {
     }
 
     /**
-     Initialize a `SourceOptionsObject` with member variables.
+      Initialize a `SourceOptionsObject` with member variables.
 
-     - parameter name: The name of the Salesforce document object to crawl. For example, `case`.
-     - parameter limit: The maximum number of documents to crawl for this document object. By default, all documents
-       in the document object are crawled.
+      - parameter name: The name of the Salesforce document object to crawl. For example, `case`.
+      - parameter limit: The maximum number of documents to crawl for this document object. By default, all documents
+        in the document object are crawled.
 
-     - returns: An initialized `SourceOptionsObject`.
+      - returns: An initialized `SourceOptionsObject`.
      */
     public init(
         name: String,

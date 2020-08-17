@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,12 +47,12 @@ public struct LogMessage: Codable, Equatable {
     }
 
     /**
-     Initialize a `LogMessage` with member variables.
+      Initialize a `LogMessage` with member variables.
 
-     - parameter level: The severity of the log message.
-     - parameter msg: The text of the log message.
+      - parameter level: The severity of the log message.
+      - parameter msg: The text of the log message.
 
-     - returns: An initialized `LogMessage`.
+      - returns: An initialized `LogMessage`.
      */
     public init(
         level: String,

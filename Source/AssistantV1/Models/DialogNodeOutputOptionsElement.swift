@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,13 +37,13 @@ public struct DialogNodeOutputOptionsElement: Codable, Equatable {
     }
 
     /**
-     Initialize a `DialogNodeOutputOptionsElement` with member variables.
+      Initialize a `DialogNodeOutputOptionsElement` with member variables.
 
-     - parameter label: The user-facing label for the option.
-     - parameter value: An object defining the message input to be sent to the Watson Assistant service if the user
-       selects the corresponding option.
+      - parameter label: The user-facing label for the option.
+      - parameter value: An object defining the message input to be sent to the Watson Assistant service if the user
+        selects the corresponding option.
 
-     - returns: An initialized `DialogNodeOutputOptionsElement`.
+      - returns: An initialized `DialogNodeOutputOptionsElement`.
      */
     public init(
         label: String,

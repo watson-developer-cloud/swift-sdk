@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,18 +52,18 @@ public struct DialogSuggestion: Codable, Equatable {
     }
 
     /**
-     Initialize a `DialogSuggestion` with member variables.
+      Initialize a `DialogSuggestion` with member variables.
 
-     - parameter label: The user-facing label for the disambiguation option. This label is taken from the **title**
-       or **user_label** property of the corresponding dialog node, depending on the disambiguation options.
-     - parameter value: An object defining the message input, intents, and entities to be sent to the Watson
-       Assistant service if the user selects the corresponding disambiguation option.
-     - parameter output: The dialog output that will be returned from the Watson Assistant service if the user
-       selects the corresponding option.
-     - parameter dialogNode: The ID of the dialog node that the **label** property is taken from. The **label**
-       property is populated using the value of the dialog node's **user_label** property.
+      - parameter label: The user-facing label for the disambiguation option. This label is taken from the **title**
+        or **user_label** property of the corresponding dialog node, depending on the disambiguation options.
+      - parameter value: An object defining the message input, intents, and entities to be sent to the Watson
+        Assistant service if the user selects the corresponding disambiguation option.
+      - parameter output: The dialog output that will be returned from the Watson Assistant service if the user
+        selects the corresponding option.
+      - parameter dialogNode: The ID of the dialog node that the **label** property is taken from. The **label**
+        property is populated using the value of the dialog node's **user_label** property.
 
-     - returns: An initialized `DialogSuggestion`.
+      - returns: An initialized `DialogSuggestion`.
      */
     public init(
         label: String,

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2018.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -81,21 +81,21 @@ public struct Configuration: Codable, Equatable {
     }
 
     /**
-     Initialize a `Configuration` with member variables.
+      Initialize a `Configuration` with member variables.
 
-     - parameter name: The name of the configuration.
-     - parameter configurationID: The unique identifier of the configuration.
-     - parameter created: The creation date of the configuration in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
-     - parameter updated: The timestamp of when the configuration was last updated in the format
-       yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
-     - parameter description: The description of the configuration, if available.
-     - parameter conversions: Document conversion settings.
-     - parameter enrichments: An array of document enrichment settings for the configuration.
-     - parameter normalizations: Defines operations that can be used to transform the final output JSON into a
-       normalized form. Operations are executed in the order that they appear in the array.
-     - parameter source: Object containing source parameters for the configuration.
+      - parameter name: The name of the configuration.
+      - parameter configurationID: The unique identifier of the configuration.
+      - parameter created: The creation date of the configuration in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+      - parameter updated: The timestamp of when the configuration was last updated in the format
+        yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
+      - parameter description: The description of the configuration, if available.
+      - parameter conversions: Document conversion settings.
+      - parameter enrichments: An array of document enrichment settings for the configuration.
+      - parameter normalizations: Defines operations that can be used to transform the final output JSON into a
+        normalized form. Operations are executed in the order that they appear in the array.
+      - parameter source: Object containing source parameters for the configuration.
 
-     - returns: An initialized `Configuration`.
+      - returns: An initialized `Configuration`.
      */
     public init(
         name: String,

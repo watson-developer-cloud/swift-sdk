@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ public struct MessageContextSkill: Codable, Equatable {
     /**
      System context data used by the skill.
      */
-    public var system: [String: JSON]?
+    public var system: MessageContextSkillSystem?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
@@ -40,16 +40,16 @@ public struct MessageContextSkill: Codable, Equatable {
     }
 
     /**
-     Initialize a `MessageContextSkill` with member variables.
+      Initialize a `MessageContextSkill` with member variables.
 
-     - parameter userDefined: Arbitrary variables that can be read and written by a particular skill.
-     - parameter system: System context data used by the skill.
+      - parameter userDefined: Arbitrary variables that can be read and written by a particular skill.
+      - parameter system: System context data used by the skill.
 
-     - returns: An initialized `MessageContextSkill`.
+      - returns: An initialized `MessageContextSkill`.
      */
     public init(
         userDefined: [String: JSON]? = nil,
-        system: [String: JSON]? = nil
+        system: MessageContextSkillSystem? = nil
     )
     {
         self.userDefined = userDefined

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ import Foundation
 
 /**
  Workspace settings related to the disambiguation feature.
- **Note:** This feature is available only to Plus and Premium users.
  */
 public struct WorkspaceSystemSettingsDisambiguation: Codable, Equatable {
 
@@ -81,23 +80,23 @@ public struct WorkspaceSystemSettingsDisambiguation: Codable, Equatable {
     }
 
     /**
-     Initialize a `WorkspaceSystemSettingsDisambiguation` with member variables.
+      Initialize a `WorkspaceSystemSettingsDisambiguation` with member variables.
 
-     - parameter prompt: The text of the introductory prompt that accompanies disambiguation options presented to the
-       user.
-     - parameter noneOfTheAbovePrompt: The user-facing label for the option users can select if none of the suggested
-       options is correct. If no value is specified for this property, this option does not appear.
-     - parameter enabled: Whether the disambiguation feature is enabled for the workspace.
-     - parameter sensitivity: The sensitivity of the disambiguation feature to intent detection conflicts. Set to
-       **high** if you want the disambiguation feature to be triggered more often. This can be useful for testing or
-       demonstration purposes.
-     - parameter randomize: Whether the order in which disambiguation suggestions are presented should be randomized
-       (but still influenced by relative confidence).
-     - parameter maxSuggestions: The maximum number of disambigation suggestions that can be included in a
-       `suggestion` response.
-     - parameter suggestionTextPolicy: For internal use only.
+      - parameter prompt: The text of the introductory prompt that accompanies disambiguation options presented to the
+        user.
+      - parameter noneOfTheAbovePrompt: The user-facing label for the option users can select if none of the suggested
+        options is correct. If no value is specified for this property, this option does not appear.
+      - parameter enabled: Whether the disambiguation feature is enabled for the workspace.
+      - parameter sensitivity: The sensitivity of the disambiguation feature to intent detection conflicts. Set to
+        **high** if you want the disambiguation feature to be triggered more often. This can be useful for testing or
+        demonstration purposes.
+      - parameter randomize: Whether the order in which disambiguation suggestions are presented should be randomized
+        (but still influenced by relative confidence).
+      - parameter maxSuggestions: The maximum number of disambigation suggestions that can be included in a
+        `suggestion` response.
+      - parameter suggestionTextPolicy: For internal use only.
 
-     - returns: An initialized `WorkspaceSystemSettingsDisambiguation`.
+      - returns: An initialized `WorkspaceSystemSettingsDisambiguation`.
      */
     public init(
         prompt: String? = nil,

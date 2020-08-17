@@ -40,14 +40,14 @@ public struct MessageContextSkillSystem: Codable, Equatable {
     }
 
     /**
-     Initialize a `MessageContextSkillSystem` with member variables.
+      Initialize a `MessageContextSkillSystem` with member variables.
 
-     - parameter state: An encoded string representing the current conversation state. By saving this value and then
-       sending it in the context of a subsequent message request, you can restore the conversation to the same state.
-       This can be useful if you need to return to an earlier point in the conversation. If you are using stateful
-       sessions, you can also use a stored state value to restore a paused conversation whose session has expired.
+      - parameter state: An encoded string representing the current conversation state. By saving this value and then
+        sending it in the context of a subsequent message request, you can restore the conversation to the same state.
+        This can be useful if you need to return to an earlier point in the conversation. If you are using stateful
+        sessions, you can also use a stored state value to restore a paused conversation whose session has expired.
 
-     - returns: An initialized `MessageContextSkillSystem`.
+      - returns: An initialized `MessageContextSkillSystem`.
      */
     public init(
         state: String? = nil,

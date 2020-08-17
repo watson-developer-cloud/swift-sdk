@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,19 +59,19 @@ public struct DialogSuggestionOutput: Codable, Equatable {
     }
 
     /**
-     Initialize a `DialogSuggestionOutput` with member variables.
+      Initialize a `DialogSuggestionOutput` with member variables.
 
-     - parameter text: An array of responses to the user.
-     - parameter nodesVisited: An array of the nodes that were triggered to create the response, in the order in
-       which they were visited. This information is useful for debugging and for tracing the path taken through the node
-       tree.
-     - parameter nodesVisitedDetails: An array of objects containing detailed diagnostic information about the nodes
-       that were triggered during processing of the input message. Included only if **nodes_visited_details** is set to
-       `true` in the message request.
-     - parameter generic: Output intended for any channel. It is the responsibility of the client application to
-       implement the supported response types.
+      - parameter text: An array of responses to the user.
+      - parameter nodesVisited: An array of the nodes that were triggered to create the response, in the order in
+        which they were visited. This information is useful for debugging and for tracing the path taken through the node
+        tree.
+      - parameter nodesVisitedDetails: An array of objects containing detailed diagnostic information about the nodes
+        that were triggered during processing of the input message. Included only if **nodes_visited_details** is set to
+        `true` in the message request.
+      - parameter generic: Output intended for any channel. It is the responsibility of the client application to
+        implement the supported response types.
 
-     - returns: An initialized `DialogSuggestionOutput`.
+      - returns: An initialized `DialogSuggestionOutput`.
      */
     public init(
         text: [String],

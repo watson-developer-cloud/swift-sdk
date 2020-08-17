@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,9 +26,9 @@ public struct SystemResponse: Codable, Equatable {
     public var additionalProperties: [String: JSON]
 
     /**
-     Initialize a `SystemResponse`.
+      Initialize a `SystemResponse`.
 
-     - returns: An initialized `SystemResponse`.
+      - returns: An initialized `SystemResponse`.
      */
     public init(
         additionalProperties: [String: JSON] = [:]

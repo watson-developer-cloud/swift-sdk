@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,12 +45,12 @@ internal struct CreateEventObject: Codable, Equatable {
     }
 
     /**
-     Initialize a `CreateEventObject` with member variables.
+      Initialize a `CreateEventObject` with member variables.
 
-     - parameter type: The event type to be created.
-     - parameter data: Query event data object.
+      - parameter type: The event type to be created.
+      - parameter data: Query event data object.
 
-     - returns: An initialized `CreateEventObject`.
+      - returns: An initialized `CreateEventObject`.
      */
     public init(
         type: String,

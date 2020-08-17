@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2018.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,12 +41,12 @@ public struct EmotionOptions: Codable, Equatable {
     }
 
     /**
-     Initialize a `EmotionOptions` with member variables.
+      Initialize a `EmotionOptions` with member variables.
 
-     - parameter document: Set this to `false` to hide document-level emotion results.
-     - parameter targets: Emotion results will be returned for each target string that is found in the document.
+      - parameter document: Set this to `false` to hide document-level emotion results.
+      - parameter targets: Emotion results will be returned for each target string that is found in the document.
 
-     - returns: An initialized `EmotionOptions`.
+      - returns: An initialized `EmotionOptions`.
      */
     public init(
         document: Bool? = nil,

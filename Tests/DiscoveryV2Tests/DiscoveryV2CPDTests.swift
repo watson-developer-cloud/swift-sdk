@@ -26,8 +26,7 @@ class DiscoveryCPDTests: XCTestCase {
 
         discovery = Discovery(version: "2020-08-12", authenticator: authenticator)
 
-        // discovery.serviceURL = WatsonCredentials.DiscoveryV2CPDServiceURL
-        discovery.serviceURL = "http://localhost:9009"
+        discovery.serviceURL = WatsonCredentials.DiscoveryV2CPDServiceURL
 
         discovery.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         discovery.defaultHeaders["X-Watson-Test"] = "true"

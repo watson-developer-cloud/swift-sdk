@@ -561,5 +561,36 @@ class AssistantV2Tests: XCTestCase {
 
         waitForExpectations()
     }
+    
+    // NOTE: this function is only available on premium instances of Assistant
+    func testListLogs() {
+        let description = "Test listLogs"
+        let expectation = self.expectation(description: description)
+        
+        let premiumAuthenticator = WatsonIAMAuthenticator(apiKey: WatsonCredentials.AssistantV2PremiumAPIKey!, url: "https://iam.test.cloud.ibm.com/identity/token")
+        let premiumAssistant = Assistant(version: versionDate, authenticator: premiumAuthenticator)
+        
+        premiumAssistant.serviceURL = WatsonCredentials.AssistantV2PremiumURL!
+        
+        premiumAssistant.listLogs(assistantID: WatsonCredentials.AssistantV2PremiumAssistantID!, sort: nil, filter: nil, pageLimit: nil, cursor: nil, headers: nil) {
+            response, error in
+            
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+
+            guard let logsCollection = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+            
+            XCTAssertNotNil(logsCollection.logs)
+
+            expectation.fulfill()
+        }
+        
+        waitForExpectations()
+    }
 
 }

@@ -54,10 +54,10 @@ class DiscoveryTests: XCTestCase {
 
     func loadDocument(name: String, ext: String) -> Data? {
         #if os(Linux)
-            let url = URL(fileURLWithPath: "Tests/DiscoveryV1Tests/Resources/" + name + "." + ext)
+        let url = URL(fileURLWithPath: "Tests/DiscoveryV1Tests/Resources/" + name + "." + ext)
         #else
-            let bundle = Bundle(for: type(of: self))
-            guard let url = bundle.url(forResource: name, withExtension: ext) else { return nil }
+        let bundle = Bundle(for: type(of: self))
+        guard let url = bundle.url(forResource: name, withExtension: ext) else { return nil }
         #endif
         let data = try? Data(contentsOf: url)
         return data
@@ -268,19 +268,19 @@ class DiscoveryTests: XCTestCase {
             description: "A collection created while testing the Swift SDK. Safe to delete.",
             configurationID: configurationID,
             language: language) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let result = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let result = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            collection = result
-            expectation.fulfill()
+                collection = result
+                expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
         return collection
@@ -296,19 +296,19 @@ class DiscoveryTests: XCTestCase {
             collectionID: collectionID,
             file: document,
             filename: "KennedySpeech.html") {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let result = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let result = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            documentAccepted = result
-            expectation.fulfill()
+                documentAccepted = result
+                expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
         return documentAccepted
@@ -633,26 +633,26 @@ class DiscoveryTests: XCTestCase {
             name: name,
             description: description,
             source: source) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let result = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let result = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            configuration = result
-            XCTAssertEqual(configuration.name, name)
-            XCTAssertEqual(configuration.description, description)
-            XCTAssertNotNil(configuration.source)
-            XCTAssertEqual(configuration.source?.type, source.type)
-            XCTAssertEqual(configuration.source?.credentialID, "my box credentialID")
-            XCTAssertEqual(configuration.source?.schedule?.timeZone, sourceSchedule.timeZone)
-            XCTAssertEqual(configuration.source?.schedule?.frequency, SourceSchedule.Frequency.weekly.rawValue)
-            expectation1.fulfill()
+                configuration = result
+                XCTAssertEqual(configuration.name, name)
+                XCTAssertEqual(configuration.description, description)
+                XCTAssertNotNil(configuration.source)
+                XCTAssertEqual(configuration.source?.type, source.type)
+                XCTAssertEqual(configuration.source?.credentialID, "my box credentialID")
+                XCTAssertEqual(configuration.source?.schedule?.timeZone, sourceSchedule.timeZone)
+                XCTAssertEqual(configuration.source?.schedule?.frequency, SourceSchedule.Frequency.weekly.rawValue)
+                expectation1.fulfill()
         }
         waitForExpectations(timeout: timeout)
 
@@ -773,30 +773,30 @@ class DiscoveryTests: XCTestCase {
             description: "A collection created while testing the Swift SDK. Safe to delete.",
             configurationID: configuration.configurationID!,
             language: "en") {
-            response, error in
+                response, error in
 
-            if let error = error {
-                let allowedErrorMessage = "Your environment does not allow more than 2 collections to be added."
-                if !(error.localizedDescription.contains(allowedErrorMessage)) {
-                    XCTFail(unexpectedErrorMessage(error))
+                if let error = error {
+                    let allowedErrorMessage = "Your environment does not allow more than 2 collections to be added."
+                    if !(error.localizedDescription.contains(allowedErrorMessage)) {
+                        XCTFail(unexpectedErrorMessage(error))
+                    }
+                    return
                 }
-                return
-            }
-            guard let result = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                guard let result = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            collection = result
+                collection = result
 
-            XCTAssertNotNil(collection.name)
-            XCTAssertEqual(collection.name!, collectionName)
-            XCTAssertEqual(collection.description, "A collection created while testing the Swift SDK. Safe to delete.")
-            XCTAssertNotNil(collection.configurationID)
-            XCTAssertEqual(collection.configurationID!, configuration.configurationID!)
-            XCTAssertNotNil(collection.language)
-            XCTAssertEqual(collection.language!, "en")
-            expectation1.fulfill()
+                XCTAssertNotNil(collection.name)
+                XCTAssertEqual(collection.name!, collectionName)
+                XCTAssertEqual(collection.description, "A collection created while testing the Swift SDK. Safe to delete.")
+                XCTAssertNotNil(collection.configurationID)
+                XCTAssertEqual(collection.configurationID!, configuration.configurationID!)
+                XCTAssertNotNil(collection.language)
+                XCTAssertEqual(collection.language!, "en")
+                expectation1.fulfill()
         }
         waitForExpectations(timeout: timeout)
 
@@ -908,21 +908,21 @@ class DiscoveryTests: XCTestCase {
             environmentID: environmentID,
             collectionID: collectionID,
             expansions: [expansion]) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let result = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let result = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            XCTAssertEqual(result.expansions.count, 1)
-            XCTAssertEqual(result.expansions.first!.expandedTerms.count, 2)
-            XCTAssertEqual(result.expansions.first!.inputTerms!.count, 1)
-            expectation1.fulfill()
+                XCTAssertEqual(result.expansions.count, 1)
+                XCTAssertEqual(result.expansions.first!.expandedTerms.count, 2)
+                XCTAssertEqual(result.expansions.first!.inputTerms!.count, 1)
+                expectation1.fulfill()
         }
         waitForExpectations(timeout: timeout)
 
@@ -1032,22 +1032,22 @@ class DiscoveryTests: XCTestCase {
             file: document,
             filename: "KennedySpeech.html",
             metadata: metadata) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let result = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let result = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            documentID = result.documentID
-            XCTAssertNotNil(result.documentID)
-            XCTAssert(result.status == "pending" || result.status == "available")
-            XCTAssertNil(result.notices)
-            expectation1.fulfill()
+                documentID = result.documentID
+                XCTAssertNotNil(result.documentID)
+                XCTAssert(result.status == "pending" || result.status == "available")
+                XCTAssertNil(result.notices)
+                expectation1.fulfill()
         }
         waitForExpectations(timeout: timeout)
 
@@ -1058,24 +1058,24 @@ class DiscoveryTests: XCTestCase {
             environmentID: environmentID,
             collectionID: collectionID,
             documentID: documentID) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let result = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let result = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            XCTAssertEqual(result.documentID, documentID)
-            XCTAssert(result.status == "processing" || result.status == "available")
-            XCTAssertGreaterThan(result.statusDescription.count, 0)
-            XCTAssertEqual(result.filename, "KennedySpeech.html")
-            XCTAssertEqual(result.fileType, "html")
-            XCTAssertEqual(result.notices.count, 0)
-            expectation2.fulfill()
+                XCTAssertEqual(result.documentID, documentID)
+                XCTAssert(result.status == "processing" || result.status == "available")
+                XCTAssertGreaterThan(result.statusDescription.count, 0)
+                XCTAssertEqual(result.filename, "KennedySpeech.html")
+                XCTAssertEqual(result.fileType, "html")
+                XCTAssertEqual(result.notices.count, 0)
+                expectation2.fulfill()
         }
         waitForExpectations(timeout: timeout)
 
@@ -1086,21 +1086,21 @@ class DiscoveryTests: XCTestCase {
             collectionID: collectionID,
             documentID: documentID,
             metadata: newMetadata) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let result = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
-            documentID = result.documentID
-            XCTAssertNotNil(result.documentID)
-            XCTAssert(result.status == "pending" || result.status == "available")
-            XCTAssertNil(result.notices)
-            expectation3.fulfill()
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let result = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
+                documentID = result.documentID
+                XCTAssertNotNil(result.documentID)
+                XCTAssert(result.status == "pending" || result.status == "available")
+                XCTAssertNil(result.notices)
+                expectation3.fulfill()
         }
         waitForExpectations(timeout: timeout)
 
@@ -1111,20 +1111,20 @@ class DiscoveryTests: XCTestCase {
             environmentID: environmentID,
             collectionID: collectionID,
             documentID: documentID) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let result = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let result = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            XCTAssertEqual(result.documentID, documentID)
-            XCTAssertEqual(result.status, "deleted")
-            expectation4.fulfill()
+                XCTAssertEqual(result.documentID, documentID)
+                XCTAssertEqual(result.status, "deleted")
+                expectation4.fulfill()
         }
         waitForExpectations(timeout: timeout)
     }
@@ -1145,27 +1145,27 @@ class DiscoveryTests: XCTestCase {
             highlight: true,
             deduplicate: true,
             deduplicateField: "title") {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let query = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let query = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            XCTAssertNotNil(query.matchingResults)
-            XCTAssertGreaterThan(query.matchingResults!, 0)
-            XCTAssertNotNil(query.results)
-            XCTAssertEqual(query.results!.count, 5)
-            for result in query.results! {
-                XCTAssertNotNil(result.id)
-                XCTAssertNotNil(result.resultMetadata)
-                XCTAssertNotNil(result.resultMetadata!.score)
-            }
-            expectation.fulfill()
+                XCTAssertNotNil(query.matchingResults)
+                XCTAssertGreaterThan(query.matchingResults!, 0)
+                XCTAssertNotNil(query.results)
+                XCTAssertEqual(query.results!.count, 5)
+                for result in query.results! {
+                    XCTAssertNotNil(result.id)
+                    XCTAssertNotNil(result.resultMetadata)
+                    XCTAssertNotNil(result.resultMetadata!.score)
+                }
+                expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
     }
@@ -1177,27 +1177,27 @@ class DiscoveryTests: XCTestCase {
             collectionID: newsCollectionID,
             naturalLanguageQuery: "Kubernetes",
             count: 5) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let query = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let query = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            XCTAssertNotNil(query.matchingResults)
-            XCTAssertGreaterThan(query.matchingResults!, 0)
-            XCTAssertNotNil(query.results)
-            XCTAssertEqual(query.results!.count, 5)
-            for result in query.results! {
-                XCTAssertNotNil(result.id)
-                XCTAssertNotNil(result.resultMetadata)
-                XCTAssertNotNil(result.resultMetadata!.score)
-            }
-            expectation.fulfill()
+                XCTAssertNotNil(query.matchingResults)
+                XCTAssertGreaterThan(query.matchingResults!, 0)
+                XCTAssertNotNil(query.results)
+                XCTAssertEqual(query.results!.count, 5)
+                for result in query.results! {
+                    XCTAssertNotNil(result.id)
+                    XCTAssertNotNil(result.resultMetadata)
+                    XCTAssertNotNil(result.resultMetadata!.score)
+                }
+                expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
     }
@@ -1212,21 +1212,21 @@ class DiscoveryTests: XCTestCase {
             passagesFields: "text",
             passagesCount: 1,
             passagesCharacters: 400) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let query = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let query = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            XCTAssertNotNil(query.matchingResults)
-            XCTAssertGreaterThan(query.matchingResults!, 0)
-            XCTAssertNotNil(query.passages)
-            expectation.fulfill()
+                XCTAssertNotNil(query.matchingResults)
+                XCTAssertGreaterThan(query.matchingResults!, 0)
+                XCTAssertNotNil(query.passages)
+                expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
     }
@@ -1240,20 +1240,20 @@ class DiscoveryTests: XCTestCase {
             similar: true,
             similarDocumentIDs: nil,
             similarFields: "text") {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let query = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let query = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            XCTAssertNotNil(query.matchingResults)
-            XCTAssertGreaterThan(query.matchingResults!, 0)
-            expectation.fulfill()
+                XCTAssertNotNil(query.matchingResults)
+                XCTAssertGreaterThan(query.matchingResults!, 0)
+                expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
     }
@@ -1266,34 +1266,34 @@ class DiscoveryTests: XCTestCase {
             query: "enriched_text.concepts.text:\"Cloud computing\"",
             aggregation: "term(enriched_text.concepts.text,count:10)",
             count: 1) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let query = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let query = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            XCTAssertNotNil(query.aggregations)
-            XCTAssertEqual(query.aggregations!.count, 1)
-            guard case let .term(term) = query.aggregations!.first! else {
-                XCTFail(self.unexpectedAggregationTypeMessage)
+                XCTAssertNotNil(query.aggregations)
+                XCTAssertEqual(query.aggregations!.count, 1)
+                guard case let .term(term) = query.aggregations!.first! else {
+                    XCTFail(self.unexpectedAggregationTypeMessage)
+                    expectation.fulfill()
+                    return
+                }
+                XCTAssertEqual(term.type, "term")
+                XCTAssertEqual(term.field, "enriched_text.concepts.text")
+                XCTAssertEqual(term.count, 10)
+                XCTAssertNotNil(term.results)
+                XCTAssertEqual(term.results!.count, 10)
+                XCTAssertNotNil(term.results!.first!.key)
+                XCTAssertEqual(term.results!.first!.key, "Cloud computing")
+                XCTAssertNotNil(term.results!.first!.matchingResults)
+                XCTAssertGreaterThan(term.results!.first!.matchingResults!, 0)
                 expectation.fulfill()
-                return
-            }
-            XCTAssertEqual(term.type, "term")
-            XCTAssertEqual(term.field, "enriched_text.concepts.text")
-            XCTAssertEqual(term.count, 10)
-            XCTAssertNotNil(term.results)
-            XCTAssertEqual(term.results!.count, 10)
-            XCTAssertNotNil(term.results!.first!.key)
-            XCTAssertEqual(term.results!.first!.key, "Cloud computing")
-            XCTAssertNotNil(term.results!.first!.matchingResults)
-            XCTAssertGreaterThan(term.results!.first!.matchingResults!, 0)
-            expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
     }
@@ -1306,29 +1306,29 @@ class DiscoveryTests: XCTestCase {
             query: "enriched_text.concepts.text:\"Cloud computing\"",
             aggregation: "filter(enriched_text.concepts.text:\"cloud computing\")",
             count: 1) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let query = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let query = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            XCTAssertNotNil(query.aggregations)
-            XCTAssertEqual(query.aggregations!.count, 1)
-            guard case let .filter(filter) = query.aggregations!.first! else {
-                XCTFail(self.unexpectedAggregationTypeMessage)
+                XCTAssertNotNil(query.aggregations)
+                XCTAssertEqual(query.aggregations!.count, 1)
+                guard case let .filter(filter) = query.aggregations!.first! else {
+                    XCTFail(self.unexpectedAggregationTypeMessage)
+                    expectation.fulfill()
+                    return
+                }
+                XCTAssertEqual(filter.type, "filter")
+                XCTAssertEqual(filter.match, "enriched_text.concepts.text:\"cloud computing\"")
+                XCTAssertNotNil(filter.matchingResults)
+                XCTAssertGreaterThan(filter.matchingResults!, 0)
                 expectation.fulfill()
-                return
-            }
-            XCTAssertEqual(filter.type, "filter")
-            XCTAssertEqual(filter.match, "enriched_text.concepts.text:\"cloud computing\"")
-            XCTAssertNotNil(filter.matchingResults)
-            XCTAssertGreaterThan(filter.matchingResults!, 0)
-            expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
     }
@@ -1341,29 +1341,29 @@ class DiscoveryTests: XCTestCase {
             query: "enriched_text.concepts.text:\"Cloud computing\"",
             aggregation: "nested(enriched_text.entities)",
             count: 1) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let query = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let query = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            XCTAssertNotNil(query.aggregations)
-            XCTAssertEqual(query.aggregations!.count, 1)
-            guard case let .nested(nested) = query.aggregations!.first! else {
-                XCTFail(self.unexpectedAggregationTypeMessage)
+                XCTAssertNotNil(query.aggregations)
+                XCTAssertEqual(query.aggregations!.count, 1)
+                guard case let .nested(nested) = query.aggregations!.first! else {
+                    XCTFail(self.unexpectedAggregationTypeMessage)
+                    expectation.fulfill()
+                    return
+                }
+                XCTAssertEqual(nested.type, "nested")
+                XCTAssertEqual(nested.path, "enriched_text.entities")
+                XCTAssertNotNil(nested.matchingResults)
+                XCTAssertGreaterThan(nested.matchingResults!, 0)
                 expectation.fulfill()
-                return
-            }
-            XCTAssertEqual(nested.type, "nested")
-            XCTAssertEqual(nested.path, "enriched_text.entities")
-            XCTAssertNotNil(nested.matchingResults)
-            XCTAssertGreaterThan(nested.matchingResults!, 0)
-            expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
     }
@@ -1376,34 +1376,34 @@ class DiscoveryTests: XCTestCase {
             query: "enriched_text.concepts.text:\"Cloud computing\"",
             aggregation: "histogram(enriched_text.concepts.relevance,interval:1)",
             count: 1) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let query = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let query = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            XCTAssertNotNil(query.aggregations)
-            XCTAssertEqual(query.aggregations!.count, 1)
-            guard case let .histogram(histogram) = query.aggregations!.first! else {
-                XCTFail(self.unexpectedAggregationTypeMessage)
+                XCTAssertNotNil(query.aggregations)
+                XCTAssertEqual(query.aggregations!.count, 1)
+                guard case let .histogram(histogram) = query.aggregations!.first! else {
+                    XCTFail(self.unexpectedAggregationTypeMessage)
+                    expectation.fulfill()
+                    return
+                }
+                XCTAssertEqual(histogram.type, "histogram")
+                XCTAssertEqual(histogram.field, "enriched_text.concepts.relevance")
+                XCTAssertEqual(histogram.interval, 1)
+                XCTAssertNotNil(histogram.results)
+                XCTAssertGreaterThan(histogram.results!.count, 0)
+                XCTAssertNotNil(histogram.results!.first!.key)
+                XCTAssertEqual(histogram.results!.first!.key!, "0")
+                XCTAssertNotNil(histogram.results!.first!.matchingResults)
+                XCTAssertGreaterThan(histogram.results!.first!.matchingResults!, 0)
                 expectation.fulfill()
-                return
-            }
-            XCTAssertEqual(histogram.type, "histogram")
-            XCTAssertEqual(histogram.field, "enriched_text.concepts.relevance")
-            XCTAssertEqual(histogram.interval, 1)
-            XCTAssertNotNil(histogram.results)
-            XCTAssertGreaterThan(histogram.results!.count, 0)
-            XCTAssertNotNil(histogram.results!.first!.key)
-            XCTAssertEqual(histogram.results!.first!.key!, "0")
-            XCTAssertNotNil(histogram.results!.first!.matchingResults)
-            XCTAssertGreaterThan(histogram.results!.first!.matchingResults!, 0)
-            expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
     }
@@ -1416,33 +1416,33 @@ class DiscoveryTests: XCTestCase {
             query: "enriched_text.concepts.text:\"Cloud computing\"",
             aggregation: "timeslice(publication_date,12hours)",
             count: 1) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let query = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let query = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            XCTAssertNotNil(query.aggregations)
-            XCTAssertEqual(query.aggregations!.count, 1)
-            guard case let .timeslice(timeslice) = query.aggregations!.first! else {
-                XCTFail(self.unexpectedAggregationTypeMessage)
+                XCTAssertNotNil(query.aggregations)
+                XCTAssertEqual(query.aggregations!.count, 1)
+                guard case let .timeslice(timeslice) = query.aggregations!.first! else {
+                    XCTFail(self.unexpectedAggregationTypeMessage)
+                    expectation.fulfill()
+                    return
+                }
+                XCTAssertEqual(timeslice.type, "timeslice")
+                XCTAssertEqual(timeslice.field, "publication_date")
+                XCTAssertEqual(timeslice.interval, "12h")
+                XCTAssertNotNil(timeslice.results)
+                XCTAssertGreaterThan(timeslice.results!.count, 0)
+                XCTAssertNotNil(timeslice.results!.first!.key)
+                XCTAssertNotNil(timeslice.results!.first!.matchingResults)
+                XCTAssertGreaterThan(timeslice.results!.first!.matchingResults!, 0)
                 expectation.fulfill()
-                return
-            }
-            XCTAssertEqual(timeslice.type, "timeslice")
-            XCTAssertEqual(timeslice.field, "publication_date")
-            XCTAssertEqual(timeslice.interval, "12h")
-            XCTAssertNotNil(timeslice.results)
-            XCTAssertGreaterThan(timeslice.results!.count, 0)
-            XCTAssertNotNil(timeslice.results!.first!.key)
-            XCTAssertNotNil(timeslice.results!.first!.matchingResults)
-            XCTAssertGreaterThan(timeslice.results!.first!.matchingResults!, 0)
-            expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
     }
@@ -1455,32 +1455,32 @@ class DiscoveryTests: XCTestCase {
             query: "enriched_text.concepts.text:\"Cloud computing\"",
             aggregation: "top_hits(1)",
             count: 1) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let query = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let query = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            XCTAssertNotNil(query.aggregations)
-            XCTAssertEqual(query.aggregations!.count, 1)
-            guard case let .topHits(topHits) = query.aggregations!.first! else {
-                XCTFail(self.unexpectedAggregationTypeMessage)
+                XCTAssertNotNil(query.aggregations)
+                XCTAssertEqual(query.aggregations!.count, 1)
+                guard case let .topHits(topHits) = query.aggregations!.first! else {
+                    XCTFail(self.unexpectedAggregationTypeMessage)
+                    expectation.fulfill()
+                    return
+                }
+                XCTAssertEqual(topHits.type, "top_hits")
+                XCTAssertEqual(topHits.size, 1)
+                XCTAssertNotNil(topHits.hits)
+                XCTAssertNotNil(topHits.hits!.matchingResults)
+                XCTAssertGreaterThan(topHits.hits!.matchingResults!, 0)
+                XCTAssertNotNil(topHits.hits!.hits)
+                XCTAssertGreaterThan(topHits.hits!.hits!.count, 0)
                 expectation.fulfill()
-                return
-            }
-            XCTAssertEqual(topHits.type, "top_hits")
-            XCTAssertEqual(topHits.size, 1)
-            XCTAssertNotNil(topHits.hits)
-            XCTAssertNotNil(topHits.hits!.matchingResults)
-            XCTAssertGreaterThan(topHits.hits!.matchingResults!, 0)
-            XCTAssertNotNil(topHits.hits!.hits)
-            XCTAssertGreaterThan(topHits.hits!.hits!.count, 0)
-            expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
     }
@@ -1493,29 +1493,29 @@ class DiscoveryTests: XCTestCase {
             query: "enriched_text.concepts.text:\"Cloud computing\"",
             aggregation: "unique_count(enriched_text.keywords.text)",
             count: 1) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let query = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let query = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            XCTAssertNotNil(query.aggregations)
-            XCTAssertEqual(query.aggregations!.count, 1)
-            guard case let .uniqueCount(uniqueCount) = query.aggregations!.first! else {
-                XCTFail(self.unexpectedAggregationTypeMessage)
+                XCTAssertNotNil(query.aggregations)
+                XCTAssertEqual(query.aggregations!.count, 1)
+                guard case let .uniqueCount(uniqueCount) = query.aggregations!.first! else {
+                    XCTFail(self.unexpectedAggregationTypeMessage)
+                    expectation.fulfill()
+                    return
+                }
+                XCTAssertEqual(uniqueCount.type, "unique_count")
+                XCTAssertEqual(uniqueCount.field, "enriched_text.keywords.text")
+                XCTAssertNotNil(uniqueCount.value)
+                XCTAssertGreaterThan(uniqueCount.value!, 0)
                 expectation.fulfill()
-                return
-            }
-            XCTAssertEqual(uniqueCount.type, "unique_count")
-            XCTAssertEqual(uniqueCount.field, "enriched_text.keywords.text")
-            XCTAssertNotNil(uniqueCount.value)
-            XCTAssertGreaterThan(uniqueCount.value!, 0)
-            expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
     }
@@ -1528,29 +1528,29 @@ class DiscoveryTests: XCTestCase {
             query: "enriched_text.concepts.text:\"Cloud computing\"",
             aggregation: "max(enriched_text.entities.count)",
             count: 1) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let query = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let query = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            XCTAssertNotNil(query.aggregations)
-            XCTAssertEqual(query.aggregations!.count, 1)
-            guard case let .max(calculation) = query.aggregations!.first! else {
-                XCTFail(self.unexpectedAggregationTypeMessage)
+                XCTAssertNotNil(query.aggregations)
+                XCTAssertEqual(query.aggregations!.count, 1)
+                guard case let .max(calculation) = query.aggregations!.first! else {
+                    XCTFail(self.unexpectedAggregationTypeMessage)
+                    expectation.fulfill()
+                    return
+                }
+                XCTAssertEqual(calculation.type, "max")
+                XCTAssertEqual(calculation.field, "enriched_text.entities.count")
+                XCTAssertNotNil(calculation.value)
+                XCTAssertGreaterThan(calculation.value!, 0)
                 expectation.fulfill()
-                return
-            }
-            XCTAssertEqual(calculation.type, "max")
-            XCTAssertEqual(calculation.field, "enriched_text.entities.count")
-            XCTAssertNotNil(calculation.value)
-            XCTAssertGreaterThan(calculation.value!, 0)
-            expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
     }
@@ -1563,29 +1563,29 @@ class DiscoveryTests: XCTestCase {
             query: "enriched_text.concepts.text:\"Cloud computing\"",
             aggregation: "min(enriched_text.entities.count)",
             count: 1) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let query = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let query = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            XCTAssertNotNil(query.aggregations)
-            XCTAssertEqual(query.aggregations!.count, 1)
-            guard case let .min(calculation) = query.aggregations!.first! else {
-                XCTFail(self.unexpectedAggregationTypeMessage)
+                XCTAssertNotNil(query.aggregations)
+                XCTAssertEqual(query.aggregations!.count, 1)
+                guard case let .min(calculation) = query.aggregations!.first! else {
+                    XCTFail(self.unexpectedAggregationTypeMessage)
+                    expectation.fulfill()
+                    return
+                }
+                XCTAssertEqual(calculation.type, "min")
+                XCTAssertEqual(calculation.field, "enriched_text.entities.count")
+                XCTAssertNotNil(calculation.value)
+                XCTAssertGreaterThan(calculation.value!, 0)
                 expectation.fulfill()
-                return
-            }
-            XCTAssertEqual(calculation.type, "min")
-            XCTAssertEqual(calculation.field, "enriched_text.entities.count")
-            XCTAssertNotNil(calculation.value)
-            XCTAssertGreaterThan(calculation.value!, 0)
-            expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
     }
@@ -1598,29 +1598,29 @@ class DiscoveryTests: XCTestCase {
             query: "enriched_text.concepts.text:\"Cloud computing\"",
             aggregation: "average(enriched_text.entities.count)",
             count: 1) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let query = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let query = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            XCTAssertNotNil(query.aggregations)
-            XCTAssertEqual(query.aggregations!.count, 1)
-            guard case let .average(calculation) = query.aggregations!.first! else {
-                XCTFail(self.unexpectedAggregationTypeMessage)
+                XCTAssertNotNil(query.aggregations)
+                XCTAssertEqual(query.aggregations!.count, 1)
+                guard case let .average(calculation) = query.aggregations!.first! else {
+                    XCTFail(self.unexpectedAggregationTypeMessage)
+                    expectation.fulfill()
+                    return
+                }
+                XCTAssertEqual(calculation.type, "average")
+                XCTAssertEqual(calculation.field, "enriched_text.entities.count")
+                XCTAssertNotNil(calculation.value)
+                XCTAssertGreaterThan(calculation.value!, 0)
                 expectation.fulfill()
-                return
-            }
-            XCTAssertEqual(calculation.type, "average")
-            XCTAssertEqual(calculation.field, "enriched_text.entities.count")
-            XCTAssertNotNil(calculation.value)
-            XCTAssertGreaterThan(calculation.value!, 0)
-            expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
     }
@@ -1633,29 +1633,29 @@ class DiscoveryTests: XCTestCase {
             query: "enriched_text.concepts.text:\"Cloud computing\"",
             aggregation: "sum(enriched_text.entities.count)",
             count: 1) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let query = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let query = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            XCTAssertNotNil(query.aggregations)
-            XCTAssertEqual(query.aggregations!.count, 1)
-            guard case let .sum(calculation) = query.aggregations!.first! else {
-                XCTFail(self.unexpectedAggregationTypeMessage)
+                XCTAssertNotNil(query.aggregations)
+                XCTAssertEqual(query.aggregations!.count, 1)
+                guard case let .sum(calculation) = query.aggregations!.first! else {
+                    XCTFail(self.unexpectedAggregationTypeMessage)
+                    expectation.fulfill()
+                    return
+                }
+                XCTAssertEqual(calculation.type, "sum")
+                XCTAssertEqual(calculation.field, "enriched_text.entities.count")
+                XCTAssertNotNil(calculation.value)
+                XCTAssertGreaterThan(calculation.value!, 0)
                 expectation.fulfill()
-                return
-            }
-            XCTAssertEqual(calculation.type, "sum")
-            XCTAssertEqual(calculation.field, "enriched_text.entities.count")
-            XCTAssertNotNil(calculation.value)
-            XCTAssertGreaterThan(calculation.value!, 0)
-            expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
     }
@@ -1924,25 +1924,25 @@ class DiscoveryTests: XCTestCase {
             naturalLanguageQuery: "1962 State of the Union",
             filter: "text:politics",
             examples: [example]) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let result = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let result = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            trainingQuery = result
-            XCTAssertNotNil(result.queryID)
-            XCTAssertEqual(result.naturalLanguageQuery, "1962 State of the Union")
-            XCTAssertNotNil(result.filter)
-            XCTAssertEqual(result.filter, "text:politics")
-            XCTAssertNotNil(result.examples)
-            XCTAssertEqual(result.examples!.count, 1)
-            expectation1.fulfill()
+                trainingQuery = result
+                XCTAssertNotNil(result.queryID)
+                XCTAssertEqual(result.naturalLanguageQuery, "1962 State of the Union")
+                XCTAssertNotNil(result.filter)
+                XCTAssertEqual(result.filter, "text:politics")
+                XCTAssertNotNil(result.examples)
+                XCTAssertEqual(result.examples!.count, 1)
+                expectation1.fulfill()
         }
         waitForExpectations(timeout: timeout)
 
@@ -2029,19 +2029,19 @@ class DiscoveryTests: XCTestCase {
             naturalLanguageQuery: "1962 State of the Union",
             filter: "text:politics",
             examples: [example]) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let result = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let result = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            trainingQuery = result
-            expectation1.fulfill()
+                trainingQuery = result
+                expectation1.fulfill()
         }
         waitForExpectations(timeout: timeout)
 
@@ -2095,19 +2095,19 @@ class DiscoveryTests: XCTestCase {
             collectionID: collectionID,
             naturalLanguageQuery: "1962 State of the Union",
             filter: "text:politics") {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let result = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let result = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            trainingQuery = result
-            expectation1.fulfill()
+                trainingQuery = result
+                expectation1.fulfill()
         }
         waitForExpectations(timeout: timeout)
 
@@ -2119,20 +2119,20 @@ class DiscoveryTests: XCTestCase {
             queryID: queryID,
             documentID: documentID,
             relevance: 4) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let result = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let result = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            XCTAssertEqual(result.documentID, documentID)
-            XCTAssertEqual(result.relevance, 4)
-            expectation2.fulfill()
+                XCTAssertEqual(result.documentID, documentID)
+                XCTAssertEqual(result.relevance, 4)
+                expectation2.fulfill()
         }
         waitForExpectations(timeout: timeout)
 
@@ -2230,7 +2230,7 @@ class DiscoveryTests: XCTestCase {
         var credentials: Credentials?
 
         let createDetails = CredentialDetails(credentialType: "username_password", url: "https://login.salesforce.com",
-                                        username: "email@server.xyz", password: "{my_salesforce_password}{my_salesforce_security_token}")
+                                              username: "email@server.xyz", password: "{my_salesforce_password}{my_salesforce_security_token}")
         discovery.createCredentials(environmentID: environmentID, sourceType: Source.TypeEnum.salesforce.rawValue, credentialDetails: createDetails) {
             response, error in
 

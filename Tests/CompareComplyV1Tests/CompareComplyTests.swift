@@ -140,29 +140,29 @@ class CompareComplyTests: XCTestCase {
         }
 
         compareComply.convertToHTML(file: file, fileContentType: "application/pdf") {
-                response, error in
+            response, error in
 
-                if let error = error {
-                    XCTFail(unexpectedErrorMessage(error))
-                    return
-                }
-                guard let result = response?.result else {
-                    XCTFail(missingResultMessage)
-                    return
-                }
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
 
-                XCTAssertNotNil(result.html)
+            XCTAssertNotNil(result.html)
 
-                XCTAssertNotNil(result.numPages)
-                if let numPages = result.numPages,
-                    let numberOfPages = Int(numPages) {
-                    XCTAssert(numberOfPages == 4)
-                }
-                XCTAssertNotNil(result.title)
-                if let title = result.title {
-                    XCTAssert(title.contains("contract_A"))
-                }
-                expectation.fulfill()
+            XCTAssertNotNil(result.numPages)
+            if let numPages = result.numPages,
+                let numberOfPages = Int(numPages) {
+                XCTAssert(numberOfPages == 4)
+            }
+            XCTAssertNotNil(result.title)
+            if let title = result.title {
+                XCTAssert(title.contains("contract_A"))
+            }
+            expectation.fulfill()
         }
         waitForExpectations()
     }
@@ -171,30 +171,30 @@ class CompareComplyTests: XCTestCase {
         let expectation = self.expectation(description: "convert PDF document to HTML")
 
         compareComply.convertToHTML(file: contractAPNGFile, fileContentType: "image/png") {
-                response, error in
+            response, error in
 
-                if let error = error {
-                    XCTFail(unexpectedErrorMessage(error))
-                    return
-                }
-                guard let result = response?.result else {
-                    XCTFail(missingResultMessage)
-                    return
-                }
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
 
-                XCTAssertNotNil(result.html)
+            XCTAssertNotNil(result.html)
 
-                XCTAssertNotNil(result.numPages)
-                if let numPages = result.numPages,
-                    let numberOfPages = Int(numPages) {
-                    XCTAssert(numberOfPages == 1)
-                }
+            XCTAssertNotNil(result.numPages)
+            if let numPages = result.numPages,
+                let numberOfPages = Int(numPages) {
+                XCTAssert(numberOfPages == 1)
+            }
 
-                XCTAssertNotNil(result.title)
-                if let title = result.title {
-                    XCTAssert(title.contains("no title"))
-                }
-                expectation.fulfill()
+            XCTAssertNotNil(result.title)
+            if let title = result.title {
+                XCTAssert(title.contains("no title"))
+            }
+            expectation.fulfill()
         }
         waitForExpectations()
     }
@@ -203,30 +203,30 @@ class CompareComplyTests: XCTestCase {
         let expectation = self.expectation(description: "convert PDF document to HTML")
 
         compareComply.convertToHTML(file: contractAJPGFile, fileContentType: "image/jpg") {
-                response, error in
+            response, error in
 
-                if let error = error {
-                    XCTFail(unexpectedErrorMessage(error))
-                    return
-                }
-                guard let result = response?.result else {
-                    XCTFail(missingResultMessage)
-                    return
-                }
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
 
-                XCTAssertNotNil(result.html)
+            XCTAssertNotNil(result.html)
 
-                XCTAssertNotNil(result.numPages)
-                if let numPages = result.numPages,
-                    let numberOfPages = Int(numPages) {
-                    XCTAssert(numberOfPages == 1)
-                }
+            XCTAssertNotNil(result.numPages)
+            if let numPages = result.numPages,
+                let numberOfPages = Int(numPages) {
+                XCTAssert(numberOfPages == 1)
+            }
 
-                XCTAssertNotNil(result.title)
-                if let title = result.title {
-                    XCTAssert(title.contains("no title"))
-                }
-                expectation.fulfill()
+            XCTAssertNotNil(result.title)
+            if let title = result.title {
+                XCTAssert(title.contains("no title"))
+            }
+            expectation.fulfill()
         }
         waitForExpectations()
     }
@@ -235,30 +235,30 @@ class CompareComplyTests: XCTestCase {
         let expectation = self.expectation(description: "convert PDF document to HTML")
 
         compareComply.convertToHTML(file: contractABMPFile, fileContentType: "image/bmp") {
-                response, error in
+            response, error in
 
-                if let error = error {
-                    XCTFail(unexpectedErrorMessage(error))
-                    return
-                }
-                guard let result = response?.result else {
-                    XCTFail(missingResultMessage)
-                    return
-                }
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
 
-                XCTAssertNotNil(result.html)
+            XCTAssertNotNil(result.html)
 
-                XCTAssertNotNil(result.numPages)
-                if let numPages = result.numPages,
-                    let numberOfPages = Int(numPages) {
-                    XCTAssert(numberOfPages == 1)
-                }
+            XCTAssertNotNil(result.numPages)
+            if let numPages = result.numPages,
+                let numberOfPages = Int(numPages) {
+                XCTAssert(numberOfPages == 1)
+            }
 
-                XCTAssertNotNil(result.title)
-                if let title = result.title {
-                    XCTAssert(title.contains("no title"))
-                }
-                expectation.fulfill()
+            XCTAssertNotNil(result.title)
+            if let title = result.title {
+                XCTAssert(title.contains("no title"))
+            }
+            expectation.fulfill()
         }
         waitForExpectations()
     }
@@ -267,30 +267,30 @@ class CompareComplyTests: XCTestCase {
         let expectation = self.expectation(description: "convert PDF document to HTML")
 
         compareComply.convertToHTML(file: contractAGIFFile, fileContentType: "image/gif") {
-                response, error in
+            response, error in
 
-                if let error = error {
-                    XCTFail(unexpectedErrorMessage(error))
-                    return
-                }
-                guard let result = response?.result else {
-                    XCTFail(missingResultMessage)
-                    return
-                }
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
 
-                XCTAssertNotNil(result.html)
+            XCTAssertNotNil(result.html)
 
-                XCTAssertNotNil(result.numPages)
-                if let numPages = result.numPages,
-                    let numberOfPages = Int(numPages) {
-                    XCTAssert(numberOfPages == 1)
-                }
+            XCTAssertNotNil(result.numPages)
+            if let numPages = result.numPages,
+                let numberOfPages = Int(numPages) {
+                XCTAssert(numberOfPages == 1)
+            }
 
-                XCTAssertNotNil(result.title)
-                if let title = result.title {
-                    XCTAssert(title.contains("no title"))
-                }
-                expectation.fulfill()
+            XCTAssertNotNil(result.title)
+            if let title = result.title {
+                XCTAssert(title.contains("no title"))
+            }
+            expectation.fulfill()
         }
         waitForExpectations()
     }
@@ -299,30 +299,30 @@ class CompareComplyTests: XCTestCase {
         let expectation = self.expectation(description: "convert PDF document to HTML")
 
         compareComply.convertToHTML(file: contractATIFFFile, fileContentType: "image/tiff") {
-                response, error in
+            response, error in
 
-                if let error = error {
-                    XCTFail(unexpectedErrorMessage(error))
-                    return
-                }
-                guard let result = response?.result else {
-                    XCTFail(missingResultMessage)
-                    return
-                }
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
 
-                XCTAssertNotNil(result.html)
+            XCTAssertNotNil(result.html)
 
-                XCTAssertNotNil(result.numPages)
-                if let numPages = result.numPages,
-                    let numberOfPages = Int(numPages) {
-                    XCTAssert(numberOfPages == 1)
-                }
+            XCTAssertNotNil(result.numPages)
+            if let numPages = result.numPages,
+                let numberOfPages = Int(numPages) {
+                XCTAssert(numberOfPages == 1)
+            }
 
-                XCTAssertNotNil(result.title)
-                if let title = result.title {
-                    XCTAssert(title.contains("no title"))
-                }
-                expectation.fulfill()
+            XCTAssertNotNil(result.title)
+            if let title = result.title {
+                XCTAssert(title.contains("no title"))
+            }
+            expectation.fulfill()
         }
         waitForExpectations()
     }
@@ -331,30 +331,30 @@ class CompareComplyTests: XCTestCase {
         let expectation = self.expectation(description: "convert PDF document to HTML")
 
         compareComply.convertToHTML(file: contractADOCXFile, fileContentType: "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
-                response, error in
+            response, error in
 
-                if let error = error {
-                    XCTFail(unexpectedErrorMessage(error))
-                    return
-                }
-                guard let result = response?.result else {
-                    XCTFail(missingResultMessage)
-                    return
-                }
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
 
-                XCTAssertNotNil(result.html)
+            XCTAssertNotNil(result.html)
 
-                XCTAssertNotNil(result.numPages)
-                if let numPages = result.numPages,
-                    let numberOfPages = Int(numPages) {
-                    XCTAssert(numberOfPages == 4)
-                }
+            XCTAssertNotNil(result.numPages)
+            if let numPages = result.numPages,
+                let numberOfPages = Int(numPages) {
+                XCTAssert(numberOfPages == 4)
+            }
 
-                XCTAssertNotNil(result.title)
-                if let title = result.title {
-                    XCTAssert(title.contains("no title"))
-                }
-                expectation.fulfill()
+            XCTAssertNotNil(result.title)
+            if let title = result.title {
+                XCTAssert(title.contains("no title"))
+            }
+            expectation.fulfill()
         }
         waitForExpectations()
     }
@@ -363,30 +363,30 @@ class CompareComplyTests: XCTestCase {
         let expectation = self.expectation(description: "convert PDF document to HTML")
 
         compareComply.convertToHTML(file: contractADOCFile, fileContentType: "application/msword") {
-                response, error in
+            response, error in
 
-                if let error = error {
-                    XCTFail(unexpectedErrorMessage(error))
-                    return
-                }
-                guard let result = response?.result else {
-                    XCTFail(missingResultMessage)
-                    return
-                }
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
 
-                XCTAssertNotNil(result.html)
+            XCTAssertNotNil(result.html)
 
-                XCTAssertNotNil(result.numPages)
-                if let numPages = result.numPages,
-                    let numberOfPages = Int(numPages) {
-                    XCTAssert(numberOfPages == 4)
-                }
+            XCTAssertNotNil(result.numPages)
+            if let numPages = result.numPages,
+                let numberOfPages = Int(numPages) {
+                XCTAssert(numberOfPages == 4)
+            }
 
-                XCTAssertNotNil(result.title)
-                if let title = result.title {
-                    XCTAssert(title.contains("no title"))
-                }
-                expectation.fulfill()
+            XCTAssertNotNil(result.title)
+            if let title = result.title {
+                XCTAssert(title.contains("no title"))
+            }
+            expectation.fulfill()
         }
         waitForExpectations()
     }
@@ -995,10 +995,10 @@ class CompareComplyTests: XCTestCase {
 
         let location = Location(begin: 0, end: 1)
         let text = """
-                    1. IBM will provide a Senior Managing Consultant / expert resource, for up to 80 hours, to assist
-                    Florida Power & Light (FPL) with the creation of an IT infrastructure unit cost model for existing
-                    infrastructure."
-                    """
+        1. IBM will provide a Senior Managing Consultant / expert resource, for up to 80 hours, to assist
+        Florida Power & Light (FPL) with the creation of an IT infrastructure unit cost model for existing
+        infrastructure."
+        """
 
         let originalType1 = TypeLabel(
             label: Label(nature: "Obligation", party: "IBM"),
@@ -1147,10 +1147,10 @@ class CompareComplyTests: XCTestCase {
 
         let location = Location(begin: 0, end: 1)
         let text = """
-                    1. IBM will provide a Senior Managing Consultant / expert resource, for up to 80 hours, to assist
-                    Florida Power & Light (FPL) with the creation of an IT infrastructure unit cost model for existing
-                    infrastructure."
-                    """
+        1. IBM will provide a Senior Managing Consultant / expert resource, for up to 80 hours, to assist
+        Florida Power & Light (FPL) with the creation of an IT infrastructure unit cost model for existing
+        infrastructure."
+        """
 
         let originalType1 = TypeLabel(
             label: Label(nature: "Obligation", party: "IBM"),
@@ -1241,10 +1241,10 @@ class CompareComplyTests: XCTestCase {
 
         let location = Location(begin: 0, end: 1)
         let text = """
-                    1. IBM will provide a Senior Managing Consultant / expert resource, for up to 80 hours, to assist
-                    Florida Power & Light (FPL) with the creation of an IT infrastructure unit cost model for existing
-                    infrastructure."
-                    """
+        1. IBM will provide a Senior Managing Consultant / expert resource, for up to 80 hours, to assist
+        Florida Power & Light (FPL) with the creation of an IT infrastructure unit cost model for existing
+        infrastructure."
+        """
 
         let originalType1 = TypeLabel(
             label: Label(nature: "Obligation", party: "IBM"),
@@ -1329,22 +1329,22 @@ class CompareComplyTests: XCTestCase {
 
         let expectation2 = self.expectation(description: "Get feedback")
         compareComply.getFeedback(
-        feedbackID: newFeedbackID) {
-            response, error in
+            feedbackID: newFeedbackID) {
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let result = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let result = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            // Bug opened with CnC team: #11500
-            XCTAssertEqual(result.comment, myComment)
+                // Bug opened with CnC team: #11500
+                XCTAssertEqual(result.comment, myComment)
 
-            expectation2.fulfill()
+                expectation2.fulfill()
         }
         waitForExpectations()
     }
@@ -1355,8 +1355,8 @@ class CompareComplyTests: XCTestCase {
     func testBatchOperations() {
         guard let credentialsInput = loadDocument(name: "cloud-object-storage-credentials-input", ext: "json"),
             let credentialsOutput = loadDocument(name: "cloud-object-storage-credentials-output", ext: "json") else {
-                XCTFail("Failed to load Cloud Object Storage credentials")
-                return
+            XCTFail("Failed to load Cloud Object Storage credentials")
+            return
         }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"

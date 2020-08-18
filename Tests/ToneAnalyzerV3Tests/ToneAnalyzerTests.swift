@@ -177,21 +177,21 @@ class ToneAnalyzerTests: XCTestCase {
             sentences: false,
             contentLanguage: "en",
             acceptLanguage: "en") {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let toneAnalysis = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let toneAnalysis = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            XCTAssertNotNil(toneAnalysis.documentTone.tones)
-            XCTAssertGreaterThan(toneAnalysis.documentTone.tones!.count, 0)
-            XCTAssertNil(toneAnalysis.sentencesTone)
-            expectation.fulfill()
+                XCTAssertNotNil(toneAnalysis.documentTone.tones)
+                XCTAssertGreaterThan(toneAnalysis.documentTone.tones!.count, 0)
+                XCTAssertNil(toneAnalysis.sentencesTone)
+                expectation.fulfill()
         }
         waitForExpectations()
     }

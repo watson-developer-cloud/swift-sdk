@@ -70,14 +70,14 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
 
     func loadHTML() {
         #if os(Linux)
-            let file = URL(fileURLWithPath: "Tests/NaturalLanguageUnderstandingV1Tests/testArticle.html").path
-            html = try! String(contentsOfFile: file, encoding: .utf8)
+        let file = URL(fileURLWithPath: "Tests/NaturalLanguageUnderstandingV1Tests/testArticle.html").path
+        html = try! String(contentsOfFile: file, encoding: .utf8)
         #else
-            let bundle = Bundle(for: type(of: self))
-            guard let file = bundle.path(forResource: "testArticle", ofType: "html") else {
-                XCTFail("Unable to locate testArticle.html")
-                return
-            }
+        let bundle = Bundle(for: type(of: self))
+        guard let file = bundle.path(forResource: "testArticle", ofType: "html") else {
+            XCTFail("Unable to locate testArticle.html")
+            return
+        }
         html = try! String(contentsOfFile: file)
         #endif
     }
@@ -222,9 +222,9 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         let description = "Analyze text for emotions."
         let expectation = self.expectation(description: description)
         let text = "But I believe this thinking is wrong. I believe the road of true democracy remains the better path. "
-                 + "I believe that in the 21st century, economies can only grow to a certain point until they need to open up -- "
-                 + "because entrepreneurs need to access information in order to invent; young people need a global education "
-                 + "in order to thrive; independent media needs to check the abuses of power."
+            + "I believe that in the 21st century, economies can only grow to a certain point until they need to open up -- "
+            + "because entrepreneurs need to access information in order to invent; young people need a global education "
+            + "in order to thrive; independent media needs to check the abuses of power."
         let emotion = EmotionOptions(targets: ["democracy", "entrepreneurs", "media", "economies"])
         let features = Features(emotion: emotion)
         naturalLanguageUnderstanding.analyze(features: features, text: text, returnAnalyzedText: true) {
@@ -272,9 +272,9 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         let description = "Analyze text for emotions without targets."
         let expectation = self.expectation(description: description)
         let text = "But I believe this thinking is wrong. I believe the road of true democracy remains the better path. "
-                 + "I believe that in the 21st century, economies can only grow to a certain point until they need to open up -- "
-                 + "because entrepreneurs need to access information in order to invent; young people need a global education "
-                 + "in order to thrive; independent media needs to check the abuses of power."
+            + "I believe that in the 21st century, economies can only grow to a certain point until they need to open up -- "
+            + "because entrepreneurs need to access information in order to invent; young people need a global education "
+            + "in order to thrive; independent media needs to check the abuses of power."
         let features = Features(emotion: EmotionOptions())
         naturalLanguageUnderstanding.analyze(features: features, text: text, returnAnalyzedText: true) {
             response, error in

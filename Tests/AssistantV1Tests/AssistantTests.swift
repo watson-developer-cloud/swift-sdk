@@ -205,41 +205,41 @@ class AssistantTests: XCTestCase {
             entities: entities,
             context: context,
             output: output) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let message = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let message = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            // verify objects are non-nil
-            XCTAssertNotNil(entities)
-            XCTAssertNotNil(intents)
-            XCTAssertNotNil(output)
+                // verify objects are non-nil
+                XCTAssertNotNil(entities)
+                XCTAssertNotNil(intents)
+                XCTAssertNotNil(output)
 
-            // verify intents are equal
-            for index in 0..<message.intents.count {
-                let intent1 = intents![index]
-                let intent2 = message.intents[index]
-                XCTAssertEqual(intent1.intent, intent2.intent)
-                XCTAssertEqual(intent1.confidence, intent2.confidence, accuracy: 10E-5)
-            }
+                // verify intents are equal
+                for index in 0..<message.intents.count {
+                    let intent1 = intents![index]
+                    let intent2 = message.intents[index]
+                    XCTAssertEqual(intent1.intent, intent2.intent)
+                    XCTAssertEqual(intent1.confidence, intent2.confidence, accuracy: 10E-5)
+                }
 
-            // verify entities are equal
-            for index in 0..<message.entities.count {
-                let entity1 = entities![index]
-                let entity2 = message.entities[index]
-                XCTAssertEqual(entity1.entity, entity2.entity)
-                XCTAssertEqual(entity1.location[0], entity2.location[0])
-                XCTAssertEqual(entity1.location[1], entity2.location[1])
-                XCTAssertEqual(entity1.value, entity2.value)
-            }
+                // verify entities are equal
+                for index in 0..<message.entities.count {
+                    let entity1 = entities![index]
+                    let entity2 = message.entities[index]
+                    XCTAssertEqual(entity1.entity, entity2.entity)
+                    XCTAssertEqual(entity1.location[0], entity2.location[0])
+                    XCTAssertEqual(entity1.location[1], entity2.location[1])
+                    XCTAssertEqual(entity1.value, entity2.value)
+                }
 
-            expectation2.fulfill()
+                expectation2.fulfill()
         }
         waitForExpectations()
     }
@@ -281,22 +281,22 @@ class AssistantTests: XCTestCase {
             entities: entities,
             context: context,
             output: output) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let message = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let message = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            context = message.context
-            entities = message.entities
-            intents = message.intents
-            output = message.output
-            expectation2.fulfill()
+                context = message.context
+                entities = message.entities
+                intents = message.intents
+                output = message.output
+                expectation2.fulfill()
         }
         waitForExpectations()
 
@@ -311,91 +311,91 @@ class AssistantTests: XCTestCase {
             entities: entities,
             context: context,
             output: output) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let message = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let message = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            // verify objects are non-nil
-            XCTAssertNotNil(entities)
-            XCTAssertNotNil(intents)
-            XCTAssertNotNil(output)
+                // verify objects are non-nil
+                XCTAssertNotNil(entities)
+                XCTAssertNotNil(intents)
+                XCTAssertNotNil(output)
 
-            // verify intents are equal
-            for index in 0..<message.intents.count {
-                let intent1 = intents![index]
-                let intent2 = message.intents[index]
-                XCTAssertEqual(intent1.intent, intent2.intent)
-                XCTAssertEqual(intent1.confidence, intent2.confidence, accuracy: 10E-5)
-            }
+                // verify intents are equal
+                for index in 0..<message.intents.count {
+                    let intent1 = intents![index]
+                    let intent2 = message.intents[index]
+                    XCTAssertEqual(intent1.intent, intent2.intent)
+                    XCTAssertEqual(intent1.confidence, intent2.confidence, accuracy: 10E-5)
+                }
 
-            // verify entities are equal
-            for index in 0..<message.entities.count {
-                let entity1 = entities![index]
-                let entity2 = message.entities[index]
-                XCTAssertEqual(entity1.entity, entity2.entity)
-                XCTAssertEqual(entity1.location[0], entity2.location[0])
-                XCTAssertEqual(entity1.location[1], entity2.location[1])
-                XCTAssertEqual(entity1.value, entity2.value)
-            }
+                // verify entities are equal
+                for index in 0..<message.entities.count {
+                    let entity1 = entities![index]
+                    let entity2 = message.entities[index]
+                    XCTAssertEqual(entity1.entity, entity2.entity)
+                    XCTAssertEqual(entity1.location[0], entity2.location[0])
+                    XCTAssertEqual(entity1.location[1], entity2.location[1])
+                    XCTAssertEqual(entity1.value, entity2.value)
+                }
 
-            expectation3.fulfill()
+                expectation3.fulfill()
         }
         waitForExpectations()
     }
-    
+
     func testMessageSystemEntity() {
         var context: Context!
-        
+
         let message1Expectation = self.expectation(description: "message 1")
         assistant.message(workspaceID: workspaceID) {
-                response, error in
-            
+            response, error in
+
             if let error = error {
                 XCTFail(error.localizedDescription)
                 return
             }
-            
+
             guard let result = response?.result else {
                 XCTFail("no response")
                 return
             }
-            
+
             XCTAssertNotNil(result.context)
             context = result.context
-            
+
             message1Expectation.fulfill()
         }
-        
+
         waitForExpectations()
-        
+
         let message2Expectation = self.expectation(description: "message 2")
         let input = MessageInput(text: "I was born on 7/26/1990")
         assistant.message(workspaceID: workspaceID, input: input, context: context) {
             response, error in
-            
+
             if let error = error {
                 XCTFail(error.localizedDescription)
                 return
             }
-            
+
             guard let result = response?.result else {
                 XCTFail("no response")
                 return
             }
-            
+
             XCTAssertNotNil(result.context)
             context = result.context
-            
+
             message2Expectation.fulfill()
         }
-        
+
         waitForExpectations()
     }
 
@@ -537,24 +537,24 @@ class AssistantTests: XCTestCase {
             dialogNodes: [workspaceDialogNode],
             counterexamples: [workspaceCounterexample],
             includeAudit: true) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let workspace = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let workspace = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            XCTAssertEqual(workspace.name, workspaceName)
-            XCTAssertEqual(workspace.description, workspaceDescription)
-            XCTAssertEqual(workspace.language, workspaceLanguage)
-            XCTAssertNotNil(workspace.workspaceID)
+                XCTAssertEqual(workspace.name, workspaceName)
+                XCTAssertEqual(workspace.description, workspaceDescription)
+                XCTAssertEqual(workspace.language, workspaceLanguage)
+                XCTAssertNotNil(workspace.workspaceID)
 
-            newWorkspace = workspace.workspaceID
-            expectation1.fulfill()
+                newWorkspace = workspace.workspaceID
+                expectation1.fulfill()
         }
         waitForExpectations(timeout: 20.0)
 
@@ -1508,20 +1508,20 @@ class AssistantTests: XCTestCase {
             newEntity: updatedEntityName,
             newDescription: updatedEntityDescription,
             includeAudit: true) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let entity = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let entity = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            XCTAssertEqual(entity.entity, updatedEntityName)
-            XCTAssertEqual(entity.description, updatedEntityDescription)
-            expectationTwo.fulfill()
+                XCTAssertEqual(entity.entity, updatedEntityName)
+                XCTAssertEqual(entity.description, updatedEntityDescription)
+                expectationTwo.fulfill()
         }
         waitForExpectations()
 
@@ -1681,20 +1681,20 @@ class AssistantTests: XCTestCase {
             newValue: updatedValueName,
             newMetadata: ["oldname": .string(valueName)],
             includeAudit: true) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let value = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let value = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            XCTAssertEqual(value.value, updatedValueName)
-            XCTAssertNotNil(value.metadata)
-            expectationTwo.fulfill()
+                XCTAssertEqual(value.value, updatedValueName)
+                XCTAssertNotNil(value.metadata)
+                expectationTwo.fulfill()
         }
         waitForExpectations()
 
@@ -1978,30 +1978,30 @@ class AssistantTests: XCTestCase {
             metadata: dialogMetadata,
             title: "Order Pizza",
             includeAudit: true) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let node = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let node = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            XCTAssertEqual(node.dialogNode, dialogNode)
-            XCTAssertEqual(node.description, "Reply affirmatively")
-            XCTAssertEqual(node.conditions, "#order_pizza")
-            XCTAssertNil(node.parent)
-            XCTAssertNil(node.previousSibling)
-            XCTAssertNil(node.context)
-            XCTAssertEqual(node.metadata!, dialogMetadata)
-            XCTAssertNil(node.nextStep)
-            XCTAssertNil(node.actions)
-            XCTAssertEqual(node.title, "Order Pizza")
-            XCTAssertNil(node.eventName)
-            XCTAssertNil(node.variable)
-            expectation1.fulfill()
+                XCTAssertEqual(node.dialogNode, dialogNode)
+                XCTAssertEqual(node.description, "Reply affirmatively")
+                XCTAssertEqual(node.conditions, "#order_pizza")
+                XCTAssertNil(node.parent)
+                XCTAssertNil(node.previousSibling)
+                XCTAssertNil(node.context)
+                XCTAssertEqual(node.metadata!, dialogMetadata)
+                XCTAssertNil(node.nextStep)
+                XCTAssertNil(node.actions)
+                XCTAssertEqual(node.title, "Order Pizza")
+                XCTAssertNil(node.eventName)
+                XCTAssertNil(node.variable)
+                expectation1.fulfill()
         }
         waitForExpectations()
 
@@ -2047,19 +2047,19 @@ class AssistantTests: XCTestCase {
             dialogNode: "test-node",
             newDialogNode: "test-node-updated",
             includeAudit: true) {
-            response, error in
+                response, error in
 
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            guard let node = response?.result else {
-                XCTFail(missingResultMessage)
-                return
-            }
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                guard let node = response?.result else {
+                    XCTFail(missingResultMessage)
+                    return
+                }
 
-            XCTAssertEqual(node.dialogNode, "test-node-updated")
-            expectation2.fulfill()
+                XCTAssertEqual(node.dialogNode, "test-node-updated")
+                expectation2.fulfill()
         }
         waitForExpectations()
 
@@ -2111,7 +2111,7 @@ class AssistantTests: XCTestCase {
 
                     XCTAssertEqual(dialogNode.dialogNode, node.dialogNode)
                     expectation.fulfill()
-                }
+            }
         }
         waitForExpectations()
     }

@@ -52,10 +52,10 @@ class DiscoveryCPDTests: XCTestCase {
 
     func loadDocument(name: String, ext: String) -> Data? {
         #if os(Linux)
-            let url = URL(fileURLWithPath: "Tests/DiscoveryV1Tests/Resources/" + name + "." + ext)
+        let url = URL(fileURLWithPath: "Tests/DiscoveryV1Tests/Resources/" + name + "." + ext)
         #else
-            let bundle = Bundle(for: type(of: self))
-            guard let url = bundle.url(forResource: name, withExtension: ext) else { return nil }
+        let bundle = Bundle(for: type(of: self))
+        guard let url = bundle.url(forResource: name, withExtension: ext) else { return nil }
         #endif
         let data = try? Data(contentsOf: url)
         return data

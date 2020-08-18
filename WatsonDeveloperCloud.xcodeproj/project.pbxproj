@@ -327,9 +327,31 @@
 		7AAD66571DCA5D730010481E /* sign.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7AAD664F1DCA5D730010481E /* sign.jpg */; };
 		7AAD66581DCA5D730010481E /* VisualRecognitionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAD66501DCA5D730010481E /* VisualRecognitionTests.swift */; };
 		7AF31BFB1D7A414D0040D944 /* SpeechToTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */; };
+		7E0DACE924E578620032E040 /* analyzeDocument.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7E0DACE824E578620032E040 /* analyzeDocument.txt */; };
+		7E0DACEB24E579720032E040 /* Jeopardy.html in Resources */ = {isa = PBXBuildFile; fileRef = 7E0DACEA24E579720032E040 /* Jeopardy.html */; };
 		7E0ECA8C237B515A00236E6D /* GenericQueryAggregation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E0ECA8B237B515A00236E6D /* GenericQueryAggregation.swift */; };
 		7E12A8CF23477FD00008906B /* DiscoveryTest+CPD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E12A8CE23477FD00008906B /* DiscoveryTest+CPD.swift */; };
 		7E1C22232450CF8700D00CF5 /* RuntimeEntityAlternative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1C22222450CF8700D00CF5 /* RuntimeEntityAlternative.swift */; };
+		7E2B504924E1DEF1007AAFC4 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2B504624E1DEF1007AAFC4 /* Log.swift */; };
+		7E2B504A24E1DEF1007AAFC4 /* LogCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2B504724E1DEF1007AAFC4 /* LogCollection.swift */; };
+		7E2B504B24E1DEF1007AAFC4 /* LogPagination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2B504824E1DEF1007AAFC4 /* LogPagination.swift */; };
+		7E2B505F24E2DB44007AAFC4 /* ListProjectsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2B504C24E2DB43007AAFC4 /* ListProjectsResponse.swift */; };
+		7E2B506024E2DB44007AAFC4 /* ProjectDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2B504D24E2DB43007AAFC4 /* ProjectDetails.swift */; };
+		7E2B506124E2DB44007AAFC4 /* EnrichmentOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2B504E24E2DB43007AAFC4 /* EnrichmentOptions.swift */; };
+		7E2B506224E2DB44007AAFC4 /* ProjectName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2B504F24E2DB43007AAFC4 /* ProjectName.swift */; };
+		7E2B506424E2DB44007AAFC4 /* Enrichments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2B505124E2DB43007AAFC4 /* Enrichments.swift */; };
+		7E2B506624E2DB44007AAFC4 /* DefaultQueryParamsSuggestedRefinements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2B505324E2DB43007AAFC4 /* DefaultQueryParamsSuggestedRefinements.swift */; };
+		7E2B506724E2DB44007AAFC4 /* CollectionEnrichment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2B505424E2DB43007AAFC4 /* CollectionEnrichment.swift */; };
+		7E2B506824E2DB44007AAFC4 /* Enrichment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2B505524E2DB43007AAFC4 /* Enrichment.swift */; };
+		7E2B506924E2DB44007AAFC4 /* DefaultQueryParamsTableResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2B505624E2DB43007AAFC4 /* DefaultQueryParamsTableResults.swift */; };
+		7E2B506A24E2DB44007AAFC4 /* QueryGroupByAggregationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2B505724E2DB44007AAFC4 /* QueryGroupByAggregationResult.swift */; };
+		7E2B506B24E2DB44007AAFC4 /* DefaultQueryParamsPassages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2B505824E2DB44007AAFC4 /* DefaultQueryParamsPassages.swift */; };
+		7E2B506C24E2DB44007AAFC4 /* CollectionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2B505924E2DB44007AAFC4 /* CollectionDetails.swift */; };
+		7E2B506D24E2DB44007AAFC4 /* QueryGroupByAggregation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2B505A24E2DB44007AAFC4 /* QueryGroupByAggregation.swift */; };
+		7E2B506F24E2DB44007AAFC4 /* ProjectListDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2B505C24E2DB44007AAFC4 /* ProjectListDetails.swift */; };
+		7E2B507024E2DB44007AAFC4 /* UpdateEnrichment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2B505D24E2DB44007AAFC4 /* UpdateEnrichment.swift */; };
+		7E2B507124E2DB44007AAFC4 /* DefaultQueryParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2B505E24E2DB44007AAFC4 /* DefaultQueryParams.swift */; };
+		7E2B507324E3184F007AAFC4 /* TestEnrichments.csv in Resources */ = {isa = PBXBuildFile; fileRef = 7E2B507224E3184F007AAFC4 /* TestEnrichments.csv */; };
 		7E2C0DA4230DD282002FE627 /* TableTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2C0D9B230DD281002FE627 /* TableTitle.swift */; };
 		7E2C0DA5230DD282002FE627 /* Paragraphs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2C0D9C230DD281002FE627 /* Paragraphs.swift */; };
 		7E2C0DA6230DD282002FE627 /* Contexts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2C0D9D230DD281002FE627 /* Contexts.swift */; };
@@ -370,6 +392,9 @@
 		7E48B6C2233539EB0009F2B7 /* IBMSwiftSDKCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E48B6B8233539EB0009F2B7 /* IBMSwiftSDKCore.framework */; };
 		7E48B6C3233539EB0009F2B7 /* IBMSwiftSDKCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E48B6B8233539EB0009F2B7 /* IBMSwiftSDKCore.framework */; };
 		7E48B6C4233539EB0009F2B7 /* IBMSwiftSDKCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E48B6B8233539EB0009F2B7 /* IBMSwiftSDKCore.framework */; };
+		7E49969E24E45B3D000527AA /* ProjectCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E49969C24E45B3C000527AA /* ProjectCreation.swift */; };
+		7E49969F24E45B3D000527AA /* ProjectListDetailsRelevancyTrainingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E49969D24E45B3C000527AA /* ProjectListDetailsRelevancyTrainingStatus.swift */; };
+		7E4996A224E46179000527AA /* DiscoveryV2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC4FFBA2379EAE100F9A970 /* DiscoveryV2Tests.swift */; };
 		7E70D5C72388491E00CC8C80 /* WebhookHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70D5C42388491D00CC8C80 /* WebhookHeader.swift */; };
 		7E70D5C82388491E00CC8C80 /* WorkspaceSystemSettingsOffTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70D5C52388491E00CC8C80 /* WorkspaceSystemSettingsOffTopic.swift */; };
 		7E70D5C92388491E00CC8C80 /* Webhook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E70D5C62388491E00CC8C80 /* Webhook.swift */; };
@@ -387,7 +412,10 @@
 		7E96EC3C233907660039388E /* GenericQueryAggregation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E96EC3B233907660039388E /* GenericQueryAggregation.swift */; };
 		7E96EC3F23391C0A0039388E /* WordTimestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E96EC3D23391C0A0039388E /* WordTimestamp.swift */; };
 		7E96EC4023391C0A0039388E /* WordConfidence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E96EC3E23391C0A0039388E /* WordConfidence.swift */; };
-		7E974916238EEE0C002864D2 /* DiscoveryV2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC4FFBA2379EAE100F9A970 /* DiscoveryV2Tests.swift */; };
+		7EA22AB824E57E5900809516 /* analyzeDocument.json in Resources */ = {isa = PBXBuildFile; fileRef = 7EA22AB724E57E5800809516 /* analyzeDocument.json */; };
+		7EA9A3EF24E571F000E5FBF4 /* DiscoveryV2CPDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA9A3EE24E571F000E5FBF4 /* DiscoveryV2CPDTests.swift */; };
+		7EADD90524EAD9FD00FF3664 /* UpdateCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EADD90324EAD9FD00FF3664 /* UpdateCollection.swift */; };
+		7EADD90624EAD9FD00FF3664 /* CreateEnrichment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EADD90424EAD9FD00FF3664 /* CreateEnrichment.swift */; };
 		7EC4FF172379E41300F9A970 /* IBMSwiftSDKCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E48B6B8233539EB0009F2B7 /* IBMSwiftSDKCore.framework */; };
 		7EC4FF212379E44600F9A970 /* Discovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC4FF202379E44600F9A970 /* Discovery.swift */; };
 		7EC4FF5F2379E48400F9A970 /* Completions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EC4FF252379E48000F9A970 /* Completions.swift */; };
@@ -1311,9 +1339,32 @@
 		7AAD664E1DCA5D730010481E /* obama.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = obama.jpg; sourceTree = "<group>"; };
 		7AAD664F1DCA5D730010481E /* sign.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sign.jpg; sourceTree = "<group>"; };
 		7AAD66501DCA5D730010481E /* VisualRecognitionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VisualRecognitionTests.swift; path = Tests/VisualRecognitionV3Tests/VisualRecognitionTests.swift; sourceTree = SOURCE_ROOT; };
+		7E0DACE824E578620032E040 /* analyzeDocument.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = analyzeDocument.txt; sourceTree = "<group>"; };
+		7E0DACEA24E579720032E040 /* Jeopardy.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Jeopardy.html; sourceTree = "<group>"; };
 		7E0ECA8B237B515A00236E6D /* GenericQueryAggregation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericQueryAggregation.swift; sourceTree = "<group>"; };
 		7E12A8CE23477FD00008906B /* DiscoveryTest+CPD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiscoveryTest+CPD.swift"; sourceTree = "<group>"; };
 		7E1C22222450CF8700D00CF5 /* RuntimeEntityAlternative.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuntimeEntityAlternative.swift; sourceTree = "<group>"; };
+		7E2B504624E1DEF1007AAFC4 /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		7E2B504724E1DEF1007AAFC4 /* LogCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogCollection.swift; sourceTree = "<group>"; };
+		7E2B504824E1DEF1007AAFC4 /* LogPagination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogPagination.swift; sourceTree = "<group>"; };
+		7E2B504C24E2DB43007AAFC4 /* ListProjectsResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListProjectsResponse.swift; sourceTree = "<group>"; };
+		7E2B504D24E2DB43007AAFC4 /* ProjectDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectDetails.swift; sourceTree = "<group>"; };
+		7E2B504E24E2DB43007AAFC4 /* EnrichmentOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnrichmentOptions.swift; sourceTree = "<group>"; };
+		7E2B504F24E2DB43007AAFC4 /* ProjectName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectName.swift; sourceTree = "<group>"; };
+		7E2B505024E2DB43007AAFC4 /* ProjectRelTrainStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectRelTrainStatus.swift; sourceTree = "<group>"; };
+		7E2B505124E2DB43007AAFC4 /* Enrichments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enrichments.swift; sourceTree = "<group>"; };
+		7E2B505324E2DB43007AAFC4 /* DefaultQueryParamsSuggestedRefinements.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultQueryParamsSuggestedRefinements.swift; sourceTree = "<group>"; };
+		7E2B505424E2DB43007AAFC4 /* CollectionEnrichment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionEnrichment.swift; sourceTree = "<group>"; };
+		7E2B505524E2DB43007AAFC4 /* Enrichment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enrichment.swift; sourceTree = "<group>"; };
+		7E2B505624E2DB43007AAFC4 /* DefaultQueryParamsTableResults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultQueryParamsTableResults.swift; sourceTree = "<group>"; };
+		7E2B505724E2DB44007AAFC4 /* QueryGroupByAggregationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryGroupByAggregationResult.swift; sourceTree = "<group>"; };
+		7E2B505824E2DB44007AAFC4 /* DefaultQueryParamsPassages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultQueryParamsPassages.swift; sourceTree = "<group>"; };
+		7E2B505924E2DB44007AAFC4 /* CollectionDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionDetails.swift; sourceTree = "<group>"; };
+		7E2B505A24E2DB44007AAFC4 /* QueryGroupByAggregation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryGroupByAggregation.swift; sourceTree = "<group>"; };
+		7E2B505C24E2DB44007AAFC4 /* ProjectListDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectListDetails.swift; sourceTree = "<group>"; };
+		7E2B505D24E2DB44007AAFC4 /* UpdateEnrichment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateEnrichment.swift; sourceTree = "<group>"; };
+		7E2B505E24E2DB44007AAFC4 /* DefaultQueryParams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultQueryParams.swift; sourceTree = "<group>"; };
+		7E2B507224E3184F007AAFC4 /* TestEnrichments.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestEnrichments.csv; sourceTree = "<group>"; };
 		7E2C0D9B230DD281002FE627 /* TableTitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableTitle.swift; sourceTree = "<group>"; };
 		7E2C0D9C230DD281002FE627 /* Paragraphs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Paragraphs.swift; sourceTree = "<group>"; };
 		7E2C0D9D230DD281002FE627 /* Contexts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contexts.swift; sourceTree = "<group>"; };
@@ -1343,6 +1394,8 @@
 		7E34336E2346A384004427C4 /* CollQueryLarge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollQueryLarge.swift; sourceTree = "<group>"; };
 		7E48B6B6233535A60009F2B7 /* FedQueryLarge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FedQueryLarge.swift; sourceTree = "<group>"; };
 		7E48B6B8233539EB0009F2B7 /* IBMSwiftSDKCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IBMSwiftSDKCore.framework; path = Carthage/Build/iOS/IBMSwiftSDKCore.framework; sourceTree = "<group>"; };
+		7E49969C24E45B3C000527AA /* ProjectCreation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectCreation.swift; sourceTree = "<group>"; };
+		7E49969D24E45B3C000527AA /* ProjectListDetailsRelevancyTrainingStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectListDetailsRelevancyTrainingStatus.swift; sourceTree = "<group>"; };
 		7E70D5C42388491D00CC8C80 /* WebhookHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebhookHeader.swift; sourceTree = "<group>"; };
 		7E70D5C52388491E00CC8C80 /* WorkspaceSystemSettingsOffTopic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkspaceSystemSettingsOffTopic.swift; sourceTree = "<group>"; };
 		7E70D5C62388491E00CC8C80 /* Webhook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Webhook.swift; sourceTree = "<group>"; };
@@ -1360,6 +1413,10 @@
 		7E96EC3B233907660039388E /* GenericQueryAggregation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericQueryAggregation.swift; sourceTree = "<group>"; };
 		7E96EC3D23391C0A0039388E /* WordTimestamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordTimestamp.swift; sourceTree = "<group>"; };
 		7E96EC3E23391C0A0039388E /* WordConfidence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordConfidence.swift; sourceTree = "<group>"; };
+		7EA22AB724E57E5800809516 /* analyzeDocument.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = analyzeDocument.json; sourceTree = "<group>"; };
+		7EA9A3EE24E571F000E5FBF4 /* DiscoveryV2CPDTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryV2CPDTests.swift; sourceTree = "<group>"; };
+		7EADD90324EAD9FD00FF3664 /* UpdateCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateCollection.swift; sourceTree = "<group>"; };
+		7EADD90424EAD9FD00FF3664 /* CreateEnrichment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEnrichment.swift; sourceTree = "<group>"; };
 		7EC4FF1E2379E41300F9A970 /* DiscoveryV2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DiscoveryV2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EC4FF1F2379E41300F9A970 /* DiscoveryV1 copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "DiscoveryV1 copy-Info.plist"; path = "/Users/jeffarn/Programming/sdks/swift-sdk/DiscoveryV1 copy-Info.plist"; sourceTree = "<absolute>"; };
 		7EC4FF202379E44600F9A970 /* Discovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Discovery.swift; sourceTree = "<group>"; };
@@ -2678,23 +2735,42 @@
 			isa = PBXGroup;
 			children = (
 				7EC4FF262379E48000F9A970 /* Collection.swift */,
+				7E2B505924E2DB44007AAFC4 /* CollectionDetails.swift */,
+				7E2B505424E2DB43007AAFC4 /* CollectionEnrichment.swift */,
 				7EC4FF252379E48000F9A970 /* Completions.swift */,
 				7EC4FF3D2379E48200F9A970 /* ComponentSettingsAggregation.swift */,
 				7EC4FF532379E48300F9A970 /* ComponentSettingsFieldsShown.swift */,
 				7EC4FF272379E48000F9A970 /* ComponentSettingsFieldsShownBody.swift */,
 				7EC4FF3F2379E48200F9A970 /* ComponentSettingsFieldsShownTitle.swift */,
 				7EC4FF3B2379E48100F9A970 /* ComponentSettingsResponse.swift */,
+				7EADD90424EAD9FD00FF3664 /* CreateEnrichment.swift */,
+				7E2B505E24E2DB44007AAFC4 /* DefaultQueryParams.swift */,
+				7E2B505824E2DB44007AAFC4 /* DefaultQueryParamsPassages.swift */,
+				7E2B505324E2DB43007AAFC4 /* DefaultQueryParamsSuggestedRefinements.swift */,
+				7E2B505624E2DB43007AAFC4 /* DefaultQueryParamsTableResults.swift */,
 				7EC4FF4C2379E48300F9A970 /* DeleteDocumentResponse.swift */,
 				7EC4FF542379E48400F9A970 /* DocumentAccepted.swift */,
 				7EC4FF432379E48200F9A970 /* DocumentAttribute.swift */,
+				7E2B505524E2DB43007AAFC4 /* Enrichment.swift */,
+				7E2B504E24E2DB43007AAFC4 /* EnrichmentOptions.swift */,
+				7E2B505124E2DB43007AAFC4 /* Enrichments.swift */,
 				7EC4FF482379E48300F9A970 /* Field.swift */,
 				7E0ECA8B237B515A00236E6D /* GenericQueryAggregation.swift */,
-				7EC4FF5A2379E48400F9A970 /* QueryAggregation.swift */,
 				7EC4FF5C2379E48400F9A970 /* ListCollectionsResponse.swift */,
 				7EC4FF2F2379E48100F9A970 /* ListFieldsResponse.swift */,
+				7E2B504C24E2DB43007AAFC4 /* ListProjectsResponse.swift */,
 				7EC4FF562379E48400F9A970 /* Notice.swift */,
+				7E49969C24E45B3C000527AA /* ProjectCreation.swift */,
+				7E2B504D24E2DB43007AAFC4 /* ProjectDetails.swift */,
+				7E2B505C24E2DB44007AAFC4 /* ProjectListDetails.swift */,
+				7E49969D24E45B3C000527AA /* ProjectListDetailsRelevancyTrainingStatus.swift */,
+				7E2B504F24E2DB43007AAFC4 /* ProjectName.swift */,
+				7E2B505024E2DB43007AAFC4 /* ProjectRelTrainStatus.swift */,
+				7EC4FF5A2379E48400F9A970 /* QueryAggregation.swift */,
 				7EC4FF342379E48100F9A970 /* QueryCalculationAggregation.swift */,
 				7EC4FF592379E48400F9A970 /* QueryFilterAggregation.swift */,
+				7E2B505A24E2DB44007AAFC4 /* QueryGroupByAggregation.swift */,
+				7E2B505724E2DB44007AAFC4 /* QueryGroupByAggregationResult.swift */,
 				7EC4FF312379E48100F9A970 /* QueryHistogramAggregation.swift */,
 				7EC4FF352379E48100F9A970 /* QueryHistogramAggregationResult.swift */,
 				7EC4FF512379E48300F9A970 /* QueryLarge.swift */,
@@ -2736,6 +2812,8 @@
 				7EC4FF2D2379E48000F9A970 /* TrainingExample.swift */,
 				7EC4FF442379E48200F9A970 /* TrainingQuery.swift */,
 				7EC4FF2A2379E48000F9A970 /* TrainingQuerySet.swift */,
+				7EADD90324EAD9FD00FF3664 /* UpdateCollection.swift */,
+				7E2B505D24E2DB44007AAFC4 /* UpdateEnrichment.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2743,10 +2821,12 @@
 		7EC4FF9D2379E6F100F9A970 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				7EDF424F2382E05A00B7CAE3 /* Resources */,
+				7EA9A3EE24E571F000E5FBF4 /* DiscoveryV2CPDTests.swift */,
 				7EC4FFBA2379EAE100F9A970 /* DiscoveryV2Tests.swift */,
+				7EDF424F2382E05A00B7CAE3 /* Resources */,
 			);
-			path = Tests;
+			name = Tests;
+			path = ../../Tests/DiscoveryV2Tests;
 			sourceTree = "<group>";
 		};
 		7ED751E7233BE8D40050A2EB /* VisualRecogntionV4 */ = {
@@ -2829,6 +2909,10 @@
 		7EDF424F2382E05A00B7CAE3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7EA22AB724E57E5800809516 /* analyzeDocument.json */,
+				7E0DACEA24E579720032E040 /* Jeopardy.html */,
+				7E0DACE824E578620032E040 /* analyzeDocument.txt */,
+				7E2B507224E3184F007AAFC4 /* TestEnrichments.csv */,
 				7EDF42502382E09C00B7CAE3 /* KennedySpeech.html */,
 			);
 			name = Resources;
@@ -2976,6 +3060,9 @@
 				922077972152FC5900C8C7E4 /* DialogNodesVisited.swift */,
 				922077852152FC5900C8C7E4 /* DialogSuggestion.swift */,
 				9220778D2152FC5900C8C7E4 /* DialogSuggestionValue.swift */,
+				7E2B504624E1DEF1007AAFC4 /* Log.swift */,
+				7E2B504724E1DEF1007AAFC4 /* LogCollection.swift */,
+				7E2B504824E1DEF1007AAFC4 /* LogPagination.swift */,
 				922077842152FC5900C8C7E4 /* MessageContext.swift */,
 				922077952152FC5900C8C7E4 /* MessageContextGlobal.swift */,
 				7E8B21252475973700BE7EFA /* MessageContextGlobalStateless.swift */,
@@ -4184,7 +4271,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7EA22AB824E57E5900809516 /* analyzeDocument.json in Resources */,
+				7E0DACE924E578620032E040 /* analyzeDocument.txt in Resources */,
 				7EDF42512382E09C00B7CAE3 /* KennedySpeech.html in Resources */,
+				7E0DACEB24E579720032E040 /* Jeopardy.html in Resources */,
+				7E2B507324E3184F007AAFC4 /* TestEnrichments.csv in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5251,17 +5342,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E2B506C24E2DB44007AAFC4 /* CollectionDetails.swift in Sources */,
+				7E2B507024E2DB44007AAFC4 /* UpdateEnrichment.swift in Sources */,
 				7EC4FF9C2379E5B200F9A970 /* InsecureConnection.swift in Sources */,
 				7EC4FF9B2379E5A500F9A970 /* Shared.swift in Sources */,
 				7EC4FF702379E48400F9A970 /* TableResultTable.swift in Sources */,
+				7E2B505F24E2DB44007AAFC4 /* ListProjectsResponse.swift in Sources */,
 				7EC4FF652379E48400F9A970 /* TableCellValues.swift in Sources */,
+				7E2B506A24E2DB44007AAFC4 /* QueryGroupByAggregationResult.swift in Sources */,
 				7EC4FF882379E48500F9A970 /* QueryLargeTableResults.swift in Sources */,
 				7EC4FF922379E48500F9A970 /* QueryResultPassage.swift in Sources */,
+				7E2B506F24E2DB44007AAFC4 /* ProjectListDetails.swift in Sources */,
 				7EC4FF6C2379E48400F9A970 /* TableRowHeaderTextsNormalized.swift in Sources */,
 				7EC4FF932379E48500F9A970 /* QueryFilterAggregation.swift in Sources */,
 				7EC4FF812379E48400F9A970 /* QueryNoticesResponse.swift in Sources */,
 				7EC4FF6E2379E48400F9A970 /* QueryCalculationAggregation.swift in Sources */,
 				7EC4FF682379E48400F9A970 /* QueryTopHitsAggregationResult.swift in Sources */,
+				7E2B506024E2DB44007AAFC4 /* ProjectDetails.swift in Sources */,
 				7EC4FF7D2379E48400F9A970 /* DocumentAttribute.swift in Sources */,
 				7EC4FF972379E48500F9A970 /* TableElementLocation.swift in Sources */,
 				7EC4FF752379E48400F9A970 /* ComponentSettingsResponse.swift in Sources */,
@@ -5271,11 +5368,16 @@
 				7EC4FF912379E48500F9A970 /* TableColumnHeaderIDs.swift in Sources */,
 				7EC4FF602379E48400F9A970 /* Collection.swift in Sources */,
 				7EC4FF642379E48400F9A970 /* TrainingQuerySet.swift in Sources */,
+				7E49969F24E45B3D000527AA /* ProjectListDetailsRelevancyTrainingStatus.swift in Sources */,
 				7EC4FF722379E48400F9A970 /* QueryResultMetadata.swift in Sources */,
 				7E0ECA8C237B515A00236E6D /* GenericQueryAggregation.swift in Sources */,
 				7EC4FF902379E48500F9A970 /* Notice.swift in Sources */,
+				7E2B506124E2DB44007AAFC4 /* EnrichmentOptions.swift in Sources */,
 				7EC4FF7B2379E48400F9A970 /* QuerySuggestedRefinement.swift in Sources */,
 				7EC4FF822379E48400F9A970 /* Field.swift in Sources */,
+				7E49969E24E45B3D000527AA /* ProjectCreation.swift in Sources */,
+				7EADD90624EAD9FD00FF3664 /* CreateEnrichment.swift in Sources */,
+				7E2B506424E2DB44007AAFC4 /* Enrichments.swift in Sources */,
 				7EC4FF7A2379E48400F9A970 /* TableTextLocation.swift in Sources */,
 				7EC4FF852379E48400F9A970 /* QueryTermAggregationResult.swift in Sources */,
 				7EC4FF6D2379E48400F9A970 /* TableColumnHeaders.swift in Sources */,
@@ -5284,16 +5386,23 @@
 				7EC4FF982379E48500F9A970 /* QueryLargePassages.swift in Sources */,
 				7EC4FF6F2379E48400F9A970 /* QueryHistogramAggregationResult.swift in Sources */,
 				7EC4FF962379E48500F9A970 /* ListCollectionsResponse.swift in Sources */,
+				7E2B506924E2DB44007AAFC4 /* DefaultQueryParamsTableResults.swift in Sources */,
+				7E2B506D24E2DB44007AAFC4 /* QueryGroupByAggregation.swift in Sources */,
+				7E2B506624E2DB44007AAFC4 /* DefaultQueryParamsSuggestedRefinements.swift in Sources */,
 				7EC4FF762379E48400F9A970 /* TableHeaders.swift in Sources */,
 				7EC4FF782379E48400F9A970 /* QueryTermAggregation.swift in Sources */,
+				7E2B506824E2DB44007AAFC4 /* Enrichment.swift in Sources */,
 				7EC4FF8F2379E48500F9A970 /* QueryTopHitsAggregation.swift in Sources */,
 				7EC4FF6A2379E48400F9A970 /* TableCellKey.swift in Sources */,
+				7E2B506224E2DB44007AAFC4 /* ProjectName.swift in Sources */,
+				7E2B506724E2DB44007AAFC4 /* CollectionEnrichment.swift in Sources */,
 				7EC4FF7E2379E48400F9A970 /* TrainingQuery.swift in Sources */,
 				7EC4FF612379E48400F9A970 /* ComponentSettingsFieldsShownBody.swift in Sources */,
 				7EC4FF862379E48400F9A970 /* DeleteDocumentResponse.swift in Sources */,
 				7EC4FF832379E48400F9A970 /* QueryTableResult.swift in Sources */,
 				7EC4FF8B2379E48500F9A970 /* QueryLarge.swift in Sources */,
 				7EC4FF872379E48400F9A970 /* QueryNoticesResult.swift in Sources */,
+				7E2B506B24E2DB44007AAFC4 /* DefaultQueryParamsPassages.swift in Sources */,
 				7EC4FF7C2379E48400F9A970 /* TableRowHeaderTexts.swift in Sources */,
 				7EC4FF892379E48500F9A970 /* TableColumnHeaderTexts.swift in Sources */,
 				7EC4FF8A2379E48500F9A970 /* TableKeyValuePairs.swift in Sources */,
@@ -5301,6 +5410,7 @@
 				7EC4FF6B2379E48400F9A970 /* QueryHistogramAggregation.swift in Sources */,
 				7EC4FF7F2379E48400F9A970 /* RetrievalDetails.swift in Sources */,
 				7EC4FF952379E48500F9A970 /* QueryLargeSuggestedRefinements.swift in Sources */,
+				7EADD90524EAD9FD00FF3664 /* UpdateCollection.swift in Sources */,
 				7EC4FF8C2379E48500F9A970 /* TableColumnHeaderTextsNormalized.swift in Sources */,
 				7EC4FF692379E48400F9A970 /* ListFieldsResponse.swift in Sources */,
 				7EC4FF662379E48400F9A970 /* QueryTimesliceAggregationResult.swift in Sources */,
@@ -5308,6 +5418,7 @@
 				7EC4FF842379E48400F9A970 /* TableBodyCells.swift in Sources */,
 				7EC4FF212379E44600F9A970 /* Discovery.swift in Sources */,
 				7EC4FF792379E48400F9A970 /* ComponentSettingsFieldsShownTitle.swift in Sources */,
+				7E2B507124E2DB44007AAFC4 /* DefaultQueryParams.swift in Sources */,
 				7EC4FF732379E48400F9A970 /* TableRowHeaderIDs.swift in Sources */,
 				7EC4FF5F2379E48400F9A970 /* Completions.swift in Sources */,
 				7EC4FF622379E48400F9A970 /* QueryNestedAggregation.swift in Sources */,
@@ -5320,8 +5431,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E4996A224E46179000527AA /* DiscoveryV2Tests.swift in Sources */,
 				7EC4FFA22379EA6800F9A970 /* TestUtilities.swift in Sources */,
-				7E974916238EEE0C002864D2 /* DiscoveryV2Tests.swift in Sources */,
+				7EA9A3EF24E571F000E5FBF4 /* DiscoveryV2CPDTests.swift in Sources */,
 				7EC4FFA32379EA6800F9A970 /* SharedTests.swift in Sources */,
 				7EC4FFA42379EA6800F9A970 /* WatsonCredentials.swift in Sources */,
 				7EC4FFA52379EA6800F9A970 /* Shared.swift in Sources */,
@@ -5394,6 +5506,7 @@
 				922078572152FCE400C8C7E4 /* MessageResponse.swift in Sources */,
 				7E8B212C2475973700BE7EFA /* MessageContextStateless.swift in Sources */,
 				7E8B212A2475973700BE7EFA /* MessageOutputSpelling.swift in Sources */,
+				7E2B504924E1DEF1007AAFC4 /* Log.swift in Sources */,
 				7EC735DC2319DDB400A73810 /* RuntimeResponseGeneric.swift in Sources */,
 				922078442152FCE400C8C7E4 /* DialogSuggestion.swift in Sources */,
 				922078512152FCE400C8C7E4 /* RuntimeEntity.swift in Sources */,
@@ -5403,10 +5516,12 @@
 				922078432152FCE400C8C7E4 /* MessageContext.swift in Sources */,
 				7E8B212D2475973700BE7EFA /* MessageResponseStateless.swift in Sources */,
 				922078562152FCE400C8C7E4 /* DialogNodesVisited.swift in Sources */,
+				7E2B504B24E1DEF1007AAFC4 /* LogPagination.swift in Sources */,
 				924EE7BA21505D7A0048C0E5 /* Shared.swift in Sources */,
 				922078422152FCE400C8C7E4 /* DialogNodeAction.swift in Sources */,
 				922078452152FCE400C8C7E4 /* SessionResponse.swift in Sources */,
 				7E8B212B2475973700BE7EFA /* MessageRequestStateless.swift in Sources */,
+				7E2B504A24E1DEF1007AAFC4 /* LogCollection.swift in Sources */,
 				922078502152FCE400C8C7E4 /* MessageInput.swift in Sources */,
 				922078472152FCE400C8C7E4 /* CaptureGroup.swift in Sources */,
 				5F2C5BE622E9FA0900A7628D /* SearchResult.swift in Sources */,

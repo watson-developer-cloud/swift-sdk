@@ -57,7 +57,7 @@ public class Discovery {
      */
     public init(version: String) throws {
         self.version = version
-        
+
         let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
         self.authenticator = authenticator
 
@@ -1539,8 +1539,15 @@ public class Discovery {
             multipartFormData.append(enrichmentData, withName: "enrichment")
         }
         if let file = file {
-            multipartFormData.append(file, withName: "file", fileName: "filename")
+            multipartFormData.append(file, withName: "file", mimeType: "application/octet-stream", fileName: "filename")
         }
+
+        guard let enrichmentJSON = try? JSON.encoder.encode(enrichment) else {
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            return
+        }
+        multipartFormData.append(enrichmentJSON, withName: "enrichment")
+
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
             return

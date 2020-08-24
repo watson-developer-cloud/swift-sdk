@@ -1535,9 +1535,7 @@ public class Discovery {
     {
         // construct body
         let multipartFormData = MultipartFormData()
-        if let enrichmentData = "\(enrichment)".data(using: .utf8) {
-            multipartFormData.append(enrichmentData, withName: "enrichment")
-        }
+
         if let file = file {
             multipartFormData.append(file, withName: "file", mimeType: "application/octet-stream", fileName: "filename")
         }
@@ -1546,6 +1544,7 @@ public class Discovery {
             completionHandler(nil, WatsonError.serialization(values: "request body"))
             return
         }
+
         multipartFormData.append(enrichmentJSON, withName: "enrichment")
 
         guard let body = try? multipartFormData.toData() else {

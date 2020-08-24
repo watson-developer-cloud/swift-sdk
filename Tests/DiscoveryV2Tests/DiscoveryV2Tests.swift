@@ -919,7 +919,7 @@ class DiscoveryTests: XCTestCase {
         let enrichmentData = loadDocument(name: "TestEnrichments", ext: "csv")
         let enrichmentOptions = EnrichmentOptions(languages: ["en"], entityType: "keyword", regularExpression: nil, resultField: nil)
         let enrichment = CreateEnrichment(name: "Dictionary", description: "test dictionary", type: "dictionary", options: enrichmentOptions)
-        discovery.createEnrichment(projectID: projectID, file: enrichmentData, enrichment: enrichment) {
+        discovery.createEnrichment(projectID: projectID, enrichment: enrichment, file: enrichmentData) {
             response, error in
 
             if let error = error {

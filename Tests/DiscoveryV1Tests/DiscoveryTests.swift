@@ -1024,7 +1024,7 @@ class DiscoveryTests: XCTestCase {
         let collectionID = collection.collectionID!
 
         let expectation1 = self.expectation(description: "addDocument")
-        let metadata = "{ \"name\": \"Kennedy Speech\" }"
+        let metadata = "{ \"name\": \"Kennedy Speech2\" }"
         var documentID: String!
         discovery.addDocument(
             environmentID: environmentID,
@@ -1072,7 +1072,7 @@ class DiscoveryTests: XCTestCase {
                 XCTAssertEqual(result.documentID, documentID)
                 XCTAssert(result.status == "processing" || result.status == "available")
                 XCTAssertGreaterThan(result.statusDescription.count, 0)
-                XCTAssertEqual(result.filename, "KennedySpeech.html")
+                XCTAssert(result.filename == nil || result.filename == "KennedySpeech.html")
                 XCTAssertEqual(result.fileType, "html")
                 XCTAssertEqual(result.notices.count, 0)
                 expectation2.fulfill()

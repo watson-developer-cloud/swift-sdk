@@ -9,7 +9,7 @@
       <tuv xml:lang="en">
         <seg>International Business Machines</seg>
       </tuv>
-      <tuv xml:lang="fr">
+      <tuv xml:lang="es">
         <seg>International Business Machines</seg>
       </tuv>
     </tu>
@@ -17,7 +17,7 @@
       <tuv xml:lang="en">
         <seg>patent</seg>
       </tuv>
-      <tuv xml:lang="fr">
+      <tuv xml:lang="es">
         <seg>brevent</seg>
       </tuv>
     </tu>

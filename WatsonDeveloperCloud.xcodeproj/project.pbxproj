@@ -25,6 +25,8 @@
 		12F800581DF71AD9006851D6 /* WatsonCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6C7B3C1D8C960300CD97FA /* WatsonCredentials.swift */; };
 		12F8005C1DF71BA1006851D6 /* Discovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F8005B1DF71BA1006851D6 /* Discovery.swift */; };
 		12F8005E1DF71BED006851D6 /* DiscoveryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F8005D1DF71BED006851D6 /* DiscoveryTests.swift */; };
+		3EDCC07524F02F6200672463 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDCC07324F02F6200672463 /* Language.swift */; };
+		3EDCC07624F02F6200672463 /* Languages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDCC07424F02F6200672463 /* Languages.swift */; };
 		5F2C5BE622E9FA0900A7628D /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2C5BE322E9FA0900A7628D /* SearchResult.swift */; };
 		5F2C5BE722E9FA0900A7628D /* SearchResultHighlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2C5BE422E9FA0900A7628D /* SearchResultHighlight.swift */; };
 		5F2C5BE822E9FA0900A7628D /* SearchResultMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2C5BE522E9FA0900A7628D /* SearchResultMetadata.swift */; };
@@ -1048,6 +1050,8 @@
 		12F800481DF71921006851D6 /* DiscoveryV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiscoveryV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		12F8005B1DF71BA1006851D6 /* Discovery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Discovery.swift; sourceTree = "<group>"; };
 		12F8005D1DF71BED006851D6 /* DiscoveryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoveryTests.swift; sourceTree = "<group>"; };
+		3EDCC07324F02F6200672463 /* Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Language.swift; path = Models/Language.swift; sourceTree = "<group>"; };
+		3EDCC07424F02F6200672463 /* Languages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Languages.swift; path = Models/Languages.swift; sourceTree = "<group>"; };
 		5F2C5BE322E9FA0900A7628D /* SearchResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		5F2C5BE422E9FA0900A7628D /* SearchResultHighlight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultHighlight.swift; sourceTree = "<group>"; };
 		5F2C5BE522E9FA0900A7628D /* SearchResultMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultMetadata.swift; sourceTree = "<group>"; };
@@ -2915,8 +2919,7 @@
 				7E2B507224E3184F007AAFC4 /* TestEnrichments.csv */,
 				7EDF42502382E09C00B7CAE3 /* KennedySpeech.html */,
 			);
-			name = Resources;
-			path = ../../../Tests/DiscoveryV2Tests/Resources;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		920645F4212E2880004ACCC9 /* Dependencies */ = {
@@ -3252,6 +3255,8 @@
 		CAD2685320CAF28A002BA2C4 /* LanguageTranslatorV3 */ = {
 			isa = PBXGroup;
 			children = (
+				3EDCC07324F02F6200672463 /* Language.swift */,
+				3EDCC07424F02F6200672463 /* Languages.swift */,
 				CAD2686A20CAF919002BA2C4 /* LanguageTranslator.swift */,
 				CA28815E20CB090700FC992C /* Models */,
 				CA28817320CB092500FC992C /* Tests */,
@@ -5645,6 +5650,7 @@
 			files = (
 				CA28817D20CB099D00FC992C /* IdentifiedLanguages.swift in Sources */,
 				CA28818020CB099D00FC992C /* TranslationModels.swift in Sources */,
+				3EDCC07624F02F6200672463 /* Languages.swift in Sources */,
 				CA28817E20CB099D00FC992C /* TranslationModel.swift in Sources */,
 				CAD2686E20CAF919002BA2C4 /* LanguageTranslator.swift in Sources */,
 				CA28817A20CB099D00FC992C /* IdentifiableLanguage.swift in Sources */,
@@ -5656,6 +5662,7 @@
 				CA28818120CB099D00FC992C /* TranslateRequest.swift in Sources */,
 				CA54269E229ECBC30077618A /* InsecureConnection.swift in Sources */,
 				CA28817C20CB099D00FC992C /* TranslationResult.swift in Sources */,
+				3EDCC07524F02F6200672463 /* Language.swift in Sources */,
 				CAEBE47C22A6B9C200F86C3A /* DocumentStatus.swift in Sources */,
 				CA28817B20CB099D00FC992C /* Translation.swift in Sources */,
 			);

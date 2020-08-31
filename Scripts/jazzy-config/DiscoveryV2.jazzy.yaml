@@ -4,7 +4,7 @@ github_url: https://github.com/watson-developer-cloud/swift-sdk
 clean: true
 output: ../../gh-pages/services/DiscoveryV2
 module: DiscoveryV2
-module_version: "3.5.1"
+module_version: "3.6.0"
 documentation: ../../Source/DiscoveryV2/README.md
 readme: ../../Source/DiscoveryV2/README.md
 build_tool_arguments:

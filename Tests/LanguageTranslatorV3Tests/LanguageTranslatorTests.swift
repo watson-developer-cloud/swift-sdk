@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * (C) Copyright IBM Corp. 2016, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -193,13 +193,13 @@ class LanguageTranslatorTests: XCTestCase {
         let expectation = self.expectation(description: "Create and delete a custom language model.")
 
         #if os(Linux)
-            let url = URL(fileURLWithPath: "Tests/LanguageTranslatorV3Tests/Resources/glossary.tmx")
+        let url = URL(fileURLWithPath: "Tests/LanguageTranslatorV3Tests/Resources/glossary.tmx")
         #else
-            let bundle = Bundle(for: type(of: self))
-            guard let url = bundle.url(forResource: "glossary", withExtension: "tmx") else {
-                XCTFail("Unable to read forced glossary.")
-                return
-            }
+        let bundle = Bundle(for: type(of: self))
+        guard let url = bundle.url(forResource: "glossary", withExtension: "tmx") else {
+            XCTFail("Unable to read forced glossary.")
+            return
+        }
         #endif
         let glossary = try? Data(contentsOf: url)
 
@@ -462,8 +462,8 @@ class LanguageTranslatorTests: XCTestCase {
 
             XCTAssertGreaterThan(document.count, 0)  // document has content
             let contentType = response?.headers
-                                .first { $0.key.compare("content-type", options: .caseInsensitive) == .orderedSame }
-                                .map { $0.value }
+                .first { $0.key.compare("content-type", options: .caseInsensitive) == .orderedSame }
+                .map { $0.value }
             XCTAssertNotNil(contentType)
             expectation3.fulfill()
         }

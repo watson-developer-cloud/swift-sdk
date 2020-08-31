@@ -32,11 +32,11 @@ public struct WordSettings: Codable, Equatable {
     }
 
     /**
-     Initialize a `WordSettings` with member variables.
+      Initialize a `WordSettings` with member variables.
 
-     - parameter heading: Object containing heading detection conversion settings for Microsoft Word documents.
+      - parameter heading: Object containing heading detection conversion settings for Microsoft Word documents.
 
-     - returns: An initialized `WordSettings`.
+      - returns: An initialized `WordSettings`.
      */
     public init(
         heading: WordHeadingDetection? = nil

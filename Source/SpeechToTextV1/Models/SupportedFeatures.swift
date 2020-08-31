@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2018, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,9 @@ public struct SupportedFeatures: Codable, Equatable {
 
     /**
      Indicates whether the `speaker_labels` parameter can be used with the language model.
+     **Note:** The field returns `true` for all models. However, speaker labels are supported only for US English,
+     Australian English, German, Japanese, Korean, and Spanish (both broadband and narrowband models) and UK English
+     (narrowband model only). Speaker labels are not supported for any other models.
      */
     public var speakerLabels: Bool
 

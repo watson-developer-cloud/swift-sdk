@@ -49,17 +49,17 @@ public struct DialogNodeOutputOptionsElementValue: Codable, Equatable {
     }
 
     /**
-     Initialize a `DialogNodeOutputOptionsElementValue` with member variables.
+      Initialize a `DialogNodeOutputOptionsElementValue` with member variables.
 
-     - parameter input: An input object that includes the input text.
-     - parameter intents: An array of intents to be used while processing the input.
-       **Note:** This property is supported for backward compatibility with applications that use the v1 **Get response
-       to user input** method.
-     - parameter entities: An array of entities to be used while processing the user input.
-       **Note:** This property is supported for backward compatibility with applications that use the v1 **Get response
-       to user input** method.
+      - parameter input: An input object that includes the input text.
+      - parameter intents: An array of intents to be used while processing the input.
+        **Note:** This property is supported for backward compatibility with applications that use the v1 **Get response
+        to user input** method.
+      - parameter entities: An array of entities to be used while processing the user input.
+        **Note:** This property is supported for backward compatibility with applications that use the v1 **Get response
+        to user input** method.
 
-     - returns: An initialized `DialogNodeOutputOptionsElementValue`.
+      - returns: An initialized `DialogNodeOutputOptionsElementValue`.
      */
     public init(
         input: MessageInput? = nil,

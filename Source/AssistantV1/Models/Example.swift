@@ -50,16 +50,16 @@ public struct Example: Codable, Equatable {
     }
 
     /**
-     Initialize a `Example` with member variables.
+      Initialize a `Example` with member variables.
 
-     - parameter text: The text of a user input example. This string must conform to the following restrictions:
-       - It cannot contain carriage return, newline, or tab characters.
-       - It cannot consist of only whitespace characters.
-     - parameter mentions: An array of contextual entity mentions.
-     - parameter created: The timestamp for creation of the object.
-     - parameter updated: The timestamp for the most recent update to the object.
+      - parameter text: The text of a user input example. This string must conform to the following restrictions:
+        - It cannot contain carriage return, newline, or tab characters.
+        - It cannot consist of only whitespace characters.
+      - parameter mentions: An array of contextual entity mentions.
+      - parameter created: The timestamp for creation of the object.
+      - parameter updated: The timestamp for the most recent update to the object.
 
-     - returns: An initialized `Example`.
+      - returns: An initialized `Example`.
      */
     public init(
         text: String,

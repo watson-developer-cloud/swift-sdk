@@ -32,11 +32,11 @@ public struct ToneInput: Codable, Equatable {
     }
 
     /**
-     Initialize a `ToneInput` with member variables.
+      Initialize a `ToneInput` with member variables.
 
-     - parameter text: The input content that the service is to analyze.
+      - parameter text: The input content that the service is to analyze.
 
-     - returns: An initialized `ToneInput`.
+      - returns: An initialized `ToneInput`.
      */
     public init(
         text: String

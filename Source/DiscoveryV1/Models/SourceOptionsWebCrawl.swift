@@ -92,30 +92,30 @@ public struct SourceOptionsWebCrawl: Codable, Equatable {
     }
 
     /**
-     Initialize a `SourceOptionsWebCrawl` with member variables.
+      Initialize a `SourceOptionsWebCrawl` with member variables.
 
-     - parameter url: The starting URL to crawl.
-     - parameter limitToStartingHosts: When `true`, crawls of the specified URL are limited to the host part of the
-       **url** field.
-     - parameter crawlSpeed: The number of concurrent URLs to fetch. `gentle` means one URL is fetched at a time with
-       a delay between each call. `normal` means as many as two URLs are fectched concurrently with a short delay
-       between fetch calls. `aggressive` means that up to ten URLs are fetched concurrently with a short delay between
-       fetch calls.
-     - parameter allowUntrustedCertificate: When `true`, allows the crawl to interact with HTTPS sites with SSL
-       certificates with untrusted signers.
-     - parameter maximumHops: The maximum number of hops to make from the initial URL. When a page is crawled each
-       link on that page will also be crawled if it is within the **maximum_hops** from the initial URL. The first page
-       crawled is 0 hops, each link crawled from the first page is 1 hop, each link crawled from those pages is 2 hops,
-       and so on.
-     - parameter requestTimeout: The maximum milliseconds to wait for a response from the web server.
-     - parameter overrideRobotsTxt: When `true`, the crawler will ignore any `robots.txt` encountered by the crawler.
-       This should only ever be done when crawling a web site the user owns. This must be be set to `true` when a
-       **gateway_id** is specied in the **credentials**.
-     - parameter blacklist: Array of URL's to be excluded while crawling. The crawler will not follow links which
-       contains this string. For example, listing `https://ibm.com/watson` also excludes
-       `https://ibm.com/watson/discovery`.
+      - parameter url: The starting URL to crawl.
+      - parameter limitToStartingHosts: When `true`, crawls of the specified URL are limited to the host part of the
+        **url** field.
+      - parameter crawlSpeed: The number of concurrent URLs to fetch. `gentle` means one URL is fetched at a time with
+        a delay between each call. `normal` means as many as two URLs are fectched concurrently with a short delay
+        between fetch calls. `aggressive` means that up to ten URLs are fetched concurrently with a short delay between
+        fetch calls.
+      - parameter allowUntrustedCertificate: When `true`, allows the crawl to interact with HTTPS sites with SSL
+        certificates with untrusted signers.
+      - parameter maximumHops: The maximum number of hops to make from the initial URL. When a page is crawled each
+        link on that page will also be crawled if it is within the **maximum_hops** from the initial URL. The first page
+        crawled is 0 hops, each link crawled from the first page is 1 hop, each link crawled from those pages is 2 hops,
+        and so on.
+      - parameter requestTimeout: The maximum milliseconds to wait for a response from the web server.
+      - parameter overrideRobotsTxt: When `true`, the crawler will ignore any `robots.txt` encountered by the crawler.
+        This should only ever be done when crawling a web site the user owns. This must be be set to `true` when a
+        **gateway_id** is specied in the **credentials**.
+      - parameter blacklist: Array of URL's to be excluded while crawling. The crawler will not follow links which
+        contains this string. For example, listing `https://ibm.com/watson` also excludes
+        `https://ibm.com/watson/discovery`.
 
-     - returns: An initialized `SourceOptionsWebCrawl`.
+      - returns: An initialized `SourceOptionsWebCrawl`.
      */
     public init(
         url: String,

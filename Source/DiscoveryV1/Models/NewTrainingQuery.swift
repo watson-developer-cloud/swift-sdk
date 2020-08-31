@@ -44,13 +44,13 @@ internal struct NewTrainingQuery: Codable, Equatable {
     }
 
     /**
-     Initialize a `NewTrainingQuery` with member variables.
+      Initialize a `NewTrainingQuery` with member variables.
 
-     - parameter naturalLanguageQuery: The natural text query for the new training query.
-     - parameter filter: The filter used on the collection before the **natural_language_query** is applied.
-     - parameter examples: Array of training examples.
+      - parameter naturalLanguageQuery: The natural text query for the new training query.
+      - parameter filter: The filter used on the collection before the **natural_language_query** is applied.
+      - parameter examples: Array of training examples.
 
-     - returns: An initialized `NewTrainingQuery`.
+      - returns: An initialized `NewTrainingQuery`.
      */
     public init(
         naturalLanguageQuery: String? = nil,

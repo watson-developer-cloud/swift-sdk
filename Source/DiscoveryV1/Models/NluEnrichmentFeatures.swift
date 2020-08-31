@@ -74,19 +74,19 @@ public struct NluEnrichmentFeatures: Codable, Equatable {
     }
 
     /**
-     Initialize a `NluEnrichmentFeatures` with member variables.
+      Initialize a `NluEnrichmentFeatures` with member variables.
 
-     - parameter keywords: An object specifying the Keyword enrichment and related parameters.
-     - parameter entities: An object speficying the Entities enrichment and related parameters.
-     - parameter sentiment: An object specifying the sentiment extraction enrichment and related parameters.
-     - parameter emotion: An object specifying the emotion detection enrichment and related parameters.
-     - parameter categories: An object that indicates the Categories enrichment will be applied to the specified
-       field.
-     - parameter semanticRoles: An object specifiying the semantic roles enrichment and related parameters.
-     - parameter relations: An object specifying the relations enrichment and related parameters.
-     - parameter concepts: An object specifiying the concepts enrichment and related parameters.
+      - parameter keywords: An object specifying the Keyword enrichment and related parameters.
+      - parameter entities: An object speficying the Entities enrichment and related parameters.
+      - parameter sentiment: An object specifying the sentiment extraction enrichment and related parameters.
+      - parameter emotion: An object specifying the emotion detection enrichment and related parameters.
+      - parameter categories: An object that indicates the Categories enrichment will be applied to the specified
+        field.
+      - parameter semanticRoles: An object specifiying the semantic roles enrichment and related parameters.
+      - parameter relations: An object specifying the relations enrichment and related parameters.
+      - parameter concepts: An object specifiying the concepts enrichment and related parameters.
 
-     - returns: An initialized `NluEnrichmentFeatures`.
+      - returns: An initialized `NluEnrichmentFeatures`.
      */
     public init(
         keywords: NluEnrichmentKeywords? = nil,

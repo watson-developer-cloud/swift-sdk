@@ -50,16 +50,16 @@ internal struct UpdateExample: Codable, Equatable {
     }
 
     /**
-     Initialize a `UpdateExample` with member variables.
+      Initialize a `UpdateExample` with member variables.
 
-     - parameter text: The text of the user input example. This string must conform to the following restrictions:
-       - It cannot contain carriage return, newline, or tab characters.
-       - It cannot consist of only whitespace characters.
-     - parameter mentions: An array of contextual entity mentions.
-     - parameter created: The timestamp for creation of the object.
-     - parameter updated: The timestamp for the most recent update to the object.
+      - parameter text: The text of the user input example. This string must conform to the following restrictions:
+        - It cannot contain carriage return, newline, or tab characters.
+        - It cannot consist of only whitespace characters.
+      - parameter mentions: An array of contextual entity mentions.
+      - parameter created: The timestamp for creation of the object.
+      - parameter updated: The timestamp for the most recent update to the object.
 
-     - returns: An initialized `UpdateExample`.
+      - returns: An initialized `UpdateExample`.
      */
     public init(
         text: String? = nil,

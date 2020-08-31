@@ -38,12 +38,12 @@ public struct RuntimeEntityAlternative: Codable, Equatable {
     }
 
     /**
-     Initialize a `RuntimeEntityAlternative` with member variables.
+      Initialize a `RuntimeEntityAlternative` with member variables.
 
-     - parameter value: The entity value that was recognized in the user input.
-     - parameter confidence: A decimal percentage that represents Watson's confidence in the recognized entity.
+      - parameter value: The entity value that was recognized in the user input.
+      - parameter confidence: A decimal percentage that represents Watson's confidence in the recognized entity.
 
-     - returns: An initialized `RuntimeEntityAlternative`.
+      - returns: An initialized `RuntimeEntityAlternative`.
      */
     public init(
         value: String? = nil,

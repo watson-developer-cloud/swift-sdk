@@ -26,9 +26,9 @@ public struct NluEnrichmentCategories: Codable, Equatable {
     public var additionalProperties: [String: JSON]
 
     /**
-     Initialize a `NluEnrichmentCategories`.
+      Initialize a `NluEnrichmentCategories`.
 
-     - returns: An initialized `NluEnrichmentCategories`.
+      - returns: An initialized `NluEnrichmentCategories`.
      */
     public init(
         additionalProperties: [String: JSON] = [:]

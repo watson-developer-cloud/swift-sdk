@@ -27,7 +27,7 @@ import IBMSwiftSDKCore
 public class Assistant {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL: String? = "https://gateway.watsonplatform.net/assistant/api"
+    public var serviceURL: String? = "https://api.us-south.assistant.watson.cloud.ibm.com"
 
     /// Service identifiers
     internal let serviceName = "Conversation"
@@ -84,8 +84,8 @@ public class Assistant {
 
     #if !os(Linux)
     /**
-     Allow network requests to a server without verification of the server certificate.
-     **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
+      Allow network requests to a server without verification of the server certificate.
+      **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
      */
     public func disableSSLVerification() {
         session = InsecureConnection.session()
@@ -253,7 +253,6 @@ public class Assistant {
 
      Send user input to an assistant and receive a response, with conversation state (including context data) stored by
      Watson Assistant for the duration of the session.
-     There is no rate limit for this operation.
 
      - parameter assistantID: Unique identifier of the assistant. To find the assistant ID in the Watson Assistant
        user interface, open the assistant settings and click **API Details**. For information about creating assistants,
@@ -332,7 +331,6 @@ public class Assistant {
 
      Send user input to an assistant and receive a response, with conversation state (including context data) managed by
      your application.
-     There is no rate limit for this operation.
 
      - parameter assistantID: Unique identifier of the assistant. To find the assistant ID in the Watson Assistant
        user interface, open the assistant settings and click **API Details**. For information about creating assistants,
@@ -402,6 +400,146 @@ public class Assistant {
 
         // execute REST request
         request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     List log events for an assistant.
+
+     List the events from the log of an assistant.
+     This method is available only with Premium plans.
+
+     - parameter assistantID: Unique identifier of the assistant. To find the assistant ID in the Watson Assistant
+       user interface, open the assistant settings and click **API Details**. For information about creating assistants,
+       see the [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-assistant-add#assistant-add-task).
+       **Note:** Currently, the v2 API does not support creating assistants.
+     - parameter sort: How to sort the returned log events. You can sort by **request_timestamp**. To reverse the sort
+       order, prefix the parameter value with a minus sign (`-`).
+     - parameter filter: A cacheable parameter that limits the results to those matching the specified filter. For
+       more information, see the
+       [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-filter-reference#filter-reference).
+     - parameter pageLimit: The number of records to return in each page of results.
+     - parameter cursor: A token identifying the page of results to retrieve.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func listLogs(
+        assistantID: String,
+        sort: String? = nil,
+        filter: String? = nil,
+        pageLimit: Int? = nil,
+        cursor: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<LogCollection>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listLogs")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        if let sort = sort {
+            let queryParameter = URLQueryItem(name: "sort", value: sort)
+            queryParameters.append(queryParameter)
+        }
+        if let filter = filter {
+            let queryParameter = URLQueryItem(name: "filter", value: filter)
+            queryParameters.append(queryParameter)
+        }
+        if let pageLimit = pageLimit {
+            let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
+            queryParameters.append(queryParameter)
+        }
+        if let cursor = cursor {
+            let queryParameter = URLQueryItem(name: "cursor", value: cursor)
+            queryParameters.append(queryParameter)
+        }
+
+        // construct REST request
+        let path = "/v2/assistants/\(assistantID)/logs"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Delete labeled data.
+
+     Deletes all data associated with a specified customer ID. The method has no effect if no data is associated with
+     the customer ID.
+     You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request that passes data.
+     For more information about personal data and customer IDs, see [Information
+     security](https://cloud.ibm.com/docs/assistant?topic=assistant-information-security#information-security).
+     This operation is limited to 4 requests per minute. For more information, see **Rate limiting**.
+
+     - parameter customerID: The customer ID for which all data is to be deleted.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func deleteUserData(
+        customerID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteUserData")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+        queryParameters.append(URLQueryItem(name: "customer_id", value: customerID))
+
+        // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, WatsonError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "DELETE",
+            url: serviceEndpoint + "/v2/user_data",
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.response(completionHandler: completionHandler)
     }
 
 }

@@ -29,7 +29,7 @@ let obama: Data = loadResource(name: "obama", ext: "jpg")
 let sign: Data = loadResource(name: "sign", ext: "jpg")
 
 let obamaURL = "https://www.whitehouse.gov/sites/whitehouse.gov/files/images/" +
-"Administration/People/president_official_portrait_lores.jpg"
+    "Administration/People/president_official_portrait_lores.jpg"
 let carURL = "https://raw.githubusercontent.com/watson-developer-cloud/java-sdk/master/visual-recognition/src/test/resources/visual_recognition/v4/turtle_to_classify.jpg"
 let signURL = "https://raw.githubusercontent.com/watson-developer-cloud/java-sdk/master/visual-recognition/src/test/resources/visual_recognition/v4/turtle_to_classify.jpg"
 let giraffeURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Giraffe_Mikumi_National_Park.jpg/220px-Giraffe_Mikumi_National_Park.jpg"

@@ -42,16 +42,16 @@ public struct MessageContextMetadata: Codable, Equatable {
     }
 
     /**
-     Initialize a `MessageContextMetadata` with member variables.
+      Initialize a `MessageContextMetadata` with member variables.
 
-     - parameter deployment: A label identifying the deployment environment, used for filtering log data. This string
-       cannot contain carriage return, newline, or tab characters.
-     - parameter userID: A string value that identifies the user who is interacting with the workspace. The client
-       must provide a unique identifier for each individual end user who accesses the application. For Plus and Premium
-       plans, this user ID is used to identify unique users for billing purposes. This string cannot contain carriage
-       return, newline, or tab characters.
+      - parameter deployment: A label identifying the deployment environment, used for filtering log data. This string
+        cannot contain carriage return, newline, or tab characters.
+      - parameter userID: A string value that identifies the user who is interacting with the workspace. The client
+        must provide a unique identifier for each individual end user who accesses the application. For Plus and Premium
+        plans, this user ID is used to identify unique users for billing purposes. This string cannot contain carriage
+        return, newline, or tab characters.
 
-     - returns: An initialized `MessageContextMetadata`.
+      - returns: An initialized `MessageContextMetadata`.
      */
     public init(
         deployment: String? = nil,

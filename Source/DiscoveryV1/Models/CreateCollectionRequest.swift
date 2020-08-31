@@ -67,15 +67,15 @@ internal struct CreateCollectionRequest: Codable, Equatable {
     }
 
     /**
-     Initialize a `CreateCollectionRequest` with member variables.
+      Initialize a `CreateCollectionRequest` with member variables.
 
-     - parameter name: The name of the collection to be created.
-     - parameter description: A description of the collection.
-     - parameter configurationID: The ID of the configuration in which the collection is to be created.
-     - parameter language: The language of the documents stored in the collection, in the form of an ISO 639-1
-       language code.
+      - parameter name: The name of the collection to be created.
+      - parameter description: A description of the collection.
+      - parameter configurationID: The ID of the configuration in which the collection is to be created.
+      - parameter language: The language of the documents stored in the collection, in the form of an ISO 639-1
+        language code.
 
-     - returns: An initialized `CreateCollectionRequest`.
+      - returns: An initialized `CreateCollectionRequest`.
      */
     public init(
         name: String,

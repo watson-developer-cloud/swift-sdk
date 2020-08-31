@@ -32,11 +32,11 @@ public struct PDFHeadingDetection: Codable, Equatable {
     }
 
     /**
-     Initialize a `PDFHeadingDetection` with member variables.
+      Initialize a `PDFHeadingDetection` with member variables.
 
-     - parameter fonts: Array of font matching configurations.
+      - parameter fonts: Array of font matching configurations.
 
-     - returns: An initialized `PDFHeadingDetection`.
+      - returns: An initialized `PDFHeadingDetection`.
      */
     public init(
         fonts: [FontSetting]? = nil

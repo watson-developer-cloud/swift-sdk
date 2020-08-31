@@ -32,11 +32,11 @@ public struct PDFSettings: Codable, Equatable {
     }
 
     /**
-     Initialize a `PDFSettings` with member variables.
+      Initialize a `PDFSettings` with member variables.
 
-     - parameter heading: Object containing heading detection conversion settings for PDF documents.
+      - parameter heading: Object containing heading detection conversion settings for PDF documents.
 
-     - returns: An initialized `PDFSettings`.
+      - returns: An initialized `PDFSettings`.
      */
     public init(
         heading: PDFHeadingDetection? = nil

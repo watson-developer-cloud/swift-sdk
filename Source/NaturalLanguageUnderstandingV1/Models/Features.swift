@@ -37,7 +37,8 @@ public struct Features: Codable, Equatable {
     public var emotion: EmotionOptions?
 
     /**
-     Identifies people, cities, organizations, and other entities in the content. See [Entity types and
+     Identifies people, cities, organizations, and other entities in the content. For more information, see [Entity
+     types and
      subtypes](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-entity-types).
      Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
      Arabic, Chinese, and Dutch are supported only through custom models.
@@ -58,7 +59,7 @@ public struct Features: Codable, Equatable {
 
     /**
      Recognizes when two entities are related and identifies the type of relation. For example, an `awardedTo` relation
-     might connect the entities "Nobel Prize" and "Albert Einstein". See [Relation
+     might connect the entities "Nobel Prize" and "Albert Einstein". For more information, see [Relation
      types](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-relations).
      Supported languages: Arabic, English, German, Japanese, Korean, Spanish. Chinese, Dutch, French, Italian, and
      Portuguese custom models are also supported.
@@ -104,40 +105,41 @@ public struct Features: Codable, Equatable {
     }
 
     /**
-     Initialize a `Features` with member variables.
+      Initialize a `Features` with member variables.
 
-     - parameter concepts: Returns high-level concepts in the content. For example, a research paper about deep
-       learning might return the concept, "Artificial Intelligence" although the term is not mentioned.
-       Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
-     - parameter emotion: Detects anger, disgust, fear, joy, or sadness that is conveyed in the content or by the
-       context around target phrases specified in the targets parameter. You can analyze emotion for detected entities
-       with `entities.emotion` and for keywords with `keywords.emotion`.
-       Supported languages: English.
-     - parameter entities: Identifies people, cities, organizations, and other entities in the content. See [Entity
-       types and
-       subtypes](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-entity-types).
-       Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
-       Arabic, Chinese, and Dutch are supported only through custom models.
-     - parameter keywords: Returns important keywords in the content.
-       Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
-     - parameter metadata: Returns information from the document, including author name, title, RSS/ATOM feeds,
-       prominent page image, and publication date. Supports URL and HTML input types only.
-     - parameter relations: Recognizes when two entities are related and identifies the type of relation. For
-       example, an `awardedTo` relation might connect the entities "Nobel Prize" and "Albert Einstein". See [Relation
-       types](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-relations).
-       Supported languages: Arabic, English, German, Japanese, Korean, Spanish. Chinese, Dutch, French, Italian, and
-       Portuguese custom models are also supported.
-     - parameter semanticRoles: Parses sentences into subject, action, and object form.
-       Supported languages: English, German, Japanese, Korean, Spanish.
-     - parameter sentiment: Analyzes the general sentiment of your content or the sentiment toward specific target
-       phrases. You can analyze sentiment for detected entities with `entities.sentiment` and for keywords with
-       `keywords.sentiment`.
-        Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish.
-     - parameter categories: Returns a five-level taxonomy of the content. The top three categories are returned.
-       Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
-     - parameter syntax: Returns tokens and sentences from the input text.
+      - parameter concepts: Returns high-level concepts in the content. For example, a research paper about deep
+        learning might return the concept, "Artificial Intelligence" although the term is not mentioned.
+        Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
+      - parameter emotion: Detects anger, disgust, fear, joy, or sadness that is conveyed in the content or by the
+        context around target phrases specified in the targets parameter. You can analyze emotion for detected entities
+        with `entities.emotion` and for keywords with `keywords.emotion`.
+        Supported languages: English.
+      - parameter entities: Identifies people, cities, organizations, and other entities in the content. For more
+        information, see [Entity types and
+        subtypes](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-entity-types).
+        Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
+        Arabic, Chinese, and Dutch are supported only through custom models.
+      - parameter keywords: Returns important keywords in the content.
+        Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
+      - parameter metadata: Returns information from the document, including author name, title, RSS/ATOM feeds,
+        prominent page image, and publication date. Supports URL and HTML input types only.
+      - parameter relations: Recognizes when two entities are related and identifies the type of relation. For
+        example, an `awardedTo` relation might connect the entities "Nobel Prize" and "Albert Einstein". For more
+        information, see [Relation
+        types](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-relations).
+        Supported languages: Arabic, English, German, Japanese, Korean, Spanish. Chinese, Dutch, French, Italian, and
+        Portuguese custom models are also supported.
+      - parameter semanticRoles: Parses sentences into subject, action, and object form.
+        Supported languages: English, German, Japanese, Korean, Spanish.
+      - parameter sentiment: Analyzes the general sentiment of your content or the sentiment toward specific target
+        phrases. You can analyze sentiment for detected entities with `entities.sentiment` and for keywords with
+        `keywords.sentiment`.
+         Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish.
+      - parameter categories: Returns a five-level taxonomy of the content. The top three categories are returned.
+        Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
+      - parameter syntax: Returns tokens and sentences from the input text.
 
-     - returns: An initialized `Features`.
+      - returns: An initialized `Features`.
      */
     public init(
         concepts: ConceptsOptions? = nil,

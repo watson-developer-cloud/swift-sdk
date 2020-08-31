@@ -32,11 +32,11 @@ internal struct GatewayName: Codable, Equatable {
     }
 
     /**
-     Initialize a `GatewayName` with member variables.
+      Initialize a `GatewayName` with member variables.
 
-     - parameter name: User-defined name.
+      - parameter name: User-defined name.
 
-     - returns: An initialized `GatewayName`.
+      - returns: An initialized `GatewayName`.
      */
     public init(
         name: String? = nil

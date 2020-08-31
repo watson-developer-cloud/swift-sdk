@@ -27,7 +27,7 @@ import IBMSwiftSDKCore
 public class Discovery {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL: String? = "https://gateway.watsonplatform.net/discovery/api"
+    public var serviceURL: String? = "https://api.us-south.discovery.watson.cloud.ibm.com"
 
     /// Service identifiers
     internal let serviceName = "Discovery"
@@ -83,8 +83,8 @@ public class Discovery {
 
     #if !os(Linux)
     /**
-     Allow network requests to a server without verification of the server certificate.
-     **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
+      Allow network requests to a server without verification of the server certificate.
+      **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
      */
     public func disableSSLVerification() {
         session = InsecureConnection.session()

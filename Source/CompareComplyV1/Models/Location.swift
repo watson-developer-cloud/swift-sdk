@@ -39,12 +39,12 @@ public struct Location: Codable, Equatable {
     }
 
     /**
-     Initialize a `Location` with member variables.
+      Initialize a `Location` with member variables.
 
-     - parameter begin: The element's `begin` index.
-     - parameter end: The element's `end` index.
+      - parameter begin: The element's `begin` index.
+      - parameter end: The element's `end` index.
 
-     - returns: An initialized `Location`.
+      - returns: An initialized `Location`.
      */
     public init(
         begin: Int,

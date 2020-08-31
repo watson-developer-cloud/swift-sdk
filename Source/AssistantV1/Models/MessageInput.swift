@@ -68,23 +68,23 @@ public struct MessageInput: Codable, Equatable {
     }
 
     /**
-     Initialize a `MessageInput` with member variables.
+      Initialize a `MessageInput` with member variables.
 
-     - parameter text: The text of the user input. This string cannot contain carriage return, newline, or tab
-       characters.
-     - parameter spellingSuggestions: Whether to use spelling correction when processing the input. This property
-       overrides the value of the **spelling_suggestions** property in the workspace settings.
-     - parameter spellingAutoCorrect: Whether to use autocorrection when processing the input. If spelling correction
-       is used and this property is `false`, any suggested corrections are returned in the **suggested_text** property
-       of the message response. If this property is `true`, any corrections are automatically applied to the user input,
-       and the original text is returned in the **original_text** property of the message response. This property
-       overrides the value of the **spelling_auto_correct** property in the workspace settings.
-     - parameter suggestedText: Any suggested corrections of the input text. This property is returned only if
-       spelling correction is enabled and autocorrection is disabled.
-     - parameter originalText: The original user input text. This property is returned only if autocorrection is
-       enabled and the user input was corrected.
+      - parameter text: The text of the user input. This string cannot contain carriage return, newline, or tab
+        characters.
+      - parameter spellingSuggestions: Whether to use spelling correction when processing the input. This property
+        overrides the value of the **spelling_suggestions** property in the workspace settings.
+      - parameter spellingAutoCorrect: Whether to use autocorrection when processing the input. If spelling correction
+        is used and this property is `false`, any suggested corrections are returned in the **suggested_text** property
+        of the message response. If this property is `true`, any corrections are automatically applied to the user input,
+        and the original text is returned in the **original_text** property of the message response. This property
+        overrides the value of the **spelling_auto_correct** property in the workspace settings.
+      - parameter suggestedText: Any suggested corrections of the input text. This property is returned only if
+        spelling correction is enabled and autocorrection is disabled.
+      - parameter originalText: The original user input text. This property is returned only if autocorrection is
+        enabled and the user input was corrected.
 
-     - returns: An initialized `MessageInput`.
+      - returns: An initialized `MessageInput`.
      */
     public init(
         text: String? = nil,

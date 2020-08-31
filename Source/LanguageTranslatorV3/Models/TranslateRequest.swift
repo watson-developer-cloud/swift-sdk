@@ -20,19 +20,20 @@ import Foundation
 internal struct TranslateRequest: Codable, Equatable {
 
     /**
-     Input text in UTF-8 encoding. Multiple entries will result in multiple translations in the response.
+     Input text in UTF-8 encoding. Multiple entries result in multiple translations in the response.
      */
     public var text: [String]
 
     /**
-     The model to use for translation. For example, `en-de` selects the IBM provided base model for English to German
-     translation. A model ID overrides the source and target parameters and is required if you use a custom model. If no
-     model ID is specified, you must specify a target language.
+     The model to use for translation. For example, `en-de` selects the IBM-provided base model for English-to-German
+     translation. A model ID overrides the `source` and `target` parameters and is required if you use a custom model.
+     If no model ID is specified, you must specify at least a target language.
      */
     public var modelID: String?
 
     /**
-     Language code that specifies the language of the source document.
+     Language code that specifies the language of the input text. If omitted, the service derives the source language
+     from the input text. The input must contain sufficient text for the service to identify the language reliably.
      */
     public var source: String?
 
@@ -50,18 +51,20 @@ internal struct TranslateRequest: Codable, Equatable {
     }
 
     /**
-     Initialize a `TranslateRequest` with member variables.
+      Initialize a `TranslateRequest` with member variables.
 
-     - parameter text: Input text in UTF-8 encoding. Multiple entries will result in multiple translations in the
-       response.
-     - parameter modelID: The model to use for translation. For example, `en-de` selects the IBM provided base model
-       for English to German translation. A model ID overrides the source and target parameters and is required if you
-       use a custom model. If no model ID is specified, you must specify a target language.
-     - parameter source: Language code that specifies the language of the source document.
-     - parameter target: Language code that specifies the target language for translation. Required if model ID is
-       not specified.
+      - parameter text: Input text in UTF-8 encoding. Multiple entries result in multiple translations in the
+        response.
+      - parameter modelID: The model to use for translation. For example, `en-de` selects the IBM-provided base model
+        for English-to-German translation. A model ID overrides the `source` and `target` parameters and is required if
+        you use a custom model. If no model ID is specified, you must specify at least a target language.
+      - parameter source: Language code that specifies the language of the input text. If omitted, the service derives
+        the source language from the input text. The input must contain sufficient text for the service to identify the
+        language reliably.
+      - parameter target: Language code that specifies the target language for translation. Required if model ID is
+        not specified.
 
-     - returns: An initialized `TranslateRequest`.
+      - returns: An initialized `TranslateRequest`.
      */
     public init(
         text: [String],

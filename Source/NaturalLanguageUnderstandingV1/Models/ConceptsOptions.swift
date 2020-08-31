@@ -34,11 +34,11 @@ public struct ConceptsOptions: Codable, Equatable {
     }
 
     /**
-     Initialize a `ConceptsOptions` with member variables.
+      Initialize a `ConceptsOptions` with member variables.
 
-     - parameter limit: Maximum number of concepts to return.
+      - parameter limit: Maximum number of concepts to return.
 
-     - returns: An initialized `ConceptsOptions`.
+      - returns: An initialized `ConceptsOptions`.
      */
     public init(
         limit: Int? = nil

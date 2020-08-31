@@ -165,11 +165,11 @@ class SpeechToTextTests: XCTestCase {
             corpusName: "swift-test-corpus",
             corpusFile: fileData,
             allowOverwrite: true) {
-            _, error in
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-            }
-            expectation.fulfill()
+                _, error in
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                }
+                expectation.fulfill()
         }
         wait(for: [expectation], timeout: timeout)
         waitUntil(languageModel, is: "ready")
@@ -183,11 +183,11 @@ class SpeechToTextTests: XCTestCase {
             audioName: "audio",
             audioResource: audio,
             contentType: "audio/wav", allowOverwrite: true) {
-            _, error in
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-            }
-            expectation.fulfill()
+                _, error in
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                }
+                expectation.fulfill()
         }
         wait(for: [expectation], timeout: timeout)
         waitUntil(acousticModel, is: "ready")
@@ -905,12 +905,12 @@ class SpeechToTextTests: XCTestCase {
             grammarFile: grammarFile.absoluteString,
             contentType: "application/srgs",
             allowOverwrite: true) {
-            _, error in
-            if let error = error {
-                XCTFail(unexpectedErrorMessage(error))
-                return
-            }
-            expectation1.fulfill()
+                _, error in
+                if let error = error {
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+                expectation1.fulfill()
         }
 
         wait(for: [expectation1], timeout: timeout)

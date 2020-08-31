@@ -22,10 +22,9 @@ import Foundation
 public struct CategoriesResult: Codable, Equatable {
 
     /**
-     The path to the category through the 5-level taxonomy hierarchy. For the complete list of categories, see the
+     The path to the category through the 5-level taxonomy hierarchy. For more information about the categories, see
      [Categories
-     hierarchy](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-categories#categories-hierarchy)
-     documentation.
+     hierarchy](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-categories#categories-hierarchy).
      */
     public var label: String?
 

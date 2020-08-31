@@ -28,7 +28,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
     private let text = "Swift at IBM is awesome. You should try it!"
 
     private let ssmlString = "<speak xml:lang=\"En-US\" version=\"1.0\">" +
-    "<say-as interpret-as=\"letters\">Hello</say-as></speak>"
+        "<say-as interpret-as=\"letters\">Hello</say-as></speak>"
     private let failedToInitializeAudioPlayerMessage = "Failed to initialize an AVAudioPlayer with the received data"
 
     // MARK: - Test Configuration
@@ -91,7 +91,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
     func testSynthesizeAllVoices() {
         let voices: [String : String] = [
             "ar-AR_OmarVoice": "تقوم خدمة I B M النص إلى خدمة الكلام بتحويل النص المكتوب إلى صوت طبيعي في مجموعة متنوعة من اللغات والأصوات.",
@@ -129,27 +129,27 @@ class TextToSpeechPlaybackTests: XCTestCase {
             "es-US_SofiaVoice": "Consciente de su patrimonio espiritual y moral, la Unión está ",
             "es-US_SofiaV3Voice": "Consciente de su patrimonio espiritual y moral, la Unión está ß"
         ]
-            
+
         // test all voices
         for (voice, sampleText) in voices {
             let voiceDescription = "Test of the \(voice) voice."
             let voiceExpectation = self.expectation(description: voiceDescription)
-            
+
             textToSpeech.synthesize(text: sampleText, accept: "audio/wav", voice: voice) {
                 response, error in
-                
+
                 if let error = error {
                     XCTFail(unexpectedErrorMessage(error))
                     return
                 }
-                
+
                 guard let data = response?.result else {
                     XCTFail(missingResultMessage)
                     return
                 }
-                
+
                 XCTAssertGreaterThan(data.count, 0)
-                
+
                 do {
                     let audioPlayer = try AVAudioPlayer(data: data)
                     audioPlayer.prepareToPlay()
@@ -162,7 +162,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
                 }
                 voiceExpectation.fulfill()
             }
-            
+
             waitForExpectations()
         }
     }

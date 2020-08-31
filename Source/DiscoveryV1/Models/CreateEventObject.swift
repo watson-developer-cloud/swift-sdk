@@ -45,12 +45,12 @@ internal struct CreateEventObject: Codable, Equatable {
     }
 
     /**
-     Initialize a `CreateEventObject` with member variables.
+      Initialize a `CreateEventObject` with member variables.
 
-     - parameter type: The event type to be created.
-     - parameter data: Query event data object.
+      - parameter type: The event type to be created.
+      - parameter data: Query event data object.
 
-     - returns: An initialized `CreateEventObject`.
+      - returns: An initialized `CreateEventObject`.
      */
     public init(
         type: String,

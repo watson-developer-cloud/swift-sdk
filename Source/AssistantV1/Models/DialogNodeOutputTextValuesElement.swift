@@ -31,12 +31,12 @@ public struct DialogNodeOutputTextValuesElement: Codable, Equatable {
     }
 
     /**
-     Initialize a `DialogNodeOutputTextValuesElement` with member variables.
+      Initialize a `DialogNodeOutputTextValuesElement` with member variables.
 
-     - parameter text: The text of a response. This string can include newline characters (`\n`), Markdown tagging,
-       or other special characters, if supported by the channel.
+      - parameter text: The text of a response. This string can include newline characters (`\n`), Markdown tagging,
+        or other special characters, if supported by the channel.
 
-     - returns: An initialized `DialogNodeOutputTextValuesElement`.
+      - returns: An initialized `DialogNodeOutputTextValuesElement`.
      */
     public init(
         text: String? = nil

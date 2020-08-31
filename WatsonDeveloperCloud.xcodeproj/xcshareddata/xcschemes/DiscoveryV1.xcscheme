@@ -73,6 +73,9 @@
             </BuildableReference>
             <SkippedTests>
                <Test
+                  Identifier = "DiscoveryCPDTests">
+               </Test>
+               <Test
                   Identifier = "DiscoveryCPDTests/testAutoComplete()">
                </Test>
             </SkippedTests>

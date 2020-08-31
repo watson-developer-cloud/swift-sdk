@@ -38,12 +38,12 @@ public struct NluEnrichmentEmotion: Codable, Equatable {
     }
 
     /**
-     Initialize a `NluEnrichmentEmotion` with member variables.
+      Initialize a `NluEnrichmentEmotion` with member variables.
 
-     - parameter document: When `true`, emotion detection is performed on the entire field.
-     - parameter targets: A comma-separated list of target strings that will have any associated emotions detected.
+      - parameter document: When `true`, emotion detection is performed on the entire field.
+      - parameter targets: A comma-separated list of target strings that will have any associated emotions detected.
 
-     - returns: An initialized `NluEnrichmentEmotion`.
+      - returns: An initialized `NluEnrichmentEmotion`.
      */
     public init(
         document: Bool? = nil,

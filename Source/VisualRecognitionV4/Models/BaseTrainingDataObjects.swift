@@ -32,11 +32,11 @@ internal struct BaseTrainingDataObjects: Codable, Equatable {
     }
 
     /**
-     Initialize a `BaseTrainingDataObjects` with member variables.
+      Initialize a `BaseTrainingDataObjects` with member variables.
 
-     - parameter objects: Training data for specific objects.
+      - parameter objects: Training data for specific objects.
 
-     - returns: An initialized `BaseTrainingDataObjects`.
+      - returns: An initialized `BaseTrainingDataObjects`.
      */
     public init(
         objects: [TrainingDataObject]? = nil

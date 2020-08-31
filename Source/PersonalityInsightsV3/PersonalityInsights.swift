@@ -36,7 +36,7 @@ import IBMSwiftSDKCore
 public class PersonalityInsights {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL: String? = "https://gateway.watsonplatform.net/personality-insights/api"
+    public var serviceURL: String? = "https://api.us-south.personality-insights.watson.cloud.ibm.com"
 
     /// Service identifiers
     internal let serviceName = "PersonalityInsights"
@@ -93,8 +93,8 @@ public class PersonalityInsights {
 
     #if !os(Linux)
     /**
-     Allow network requests to a server without verification of the server certificate.
-     **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
+      Allow network requests to a server without verification of the server certificate.
+      **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
      */
     public func disableSSLVerification() {
         session = InsecureConnection.session()

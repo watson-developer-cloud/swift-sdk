@@ -686,8 +686,8 @@ class AssistantV1UnitTests: XCTestCase {
             workspaceID: self.workspaceID,
             intent: intent,
             text: text) {
-            _, _ in
-            expectation.fulfill()
+                _, _ in
+                expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
     }

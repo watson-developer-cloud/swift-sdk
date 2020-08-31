@@ -66,20 +66,20 @@ public struct Conversions: Codable, Equatable {
     }
 
     /**
-     Initialize a `Conversions` with member variables.
+      Initialize a `Conversions` with member variables.
 
-     - parameter pdf: A list of PDF conversion settings.
-     - parameter word: A list of Word conversion settings.
-     - parameter html: A list of HTML conversion settings.
-     - parameter segment: A list of Document Segmentation settings.
-     - parameter jsonNormalizations: Defines operations that can be used to transform the final output JSON into a
-       normalized form. Operations are executed in the order that they appear in the array.
-     - parameter imageTextRecognition: When `true`, automatic text extraction from images (this includes images
-       embedded in supported document formats, for example PDF, and suppported image formats, for example TIFF) is
-       performed on documents uploaded to the collection. This field is supported on **Advanced** and higher plans only.
-       **Lite** plans do not support image text recognition.
+      - parameter pdf: A list of PDF conversion settings.
+      - parameter word: A list of Word conversion settings.
+      - parameter html: A list of HTML conversion settings.
+      - parameter segment: A list of Document Segmentation settings.
+      - parameter jsonNormalizations: Defines operations that can be used to transform the final output JSON into a
+        normalized form. Operations are executed in the order that they appear in the array.
+      - parameter imageTextRecognition: When `true`, automatic text extraction from images (this includes images
+        embedded in supported document formats, for example PDF, and suppported image formats, for example TIFF) is
+        performed on documents uploaded to the collection. This field is supported on **Advanced** and higher plans only.
+        **Lite** plans do not support image text recognition.
 
-     - returns: An initialized `Conversions`.
+      - returns: An initialized `Conversions`.
      */
     public init(
         pdf: PDFSettings? = nil,

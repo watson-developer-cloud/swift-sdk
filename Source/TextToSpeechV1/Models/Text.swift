@@ -33,11 +33,11 @@ internal struct Text: Codable, Equatable {
     }
 
     /**
-     Initialize a `Text` with member variables.
+      Initialize a `Text` with member variables.
 
-     - parameter text: The text to synthesize.
+      - parameter text: The text to synthesize.
 
-     - returns: An initialized `Text`.
+      - returns: An initialized `Text`.
      */
     public init(
         text: String

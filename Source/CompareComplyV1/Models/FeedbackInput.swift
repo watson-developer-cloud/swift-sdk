@@ -44,13 +44,13 @@ internal struct FeedbackInput: Codable, Equatable {
     }
 
     /**
-     Initialize a `FeedbackInput` with member variables.
+      Initialize a `FeedbackInput` with member variables.
 
-     - parameter feedbackData: Feedback data for submission.
-     - parameter userID: An optional string identifying the user.
-     - parameter comment: An optional comment on or description of the feedback.
+      - parameter feedbackData: Feedback data for submission.
+      - parameter userID: An optional string identifying the user.
+      - parameter comment: An optional comment on or description of the feedback.
 
-     - returns: An initialized `FeedbackInput`.
+      - returns: An initialized `FeedbackInput`.
      */
     public init(
         feedbackData: FeedbackDataInput,

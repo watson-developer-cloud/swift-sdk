@@ -38,12 +38,12 @@ public struct NluEnrichmentSentiment: Codable, Equatable {
     }
 
     /**
-     Initialize a `NluEnrichmentSentiment` with member variables.
+      Initialize a `NluEnrichmentSentiment` with member variables.
 
-     - parameter document: When `true`, sentiment analysis is performed on the entire field.
-     - parameter targets: A comma-separated list of target strings that will have any associated sentiment analyzed.
+      - parameter document: When `true`, sentiment analysis is performed on the entire field.
+      - parameter targets: A comma-separated list of target strings that will have any associated sentiment analyzed.
 
-     - returns: An initialized `NluEnrichmentSentiment`.
+      - returns: An initialized `NluEnrichmentSentiment`.
      */
     public init(
         document: Bool? = nil,

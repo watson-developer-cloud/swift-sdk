@@ -50,14 +50,14 @@ public struct Location: Codable, Equatable {
     }
 
     /**
-     Initialize a `Location` with member variables.
+      Initialize a `Location` with member variables.
 
-     - parameter top: Y-position of top-left pixel of the bounding box.
-     - parameter left: X-position of top-left pixel of the bounding box.
-     - parameter width: Width in pixels of of the bounding box.
-     - parameter height: Height in pixels of the bounding box.
+      - parameter top: Y-position of top-left pixel of the bounding box.
+      - parameter left: X-position of top-left pixel of the bounding box.
+      - parameter width: Width in pixels of of the bounding box.
+      - parameter height: Height in pixels of the bounding box.
 
-     - returns: An initialized `Location`.
+      - returns: An initialized `Location`.
      */
     public init(
         top: Int,

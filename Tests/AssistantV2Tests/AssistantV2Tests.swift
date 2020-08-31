@@ -280,38 +280,38 @@ class AssistantV2Tests: XCTestCase {
         }
         waitForExpectations()
     }
-    
+
     func testMessageStateless() {
         let description = "Test message stateless"
         let statelessMessageExpectation = self.expectation(description: description)
-        
+
         let testInput: MessageInputStateless = MessageInputStateless(messageType: "text", text: "This is a test", intents: nil, entities: nil, suggestionID: nil, options: nil)
-        
+
         let testGlobalContext: MessageContextGlobalStateless = MessageContextGlobalStateless(system: nil, sessionID: nil)
         let testContext: MessageContextStateless = MessageContextStateless(global: testGlobalContext, skills: nil)
-        
+
         assistant.messageStateless(assistantID: assistantID, input: testInput, context: testContext, headers: nil) {
             response, error in
-            
+
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
                 return
             }
-            
+
             guard let messageResponse = response?.result else {
                 XCTFail(missingResultMessage)
                 return
             }
-            
+
             XCTAssertNotNil(messageResponse.output)
             XCTAssertNotNil(messageResponse.context)
-            
+
             statelessMessageExpectation.fulfill()
         }
-        
+
         waitForExpectations()
     }
-    
+
     func testMessageWithSystemEntity() {
         let description1 = "Create a session"
         let expectation1 = self.expectation(description: description1)
@@ -334,44 +334,44 @@ class AssistantV2Tests: XCTestCase {
         }
 
         waitForExpectations()
-        
+
         let message1Expectation = self.expectation(description: "message 1")
         assistant.message(assistantID: assistantID, sessionID: newSessionID!) {
-                response, error in
-            
+            response, error in
+
             if let error = error {
                 XCTFail(error.localizedDescription)
                 return
             }
-            
+
             guard let result = response?.result else {
                 XCTFail("no response")
                 return
             }
-            
+
             message1Expectation.fulfill()
         }
-            
+
         waitForExpectations()
-        
-    let message2Expectation = self.expectation(description: "message 2")
-    let messageInput = MessageInput(messageType: MessageInput.MessageType.text.rawValue, text: "are you open on christmas")
-    assistant.message(assistantID: assistantID, sessionID: newSessionID!, input: messageInput, context: nil) {
+
+        let message2Expectation = self.expectation(description: "message 2")
+        let messageInput = MessageInput(messageType: MessageInput.MessageType.text.rawValue, text: "are you open on christmas")
+        assistant.message(assistantID: assistantID, sessionID: newSessionID!, input: messageInput, context: nil) {
             response, error in
-            
+
             if let error = error {
                 XCTFail(error.localizedDescription)
                 return
             }
-            
+
             guard let result = response?.result else {
                 XCTFail("no response")
                 return
             }
-            
+
             message2Expectation.fulfill()
         }
-        
+
         waitForExpectations()
     }
 
@@ -557,6 +557,37 @@ class AssistantV2Tests: XCTestCase {
             XCTAssert(message.responseType == "search")
 
             searchSkillMessageExpectation.fulfill()
+        }
+
+        waitForExpectations()
+    }
+
+    // NOTE: this function is only available on premium instances of Assistant
+    func testListLogs() {
+        let description = "Test listLogs"
+        let expectation = self.expectation(description: description)
+
+        let premiumAuthenticator = WatsonIAMAuthenticator(apiKey: WatsonCredentials.AssistantV2PremiumAPIKey!, url: "https://iam.test.cloud.ibm.com/identity/token")
+        let premiumAssistant = Assistant(version: versionDate, authenticator: premiumAuthenticator)
+
+        premiumAssistant.serviceURL = WatsonCredentials.AssistantV2PremiumURL!
+
+        premiumAssistant.listLogs(assistantID: WatsonCredentials.AssistantV2PremiumAssistantID!, sort: nil, filter: nil, pageLimit: nil, cursor: nil, headers: nil) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+
+            guard let logsCollection = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssertNotNil(logsCollection.logs)
+
+            expectation.fulfill()
         }
 
         waitForExpectations()

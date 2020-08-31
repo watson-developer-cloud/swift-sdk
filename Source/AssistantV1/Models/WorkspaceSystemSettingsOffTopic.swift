@@ -32,11 +32,11 @@ public struct WorkspaceSystemSettingsOffTopic: Codable, Equatable {
     }
 
     /**
-     Initialize a `WorkspaceSystemSettingsOffTopic` with member variables.
+      Initialize a `WorkspaceSystemSettingsOffTopic` with member variables.
 
-     - parameter enabled: Whether enhanced irrelevance detection is enabled for the workspace.
+      - parameter enabled: Whether enhanced irrelevance detection is enabled for the workspace.
 
-     - returns: An initialized `WorkspaceSystemSettingsOffTopic`.
+      - returns: An initialized `WorkspaceSystemSettingsOffTopic`.
      */
     public init(
         enabled: Bool? = nil

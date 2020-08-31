@@ -32,11 +32,11 @@ public struct ClassifyInput: Codable, Equatable {
     }
 
     /**
-     Initialize a `ClassifyInput` with member variables.
+      Initialize a `ClassifyInput` with member variables.
 
-     - parameter text: The submitted phrase. The maximum length is 2048 characters.
+      - parameter text: The submitted phrase. The maximum length is 2048 characters.
 
-     - returns: An initialized `ClassifyInput`.
+      - returns: An initialized `ClassifyInput`.
      */
     public init(
         text: String

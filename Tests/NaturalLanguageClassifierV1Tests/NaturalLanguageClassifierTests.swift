@@ -95,10 +95,10 @@ class NaturalLanguageClassifierTests: XCTestCase {
     /** Load a file used when creating a classifier. */
     func loadClassifierFile(name: String, withExtension: String) -> Data? {
         #if os(Linux)
-            let url = URL(fileURLWithPath: "Tests/NaturalLanguageClassifierV1Tests/" + name + "." + withExtension)
+        let url = URL(fileURLWithPath: "Tests/NaturalLanguageClassifierV1Tests/" + name + "." + withExtension)
         #else
-            let bundle = Bundle(for: type(of: self))
-            guard let url = bundle.url(forResource: name, withExtension: withExtension) else { return nil }
+        let bundle = Bundle(for: type(of: self))
+        guard let url = bundle.url(forResource: name, withExtension: withExtension) else { return nil }
         #endif
         let data = try? Data(contentsOf: url)
         return data
@@ -261,12 +261,12 @@ class NaturalLanguageClassifierTests: XCTestCase {
             trainingMetadata: metadataFileEmpty,
             trainingData: trainingFile
         ) {
-                _, error in
+            _, error in
 
-                if error == nil {
-                    XCTFail(missingErrorMessage)
-                }
-                expectation.fulfill()
+            if error == nil {
+                XCTFail(missingErrorMessage)
+            }
+            expectation.fulfill()
         }
         waitForExpectations()
     }

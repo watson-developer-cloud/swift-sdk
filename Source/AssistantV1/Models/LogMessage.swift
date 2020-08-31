@@ -47,12 +47,12 @@ public struct LogMessage: Codable, Equatable {
     }
 
     /**
-     Initialize a `LogMessage` with member variables.
+      Initialize a `LogMessage` with member variables.
 
-     - parameter level: The severity of the log message.
-     - parameter msg: The text of the log message.
+      - parameter level: The severity of the log message.
+      - parameter msg: The text of the log message.
 
-     - returns: An initialized `LogMessage`.
+      - returns: An initialized `LogMessage`.
      */
     public init(
         level: String,

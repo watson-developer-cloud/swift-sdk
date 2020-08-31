@@ -32,12 +32,12 @@ public struct NluEnrichmentConcepts: Codable, Equatable {
     }
 
     /**
-     Initialize a `NluEnrichmentConcepts` with member variables.
+      Initialize a `NluEnrichmentConcepts` with member variables.
 
-     - parameter limit: The maximum number of concepts enrichments to extact from each instance of the specified
-       field.
+      - parameter limit: The maximum number of concepts enrichments to extact from each instance of the specified
+        field.
 
-     - returns: An initialized `NluEnrichmentConcepts`.
+      - returns: An initialized `NluEnrichmentConcepts`.
      */
     public init(
         limit: Int? = nil

@@ -38,12 +38,12 @@ public struct SyntaxOptionsTokens: Codable, Equatable {
     }
 
     /**
-     Initialize a `SyntaxOptionsTokens` with member variables.
+      Initialize a `SyntaxOptionsTokens` with member variables.
 
-     - parameter lemma: Set this to `true` to return the lemma for each token.
-     - parameter partOfSpeech: Set this to `true` to return the part of speech for each token.
+      - parameter lemma: Set this to `true` to return the lemma for each token.
+      - parameter partOfSpeech: Set this to `true` to return the part of speech for each token.
 
-     - returns: An initialized `SyntaxOptionsTokens`.
+      - returns: An initialized `SyntaxOptionsTokens`.
      */
     public init(
         lemma: Bool? = nil,

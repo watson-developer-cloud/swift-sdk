@@ -62,16 +62,16 @@ public struct HTMLSettings: Codable, Equatable {
     }
 
     /**
-     Initialize a `HTMLSettings` with member variables.
+      Initialize a `HTMLSettings` with member variables.
 
-     - parameter excludeTagsCompletely: Array of HTML tags that are excluded completely.
-     - parameter excludeTagsKeepContent: Array of HTML tags which are excluded but still retain content.
-     - parameter keepContent: Object containing an array of XPaths.
-     - parameter excludeContent: Object containing an array of XPaths.
-     - parameter keepTagAttributes: An array of HTML tag attributes to keep in the converted document.
-     - parameter excludeTagAttributes: Array of HTML tag attributes to exclude.
+      - parameter excludeTagsCompletely: Array of HTML tags that are excluded completely.
+      - parameter excludeTagsKeepContent: Array of HTML tags which are excluded but still retain content.
+      - parameter keepContent: Object containing an array of XPaths.
+      - parameter excludeContent: Object containing an array of XPaths.
+      - parameter keepTagAttributes: An array of HTML tag attributes to keep in the converted document.
+      - parameter excludeTagAttributes: Array of HTML tag attributes to exclude.
 
-     - returns: An initialized `HTMLSettings`.
+      - returns: An initialized `HTMLSettings`.
      */
     public init(
         excludeTagsCompletely: [String]? = nil,

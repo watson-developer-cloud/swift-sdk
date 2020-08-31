@@ -32,12 +32,12 @@ public struct WorkspaceSystemSettingsTooling: Codable, Equatable {
     }
 
     /**
-     Initialize a `WorkspaceSystemSettingsTooling` with member variables.
+      Initialize a `WorkspaceSystemSettingsTooling` with member variables.
 
-     - parameter storeGenericResponses: Whether the dialog JSON editor displays text responses within the
-       `output.generic` object.
+      - parameter storeGenericResponses: Whether the dialog JSON editor displays text responses within the
+        `output.generic` object.
 
-     - returns: An initialized `WorkspaceSystemSettingsTooling`.
+      - returns: An initialized `WorkspaceSystemSettingsTooling`.
      */
     public init(
         storeGenericResponses: Bool? = nil

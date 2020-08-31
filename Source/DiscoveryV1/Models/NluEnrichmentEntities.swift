@@ -70,21 +70,21 @@ public struct NluEnrichmentEntities: Codable, Equatable {
     }
 
     /**
-     Initialize a `NluEnrichmentEntities` with member variables.
+      Initialize a `NluEnrichmentEntities` with member variables.
 
-     - parameter sentiment: When `true`, sentiment analysis of entities will be performed on the specified field.
-     - parameter emotion: When `true`, emotion detection of entities will be performed on the specified field.
-     - parameter limit: The maximum number of entities to extract for each instance of the specified field.
-     - parameter mentions: When `true`, the number of mentions of each identified entity is recorded. The default is
-       `false`.
-     - parameter mentionTypes: When `true`, the types of mentions for each idetifieid entity is recorded. The default
-       is `false`.
-     - parameter sentenceLocations: When `true`, a list of sentence locations for each instance of each identified
-       entity is recorded. The default is `false`.
-     - parameter model: The enrichement model to use with entity extraction. May be a custom model provided by Watson
-       Knowledge Studio, or the default public model `alchemy`.
+      - parameter sentiment: When `true`, sentiment analysis of entities will be performed on the specified field.
+      - parameter emotion: When `true`, emotion detection of entities will be performed on the specified field.
+      - parameter limit: The maximum number of entities to extract for each instance of the specified field.
+      - parameter mentions: When `true`, the number of mentions of each identified entity is recorded. The default is
+        `false`.
+      - parameter mentionTypes: When `true`, the types of mentions for each idetifieid entity is recorded. The default
+        is `false`.
+      - parameter sentenceLocations: When `true`, a list of sentence locations for each instance of each identified
+        entity is recorded. The default is `false`.
+      - parameter model: The enrichement model to use with entity extraction. May be a custom model provided by Watson
+        Knowledge Studio, or the default public model `alchemy`.
 
-     - returns: An initialized `NluEnrichmentEntities`.
+      - returns: An initialized `NluEnrichmentEntities`.
      */
     public init(
         sentiment: Bool? = nil,

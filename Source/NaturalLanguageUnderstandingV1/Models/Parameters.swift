@@ -42,9 +42,8 @@ internal struct Parameters: Codable, Equatable {
     public var features: Features
 
     /**
-     Set this to `false` to disable webpage cleaning. To learn more about webpage cleaning, see the [Analyzing
-     webpages](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-analyzing-webpages)
-     documentation.
+     Set this to `false` to disable webpage cleaning. For more information about webpage cleaning, see [Analyzing
+     webpages](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-analyzing-webpages).
      */
     public var clean: Bool?
 
@@ -68,9 +67,8 @@ internal struct Parameters: Codable, Equatable {
 
     /**
      ISO 639-1 code that specifies the language of your text. This overrides automatic language detection. Language
-     support differs depending on the features you include in your analysis. See [Language
-     support](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-language-support)
-     for more information.
+     support differs depending on the features you include in your analysis. For more information, see [Language
+     support](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-language-support).
      */
     public var language: String?
 
@@ -94,29 +92,28 @@ internal struct Parameters: Codable, Equatable {
     }
 
     /**
-     Initialize a `Parameters` with member variables.
+      Initialize a `Parameters` with member variables.
 
-     - parameter features: Specific features to analyze the document for.
-     - parameter text: The plain text to analyze. One of the `text`, `html`, or `url` parameters is required.
-     - parameter html: The HTML file to analyze. One of the `text`, `html`, or `url` parameters is required.
-     - parameter url: The webpage to analyze. One of the `text`, `html`, or `url` parameters is required.
-     - parameter clean: Set this to `false` to disable webpage cleaning. To learn more about webpage cleaning, see
-       the [Analyzing
-       webpages](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-analyzing-webpages)
-       documentation.
-     - parameter xpath: An [XPath
-       query](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-analyzing-webpages#xpath)
-       to perform on `html` or `url` input. Results of the query will be appended to the cleaned webpage text before it
-       is analyzed. To analyze only the results of the XPath query, set the `clean` parameter to `false`.
-     - parameter fallbackToRaw: Whether to use raw HTML content if text cleaning fails.
-     - parameter returnAnalyzedText: Whether or not to return the analyzed text.
-     - parameter language: ISO 639-1 code that specifies the language of your text. This overrides automatic language
-       detection. Language support differs depending on the features you include in your analysis. See [Language
-       support](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-language-support)
-       for more information.
-     - parameter limitTextCharacters: Sets the maximum number of characters that are processed by the service.
+      - parameter features: Specific features to analyze the document for.
+      - parameter text: The plain text to analyze. One of the `text`, `html`, or `url` parameters is required.
+      - parameter html: The HTML file to analyze. One of the `text`, `html`, or `url` parameters is required.
+      - parameter url: The webpage to analyze. One of the `text`, `html`, or `url` parameters is required.
+      - parameter clean: Set this to `false` to disable webpage cleaning. For more information about webpage cleaning,
+        see [Analyzing
+        webpages](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-analyzing-webpages).
+      - parameter xpath: An [XPath
+        query](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-analyzing-webpages#xpath)
+        to perform on `html` or `url` input. Results of the query will be appended to the cleaned webpage text before it
+        is analyzed. To analyze only the results of the XPath query, set the `clean` parameter to `false`.
+      - parameter fallbackToRaw: Whether to use raw HTML content if text cleaning fails.
+      - parameter returnAnalyzedText: Whether or not to return the analyzed text.
+      - parameter language: ISO 639-1 code that specifies the language of your text. This overrides automatic language
+        detection. Language support differs depending on the features you include in your analysis. For more information,
+        see [Language
+        support](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-language-support).
+      - parameter limitTextCharacters: Sets the maximum number of characters that are processed by the service.
 
-     - returns: An initialized `Parameters`.
+      - returns: An initialized `Parameters`.
      */
     public init(
         features: Features,

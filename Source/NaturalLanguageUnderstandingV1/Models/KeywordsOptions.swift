@@ -45,13 +45,13 @@ public struct KeywordsOptions: Codable, Equatable {
     }
 
     /**
-     Initialize a `KeywordsOptions` with member variables.
+      Initialize a `KeywordsOptions` with member variables.
 
-     - parameter limit: Maximum number of keywords to return.
-     - parameter sentiment: Set this to `true` to return sentiment information for detected keywords.
-     - parameter emotion: Set this to `true` to analyze emotion for detected keywords.
+      - parameter limit: Maximum number of keywords to return.
+      - parameter sentiment: Set this to `true` to return sentiment information for detected keywords.
+      - parameter emotion: Set this to `true` to analyze emotion for detected keywords.
 
-     - returns: An initialized `KeywordsOptions`.
+      - returns: An initialized `KeywordsOptions`.
      */
     public init(
         limit: Int? = nil,

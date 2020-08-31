@@ -110,33 +110,33 @@ internal struct CreateLanguageModel: Codable, Equatable {
     }
 
     /**
-     Initialize a `CreateLanguageModel` with member variables.
+      Initialize a `CreateLanguageModel` with member variables.
 
-     - parameter name: A user-defined name for the new custom language model. Use a name that is unique among all
-       custom language models that you own. Use a localized name that matches the language of the custom model. Use a
-       name that describes the domain of the custom model, such as `Medical custom model` or `Legal custom model`.
-     - parameter baseModelName: The name of the base language model that is to be customized by the new custom
-       language model. The new custom model can be used only with the base model that it customizes.
-       To determine whether a base model supports language model customization, use the **Get a model** method and check
-       that the attribute `custom_language_model` is set to `true`. You can also refer to [Language support for
-       customization](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-customization#languageSupport).
-     - parameter dialect: The dialect of the specified language that is to be used with the custom language model.
-       For most languages, the dialect matches the language of the base model by default. For example, `en-US` is used
-       for either of the US English language models.
-       For a Spanish language, the service creates a custom language model that is suited for speech in one of the
-       following dialects:
-       * `es-ES` for Castilian Spanish (`es-ES` models)
-       * `es-LA` for Latin American Spanish (`es-AR`, `es-CL`, `es-CO`, and `es-PE` models)
-       * `es-US` for Mexican (North American) Spanish (`es-MX` models)
-       The parameter is meaningful only for Spanish models, for which you can always safely omit the parameter to have
-       the service create the correct mapping.
-       If you specify the `dialect` parameter for non-Spanish language models, its value must match the language of the
-       base model. If you specify the `dialect` for Spanish language models, its value must match one of the defined
-       mappings as indicated (`es-ES`, `es-LA`, or `es-MX`). All dialect values are case-insensitive.
-     - parameter description: A description of the new custom language model. Use a localized description that
-       matches the language of the custom model.
+      - parameter name: A user-defined name for the new custom language model. Use a name that is unique among all
+        custom language models that you own. Use a localized name that matches the language of the custom model. Use a
+        name that describes the domain of the custom model, such as `Medical custom model` or `Legal custom model`.
+      - parameter baseModelName: The name of the base language model that is to be customized by the new custom
+        language model. The new custom model can be used only with the base model that it customizes.
+        To determine whether a base model supports language model customization, use the **Get a model** method and check
+        that the attribute `custom_language_model` is set to `true`. You can also refer to [Language support for
+        customization](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-customization#languageSupport).
+      - parameter dialect: The dialect of the specified language that is to be used with the custom language model.
+        For most languages, the dialect matches the language of the base model by default. For example, `en-US` is used
+        for either of the US English language models.
+        For a Spanish language, the service creates a custom language model that is suited for speech in one of the
+        following dialects:
+        * `es-ES` for Castilian Spanish (`es-ES` models)
+        * `es-LA` for Latin American Spanish (`es-AR`, `es-CL`, `es-CO`, and `es-PE` models)
+        * `es-US` for Mexican (North American) Spanish (`es-MX` models)
+        The parameter is meaningful only for Spanish models, for which you can always safely omit the parameter to have
+        the service create the correct mapping.
+        If you specify the `dialect` parameter for non-Spanish language models, its value must match the language of the
+        base model. If you specify the `dialect` for Spanish language models, its value must match one of the defined
+        mappings as indicated (`es-ES`, `es-LA`, or `es-MX`). All dialect values are case-insensitive.
+      - parameter description: A description of the new custom language model. Use a localized description that
+        matches the language of the custom model.
 
-     - returns: An initialized `CreateLanguageModel`.
+      - returns: An initialized `CreateLanguageModel`.
      */
     public init(
         name: String,

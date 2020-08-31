@@ -67,20 +67,20 @@ public struct SourceSchedule: Codable, Equatable {
     }
 
     /**
-     Initialize a `SourceSchedule` with member variables.
+      Initialize a `SourceSchedule` with member variables.
 
-     - parameter enabled: When `true`, the source is re-crawled based on the **frequency** field in this object. When
-       `false` the source is not re-crawled; When `false` and connecting to Salesforce the source is crawled annually.
-     - parameter timeZone: The time zone to base source crawl times on. Possible values correspond to the IANA
-       (Internet Assigned Numbers Authority) time zones list.
-     - parameter frequency: The crawl schedule in the specified **time_zone**.
-       -  `five_minutes`: Runs every five minutes.
-       -  `hourly`: Runs every hour.
-       -  `daily`: Runs every day between 00:00 and 06:00.
-       -  `weekly`: Runs every week on Sunday between 00:00 and 06:00.
-       -  `monthly`: Runs the on the first Sunday of every month between 00:00 and 06:00.
+      - parameter enabled: When `true`, the source is re-crawled based on the **frequency** field in this object. When
+        `false` the source is not re-crawled; When `false` and connecting to Salesforce the source is crawled annually.
+      - parameter timeZone: The time zone to base source crawl times on. Possible values correspond to the IANA
+        (Internet Assigned Numbers Authority) time zones list.
+      - parameter frequency: The crawl schedule in the specified **time_zone**.
+        -  `five_minutes`: Runs every five minutes.
+        -  `hourly`: Runs every hour.
+        -  `daily`: Runs every day between 00:00 and 06:00.
+        -  `weekly`: Runs every week on Sunday between 00:00 and 06:00.
+        -  `monthly`: Runs the on the first Sunday of every month between 00:00 and 06:00.
 
-     - returns: An initialized `SourceSchedule`.
+      - returns: An initialized `SourceSchedule`.
      */
     public init(
         enabled: Bool? = nil,

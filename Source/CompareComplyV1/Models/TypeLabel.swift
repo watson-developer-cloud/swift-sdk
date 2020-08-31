@@ -39,13 +39,13 @@ public struct TypeLabel: Codable, Equatable {
     }
 
     /**
-     Initialize a `TypeLabel` with member variables.
+      Initialize a `TypeLabel` with member variables.
 
-     - parameter label: A pair of `nature` and `party` objects. The `nature` object identifies the effect of the
-       element on the identified `party`, and the `party` object identifies the affected party.
-     - parameter provenanceIDs: Hashed values that you can send to IBM to provide feedback or receive support.
+      - parameter label: A pair of `nature` and `party` objects. The `nature` object identifies the effect of the
+        element on the identified `party`, and the `party` object identifies the affected party.
+      - parameter provenanceIDs: Hashed values that you can send to IBM to provide feedback or receive support.
 
-     - returns: An initialized `TypeLabel`.
+      - returns: An initialized `TypeLabel`.
      */
     public init(
         label: Label? = nil,

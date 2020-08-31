@@ -44,16 +44,16 @@ public struct Counterexample: Codable, Equatable {
     }
 
     /**
-     Initialize a `Counterexample` with member variables.
+      Initialize a `Counterexample` with member variables.
 
-     - parameter text: The text of a user input marked as irrelevant input. This string must conform to the following
-       restrictions:
-       - It cannot contain carriage return, newline, or tab characters.
-       - It cannot consist of only whitespace characters.
-     - parameter created: The timestamp for creation of the object.
-     - parameter updated: The timestamp for the most recent update to the object.
+      - parameter text: The text of a user input marked as irrelevant input. This string must conform to the following
+        restrictions:
+        - It cannot contain carriage return, newline, or tab characters.
+        - It cannot consist of only whitespace characters.
+      - parameter created: The timestamp for creation of the object.
+      - parameter updated: The timestamp for the most recent update to the object.
 
-     - returns: An initialized `Counterexample`.
+      - returns: An initialized `Counterexample`.
      */
     public init(
         text: String,

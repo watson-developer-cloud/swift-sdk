@@ -22,6 +22,18 @@ public struct Model: Codable, Equatable {
     /**
      When the status is `available`, the model is ready to use.
      */
+    public enum Status: String {
+        case starting = "starting"
+        case training = "training"
+        case deploying = "deploying"
+        case available = "available"
+        case error = "error"
+        case deleted = "deleted"
+    }
+
+    /**
+     When the status is `available`, the model is ready to use.
+     */
     public var status: String?
 
     /**
@@ -30,7 +42,7 @@ public struct Model: Codable, Equatable {
     public var modelID: String?
 
     /**
-     ISO 639-1 code indicating the language of the model.
+     ISO 639-1 code that indicates the language of the model.
      */
     public var language: String?
 

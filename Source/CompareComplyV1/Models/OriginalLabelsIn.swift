@@ -38,13 +38,13 @@ public struct OriginalLabelsIn: Codable, Equatable {
     }
 
     /**
-     Initialize a `OriginalLabelsIn` with member variables.
+      Initialize a `OriginalLabelsIn` with member variables.
 
-     - parameter types: Description of the action specified by the element and whom it affects.
-     - parameter categories: List of functional categories into which the element falls; in other words, the subject
-       matter of the element.
+      - parameter types: Description of the action specified by the element and whom it affects.
+      - parameter categories: List of functional categories into which the element falls; in other words, the subject
+        matter of the element.
 
-     - returns: An initialized `OriginalLabelsIn`.
+      - returns: An initialized `OriginalLabelsIn`.
      */
     public init(
         types: [TypeLabel],

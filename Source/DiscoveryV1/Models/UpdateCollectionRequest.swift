@@ -44,13 +44,13 @@ internal struct UpdateCollectionRequest: Codable, Equatable {
     }
 
     /**
-     Initialize a `UpdateCollectionRequest` with member variables.
+      Initialize a `UpdateCollectionRequest` with member variables.
 
-     - parameter name: The name of the collection.
-     - parameter description: A description of the collection.
-     - parameter configurationID: The ID of the configuration in which the collection is to be updated.
+      - parameter name: The name of the collection.
+      - parameter description: A description of the collection.
+      - parameter configurationID: The ID of the configuration in which the collection is to be updated.
 
-     - returns: An initialized `UpdateCollectionRequest`.
+      - returns: An initialized `UpdateCollectionRequest`.
      */
     public init(
         name: String,

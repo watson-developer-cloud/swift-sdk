@@ -26,9 +26,9 @@ public struct SystemResponse: Codable, Equatable {
     public var additionalProperties: [String: JSON]
 
     /**
-     Initialize a `SystemResponse`.
+      Initialize a `SystemResponse`.
 
-     - returns: An initialized `SystemResponse`.
+      - returns: An initialized `SystemResponse`.
      */
     public init(
         additionalProperties: [String: JSON] = [:]

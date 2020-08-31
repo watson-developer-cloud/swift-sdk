@@ -42,13 +42,13 @@ public struct DialogNodeVisitedDetails: Codable, Equatable {
     }
 
     /**
-     Initialize a `DialogNodeVisitedDetails` with member variables.
+      Initialize a `DialogNodeVisitedDetails` with member variables.
 
-     - parameter dialogNode: A dialog node that was triggered during processing of the input message.
-     - parameter title: The title of the dialog node.
-     - parameter conditions: The conditions that trigger the dialog node.
+      - parameter dialogNode: A dialog node that was triggered during processing of the input message.
+      - parameter title: The title of the dialog node.
+      - parameter conditions: The conditions that trigger the dialog node.
 
-     - returns: An initialized `DialogNodeVisitedDetails`.
+      - returns: An initialized `DialogNodeVisitedDetails`.
      */
     public init(
         dialogNode: String? = nil,

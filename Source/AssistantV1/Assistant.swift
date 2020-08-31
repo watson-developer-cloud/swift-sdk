@@ -26,7 +26,7 @@ import IBMSwiftSDKCore
 public class Assistant {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL: String? = "https://gateway.watsonplatform.net/assistant/api"
+    public var serviceURL: String? = "https://api.us-south.assistant.watson.cloud.ibm.com"
 
     /// Service identifiers
     internal let serviceName = "Conversation"
@@ -83,8 +83,8 @@ public class Assistant {
 
     #if !os(Linux)
     /**
-     Allow network requests to a server without verification of the server certificate.
-     **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
+      Allow network requests to a server without verification of the server certificate.
+      **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
      */
     public func disableSSLVerification() {
         session = InsecureConnection.session()
@@ -133,7 +133,6 @@ public class Assistant {
      **Important:** This method has been superseded by the new v2 runtime API. The v2 API offers significant advantages,
      including ease of deployment, automatic state management, versioning, and search capabilities. For more
      information, see the [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-api-overview).
-     There is no rate limit for this operation.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter input: An input object that includes the input text.
@@ -227,7 +226,6 @@ public class Assistant {
      List workspaces.
 
      List the workspaces associated with a Watson Assistant service instance.
-     This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter pageLimit: The number of records to return in each page of results.
      - parameter sort: The attribute by which returned workspaces will be sorted. To reverse the sort order, prefix
@@ -302,7 +300,6 @@ public class Assistant {
 
      Create a workspace based on component objects. You must provide workspace components defining the content of the
      new workspace.
-     This operation is limited to 30 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter name: The name of the workspace. This string cannot contain carriage return, newline, or tab
        characters.
@@ -404,8 +401,6 @@ public class Assistant {
      Get information about a workspace.
 
      Get information about a workspace, optionally including all workspace content.
-     With **export**=`false`, this operation is limited to 6000 requests per 5 minutes. With **export**=`true`, the
-     limit is 20 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter export: Whether to include all element content in the returned data. If **export**=`false`, the
@@ -484,7 +479,6 @@ public class Assistant {
 
      Update an existing workspace with new or modified data. You must provide component objects defining the content of
      the updated workspace.
-     This operation is limited to 30 request per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter name: The name of the workspace. This string cannot contain carriage return, newline, or tab
@@ -604,7 +598,6 @@ public class Assistant {
      Delete workspace.
 
      Delete a workspace from the service instance.
-     This operation is limited to 30 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -659,8 +652,6 @@ public class Assistant {
      List intents.
 
      List the intents for a workspace.
-     With **export**=`false`, this operation is limited to 2000 requests per 30 minutes. With **export**=`true`, the
-     limit is 400 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter export: Whether to include all element content in the returned data. If **export**=`false`, the
@@ -751,7 +742,6 @@ public class Assistant {
      Create a new intent.
      If you want to create multiple intents with a single API call, consider using the **[Update
      workspace](#update-workspace)** method instead.
-     This operation is limited to 2000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter intent: The name of the intent. This string must conform to the following restrictions:
@@ -834,8 +824,6 @@ public class Assistant {
      Get intent.
 
      Get information about an intent, optionally including all intent content.
-     With **export**=`false`, this operation is limited to 6000 requests per 5 minutes. With **export**=`true`, the
-     limit is 400 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter intent: The intent name.
@@ -910,7 +898,6 @@ public class Assistant {
      updated intent.
      If you want to update multiple intents with a single API call, consider using the **[Update
      workspace](#update-workspace)** method instead.
-     This operation is limited to 2000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter intent: The intent name.
@@ -1006,7 +993,6 @@ public class Assistant {
      Delete intent.
 
      Delete an intent from a workspace.
-     This operation is limited to 2000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter intent: The intent name.
@@ -1063,7 +1049,6 @@ public class Assistant {
      List user input examples.
 
      List the user input examples for an intent, optionally including contextual entity mentions.
-     This operation is limited to 2500 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter intent: The intent name.
@@ -1148,7 +1133,6 @@ public class Assistant {
      Add a new user input example to an intent.
      If you want to add multiple examples with a single API call, consider using the **[Update intent](#update-intent)**
      method instead.
-     This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter intent: The intent name.
@@ -1229,7 +1213,6 @@ public class Assistant {
      Get user input example.
 
      Get information about a user input example.
-     This operation is limited to 6000 requests per 5 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter intent: The intent name.
@@ -1297,7 +1280,6 @@ public class Assistant {
      Update the text of a user input example.
      If you want to update multiple examples with a single API call, consider using the **[Update
      intent](#update-intent)** method instead.
-     This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter intent: The intent name.
@@ -1380,7 +1362,6 @@ public class Assistant {
      Delete user input example.
 
      Delete a user input example from an intent.
-     This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter intent: The intent name.
@@ -1439,7 +1420,6 @@ public class Assistant {
      List counterexamples.
 
      List the counterexamples for a workspace. Counterexamples are examples that have been marked as irrelevant input.
-     This operation is limited to 2500 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter pageLimit: The number of records to return in each page of results.
@@ -1522,7 +1502,6 @@ public class Assistant {
      Add a new counterexample to a workspace. Counterexamples are examples that have been marked as irrelevant input.
      If you want to add multiple counterexamples with a single API call, consider using the **[Update
      workspace](#update-workspace)** method instead.
-     This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter text: The text of a user input marked as irrelevant input. This string must conform to the following
@@ -1599,7 +1578,6 @@ public class Assistant {
      Get counterexample.
 
      Get information about a counterexample. Counterexamples are examples that have been marked as irrelevant input.
-     This operation is limited to 6000 requests per 5 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter text: The text of a user input counterexample (for example, `What are you wearing?`).
@@ -1663,9 +1641,6 @@ public class Assistant {
      Update counterexample.
 
      Update the text of a counterexample. Counterexamples are examples that have been marked as irrelevant input.
-     If you want to update multiple counterexamples with a single API call, consider using the **[Update
-     workspace](#update-workspace)** method instead.
-     This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter text: The text of a user input counterexample (for example, `What are you wearing?`).
@@ -1744,7 +1719,6 @@ public class Assistant {
      Delete counterexample.
 
      Delete a counterexample from a workspace. Counterexamples are examples that have been marked as irrelevant input.
-     This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter text: The text of a user input counterexample (for example, `What are you wearing?`).
@@ -1801,8 +1775,6 @@ public class Assistant {
      List entities.
 
      List the entities for a workspace.
-     With **export**=`false`, this operation is limited to 1000 requests per 30 minutes. With **export**=`true`, the
-     limit is 200 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter export: Whether to include all element content in the returned data. If **export**=`false`, the
@@ -1893,7 +1865,6 @@ public class Assistant {
      Create a new entity, or enable a system entity.
      If you want to create multiple entities with a single API call, consider using the **[Update
      workspace](#update-workspace)** method instead.
-     This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity. This string must conform to the following restrictions:
@@ -1983,8 +1954,6 @@ public class Assistant {
      Get entity.
 
      Get information about an entity, optionally including all entity content.
-     With **export**=`false`, this operation is limited to 6000 requests per 5 minutes. With **export**=`true`, the
-     limit is 200 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity.
@@ -2059,7 +2028,6 @@ public class Assistant {
      updated entity.
      If you want to update multiple entities with a single API call, consider using the **[Update
      workspace](#update-workspace)** method instead.
-     This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity.
@@ -2161,7 +2129,6 @@ public class Assistant {
      Delete entity.
 
      Delete an entity from a workspace, or disable a system entity.
-     This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity.
@@ -2219,7 +2186,6 @@ public class Assistant {
 
      List mentions for a contextual entity. An entity mention is an occurrence of a contextual entity in the context of
      an intent user input example.
-     This operation is limited to 200 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity.
@@ -2291,7 +2257,6 @@ public class Assistant {
      List entity values.
 
      List the values for an entity.
-     This operation is limited to 2500 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity.
@@ -2384,7 +2349,6 @@ public class Assistant {
      Create a new value for an entity.
      If you want to create multiple entity values with a single API call, consider using the **[Update
      entity](#update-entity)** method instead.
-     This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity.
@@ -2480,7 +2444,6 @@ public class Assistant {
      Get entity value.
 
      Get information about an entity value.
-     This operation is limited to 6000 requests per 5 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity.
@@ -2557,7 +2520,6 @@ public class Assistant {
      of the updated entity value.
      If you want to update multiple entity values with a single API call, consider using the **[Update
      entity](#update-entity)** method instead.
-     This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity.
@@ -2666,7 +2628,6 @@ public class Assistant {
      Delete entity value.
 
      Delete a value from an entity.
-     This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity.
@@ -2725,7 +2686,6 @@ public class Assistant {
      List entity value synonyms.
 
      List the synonyms for an entity value.
-     This operation is limited to 2500 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity.
@@ -2812,7 +2772,6 @@ public class Assistant {
      Add a new synonym to an entity value.
      If you want to create multiple synonyms with a single API call, consider using the **[Update
      entity](#update-entity)** or **[Update entity value](#update-entity-value)** method instead.
-     This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity.
@@ -2892,7 +2851,6 @@ public class Assistant {
      Get entity value synonym.
 
      Get information about a synonym of an entity value.
-     This operation is limited to 6000 requests per 5 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity.
@@ -2962,7 +2920,6 @@ public class Assistant {
      Update an existing entity value synonym with new text.
      If you want to update multiple synonyms with a single API call, consider using the **[Update
      entity](#update-entity)** or **[Update entity value](#update-entity-value)** method instead.
-     This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity.
@@ -3044,7 +3001,6 @@ public class Assistant {
      Delete entity value synonym.
 
      Delete a synonym from an entity value.
-     This operation is limited to 1000 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter entity: The name of the entity.
@@ -3105,7 +3061,6 @@ public class Assistant {
      List dialog nodes.
 
      List the dialog nodes for a workspace.
-     This operation is limited to 2500 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter pageLimit: The number of records to return in each page of results.
@@ -3188,7 +3143,6 @@ public class Assistant {
      Create a new dialog node.
      If you want to create multiple dialog nodes with a single API call, consider using the **[Update
      workspace](#update-workspace)** method instead.
-     This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter dialogNode: The dialog node ID. This string must conform to the following restrictions:
@@ -3325,7 +3279,6 @@ public class Assistant {
      Get dialog node.
 
      Get information about a dialog node.
-     This operation is limited to 6000 requests per 5 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter dialogNode: The dialog node ID (for example, `get_order`).
@@ -3391,7 +3344,6 @@ public class Assistant {
      Update an existing dialog node with new or modified data.
      If you want to update multiple dialog nodes with a single API call, consider using the **[Update
      workspace](#update-workspace)** method instead.
-     This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter dialogNode: The dialog node ID (for example, `get_order`).
@@ -3531,7 +3483,6 @@ public class Assistant {
      Delete dialog node.
 
      Delete a dialog node from a workspace.
-     This operation is limited to 500 requests per 30 minutes. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter dialogNode: The dialog node ID (for example, `get_order`).
@@ -3588,8 +3539,6 @@ public class Assistant {
      List log events in a workspace.
 
      List the events from the log of a specific workspace.
-     If **cursor** is not specified, this operation is limited to 40 requests per 30 minutes. If **cursor** is
-     specified, the limit is 120 requests per minute. For more information, see **Rate limiting**.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter sort: How to sort the returned log events. You can sort by **request_timestamp**. To reverse the sort
@@ -3671,8 +3620,6 @@ public class Assistant {
      List log events in all workspaces.
 
      List the events from the logs of all workspaces in the service instance.
-     If **cursor** is not specified, this operation is limited to 40 requests per 30 minutes. If **cursor** is
-     specified, the limit is 120 requests per minute. For more information, see **Rate limiting**.
 
      - parameter filter: A cacheable parameter that limits the results to those matching the specified filter. You
        must specify a filter query that includes a value for `language`, as well as a value for
@@ -3750,7 +3697,6 @@ public class Assistant {
      You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request that passes data.
      For more information about personal data and customer IDs, see [Information
      security](https://cloud.ibm.com/docs/assistant?topic=assistant-information-security#information-security).
-     This operation is limited to 4 requests per minute. For more information, see **Rate limiting**.
 
      - parameter customerID: The customer ID for which all data is to be deleted.
      - parameter headers: A dictionary of request headers to be sent with this request.

@@ -45,19 +45,19 @@ public struct MessageInputOptionsSpelling: Codable, Equatable {
     }
 
     /**
-     Initialize a `MessageInputOptionsSpelling` with member variables.
+      Initialize a `MessageInputOptionsSpelling` with member variables.
 
-     - parameter suggestions: Whether to use spelling correction when processing the input. If spelling correction is
-       used and **auto_correct** is `true`, any spelling corrections are automatically applied to the user input. If
-       **auto_correct** is `false`, any suggested corrections are returned in the **output.spelling** property.
-       This property overrides the value of the **spelling_suggestions** property in the workspace settings for the
-       skill.
-     - parameter autoCorrect: Whether to use autocorrection when processing the input. If this property is `true`,
-       any corrections are automatically applied to the user input, and the original text is returned in the
-       **output.spelling** property of the message response. This property overrides the value of the
-       **spelling_auto_correct** property in the workspace settings for the skill.
+      - parameter suggestions: Whether to use spelling correction when processing the input. If spelling correction is
+        used and **auto_correct** is `true`, any spelling corrections are automatically applied to the user input. If
+        **auto_correct** is `false`, any suggested corrections are returned in the **output.spelling** property.
+        This property overrides the value of the **spelling_suggestions** property in the workspace settings for the
+        skill.
+      - parameter autoCorrect: Whether to use autocorrection when processing the input. If this property is `true`,
+        any corrections are automatically applied to the user input, and the original text is returned in the
+        **output.spelling** property of the message response. This property overrides the value of the
+        **spelling_auto_correct** property in the workspace settings for the skill.
 
-     - returns: An initialized `MessageInputOptionsSpelling`.
+      - returns: An initialized `MessageInputOptionsSpelling`.
      */
     public init(
         suggestions: Bool? = nil,

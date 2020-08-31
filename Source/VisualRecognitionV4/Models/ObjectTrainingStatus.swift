@@ -63,17 +63,17 @@ public struct ObjectTrainingStatus: Codable, Equatable {
     }
 
     /**
-     Initialize a `ObjectTrainingStatus` with member variables.
+      Initialize a `ObjectTrainingStatus` with member variables.
 
-     - parameter ready: Whether you can analyze images in the collection with the **objects** feature.
-     - parameter inProgress: Whether training is in progress.
-     - parameter dataChanged: Whether there are changes to the training data since the most recent training.
-     - parameter latestFailed: Whether the most recent training failed.
-     - parameter rscnnReady: Whether the model can be downloaded after the training status is `ready`.
-     - parameter description: Details about the training. If training is in progress, includes information about the
-       status. If training is not in progress, includes a success message or information about why training failed.
+      - parameter ready: Whether you can analyze images in the collection with the **objects** feature.
+      - parameter inProgress: Whether training is in progress.
+      - parameter dataChanged: Whether there are changes to the training data since the most recent training.
+      - parameter latestFailed: Whether the most recent training failed.
+      - parameter rscnnReady: Whether the model can be downloaded after the training status is `ready`.
+      - parameter description: Details about the training. If training is in progress, includes information about the
+        status. If training is not in progress, includes a success message or information about why training failed.
 
-     - returns: An initialized `ObjectTrainingStatus`.
+      - returns: An initialized `ObjectTrainingStatus`.
      */
     public init(
         ready: Bool,

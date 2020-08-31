@@ -28,9 +28,9 @@ public struct MessageContextSkills: Codable, Equatable {
     public var additionalProperties: [String: MessageContextSkill]
 
     /**
-     Initialize a `MessageContextSkills`.
+      Initialize a `MessageContextSkills`.
 
-     - returns: An initialized `MessageContextSkills`.
+      - returns: An initialized `MessageContextSkills`.
      */
     public init(
         additionalProperties: [String: MessageContextSkill] = [:]

@@ -49,13 +49,13 @@ public struct Context: Codable, Equatable {
     }
 
     /**
-     Initialize a `Context` with member variables.
+      Initialize a `Context` with member variables.
 
-     - parameter conversationID: The unique identifier of the conversation.
-     - parameter system: For internal use only.
-     - parameter metadata: Metadata related to the message.
+      - parameter conversationID: The unique identifier of the conversation.
+      - parameter system: For internal use only.
+      - parameter metadata: Metadata related to the message.
 
-     - returns: An initialized `Context`.
+      - returns: An initialized `Context`.
      */
     public init(
         conversationID: String? = nil,

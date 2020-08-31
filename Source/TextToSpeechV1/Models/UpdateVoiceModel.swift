@@ -45,14 +45,14 @@ internal struct UpdateVoiceModel: Codable, Equatable {
     }
 
     /**
-     Initialize a `UpdateVoiceModel` with member variables.
+      Initialize a `UpdateVoiceModel` with member variables.
 
-     - parameter name: A new name for the custom voice model.
-     - parameter description: A new description for the custom voice model.
-     - parameter words: An array of `Word` objects that provides the words and their translations that are to be
-       added or updated for the custom voice model. Pass an empty array to make no additions or updates.
+      - parameter name: A new name for the custom voice model.
+      - parameter description: A new description for the custom voice model.
+      - parameter words: An array of `Word` objects that provides the words and their translations that are to be
+        added or updated for the custom voice model. Pass an empty array to make no additions or updates.
 
-     - returns: An initialized `UpdateVoiceModel`.
+      - returns: An initialized `UpdateVoiceModel`.
      */
     public init(
         name: String? = nil,

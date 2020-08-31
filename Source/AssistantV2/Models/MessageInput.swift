@@ -71,19 +71,19 @@ public struct MessageInput: Codable, Equatable {
     }
 
     /**
-     Initialize a `MessageInput` with member variables.
+      Initialize a `MessageInput` with member variables.
 
-     - parameter messageType: The type of user input. Currently, only text input is supported.
-     - parameter text: The text of the user input. This string cannot contain carriage return, newline, or tab
-       characters.
-     - parameter intents: Intents to use when evaluating the user input. Include intents from the previous response
-       to continue using those intents rather than trying to recognize intents in the new input.
-     - parameter entities: Entities to use when evaluating the message. Include entities from the previous response
-       to continue using those entities rather than detecting entities in the new input.
-     - parameter suggestionID: For internal use only.
-     - parameter options: Optional properties that control how the assistant responds.
+      - parameter messageType: The type of user input. Currently, only text input is supported.
+      - parameter text: The text of the user input. This string cannot contain carriage return, newline, or tab
+        characters.
+      - parameter intents: Intents to use when evaluating the user input. Include intents from the previous response
+        to continue using those intents rather than trying to recognize intents in the new input.
+      - parameter entities: Entities to use when evaluating the message. Include entities from the previous response
+        to continue using those entities rather than detecting entities in the new input.
+      - parameter suggestionID: For internal use only.
+      - parameter options: Optional properties that control how the assistant responds.
 
-     - returns: An initialized `MessageInput`.
+      - returns: An initialized `MessageInput`.
      */
     public init(
         messageType: String? = nil,

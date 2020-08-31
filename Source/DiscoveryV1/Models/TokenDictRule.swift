@@ -50,16 +50,16 @@ public struct TokenDictRule: Codable, Equatable {
     }
 
     /**
-     Initialize a `TokenDictRule` with member variables.
+      Initialize a `TokenDictRule` with member variables.
 
-     - parameter text: The string to tokenize.
-     - parameter tokens: Array of tokens that the `text` field is split into when found.
-     - parameter partOfSpeech: The part of speech that the `text` string belongs to. For example `noun`. Custom parts
-       of speech can be specified.
-     - parameter readings: Array of tokens that represent the content of the `text` field in an alternate character
-       set.
+      - parameter text: The string to tokenize.
+      - parameter tokens: Array of tokens that the `text` field is split into when found.
+      - parameter partOfSpeech: The part of speech that the `text` string belongs to. For example `noun`. Custom parts
+        of speech can be specified.
+      - parameter readings: Array of tokens that represent the content of the `text` field in an alternate character
+        set.
 
-     - returns: An initialized `TokenDictRule`.
+      - returns: An initialized `TokenDictRule`.
      */
     public init(
         text: String,

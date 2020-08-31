@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2019, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ public struct QueryLargeSuggestedRefinements: Codable, Equatable {
     public var enabled: Bool?
 
     /**
-     Maximum number of suggested refinements texts to be returned. The default is `10`. The maximum is `100`.
+     Maximum number of suggested refinements texts to be returned. The maximum is `100`.
      */
     public var count: Int?
 
@@ -38,13 +38,12 @@ public struct QueryLargeSuggestedRefinements: Codable, Equatable {
     }
 
     /**
-     Initialize a `QueryLargeSuggestedRefinements` with member variables.
+      Initialize a `QueryLargeSuggestedRefinements` with member variables.
 
-     - parameter enabled: Whether to perform suggested refinements.
-     - parameter count: Maximum number of suggested refinements texts to be returned. The default is `10`. The
-       maximum is `100`.
+      - parameter enabled: Whether to perform suggested refinements.
+      - parameter count: Maximum number of suggested refinements texts to be returned. The maximum is `100`.
 
-     - returns: An initialized `QueryLargeSuggestedRefinements`.
+      - returns: An initialized `QueryLargeSuggestedRefinements`.
      */
     public init(
         enabled: Bool? = nil,

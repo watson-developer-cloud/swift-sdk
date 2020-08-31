@@ -39,12 +39,12 @@ public struct Label: Codable, Equatable {
     }
 
     /**
-     Initialize a `Label` with member variables.
+      Initialize a `Label` with member variables.
 
-     - parameter nature: The identified `nature` of the element.
-     - parameter party: The identified `party` of the element.
+      - parameter nature: The identified `nature` of the element.
+      - parameter party: The identified `party` of the element.
 
-     - returns: An initialized `Label`.
+      - returns: An initialized `Label`.
      */
     public init(
         nature: String,

@@ -32,11 +32,11 @@ public struct XPathPatterns: Codable, Equatable {
     }
 
     /**
-     Initialize a `XPathPatterns` with member variables.
+      Initialize a `XPathPatterns` with member variables.
 
-     - parameter xpaths: An array to XPaths.
+      - parameter xpaths: An array to XPaths.
 
-     - returns: An initialized `XPathPatterns`.
+      - returns: An initialized `XPathPatterns`.
      */
     public init(
         xpaths: [String]? = nil

@@ -45,13 +45,13 @@ public struct Webhook: Codable, Equatable {
     }
 
     /**
-     Initialize a `Webhook` with member variables.
+      Initialize a `Webhook` with member variables.
 
-     - parameter url: The URL for the external service or application to which you want to send HTTP POST requests.
-     - parameter name: The name of the webhook. Currently, `main_webhook` is the only supported value.
-     - parameter headers: An optional array of HTTP headers to pass with the HTTP request.
+      - parameter url: The URL for the external service or application to which you want to send HTTP POST requests.
+      - parameter name: The name of the webhook. Currently, `main_webhook` is the only supported value.
+      - parameter headers: An optional array of HTTP headers to pass with the HTTP request.
 
-     - returns: An initialized `Webhook`.
+      - returns: An initialized `Webhook`.
      */
     public init(
         url: String,

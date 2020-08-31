@@ -44,12 +44,12 @@ public struct DialogNodeOutput: Codable, Equatable {
     }
 
     /**
-     Initialize a `DialogNodeOutput` with member variables.
+      Initialize a `DialogNodeOutput` with member variables.
 
-     - parameter generic: An array of objects describing the output defined for the dialog node.
-     - parameter modifiers: Options that modify how specified output is handled.
+      - parameter generic: An array of objects describing the output defined for the dialog node.
+      - parameter modifiers: Options that modify how specified output is handled.
 
-     - returns: An initialized `DialogNodeOutput`.
+      - returns: An initialized `DialogNodeOutput`.
      */
     public init(
         generic: [DialogNodeOutputGeneric]? = nil,

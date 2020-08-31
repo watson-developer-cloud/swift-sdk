@@ -32,12 +32,12 @@ internal struct ToneChatInput: Codable, Equatable {
     }
 
     /**
-     Initialize a `ToneChatInput` with member variables.
+      Initialize a `ToneChatInput` with member variables.
 
-     - parameter utterances: An array of `Utterance` objects that provides the input content that the service is to
-       analyze.
+      - parameter utterances: An array of `Utterance` objects that provides the input content that the service is to
+        analyze.
 
-     - returns: An initialized `ToneChatInput`.
+      - returns: An initialized `ToneChatInput`.
      */
     public init(
         utterances: [Utterance]

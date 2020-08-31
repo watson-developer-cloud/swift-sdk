@@ -83,25 +83,25 @@ internal struct UpdateValue: Codable, Equatable {
     }
 
     /**
-     Initialize a `UpdateValue` with member variables.
+      Initialize a `UpdateValue` with member variables.
 
-     - parameter value: The text of the entity value. This string must conform to the following restrictions:
-       - It cannot contain carriage return, newline, or tab characters.
-       - It cannot consist of only whitespace characters.
-     - parameter metadata: Any metadata related to the entity value.
-     - parameter type: Specifies the type of entity value.
-     - parameter synonyms: An array of synonyms for the entity value. A value can specify either synonyms or patterns
-       (depending on the value type), but not both. A synonym must conform to the following resrictions:
-       - It cannot contain carriage return, newline, or tab characters.
-       - It cannot consist of only whitespace characters.
-     - parameter patterns: An array of patterns for the entity value. A value can specify either synonyms or patterns
-       (depending on the value type), but not both. A pattern is a regular expression; for more information about how to
-       specify a pattern, see the
-       [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-entities#entities-create-dictionary-based).
-     - parameter created: The timestamp for creation of the object.
-     - parameter updated: The timestamp for the most recent update to the object.
+      - parameter value: The text of the entity value. This string must conform to the following restrictions:
+        - It cannot contain carriage return, newline, or tab characters.
+        - It cannot consist of only whitespace characters.
+      - parameter metadata: Any metadata related to the entity value.
+      - parameter type: Specifies the type of entity value.
+      - parameter synonyms: An array of synonyms for the entity value. A value can specify either synonyms or patterns
+        (depending on the value type), but not both. A synonym must conform to the following resrictions:
+        - It cannot contain carriage return, newline, or tab characters.
+        - It cannot consist of only whitespace characters.
+      - parameter patterns: An array of patterns for the entity value. A value can specify either synonyms or patterns
+        (depending on the value type), but not both. A pattern is a regular expression; for more information about how to
+        specify a pattern, see the
+        [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-entities#entities-create-dictionary-based).
+      - parameter created: The timestamp for creation of the object.
+      - parameter updated: The timestamp for the most recent update to the object.
 
-     - returns: An initialized `UpdateValue`.
+      - returns: An initialized `UpdateValue`.
      */
     public init(
         value: String? = nil,

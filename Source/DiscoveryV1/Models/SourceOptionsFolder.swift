@@ -44,14 +44,14 @@ public struct SourceOptionsFolder: Codable, Equatable {
     }
 
     /**
-     Initialize a `SourceOptionsFolder` with member variables.
+      Initialize a `SourceOptionsFolder` with member variables.
 
-     - parameter ownerUserID: The Box user ID of the user who owns the folder to crawl.
-     - parameter folderID: The Box folder ID of the folder to crawl.
-     - parameter limit: The maximum number of documents to crawl for this folder. By default, all documents in the
-       folder are crawled.
+      - parameter ownerUserID: The Box user ID of the user who owns the folder to crawl.
+      - parameter folderID: The Box folder ID of the folder to crawl.
+      - parameter limit: The maximum number of documents to crawl for this folder. By default, all documents in the
+        folder are crawled.
 
-     - returns: An initialized `SourceOptionsFolder`.
+      - returns: An initialized `SourceOptionsFolder`.
      */
     public init(
         ownerUserID: String,

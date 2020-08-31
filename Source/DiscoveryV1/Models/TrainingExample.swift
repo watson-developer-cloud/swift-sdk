@@ -44,13 +44,13 @@ public struct TrainingExample: Codable, Equatable {
     }
 
     /**
-     Initialize a `TrainingExample` with member variables.
+      Initialize a `TrainingExample` with member variables.
 
-     - parameter documentID: The document ID associated with this training example.
-     - parameter crossReference: The cross reference associated with this training example.
-     - parameter relevance: The relevance of the training example.
+      - parameter documentID: The document ID associated with this training example.
+      - parameter crossReference: The cross reference associated with this training example.
+      - parameter relevance: The relevance of the training example.
 
-     - returns: An initialized `TrainingExample`.
+      - returns: An initialized `TrainingExample`.
      */
     public init(
         documentID: String? = nil,

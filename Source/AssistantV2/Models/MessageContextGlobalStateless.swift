@@ -38,12 +38,12 @@ public struct MessageContextGlobalStateless: Codable, Equatable {
     }
 
     /**
-     Initialize a `MessageContextGlobalStateless` with member variables.
+      Initialize a `MessageContextGlobalStateless` with member variables.
 
-     - parameter system: Built-in system properties that apply to all skills used by the assistant.
-     - parameter sessionID: The unique identifier of the session.
+      - parameter system: Built-in system properties that apply to all skills used by the assistant.
+      - parameter sessionID: The unique identifier of the session.
 
-     - returns: An initialized `MessageContextGlobalStateless`.
+      - returns: An initialized `MessageContextGlobalStateless`.
      */
     public init(
         system: MessageContextGlobalSystem? = nil,

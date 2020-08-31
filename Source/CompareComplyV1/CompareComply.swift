@@ -25,7 +25,7 @@ import IBMSwiftSDKCore
 public class CompareComply {
 
     /// The base URL to use when contacting the service.
-    public var serviceURL: String? = "https://gateway.watsonplatform.net/compare-comply/api"
+    public var serviceURL: String? = "https://api.us-south.compare-comply.watson.cloud.ibm.com"
 
     /// Service identifiers
     internal let serviceName = "CompareComply"
@@ -82,8 +82,8 @@ public class CompareComply {
 
     #if !os(Linux)
     /**
-     Allow network requests to a server without verification of the server certificate.
-     **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
+      Allow network requests to a server without verification of the server certificate.
+      **IMPORTANT**: This should ONLY be used if truly intended, as it is unsafe otherwise.
      */
     public func disableSSLVerification() {
         session = InsecureConnection.session()

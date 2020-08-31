@@ -29,7 +29,6 @@ public struct WorkspaceSystemSettings: Codable, Equatable {
 
     /**
      Workspace settings related to the disambiguation feature.
-     **Note:** This feature is available only to Plus and Premium users.
      */
     public var disambiguation: WorkspaceSystemSettingsDisambiguation?
 
@@ -73,21 +72,20 @@ public struct WorkspaceSystemSettings: Codable, Equatable {
     }
 
     /**
-     Initialize a `WorkspaceSystemSettings` with member variables.
+      Initialize a `WorkspaceSystemSettings` with member variables.
 
-     - parameter tooling: Workspace settings related to the Watson Assistant user interface.
-     - parameter disambiguation: Workspace settings related to the disambiguation feature.
-       **Note:** This feature is available only to Plus and Premium users.
-     - parameter humanAgentAssist: For internal use only.
-     - parameter spellingSuggestions: Whether spelling correction is enabled for the workspace.
-     - parameter spellingAutoCorrect: Whether autocorrection is enabled for the workspace. If spelling correction is
-       enabled and this property is `false`, any suggested corrections are returned in the **suggested_text** property
-       of the message response. If this property is `true`, any corrections are automatically applied to the user input,
-       and the original text is returned in the **original_text** property of the message response.
-     - parameter systemEntities: Workspace settings related to the behavior of system entities.
-     - parameter offTopic: Workspace settings related to detection of irrelevant input.
+      - parameter tooling: Workspace settings related to the Watson Assistant user interface.
+      - parameter disambiguation: Workspace settings related to the disambiguation feature.
+      - parameter humanAgentAssist: For internal use only.
+      - parameter spellingSuggestions: Whether spelling correction is enabled for the workspace.
+      - parameter spellingAutoCorrect: Whether autocorrection is enabled for the workspace. If spelling correction is
+        enabled and this property is `false`, any suggested corrections are returned in the **suggested_text** property
+        of the message response. If this property is `true`, any corrections are automatically applied to the user input,
+        and the original text is returned in the **original_text** property of the message response.
+      - parameter systemEntities: Workspace settings related to the behavior of system entities.
+      - parameter offTopic: Workspace settings related to detection of irrelevant input.
 
-     - returns: An initialized `WorkspaceSystemSettings`.
+      - returns: An initialized `WorkspaceSystemSettings`.
      */
     public init(
         tooling: WorkspaceSystemSettingsTooling? = nil,

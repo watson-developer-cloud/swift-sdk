@@ -44,13 +44,13 @@ public struct FileWithMetadata: Codable, Equatable {
     }
 
     /**
-     Initialize a `FileWithMetadata` with member variables.
+      Initialize a `FileWithMetadata` with member variables.
 
-     - parameter data: The data / content for the file.
-     - parameter filename: The filename of the file.
-     - parameter contentType: The content type of the file.
+      - parameter data: The data / content for the file.
+      - parameter filename: The filename of the file.
+      - parameter contentType: The content type of the file.
 
-     - returns: An initialized `FileWithMetadata`.
+      - returns: An initialized `FileWithMetadata`.
      */
     public init(
         data: Data,

@@ -38,13 +38,13 @@ public struct CaptureGroup: Codable, Equatable {
     }
 
     /**
-     Initialize a `CaptureGroup` with member variables.
+      Initialize a `CaptureGroup` with member variables.
 
-     - parameter group: A recognized capture group for the entity.
-     - parameter location: Zero-based character offsets that indicate where the entity value begins and ends in the
-       input text.
+      - parameter group: A recognized capture group for the entity.
+      - parameter location: Zero-based character offsets that indicate where the entity value begins and ends in the
+        input text.
 
-     - returns: An initialized `CaptureGroup`.
+      - returns: An initialized `CaptureGroup`.
      */
     public init(
         group: String,

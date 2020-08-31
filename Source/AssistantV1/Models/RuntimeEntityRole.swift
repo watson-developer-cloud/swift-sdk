@@ -45,11 +45,11 @@ public struct RuntimeEntityRole: Codable, Equatable {
     }
 
     /**
-     Initialize a `RuntimeEntityRole` with member variables.
+      Initialize a `RuntimeEntityRole` with member variables.
 
-     - parameter type: The relationship of the entity to the range.
+      - parameter type: The relationship of the entity to the range.
 
-     - returns: An initialized `RuntimeEntityRole`.
+      - returns: An initialized `RuntimeEntityRole`.
      */
     public init(
         type: String? = nil

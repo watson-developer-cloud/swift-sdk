@@ -68,15 +68,15 @@ internal struct CreateVoiceModel: Codable, Equatable {
     }
 
     /**
-     Initialize a `CreateVoiceModel` with member variables.
+      Initialize a `CreateVoiceModel` with member variables.
 
-     - parameter name: The name of the new custom voice model.
-     - parameter language: The language of the new custom voice model. You create a custom voice model for a specific
-       language, not for a specific voice. A custom model can be used with any voice, standard or neural, for its
-       specified language. Omit the parameter to use the the default language, `en-US`.
-     - parameter description: A description of the new custom voice model. Specifying a description is recommended.
+      - parameter name: The name of the new custom voice model.
+      - parameter language: The language of the new custom voice model. You create a custom voice model for a specific
+        language, not for a specific voice. A custom model can be used with any voice, standard or neural, for its
+        specified language. Omit the parameter to use the the default language, `en-US`.
+      - parameter description: A description of the new custom voice model. Specifying a description is recommended.
 
-     - returns: An initialized `CreateVoiceModel`.
+      - returns: An initialized `CreateVoiceModel`.
      */
     public init(
         name: String,

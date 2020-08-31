@@ -216,41 +216,41 @@ public struct DialogNode: Codable, Equatable {
     }
 
     /**
-     Initialize a `DialogNode` with member variables.
+      Initialize a `DialogNode` with member variables.
 
-     - parameter dialogNode: The dialog node ID. This string must conform to the following restrictions:
-       - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
-     - parameter description: The description of the dialog node. This string cannot contain carriage return,
-       newline, or tab characters.
-     - parameter conditions: The condition that will trigger the dialog node. This string cannot contain carriage
-       return, newline, or tab characters.
-     - parameter parent: The ID of the parent dialog node. This property is omitted if the dialog node has no parent.
-     - parameter previousSibling: The ID of the previous sibling dialog node. This property is omitted if the dialog
-       node has no previous sibling.
-     - parameter output: The output of the dialog node. For more information about how to specify dialog node output,
-       see the
-       [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
-     - parameter context: The context for the dialog node.
-     - parameter metadata: The metadata for the dialog node.
-     - parameter nextStep: The next step to execute following this dialog node.
-     - parameter title: The alias used to identify the dialog node. This string must conform to the following
-       restrictions:
-       - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
-     - parameter type: How the dialog node is processed.
-     - parameter eventName: How an `event_handler` node is processed.
-     - parameter variable: The location in the dialog context where output is stored.
-     - parameter actions: An array of objects describing any actions to be invoked by the dialog node.
-     - parameter digressIn: Whether this top-level dialog node can be digressed into.
-     - parameter digressOut: Whether this dialog node can be returned to after a digression.
-     - parameter digressOutSlots: Whether the user can digress to top-level nodes while filling out slots.
-     - parameter userLabel: A label that can be displayed externally to describe the purpose of the node to users.
-     - parameter disambiguationOptOut: Whether the dialog node should be excluded from disambiguation suggestions.
-       Valid only when **type**=`standard` or `frame`.
-     - parameter disabled: For internal use only.
-     - parameter created: The timestamp for creation of the object.
-     - parameter updated: The timestamp for the most recent update to the object.
+      - parameter dialogNode: The dialog node ID. This string must conform to the following restrictions:
+        - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
+      - parameter description: The description of the dialog node. This string cannot contain carriage return,
+        newline, or tab characters.
+      - parameter conditions: The condition that will trigger the dialog node. This string cannot contain carriage
+        return, newline, or tab characters.
+      - parameter parent: The ID of the parent dialog node. This property is omitted if the dialog node has no parent.
+      - parameter previousSibling: The ID of the previous sibling dialog node. This property is omitted if the dialog
+        node has no previous sibling.
+      - parameter output: The output of the dialog node. For more information about how to specify dialog node output,
+        see the
+        [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
+      - parameter context: The context for the dialog node.
+      - parameter metadata: The metadata for the dialog node.
+      - parameter nextStep: The next step to execute following this dialog node.
+      - parameter title: The alias used to identify the dialog node. This string must conform to the following
+        restrictions:
+        - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
+      - parameter type: How the dialog node is processed.
+      - parameter eventName: How an `event_handler` node is processed.
+      - parameter variable: The location in the dialog context where output is stored.
+      - parameter actions: An array of objects describing any actions to be invoked by the dialog node.
+      - parameter digressIn: Whether this top-level dialog node can be digressed into.
+      - parameter digressOut: Whether this dialog node can be returned to after a digression.
+      - parameter digressOutSlots: Whether the user can digress to top-level nodes while filling out slots.
+      - parameter userLabel: A label that can be displayed externally to describe the purpose of the node to users.
+      - parameter disambiguationOptOut: Whether the dialog node should be excluded from disambiguation suggestions.
+        Valid only when **type**=`standard` or `frame`.
+      - parameter disabled: For internal use only.
+      - parameter created: The timestamp for creation of the object.
+      - parameter updated: The timestamp for the most recent update to the object.
 
-     - returns: An initialized `DialogNode`.
+      - returns: An initialized `DialogNode`.
      */
     public init(
         dialogNode: String,

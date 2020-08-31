@@ -38,12 +38,12 @@ public struct QueryLargeTableResults: Codable, Equatable {
     }
 
     /**
-     Initialize a `QueryLargeTableResults` with member variables.
+      Initialize a `QueryLargeTableResults` with member variables.
 
-     - parameter enabled: Whether to enable table retrieval.
-     - parameter count: Maximum number of tables to return.
+      - parameter enabled: Whether to enable table retrieval.
+      - parameter count: Maximum number of tables to return.
 
-     - returns: An initialized `QueryLargeTableResults`.
+      - returns: An initialized `QueryLargeTableResults`.
      */
     public init(
         enabled: Bool? = nil,

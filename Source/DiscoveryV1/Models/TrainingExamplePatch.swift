@@ -38,12 +38,12 @@ internal struct TrainingExamplePatch: Codable, Equatable {
     }
 
     /**
-     Initialize a `TrainingExamplePatch` with member variables.
+      Initialize a `TrainingExamplePatch` with member variables.
 
-     - parameter crossReference: The example to add.
-     - parameter relevance: The relevance value for this example.
+      - parameter crossReference: The example to add.
+      - parameter relevance: The relevance value for this example.
 
-     - returns: An initialized `TrainingExamplePatch`.
+      - returns: An initialized `TrainingExamplePatch`.
      */
     public init(
         crossReference: String? = nil,

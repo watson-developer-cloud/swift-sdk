@@ -32,11 +32,11 @@ public struct WorkspaceSystemSettingsSystemEntities: Codable, Equatable {
     }
 
     /**
-     Initialize a `WorkspaceSystemSettingsSystemEntities` with member variables.
+      Initialize a `WorkspaceSystemSettingsSystemEntities` with member variables.
 
-     - parameter enabled: Whether the new system entities are enabled for the workspace.
+      - parameter enabled: Whether the new system entities are enabled for the workspace.
 
-     - returns: An initialized `WorkspaceSystemSettingsSystemEntities`.
+      - returns: An initialized `WorkspaceSystemSettingsSystemEntities`.
      */
     public init(
         enabled: Bool? = nil

@@ -41,15 +41,15 @@ internal struct MessageRequestStateless: Codable, Equatable {
     }
 
     /**
-     Initialize a `MessageRequestStateless` with member variables.
+      Initialize a `MessageRequestStateless` with member variables.
 
-     - parameter input: An input object that includes the input text.
-     - parameter context: Context data for the conversation. You can use this property to set or modify context
-       variables, which can also be accessed by dialog nodes. The context is not stored by the assistant. To maintain
-       session state, include the context from the previous response.
-       **Note:** The total size of the context data for a stateless session cannot exceed 250KB.
+      - parameter input: An input object that includes the input text.
+      - parameter context: Context data for the conversation. You can use this property to set or modify context
+        variables, which can also be accessed by dialog nodes. The context is not stored by the assistant. To maintain
+        session state, include the context from the previous response.
+        **Note:** The total size of the context data for a stateless session cannot exceed 250KB.
 
-     - returns: An initialized `MessageRequestStateless`.
+      - returns: An initialized `MessageRequestStateless`.
      */
     public init(
         input: MessageInputStateless? = nil,

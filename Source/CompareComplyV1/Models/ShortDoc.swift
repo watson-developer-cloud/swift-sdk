@@ -38,12 +38,12 @@ public struct ShortDoc: Codable, Equatable {
     }
 
     /**
-     Initialize a `ShortDoc` with member variables.
+      Initialize a `ShortDoc` with member variables.
 
-     - parameter title: The title of the input document, if identified.
-     - parameter hash: The MD5 hash of the input document.
+      - parameter title: The title of the input document, if identified.
+      - parameter hash: The MD5 hash of the input document.
 
-     - returns: An initialized `ShortDoc`.
+      - returns: An initialized `ShortDoc`.
      */
     public init(
         title: String? = nil,

@@ -69,20 +69,20 @@ internal struct UpdateEntity: Codable, Equatable {
     }
 
     /**
-     Initialize a `UpdateEntity` with member variables.
+      Initialize a `UpdateEntity` with member variables.
 
-     - parameter entity: The name of the entity. This string must conform to the following restrictions:
-       - It can contain only Unicode alphanumeric, underscore, and hyphen characters.
-       - It cannot begin with the reserved prefix `sys-`.
-     - parameter description: The description of the entity. This string cannot contain carriage return, newline, or
-       tab characters.
-     - parameter metadata: Any metadata related to the entity.
-     - parameter fuzzyMatch: Whether to use fuzzy matching for the entity.
-     - parameter created: The timestamp for creation of the object.
-     - parameter updated: The timestamp for the most recent update to the object.
-     - parameter values: An array of objects describing the entity values.
+      - parameter entity: The name of the entity. This string must conform to the following restrictions:
+        - It can contain only Unicode alphanumeric, underscore, and hyphen characters.
+        - It cannot begin with the reserved prefix `sys-`.
+      - parameter description: The description of the entity. This string cannot contain carriage return, newline, or
+        tab characters.
+      - parameter metadata: Any metadata related to the entity.
+      - parameter fuzzyMatch: Whether to use fuzzy matching for the entity.
+      - parameter created: The timestamp for creation of the object.
+      - parameter updated: The timestamp for the most recent update to the object.
+      - parameter values: An array of objects describing the entity values.
 
-     - returns: An initialized `UpdateEntity`.
+      - returns: An initialized `UpdateEntity`.
      */
     public init(
         entity: String? = nil,

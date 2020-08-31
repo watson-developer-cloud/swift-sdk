@@ -32,11 +32,11 @@ public struct TrainingStatus: Codable, Equatable {
     }
 
     /**
-     Initialize a `TrainingStatus` with member variables.
+      Initialize a `TrainingStatus` with member variables.
 
-     - parameter objects: Training status for the objects in the collection.
+      - parameter objects: Training status for the objects in the collection.
 
-     - returns: An initialized `TrainingStatus`.
+      - returns: An initialized `TrainingStatus`.
      */
     public init(
         objects: ObjectTrainingStatus

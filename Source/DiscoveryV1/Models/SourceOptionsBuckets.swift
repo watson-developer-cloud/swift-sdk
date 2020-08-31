@@ -39,13 +39,13 @@ public struct SourceOptionsBuckets: Codable, Equatable {
     }
 
     /**
-     Initialize a `SourceOptionsBuckets` with member variables.
+      Initialize a `SourceOptionsBuckets` with member variables.
 
-     - parameter name: The name of the cloud object store bucket to crawl.
-     - parameter limit: The number of documents to crawl from this cloud object store bucket. If not specified, all
-       documents in the bucket are crawled.
+      - parameter name: The name of the cloud object store bucket to crawl.
+      - parameter limit: The number of documents to crawl from this cloud object store bucket. If not specified, all
+        documents in the bucket are crawled.
 
-     - returns: An initialized `SourceOptionsBuckets`.
+      - returns: An initialized `SourceOptionsBuckets`.
      */
     public init(
         name: String,

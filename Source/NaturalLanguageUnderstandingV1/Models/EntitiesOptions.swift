@@ -17,7 +17,8 @@
 import Foundation
 
 /**
- Identifies people, cities, organizations, and other entities in the content. See [Entity types and
+ Identifies people, cities, organizations, and other entities in the content. For more information, see [Entity types
+ and
  subtypes](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-entity-types).
  Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish. Arabic,
  Chinese, and Dutch are supported only through custom models.
@@ -61,17 +62,17 @@ public struct EntitiesOptions: Codable, Equatable {
     }
 
     /**
-     Initialize a `EntitiesOptions` with member variables.
+      Initialize a `EntitiesOptions` with member variables.
 
-     - parameter limit: Maximum number of entities to return.
-     - parameter mentions: Set this to `true` to return locations of entity mentions.
-     - parameter model: Enter a [custom
-       model](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-customizing)
-       ID to override the standard entity detection model.
-     - parameter sentiment: Set this to `true` to return sentiment information for detected entities.
-     - parameter emotion: Set this to `true` to analyze emotion for detected keywords.
+      - parameter limit: Maximum number of entities to return.
+      - parameter mentions: Set this to `true` to return locations of entity mentions.
+      - parameter model: Enter a [custom
+        model](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-customizing)
+        ID to override the standard entity detection model.
+      - parameter sentiment: Set this to `true` to return sentiment information for detected entities.
+      - parameter emotion: Set this to `true` to analyze emotion for detected keywords.
 
-     - returns: An initialized `EntitiesOptions`.
+      - returns: An initialized `EntitiesOptions`.
      */
     public init(
         limit: Int? = nil,

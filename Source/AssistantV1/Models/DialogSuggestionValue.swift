@@ -45,13 +45,13 @@ public struct DialogSuggestionValue: Codable, Equatable {
     }
 
     /**
-     Initialize a `DialogSuggestionValue` with member variables.
+      Initialize a `DialogSuggestionValue` with member variables.
 
-     - parameter input: An input object that includes the input text.
-     - parameter intents: An array of intents to be sent along with the user input.
-     - parameter entities: An array of entities to be sent along with the user input.
+      - parameter input: An input object that includes the input text.
+      - parameter intents: An array of intents to be sent along with the user input.
+      - parameter entities: An array of entities to be sent along with the user input.
 
-     - returns: An initialized `DialogSuggestionValue`.
+      - returns: An initialized `DialogSuggestionValue`.
      */
     public init(
         input: MessageInput? = nil,

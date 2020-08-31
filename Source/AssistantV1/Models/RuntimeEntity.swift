@@ -90,28 +90,28 @@ public struct RuntimeEntity: Codable, Equatable {
     }
 
     /**
-     Initialize a `RuntimeEntity` with member variables.
+      Initialize a `RuntimeEntity` with member variables.
 
-     - parameter entity: An entity detected in the input.
-     - parameter location: An array of zero-based character offsets that indicate where the detected entity values
-       begin and end in the input text.
-     - parameter value: The entity value that was recognized in the user input.
-     - parameter confidence: A decimal percentage that represents Watson's confidence in the recognized entity.
-     - parameter metadata: Any metadata for the entity.
-     - parameter groups: The recognized capture groups for the entity, as defined by the entity pattern.
-     - parameter interpretation: An object containing detailed information about the entity recognized in the user
-       input. This property is included only if the new system entities are enabled for the workspace.
-       For more information about how the new system entities are interpreted, see the
-       [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-beta-system-entities).
-     - parameter alternatives: An array of possible alternative values that the user might have intended instead of
-       the value returned in the **value** property. This property is returned only for `@sys-time` and `@sys-date`
-       entities when the user's input is ambiguous.
-       This property is included only if the new system entities are enabled for the workspace.
-     - parameter role: An object describing the role played by a system entity that is specifies the beginning or end
-       of a range recognized in the user input. This property is included only if the new system entities are enabled
-       for the workspace.
+      - parameter entity: An entity detected in the input.
+      - parameter location: An array of zero-based character offsets that indicate where the detected entity values
+        begin and end in the input text.
+      - parameter value: The entity value that was recognized in the user input.
+      - parameter confidence: A decimal percentage that represents Watson's confidence in the recognized entity.
+      - parameter metadata: Any metadata for the entity.
+      - parameter groups: The recognized capture groups for the entity, as defined by the entity pattern.
+      - parameter interpretation: An object containing detailed information about the entity recognized in the user
+        input. This property is included only if the new system entities are enabled for the workspace.
+        For more information about how the new system entities are interpreted, see the
+        [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-beta-system-entities).
+      - parameter alternatives: An array of possible alternative values that the user might have intended instead of
+        the value returned in the **value** property. This property is returned only for `@sys-time` and `@sys-date`
+        entities when the user's input is ambiguous.
+        This property is included only if the new system entities are enabled for the workspace.
+      - parameter role: An object describing the role played by a system entity that is specifies the beginning or end
+        of a range recognized in the user input. This property is included only if the new system entities are enabled
+        for the workspace.
 
-     - returns: An initialized `RuntimeEntity`.
+      - returns: An initialized `RuntimeEntity`.
      */
     public init(
         entity: String,

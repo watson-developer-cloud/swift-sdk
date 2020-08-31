@@ -66,20 +66,20 @@ public struct OutputData: Codable, Equatable {
     }
 
     /**
-     Initialize a `OutputData` with member variables.
+      Initialize a `OutputData` with member variables.
 
-     - parameter logMessages: An array of up to 50 messages logged with the request.
-     - parameter text: An array of responses to the user.
-     - parameter nodesVisited: An array of the nodes that were triggered to create the response, in the order in
-       which they were visited. This information is useful for debugging and for tracing the path taken through the node
-       tree.
-     - parameter nodesVisitedDetails: An array of objects containing detailed diagnostic information about the nodes
-       that were triggered during processing of the input message. Included only if **nodes_visited_details** is set to
-       `true` in the message request.
-     - parameter generic: Output intended for any channel. It is the responsibility of the client application to
-       implement the supported response types.
+      - parameter logMessages: An array of up to 50 messages logged with the request.
+      - parameter text: An array of responses to the user.
+      - parameter nodesVisited: An array of the nodes that were triggered to create the response, in the order in
+        which they were visited. This information is useful for debugging and for tracing the path taken through the node
+        tree.
+      - parameter nodesVisitedDetails: An array of objects containing detailed diagnostic information about the nodes
+        that were triggered during processing of the input message. Included only if **nodes_visited_details** is set to
+        `true` in the message request.
+      - parameter generic: Output intended for any channel. It is the responsibility of the client application to
+        implement the supported response types.
 
-     - returns: An initialized `OutputData`.
+      - returns: An initialized `OutputData`.
      */
     public init(
         logMessages: [LogMessage],

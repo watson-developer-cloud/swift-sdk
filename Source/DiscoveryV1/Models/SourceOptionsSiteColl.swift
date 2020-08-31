@@ -40,15 +40,15 @@ public struct SourceOptionsSiteColl: Codable, Equatable {
     }
 
     /**
-     Initialize a `SourceOptionsSiteColl` with member variables.
+      Initialize a `SourceOptionsSiteColl` with member variables.
 
-     - parameter siteCollectionPath: The Microsoft SharePoint Online site collection path to crawl. The path must be
-       be relative to the **organization_url** that was specified in the credentials associated with this source
-       configuration.
-     - parameter limit: The maximum number of documents to crawl for this site collection. By default, all documents
-       in the site collection are crawled.
+      - parameter siteCollectionPath: The Microsoft SharePoint Online site collection path to crawl. The path must be
+        be relative to the **organization_url** that was specified in the credentials associated with this source
+        configuration.
+      - parameter limit: The maximum number of documents to crawl for this site collection. By default, all documents
+        in the site collection are crawled.
 
-     - returns: An initialized `SourceOptionsSiteColl`.
+      - returns: An initialized `SourceOptionsSiteColl`.
      */
     public init(
         siteCollectionPath: String,

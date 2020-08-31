@@ -130,7 +130,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
         wait(for: [expectation], timeout: timeout)
     }
 
-     // MARK: - Transcribe File, Custom Settings
+    // MARK: - Transcribe File, Custom Settings
 
     func testTranscribeFileCustomWAV() {
         transcribeFileCustom(filename: "SpeechSample", withExtension: "wav", format: "audio/wav")
@@ -306,7 +306,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
         }
     }
 
-     // MARK: - Transcribe Data, Custom Settings
+    // MARK: - Transcribe Data, Custom Settings
 
     func testTranscribeDataCustomWAV() {
         transcribeDataCustom(filename: "SpeechSample", withExtension: "wav", format: "audio/wav")
@@ -505,7 +505,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
         }
     }
 
-     // MARK: - Transcribe Data with Smart Formatting
+    // MARK: - Transcribe Data with Smart Formatting
 
     func testTranscribeStockAnnouncementCustomWAV() {
         transcribeDataCustomForNumbers(
@@ -617,9 +617,9 @@ class SpeechToTextRecognizeTests: XCTestCase {
             return
         }
     }
-    
+
     // MARK: - All settings
-    
+
     func testTranscribeDataWithAllSettingsWAV() {
         transcribeDataWithAllSettings(filename: "SpeechSample", withExtension: "wav", format: "audio/wav")
     }
@@ -635,7 +635,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
     func testTranscribeDataWithAllSettingsNoFormat() {
         transcribeDataWithAllSettings(filename: "SpeechSample", withExtension: "ogg", format: nil)
     }
-    
+
     func transcribeDataWithAllSettings(filename: String, withExtension: String, format: String?) {
         let description = "Transcribe an audio file."
         let expectation = self.expectation(description: description)
@@ -726,7 +726,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
 
         var callback = RecognizeCallback()
         callback.onError = { results in
-             gotError.fulfill()
+            gotError.fulfill()
         }
 
         speechToText.recognizeUsingWebSocket(audio: audio, settings: settings, model: "en-US_NarrowbandModel", learningOptOut: true, callback: callback)
@@ -738,67 +738,67 @@ class SpeechToTextRecognizeTests: XCTestCase {
 
     func testResultsAccumulator() {
         let results1 = """
-            {
-              "results": [{
-                "alternatives": [{
-                  "transcript": "the quick "
-                }],
-                "final": false
-              }],
-              "result_index": 0
-            }
-            """
+        {
+          "results": [{
+            "alternatives": [{
+              "transcript": "the quick "
+            }],
+            "final": false
+          }],
+          "result_index": 0
+        }
+        """
 
         let results2 = """
+        {
+          "results": [{
+            "alternatives": [{
+              "confidence": 0.922,
+              "transcript": "the quick brown fox"
+            }],
+            "final": true
+          }],
+          "result_index": 0,
+          "speaker_labels": [
             {
-              "results": [{
-                "alternatives": [{
-                  "confidence": 0.922,
-                  "transcript": "the quick brown fox"
-                }],
-                "final": true
-              }],
-              "result_index": 0,
-              "speaker_labels": [
-                {
-                  "from": 0.68,
-                  "to": 1.19,
-                  "speaker": 2,
-                  "confidence": 0.418,
-                  "final": false
-                },
-                {
-                  "from": 1.47,
-                  "to": 1.93,
-                  "speaker": 1,
-                  "confidence": 0.521,
-                  "final": false
-                }
-              ]
+              "from": 0.68,
+              "to": 1.19,
+              "speaker": 2,
+              "confidence": 0.418,
+              "final": false
+            },
+            {
+              "from": 1.47,
+              "to": 1.93,
+              "speaker": 1,
+              "confidence": 0.521,
+              "final": false
             }
-            """
+          ]
+        }
+        """
 
         let results3 = """
+        {
+          "results": [{
+            "alternatives": [{
+              "confidence": 0.873,
+              "transcript": "jumps over the lazy dog"
+            }],
+            "final": true
+          }],
+          "result_index": 1,
+          "speaker_labels": [
             {
-              "results": [{
-                "alternatives": [{
-                  "confidence": 0.873,
-                  "transcript": "jumps over the lazy dog"
-                }],
-                "final": true
-              }],
-              "result_index": 1,
-              "speaker_labels": [
-                {
-                  "from": 1.96,
-                  "to": 2.59,
-                  "speaker": 2,
-                  "confidence": 0.418,
-                  "final": false
-                }
-              ]
+              "from": 1.96,
+              "to": 2.59,
+              "speaker": 2,
+              "confidence": 0.418,
+              "final": false
             }
-            """
+          ]
+        }
+        """
 
         var accumulator = SpeechRecognitionResultsAccumulator()
         accumulator.add(results: try! JSONDecoder().decode(SpeechRecognitionResults.self, from: results1.data(using: .utf8)!))
@@ -810,7 +810,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
         XCTAssertEqual(accumulator.bestTranscript, "the quick brown fox jumps over the lazy dog")
     }
 
-     // MARK: - Transcribe Streaming
+    // MARK: - Transcribe Streaming
 
     func testTranscribeStreaming() {
         print("")
@@ -822,7 +822,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
         print("")
     }
 
-     // MARK: - Validation Functions
+    // MARK: - Validation Functions
 
     func validateSTTResults(results: SpeechRecognitionResults, settings: RecognitionSettings) {
         guard let results = results.results else { return }

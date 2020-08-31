@@ -75,19 +75,19 @@ public struct FeedbackDataInput: Codable, Equatable {
     }
 
     /**
-     Initialize a `FeedbackDataInput` with member variables.
+      Initialize a `FeedbackDataInput` with member variables.
 
-     - parameter feedbackType: The type of feedback. The only permitted value is `element_classification`.
-     - parameter location: The numeric location of the identified element in the document, represented with two
-       integers labeled `begin` and `end`.
-     - parameter text: The text on which to submit feedback.
-     - parameter originalLabels: The original labeling from the input document, without the submitted feedback.
-     - parameter updatedLabels: The updated labeling from the input document, accounting for the submitted feedback.
-     - parameter document: Brief information about the input document.
-     - parameter modelID: An optional string identifying the model ID. The only permitted value is `contracts`.
-     - parameter modelVersion: An optional string identifying the version of the model used.
+      - parameter feedbackType: The type of feedback. The only permitted value is `element_classification`.
+      - parameter location: The numeric location of the identified element in the document, represented with two
+        integers labeled `begin` and `end`.
+      - parameter text: The text on which to submit feedback.
+      - parameter originalLabels: The original labeling from the input document, without the submitted feedback.
+      - parameter updatedLabels: The updated labeling from the input document, accounting for the submitted feedback.
+      - parameter document: Brief information about the input document.
+      - parameter modelID: An optional string identifying the model ID. The only permitted value is `contracts`.
+      - parameter modelVersion: An optional string identifying the version of the model used.
 
-     - returns: An initialized `FeedbackDataInput`.
+      - returns: An initialized `FeedbackDataInput`.
      */
     public init(
         feedbackType: String,

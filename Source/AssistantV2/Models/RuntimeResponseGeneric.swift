@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2018, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,8 +22,6 @@ public struct RuntimeResponseGeneric: Codable, Equatable {
     /**
      The type of response returned by the dialog node. The specified response type must be supported by the client
      application or channel.
-     **Note:** The **suggestion** response type is part of the disambiguation feature, which is only available for
-     Premium users.
      */
     public enum ResponseType: String {
         case text = "text"
@@ -46,8 +44,6 @@ public struct RuntimeResponseGeneric: Codable, Equatable {
     /**
      The type of response returned by the dialog node. The specified response type must be supported by the client
      application or channel.
-     **Note:** The **suggestion** response type is part of the disambiguation feature, which is only available for
-     Premium users.
      */
     public var responseType: String
 
@@ -103,8 +99,6 @@ public struct RuntimeResponseGeneric: Codable, Equatable {
 
     /**
      An array of objects describing the possible matching dialog nodes from which the user can choose.
-     **Note:** The **suggestions** property is part of the disambiguation feature, which is only available for Premium
-     users.
      */
     public var suggestions: [DialogSuggestion]?
 

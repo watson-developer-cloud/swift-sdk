@@ -38,12 +38,12 @@ public struct WebhookHeader: Codable, Equatable {
     }
 
     /**
-     Initialize a `WebhookHeader` with member variables.
+      Initialize a `WebhookHeader` with member variables.
 
-     - parameter name: The name of an HTTP header (for example, `Authorization`).
-     - parameter value: The value of an HTTP header.
+      - parameter name: The name of an HTTP header (for example, `Authorization`).
+      - parameter value: The value of an HTTP header.
 
-     - returns: An initialized `WebhookHeader`.
+      - returns: An initialized `WebhookHeader`.
      */
     public init(
         name: String,

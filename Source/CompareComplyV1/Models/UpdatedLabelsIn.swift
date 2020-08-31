@@ -38,13 +38,13 @@ public struct UpdatedLabelsIn: Codable, Equatable {
     }
 
     /**
-     Initialize a `UpdatedLabelsIn` with member variables.
+      Initialize a `UpdatedLabelsIn` with member variables.
 
-     - parameter types: Description of the action specified by the element and whom it affects.
-     - parameter categories: List of functional categories into which the element falls; in other words, the subject
-       matter of the element.
+      - parameter types: Description of the action specified by the element and whom it affects.
+      - parameter categories: List of functional categories into which the element falls; in other words, the subject
+        matter of the element.
 
-     - returns: An initialized `UpdatedLabelsIn`.
+      - returns: An initialized `UpdatedLabelsIn`.
      */
     public init(
         types: [TypeLabel],

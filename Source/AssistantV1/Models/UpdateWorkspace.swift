@@ -124,30 +124,30 @@ internal struct UpdateWorkspace: Codable, Equatable {
     }
 
     /**
-     Initialize a `UpdateWorkspace` with member variables.
+      Initialize a `UpdateWorkspace` with member variables.
 
-     - parameter name: The name of the workspace. This string cannot contain carriage return, newline, or tab
-       characters.
-     - parameter description: The description of the workspace. This string cannot contain carriage return, newline,
-       or tab characters.
-     - parameter language: The language of the workspace.
-     - parameter metadata: Any metadata related to the workspace.
-     - parameter learningOptOut: Whether training data from the workspace (including artifacts such as intents and
-       entities) can be used by IBM for general service improvements. `true` indicates that workspace training data is
-       not to be used.
-     - parameter systemSettings: Global settings for the workspace.
-     - parameter workspaceID: The workspace ID of the workspace.
-     - parameter status: The current status of the workspace.
-     - parameter created: The timestamp for creation of the object.
-     - parameter updated: The timestamp for the most recent update to the object.
-     - parameter intents: An array of objects defining the intents for the workspace.
-     - parameter entities: An array of objects describing the entities for the workspace.
-     - parameter dialogNodes: An array of objects describing the dialog nodes in the workspace.
-     - parameter counterexamples: An array of objects defining input examples that have been marked as irrelevant
-       input.
-     - parameter webhooks:
+      - parameter name: The name of the workspace. This string cannot contain carriage return, newline, or tab
+        characters.
+      - parameter description: The description of the workspace. This string cannot contain carriage return, newline,
+        or tab characters.
+      - parameter language: The language of the workspace.
+      - parameter metadata: Any metadata related to the workspace.
+      - parameter learningOptOut: Whether training data from the workspace (including artifacts such as intents and
+        entities) can be used by IBM for general service improvements. `true` indicates that workspace training data is
+        not to be used.
+      - parameter systemSettings: Global settings for the workspace.
+      - parameter workspaceID: The workspace ID of the workspace.
+      - parameter status: The current status of the workspace.
+      - parameter created: The timestamp for creation of the object.
+      - parameter updated: The timestamp for the most recent update to the object.
+      - parameter intents: An array of objects defining the intents for the workspace.
+      - parameter entities: An array of objects describing the entities for the workspace.
+      - parameter dialogNodes: An array of objects describing the dialog nodes in the workspace.
+      - parameter counterexamples: An array of objects defining input examples that have been marked as irrelevant
+        input.
+      - parameter webhooks:
 
-     - returns: An initialized `UpdateWorkspace`.
+      - returns: An initialized `UpdateWorkspace`.
      */
     public init(
         name: String? = nil,

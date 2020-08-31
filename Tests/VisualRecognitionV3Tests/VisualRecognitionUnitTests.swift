@@ -351,7 +351,7 @@ class VisualRecognitionUnitTests: XCTestCase {
     }
     #endif
 
-#if os(iOS) || os(tvOS) || os(watchOS)
+    #if os(iOS) || os(tvOS) || os(watchOS)
 
     // MARK: - VisualRecognition+CoreML
 
@@ -698,7 +698,7 @@ class VisualRecognitionUnitTests: XCTestCase {
         }
     }
 
-#endif
+    #endif
 
 }
 

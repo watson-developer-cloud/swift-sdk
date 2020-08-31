@@ -56,18 +56,18 @@ public struct CreateIntent: Codable, Equatable {
     }
 
     /**
-     Initialize a `CreateIntent` with member variables.
+      Initialize a `CreateIntent` with member variables.
 
-     - parameter intent: The name of the intent. This string must conform to the following restrictions:
-       - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.
-       - It cannot begin with the reserved prefix `sys-`.
-     - parameter description: The description of the intent. This string cannot contain carriage return, newline, or
-       tab characters.
-     - parameter created: The timestamp for creation of the object.
-     - parameter updated: The timestamp for the most recent update to the object.
-     - parameter examples: An array of user input examples for the intent.
+      - parameter intent: The name of the intent. This string must conform to the following restrictions:
+        - It can contain only Unicode alphanumeric, underscore, hyphen, and dot characters.
+        - It cannot begin with the reserved prefix `sys-`.
+      - parameter description: The description of the intent. This string cannot contain carriage return, newline, or
+        tab characters.
+      - parameter created: The timestamp for creation of the object.
+      - parameter updated: The timestamp for the most recent update to the object.
+      - parameter examples: An array of user input examples for the intent.
 
-     - returns: An initialized `CreateIntent`.
+      - returns: An initialized `CreateIntent`.
      */
     public init(
         intent: String,

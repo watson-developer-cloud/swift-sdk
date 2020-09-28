@@ -6,7 +6,7 @@
 [![Documentation](https://img.shields.io/badge/Documentation-API-blue.svg)](http://watson-developer-cloud.github.io/swift-sdk)
 [![CLA assistant](https://cla-assistant.io/readme/badge/watson-developer-cloud/swift-sdk)](https://cla-assistant.io/watson-developer-cloud/swift-sdk)
 [![wdc-community.slack.com](https://wdc-slack-inviter.mybluemix.net/badge.svg)](http://wdc-slack-inviter.mybluemix.net/)
-
+[![Run on Repl.it](https://repl.it/badge/github/watson-developer-cloud/swift-sdk)](https://repl.it/github/watson-developer-cloud/swift-sdk)
 
 ## Overview
 

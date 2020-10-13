@@ -24,6 +24,7 @@ There are many resources to help you build your first cognitive application with
 * [Before you begin](#before-you-begin)
 * [Requirements](#requirements)
 * [Installation](#installation)
+* [Known Issues](#known-issues)
 * [Authentication](#authentication)
 * [Custom Service URLs](#custom-service-urls)
 * [Obtaining Transaction IDs](#obtaining-transaction-ids)
@@ -103,6 +104,8 @@ For more information on using Cocoapods, refer to the [Cocoapods Guides](https:/
 
 ### Carthage
 
+**NOTE**: Current issues with Carthage and XCode 12 prevents installation of necessary dependencies. See [Known Issues](https://github.com/watson-developer-cloud/swift-sdk#known-issues)
+
 You can install Carthage with [Homebrew](http://brew.sh/):
 
 ```bash
@@ -139,6 +142,10 @@ dependencies: [
     .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "3.6.0")
 ]
 ```
+
+## Known Issues
+
+There is a known issue with Carthage and XCode 12 that prevents installation of the required dependency Starscream. There is already an [issue thread](https://github.com/Carthage/Carthage/issues/3019) up on the Carthage repository with a [workaround script](https://github.com/getsentry/sentry-cocoa/pull/780) that can be run to address the issue.  Until there is a version released that truly addresses this issue, it is recommended to either use one of the other two package managers or use the workaround script.
 
 ## Authentication
 

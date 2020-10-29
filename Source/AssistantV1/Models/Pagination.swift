@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2018.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,8 @@ public struct Pagination: Codable, Equatable {
     public var nextURL: String?
 
     /**
-     Reserved for future use.
+     The total number of objects that satisfy the request. This total includes all results, not just those included in
+     the current page.
      */
     public var total: Int?
 

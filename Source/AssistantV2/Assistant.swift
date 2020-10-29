@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,11 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
+/**
+ * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-36b26b63-20201028-122900
+ **/
+
 // swiftlint:disable file_length
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 import IBMSwiftSDKCore
 
+public typealias WatsonError = RestError
+public typealias WatsonResponse = RestResponse
 /**
  The IBM Watson&trade; Assistant service combines machine learning, natural language understanding, and an integrated
  dialog editor to create conversation flows between your apps and your users.
@@ -29,8 +39,14 @@ public class Assistant {
     /// The base URL to use when contacting the service.
     public var serviceURL: String? = "https://api.us-south.assistant.watson.cloud.ibm.com"
 
+    /// Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The current version is
+    /// `2020-04-01`.
+    public var version: String
+
     /// Service identifiers
-    internal let serviceName = "Conversation"
+    public static let defaultServiceName = "conversation"
+    // Service info for SDK headers
+    internal let serviceName = defaultServiceName
     internal let serviceVersion = "v2"
     internal let serviceSdkName = "assistant"
 
@@ -39,41 +55,39 @@ public class Assistant {
 
     var session = URLSession(configuration: URLSessionConfiguration.default)
     public let authenticator: Authenticator
-    let version: String
 
     #if os(Linux)
     /**
      Create a `Assistant` object.
 
-     This initializer will retrieve credentials from the environment or a local credentials file.
+     If an authenticator is not supplied, the initializer will retrieve credentials from the environment or
+     a local credentials file and construct an appropriate authenticator using these credentials.
      The credentials file can be downloaded from your service instance on IBM Cloud as ibm-credentials.env.
      Make sure to add the credentials file to your project so that it can be loaded at runtime.
 
-     If credentials are not available in the environment or a local credentials file, initialization will fail.
+     If an authenticator is not supplied and credentials are not available in the environment or a local
+     credentials file, initialization will fail by throwing an exception.
      In that case, try another initializer that directly passes in the credentials.
 
-     - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
+     - parameter version: Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The
+       current version is `2020-04-01`.
+     - parameter authenticator: The Authenticator object used to authenticate requests to the service
+     - serviceName: String = defaultServiceName
      */
-    public init(version: String) throws {
+    public init(version: String, authenticator: Authenticator? = nil, serviceName: String = defaultServiceName) throws {
         self.version = version
-
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
-        self.authenticator = authenticator
-
-        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
+        self.authenticator = try authenticator ?? ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceName)
+        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceName) {
             self.serviceURL = serviceURL
         }
-
         RestRequest.userAgent = Shared.userAgent
     }
-    #endif
-
+    #else
     /**
      Create a `Assistant` object.
 
-     - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
+     - parameter version: Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The
+       current version is `2020-04-01`.
      - parameter authenticator: The Authenticator object used to authenticate requests to the service
      */
     public init(version: String, authenticator: Authenticator) {
@@ -81,6 +95,7 @@ public class Assistant {
         self.authenticator = authenticator
         RestRequest.userAgent = Shared.userAgent
     }
+    #endif
 
     #if !os(Linux)
     /**
@@ -99,7 +114,7 @@ public class Assistant {
      - parameter data: Raw data returned by the service that may represent an error.
      - parameter response: the URL response returned by the service.
      */
-    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> WatsonError {
+    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> RestError {
 
         let statusCode = response.statusCode
         var errorMessage: String?
@@ -124,7 +139,7 @@ public class Assistant {
             errorMessage = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
         }
 
-        return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: metadata)
+        return RestError.http(statusCode: statusCode, message: errorMessage, metadata: metadata)
     }
 
     /**
@@ -149,13 +164,12 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createSession")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
-        headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -164,13 +178,13 @@ public class Assistant {
         // construct REST request
         let path = "/v2/assistants/\(assistantID)/sessions"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -210,12 +224,12 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteSession")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -224,13 +238,13 @@ public class Assistant {
         // construct REST request
         let path = "/v2/assistants/\(assistantID)/sessions/\(sessionID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -279,20 +293,23 @@ public class Assistant {
         let messageRequest = MessageRequest(
             input: input,
             context: context)
-        guard let body = try? JSON.encoder.encodeIfPresent(messageRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+        let body: Data?
+        do {
+            body = try JSON.encoder.encodeIfPresent(messageRequest)
+        } catch {
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "message")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -301,13 +318,13 @@ public class Assistant {
         // construct REST request
         let path = "/v2/assistants/\(assistantID)/sessions/\(sessionID)/message"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -324,6 +341,21 @@ public class Assistant {
 
         // execute REST request
         request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the message request body
+    private struct MessageRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let input: MessageInput?
+        let context: MessageContext?
+        init? (input: MessageInput? = nil, context: MessageContext? = nil) {
+            if input == nil && context == nil {
+                return nil
+            }
+            self.input = input
+            self.context = context
+        }
+        // swiftlint:enable identifier_name
     }
 
     /**
@@ -352,23 +384,26 @@ public class Assistant {
         completionHandler: @escaping (WatsonResponse<MessageResponseStateless>?, WatsonError?) -> Void)
     {
         // construct body
-        let messageStatelessRequest = MessageRequestStateless(
+        let messageStatelessRequest = MessageStatelessRequest(
             input: input,
             context: context)
-        guard let body = try? JSON.encoder.encodeIfPresent(messageStatelessRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+        let body: Data?
+        do {
+            body = try JSON.encoder.encodeIfPresent(messageStatelessRequest)
+        } catch {
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "messageStateless")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -377,13 +412,13 @@ public class Assistant {
         // construct REST request
         let path = "/v2/assistants/\(assistantID)/message"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -400,6 +435,21 @@ public class Assistant {
 
         // execute REST request
         request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the messageStateless request body
+    private struct MessageStatelessRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let input: MessageInputStateless?
+        let context: MessageContextStateless?
+        init? (input: MessageInputStateless? = nil, context: MessageContextStateless? = nil) {
+            if input == nil && context == nil {
+                return nil
+            }
+            self.input = input
+            self.context = context
+        }
+        // swiftlint:enable identifier_name
     }
 
     /**
@@ -433,12 +483,12 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listLogs")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -463,13 +513,13 @@ public class Assistant {
         // construct REST request
         let path = "/v2/assistants/\(assistantID)/logs"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -508,12 +558,12 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteUserData")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -524,7 +574,7 @@ public class Assistant {
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -540,6 +590,92 @@ public class Assistant {
 
         // execute REST request
         request.response(completionHandler: completionHandler)
+    }
+
+    /**
+     Identify intents and entities in multiple user utterances.
+
+     Send multiple user inputs to a dialog skill in a single request and receive information about the intents and
+     entities recognized in each input. This method is useful for testing and comparing the performance of different
+     skills or skill versions.
+     This method is available only with Premium plans.
+
+     - parameter skillID: Unique identifier of the skill. To find the skill ID in the Watson Assistant user interface,
+       open the skill settings and click **API Details**.
+     - parameter input: An array of input utterances to classify.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func bulkClassify(
+        skillID: String,
+        input: [BulkClassifyUtterance]? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<BulkClassifyResponse>?, WatsonError?) -> Void)
+    {
+        // construct body
+        let bulkClassifyRequest = BulkClassifyRequest(
+            input: input)
+        let body: Data?
+        do {
+            body = try JSON.encoder.encodeIfPresent(bulkClassifyRequest)
+        } catch {
+            completionHandler(nil, RestError.serialization(values: "request body"))
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "bulkClassify")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v2/skills/\(skillID)/workspace/bulk_classify"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "POST",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the bulkClassify request body
+    private struct BulkClassifyRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let input: [BulkClassifyUtterance]?
+        init? (input: [BulkClassifyUtterance]? = nil) {
+            if input == nil {
+                return nil
+            }
+            self.input = input
+        }
+        // swiftlint:enable identifier_name
     }
 
 }

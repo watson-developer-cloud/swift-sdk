@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,6 +53,15 @@ public struct Category: Codable, Equatable {
     }
 
     /**
+     The type of modification of the feedback entry in the updated labels response.
+     */
+    public enum Modification: String {
+        case added = "added"
+        case unchanged = "unchanged"
+        case removed = "removed"
+    }
+
+    /**
      The category of the associated element.
      */
     public var label: String?
@@ -62,10 +71,16 @@ public struct Category: Codable, Equatable {
      */
     public var provenanceIDs: [String]?
 
+    /**
+     The type of modification of the feedback entry in the updated labels response.
+     */
+    public var modification: String?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case label = "label"
         case provenanceIDs = "provenance_ids"
+        case modification = "modification"
     }
 
     /**
@@ -73,16 +88,19 @@ public struct Category: Codable, Equatable {
 
       - parameter label: The category of the associated element.
       - parameter provenanceIDs: Hashed values that you can send to IBM to provide feedback or receive support.
+      - parameter modification: The type of modification of the feedback entry in the updated labels response.
 
       - returns: An initialized `Category`.
      */
     public init(
         label: String? = nil,
-        provenanceIDs: [String]? = nil
+        provenanceIDs: [String]? = nil,
+        modification: String? = nil
     )
     {
         self.label = label
         self.provenanceIDs = provenanceIDs
+        self.modification = modification
     }
 
 }

@@ -24,6 +24,7 @@ There are many resources to help you build your first cognitive application with
 * [Before you begin](#before-you-begin)
 * [Requirements](#requirements)
 * [Installation](#installation)
+* [Known Issues](#known-issues)
 * [Authentication](#authentication)
 * [Custom Service URLs](#custom-service-urls)
 * [Obtaining Transaction IDs](#obtaining-transaction-ids)
@@ -51,6 +52,15 @@ This SDK provides classes and methods to access the following Watson services.
 * [Text to Speech](https://www.ibm.com/watson/services/text-to-speech)
 * [Tone Analyzer](https://www.ibm.com/watson/services/tone-analyzer)
 * [Visual Recognition](https://www.ibm.com/watson/services/visual-recognition)
+
+## ANNOUNCEMENTS!
+### Personality Insights deprecation
+IBM Watson™ Personality Insights is discontinued. For a period of one year from 1 December 2020, you will still be able to use Watson Personality Insights. However, as of 1 December 2021, the offering will no longer be available.
+
+As an alternative, we encourage you to consider migrating to IBM Watson™ [Natural Language Understanding](https://cloud.ibm.com/docs/natural-language-understanding), a service on IBM Cloud® that uses deep learning to extract data and insights from text such as keywords, categories, sentiment, emotion, and syntax to provide insights for your business or industry. For more information, see About Natural Language Understanding.
+
+### Visual Recognition deprecation
+IBM Watson™ Visual Recognition is discontinued. Existing instances are supported until 1 December 2021, but as of 7 January 2021, you can't create instances. Any instance that is provisioned on 1 December 2021 will be deleted.
 
 ## Before you begin
 * You need an [IBM Cloud][ibm-cloud-onboarding] account.
@@ -103,6 +113,8 @@ For more information on using Cocoapods, refer to the [Cocoapods Guides](https:/
 
 ### Carthage
 
+**NOTE**: Current issues with Carthage and XCode 12 prevents installation of necessary dependencies. See [Known Issues](https://github.com/watson-developer-cloud/swift-sdk#known-issues)
+
 You can install Carthage with [Homebrew](http://brew.sh/):
 
 ```bash
@@ -139,6 +151,10 @@ dependencies: [
     .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "3.6.0")
 ]
 ```
+
+## Known Issues
+
+There is a known issue with Carthage and XCode 12 that prevents installation of the required dependency Starscream. There is already an [issue thread](https://github.com/Carthage/Carthage/issues/3019) up on the Carthage repository with a [workaround script](https://github.com/getsentry/sentry-cocoa/pull/780) that can be run to address the issue.  Until there is a version released that truly addresses this issue, it is recommended to either use one of the other two package managers or use the workaround script. 
 
 ## Authentication
 
@@ -228,7 +244,7 @@ For example, here is how to connect to a Watson Assistant instance that is hoste
 let authenticator = WatsonIAMAuthenticator(apiKey: "{apikey}")
 let assistant = Assistant(version: "{version}", authenticator: authenticator)
 
-assistant.serviceURL = "https://gateway-fra.watsonplatform.net/conversation/api"
+assistant.serviceURL = "https://api.eu-de.assistant.watson.cloud.ibm.com"
 ```
 
 ## Disable SSL certificate verification
@@ -248,7 +264,7 @@ Note: `disableSSLVerification()` is currently not supported on Linux.
 
 When debugging an issue with IBM support, you may be asked to provide a `transaction ID` to help IBM identify an API call that needs to be debugged.
 
-Every SDK call returns a response with a transaction ID in the `x-global-transaction-id` header. This transaction ID is useful for troubleshooting and accessing relevant logs from your service instance.
+Every SDK call returns a response with a transaction ID in the `X-Global-Transaction-Id` header. Together the service instance region, this ID helps support teams troubleshoot issues from relevant logs.
 
 You can access the header following the pattern below:
 
@@ -266,7 +282,26 @@ let input = MessageInput(text: "Hello")
 assistant.message(workspaceID: "{workspace_id}", input: input) {
   response, error in
 
-  print(response?.headers["x-global-transaction-id"]!)
+  print(response?.headers["X-Global-Transaction-Id"]!)
+
+  ...
+}
+```
+
+However, the transaction ID isn't available when the API doesn't return a response for some reason. In that case, you can set your own transaction ID in the request. For example, replace `<my-unique-transaction-id>` in the following example with a unique transaction ID.
+
+```swift
+let authenticator = WatsonIAMAuthenticator(apiKey: "{apikey}")
+let assistant = Assistant(version: "2020-04-01", authenticator: authenticator)
+assistant.serviceURL = "{url}"
+
+let workspaceID = getWorkspaceID()
+let input = MessageInput(text: "Hello")
+
+assistant.message(workspaceID: "{workspace_id}", input: input, headers: ["X-Global-Transaction-Id": "<my-unique-transaction-id>"]) {
+  response, error in
+
+  print(response?.headers["X-Global-Transaction-Id"]!)
 
   ...
 }

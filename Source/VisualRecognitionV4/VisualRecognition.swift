@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,22 +13,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
+/**
+ * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-be3b4618-20201201-153403
+ **/
+
 // swiftlint:disable file_length
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 import IBMSwiftSDKCore
 
+public typealias WatsonError = RestError
+public typealias WatsonResponse = RestResponse
 /**
- Provide images to the IBM Watson&trade; Visual Recognition service for analysis. The service detects objects based on a
- set of images with training data.
+ IBM Watson&trade; Visual Recognition is discontinued. Existing instances are supported until 1 December 2021, but as of
+ 7 January 2021, you can't create instances. Any instance that is provisioned on 1 December 2021 will be deleted.
+ {: deprecated}
+ Provide images to the IBM Watson Visual Recognition service for analysis. The service detects objects based on a set of
+ images with training data.
  */
 public class VisualRecognition {
 
     /// The base URL to use when contacting the service.
     public var serviceURL: String? = "https://api.us-south.visual-recognition.watson.cloud.ibm.com"
 
+    /// Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The current version is
+    /// `2019-02-11`.
+    public var version: String
+
     /// Service identifiers
-    internal let serviceName = "WatsonVisionCombined"
+    public static let defaultServiceName = "watson_vision_combined"
+    // Service info for SDK headers
+    internal let serviceName = defaultServiceName
     internal let serviceVersion = "v4"
     internal let serviceSdkName = "visual_recognition"
 
@@ -37,48 +56,49 @@ public class VisualRecognition {
 
     var session = URLSession(configuration: URLSessionConfiguration.default)
     public let authenticator: Authenticator
-    let version: String
 
     #if os(Linux)
     /**
      Create a `VisualRecognition` object.
 
-     This initializer will retrieve credentials from the environment or a local credentials file.
+     If an authenticator is not supplied, the initializer will retrieve credentials from the environment or
+     a local credentials file and construct an appropriate authenticator using these credentials.
      The credentials file can be downloaded from your service instance on IBM Cloud as ibm-credentials.env.
      Make sure to add the credentials file to your project so that it can be loaded at runtime.
 
-     If credentials are not available in the environment or a local credentials file, initialization will fail.
+     If an authenticator is not supplied and credentials are not available in the environment or a local
+     credentials file, initialization will fail by throwing an exception.
      In that case, try another initializer that directly passes in the credentials.
 
-     - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
+     - parameter version: Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The
+       current version is `2019-02-11`.
+     - parameter authenticator: The Authenticator object used to authenticate requests to the service
+     - serviceName: String = defaultServiceName
      */
-    public init(version: String) throws {
+    public init(version: String, authenticator: Authenticator? = nil, serviceName: String = defaultServiceName) throws {
+        #warning("On 1 December 2021, Visual Recognition will no longer be available. For more information, see https://github.com/watson-developer-cloud/swift-sdk/tree/master#visual-recognition-deprecation")
         self.version = version
-
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
-        self.authenticator = authenticator
-
-        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
+        self.authenticator = try authenticator ?? ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceName)
+        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceName) {
             self.serviceURL = serviceURL
         }
-
         RestRequest.userAgent = Shared.userAgent
     }
-    #endif
-
+    #else
     /**
      Create a `VisualRecognition` object.
 
-     - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
+     - parameter version: Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The
+       current version is `2019-02-11`.
      - parameter authenticator: The Authenticator object used to authenticate requests to the service
      */
     public init(version: String, authenticator: Authenticator) {
+        #warning("On 1 December 2021, Visual Recognition will no longer be available. For more information, see https://github.com/watson-developer-cloud/swift-sdk/tree/master#visual-recognition-deprecation")
         self.version = version
         self.authenticator = authenticator
         RestRequest.userAgent = Shared.userAgent
     }
+    #endif
 
     #if !os(Linux)
     /**
@@ -97,7 +117,7 @@ public class VisualRecognition {
      - parameter data: Raw data returned by the service that may represent an error.
      - parameter response: the URL response returned by the service.
      */
-    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> WatsonError {
+    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> RestError {
 
         let statusCode = response.statusCode
         var errorMessage: String?
@@ -122,7 +142,7 @@ public class VisualRecognition {
             errorMessage = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
         }
 
-        return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: metadata)
+        return RestError.http(statusCode: statusCode, message: errorMessage, metadata: metadata)
     }
 
     /**
@@ -161,17 +181,16 @@ public class VisualRecognition {
     {
         // construct body
         let multipartFormData = MultipartFormData()
-
-        // HAND EDIT: join collectionIDs into CSV string
-        if let csvCollectionIDsData = collectionIDs.joined(separator: ",").data(using: .utf8) {
-            multipartFormData.append(csvCollectionIDsData, withName: "collection_ids")
+        for item in collectionIDs {
+            if let itemData = item.data(using: .utf8) {
+                multipartFormData.append(itemData, withName: "collection_ids")
+            }
         }
-
-        // HAND EDIT: join features into CSV string
-        if let csvFeaturesData = features.joined(separator: ",").data(using: .utf8) {
-            multipartFormData.append(csvFeaturesData, withName: "features")
+        for item in features {
+            if let itemData = item.data(using: .utf8) {
+                multipartFormData.append(itemData, withName: "features")
+            }
         }
-
         if let imagesFile = imagesFile {
             for item in imagesFile {
                 multipartFormData.append(item.data, withName: "images_file", mimeType: item.contentType, fileName: item.filename)
@@ -190,19 +209,19 @@ public class VisualRecognition {
             }
         }
         guard let body = try? multipartFormData.toData() else {
-            completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
+            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "analyze")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -212,7 +231,7 @@ public class VisualRecognition {
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -242,6 +261,7 @@ public class VisualRecognition {
      - parameter name: The name of the collection. The name can contain alphanumeric, underscore, hyphen, and dot
        characters. It cannot begin with the reserved prefix `sys-`.
      - parameter description: The description of the collection.
+     - parameter trainingStatus: Training status information for the collection.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -252,23 +272,23 @@ public class VisualRecognition {
         completionHandler: @escaping (WatsonResponse<Collection>?, WatsonError?) -> Void)
     {
         // construct body
-        let createCollectionRequest = BaseCollection(
+        let createCollectionRequest = CreateCollectionRequest(
             name: name,
             description: description)
         guard let body = try? JSON.encoder.encode(createCollectionRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createCollection")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -278,7 +298,7 @@ public class VisualRecognition {
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -297,6 +317,14 @@ public class VisualRecognition {
         request.responseObject(completionHandler: completionHandler)
     }
 
+    // Private struct for the createCollection request body
+    private struct CreateCollectionRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let name: String?
+        let description: String?
+        // swiftlint:enable identifier_name
+    }
+
     /**
      List collections.
 
@@ -311,12 +339,12 @@ public class VisualRecognition {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listCollections")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -326,7 +354,7 @@ public class VisualRecognition {
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -360,12 +388,12 @@ public class VisualRecognition {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getCollection")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -374,13 +402,13 @@ public class VisualRecognition {
         // construct REST request
         let path = "/v4/collections/\(collectionID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -409,6 +437,7 @@ public class VisualRecognition {
      - parameter name: The name of the collection. The name can contain alphanumeric, underscore, hyphen, and dot
        characters. It cannot begin with the reserved prefix `sys-`.
      - parameter description: The description of the collection.
+     - parameter trainingStatus: Training status information for the collection.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -420,23 +449,26 @@ public class VisualRecognition {
         completionHandler: @escaping (WatsonResponse<Collection>?, WatsonError?) -> Void)
     {
         // construct body
-        let updateCollectionRequest = BaseCollection(
+        let updateCollectionRequest = UpdateCollectionRequest(
             name: name,
             description: description)
-        guard let body = try? JSON.encoder.encodeIfPresent(updateCollectionRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+        let body: Data?
+        do {
+            body = try JSON.encoder.encodeIfPresent(updateCollectionRequest)
+        } catch {
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateCollection")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -445,13 +477,13 @@ public class VisualRecognition {
         // construct REST request
         let path = "/v4/collections/\(collectionID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -470,6 +502,21 @@ public class VisualRecognition {
         request.responseObject(completionHandler: completionHandler)
     }
 
+    // Private struct for the updateCollection request body
+    private struct UpdateCollectionRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let name: String?
+        let description: String?
+        init? (name: String? = nil, description: String? = nil) {
+            if name == nil && description == nil {
+                return nil
+            }
+            self.name = name
+            self.description = description
+        }
+        // swiftlint:enable identifier_name
+    }
+
     /**
      Delete a collection.
 
@@ -486,12 +533,12 @@ public class VisualRecognition {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteCollection")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -500,13 +547,13 @@ public class VisualRecognition {
         // construct REST request
         let path = "/v4/collections/\(collectionID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -548,12 +595,12 @@ public class VisualRecognition {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getModelFile")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/octet-stream"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -564,13 +611,13 @@ public class VisualRecognition {
         // construct REST request
         let path = "/v4/collections/\(collectionID)/model"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -642,19 +689,19 @@ public class VisualRecognition {
             }
         }
         guard let body = try? multipartFormData.toData() else {
-            completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
+            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "addImages")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -663,13 +710,13 @@ public class VisualRecognition {
         // construct REST request
         let path = "/v4/collections/\(collectionID)/images"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -704,12 +751,12 @@ public class VisualRecognition {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listImages")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -718,13 +765,13 @@ public class VisualRecognition {
         // construct REST request
         let path = "/v4/collections/\(collectionID)/images"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -760,12 +807,12 @@ public class VisualRecognition {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getImageDetails")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -774,13 +821,13 @@ public class VisualRecognition {
         // construct REST request
         let path = "/v4/collections/\(collectionID)/images/\(imageID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -816,12 +863,12 @@ public class VisualRecognition {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteImage")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -830,13 +877,13 @@ public class VisualRecognition {
         // construct REST request
         let path = "/v4/collections/\(collectionID)/images/\(imageID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -876,12 +923,12 @@ public class VisualRecognition {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getJpegImage")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "image/jpeg"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -894,13 +941,13 @@ public class VisualRecognition {
         // construct REST request
         let path = "/v4/collections/\(collectionID)/images/\(imageID)/jpeg"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -934,12 +981,12 @@ public class VisualRecognition {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listObjectMetadata")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -948,13 +995,13 @@ public class VisualRecognition {
         // construct REST request
         let path = "/v4/collections/\(collectionID)/objects"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -992,22 +1039,22 @@ public class VisualRecognition {
         completionHandler: @escaping (WatsonResponse<UpdateObjectMetadata>?, WatsonError?) -> Void)
     {
         // construct body
-        let updateObjectMetadataRequest = UpdateObjectMetadata(
+        let updateObjectMetadataRequest = UpdateObjectMetadataRequest(
             object: newObject)
         guard let body = try? JSON.encoder.encode(updateObjectMetadataRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateObjectMetadata")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1016,13 +1063,13 @@ public class VisualRecognition {
         // construct REST request
         let path = "/v4/collections/\(collectionID)/objects/\(object)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1039,6 +1086,13 @@ public class VisualRecognition {
 
         // execute REST request
         request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the updateObjectMetadata request body
+    private struct UpdateObjectMetadataRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let object: String
+        // swiftlint:enable identifier_name
     }
 
     /**
@@ -1059,12 +1113,12 @@ public class VisualRecognition {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getObjectMetadata")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1073,13 +1127,13 @@ public class VisualRecognition {
         // construct REST request
         let path = "/v4/collections/\(collectionID)/objects/\(object)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1116,12 +1170,12 @@ public class VisualRecognition {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteObject")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1130,13 +1184,13 @@ public class VisualRecognition {
         // construct REST request
         let path = "/v4/collections/\(collectionID)/objects/\(object)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1172,12 +1226,12 @@ public class VisualRecognition {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "train")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1186,13 +1240,13 @@ public class VisualRecognition {
         // construct REST request
         let path = "/v4/collections/\(collectionID)/train"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1233,22 +1287,22 @@ public class VisualRecognition {
         completionHandler: @escaping (WatsonResponse<TrainingDataObjects>?, WatsonError?) -> Void)
     {
         // construct body
-        let addImageTrainingDataRequest = BaseTrainingDataObjects(
+        let addImageTrainingDataRequest = AddImageTrainingDataRequest(
             objects: objects)
         guard let body = try? JSON.encoder.encode(addImageTrainingDataRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "addImageTrainingData")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1257,13 +1311,13 @@ public class VisualRecognition {
         // construct REST request
         let path = "/v4/collections/\(collectionID)/images/\(imageID)/training_data"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1282,6 +1336,13 @@ public class VisualRecognition {
         request.responseObject(completionHandler: completionHandler)
     }
 
+    // Private struct for the addImageTrainingData request body
+    private struct AddImageTrainingDataRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let objects: [TrainingDataObject]?
+        // swiftlint:enable identifier_name
+    }
+
     /**
      Get training usage.
 
@@ -1297,29 +1358,35 @@ public class VisualRecognition {
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func getTrainingUsage(
-        startTime: String? = nil,
-        endTime: String? = nil,
+        startTime: Date? = nil,
+        endTime: Date? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<TrainingEvents>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getTrainingUsage")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let startTime = startTime {
-            let queryParameter = URLQueryItem(name: "start_time", value: startTime)
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-mm-dd"
+            let dateString = dateFormatter.string(from: startTime)
+            let queryParameter = URLQueryItem(name: "start_time", value: dateString)
             queryParameters.append(queryParameter)
         }
         if let endTime = endTime {
-            let queryParameter = URLQueryItem(name: "end_time", value: endTime)
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-mm-dd"
+            let dateString = dateFormatter.string(from: endTime)
+            let queryParameter = URLQueryItem(name: "end_time", value: dateString)
             queryParameters.append(queryParameter)
         }
 
@@ -1327,7 +1394,7 @@ public class VisualRecognition {
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1365,12 +1432,12 @@ public class VisualRecognition {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteUserData")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1381,7 +1448,7 @@ public class VisualRecognition {
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 

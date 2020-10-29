@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,17 +41,14 @@ public struct MessageContextGlobal: Codable, Equatable {
       Initialize a `MessageContextGlobal` with member variables.
 
       - parameter system: Built-in system properties that apply to all skills used by the assistant.
-      - parameter sessionID: The session ID.
 
       - returns: An initialized `MessageContextGlobal`.
      */
     public init(
-        system: MessageContextGlobalSystem? = nil,
-        sessionID: String? = nil
+        system: MessageContextGlobalSystem? = nil
     )
     {
         self.system = system
-        self.sessionID = sessionID
     }
 
 }

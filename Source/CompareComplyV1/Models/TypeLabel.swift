@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,15 @@ import Foundation
 public struct TypeLabel: Codable, Equatable {
 
     /**
+     The type of modification of the feedback entry in the updated labels response.
+     */
+    public enum Modification: String {
+        case added = "added"
+        case unchanged = "unchanged"
+        case removed = "removed"
+    }
+
+    /**
      A pair of `nature` and `party` objects. The `nature` object identifies the effect of the element on the identified
      `party`, and the `party` object identifies the affected party.
      */
@@ -32,10 +41,16 @@ public struct TypeLabel: Codable, Equatable {
      */
     public var provenanceIDs: [String]?
 
+    /**
+     The type of modification of the feedback entry in the updated labels response.
+     */
+    public var modification: String?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case label = "label"
         case provenanceIDs = "provenance_ids"
+        case modification = "modification"
     }
 
     /**
@@ -44,16 +59,19 @@ public struct TypeLabel: Codable, Equatable {
       - parameter label: A pair of `nature` and `party` objects. The `nature` object identifies the effect of the
         element on the identified `party`, and the `party` object identifies the affected party.
       - parameter provenanceIDs: Hashed values that you can send to IBM to provide feedback or receive support.
+      - parameter modification: The type of modification of the feedback entry in the updated labels response.
 
       - returns: An initialized `TypeLabel`.
      */
     public init(
         label: Label? = nil,
-        provenanceIDs: [String]? = nil
+        provenanceIDs: [String]? = nil,
+        modification: String? = nil
     )
     {
         self.label = label
         self.provenanceIDs = provenanceIDs
+        self.modification = modification
     }
 
 }

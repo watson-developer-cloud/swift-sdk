@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,9 @@ import Foundation
 
 /**
  A modifier that will narrow down the document set of the sub aggregations it precedes.
+
+ Enums with an associated value of QueryFilterAggregation:
+    QueryAggregation
  */
 public struct QueryFilterAggregation: Codable, Equatable {
 

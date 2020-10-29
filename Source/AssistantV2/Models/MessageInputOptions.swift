@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -90,12 +90,12 @@ public struct MessageInputOptions: Codable, Equatable {
       - returns: An initialized `MessageInputOptions`.
      */
     public init(
-        debug: Bool? = nil,
         restart: Bool? = nil,
         alternateIntents: Bool? = nil,
+        spelling: MessageInputOptionsSpelling? = nil,
+        debug: Bool? = nil,
         returnContext: Bool? = nil,
-        export: Bool? = nil,
-        spelling: MessageInputOptionsSpelling? = nil
+        export: Bool? = nil
     )
     {
         self.restart = restart

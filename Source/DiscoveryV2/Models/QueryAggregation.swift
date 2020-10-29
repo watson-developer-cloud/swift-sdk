@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,91 +16,145 @@
 
 import Foundation
 
-/** An aggregation produced by the Discovery service to analyze the input provided. */
+/**
+ An abstract aggregation type produced by Discovery to analyze the input provided.
+ */
 public enum QueryAggregation: Codable, Equatable {
 
-    // reference: https://cloud.ibm.com/docs/services/discovery/query-reference.html#aggregations
-
+    case queryAggregation(GenericQueryAggregation)
     case term(QueryTermAggregation)
-    case filter(QueryFilterAggregation)
-    case nested(QueryNestedAggregation)
     case histogram(QueryHistogramAggregation)
     case timeslice(QueryTimesliceAggregation)
-    case topHits(QueryTopHitsAggregation)
-    case uniqueCount(QueryCalculationAggregation)
-    case max(QueryCalculationAggregation)
+    case nested(QueryNestedAggregation)
+    case filter(QueryFilterAggregation)
     case min(QueryCalculationAggregation)
-    case average(QueryCalculationAggregation)
+    case max(QueryCalculationAggregation)
     case sum(QueryCalculationAggregation)
-    case generic(GenericQueryAggregation)
-
-    private enum CodingKeys: String, CodingKey {
-        case type = "type"
-    }
+    case average(QueryCalculationAggregation)
+    case uniqueCount(QueryCalculationAggregation)
+    case topHits(QueryTopHitsAggregation)
+    case groupBy(QueryGroupByAggregation)
 
     public init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        guard let type = try container.decodeIfPresent(String.self, forKey: .type) else {
-            // the specification does not identify `type` as a required field,
-            // so we need a generic catch-all in case it is not present
-            self = .generic(try GenericQueryAggregation(from: decoder))
-            return
+        let container = try decoder.singleValueContainer()
+        if let genericInstance = try? container.decode(GenericQueryAggregation.self) {
+            switch genericInstance.type {
+            case "term":
+                if let val = try? container.decode(QueryTermAggregation.self) {
+                    self = .term(val)
+                    return
+                }
+            case "histogram":
+                if let val = try? container.decode(QueryHistogramAggregation.self) {
+                    self = .histogram(val)
+                    return
+                }
+            case "timeslice":
+                if let val = try? container.decode(QueryTimesliceAggregation.self) {
+                    self = .timeslice(val)
+                    return
+                }
+            case "nested":
+                if let val = try? container.decode(QueryNestedAggregation.self) {
+                    self = .nested(val)
+                    return
+                }
+            case "filter":
+                if let val = try? container.decode(QueryFilterAggregation.self) {
+                    self = .filter(val)
+                    return
+                }
+            case "min":
+                if let val = try? container.decode(QueryCalculationAggregation.self) {
+                    self = .min(val)
+                    return
+                }
+            case "max":
+                if let val = try? container.decode(QueryCalculationAggregation.self) {
+                    self = .max(val)
+                    return
+                }
+            case "sum":
+                if let val = try? container.decode(QueryCalculationAggregation.self) {
+                    self = .sum(val)
+                    return
+                }
+            case "average":
+                if let val = try? container.decode(QueryCalculationAggregation.self) {
+                    self = .average(val)
+                    return
+                }
+            case "unique_count":
+                if let val = try? container.decode(QueryCalculationAggregation.self) {
+                    self = .uniqueCount(val)
+                    return
+                }
+            case "top_hits":
+                if let val = try? container.decode(QueryTopHitsAggregation.self) {
+                    self = .topHits(val)
+                    return
+                }
+            case "group_by":
+                if let val = try? container.decode(QueryGroupByAggregation.self) {
+                    self = .groupBy(val)
+                    return
+                }
+            default:
+                if let val = try? container.decode(GenericQueryAggregation.self) {
+                    self = .queryAggregation(val)
+                    return
+                }
+            }
         }
-        switch type {
-        case "term": self = .term(try QueryTermAggregation(from: decoder))
-        case "filter": self = .filter(try QueryFilterAggregation(from: decoder))
-        case "nested": self = .nested(try QueryNestedAggregation(from: decoder))
-        case "histogram": self = .histogram(try QueryHistogramAggregation(from: decoder))
-        case "timeslice": self = .timeslice(try QueryTimesliceAggregation(from: decoder))
-        case "top_hits": self = .topHits(try QueryTopHitsAggregation(from: decoder))
-        case "unique_count": self = .uniqueCount(try QueryCalculationAggregation(from: decoder))
-        case "max": self = .max(try QueryCalculationAggregation(from: decoder))
-        case "min": self = .min(try QueryCalculationAggregation(from: decoder))
-        case "average": self = .average(try QueryCalculationAggregation(from: decoder))
-        case "sum": self = .sum(try QueryCalculationAggregation(from: decoder))
-        default: self = .generic(try GenericQueryAggregation(from: decoder))
-        }
+
+        throw DecodingError.typeMismatch(QueryAggregation.self,
+                                         DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Decoding failed for all associated types"))
     }
 
     public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
+        var container = encoder.singleValueContainer()
         switch self {
+        case .queryAggregation(let queryAggregation):
+            try container.encode(queryAggregation)
         case .term(let term):
-            try container.encode("term", forKey: .type)
-            try term.encode(to: encoder)
-        case .filter(let filter):
-            try container.encode("filter", forKey: .type)
-            try filter.encode(to: encoder)
-        case .nested(let nested):
-            try container.encode("nested", forKey: .type)
-            try nested.encode(to: encoder)
+            try container.encode(term)
         case .histogram(let histogram):
-            try container.encode("histogram", forKey: .type)
-            try histogram.encode(to: encoder)
+            try container.encode(histogram)
         case .timeslice(let timeslice):
-            try container.encode("timeslice", forKey: .type)
-            try timeslice.encode(to: encoder)
-        case .topHits(let topHits):
-            try container.encode("top_hits", forKey: .type)
-            try topHits.encode(to: encoder)
-        case .uniqueCount(let uniqueCount):
-            try container.encode("unique_count", forKey: .type)
-            try uniqueCount.encode(to: encoder)
-        case .max(let max):
-            try container.encode("max", forKey: .type)
-            try max.encode(to: encoder)
+            try container.encode(timeslice)
+        case .nested(let nested):
+            try container.encode(nested)
+        case .filter(let filter):
+            try container.encode(filter)
         case .min(let min):
-            try container.encode("min", forKey: .type)
-            try min.encode(to: encoder)
-        case .average(let average):
-            try container.encode("average", forKey: .type)
-            try average.encode(to: encoder)
+            try container.encode(min)
+        case .max(let max):
+            try container.encode(max)
         case .sum(let sum):
-            try container.encode("sum", forKey: .type)
-            try sum.encode(to: encoder)
-        case .generic(let generic):
-            try generic.encode(to: encoder)
+            try container.encode(sum)
+        case .average(let average):
+            try container.encode(average)
+        case .uniqueCount(let unique_count):
+            try container.encode(unique_count)
+        case .topHits(let top_hits):
+            try container.encode(top_hits)
+        case .groupBy(let group_by):
+            try container.encode(group_by)
         }
+    }
+}
+
+public struct GenericQueryAggregation: Codable, Equatable {
+
+    /**
+     The type of aggregation command used. Options include: term, histogram, timeslice, nested, filter, min, max, sum,
+     average, unique_count, and top_hits.
+     */
+    public var type: String
+
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case type = "type"
     }
 
 }

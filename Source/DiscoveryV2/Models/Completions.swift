@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import Foundation
 public struct Completions: Codable, Equatable {
 
     /**
-     Array of autcomplete suggestion based on the provided prefix.
+     Array of autocomplete suggestion based on the provided prefix.
      */
     public var completions: [String]?
 

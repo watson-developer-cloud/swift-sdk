@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- Information about an available voice model.
+ Information about an available voice.
  */
 public struct Voice: Codable, Equatable {
 
@@ -58,10 +58,10 @@ public struct Voice: Codable, Equatable {
     public var supportedFeatures: SupportedFeatures
 
     /**
-     Returns information about a specified custom voice model. This field is returned only by the **Get a voice** method
-     and only when you specify the customization ID of a custom voice model.
+     Returns information about a specified custom model. This field is returned only by the **Get a voice** method and
+     only when you specify the customization ID of a custom model.
      */
-    public var customization: VoiceModel?
+    public var customization: CustomModel?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {

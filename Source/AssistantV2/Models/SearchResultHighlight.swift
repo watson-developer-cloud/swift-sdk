@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -68,6 +68,7 @@ public struct SearchResultHighlight: Codable, Equatable {
         var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
         try dynamicContainer.encodeIfPresent(additionalProperties)
     }
+
 }
 
 public extension KeyedDecodingContainer where Key == DynamicKeys {
@@ -76,7 +77,7 @@ public extension KeyedDecodingContainer where Key == DynamicKeys {
     func decode(_ type: [String: [String]].Type, excluding keys: [CodingKey]) throws -> [String: [String]] {
         var retval: [String: [String]] = [:]
         try self.allKeys.forEach { key in
-            if !keys.contains{ $0.stringValue == key.stringValue} {
+            if !keys.contains(where: { $0.stringValue == key.stringValue}) {
                 let value = try self.decode([String].self, forKey: key)
                 retval[key.stringValue] = value
             }

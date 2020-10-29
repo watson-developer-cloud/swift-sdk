@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2018.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -84,10 +84,6 @@ public struct Configuration: Codable, Equatable {
       Initialize a `Configuration` with member variables.
 
       - parameter name: The name of the configuration.
-      - parameter configurationID: The unique identifier of the configuration.
-      - parameter created: The creation date of the configuration in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
-      - parameter updated: The timestamp of when the configuration was last updated in the format
-        yyyy-MM-dd'T'HH:mm:ss.SSS'Z'.
       - parameter description: The description of the configuration, if available.
       - parameter conversions: Document conversion settings.
       - parameter enrichments: An array of document enrichment settings for the configuration.
@@ -99,9 +95,6 @@ public struct Configuration: Codable, Equatable {
      */
     public init(
         name: String,
-        configurationID: String? = nil,
-        created: Date? = nil,
-        updated: Date? = nil,
         description: String? = nil,
         conversions: Conversions? = nil,
         enrichments: [Enrichment]? = nil,
@@ -110,9 +103,6 @@ public struct Configuration: Codable, Equatable {
     )
     {
         self.name = name
-        self.configurationID = configurationID
-        self.created = created
-        self.updated = updated
         self.description = description
         self.conversions = conversions
         self.enrichments = enrichments

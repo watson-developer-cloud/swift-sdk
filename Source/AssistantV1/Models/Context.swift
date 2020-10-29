@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ public struct Context: Codable, Equatable {
     /**
      For internal use only.
      */
-    public var system: SystemResponse?
+    public var system: [String: JSON]?
 
     /**
      Metadata related to the message.
@@ -59,7 +59,7 @@ public struct Context: Codable, Equatable {
      */
     public init(
         conversationID: String? = nil,
-        system: SystemResponse? = nil,
+        system: [String: JSON]? = nil,
         metadata: MessageContextMetadata? = nil,
         additionalProperties: [String: JSON] = [:]
     )
@@ -73,7 +73,7 @@ public struct Context: Codable, Equatable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         conversationID = try container.decodeIfPresent(String.self, forKey: .conversationID)
-        system = try container.decodeIfPresent(SystemResponse.self, forKey: .system)
+        system = try container.decodeIfPresent([String: JSON].self, forKey: .system)
         metadata = try container.decodeIfPresent(MessageContextMetadata.self, forKey: .metadata)
         let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
         additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: CodingKeys.allValues)

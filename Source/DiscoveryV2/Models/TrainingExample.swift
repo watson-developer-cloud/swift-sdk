@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,24 +61,18 @@ public struct TrainingExample: Codable, Equatable {
       - parameter documentID: The document ID associated with this training example.
       - parameter collectionID: The collection ID associated with this training example.
       - parameter relevance: The relevance of the training example.
-      - parameter created: The date and time the example was created.
-      - parameter updated: The date and time the example was updated.
 
       - returns: An initialized `TrainingExample`.
      */
     public init(
         documentID: String,
         collectionID: String,
-        relevance: Int,
-        created: Date? = nil,
-        updated: Date? = nil
+        relevance: Int
     )
     {
         self.documentID = documentID
         self.collectionID = collectionID
         self.relevance = relevance
-        self.created = created
-        self.updated = updated
     }
 
 }

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -79,10 +79,6 @@ public struct MessageInput: Codable, Equatable {
         of the message response. If this property is `true`, any corrections are automatically applied to the user input,
         and the original text is returned in the **original_text** property of the message response. This property
         overrides the value of the **spelling_auto_correct** property in the workspace settings.
-      - parameter suggestedText: Any suggested corrections of the input text. This property is returned only if
-        spelling correction is enabled and autocorrection is disabled.
-      - parameter originalText: The original user input text. This property is returned only if autocorrection is
-        enabled and the user input was corrected.
 
       - returns: An initialized `MessageInput`.
      */
@@ -90,16 +86,12 @@ public struct MessageInput: Codable, Equatable {
         text: String? = nil,
         spellingSuggestions: Bool? = nil,
         spellingAutoCorrect: Bool? = nil,
-        suggestedText: String? = nil,
-        originalText: String? = nil,
         additionalProperties: [String: JSON] = [:]
     )
     {
         self.text = text
         self.spellingSuggestions = spellingSuggestions
         self.spellingAutoCorrect = spellingAutoCorrect
-        self.suggestedText = suggestedText
-        self.originalText = originalText
         self.additionalProperties = additionalProperties
     }
 
@@ -108,8 +100,6 @@ public struct MessageInput: Codable, Equatable {
         text = try container.decodeIfPresent(String.self, forKey: .text)
         spellingSuggestions = try container.decodeIfPresent(Bool.self, forKey: .spellingSuggestions)
         spellingAutoCorrect = try container.decodeIfPresent(Bool.self, forKey: .spellingAutoCorrect)
-        suggestedText = try container.decodeIfPresent(String.self, forKey: .suggestedText)
-        originalText = try container.decodeIfPresent(String.self, forKey: .originalText)
         let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
         additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: CodingKeys.allValues)
     }

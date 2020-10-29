@@ -347,7 +347,7 @@ class VisualRecognitionUnitTests: XCTestCase {
         setenv("IBM_CREDENTIALS_FILE", "Source/SupportingFiles/ibm-credentials.env", 1)
         let visualRecognition: VisualRecognition? = try? VisualRecognition(version: versionDate)
         XCTAssertNotNil(visualRecognition)
-        XCTAssertEqual("https://gateway.watsonplatform.net/visual-recognition/api", visualRecognition?.serviceURL)
+        XCTAssertEqual("https://api.us-south.visual-recognition.watson.cloud.ibm.com", visualRecognition?.serviceURL)
     }
     #endif
 

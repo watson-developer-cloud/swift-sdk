@@ -280,7 +280,7 @@ let assistant = Assistant(version: "2020-04-01", authenticator: authenticator)
 assistant.serviceURL = "{url}"
 
 let workspaceID = getWorkspaceID()
-let input = MessageInput(text: "Hello", headers: ["X-Global-Transaction-Id": "<my-unique-transaction-id>"])
+let input = MessageInput(text: "Hello")
 
 assistant.message(workspaceID: "{workspace_id}", input: input, headers: ["X-Global-Transaction-Id": "<my-unique-transaction-id>"]) {
   response, error in

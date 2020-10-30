@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,20 +17,36 @@
 import Foundation
 
 /**
- Information about existing custom voice models.
+ Defines the location of the bounding box around the object.
  */
-public struct VoiceModels: Codable, Equatable {
+public struct ObjectDetailLocation: Codable, Equatable {
 
     /**
-     An array of `VoiceModel` objects that provides information about each available custom voice model. The array is
-     empty if the requesting credentials own no custom voice models (if no language is specified) or own no custom voice
-     models for the specified language.
+     Y-position of top-left pixel of the bounding box.
      */
-    public var customizations: [VoiceModel]
+    public var top: Int
+
+    /**
+     X-position of top-left pixel of the bounding box.
+     */
+    public var left: Int
+
+    /**
+     Width in pixels of of the bounding box.
+     */
+    public var width: Int
+
+    /**
+     Height in pixels of the bounding box.
+     */
+    public var height: Int
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case customizations = "customizations"
+        case top = "top"
+        case left = "left"
+        case width = "width"
+        case height = "height"
     }
 
 }

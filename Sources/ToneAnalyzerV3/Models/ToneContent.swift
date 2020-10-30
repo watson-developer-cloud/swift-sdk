@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,22 +24,22 @@ import IBMSwiftSDKCore
 public enum ToneContent {
 
     case toneInput(ToneInput)
-    case text(String)
     case html(String)
+    case text(String)
 
     internal var contentType: String {
         switch self {
         case .toneInput: return "application/json"
-        case .text: return "text/plain"
         case .html: return "text/html"
+        case .text: return "text/plain"
         }
     }
 
     internal var content: Data? {
         switch self {
         case .toneInput(let toneInput): return try? JSON.encoder.encode(toneInput)
-        case .text(let text): return text.data(using: .utf8)
         case .html(let html): return html.data(using: .utf8)
+        case .text(let text): return text.data(using: .utf8)
         }
     }
 

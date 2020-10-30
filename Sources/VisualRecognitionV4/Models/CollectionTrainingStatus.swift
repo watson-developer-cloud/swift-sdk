@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,33 +17,18 @@
 import Foundation
 
 /**
- The text to synthesize. Specify either plain text or a subset of SSML. SSML is an XML-based markup language that
- provides text annotation for speech-synthesis applications. Pass a maximum of 5 KB of input text.
+ Training status information for the collection.
  */
-internal struct Text: Codable, Equatable {
+public struct CollectionTrainingStatus: Codable, Equatable {
 
     /**
-     The text to synthesize.
+     Training status for the objects in the collection.
      */
-    public var text: String
+    public var objects: ObjectTrainingStatus
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case text = "text"
-    }
-
-    /**
-      Initialize a `Text` with member variables.
-
-      - parameter text: The text to synthesize.
-
-      - returns: An initialized `Text`.
-     */
-    public init(
-        text: String
-    )
-    {
-        self.text = text
+        case objects = "objects"
     }
 
 }

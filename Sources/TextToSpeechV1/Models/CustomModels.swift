@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,33 +17,20 @@
 import Foundation
 
 /**
- Input for the customer-engagement endpoint.
+ Information about existing custom models.
  */
-internal struct ToneChatInput: Codable, Equatable {
+public struct CustomModels: Codable, Equatable {
 
     /**
-     An array of `Utterance` objects that provides the input content that the service is to analyze.
+     An array of `CustomModel` objects that provides information about each available custom model. The array is empty
+     if the requesting credentials own no custom models (if no language is specified) or own no custom models for the
+     specified language.
      */
-    public var utterances: [Utterance]
+    public var customizations: [CustomModel]
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case utterances = "utterances"
-    }
-
-    /**
-      Initialize a `ToneChatInput` with member variables.
-
-      - parameter utterances: An array of `Utterance` objects that provides the input content that the service is to
-        analyze.
-
-      - returns: An initialized `ToneChatInput`.
-     */
-    public init(
-        utterances: [Utterance]
-    )
-    {
-        self.utterances = utterances
+        case customizations = "customizations"
     }
 
 }

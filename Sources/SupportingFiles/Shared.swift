@@ -18,8 +18,6 @@ import Foundation
 import IBMSwiftSDKCore
 
 // Typealias rest types
-public typealias WatsonResponse = RestResponse
-public typealias WatsonError = RestError
 public typealias WatsonJSON = JSON
 
 // Typealias Authenticators provided by the core

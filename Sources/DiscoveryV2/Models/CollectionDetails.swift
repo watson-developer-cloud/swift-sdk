@@ -65,9 +65,7 @@ public struct CollectionDetails: Codable, Equatable {
       Initialize a `CollectionDetails` with member variables.
 
       - parameter name: The name of the collection.
-      - parameter collectionID: The unique identifier of the collection.
       - parameter description: A description of the collection.
-      - parameter created: The date that the collection was created.
       - parameter language: The language of the collection.
       - parameter enrichments: An array of enrichments that are applied to this collection.
 
@@ -75,17 +73,13 @@ public struct CollectionDetails: Codable, Equatable {
      */
     public init(
         name: String,
-        collectionID: String? = nil,
         description: String? = nil,
-        created: Date? = nil,
         language: String? = nil,
         enrichments: [CollectionEnrichment]? = nil
     )
     {
         self.name = name
-        self.collectionID = collectionID
         self.description = description
-        self.created = created
         self.language = language
         self.enrichments = enrichments
     }

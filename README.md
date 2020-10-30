@@ -248,7 +248,7 @@ Note: `disableSSLVerification()` is currently not supported on Linux.
 
 When debugging an issue with IBM support, you may be asked to provide a `transaction ID` to help IBM identify an API call that needs to be debugged.
 
-Every SDK call returns a response with a transaction ID in the `x-global-transaction-id` header. This transaction ID is useful for troubleshooting and accessing relevant logs from your service instance.
+Every SDK call returns a response with a transaction ID in the `X-Global-Transaction-Id` header. Together the service instance region, this ID helps support teams troubleshoot issues from relevant logs.
 
 You can access the header following the pattern below:
 
@@ -266,7 +266,26 @@ let input = MessageInput(text: "Hello")
 assistant.message(workspaceID: "{workspace_id}", input: input) {
   response, error in
 
-  print(response?.headers["x-global-transaction-id"]!)
+  print(response?.headers["X-Global-Transaction-Id"]!)
+
+  ...
+}
+```
+
+However, the transaction ID isn't available when the API doesn't return a response for some reason. In that case, you can set your own transaction ID in the request. For example, replace `<my-unique-transaction-id>` in the following example with a unique transaction ID.
+
+```swift
+let authenticator = WatsonIAMAuthenticator(apiKey: "{apikey}")
+let assistant = Assistant(version: "2020-04-01", authenticator: authenticator)
+assistant.serviceURL = "{url}"
+
+let workspaceID = getWorkspaceID()
+let input = MessageInput(text: "Hello", headers: ["X-Global-Transaction-Id": "<my-unique-transaction-id>"])
+
+assistant.message(workspaceID: "{workspace_id}", input: input) {
+  response, error in
+
+  print(response?.headers["X-Global-Transaction-Id"]!)
 
   ...
 }

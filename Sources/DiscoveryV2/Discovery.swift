@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,11 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
+/**
+ * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-36b26b63-20201028-122900
+ **/
+
 // swiftlint:disable file_length
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 import IBMSwiftSDKCore
 
+public typealias WatsonError = RestError
+public typealias WatsonResponse = RestResponse
 /**
  IBM Watson&trade; Discovery is a cognitive search and content analytics engine that you can add to applications to
  identify patterns, trends and actionable insights to drive better decision-making. Securely unify structured and
@@ -29,8 +39,14 @@ public class Discovery {
     /// The base URL to use when contacting the service.
     public var serviceURL: String? = "https://api.us-south.discovery.watson.cloud.ibm.com"
 
+    /// Release date of the version of the API you want to use. Specify dates in YYYY-MM-DD format. The current version
+    /// is `2019-11-22`.
+    public var version: String
+
     /// Service identifiers
-    internal let serviceName = "Discovery"
+    public static let defaultServiceName = "discovery"
+    // Service info for SDK headers
+    internal let serviceName = defaultServiceName
     internal let serviceVersion = "v2"
     internal let serviceSdkName = "discovery"
 
@@ -39,41 +55,39 @@ public class Discovery {
 
     var session = URLSession(configuration: URLSessionConfiguration.default)
     public let authenticator: Authenticator
-    let version: String
 
     #if os(Linux)
     /**
      Create a `Discovery` object.
 
-     This initializer will retrieve credentials from the environment or a local credentials file.
+     If an authenticator is not supplied, the initializer will retrieve credentials from the environment or
+     a local credentials file and construct an appropriate authenticator using these credentials.
      The credentials file can be downloaded from your service instance on IBM Cloud as ibm-credentials.env.
      Make sure to add the credentials file to your project so that it can be loaded at runtime.
 
-     If credentials are not available in the environment or a local credentials file, initialization will fail.
+     If an authenticator is not supplied and credentials are not available in the environment or a local
+     credentials file, initialization will fail by throwing an exception.
      In that case, try another initializer that directly passes in the credentials.
 
-     - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
+     - parameter version: Release date of the version of the API you want to use. Specify dates in YYYY-MM-DD format.
+       The current version is `2019-11-22`.
+     - parameter authenticator: The Authenticator object used to authenticate requests to the service
+     - serviceName: String = defaultServiceName
      */
-    public init(version: String) throws {
+    public init(version: String, authenticator: Authenticator? = nil, serviceName: String = defaultServiceName) throws {
         self.version = version
-
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
-        self.authenticator = authenticator
-
-        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
+        self.authenticator = try authenticator ?? ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceName)
+        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceName) {
             self.serviceURL = serviceURL
         }
-
         RestRequest.userAgent = Shared.userAgent
     }
-    #endif
-
+    #else
     /**
      Create a `Discovery` object.
 
-     - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
+     - parameter version: Release date of the version of the API you want to use. Specify dates in YYYY-MM-DD format.
+       The current version is `2019-11-22`.
      - parameter authenticator: The Authenticator object used to authenticate requests to the service
      */
     public init(version: String, authenticator: Authenticator) {
@@ -81,6 +95,7 @@ public class Discovery {
         self.authenticator = authenticator
         RestRequest.userAgent = Shared.userAgent
     }
+    #endif
 
     #if !os(Linux)
     /**
@@ -99,7 +114,7 @@ public class Discovery {
      - parameter data: Raw data returned by the service that may represent an error.
      - parameter response: the URL response returned by the service.
      */
-    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> WatsonError {
+    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> RestError {
 
         let statusCode = response.statusCode
         var errorMessage: String?
@@ -124,7 +139,7 @@ public class Discovery {
             errorMessage = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
         }
 
-        return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: metadata)
+        return RestError.http(statusCode: statusCode, message: errorMessage, metadata: metadata)
     }
 
     /**
@@ -144,12 +159,12 @@ public class Discovery {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listCollections")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -158,13 +173,13 @@ public class Discovery {
         // construct REST request
         let path = "/v2/projects/\(projectID)/collections"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -206,25 +221,25 @@ public class Discovery {
         completionHandler: @escaping (WatsonResponse<CollectionDetails>?, WatsonError?) -> Void)
     {
         // construct body
-        let createCollectionRequest = CollectionDetails(
+        let createCollectionRequest = CreateCollectionRequest(
             name: name,
             description: description,
             language: language,
             enrichments: enrichments)
         guard let body = try? JSON.encoder.encode(createCollectionRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createCollection")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -233,13 +248,13 @@ public class Discovery {
         // construct REST request
         let path = "/v2/projects/\(projectID)/collections"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -256,6 +271,16 @@ public class Discovery {
 
         // execute REST request
         request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the createCollection request body
+    private struct CreateCollectionRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let name: String
+        let description: String?
+        let language: String?
+        let enrichments: [CollectionEnrichment]?
+        // swiftlint:enable identifier_name
     }
 
     /**
@@ -277,12 +302,12 @@ public class Discovery {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getCollection")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -291,13 +316,13 @@ public class Discovery {
         // construct REST request
         let path = "/v2/projects/\(projectID)/collections/\(collectionID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -339,24 +364,24 @@ public class Discovery {
         completionHandler: @escaping (WatsonResponse<CollectionDetails>?, WatsonError?) -> Void)
     {
         // construct body
-        let updateCollectionRequest = UpdateCollection(
+        let updateCollectionRequest = UpdateCollectionRequest(
             name: name,
             description: description,
             enrichments: enrichments)
         guard let body = try? JSON.encoder.encode(updateCollectionRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateCollection")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -365,13 +390,13 @@ public class Discovery {
         // construct REST request
         let path = "/v2/projects/\(projectID)/collections/\(collectionID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -388,6 +413,15 @@ public class Discovery {
 
         // execute REST request
         request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the updateCollection request body
+    private struct UpdateCollectionRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let name: String?
+        let description: String?
+        let enrichments: [CollectionEnrichment]?
+        // swiftlint:enable identifier_name
     }
 
     /**
@@ -410,11 +444,11 @@ public class Discovery {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteCollection")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteCollection")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -423,13 +457,13 @@ public class Discovery {
         // construct REST request
         let path = "/v2/projects/\(projectID)/collections/\(collectionID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -509,7 +543,7 @@ public class Discovery {
         completionHandler: @escaping (WatsonResponse<QueryResponse>?, WatsonError?) -> Void)
     {
         // construct body
-        let queryRequest = QueryLarge(
+        let queryRequest = QueryRequest(
             collectionIDs: collectionIDs,
             filter: filter,
             query: query,
@@ -524,20 +558,23 @@ public class Discovery {
             tableResults: tableResults,
             suggestedRefinements: suggestedRefinements,
             passages: passages)
-        guard let body = try? JSON.encoder.encodeIfPresent(queryRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+        let body: Data?
+        do {
+            body = try JSON.encoder.encodeIfPresent(queryRequest)
+        } catch {
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "query")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -546,13 +583,13 @@ public class Discovery {
         // construct REST request
         let path = "/v2/projects/\(projectID)/query"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -569,6 +606,61 @@ public class Discovery {
 
         // execute REST request
         request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the query request body
+    private struct QueryRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let collectionIDs: [String]?
+        let filter: String?
+        let query: String?
+        let naturalLanguageQuery: String?
+        let aggregation: String?
+        let count: Int?
+        let `return`: [String]?
+        let offset: Int?
+        let sort: String?
+        let highlight: Bool?
+        let spellingSuggestions: Bool?
+        let tableResults: QueryLargeTableResults?
+        let suggestedRefinements: QueryLargeSuggestedRefinements?
+        let passages: QueryLargePassages?
+        private enum CodingKeys: String, CodingKey {
+            case collectionIDs = "collection_ids"
+            case filter = "filter"
+            case query = "query"
+            case naturalLanguageQuery = "natural_language_query"
+            case aggregation = "aggregation"
+            case count = "count"
+            case `return` = "return"
+            case offset = "offset"
+            case sort = "sort"
+            case highlight = "highlight"
+            case spellingSuggestions = "spelling_suggestions"
+            case tableResults = "table_results"
+            case suggestedRefinements = "suggested_refinements"
+            case passages = "passages"
+        }
+        init? (collectionIDs: [String]? = nil, filter: String? = nil, query: String? = nil, naturalLanguageQuery: String? = nil, aggregation: String? = nil, count: Int? = nil, `return`: [String]? = nil, offset: Int? = nil, sort: String? = nil, highlight: Bool? = nil, spellingSuggestions: Bool? = nil, tableResults: QueryLargeTableResults? = nil, suggestedRefinements: QueryLargeSuggestedRefinements? = nil, passages: QueryLargePassages? = nil) {
+            if collectionIDs == nil && filter == nil && query == nil && naturalLanguageQuery == nil && aggregation == nil && count == nil && `return` == nil && offset == nil && sort == nil && highlight == nil && spellingSuggestions == nil && tableResults == nil && suggestedRefinements == nil && passages == nil {
+                return nil
+            }
+            self.collectionIDs = collectionIDs
+            self.filter = filter
+            self.query = query
+            self.naturalLanguageQuery = naturalLanguageQuery
+            self.aggregation = aggregation
+            self.count = count
+            self.`return` = `return`
+            self.offset = offset
+            self.sort = sort
+            self.highlight = highlight
+            self.spellingSuggestions = spellingSuggestions
+            self.tableResults = tableResults
+            self.suggestedRefinements = suggestedRefinements
+            self.passages = passages
+        }
+        // swiftlint:enable identifier_name
     }
 
     /**
@@ -598,12 +690,12 @@ public class Discovery {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getAutocompletion")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -625,13 +717,13 @@ public class Discovery {
         // construct REST request
         let path = "/v2/projects/\(projectID)/autocompletion"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -683,12 +775,12 @@ public class Discovery {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "queryNotices")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -717,13 +809,13 @@ public class Discovery {
         // construct REST request
         let path = "/v2/projects/\(projectID)/notices"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -761,12 +853,12 @@ public class Discovery {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listFields")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -779,13 +871,13 @@ public class Discovery {
         // construct REST request
         let path = "/v2/projects/\(projectID)/fields"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -820,12 +912,12 @@ public class Discovery {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getComponentSettings")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -834,13 +926,13 @@ public class Discovery {
         // construct REST request
         let path = "/v2/projects/\(projectID)/component_settings"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -920,21 +1012,21 @@ public class Discovery {
             }
         }
         guard let body = try? multipartFormData.toData() else {
-            completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
+            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "addDocument")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
         if let xWatsonDiscoveryForce = xWatsonDiscoveryForce {
             headerParameters["X-Watson-Discovery-Force"] = "\(xWatsonDiscoveryForce)"
+        }
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
         }
 
         // construct query parameters
@@ -944,13 +1036,13 @@ public class Discovery {
         // construct REST request
         let path = "/v2/projects/\(projectID)/collections/\(collectionID)/documents"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1026,21 +1118,21 @@ public class Discovery {
             }
         }
         guard let body = try? multipartFormData.toData() else {
-            completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
+            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateDocument")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
         if let xWatsonDiscoveryForce = xWatsonDiscoveryForce {
             headerParameters["X-Watson-Discovery-Force"] = "\(xWatsonDiscoveryForce)"
+        }
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
         }
 
         // construct query parameters
@@ -1050,13 +1142,13 @@ public class Discovery {
         // construct REST request
         let path = "/v2/projects/\(projectID)/collections/\(collectionID)/documents/\(documentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1104,14 +1196,14 @@ public class Discovery {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteDocument")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         if let xWatsonDiscoveryForce = xWatsonDiscoveryForce {
             headerParameters["X-Watson-Discovery-Force"] = "\(xWatsonDiscoveryForce)"
+        }
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
         }
 
         // construct query parameters
@@ -1121,13 +1213,13 @@ public class Discovery {
         // construct REST request
         let path = "/v2/projects/\(projectID)/collections/\(collectionID)/documents/\(documentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1162,12 +1254,12 @@ public class Discovery {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listTrainingQueries")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1176,13 +1268,13 @@ public class Discovery {
         // construct REST request
         let path = "/v2/projects/\(projectID)/training_data/queries"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1217,11 +1309,11 @@ public class Discovery {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteTrainingQueries")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteTrainingQueries")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1230,13 +1322,13 @@ public class Discovery {
         // construct REST request
         let path = "/v2/projects/\(projectID)/training_data/queries"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1276,24 +1368,24 @@ public class Discovery {
         completionHandler: @escaping (WatsonResponse<TrainingQuery>?, WatsonError?) -> Void)
     {
         // construct body
-        let createTrainingQueryRequest = TrainingQuery(
-            naturalLanguageQuery: naturalLanguageQuery,
+        let createTrainingQueryRequest = CreateTrainingQueryRequest(
+            natural_language_query: naturalLanguageQuery,
             examples: examples,
             filter: filter)
         guard let body = try? JSON.encoder.encode(createTrainingQueryRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createTrainingQuery")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1302,13 +1394,13 @@ public class Discovery {
         // construct REST request
         let path = "/v2/projects/\(projectID)/training_data/queries"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1325,6 +1417,15 @@ public class Discovery {
 
         // execute REST request
         request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the createTrainingQuery request body
+    private struct CreateTrainingQueryRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let natural_language_query: String
+        let examples: [TrainingExample]
+        let filter: String?
+        // swiftlint:enable identifier_name
     }
 
     /**
@@ -1346,12 +1447,12 @@ public class Discovery {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getTrainingQuery")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1360,13 +1461,13 @@ public class Discovery {
         // construct REST request
         let path = "/v2/projects/\(projectID)/training_data/queries/\(queryID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1408,24 +1509,24 @@ public class Discovery {
         completionHandler: @escaping (WatsonResponse<TrainingQuery>?, WatsonError?) -> Void)
     {
         // construct body
-        let updateTrainingQueryRequest = TrainingQuery(
-            naturalLanguageQuery: naturalLanguageQuery,
+        let updateTrainingQueryRequest = UpdateTrainingQueryRequest(
+            natural_language_query: naturalLanguageQuery,
             examples: examples,
             filter: filter)
         guard let body = try? JSON.encoder.encode(updateTrainingQueryRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateTrainingQuery")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1434,13 +1535,113 @@ public class Discovery {
         // construct REST request
         let path = "/v2/projects/\(projectID)/training_data/queries/\(queryID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "POST",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the updateTrainingQuery request body
+    private struct UpdateTrainingQueryRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let natural_language_query: String
+        let examples: [TrainingExample]
+        let filter: String?
+        // swiftlint:enable identifier_name
+    }
+
+    /**
+     Analyze a Document.
+
+     Process a document using the specified collection's settings and return it for realtime use.
+     **Note:** Documents processed using this method are not added to the specified collection.
+     **Note:** This method is only supported on IBM Cloud Pak for Data instances of Discovery.
+
+     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
+       administrative tooling.
+     - parameter collectionID: The ID of the collection.
+     - parameter file: The content of the document to ingest. The maximum supported file size when adding a file to a
+       collection is 50 megabytes, the maximum supported file size when testing a configuration is 1 megabyte. Files
+       larger than the supported size are rejected.
+     - parameter filename: The filename for file.
+     - parameter fileContentType: The content type of file.
+     - parameter metadata: The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are
+       rejected.
+       Example:  ``` {
+         "Creator": "Johnny Appleseed",
+         "Subject": "Apples"
+       } ```.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func analyzeDocument(
+        projectID: String,
+        collectionID: String,
+        file: Data? = nil,
+        filename: String? = nil,
+        fileContentType: String? = nil,
+        metadata: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<AnalyzedDocument>?, WatsonError?) -> Void)
+    {
+        // construct body
+        let multipartFormData = MultipartFormData()
+        if let file = file {
+            multipartFormData.append(file, withName: "file", mimeType: fileContentType, fileName: filename ?? "filename")
+        }
+        if let metadata = metadata {
+            if let metadataData = metadata.data(using: .utf8) {
+                multipartFormData.append(metadataData, withName: "metadata")
+            }
+        }
+        guard let body = try? multipartFormData.toData() else {
+            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "analyzeDocument")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = multipartFormData.contentType
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v2/projects/\(projectID)/collections/\(collectionID)/analyze"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1476,12 +1677,12 @@ public class Discovery {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listEnrichments")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1490,13 +1691,13 @@ public class Discovery {
         // construct REST request
         let path = "/v2/projects/\(projectID)/enrichments"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1535,32 +1736,26 @@ public class Discovery {
     {
         // construct body
         let multipartFormData = MultipartFormData()
-
+        if let enrichmentData = "\(enrichment)".data(using: .utf8) {
+            multipartFormData.append(enrichmentData, withName: "enrichment")
+        }
         if let file = file {
-            multipartFormData.append(file, withName: "file", mimeType: "application/octet-stream", fileName: "filename")
+            multipartFormData.append(file, withName: "file", fileName: "filename")
         }
-
-        guard let enrichmentJSON = try? JSON.encoder.encode(enrichment) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
-            return
-        }
-
-        multipartFormData.append(enrichmentJSON, withName: "enrichment")
-
         guard let body = try? multipartFormData.toData() else {
-            completionHandler(nil, WatsonError.serialization(values: "request multipart form data"))
+            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createEnrichment")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = multipartFormData.contentType
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1569,13 +1764,13 @@ public class Discovery {
         // construct REST request
         let path = "/v2/projects/\(projectID)/enrichments"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1613,12 +1808,12 @@ public class Discovery {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getEnrichment")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1627,13 +1822,13 @@ public class Discovery {
         // construct REST request
         let path = "/v2/projects/\(projectID)/enrichments/\(enrichmentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1673,23 +1868,23 @@ public class Discovery {
         completionHandler: @escaping (WatsonResponse<Enrichment>?, WatsonError?) -> Void)
     {
         // construct body
-        let updateEnrichmentRequest = UpdateEnrichment(
+        let updateEnrichmentRequest = UpdateEnrichmentRequest(
             name: name,
             description: description)
         guard let body = try? JSON.encoder.encode(updateEnrichmentRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateEnrichment")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1698,13 +1893,13 @@ public class Discovery {
         // construct REST request
         let path = "/v2/projects/\(projectID)/enrichments/\(enrichmentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1721,6 +1916,14 @@ public class Discovery {
 
         // execute REST request
         request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the updateEnrichment request body
+    private struct UpdateEnrichmentRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let name: String
+        let description: String?
+        // swiftlint:enable identifier_name
     }
 
     /**
@@ -1743,11 +1946,11 @@ public class Discovery {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteEnrichment")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteEnrichment")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1756,13 +1959,13 @@ public class Discovery {
         // construct REST request
         let path = "/v2/projects/\(projectID)/enrichments/\(enrichmentID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1794,12 +1997,12 @@ public class Discovery {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listProjects")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1809,7 +2012,7 @@ public class Discovery {
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1846,24 +2049,24 @@ public class Discovery {
         completionHandler: @escaping (WatsonResponse<ProjectDetails>?, WatsonError?) -> Void)
     {
         // construct body
-        let createProjectRequest = ProjectCreation(
+        let createProjectRequest = CreateProjectRequest(
             name: name,
             type: type,
-            defaultQueryParameters: defaultQueryParameters)
+            default_query_parameters: defaultQueryParameters)
         guard let body = try? JSON.encoder.encode(createProjectRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createProject")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1873,7 +2076,7 @@ public class Discovery {
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1890,6 +2093,15 @@ public class Discovery {
 
         // execute REST request
         request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the createProject request body
+    private struct CreateProjectRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let name: String
+        let type: String
+        let default_query_parameters: DefaultQueryParams?
+        // swiftlint:enable identifier_name
     }
 
     /**
@@ -1909,12 +2121,12 @@ public class Discovery {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getProject")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1923,13 +2135,13 @@ public class Discovery {
         // construct REST request
         let path = "/v2/projects/\(projectID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1965,22 +2177,25 @@ public class Discovery {
         completionHandler: @escaping (WatsonResponse<ProjectDetails>?, WatsonError?) -> Void)
     {
         // construct body
-        let updateProjectRequest = ProjectName(
+        let updateProjectRequest = UpdateProjectRequest(
             name: name)
-        guard let body = try? JSON.encoder.encodeIfPresent(updateProjectRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+        let body: Data?
+        do {
+            body = try JSON.encoder.encodeIfPresent(updateProjectRequest)
+        } catch {
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateProject")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1989,13 +2204,13 @@ public class Discovery {
         // construct REST request
         let path = "/v2/projects/\(projectID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -2012,6 +2227,19 @@ public class Discovery {
 
         // execute REST request
         request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the updateProject request body
+    private struct UpdateProjectRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let name: String?
+        init? (name: String? = nil) {
+            if name == nil {
+                return nil
+            }
+            self.name = name
+        }
+        // swiftlint:enable identifier_name
     }
 
     /**
@@ -2033,11 +2261,11 @@ public class Discovery {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteProject")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteProject")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2046,13 +2274,13 @@ public class Discovery {
         // construct REST request
         let path = "/v2/projects/\(projectID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -2091,11 +2319,11 @@ public class Discovery {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteUserData")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
         if let headers = headers {
             headerParameters.merge(headers) { (_, new) in new }
         }
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteUserData")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2106,7 +2334,7 @@ public class Discovery {
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import IBMSwiftSDKCore
 
 /**
  Object containing Natural Language Understanding features to be used.
@@ -44,7 +45,7 @@ public struct NluEnrichmentFeatures: Codable, Equatable {
     /**
      An object that indicates the Categories enrichment will be applied to the specified field.
      */
-    public var categories: NluEnrichmentCategories?
+    public var categories: [String: JSON]?
 
     /**
      An object specifiying the semantic roles enrichment and related parameters.
@@ -93,7 +94,7 @@ public struct NluEnrichmentFeatures: Codable, Equatable {
         entities: NluEnrichmentEntities? = nil,
         sentiment: NluEnrichmentSentiment? = nil,
         emotion: NluEnrichmentEmotion? = nil,
-        categories: NluEnrichmentCategories? = nil,
+        categories: [String: JSON]? = nil,
         semanticRoles: NluEnrichmentSemanticRoles? = nil,
         relations: NluEnrichmentRelations? = nil,
         concepts: NluEnrichmentConcepts? = nil

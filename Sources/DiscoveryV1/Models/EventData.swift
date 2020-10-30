@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -80,8 +80,6 @@ public struct EventData: Codable, Equatable {
       - parameter clientTimestamp: The optional timestamp for the event that was created. If not provided, the time
         that the event was created in the log was used.
       - parameter displayRank: The rank of the result item which the event is associated with.
-      - parameter queryID: The query identifier stored in the log. The query and any events associated with that query
-        are stored with the same **query_id**.
 
       - returns: An initialized `EventData`.
      */
@@ -91,8 +89,7 @@ public struct EventData: Codable, Equatable {
         collectionID: String,
         documentID: String,
         clientTimestamp: Date? = nil,
-        displayRank: Int? = nil,
-        queryID: String? = nil
+        displayRank: Int? = nil
     )
     {
         self.environmentID = environmentID
@@ -101,7 +98,6 @@ public struct EventData: Codable, Equatable {
         self.documentID = documentID
         self.clientTimestamp = clientTimestamp
         self.displayRank = displayRank
-        self.queryID = queryID
     }
 
 }

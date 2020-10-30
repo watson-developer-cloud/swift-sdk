@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ public struct ObjectDetail: Codable, Equatable {
     /**
      Defines the location of the bounding box around the object.
      */
-    public var location: Location
+    public var location: ObjectDetailLocation
 
     /**
      Confidence score for the object in the range of 0 to 1. A higher score indicates greater likelihood that the object

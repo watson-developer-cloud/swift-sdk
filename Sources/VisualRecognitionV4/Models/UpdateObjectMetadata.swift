@@ -43,17 +43,14 @@ public struct UpdateObjectMetadata: Codable, Equatable {
 
       - parameter object: The updated name of the object. The name can contain alphanumeric, underscore, hyphen,
         space, and dot characters. It cannot begin with the reserved prefix `sys-`.
-      - parameter count: Number of bounding boxes in the collection with the updated object name.
 
       - returns: An initialized `UpdateObjectMetadata`.
      */
     public init(
-        object: String,
-        count: Int? = nil
+        object: String
     )
     {
         self.object = object
-        self.count = count
     }
 
 }

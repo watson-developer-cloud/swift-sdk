@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,11 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
+/**
+ * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-36b26b63-20201028-122900
+ **/
+
 // swiftlint:disable file_length
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 import IBMSwiftSDKCore
 
+public typealias WatsonError = RestError
+public typealias WatsonResponse = RestResponse
 /**
  The IBM Watson&trade; Tone Analyzer service uses linguistic analysis to detect emotional and language tones in written
  text. The service can analyze tone at both the document and sentence levels. You can use the service to understand how
@@ -32,8 +42,14 @@ public class ToneAnalyzer {
     /// The base URL to use when contacting the service.
     public var serviceURL: String? = "https://api.us-south.tone-analyzer.watson.cloud.ibm.com"
 
+    /// Release date of the version of the API you want to use. Specify dates in YYYY-MM-DD format. The current version
+    /// is `2017-09-21`.
+    public var version: String
+
     /// Service identifiers
-    internal let serviceName = "ToneAnalyzer"
+    public static let defaultServiceName = "tone_analyzer"
+    // Service info for SDK headers
+    internal let serviceName = defaultServiceName
     internal let serviceVersion = "v3"
     internal let serviceSdkName = "tone_analyzer"
 
@@ -42,41 +58,39 @@ public class ToneAnalyzer {
 
     var session = URLSession(configuration: URLSessionConfiguration.default)
     public let authenticator: Authenticator
-    let version: String
 
     #if os(Linux)
     /**
      Create a `ToneAnalyzer` object.
 
-     This initializer will retrieve credentials from the environment or a local credentials file.
+     If an authenticator is not supplied, the initializer will retrieve credentials from the environment or
+     a local credentials file and construct an appropriate authenticator using these credentials.
      The credentials file can be downloaded from your service instance on IBM Cloud as ibm-credentials.env.
      Make sure to add the credentials file to your project so that it can be loaded at runtime.
 
-     If credentials are not available in the environment or a local credentials file, initialization will fail.
+     If an authenticator is not supplied and credentials are not available in the environment or a local
+     credentials file, initialization will fail by throwing an exception.
      In that case, try another initializer that directly passes in the credentials.
 
-     - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
+     - parameter version: Release date of the version of the API you want to use. Specify dates in YYYY-MM-DD format.
+       The current version is `2017-09-21`.
+     - parameter authenticator: The Authenticator object used to authenticate requests to the service
+     - serviceName: String = defaultServiceName
      */
-    public init(version: String) throws {
+    public init(version: String, authenticator: Authenticator? = nil, serviceName: String = defaultServiceName) throws {
         self.version = version
-
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
-        self.authenticator = authenticator
-
-        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
+        self.authenticator = try authenticator ?? ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceName)
+        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceName) {
             self.serviceURL = serviceURL
         }
-
         RestRequest.userAgent = Shared.userAgent
     }
-    #endif
-
+    #else
     /**
      Create a `ToneAnalyzer` object.
 
-     - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
+     - parameter version: Release date of the version of the API you want to use. Specify dates in YYYY-MM-DD format.
+       The current version is `2017-09-21`.
      - parameter authenticator: The Authenticator object used to authenticate requests to the service
      */
     public init(version: String, authenticator: Authenticator) {
@@ -84,6 +98,7 @@ public class ToneAnalyzer {
         self.authenticator = authenticator
         RestRequest.userAgent = Shared.userAgent
     }
+    #endif
 
     #if !os(Linux)
     /**
@@ -102,7 +117,7 @@ public class ToneAnalyzer {
      - parameter data: Raw data returned by the service that may represent an error.
      - parameter response: the URL response returned by the service.
      */
-    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> WatsonError {
+    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> RestError {
 
         let statusCode = response.statusCode
         var errorMessage: String?
@@ -127,7 +142,7 @@ public class ToneAnalyzer {
             errorMessage = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
         }
 
-        return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: metadata)
+        return RestError.http(statusCode: statusCode, message: errorMessage, metadata: metadata)
     }
 
     /**
@@ -152,6 +167,11 @@ public class ToneAnalyzer {
      - parameter sentences: Indicates whether the service is to return an analysis of each individual sentence in
        addition to its analysis of the full document. If `true` (the default), the service returns results for each
        sentence.
+     - parameter tones: **`2017-09-21`:** Deprecated. The service continues to accept the parameter for
+       backward-compatibility, but the parameter no longer affects the response.
+       **`2016-05-19`:** A comma-separated list of tones for which the service is to return its analysis of the input;
+       the indicated tones apply both to the full document and to individual sentences of the document. You can specify
+       one or more of the valid values. Omit the parameter to request results for all three tones.
      - parameter contentLanguage: The language of the input text for the request: English or French. Regional variants
        are treated as their parent language; for example, `en-US` is interpreted as `en`. The input content must match
        the specified language. Do not submit content that contains both languages. You can use different languages for
@@ -167,22 +187,19 @@ public class ToneAnalyzer {
     public func tone(
         toneContent: ToneContent,
         sentences: Bool? = nil,
+        tones: [String]? = nil,
         contentLanguage: String? = nil,
         acceptLanguage: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<ToneAnalysis>?, WatsonError?) -> Void)
     {
-        // construct body
         guard let body = toneContent.content else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "tone")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
@@ -193,6 +210,9 @@ public class ToneAnalyzer {
         if let acceptLanguage = acceptLanguage {
             headerParameters["Accept-Language"] = acceptLanguage
         }
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -201,12 +221,16 @@ public class ToneAnalyzer {
             let queryParameter = URLQueryItem(name: "sentences", value: "\(sentences)")
             queryParameters.append(queryParameter)
         }
+        if let tones = tones {
+            let queryParameter = URLQueryItem(name: "tones", value: tones.joined(separator: ","))
+            queryParameters.append(queryParameter)
+        }
 
         // construct REST request
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -261,18 +285,15 @@ public class ToneAnalyzer {
         completionHandler: @escaping (WatsonResponse<UtteranceAnalyses>?, WatsonError?) -> Void)
     {
         // construct body
-        let toneChatRequest = ToneChatInput(
+        let toneChatRequest = ToneChatRequest(
             utterances: utterances)
         guard let body = try? JSON.encoder.encode(toneChatRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "toneChat")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
@@ -283,6 +304,9 @@ public class ToneAnalyzer {
         if let acceptLanguage = acceptLanguage {
             headerParameters["Accept-Language"] = acceptLanguage
         }
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -292,7 +316,7 @@ public class ToneAnalyzer {
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -309,6 +333,13 @@ public class ToneAnalyzer {
 
         // execute REST request
         request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the toneChat request body
+    private struct ToneChatRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let utterances: [Utterance]
+        // swiftlint:enable identifier_name
     }
 
 }

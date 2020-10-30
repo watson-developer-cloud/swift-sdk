@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,167 +16,87 @@
 
 import Foundation
 
-/** RuntimeResponseGeneric. */
-public struct RuntimeResponseGeneric: Codable, Equatable {
+/**
+ RuntimeResponseGeneric.
+ */
+public enum RuntimeResponseGeneric: Codable, Equatable {
 
-    /**
-     The type of response returned by the dialog node. The specified response type must be supported by the client
-     application or channel.
-     */
-    public enum ResponseType: String {
-        case text = "text"
-        case pause = "pause"
-        case image = "image"
-        case option = "option"
-        case connectToAgent = "connect_to_agent"
-        case suggestion = "suggestion"
+    case connectToAgent(RuntimeResponseGenericRuntimeResponseTypeConnectToAgent)
+    case image(RuntimeResponseGenericRuntimeResponseTypeImage)
+    case option(RuntimeResponseGenericRuntimeResponseTypeOption)
+    case suggestion(RuntimeResponseGenericRuntimeResponseTypeSuggestion)
+    case pause(RuntimeResponseGenericRuntimeResponseTypePause)
+    case text(RuntimeResponseGenericRuntimeResponseTypeText)
+
+    private struct GenericRuntimeResponseGeneric: Codable, Equatable {
+
+        var responseType: String
+
+        private enum CodingKeys: String, CodingKey {
+            case responseType = "response_type"
+        }
+
     }
 
-    /**
-     The preferred type of control to display.
-     */
-    public enum Preference: String {
-        case dropdown = "dropdown"
-        case button = "button"
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let genericInstance = try? container.decode(GenericRuntimeResponseGeneric.self) {
+            switch genericInstance.responseType {
+            case "connect_to_agent":
+                if let val = try? container.decode(RuntimeResponseGenericRuntimeResponseTypeConnectToAgent.self) {
+                    self = .connectToAgent(val)
+                    return
+                }
+            case "image":
+                if let val = try? container.decode(RuntimeResponseGenericRuntimeResponseTypeImage.self) {
+                    self = .image(val)
+                    return
+                }
+            case "option":
+                if let val = try? container.decode(RuntimeResponseGenericRuntimeResponseTypeOption.self) {
+                    self = .option(val)
+                    return
+                }
+            case "suggestion":
+                if let val = try? container.decode(RuntimeResponseGenericRuntimeResponseTypeSuggestion.self) {
+                    self = .suggestion(val)
+                    return
+                }
+            case "pause":
+                if let val = try? container.decode(RuntimeResponseGenericRuntimeResponseTypePause.self) {
+                    self = .pause(val)
+                    return
+                }
+            case "text":
+                if let val = try? container.decode(RuntimeResponseGenericRuntimeResponseTypeText.self) {
+                    self = .text(val)
+                    return
+                }
+            default:
+                // falling through to throw decoding error
+                break
+            }
+        }
+
+        throw DecodingError.typeMismatch(RuntimeResponseGeneric.self,
+                                         DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Decoding failed for all associated types"))
     }
 
-    /**
-     The type of response returned by the dialog node. The specified response type must be supported by the client
-     application or channel.
-     */
-    public var responseType: String
-
-    /**
-     The text of the response.
-     */
-    public var text: String?
-
-    /**
-     How long to pause, in milliseconds.
-     */
-    public var time: Int?
-
-    /**
-     Whether to send a "user is typing" event during the pause.
-     */
-    public var typing: Bool?
-
-    /**
-     The URL of the image.
-     */
-    public var source: String?
-
-    /**
-     The title or introductory text to show before the response.
-     */
-    public var title: String?
-
-    /**
-     The description to show with the the response.
-     */
-    public var description: String?
-
-    /**
-     The preferred type of control to display.
-     */
-    public var preference: String?
-
-    /**
-     An array of objects describing the options from which the user can choose.
-     */
-    public var options: [DialogNodeOutputOptionsElement]?
-
-    /**
-     A message to be sent to the human agent who will be taking over the conversation.
-     */
-    public var messageToHumanAgent: String?
-
-    /**
-     A label identifying the topic of the conversation, derived from the **title** property of the relevant node.
-     */
-    public var topic: String?
-
-    /**
-     The ID of the dialog node that the **topic** property is taken from. The **topic** property is populated using the
-     value of the dialog node's **title** property.
-     */
-    public var dialogNode: String?
-
-    /**
-     An array of objects describing the possible matching dialog nodes from which the user can choose.
-     */
-    public var suggestions: [DialogSuggestion]?
-
-    // Map each property name to the key that shall be used for encoding/decoding.
-    private enum CodingKeys: String, CodingKey {
-        case responseType = "response_type"
-        case text = "text"
-        case time = "time"
-        case typing = "typing"
-        case source = "source"
-        case title = "title"
-        case description = "description"
-        case preference = "preference"
-        case options = "options"
-        case messageToHumanAgent = "message_to_human_agent"
-        case topic = "topic"
-        case dialogNode = "dialog_node"
-        case suggestions = "suggestions"
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .connectToAgent(let connect_to_agent):
+            try container.encode(connect_to_agent)
+        case .image(let image):
+            try container.encode(image)
+        case .option(let option):
+            try container.encode(option)
+        case .suggestion(let suggestion):
+            try container.encode(suggestion)
+        case .pause(let pause):
+            try container.encode(pause)
+        case .text(let text):
+            try container.encode(text)
+        }
     }
-
-    /**
-      Initialize a `RuntimeResponseGeneric` with member variables.
-
-      - parameter responseType: The type of response returned by the dialog node. The specified response type must be
-        supported by the client application or channel.
-      - parameter text: The text of the response.
-      - parameter time: How long to pause, in milliseconds.
-      - parameter typing: Whether to send a "user is typing" event during the pause.
-      - parameter source: The URL of the image.
-      - parameter title: The title or introductory text to show before the response.
-      - parameter description: The description to show with the the response.
-      - parameter preference: The preferred type of control to display.
-      - parameter options: An array of objects describing the options from which the user can choose.
-      - parameter messageToHumanAgent: A message to be sent to the human agent who will be taking over the
-        conversation.
-      - parameter topic: A label identifying the topic of the conversation, derived from the **title** property of the
-        relevant node.
-      - parameter dialogNode: The ID of the dialog node that the **topic** property is taken from. The **topic**
-        property is populated using the value of the dialog node's **title** property.
-      - parameter suggestions: An array of objects describing the possible matching dialog nodes from which the user
-        can choose.
-
-      - returns: An initialized `RuntimeResponseGeneric`.
-     */
-    public init(
-        responseType: String,
-        text: String? = nil,
-        time: Int? = nil,
-        typing: Bool? = nil,
-        source: String? = nil,
-        title: String? = nil,
-        description: String? = nil,
-        preference: String? = nil,
-        options: [DialogNodeOutputOptionsElement]? = nil,
-        messageToHumanAgent: String? = nil,
-        topic: String? = nil,
-        dialogNode: String? = nil,
-        suggestions: [DialogSuggestion]? = nil
-    )
-    {
-        self.responseType = responseType
-        self.text = text
-        self.time = time
-        self.typing = typing
-        self.source = source
-        self.title = title
-        self.description = description
-        self.preference = preference
-        self.options = options
-        self.messageToHumanAgent = messageToHumanAgent
-        self.topic = topic
-        self.dialogNode = dialogNode
-        self.suggestions = suggestions
-    }
-
 }

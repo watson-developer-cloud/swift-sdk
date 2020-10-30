@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,9 @@
 import Foundation
 import IBMSwiftSDKCore
 
-/** CreateEntity. */
+/**
+ CreateEntity.
+ */
 public struct CreateEntity: Codable, Equatable {
 
     /**
@@ -80,8 +82,6 @@ public struct CreateEntity: Codable, Equatable {
         tab characters.
       - parameter metadata: Any metadata related to the entity.
       - parameter fuzzyMatch: Whether to use fuzzy matching for the entity.
-      - parameter created: The timestamp for creation of the object.
-      - parameter updated: The timestamp for the most recent update to the object.
       - parameter values: An array of objects describing the entity values.
 
       - returns: An initialized `CreateEntity`.
@@ -91,8 +91,6 @@ public struct CreateEntity: Codable, Equatable {
         description: String? = nil,
         metadata: [String: JSON]? = nil,
         fuzzyMatch: Bool? = nil,
-        created: Date? = nil,
-        updated: Date? = nil,
         values: [CreateValue]? = nil
     )
     {
@@ -100,8 +98,6 @@ public struct CreateEntity: Codable, Equatable {
         self.description = description
         self.metadata = metadata
         self.fuzzyMatch = fuzzyMatch
-        self.created = created
-        self.updated = updated
         self.values = values
     }
 

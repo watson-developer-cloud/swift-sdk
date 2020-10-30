@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,9 @@
 import Foundation
 import IBMSwiftSDKCore
 
-/** DialogNode. */
+/**
+ DialogNode.
+ */
 public struct DialogNode: Codable, Equatable {
 
     /**
@@ -110,7 +112,7 @@ public struct DialogNode: Codable, Equatable {
     /**
      The context for the dialog node.
      */
-    public var context: [String: JSON]?
+    public var context: DialogNodeContext?
 
     /**
      The metadata for the dialog node.
@@ -246,9 +248,6 @@ public struct DialogNode: Codable, Equatable {
       - parameter userLabel: A label that can be displayed externally to describe the purpose of the node to users.
       - parameter disambiguationOptOut: Whether the dialog node should be excluded from disambiguation suggestions.
         Valid only when **type**=`standard` or `frame`.
-      - parameter disabled: For internal use only.
-      - parameter created: The timestamp for creation of the object.
-      - parameter updated: The timestamp for the most recent update to the object.
 
       - returns: An initialized `DialogNode`.
      */
@@ -259,7 +258,7 @@ public struct DialogNode: Codable, Equatable {
         parent: String? = nil,
         previousSibling: String? = nil,
         output: DialogNodeOutput? = nil,
-        context: [String: JSON]? = nil,
+        context: DialogNodeContext? = nil,
         metadata: [String: JSON]? = nil,
         nextStep: DialogNodeNextStep? = nil,
         title: String? = nil,
@@ -271,10 +270,7 @@ public struct DialogNode: Codable, Equatable {
         digressOut: String? = nil,
         digressOutSlots: String? = nil,
         userLabel: String? = nil,
-        disambiguationOptOut: Bool? = nil,
-        disabled: Bool? = nil,
-        created: Date? = nil,
-        updated: Date? = nil
+        disambiguationOptOut: Bool? = nil
     )
     {
         self.dialogNode = dialogNode
@@ -296,9 +292,6 @@ public struct DialogNode: Codable, Equatable {
         self.digressOutSlots = digressOutSlots
         self.userLabel = userLabel
         self.disambiguationOptOut = disambiguationOptOut
-        self.disabled = disabled
-        self.created = created
-        self.updated = updated
     }
 
 }

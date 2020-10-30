@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,12 @@ public struct DialogNodeOutput: Codable, Equatable {
     public var generic: [DialogNodeOutputGeneric]?
 
     /**
+     Output intended for specific integrations. For more information, see the
+     [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-dialog-responses-json).
+     */
+    public var integrations: [String: [String: JSON]]?
+
+    /**
      Options that modify how specified output is handled.
      */
     public var modifiers: DialogNodeOutputModifiers?
@@ -39,25 +45,30 @@ public struct DialogNodeOutput: Codable, Equatable {
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case generic = "generic"
+        case integrations = "integrations"
         case modifiers = "modifiers"
-        static let allValues = [generic, modifiers]
+        static let allValues = [generic, integrations, modifiers]
     }
 
     /**
       Initialize a `DialogNodeOutput` with member variables.
 
       - parameter generic: An array of objects describing the output defined for the dialog node.
+      - parameter integrations: Output intended for specific integrations. For more information, see the
+        [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-dialog-responses-json).
       - parameter modifiers: Options that modify how specified output is handled.
 
       - returns: An initialized `DialogNodeOutput`.
      */
     public init(
         generic: [DialogNodeOutputGeneric]? = nil,
+        integrations: [String: [String: JSON]]? = nil,
         modifiers: DialogNodeOutputModifiers? = nil,
         additionalProperties: [String: JSON] = [:]
     )
     {
         self.generic = generic
+        self.integrations = integrations
         self.modifiers = modifiers
         self.additionalProperties = additionalProperties
     }
@@ -65,6 +76,7 @@ public struct DialogNodeOutput: Codable, Equatable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         generic = try container.decodeIfPresent([DialogNodeOutputGeneric].self, forKey: .generic)
+        integrations = try container.decodeIfPresent([String: [String: JSON]].self, forKey: .integrations)
         modifiers = try container.decodeIfPresent(DialogNodeOutputModifiers.self, forKey: .modifiers)
         let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
         additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: CodingKeys.allValues)
@@ -73,6 +85,7 @@ public struct DialogNodeOutput: Codable, Equatable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(generic, forKey: .generic)
+        try container.encodeIfPresent(integrations, forKey: .integrations)
         try container.encodeIfPresent(modifiers, forKey: .modifiers)
         var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
         try dynamicContainer.encodeIfPresent(additionalProperties)

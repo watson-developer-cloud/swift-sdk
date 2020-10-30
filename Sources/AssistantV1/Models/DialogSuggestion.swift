@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,11 @@
  **/
 
 import Foundation
+import IBMSwiftSDKCore
 
-/** DialogSuggestion. */
+/**
+ DialogSuggestion.
+ */
 public struct DialogSuggestion: Codable, Equatable {
 
     /**
@@ -35,7 +38,7 @@ public struct DialogSuggestion: Codable, Equatable {
      The dialog output that will be returned from the Watson Assistant service if the user selects the corresponding
      option.
      */
-    public var output: DialogSuggestionOutput?
+    public var output: [String: JSON]?
 
     /**
      The ID of the dialog node that the **label** property is taken from. The **label** property is populated using the
@@ -68,7 +71,7 @@ public struct DialogSuggestion: Codable, Equatable {
     public init(
         label: String,
         value: DialogSuggestionValue,
-        output: DialogSuggestionOutput? = nil,
+        output: [String: JSON]? = nil,
         dialogNode: String? = nil
     )
     {

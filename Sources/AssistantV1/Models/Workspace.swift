@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,9 @@
 import Foundation
 import IBMSwiftSDKCore
 
-/** Workspace. */
+/**
+ Workspace.
+ */
 public struct Workspace: Codable, Equatable {
 
     /**
@@ -47,6 +49,31 @@ public struct Workspace: Codable, Equatable {
     public var language: String
 
     /**
+     The workspace ID of the workspace.
+     */
+    public var workspaceID: String
+
+    /**
+     An array of objects describing the dialog nodes in the workspace.
+     */
+    public var dialogNodes: [DialogNode]?
+
+    /**
+     An array of objects defining input examples that have been marked as irrelevant input.
+     */
+    public var counterexamples: [Counterexample]?
+
+    /**
+     The timestamp for creation of the object.
+     */
+    public var created: Date?
+
+    /**
+     The timestamp for the most recent update to the object.
+     */
+    public var updated: Date?
+
+    /**
      Any metadata related to the workspace.
      */
     public var metadata: [String: JSON]?
@@ -63,24 +90,11 @@ public struct Workspace: Codable, Equatable {
     public var systemSettings: WorkspaceSystemSettings?
 
     /**
-     The workspace ID of the workspace.
-     */
-    public var workspaceID: String
-
-    /**
      The current status of the workspace.
      */
     public var status: String?
 
-    /**
-     The timestamp for creation of the object.
-     */
-    public var created: Date?
-
-    /**
-     The timestamp for the most recent update to the object.
-     */
-    public var updated: Date?
+    public var webhooks: [Webhook]?
 
     /**
      An array of intents.
@@ -92,35 +106,23 @@ public struct Workspace: Codable, Equatable {
      */
     public var entities: [Entity]?
 
-    /**
-     An array of objects describing the dialog nodes in the workspace.
-     */
-    public var dialogNodes: [DialogNode]?
-
-    /**
-     An array of counterexamples.
-     */
-    public var counterexamples: [Counterexample]?
-
-    public var webhooks: [Webhook]?
-
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case name = "name"
         case description = "description"
         case language = "language"
+        case workspaceID = "workspace_id"
+        case dialogNodes = "dialog_nodes"
+        case counterexamples = "counterexamples"
+        case created = "created"
+        case updated = "updated"
         case metadata = "metadata"
         case learningOptOut = "learning_opt_out"
         case systemSettings = "system_settings"
-        case workspaceID = "workspace_id"
         case status = "status"
-        case created = "created"
-        case updated = "updated"
+        case webhooks = "webhooks"
         case intents = "intents"
         case entities = "entities"
-        case dialogNodes = "dialog_nodes"
-        case counterexamples = "counterexamples"
-        case webhooks = "webhooks"
     }
 
 }

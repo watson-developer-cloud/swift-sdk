@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Counterexample. */
+/**
+ Counterexample.
+ */
 public struct Counterexample: Codable, Equatable {
 
     /**
@@ -50,20 +52,14 @@ public struct Counterexample: Codable, Equatable {
         restrictions:
         - It cannot contain carriage return, newline, or tab characters.
         - It cannot consist of only whitespace characters.
-      - parameter created: The timestamp for creation of the object.
-      - parameter updated: The timestamp for the most recent update to the object.
 
       - returns: An initialized `Counterexample`.
      */
     public init(
-        text: String,
-        created: Date? = nil,
-        updated: Date? = nil
+        text: String
     )
     {
         self.text = text
-        self.created = created
-        self.updated = updated
     }
 
 }

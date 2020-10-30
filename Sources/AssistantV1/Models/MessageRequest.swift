@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -84,7 +84,6 @@ public struct MessageRequest: Codable, Equatable {
         previous response.
       - parameter output: An output object that includes the response to the user, the dialog nodes that were
         triggered, and messages from the log.
-      - parameter actions: An array of objects describing any actions requested by the dialog node.
 
       - returns: An initialized `MessageRequest`.
      */
@@ -94,8 +93,7 @@ public struct MessageRequest: Codable, Equatable {
         entities: [RuntimeEntity]? = nil,
         alternateIntents: Bool? = nil,
         context: Context? = nil,
-        output: OutputData? = nil,
-        actions: [DialogNodeAction]? = nil
+        output: OutputData? = nil
     )
     {
         self.input = input
@@ -104,7 +102,6 @@ public struct MessageRequest: Codable, Equatable {
         self.alternateIntents = alternateIntents
         self.context = context
         self.output = output
-        self.actions = actions
     }
 
 }

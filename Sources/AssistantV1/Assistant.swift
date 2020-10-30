@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,11 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
+/**
+ * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-36b26b63-20201028-122900
+ **/
+
 // swiftlint:disable file_length
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 import IBMSwiftSDKCore
 
+public typealias WatsonError = RestError
+public typealias WatsonResponse = RestResponse
 /**
  The IBM Watson&trade; Assistant service combines machine learning, natural language understanding, and an integrated
  dialog editor to create conversation flows between your apps and your users.
@@ -28,8 +38,14 @@ public class Assistant {
     /// The base URL to use when contacting the service.
     public var serviceURL: String? = "https://api.us-south.assistant.watson.cloud.ibm.com"
 
+    /// Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The current version is
+    /// `2020-04-01`.
+    public var version: String
+
     /// Service identifiers
-    internal let serviceName = "Conversation"
+    public static let defaultServiceName = "conversation"
+    // Service info for SDK headers
+    internal let serviceName = defaultServiceName
     internal let serviceVersion = "v1"
     internal let serviceSdkName = "assistant"
 
@@ -38,41 +54,39 @@ public class Assistant {
 
     var session = URLSession(configuration: URLSessionConfiguration.default)
     public let authenticator: Authenticator
-    let version: String
 
     #if os(Linux)
     /**
      Create a `Assistant` object.
 
-     This initializer will retrieve credentials from the environment or a local credentials file.
+     If an authenticator is not supplied, the initializer will retrieve credentials from the environment or
+     a local credentials file and construct an appropriate authenticator using these credentials.
      The credentials file can be downloaded from your service instance on IBM Cloud as ibm-credentials.env.
      Make sure to add the credentials file to your project so that it can be loaded at runtime.
 
-     If credentials are not available in the environment or a local credentials file, initialization will fail.
+     If an authenticator is not supplied and credentials are not available in the environment or a local
+     credentials file, initialization will fail by throwing an exception.
      In that case, try another initializer that directly passes in the credentials.
 
-     - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
+     - parameter version: Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The
+       current version is `2020-04-01`.
+     - parameter authenticator: The Authenticator object used to authenticate requests to the service
+     - serviceName: String = defaultServiceName
      */
-    public init(version: String) throws {
+    public init(version: String, authenticator: Authenticator? = nil, serviceName: String = defaultServiceName) throws {
         self.version = version
-
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
-        self.authenticator = authenticator
-
-        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
+        self.authenticator = try authenticator ?? ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceName)
+        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceName) {
             self.serviceURL = serviceURL
         }
-
         RestRequest.userAgent = Shared.userAgent
     }
-    #endif
-
+    #else
     /**
      Create a `Assistant` object.
 
-     - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
+     - parameter version: Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The
+       current version is `2020-04-01`.
      - parameter authenticator: The Authenticator object used to authenticate requests to the service
      */
     public init(version: String, authenticator: Authenticator) {
@@ -80,6 +94,7 @@ public class Assistant {
         self.authenticator = authenticator
         RestRequest.userAgent = Shared.userAgent
     }
+    #endif
 
     #if !os(Linux)
     /**
@@ -98,7 +113,7 @@ public class Assistant {
      - parameter data: Raw data returned by the service that may represent an error.
      - parameter response: the URL response returned by the service.
      */
-    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> WatsonError {
+    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> RestError {
 
         let statusCode = response.statusCode
         var errorMessage: String?
@@ -123,7 +138,7 @@ public class Assistant {
             errorMessage = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
         }
 
-        return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: metadata)
+        return RestError.http(statusCode: statusCode, message: errorMessage, metadata: metadata)
     }
 
     /**
@@ -168,23 +183,26 @@ public class Assistant {
             input: input,
             intents: intents,
             entities: entities,
-            alternateIntents: alternateIntents,
+            alternate_intents: alternateIntents,
             context: context,
             output: output)
-        guard let body = try? JSON.encoder.encodeIfPresent(messageRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+        let body: Data?
+        do {
+            body = try JSON.encoder.encodeIfPresent(messageRequest)
+        } catch {
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "message")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -197,13 +215,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/message"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -222,12 +240,38 @@ public class Assistant {
         request.responseObject(completionHandler: completionHandler)
     }
 
+    // Private struct for the message request body
+    private struct MessageRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let input: MessageInput?
+        let intents: [RuntimeIntent]?
+        let entities: [RuntimeEntity]?
+        let alternate_intents: Bool?
+        let context: Context?
+        let output: OutputData?
+        init? (input: MessageInput? = nil, intents: [RuntimeIntent]? = nil, entities: [RuntimeEntity]? = nil, alternate_intents: Bool? = nil, context: Context? = nil, output: OutputData? = nil) {
+            if input == nil && intents == nil && entities == nil && alternate_intents == nil && context == nil && output == nil {
+                return nil
+            }
+            self.input = input
+            self.intents = intents
+            self.entities = entities
+            self.alternate_intents = alternate_intents
+            self.context = context
+            self.output = output
+        }
+        // swiftlint:enable identifier_name
+    }
+
     /**
      List workspaces.
 
      List the workspaces associated with a Watson Assistant service instance.
 
      - parameter pageLimit: The number of records to return in each page of results.
+     - parameter includeCount: Whether to include information about the number of records that satisfy the request,
+       regardless of the page limit. If this parameter is `true`, the `pagination` object in the response includes the
+       `total` property.
      - parameter sort: The attribute by which returned workspaces will be sorted. To reverse the sort order, prefix
        the value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
@@ -238,6 +282,7 @@ public class Assistant {
      */
     public func listWorkspaces(
         pageLimit: Int? = nil,
+        includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
@@ -246,18 +291,22 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listWorkspaces")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let pageLimit = pageLimit {
             let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
+            queryParameters.append(queryParameter)
+        }
+        if let includeCount = includeCount {
+            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
             queryParameters.append(queryParameter)
         }
         if let sort = sort {
@@ -277,7 +326,7 @@ public class Assistant {
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -306,17 +355,17 @@ public class Assistant {
      - parameter description: The description of the workspace. This string cannot contain carriage return, newline,
        or tab characters.
      - parameter language: The language of the workspace.
+     - parameter dialogNodes: An array of objects describing the dialog nodes in the workspace.
+     - parameter counterexamples: An array of objects defining input examples that have been marked as irrelevant
+       input.
      - parameter metadata: Any metadata related to the workspace.
      - parameter learningOptOut: Whether training data from the workspace (including artifacts such as intents and
        entities) can be used by IBM for general service improvements. `true` indicates that workspace training data is
        not to be used.
      - parameter systemSettings: Global settings for the workspace.
+     - parameter webhooks:
      - parameter intents: An array of objects defining the intents for the workspace.
      - parameter entities: An array of objects describing the entities for the workspace.
-     - parameter dialogNodes: An array of objects describing the dialog nodes in the workspace.
-     - parameter counterexamples: An array of objects defining input examples that have been marked as irrelevant
-       input.
-     - parameter webhooks:
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -326,45 +375,48 @@ public class Assistant {
         name: String? = nil,
         description: String? = nil,
         language: String? = nil,
+        dialogNodes: [DialogNode]? = nil,
+        counterexamples: [Counterexample]? = nil,
         metadata: [String: JSON]? = nil,
         learningOptOut: Bool? = nil,
         systemSettings: WorkspaceSystemSettings? = nil,
+        webhooks: [Webhook]? = nil,
         intents: [CreateIntent]? = nil,
         entities: [CreateEntity]? = nil,
-        dialogNodes: [DialogNode]? = nil,
-        counterexamples: [Counterexample]? = nil,
-        webhooks: [Webhook]? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Workspace>?, WatsonError?) -> Void)
     {
         // construct body
-        let createWorkspaceRequest = CreateWorkspace(
+        let createWorkspaceRequest = CreateWorkspaceRequest(
             name: name,
             description: description,
             language: language,
-            metadata: metadata,
-            learningOptOut: learningOptOut,
-            systemSettings: systemSettings,
-            intents: intents,
-            entities: entities,
-            dialogNodes: dialogNodes,
+            dialog_nodes: dialogNodes,
             counterexamples: counterexamples,
-            webhooks: webhooks)
-        guard let body = try? JSON.encoder.encodeIfPresent(createWorkspaceRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            metadata: metadata,
+            learning_opt_out: learningOptOut,
+            system_settings: systemSettings,
+            webhooks: webhooks,
+            intents: intents,
+            entities: entities)
+        let body: Data?
+        do {
+            body = try JSON.encoder.encodeIfPresent(createWorkspaceRequest)
+        } catch {
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createWorkspace")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -378,7 +430,7 @@ public class Assistant {
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -395,6 +447,39 @@ public class Assistant {
 
         // execute REST request
         request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the createWorkspace request body
+    private struct CreateWorkspaceRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let name: String?
+        let description: String?
+        let language: String?
+        let dialog_nodes: [DialogNode]?
+        let counterexamples: [Counterexample]?
+        let metadata: [String: JSON]?
+        let learning_opt_out: Bool?
+        let system_settings: WorkspaceSystemSettings?
+        let webhooks: [Webhook]?
+        let intents: [CreateIntent]?
+        let entities: [CreateEntity]?
+        init? (name: String? = nil, description: String? = nil, language: String? = nil, dialog_nodes: [DialogNode]? = nil, counterexamples: [Counterexample]? = nil, metadata: [String: JSON]? = nil, learning_opt_out: Bool? = nil, system_settings: WorkspaceSystemSettings? = nil, webhooks: [Webhook]? = nil, intents: [CreateIntent]? = nil, entities: [CreateEntity]? = nil) {
+            if name == nil && description == nil && language == nil && dialog_nodes == nil && counterexamples == nil && metadata == nil && learning_opt_out == nil && system_settings == nil && webhooks == nil && intents == nil && entities == nil {
+                return nil
+            }
+            self.name = name
+            self.description = description
+            self.language = language
+            self.dialog_nodes = dialog_nodes
+            self.counterexamples = counterexamples
+            self.metadata = metadata
+            self.learning_opt_out = learning_opt_out
+            self.system_settings = system_settings
+            self.webhooks = webhooks
+            self.intents = intents
+            self.entities = entities
+        }
+        // swiftlint:enable identifier_name
     }
 
     /**
@@ -424,12 +509,12 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getWorkspace")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -450,13 +535,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -486,17 +571,17 @@ public class Assistant {
      - parameter description: The description of the workspace. This string cannot contain carriage return, newline,
        or tab characters.
      - parameter language: The language of the workspace.
+     - parameter dialogNodes: An array of objects describing the dialog nodes in the workspace.
+     - parameter counterexamples: An array of objects defining input examples that have been marked as irrelevant
+       input.
      - parameter metadata: Any metadata related to the workspace.
      - parameter learningOptOut: Whether training data from the workspace (including artifacts such as intents and
        entities) can be used by IBM for general service improvements. `true` indicates that workspace training data is
        not to be used.
      - parameter systemSettings: Global settings for the workspace.
+     - parameter webhooks:
      - parameter intents: An array of objects defining the intents for the workspace.
      - parameter entities: An array of objects describing the entities for the workspace.
-     - parameter dialogNodes: An array of objects describing the dialog nodes in the workspace.
-     - parameter counterexamples: An array of objects defining input examples that have been marked as irrelevant
-       input.
-     - parameter webhooks:
      - parameter append: Whether the new data is to be appended to the existing data in the object. If
        **append**=`false`, elements included in the new data completely replace the corresponding existing elements,
        including all subelements. For example, if the new data for a workspace includes **entities** and
@@ -513,46 +598,49 @@ public class Assistant {
         name: String? = nil,
         description: String? = nil,
         language: String? = nil,
+        dialogNodes: [DialogNode]? = nil,
+        counterexamples: [Counterexample]? = nil,
         metadata: [String: JSON]? = nil,
         learningOptOut: Bool? = nil,
         systemSettings: WorkspaceSystemSettings? = nil,
+        webhooks: [Webhook]? = nil,
         intents: [CreateIntent]? = nil,
         entities: [CreateEntity]? = nil,
-        dialogNodes: [DialogNode]? = nil,
-        counterexamples: [Counterexample]? = nil,
-        webhooks: [Webhook]? = nil,
         append: Bool? = nil,
         includeAudit: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Workspace>?, WatsonError?) -> Void)
     {
         // construct body
-        let updateWorkspaceRequest = UpdateWorkspace(
+        let updateWorkspaceRequest = UpdateWorkspaceRequest(
             name: name,
             description: description,
             language: language,
-            metadata: metadata,
-            learningOptOut: learningOptOut,
-            systemSettings: systemSettings,
-            intents: intents,
-            entities: entities,
-            dialogNodes: dialogNodes,
+            dialog_nodes: dialogNodes,
             counterexamples: counterexamples,
-            webhooks: webhooks)
-        guard let body = try? JSON.encoder.encodeIfPresent(updateWorkspaceRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            metadata: metadata,
+            learning_opt_out: learningOptOut,
+            system_settings: systemSettings,
+            webhooks: webhooks,
+            intents: intents,
+            entities: entities)
+        let body: Data?
+        do {
+            body = try JSON.encoder.encodeIfPresent(updateWorkspaceRequest)
+        } catch {
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateWorkspace")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -569,13 +657,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -594,6 +682,39 @@ public class Assistant {
         request.responseObject(completionHandler: completionHandler)
     }
 
+    // Private struct for the updateWorkspace request body
+    private struct UpdateWorkspaceRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let name: String?
+        let description: String?
+        let language: String?
+        let dialog_nodes: [DialogNode]?
+        let counterexamples: [Counterexample]?
+        let metadata: [String: JSON]?
+        let learning_opt_out: Bool?
+        let system_settings: WorkspaceSystemSettings?
+        let webhooks: [Webhook]?
+        let intents: [CreateIntent]?
+        let entities: [CreateEntity]?
+        init? (name: String? = nil, description: String? = nil, language: String? = nil, dialog_nodes: [DialogNode]? = nil, counterexamples: [Counterexample]? = nil, metadata: [String: JSON]? = nil, learning_opt_out: Bool? = nil, system_settings: WorkspaceSystemSettings? = nil, webhooks: [Webhook]? = nil, intents: [CreateIntent]? = nil, entities: [CreateEntity]? = nil) {
+            if name == nil && description == nil && language == nil && dialog_nodes == nil && counterexamples == nil && metadata == nil && learning_opt_out == nil && system_settings == nil && webhooks == nil && intents == nil && entities == nil {
+                return nil
+            }
+            self.name = name
+            self.description = description
+            self.language = language
+            self.dialog_nodes = dialog_nodes
+            self.counterexamples = counterexamples
+            self.metadata = metadata
+            self.learning_opt_out = learning_opt_out
+            self.system_settings = system_settings
+            self.webhooks = webhooks
+            self.intents = intents
+            self.entities = entities
+        }
+        // swiftlint:enable identifier_name
+    }
+
     /**
      Delete workspace.
 
@@ -610,12 +731,12 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteWorkspace")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -624,13 +745,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -658,6 +779,9 @@ public class Assistant {
        returned data includes only information about the element itself. If **export**=`true`, all content, including
        subelements, is included.
      - parameter pageLimit: The number of records to return in each page of results.
+     - parameter includeCount: Whether to include information about the number of records that satisfy the request,
+       regardless of the page limit. If this parameter is `true`, the `pagination` object in the response includes the
+       `total` property.
      - parameter sort: The attribute by which returned intents will be sorted. To reverse the sort order, prefix the
        value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
@@ -670,6 +794,7 @@ public class Assistant {
         workspaceID: String,
         export: Bool? = nil,
         pageLimit: Int? = nil,
+        includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
@@ -678,12 +803,12 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listIntents")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -694,6 +819,10 @@ public class Assistant {
         }
         if let pageLimit = pageLimit {
             let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
+            queryParameters.append(queryParameter)
+        }
+        if let includeCount = includeCount {
+            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
             queryParameters.append(queryParameter)
         }
         if let sort = sort {
@@ -712,13 +841,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -765,24 +894,24 @@ public class Assistant {
         completionHandler: @escaping (WatsonResponse<Intent>?, WatsonError?) -> Void)
     {
         // construct body
-        let createIntentRequest = CreateIntent(
+        let createIntentRequest = CreateIntentRequest(
             intent: intent,
             description: description,
             examples: examples)
         guard let body = try? JSON.encoder.encode(createIntentRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createIntent")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -795,13 +924,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -818,6 +947,15 @@ public class Assistant {
 
         // execute REST request
         request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the createIntent request body
+    private struct CreateIntentRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let intent: String
+        let description: String?
+        let examples: [Example]?
+        // swiftlint:enable identifier_name
     }
 
     /**
@@ -845,12 +983,12 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getIntent")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -867,13 +1005,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -930,24 +1068,24 @@ public class Assistant {
         completionHandler: @escaping (WatsonResponse<Intent>?, WatsonError?) -> Void)
     {
         // construct body
-        let updateIntentRequest = UpdateIntent(
+        let updateIntentRequest = UpdateIntentRequest(
             intent: newIntent,
             description: newDescription,
             examples: newExamples)
         guard let body = try? JSON.encoder.encode(updateIntentRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateIntent")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -964,13 +1102,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -987,6 +1125,15 @@ public class Assistant {
 
         // execute REST request
         request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the updateIntent request body
+    private struct UpdateIntentRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let intent: String?
+        let description: String?
+        let examples: [Example]?
+        // swiftlint:enable identifier_name
     }
 
     /**
@@ -1007,12 +1154,12 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteIntent")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1021,13 +1168,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1053,6 +1200,9 @@ public class Assistant {
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter intent: The intent name.
      - parameter pageLimit: The number of records to return in each page of results.
+     - parameter includeCount: Whether to include information about the number of records that satisfy the request,
+       regardless of the page limit. If this parameter is `true`, the `pagination` object in the response includes the
+       `total` property.
      - parameter sort: The attribute by which returned examples will be sorted. To reverse the sort order, prefix the
        value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
@@ -1065,6 +1215,7 @@ public class Assistant {
         workspaceID: String,
         intent: String,
         pageLimit: Int? = nil,
+        includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
@@ -1073,18 +1224,22 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listExamples")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let pageLimit = pageLimit {
             let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
+            queryParameters.append(queryParameter)
+        }
+        if let includeCount = includeCount {
+            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
             queryParameters.append(queryParameter)
         }
         if let sort = sort {
@@ -1103,13 +1258,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1155,23 +1310,23 @@ public class Assistant {
         completionHandler: @escaping (WatsonResponse<Example>?, WatsonError?) -> Void)
     {
         // construct body
-        let createExampleRequest = Example(
+        let createExampleRequest = CreateExampleRequest(
             text: text,
             mentions: mentions)
         guard let body = try? JSON.encoder.encode(createExampleRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createExample")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1184,13 +1339,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1207,6 +1362,14 @@ public class Assistant {
 
         // execute REST request
         request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the createExample request body
+    private struct CreateExampleRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let text: String
+        let mentions: [Mention]?
+        // swiftlint:enable identifier_name
     }
 
     /**
@@ -1232,12 +1395,12 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getExample")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1250,13 +1413,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1304,23 +1467,23 @@ public class Assistant {
         completionHandler: @escaping (WatsonResponse<Example>?, WatsonError?) -> Void)
     {
         // construct body
-        let updateExampleRequest = UpdateExample(
+        let updateExampleRequest = UpdateExampleRequest(
             text: newText,
             mentions: newMentions)
         guard let body = try? JSON.encoder.encode(updateExampleRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateExample")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1333,13 +1496,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1356,6 +1519,14 @@ public class Assistant {
 
         // execute REST request
         request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the updateExample request body
+    private struct UpdateExampleRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let text: String?
+        let mentions: [Mention]?
+        // swiftlint:enable identifier_name
     }
 
     /**
@@ -1378,12 +1549,12 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteExample")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1392,13 +1563,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/intents/\(intent)/examples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1423,6 +1594,9 @@ public class Assistant {
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter pageLimit: The number of records to return in each page of results.
+     - parameter includeCount: Whether to include information about the number of records that satisfy the request,
+       regardless of the page limit. If this parameter is `true`, the `pagination` object in the response includes the
+       `total` property.
      - parameter sort: The attribute by which returned counterexamples will be sorted. To reverse the sort order,
        prefix the value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
@@ -1434,6 +1608,7 @@ public class Assistant {
     public func listCounterexamples(
         workspaceID: String,
         pageLimit: Int? = nil,
+        includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
@@ -1442,18 +1617,22 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listCounterexamples")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let pageLimit = pageLimit {
             let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
+            queryParameters.append(queryParameter)
+        }
+        if let includeCount = includeCount {
+            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
             queryParameters.append(queryParameter)
         }
         if let sort = sort {
@@ -1472,13 +1651,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/counterexamples"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1521,22 +1700,22 @@ public class Assistant {
         completionHandler: @escaping (WatsonResponse<Counterexample>?, WatsonError?) -> Void)
     {
         // construct body
-        let createCounterexampleRequest = Counterexample(
+        let createCounterexampleRequest = CreateCounterexampleRequest(
             text: text)
         guard let body = try? JSON.encoder.encode(createCounterexampleRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createCounterexample")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1549,13 +1728,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/counterexamples"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1572,6 +1751,13 @@ public class Assistant {
 
         // execute REST request
         request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the createCounterexample request body
+    private struct CreateCounterexampleRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let text: String
+        // swiftlint:enable identifier_name
     }
 
     /**
@@ -1595,12 +1781,12 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getCounterexample")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1613,13 +1799,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/counterexamples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1662,22 +1848,22 @@ public class Assistant {
         completionHandler: @escaping (WatsonResponse<Counterexample>?, WatsonError?) -> Void)
     {
         // construct body
-        let updateCounterexampleRequest = UpdateCounterexample(
+        let updateCounterexampleRequest = UpdateCounterexampleRequest(
             text: newText)
         guard let body = try? JSON.encoder.encode(updateCounterexampleRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateCounterexample")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1690,13 +1876,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/counterexamples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1713,6 +1899,13 @@ public class Assistant {
 
         // execute REST request
         request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the updateCounterexample request body
+    private struct UpdateCounterexampleRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let text: String?
+        // swiftlint:enable identifier_name
     }
 
     /**
@@ -1733,12 +1926,12 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteCounterexample")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1747,13 +1940,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/counterexamples/\(text)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1781,6 +1974,9 @@ public class Assistant {
        returned data includes only information about the element itself. If **export**=`true`, all content, including
        subelements, is included.
      - parameter pageLimit: The number of records to return in each page of results.
+     - parameter includeCount: Whether to include information about the number of records that satisfy the request,
+       regardless of the page limit. If this parameter is `true`, the `pagination` object in the response includes the
+       `total` property.
      - parameter sort: The attribute by which returned entities will be sorted. To reverse the sort order, prefix the
        value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
@@ -1793,6 +1989,7 @@ public class Assistant {
         workspaceID: String,
         export: Bool? = nil,
         pageLimit: Int? = nil,
+        includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
@@ -1801,12 +1998,12 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listEntities")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1817,6 +2014,10 @@ public class Assistant {
         }
         if let pageLimit = pageLimit {
             let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
+            queryParameters.append(queryParameter)
+        }
+        if let includeCount = includeCount {
+            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
             queryParameters.append(queryParameter)
         }
         if let sort = sort {
@@ -1835,13 +2036,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1893,26 +2094,26 @@ public class Assistant {
         completionHandler: @escaping (WatsonResponse<Entity>?, WatsonError?) -> Void)
     {
         // construct body
-        let createEntityRequest = CreateEntity(
+        let createEntityRequest = CreateEntityRequest(
             entity: entity,
             description: description,
             metadata: metadata,
-            fuzzyMatch: fuzzyMatch,
+            fuzzy_match: fuzzyMatch,
             values: values)
         guard let body = try? JSON.encoder.encode(createEntityRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createEntity")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1925,13 +2126,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -1948,6 +2149,17 @@ public class Assistant {
 
         // execute REST request
         request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the createEntity request body
+    private struct CreateEntityRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let entity: String
+        let description: String?
+        let metadata: [String: JSON]?
+        let fuzzy_match: Bool?
+        let values: [CreateValue]?
+        // swiftlint:enable identifier_name
     }
 
     /**
@@ -1975,12 +2187,12 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getEntity")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -1997,13 +2209,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -2064,26 +2276,26 @@ public class Assistant {
         completionHandler: @escaping (WatsonResponse<Entity>?, WatsonError?) -> Void)
     {
         // construct body
-        let updateEntityRequest = UpdateEntity(
+        let updateEntityRequest = UpdateEntityRequest(
             entity: newEntity,
             description: newDescription,
             metadata: newMetadata,
-            fuzzyMatch: newFuzzyMatch,
+            fuzzy_match: newFuzzyMatch,
             values: newValues)
         guard let body = try? JSON.encoder.encode(updateEntityRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateEntity")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2100,13 +2312,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -2123,6 +2335,17 @@ public class Assistant {
 
         // execute REST request
         request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the updateEntity request body
+    private struct UpdateEntityRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let entity: String?
+        let description: String?
+        let metadata: [String: JSON]?
+        let fuzzy_match: Bool?
+        let values: [CreateValue]?
+        // swiftlint:enable identifier_name
     }
 
     /**
@@ -2143,12 +2366,12 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteEntity")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2157,13 +2380,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -2207,12 +2430,12 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listMentions")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2229,13 +2452,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/mentions"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -2264,6 +2487,9 @@ public class Assistant {
        returned data includes only information about the element itself. If **export**=`true`, all content, including
        subelements, is included.
      - parameter pageLimit: The number of records to return in each page of results.
+     - parameter includeCount: Whether to include information about the number of records that satisfy the request,
+       regardless of the page limit. If this parameter is `true`, the `pagination` object in the response includes the
+       `total` property.
      - parameter sort: The attribute by which returned entity values will be sorted. To reverse the sort order, prefix
        the value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
@@ -2277,6 +2503,7 @@ public class Assistant {
         entity: String,
         export: Bool? = nil,
         pageLimit: Int? = nil,
+        includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
@@ -2285,12 +2512,12 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listValues")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2301,6 +2528,10 @@ public class Assistant {
         }
         if let pageLimit = pageLimit {
             let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
+            queryParameters.append(queryParameter)
+        }
+        if let includeCount = includeCount {
+            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
             queryParameters.append(queryParameter)
         }
         if let sort = sort {
@@ -2319,13 +2550,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -2383,26 +2614,26 @@ public class Assistant {
         completionHandler: @escaping (WatsonResponse<Value>?, WatsonError?) -> Void)
     {
         // construct body
-        let createValueRequest = CreateValue(
+        let createValueRequest = CreateValueRequest(
             value: value,
             metadata: metadata,
             type: type,
             synonyms: synonyms,
             patterns: patterns)
         guard let body = try? JSON.encoder.encode(createValueRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createValue")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2415,13 +2646,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -2438,6 +2669,17 @@ public class Assistant {
 
         // execute REST request
         request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the createValue request body
+    private struct CreateValueRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let value: String
+        let metadata: [String: JSON]?
+        let type: String?
+        let synonyms: [String]?
+        let patterns: [String]?
+        // swiftlint:enable identifier_name
     }
 
     /**
@@ -2467,12 +2709,12 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getValue")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2489,13 +2731,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -2563,26 +2805,26 @@ public class Assistant {
         completionHandler: @escaping (WatsonResponse<Value>?, WatsonError?) -> Void)
     {
         // construct body
-        let updateValueRequest = UpdateValue(
+        let updateValueRequest = UpdateValueRequest(
             value: newValue,
             metadata: newMetadata,
             type: newType,
             synonyms: newSynonyms,
             patterns: newPatterns)
         guard let body = try? JSON.encoder.encode(updateValueRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateValue")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2599,13 +2841,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -2622,6 +2864,17 @@ public class Assistant {
 
         // execute REST request
         request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the updateValue request body
+    private struct UpdateValueRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let value: String?
+        let metadata: [String: JSON]?
+        let type: String?
+        let synonyms: [String]?
+        let patterns: [String]?
+        // swiftlint:enable identifier_name
     }
 
     /**
@@ -2644,12 +2897,12 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteValue")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2658,13 +2911,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -2691,6 +2944,9 @@ public class Assistant {
      - parameter entity: The name of the entity.
      - parameter value: The text of the entity value.
      - parameter pageLimit: The number of records to return in each page of results.
+     - parameter includeCount: Whether to include information about the number of records that satisfy the request,
+       regardless of the page limit. If this parameter is `true`, the `pagination` object in the response includes the
+       `total` property.
      - parameter sort: The attribute by which returned entity value synonyms will be sorted. To reverse the sort
        order, prefix the value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
@@ -2704,6 +2960,7 @@ public class Assistant {
         entity: String,
         value: String,
         pageLimit: Int? = nil,
+        includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
@@ -2712,18 +2969,22 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listSynonyms")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let pageLimit = pageLimit {
             let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
+            queryParameters.append(queryParameter)
+        }
+        if let includeCount = includeCount {
+            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
             queryParameters.append(queryParameter)
         }
         if let sort = sort {
@@ -2742,13 +3003,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -2794,22 +3055,22 @@ public class Assistant {
         completionHandler: @escaping (WatsonResponse<Synonym>?, WatsonError?) -> Void)
     {
         // construct body
-        let createSynonymRequest = Synonym(
+        let createSynonymRequest = CreateSynonymRequest(
             synonym: synonym)
         guard let body = try? JSON.encoder.encode(createSynonymRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createSynonym")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2822,13 +3083,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -2845,6 +3106,13 @@ public class Assistant {
 
         // execute REST request
         request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the createSynonym request body
+    private struct CreateSynonymRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let synonym: String
+        // swiftlint:enable identifier_name
     }
 
     /**
@@ -2872,12 +3140,12 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getSynonym")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2890,13 +3158,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms/\(synonym)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -2944,22 +3212,22 @@ public class Assistant {
         completionHandler: @escaping (WatsonResponse<Synonym>?, WatsonError?) -> Void)
     {
         // construct body
-        let updateSynonymRequest = UpdateSynonym(
+        let updateSynonymRequest = UpdateSynonymRequest(
             synonym: newSynonym)
         guard let body = try? JSON.encoder.encode(updateSynonymRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateSynonym")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -2972,13 +3240,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms/\(synonym)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -2995,6 +3263,13 @@ public class Assistant {
 
         // execute REST request
         request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the updateSynonym request body
+    private struct UpdateSynonymRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let synonym: String?
+        // swiftlint:enable identifier_name
     }
 
     /**
@@ -3019,12 +3294,12 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteSynonym")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -3033,13 +3308,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/entities/\(entity)/values/\(value)/synonyms/\(synonym)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -3064,6 +3339,9 @@ public class Assistant {
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter pageLimit: The number of records to return in each page of results.
+     - parameter includeCount: Whether to include information about the number of records that satisfy the request,
+       regardless of the page limit. If this parameter is `true`, the `pagination` object in the response includes the
+       `total` property.
      - parameter sort: The attribute by which returned dialog nodes will be sorted. To reverse the sort order, prefix
        the value with a minus sign (`-`).
      - parameter cursor: A token identifying the page of results to retrieve.
@@ -3075,6 +3353,7 @@ public class Assistant {
     public func listDialogNodes(
         workspaceID: String,
         pageLimit: Int? = nil,
+        includeCount: Bool? = nil,
         sort: String? = nil,
         cursor: String? = nil,
         includeAudit: Bool? = nil,
@@ -3083,18 +3362,22 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listDialogNodes")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let pageLimit = pageLimit {
             let queryParameter = URLQueryItem(name: "page_limit", value: "\(pageLimit)")
+            queryParameters.append(queryParameter)
+        }
+        if let includeCount = includeCount {
+            let queryParameter = URLQueryItem(name: "include_count", value: "\(includeCount)")
             queryParameters.append(queryParameter)
         }
         if let sort = sort {
@@ -3113,13 +3396,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/dialog_nodes"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -3186,7 +3469,7 @@ public class Assistant {
         parent: String? = nil,
         previousSibling: String? = nil,
         output: DialogNodeOutput? = nil,
-        context: [String: JSON]? = nil,
+        context: DialogNodeContext? = nil,
         metadata: [String: JSON]? = nil,
         nextStep: DialogNodeNextStep? = nil,
         title: String? = nil,
@@ -3204,40 +3487,40 @@ public class Assistant {
         completionHandler: @escaping (WatsonResponse<DialogNode>?, WatsonError?) -> Void)
     {
         // construct body
-        let createDialogNodeRequest = DialogNode(
-            dialogNode: dialogNode,
+        let createDialogNodeRequest = CreateDialogNodeRequest(
+            dialog_node: dialogNode,
             description: description,
             conditions: conditions,
             parent: parent,
-            previousSibling: previousSibling,
+            previous_sibling: previousSibling,
             output: output,
             context: context,
             metadata: metadata,
-            nextStep: nextStep,
+            next_step: nextStep,
             title: title,
             type: type,
-            eventName: eventName,
+            event_name: eventName,
             variable: variable,
             actions: actions,
-            digressIn: digressIn,
-            digressOut: digressOut,
-            digressOutSlots: digressOutSlots,
-            userLabel: userLabel,
-            disambiguationOptOut: disambiguationOptOut)
+            digress_in: digressIn,
+            digress_out: digressOut,
+            digress_out_slots: digressOutSlots,
+            user_label: userLabel,
+            disambiguation_opt_out: disambiguationOptOut)
         guard let body = try? JSON.encoder.encode(createDialogNodeRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createDialogNode")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -3250,13 +3533,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/dialog_nodes"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -3273,6 +3556,31 @@ public class Assistant {
 
         // execute REST request
         request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the createDialogNode request body
+    private struct CreateDialogNodeRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let dialog_node: String
+        let description: String?
+        let conditions: String?
+        let parent: String?
+        let previous_sibling: String?
+        let output: DialogNodeOutput?
+        let context: DialogNodeContext?
+        let metadata: [String: JSON]?
+        let next_step: DialogNodeNextStep?
+        let title: String?
+        let type: String?
+        let event_name: String?
+        let variable: String?
+        let actions: [DialogNodeAction]?
+        let digress_in: String?
+        let digress_out: String?
+        let digress_out_slots: String?
+        let user_label: String?
+        let disambiguation_opt_out: Bool?
+        // swiftlint:enable identifier_name
     }
 
     /**
@@ -3296,12 +3604,12 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getDialogNode")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -3314,13 +3622,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/dialog_nodes/\(dialogNode)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -3390,7 +3698,7 @@ public class Assistant {
         newParent: String? = nil,
         newPreviousSibling: String? = nil,
         newOutput: DialogNodeOutput? = nil,
-        newContext: [String: JSON]? = nil,
+        newContext: DialogNodeContext? = nil,
         newMetadata: [String: JSON]? = nil,
         newNextStep: DialogNodeNextStep? = nil,
         newTitle: String? = nil,
@@ -3408,40 +3716,40 @@ public class Assistant {
         completionHandler: @escaping (WatsonResponse<DialogNode>?, WatsonError?) -> Void)
     {
         // construct body
-        let updateDialogNodeRequest = UpdateDialogNode(
-            dialogNode: newDialogNode,
+        let updateDialogNodeRequest = UpdateDialogNodeRequest(
+            dialog_node: newDialogNode,
             description: newDescription,
             conditions: newConditions,
             parent: newParent,
-            previousSibling: newPreviousSibling,
+            previous_sibling: newPreviousSibling,
             output: newOutput,
             context: newContext,
             metadata: newMetadata,
-            nextStep: newNextStep,
+            next_step: newNextStep,
             title: newTitle,
             type: newType,
-            eventName: newEventName,
+            event_name: newEventName,
             variable: newVariable,
             actions: newActions,
-            digressIn: newDigressIn,
-            digressOut: newDigressOut,
-            digressOutSlots: newDigressOutSlots,
-            userLabel: newUserLabel,
-            disambiguationOptOut: newDisambiguationOptOut)
+            digress_in: newDigressIn,
+            digress_out: newDigressOut,
+            digress_out_slots: newDigressOutSlots,
+            user_label: newUserLabel,
+            disambiguation_opt_out: newDisambiguationOptOut)
         guard let body = try? JSON.encoder.encode(updateDialogNodeRequest) else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateDialogNode")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
         headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -3454,13 +3762,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/dialog_nodes/\(dialogNode)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -3477,6 +3785,31 @@ public class Assistant {
 
         // execute REST request
         request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the updateDialogNode request body
+    private struct UpdateDialogNodeRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let dialog_node: String?
+        let description: String?
+        let conditions: String?
+        let parent: String?
+        let previous_sibling: String?
+        let output: DialogNodeOutput?
+        let context: DialogNodeContext?
+        let metadata: [String: JSON]?
+        let next_step: DialogNodeNextStep?
+        let title: String?
+        let type: String?
+        let event_name: String?
+        let variable: String?
+        let actions: [DialogNodeAction]?
+        let digress_in: String?
+        let digress_out: String?
+        let digress_out_slots: String?
+        let user_label: String?
+        let disambiguation_opt_out: Bool?
+        // swiftlint:enable identifier_name
     }
 
     /**
@@ -3497,12 +3830,12 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteDialogNode")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -3511,13 +3844,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/dialog_nodes/\(dialogNode)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -3562,12 +3895,12 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listLogs")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -3592,13 +3925,13 @@ public class Assistant {
         // construct REST request
         let path = "/v1/workspaces/\(workspaceID)/logs"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, WatsonError.urlEncoding(path: path))
+            completionHandler(nil, RestError.urlEncoding(path: path))
             return
         }
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -3643,12 +3976,12 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listAllLogs")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -3671,7 +4004,7 @@ public class Assistant {
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -3709,12 +4042,12 @@ public class Assistant {
     {
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteUserData")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
@@ -3725,7 +4058,7 @@ public class Assistant {
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -3741,6 +4074,90 @@ public class Assistant {
 
         // execute REST request
         request.response(completionHandler: completionHandler)
+    }
+
+    /**
+     Identify intents and entities in multiple user utterances.
+
+     Send multiple user inputs to a workspace in a single request and receive information about the intents and entities
+     recognized in each input. This method is useful for testing and comparing the performance of different workspaces.
+     This method is available only with Premium plans.
+
+     - parameter workspaceID: Unique identifier of the workspace.
+     - parameter input: An array of input utterances to classify.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func bulkClassify(
+        workspaceID: String,
+        input: [BulkClassifyUtterance]? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<BulkClassifyResponse>?, WatsonError?) -> Void)
+    {
+        // construct body
+        let bulkClassifyRequest = BulkClassifyRequest(
+            input: input)
+        let body: Data?
+        do {
+            body = try JSON.encoder.encodeIfPresent(bulkClassifyRequest)
+        } catch {
+            completionHandler(nil, RestError.serialization(values: "request body"))
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "bulkClassify")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/workspaces/\(workspaceID)/bulk_classify"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "POST",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the bulkClassify request body
+    private struct BulkClassifyRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let input: [BulkClassifyUtterance]?
+        init? (input: [BulkClassifyUtterance]? = nil) {
+            if input == nil {
+                return nil
+            }
+            self.input = input
+        }
+        // swiftlint:enable identifier_name
     }
 
 }

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,31 +18,50 @@ import Foundation
 import IBMSwiftSDKCore
 
 /**
- For internal use only.
+ The context for the dialog node.
  */
-public struct SystemResponse: Codable, Equatable {
+public struct DialogNodeContext: Codable, Equatable {
+
+    /**
+     Context data intended for specific integrations.
+     */
+    public var integrations: [String: [String: JSON]]?
 
     /// Additional properties associated with this model.
     public var additionalProperties: [String: JSON]
 
-    /**
-      Initialize a `SystemResponse`.
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case integrations = "integrations"
+        static let allValues = [integrations]
+    }
 
-      - returns: An initialized `SystemResponse`.
+    /**
+      Initialize a `DialogNodeContext` with member variables.
+
+      - parameter integrations: Context data intended for specific integrations.
+
+      - returns: An initialized `DialogNodeContext`.
      */
     public init(
+        integrations: [String: [String: JSON]]? = nil,
         additionalProperties: [String: JSON] = [:]
     )
     {
+        self.integrations = integrations
         self.additionalProperties = additionalProperties
     }
 
     public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        integrations = try container.decodeIfPresent([String: [String: JSON]].self, forKey: .integrations)
         let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
-        additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: [CodingKey]())
+        additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: CodingKeys.allValues)
     }
 
     public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(integrations, forKey: .integrations)
         var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
         try dynamicContainer.encodeIfPresent(additionalProperties)
     }

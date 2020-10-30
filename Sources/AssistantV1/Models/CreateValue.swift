@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,9 @@
 import Foundation
 import IBMSwiftSDKCore
 
-/** CreateValue. */
+/**
+ CreateValue.
+ */
 public struct CreateValue: Codable, Equatable {
 
     /**
@@ -98,8 +100,6 @@ public struct CreateValue: Codable, Equatable {
         (depending on the value type), but not both. A pattern is a regular expression; for more information about how to
         specify a pattern, see the
         [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-entities#entities-create-dictionary-based).
-      - parameter created: The timestamp for creation of the object.
-      - parameter updated: The timestamp for the most recent update to the object.
 
       - returns: An initialized `CreateValue`.
      */
@@ -108,9 +108,7 @@ public struct CreateValue: Codable, Equatable {
         metadata: [String: JSON]? = nil,
         type: String? = nil,
         synonyms: [String]? = nil,
-        patterns: [String]? = nil,
-        created: Date? = nil,
-        updated: Date? = nil
+        patterns: [String]? = nil
     )
     {
         self.value = value
@@ -118,8 +116,6 @@ public struct CreateValue: Codable, Equatable {
         self.type = type
         self.synonyms = synonyms
         self.patterns = patterns
-        self.created = created
-        self.updated = updated
     }
 
 }

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,13 +35,13 @@ public struct Webhook: Codable, Equatable {
     /**
      An optional array of HTTP headers to pass with the HTTP request.
      */
-    public var headers: [WebhookHeader]?
+    public var xheaders: [WebhookHeader]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case url = "url"
         case name = "name"
-        case headers = "headers"
+        case xheaders = "headers"
     }
 
     /**
@@ -49,19 +49,19 @@ public struct Webhook: Codable, Equatable {
 
       - parameter url: The URL for the external service or application to which you want to send HTTP POST requests.
       - parameter name: The name of the webhook. Currently, `main_webhook` is the only supported value.
-      - parameter headers: An optional array of HTTP headers to pass with the HTTP request.
+      - parameter xheaders: An optional array of HTTP headers to pass with the HTTP request.
 
       - returns: An initialized `Webhook`.
      */
     public init(
         url: String,
         name: String,
-        headers: [WebhookHeader]? = nil
+        xheaders: [WebhookHeader]? = nil
     )
     {
         self.url = url
         self.name = name
-        self.headers = headers
+        self.xheaders = xheaders
     }
 
 }

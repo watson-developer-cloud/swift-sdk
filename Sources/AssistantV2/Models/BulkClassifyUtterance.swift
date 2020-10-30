@@ -17,38 +17,32 @@
 import Foundation
 
 /**
- Session context data that is shared by all skills used by the Assistant.
+ The user input utterance to classify.
  */
-public struct MessageContextGlobal: Codable, Equatable {
+public struct BulkClassifyUtterance: Codable, Equatable {
 
     /**
-     Built-in system properties that apply to all skills used by the assistant.
+     The text of the input utterance.
      */
-    public var system: MessageContextGlobalSystem?
-
-    /**
-     The session ID.
-     */
-    public var sessionID: String?
+    public var text: String
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case system = "system"
-        case sessionID = "session_id"
+        case text = "text"
     }
 
     /**
-      Initialize a `MessageContextGlobal` with member variables.
+      Initialize a `BulkClassifyUtterance` with member variables.
 
-      - parameter system: Built-in system properties that apply to all skills used by the assistant.
+      - parameter text: The text of the input utterance.
 
-      - returns: An initialized `MessageContextGlobal`.
+      - returns: An initialized `BulkClassifyUtterance`.
      */
     public init(
-        system: MessageContextGlobalSystem? = nil
+        text: String
     )
     {
-        self.system = system
+        self.text = text
     }
 
 }

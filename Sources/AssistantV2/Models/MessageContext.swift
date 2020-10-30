@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** MessageContext. */
+/**
+ MessageContext.
+ */
 public struct MessageContext: Codable, Equatable {
 
     /**
@@ -29,7 +31,7 @@ public struct MessageContext: Codable, Equatable {
      **Note:** Currently, only a single child property is supported, containing variables that apply to the dialog skill
      used by the assistant.
      */
-    public var skills: MessageContextSkills?
+    public var skills: [String: MessageContextSkill]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
@@ -49,7 +51,7 @@ public struct MessageContext: Codable, Equatable {
      */
     public init(
         global: MessageContextGlobal? = nil,
-        skills: MessageContextSkills? = nil
+        skills: [String: MessageContextSkill]? = nil
     )
     {
         self.global = global

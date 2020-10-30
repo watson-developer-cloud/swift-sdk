@@ -32,7 +32,7 @@ public struct ProjectListDetailsRelevancyTrainingStatus: Codable, Equatable {
     public var totalExamples: Int?
 
     /**
-     When `true`, sufficent label diversity is present to allow training for this project.
+     When `true`, sufficient label diversity is present to allow training for this project.
      */
     public var sufficientLabelDiversity: Bool?
 
@@ -47,7 +47,7 @@ public struct ProjectListDetailsRelevancyTrainingStatus: Codable, Equatable {
     public var minimumExamplesAdded: Bool?
 
     /**
-     The time that the most recent successful training occured.
+     The time that the most recent successful training occurred.
      */
     public var successfullyTrained: String?
 

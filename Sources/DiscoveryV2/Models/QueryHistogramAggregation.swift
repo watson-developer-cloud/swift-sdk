@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,9 @@ import Foundation
 /**
  Numeric interval segments to categorize documents by using field values from a single numeric field to describe the
  category.
+
+ Enums with an associated value of QueryHistogramAggregation:
+    QueryAggregation
  */
 public struct QueryHistogramAggregation: Codable, Equatable {
 

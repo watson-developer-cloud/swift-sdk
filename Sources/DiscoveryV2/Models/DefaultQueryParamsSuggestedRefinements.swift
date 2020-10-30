@@ -22,7 +22,7 @@ import Foundation
 public struct DefaultQueryParamsSuggestedRefinements: Codable, Equatable {
 
     /**
-     When `true`, a suggested refinements for the query are retuned by default.
+     When `true`, a suggested refinements for the query are returned by default.
      */
     public var enabled: Bool?
 
@@ -40,7 +40,7 @@ public struct DefaultQueryParamsSuggestedRefinements: Codable, Equatable {
     /**
       Initialize a `DefaultQueryParamsSuggestedRefinements` with member variables.
 
-      - parameter enabled: When `true`, a suggested refinements for the query are retuned by default.
+      - parameter enabled: When `true`, a suggested refinements for the query are returned by default.
       - parameter count: The number of suggested refinements to return by default.
 
       - returns: An initialized `DefaultQueryParamsSuggestedRefinements`.

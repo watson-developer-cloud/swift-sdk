@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,8 +22,8 @@ import Foundation
 public struct Pronunciation: Codable, Equatable {
 
     /**
-     The pronunciation of the specified text in the requested voice and format. If a custom voice model is specified,
-     the pronunciation also reflects that custom voice.
+     The pronunciation of the specified text in the requested voice and format. If a custom model is specified, the
+     pronunciation also reflects that custom model.
      */
     public var pronunciation: String
 

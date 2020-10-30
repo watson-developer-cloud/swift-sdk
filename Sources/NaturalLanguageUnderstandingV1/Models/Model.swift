@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Model. */
+/**
+ Model.
+ */
 public struct Model: Codable, Equatable {
 
     /**
@@ -62,7 +64,7 @@ public struct Model: Codable, Equatable {
     public var modelVersion: String?
 
     /**
-     (Deprecated — use `model_version`) The model version, if it was manually provided in Watson Knowledge Studio.
+     Deprecated — use `model_version`.
      */
     public var version: String?
 

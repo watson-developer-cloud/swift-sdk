@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- Information about a word for the custom voice model.
+ Information about a word for the custom model.
  */
 public struct Word: Codable, Equatable {
 
@@ -48,7 +48,7 @@ public struct Word: Codable, Equatable {
     }
 
     /**
-     The word for the custom voice model. The maximum length of a word is 49 characters.
+     The word for the custom model. The maximum length of a word is 49 characters.
      */
     public var word: String
 
@@ -78,7 +78,7 @@ public struct Word: Codable, Equatable {
     /**
       Initialize a `Word` with member variables.
 
-      - parameter word: The word for the custom voice model. The maximum length of a word is 49 characters.
+      - parameter word: The word for the custom model. The maximum length of a word is 49 characters.
       - parameter translation: The phonetic or sounds-like translation for the word. A phonetic translation is based
         on the SSML format for representing the phonetic string of a word either as an IPA or IBM SPR translation. The
         Arabic, Chinese, Dutch, and Korean languages support only IPA. A sounds-like translation consists of one or more

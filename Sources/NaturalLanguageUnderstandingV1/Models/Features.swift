@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import IBMSwiftSDKCore
 
 /**
  Analysis features and options.
@@ -55,7 +56,7 @@ public struct Features: Codable, Equatable {
      Returns information from the document, including author name, title, RSS/ATOM feeds, prominent page image, and
      publication date. Supports URL and HTML input types only.
      */
-    public var metadata: MetadataOptions?
+    public var metadata: [String: JSON]?
 
     /**
      Recognizes when two entities are related and identifies the type of relation. For example, an `awardedTo` relation
@@ -146,7 +147,7 @@ public struct Features: Codable, Equatable {
         emotion: EmotionOptions? = nil,
         entities: EntitiesOptions? = nil,
         keywords: KeywordsOptions? = nil,
-        metadata: MetadataOptions? = nil,
+        metadata: [String: JSON]? = nil,
         relations: RelationsOptions? = nil,
         semanticRoles: SemanticRolesOptions? = nil,
         sentiment: SentimentOptions? = nil,

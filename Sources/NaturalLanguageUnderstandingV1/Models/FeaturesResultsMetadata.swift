@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ import Foundation
 /**
  Webpage metadata, such as the author and the title of the page.
  */
-public struct AnalysisResultsMetadata: Codable, Equatable {
+public struct FeaturesResultsMetadata: Codable, Equatable {
 
     /**
      The authors of the document.

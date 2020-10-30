@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,11 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+
+/**
+ * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-36b26b63-20201028-122900
+ **/
+
 // swiftlint:disable file_length
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 import IBMSwiftSDKCore
 
+public typealias WatsonError = RestError
+public typealias WatsonResponse = RestResponse
 /**
  The IBM Watson&trade; Personality Insights service enables applications to derive insights from social media,
  enterprise data, or other digital communications. The service uses linguistic analytics to infer individuals' intrinsic
@@ -38,8 +48,14 @@ public class PersonalityInsights {
     /// The base URL to use when contacting the service.
     public var serviceURL: String? = "https://api.us-south.personality-insights.watson.cloud.ibm.com"
 
+    /// Release date of the version of the API you want to use. Specify dates in YYYY-MM-DD format. The current version
+    /// is `2017-10-13`.
+    public var version: String
+
     /// Service identifiers
-    internal let serviceName = "PersonalityInsights"
+    public static let defaultServiceName = "personality_insights"
+    // Service info for SDK headers
+    internal let serviceName = defaultServiceName
     internal let serviceVersion = "v3"
     internal let serviceSdkName = "personality_insights"
 
@@ -48,41 +64,39 @@ public class PersonalityInsights {
 
     var session = URLSession(configuration: URLSessionConfiguration.default)
     public let authenticator: Authenticator
-    let version: String
 
     #if os(Linux)
     /**
      Create a `PersonalityInsights` object.
 
-     This initializer will retrieve credentials from the environment or a local credentials file.
+     If an authenticator is not supplied, the initializer will retrieve credentials from the environment or
+     a local credentials file and construct an appropriate authenticator using these credentials.
      The credentials file can be downloaded from your service instance on IBM Cloud as ibm-credentials.env.
      Make sure to add the credentials file to your project so that it can be loaded at runtime.
 
-     If credentials are not available in the environment or a local credentials file, initialization will fail.
+     If an authenticator is not supplied and credentials are not available in the environment or a local
+     credentials file, initialization will fail by throwing an exception.
      In that case, try another initializer that directly passes in the credentials.
 
-     - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
+     - parameter version: Release date of the version of the API you want to use. Specify dates in YYYY-MM-DD format.
+       The current version is `2017-10-13`.
+     - parameter authenticator: The Authenticator object used to authenticate requests to the service
+     - serviceName: String = defaultServiceName
      */
-    public init(version: String) throws {
+    public init(version: String, authenticator: Authenticator? = nil, serviceName: String = defaultServiceName) throws {
         self.version = version
-
-        let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
-        self.authenticator = authenticator
-
-        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceSdkName) {
+        self.authenticator = try authenticator ?? ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceName)
+        if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceName) {
             self.serviceURL = serviceURL
         }
-
         RestRequest.userAgent = Shared.userAgent
     }
-    #endif
-
+    #else
     /**
      Create a `PersonalityInsights` object.
 
-     - parameter version: The release date of the version of the API to use. Specify the date
-       in "YYYY-MM-DD" format.
+     - parameter version: Release date of the version of the API you want to use. Specify dates in YYYY-MM-DD format.
+       The current version is `2017-10-13`.
      - parameter authenticator: The Authenticator object used to authenticate requests to the service
      */
     public init(version: String, authenticator: Authenticator) {
@@ -90,6 +104,7 @@ public class PersonalityInsights {
         self.authenticator = authenticator
         RestRequest.userAgent = Shared.userAgent
     }
+    #endif
 
     #if !os(Linux)
     /**
@@ -108,7 +123,7 @@ public class PersonalityInsights {
      - parameter data: Raw data returned by the service that may represent an error.
      - parameter response: the URL response returned by the service.
      */
-    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> WatsonError {
+    func errorResponseDecoder(data: Data, response: HTTPURLResponse) -> RestError {
 
         let statusCode = response.statusCode
         var errorMessage: String?
@@ -133,7 +148,7 @@ public class PersonalityInsights {
             errorMessage = HTTPURLResponse.localizedString(forStatusCode: response.statusCode)
         }
 
-        return WatsonError.http(statusCode: statusCode, message: errorMessage, metadata: metadata)
+        return RestError.http(statusCode: statusCode, message: errorMessage, metadata: metadata)
     }
 
     /**
@@ -184,6 +199,8 @@ public class PersonalityInsights {
      - parameter rawScores: Indicates whether a raw score in addition to a normalized percentile is returned for each
        characteristic; raw scores are not compared with a sample population. By default, only normalized percentiles are
        returned.
+     - parameter csvHeaders: Indicates whether column labels are returned with a CSV response. By default, no column
+       labels are returned. Applies only when the response type is CSV (`text/csv`).
      - parameter consumptionPreferences: Indicates whether consumption preferences are returned with the results. By
        default, no consumption preferences are returned.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -194,21 +211,18 @@ public class PersonalityInsights {
         contentLanguage: String? = nil,
         acceptLanguage: String? = nil,
         rawScores: Bool? = nil,
+        csvHeaders: Bool? = nil,
         consumptionPreferences: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Profile>?, WatsonError?) -> Void)
     {
-        // construct body
         guard let body = profileContent.content else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "profile")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "application/json"
@@ -219,12 +233,19 @@ public class PersonalityInsights {
         if let acceptLanguage = acceptLanguage {
             headerParameters["Accept-Language"] = acceptLanguage
         }
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
 
         // construct query parameters
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let rawScores = rawScores {
             let queryParameter = URLQueryItem(name: "raw_scores", value: "\(rawScores)")
+            queryParameters.append(queryParameter)
+        }
+        if let csvHeaders = csvHeaders {
+            let queryParameter = URLQueryItem(name: "csv_headers", value: "\(csvHeaders)")
             queryParameters.append(queryParameter)
         }
         if let consumptionPreferences = consumptionPreferences {
@@ -236,7 +257,7 @@ public class PersonalityInsights {
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 
@@ -318,19 +339,15 @@ public class PersonalityInsights {
         csvHeaders: Bool? = nil,
         consumptionPreferences: Bool? = nil,
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<String>?, WatsonError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<Data>?, WatsonError?) -> Void)
     {
-        // construct body
         guard let body = profileContent.content else {
-            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            completionHandler(nil, RestError.serialization(values: "request body"))
             return
         }
 
         // construct header parameters
         var headerParameters = defaultHeaders
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
         let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "profileAsCSV")
         headerParameters.merge(sdkHeaders) { (_, new) in new }
         headerParameters["Accept"] = "text/csv"
@@ -340,6 +357,9 @@ public class PersonalityInsights {
         }
         if let acceptLanguage = acceptLanguage {
             headerParameters["Accept-Language"] = acceptLanguage
+        }
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
         }
 
         // construct query parameters
@@ -362,7 +382,7 @@ public class PersonalityInsights {
 
         // ensure that serviceURL is set
         guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, WatsonError.noEndpoint)
+            completionHandler(nil, RestError.noEndpoint)
             return
         }
 

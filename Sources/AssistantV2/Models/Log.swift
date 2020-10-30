@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** Log. */
+/**
+ Log.
+ */
 public struct Log: Codable, Equatable {
 
     /**

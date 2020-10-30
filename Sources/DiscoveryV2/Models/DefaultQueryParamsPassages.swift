@@ -32,7 +32,7 @@ public struct DefaultQueryParamsPassages: Codable, Equatable {
     public var count: Int?
 
     /**
-     An array of field names to perfom the passage search on.
+     An array of field names to perform the passage search on.
      */
     public var fields: [String]?
 
@@ -67,7 +67,7 @@ public struct DefaultQueryParamsPassages: Codable, Equatable {
 
       - parameter enabled: When `true`, a passage search is performed by default.
       - parameter count: The number of passages to return.
-      - parameter fields: An array of field names to perfom the passage search on.
+      - parameter fields: An array of field names to perform the passage search on.
       - parameter characters: The approximate number of characters that each returned passage will contain.
       - parameter perDocument: When `true` the number of passages that can be returned from a single document is
         restricted to the *max_per_document* value.

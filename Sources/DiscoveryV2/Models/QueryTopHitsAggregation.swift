@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,9 @@ import Foundation
 
 /**
  Returns the top documents ranked by the score of the query.
+
+ Enums with an associated value of QueryTopHitsAggregation:
+    QueryAggregation
  */
 public struct QueryTopHitsAggregation: Codable, Equatable {
 

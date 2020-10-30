@@ -22,7 +22,7 @@ import Foundation
 public struct DefaultQueryParamsTableResults: Codable, Equatable {
 
     /**
-     When `true`, a table results for the query are retuned by default.
+     When `true`, a table results for the query are returned by default.
      */
     public var enabled: Bool?
 
@@ -46,7 +46,7 @@ public struct DefaultQueryParamsTableResults: Codable, Equatable {
     /**
       Initialize a `DefaultQueryParamsTableResults` with member variables.
 
-      - parameter enabled: When `true`, a table results for the query are retuned by default.
+      - parameter enabled: When `true`, a table results for the query are returned by default.
       - parameter count: The number of table results to return by default.
       - parameter perDocument: The number of table results to include in each result document.
 

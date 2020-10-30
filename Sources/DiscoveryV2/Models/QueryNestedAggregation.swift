@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,9 @@ import Foundation
 /**
  A restriction that alter the document set used for sub aggregations it precedes to nested documents found in the field
  specified.
+
+ Enums with an associated value of QueryNestedAggregation:
+    QueryAggregation
  */
 public struct QueryNestedAggregation: Codable, Equatable {
 

@@ -18,6 +18,9 @@ import Foundation
 
 /**
  Returns the top values for the field specified.
+
+ Enums with an associated value of QueryGroupByAggregation:
+    QueryAggregation
  */
 public struct QueryGroupByAggregation: Codable, Equatable {
 

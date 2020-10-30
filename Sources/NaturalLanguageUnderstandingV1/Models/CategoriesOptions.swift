@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,6 +37,10 @@ public struct CategoriesOptions: Codable, Equatable {
      Enter a [custom
      model](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-customizing)
      ID to override the standard categories model.
+     The custom categories experimental feature will be retired on 19 December 2019. On that date, deployed custom
+     categories models will no longer be accessible in Natural Language Understanding. The feature will be removed from
+     Knowledge Studio on an earlier date. Custom categories models will no longer be accessible in Knowledge Studio on
+     17 December 2019.
      */
     public var model: String?
 

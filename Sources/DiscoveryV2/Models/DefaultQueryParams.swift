@@ -47,12 +47,12 @@ public struct DefaultQueryParams: Codable, Equatable {
     public var suggestedRefinements: DefaultQueryParamsSuggestedRefinements?
 
     /**
-     When `true`, a spelling suggestions for the query are retuned by default.
+     When `true`, a spelling suggestions for the query are returned by default.
      */
     public var spellingSuggestions: Bool?
 
     /**
-     When `true`, a highlights for the query are retuned by default.
+     When `true`, a highlights for the query are returned by default.
      */
     public var highlight: Bool?
 
@@ -94,8 +94,8 @@ public struct DefaultQueryParams: Codable, Equatable {
       - parameter tableResults: Default project query settings for table results.
       - parameter aggregation: A string representing the default aggregation query for the project.
       - parameter suggestedRefinements: Object containing suggested refinement settings.
-      - parameter spellingSuggestions: When `true`, a spelling suggestions for the query are retuned by default.
-      - parameter highlight: When `true`, a highlights for the query are retuned by default.
+      - parameter spellingSuggestions: When `true`, a spelling suggestions for the query are returned by default.
+      - parameter highlight: When `true`, a highlights for the query are returned by default.
       - parameter count: The number of document results returned by default.
       - parameter sort: A comma separated list of document fields to sort results by default.
       - parameter `return`: An array of field names to return in document results if present by default.

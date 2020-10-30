@@ -16,7 +16,9 @@
 
 import Foundation
 
-/** RuntimeEntityInterpretation. */
+/**
+ RuntimeEntityInterpretation.
+ */
 public struct RuntimeEntityInterpretation: Codable, Equatable {
 
     /**

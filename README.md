@@ -282,7 +282,7 @@ assistant.serviceURL = "{url}"
 let workspaceID = getWorkspaceID()
 let input = MessageInput(text: "Hello", headers: ["X-Global-Transaction-Id": "<my-unique-transaction-id>"])
 
-assistant.message(workspaceID: "{workspace_id}", input: input) {
+assistant.message(workspaceID: "{workspace_id}", input: input, headers: ["X-Global-Transaction-Id": "<my-unique-transaction-id>"]) {
   response, error in
 
   print(response?.headers["X-Global-Transaction-Id"]!)

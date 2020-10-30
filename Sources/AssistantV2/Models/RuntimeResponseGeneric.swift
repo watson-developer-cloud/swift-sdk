@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,118 +16,95 @@
 
 import Foundation
 
-/** RuntimeResponseGeneric. */
-public struct RuntimeResponseGeneric: Codable, Equatable {
+/**
+ RuntimeResponseGeneric.
+ */
+public enum RuntimeResponseGeneric: Codable, Equatable {
 
-    /**
-     The type of response returned by the dialog node. The specified response type must be supported by the client
-     application or channel.
-     */
-    public enum ResponseType: String {
-        case text = "text"
-        case pause = "pause"
-        case image = "image"
-        case option = "option"
-        case connectToAgent = "connect_to_agent"
-        case suggestion = "suggestion"
-        case search = "search"
+    case connectToAgent(RuntimeResponseGenericRuntimeResponseTypeConnectToAgent)
+    case image(RuntimeResponseGenericRuntimeResponseTypeImage)
+    case option(RuntimeResponseGenericRuntimeResponseTypeOption)
+    case suggestion(RuntimeResponseGenericRuntimeResponseTypeSuggestion)
+    case pause(RuntimeResponseGenericRuntimeResponseTypePause)
+    case search(RuntimeResponseGenericRuntimeResponseTypeSearch)
+    case text(RuntimeResponseGenericRuntimeResponseTypeText)
+
+    private struct GenericRuntimeResponseGeneric: Codable, Equatable {
+
+        var responseType: String
+
+        private enum CodingKeys: String, CodingKey {
+            case responseType = "response_type"
+        }
+
     }
 
-    /**
-     The preferred type of control to display.
-     */
-    public enum Preference: String {
-        case dropdown = "dropdown"
-        case button = "button"
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let genericInstance = try? container.decode(GenericRuntimeResponseGeneric.self) {
+            switch genericInstance.responseType {
+            case "connect_to_agent":
+                if let val = try? container.decode(RuntimeResponseGenericRuntimeResponseTypeConnectToAgent.self) {
+                    self = .connectToAgent(val)
+                    return
+                }
+            case "image":
+                if let val = try? container.decode(RuntimeResponseGenericRuntimeResponseTypeImage.self) {
+                    self = .image(val)
+                    return
+                }
+            case "option":
+                if let val = try? container.decode(RuntimeResponseGenericRuntimeResponseTypeOption.self) {
+                    self = .option(val)
+                    return
+                }
+            case "suggestion":
+                if let val = try? container.decode(RuntimeResponseGenericRuntimeResponseTypeSuggestion.self) {
+                    self = .suggestion(val)
+                    return
+                }
+            case "pause":
+                if let val = try? container.decode(RuntimeResponseGenericRuntimeResponseTypePause.self) {
+                    self = .pause(val)
+                    return
+                }
+            case "search":
+                if let val = try? container.decode(RuntimeResponseGenericRuntimeResponseTypeSearch.self) {
+                    self = .search(val)
+                    return
+                }
+            case "text":
+                if let val = try? container.decode(RuntimeResponseGenericRuntimeResponseTypeText.self) {
+                    self = .text(val)
+                    return
+                }
+            default:
+                // falling through to throw decoding error
+                break
+            }
+        }
+
+        throw DecodingError.typeMismatch(RuntimeResponseGeneric.self,
+                                         DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Decoding failed for all associated types"))
     }
 
-    /**
-     The type of response returned by the dialog node. The specified response type must be supported by the client
-     application or channel.
-     */
-    public var responseType: String
-
-    /**
-     The text of the response.
-     */
-    public var text: String?
-
-    /**
-     How long to pause, in milliseconds.
-     */
-    public var time: Int?
-
-    /**
-     Whether to send a "user is typing" event during the pause.
-     */
-    public var typing: Bool?
-
-    /**
-     The URL of the image.
-     */
-    public var source: String?
-
-    /**
-     The title or introductory text to show before the response.
-     */
-    public var title: String?
-
-    /**
-     The description to show with the the response.
-     */
-    public var description: String?
-
-    /**
-     The preferred type of control to display.
-     */
-    public var preference: String?
-
-    /**
-     An array of objects describing the options from which the user can choose.
-     */
-    public var options: [DialogNodeOutputOptionsElement]?
-
-    /**
-     A message to be sent to the human agent who will be taking over the conversation.
-     */
-    public var messageToHumanAgent: String?
-
-    /**
-     A label identifying the topic of the conversation, derived from the **user_label** property of the relevant node.
-     */
-    public var topic: String?
-
-    /**
-     An array of objects describing the possible matching dialog nodes from which the user can choose.
-     */
-    public var suggestions: [DialogSuggestion]?
-
-    /**
-     The title or introductory text to show before the response. This text is defined in the search skill configuration.
-     */
-    public var header: String?
-
-    /**
-     An array of objects containing search results.
-     */
-    public var results: [SearchResult]?
-
-    // Map each property name to the key that shall be used for encoding/decoding.
-    private enum CodingKeys: String, CodingKey {
-        case responseType = "response_type"
-        case text = "text"
-        case time = "time"
-        case typing = "typing"
-        case source = "source"
-        case title = "title"
-        case description = "description"
-        case preference = "preference"
-        case options = "options"
-        case messageToHumanAgent = "message_to_human_agent"
-        case topic = "topic"
-        case suggestions = "suggestions"
-        case header = "header"
-        case results = "results"
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .connectToAgent(let connect_to_agent):
+            try container.encode(connect_to_agent)
+        case .image(let image):
+            try container.encode(image)
+        case .option(let option):
+            try container.encode(option)
+        case .suggestion(let suggestion):
+            try container.encode(suggestion)
+        case .pause(let pause):
+            try container.encode(pause)
+        case .search(let search):
+            try container.encode(search)
+        case .text(let text):
+            try container.encode(text)
+        }
     }
-
 }

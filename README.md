@@ -303,8 +303,12 @@ assistant.message(workspaceID: "{workspace_id}", input: input, headers: ["X-Glob
 =======
 let input = MessageInput(text: "Hello", headers: ["X-Global-Transaction-Id": "<my-unique-transaction-id>"])
 
+<<<<<<< HEAD
 assistant.message(workspaceID: "{workspace_id}", input: input) {
 >>>>>>> docs(readme): document setting global transaction id
+=======
+assistant.message(workspaceID: "{workspace_id}", input: input, headers: ["X-Global-Transaction-Id": "<my-unique-transaction-id>"]) {
+>>>>>>> docs(readme): update README.md
   response, error in
 
   print(response?.headers["X-Global-Transaction-Id"]!)

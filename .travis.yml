@@ -19,7 +19,7 @@ jobs:
     before_install:
     - brew install carthage || true
     - openssl aes-256-cbc -K $encrypted_fbac8f4690fc_key -iv $encrypted_fbac8f4690fc_iv
-      -in ./Source/SupportingFiles/WatsonCredentials.swift.enc -out ./Source/SupportingFiles/WatsonCredentials.swift 
+      -in ./Source/SupportingFiles/WatsonCredentials.swift.enc -out ./Source/SupportingFiles/WatsonCredentials.swift
       -d
     - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv
       -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json.enc
@@ -39,7 +39,7 @@ jobs:
     before_install:
     - brew install carthage || true
     - openssl aes-256-cbc -K $encrypted_fbac8f4690fc_key -iv $encrypted_fbac8f4690fc_iv
-      -in ./Source/SupportingFiles/WatsonCredentials.swift.enc -out ./Source/SupportingFiles/WatsonCredentials.swift 
+      -in ./Source/SupportingFiles/WatsonCredentials.swift.enc -out ./Source/SupportingFiles/WatsonCredentials.swift
       -d
     - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv
       -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json.enc
@@ -59,7 +59,7 @@ jobs:
     before_install:
     - brew install carthage || true
     - openssl aes-256-cbc -K $encrypted_fbac8f4690fc_key -iv $encrypted_fbac8f4690fc_iv
-      -in ./Source/SupportingFiles/WatsonCredentials.swift.enc -out ./Source/SupportingFiles/WatsonCredentials.swift 
+      -in ./Source/SupportingFiles/WatsonCredentials.swift.enc -out ./Source/SupportingFiles/WatsonCredentials.swift
       -d
     - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv
       -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json.enc
@@ -79,7 +79,7 @@ jobs:
     before_install:
     - brew install carthage || true
     - openssl aes-256-cbc -K $encrypted_fbac8f4690fc_key -iv $encrypted_fbac8f4690fc_iv
-      -in ./Source/SupportingFiles/WatsonCredentials.swift.enc -out ./Source/SupportingFiles/WatsonCredentials.swift 
+      -in ./Source/SupportingFiles/WatsonCredentials.swift.enc -out ./Source/SupportingFiles/WatsonCredentials.swift
       -d
     - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv
       -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json.enc
@@ -99,7 +99,7 @@ jobs:
     before_install:
     - brew install carthage || true
     - openssl aes-256-cbc -K $encrypted_fbac8f4690fc_key -iv $encrypted_fbac8f4690fc_iv
-      -in ./Source/SupportingFiles/WatsonCredentials.swift.enc -out ./Source/SupportingFiles/WatsonCredentials.swift 
+      -in ./Source/SupportingFiles/WatsonCredentials.swift.enc -out ./Source/SupportingFiles/WatsonCredentials.swift
       -d
     - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv
       -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json.enc
@@ -119,7 +119,7 @@ jobs:
     before_install:
     - brew install carthage || true
     - openssl aes-256-cbc -K $encrypted_fbac8f4690fc_key -iv $encrypted_fbac8f4690fc_iv
-      -in ./Source/SupportingFiles/WatsonCredentials.swift.enc -out ./Source/SupportingFiles/WatsonCredentials.swift 
+      -in ./Source/SupportingFiles/WatsonCredentials.swift.enc -out ./Source/SupportingFiles/WatsonCredentials.swift
       -d
     - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv
       -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json.enc
@@ -139,7 +139,7 @@ jobs:
     before_install:
     - brew install carthage || true
     - openssl aes-256-cbc -K $encrypted_fbac8f4690fc_key -iv $encrypted_fbac8f4690fc_iv
-      -in ./Source/SupportingFiles/WatsonCredentials.swift.enc -out ./Source/SupportingFiles/WatsonCredentials.swift 
+      -in ./Source/SupportingFiles/WatsonCredentials.swift.enc -out ./Source/SupportingFiles/WatsonCredentials.swift
       -d
     - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv
       -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json.enc
@@ -159,7 +159,7 @@ jobs:
     before_install:
     - brew install carthage || true
     - openssl aes-256-cbc -K $encrypted_fbac8f4690fc_key -iv $encrypted_fbac8f4690fc_iv
-      -in ./Source/SupportingFiles/WatsonCredentials.swift.enc -out ./Source/SupportingFiles/WatsonCredentials.swift 
+      -in ./Source/SupportingFiles/WatsonCredentials.swift.enc -out ./Source/SupportingFiles/WatsonCredentials.swift
       -d
     - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv
       -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json.enc
@@ -179,7 +179,7 @@ jobs:
     before_install:
     - brew install carthage || true
     - openssl aes-256-cbc -K $encrypted_fbac8f4690fc_key -iv $encrypted_fbac8f4690fc_iv
-      -in ./Source/SupportingFiles/WatsonCredentials.swift.enc -out ./Source/SupportingFiles/WatsonCredentials.swift 
+      -in ./Source/SupportingFiles/WatsonCredentials.swift.enc -out ./Source/SupportingFiles/WatsonCredentials.swift
       -d
     - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv
       -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json.enc
@@ -199,7 +199,7 @@ jobs:
     before_install:
     - brew install carthage || true
     - openssl aes-256-cbc -K $encrypted_fbac8f4690fc_key -iv $encrypted_fbac8f4690fc_iv
-      -in ./Source/SupportingFiles/WatsonCredentials.swift.enc -out ./Source/SupportingFiles/WatsonCredentials.swift 
+      -in ./Source/SupportingFiles/WatsonCredentials.swift.enc -out ./Source/SupportingFiles/WatsonCredentials.swift
       -d
     - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv
       -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json.enc
@@ -219,7 +219,7 @@ jobs:
     before_install:
     - brew install carthage || true
     - openssl aes-256-cbc -K $encrypted_fbac8f4690fc_key -iv $encrypted_fbac8f4690fc_iv
-      -in ./Source/SupportingFiles/WatsonCredentials.swift.enc -out ./Source/SupportingFiles/WatsonCredentials.swift 
+      -in ./Source/SupportingFiles/WatsonCredentials.swift.enc -out ./Source/SupportingFiles/WatsonCredentials.swift
       -d
     - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv
       -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json.enc
@@ -239,7 +239,7 @@ jobs:
     before_install:
     - brew install carthage || true
     - openssl aes-256-cbc -K $encrypted_fbac8f4690fc_key -iv $encrypted_fbac8f4690fc_iv
-      -in ./Source/SupportingFiles/WatsonCredentials.swift.enc -out ./Source/SupportingFiles/WatsonCredentials.swift 
+      -in ./Source/SupportingFiles/WatsonCredentials.swift.enc -out ./Source/SupportingFiles/WatsonCredentials.swift
       -d
     - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv
       -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json.enc
@@ -259,7 +259,7 @@ jobs:
     before_install:
     - brew install carthage || true
     - openssl aes-256-cbc -K $encrypted_fbac8f4690fc_key -iv $encrypted_fbac8f4690fc_iv
-      -in ./Source/SupportingFiles/WatsonCredentials.swift.enc -out ./Source/SupportingFiles/WatsonCredentials.swift 
+      -in ./Source/SupportingFiles/WatsonCredentials.swift.enc -out ./Source/SupportingFiles/WatsonCredentials.swift
       -d
     - openssl aes-256-cbc -K $encrypted_d84ac0b7eb5c_key -iv $encrypted_d84ac0b7eb5c_iv
       -in Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials-input.json.enc
@@ -288,3 +288,6 @@ jobs:
     os: osx
     osx_image: xcode11
     if: branch = master AND type = push AND fork = false
+before_install:
+- openssl aes-256-cbc -K $encrypted_fbac8f4690fc_key -iv $encrypted_fbac8f4690fc_iv
+  -in WatsonCredentials.swift.enc -out WatsonCredentials.swift -d

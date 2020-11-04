@@ -8,11 +8,16 @@
 
 ### AssistantV1 Instance
 
-* Now Accepts `includeCount` Parameter: `listWorkspaces()`, `listIntents()`, `listExamples()`, `listCounterexamples()`, `listEntities()`, `listValues()`, `listSynonyms()`, `listDialogNodes()`, 
+* Now Accepts `includeCount` Parameter: `listWorkspaces()`, `listIntents()`, `listExamples()`, `listCounterexamples()`, `listEntities()`, `listValues()`, `listSynonyms()`, `listDialogNodes()`
+
 * `createWorkspace()`: function parameter reordering
+
 * `updateWorkspace()`: function parameter reordering
+
 * `createDialogNode()`: parameter `context` type change from `[Sting: JSON]?` to `DialogNodeContext?`
+
 * `updateDialogNode()`: parameter `newContext` type change from `[Sting: JSON]?` to `DialogNodeContext?`
+
 * `bulkClassify()`: function added - Identify intents and entities in multiple user utterances.
 
 
@@ -27,19 +32,28 @@
 #### Model Properties Changed
 `Context`
 * `system` type changed from `SystemResponse?` to `[String: JSON]?`
+
 `DialogSuggestion`
 * `output` type changed from `DialogSuggestionOutput?` to `[String: JSON]?`
+
 `Counterexample`, `CreateEntity`, `CreateIntent`, `CreateValue`, `Example`, `Synonym`
 * `created` read only
 * `updated` read only
+
 `DialogNodeOutput`
 * `integrations` added
+
 `MessageInput`
+
 * `suggestedText` read only
 * `originalText` read only
+
 `MessageRequest`
+
 * `actions` read only
+
 `Webhook`
+
 * `headers` renamed to `xheaders`
 
 #### Multiple/Unique Changes
@@ -51,6 +65,7 @@
 
 `DialogNodeOutputGeneric`
 * Changed from struct to enum to discriminate between response types
+
 `RuntimeResponseGeneric`
 * Changed from struct to enum to discriminate between response types
 
@@ -63,22 +78,27 @@
 
 #### Models Added
 `BulkClassifyOutput`, `BulkClassifyResponse`, `BulkClassifyUtterance`, `DialogNodeOutputConnectToAgentTransferInfo`, `RuntimeResponseGenericRuntimeResponseTypeConnectToAgent`, `RuntimeResponseGenericRuntimeResponseTypeImage`, `RuntimeResponseGenericRuntimeResponseTypeOption`, `RuntimeResponseGenericRuntimeResponseTypePause`, `RuntimeResponseGenericRuntimeResponseTypeSuggestion`, `RuntimeResponseGenericRuntimeResponseTypeText`
+
 #### Models Removed
 `MessageContextSkills`, `MessageRequestStateless`
+
 #### Model Properties Changed
 `MessageContextGlobal`
 * `system` read only
+
 `MessageContext`, `MessageContextStateless`
 * `skills` type changed from `MessageContextSkills?` to `[String: MessageContextSkill]?`
+
 `MessageInputOptions` 
 * model parameters repositioned
+
 #### Multiple/Unique Changes
 `RuntimeResponseGeneric`
 * Changed from struct to enum to discriminate between response types
 
 ### CompareComplyV1 Instance
 
-`listFeedback()`: `before` and `after` parameters removed
+* `listFeedback()`: `before` and `after` parameters removed
 
 ### CompareComplyV1 Models
 
@@ -88,6 +108,7 @@
 #### Model Properties Changed
 `Category`, `TypeLabel`
 * `modification` added
+
 `OriginalLabelsOut`, `UpdatedLabelsOut`
 * `modification` removed
 
@@ -104,16 +125,19 @@
 * `created` read only
 * `updated` read only
 * `configurationID` read only
+
 `Credentials`
 * `credentialID` read only
+
 `EventData`
 * `queryID` read only
+
 `NluEnrichmentFeatures`
 * `categories` type changed from `NluEnrichmentCategories?` to `[String: JSON]?`
 
 ### DiscoveryV2 Instance
 
-`analyzeDocument()`: function added - Process a document using the specified collection's settings and return it for realtime use. - Currently CP4D only
+* `analyzeDocument()`: function added - Process a document using the specified collection's settings and return it for realtime use. - Currently CP4D only
 
 ### DiscoveryV2 Models
 
@@ -125,11 +149,14 @@
 `CollectionDetails`
 * `collectionID` read only
 * `created` read only
+
 `QueryResponse`
 * `passages` added
+
 `TrainingExample`
 * `created` read only
 * `updated` read only
+
 `TraningQuery`
 * `created` read only
 * `updated` read only
@@ -163,19 +190,22 @@
 #### Model Properties Changed
 `AnalysisResults`
 * `metadata` type changed from `AnalysisResultsMetadata?` to `FeaturesResultsMetadata?`
+
 `Features`
 * `metadata` type changed from `MetadataOptions?` to `[String: JSON]?`
 
 ### PersonalityInsights Instance
 * `profile()`: csvHeaders parameter added
+
 * `profileAsCSV()`: return type changed from `WatsonResponse<String>?` to `WatsonResponse<Data>?`
 
 ### PersonalityInightsV3 Models
 * No changes
 
 ### SpeechToTextV1 Instance
-`trainLanguageModel()`: return type changed from `WatsonResponse<Void>?` to `WatsonResponse<TrainingResponse>?`
-`trainAcousticModel()`: return type changed from `WatsonResponse<Void>?` to `WatsonResponse<TrainingResponse>?`
+* `trainLanguageModel()`: return type changed from `WatsonResponse<Void>?` to `WatsonResponse<TrainingResponse>?`
+
+* `trainAcousticModel()`: return type changed from `WatsonResponse<Void>?` to `WatsonResponse<TrainingResponse>?`
 
 ### SpeechToTextV1 Models
 * No changes
@@ -185,9 +215,13 @@
 
 ### TextToSpeechV1 Instance
 * `createVoiceModel()`: function changed to `createCustomModel()` now returning `WatsonResponse<CustomModel>?`
+
 * `listVoiceModels()`: function changed to `listCustomModels()` now returning `WatsonResponse<CustomModels>?`
+
 * `updateVoiceModel()`: function changed to `updateCustomModel()`
+
 * `getVoiceModel()`: function changed to `getCustomModel()` now returning `WatsonResponse<CustomModel>?`
+
 * `deleteVoiceModel()`: function changed to `deleteCustomModel()`
 
 ### TextToSpeechV1 Models
@@ -216,7 +250,9 @@
 
 ### VisualRecognitionV4 Instance
 * `createCollection()`: `trainingStatus` parameter added
+
 * `updateCollection()`: `trainingStatus` parameter added
+
 * `getTrainingUsage()`: `startTime` and `endTime` parameter types changed from `String?` to `Date?`
 
 ### VisualRecognitionV4 Models
@@ -228,8 +264,10 @@
 #### Model Properties Changed
 `Collection`
 * `trainingStatus` type changed from `TrainingStatus` to `CollectionTrainingStatus`
+
 `ObjectDetail`
 * `location` type changed from `Location` to `ObjectDetailLocation`
+
 `UpdateObjectMetadata`
 * `count` read only
 

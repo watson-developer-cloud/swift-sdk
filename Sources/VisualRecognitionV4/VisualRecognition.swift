@@ -265,15 +265,13 @@ public class VisualRecognition {
     public func createCollection(
         name: String? = nil,
         description: String? = nil,
-        trainingStatus: TrainingStatus? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Collection>?, WatsonError?) -> Void)
     {
         // construct body
         let createCollectionRequest = CreateCollectionRequest(
             name: name,
-            description: description,
-            training_status: trainingStatus)
+            description: description)
         guard let body = try? JSON.encoder.encode(createCollectionRequest) else {
             completionHandler(nil, RestError.serialization(values: "request body"))
             return
@@ -321,7 +319,6 @@ public class VisualRecognition {
         // swiftlint:disable identifier_name
         let name: String?
         let description: String?
-        let training_status: TrainingStatus?
         // swiftlint:enable identifier_name
     }
 
@@ -445,15 +442,13 @@ public class VisualRecognition {
         collectionID: String,
         name: String? = nil,
         description: String? = nil,
-        trainingStatus: TrainingStatus? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Collection>?, WatsonError?) -> Void)
     {
         // construct body
         let updateCollectionRequest = UpdateCollectionRequest(
             name: name,
-            description: description,
-            training_status: trainingStatus)
+            description: description)
         let body: Data?
         do {
             body = try JSON.encoder.encodeIfPresent(updateCollectionRequest)
@@ -509,14 +504,12 @@ public class VisualRecognition {
         // swiftlint:disable identifier_name
         let name: String?
         let description: String?
-        let training_status: TrainingStatus?
-        init? (name: String? = nil, description: String? = nil, training_status: TrainingStatus? = nil) {
-            if name == nil && description == nil && training_status == nil {
+        init? (name: String? = nil, description: String? = nil) {
+            if name == nil && description == nil {
                 return nil
             }
             self.name = name
             self.description = description
-            self.training_status = training_status
         }
         // swiftlint:enable identifier_name
     }

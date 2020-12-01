@@ -244,7 +244,7 @@ For example, here is how to connect to a Watson Assistant instance that is hoste
 let authenticator = WatsonIAMAuthenticator(apiKey: "{apikey}")
 let assistant = Assistant(version: "{version}", authenticator: authenticator)
 
-assistant.serviceURL = "https://gateway-fra.watsonplatform.net/conversation/api"
+assistant.serviceURL = "https://api.eu-de.assistant.watson.cloud.ibm.com"
 ```
 
 ## Disable SSL certificate verification

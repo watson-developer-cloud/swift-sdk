@@ -35,20 +35,20 @@ class SpeechToTextUnitTests: XCTestCase {
         let speechToTextSession = SpeechToTextSession(authenticator: defaultTestAuthenticator)
 
         // Default URLs value
-        XCTAssertEqual(speechToTextSession.websocketsURL, "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize")
-        XCTAssertEqual(speechToTextSession.serviceURL, "https://stream.watsonplatform.net/speech-to-text/api")
+        XCTAssertEqual(speechToTextSession.websocketsURL, "wss://api.us-south.speech-to-text.watson.cloud.ibm.com/v1/recognize")
+        XCTAssertEqual(speechToTextSession.serviceURL, "https://api.us-south.speech-to-text.watson.cloud.ibm.com")
 
         // Set websockets URL and verify serviceURL
-        speechToTextSession.websocketsURL = "wss://gateway-syd.watsonplatform.net/speech-to-text/api/v1/recognize"
-        XCTAssertEqual(speechToTextSession.serviceURL, "https://gateway-syd.watsonplatform.net/speech-to-text/api")
+        speechToTextSession.websocketsURL = "wss://api.au-syd.speech-to-text.watson.cloud.ibm.com/v1/recognize"
+        XCTAssertEqual(speechToTextSession.serviceURL, "https://api.au-syd.speech-to-text.watson.cloud.ibm.com")
 
         // Trailing forward slash
-        speechToTextSession.websocketsURL = "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize/"
-        XCTAssertEqual(speechToTextSession.serviceURL, "https://stream.watsonplatform.net/speech-to-text/api")
+        speechToTextSession.websocketsURL = "wss://api.us-south.speech-to-text.watson.cloud.ibm.com/v1/recognize/"
+        XCTAssertEqual(speechToTextSession.serviceURL, "api.us-south.speech-to-text.watson.cloud.ibm.com")
 
         // http instead of https
-        speechToTextSession.websocketsURL = "ws://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
-        XCTAssertEqual(speechToTextSession.serviceURL, "http://stream.watsonplatform.net/speech-to-text/api")
+        speechToTextSession.websocketsURL = "ws://api.us-south.speech-to-text.watson.cloud.ibm.com/v1/recognize"
+        XCTAssertEqual(speechToTextSession.serviceURL, "api.us-south.speech-to-text.watson.cloud.ibm.com")
 
         // Different base URL
         speechToTextSession.websocketsURL = "wss://example.com/speech-to-text/api/v1/recognize/v1/recognize"
@@ -60,16 +60,16 @@ class SpeechToTextUnitTests: XCTestCase {
         let speechToTextSession = SpeechToTextSession(authenticator: defaultTestAuthenticator)
 
         // Default URLs value
-        XCTAssertEqual(speechToTextSession.websocketsURL, "wss://stream.watsonplatform.net/speech-to-text/api/v1/recognize")
-        XCTAssertEqual(speechToTextSession.tokenURL, "https://stream.watsonplatform.net/authorization/api/v1/token")
+        XCTAssertEqual(speechToTextSession.websocketsURL, "wss://api.us-south.speech-to-text.watson.cloud.ibm.com/recognize")
+        XCTAssertEqual(speechToTextSession.tokenURL, "https://api.us-south.speech-to-text.watson.cloud.ibm.com/authorization/api/v1/token")
 
         // Set websockets URL and verify tokenURL
-        speechToTextSession.websocketsURL = "wss://gateway-syd.watsonplatform.net/speech-to-text/api/v1/recognize"
-        XCTAssertEqual(speechToTextSession.tokenURL, "https://gateway-syd.watsonplatform.net/authorization/api/v1/token")
+        speechToTextSession.websocketsURL = "wss://api.au-syd.speech-to-text.watson.cloud.ibm.com/v1/recognize"
+        XCTAssertEqual(speechToTextSession.tokenURL, "https://api.au-syd.speech-to-text.watson.cloud.ibm.com/authorization/api/v1/token")
 
         // http instead of https
-        speechToTextSession.websocketsURL = "ws://stream.watsonplatform.net/speech-to-text/api/v1/recognize"
-        XCTAssertEqual(speechToTextSession.tokenURL, "http://stream.watsonplatform.net/authorization/api/v1/token")
+        speechToTextSession.websocketsURL = "ws://api.us-south.speech-to-text.watson.cloud.ibm.com/v1/recognize"
+        XCTAssertEqual(speechToTextSession.tokenURL, "http://api.us-south.speech-to-text.watson.cloud.ibm.com/authorization/api/v1/token")
 
         // Different base URL
         speechToTextSession.websocketsURL = "wss://example.com/speech-to-text/api/v1/recognize/v1/recognize"

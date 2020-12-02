@@ -54,6 +54,8 @@ public class VisualRecognition {
        in "YYYY-MM-DD" format.
      */
     public init(version: String) throws {
+        #warning("On 1 December 2021, Visual Recognition will no longer be available. For more information, see https://github.com/watson-developer-cloud/swift-sdk/tree/master#visual-recognition-deprecation")
+
         self.version = version
 
         let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
@@ -75,6 +77,8 @@ public class VisualRecognition {
      - parameter authenticator: The Authenticator object used to authenticate requests to the service
      */
     public init(version: String, authenticator: Authenticator) {
+        #warning("On 1 December 2021, Visual Recognition will no longer be available. For more information, see https://github.com/watson-developer-cloud/swift-sdk/tree/master#visual-recognition-deprecation")
+        
         self.version = version
         self.authenticator = authenticator
         RestRequest.userAgent = Shared.userAgent

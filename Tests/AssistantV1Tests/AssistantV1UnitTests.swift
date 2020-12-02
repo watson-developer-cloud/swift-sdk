@@ -151,8 +151,10 @@ class AssistantV1UnitTests: XCTestCase {
         let name = "Anthony's workspace"
         let description = "The best workspace there ever was"
         let language = "en"
-        let intents = [CreateIntent(intent: "intent")]
-        let entities = [CreateEntity(entity: "entity")]
+        let intents = [Intent(intent: "intent")]
+        let entities = [Entity(entity: "entity")]
+        let createIntents = [CreateIntent(intent: "intent")]
+        let createEntities = [CreateEntity(entity: "entity")]
         let dialogNodes = [DialogNode(dialogNode: "Best node")]
         let counterExamples = [Counterexample(text: "no u")]
         let metadata: [String: WatsonJSON] = ["key": WatsonJSON.string("value")]
@@ -168,7 +170,7 @@ class AssistantV1UnitTests: XCTestCase {
 
             do {
                 let body = Data(reading: request.httpBodyStream!)
-                let decodedBody = try JSONDecoder().decode(CreateWorkspace.self, from: body)
+                let decodedBody = try JSONDecoder().decode(Workspace.self, from: body)
 
                 XCTAssertEqual(decodedBody.intents, intents)
                 XCTAssertEqual(decodedBody.entities, entities)
@@ -192,13 +194,13 @@ class AssistantV1UnitTests: XCTestCase {
             name: name,
             description: description,
             language: language,
+            dialogNodes: dialogNodes,
+            counterexamples: counterExamples,
             metadata: metadata,
             learningOptOut: learningOptOut,
             systemSettings: systemSettings,
-            intents: intents,
-            entities: entities,
-            dialogNodes: dialogNodes,
-            counterexamples: counterExamples) {
+            intents: createIntents,
+            entities: createEntities) {
                 _, _ in
                 expectation.fulfill()
         }
@@ -238,8 +240,10 @@ class AssistantV1UnitTests: XCTestCase {
         let name = "Anthony's workspace"
         let description = "The best workspace there ever was"
         let language = "en"
-        let intents = [CreateIntent(intent: "intent")]
-        let entities = [CreateEntity(entity: "entity")]
+        let intents = [Intent(intent: "intent")]
+        let entities = [Entity(entity: "entity")]
+        let createIntents = [CreateIntent(intent: "intent")]
+        let createEntities = [CreateEntity(entity: "entity")]
         let dialogNodes = [DialogNode(dialogNode: "Best node")]
         let counterExamples = [Counterexample(text: "no u")]
         let metadata: [String: WatsonJSON] = ["key": WatsonJSON.string("value")]
@@ -258,7 +262,7 @@ class AssistantV1UnitTests: XCTestCase {
 
             do {
                 let body = Data(reading: request.httpBodyStream!)
-                let decodedBody = try JSONDecoder().decode(UpdateWorkspace.self, from: body)
+                let decodedBody = try JSONDecoder().decode(Workspace.self, from: body)
 
                 XCTAssertEqual(decodedBody.intents, intents)
                 XCTAssertEqual(decodedBody.entities, entities)
@@ -283,13 +287,13 @@ class AssistantV1UnitTests: XCTestCase {
             name: name,
             description: description,
             language: language,
+            dialogNodes: dialogNodes,
+            counterexamples: counterExamples,
             metadata: metadata,
             learningOptOut: learningOptOut,
             systemSettings: systemSettings,
-            intents: intents,
-            entities: entities,
-            dialogNodes: dialogNodes,
-            counterexamples: counterExamples,
+            intents: createIntents,
+            entities: createEntities,
             append: true) {
                 _, _ in
                 expectation.fulfill()
@@ -447,7 +451,7 @@ class AssistantV1UnitTests: XCTestCase {
 
             do {
                 let body = Data(reading: request.httpBodyStream!)
-                let decodedBody = try JSONDecoder().decode(UpdateIntent.self, from: body)
+                let decodedBody = try JSONDecoder().decode(Intent.self, from: body)
 
                 XCTAssertEqual(decodedBody.intent, newIntent)
                 XCTAssertEqual(decodedBody.description, newDescription)
@@ -636,7 +640,7 @@ class AssistantV1UnitTests: XCTestCase {
 
             do {
                 let body = Data(reading: request.httpBodyStream!)
-                let decodedBody = try JSONDecoder().decode(UpdateExample.self, from: body)
+                let decodedBody = try JSONDecoder().decode(Example.self, from: body)
 
                 XCTAssertEqual(decodedBody.text, newText)
                 XCTAssertEqual(decodedBody.mentions, newMentions)
@@ -810,7 +814,7 @@ class AssistantV1UnitTests: XCTestCase {
 
             do {
                 let body = Data(reading: request.httpBodyStream!)
-                let decodedBody = try JSONDecoder().decode(UpdateCounterexample.self, from: body)
+                let decodedBody = try JSONDecoder().decode(Counterexample.self, from: body)
 
                 XCTAssertEqual(decodedBody.text, newText)
             } catch {
@@ -980,7 +984,8 @@ class AssistantV1UnitTests: XCTestCase {
         let newEntity = "new entity"
         let newDescription = "The best entity there ever was"
         let newMetadata = ["key": WatsonJSON.string("value")]
-        let newValues = [CreateValue(value: "value")]
+        let newValues = [Value(value: "value", type: "synonyms")]
+        let newCreateValues = [CreateValue(value: "value")]
         let newFuzzyMatch = true
 
         MockURLProtocol.requestHandler = { request in
@@ -996,7 +1001,7 @@ class AssistantV1UnitTests: XCTestCase {
 
             do {
                 let body = Data(reading: request.httpBodyStream!)
-                let decodedBody = try JSONDecoder().decode(UpdateEntity.self, from: body)
+                let decodedBody = try JSONDecoder().decode(Entity.self, from: body)
 
                 XCTAssertEqual(decodedBody.entity, newEntity)
                 XCTAssertEqual(decodedBody.description, newDescription)
@@ -1018,7 +1023,7 @@ class AssistantV1UnitTests: XCTestCase {
             newDescription: newDescription,
             newMetadata: newMetadata,
             newFuzzyMatch: newFuzzyMatch,
-            newValues: newValues) {
+            newValues: newCreateValues) {
                 _, _ in
                 expectation.fulfill()
         }
@@ -1240,7 +1245,7 @@ class AssistantV1UnitTests: XCTestCase {
 
             do {
                 let body = Data(reading: request.httpBodyStream!)
-                let decodedBody = try JSONDecoder().decode(UpdateValue.self, from: body)
+                let decodedBody = try JSONDecoder().decode(Value.self, from: body)
 
                 XCTAssertEqual(decodedBody.value, newValue)
                 XCTAssertEqual(decodedBody.metadata, newMetadata)
@@ -1449,7 +1454,7 @@ class AssistantV1UnitTests: XCTestCase {
 
             do {
                 let body = Data(reading: request.httpBodyStream!)
-                let decodedBody = try JSONDecoder().decode(UpdateSynonym.self, from: body)
+                let decodedBody = try JSONDecoder().decode(Synonym.self, from: body)
 
                 XCTAssertEqual(decodedBody.synonym, newSynonym)
             } catch {
@@ -1550,10 +1555,9 @@ class AssistantV1UnitTests: XCTestCase {
         let conditions = "best"
         let parent = "parent"
         let previousSibling = "brother"
-        let generic = DialogNodeOutputGeneric(responseType: "json")
         let additionalProperties = ["key": WatsonJSON.string("value")]
-        let output = DialogNodeOutput(generic: [generic], modifiers: nil, additionalProperties: additionalProperties)
-        let context = ["key1": WatsonJSON.string("value1")]
+        let output = DialogNodeOutput(modifiers: nil, additionalProperties: additionalProperties)
+        let context = DialogNodeContext(integrations: ["key1": ["subkey1": WatsonJSON.string("value1")]])
         let metadata = ["key2": WatsonJSON.string("value2")]
         let nextStep = DialogNodeNextStep(behavior: "jump")
         let actions = [DialogNodeAction(name: "action", resultVariable: "nothing")]
@@ -1667,10 +1671,9 @@ class AssistantV1UnitTests: XCTestCase {
         let newConditions = "newConditions"
         let newParent = "newParent"
         let newPreviousSibling = "newPreviousSibling"
-        let generic = DialogNodeOutputGeneric(responseType: "json")
         let additionalProperties = ["key": WatsonJSON.string("value")]
-        let newOutput = DialogNodeOutput(generic: [generic], modifiers: nil, additionalProperties: additionalProperties)
-        let newContext = ["key1": WatsonJSON.string("value1")]
+        let newOutput = DialogNodeOutput(modifiers: nil, additionalProperties: additionalProperties)
+        let newContext = DialogNodeContext(integrations: ["key1": ["subkey1": WatsonJSON.string("value1")]])
         let newMetadata = ["key2": WatsonJSON.string("value2")]
         let newNextStep = DialogNodeNextStep(behavior: "jump")
         let newTitle = "newTitle"
@@ -1696,7 +1699,7 @@ class AssistantV1UnitTests: XCTestCase {
 
             do {
                 let body = Data(reading: request.httpBodyStream!)
-                let decodedBody = try JSONDecoder().decode(UpdateDialogNode.self, from: body)
+                let decodedBody = try JSONDecoder().decode(DialogNode.self, from: body)
 
                 XCTAssertEqual(decodedBody.dialogNode, newDialogNode)
                 XCTAssertEqual(decodedBody.description, newDescription)

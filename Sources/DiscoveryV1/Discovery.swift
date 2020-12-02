@@ -15,7 +15,7 @@
  **/
 
 /**
- * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-36b26b63-20201028-122900
+ * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-be3b4618-20201201-153403
  **/
 
 // swiftlint:disable file_length
@@ -3908,11 +3908,15 @@ public class Discovery {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let startTime = startTime {
-            let queryParameter = URLQueryItem(name: "start_time", value: "\(startTime)")
+            let dateFormatterISO = ISO8601DateFormatter()
+            let dateString = dateFormatterISO.string(from: startTime)
+            let queryParameter = URLQueryItem(name: "start_time", value: dateString)
             queryParameters.append(queryParameter)
         }
         if let endTime = endTime {
-            let queryParameter = URLQueryItem(name: "end_time", value: "\(endTime)")
+            let dateFormatterISO = ISO8601DateFormatter()
+            let dateString = dateFormatterISO.string(from: endTime)
+            let queryParameter = URLQueryItem(name: "end_time", value: dateString)
             queryParameters.append(queryParameter)
         }
         if let resultType = resultType {
@@ -3977,11 +3981,15 @@ public class Discovery {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let startTime = startTime {
-            let queryParameter = URLQueryItem(name: "start_time", value: "\(startTime)")
+            let dateFormatterISO = ISO8601DateFormatter()
+            let dateString = dateFormatterISO.string(from: startTime)
+            let queryParameter = URLQueryItem(name: "start_time", value: dateString)
             queryParameters.append(queryParameter)
         }
         if let endTime = endTime {
-            let queryParameter = URLQueryItem(name: "end_time", value: "\(endTime)")
+            let dateFormatterISO = ISO8601DateFormatter()
+            let dateString = dateFormatterISO.string(from: endTime)
+            let queryParameter = URLQueryItem(name: "end_time", value: dateString)
             queryParameters.append(queryParameter)
         }
         if let resultType = resultType {
@@ -4045,11 +4053,15 @@ public class Discovery {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let startTime = startTime {
-            let queryParameter = URLQueryItem(name: "start_time", value: "\(startTime)")
+            let dateFormatterISO = ISO8601DateFormatter()
+            let dateString = dateFormatterISO.string(from: startTime)
+            let queryParameter = URLQueryItem(name: "start_time", value: dateString)
             queryParameters.append(queryParameter)
         }
         if let endTime = endTime {
-            let queryParameter = URLQueryItem(name: "end_time", value: "\(endTime)")
+            let dateFormatterISO = ISO8601DateFormatter()
+            let dateString = dateFormatterISO.string(from: endTime)
+            let queryParameter = URLQueryItem(name: "end_time", value: dateString)
             queryParameters.append(queryParameter)
         }
         if let resultType = resultType {
@@ -4114,11 +4126,15 @@ public class Discovery {
         var queryParameters = [URLQueryItem]()
         queryParameters.append(URLQueryItem(name: "version", value: version))
         if let startTime = startTime {
-            let queryParameter = URLQueryItem(name: "start_time", value: "\(startTime)")
+            let dateFormatterISO = ISO8601DateFormatter()
+            let dateString = dateFormatterISO.string(from: startTime)
+            let queryParameter = URLQueryItem(name: "start_time", value: dateString)
             queryParameters.append(queryParameter)
         }
         if let endTime = endTime {
-            let queryParameter = URLQueryItem(name: "end_time", value: "\(endTime)")
+            let dateFormatterISO = ISO8601DateFormatter()
+            let dateString = dateFormatterISO.string(from: endTime)
+            let queryParameter = URLQueryItem(name: "end_time", value: dateString)
             queryParameters.append(queryParameter)
         }
         if let resultType = resultType {

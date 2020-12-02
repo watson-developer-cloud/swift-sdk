@@ -15,7 +15,7 @@
  **/
 
 /**
- * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-36b26b63-20201028-122900
+ * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-be3b4618-20201201-153403
  **/
 
 // swiftlint:disable file_length
@@ -29,8 +29,11 @@ import IBMSwiftSDKCore
 public typealias WatsonError = RestError
 public typealias WatsonResponse = RestResponse
 /**
- The IBM Watson&trade; Visual Recognition service uses deep learning algorithms to identify scenes and objects in images
- that you upload to the service. You can create and train a custom classifier to identify subjects that suit your needs.
+ IBM Watson&trade; Visual Recognition is discontinued. Existing instances are supported until 1 December 2021, but as of
+ 7 January 2021, you can't create instances. Any instance that is provisioned on 1 December 2021 will be deleted.
+ {: deprecated}
+ The IBM Watson Visual Recognition service uses deep learning algorithms to identify scenes and objects in images that
+ you upload to the service. You can create and train a custom classifier to identify subjects that suit your needs.
  */
 public class VisualRecognition {
 
@@ -73,6 +76,7 @@ public class VisualRecognition {
      - serviceName: String = defaultServiceName
      */
     public init(version: String, authenticator: Authenticator? = nil, serviceName: String = defaultServiceName) throws {
+        #warning("On 1 December 2021, Visual Recognition will no longer be available. For more information, see https://github.com/watson-developer-cloud/swift-sdk/tree/master#visual-recognition-deprecation")
         self.version = version
         self.authenticator = try authenticator ?? ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceName)
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceName) {
@@ -90,7 +94,6 @@ public class VisualRecognition {
      */
     public init(version: String, authenticator: Authenticator) {
         #warning("On 1 December 2021, Visual Recognition will no longer be available. For more information, see https://github.com/watson-developer-cloud/swift-sdk/tree/master#visual-recognition-deprecation")
-        
         self.version = version
         self.authenticator = authenticator
         RestRequest.userAgent = Shared.userAgent

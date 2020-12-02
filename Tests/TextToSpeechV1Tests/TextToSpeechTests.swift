@@ -96,7 +96,7 @@ class TextToSpeechTests: XCTestCase {
     func deleteCustomizations() {
         let description = "Delete all customizations."
         let expectation = self.expectation(description: description)
-        textToSpeech.listVoiceModels {
+        textToSpeech.listCustomModels {
             response, error in
             if let error = error {
                 if !error.localizedDescription.contains(self.litePlanMessage) {
@@ -110,7 +110,7 @@ class TextToSpeechTests: XCTestCase {
                 return
             }
             for voiceModel in voiceModels.customizations {
-                self.textToSpeech.deleteVoiceModel(customizationID: voiceModel.customizationID) { _, _ in }
+                self.textToSpeech.deleteCustomModel(customizationID: voiceModel.customizationID) { _, _ in }
             }
             expectation.fulfill()
         }
@@ -262,7 +262,7 @@ class TextToSpeechTests: XCTestCase {
 
     func testListVoiceModels() {
         let expectation = self.expectation(description: "List voice models")
-        textToSpeech.listVoiceModels {
+        textToSpeech.listCustomModels {
             response, error in
             if let error = error {
                 if !error.localizedDescription.contains(self.litePlanMessage) {
@@ -284,8 +284,8 @@ class TextToSpeechTests: XCTestCase {
     func testVoiceModelsCRUD() {
         let expectation1 = self.expectation(description: "Create voice model")
         let name = "Swift SDK Test Custom Voice Model"
-        var voiceModel: VoiceModel!
-        textToSpeech.createVoiceModel(name: name) {
+        var voiceModel: CustomModel!
+        textToSpeech.createCustomModel(name: name) {
             response, error in
             if let error = error {
                 if !error.localizedDescription.contains(self.litePlanMessage) {
@@ -311,7 +311,7 @@ class TextToSpeechTests: XCTestCase {
 
         let expectation2 = self.expectation(description: "Get voice model")
         let customizationID = voiceModel.customizationID
-        textToSpeech.getVoiceModel(customizationID: customizationID) {
+        textToSpeech.getCustomModel(customizationID: customizationID) {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -331,7 +331,7 @@ class TextToSpeechTests: XCTestCase {
         let newName = name + " - Updated"
         let description = "Safe to delete"
         let words = [Word(word: "IBM", translation: "eye bee em"), Word(word: "MIL", translation: "mill")]
-        textToSpeech.updateVoiceModel(customizationID: customizationID, name: newName, description: description, words: words) {
+        textToSpeech.updateCustomModel(customizationID: customizationID, name: newName, description: description, words: words) {
             _, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -341,7 +341,7 @@ class TextToSpeechTests: XCTestCase {
         waitForExpectations()
 
         let expectation4 = self.expectation(description: "Get voice model")
-        textToSpeech.getVoiceModel(customizationID: customizationID) {
+        textToSpeech.getCustomModel(customizationID: customizationID) {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -363,7 +363,7 @@ class TextToSpeechTests: XCTestCase {
         waitForExpectations()
 
         let expectation5 = self.expectation(description: "Delete voice model")
-        textToSpeech.deleteVoiceModel(customizationID: customizationID) {
+        textToSpeech.deleteCustomModel(customizationID: customizationID) {
             _, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
@@ -375,8 +375,8 @@ class TextToSpeechTests: XCTestCase {
 
     func testWordsCRUD() {
         let expectation1 = self.expectation(description: "Create voice model")
-        var voiceModel: VoiceModel!
-        textToSpeech.createVoiceModel(name: "Swift SDK Test Custom Voice Model") {
+        var voiceModel: CustomModel!
+        textToSpeech.createCustomModel(name: "Swift SDK Test Custom Voice Model") {
             response, error in
             if let error = error {
                 if !error.localizedDescription.contains(self.litePlanMessage) {
@@ -522,7 +522,7 @@ class TextToSpeechTests: XCTestCase {
 
     func testGetCustomizationsWithInvalidLanguage() {
         let expectation = self.expectation(description: "List voice models")
-        textToSpeech.listVoiceModels(language: "invalid-language") {
+        textToSpeech.listCustomModels(language: "invalid-language") {
             _, error in
             if error == nil {
                 XCTFail(missingErrorMessage)
@@ -534,7 +534,7 @@ class TextToSpeechTests: XCTestCase {
 
     func testCreateCustomizationWithInvalidLanguage() {
         let expectation = self.expectation(description: "Create voice model")
-        textToSpeech.createVoiceModel(name: "custom-model", language: "invalid-language") {
+        textToSpeech.createCustomModel(name: "custom-model", language: "invalid-language") {
             _, error in
             if error == nil {
                 XCTFail(missingErrorMessage)
@@ -546,7 +546,7 @@ class TextToSpeechTests: XCTestCase {
 
     func testDeleteCustomizationWithBadID() {
         let expectation = self.expectation(description: "Delete voice model")
-        textToSpeech.deleteVoiceModel(customizationID: "invalid-id") {
+        textToSpeech.deleteCustomModel(customizationID: "invalid-id") {
             _, error in
             if error == nil {
                 XCTFail(missingErrorMessage)
@@ -558,7 +558,7 @@ class TextToSpeechTests: XCTestCase {
 
     func testGetCustomizationWithBadID() {
         let expectation = self.expectation(description: "Get voice model")
-        textToSpeech.getVoiceModel(customizationID: "invalid-id") {
+        textToSpeech.getCustomModel(customizationID: "invalid-id") {
             _, error in
             if error == nil {
                 XCTFail(missingErrorMessage)
@@ -570,7 +570,7 @@ class TextToSpeechTests: XCTestCase {
 
     func testUpdateCustomizationWithBadID() {
         let expectation = self.expectation(description: "Update voice model")
-        textToSpeech.updateVoiceModel(customizationID: "invalid-id") {
+        textToSpeech.updateCustomModel(customizationID: "invalid-id") {
             _, error in
             if error == nil {
                 XCTFail(missingErrorMessage)

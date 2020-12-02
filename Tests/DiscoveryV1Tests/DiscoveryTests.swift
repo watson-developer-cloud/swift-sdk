@@ -1804,11 +1804,17 @@ class DiscoveryTests: XCTestCase {
     func testGetMetricsQuery() {
         let expectation = self.expectation(description: "getMetricsQuery")
         discovery.getMetricsQuery {
-            _, error in
+            response, error in
 
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
             }
+            
+            guard let result = response?.result else {
+                XCTFail("response is nil or result is not a property of response")
+                return
+            }
+            
             expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)

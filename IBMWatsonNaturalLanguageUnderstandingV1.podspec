@@ -16,10 +16,10 @@ including categories, concepts, emotion, entities, keywords, metadata, relations
   s.ios.deployment_target = '10.0'
   s.source                = { :git => 'https://github.com/watson-developer-cloud/swift-sdk.git', :tag => "v#{s.version}" }
 
-  s.source_files          = 'Source/NaturalLanguageUnderstandingV1/**/*.swift',
-                            'Source/SupportingFiles/InsecureConnection.swift',
-                            'Source/SupportingFiles/Shared.swift'
-  s.exclude_files         = 'Source/NaturalLanguageUnderstandingV1/Shared.swift'
+  s.source_files          = 'Sources/NaturalLanguageUnderstandingV1/**/*.swift',
+                            'Sources/SupportingFiles/InsecureConnection.swift',
+                            'Sources/SupportingFiles/Shared.swift'
+  s.exclude_files         = 'Sources/NaturalLanguageUnderstandingV1/Shared.swift'
 
   s.swift_version         = ['4.2', '5.0', '5.1']
   s.dependency              'IBMSwiftSDKCore', '~> 1.0.0'

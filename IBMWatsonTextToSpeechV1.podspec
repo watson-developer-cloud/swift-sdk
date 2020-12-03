@@ -34,7 +34,7 @@ The service streams the results back to the client with minimal delay.
                         cd Sources/SupportingFiles/Dependencies/Libraries
                         mv libogg.a libogg_tts.a
                         mv libopus.a libopus_tts.a
-                        cd ../Sources
+                        cd ../Source
                         mv ogg/* .
                         mv opus/* .
                         rm -rf ogg

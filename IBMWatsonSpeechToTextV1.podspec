@@ -38,7 +38,7 @@ of the audio signal. It continuously returns and retroactively updates a transcr
                         cd Sources/SupportingFiles/Dependencies/Libraries
                         mv libogg.a libogg_stt.a
                         mv libopus.a libopus_stt.a
-                        cd ../Sources
+                        cd ../Source
                         mv ogg/* .
                         mv opus/* .
                         rm -rf ogg

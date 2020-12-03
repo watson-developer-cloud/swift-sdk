@@ -19,7 +19,7 @@ The service streams the results back to the client with minimal delay.
   s.source_files          = 'Sources/TextToSpeechV1/**/*.swift',
                             'Sources/SupportingFiles/InsecureConnection.swift',
                             'Sources/SupportingFiles/Shared.swift',
-                            'Sources/SupportingFiles/Dependencies/Sources/**/*'
+                            'Sources/SupportingFiles/Dependencies/Source/**/*'
   s.exclude_files         = 'Sources/TextToSpeechV1/Shared.swift',
                             '**/config_types.h'
 

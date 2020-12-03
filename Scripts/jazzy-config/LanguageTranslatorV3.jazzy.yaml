@@ -5,8 +5,8 @@ clean: true
 output: ../../gh-pages/services/LanguageTranslatorV3
 module: LanguageTranslatorV3
 module_version: "3.6.0"
-documentation: ../../Source/LanguageTranslatorV3/README.md
-readme: ../../Source/LanguageTranslatorV3/README.md
+documentation: ../../Sources/LanguageTranslatorV3/README.md
+readme: ../../Sources/LanguageTranslatorV3/README.md
 build_tool_arguments:
   - "-project"
   - "WatsonDeveloperCloud.xcodeproj"

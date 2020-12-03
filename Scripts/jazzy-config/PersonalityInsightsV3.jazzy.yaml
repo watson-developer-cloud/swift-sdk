@@ -5,8 +5,8 @@ clean: true
 output: ../../gh-pages/services/PersonalityInsightsV3
 module: PersonalityInsightsV3
 module_version: "3.6.0"
-documentation: ../../Source/PersonalityInsightsV3/README.md
-readme: ../../Source/PersonalityInsightsV3/README.md
+documentation: ../../Sources/PersonalityInsightsV3/README.md
+readme: ../../Sources/PersonalityInsightsV3/README.md
 build_tool_arguments:
   - "-project"
   - "WatsonDeveloperCloud.xcodeproj"

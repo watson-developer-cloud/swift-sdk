@@ -5,8 +5,8 @@ clean: true
 output: ../../gh-pages/services/AssistantV1
 module: AssistantV1
 module_version: "3.6.0"
-documentation: ../../Source/AssistantV1/README.md
-readme: ../../Source/AssistantV1/README.md
+documentation: ../../Sources/AssistantV1/README.md
+readme: ../../Sources/AssistantV1/README.md
 build_tool_arguments:
   - "-project"
   - "WatsonDeveloperCloud.xcodeproj"

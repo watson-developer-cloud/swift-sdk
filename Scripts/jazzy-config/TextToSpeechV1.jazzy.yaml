@@ -5,8 +5,8 @@ clean: true
 output: ../../gh-pages/services/TextToSpeechV1
 module: TextToSpeechV1
 module_version: "3.6.0"
-documentation: ../../Source/TextToSpeechV1/README.md
-readme: ../../Source/TextToSpeechV1/README.md
+documentation: ../../Sources/TextToSpeechV1/README.md
+readme: ../../Sources/TextToSpeechV1/README.md
 build_tool_arguments:
   - "-project"
   - "WatsonDeveloperCloud.xcodeproj"

@@ -1598,7 +1598,7 @@ public class Discovery {
         collectionID: String,
         file: Data? = nil,
         filename: String? = nil,
-        fileContentType: String? = nil,
+        fileContentType: String,
         metadata: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<AnalyzedDocument>?, WatsonError?) -> Void)
@@ -1731,16 +1731,20 @@ public class Discovery {
         projectID: String,
         enrichment: CreateEnrichment,
         file: Data? = nil,
+        fileContentType: String,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Enrichment>?, WatsonError?) -> Void)
     {
         // construct body
         let multipartFormData = MultipartFormData()
-        if let enrichmentData = "\(enrichment)".data(using: .utf8) {
-            multipartFormData.append(enrichmentData, withName: "enrichment")
+        guard let enrichmentJSON = try? JSON.encoder.encode(enrichment) else {
+            completionHandler(nil, WatsonError.serialization(values: "request body"))
+            return
         }
+
+        multipartFormData.append(enrichmentJSON, withName: "enrichment")
         if let file = file {
-            multipartFormData.append(file, withName: "file", fileName: "filename")
+            multipartFormData.append(file, withName: "file", mimeType: fileContentType, fileName: "filename")
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, RestError.serialization(values: "request multipart form data"))

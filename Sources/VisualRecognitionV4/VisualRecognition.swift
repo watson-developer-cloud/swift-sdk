@@ -181,15 +181,13 @@ public class VisualRecognition {
     {
         // construct body
         let multipartFormData = MultipartFormData()
-        for item in collectionIDs {
-            if let itemData = item.data(using: .utf8) {
-                multipartFormData.append(itemData, withName: "collection_ids")
-            }
+        // HAND EDIT: join collectionIDs into CSV string
+        if let csvCollectionIDsData = collectionIDs.joined(separator: ",").data(using: .utf8) {
+            multipartFormData.append(csvCollectionIDsData, withName: "collection_ids")
         }
-        for item in features {
-            if let itemData = item.data(using: .utf8) {
-                multipartFormData.append(itemData, withName: "features")
-            }
+        // HAND EDIT: join features into CSV string
+        if let csvFeaturesData = features.joined(separator: ",").data(using: .utf8) {
+            multipartFormData.append(csvFeaturesData, withName: "features")
         }
         if let imagesFile = imagesFile {
             for item in imagesFile {
@@ -261,7 +259,6 @@ public class VisualRecognition {
      - parameter name: The name of the collection. The name can contain alphanumeric, underscore, hyphen, and dot
        characters. It cannot begin with the reserved prefix `sys-`.
      - parameter description: The description of the collection.
-     - parameter trainingStatus: Training status information for the collection.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -437,7 +434,6 @@ public class VisualRecognition {
      - parameter name: The name of the collection. The name can contain alphanumeric, underscore, hyphen, and dot
        characters. It cannot begin with the reserved prefix `sys-`.
      - parameter description: The description of the collection.
-     - parameter trainingStatus: Training status information for the collection.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */

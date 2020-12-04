@@ -208,19 +208,12 @@ public class VisualRecognition {
                 multipartFormData.append(thresholdData, withName: "threshold")
             }
         }
-        if let owners = owners {
-            for item in owners {
-                if let itemData = item.data(using: .utf8) {
-                    multipartFormData.append(itemData, withName: "owners")
-                }
-            }
+        if let csvOwners = owners?.joined(separator: ",").data(using: .utf8) {
+            multipartFormData.append(csvOwners, withName: "owners")
         }
-        if let classifierIDs = classifierIDs {
-            for item in classifierIDs {
-                if let itemData = item.data(using: .utf8) {
-                    multipartFormData.append(itemData, withName: "classifier_ids")
-                }
-            }
+        // HAND EDIT: concat classifier IDs into csv data
+        if let csvClassifierIDs = classifierIDs?.joined(separator: ",").data(using: .utf8) {
+            multipartFormData.append(csvClassifierIDs, withName: "classifier_ids")
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, RestError.serialization(values: "request multipart form data"))
@@ -312,10 +305,10 @@ public class VisualRecognition {
         }
         positiveExamples.forEach { (classname, value) in
             let partName = "\(classname)_positive_examples"
-            multipartFormData.append(value, withName: partName, fileName: classname)
+            multipartFormData.append(value, withName: partName, fileName: "\(classname).zip")
         }
         if let negativeExamples = negativeExamples {
-            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename")
+            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename.zip")
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, RestError.serialization(values: "request multipart form data"))
@@ -511,11 +504,11 @@ public class VisualRecognition {
         if let positiveExamples = positiveExamples {
             positiveExamples.forEach { (classname, value) in
                 let partName = "\(classname)_positive_examples"
-                multipartFormData.append(value, withName: partName, fileName: classname)
+                multipartFormData.append(value, withName: partName, fileName: "\(classname).zip")
             }
         }
         if let negativeExamples = negativeExamples {
-            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename")
+            multipartFormData.append(negativeExamples, withName: "negative_examples", fileName: negativeExamplesFilename ?? "filename.zip")
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, RestError.serialization(values: "request multipart form data"))

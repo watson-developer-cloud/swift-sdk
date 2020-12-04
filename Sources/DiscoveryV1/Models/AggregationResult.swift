@@ -43,7 +43,7 @@ public struct AggregationResult: Codable, Equatable {
         case aggregations = "aggregations"
     }
 
-        public init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         if let keyAsString = try? container.decode(String.self, forKey: .key) { key = keyAsString }
         if let keyAsInt = try? container.decode(Int.self, forKey: .key) { key = "\(keyAsInt)" }

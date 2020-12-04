@@ -898,7 +898,7 @@ class DiscoveryTests: XCTestCase {
         let deleteExpectation = self.expectation(description: "deleteCollection")
 
         discovery.deleteCollection(projectID: projectID, collectionID: generatedCollectionID, headers: nil) {
-            response, error in
+            _, error in
 
             if let error = error {
                 debugPrint(error.localizedDescription)
@@ -992,7 +992,7 @@ class DiscoveryTests: XCTestCase {
         let deleteExpectation = self.expectation(description: "deleteEnrichment")
 
         discovery.deleteEnrichment(projectID: projectID, enrichmentID: generatedEnrichmentID) {
-            response, error in
+            _, error in
 
             if let error = error {
                 debugPrint(error.localizedDescription)
@@ -1036,7 +1036,7 @@ class DiscoveryTests: XCTestCase {
 
         let listExpectation = self.expectation(description: "listProjects")
 
-        discovery.listProjects() {
+        discovery.listProjects {
             response, error in
 
             if let error = error {
@@ -1084,7 +1084,7 @@ class DiscoveryTests: XCTestCase {
         let deleteExpectation = self.expectation(description: "deleteProject")
 
         discovery.deleteProject(projectID: generatedProjectID) {
-            response, error in
+            _, error in
 
             if let error = error {
                 debugPrint(error.localizedDescription)

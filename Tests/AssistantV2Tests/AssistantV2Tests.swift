@@ -223,15 +223,15 @@ class AssistantV2Tests: XCTestCase {
                 XCTFail("no generic")
                 return
             }
-            
+
             guard case let .text(text) = dialogRuntimeResponse else {
                 XCTFail("Unexpected RuntimeResponse return type")
                 expectation2.fulfill()
                 return
             }
-            
+
             XCTAssertNotNil(text.text)
-            
+
             // verify context
             XCTAssertNil(context)
 
@@ -243,7 +243,7 @@ class AssistantV2Tests: XCTestCase {
         let description3 = "Continue a conversation."
         let expectation3 = self.expectation(description: description3)
 
-        let messageInputOptions = MessageInputOptions(restart: false, alternateIntents: false,spelling: nil, debug: false, returnContext: true, export: false)
+        let messageInputOptions = MessageInputOptions(restart: false, alternateIntents: false, spelling: nil, debug: false, returnContext: true, export: false)
         let messageInput = MessageInput(messageType: MessageInput.MessageType.text.rawValue, text: "I'm good, how are you?", options: messageInputOptions)
 
         assistant.message(assistantID: assistantID, sessionID: sessionID, input: messageInput, context: nil) {
@@ -266,7 +266,7 @@ class AssistantV2Tests: XCTestCase {
                 XCTFail("no generic")
                 return
             }
-            
+
             guard case let .text(text) = dialogRuntimeResponse else {
                 XCTFail("Unexpected RuntimeResponse return type")
                 expectation3.fulfill()
@@ -450,7 +450,7 @@ class AssistantV2Tests: XCTestCase {
                 XCTFail("no generic")
                 return
             }
-            
+
             guard case let .text(text) = dialogRuntimeResponse else {
                 XCTFail("Unexpected RuntimeResponse return type")
                 expectation2.fulfill()
@@ -567,7 +567,7 @@ class AssistantV2Tests: XCTestCase {
                 XCTFail("no generic")
                 return
             }
-            
+
             guard case let .search(search) = dialogRuntimeResponse else {
                 XCTFail("Unexpected RuntimeResponse return type")
                 searchSkillMessageExpectation.fulfill()

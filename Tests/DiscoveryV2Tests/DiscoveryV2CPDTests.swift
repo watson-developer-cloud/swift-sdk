@@ -1,5 +1,3 @@
-
-
 import XCTest
 import Foundation
 // Do not import @testable to ensure only public interface is exposed

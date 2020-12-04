@@ -804,7 +804,7 @@ class VisualRecognitionV4Tests: XCTestCase {
         let deleteExpectation = self.expectation(description: "delete object metadata")
 
         visualRecognition.deleteObject(collectionID: trainingDummyCollectionID, object: testObject) {
-            response, error in
+            _, error in
 
             // make sure we didn't get an error
             if let error = error {

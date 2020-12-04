@@ -93,7 +93,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
     }
 
     func testSynthesizeAllVoices() {
-        let voices: [String : String] = [
+        let voices: [String: String] = [
             "ar-AR_OmarVoice": "تقوم خدمة I B M النص إلى خدمة الكلام بتحويل النص المكتوب إلى صوت طبيعي في مجموعة متنوعة من اللغات والأصوات.",
             "pt-BR_IsabelaVoice": "Consciente do seu patrimônio espiritual e moral, a União é fundamentada nos valores indivisíveis ",
             "pt-BR_IsabelaV3Voice": "Consciente do seu patrimônio espiritual e moral, a União é fundamentada nos valores indivisíveis ",
@@ -127,7 +127,7 @@ class TextToSpeechPlaybackTests: XCTestCase {
             "es-LA_SofiaVoice": "Consciente de su patrimonio espiritual y moral, la Unión está ",
             "es-LA_SofiaV3Voice": "Consciente de su patrimonio espiritual y moral, la Unión está ",
             "es-US_SofiaVoice": "Consciente de su patrimonio espiritual y moral, la Unión está ",
-            "es-US_SofiaV3Voice": "Consciente de su patrimonio espiritual y moral, la Unión está ß"
+            "es-US_SofiaV3Voice": "Consciente de su patrimonio espiritual y moral, la Unión está ß",
         ]
 
         // test all voices

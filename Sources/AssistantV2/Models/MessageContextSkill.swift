@@ -58,7 +58,6 @@ public struct MessageContextSkill: Codable, Equatable {
 
 }
 
-
 public extension KeyedDecodingContainer where Key == DynamicKeys {
 
     /// Decode additional properties.

@@ -6,7 +6,7 @@
 ### All Services
 * `init` now accepts a `serviceName` parameter to set the default service name of the instance
 
-### AssistantV1 Instance
+### AssistantV1 Service
 
 * Now Accepts `includeCount` Parameter: `listWorkspaces()`, `listIntents()`, `listExamples()`, `listCounterexamples()`, `listEntities()`, `listValues()`, `listSynonyms()`, `listDialogNodes()`
 
@@ -70,7 +70,7 @@
 * Changed from struct to enum to discriminate between response types
 
 
-### AssistantV2 Instance
+### AssistantV2 Service
 
 * `bulkClassify()`: function added - Identify intents and entities in multiple user utterances.
 
@@ -96,7 +96,7 @@
 `RuntimeResponseGeneric`
 * Changed from struct to enum to discriminate between response types
 
-### CompareComplyV1 Instance
+### CompareComplyV1 Service
 
 * `listFeedback()`: `before` and `after` parameters removed
 
@@ -112,7 +112,7 @@
 `OriginalLabelsOut`, `UpdatedLabelsOut`
 * `modification` removed
 
-### DiscoveryV1 Instance
+### DiscoveryV1 Service
 
 * No changes
 
@@ -135,7 +135,7 @@
 `NluEnrichmentFeatures`
 * `categories` type changed from `NluEnrichmentCategories?` to `[String: JSON]?`
 
-### DiscoveryV2 Instance
+### DiscoveryV2 Service
 
 * `analyzeDocument()`: function added - Process a document using the specified collection's settings and return it for realtime use. - Currently CP4D only
 
@@ -162,7 +162,7 @@
 * `updated` read only
 * `queryID` read only
 
-### LanguageTranslator Instance
+### LanguageTranslator Service
 * No changes
 
 ### LanguageTranslatorV3 Models
@@ -170,7 +170,7 @@
 #### Models Removed
 `TranslateRequest`
 
-### NaturalLanguageClassifierV1 Instance
+### NaturalLanguageClassifierV1 Service
 * No changes
 
 ### NaturalLanguageClassifierV1 Models
@@ -178,7 +178,7 @@
 #### Models Removed
 `ClassifyCollectionInput`
 
-### NaturalLanguageUnderstanding Instance
+### NaturalLanguageUnderstanding Service
 * No changes
 
 ### NaturalLanguageUnderstandingV1 Models
@@ -194,7 +194,11 @@
 `Features`
 * `metadata` type changed from `MetadataOptions?` to `[String: JSON]?`
 
-### PersonalityInsights Instance
+### PersonalityInsights Service
+IBM Watson™ Personality Insights is discontinued. For a period of one year from 1 December 2020, you will still be able to use Watson Personality Insights. However, as of 1 December 2021, the offering will no longer be available.
+
+As an alternative, we encourage you to consider migrating to IBM Watson™ Natural Language Understanding, a service on IBM Cloud® that uses deep learning to extract data and insights from text such as keywords, categories, sentiment, emotion, and syntax to provide insights for your business or industry. For more information, see About Natural Language Understanding.
+
 * `profile()`: csvHeaders parameter added
 
 * `profileAsCSV()`: return type changed from `WatsonResponse<String>?` to `WatsonResponse<Data>?`
@@ -202,7 +206,7 @@
 ### PersonalityInightsV3 Models
 * No changes
 
-### SpeechToTextV1 Instance
+### SpeechToTextV1 Service
 * `trainLanguageModel()`: return type changed from `WatsonResponse<Void>?` to `WatsonResponse<TrainingResponse>?`
 
 * `trainAcousticModel()`: return type changed from `WatsonResponse<Void>?` to `WatsonResponse<TrainingResponse>?`
@@ -213,7 +217,7 @@
 #### Models Removed
 `CreateAcousticModel`, `CreateLanguageModel`, `CustomWords`
 
-### TextToSpeechV1 Instance
+### TextToSpeechV1 Service
 * `createVoiceModel()`: function changed to `createCustomModel()` now returning `WatsonResponse<CustomModel>?`
 
 * `listVoiceModels()`: function changed to `listCustomModels()` now returning `WatsonResponse<CustomModels>?`
@@ -234,24 +238,19 @@
 `Voice`
 * customization type changed from `VoiceModel?` to `CustomModel?`
 
-### ToneAnalyzer Instance
-* `tone()`: `tones` parameter added
-
 ### ToneAnalyzerV3 Models
 
 #### Models Removed
 `ToneChatInput`
 
-### VisualRecognitionV3 Instance
-* No changes
+### VisualRecognitionV3 Service
+IBM Watson™ Visual Recognition is discontinued. Existing instances are supported until 1 December 2021, but as of 7 January 2021, you can't create instances. Any instance that is provisioned on 1 December 2021 will be deleted.
 
 ### VisualRecognitionV3 Models
 * No changes
 
-### VisualRecognitionV4 Instance
-* `createCollection()`: `trainingStatus` parameter added
-
-* `updateCollection()`: `trainingStatus` parameter added
+### VisualRecognitionV4 Service
+IBM Watson™ Visual Recognition is discontinued. Existing instances are supported until 1 December 2021, but as of 7 January 2021, you can't create instances. Any instance that is provisioned on 1 December 2021 will be deleted.
 
 * `getTrainingUsage()`: `startTime` and `endTime` parameter types changed from `String?` to `Date?`
 

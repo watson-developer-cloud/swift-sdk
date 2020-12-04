@@ -1809,12 +1809,12 @@ class DiscoveryTests: XCTestCase {
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))
             }
-            
+
             guard let result = response?.result else {
                 XCTFail("response is nil or result is not a property of response")
                 return
             }
-            
+
             expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)

@@ -36,7 +36,7 @@ internal class SpeechToTextRecorder {
     private var powerTimer: Timer?                                   // timer to invoke metering callback
 
     private let callback: AudioQueueInputCallback = {
-        userData, queue, bufferRef, startTimeRef, numPackets, packetDescriptions in
+        userData, queue, bufferRef, startTimeRef, numPackets, _ in
 
         // parse `userData` as `SpeechToTextRecorder`
         guard let userData = userData else { return }

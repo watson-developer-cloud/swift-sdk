@@ -65,6 +65,7 @@ public class PersonalityInsights {
        in "YYYY-MM-DD" format.
      */
     public init(version: String) throws {
+        #warning("On 1 December 2021, Personality Insights will no longer be available. Consider migrating to Watson Natural Language Understanding. For more information, see https://github.com/watson-developer-cloud/swift-sdk/tree/master#personality-insights-deprecation")
         self.version = version
 
         let authenticator = try ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceSdkName)
@@ -86,6 +87,7 @@ public class PersonalityInsights {
      - parameter authenticator: The Authenticator object used to authenticate requests to the service
      */
     public init(version: String, authenticator: Authenticator) {
+        #warning("On 1 December 2021, Personality Insights will no longer be available. Consider migrating to Watson Natural Language Understanding. For more information, see https://github.com/watson-developer-cloud/swift-sdk/tree/master#personality-insights-deprecation")
         self.version = version
         self.authenticator = authenticator
         RestRequest.userAgent = Shared.userAgent

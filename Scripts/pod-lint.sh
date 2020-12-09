@@ -13,7 +13,7 @@ pod lib lint IBMWatsonDiscoveryV2.podspec --allow-warnings
 pod lib lint IBMWatsonLanguageTranslatorV3.podspec
 pod lib lint IBMWatsonNaturalLanguageClassifierV1.podspec
 pod lib lint IBMWatsonNaturalLanguageUnderstandingV1.podspec
-pod lib lint IBMWatsonPersonalityInsightsV3.podspec
+pod lib lint IBMWatsonPersonalityInsightsV3.podspec --allow-warnings
 
 pod lib lint IBMWatsonSpeechToTextV1.podspec --allow-warnings
 # Cleanup from the podspec prepare_command
@@ -28,5 +28,5 @@ rm Source/SupportingFiles/Dependencies/Libraries/*tts.a
 find Source/SupportingFiles/Dependencies/Source -maxdepth 1 -type f -delete
 
 pod lib lint IBMWatsonToneAnalyzerV3.podspec
-pod lib lint IBMWatsonVisualRecognitionV3.podspec
-pod lib lint IBMWatsonVisualRecognitionV4.podspec
+pod lib lint IBMWatsonVisualRecognitionV3.podspec --allow-warnings
+pod lib lint IBMWatsonVisualRecognitionV4.podspec --allow-warnings

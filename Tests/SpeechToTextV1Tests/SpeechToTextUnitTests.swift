@@ -44,11 +44,11 @@ class SpeechToTextUnitTests: XCTestCase {
 
         // Trailing forward slash
         speechToTextSession.websocketsURL = "wss://api.us-south.speech-to-text.watson.cloud.ibm.com/v1/recognize/"
-        XCTAssertEqual(speechToTextSession.serviceURL, "api.us-south.speech-to-text.watson.cloud.ibm.com")
+        XCTAssertEqual(speechToTextSession.serviceURL, "https://api.us-south.speech-to-text.watson.cloud.ibm.com")
 
         // http instead of https
         speechToTextSession.websocketsURL = "ws://api.us-south.speech-to-text.watson.cloud.ibm.com/v1/recognize"
-        XCTAssertEqual(speechToTextSession.serviceURL, "api.us-south.speech-to-text.watson.cloud.ibm.com")
+        XCTAssertEqual(speechToTextSession.serviceURL, "http://api.us-south.speech-to-text.watson.cloud.ibm.com")
 
         // Different base URL
         speechToTextSession.websocketsURL = "wss://example.com/speech-to-text/api/v1/recognize/v1/recognize"

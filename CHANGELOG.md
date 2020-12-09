@@ -815,7 +815,7 @@ VisualRecognitionV4 added :tada:
 
 
 ### SpeechToTextV1
-- The `tokenURL` and `websocketsURL` properties are no longer public. Setting the `serviceURL` will automatically update the other two URLs appropriately.
+- The `websocketsURL` property is no longer public. Setting the `serviceURL` will automatically update the property.
 - Add missing parameters `baseModelVersion`, `languageCustomizationID`, and `customerID` to the following methods:
     - `recognize()` (using an audio file)
     - `recognizeUsingWebsocket()`

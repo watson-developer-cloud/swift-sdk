@@ -36,22 +36,18 @@ public class SpeechToTextSession {
     /// The URL that shall be used to stream audio for transcription.
     public var websocketsURL = "wss://api.us-south.speech-to-text.watson.cloud.ibm.com/v1/recognize" {
         didSet {
-            // serviceURL and tokenURL are both derivative of websocketsURL
+            // serviceURL is a derivative of websocketsURL
             if websocketsURL.last == "/" {
                 websocketsURL.removeLast()
             }
             serviceURL = websocketsURL
                 .replacingOccurrences(of: "ws", with: "http", options: .anchored, range: nil)
                 .replacingOccurrences(of: "/v1/recognize", with: "")
-            tokenURL = serviceURL.replacingOccurrences(of: "/speech-to-text/api", with: "/authorization/api/v1/token")
         }
     }
 
     /// The base URL of the Speech to Text service.
     internal var serviceURL = "https://api.us-south.speech-to-text.watson.cloud.ibm.com"
-
-    /// The URL that shall be used to obtain a token.
-    internal var tokenURL = "https://api.us-south.speech-to-text.watson.cloud.ibm.com/v1/token"
 
     /// The default HTTP headers for all requests to the service.
     public var defaultHeaders = [String: String]()

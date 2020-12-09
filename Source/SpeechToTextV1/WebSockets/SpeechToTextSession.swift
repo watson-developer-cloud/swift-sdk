@@ -34,7 +34,7 @@ import IBMSwiftSDKCore
 public class SpeechToTextSession {
 
     /// The URL that shall be used to stream audio for transcription.
-    public var websocketsURL = "https://api.us-south.speech-to-text.watson.cloud.ibm.com/v1/recognize" {
+    public var websocketsURL = "wss://api.us-south.speech-to-text.watson.cloud.ibm.com/v1/recognize" {
         didSet {
             // serviceURL and tokenURL are both derivative of websocketsURL
             if websocketsURL.last == "/" {

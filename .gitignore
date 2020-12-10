@@ -1,6 +1,6 @@
 # Custom
-Source/SupportingFiles/Credentials.swift
-Source/SupportingFiles/WatsonCredentials.swift
+Sources/SupportingFiles/Credentials.swift
+Sources/SupportingFiles/WatsonCredentials.swift
 Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials*
 
 # Build generated

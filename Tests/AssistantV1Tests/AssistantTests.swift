@@ -148,8 +148,8 @@ class AssistantTests: XCTestCase {
             XCTAssertNotNil(message.context.conversationID)
             XCTAssertNotEqual(message.context.conversationID, "")
             XCTAssertNotNil(message.context.system)
-            XCTAssertNotNil(message.context.system!.additionalProperties)
-            XCTAssertFalse(message.context.system!.additionalProperties.isEmpty)
+            XCTAssertNotNil(message.context.additionalProperties)
+            XCTAssertFalse(message.context.additionalProperties.isEmpty)
 
             // verify entities
             XCTAssertTrue(message.entities.isEmpty)
@@ -531,11 +531,11 @@ class AssistantTests: XCTestCase {
             name: workspaceName,
             description: workspaceDescription,
             language: workspaceLanguage,
+            dialogNodes: [workspaceDialogNode],
+            counterexamples: [workspaceCounterexample],
             metadata: workspaceMetadata,
             intents: [workspaceIntent],
             entities: [workspaceEntity],
-            dialogNodes: [workspaceDialogNode],
-            counterexamples: [workspaceCounterexample],
             includeAudit: true) {
                 response, error in
 

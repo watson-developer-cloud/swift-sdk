@@ -5,8 +5,8 @@ clean: true
 output: ../../gh-pages/services/VisualRecognitionV4
 module: VisualRecognitionV4
 module_version: "3.6.0"
-documentation: ../../Source/VisualRecognitionV4/README.md
-readme: ../../Source/VisualRecognitionV4/README.md
+documentation: ../../Sources/VisualRecognitionV4/README.md
+readme: ../../Sources/VisualRecognitionV4/README.md
 build_tool_arguments:
   - "-project"
   - "WatsonDeveloperCloud.xcodeproj"

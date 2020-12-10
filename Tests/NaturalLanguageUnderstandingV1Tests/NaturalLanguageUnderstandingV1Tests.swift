@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2019.
+ * (C) Copyright IBM Corp. 2017, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -380,7 +380,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
     func testAnalyzeHTMLForMetadata() {
         let description = "Analyze html for metadata."
         let expectation = self.expectation(description: description)
-        let features = Features(metadata: MetadataOptions())
+        let features = Features(metadata: ["test": .string("")])
         let fileTitle = "This 5,000-year-old recipe for beer actually sounds pretty tasty"
         let fileDate = "2016-05-23T20:13:00"
         let fileAuthor = "Annalee Newitz"

@@ -1,7 +1,7 @@
 excluded: # paths to ignore during linting (takes precedence over `included`)
   - Carthage
-  - Source/SupportingFiles/Dependencies
-  - Source/*/Shared.swift
+  - Sources/SupportingFiles/Dependencies
+  - Sources/*/Shared.swift
 
 disabled_rules: # rule identifiers to exclude from running
   - closure_parameter_position
@@ -10,6 +10,8 @@ disabled_rules: # rule identifiers to exclude from running
   - cyclomatic_complexity
   - superfluous_disable_command
   - function_parameter_count
+  - identifier_name
+  - line_length
 
 opt_in_rules:
  - force_unwrapping

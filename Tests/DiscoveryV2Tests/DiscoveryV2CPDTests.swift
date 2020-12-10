@@ -1,5 +1,3 @@
-
-
 import XCTest
 import Foundation
 // Do not import @testable to ensure only public interface is exposed
@@ -47,4 +45,28 @@ class DiscoveryCPDTests: XCTestCase {
         let data = try? Data(contentsOf: url)
         return data
     }
+
+    func testAnalyzeDocument() {
+            let expectation = self.expectation(description: "analyzeDocument")
+            let testDocument = loadDocument(name: "analyzeDocument", ext: "json")
+
+        discovery.analyzeDocument(projectID: projectID, collectionID: collectionID, file: testDocument, filename: "analyzeDocument.json", fileContentType: "application/json"){
+                response, error in
+
+                if let error = error {
+                    debugPrint(error.localizedDescription)
+                    XCTFail(unexpectedErrorMessage(error))
+                    return
+                }
+
+                guard let result = response?.result else {
+                    XCTFail("No response")
+                    return
+                }
+
+                expectation.fulfill()
+            }
+
+            waitForExpectations(timeout: timeout)
+        }
 }

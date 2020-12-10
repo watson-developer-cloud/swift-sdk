@@ -219,13 +219,18 @@ class AssistantV2Tests: XCTestCase {
             let context = message.context
 
             // verify response message
-            guard let dialogRuntimeResponse = output.generic, dialogRuntimeResponse.count == 1 else {
-                XCTFail("Expected to receive a response message")
+            guard let dialogRuntimeResponse = output.generic?.first else {
+                XCTFail("no generic")
                 return
             }
 
-            XCTAssertEqual(dialogRuntimeResponse[0].responseType, "text")
-            XCTAssertNotNil(dialogRuntimeResponse[0].text)
+            guard case let .text(text) = dialogRuntimeResponse else {
+                XCTFail("Unexpected RuntimeResponse return type")
+                expectation2.fulfill()
+                return
+            }
+
+            XCTAssertNotNil(text.text)
 
             // verify context
             XCTAssertNil(context)
@@ -238,7 +243,7 @@ class AssistantV2Tests: XCTestCase {
         let description3 = "Continue a conversation."
         let expectation3 = self.expectation(description: description3)
 
-        let messageInputOptions = MessageInputOptions(debug: false, restart: false, alternateIntents: false, returnContext: true, export: false, spelling: nil)
+        let messageInputOptions = MessageInputOptions(restart: false, alternateIntents: false, spelling: nil, debug: false, returnContext: true, export: false)
         let messageInput = MessageInput(messageType: MessageInput.MessageType.text.rawValue, text: "I'm good, how are you?", options: messageInputOptions)
 
         assistant.message(assistantID: assistantID, sessionID: sessionID, input: messageInput, context: nil) {
@@ -257,13 +262,18 @@ class AssistantV2Tests: XCTestCase {
             let context = message.context
 
             // verify response message
-            guard let dialogRuntimeResponse = output.generic, dialogRuntimeResponse.count == 1 else {
-                XCTFail("Expected to receive a response message")
+            guard let dialogRuntimeResponse = output.generic?.first else {
+                XCTFail("no generic")
                 return
             }
 
-            XCTAssertEqual(dialogRuntimeResponse[0].responseType, "text")
-            XCTAssertNotNil(dialogRuntimeResponse[0].text)
+            guard case let .text(text) = dialogRuntimeResponse else {
+                XCTFail("Unexpected RuntimeResponse return type")
+                expectation3.fulfill()
+                return
+            }
+
+            XCTAssertNotNil(text.text)
 
             // verify intents
             guard let intents = output.intents, intents.count == 1 else {
@@ -413,7 +423,7 @@ class AssistantV2Tests: XCTestCase {
         var userDefinedContext: [String: WatsonJSON] = [:]
         userDefinedContext["account_number"] = .string("123456")
         let mainSkillContext = MessageContextSkill(userDefined: userDefinedContext)
-        let skills = MessageContextSkills(additionalProperties: ["main skill": mainSkillContext])
+        let skills = ["main skill": mainSkillContext]
 
         let context = MessageContext(global: global, skills: skills)
 
@@ -436,19 +446,23 @@ class AssistantV2Tests: XCTestCase {
             let output = message.output
 
             // verify response message
-            guard let dialogRuntimeResponse = output.generic, dialogRuntimeResponse.count == 1 else {
-                XCTFail("Expected to receive a response message")
+            guard let dialogRuntimeResponse = output.generic?.first else {
+                XCTFail("no generic")
                 return
             }
 
-            XCTAssertEqual(dialogRuntimeResponse[0].responseType, "text")
-            XCTAssertNotNil(dialogRuntimeResponse[0].text)
+            guard case let .text(text) = dialogRuntimeResponse else {
+                XCTFail("Unexpected RuntimeResponse return type")
+                expectation2.fulfill()
+                return
+            }
+
+            XCTAssertNotNil(text.text)
 
             // verify context
             XCTAssertNotNil(message.context)
             XCTAssertNotNil(message.context?.skills)
-            XCTAssertNotNil(message.context?.skills?.additionalProperties)
-            XCTAssertTrue(message.context?.skills?.additionalProperties.keys.contains("main skill") ?? false)
+            XCTAssertTrue(message.context?.skills?.keys.contains("main skill") ?? false)
 
             expectation2.fulfill()
         }
@@ -548,13 +562,20 @@ class AssistantV2Tests: XCTestCase {
                 return
             }
 
-            guard let message = response?.result?.output.generic?[0] else {
-                XCTFail(missingResultMessage)
+            // verify response message
+            guard let dialogRuntimeResponse = response?.result?.output.generic?.first else {
+                XCTFail("no generic")
                 return
             }
 
-            XCTAssertNotNil(message)
-            XCTAssert(message.responseType == "search")
+            guard case let .search(search) = dialogRuntimeResponse else {
+                XCTFail("Unexpected RuntimeResponse return type")
+                searchSkillMessageExpectation.fulfill()
+                return
+            }
+
+            XCTAssertNotNil(search)
+            XCTAssert(search.responseType == "search")
 
             searchSkillMessageExpectation.fulfill()
         }

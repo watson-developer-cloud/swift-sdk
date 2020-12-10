@@ -683,7 +683,6 @@ class SpeechToTextRecognizeTests: XCTestCase {
         }
     }
 
-
     // MARK: - callbacks
 
     func testCallbacks() {
@@ -704,7 +703,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
         let gotResults = self.expectation(description: "onResults received")
 
         var callback = RecognizeCallback()
-        callback.onResults = { results in
+        callback.onResults = { _ in
             gotResults.fulfill()
         }
         callback.onError = { error in
@@ -725,7 +724,7 @@ class SpeechToTextRecognizeTests: XCTestCase {
         gotError.assertForOverFulfill = false
 
         var callback = RecognizeCallback()
-        callback.onError = { results in
+        callback.onError = { _ in
             gotError.fulfill()
         }
 

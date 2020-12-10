@@ -5,8 +5,8 @@ clean: true
 output: ../../gh-pages/services/ToneAnalyzerV3
 module: ToneAnalyzerV3
 module_version: "3.6.0"
-documentation: ../../Source/ToneAnalyzerV3/README.md
-readme: ../../Source/ToneAnalyzerV3/README.md
+documentation: ../../Sources/ToneAnalyzerV3/README.md
+readme: ../../Sources/ToneAnalyzerV3/README.md
 build_tool_arguments:
   - "-project"
   - "WatsonDeveloperCloud.xcodeproj"

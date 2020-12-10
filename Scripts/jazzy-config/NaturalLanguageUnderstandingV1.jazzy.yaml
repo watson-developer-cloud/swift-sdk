@@ -5,8 +5,8 @@ clean: true
 output: ../../gh-pages/services/NaturalLanguageUnderstandingV1
 module: NaturalLanguageUnderstandingV1
 module_version: "3.6.0"
-documentation: ../../Source/NaturalLanguageUnderstandingV1/README.md
-readme: ../../Source/NaturalLanguageUnderstandingV1/README.md
+documentation: ../../Sources/NaturalLanguageUnderstandingV1/README.md
+readme: ../../Sources/NaturalLanguageUnderstandingV1/README.md
 build_tool_arguments:
   - "-project"
   - "WatsonDeveloperCloud.xcodeproj"

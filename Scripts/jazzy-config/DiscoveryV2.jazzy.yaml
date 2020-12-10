@@ -5,8 +5,8 @@ clean: true
 output: ../../gh-pages/services/DiscoveryV2
 module: DiscoveryV2
 module_version: "3.6.0"
-documentation: ../../Source/DiscoveryV2/README.md
-readme: ../../Source/DiscoveryV2/README.md
+documentation: ../../Sources/DiscoveryV2/README.md
+readme: ../../Sources/DiscoveryV2/README.md
 build_tool_arguments:
   - "-project"
   - "WatsonDeveloperCloud.xcodeproj"

@@ -154,7 +154,9 @@ dependencies: [
 
 ## Known Issues
 
-There is a known issue with Carthage and XCode 12 that prevents installation of the required dependency Starscream. There is already an [issue thread](https://github.com/Carthage/Carthage/issues/3019) up on the Carthage repository with a [workaround script](https://github.com/getsentry/sentry-cocoa/pull/780) that can be run to address the issue.  Until there is a version released that truly addresses this issue, it is recommended to either use one of the other two package managers or use the workaround script. 
+The release of XCode 12 created issues in both Cocoapods and Carthage preventing the use of these package managers with no current easy fixes. Current use of this sdk will only work with Xcode 11.7 and below. In the future, we will be dropping support for Cocoapods and Carthage in favor of Swift Package Manager
+
+There is a workaround in Carthage to get this sdk to work with XCode 12. An [issue thread](https://github.com/Carthage/Carthage/issues/3019) up on the Carthage repository contains a [workaround script](https://github.com/getsentry/sentry-cocoa/pull/780) that can be run to address the issue.  Until there is a version released that truly addresses this issue, it is recommended to use this sdk with XCode 11.7 or below. 
 
 ## Authentication
 

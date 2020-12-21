@@ -15,7 +15,7 @@
  **/
 
 /**
- * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-36b26b63-20201028-122900
+ * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-be3b4618-20201221-123327
  **/
 
 // swiftlint:disable file_length
@@ -196,7 +196,7 @@ public class SpeechToText {
      **See also:** [Languages and models](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-models#models).
 
      - parameter modelID: The identifier of the model in the form of its name from the output of the **Get a model**
-       method.
+       method. (**Note:** The model `ar-AR_BroadbandModel` is deprecated; use `ar-MS_BroadbandModel` instead.).
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -305,7 +305,8 @@ public class SpeechToText {
      - parameter audio: The audio to transcribe.
      - parameter contentType: The format (MIME type) of the audio. For more information about specifying an audio
        format, see **Audio formats (content types)** in the method description.
-     - parameter model: The identifier of the model that is to be used for the recognition request. See [Languages and
+     - parameter model: The identifier of the model that is to be used for the recognition request. (**Note:** The
+       model `ar-AR_BroadbandModel` is deprecated; use `ar-MS_BroadbandModel` instead.) See [Languages and
        models](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-models#models).
      - parameter languageCustomizationID: The customization ID (GUID) of a custom language model that is to be used
        with the recognition request. The base model of the specified custom language model must match the model
@@ -811,7 +812,8 @@ public class SpeechToText {
      - parameter audio: The audio to transcribe.
      - parameter contentType: The format (MIME type) of the audio. For more information about specifying an audio
        format, see **Audio formats (content types)** in the method description.
-     - parameter model: The identifier of the model that is to be used for the recognition request. See [Languages and
+     - parameter model: The identifier of the model that is to be used for the recognition request. (**Note:** The
+       model `ar-AR_BroadbandModel` is deprecated; use `ar-MS_BroadbandModel` instead.) See [Languages and
        models](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-models#models).
      - parameter callbackURL: A URL to which callback notifications are to be sent. The URL must already be
        successfully allowlisted by using the **Register a callback** method. You can include the same callback URL with
@@ -1452,7 +1454,7 @@ public class SpeechToText {
 
      - parameter language: The identifier of the language for which custom language or custom acoustic models are to
        be returned. Omit the parameter to see all custom language or custom acoustic models that are owned by the
-       requesting credentials.
+       requesting credentials. (**Note:** The identifier `ar-AR` is deprecated; use `ar-MS` instead.)
        To determine the languages for which customization is available, see [Language support for
        customization](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-customization#languageSupport).
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -2852,7 +2854,8 @@ public class SpeechToText {
        name that describes the acoustic environment of the custom model, such as `Mobile custom model` or `Noisy car
        custom model`.
      - parameter baseModelName: The name of the base language model that is to be customized by the new custom
-       acoustic model. The new custom model can be used only with the base model that it customizes.
+       acoustic model. The new custom model can be used only with the base model that it customizes. (**Note:** The
+       model `ar-AR_BroadbandModel` is deprecated; use `ar-MS_BroadbandModel` instead.)
        To determine whether a base model supports acoustic model customization, refer to [Language support for
        customization](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-customization#languageSupport).
      - parameter description: A description of the new custom acoustic model. Use a localized description that matches
@@ -2930,7 +2933,7 @@ public class SpeechToText {
 
      - parameter language: The identifier of the language for which custom language or custom acoustic models are to
        be returned. Omit the parameter to see all custom language or custom acoustic models that are owned by the
-       requesting credentials.
+       requesting credentials. (**Note:** The identifier `ar-AR` is deprecated; use `ar-MS` instead.)
        To determine the languages for which customization is available, see [Language support for
        customization](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-customization#languageSupport).
      - parameter headers: A dictionary of request headers to be sent with this request.

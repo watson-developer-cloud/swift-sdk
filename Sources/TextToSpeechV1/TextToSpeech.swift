@@ -15,7 +15,7 @@
  **/
 
 /**
- * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-36b26b63-20201028-122900
+ * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-be3b4618-20201221-123327
  **/
 
 // swiftlint:disable file_length
@@ -40,7 +40,7 @@ public typealias WatsonResponse = RestResponse
  A sounds-like translation consists of one or more words that, when combined, sound like the word. A phonetic
  translation is based on the SSML phoneme format for representing a word. You can specify a phonetic translation in
  standard International Phonetic Alphabet (IPA) representation or in the proprietary IBM Symbolic Phonetic
- Representation (SPR). The Arabic, Chinese, Dutch, and Korean languages support only IPA.
+ Representation (SPR). The Arabic, Chinese, Dutch, Australian English, and Korean languages support only IPA.
  */
 public class TextToSpeech {
 
@@ -194,8 +194,24 @@ public class TextToSpeech {
      language of the specified voice. To list information about all available voices, use the **List voices** method.
      **See also:** [Listing a specific
      voice](https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-voices#listVoice).
+     ### Important voice updates
+      The service's voices underwent significant change on 2 December 2020.
+     * The Arabic, Chinese, Dutch, Australian English, and Korean voices are now neural instead of concatenative.
+     * The `ar-AR_OmarVoice` voice is deprecated. Use `ar-MS_OmarVoice` voice instead.
+     * The `ar-AR` language identifier cannot be used to create a custom model. Use the `ar-MS` identifier instead.
+     * The standard concatenative voices for the following languages are now deprecated: Brazilian Portuguese, United
+     Kingdom and United States English, French, German, Italian, Japanese, and Spanish (all dialects).
+     * The features expressive SSML, voice transformation SSML, and use of the `volume` attribute of the `<prosody>`
+     element are deprecated and are not supported with any of the service's neural voices.
+     * All of the service's voices are now customizable and generally available (GA) for production use.
+     The deprecated voices and features will continue to function for at least one year but might be removed at a future
+     date. You are encouraged to migrate to the equivalent neural voices at your earliest convenience. For more
+     information about all voice updates, see the [2 December 2020 service
+     update](https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-release-notes#December2020) in the release
+     notes.
 
-     - parameter voice: The voice for which information is to be returned.
+     - parameter voice: The voice for which information is to be returned. For more information about specifying a
+       voice, see **Important voice updates** in the method description.
      - parameter customizationID: The customization ID (GUID) of a custom model for which information is to be
        returned. You must make the request with credentials for the instance of the service that owns the custom model.
        Omit the parameter to see information about the specified voice with no customization.
@@ -293,6 +309,21 @@ public class TextToSpeech {
      22,050 Hz.
      For more information about specifying an audio format, including additional details about some of the formats, see
      [Audio formats](https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-audioFormats#audioFormats).
+     ### Important voice updates
+      The service's voices underwent significant change on 2 December 2020.
+     * The Arabic, Chinese, Dutch, Australian English, and Korean voices are now neural instead of concatenative.
+     * The `ar-AR_OmarVoice` voice is deprecated. Use `ar-MS_OmarVoice` voice instead.
+     * The `ar-AR` language identifier cannot be used to create a custom model. Use the `ar-MS` identifier instead.
+     * The standard concatenative voices for the following languages are now deprecated: Brazilian Portuguese, United
+     Kingdom and United States English, French, German, Italian, Japanese, and Spanish (all dialects).
+     * The features expressive SSML, voice transformation SSML, and use of the `volume` attribute of the `<prosody>`
+     element are deprecated and are not supported with any of the service's neural voices.
+     * All of the service's voices are now customizable and generally available (GA) for production use.
+     The deprecated voices and features will continue to function for at least one year but might be removed at a future
+     date. You are encouraged to migrate to the equivalent neural voices at your earliest convenience. For more
+     information about all voice updates, see the [2 December 2020 service
+     update](https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-release-notes#December2020) in the release
+     notes.
      ### Warning messages
       If a request includes invalid query parameters, the service returns a `Warnings` response header that provides
      messages about the invalid parameters. The warning includes a descriptive message and a list of invalid argument
@@ -303,7 +334,8 @@ public class TextToSpeech {
      - parameter accept: The requested format (MIME type) of the audio. You can use the `Accept` header or the
        `accept` parameter to specify the audio format. For more information about specifying an audio format, see
        **Audio formats (accept types)** in the method description.
-     - parameter voice: The voice to use for synthesis.
+     - parameter voice: The voice to use for synthesis. For more information about specifying a voice, see **Important
+       voice updates** in the method description.
      - parameter customizationID: The customization ID (GUID) of a custom model to use for the synthesis. If a custom
        model is specified, it works only if it matches the language of the indicated voice. You must make the request
        with credentials for the instance of the service that owns the custom model. Omit the parameter to use the
@@ -388,12 +420,29 @@ public class TextToSpeech {
      voice or for a specific custom model to see the translation for that model.
      **See also:** [Querying a word from a
      language](https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customWords#cuWordsQueryLanguage).
+     ### Important voice updates
+      The service's voices underwent significant change on 2 December 2020.
+     * The Arabic, Chinese, Dutch, Australian English, and Korean voices are now neural instead of concatenative.
+     * The `ar-AR_OmarVoice` voice is deprecated. Use `ar-MS_OmarVoice` voice instead.
+     * The `ar-AR` language identifier cannot be used to create a custom model. Use the `ar-MS` identifier instead.
+     * The standard concatenative voices for the following languages are now deprecated: Brazilian Portuguese, United
+     Kingdom and United States English, French, German, Italian, Japanese, and Spanish (all dialects).
+     * The features expressive SSML, voice transformation SSML, and use of the `volume` attribute of the `<prosody>`
+     element are deprecated and are not supported with any of the service's neural voices.
+     * All of the service's voices are now customizable and generally available (GA) for production use.
+     The deprecated voices and features will continue to function for at least one year but might be removed at a future
+     date. You are encouraged to migrate to the equivalent neural voices at your earliest convenience. For more
+     information about all voice updates, see the [2 December 2020 service
+     update](https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-release-notes#December2020) in the release
+     notes.
 
      - parameter text: The word for which the pronunciation is requested.
      - parameter voice: A voice that specifies the language in which the pronunciation is to be returned. All voices
-       for the same language (for example, `en-US`) return the same translation.
-     - parameter format: The phoneme format in which to return the pronunciation. The Arabic, Chinese, Dutch, and
-       Korean languages support only IPA. Omit the parameter to obtain the pronunciation in the default format.
+       for the same language (for example, `en-US`) return the same translation. For more information about specifying a
+       voice, see **Important voice updates** in the method description.
+     - parameter format: The phoneme format in which to return the pronunciation. The Arabic, Chinese, Dutch,
+       Australian English, and Korean languages support only IPA. Omit the parameter to obtain the pronunciation in the
+       default format.
      - parameter customizationID: The customization ID (GUID) of a custom model for which the pronunciation is to be
        returned. The language of a specified custom model must match the language of the specified voice. If the word is
        not defined in the specified custom model, the service returns the default translation for the custom model's
@@ -465,11 +514,27 @@ public class TextToSpeech {
      are used to create it.
      **See also:** [Creating a custom
      model](https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customModels#cuModelsCreate).
+     ### Important voice updates
+      The service's voices underwent significant change on 2 December 2020.
+     * The Arabic, Chinese, Dutch, Australian English, and Korean voices are now neural instead of concatenative.
+     * The `ar-AR_OmarVoice` voice is deprecated. Use `ar-MS_OmarVoice` voice instead.
+     * The `ar-AR` language identifier cannot be used to create a custom model. Use the `ar-MS` identifier instead.
+     * The standard concatenative voices for the following languages are now deprecated: Brazilian Portuguese, United
+     Kingdom and United States English, French, German, Italian, Japanese, and Spanish (all dialects).
+     * The features expressive SSML, voice transformation SSML, and use of the `volume` attribute of the `<prosody>`
+     element are deprecated and are not supported with any of the service's neural voices.
+     * All of the service's voices are now customizable and generally available (GA) for production use.
+     The deprecated voices and features will continue to function for at least one year but might be removed at a future
+     date. You are encouraged to migrate to the equivalent neural voices at your earliest convenience. For more
+     information about all voice updates, see the [2 December 2020 service
+     update](https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-release-notes#December2020) in the release
+     notes.
 
      - parameter name: The name of the new custom model.
      - parameter language: The language of the new custom model. You create a custom model for a specific language,
-       not for a specific voice. A custom model can be used with any voice, standard or neural, for its specified
-       language. Omit the parameter to use the the default language, `en-US`.
+       not for a specific voice. A custom model can be used with any voice for its specified language. Omit the
+       parameter to use the the default language, `en-US`. **Note:** The `ar-AR` language identifier cannot be used to
+       create a custom model. Use the `ar-MS` identifier instead.
      - parameter description: A description of the new custom model. Specifying a description is recommended.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -959,8 +1024,8 @@ public class TextToSpeech {
      - parameter word: The word that is to be added or updated for the custom model.
      - parameter translation: The phonetic or sounds-like translation for the word. A phonetic translation is based on
        the SSML format for representing the phonetic string of a word either as an IPA translation or as an IBM SPR
-       translation. The Arabic, Chinese, Dutch, and Korean languages support only IPA. A sounds-like is one or more
-       words that, when combined, sound like the word.
+       translation. The Arabic, Chinese, Dutch, Australian English, and Korean languages support only IPA. A sounds-like
+       is one or more words that, when combined, sound like the word.
      - parameter partOfSpeech: **Japanese only.** The part of speech for the word. The service uses the value to
        produce the correct intonation for the word. You can create only a single entry, with or without a single part of
        speech, for any word; you cannot create multiple entries with different parts of speech for the same word. For

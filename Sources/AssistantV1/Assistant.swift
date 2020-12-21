@@ -15,7 +15,7 @@
  **/
 
 /**
- * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-36b26b63-20201028-122900
+ * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-be3b4618-20201221-123327
  **/
 
 // swiftlint:disable file_length
@@ -259,6 +259,90 @@ public class Assistant {
             self.alternate_intents = alternate_intents
             self.context = context
             self.output = output
+        }
+        // swiftlint:enable identifier_name
+    }
+
+    /**
+     Identify intents and entities in multiple user utterances.
+
+     Send multiple user inputs to a workspace in a single request and receive information about the intents and entities
+     recognized in each input. This method is useful for testing and comparing the performance of different workspaces.
+     This method is available only with Premium plans.
+
+     - parameter workspaceID: Unique identifier of the workspace.
+     - parameter input: An array of input utterances to classify.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func bulkClassify(
+        workspaceID: String,
+        input: [BulkClassifyUtterance]? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<BulkClassifyResponse>?, WatsonError?) -> Void)
+    {
+        // construct body
+        let bulkClassifyRequest = BulkClassifyRequest(
+            input: input)
+        let body: Data?
+        do {
+            body = try JSON.encoder.encodeIfPresent(bulkClassifyRequest)
+        } catch {
+            completionHandler(nil, RestError.serialization(values: "request body"))
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "bulkClassify")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/workspaces/\(workspaceID)/bulk_classify"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "POST",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the bulkClassify request body
+    private struct BulkClassifyRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let input: [BulkClassifyUtterance]?
+        init? (input: [BulkClassifyUtterance]? = nil) {
+            if input == nil {
+                return nil
+            }
+            self.input = input
         }
         // swiftlint:enable identifier_name
     }
@@ -4074,90 +4158,6 @@ public class Assistant {
 
         // execute REST request
         request.response(completionHandler: completionHandler)
-    }
-
-    /**
-     Identify intents and entities in multiple user utterances.
-
-     Send multiple user inputs to a workspace in a single request and receive information about the intents and entities
-     recognized in each input. This method is useful for testing and comparing the performance of different workspaces.
-     This method is available only with Premium plans.
-
-     - parameter workspaceID: Unique identifier of the workspace.
-     - parameter input: An array of input utterances to classify.
-     - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter completionHandler: A function executed when the request completes with a successful result or error
-     */
-    public func bulkClassify(
-        workspaceID: String,
-        input: [BulkClassifyUtterance]? = nil,
-        headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<BulkClassifyResponse>?, WatsonError?) -> Void)
-    {
-        // construct body
-        let bulkClassifyRequest = BulkClassifyRequest(
-            input: input)
-        let body: Data?
-        do {
-            body = try JSON.encoder.encodeIfPresent(bulkClassifyRequest)
-        } catch {
-            completionHandler(nil, RestError.serialization(values: "request body"))
-            return
-        }
-
-        // construct header parameters
-        var headerParameters = defaultHeaders
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "bulkClassify")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
-        headerParameters["Accept"] = "application/json"
-        headerParameters["Content-Type"] = "application/json"
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v1/workspaces/\(workspaceID)/bulk_classify"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
-            return
-        }
-
-        // ensure that serviceURL is set
-        guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, RestError.noEndpoint)
-            return
-        }
-
-        let request = RestRequest(
-            session: session,
-            authenticator: authenticator,
-            errorResponseDecoder: errorResponseDecoder,
-            method: "POST",
-            url: serviceEndpoint + encodedPath,
-            headerParameters: headerParameters,
-            queryItems: queryParameters,
-            messageBody: body
-        )
-
-        // execute REST request
-        request.responseObject(completionHandler: completionHandler)
-    }
-
-    // Private struct for the bulkClassify request body
-    private struct BulkClassifyRequest: Encodable {
-        // swiftlint:disable identifier_name
-        let input: [BulkClassifyUtterance]?
-        init? (input: [BulkClassifyUtterance]? = nil) {
-            if input == nil {
-                return nil
-            }
-            self.input = input
-        }
-        // swiftlint:enable identifier_name
     }
 
 }

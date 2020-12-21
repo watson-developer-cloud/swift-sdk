@@ -54,10 +54,9 @@ public struct RuntimeEntity: Codable, Equatable {
     public var groups: [CaptureGroup]?
 
     /**
-     An object containing detailed information about the entity recognized in the user input. This property is included
-     only if the new system entities are enabled for the workspace.
-     For more information about how the new system entities are interpreted, see the
-     [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-beta-system-entities).
+     An object containing detailed information about the entity recognized in the user input.
+     For more information about how system entities are interpreted, see the
+     [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-system-entities).
      */
     public var interpretation: RuntimeEntityInterpretation?
 
@@ -100,9 +99,9 @@ public struct RuntimeEntity: Codable, Equatable {
       - parameter metadata: Any metadata for the entity.
       - parameter groups: The recognized capture groups for the entity, as defined by the entity pattern.
       - parameter interpretation: An object containing detailed information about the entity recognized in the user
-        input. This property is included only if the new system entities are enabled for the workspace.
-        For more information about how the new system entities are interpreted, see the
-        [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-beta-system-entities).
+        input.
+        For more information about how system entities are interpreted, see the
+        [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-system-entities).
       - parameter alternatives: An array of possible alternative values that the user might have intended instead of
         the value returned in the **value** property. This property is returned only for `@sys-time` and `@sys-date`
         entities when the user's input is ambiguous.

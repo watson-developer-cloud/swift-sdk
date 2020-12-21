@@ -4,7 +4,7 @@ github_url: https://github.com/watson-developer-cloud/swift-sdk
 clean: true
 output: ../../gh-pages/services/LanguageTranslatorV3
 module: LanguageTranslatorV3
-module_version: "3.6.0"
+module_version: "4.0.0"
 documentation: ../../Sources/LanguageTranslatorV3/README.md
 readme: ../../Sources/LanguageTranslatorV3/README.md
 build_tool_arguments:

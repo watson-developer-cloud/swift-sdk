@@ -4,7 +4,7 @@ github_url: https://github.com/watson-developer-cloud/swift-sdk
 clean: true
 output: ../../gh-pages/services/VisualRecognitionV4
 module: VisualRecognitionV4
-module_version: "3.6.0"
+module_version: "4.0.0"
 documentation: ../../Sources/VisualRecognitionV4/README.md
 readme: ../../Sources/VisualRecognitionV4/README.md
 build_tool_arguments:

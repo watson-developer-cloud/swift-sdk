@@ -89,18 +89,18 @@ If your project does not yet have a Podfile, use the `pod init` command in the r
 use_frameworks!
 
 target 'MyApp' do
-    pod 'IBMWatsonAssistantV1', '~> 3.6.0'
-    pod 'IBMWatsonAssistantV2', '~> 3.6.0'
-    pod 'IBMWatsonCompareComplyV1', '~> 3.6.0'
-    pod 'IBMWatsonDiscoveryV1', '~> 3.6.0'
-    pod 'IBMWatsonLanguageTranslatorV3', '~> 3.6.0'
-    pod 'IBMWatsonNaturalLanguageClassifierV1', '~> 3.6.0'
-    pod 'IBMWatsonNaturalLanguageUnderstandingV1', '~> 3.6.0'
-    pod 'IBMWatsonPersonalityInsightsV3', '~> 3.6.0'
-    pod 'IBMWatsonSpeechToTextV1', '~> 3.6.0'
-    pod 'IBMWatsonTextToSpeechV1', '~> 3.6.0'
-    pod 'IBMWatsonToneAnalyzerV3', '~> 3.6.0'
-    pod 'IBMWatsonVisualRecognitionV3', '~> 3.6.0'
+    pod 'IBMWatsonAssistantV1', '~> 4.0.0'
+    pod 'IBMWatsonAssistantV2', '~> 4.0.0'
+    pod 'IBMWatsonCompareComplyV1', '~> 4.0.0'
+    pod 'IBMWatsonDiscoveryV1', '~> 4.0.0'
+    pod 'IBMWatsonLanguageTranslatorV3', '~> 4.0.0'
+    pod 'IBMWatsonNaturalLanguageClassifierV1', '~> 4.0.0'
+    pod 'IBMWatsonNaturalLanguageUnderstandingV1', '~> 4.0.0'
+    pod 'IBMWatsonPersonalityInsightsV3', '~> 4.0.0'
+    pod 'IBMWatsonSpeechToTextV1', '~> 4.0.0'
+    pod 'IBMWatsonTextToSpeechV1', '~> 4.0.0'
+    pod 'IBMWatsonToneAnalyzerV3', '~> 4.0.0'
+    pod 'IBMWatsonVisualRecognitionV3', '~> 4.0.0'
 end
 ```
 
@@ -125,7 +125,7 @@ $ brew install carthage
 If your project does not have a Cartfile yet, use the `touch Cartfile` command in the root directory of your project. To install the IBM Watson Swift SDK using Carthage, add the following to your Cartfile.
 
 ```
-github "watson-developer-cloud/swift-sdk" ~> 3.6.0
+github "watson-developer-cloud/swift-sdk" ~> 4.0.0
 ```
 
 Then run the following command to build the dependencies and frameworks:
@@ -148,13 +148,15 @@ Add the following to your `Package.swift` file to identify the IBM Watson Swift 
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "3.6.0")
+    .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "4.0.0")
 ]
 ```
 
 ## Known Issues
 
-There is a known issue with Carthage and XCode 12 that prevents installation of the required dependency Starscream. There is already an [issue thread](https://github.com/Carthage/Carthage/issues/3019) up on the Carthage repository with a [workaround script](https://github.com/getsentry/sentry-cocoa/pull/780) that can be run to address the issue.  Until there is a version released that truly addresses this issue, it is recommended to either use one of the other two package managers or use the workaround script. 
+The release of XCode 12 created issues in both Cocoapods and Carthage preventing the use of these package managers with no current easy fixes. Current use of this sdk will only work with Xcode 11.7 and below. In the future, we will be dropping support for Cocoapods and Carthage in favor of Swift Package Manager
+
+There is a workaround in Carthage to get this sdk to work with XCode 12. An [issue thread](https://github.com/Carthage/Carthage/issues/3019) up on the Carthage repository contains a [workaround script](https://github.com/getsentry/sentry-cocoa/pull/780) that can be run to address the issue.  Until there is a version released that truly addresses this issue, it is recommended to use this sdk with XCode 11.7 or below. 
 
 ## Authentication
 

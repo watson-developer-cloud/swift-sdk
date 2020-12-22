@@ -4,7 +4,7 @@ github_url: https://github.com/watson-developer-cloud/swift-sdk
 clean: true
 output: ../../gh-pages/services/NaturalLanguageClassifierV1
 module: NaturalLanguageClassifierV1
-module_version: "4.0.0"
+module_version: "4.0.1"
 documentation: ../../Sources/NaturalLanguageClassifierV1/README.md
 readme: ../../Sources/NaturalLanguageClassifierV1/README.md
 build_tool_arguments:

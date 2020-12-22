@@ -28,7 +28,8 @@ public struct SupportedFeatures: Codable, Equatable {
 
     /**
      If `true`, the voice can be transformed by using the SSML &lt;voice-transformation&gt; element; if `false`, the
-     voice cannot be transformed.
+     voice cannot be transformed. The feature was available only for the now-deprecated standard voices. You cannot use
+     the feature with neural voices.
      */
     public var voiceTransformation: Bool
 

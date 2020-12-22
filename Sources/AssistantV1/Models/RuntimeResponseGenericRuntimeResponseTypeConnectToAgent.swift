@@ -47,13 +47,13 @@ public struct RuntimeResponseGenericRuntimeResponseTypeConnectToAgent: Codable, 
      An optional message to be displayed to the user to indicate that the conversation will be transferred to the next
      available agent.
      */
-    public var agentAvailable: String?
+    public var agentAvailable: AgentAvailabilityMessage?
 
     /**
      An optional message to be displayed to the user to indicate that no online agent is available to take over the
      conversation.
      */
-    public var agentUnavailable: String?
+    public var agentUnavailable: AgentAvailabilityMessage?
 
     /**
      Routing or other contextual information to be used by target service desk systems.
@@ -105,8 +105,8 @@ public struct RuntimeResponseGenericRuntimeResponseTypeConnectToAgent: Codable, 
     public init(
         responseType: String,
         messageToHumanAgent: String? = nil,
-        agentAvailable: String? = nil,
-        agentUnavailable: String? = nil,
+        agentAvailable: AgentAvailabilityMessage? = nil,
+        agentUnavailable: AgentAvailabilityMessage? = nil,
         transferInfo: DialogNodeOutputConnectToAgentTransferInfo? = nil,
         topic: String? = nil,
         dialogNode: String? = nil

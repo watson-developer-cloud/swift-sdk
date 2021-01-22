@@ -31,6 +31,16 @@ of the audio signal. It continuously returns and retroactively updates a transcr
   s.dependency              'Starscream', '3.0.5'
   s.vendored_libraries    = 'Sources/SupportingFiles/Dependencies/Libraries/*.a'
 
+  # This is necessary for the time being as we do not support the
+  # XCFramework binary solution that can be bundled for all
+  # architectures (thus supporting Apple Silicon)
+  s.pod_target_xcconfig = {
+    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
+  }
+  s.user_target_xcconfig = {
+    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
+  }
+
   # The renaming of libogg.a and libopus.a is done to avoid duplicate library name errors
   # in case TextToSpeech is being installed in the same app (which also includes libogg and libopus)
   # The ogg/ and opus/ files are flattened to the same directory so that all #include statements work

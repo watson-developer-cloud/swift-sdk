@@ -19,6 +19,8 @@
 
 import Foundation
 import AudioToolbox
+import Clibogg
+import Clibopus
 
 internal class SpeechToTextEncoder {
 

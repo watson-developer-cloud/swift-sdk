@@ -15,9 +15,15 @@
  **/
 
 import Foundation
+#if canImport(Clibogg)
 import Clibogg
+#endif
+#if canImport(Clibopus)
 import Clibopus
+#endif
+#if canImport(Copustools)
 import Copustools
+#endif
 
 internal class TextToSpeechDecoder {
 

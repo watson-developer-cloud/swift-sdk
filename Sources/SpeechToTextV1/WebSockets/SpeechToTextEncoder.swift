@@ -19,8 +19,12 @@
 
 import Foundation
 import AudioToolbox
+#if canImport(Clibogg)
 import Clibogg
+#endif
+#if canImport(Clibopus)
 import Clibopus
+#endif
 
 internal class SpeechToTextEncoder {
 

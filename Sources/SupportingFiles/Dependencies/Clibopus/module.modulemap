@@ -1,0 +1,6 @@
+module Clibopus [system] {
+  header "/usr/local/opt/opus/include/opus/opus.h"
+  header "/usr/local/opt/opus/include/opus/opus_multistream.h"
+  link "opus"
+  export *
+}

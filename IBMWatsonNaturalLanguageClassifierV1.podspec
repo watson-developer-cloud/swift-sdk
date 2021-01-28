@@ -20,7 +20,8 @@ return information for texts that it is not trained on.
   s.source_files          = 'Sources/NaturalLanguageClassifierV1/**/*.swift',
                             'Sources/SupportingFiles/InsecureConnection.swift',
                             'Sources/SupportingFiles/Shared.swift'
-  s.exclude_files         = 'Sources/NaturalLanguageClassifierV1/Shared.swift'
+  s.exclude_files         = 'Sources/NaturalLanguageClassifierV1/Shared.swift',
+                            'Sources/NaturalLanguageClassifierV1/InsecureConnection.swift'
 
   s.swift_version         = ['4.2', '5.0', '5.1']
   s.dependency              'IBMSwiftSDKCore', '~> 1.0.0'

@@ -21,6 +21,7 @@ The service streams the results back to the client with minimal delay.
                             'Sources/SupportingFiles/Shared.swift',
                             'Sources/SupportingFiles/Dependencies/Source/**/*'
   s.exclude_files         = 'Sources/TextToSpeechV1/Shared.swift',
+                            'Sources/TextToSpeechV1/InsecureConnection.swift',
                             '**/config_types.h'
 
   s.swift_version         = ['4.2', '5.0', '5.1']

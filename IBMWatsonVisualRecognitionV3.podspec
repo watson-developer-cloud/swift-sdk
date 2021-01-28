@@ -19,7 +19,8 @@ scenes, objects, faces, and other content. The response includes keywords that p
   s.source_files          = 'Sources/VisualRecognitionV3/**/*.swift',
                             'Sources/SupportingFiles/InsecureConnection.swift',
                             'Sources/SupportingFiles/Shared.swift'
-  s.exclude_files         = 'Sources/VisualRecognitionV3/Shared.swift'
+  s.exclude_files         = 'Sources/VisualRecognitionV3/Shared.swift',
+                            'Sources/VisualRecognitionV3/InsecureConnection.swift'
 
   s.swift_version         = ['4.2', '5.0', '5.1']
   s.dependency              'IBMSwiftSDKCore', '~> 1.0.0'

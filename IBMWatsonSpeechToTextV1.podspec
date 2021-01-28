@@ -22,6 +22,7 @@ of the audio signal. It continuously returns and retroactively updates a transcr
                             'Sources/SupportingFiles/Shared.swift',
                             'Sources/SupportingFiles/Dependencies/Source/**/*'
   s.exclude_files         = 'Sources/SpeechToTextV1/Shared.swift',
+                            'Sources/SpeechToTextV1/InsecureConnection.swift',
                             '**/config_types.h',
                             '**/opus_header.h',
                             '**/opus_header.c'

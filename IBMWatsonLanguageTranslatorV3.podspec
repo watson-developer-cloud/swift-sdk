@@ -18,7 +18,8 @@ IBM Watson™ Language Translator can identify the language of text and translat
   s.source_files          = 'Sources/LanguageTranslatorV3/**/*.swift',
                             'Sources/SupportingFiles/InsecureConnection.swift',
                             'Sources/SupportingFiles/Shared.swift'
-  s.exclude_files         = 'Sources/LanguageTranslatorV3/Shared.swift'
+  s.exclude_files         = 'Sources/LanguageTranslatorV3/Shared.swift',
+                            'Sources/LanguageTranslatorV3/InsecureConnection.swift'
 
   s.swift_version         = ['4.2', '5.0', '5.1']
   s.dependency              'IBMSwiftSDKCore', '~> 1.0.0'

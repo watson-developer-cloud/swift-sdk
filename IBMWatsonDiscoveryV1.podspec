@@ -20,7 +20,8 @@ as well as public and third-party data.
   s.source_files          = 'Sources/DiscoveryV1/**/*.swift',
                             'Sources/SupportingFiles/InsecureConnection.swift',
                             'Sources/SupportingFiles/Shared.swift'
-  s.exclude_files         = 'Sources/DiscoveryV1/Shared.swift'
+  s.exclude_files         = 'Sources/DiscoveryV1/Shared.swift',
+                            'Sources/DiscoveryV1/InsecureConnection.swift'
 
   s.swift_version         = ['4.2', '5.0', '5.1']
   s.dependency              'IBMSwiftSDKCore', '~> 1.0.0'

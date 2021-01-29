@@ -81,13 +81,13 @@ IBM Watson™ Compare and Comply is discontinued. Existing instances are support
 The IBM Watson Swift SDK can be installed with [Swift Package Manager](https://swift.org/package-manager/), [Cocoapods](http://cocoapods.org/), or [Carthage](https://github.com/Carthage/Carthage).
 
 ### Swift Package Manager
-New in version 4.1, the Watson Developer Cloud Swift SDK now supports all services through Swift Package Manager.
+New in version 4.0.2, the Watson Developer Cloud Swift SDK now supports all services through Swift Package Manager.
 
 On the XCode menu bar at the top of your screen click `File -> Swift Packages -> Add Package Dependencies`, follow the prompts by pasting the github url `https://github.com/watson-developer-cloud/swift-sdk` and using the most recent major version if appropriate. Make sure to only click on the services you plan on using otherwise you may face long build times
 
 To import a service into your project:
 ```swift
-import AssitantV2
+import AssistantV2
 import DiscoveryV2
 .
 .
@@ -96,9 +96,8 @@ import DiscoveryV2
 
 
 
-(**Speech To Text and Text To Speech only**)
-
-The use of special libraries by these services requires extra steps. 
+**(Speech To Text and Text To Speech only)**
+The use of the `libogg` and `opus` libraries by these services requires extra steps to be taken. 
 1. You will need [Homebrew](http://brew.sh/) installed
 2. Install `libogg` and `opus`
     ```bash
@@ -120,10 +119,10 @@ The use of special libraries by these services requires extra steps.
 
 5. Replace the currently installed `libogg` and `libopus` libraries
     ```bash
-    rm /usr/local/Cellar/libogg/1.3.4/lib/libogg.a && cp ~/Downloads/libogg.a /usr/local/Cellar/libogg/1.3.4/lib
+    rm -f /usr/local/Cellar/libogg/1.3.4/lib/libogg.a && cp ~/Downloads/libogg.a /usr/local/Cellar/libogg/1.3.4/lib
     ```
     ```bash
-    rm /usr/local/Cellar/libogg/1.3.1/lib/libopus.a && cp ~/Downloads/libopus.a /usr/local/Cellar/opus/1.3.1/lib
+    rm -f /usr/local/Cellar/libogg/1.3.1/lib/libopus.a && cp ~/Downloads/libopus.a /usr/local/Cellar/opus/1.3.1/lib
     ```
 
 6. You're ready to go!
@@ -142,18 +141,18 @@ If your project does not yet have a Podfile, use the `pod init` command in the r
 use_frameworks!
 
 target 'MyApp' do
-    pod 'IBMWatsonAssistantV1', '~> 4.0'
-    pod 'IBMWatsonAssistantV2', '~> 4.0'
-    pod 'IBMWatsonCompareComplyV1', '~> 4.0'
-    pod 'IBMWatsonDiscoveryV1', '~> 4.0'
-    pod 'IBMWatsonLanguageTranslatorV3', '~> 4.0'
-    pod 'IBMWatsonNaturalLanguageClassifierV1', '~> 4.0'
-    pod 'IBMWatsonNaturalLanguageUnderstandingV1', '~> 4.0'
-    pod 'IBMWatsonPersonalityInsightsV3', '~> 4.0'
-    pod 'IBMWatsonSpeechToTextV1', '~> 4.0'
-    pod 'IBMWatsonTextToSpeechV1', '~> 4.0'
-    pod 'IBMWatsonToneAnalyzerV3', '~> 4.0'
-    pod 'IBMWatsonVisualRecognitionV3', '~> 4.0'
+    pod 'IBMWatsonAssistantV1', '~> 4.0.1'
+    pod 'IBMWatsonAssistantV2', '~> 4.0.1'
+    pod 'IBMWatsonCompareComplyV1', '~> 4.0.1'
+    pod 'IBMWatsonDiscoveryV1', '~> 4.0.1'
+    pod 'IBMWatsonLanguageTranslatorV3', '~> 4.0.1'
+    pod 'IBMWatsonNaturalLanguageClassifierV1', '~> 4.0.1'
+    pod 'IBMWatsonNaturalLanguageUnderstandingV1', '~> 4.0.1'
+    pod 'IBMWatsonPersonalityInsightsV3', '~> 4.0.1'
+    pod 'IBMWatsonSpeechToTextV1', '~> 4.0.1'
+    pod 'IBMWatsonTextToSpeechV1', '~> 4.0.1'
+    pod 'IBMWatsonToneAnalyzerV3', '~> 4.0.1'
+    pod 'IBMWatsonVisualRecognitionV3', '~> 4.0.1'
 end
 ```
 
@@ -180,7 +179,7 @@ $ brew install carthage
 If your project does not have a Cartfile yet, use the `touch Cartfile` command in the root directory of your project. To install the IBM Watson Swift SDK using Carthage, add the following to your Cartfile.
 
 ```
-github "watson-developer-cloud/swift-sdk" ~> 4.0
+github "watson-developer-cloud/swift-sdk" ~> 4.0.1
 ```
 
 Follow the remaining Carthage installation instructions for the XCode 12 workaround [here](https://github.com/Carthage/Carthage/blob/master/Documentation/Xcode12Workaround.md#how-to-make-it-work). Then run the following command to build the dependencies and frameworks: 

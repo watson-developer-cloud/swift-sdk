@@ -49,7 +49,7 @@ let package = Package(
     ],
     dependencies: [
         .package(name: "IBMSwiftSDKCore", url: "https://github.com/IBM/swift-sdk-core", from: "1.0.0"),
-        .package(name: "Starscream", url: "https://github.com/daltoniam/Starscream", from: "3.0.0"),
+        .package(name: "Starscream", url: "https://github.com/daltoniam/Starscream", from: "4.0.0"),
     ],
     targets: [
         .systemLibrary(name: "Clibogg", path: "Sources/SupportingFiles/Dependencies/Clibogg", pkgConfig: "ogg", providers: [.brew(["libogg"])]),

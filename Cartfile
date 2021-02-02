@@ -1,2 +1,2 @@
-github "daltoniam/Starscream" ~> 3.0.0
+github "daltoniam/Starscream" ~> 4.0.0
 github "IBM/swift-sdk-core" ~> 1.0.0

@@ -97,7 +97,7 @@ import DiscoveryV2
 
 
 **(Speech To Text and Text To Speech only)**
-The use of the `libogg` and `opus` libraries by these services requires extra steps to be taken. 
+The use of the `libogg` and `opus` libraries by these services requires extra steps to be taken BEFORE the package is installed. 
 1. You will need [Homebrew](http://brew.sh/) installed
 2. Install `libogg` and `opus`
     ```bash
@@ -115,17 +115,19 @@ The use of the `libogg` and `opus` libraries by these services requires extra st
     ```bash
     $ rm -f /usr/local/Cellar/opus/1.3.1/lib/*.dylib
     ```
-4. The static libraries installed must be replaced with libraries compiled for multiple architectures. These libraries can be downloaded from the github repo for libogg [here](https://github.com/watson-developer-cloud/swift-sdk/blob/master/Sources/SupportingFiles/Dependencies/Libraries/libogg.a) and opus [here](https://github.com/watson-developer-cloud/swift-sdk/blob/master/Sources/SupportingFiles/Dependencies/Libraries/libopus.a)
+4. The static libraries installed must be replaced with libraries compiled for multiple architectures. These libraries can be downloaded from this github repo for libogg [here](https://github.com/watson-developer-cloud/swift-sdk/blob/master/Sources/SupportingFiles/Dependencies/Libraries/libogg.a) and opus [here](https://github.com/watson-developer-cloud/swift-sdk/blob/master/Sources/SupportingFiles/Dependencies/Libraries/libopus.a)
 
 5. Replace the currently installed `libogg` and `libopus` libraries
     ```bash
     rm -f /usr/local/Cellar/libogg/1.3.4/lib/libogg.a && cp ~/Downloads/libogg.a /usr/local/Cellar/libogg/1.3.4/lib
     ```
     ```bash
-    rm -f /usr/local/Cellar/libogg/1.3.1/lib/libopus.a && cp ~/Downloads/libopus.a /usr/local/Cellar/opus/1.3.1/lib
+    rm -f /usr/local/Cellar/opus/1.3.1/lib/libopus.a && cp ~/Downloads/libopus.a /usr/local/Cellar/opus/1.3.1/lib
     ```
 
-6. You're ready to go!
+6. If you run into any build errors or imported the package before performing the above steps, the project may need to be reindexed. Remove the `WatsonDeveloperCloud` package from your XCode project file under `Swift Packages`; then, from the XCode menu bar on the top of the screen click `Product -> Clean Build Folder` and lastly reinstall the package.
+
+7. You're ready to go!
 
 ### Cocoapods
 

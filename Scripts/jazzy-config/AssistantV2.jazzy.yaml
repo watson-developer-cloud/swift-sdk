@@ -4,7 +4,7 @@ github_url: https://github.com/watson-developer-cloud/swift-sdk
 clean: true
 output: ../../gh-pages/services/AssistantV2
 module: AssistantV2
-module_version: "4.0.1"
+module_version: "4.1.0"
 documentation: ../../Sources/AssistantV2/README.md
 readme: ../../Sources/AssistantV2/README.md
 build_tool_arguments:

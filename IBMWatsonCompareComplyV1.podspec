@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                  = 'IBMWatsonCompareComplyV1'
-  s.version               = '4.0.1'
+  s.version               = '4.1.0'
   s.summary               = 'Client framework for the IBM Watson Compare & Comply service'
   s.description           = <<-DESC
 IBM Watson™ Compare and Comply analyzes governing documents to provide details about critical aspects of the documents.

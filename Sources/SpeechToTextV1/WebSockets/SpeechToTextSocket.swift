@@ -19,6 +19,32 @@ import Starscream
 import IBMSwiftSDKCore
 
 internal class SpeechToTextSocket: WebSocketDelegate {
+    // TODO: need to figure out what this does
+    func didReceive(event: WebSocketEvent, client: WebSocket) {
+        switch event {
+        case .connected(let headers):
+            self.websocketDidConnect(socket: client)
+        case .disconnected(let reason, let code):
+            self.websocketDidDisconnect(socket: client, error: nil)
+        case .text(let string):
+            self.websocketDidReceiveMessage(socket: client, text: string)
+        case .binary(let data):
+            self.websocketDidReceiveData(socket: client, data: data)
+        case .ping:
+            break
+        case .pong:
+            break
+        case .viabilityChanged:
+            break
+        case .reconnectSuggested:
+            break
+        case .cancelled:
+            break
+        case .error(let error):
+            self.websocketDidDisconnect(socket: client, error: error)
+            break
+        }
+    }
 
     private(set) internal var results = SpeechRecognitionResults()
     private(set) internal var state: SpeechToTextState = .disconnected
@@ -154,7 +180,7 @@ internal class SpeechToTextSocket: WebSocketDelegate {
         queue.addOperation {
             self.queue.isSuspended = true
             self.queue.cancelAllOperations()
-            self.socket.disconnect(forceTimeout: forceTimeout)
+            self.socket.disconnect()
         }
     }
 
@@ -225,7 +251,8 @@ internal class SpeechToTextSocket: WebSocketDelegate {
     private func isAuthenticationFailure(error: Error) -> Bool {
         if let error = error as? WSError {
             let matchesCode = (error.code == 400)
-            let matchesType     = (error.type == .upgradeError)
+            // TODO: what error type is thrown when there is an authentication error
+            let matchesType     = (error.type == .securityError)
             return matchesCode && matchesType
         }
         return false

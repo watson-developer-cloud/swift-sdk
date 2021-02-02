@@ -19,7 +19,8 @@ natural-language input and uses machine learning to respond to customers in a wa
   s.source_files          = 'Sources/AssistantV2/**/*.swift',
                             'Sources/SupportingFiles/InsecureConnection.swift',
                             'Sources/SupportingFiles/Shared.swift'
-  s.exclude_files         = 'Sources/AssistantV2/Shared.swift'
+  s.exclude_files         = 'Sources/AssistantV2/Shared.swift',
+                            'Sources/AssistantV2/InsecureConnection.swift'
 
   s.swift_version         = ['4.2', '5.0', '5.1']
   s.dependency              'IBMSwiftSDKCore', '~> 1.0.0'

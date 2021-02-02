@@ -22,14 +22,25 @@ of the audio signal. It continuously returns and retroactively updates a transcr
                             'Sources/SupportingFiles/Shared.swift',
                             'Sources/SupportingFiles/Dependencies/Source/**/*'
   s.exclude_files         = 'Sources/SpeechToTextV1/Shared.swift',
+                            'Sources/SpeechToTextV1/InsecureConnection.swift',
                             '**/config_types.h',
                             '**/opus_header.h',
                             '**/opus_header.c'
 
   s.swift_version         = ['4.2', '5.0', '5.1']
   s.dependency              'IBMSwiftSDKCore', '~> 1.0.0'
-  s.dependency              'Starscream', '3.0.5'
+  s.dependency              'Starscream', '~> 4.0.0'
   s.vendored_libraries    = 'Sources/SupportingFiles/Dependencies/Libraries/*.a'
+
+  # This is necessary for the time being as we do not support the
+  # XCFramework binary solution that can be bundled for all
+  # architectures (thus supporting Apple Silicon)
+  s.pod_target_xcconfig = {
+    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
+  }
+  s.user_target_xcconfig = {
+    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
+  }
 
   # The renaming of libogg.a and libopus.a is done to avoid duplicate library name errors
   # in case TextToSpeech is being installed in the same app (which also includes libogg and libopus)

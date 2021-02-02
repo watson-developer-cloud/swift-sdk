@@ -20,7 +20,8 @@ as well as public and third-party data. IBM Watson™ Discovery V2 is available 
   s.source_files          = 'Sources/DiscoveryV2/**/*.swift',
                             'Sources/SupportingFiles/InsecureConnection.swift',
                             'Sources/SupportingFiles/Shared.swift'
-  s.exclude_files         = 'Sources/DiscoveryV2/Shared.swift'
+  s.exclude_files         = 'Sources/DiscoveryV2/Shared.swift',
+                            'Sources/DiscoveryV2/InsecureConnection.swift'
 
   s.swift_version         = ['4.2', '5.0', '5.1']
   s.dependency              'IBMSwiftSDKCore', '~> 1.0.0'

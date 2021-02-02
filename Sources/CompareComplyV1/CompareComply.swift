@@ -73,6 +73,7 @@ public class CompareComply {
      - serviceName: String = defaultServiceName
      */
     public init(version: String, authenticator: Authenticator? = nil, serviceName: String = defaultServiceName) throws {
+        #warning("On 30 November 2021, Compare and Comply will no longer be available. For more information, see https://github.com/watson-developer-cloud/swift-sdk#compare-and-comply-deprecation")
         self.version = version
         self.authenticator = try authenticator ?? ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceName)
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceName) {
@@ -89,6 +90,7 @@ public class CompareComply {
      - parameter authenticator: The Authenticator object used to authenticate requests to the service
      */
     public init(version: String, authenticator: Authenticator) {
+        #warning("On 30 November 2021, Compare and Comply will no longer be available. For more information, see https://github.com/watson-developer-cloud/swift-sdk#compare-and-comply-deprecation")
         self.version = version
         self.authenticator = authenticator
         RestRequest.userAgent = Shared.userAgent

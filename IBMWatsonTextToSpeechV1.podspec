@@ -21,11 +21,22 @@ The service streams the results back to the client with minimal delay.
                             'Sources/SupportingFiles/Shared.swift',
                             'Sources/SupportingFiles/Dependencies/Source/**/*'
   s.exclude_files         = 'Sources/TextToSpeechV1/Shared.swift',
+                            'Sources/TextToSpeechV1/InsecureConnection.swift',
                             '**/config_types.h'
 
   s.swift_version         = ['4.2', '5.0', '5.1']
   s.dependency              'IBMSwiftSDKCore', '~> 1.0.0'
   s.vendored_libraries    = 'Sources/SupportingFiles/Dependencies/Libraries/*.a'
+
+  # This is necessary for the time being as we do not support the
+  # XCFramework binary solution that can be bundled for all
+  # architectures (thus supporting Apple Silicon)
+  s.pod_target_xcconfig = {
+    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
+  }
+  s.user_target_xcconfig = {
+    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64'
+  }
 
   # The renaming of libogg.a and libopus.a is done to avoid duplicate library name errors
   # in case SpeechToText is being installed in the same app (which also includes libogg and libopus)

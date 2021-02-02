@@ -18,7 +18,8 @@ IBM Watson™ Compare and Comply analyzes governing documents to provide details
   s.source_files          = 'Sources/CompareComplyV1/**/*.swift',
                             'Sources/SupportingFiles/InsecureConnection.swift',
                             'Sources/SupportingFiles/Shared.swift'
-  s.exclude_files         = 'Sources/CompareComplyV1/Shared.swift'
+  s.exclude_files         = 'Sources/CompareComplyV1/Shared.swift',
+                            'Sources/CompareComplyV1/InsecureConnection.swift'
 
   s.swift_version         = ['4.2', '5.0', '5.1']
   s.dependency              'IBMSwiftSDKCore', '~> 1.0.0'

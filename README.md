@@ -24,7 +24,6 @@ There are many resources to help you build your first cognitive application with
 * [Before you begin](#before-you-begin)
 * [Requirements](#requirements)
 * [Installation](#installation)
-* [Known Issues](#known-issues)
 * [Authentication](#authentication)
 * [Custom Service URLs](#custom-service-urls)
 * [Obtaining Transaction IDs](#obtaining-transaction-ids)
@@ -79,7 +78,56 @@ IBM Watson™ Compare and Comply is discontinued. Existing instances are support
 
 ## Installation
 
-The IBM Watson Swift SDK can be installed with [Cocoapods](http://cocoapods.org/), [Carthage](https://github.com/Carthage/Carthage), or [Swift Package Manager](https://swift.org/package-manager/).
+The IBM Watson Swift SDK can be installed with [Swift Package Manager](https://swift.org/package-manager/), [Cocoapods](http://cocoapods.org/), or [Carthage](https://github.com/Carthage/Carthage).
+
+### Swift Package Manager
+New in version 4.0.2, the Watson Developer Cloud Swift SDK now supports all services through Swift Package Manager.
+
+On the XCode menu bar at the top of your screen click `File -> Swift Packages -> Add Package Dependencies`, follow the prompts by pasting the github url `https://github.com/watson-developer-cloud/swift-sdk` and using the most recent major version if appropriate. Make sure to only click on the services you plan on using otherwise you may face long build times
+
+To import a service into your project:
+```swift
+import AssistantV2
+import DiscoveryV2
+.
+.
+.
+```
+
+
+
+**(Speech To Text and Text To Speech only)**
+The use of the `libogg` and `opus` libraries by these services requires extra steps to be taken BEFORE the package is installed. 
+1. You will need [Homebrew](http://brew.sh/) installed
+2. Install `libogg` and `opus`
+    ```bash
+    $ brew install libogg opus
+    ```
+3. Packaged dynamic libraries must be removed according to current library versions.
+
+    libogg version as of writing: 1.3.4. 
+    
+    opus version as of writing: 1.3.1
+
+    ```bash
+    $ rm -f /usr/local/Cellar/libogg/1.3.4/lib/*.dylib
+    ```
+    ```bash
+    $ rm -f /usr/local/Cellar/opus/1.3.1/lib/*.dylib
+    ```
+4. The static libraries installed must be replaced with libraries compiled for multiple architectures. These libraries can be downloaded from this github repo for libogg [here](https://github.com/watson-developer-cloud/swift-sdk/blob/master/Sources/SupportingFiles/Dependencies/Libraries/libogg.a) and opus [here](https://github.com/watson-developer-cloud/swift-sdk/blob/master/Sources/SupportingFiles/Dependencies/Libraries/libopus.a)
+
+5. Replace the currently installed `libogg` and `libopus` libraries
+    ```bash
+    rm -f /usr/local/Cellar/libogg/1.3.4/lib/libogg.a && cp ~/Downloads/libogg.a /usr/local/Cellar/libogg/1.3.4/lib
+    ```
+    ```bash
+    rm -f /usr/local/Cellar/opus/1.3.1/lib/libopus.a && cp ~/Downloads/libopus.a /usr/local/Cellar/opus/1.3.1/lib
+    ```
+
+6. If you run into any build errors or imported the package before performing the above steps, the project may need to be reindexed. Remove the `WatsonDeveloperCloud` package from your XCode project file under `Swift Packages`; then, from the XCode menu bar on the top of the screen click `Product -> Clean Build Folder` and lastly reinstall the package.
+
+7. You're ready to go!
 
 ### Cocoapods
 
@@ -119,7 +167,9 @@ For more information on using Cocoapods, refer to the [Cocoapods Guides](https:/
 
 ### Carthage
 
-**NOTE**: Current issues with Carthage and XCode 12 prevents installation of necessary dependencies. See [Known Issues](https://github.com/watson-developer-cloud/swift-sdk#known-issues)
+**NOTE**: The release of Apple's new M1 chip has caused issues in Carthage for XCode versions 11+. For the foreseeable future, we are unable to support XCode 11 through Carthage. We would recommend installing through Swift Package Manager (preferable) or upgrading to XCode 12 (where there is a workaround).
+
+**NOTE**: Our frameworks cannot currently be run on the new Apple Silicon Macs through Carthage. Again, we recommend the use of Swift Package Manager instead.
 
 You can install Carthage with [Homebrew](http://brew.sh/):
 
@@ -134,35 +184,54 @@ If your project does not have a Cartfile yet, use the `touch Cartfile` command i
 github "watson-developer-cloud/swift-sdk" ~> 4.0.1
 ```
 
-Then run the following command to build the dependencies and frameworks:
-
+Follow the remaining Carthage installation instructions for the XCode 12 workaround [here](https://github.com/Carthage/Carthage/blob/master/Documentation/Xcode12Workaround.md#how-to-make-it-work). Then run the following command to build the dependencies and frameworks: 
 ```bash
-$ carthage bootstrap --platform iOS
+$ carthage.sh bootstrap --platform iOS
 ```
 
-Follow the remaining Carthage installation instructions [here](https://github.com/Carthage/Carthage#getting-started). Note that the above command will download and build all of the services in the IBM Watson Swift SDK. Make sure to drag-and-drop the built frameworks (only for the services your app requires) into your Xcode project and import them in the source files that require them. The following frameworks need to be added to your app:
-1. `IBMSwiftSDKCore.framework`
-1. Whichever services your app will be using (`AssistantV1.framework`, `DiscoveryV1.framework`, etc.)
-1. (**Speech to Text only**) `Starscream.framework`
+Note that the above command will download and build all of the services in the IBM Watson Swift SDK and does take awhile.
 
-If your app fails to build because it is built with a different version of Swift than the downloaded SDK, then re-run the `carthage update` command with the `--no-use-binaries` flag added.
+Follow the next steps to link the frameworks to your XCode project:
 
+ 
+ 1. Make sure to drag-and-drop the built frameworks (only for the services your app requires) into your app target under `General -> Frameworks, Libraries, and Embedded Content` (XCode <= 10.x: `General -> Linked Frameworks and Libraries` ) and import them in the source files that require them. You will find the .framework files under `./Carthage/Build/iOS` from your source directory. 
+ 
+ 2. The following frameworks need to be added to your app:
+    `IBMSwiftSDKCore.framework`
+    
+    Whichever services your app will be using (`AssistantV1.framework`, `DiscoveryV1.framework`, etc.)
+    
+    (**Speech to Text only**) `Starscream.framework`. Be sure to add this framework to your `input.xcfilelist` and `output.xcfilelist` which will be detailed below
 
-### Swift Package Manager
+3. XCode 12 only: Under the `Embed` column make sure each framework is set to `Do Not Embed`
 
-Add the following to your `Package.swift` file to identify the IBM Watson Swift SDK as a dependency. The package manager will clone the Swift SDK when you build your project with `swift build`.
+4. On your application targets’ Build Phases settings tab, click the + icon and choose New Run Script Phase. Create a Run Script in which you specify your shell (ex: /bin/sh), add the following contents to the script area below the shell:
+    ```
+    /usr/local/bin/carthage copy-frameworks
+    ```
 
-```swift
-dependencies: [
-    .package(url: "https://github.com/watson-developer-cloud/swift-sdk", from: "4.0.1")
-]
-```
+5. Create a file named `input.xcfilelist` and a file named `output.xcfilelist`
 
-## Known Issues
+6. Add the paths to the frameworks you want to use to your `input.xcfilelist`. For example:
 
-The release of XCode 12 created issues in both Cocoapods and Carthage preventing the use of these package managers with no current easy fixes. Current use of this sdk will only work with Xcode 11.7 and below. In the future, we will be dropping support for Cocoapods and Carthage in favor of Swift Package Manager
+    ```
+    $(SRCROOT)/Carthage/Build/iOS/IBMSwiftSDKCore.framework
+    $(SRCROOT)/Carthage/Build/iOS/DiscoveryV1.framework
+    ```
 
-There is a workaround in Carthage to get this sdk to work with XCode 12. An [issue thread](https://github.com/Carthage/Carthage/issues/3019) up on the Carthage repository contains a [workaround script](https://github.com/getsentry/sentry-cocoa/pull/780) that can be run to address the issue.  Until there is a version released that truly addresses this issue, it is recommended to use this sdk with XCode 11.7 or below. 
+7. Add the paths to the copied frameworks to the `output.xcfilelist`. For example:
+
+    ```
+    $(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/IBMSwiftSDKCore.framework
+    $(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/DiscoveryV1.framework
+    ```
+
+    With output files specified alongside the input files, XCode only needs to run the script when the input files have changed or the output files are missing. This means dirty builds will be faster when you haven't rebuilt frameworks with Carthage.
+
+8. Add the path to `input.xcfilelist` to the "Input File Lists" section of the Carthage run script phase. This will usually be `$(SRCROOT)/input.xcfilelist`
+9. Add the path to `output.xcfilelist` to the "Output File Lists" section of the Carthage run script phase. This will usually be `$(SRCROOT)/output.xcfilelist`
+
+If your app fails to build because it is built with a different version of Swift than the downloaded SDK, then re-run the `carthage.sh bootstrap` command with the `--no-use-binaries` flag added.
 
 ## Authentication
 

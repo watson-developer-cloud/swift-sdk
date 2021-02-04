@@ -3,7 +3,7 @@
 
 set -e
 
-if [ "$is_travis" = "TRAVIS" ]; then
+if [ "$TRAVIS" = "true" ]; then
     gem install jazzy
 
     # Configure Travis to be able to push to the Github repo

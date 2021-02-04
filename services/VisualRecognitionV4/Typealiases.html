@@ -8,14 +8,22 @@
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
     
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Section/Type Aliases" class="dashAnchor"></a>
     <a title="Type Aliases  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">VisualRecognitionV4 3.5.0 Docs</a> (83% documented)</p>
+        <p><a href="index.html">VisualRecognitionV4 4.1.0 Docs</a> (84% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -47,6 +55,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/CollectionObjects.html">CollectionObjects</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CollectionTrainingStatus.html">CollectionTrainingStatus</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/CollectionsList.html">CollectionsList</a>
@@ -98,6 +109,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/ObjectDetail.html">ObjectDetail</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ObjectDetailLocation.html">ObjectDetailLocation</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/ObjectMetadata.html">ObjectMetadata</a>
@@ -187,60 +201,6 @@
           <section class="section task-group-section">
             <div class="task-group">
               <ul>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:19VisualRecognitionV414WatsonResponsea"></a>
-                    <a name="//apple_ref/swift/Alias/WatsonResponse" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV414WatsonResponsea">WatsonResponse</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">WatsonResponse</span> <span class="o">=</span> <span class="kt">RestResponse</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:19VisualRecognitionV411WatsonErrora"></a>
-                    <a name="//apple_ref/swift/Alias/WatsonError" class="dashAnchor"></a>
-                    <a class="token" href="#/s:19VisualRecognitionV411WatsonErrora">WatsonError</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Undocumented</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">WatsonError</span> <span class="o">=</span> <span class="kt">RestError</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -457,13 +417,67 @@
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV411WatsonErrora"></a>
+                    <a name="//apple_ref/swift/Alias/WatsonError" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV411WatsonErrora">WatsonError</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">WatsonError</span> <span class="o">=</span> <span class="kt">RestError</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV414WatsonResponsea"></a>
+                    <a name="//apple_ref/swift/Alias/WatsonResponse" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV414WatsonResponsea">WatsonResponse</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">typealias</span> <span class="kt">WatsonResponse</span> <span class="o">=</span> <span class="kt">RestResponse</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
           </section>
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

@@ -8,14 +8,22 @@
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Class/Discovery" class="dashAnchor"></a>
     <a title="Discovery Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">DiscoveryV1 3.5.0 Docs</a> (81% documented)</p>
+        <p><a href="../index.html">DiscoveryV1 4.1.0 Docs</a> (81% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -276,9 +284,6 @@
                 <a href="../Structs/Nested.html">Nested</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/NluEnrichmentCategories.html">NluEnrichmentCategories</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/NluEnrichmentConcepts.html">NluEnrichmentConcepts</a>
               </li>
               <li class="nav-group-task">
@@ -494,6 +499,7 @@
             <h1>Discovery</h1>
               <div class="declaration">
                 <div class="language">
+                  
                   <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Discovery</span></code></pre>
 
                 </div>
@@ -528,6 +534,61 @@ filtering of results.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV10A0C7versionSSvp"></a>
+                    <a name="//apple_ref/swift/Property/version" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C7versionSSvp">version</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Release date of the version of the API you want to use. Specify dates in YYYY-MM-DD format. The current version
+is <code>2019-04-30</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">version</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV10A0C18defaultServiceNameSSvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/defaultServiceName" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C18defaultServiceNameSSvpZ">defaultServiceName</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Service identifiers</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">defaultServiceName</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -592,8 +653,8 @@ filtering of results.</p>
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/init(version:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">init(version:<wbr>)</a>
+                    <a name="//apple_ref/swift/Method/init(version:authenticator:serviceName:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">init(version:<wbr>authenticator:<wbr>serviceName:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -603,12 +664,18 @@ filtering of results.</p>
                       <div class="abstract">
                         <p>Create a <code>Discovery</code> object.</p>
 
-<p>This initializer will retrieve credentials from the environment or a local credentials file.
+<p>If an authenticator is not supplied, the initializer will retrieve credentials from the environment or
+a local credentials file and construct an appropriate authenticator using these credentials.
 The credentials file can be downloaded from your service instance on IBM Cloud as ibm-credentials.env.
 Make sure to add the credentials file to your project so that it can be loaded at runtime.</p>
 
-<p>If credentials are not available in the environment or a local credentials file, initialization will fail.
+<p>If an authenticator is not supplied and credentials are not available in the environment or a local
+credentials file, initialization will fail by throwing an exception.
 In that case, try another initializer that directly passes in the credentials.</p>
+
+<ul>
+<li>serviceName: String = defaultServiceName</li>
+</ul>
 
                       </div>
                     </section>
@@ -650,8 +717,8 @@ In that case, try another initializer that directly passes in the credentials.</
                               </td>
                               <td>
                                 <div>
-                                  <p>The release date of the version of the API to use. Specify the date
-in &ldquo;YYYY-MM-DD&rdquo; format.</p>
+                                  <p>Release date of the version of the API you want to use. Specify dates in YYYY-MM-DD format.
+The current version is <code>2019-04-30</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3848,7 +3915,7 @@ documentation</a>.</p>
     <span class="nv">passages</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">aggregation</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="p">`</span><span class="nv">return</span><span class="p">`:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="err">`</span><span class="k">return</span><span class="err">`</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">offset</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">highlight</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -4227,7 +4294,7 @@ on the query language.</p>
     <span class="nv">passages</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">aggregation</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="p">`</span><span class="nv">return</span><span class="p">`:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="err">`</span><span class="k">return</span><span class="err">`</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">offset</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">sort</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">highlight</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -4545,7 +4612,7 @@ identify similar documents. If not specified, the entire document is used for co
     <span class="nv">passages</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">aggregation</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="p">`</span><span class="nv">return</span><span class="p">`:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="err">`</span><span class="k">return</span><span class="err">`</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">offset</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">highlight</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -4907,7 +4974,7 @@ on the query language.</p>
     <span class="nv">naturalLanguageQuery</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">aggregation</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="p">`</span><span class="nv">return</span><span class="p">`:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="err">`</span><span class="k">return</span><span class="err">`</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">offset</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">sort</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">highlight</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -5166,7 +5233,7 @@ using the Cloud Pak version of Discovery.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getAutocompletion</span><span class="p">(</span>
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="p">`</span><span class="nv">prefix</span><span class="p">`:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="err">`</span><span class="k">prefix</span><span class="err">`</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">field</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -8033,7 +8100,7 @@ the password provided has expired) and must be corrected before they can be used
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

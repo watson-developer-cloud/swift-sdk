@@ -8,14 +8,22 @@
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
     
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Section/Structures" class="dashAnchor"></a>
     <a title="Structures  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">DiscoveryV1 3.5.0 Docs</a> (81% documented)</p>
+        <p><a href="index.html">DiscoveryV1 4.1.0 Docs</a> (81% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -274,9 +282,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/Nested.html">Nested</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/NluEnrichmentCategories.html">NluEnrichmentCategories</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/NluEnrichmentConcepts.html">NluEnrichmentConcepts</a>
@@ -540,6 +545,9 @@
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Calculation.</p>
+
+<p>Enums with an associated value of Calculation:
+   QueryAggregation</p>
 
                         <a href="Structs/Calculation.html" class="slightly-smaller">See more</a>
                       </div>
@@ -1356,6 +1364,9 @@ for the word <code>hot</code> in one object, and expansions for the word <code>c
                       <div class="abstract">
                         <p>Filter.</p>
 
+<p>Enums with an associated value of Filter:
+   QueryAggregation</p>
+
                         <a href="Structs/Filter.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
@@ -1484,34 +1495,6 @@ for the word <code>hot</code> in one object, and expansions for the word <code>c
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV123GenericQueryAggregationV"></a>
-                    <a name="//apple_ref/swift/Struct/GenericQueryAggregation" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV123GenericQueryAggregationV">GenericQueryAggregation</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>An aggregation produced by the Discovery service to analyze the input provided.</p>
-
-                        <a href="Structs/GenericQueryAggregation.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">GenericQueryAggregation</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/s:11DiscoveryV112HTMLSettingsV"></a>
                     <a name="//apple_ref/swift/Struct/HTMLSettings" class="dashAnchor"></a>
                     <a class="token" href="#/s:11DiscoveryV112HTMLSettingsV">HTMLSettings</a>
@@ -1551,6 +1534,9 @@ for the word <code>hot</code> in one object, and expansions for the word <code>c
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Histogram.</p>
+
+<p>Enums with an associated value of Histogram:
+   QueryAggregation</p>
 
                         <a href="Structs/Histogram.html" class="slightly-smaller">See more</a>
                       </div>
@@ -2012,6 +1998,9 @@ logs of type <code>query</code>.</p>
                       <div class="abstract">
                         <p>Nested.</p>
 
+<p>Enums with an associated value of Nested:
+   QueryAggregation</p>
+
                         <a href="Structs/Nested.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
@@ -2019,34 +2008,6 @@ logs of type <code>query</code>.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Nested</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11DiscoveryV123NluEnrichmentCategoriesV"></a>
-                    <a name="//apple_ref/swift/Struct/NluEnrichmentCategories" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV123NluEnrichmentCategoriesV">NluEnrichmentCategories</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>An object that indicates the Categories enrichment will be applied to the specified field.</p>
-
-                        <a href="Structs/NluEnrichmentCategories.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">NluEnrichmentCategories</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2383,6 +2344,34 @@ logs of type <code>query</code>.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">PDFSettings</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV123GenericQueryAggregationV"></a>
+                    <a name="//apple_ref/swift/Struct/GenericQueryAggregation" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV123GenericQueryAggregationV">GenericQueryAggregation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/GenericQueryAggregation.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">GenericQueryAggregation</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -2964,6 +2953,9 @@ logs of type <code>query</code>.</p>
                       <div class="abstract">
                         <p>Term.</p>
 
+<p>Enums with an associated value of Term:
+   QueryAggregation</p>
+
                         <a href="Structs/Term.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
@@ -2991,6 +2983,9 @@ logs of type <code>query</code>.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Timeslice.</p>
+
+<p>Enums with an associated value of Timeslice:
+   QueryAggregation</p>
 
                         <a href="Structs/Timeslice.html" class="slightly-smaller">See more</a>
                       </div>
@@ -3075,6 +3070,9 @@ logs of type <code>query</code>.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>TopHits.</p>
+
+<p>Enums with an associated value of TopHits:
+   QueryAggregation</p>
 
                         <a href="Structs/TopHits.html" class="slightly-smaller">See more</a>
                       </div>
@@ -3375,7 +3373,7 @@ logs of type <code>query</code>.</p>
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

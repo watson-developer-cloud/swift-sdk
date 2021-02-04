@@ -8,14 +8,22 @@
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Struct/Features" class="dashAnchor"></a>
     <a title="Features Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">NaturalLanguageUnderstandingV1 3.5.0 Docs</a> (86% documented)</p>
+        <p><a href="../index.html">NaturalLanguageUnderstandingV1 4.1.0 Docs</a> (85% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -41,9 +49,6 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Structs/AnalysisResults.html">AnalysisResults</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/AnalysisResultsMetadata.html">AnalysisResultsMetadata</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/AnalysisResultsUsage.html">AnalysisResultsUsage</a>
@@ -106,6 +111,9 @@
                 <a href="../Structs/Features.html">Features</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/FeaturesResultsMetadata.html">FeaturesResultsMetadata</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/Feed.html">Feed</a>
               </li>
               <li class="nav-group-task">
@@ -118,10 +126,10 @@
                 <a href="../Structs/ListModelsResults.html">ListModelsResults</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/MetadataOptions.html">MetadataOptions</a>
+                <a href="../Structs/Model.html">Model</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/Model.html">Model</a>
+                <a href="../Structs/Model/Status.html">– Status</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/RelationArgument.html">RelationArgument</a>
@@ -234,6 +242,7 @@
             <h1>Features</h1>
               <div class="declaration">
                 <div class="language">
+                  
                   <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Features</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                 </div>
@@ -316,7 +325,8 @@ Supported languages: English.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Identifies people, cities, organizations, and other entities in the content. See <a href="https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-entity-types">Entity types and
+                        <p>Identifies people, cities, organizations, and other entities in the content. For more information, see <a href="https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-entity-types">Entity
+types and
 subtypes</a>.
 Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
 Arabic, Chinese, and Dutch are supported only through custom models.</p>
@@ -364,9 +374,9 @@ Supported languages: English, French, German, Italian, Japanese, Korean, Portugu
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:30NaturalLanguageUnderstandingV18FeaturesV8metadataAA15MetadataOptionsVSgvp"></a>
+                    <a name="/s:30NaturalLanguageUnderstandingV18FeaturesV8metadataSDySS15IBMSwiftSDKCore4JSONOGSgvp"></a>
                     <a name="//apple_ref/swift/Property/metadata" class="dashAnchor"></a>
-                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV18FeaturesV8metadataAA15MetadataOptionsVSgvp">metadata</a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV18FeaturesV8metadataSDySS15IBMSwiftSDKCore4JSONOGSgvp">metadata</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -382,7 +392,7 @@ publication date. Supports URL and HTML input types only.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">metadata</span><span class="p">:</span> <span class="kt"><a href="../Structs/MetadataOptions.html">MetadataOptions</a></span><span class="p">?</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">metadata</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">JSON</span><span class="p">]?</span></code></pre>
 
                         </div>
                       </div>
@@ -403,7 +413,7 @@ publication date. Supports URL and HTML input types only.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Recognizes when two entities are related and identifies the type of relation. For example, an <code>awardedTo</code> relation
-might connect the entities &ldquo;Nobel Prize&rdquo; and &ldquo;Albert Einstein&rdquo;. See <a href="https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-relations">Relation
+might connect the entities &ldquo;Nobel Prize&rdquo; and &ldquo;Albert Einstein&rdquo;. For more information, see <a href="https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-relations">Relation
 types</a>.
 Supported languages: Arabic, English, German, Japanese, Korean, Spanish. Chinese, Dutch, French, Italian, and
 Portuguese custom models are also supported.</p>
@@ -535,9 +545,9 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:30NaturalLanguageUnderstandingV18FeaturesV8concepts7emotion8entities8keywords8metadata9relations13semanticRoles9sentiment10categories6syntaxAcA15ConceptsOptionsVSg_AA07EmotionR0VSgAA08EntitiesR0VSgAA08KeywordsR0VSgAA08MetadataR0VSgAA09RelationsR0VSgAA08SemanticmR0VSgAA09SentimentR0VSgAA010CategoriesR0VSgAA06SyntaxR0VSgtcfc"></a>
+                    <a name="/s:30NaturalLanguageUnderstandingV18FeaturesV8concepts7emotion8entities8keywords8metadata9relations13semanticRoles9sentiment10categories6syntaxAcA15ConceptsOptionsVSg_AA07EmotionR0VSgAA08EntitiesR0VSgAA08KeywordsR0VSgSDySS15IBMSwiftSDKCore4JSONOGSgAA09RelationsR0VSgAA08SemanticmR0VSgAA09SentimentR0VSgAA010CategoriesR0VSgAA06SyntaxR0VSgtcfc"></a>
                     <a name="//apple_ref/swift/Method/init(concepts:emotion:entities:keywords:metadata:relations:semanticRoles:sentiment:categories:syntax:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV18FeaturesV8concepts7emotion8entities8keywords8metadata9relations13semanticRoles9sentiment10categories6syntaxAcA15ConceptsOptionsVSg_AA07EmotionR0VSgAA08EntitiesR0VSgAA08KeywordsR0VSgAA08MetadataR0VSgAA09RelationsR0VSgAA08SemanticmR0VSgAA09SentimentR0VSgAA010CategoriesR0VSgAA06SyntaxR0VSgtcfc">init(concepts:<wbr>emotion:<wbr>entities:<wbr>keywords:<wbr>metadata:<wbr>relations:<wbr>semanticRoles:<wbr>sentiment:<wbr>categories:<wbr>syntax:<wbr>)</a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV18FeaturesV8concepts7emotion8entities8keywords8metadata9relations13semanticRoles9sentiment10categories6syntaxAcA15ConceptsOptionsVSg_AA07EmotionR0VSgAA08EntitiesR0VSgAA08KeywordsR0VSgSDySS15IBMSwiftSDKCore4JSONOGSgAA09RelationsR0VSgAA08SemanticmR0VSgAA09SentimentR0VSgAA010CategoriesR0VSgAA06SyntaxR0VSgtcfc">init(concepts:<wbr>emotion:<wbr>entities:<wbr>keywords:<wbr>metadata:<wbr>relations:<wbr>semanticRoles:<wbr>sentiment:<wbr>categories:<wbr>syntax:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -557,7 +567,7 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
     <span class="nv">emotion</span><span class="p">:</span> <span class="kt"><a href="../Structs/EmotionOptions.html">EmotionOptions</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">entities</span><span class="p">:</span> <span class="kt"><a href="../Structs/EntitiesOptions.html">EntitiesOptions</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">keywords</span><span class="p">:</span> <span class="kt"><a href="../Structs/KeywordsOptions.html">KeywordsOptions</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">metadata</span><span class="p">:</span> <span class="kt"><a href="../Structs/MetadataOptions.html">MetadataOptions</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">metadata</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">JSON</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">relations</span><span class="p">:</span> <span class="kt"><a href="../Structs/RelationsOptions.html">RelationsOptions</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">semanticRoles</span><span class="p">:</span> <span class="kt"><a href="../Structs/SemanticRolesOptions.html">SemanticRolesOptions</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">sentiment</span><span class="p">:</span> <span class="kt"><a href="../Structs/SentimentOptions.html">SentimentOptions</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -608,8 +618,8 @@ Supported languages: English.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Identifies people, cities, organizations, and other entities in the content. See <a href="https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-entity-types">Entity
-types and
+                                  <p>Identifies people, cities, organizations, and other entities in the content. For more
+information, see <a href="https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-entity-types">Entity types and
 subtypes</a>.
 Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish, Swedish.
 Arabic, Chinese, and Dutch are supported only through custom models.</p>
@@ -651,7 +661,8 @@ prominent page image, and publication date. Supports URL and HTML input types on
                               <td>
                                 <div>
                                   <p>Recognizes when two entities are related and identifies the type of relation. For
-example, an <code>awardedTo</code> relation might connect the entities &ldquo;Nobel Prize&rdquo; and &ldquo;Albert Einstein&rdquo;. See <a href="https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-relations">Relation
+example, an <code>awardedTo</code> relation might connect the entities &ldquo;Nobel Prize&rdquo; and &ldquo;Albert Einstein&rdquo;. For more
+information, see <a href="https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-relations">Relation
 types</a>.
 Supported languages: Arabic, English, German, Japanese, Korean, Spanish. Chinese, Dutch, French, Italian, and
 Portuguese custom models are also supported.</p>
@@ -727,7 +738,7 @@ Supported languages: Arabic, English, French, German, Italian, Japanese, Korean,
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

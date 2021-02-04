@@ -8,14 +8,22 @@
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Class/SpeechToText" class="dashAnchor"></a>
     <a title="SpeechToText Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">SpeechToTextV1 3.5.0 Docs</a> (83% documented)</p>
+        <p><a href="../index.html">SpeechToTextV1 4.1.0 Docs</a> (83% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -246,13 +254,14 @@
             <h1>SpeechToText</h1>
               <div class="declaration">
                 <div class="language">
+                  
                   <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">SpeechToText</span></code></pre>
 
                 </div>
               </div>
-            <p>The IBM&reg; Speech to Text service provides APIs that use IBM&rsquo;s speech-recognition capabilities to produce transcripts
-of spoken audio. The service can transcribe speech from various languages and audio formats. In addition to basic
-transcription, the service can produce detailed information about many different aspects of the audio. For most
+            <p>The IBM Watson&trade; Speech to Text service provides APIs that use IBM&rsquo;s speech-recognition capabilities to produce
+transcripts of spoken audio. The service can transcribe speech from various languages and audio formats. In addition to
+basic transcription, the service can produce detailed information about many different aspects of the audio. For most
 languages, the service supports two sampling rates, broadband and narrowband. It returns all JSON response content in
 the UTF-8 character set.
 For speech recognition, the service supports synchronous and asynchronous HTTP Representational State Transfer (REST)
@@ -291,6 +300,33 @@ language model customization.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14SpeechToTextV10abC0C18defaultServiceNameSSvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/defaultServiceName" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C18defaultServiceNameSSvpZ">defaultServiceName</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Service identifiers</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">defaultServiceName</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -355,8 +391,8 @@ language model customization.</p>
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
-                    <a class="token" href="#/">init()</a>
+                    <a name="//apple_ref/swift/Method/init(authenticator:serviceName:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">init(authenticator:<wbr>serviceName:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -366,12 +402,18 @@ language model customization.</p>
                       <div class="abstract">
                         <p>Create a <code>SpeechToText</code> object.</p>
 
-<p>This initializer will retrieve credentials from the environment or a local credentials file.
+<p>If an authenticator is not supplied, the initializer will retrieve credentials from the environment or
+a local credentials file and construct an appropriate authenticator using these credentials.
 The credentials file can be downloaded from your service instance on IBM Cloud as ibm-credentials.env.
 Make sure to add the credentials file to your project so that it can be loaded at runtime.</p>
 
-<p>If credentials are not available in the environment or a local credentials file, initialization will fail.
+<p>If an authenticator is not supplied and credentials are not available in the environment or a local
+credentials file, initialization will fail by throwing an exception.
 In that case, try another initializer that directly passes in the credentials.</p>
+
+<ul>
+<li>serviceName: String = defaultServiceName</li>
+</ul>
 
                       </div>
                     </section>
@@ -467,7 +509,8 @@ In that case, try another initializer that directly passes in the credentials.</
                         <p>List models.</p>
 
 <p>Lists all language models that are available for use with the service. The information includes the name of the
-model and its minimum sampling rate in Hertz, among other things.
+model and its minimum sampling rate in Hertz, among other things. The ordering of the list of models can change
+from call to call; do not rely on an alphabetized or static list of models.
 <strong>See also:</strong> <a href="https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-models#models">Languages and models</a>.</p>
 
                       </div>
@@ -559,7 +602,7 @@ includes the name of the model and its minimum sampling rate in Hertz, among oth
                               <td>
                                 <div>
                                   <p>The identifier of the model in the form of its name from the output of the <strong>Get a model</strong>
-method.</p>
+method. (<strong>Note:</strong> The model <code>ar-AR_BroadbandModel</code> is deprecated; use <code>ar-MS_BroadbandModel</code> instead.).</p>
                                 </div>
                               </td>
                             </tr>
@@ -745,7 +788,8 @@ format, see <strong>Audio formats (content types)</strong> in the method descrip
                               </td>
                               <td>
                                 <div>
-                                  <p>The identifier of the model that is to be used for the recognition request. See <a href="https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-models#models">Languages and
+                                  <p>The identifier of the model that is to be used for the recognition request. (<strong>Note:</strong> The
+model <code>ar-AR_BroadbandModel</code> is deprecated; use <code>ar-MS_BroadbandModel</code> instead.) See <a href="https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-models#models">Languages and
 models</a>.</p>
                                 </div>
                               </td>
@@ -973,9 +1017,8 @@ See <a href="https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-outp
 participants in a multi-person exchange. By default, the service returns no speaker labels. Setting
 <code>speaker_labels</code> to <code>true</code> forces the <code>timestamps</code> parameter to be <code>true</code>, regardless of whether you specify
 <code>false</code> for the parameter.
-<strong>Note:</strong> Applies to US English, German, Japanese, Korean, and Spanish (both broadband and narrowband models) and
-UK English (narrowband model) transcription only. To determine whether a language model supports speaker labels,
-you can also use the <strong>Get a model</strong> method and check that the attribute <code>speaker_labels</code> is set to <code>true</code>.
+<strong>Note:</strong> Applies to US English, Australian English, German, Japanese, Korean, and Spanish (both broadband and
+narrowband models) and UK English (narrowband model) transcription only.
 See <a href="https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-output#speaker_labels">Speaker labels</a>.</p>
                                 </div>
                               </td>
@@ -1182,7 +1225,7 @@ Detection</a>.</li>
                         <p>Register a callback.</p>
 
 <p>Registers a callback URL with the service for use with subsequent asynchronous recognition requests. The service
-attempts to register, or white-list, the callback URL if it is not already registered by sending a <code>GET</code> request to
+attempts to register, or allowlist, the callback URL if it is not already registered by sending a <code>GET</code> request to
 the callback URL. The service passes a random alphanumeric challenge string via the <code>challenge_string</code> parameter of
 the request. The request includes an <code>Accept</code> header that specifies <code>text/plain</code> as the required response type.
 To be registered successfully, the callback URL must respond to the <code>GET</code> request from the service. The response
@@ -1191,8 +1234,8 @@ to <code>text/plain</code>. Upon receiving this response, the service responds t
 response code 201.
 The service sends only a single <code>GET</code> request to the callback URL. If the service does not receive a reply with a
 response code of 200 and a body that echoes the challenge string sent by the service within five seconds, it does
-not white-list the URL; it instead sends status code 400 in response to the <strong>Register a callback</strong> request. If the
-requested callback URL is already white-listed, the service responds to the initial registration request with
+not allowlist the URL; it instead sends status code 400 in response to the <strong>Register a callback</strong> request. If the
+requested callback URL is already allowlisted, the service responds to the initial registration request with
 response code 200.
 If you specify a user secret with the request, the service uses it as a key to calculate an HMAC-SHA1 signature of
 the challenge string in its response to the <code>POST</code> request. It sends this signature in the <code>X-Callback-Signature</code>
@@ -1229,7 +1272,7 @@ URL</a>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>An HTTP or HTTPS URL to which callback notifications are to be sent. To be white-listed,
+                                  <p>An HTTP or HTTPS URL to which callback notifications are to be sent. To be allowlisted,
 the URL must successfully echo the challenge string during URL verification. During verification, the client can
 also check the signature that the service sends in the <code>X-Callback-Signature</code> header to verify the origin of the
 request.</p>
@@ -1296,7 +1339,7 @@ you omit the parameter, the service does not send the header.</p>
                       <div class="abstract">
                         <p>Unregister a callback.</p>
 
-<p>Unregisters a callback URL that was previously white-listed with a <strong>Register a callback</strong> request for use with the
+<p>Unregisters a callback URL that was previously allowlisted with a <strong>Register a callback</strong> request for use with the
 asynchronous interface. Once unregistered, the URL can no longer be used with asynchronous recognition requests.
 <strong>See also:</strong> <a href="https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-async#unregister">Unregistering a callback
 URL</a>.</p>
@@ -1523,7 +1566,8 @@ format, see <strong>Audio formats (content types)</strong> in the method descrip
                               </td>
                               <td>
                                 <div>
-                                  <p>The identifier of the model that is to be used for the recognition request. See <a href="https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-models#models">Languages and
+                                  <p>The identifier of the model that is to be used for the recognition request. (<strong>Note:</strong> The
+model <code>ar-AR_BroadbandModel</code> is deprecated; use <code>ar-MS_BroadbandModel</code> instead.) See <a href="https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-models#models">Languages and
 models</a>.</p>
                                 </div>
                               </td>
@@ -1537,7 +1581,7 @@ models</a>.</p>
                               <td>
                                 <div>
                                   <p>A URL to which callback notifications are to be sent. The URL must already be
-successfully white-listed by using the <strong>Register a callback</strong> method. You can include the same callback URL with
+successfully allowlisted by using the <strong>Register a callback</strong> method. You can include the same callback URL with
 any number of job creation requests. Omit the parameter to poll the service for job completion and results.
 Use the <code>user_token</code> parameter to specify a unique user-specified string with each job to differentiate the
 callback notifications for the jobs.</p>
@@ -1823,9 +1867,8 @@ See <a href="https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-outp
 participants in a multi-person exchange. By default, the service returns no speaker labels. Setting
 <code>speaker_labels</code> to <code>true</code> forces the <code>timestamps</code> parameter to be <code>true</code>, regardless of whether you specify
 <code>false</code> for the parameter.
-<strong>Note:</strong> Applies to US English, German, Japanese, Korean, and Spanish (both broadband and narrowband models) and
-UK English (narrowband model) transcription only. To determine whether a language model supports speaker labels,
-you can also use the <strong>Get a model</strong> method and check that the attribute <code>speaker_labels</code> is set to <code>true</code>.
+<strong>Note:</strong> Applies to US English, Australian English, German, Japanese, Korean, and Spanish (both broadband and
+narrowband models) and UK English (narrowband model) transcription only.
 See <a href="https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-output#speaker_labels">Speaker labels</a>.</p>
                                 </div>
                               </td>
@@ -2476,8 +2519,10 @@ models</a>.</p>
                               <td>
                                 <div>
                                   <p>The identifier of the language for which custom language or custom acoustic models are to
-be returned (for example, <code>en-US</code>). Omit the parameter to see all custom language or custom acoustic models that
-are owned by the requesting credentials.</p>
+be returned. Omit the parameter to see all custom language or custom acoustic models that are owned by the
+requesting credentials. (<strong>Note:</strong> The identifier <code>ar-AR</code> is deprecated; use <code>ar-MS</code> instead.)
+To determine the languages for which customization is available, see <a href="https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-customization#languageSupport">Language support for
+customization</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2673,9 +2718,9 @@ request. You must make the request with credentials for the instance of the serv
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C18trainLanguageModel15customizationID08wordTypeB3Add0H6Weight7headers17completionHandlerySS_SSSgSdSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AN0S5ErrorOSgtctF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C18trainLanguageModel15customizationID08wordTypeB3Add0H6Weight7headers17completionHandlerySS_SSSgSdSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA08TrainingT0VGSg_AN0S5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/trainLanguageModel(customizationID:wordTypeToAdd:customizationWeight:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C18trainLanguageModel15customizationID08wordTypeB3Add0H6Weight7headers17completionHandlerySS_SSSgSdSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AN0S5ErrorOSgtctF">trainLanguageModel(customizationID:<wbr>wordTypeToAdd:<wbr>customizationWeight:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C18trainLanguageModel15customizationID08wordTypeB3Add0H6Weight7headers17completionHandlerySS_SSSgSdSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA08TrainingT0VGSg_AN0S5ErrorOSgtctF">trainLanguageModel(customizationID:<wbr>wordTypeToAdd:<wbr>customizationWeight:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2724,7 +2769,7 @@ to succeed.</p></li>
     <span class="nv">wordTypeToAdd</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">customizationWeight</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14SpeechToTextV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14SpeechToTextV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14SpeechToTextV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/TrainingResponse.html">TrainingResponse</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14SpeechToTextV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -4558,7 +4603,8 @@ custom model</code>.</p>
                               <td>
                                 <div>
                                   <p>The name of the base language model that is to be customized by the new custom
-acoustic model. The new custom model can be used only with the base model that it customizes.
+acoustic model. The new custom model can be used only with the base model that it customizes. (<strong>Note:</strong> The
+model <code>ar-AR_BroadbandModel</code> is deprecated; use <code>ar-MS_BroadbandModel</code> instead.)
 To determine whether a base model supports acoustic model customization, refer to <a href="https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-customization#languageSupport">Language support for
 customization</a>.</p>
                                 </div>
@@ -4654,8 +4700,10 @@ models</a>.</p>
                               <td>
                                 <div>
                                   <p>The identifier of the language for which custom language or custom acoustic models are to
-be returned (for example, <code>en-US</code>). Omit the parameter to see all custom language or custom acoustic models that
-are owned by the requesting credentials.</p>
+be returned. Omit the parameter to see all custom language or custom acoustic models that are owned by the
+requesting credentials. (<strong>Note:</strong> The identifier <code>ar-AR</code> is deprecated; use <code>ar-MS</code> instead.)
+To determine the languages for which customization is available, see <a href="https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-customization#languageSupport">Language support for
+customization</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4851,9 +4899,9 @@ request. You must make the request with credentials for the instance of the serv
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14SpeechToTextV10abC0C18trainAcousticModel15customizationID014customLanguagegI07headers17completionHandlerySS_SSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AL0Q5ErrorOSgtctF"></a>
+                    <a name="/s:14SpeechToTextV10abC0C18trainAcousticModel15customizationID014customLanguagegI07headers17completionHandlerySS_SSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA08TrainingR0VGSg_AL0Q5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/trainAcousticModel(customizationID:customLanguageModelID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14SpeechToTextV10abC0C18trainAcousticModel15customizationID014customLanguagegI07headers17completionHandlerySS_SSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AL0Q5ErrorOSgtctF">trainAcousticModel(customizationID:<wbr>customLanguageModelID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    <a class="token" href="#/s:14SpeechToTextV10abC0C18trainAcousticModel15customizationID014customLanguagegI07headers17completionHandlerySS_SSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA08TrainingR0VGSg_AL0Q5ErrorOSgtctF">trainAcousticModel(customizationID:<wbr>customLanguageModelID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4867,11 +4915,12 @@ request. You must make the request with credentials for the instance of the serv
 audio resources for a custom acoustic model, use this method to begin the actual training of the model on the
 latest audio data. The custom acoustic model does not reflect its changed data until you train it. You must use
 credentials for the instance of the service that owns a model to train it.
-The training method is asynchronous. It can take on the order of minutes or hours to complete depending on the
-total amount of audio data on which the custom acoustic model is being trained and the current load on the service.
-Typically, training a custom acoustic model takes approximately two to four times the length of its audio data. The
-actual time depends on the model being trained and the nature of the audio, such as whether the audio is clean or
-noisy. The method returns an HTTP 200 response code to indicate that the training process has begun.
+The training method is asynchronous. Training time depends on the cumulative amount of audio data that the custom
+acoustic model contains and the current load on the service. When you train or retrain a model, the service uses
+all of the model&rsquo;s audio data in the training. Training a custom acoustic model takes approximately as long as the
+length of its cumulative audio data. For example, it takes approximately 2 hours to train a model that contains a
+total of 2 hours of audio. The method returns an HTTP 200 response code to indicate that the training process has
+begun.
 You can monitor the status of the training by using the <strong>Get a custom acoustic model</strong> method to poll the model&rsquo;s
 status. Use a loop to check the status once a minute. The method returns an <code><a href="../Structs/AcousticModel.html">AcousticModel</a></code> object that includes
 <code>status</code> and <code>progress</code> fields. A status of <code>available</code> indicates that the custom model is trained and ready to
@@ -4915,7 +4964,7 @@ least one valid resource for training to succeed.</p></li>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">customLanguageModelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14SpeechToTextV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14SpeechToTextV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14SpeechToTextV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/TrainingResponse.html">TrainingResponse</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14SpeechToTextV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -5734,9 +5783,12 @@ request. You must make the request with credentials for the instance of the serv
 <p>Deletes all data that is associated with a specified customer ID. The method deletes all data for the customer ID,
 regardless of the method by which the information was added. The method has no effect if no data is associated with
 the customer ID. You must issue the request with credentials for the same instance of the service that was used to
-associate the customer ID with the data.
-You associate a customer ID with data by passing the <code>X-Watson-Metadata</code> header with a request that passes the
-data.
+associate the customer ID with the data. You associate a customer ID with data by passing the <code>X-Watson-Metadata</code>
+header with a request that passes the data.
+<strong>Note:</strong> If you delete an instance of the service from the service console, all data associated with that service
+instance is automatically deleted. This includes all custom language models, corpora, grammars, and words; all
+custom acoustic models and audio resources; all registered endpoints for the asynchronous HTTP interface; and all
+data related to speech recognition requests.
 <strong>See also:</strong> <a href="https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-information-security#information-security">Information
 security</a>.</p>
 
@@ -6223,7 +6275,7 @@ for the <strong>configureSession</strong> parameter. Default is <code>true</code
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

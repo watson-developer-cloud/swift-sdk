@@ -8,14 +8,22 @@
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Class/Assistant" class="dashAnchor"></a>
     <a title="Assistant Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">AssistantV1 3.5.0 Docs</a> (81% documented)</p>
+        <p><a href="../index.html">AssistantV1 4.1.0 Docs</a> (82% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -37,8 +45,31 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/DialogNodeOutputGeneric.html">DialogNodeOutputGeneric</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/RuntimeResponseGeneric.html">RuntimeResponseGeneric</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/AgentAvailabilityMessage.html">AgentAvailabilityMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BulkClassifyOutput.html">BulkClassifyOutput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BulkClassifyResponse.html">BulkClassifyResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BulkClassifyUtterance.html">BulkClassifyUtterance</a>
+              </li>
               <li class="nav-group-task">
                 <a href="../Structs/CaptureGroup.html">CaptureGroup</a>
               </li>
@@ -91,6 +122,9 @@
                 <a href="../Structs/DialogNodeCollection.html">DialogNodeCollection</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/DialogNodeContext.html">DialogNodeContext</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/DialogNodeNextStep.html">DialogNodeNextStep</a>
               </li>
               <li class="nav-group-task">
@@ -103,19 +137,52 @@
                 <a href="../Structs/DialogNodeOutput.html">DialogNodeOutput</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/DialogNodeOutputGeneric.html">DialogNodeOutputGeneric</a>
+                <a href="../Structs/DialogNodeOutputConnectToAgentTransferInfo.html">DialogNodeOutputConnectToAgentTransferInfo</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/DialogNodeOutputGeneric/ResponseType.html">– ResponseType</a>
+                <a href="../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeConnectToAgent.html">DialogNodeOutputGenericDialogNodeOutputResponseTypeConnectToAgent</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/DialogNodeOutputGeneric/SelectionPolicy.html">– SelectionPolicy</a>
+                <a href="../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeConnectToAgent/ResponseType.html">– ResponseType</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/DialogNodeOutputGeneric/Preference.html">– Preference</a>
+                <a href="../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeImage.html">DialogNodeOutputGenericDialogNodeOutputResponseTypeImage</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/DialogNodeOutputGeneric/QueryType.html">– QueryType</a>
+                <a href="../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeImage/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeOption.html">DialogNodeOutputGenericDialogNodeOutputResponseTypeOption</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeOption/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeOption/Preference.html">– Preference</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypePause.html">DialogNodeOutputGenericDialogNodeOutputResponseTypePause</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypePause/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill.html">DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill/QueryType.html">– QueryType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeText.html">DialogNodeOutputGenericDialogNodeOutputResponseTypeText</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeText/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeText/SelectionPolicy.html">– SelectionPolicy</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/DialogNodeOutputModifiers.html">DialogNodeOutputModifiers</a>
@@ -134,18 +201,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/DialogSuggestion.html">DialogSuggestion</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/DialogSuggestionOutput.html">DialogSuggestionOutput</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/DialogSuggestionResponseGeneric.html">DialogSuggestionResponseGeneric</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/DialogSuggestionResponseGeneric/ResponseType.html">– ResponseType</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/DialogSuggestionResponseGeneric/Preference.html">– Preference</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/DialogSuggestionValue.html">DialogSuggestionValue</a>
@@ -232,22 +287,49 @@
                 <a href="../Structs/RuntimeIntent.html">RuntimeIntent</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/RuntimeResponseGeneric.html">RuntimeResponseGeneric</a>
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeConnectToAgent.html">RuntimeResponseGenericRuntimeResponseTypeConnectToAgent</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/RuntimeResponseGeneric/ResponseType.html">– ResponseType</a>
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeConnectToAgent/ResponseType.html">– ResponseType</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/RuntimeResponseGeneric/Preference.html">– Preference</a>
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeImage.html">RuntimeResponseGenericRuntimeResponseTypeImage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeImage/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeOption.html">RuntimeResponseGenericRuntimeResponseTypeOption</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeOption/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeOption/Preference.html">– Preference</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypePause.html">RuntimeResponseGenericRuntimeResponseTypePause</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypePause/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeSuggestion.html">RuntimeResponseGenericRuntimeResponseTypeSuggestion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeSuggestion/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeText.html">RuntimeResponseGenericRuntimeResponseTypeText</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeText/ResponseType.html">– ResponseType</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Synonym.html">Synonym</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/SynonymCollection.html">SynonymCollection</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/SystemResponse.html">SystemResponse</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Value.html">Value</a>
@@ -336,6 +418,7 @@
             <h1>Assistant</h1>
               <div class="declaration">
                 <div class="language">
+                  
                   <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Assistant</span></code></pre>
 
                 </div>
@@ -369,6 +452,61 @@ The Assistant v1 API provides authoring methods your application can use to crea
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV10A0C7versionSSvp"></a>
+                    <a name="//apple_ref/swift/Property/version" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C7versionSSvp">version</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The current version is
+<code>2020-04-01</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">version</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV10A0C18defaultServiceNameSSvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/defaultServiceName" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C18defaultServiceNameSSvpZ">defaultServiceName</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Service identifiers</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">defaultServiceName</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -433,8 +571,8 @@ The Assistant v1 API provides authoring methods your application can use to crea
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/init(version:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">init(version:<wbr>)</a>
+                    <a name="//apple_ref/swift/Method/init(version:authenticator:serviceName:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">init(version:<wbr>authenticator:<wbr>serviceName:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -444,12 +582,18 @@ The Assistant v1 API provides authoring methods your application can use to crea
                       <div class="abstract">
                         <p>Create a <code>Assistant</code> object.</p>
 
-<p>This initializer will retrieve credentials from the environment or a local credentials file.
+<p>If an authenticator is not supplied, the initializer will retrieve credentials from the environment or
+a local credentials file and construct an appropriate authenticator using these credentials.
 The credentials file can be downloaded from your service instance on IBM Cloud as ibm-credentials.env.
 Make sure to add the credentials file to your project so that it can be loaded at runtime.</p>
 
-<p>If credentials are not available in the environment or a local credentials file, initialization will fail.
+<p>If an authenticator is not supplied and credentials are not available in the environment or a local
+credentials file, initialization will fail by throwing an exception.
 In that case, try another initializer that directly passes in the credentials.</p>
+
+<ul>
+<li>serviceName: String = defaultServiceName</li>
+</ul>
 
                       </div>
                     </section>
@@ -491,8 +635,8 @@ In that case, try another initializer that directly passes in the credentials.</
                               </td>
                               <td>
                                 <div>
-                                  <p>The release date of the version of the API to use. Specify the date
-in &ldquo;YYYY-MM-DD&rdquo; format.</p>
+                                  <p>Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The
+current version is <code>2020-04-01</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -560,8 +704,7 @@ in &ldquo;YYYY-MM-DD&rdquo; format.</p>
 <p>Send user input to a workspace and receive a response.
 <strong>Important:</strong> This method has been superseded by the new v2 runtime API. The v2 API offers significant advantages,
 including ease of deployment, automatic state management, versioning, and search capabilities. For more
-information, see the <a href="https://cloud.ibm.com/docs/assistant?topic=assistant-api-overview">documentation</a>.
-There is no rate limit for this operation.</p>
+information, see the <a href="https://cloud.ibm.com/docs/assistant?topic=assistant-api-overview">documentation</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -721,9 +864,99 @@ were visited during processing of the message.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C14listWorkspaces9pageLimit4sort6cursor12includeAudit7headers17completionHandlerySiSg_SSSgALSbSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA19WorkspaceCollectionVGSg_AP0P5ErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/listWorkspaces(pageLimit:sort:cursor:includeAudit:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C14listWorkspaces9pageLimit4sort6cursor12includeAudit7headers17completionHandlerySiSg_SSSgALSbSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA19WorkspaceCollectionVGSg_AP0P5ErrorOSgtctF">listWorkspaces(pageLimit:<wbr>sort:<wbr>cursor:<wbr>includeAudit:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    <a name="/s:11AssistantV10A0C12bulkClassify11workspaceID5input7headers17completionHandlerySS_SayAA04BulkD9UtteranceVGSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0kdP0VGSg_AO0O5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/bulkClassify(workspaceID:input:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C12bulkClassify11workspaceID5input7headers17completionHandlerySS_SayAA04BulkD9UtteranceVGSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0kdP0VGSg_AO0O5ErrorOSgtctF">bulkClassify(workspaceID:<wbr>input:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Identify intents and entities in multiple user utterances.</p>
+
+<p>Send multiple user inputs to a workspace in a single request and receive information about the intents and entities
+recognized in each input. This method is useful for testing and comparing the performance of different workspaces.
+This method is available only with Premium plans.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">bulkClassify</span><span class="p">(</span>
+    <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">input</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/BulkClassifyUtterance.html">BulkClassifyUtterance</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11AssistantV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/BulkClassifyResponse.html">BulkClassifyResponse</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11AssistantV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>workspaceID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Unique identifier of the workspace.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>input</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of input utterances to classify.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV10A0C14listWorkspaces9pageLimit12includeCount4sort6cursor0G5Audit7headers17completionHandlerySiSg_SbSgSSSgAnMSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA19WorkspaceCollectionVGSg_AQ0Q5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/listWorkspaces(pageLimit:includeCount:sort:cursor:includeAudit:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C14listWorkspaces9pageLimit12includeCount4sort6cursor0G5Audit7headers17completionHandlerySiSg_SbSgSSSgAnMSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA19WorkspaceCollectionVGSg_AQ0Q5ErrorOSgtctF">listWorkspaces(pageLimit:<wbr>includeCount:<wbr>sort:<wbr>cursor:<wbr>includeAudit:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -733,8 +966,7 @@ were visited during processing of the message.</p>
                       <div class="abstract">
                         <p>List workspaces.</p>
 
-<p>List the workspaces associated with a Watson Assistant service instance.
-This operation is limited to 500 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+<p>List the workspaces associated with a Watson Assistant service instance.</p>
 
                       </div>
                       <div class="declaration">
@@ -743,6 +975,7 @@ This operation is limited to 500 requests per 30 minutes. For more information, 
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listWorkspaces</span><span class="p">(</span>
     <span class="nv">pageLimit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">includeCount</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">cursor</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">includeAudit</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -764,6 +997,20 @@ This operation is limited to 500 requests per 30 minutes. For more information, 
                               <td>
                                 <div>
                                   <p>The number of records to return in each page of results.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>includeCount</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether to include information about the number of records that satisfy the request,
+regardless of the page limit. If this parameter is <code>true</code>, the <code>pagination</code> object in the response includes the
+<code>total</code> property.</p>
                                 </div>
                               </td>
                             </tr>
@@ -838,9 +1085,9 @@ response.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C15createWorkspace4name11description8language8metadata14learningOptOut14systemSettings7intents8entities11dialogNodes15counterexamples8webhooks12includeAudit7headers17completionHandlerySSSg_A2SSDySS15IBMSwiftSDKCore4JSONOGSgSbSgAA0d6SystemM0VSgSayAA12CreateIntentVGSgSayAA12CreateEntityVGSgSayAA10DialogNodeVGSgSayAA14CounterexampleVGSgSayAA7WebhookVGSgAYSDyS2SGSgyAT12RestResponseVyAA0D0VGSg_AT9RestErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/createWorkspace(name:description:language:metadata:learningOptOut:systemSettings:intents:entities:dialogNodes:counterexamples:webhooks:includeAudit:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C15createWorkspace4name11description8language8metadata14learningOptOut14systemSettings7intents8entities11dialogNodes15counterexamples8webhooks12includeAudit7headers17completionHandlerySSSg_A2SSDySS15IBMSwiftSDKCore4JSONOGSgSbSgAA0d6SystemM0VSgSayAA12CreateIntentVGSgSayAA12CreateEntityVGSgSayAA10DialogNodeVGSgSayAA14CounterexampleVGSgSayAA7WebhookVGSgAYSDyS2SGSgyAT12RestResponseVyAA0D0VGSg_AT9RestErrorOSgtctF">createWorkspace(name:<wbr>description:<wbr>language:<wbr>metadata:<wbr>learningOptOut:<wbr>systemSettings:<wbr>intents:<wbr>entities:<wbr>dialogNodes:<wbr>counterexamples:<wbr>webhooks:<wbr>includeAudit:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    <a name="/s:11AssistantV10A0C15createWorkspace4name11description8language11dialogNodes15counterexamples8metadata14learningOptOut14systemSettings8webhooks7intents8entities12includeAudit7headers17completionHandlerySSSg_A2SSayAA10DialogNodeVGSgSayAA14CounterexampleVGSgSDySS15IBMSwiftSDKCore4JSONOGSgSbSgAA0d6SystemP0VSgSayAA7WebhookVGSgSayAA12CreateIntentVGSgSayAA12CreateEntityVGSgA5_SDyS2SGSgyA0_12RestResponseVyAA0D0VGSg_A0_9RestErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/createWorkspace(name:description:language:dialogNodes:counterexamples:metadata:learningOptOut:systemSettings:webhooks:intents:entities:includeAudit:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C15createWorkspace4name11description8language11dialogNodes15counterexamples8metadata14learningOptOut14systemSettings8webhooks7intents8entities12includeAudit7headers17completionHandlerySSSg_A2SSayAA10DialogNodeVGSgSayAA14CounterexampleVGSgSDySS15IBMSwiftSDKCore4JSONOGSgSbSgAA0d6SystemP0VSgSayAA7WebhookVGSgSayAA12CreateIntentVGSgSayAA12CreateEntityVGSgA5_SDyS2SGSgyA0_12RestResponseVyAA0D0VGSg_A0_9RestErrorOSgtctF">createWorkspace(name:<wbr>description:<wbr>language:<wbr>dialogNodes:<wbr>counterexamples:<wbr>metadata:<wbr>learningOptOut:<wbr>systemSettings:<wbr>webhooks:<wbr>intents:<wbr>entities:<wbr>includeAudit:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -851,8 +1098,7 @@ response.</p>
                         <p>Create workspace.</p>
 
 <p>Create a workspace based on component objects. You must provide workspace components defining the content of the
-new workspace.
-This operation is limited to 30 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+new workspace.</p>
 
                       </div>
                       <div class="declaration">
@@ -863,14 +1109,14 @@ This operation is limited to 30 requests per 30 minutes. For more information, s
     <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">dialogNodes</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/DialogNode.html">DialogNode</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">counterexamples</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Counterexample.html">Counterexample</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">metadata</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">JSON</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">learningOptOut</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">systemSettings</span><span class="p">:</span> <span class="kt"><a href="../Structs/WorkspaceSystemSettings.html">WorkspaceSystemSettings</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">webhooks</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Webhook.html">Webhook</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">intents</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/CreateIntent.html">CreateIntent</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">entities</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/CreateEntity.html">CreateEntity</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">dialogNodes</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/DialogNode.html">DialogNode</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">counterexamples</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Counterexample.html">Counterexample</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">webhooks</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Webhook.html">Webhook</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">includeAudit</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11AssistantV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Workspace.html">Workspace</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11AssistantV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
@@ -922,6 +1168,31 @@ or tab characters.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>dialogNodes</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of objects describing the dialog nodes in the workspace.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>counterexamples</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of objects defining input examples that have been marked as irrelevant
+input.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>metadata</em>
                                 </code>
                               </td>
@@ -960,6 +1231,18 @@ not to be used.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>webhooks</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>intents</em>
                                 </code>
                               </td>
@@ -978,43 +1261,6 @@ not to be used.</p>
                               <td>
                                 <div>
                                   <p>An array of objects describing the entities for the workspace.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>dialogNodes</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An array of objects describing the dialog nodes in the workspace.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>counterexamples</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An array of objects defining input examples that have been marked as irrelevant
-input.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>webhooks</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p></p>
                                 </div>
                               </td>
                             </tr>
@@ -1076,9 +1322,7 @@ response.</p>
                       <div class="abstract">
                         <p>Get information about a workspace.</p>
 
-<p>Get information about a workspace, optionally including all workspace content.
-With <strong>export</strong>=<code>false</code>, this operation is limited to 6000 requests per 5 minutes. With <strong>export</strong>=<code>true</code>, the
-limit is 20 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+<p>Get information about a workspace, optionally including all workspace content.</p>
 
                       </div>
                       <div class="declaration">
@@ -1185,9 +1429,9 @@ alphabetical order.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C15updateWorkspace11workspaceID4name11description8language8metadata14learningOptOut14systemSettings7intents8entities11dialogNodes15counterexamples8webhooks6append12includeAudit7headers17completionHandlerySS_SSSgA2USDySS15IBMSwiftSDKCore4JSONOGSgSbSgAA0d6SystemO0VSgSayAA12CreateIntentVGSgSayAA12CreateEntityVGSgSayAA10DialogNodeVGSgSayAA14CounterexampleVGSgSayAA7WebhookVGSgA_A_SDyS2SGSgyAV12RestResponseVyAA0D0VGSg_AV9RestErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/updateWorkspace(workspaceID:name:description:language:metadata:learningOptOut:systemSettings:intents:entities:dialogNodes:counterexamples:webhooks:append:includeAudit:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C15updateWorkspace11workspaceID4name11description8language8metadata14learningOptOut14systemSettings7intents8entities11dialogNodes15counterexamples8webhooks6append12includeAudit7headers17completionHandlerySS_SSSgA2USDySS15IBMSwiftSDKCore4JSONOGSgSbSgAA0d6SystemO0VSgSayAA12CreateIntentVGSgSayAA12CreateEntityVGSgSayAA10DialogNodeVGSgSayAA14CounterexampleVGSgSayAA7WebhookVGSgA_A_SDyS2SGSgyAV12RestResponseVyAA0D0VGSg_AV9RestErrorOSgtctF">updateWorkspace(workspaceID:<wbr>name:<wbr>description:<wbr>language:<wbr>metadata:<wbr>learningOptOut:<wbr>systemSettings:<wbr>intents:<wbr>entities:<wbr>dialogNodes:<wbr>counterexamples:<wbr>webhooks:<wbr>append:<wbr>includeAudit:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    <a name="/s:11AssistantV10A0C15updateWorkspace11workspaceID4name11description8language11dialogNodes15counterexamples8metadata14learningOptOut14systemSettings8webhooks7intents8entities6append12includeAudit7headers17completionHandlerySS_SSSgA2USayAA10DialogNodeVGSgSayAA14CounterexampleVGSgSDySS15IBMSwiftSDKCore4JSONOGSgSbSgAA0d6SystemR0VSgSayAA7WebhookVGSgSayAA12CreateIntentVGSgSayAA12CreateEntityVGSgA7_A7_SDyS2SGSgyA2_12RestResponseVyAA0D0VGSg_A2_9RestErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/updateWorkspace(workspaceID:name:description:language:dialogNodes:counterexamples:metadata:learningOptOut:systemSettings:webhooks:intents:entities:append:includeAudit:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C15updateWorkspace11workspaceID4name11description8language11dialogNodes15counterexamples8metadata14learningOptOut14systemSettings8webhooks7intents8entities6append12includeAudit7headers17completionHandlerySS_SSSgA2USayAA10DialogNodeVGSgSayAA14CounterexampleVGSgSDySS15IBMSwiftSDKCore4JSONOGSgSbSgAA0d6SystemR0VSgSayAA7WebhookVGSgSayAA12CreateIntentVGSgSayAA12CreateEntityVGSgA7_A7_SDyS2SGSgyA2_12RestResponseVyAA0D0VGSg_A2_9RestErrorOSgtctF">updateWorkspace(workspaceID:<wbr>name:<wbr>description:<wbr>language:<wbr>dialogNodes:<wbr>counterexamples:<wbr>metadata:<wbr>learningOptOut:<wbr>systemSettings:<wbr>webhooks:<wbr>intents:<wbr>entities:<wbr>append:<wbr>includeAudit:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1198,8 +1442,7 @@ alphabetical order.</p>
                         <p>Update workspace.</p>
 
 <p>Update an existing workspace with new or modified data. You must provide component objects defining the content of
-the updated workspace.
-This operation is limited to 30 request per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+the updated workspace.</p>
 
                       </div>
                       <div class="declaration">
@@ -1211,14 +1454,14 @@ This operation is limited to 30 request per 30 minutes. For more information, se
     <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">dialogNodes</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/DialogNode.html">DialogNode</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">counterexamples</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Counterexample.html">Counterexample</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">metadata</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">JSON</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">learningOptOut</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">systemSettings</span><span class="p">:</span> <span class="kt"><a href="../Structs/WorkspaceSystemSettings.html">WorkspaceSystemSettings</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">webhooks</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Webhook.html">Webhook</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">intents</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/CreateIntent.html">CreateIntent</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">entities</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/CreateEntity.html">CreateEntity</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">dialogNodes</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/DialogNode.html">DialogNode</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">counterexamples</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Counterexample.html">Counterexample</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">webhooks</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Webhook.html">Webhook</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">append</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">includeAudit</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -1283,6 +1526,31 @@ or tab characters.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>dialogNodes</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of objects describing the dialog nodes in the workspace.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>counterexamples</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of objects defining input examples that have been marked as irrelevant
+input.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>metadata</em>
                                 </code>
                               </td>
@@ -1321,6 +1589,18 @@ not to be used.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>webhooks</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>intents</em>
                                 </code>
                               </td>
@@ -1339,43 +1619,6 @@ not to be used.</p>
                               <td>
                                 <div>
                                   <p>An array of objects describing the entities for the workspace.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>dialogNodes</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An array of objects describing the dialog nodes in the workspace.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>counterexamples</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An array of objects defining input examples that have been marked as irrelevant
-input.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>webhooks</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p></p>
                                 </div>
                               </td>
                             </tr>
@@ -1454,8 +1697,7 @@ response.</p>
                       <div class="abstract">
                         <p>Delete workspace.</p>
 
-<p>Delete a workspace from the service instance.
-This operation is limited to 30 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+<p>Delete a workspace from the service instance.</p>
 
                       </div>
                       <div class="declaration">
@@ -1518,9 +1760,9 @@ This operation is limited to 30 requests per 30 minutes. For more information, s
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C11listIntents11workspaceID6export9pageLimit4sort6cursor12includeAudit7headers17completionHandlerySS_SbSgSiSgSSSgAoMSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA16IntentCollectionVGSg_AR0S5ErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/listIntents(workspaceID:export:pageLimit:sort:cursor:includeAudit:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C11listIntents11workspaceID6export9pageLimit4sort6cursor12includeAudit7headers17completionHandlerySS_SbSgSiSgSSSgAoMSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA16IntentCollectionVGSg_AR0S5ErrorOSgtctF">listIntents(workspaceID:<wbr>export:<wbr>pageLimit:<wbr>sort:<wbr>cursor:<wbr>includeAudit:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    <a name="/s:11AssistantV10A0C11listIntents11workspaceID6export9pageLimit12includeCount4sort6cursor0J5Audit7headers17completionHandlerySS_SbSgSiSgANSSSgApNSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA16IntentCollectionVGSg_AS0T5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/listIntents(workspaceID:export:pageLimit:includeCount:sort:cursor:includeAudit:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C11listIntents11workspaceID6export9pageLimit12includeCount4sort6cursor0J5Audit7headers17completionHandlerySS_SbSgSiSgANSSSgApNSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA16IntentCollectionVGSg_AS0T5ErrorOSgtctF">listIntents(workspaceID:<wbr>export:<wbr>pageLimit:<wbr>includeCount:<wbr>sort:<wbr>cursor:<wbr>includeAudit:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1530,9 +1772,7 @@ This operation is limited to 30 requests per 30 minutes. For more information, s
                       <div class="abstract">
                         <p>List intents.</p>
 
-<p>List the intents for a workspace.
-With <strong>export</strong>=<code>false</code>, this operation is limited to 2000 requests per 30 minutes. With <strong>export</strong>=<code>true</code>, the
-limit is 400 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+<p>List the intents for a workspace.</p>
 
                       </div>
                       <div class="declaration">
@@ -1543,6 +1783,7 @@ limit is 400 requests per 30 minutes. For more information, see <strong>Rate lim
     <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">export</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">pageLimit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">includeCount</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">cursor</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">includeAudit</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -1590,6 +1831,20 @@ subelements, is included.</p>
                               <td>
                                 <div>
                                   <p>The number of records to return in each page of results.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>includeCount</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether to include information about the number of records that satisfy the request,
+regardless of the page limit. If this parameter is <code>true</code>, the <code>pagination</code> object in the response includes the
+<code>total</code> property.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1678,8 +1933,7 @@ response.</p>
 
 <p>Create a new intent.
 If you want to create multiple intents with a single API call, consider using the <strong><a href="#update-workspace">Update
-workspace</a></strong> method instead.
-This operation is limited to 2000 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+workspace</a></strong> method instead.</p>
 
                       </div>
                       <div class="declaration">
@@ -1813,9 +2067,7 @@ response.</p>
                       <div class="abstract">
                         <p>Get intent.</p>
 
-<p>Get information about an intent, optionally including all intent content.
-With <strong>export</strong>=<code>false</code>, this operation is limited to 6000 requests per 5 minutes. With <strong>export</strong>=<code>true</code>, the
-limit is 400 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+<p>Get information about an intent, optionally including all intent content.</p>
 
                       </div>
                       <div class="declaration">
@@ -1935,8 +2187,7 @@ response.</p>
 <p>Update an existing intent with new or modified data. You must provide component objects defining the content of the
 updated intent.
 If you want to update multiple intents with a single API call, consider using the <strong><a href="#update-workspace">Update
-workspace</a></strong> method instead.
-This operation is limited to 2000 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+workspace</a></strong> method instead.</p>
 
                       </div>
                       <div class="declaration">
@@ -2101,8 +2352,7 @@ response.</p>
                       <div class="abstract">
                         <p>Delete intent.</p>
 
-<p>Delete an intent from a workspace.
-This operation is limited to 2000 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+<p>Delete an intent from a workspace.</p>
 
                       </div>
                       <div class="declaration">
@@ -2178,9 +2428,9 @@ This operation is limited to 2000 requests per 30 minutes. For more information,
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C12listExamples11workspaceID6intent9pageLimit4sort6cursor12includeAudit7headers17completionHandlerySS_SSSiSgSSSgANSbSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA17ExampleCollectionVGSg_AR0S5ErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/listExamples(workspaceID:intent:pageLimit:sort:cursor:includeAudit:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C12listExamples11workspaceID6intent9pageLimit4sort6cursor12includeAudit7headers17completionHandlerySS_SSSiSgSSSgANSbSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA17ExampleCollectionVGSg_AR0S5ErrorOSgtctF">listExamples(workspaceID:<wbr>intent:<wbr>pageLimit:<wbr>sort:<wbr>cursor:<wbr>includeAudit:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    <a name="/s:11AssistantV10A0C12listExamples11workspaceID6intent9pageLimit12includeCount4sort6cursor0J5Audit7headers17completionHandlerySS_SSSiSgSbSgSSSgApOSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA17ExampleCollectionVGSg_AS0T5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/listExamples(workspaceID:intent:pageLimit:includeCount:sort:cursor:includeAudit:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C12listExamples11workspaceID6intent9pageLimit12includeCount4sort6cursor0J5Audit7headers17completionHandlerySS_SSSiSgSbSgSSSgApOSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA17ExampleCollectionVGSg_AS0T5ErrorOSgtctF">listExamples(workspaceID:<wbr>intent:<wbr>pageLimit:<wbr>includeCount:<wbr>sort:<wbr>cursor:<wbr>includeAudit:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2190,8 +2440,7 @@ This operation is limited to 2000 requests per 30 minutes. For more information,
                       <div class="abstract">
                         <p>List user input examples.</p>
 
-<p>List the user input examples for an intent, optionally including contextual entity mentions.
-This operation is limited to 2500 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+<p>List the user input examples for an intent, optionally including contextual entity mentions.</p>
 
                       </div>
                       <div class="declaration">
@@ -2202,6 +2451,7 @@ This operation is limited to 2500 requests per 30 minutes. For more information,
     <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">intent</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">pageLimit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">includeCount</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">cursor</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">includeAudit</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -2247,6 +2497,20 @@ This operation is limited to 2500 requests per 30 minutes. For more information,
                               <td>
                                 <div>
                                   <p>The number of records to return in each page of results.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>includeCount</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether to include information about the number of records that satisfy the request,
+regardless of the page limit. If this parameter is <code>true</code>, the <code>pagination</code> object in the response includes the
+<code>total</code> property.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2335,8 +2599,7 @@ response.</p>
 
 <p>Add a new user input example to an intent.
 If you want to add multiple examples with a single API call, consider using the <strong><a href="#update-intent">Update intent</a></strong>
-method instead.
-This operation is limited to 1000 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+method instead.</p>
 
                       </div>
                       <div class="declaration">
@@ -2469,8 +2732,7 @@ response.</p>
                       <div class="abstract">
                         <p>Get user input example.</p>
 
-<p>Get information about a user input example.
-This operation is limited to 6000 requests per 5 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+<p>Get information about a user input example.</p>
 
                       </div>
                       <div class="declaration">
@@ -2587,8 +2849,7 @@ response.</p>
 
 <p>Update the text of a user input example.
 If you want to update multiple examples with a single API call, consider using the <strong><a href="#update-intent">Update
-intent</a></strong> method instead.
-This operation is limited to 1000 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+intent</a></strong> method instead.</p>
 
                       </div>
                       <div class="declaration">
@@ -2734,8 +2995,7 @@ response.</p>
                       <div class="abstract">
                         <p>Delete user input example.</p>
 
-<p>Delete a user input example from an intent.
-This operation is limited to 1000 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+<p>Delete a user input example from an intent.</p>
 
                       </div>
                       <div class="declaration">
@@ -2824,9 +3084,9 @@ This operation is limited to 1000 requests per 30 minutes. For more information,
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C19listCounterexamples11workspaceID9pageLimit4sort6cursor12includeAudit7headers17completionHandlerySS_SiSgSSSgAMSbSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA24CounterexampleCollectionVGSg_AQ0R5ErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/listCounterexamples(workspaceID:pageLimit:sort:cursor:includeAudit:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C19listCounterexamples11workspaceID9pageLimit4sort6cursor12includeAudit7headers17completionHandlerySS_SiSgSSSgAMSbSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA24CounterexampleCollectionVGSg_AQ0R5ErrorOSgtctF">listCounterexamples(workspaceID:<wbr>pageLimit:<wbr>sort:<wbr>cursor:<wbr>includeAudit:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    <a name="/s:11AssistantV10A0C19listCounterexamples11workspaceID9pageLimit12includeCount4sort6cursor0I5Audit7headers17completionHandlerySS_SiSgSbSgSSSgAoNSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA24CounterexampleCollectionVGSg_AR0S5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/listCounterexamples(workspaceID:pageLimit:includeCount:sort:cursor:includeAudit:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C19listCounterexamples11workspaceID9pageLimit12includeCount4sort6cursor0I5Audit7headers17completionHandlerySS_SiSgSbSgSSSgAoNSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA24CounterexampleCollectionVGSg_AR0S5ErrorOSgtctF">listCounterexamples(workspaceID:<wbr>pageLimit:<wbr>includeCount:<wbr>sort:<wbr>cursor:<wbr>includeAudit:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2836,8 +3096,7 @@ This operation is limited to 1000 requests per 30 minutes. For more information,
                       <div class="abstract">
                         <p>List counterexamples.</p>
 
-<p>List the counterexamples for a workspace. Counterexamples are examples that have been marked as irrelevant input.
-This operation is limited to 2500 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+<p>List the counterexamples for a workspace. Counterexamples are examples that have been marked as irrelevant input.</p>
 
                       </div>
                       <div class="declaration">
@@ -2847,6 +3106,7 @@ This operation is limited to 2500 requests per 30 minutes. For more information,
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listCounterexamples</span><span class="p">(</span>
     <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">pageLimit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">includeCount</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">cursor</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">includeAudit</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -2880,6 +3140,20 @@ This operation is limited to 2500 requests per 30 minutes. For more information,
                               <td>
                                 <div>
                                   <p>The number of records to return in each page of results.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>includeCount</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether to include information about the number of records that satisfy the request,
+regardless of the page limit. If this parameter is <code>true</code>, the <code>pagination</code> object in the response includes the
+<code>total</code> property.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2968,8 +3242,7 @@ response.</p>
 
 <p>Add a new counterexample to a workspace. Counterexamples are examples that have been marked as irrelevant input.
 If you want to add multiple counterexamples with a single API call, consider using the <strong><a href="#update-workspace">Update
-workspace</a></strong> method instead.
-This operation is limited to 1000 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+workspace</a></strong> method instead.</p>
 
                       </div>
                       <div class="declaration">
@@ -3077,8 +3350,7 @@ response.</p>
                       <div class="abstract">
                         <p>Get counterexample.</p>
 
-<p>Get information about a counterexample. Counterexamples are examples that have been marked as irrelevant input.
-This operation is limited to 6000 requests per 5 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+<p>Get information about a counterexample. Counterexamples are examples that have been marked as irrelevant input.</p>
 
                       </div>
                       <div class="declaration">
@@ -3180,10 +3452,7 @@ response.</p>
                       <div class="abstract">
                         <p>Update counterexample.</p>
 
-<p>Update the text of a counterexample. Counterexamples are examples that have been marked as irrelevant input.
-If you want to update multiple counterexamples with a single API call, consider using the <strong><a href="#update-workspace">Update
-workspace</a></strong> method instead.
-This operation is limited to 1000 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+<p>Update the text of a counterexample. Counterexamples are examples that have been marked as irrelevant input.</p>
 
                       </div>
                       <div class="declaration">
@@ -3304,8 +3573,7 @@ response.</p>
                       <div class="abstract">
                         <p>Delete counterexample.</p>
 
-<p>Delete a counterexample from a workspace. Counterexamples are examples that have been marked as irrelevant input.
-This operation is limited to 1000 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+<p>Delete a counterexample from a workspace. Counterexamples are examples that have been marked as irrelevant input.</p>
 
                       </div>
                       <div class="declaration">
@@ -3381,9 +3649,9 @@ This operation is limited to 1000 requests per 30 minutes. For more information,
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C12listEntities11workspaceID6export9pageLimit4sort6cursor12includeAudit7headers17completionHandlerySS_SbSgSiSgSSSgAoMSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA16EntityCollectionVGSg_AR0S5ErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/listEntities(workspaceID:export:pageLimit:sort:cursor:includeAudit:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C12listEntities11workspaceID6export9pageLimit4sort6cursor12includeAudit7headers17completionHandlerySS_SbSgSiSgSSSgAoMSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA16EntityCollectionVGSg_AR0S5ErrorOSgtctF">listEntities(workspaceID:<wbr>export:<wbr>pageLimit:<wbr>sort:<wbr>cursor:<wbr>includeAudit:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    <a name="/s:11AssistantV10A0C12listEntities11workspaceID6export9pageLimit12includeCount4sort6cursor0J5Audit7headers17completionHandlerySS_SbSgSiSgANSSSgApNSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA16EntityCollectionVGSg_AS0T5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/listEntities(workspaceID:export:pageLimit:includeCount:sort:cursor:includeAudit:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C12listEntities11workspaceID6export9pageLimit12includeCount4sort6cursor0J5Audit7headers17completionHandlerySS_SbSgSiSgANSSSgApNSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA16EntityCollectionVGSg_AS0T5ErrorOSgtctF">listEntities(workspaceID:<wbr>export:<wbr>pageLimit:<wbr>includeCount:<wbr>sort:<wbr>cursor:<wbr>includeAudit:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -3393,9 +3661,7 @@ This operation is limited to 1000 requests per 30 minutes. For more information,
                       <div class="abstract">
                         <p>List entities.</p>
 
-<p>List the entities for a workspace.
-With <strong>export</strong>=<code>false</code>, this operation is limited to 1000 requests per 30 minutes. With <strong>export</strong>=<code>true</code>, the
-limit is 200 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+<p>List the entities for a workspace.</p>
 
                       </div>
                       <div class="declaration">
@@ -3406,6 +3672,7 @@ limit is 200 requests per 30 minutes. For more information, see <strong>Rate lim
     <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">export</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">pageLimit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">includeCount</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">cursor</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">includeAudit</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -3453,6 +3720,20 @@ subelements, is included.</p>
                               <td>
                                 <div>
                                   <p>The number of records to return in each page of results.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>includeCount</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether to include information about the number of records that satisfy the request,
+regardless of the page limit. If this parameter is <code>true</code>, the <code>pagination</code> object in the response includes the
+<code>total</code> property.</p>
                                 </div>
                               </td>
                             </tr>
@@ -3541,8 +3822,7 @@ response.</p>
 
 <p>Create a new entity, or enable a system entity.
 If you want to create multiple entities with a single API call, consider using the <strong><a href="#update-workspace">Update
-workspace</a></strong> method instead.
-This operation is limited to 1000 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+workspace</a></strong> method instead.</p>
 
                       </div>
                       <div class="declaration">
@@ -3703,9 +3983,7 @@ response.</p>
                       <div class="abstract">
                         <p>Get entity.</p>
 
-<p>Get information about an entity, optionally including all entity content.
-With <strong>export</strong>=<code>false</code>, this operation is limited to 6000 requests per 5 minutes. With <strong>export</strong>=<code>true</code>, the
-limit is 200 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+<p>Get information about an entity, optionally including all entity content.</p>
 
                       </div>
                       <div class="declaration">
@@ -3825,8 +4103,7 @@ response.</p>
 <p>Update an existing entity with new or modified data. You must provide component objects defining the content of the
 updated entity.
 If you want to update multiple entities with a single API call, consider using the <strong><a href="#update-workspace">Update
-workspace</a></strong> method instead.
-This operation is limited to 1000 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+workspace</a></strong> method instead.</p>
 
                       </div>
                       <div class="declaration">
@@ -4017,8 +4294,7 @@ response.</p>
                       <div class="abstract">
                         <p>Delete entity.</p>
 
-<p>Delete an entity from a workspace, or disable a system entity.
-This operation is limited to 1000 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+<p>Delete an entity from a workspace, or disable a system entity.</p>
 
                       </div>
                       <div class="declaration">
@@ -4107,8 +4383,7 @@ This operation is limited to 1000 requests per 30 minutes. For more information,
                         <p>List entity mentions.</p>
 
 <p>List mentions for a contextual entity. An entity mention is an occurrence of a contextual entity in the context of
-an intent user input example.
-This operation is limited to 200 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+an intent user input example.</p>
 
                       </div>
                       <div class="declaration">
@@ -4213,9 +4488,9 @@ response.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C10listValues11workspaceID6entity6export9pageLimit4sort6cursor12includeAudit7headers17completionHandlerySS_SSSbSgSiSgSSSgApNSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA15ValueCollectionVGSg_AS0T5ErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/listValues(workspaceID:entity:export:pageLimit:sort:cursor:includeAudit:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C10listValues11workspaceID6entity6export9pageLimit4sort6cursor12includeAudit7headers17completionHandlerySS_SSSbSgSiSgSSSgApNSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA15ValueCollectionVGSg_AS0T5ErrorOSgtctF">listValues(workspaceID:<wbr>entity:<wbr>export:<wbr>pageLimit:<wbr>sort:<wbr>cursor:<wbr>includeAudit:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    <a name="/s:11AssistantV10A0C10listValues11workspaceID6entity6export9pageLimit12includeCount4sort6cursor0K5Audit7headers17completionHandlerySS_SSSbSgSiSgAOSSSgAqOSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA15ValueCollectionVGSg_AT0U5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/listValues(workspaceID:entity:export:pageLimit:includeCount:sort:cursor:includeAudit:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C10listValues11workspaceID6entity6export9pageLimit12includeCount4sort6cursor0K5Audit7headers17completionHandlerySS_SSSbSgSiSgAOSSSgAqOSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA15ValueCollectionVGSg_AT0U5ErrorOSgtctF">listValues(workspaceID:<wbr>entity:<wbr>export:<wbr>pageLimit:<wbr>includeCount:<wbr>sort:<wbr>cursor:<wbr>includeAudit:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -4225,8 +4500,7 @@ response.</p>
                       <div class="abstract">
                         <p>List entity values.</p>
 
-<p>List the values for an entity.
-This operation is limited to 2500 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+<p>List the values for an entity.</p>
 
                       </div>
                       <div class="declaration">
@@ -4238,6 +4512,7 @@ This operation is limited to 2500 requests per 30 minutes. For more information,
     <span class="nv">entity</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">export</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">pageLimit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">includeCount</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">cursor</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">includeAudit</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -4297,6 +4572,20 @@ subelements, is included.</p>
                               <td>
                                 <div>
                                   <p>The number of records to return in each page of results.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>includeCount</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether to include information about the number of records that satisfy the request,
+regardless of the page limit. If this parameter is <code>true</code>, the <code>pagination</code> object in the response includes the
+<code>total</code> property.</p>
                                 </div>
                               </td>
                             </tr>
@@ -4385,8 +4674,7 @@ response.</p>
 
 <p>Create a new value for an entity.
 If you want to create multiple entity values with a single API call, consider using the <strong><a href="#update-entity">Update
-entity</a></strong> method instead.
-This operation is limited to 1000 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+entity</a></strong> method instead.</p>
 
                       </div>
                       <div class="declaration">
@@ -4567,8 +4855,7 @@ response.</p>
                       <div class="abstract">
                         <p>Get entity value.</p>
 
-<p>Get information about an entity value.
-This operation is limited to 6000 requests per 5 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+<p>Get information about an entity value.</p>
 
                       </div>
                       <div class="declaration">
@@ -4701,8 +4988,7 @@ response.</p>
 <p>Update an existing entity value with new or modified data. You must provide component objects defining the content
 of the updated entity value.
 If you want to update multiple entity values with a single API call, consider using the <strong><a href="#update-entity">Update
-entity</a></strong> method instead.
-This operation is limited to 1000 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+entity</a></strong> method instead.</p>
 
                       </div>
                       <div class="declaration">
@@ -4914,8 +5200,7 @@ response.</p>
                       <div class="abstract">
                         <p>Delete entity value.</p>
 
-<p>Delete a value from an entity.
-This operation is limited to 1000 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+<p>Delete a value from an entity.</p>
 
                       </div>
                       <div class="declaration">
@@ -5004,9 +5289,9 @@ This operation is limited to 1000 requests per 30 minutes. For more information,
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C12listSynonyms11workspaceID6entity5value9pageLimit4sort6cursor12includeAudit7headers17completionHandlerySS_S2SSiSgSSSgAOSbSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA17SynonymCollectionVGSg_AS0T5ErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/listSynonyms(workspaceID:entity:value:pageLimit:sort:cursor:includeAudit:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C12listSynonyms11workspaceID6entity5value9pageLimit4sort6cursor12includeAudit7headers17completionHandlerySS_S2SSiSgSSSgAOSbSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA17SynonymCollectionVGSg_AS0T5ErrorOSgtctF">listSynonyms(workspaceID:<wbr>entity:<wbr>value:<wbr>pageLimit:<wbr>sort:<wbr>cursor:<wbr>includeAudit:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    <a name="/s:11AssistantV10A0C12listSynonyms11workspaceID6entity5value9pageLimit12includeCount4sort6cursor0K5Audit7headers17completionHandlerySS_S2SSiSgSbSgSSSgAqPSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA17SynonymCollectionVGSg_AT0U5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/listSynonyms(workspaceID:entity:value:pageLimit:includeCount:sort:cursor:includeAudit:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C12listSynonyms11workspaceID6entity5value9pageLimit12includeCount4sort6cursor0K5Audit7headers17completionHandlerySS_S2SSiSgSbSgSSSgAqPSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA17SynonymCollectionVGSg_AT0U5ErrorOSgtctF">listSynonyms(workspaceID:<wbr>entity:<wbr>value:<wbr>pageLimit:<wbr>includeCount:<wbr>sort:<wbr>cursor:<wbr>includeAudit:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -5016,8 +5301,7 @@ This operation is limited to 1000 requests per 30 minutes. For more information,
                       <div class="abstract">
                         <p>List entity value synonyms.</p>
 
-<p>List the synonyms for an entity value.
-This operation is limited to 2500 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+<p>List the synonyms for an entity value.</p>
 
                       </div>
                       <div class="declaration">
@@ -5029,6 +5313,7 @@ This operation is limited to 2500 requests per 30 minutes. For more information,
     <span class="nv">entity</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">value</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">pageLimit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">includeCount</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">cursor</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">includeAudit</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -5086,6 +5371,20 @@ This operation is limited to 2500 requests per 30 minutes. For more information,
                               <td>
                                 <div>
                                   <p>The number of records to return in each page of results.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>includeCount</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether to include information about the number of records that satisfy the request,
+regardless of the page limit. If this parameter is <code>true</code>, the <code>pagination</code> object in the response includes the
+<code>total</code> property.</p>
                                 </div>
                               </td>
                             </tr>
@@ -5174,8 +5473,7 @@ response.</p>
 
 <p>Add a new synonym to an entity value.
 If you want to create multiple synonyms with a single API call, consider using the <strong><a href="#update-entity">Update
-entity</a></strong> or <strong><a href="#update-entity-value">Update entity value</a></strong> method instead.
-This operation is limited to 1000 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+entity</a></strong> or <strong><a href="#update-entity-value">Update entity value</a></strong> method instead.</p>
 
                       </div>
                       <div class="declaration">
@@ -5308,8 +5606,7 @@ response.</p>
                       <div class="abstract">
                         <p>Get entity value synonym.</p>
 
-<p>Get information about a synonym of an entity value.
-This operation is limited to 6000 requests per 5 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+<p>Get information about a synonym of an entity value.</p>
 
                       </div>
                       <div class="declaration">
@@ -5439,8 +5736,7 @@ response.</p>
 
 <p>Update an existing entity value synonym with new text.
 If you want to update multiple synonyms with a single API call, consider using the <strong><a href="#update-entity">Update
-entity</a></strong> or <strong><a href="#update-entity-value">Update entity value</a></strong> method instead.
-This operation is limited to 1000 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+entity</a></strong> or <strong><a href="#update-entity-value">Update entity value</a></strong> method instead.</p>
 
                       </div>
                       <div class="declaration">
@@ -5586,8 +5882,7 @@ response.</p>
                       <div class="abstract">
                         <p>Delete entity value synonym.</p>
 
-<p>Delete a synonym from an entity value.
-This operation is limited to 1000 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+<p>Delete a synonym from an entity value.</p>
 
                       </div>
                       <div class="declaration">
@@ -5689,9 +5984,9 @@ This operation is limited to 1000 requests per 30 minutes. For more information,
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C15listDialogNodes11workspaceID9pageLimit4sort6cursor12includeAudit7headers17completionHandlerySS_SiSgSSSgAMSbSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D14NodeCollectionVGSg_AQ0S5ErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/listDialogNodes(workspaceID:pageLimit:sort:cursor:includeAudit:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C15listDialogNodes11workspaceID9pageLimit4sort6cursor12includeAudit7headers17completionHandlerySS_SiSgSSSgAMSbSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D14NodeCollectionVGSg_AQ0S5ErrorOSgtctF">listDialogNodes(workspaceID:<wbr>pageLimit:<wbr>sort:<wbr>cursor:<wbr>includeAudit:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    <a name="/s:11AssistantV10A0C15listDialogNodes11workspaceID9pageLimit12includeCount4sort6cursor0J5Audit7headers17completionHandlerySS_SiSgSbSgSSSgAoNSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D14NodeCollectionVGSg_AR0T5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/listDialogNodes(workspaceID:pageLimit:includeCount:sort:cursor:includeAudit:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV10A0C15listDialogNodes11workspaceID9pageLimit12includeCount4sort6cursor0J5Audit7headers17completionHandlerySS_SiSgSbSgSSSgAoNSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D14NodeCollectionVGSg_AR0T5ErrorOSgtctF">listDialogNodes(workspaceID:<wbr>pageLimit:<wbr>includeCount:<wbr>sort:<wbr>cursor:<wbr>includeAudit:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -5701,8 +5996,7 @@ This operation is limited to 1000 requests per 30 minutes. For more information,
                       <div class="abstract">
                         <p>List dialog nodes.</p>
 
-<p>List the dialog nodes for a workspace.
-This operation is limited to 2500 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+<p>List the dialog nodes for a workspace.</p>
 
                       </div>
                       <div class="declaration">
@@ -5712,6 +6006,7 @@ This operation is limited to 2500 requests per 30 minutes. For more information,
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listDialogNodes</span><span class="p">(</span>
     <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">pageLimit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">includeCount</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">cursor</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">includeAudit</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -5745,6 +6040,20 @@ This operation is limited to 2500 requests per 30 minutes. For more information,
                               <td>
                                 <div>
                                   <p>The number of records to return in each page of results.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>includeCount</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Whether to include information about the number of records that satisfy the request,
+regardless of the page limit. If this parameter is <code>true</code>, the <code>pagination</code> object in the response includes the
+<code>total</code> property.</p>
                                 </div>
                               </td>
                             </tr>
@@ -5819,9 +6128,9 @@ response.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C16createDialogNode11workspaceID06dialogE011description10conditions6parent15previousSibling6output7context8metadata8nextStep5title4type9eventName8variable7actions9digressIn0Y3Out0Y8OutSlots9userLabel20disambiguationOptOut12includeAudit7headers17completionHandlerySS_S2SSgA0_A0_A0_AA0dE6OutputVSgSDySS15IBMSwiftSDKCore4JSONOGSgA8_AA0de4NextR0VSgA0_A0_A0_A0_SayAA0dE6ActionVGSgA0_A0_A0_A0_SbSgA16_SDyS2SGSgyA4_12RestResponseVyAA0dE0VGSg_A4_9RestErrorOSgtctF"></a>
+                    <a name="/s:11AssistantV10A0C16createDialogNode11workspaceID06dialogE011description10conditions6parent15previousSibling6output7context8metadata8nextStep5title4type9eventName8variable7actions9digressIn0Y3Out0Y8OutSlots9userLabel20disambiguationOptOut12includeAudit7headers17completionHandlerySS_S2SSgA0_A0_A0_AA0dE6OutputVSgAA0dE7ContextVSgSDySS15IBMSwiftSDKCore4JSONOGSgAA0de4NextR0VSgA0_A0_A0_A0_SayAA0dE6ActionVGSgA0_A0_A0_A0_SbSgA19_SDyS2SGSgyA7_12RestResponseVyAA0dE0VGSg_A7_9RestErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/createDialogNode(workspaceID:dialogNode:description:conditions:parent:previousSibling:output:context:metadata:nextStep:title:type:eventName:variable:actions:digressIn:digressOut:digressOutSlots:userLabel:disambiguationOptOut:includeAudit:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C16createDialogNode11workspaceID06dialogE011description10conditions6parent15previousSibling6output7context8metadata8nextStep5title4type9eventName8variable7actions9digressIn0Y3Out0Y8OutSlots9userLabel20disambiguationOptOut12includeAudit7headers17completionHandlerySS_S2SSgA0_A0_A0_AA0dE6OutputVSgSDySS15IBMSwiftSDKCore4JSONOGSgA8_AA0de4NextR0VSgA0_A0_A0_A0_SayAA0dE6ActionVGSgA0_A0_A0_A0_SbSgA16_SDyS2SGSgyA4_12RestResponseVyAA0dE0VGSg_A4_9RestErrorOSgtctF">createDialogNode(workspaceID:<wbr>dialogNode:<wbr>description:<wbr>conditions:<wbr>parent:<wbr>previousSibling:<wbr>output:<wbr>context:<wbr>metadata:<wbr>nextStep:<wbr>title:<wbr>type:<wbr>eventName:<wbr>variable:<wbr>actions:<wbr>digressIn:<wbr>digressOut:<wbr>digressOutSlots:<wbr>userLabel:<wbr>disambiguationOptOut:<wbr>includeAudit:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    <a class="token" href="#/s:11AssistantV10A0C16createDialogNode11workspaceID06dialogE011description10conditions6parent15previousSibling6output7context8metadata8nextStep5title4type9eventName8variable7actions9digressIn0Y3Out0Y8OutSlots9userLabel20disambiguationOptOut12includeAudit7headers17completionHandlerySS_S2SSgA0_A0_A0_AA0dE6OutputVSgAA0dE7ContextVSgSDySS15IBMSwiftSDKCore4JSONOGSgAA0de4NextR0VSgA0_A0_A0_A0_SayAA0dE6ActionVGSgA0_A0_A0_A0_SbSgA19_SDyS2SGSgyA7_12RestResponseVyAA0dE0VGSg_A7_9RestErrorOSgtctF">createDialogNode(workspaceID:<wbr>dialogNode:<wbr>description:<wbr>conditions:<wbr>parent:<wbr>previousSibling:<wbr>output:<wbr>context:<wbr>metadata:<wbr>nextStep:<wbr>title:<wbr>type:<wbr>eventName:<wbr>variable:<wbr>actions:<wbr>digressIn:<wbr>digressOut:<wbr>digressOutSlots:<wbr>userLabel:<wbr>disambiguationOptOut:<wbr>includeAudit:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -5833,8 +6142,7 @@ response.</p>
 
 <p>Create a new dialog node.
 If you want to create multiple dialog nodes with a single API call, consider using the <strong><a href="#update-workspace">Update
-workspace</a></strong> method instead.
-This operation is limited to 500 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+workspace</a></strong> method instead.</p>
 
                       </div>
                       <div class="declaration">
@@ -5849,7 +6157,7 @@ This operation is limited to 500 requests per 30 minutes. For more information, 
     <span class="nv">parent</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">previousSibling</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">output</span><span class="p">:</span> <span class="kt"><a href="../Structs/DialogNodeOutput.html">DialogNodeOutput</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">context</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">JSON</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">context</span><span class="p">:</span> <span class="kt"><a href="../Structs/DialogNodeContext.html">DialogNodeContext</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">metadata</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">JSON</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">nextStep</span><span class="p">:</span> <span class="kt"><a href="../Structs/DialogNodeNextStep.html">DialogNodeNextStep</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">title</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -6185,8 +6493,7 @@ response.</p>
                       <div class="abstract">
                         <p>Get dialog node.</p>
 
-<p>Get information about a dialog node.
-This operation is limited to 6000 requests per 5 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+<p>Get information about a dialog node.</p>
 
                       </div>
                       <div class="declaration">
@@ -6276,9 +6583,9 @@ response.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV10A0C16updateDialogNode11workspaceID06dialogE003newdE00I11Description0I10Conditions0I6Parent0I15PreviousSibling0I6Output0I7Context0I8Metadata0I8NextStep0I5Title0I4Type0I9EventName0I8Variable0I7Actions0I9DigressIn0iZ3Out0iZ8OutSlots0I9UserLabel0I20DisambiguationOptOut12includeAudit7headers17completionHandlerySS_S2SSgA1_A1_A1_A1_AA0deO0VSgSDySS15IBMSwiftSDKCore4JSONOGSgA9_AA0derS0VSgA1_A1_A1_A1_SayAA0dE6ActionVGSgA1_A1_A1_A1_SbSgA17_SDyS2SGSgyA5_12RestResponseVyAA0dE0VGSg_A5_9RestErrorOSgtctF"></a>
+                    <a name="/s:11AssistantV10A0C16updateDialogNode11workspaceID06dialogE003newdE00I11Description0I10Conditions0I6Parent0I15PreviousSibling0I6Output0I7Context0I8Metadata0I8NextStep0I5Title0I4Type0I9EventName0I8Variable0I7Actions0I9DigressIn0iZ3Out0iZ8OutSlots0I9UserLabel0I20DisambiguationOptOut12includeAudit7headers17completionHandlerySS_S2SSgA1_A1_A1_A1_AA0deO0VSgAA0deP0VSgSDySS15IBMSwiftSDKCore4JSONOGSgAA0derS0VSgA1_A1_A1_A1_SayAA0dE6ActionVGSgA1_A1_A1_A1_SbSgA20_SDyS2SGSgyA8_12RestResponseVyAA0dE0VGSg_A8_9RestErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/updateDialogNode(workspaceID:dialogNode:newDialogNode:newDescription:newConditions:newParent:newPreviousSibling:newOutput:newContext:newMetadata:newNextStep:newTitle:newType:newEventName:newVariable:newActions:newDigressIn:newDigressOut:newDigressOutSlots:newUserLabel:newDisambiguationOptOut:includeAudit:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV10A0C16updateDialogNode11workspaceID06dialogE003newdE00I11Description0I10Conditions0I6Parent0I15PreviousSibling0I6Output0I7Context0I8Metadata0I8NextStep0I5Title0I4Type0I9EventName0I8Variable0I7Actions0I9DigressIn0iZ3Out0iZ8OutSlots0I9UserLabel0I20DisambiguationOptOut12includeAudit7headers17completionHandlerySS_S2SSgA1_A1_A1_A1_AA0deO0VSgSDySS15IBMSwiftSDKCore4JSONOGSgA9_AA0derS0VSgA1_A1_A1_A1_SayAA0dE6ActionVGSgA1_A1_A1_A1_SbSgA17_SDyS2SGSgyA5_12RestResponseVyAA0dE0VGSg_A5_9RestErrorOSgtctF">updateDialogNode(workspaceID:<wbr>dialogNode:<wbr>newDialogNode:<wbr>newDescription:<wbr>newConditions:<wbr>newParent:<wbr>newPreviousSibling:<wbr>newOutput:<wbr>newContext:<wbr>newMetadata:<wbr>newNextStep:<wbr>newTitle:<wbr>newType:<wbr>newEventName:<wbr>newVariable:<wbr>newActions:<wbr>newDigressIn:<wbr>newDigressOut:<wbr>newDigressOutSlots:<wbr>newUserLabel:<wbr>newDisambiguationOptOut:<wbr>includeAudit:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    <a class="token" href="#/s:11AssistantV10A0C16updateDialogNode11workspaceID06dialogE003newdE00I11Description0I10Conditions0I6Parent0I15PreviousSibling0I6Output0I7Context0I8Metadata0I8NextStep0I5Title0I4Type0I9EventName0I8Variable0I7Actions0I9DigressIn0iZ3Out0iZ8OutSlots0I9UserLabel0I20DisambiguationOptOut12includeAudit7headers17completionHandlerySS_S2SSgA1_A1_A1_A1_AA0deO0VSgAA0deP0VSgSDySS15IBMSwiftSDKCore4JSONOGSgAA0derS0VSgA1_A1_A1_A1_SayAA0dE6ActionVGSgA1_A1_A1_A1_SbSgA20_SDyS2SGSgyA8_12RestResponseVyAA0dE0VGSg_A8_9RestErrorOSgtctF">updateDialogNode(workspaceID:<wbr>dialogNode:<wbr>newDialogNode:<wbr>newDescription:<wbr>newConditions:<wbr>newParent:<wbr>newPreviousSibling:<wbr>newOutput:<wbr>newContext:<wbr>newMetadata:<wbr>newNextStep:<wbr>newTitle:<wbr>newType:<wbr>newEventName:<wbr>newVariable:<wbr>newActions:<wbr>newDigressIn:<wbr>newDigressOut:<wbr>newDigressOutSlots:<wbr>newUserLabel:<wbr>newDisambiguationOptOut:<wbr>includeAudit:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -6290,8 +6597,7 @@ response.</p>
 
 <p>Update an existing dialog node with new or modified data.
 If you want to update multiple dialog nodes with a single API call, consider using the <strong><a href="#update-workspace">Update
-workspace</a></strong> method instead.
-This operation is limited to 500 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+workspace</a></strong> method instead.</p>
 
                       </div>
                       <div class="declaration">
@@ -6307,7 +6613,7 @@ This operation is limited to 500 requests per 30 minutes. For more information, 
     <span class="nv">newParent</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">newPreviousSibling</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">newOutput</span><span class="p">:</span> <span class="kt"><a href="../Structs/DialogNodeOutput.html">DialogNodeOutput</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">newContext</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">JSON</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">newContext</span><span class="p">:</span> <span class="kt"><a href="../Structs/DialogNodeContext.html">DialogNodeContext</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">newMetadata</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">JSON</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">newNextStep</span><span class="p">:</span> <span class="kt"><a href="../Structs/DialogNodeNextStep.html">DialogNodeNextStep</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">newTitle</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -6656,8 +6962,7 @@ response.</p>
                       <div class="abstract">
                         <p>Delete dialog node.</p>
 
-<p>Delete a dialog node from a workspace.
-This operation is limited to 500 requests per 30 minutes. For more information, see <strong>Rate limiting</strong>.</p>
+<p>Delete a dialog node from a workspace.</p>
 
                       </div>
                       <div class="declaration">
@@ -6745,9 +7050,7 @@ This operation is limited to 500 requests per 30 minutes. For more information, 
                       <div class="abstract">
                         <p>List log events in a workspace.</p>
 
-<p>List the events from the log of a specific workspace.
-If <strong>cursor</strong> is not specified, this operation is limited to 40 requests per 30 minutes. If <strong>cursor</strong> is
-specified, the limit is 120 requests per minute. For more information, see <strong>Rate limiting</strong>.</p>
+<p>List the events from the log of a specific workspace.</p>
 
                       </div>
                       <div class="declaration">
@@ -6877,9 +7180,7 @@ more information, see the
                       <div class="abstract">
                         <p>List log events in all workspaces.</p>
 
-<p>List the events from the logs of all workspaces in the service instance.
-If <strong>cursor</strong> is not specified, this operation is limited to 40 requests per 30 minutes. If <strong>cursor</strong> is
-specified, the limit is 120 requests per minute. For more information, see <strong>Rate limiting</strong>.</p>
+<p>List the events from the logs of all workspaces in the service instance.</p>
 
                       </div>
                       <div class="declaration">
@@ -7002,8 +7303,7 @@ order, prefix the parameter value with a minus sign (<code>-</code>).</p>
 the customer ID.
 You associate a customer ID with data by passing the <code>X-Watson-Metadata</code> header with a request that passes data.
 For more information about personal data and customer IDs, see <a href="https://cloud.ibm.com/docs/assistant?topic=assistant-information-security#information-security">Information
-security</a>.
-This operation is limited to 4 requests per minute. For more information, see <strong>Rate limiting</strong>.</p>
+security</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -7069,7 +7369,7 @@ This operation is limited to 4 requests per minute. For more information, see <s
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

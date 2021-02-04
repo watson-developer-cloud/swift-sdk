@@ -8,14 +8,22 @@
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Struct/Configuration" class="dashAnchor"></a>
     <a title="Configuration Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">DiscoveryV1 3.5.0 Docs</a> (81% documented)</p>
+        <p><a href="../index.html">DiscoveryV1 4.1.0 Docs</a> (81% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -276,9 +284,6 @@
                 <a href="../Structs/Nested.html">Nested</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/NluEnrichmentCategories.html">NluEnrichmentCategories</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/NluEnrichmentConcepts.html">NluEnrichmentConcepts</a>
               </li>
               <li class="nav-group-task">
@@ -494,6 +499,7 @@
             <h1>Configuration</h1>
               <div class="declaration">
                 <div class="language">
+                  
                   <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Configuration</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                 </div>
@@ -751,9 +757,9 @@ executed in the order that they appear in the array.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV113ConfigurationV4name15configurationID7created7updated11description11conversions11enrichments14normalizations6sourceACSS_SSSg10Foundation4DateVSgAqmA11ConversionsVSgSayAA10EnrichmentVGSgSayAA22NormalizationOperationVGSgAA6SourceVSgtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(name:configurationID:created:updated:description:conversions:enrichments:normalizations:source:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV113ConfigurationV4name15configurationID7created7updated11description11conversions11enrichments14normalizations6sourceACSS_SSSg10Foundation4DateVSgAqmA11ConversionsVSgSayAA10EnrichmentVGSgSayAA22NormalizationOperationVGSgAA6SourceVSgtcfc">init(name:<wbr>configurationID:<wbr>created:<wbr>updated:<wbr>description:<wbr>conversions:<wbr>enrichments:<wbr>normalizations:<wbr>source:<wbr>)</a>
+                    <a name="/s:11DiscoveryV113ConfigurationV4name11description11conversions11enrichments14normalizations6sourceACSS_SSSgAA11ConversionsVSgSayAA10EnrichmentVGSgSayAA22NormalizationOperationVGSgAA6SourceVSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(name:description:conversions:enrichments:normalizations:source:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV113ConfigurationV4name11description11conversions11enrichments14normalizations6sourceACSS_SSSgAA11ConversionsVSgSayAA10EnrichmentVGSgSayAA22NormalizationOperationVGSgAA6SourceVSgtcfc">init(name:<wbr>description:<wbr>conversions:<wbr>enrichments:<wbr>normalizations:<wbr>source:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -770,9 +776,6 @@ executed in the order that they appear in the array.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
     <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">configurationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">created</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">updated</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">conversions</span><span class="p">:</span> <span class="kt"><a href="../Structs/Conversions.html">Conversions</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">enrichments</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Enrichment.html">Enrichment</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -795,43 +798,6 @@ executed in the order that they appear in the array.</p>
                               <td>
                                 <div>
                                   <p>The name of the configuration.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>configurationID</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The unique identifier of the configuration.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>created</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The creation date of the configuration in the format yyyy-MM-dd&rsquo;T&#39;HH:mm:ss.SSS&#39;Z&rsquo;.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>updated</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The timestamp of when the configuration was last updated in the format
-yyyy-MM-dd&rsquo;T&#39;HH:mm:ss.SSS&#39;Z&rsquo;.</p>
                                 </div>
                               </td>
                             </tr>
@@ -912,7 +878,7 @@ normalized form. Operations are executed in the order that they appear in the ar
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

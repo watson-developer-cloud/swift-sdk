@@ -8,14 +8,22 @@
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Class/NaturalLanguageUnderstanding" class="dashAnchor"></a>
     <a title="NaturalLanguageUnderstanding Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">NaturalLanguageUnderstandingV1 3.5.0 Docs</a> (86% documented)</p>
+        <p><a href="../index.html">NaturalLanguageUnderstandingV1 4.1.0 Docs</a> (85% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -41,9 +49,6 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Structs/AnalysisResults.html">AnalysisResults</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/AnalysisResultsMetadata.html">AnalysisResultsMetadata</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/AnalysisResultsUsage.html">AnalysisResultsUsage</a>
@@ -106,6 +111,9 @@
                 <a href="../Structs/Features.html">Features</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/FeaturesResultsMetadata.html">FeaturesResultsMetadata</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/Feed.html">Feed</a>
               </li>
               <li class="nav-group-task">
@@ -118,10 +126,10 @@
                 <a href="../Structs/ListModelsResults.html">ListModelsResults</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/MetadataOptions.html">MetadataOptions</a>
+                <a href="../Structs/Model.html">Model</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/Model.html">Model</a>
+                <a href="../Structs/Model/Status.html">– Status</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/RelationArgument.html">RelationArgument</a>
@@ -234,6 +242,7 @@
             <h1>NaturalLanguageUnderstanding</h1>
               <div class="declaration">
                 <div class="language">
+                  
                   <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">NaturalLanguageUnderstanding</span></code></pre>
 
                 </div>
@@ -270,6 +279,61 @@ with Watson Knowledge Studio to detect custom entities and relations in Natural 
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV10abC0C7versionSSvp"></a>
+                    <a name="//apple_ref/swift/Property/version" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV10abC0C7versionSSvp">version</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The current version is
+<code>2020-08-01</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">version</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV10abC0C18defaultServiceNameSSvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/defaultServiceName" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV10abC0C18defaultServiceNameSSvpZ">defaultServiceName</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Service identifiers</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">defaultServiceName</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -334,8 +398,8 @@ with Watson Knowledge Studio to detect custom entities and relations in Natural 
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/init(version:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">init(version:<wbr>)</a>
+                    <a name="//apple_ref/swift/Method/init(version:authenticator:serviceName:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">init(version:<wbr>authenticator:<wbr>serviceName:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -345,12 +409,18 @@ with Watson Knowledge Studio to detect custom entities and relations in Natural 
                       <div class="abstract">
                         <p>Create a <code>NaturalLanguageUnderstanding</code> object.</p>
 
-<p>This initializer will retrieve credentials from the environment or a local credentials file.
+<p>If an authenticator is not supplied, the initializer will retrieve credentials from the environment or
+a local credentials file and construct an appropriate authenticator using these credentials.
 The credentials file can be downloaded from your service instance on IBM Cloud as ibm-credentials.env.
 Make sure to add the credentials file to your project so that it can be loaded at runtime.</p>
 
-<p>If credentials are not available in the environment or a local credentials file, initialization will fail.
+<p>If an authenticator is not supplied and credentials are not available in the environment or a local
+credentials file, initialization will fail by throwing an exception.
 In that case, try another initializer that directly passes in the credentials.</p>
+
+<ul>
+<li>serviceName: String = defaultServiceName</li>
+</ul>
 
                       </div>
                     </section>
@@ -392,8 +462,8 @@ In that case, try another initializer that directly passes in the credentials.</
                               </td>
                               <td>
                                 <div>
-                                  <p>The release date of the version of the API to use. Specify the date
-in &ldquo;YYYY-MM-DD&rdquo; format.</p>
+                                  <p>Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The
+current version is <code>2020-08-01</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -470,7 +540,8 @@ in &ldquo;YYYY-MM-DD&rdquo; format.</p>
 <li>Relations</li>
 <li>Semantic roles</li>
 <li>Sentiment</li>
-<li><p>Syntax (Experimental).
+<li>Syntax</li>
+<li><p>Summarization (Experimental)
 If a language for the input text is not specified with the <code>language</code> parameter, the service <a href="https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-detectable-languages">automatically detects
 the
 language</a>.</p></li>
@@ -557,10 +628,9 @@ language</a>.</p></li>
                               </td>
                               <td>
                                 <div>
-                                  <p>Set this to <code>false</code> to disable webpage cleaning. To learn more about webpage cleaning, see the
-<a href="https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-analyzing-webpages">Analyzing
-webpages</a>
-documentation.</p>
+                                  <p>Set this to <code>false</code> to disable webpage cleaning. For more information about webpage cleaning,
+see <a href="https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-analyzing-webpages">Analyzing
+webpages</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -612,9 +682,9 @@ is analyzed. To analyze only the results of the XPath query, set the <code>clean
                               <td>
                                 <div>
                                   <p>ISO 639-1 code that specifies the language of your text. This overrides automatic language
-detection. Language support differs depending on the features you include in your analysis. See <a href="https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-language-support">Language
-support</a>
-for more information.</p>
+detection. Language support differs depending on the features you include in your analysis. For more information,
+see <a href="https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-language-support">Language
+support</a>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -805,7 +875,7 @@ that are deployed to your Natural Language Understanding service.</p>
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

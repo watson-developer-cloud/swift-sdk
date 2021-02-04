@@ -8,14 +8,22 @@
     <script src="../../js/jquery.min.js" defer></script>
     <script src="../../js/jazzy.js" defer></script>
     
+    <script src="../../js/lunr.min.js" defer></script>
+    <script src="../../js/typeahead.jquery.js" defer></script>
+    <script src="../../js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Enum/Granularity" class="dashAnchor"></a>
     <a title="Granularity Enumeration Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../../index.html">AssistantV1 3.5.0 Docs</a> (81% documented)</p>
+        <p><a href="../../index.html">AssistantV1 4.1.0 Docs</a> (82% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="../../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -37,8 +45,31 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a href="../../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Enums/DialogNodeOutputGeneric.html">DialogNodeOutputGeneric</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Enums/RuntimeResponseGeneric.html">RuntimeResponseGeneric</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a href="../../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../../Structs/AgentAvailabilityMessage.html">AgentAvailabilityMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/BulkClassifyOutput.html">BulkClassifyOutput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/BulkClassifyResponse.html">BulkClassifyResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/BulkClassifyUtterance.html">BulkClassifyUtterance</a>
+              </li>
               <li class="nav-group-task">
                 <a href="../../Structs/CaptureGroup.html">CaptureGroup</a>
               </li>
@@ -91,6 +122,9 @@
                 <a href="../../Structs/DialogNodeCollection.html">DialogNodeCollection</a>
               </li>
               <li class="nav-group-task">
+                <a href="../../Structs/DialogNodeContext.html">DialogNodeContext</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../../Structs/DialogNodeNextStep.html">DialogNodeNextStep</a>
               </li>
               <li class="nav-group-task">
@@ -103,19 +137,52 @@
                 <a href="../../Structs/DialogNodeOutput.html">DialogNodeOutput</a>
               </li>
               <li class="nav-group-task">
-                <a href="../../Structs/DialogNodeOutputGeneric.html">DialogNodeOutputGeneric</a>
+                <a href="../../Structs/DialogNodeOutputConnectToAgentTransferInfo.html">DialogNodeOutputConnectToAgentTransferInfo</a>
               </li>
               <li class="nav-group-task">
-                <a href="../../Structs/DialogNodeOutputGeneric/ResponseType.html">– ResponseType</a>
+                <a href="../../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeConnectToAgent.html">DialogNodeOutputGenericDialogNodeOutputResponseTypeConnectToAgent</a>
               </li>
               <li class="nav-group-task">
-                <a href="../../Structs/DialogNodeOutputGeneric/SelectionPolicy.html">– SelectionPolicy</a>
+                <a href="../../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeConnectToAgent/ResponseType.html">– ResponseType</a>
               </li>
               <li class="nav-group-task">
-                <a href="../../Structs/DialogNodeOutputGeneric/Preference.html">– Preference</a>
+                <a href="../../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeImage.html">DialogNodeOutputGenericDialogNodeOutputResponseTypeImage</a>
               </li>
               <li class="nav-group-task">
-                <a href="../../Structs/DialogNodeOutputGeneric/QueryType.html">– QueryType</a>
+                <a href="../../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeImage/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeOption.html">DialogNodeOutputGenericDialogNodeOutputResponseTypeOption</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeOption/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeOption/Preference.html">– Preference</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypePause.html">DialogNodeOutputGenericDialogNodeOutputResponseTypePause</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypePause/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill.html">DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill/QueryType.html">– QueryType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeText.html">DialogNodeOutputGenericDialogNodeOutputResponseTypeText</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeText/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeText/SelectionPolicy.html">– SelectionPolicy</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Structs/DialogNodeOutputModifiers.html">DialogNodeOutputModifiers</a>
@@ -134,18 +201,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../../Structs/DialogSuggestion.html">DialogSuggestion</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../../Structs/DialogSuggestionOutput.html">DialogSuggestionOutput</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../../Structs/DialogSuggestionResponseGeneric.html">DialogSuggestionResponseGeneric</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../../Structs/DialogSuggestionResponseGeneric/ResponseType.html">– ResponseType</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../../Structs/DialogSuggestionResponseGeneric/Preference.html">– Preference</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Structs/DialogSuggestionValue.html">DialogSuggestionValue</a>
@@ -232,22 +287,49 @@
                 <a href="../../Structs/RuntimeIntent.html">RuntimeIntent</a>
               </li>
               <li class="nav-group-task">
-                <a href="../../Structs/RuntimeResponseGeneric.html">RuntimeResponseGeneric</a>
+                <a href="../../Structs/RuntimeResponseGenericRuntimeResponseTypeConnectToAgent.html">RuntimeResponseGenericRuntimeResponseTypeConnectToAgent</a>
               </li>
               <li class="nav-group-task">
-                <a href="../../Structs/RuntimeResponseGeneric/ResponseType.html">– ResponseType</a>
+                <a href="../../Structs/RuntimeResponseGenericRuntimeResponseTypeConnectToAgent/ResponseType.html">– ResponseType</a>
               </li>
               <li class="nav-group-task">
-                <a href="../../Structs/RuntimeResponseGeneric/Preference.html">– Preference</a>
+                <a href="../../Structs/RuntimeResponseGenericRuntimeResponseTypeImage.html">RuntimeResponseGenericRuntimeResponseTypeImage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/RuntimeResponseGenericRuntimeResponseTypeImage/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/RuntimeResponseGenericRuntimeResponseTypeOption.html">RuntimeResponseGenericRuntimeResponseTypeOption</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/RuntimeResponseGenericRuntimeResponseTypeOption/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/RuntimeResponseGenericRuntimeResponseTypeOption/Preference.html">– Preference</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/RuntimeResponseGenericRuntimeResponseTypePause.html">RuntimeResponseGenericRuntimeResponseTypePause</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/RuntimeResponseGenericRuntimeResponseTypePause/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/RuntimeResponseGenericRuntimeResponseTypeSuggestion.html">RuntimeResponseGenericRuntimeResponseTypeSuggestion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/RuntimeResponseGenericRuntimeResponseTypeSuggestion/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/RuntimeResponseGenericRuntimeResponseTypeText.html">RuntimeResponseGenericRuntimeResponseTypeText</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../../Structs/RuntimeResponseGenericRuntimeResponseTypeText/ResponseType.html">– ResponseType</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Structs/Synonym.html">Synonym</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Structs/SynonymCollection.html">SynonymCollection</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../../Structs/SystemResponse.html">SystemResponse</a>
               </li>
               <li class="nav-group-task">
                 <a href="../../Structs/Value.html">Value</a>
@@ -336,6 +418,7 @@
             <h1>Granularity</h1>
               <div class="declaration">
                 <div class="language">
+                  
                   <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Granularity</span> <span class="p">:</span> <span class="kt">String</span></code></pre>
 
                 </div>
@@ -649,7 +732,7 @@
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

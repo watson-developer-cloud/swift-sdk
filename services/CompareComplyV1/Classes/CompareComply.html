@@ -8,14 +8,22 @@
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Class/CompareComply" class="dashAnchor"></a>
     <a title="CompareComply Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">CompareComplyV1 3.5.0 Docs</a> (77% documented)</p>
+        <p><a href="../index.html">CompareComplyV1 4.1.0 Docs</a> (77% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -68,6 +76,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Category/Label.html">– Label</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Category/Modification.html">– Modification</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/CategoryComparison.html">CategoryComparison</a>
@@ -190,9 +201,6 @@
                 <a href="../Structs/OriginalLabelsOut.html">OriginalLabelsOut</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/OriginalLabelsOut/Modification.html">– Modification</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/Pagination.html">Pagination</a>
               </li>
               <li class="nav-group-task">
@@ -244,6 +252,9 @@
                 <a href="../Structs/TypeLabel.html">TypeLabel</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/TypeLabel/Modification.html">– Modification</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/TypeLabelComparison.html">TypeLabelComparison</a>
               </li>
               <li class="nav-group-task">
@@ -254,9 +265,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/UpdatedLabelsOut.html">UpdatedLabelsOut</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/UpdatedLabelsOut/Modification.html">– Modification</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Value.html">Value</a>
@@ -306,6 +314,7 @@
             <h1>CompareComply</h1>
               <div class="declaration">
                 <div class="language">
+                  
                   <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">CompareComply</span></code></pre>
 
                 </div>
@@ -338,6 +347,61 @@ documents.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV10aB0C7versionSSvp"></a>
+                    <a name="//apple_ref/swift/Property/version" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV10aB0C7versionSSvp">version</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Release date of the version of the API you want to use. Specify dates in YYYY-MM-DD format. The current version
+is <code>2018-10-15</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">version</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15CompareComplyV10aB0C18defaultServiceNameSSvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/defaultServiceName" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV10aB0C18defaultServiceNameSSvpZ">defaultServiceName</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Service identifiers</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">defaultServiceName</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -402,8 +466,8 @@ documents.</p>
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/init(version:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">init(version:<wbr>)</a>
+                    <a name="//apple_ref/swift/Method/init(version:authenticator:serviceName:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">init(version:<wbr>authenticator:<wbr>serviceName:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -413,12 +477,18 @@ documents.</p>
                       <div class="abstract">
                         <p>Create a <code>CompareComply</code> object.</p>
 
-<p>This initializer will retrieve credentials from the environment or a local credentials file.
+<p>If an authenticator is not supplied, the initializer will retrieve credentials from the environment or
+a local credentials file and construct an appropriate authenticator using these credentials.
 The credentials file can be downloaded from your service instance on IBM Cloud as ibm-credentials.env.
 Make sure to add the credentials file to your project so that it can be loaded at runtime.</p>
 
-<p>If credentials are not available in the environment or a local credentials file, initialization will fail.
+<p>If an authenticator is not supplied and credentials are not available in the environment or a local
+credentials file, initialization will fail by throwing an exception.
 In that case, try another initializer that directly passes in the credentials.</p>
+
+<ul>
+<li>serviceName: String = defaultServiceName</li>
+</ul>
 
                       </div>
                     </section>
@@ -460,8 +530,8 @@ In that case, try another initializer that directly passes in the credentials.</
                               </td>
                               <td>
                                 <div>
-                                  <p>The release date of the version of the API to use. Specify the date
-in &ldquo;YYYY-MM-DD&rdquo; format.</p>
+                                  <p>Release date of the version of the API you want to use. Specify dates in YYYY-MM-DD format.
+The current version is <code>2018-10-15</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1081,9 +1151,9 @@ incorporated at a later date. Instead, submitted feedback is used to suggest fut
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:15CompareComplyV10aB0C12listFeedback12feedbackType6before5after13documentTitle7modelID0L7Version15categoryRemoved0O5Added0O10NotChanged04typeP00tQ00trS09pageLimit6cursor4sort12includeTotal7headers17completionHandlerySSSg_10Foundation4DateVSgA_A9WSiSgA2WSbSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0E4ListVGSg_A4_9RestErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/listFeedback(feedbackType:before:after:documentTitle:modelID:modelVersion:categoryRemoved:categoryAdded:categoryNotChanged:typeRemoved:typeAdded:typeNotChanged:pageLimit:cursor:sort:includeTotal:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:15CompareComplyV10aB0C12listFeedback12feedbackType6before5after13documentTitle7modelID0L7Version15categoryRemoved0O5Added0O10NotChanged04typeP00tQ00trS09pageLimit6cursor4sort12includeTotal7headers17completionHandlerySSSg_10Foundation4DateVSgA_A9WSiSgA2WSbSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0E4ListVGSg_A4_9RestErrorOSgtctF">listFeedback(feedbackType:<wbr>before:<wbr>after:<wbr>documentTitle:<wbr>modelID:<wbr>modelVersion:<wbr>categoryRemoved:<wbr>categoryAdded:<wbr>categoryNotChanged:<wbr>typeRemoved:<wbr>typeAdded:<wbr>typeNotChanged:<wbr>pageLimit:<wbr>cursor:<wbr>sort:<wbr>includeTotal:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    <a name="/s:15CompareComplyV10aB0C12listFeedback12feedbackType13documentTitle7modelID0J7Version15categoryRemoved0M5Added0M10NotChanged04typeN00rO00rpQ09pageLimit6cursor4sort12includeTotal7headers17completionHandlerySSSg_A9USiSgA2USbSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0E4ListVGSg_AZ9RestErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/listFeedback(feedbackType:documentTitle:modelID:modelVersion:categoryRemoved:categoryAdded:categoryNotChanged:typeRemoved:typeAdded:typeNotChanged:pageLimit:cursor:sort:includeTotal:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15CompareComplyV10aB0C12listFeedback12feedbackType13documentTitle7modelID0J7Version15categoryRemoved0M5Added0M10NotChanged04typeN00rO00rpQ09pageLimit6cursor4sort12includeTotal7headers17completionHandlerySSSg_A9USiSgA2USbSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0E4ListVGSg_AZ9RestErrorOSgtctF">listFeedback(feedbackType:<wbr>documentTitle:<wbr>modelID:<wbr>modelVersion:<wbr>categoryRemoved:<wbr>categoryAdded:<wbr>categoryNotChanged:<wbr>typeRemoved:<wbr>typeAdded:<wbr>typeNotChanged:<wbr>pageLimit:<wbr>cursor:<wbr>sort:<wbr>includeTotal:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1102,8 +1172,6 @@ incorporated at a later date. Instead, submitted feedback is used to suggest fut
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listFeedback</span><span class="p">(</span>
     <span class="nv">feedbackType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">before</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">after</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">documentTitle</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">modelVersion</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -1136,32 +1204,6 @@ incorporated at a later date. Instead, submitted feedback is used to suggest fut
                                 <div>
                                   <p>An optional string that filters the output to include only feedback with the specified
 feedback type. The only permitted value is <code>element_classification</code>.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>before</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An optional string in the format <code>YYYY-MM-DD</code> that filters the output to include only
-feedback that was added before the specified date.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>after</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>An optional string in the format <code>YYYY-MM-DD</code> that filters the output to include only feedback
-that was added after the specified date.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1976,7 +2018,7 @@ These defaults apply to the standalone methods as well as to the methods&rsquo; 
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

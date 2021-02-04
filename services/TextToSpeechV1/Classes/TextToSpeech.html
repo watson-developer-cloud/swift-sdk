@@ -8,14 +8,22 @@
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Class/TextToSpeech" class="dashAnchor"></a>
     <a title="TextToSpeech Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">TextToSpeechV1 3.5.0 Docs</a> (57% documented)</p>
+        <p><a href="../index.html">TextToSpeechV1 4.1.0 Docs</a> (57% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -40,6 +48,12 @@
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Structs/CustomModel.html">CustomModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CustomModels.html">CustomModels</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/Pronunciation.html">Pronunciation</a>
               </li>
               <li class="nav-group-task">
@@ -53,12 +67,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Voice.html">Voice</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/VoiceModel.html">VoiceModel</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/VoiceModels.html">VoiceModels</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Voices.html">Voices</a>
@@ -117,13 +125,14 @@
             <h1>TextToSpeech</h1>
               <div class="declaration">
                 <div class="language">
+                  
                   <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">TextToSpeech</span></code></pre>
 
                 </div>
               </div>
-            <p>The IBM&reg; Text to Speech service provides APIs that use IBM&rsquo;s speech-synthesis capabilities to synthesize text into
-natural-sounding speech in a variety of languages, dialects, and voices. The service supports at least one male or
-female voice, sometimes both, for each language. The audio is streamed back to the client with minimal delay.
+            <p>The IBM Watson&trade; Text to Speech service provides APIs that use IBM&rsquo;s speech-synthesis capabilities to synthesize
+text into natural-sounding speech in a variety of languages, dialects, and voices. The service supports at least one
+male or female voice, sometimes both, for each language. The audio is streamed back to the client with minimal delay.
 For speech synthesis, the service supports a synchronous HTTP Representational State Transfer (REST) interface and a
 WebSocket interface. Both interfaces support plain text and SSML input. SSML is an XML-based markup language that
 provides text annotation for speech-synthesis applications. The WebSocket interface also supports the SSML
@@ -132,7 +141,7 @@ The service offers a customization interface that you can use to define sounds-l
 A sounds-like translation consists of one or more words that, when combined, sound like the word. A phonetic
 translation is based on the SSML phoneme format for representing a word. You can specify a phonetic translation in
 standard International Phonetic Alphabet (IPA) representation or in the proprietary IBM Symbolic Phonetic
-Representation (SPR). The Arabic, Chinese, Dutch, and Korean languages support only IPA.</p>
+Representation (SPR). The Arabic, Chinese, Dutch, Australian English, and Korean languages support only IPA.</p>
 
           </section>
           <section class="section task-group-section">
@@ -159,6 +168,33 @@ Representation (SPR). The Arabic, Chinese, Dutch, and Korean languages support o
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14TextToSpeechV10abC0C18defaultServiceNameSSvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/defaultServiceName" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C18defaultServiceNameSSvpZ">defaultServiceName</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Service identifiers</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">defaultServiceName</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -223,8 +259,8 @@ Representation (SPR). The Arabic, Chinese, Dutch, and Korean languages support o
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/init()" class="dashAnchor"></a>
-                    <a class="token" href="#/">init()</a>
+                    <a name="//apple_ref/swift/Method/init(authenticator:serviceName:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">init(authenticator:<wbr>serviceName:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -234,12 +270,18 @@ Representation (SPR). The Arabic, Chinese, Dutch, and Korean languages support o
                       <div class="abstract">
                         <p>Create a <code>TextToSpeech</code> object.</p>
 
-<p>This initializer will retrieve credentials from the environment or a local credentials file.
+<p>If an authenticator is not supplied, the initializer will retrieve credentials from the environment or
+a local credentials file and construct an appropriate authenticator using these credentials.
 The credentials file can be downloaded from your service instance on IBM Cloud as ibm-credentials.env.
 Make sure to add the credentials file to your project so that it can be loaded at runtime.</p>
 
-<p>If credentials are not available in the environment or a local credentials file, initialization will fail.
+<p>If an authenticator is not supplied and credentials are not available in the environment or a local
+credentials file, initialization will fail by throwing an exception.
 In that case, try another initializer that directly passes in the credentials.</p>
+
+<ul>
+<li>serviceName: String = defaultServiceName</li>
+</ul>
 
                       </div>
                     </section>
@@ -335,7 +377,8 @@ In that case, try another initializer that directly passes in the credentials.</
                         <p>List voices.</p>
 
 <p>Lists all voices available for use with the service. The information includes the name, language, gender, and other
-details about the voice. To see information about a specific voice, use the <strong>Get a voice</strong> method.
+details about the voice. The ordering of the list of voices can change from call to call; do not rely on an
+alphabetized or static list of voices. To see information about a specific voice, use the <strong>Get a voice</strong> method.
 <strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-voices#listVoices">Listing all available
 voices</a>.</p>
 
@@ -400,10 +443,29 @@ voices</a>.</p>
                         <p>Get a voice.</p>
 
 <p>Gets information about the specified voice. The information includes the name, language, gender, and other details
-about the voice. Specify a customization ID to obtain information for a custom voice model that is defined for the
+about the voice. Specify a customization ID to obtain information for a custom model that is defined for the
 language of the specified voice. To list information about all available voices, use the <strong>List voices</strong> method.
 <strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-voices#listVoice">Listing a specific
 voice</a>.</p>
+<h3 id='important-voice-updates' class='heading'>Important voice updates</h3>
+
+<p>The service&rsquo;s voices underwent significant change on 2 December 2020.</p>
+
+<ul>
+<li>The Arabic, Chinese, Dutch, Australian English, and Korean voices are now neural instead of concatenative.</li>
+<li>The <code>ar-AR_OmarVoice</code> voice is deprecated. Use <code>ar-MS_OmarVoice</code> voice instead.</li>
+<li>The <code>ar-AR</code> language identifier cannot be used to create a custom model. Use the <code>ar-MS</code> identifier instead.</li>
+<li>The standard concatenative voices for the following languages are now deprecated: Brazilian Portuguese, United
+Kingdom and United States English, French, German, Italian, Japanese, and Spanish (all dialects).</li>
+<li>The features expressive SSML, voice transformation SSML, and use of the <code>volume</code> attribute of the <code>&lt;prosody&gt;</code>
+element are deprecated and are not supported with any of the service&rsquo;s neural voices.</li>
+<li><p>All of the service&rsquo;s voices are now customizable and generally available (GA) for production use.
+The deprecated voices and features will continue to function for at least one year but might be removed at a future
+date. You are encouraged to migrate to the equivalent neural voices at your earliest convenience. For more
+information about all voice updates, see the <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-release-notes#December2020">2 December 2020 service
+update</a> in the release
+notes.</p></li>
+</ul>
 
                       </div>
                       <div class="declaration">
@@ -430,7 +492,8 @@ voice</a>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The voice for which information is to be returned.</p>
+                                  <p>The voice for which information is to be returned. For more information about specifying a
+voice, see <strong>Important voice updates</strong> in the method description.</p>
                                 </div>
                               </td>
                             </tr>
@@ -442,7 +505,7 @@ voice</a>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The customization ID (GUID) of a custom voice model for which information is to be
+                                  <p>The customization ID (GUID) of a custom model for which information is to be
 returned. You must make the request with credentials for the instance of the service that owns the custom model.
 Omit the parameter to see information about the specified voice with no customization.</p>
                                 </div>
@@ -531,10 +594,25 @@ service returns an error. The default sampling rate is 48,000 Hz.</li>
 <li><code>audio/webm</code> - The service returns the audio in the <code>opus</code> codec. The service returns audio with a sampling rate
 of 48,000 Hz.</li>
 <li><code>audio/webm;codecs=opus</code> - The service returns audio with a sampling rate of 48,000 Hz.</li>
-<li><p><code>audio/webm;codecs=vorbis</code> - You can optionally specify the <code>rate</code> of the audio. The default sampling rate is
+<li><code>audio/webm;codecs=vorbis</code> - You can optionally specify the <code>rate</code> of the audio. The default sampling rate is
 22,050 Hz.
 For more information about specifying an audio format, including additional details about some of the formats, see
-<a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-audioFormats#audioFormats">Audio formats</a>.</p>
+<a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-audioFormats#audioFormats">Audio formats</a>.
+### Important voice updates
+The service&rsquo;s voices underwent significant change on 2 December 2020.</li>
+<li>The Arabic, Chinese, Dutch, Australian English, and Korean voices are now neural instead of concatenative.</li>
+<li>The <code>ar-AR_OmarVoice</code> voice is deprecated. Use <code>ar-MS_OmarVoice</code> voice instead.</li>
+<li>The <code>ar-AR</code> language identifier cannot be used to create a custom model. Use the <code>ar-MS</code> identifier instead.</li>
+<li>The standard concatenative voices for the following languages are now deprecated: Brazilian Portuguese, United
+Kingdom and United States English, French, German, Italian, Japanese, and Spanish (all dialects).</li>
+<li>The features expressive SSML, voice transformation SSML, and use of the <code>volume</code> attribute of the <code>&lt;prosody&gt;</code>
+element are deprecated and are not supported with any of the service&rsquo;s neural voices.</li>
+<li><p>All of the service&rsquo;s voices are now customizable and generally available (GA) for production use.
+The deprecated voices and features will continue to function for at least one year but might be removed at a future
+date. You are encouraged to migrate to the equivalent neural voices at your earliest convenience. For more
+information about all voice updates, see the <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-release-notes#December2020">2 December 2020 service
+update</a> in the release
+notes.</p>
 <h3 id='warning-messages' class='heading'>Warning messages</h3>
 
 <p>If a request includes invalid query parameters, the service returns a <code>Warnings</code> response header that provides
@@ -596,7 +674,8 @@ list of the form <code>&quot;{invalid_arg_1}, {invalid_arg_2}.&quot;</code> The 
                               </td>
                               <td>
                                 <div>
-                                  <p>The voice to use for synthesis.</p>
+                                  <p>The voice to use for synthesis. For more information about specifying a voice, see <strong>Important
+voice updates</strong> in the method description.</p>
                                 </div>
                               </td>
                             </tr>
@@ -608,10 +687,10 @@ list of the form <code>&quot;{invalid_arg_1}, {invalid_arg_2}.&quot;</code> The 
                               </td>
                               <td>
                                 <div>
-                                  <p>The customization ID (GUID) of a custom voice model to use for the synthesis. If a
-custom voice model is specified, it works only if it matches the language of the indicated voice. You must make
-the request with credentials for the instance of the service that owns the custom model. Omit the parameter to
-use the specified voice with no customization.</p>
+                                  <p>The customization ID (GUID) of a custom model to use for the synthesis. If a custom
+model is specified, it works only if it matches the language of the indicated voice. You must make the request
+with credentials for the instance of the service that owns the custom model. Omit the parameter to use the
+specified voice with no customization.</p>
                                 </div>
                               </td>
                             </tr>
@@ -662,10 +741,28 @@ use the specified voice with no customization.</p>
 
 <p>Gets the phonetic pronunciation for the specified word. You can request the pronunciation for a specific format.
 You can also request the pronunciation for a specific voice to see the default translation for the language of that
-voice or for a specific custom voice model to see the translation for that voice model.
-<strong>Note:</strong> This method is currently a beta release.
+voice or for a specific custom model to see the translation for that model.
 <strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customWords#cuWordsQueryLanguage">Querying a word from a
 language</a>.</p>
+<h3 id='important-voice-updates' class='heading'>Important voice updates</h3>
+
+<p>The service&rsquo;s voices underwent significant change on 2 December 2020.</p>
+
+<ul>
+<li>The Arabic, Chinese, Dutch, Australian English, and Korean voices are now neural instead of concatenative.</li>
+<li>The <code>ar-AR_OmarVoice</code> voice is deprecated. Use <code>ar-MS_OmarVoice</code> voice instead.</li>
+<li>The <code>ar-AR</code> language identifier cannot be used to create a custom model. Use the <code>ar-MS</code> identifier instead.</li>
+<li>The standard concatenative voices for the following languages are now deprecated: Brazilian Portuguese, United
+Kingdom and United States English, French, German, Italian, Japanese, and Spanish (all dialects).</li>
+<li>The features expressive SSML, voice transformation SSML, and use of the <code>volume</code> attribute of the <code>&lt;prosody&gt;</code>
+element are deprecated and are not supported with any of the service&rsquo;s neural voices.</li>
+<li><p>All of the service&rsquo;s voices are now customizable and generally available (GA) for production use.
+The deprecated voices and features will continue to function for at least one year but might be removed at a future
+date. You are encouraged to migrate to the equivalent neural voices at your earliest convenience. For more
+information about all voice updates, see the <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-release-notes#December2020">2 December 2020 service
+update</a> in the release
+notes.</p></li>
+</ul>
 
                       </div>
                       <div class="declaration">
@@ -707,7 +804,8 @@ language</a>.</p>
                               <td>
                                 <div>
                                   <p>A voice that specifies the language in which the pronunciation is to be returned. All voices
-for the same language (for example, <code>en-US</code>) return the same translation.</p>
+for the same language (for example, <code>en-US</code>) return the same translation. For more information about specifying a
+voice, see <strong>Important voice updates</strong> in the method description.</p>
                                 </div>
                               </td>
                             </tr>
@@ -719,8 +817,9 @@ for the same language (for example, <code>en-US</code>) return the same translat
                               </td>
                               <td>
                                 <div>
-                                  <p>The phoneme format in which to return the pronunciation. The Arabic, Chinese, Dutch, and
-Korean languages support only IPA. Omit the parameter to obtain the pronunciation in the default format.</p>
+                                  <p>The phoneme format in which to return the pronunciation. The Arabic, Chinese, Dutch,
+Australian English, and Korean languages support only IPA. Omit the parameter to obtain the pronunciation in the
+default format.</p>
                                 </div>
                               </td>
                             </tr>
@@ -732,11 +831,11 @@ Korean languages support only IPA. Omit the parameter to obtain the pronunciatio
                               </td>
                               <td>
                                 <div>
-                                  <p>The customization ID (GUID) of a custom voice model for which the pronunciation is
-to be returned. The language of a specified custom model must match the language of the specified voice. If the
-word is not defined in the specified custom model, the service returns the default translation for the custom
-model&rsquo;s language. You must make the request with credentials for the instance of the service that owns the custom
-model. Omit the parameter to see the translation for the specified voice with no customization.</p>
+                                  <p>The customization ID (GUID) of a custom model for which the pronunciation is to be
+returned. The language of a specified custom model must match the language of the specified voice. If the word is
+not defined in the specified custom model, the service returns the default translation for the custom model&rsquo;s
+language. You must make the request with credentials for the instance of the service that owns the custom model.
+Omit the parameter to see the translation for the specified voice with no customization.</p>
                                 </div>
                               </td>
                             </tr>
@@ -773,9 +872,9 @@ model. Omit the parameter to see the translation for the specified voice with no
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C16createVoiceModel4name8language11description7headers17completionHandlerySS_SSSgAJSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AM0P5ErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/createVoiceModel(name:language:description:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C16createVoiceModel4name8language11description7headers17completionHandlerySS_SSSgAJSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AM0P5ErrorOSgtctF">createVoiceModel(name:<wbr>language:<wbr>description:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    <a name="/s:14TextToSpeechV10abC0C17createCustomModel4name8language11description7headers17completionHandlerySS_SSSgAJSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AM0P5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/createCustomModel(name:language:description:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C17createCustomModel4name8language11description7headers17completionHandlerySS_SSSgAJSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AM0P5ErrorOSgtctF">createCustomModel(name:<wbr>language:<wbr>description:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -785,24 +884,42 @@ model. Omit the parameter to see the translation for the specified voice with no
                       <div class="abstract">
                         <p>Create a custom model.</p>
 
-<p>Creates a new empty custom voice model. You must specify a name for the new custom model. You can optionally
-specify the language and a description for the new model. The model is owned by the instance of the service whose
-credentials are used to create it.
-<strong>Note:</strong> This method is currently a beta release.
+<p>Creates a new empty custom model. You must specify a name for the new custom model. You can optionally specify the
+language and a description for the new model. The model is owned by the instance of the service whose credentials
+are used to create it.
 <strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customModels#cuModelsCreate">Creating a custom
 model</a>.</p>
+<h3 id='important-voice-updates' class='heading'>Important voice updates</h3>
+
+<p>The service&rsquo;s voices underwent significant change on 2 December 2020.</p>
+
+<ul>
+<li>The Arabic, Chinese, Dutch, Australian English, and Korean voices are now neural instead of concatenative.</li>
+<li>The <code>ar-AR_OmarVoice</code> voice is deprecated. Use <code>ar-MS_OmarVoice</code> voice instead.</li>
+<li>The <code>ar-AR</code> language identifier cannot be used to create a custom model. Use the <code>ar-MS</code> identifier instead.</li>
+<li>The standard concatenative voices for the following languages are now deprecated: Brazilian Portuguese, United
+Kingdom and United States English, French, German, Italian, Japanese, and Spanish (all dialects).</li>
+<li>The features expressive SSML, voice transformation SSML, and use of the <code>volume</code> attribute of the <code>&lt;prosody&gt;</code>
+element are deprecated and are not supported with any of the service&rsquo;s neural voices.</li>
+<li><p>All of the service&rsquo;s voices are now customizable and generally available (GA) for production use.
+The deprecated voices and features will continue to function for at least one year but might be removed at a future
+date. You are encouraged to migrate to the equivalent neural voices at your earliest convenience. For more
+information about all voice updates, see the <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-release-notes#December2020">2 December 2020 service
+update</a> in the release
+notes.</p></li>
+</ul>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createVoiceModel</span><span class="p">(</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createCustomModel</span><span class="p">(</span>
     <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/VoiceModel.html">VoiceModel</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/CustomModel.html">CustomModel</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -818,7 +935,7 @@ model</a>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The name of the new custom voice model.</p>
+                                  <p>The name of the new custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -830,9 +947,10 @@ model</a>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The language of the new custom voice model. You create a custom voice model for a specific
-language, not for a specific voice. A custom model can be used with any voice, standard or neural, for its
-specified language. Omit the parameter to use the the default language, <code>en-US</code>.</p>
+                                  <p>The language of the new custom model. You create a custom model for a specific language,
+not for a specific voice. A custom model can be used with any voice for its specified language. Omit the
+parameter to use the the default language, <code>en-US</code>. <strong>Note:</strong> The <code>ar-AR</code> language identifier cannot be used to
+create a custom model. Use the <code>ar-MS</code> identifier instead.</p>
                                 </div>
                               </td>
                             </tr>
@@ -844,7 +962,7 @@ specified language. Omit the parameter to use the the default language, <code>en
                               </td>
                               <td>
                                 <div>
-                                  <p>A description of the new custom voice model. Specifying a description is recommended.</p>
+                                  <p>A description of the new custom model. Specifying a description is recommended.</p>
                                 </div>
                               </td>
                             </tr>
@@ -881,9 +999,9 @@ specified language. Omit the parameter to use the the default language, <code>en
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C15listVoiceModels8language7headers17completionHandlerySSSg_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AK0N5ErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/listVoiceModels(language:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C15listVoiceModels8language7headers17completionHandlerySSSg_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AK0N5ErrorOSgtctF">listVoiceModels(language:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    <a name="/s:14TextToSpeechV10abC0C16listCustomModels8language7headers17completionHandlerySSSg_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AK0N5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/listCustomModels(language:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C16listCustomModels8language7headers17completionHandlerySSSg_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AK0N5ErrorOSgtctF">listCustomModels(language:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -893,11 +1011,10 @@ specified language. Omit the parameter to use the the default language, <code>en
                       <div class="abstract">
                         <p>List custom models.</p>
 
-<p>Lists metadata such as the name and description for all custom voice models that are owned by an instance of the
-service. Specify a language to list the voice models for that language only. To see the words in addition to the
-metadata for a specific voice model, use the <strong>List a custom model</strong> method. You must use credentials for the
-instance of the service that owns a model to list information about it.
-<strong>Note:</strong> This method is currently a beta release.
+<p>Lists metadata such as the name and description for all custom models that are owned by an instance of the service.
+Specify a language to list the custom models for that language only. To see the words in addition to the metadata
+for a specific custom model, use the <strong>List a custom model</strong> method. You must use credentials for the instance of
+the service that owns a model to list information about it.
 <strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customModels#cuModelsQueryAll">Querying all custom
 models</a>.</p>
 
@@ -906,10 +1023,10 @@ models</a>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listVoiceModels</span><span class="p">(</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listCustomModels</span><span class="p">(</span>
     <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/VoiceModels.html">VoiceModels</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/CustomModels.html">CustomModels</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -925,8 +1042,8 @@ models</a>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The language for which custom voice models that are owned by the requesting credentials are
-to be returned. Omit the parameter to see all custom voice models that are owned by the requester.</p>
+                                  <p>The language for which custom models that are owned by the requesting credentials are to be
+returned. Omit the parameter to see all custom models that are owned by the requester.</p>
                                 </div>
                               </td>
                             </tr>
@@ -963,9 +1080,9 @@ to be returned. Omit the parameter to see all custom voice models that are owned
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C16updateVoiceModel15customizationID4name11description5words7headers17completionHandlerySS_SSSgAKSayAA4WordVGSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AR0S5ErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/updateVoiceModel(customizationID:name:description:words:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C16updateVoiceModel15customizationID4name11description5words7headers17completionHandlerySS_SSSgAKSayAA4WordVGSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AR0S5ErrorOSgtctF">updateVoiceModel(customizationID:<wbr>name:<wbr>description:<wbr>words:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    <a name="/s:14TextToSpeechV10abC0C17updateCustomModel15customizationID4name11description5words7headers17completionHandlerySS_SSSgAKSayAA4WordVGSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AR0S5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/updateCustomModel(customizationID:name:description:words:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C17updateCustomModel15customizationID4name11description5words7headers17completionHandlerySS_SSSgAKSayAA4WordVGSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AR0S5ErrorOSgtctF">updateCustomModel(customizationID:<wbr>name:<wbr>description:<wbr>words:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -975,18 +1092,16 @@ to be returned. Omit the parameter to see all custom voice models that are owned
                       <div class="abstract">
                         <p>Update a custom model.</p>
 
-<p>Updates information for the specified custom voice model. You can update metadata such as the name and description
-of the voice model. You can also update the words in the model and their translations. Adding a new translation for
-a word that already exists in a custom model overwrites the word&rsquo;s existing translation. A custom model can contain
-no more than 20,000 entries. You must use credentials for the instance of the service that owns a model to update
-it.
+<p>Updates information for the specified custom model. You can update metadata such as the name and description of the
+model. You can also update the words in the model and their translations. Adding a new translation for a word that
+already exists in a custom model overwrites the word&rsquo;s existing translation. A custom model can contain no more
+than 20,000 entries. You must use credentials for the instance of the service that owns a model to update it.
 You can define sounds-like or phonetic translations for words. A sounds-like translation consists of one or more
 words that, when combined, sound like the word. Phonetic translations are based on the SSML phoneme format for
 representing a word. You can specify them in standard International Phonetic Alphabet (IPA) representation
   <code>&lt;phoneme alphabet=&quot;ipa&quot; ph=&quot;t&#601;m&#712;&#593;to&quot;&gt;&lt;/phoneme&gt;</code>
   or in the proprietary IBM Symbolic Phonetic Representation (SPR)
   <code>&lt;phoneme alphabet=&quot;ibm&quot; ph=&quot;1gAstroEntxrYFXs&quot;&gt;&lt;/phoneme&gt;</code>
-<strong>Note:</strong> This method is currently a beta release.
 <strong>See also:</strong></p>
 
 <ul>
@@ -1003,7 +1118,7 @@ customization</a>.</p></li>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateVoiceModel</span><span class="p">(</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateCustomModel</span><span class="p">(</span>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -1025,8 +1140,8 @@ customization</a>.</p></li>
                               </td>
                               <td>
                                 <div>
-                                  <p>The customization ID (GUID) of the custom voice model. You must make the request
-with credentials for the instance of the service that owns the custom model.</p>
+                                  <p>The customization ID (GUID) of the custom model. You must make the request with
+credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1038,7 +1153,7 @@ with credentials for the instance of the service that owns the custom model.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A new name for the custom voice model.</p>
+                                  <p>A new name for the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1050,7 +1165,7 @@ with credentials for the instance of the service that owns the custom model.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A new description for the custom voice model.</p>
+                                  <p>A new description for the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1063,7 +1178,7 @@ with credentials for the instance of the service that owns the custom model.</p>
                               <td>
                                 <div>
                                   <p>An array of <code><a href="../Structs/Word.html">Word</a></code> objects that provides the words and their translations that are to be added
-or updated for the custom voice model. Pass an empty array to make no additions or updates.</p>
+or updated for the custom model. Pass an empty array to make no additions or updates.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1100,9 +1215,9 @@ or updated for the custom voice model. Pass an empty array to make no additions 
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C13getVoiceModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AJ0O5ErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/getVoiceModel(customizationID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C13getVoiceModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AJ0O5ErrorOSgtctF">getVoiceModel(customizationID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    <a name="/s:14TextToSpeechV10abC0C14getCustomModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AJ0O5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/getCustomModel(customizationID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C14getCustomModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AJ0O5ErrorOSgtctF">getCustomModel(customizationID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1112,10 +1227,9 @@ or updated for the custom voice model. Pass an empty array to make no additions 
                       <div class="abstract">
                         <p>Get a custom model.</p>
 
-<p>Gets all information about a specified custom voice model. In addition to metadata such as the name and description
-of the voice model, the output includes the words and their translations as defined in the model. To see just the
-metadata for a voice model, use the <strong>List custom models</strong> method.
-<strong>Note:</strong> This method is currently a beta release.
+<p>Gets all information about a specified custom model. In addition to metadata such as the name and description of
+the custom model, the output includes the words and their translations as defined in the model. To see just the
+metadata for a model, use the <strong>List custom models</strong> method.
 <strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customModels#cuModelsQuery">Querying a custom
 model</a>.</p>
 
@@ -1124,10 +1238,10 @@ model</a>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getVoiceModel</span><span class="p">(</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getCustomModel</span><span class="p">(</span>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/VoiceModel.html">VoiceModel</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/CustomModel.html">CustomModel</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -1143,8 +1257,8 @@ model</a>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The customization ID (GUID) of the custom voice model. You must make the request
-with credentials for the instance of the service that owns the custom model.</p>
+                                  <p>The customization ID (GUID) of the custom model. You must make the request with
+credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1181,9 +1295,9 @@ with credentials for the instance of the service that owns the custom model.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C16deleteVoiceModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AJ0O5ErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/deleteVoiceModel(customizationID:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C16deleteVoiceModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AJ0O5ErrorOSgtctF">deleteVoiceModel(customizationID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    <a name="/s:14TextToSpeechV10abC0C17deleteCustomModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AJ0O5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/deleteCustomModel(customizationID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C17deleteCustomModel15customizationID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AJ0O5ErrorOSgtctF">deleteCustomModel(customizationID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1193,9 +1307,8 @@ with credentials for the instance of the service that owns the custom model.</p>
                       <div class="abstract">
                         <p>Delete a custom model.</p>
 
-<p>Deletes the specified custom voice model. You must use credentials for the instance of the service that owns a
-model to delete it.
-<strong>Note:</strong> This method is currently a beta release.
+<p>Deletes the specified custom model. You must use credentials for the instance of the service that owns a model to
+delete it.
 <strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customModels#cuModelsDelete">Deleting a custom
 model</a>.</p>
 
@@ -1204,7 +1317,7 @@ model</a>.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteVoiceModel</span><span class="p">(</span>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteCustomModel</span><span class="p">(</span>
     <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
@@ -1223,8 +1336,8 @@ model</a>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The customization ID (GUID) of the custom voice model. You must make the request
-with credentials for the instance of the service that owns the custom model.</p>
+                                  <p>The customization ID (GUID) of the custom model. You must make the request with
+credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1273,17 +1386,16 @@ with credentials for the instance of the service that owns the custom model.</p>
                       <div class="abstract">
                         <p>Add custom words.</p>
 
-<p>Adds one or more words and their translations to the specified custom voice model. Adding a new translation for a
-word that already exists in a custom model overwrites the word&rsquo;s existing translation. A custom model can contain
-no more than 20,000 entries. You must use credentials for the instance of the service that owns a model to add
-words to it.
+<p>Adds one or more words and their translations to the specified custom model. Adding a new translation for a word
+that already exists in a custom model overwrites the word&rsquo;s existing translation. A custom model can contain no
+more than 20,000 entries. You must use credentials for the instance of the service that owns a model to add words
+to it.
 You can define sounds-like or phonetic translations for words. A sounds-like translation consists of one or more
 words that, when combined, sound like the word. Phonetic translations are based on the SSML phoneme format for
 representing a word. You can specify them in standard International Phonetic Alphabet (IPA) representation
   <code>&lt;phoneme alphabet=&quot;ipa&quot; ph=&quot;t&#601;m&#712;&#593;to&quot;&gt;&lt;/phoneme&gt;</code>
   or in the proprietary IBM Symbolic Phonetic Representation (SPR)
   <code>&lt;phoneme alphabet=&quot;ibm&quot; ph=&quot;1gAstroEntxrYFXs&quot;&gt;&lt;/phoneme&gt;</code>
-<strong>Note:</strong> This method is currently a beta release.
 <strong>See also:</strong></p>
 
 <ul>
@@ -1320,8 +1432,8 @@ customization</a>.</p></li>
                               </td>
                               <td>
                                 <div>
-                                  <p>The customization ID (GUID) of the custom voice model. You must make the request
-with credentials for the instance of the service that owns the custom model.</p>
+                                  <p>The customization ID (GUID) of the custom model. You must make the request with
+credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1334,10 +1446,10 @@ with credentials for the instance of the service that owns the custom model.</p>
                               <td>
                                 <div>
                                   <p>The <strong>Add custom words</strong> method accepts an array of <code><a href="../Structs/Word.html">Word</a></code> objects. Each object provides a
-word that is to be added or updated for the custom voice model and the word&rsquo;s translation.
+word that is to be added or updated for the custom model and the word&rsquo;s translation.
 The <strong>List custom words</strong> method returns an array of <code><a href="../Structs/Word.html">Word</a></code> objects. Each object shows a word and its translation
-from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before
-lowercase letters. The array is empty if the custom model contains no words.</p>
+from the custom model. The words are listed in alphabetical order, with uppercase letters listed before lowercase
+letters. The array is empty if the custom model contains no words.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1386,10 +1498,9 @@ lowercase letters. The array is empty if the custom model contains no words.</p>
                       <div class="abstract">
                         <p>List custom words.</p>
 
-<p>Lists all of the words and their translations for the specified custom voice model. The output shows the
-translations as they are defined in the model. You must use credentials for the instance of the service that owns a
-model to list its words.
-<strong>Note:</strong> This method is currently a beta release.
+<p>Lists all of the words and their translations for the specified custom model. The output shows the translations as
+they are defined in the model. You must use credentials for the instance of the service that owns a model to list
+its words.
 <strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customWords#cuWordsQueryModel">Querying all words from a custom
 model</a>.</p>
 
@@ -1417,8 +1528,8 @@ model</a>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The customization ID (GUID) of the custom voice model. You must make the request
-with credentials for the instance of the service that owns the custom model.</p>
+                                  <p>The customization ID (GUID) of the custom model. You must make the request with
+credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1467,17 +1578,16 @@ with credentials for the instance of the service that owns the custom model.</p>
                       <div class="abstract">
                         <p>Add a custom word.</p>
 
-<p>Adds a single word and its translation to the specified custom voice model. Adding a new translation for a word
-that already exists in a custom model overwrites the word&rsquo;s existing translation. A custom model can contain no
-more than 20,000 entries. You must use credentials for the instance of the service that owns a model to add a word
-to it.
+<p>Adds a single word and its translation to the specified custom model. Adding a new translation for a word that
+already exists in a custom model overwrites the word&rsquo;s existing translation. A custom model can contain no more
+than 20,000 entries. You must use credentials for the instance of the service that owns a model to add a word to
+it.
 You can define sounds-like or phonetic translations for words. A sounds-like translation consists of one or more
 words that, when combined, sound like the word. Phonetic translations are based on the SSML phoneme format for
 representing a word. You can specify them in standard International Phonetic Alphabet (IPA) representation
   <code>&lt;phoneme alphabet=&quot;ipa&quot; ph=&quot;t&#601;m&#712;&#593;to&quot;&gt;&lt;/phoneme&gt;</code>
   or in the proprietary IBM Symbolic Phonetic Representation (SPR)
   <code>&lt;phoneme alphabet=&quot;ibm&quot; ph=&quot;1gAstroEntxrYFXs&quot;&gt;&lt;/phoneme&gt;</code>
-<strong>Note:</strong> This method is currently a beta release.
 <strong>See also:</strong></p>
 
 <ul>
@@ -1516,8 +1626,8 @@ customization</a>.</p></li>
                               </td>
                               <td>
                                 <div>
-                                  <p>The customization ID (GUID) of the custom voice model. You must make the request
-with credentials for the instance of the service that owns the custom model.</p>
+                                  <p>The customization ID (GUID) of the custom model. You must make the request with
+credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1529,7 +1639,7 @@ with credentials for the instance of the service that owns the custom model.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The word that is to be added or updated for the custom voice model.</p>
+                                  <p>The word that is to be added or updated for the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1543,8 +1653,8 @@ with credentials for the instance of the service that owns the custom model.</p>
                                 <div>
                                   <p>The phonetic or sounds-like translation for the word. A phonetic translation is based on
 the SSML format for representing the phonetic string of a word either as an IPA translation or as an IBM SPR
-translation. The Arabic, Chinese, Dutch, and Korean languages support only IPA. A sounds-like is one or more
-words that, when combined, sound like the word.</p>
+translation. The Arabic, Chinese, Dutch, Australian English, and Korean languages support only IPA. A sounds-like
+is one or more words that, when combined, sound like the word.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1611,7 +1721,6 @@ entries</a>.</p>
 
 <p>Gets the translation for a single word from the specified custom model. The output shows the translation as it is
 defined in the model. You must use credentials for the instance of the service that owns a model to list its words.
-<strong>Note:</strong> This method is currently a beta release.
 <strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customWords#cuWordQueryModel">Querying a single word from a custom
 model</a>.</p>
 
@@ -1640,8 +1749,8 @@ model</a>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The customization ID (GUID) of the custom voice model. You must make the request
-with credentials for the instance of the service that owns the custom model.</p>
+                                  <p>The customization ID (GUID) of the custom model. You must make the request with
+credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1653,7 +1762,7 @@ with credentials for the instance of the service that owns the custom model.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The word that is to be queried from the custom voice model.</p>
+                                  <p>The word that is to be queried from the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1702,9 +1811,8 @@ with credentials for the instance of the service that owns the custom model.</p>
                       <div class="abstract">
                         <p>Delete a custom word.</p>
 
-<p>Deletes a single word from the specified custom voice model. You must use credentials for the instance of the
-service that owns a model to delete its words.
-<strong>Note:</strong> This method is currently a beta release.
+<p>Deletes a single word from the specified custom model. You must use credentials for the instance of the service
+that owns a model to delete its words.
 <strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customWords#cuWordDelete">Deleting a word from a custom
 model</a>.</p>
 
@@ -1733,8 +1841,8 @@ model</a>.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The customization ID (GUID) of the custom voice model. You must make the request
-with credentials for the instance of the service that owns the custom model.</p>
+                                  <p>The customization ID (GUID) of the custom model. You must make the request with
+credentials for the instance of the service that owns the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1746,7 +1854,7 @@ with credentials for the instance of the service that owns the custom model.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The word that is to be deleted from the custom voice model.</p>
+                                  <p>The word that is to be deleted from the custom model.</p>
                                 </div>
                               </td>
                             </tr>
@@ -1798,9 +1906,11 @@ with credentials for the instance of the service that owns the custom model.</p>
 <p>Deletes all data that is associated with a specified customer ID. The method deletes all data for the customer ID,
 regardless of the method by which the information was added. The method has no effect if no data is associated with
 the customer ID. You must issue the request with credentials for the same instance of the service that was used to
-associate the customer ID with the data.
-You associate a customer ID with data by passing the <code>X-Watson-Metadata</code> header with a request that passes the
-data.
+associate the customer ID with the data. You associate a customer ID with data by passing the <code>X-Watson-Metadata</code>
+header with a request that passes the data.
+<strong>Note:</strong> If you delete an instance of the service from the service console, all data associated with that service
+instance is automatically deleted. This includes all custom models and word/translation pairs, and all data related
+to speech synthesis requests.
 <strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-information-security#information-security">Information
 security</a>.</p>
 
@@ -1868,7 +1978,7 @@ security</a>.</p>
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

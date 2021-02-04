@@ -8,14 +8,22 @@
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Struct/Model" class="dashAnchor"></a>
     <a title="Model Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">NaturalLanguageUnderstandingV1 3.5.0 Docs</a> (86% documented)</p>
+        <p><a href="../index.html">NaturalLanguageUnderstandingV1 4.1.0 Docs</a> (85% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -41,9 +49,6 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="../Structs/AnalysisResults.html">AnalysisResults</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/AnalysisResultsMetadata.html">AnalysisResultsMetadata</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/AnalysisResultsUsage.html">AnalysisResultsUsage</a>
@@ -106,6 +111,9 @@
                 <a href="../Structs/Features.html">Features</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/FeaturesResultsMetadata.html">FeaturesResultsMetadata</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/Feed.html">Feed</a>
               </li>
               <li class="nav-group-task">
@@ -118,10 +126,10 @@
                 <a href="../Structs/ListModelsResults.html">ListModelsResults</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/MetadataOptions.html">MetadataOptions</a>
+                <a href="../Structs/Model.html">Model</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/Model.html">Model</a>
+                <a href="../Structs/Model/Status.html">– Status</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/RelationArgument.html">RelationArgument</a>
@@ -234,6 +242,7 @@
             <h1>Model</h1>
               <div class="declaration">
                 <div class="language">
+                  
                   <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Model</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                 </div>
@@ -244,6 +253,34 @@
           <section class="section task-group-section">
             <div class="task-group">
               <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV15ModelV6StatusO"></a>
+                    <a name="//apple_ref/swift/Enum/Status" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV15ModelV6StatusO">Status</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>When the status is <code>available</code>, the model is ready to use.</p>
+
+                        <a href="../Structs/Model/Status.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">Status</span> <span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -311,7 +348,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>ISO 639-1 code indicating the language of the model.</p>
+                        <p>ISO 639-1 code that indicates the language of the model.</p>
 
                       </div>
                       <div class="declaration">
@@ -419,7 +456,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>(Deprecated — use <code>model_version</code>) The model version, if it was manually provided in Watson Knowledge Studio.</p>
+                        <p>Deprecated — use <code>model_version</code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -493,7 +530,7 @@
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

@@ -1,418 +1,418 @@
 {
   "warnings": [
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/AcousticModel.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/AcousticModel.swift",
       "line": 36,
       "symbol": "AcousticModel.Status.pending",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/AcousticModel.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/AcousticModel.swift",
       "line": 37,
       "symbol": "AcousticModel.Status.ready",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/AcousticModel.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/AcousticModel.swift",
       "line": 38,
       "symbol": "AcousticModel.Status.training",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/AcousticModel.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/AcousticModel.swift",
       "line": 39,
       "symbol": "AcousticModel.Status.available",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/AcousticModel.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/AcousticModel.swift",
       "line": 40,
       "symbol": "AcousticModel.Status.upgrading",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/AcousticModel.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/AcousticModel.swift",
       "line": 41,
       "symbol": "AcousticModel.Status.failed",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/AudioDetails.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/AudioDetails.swift",
       "line": 32,
       "symbol": "AudioDetails.TypeEnum.audio",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/AudioDetails.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/AudioDetails.swift",
       "line": 33,
       "symbol": "AudioDetails.TypeEnum.archive",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/AudioDetails.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/AudioDetails.swift",
       "line": 34,
       "symbol": "AudioDetails.TypeEnum.undetermined",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/AudioDetails.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/AudioDetails.swift",
       "line": 44,
       "symbol": "AudioDetails.Compression.zip",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/AudioDetails.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/AudioDetails.swift",
       "line": 45,
       "symbol": "AudioDetails.Compression.gzip",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/AudioListing.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/AudioListing.swift",
       "line": 34,
       "symbol": "AudioListing.Status.ok",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/AudioListing.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/AudioListing.swift",
       "line": 35,
       "symbol": "AudioListing.Status.beingProcessed",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/AudioListing.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/AudioListing.swift",
       "line": 36,
       "symbol": "AudioListing.Status.invalid",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/AudioResource.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/AudioResource.swift",
       "line": 34,
       "symbol": "AudioResource.Status.ok",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/AudioResource.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/AudioResource.swift",
       "line": 35,
       "symbol": "AudioResource.Status.beingProcessed",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/AudioResource.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/AudioResource.swift",
       "line": 36,
       "symbol": "AudioResource.Status.invalid",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/Corpus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/Corpus.swift",
       "line": 34,
       "symbol": "Corpus.Status.analyzed",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/Corpus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/Corpus.swift",
       "line": 35,
       "symbol": "Corpus.Status.beingProcessed",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/Corpus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/Corpus.swift",
       "line": 36,
       "symbol": "Corpus.Status.undetermined",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/Grammar.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/Grammar.swift",
       "line": 34,
       "symbol": "Grammar.Status.analyzed",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/Grammar.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/Grammar.swift",
       "line": 35,
       "symbol": "Grammar.Status.beingProcessed",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/Grammar.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/Grammar.swift",
       "line": 36,
       "symbol": "Grammar.Status.undetermined",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/LanguageModel.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/LanguageModel.swift",
       "line": 36,
       "symbol": "LanguageModel.Status.pending",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/LanguageModel.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/LanguageModel.swift",
       "line": 37,
       "symbol": "LanguageModel.Status.ready",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/LanguageModel.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/LanguageModel.swift",
       "line": 38,
       "symbol": "LanguageModel.Status.training",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/LanguageModel.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/LanguageModel.swift",
       "line": 39,
       "symbol": "LanguageModel.Status.available",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/LanguageModel.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/LanguageModel.swift",
       "line": 40,
       "symbol": "LanguageModel.Status.upgrading",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/LanguageModel.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/LanguageModel.swift",
       "line": 41,
       "symbol": "LanguageModel.Status.failed",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/RecognitionJob.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/RecognitionJob.swift",
       "line": 36,
       "symbol": "RecognitionJob.Status.waiting",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/RecognitionJob.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/RecognitionJob.swift",
       "line": 37,
       "symbol": "RecognitionJob.Status.processing",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/RecognitionJob.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/RecognitionJob.swift",
       "line": 38,
       "symbol": "RecognitionJob.Status.completed",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/RecognitionJob.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/RecognitionJob.swift",
       "line": 39,
       "symbol": "RecognitionJob.Status.failed",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/RegisterStatus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/RegisterStatus.swift",
       "line": 30,
       "symbol": "RegisterStatus.Status.created",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/RegisterStatus.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/RegisterStatus.swift",
       "line": 31,
       "symbol": "RegisterStatus.Status.alreadyCreated",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/SpeechRecognitionResult.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/SpeechRecognitionResult.swift",
       "line": 34,
       "symbol": "SpeechRecognitionResult.EndOfUtterance.endOfData",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/SpeechRecognitionResult.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/SpeechRecognitionResult.swift",
       "line": 35,
       "symbol": "SpeechRecognitionResult.EndOfUtterance.fullStop",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/SpeechRecognitionResult.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/SpeechRecognitionResult.swift",
       "line": 36,
       "symbol": "SpeechRecognitionResult.EndOfUtterance.reset",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/SpeechRecognitionResult.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/SpeechRecognitionResult.swift",
       "line": 37,
       "symbol": "SpeechRecognitionResult.EndOfUtterance.silence",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/TrainingWarning.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/TrainingWarning.swift",
       "line": 28,
       "symbol": "TrainingWarning.Code.invalidAudioFiles",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/TrainingWarning.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/TrainingWarning.swift",
       "line": 29,
       "symbol": "TrainingWarning.Code.invalidCorpusFiles",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/TrainingWarning.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/TrainingWarning.swift",
       "line": 30,
       "symbol": "TrainingWarning.Code.invalidGrammarFiles",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/Models/TrainingWarning.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/Models/TrainingWarning.swift",
       "line": 31,
       "symbol": "TrainingWarning.Code.invalidWords",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/SpeechToText.swift",
-      "line": 52,
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/SpeechToText.swift",
+      "line": 29,
+      "symbol": "WatsonError",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/SpeechToText.swift",
+      "line": 30,
+      "symbol": "WatsonResponse",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/SpeechToText.swift",
+      "line": 64,
       "symbol": "SpeechToText.authenticator",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/WebSockets/RecognitionSettings.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/WebSockets/RecognitionSettings.swift",
       "line": 113,
       "symbol": "RecognitionSettings.processingMetrics",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/WebSockets/RecognitionSettings.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/WebSockets/RecognitionSettings.swift",
       "line": 121,
       "symbol": "RecognitionSettings.processingMetricsInterval",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/WebSockets/RecognitionSettings.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/WebSockets/RecognitionSettings.swift",
       "line": 125,
       "symbol": "RecognitionSettings.audioMetrics",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/WebSockets/RecognizeCallback.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/WebSockets/RecognizeCallback.swift",
       "line": 19,
       "symbol": "RecognizeCallback",
       "symbol_kind": "source.lang.swift.decl.struct",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SpeechToTextV1/WebSockets/SpeechToTextSession.swift",
-      "line": 138,
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/WebSockets/SpeechToTextSession.swift",
+      "line": 134,
       "symbol": "SpeechToTextSession.init(authenticator:model:baseModelVersion:languageCustomizationID:acousticCustomizationID:learningOptOut:endOfPhraseSilenceTime:splitTranscriptAtPhraseEnd:customerID:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SupportingFiles/Shared.swift",
       "line": 21,
-      "symbol": "WatsonResponse",
-      "symbol_kind": "source.lang.swift.decl.typealias",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
-      "line": 22,
-      "symbol": "WatsonError",
-      "symbol_kind": "source.lang.swift.decl.typealias",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
-      "line": 23,
       "symbol": "WatsonJSON",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
-      "line": 26,
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SupportingFiles/Shared.swift",
+      "line": 24,
       "symbol": "WatsonAuthenticator",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
-      "line": 27,
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SupportingFiles/Shared.swift",
+      "line": 25,
       "symbol": "WatsonIAMAuthenticator",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
-      "line": 28,
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SupportingFiles/Shared.swift",
+      "line": 26,
       "symbol": "WatsonBasicAuthenticator",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
-      "line": 29,
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SupportingFiles/Shared.swift",
+      "line": 27,
       "symbol": "WatsonCloudPakForDataAuthenticator",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
-      "line": 30,
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SupportingFiles/Shared.swift",
+      "line": 28,
       "symbol": "WatsonTokenSourceAuthenticator",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
-      "line": 31,
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SupportingFiles/Shared.swift",
+      "line": 29,
       "symbol": "WatsonBearerTokenAuthenticator",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/jeffarn/Programming/sdks/swift-sdk/Source/SupportingFiles/Shared.swift",
-      "line": 32,
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SupportingFiles/Shared.swift",
+      "line": 30,
       "symbol": "WatsonNoAuthAuthenticator",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     }
   ],
-  "source_directory": "/Users/jeffarn/Programming/sdks/swift-sdk"
+  "source_directory": "/Users/travis/build/watson-developer-cloud/swift-sdk"
 }

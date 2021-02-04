@@ -8,14 +8,22 @@
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Class/ToneAnalyzer" class="dashAnchor"></a>
     <a title="ToneAnalyzer Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">ToneAnalyzerV3 3.5.0 Docs</a> (70% documented)</p>
+        <p><a href="../index.html">ToneAnalyzerV3 4.1.0 Docs</a> (71% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -125,6 +133,7 @@
             <h1>ToneAnalyzer</h1>
               <div class="declaration">
                 <div class="language">
+                  
                   <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">ToneAnalyzer</span></code></pre>
 
                 </div>
@@ -162,6 +171,61 @@ understand and improve their customer conversations.
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ToneAnalyzerV30aB0C7versionSSvp"></a>
+                    <a name="//apple_ref/swift/Property/version" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C7versionSSvp">version</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Release date of the version of the API you want to use. Specify dates in YYYY-MM-DD format. The current version
+is <code>2017-09-21</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">version</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14ToneAnalyzerV30aB0C18defaultServiceNameSSvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/defaultServiceName" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C18defaultServiceNameSSvpZ">defaultServiceName</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Service identifiers</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">defaultServiceName</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -226,8 +290,8 @@ understand and improve their customer conversations.
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/init(version:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">init(version:<wbr>)</a>
+                    <a name="//apple_ref/swift/Method/init(version:authenticator:serviceName:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">init(version:<wbr>authenticator:<wbr>serviceName:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -237,12 +301,18 @@ understand and improve their customer conversations.
                       <div class="abstract">
                         <p>Create a <code>ToneAnalyzer</code> object.</p>
 
-<p>This initializer will retrieve credentials from the environment or a local credentials file.
+<p>If an authenticator is not supplied, the initializer will retrieve credentials from the environment or
+a local credentials file and construct an appropriate authenticator using these credentials.
 The credentials file can be downloaded from your service instance on IBM Cloud as ibm-credentials.env.
 Make sure to add the credentials file to your project so that it can be loaded at runtime.</p>
 
-<p>If credentials are not available in the environment or a local credentials file, initialization will fail.
+<p>If an authenticator is not supplied and credentials are not available in the environment or a local
+credentials file, initialization will fail by throwing an exception.
 In that case, try another initializer that directly passes in the credentials.</p>
+
+<ul>
+<li>serviceName: String = defaultServiceName</li>
+</ul>
 
                       </div>
                     </section>
@@ -284,8 +354,8 @@ In that case, try another initializer that directly passes in the credentials.</
                               </td>
                               <td>
                                 <div>
-                                  <p>The release date of the version of the API to use. Specify the date
-in &ldquo;YYYY-MM-DD&rdquo; format.</p>
+                                  <p>Release date of the version of the API you want to use. Specify dates in YYYY-MM-DD format.
+The current version is <code>2017-09-21</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -338,9 +408,9 @@ in &ldquo;YYYY-MM-DD&rdquo; format.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14ToneAnalyzerV30aB0C4tone0D7Content9sentences15contentLanguage06acceptH07headers17completionHandleryAA0aE0O_SbSgSSSgANSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0A8AnalysisVGSg_AQ0O5ErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/tone(toneContent:sentences:contentLanguage:acceptLanguage:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C4tone0D7Content9sentences15contentLanguage06acceptH07headers17completionHandleryAA0aE0O_SbSgSSSgANSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0A8AnalysisVGSg_AQ0O5ErrorOSgtctF">tone(toneContent:<wbr>sentences:<wbr>contentLanguage:<wbr>acceptLanguage:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    <a name="/s:14ToneAnalyzerV30aB0C4tone0D7Content9sentences5tones15contentLanguage06acceptI07headers17completionHandleryAA0aE0O_SbSgSaySSGSgSSSgAQSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0A8AnalysisVGSg_AT0P5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/tone(toneContent:sentences:tones:contentLanguage:acceptLanguage:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14ToneAnalyzerV30aB0C4tone0D7Content9sentences5tones15contentLanguage06acceptI07headers17completionHandleryAA0aE0O_SbSgSaySSGSgSSSgAQSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0A8AnalysisVGSg_AT0P5ErrorOSgtctF">tone(toneContent:<wbr>sentences:<wbr>tones:<wbr>contentLanguage:<wbr>acceptLanguage:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -372,6 +442,7 @@ endpoint</a>.</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">tone</span><span class="p">(</span>
     <span class="nv">toneContent</span><span class="p">:</span> <span class="kt"><a href="../Enums/ToneContent.html">ToneContent</a></span><span class="p">,</span>
     <span class="nv">sentences</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">tones</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">contentLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">acceptLanguage</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -407,6 +478,22 @@ input, provide an object of type <code><a href="../Structs/ToneInput.html">ToneI
                                   <p>Indicates whether the service is to return an analysis of each individual sentence in
 addition to its analysis of the full document. If <code>true</code> (the default), the service returns results for each
 sentence.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>tones</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><strong><code>2017-09-21</code>:</strong> Deprecated. The service continues to accept the parameter for
+backward-compatibility, but the parameter no longer affects the response.
+<strong><code>2016-05-19</code>:</strong> A comma-separated list of tones for which the service is to return its analysis of the input;
+the indicated tones apply both to the full document and to individual sentences of the document. You can specify
+one or more of the valid values. Omit the parameter to request results for all three tones.</p>
                                 </div>
                               </td>
                             </tr>
@@ -601,7 +688,7 @@ languages for <strong>Content-Language</strong> and <strong>Accept-Language</str
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

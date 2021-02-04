@@ -8,14 +8,22 @@
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
     
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Section/Structures" class="dashAnchor"></a>
     <a title="Structures  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">DiscoveryV2 3.5.0 Docs</a> (85% documented)</p>
+        <p><a href="index.html">DiscoveryV2 4.1.0 Docs</a> (85% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -48,7 +56,19 @@
             <a href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="Structs/AnalyzedDocument.html">AnalyzedDocument</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/AnalyzedResult.html">AnalyzedResult</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/Collection.html">Collection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CollectionDetails.html">CollectionDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CollectionEnrichment.html">CollectionEnrichment</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/Completions.html">Completions</a>
@@ -72,6 +92,24 @@
                 <a href="Structs/ComponentSettingsResponse.html">ComponentSettingsResponse</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/CreateEnrichment.html">CreateEnrichment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateEnrichment/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DefaultQueryParams.html">DefaultQueryParams</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DefaultQueryParamsPassages.html">DefaultQueryParamsPassages</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DefaultQueryParamsSuggestedRefinements.html">DefaultQueryParamsSuggestedRefinements</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DefaultQueryParamsTableResults.html">DefaultQueryParamsTableResults</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/DeleteDocumentResponse.html">DeleteDocumentResponse</a>
               </li>
               <li class="nav-group-task">
@@ -85,6 +123,18 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/DocumentAttribute.html">DocumentAttribute</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Enrichment.html">Enrichment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Enrichment/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/EnrichmentOptions.html">EnrichmentOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Enrichments.html">Enrichments</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/Field.html">Field</a>
@@ -102,16 +152,40 @@
                 <a href="Structs/ListFieldsResponse.html">ListFieldsResponse</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/ListProjectsResponse.html">ListProjectsResponse</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/Notice.html">Notice</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/Notice/Severity.html">– Severity</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/ProjectDetails.html">ProjectDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ProjectDetails/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ProjectListDetails.html">ProjectListDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ProjectListDetails/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ProjectListDetailsRelevancyTrainingStatus.html">ProjectListDetailsRelevancyTrainingStatus</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/QueryCalculationAggregation.html">QueryCalculationAggregation</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/QueryFilterAggregation.html">QueryFilterAggregation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/QueryGroupByAggregation.html">QueryGroupByAggregation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/QueryGroupByAggregationResult.html">QueryGroupByAggregationResult</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/QueryHistogramAggregation.html">QueryHistogramAggregation</a>
@@ -135,13 +209,10 @@
                 <a href="Structs/QueryNoticesResponse.html">QueryNoticesResponse</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/QueryNoticesResult.html">QueryNoticesResult</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/QueryNoticesResult/FileType.html">– FileType</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Structs/QueryResponse.html">QueryResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/QueryResponsePassage.html">QueryResponsePassage</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/QueryResult.html">QueryResult</a>
@@ -294,6 +365,62 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:11DiscoveryV216AnalyzedDocumentV"></a>
+                    <a name="//apple_ref/swift/Struct/AnalyzedDocument" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV216AnalyzedDocumentV">AnalyzedDocument</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An object containing the converted document and any identified enrichments.</p>
+
+                        <a href="Structs/AnalyzedDocument.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AnalyzedDocument</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV214AnalyzedResultV"></a>
+                    <a name="//apple_ref/swift/Struct/AnalyzedResult" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV214AnalyzedResultV">AnalyzedResult</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Result of the document analysis.</p>
+
+                        <a href="Structs/AnalyzedResult.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AnalyzedResult</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:11DiscoveryV210CollectionV"></a>
                     <a name="//apple_ref/swift/Struct/Collection" class="dashAnchor"></a>
                     <a class="token" href="#/s:11DiscoveryV210CollectionV">Collection</a>
@@ -313,6 +440,62 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Collection</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV217CollectionDetailsV"></a>
+                    <a name="//apple_ref/swift/Struct/CollectionDetails" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV217CollectionDetailsV">CollectionDetails</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A collection for storing documents.</p>
+
+                        <a href="Structs/CollectionDetails.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CollectionDetails</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV220CollectionEnrichmentV"></a>
+                    <a name="//apple_ref/swift/Struct/CollectionEnrichment" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV220CollectionEnrichmentV">CollectionEnrichment</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An object describing an Enrichment for a collection.</p>
+
+                        <a href="Structs/CollectionEnrichment.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CollectionEnrichment</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -472,7 +655,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A response containing the default component settings.</p>
+                        <p>The default component settings for this project.</p>
 
                         <a href="Structs/ComponentSettingsResponse.html" class="slightly-smaller">See more</a>
                       </div>
@@ -481,6 +664,146 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ComponentSettingsResponse</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV216CreateEnrichmentV"></a>
+                    <a name="//apple_ref/swift/Struct/CreateEnrichment" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV216CreateEnrichmentV">CreateEnrichment</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Information about a specific enrichment.</p>
+
+                        <a href="Structs/CreateEnrichment.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CreateEnrichment</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV218DefaultQueryParamsV"></a>
+                    <a name="//apple_ref/swift/Struct/DefaultQueryParams" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV218DefaultQueryParamsV">DefaultQueryParams</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Default query parameters for this project.</p>
+
+                        <a href="Structs/DefaultQueryParams.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DefaultQueryParams</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV226DefaultQueryParamsPassagesV"></a>
+                    <a name="//apple_ref/swift/Struct/DefaultQueryParamsPassages" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV226DefaultQueryParamsPassagesV">DefaultQueryParamsPassages</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Default settings configuration for passage search options.</p>
+
+                        <a href="Structs/DefaultQueryParamsPassages.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DefaultQueryParamsPassages</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV238DefaultQueryParamsSuggestedRefinementsV"></a>
+                    <a name="//apple_ref/swift/Struct/DefaultQueryParamsSuggestedRefinements" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV238DefaultQueryParamsSuggestedRefinementsV">DefaultQueryParamsSuggestedRefinements</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Object containing suggested refinement settings.</p>
+
+                        <a href="Structs/DefaultQueryParamsSuggestedRefinements.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DefaultQueryParamsSuggestedRefinements</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV230DefaultQueryParamsTableResultsV"></a>
+                    <a name="//apple_ref/swift/Struct/DefaultQueryParamsTableResults" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV230DefaultQueryParamsTableResultsV">DefaultQueryParamsTableResults</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Default project query settings for table results.</p>
+
+                        <a href="Structs/DefaultQueryParamsTableResults.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DefaultQueryParamsTableResults</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -574,6 +897,90 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:11DiscoveryV210EnrichmentV"></a>
+                    <a name="//apple_ref/swift/Struct/Enrichment" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV210EnrichmentV">Enrichment</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Information about a specific enrichment.</p>
+
+                        <a href="Structs/Enrichment.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Enrichment</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV217EnrichmentOptionsV"></a>
+                    <a name="//apple_ref/swift/Struct/EnrichmentOptions" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV217EnrichmentOptionsV">EnrichmentOptions</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A object containing options for the current enrichment.</p>
+
+                        <a href="Structs/EnrichmentOptions.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">EnrichmentOptions</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV211EnrichmentsV"></a>
+                    <a name="//apple_ref/swift/Struct/Enrichments" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV211EnrichmentsV">Enrichments</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An object containing an array of enrichment definitions.</p>
+
+                        <a href="Structs/Enrichments.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Enrichments</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:11DiscoveryV25FieldV"></a>
                     <a name="//apple_ref/swift/Struct/Field" class="dashAnchor"></a>
                     <a class="token" href="#/s:11DiscoveryV25FieldV">Field</a>
@@ -593,46 +1000,6 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Field</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11DiscoveryV223GenericQueryAggregationV"></a>
-                    <a name="//apple_ref/swift/Struct/GenericQueryAggregation" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV223GenericQueryAggregationV">GenericQueryAggregation</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>&copy; Copyright IBM Corp. 2019.</p>
-
-<p>Licensed under the Apache License, Version 2.0 (the &ldquo;License&rdquo;);
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at</p>
-
-<p><a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></p>
-
-<p>Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an &ldquo;AS IS&rdquo; BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.</p>
-
-                        <a href="Structs/GenericQueryAggregation.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">GenericQueryAggregation</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -706,6 +1073,34 @@ means that the <code>warnings</code> object has a property called <code>severity
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:11DiscoveryV220ListProjectsResponseV"></a>
+                    <a name="//apple_ref/swift/Struct/ListProjectsResponse" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV220ListProjectsResponseV">ListProjectsResponse</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A list of projects in this instance.</p>
+
+                        <a href="Structs/ListProjectsResponse.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ListProjectsResponse</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:11DiscoveryV26NoticeV"></a>
                     <a name="//apple_ref/swift/Struct/Notice" class="dashAnchor"></a>
                     <a class="token" href="#/s:11DiscoveryV26NoticeV">Notice</a>
@@ -734,6 +1129,118 @@ means that the <code>warnings</code> object has a property called <code>severity
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:11DiscoveryV214ProjectDetailsV"></a>
+                    <a name="//apple_ref/swift/Struct/ProjectDetails" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV214ProjectDetailsV">ProjectDetails</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Detailed information about the specified project.</p>
+
+                        <a href="Structs/ProjectDetails.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ProjectDetails</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV218ProjectListDetailsV"></a>
+                    <a name="//apple_ref/swift/Struct/ProjectListDetails" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV218ProjectListDetailsV">ProjectListDetails</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Details about a specific project.</p>
+
+                        <a href="Structs/ProjectListDetails.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ProjectListDetails</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV241ProjectListDetailsRelevancyTrainingStatusV"></a>
+                    <a name="//apple_ref/swift/Struct/ProjectListDetailsRelevancyTrainingStatus" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV241ProjectListDetailsRelevancyTrainingStatusV">ProjectListDetailsRelevancyTrainingStatus</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Relevancy training status information for this project.</p>
+
+                        <a href="Structs/ProjectListDetailsRelevancyTrainingStatus.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ProjectListDetailsRelevancyTrainingStatus</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV223GenericQueryAggregationV"></a>
+                    <a name="//apple_ref/swift/Struct/GenericQueryAggregation" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV223GenericQueryAggregationV">GenericQueryAggregation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                        <a href="Structs/GenericQueryAggregation.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">GenericQueryAggregation</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:11DiscoveryV227QueryCalculationAggregationV"></a>
                     <a name="//apple_ref/swift/Struct/QueryCalculationAggregation" class="dashAnchor"></a>
                     <a class="token" href="#/s:11DiscoveryV227QueryCalculationAggregationV">QueryCalculationAggregation</a>
@@ -746,6 +1253,9 @@ means that the <code>warnings</code> object has a property called <code>severity
                       <div class="abstract">
                         <p>Returns a scalar calculation across all documents for the field specified. Possible calculations include min, max, sum,
 average, and unique_count.</p>
+
+<p>Enums with an associated value of QueryCalculationAggregation:
+   QueryAggregation</p>
 
                         <a href="Structs/QueryCalculationAggregation.html" class="slightly-smaller">See more</a>
                       </div>
@@ -775,6 +1285,9 @@ average, and unique_count.</p>
                       <div class="abstract">
                         <p>A modifier that will narrow down the document set of the sub aggregations it precedes.</p>
 
+<p>Enums with an associated value of QueryFilterAggregation:
+   QueryAggregation</p>
+
                         <a href="Structs/QueryFilterAggregation.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
@@ -782,6 +1295,65 @@ average, and unique_count.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryFilterAggregation</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV223QueryGroupByAggregationV"></a>
+                    <a name="//apple_ref/swift/Struct/QueryGroupByAggregation" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV223QueryGroupByAggregationV">QueryGroupByAggregation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Returns the top values for the field specified.</p>
+
+<p>Enums with an associated value of QueryGroupByAggregation:
+   QueryAggregation</p>
+
+                        <a href="Structs/QueryGroupByAggregation.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryGroupByAggregation</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV229QueryGroupByAggregationResultV"></a>
+                    <a name="//apple_ref/swift/Struct/QueryGroupByAggregationResult" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV229QueryGroupByAggregationResultV">QueryGroupByAggregationResult</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Top value result for the term aggregation.</p>
+
+                        <a href="Structs/QueryGroupByAggregationResult.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryGroupByAggregationResult</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -803,6 +1375,9 @@ average, and unique_count.</p>
                       <div class="abstract">
                         <p>Numeric interval segments to categorize documents by using field values from a single numeric field to describe the
 category.</p>
+
+<p>Enums with an associated value of QueryHistogramAggregation:
+   QueryAggregation</p>
 
                         <a href="Structs/QueryHistogramAggregation.html" class="slightly-smaller">See more</a>
                       </div>
@@ -945,6 +1520,9 @@ category.</p>
                         <p>A restriction that alter the document set used for sub aggregations it precedes to nested documents found in the field
 specified.</p>
 
+<p>Enums with an associated value of QueryNestedAggregation:
+   QueryAggregation</p>
+
                         <a href="Structs/QueryNestedAggregation.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
@@ -989,34 +1567,6 @@ specified.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV218QueryNoticesResultV"></a>
-                    <a name="//apple_ref/swift/Struct/QueryNoticesResult" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV218QueryNoticesResultV">QueryNoticesResult</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Result document for the specified query.</p>
-
-                        <a href="Structs/QueryNoticesResult.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryNoticesResult</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/s:11DiscoveryV213QueryResponseV"></a>
                     <a name="//apple_ref/swift/Struct/QueryResponse" class="dashAnchor"></a>
                     <a class="token" href="#/s:11DiscoveryV213QueryResponseV">QueryResponse</a>
@@ -1036,6 +1586,34 @@ specified.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryResponse</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV220QueryResponsePassageV"></a>
+                    <a name="//apple_ref/swift/Struct/QueryResponsePassage" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV220QueryResponsePassageV">QueryResponsePassage</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A passage query response.</p>
+
+                        <a href="Structs/QueryResponsePassage.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">QueryResponsePassage</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1197,6 +1775,9 @@ specified.</p>
                       <div class="abstract">
                         <p>Returns the top values for the field specified.</p>
 
+<p>Enums with an associated value of QueryTermAggregation:
+   QueryAggregation</p>
+
                         <a href="Structs/QueryTermAggregation.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
@@ -1253,6 +1834,9 @@ specified.</p>
                       <div class="abstract">
                         <p>A specialized histogram aggregation that uses dates to create interval segments.</p>
 
+<p>Enums with an associated value of QueryTimesliceAggregation:
+   QueryAggregation</p>
+
                         <a href="Structs/QueryTimesliceAggregation.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
@@ -1308,6 +1892,9 @@ specified.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Returns the top documents ranked by the score of the query.</p>
+
+<p>Enums with an associated value of QueryTopHitsAggregation:
+   QueryAggregation</p>
 
                         <a href="Structs/QueryTopHitsAggregation.html" class="slightly-smaller">See more</a>
                       </div>
@@ -1919,7 +2506,7 @@ otherwise, the same value as <code>row_header_texts</code>.</p>
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

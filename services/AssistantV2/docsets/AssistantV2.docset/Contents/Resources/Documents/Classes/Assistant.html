@@ -8,14 +8,22 @@
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Class/Assistant" class="dashAnchor"></a>
     <a title="Assistant Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">AssistantV2 3.5.0 Docs</a> (78% documented)</p>
+        <p><a href="../index.html">AssistantV2 4.1.0 Docs</a> (80% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -37,6 +45,14 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/RuntimeResponseGeneric.html">RuntimeResponseGeneric</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a href="../Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
@@ -50,6 +66,18 @@
           <li class="nav-group-name">
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/AgentAvailabilityMessage.html">AgentAvailabilityMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BulkClassifyOutput.html">BulkClassifyOutput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BulkClassifyResponse.html">BulkClassifyResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/BulkClassifyUtterance.html">BulkClassifyUtterance</a>
+              </li>
               <li class="nav-group-task">
                 <a href="../Structs/CaptureGroup.html">CaptureGroup</a>
               </li>
@@ -66,6 +94,9 @@
                 <a href="../Structs/DialogNodeAction/TypeEnum.html">– TypeEnum</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/DialogNodeOutputConnectToAgentTransferInfo.html">DialogNodeOutputConnectToAgentTransferInfo</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/DialogNodeOutputOptionsElement.html">DialogNodeOutputOptionsElement</a>
               </li>
               <li class="nav-group-task">
@@ -79,6 +110,15 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/DialogSuggestionValue.html">DialogSuggestionValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Log.html">Log</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogCollection.html">LogCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogPagination.html">LogPagination</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/MessageContext.html">MessageContext</a>
@@ -100,9 +140,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/MessageContextSkillSystem.html">MessageContextSkillSystem</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/MessageContextSkills.html">MessageContextSkills</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/MessageContextStateless.html">MessageContextStateless</a>
@@ -141,6 +178,9 @@
                 <a href="../Structs/MessageOutputSpelling.html">MessageOutputSpelling</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/MessageRequest.html">MessageRequest</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/MessageResponse.html">MessageResponse</a>
               </li>
               <li class="nav-group-task">
@@ -168,13 +208,49 @@
                 <a href="../Structs/RuntimeIntent.html">RuntimeIntent</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/RuntimeResponseGeneric.html">RuntimeResponseGeneric</a>
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeConnectToAgent.html">RuntimeResponseGenericRuntimeResponseTypeConnectToAgent</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/RuntimeResponseGeneric/ResponseType.html">– ResponseType</a>
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeConnectToAgent/ResponseType.html">– ResponseType</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/RuntimeResponseGeneric/Preference.html">– Preference</a>
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeImage.html">RuntimeResponseGenericRuntimeResponseTypeImage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeImage/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeOption.html">RuntimeResponseGenericRuntimeResponseTypeOption</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeOption/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeOption/Preference.html">– Preference</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypePause.html">RuntimeResponseGenericRuntimeResponseTypePause</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypePause/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeSearch.html">RuntimeResponseGenericRuntimeResponseTypeSearch</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeSearch/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeSuggestion.html">RuntimeResponseGenericRuntimeResponseTypeSuggestion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeSuggestion/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeText.html">RuntimeResponseGenericRuntimeResponseTypeText</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeText/ResponseType.html">– ResponseType</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/SearchResult.html">SearchResult</a>
@@ -233,6 +309,7 @@
             <h1>Assistant</h1>
               <div class="declaration">
                 <div class="language">
+                  
                   <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Assistant</span></code></pre>
 
                 </div>
@@ -267,6 +344,61 @@ receive a response.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV20A0C7versionSSvp"></a>
+                    <a name="//apple_ref/swift/Property/version" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV20A0C7versionSSvp">version</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The current version is
+<code>2020-04-01</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">version</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV20A0C18defaultServiceNameSSvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/defaultServiceName" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV20A0C18defaultServiceNameSSvpZ">defaultServiceName</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Service identifiers</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">defaultServiceName</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -331,8 +463,8 @@ receive a response.</p>
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/init(version:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">init(version:<wbr>)</a>
+                    <a name="//apple_ref/swift/Method/init(version:authenticator:serviceName:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">init(version:<wbr>authenticator:<wbr>serviceName:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -342,12 +474,18 @@ receive a response.</p>
                       <div class="abstract">
                         <p>Create a <code>Assistant</code> object.</p>
 
-<p>This initializer will retrieve credentials from the environment or a local credentials file.
+<p>If an authenticator is not supplied, the initializer will retrieve credentials from the environment or
+a local credentials file and construct an appropriate authenticator using these credentials.
 The credentials file can be downloaded from your service instance on IBM Cloud as ibm-credentials.env.
 Make sure to add the credentials file to your project so that it can be loaded at runtime.</p>
 
-<p>If credentials are not available in the environment or a local credentials file, initialization will fail.
+<p>If an authenticator is not supplied and credentials are not available in the environment or a local
+credentials file, initialization will fail by throwing an exception.
 In that case, try another initializer that directly passes in the credentials.</p>
+
+<ul>
+<li>serviceName: String = defaultServiceName</li>
+</ul>
 
                       </div>
                     </section>
@@ -389,8 +527,8 @@ In that case, try another initializer that directly passes in the credentials.</
                               </td>
                               <td>
                                 <div>
-                                  <p>The release date of the version of the API to use. Specify the date
-in &ldquo;YYYY-MM-DD&rdquo; format.</p>
+                                  <p>Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The
+current version is <code>2020-04-01</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -629,8 +767,7 @@ see the <a href="https://cloud.ibm.com/docs/assistant?topic=assistant-assistant-
                         <p>Send user input to assistant (stateful).</p>
 
 <p>Send user input to an assistant and receive a response, with conversation state (including context data) stored by
-Watson Assistant for the duration of the session.
-There is no rate limit for this operation.</p>
+Watson Assistant for the duration of the session.</p>
 
                       </div>
                       <div class="declaration">
@@ -751,8 +888,7 @@ basis.
                         <p>Send user input to assistant (stateless).</p>
 
 <p>Send user input to an assistant and receive a response, with conversation state (including context data) managed by
-your application.
-There is no rate limit for this operation.</p>
+your application.</p>
 
                       </div>
                       <div class="declaration">
@@ -844,13 +980,319 @@ session state, include the context from the previous response.
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV20A0C12bulkClassify7skillID5input7headers17completionHandlerySS_SayAA04BulkD9UtteranceVGSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0kdP0VGSg_AO0O5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/bulkClassify(skillID:input:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV20A0C12bulkClassify7skillID5input7headers17completionHandlerySS_SayAA04BulkD9UtteranceVGSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0kdP0VGSg_AO0O5ErrorOSgtctF">bulkClassify(skillID:<wbr>input:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Identify intents and entities in multiple user utterances.</p>
+
+<p>Send multiple user inputs to a dialog skill in a single request and receive information about the intents and
+entities recognized in each input. This method is useful for testing and comparing the performance of different
+skills or skill versions.
+This method is available only with Premium plans.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">bulkClassify</span><span class="p">(</span>
+    <span class="nv">skillID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">input</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/BulkClassifyUtterance.html">BulkClassifyUtterance</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11AssistantV214WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/BulkClassifyResponse.html">BulkClassifyResponse</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11AssistantV211WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>skillID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Unique identifier of the skill. To find the skill ID in the Watson Assistant user interface,
+open the skill settings and click <strong>API Details</strong>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>input</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of input utterances to classify.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV20A0C8listLogs11assistantID4sort6filter9pageLimit6cursor7headers17completionHandlerySS_SSSgALSiSgALSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA13LogCollectionVGSg_AP0Q5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/listLogs(assistantID:sort:filter:pageLimit:cursor:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV20A0C8listLogs11assistantID4sort6filter9pageLimit6cursor7headers17completionHandlerySS_SSSgALSiSgALSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA13LogCollectionVGSg_AP0Q5ErrorOSgtctF">listLogs(assistantID:<wbr>sort:<wbr>filter:<wbr>pageLimit:<wbr>cursor:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List log events for an assistant.</p>
+
+<p>List the events from the log of an assistant.
+This method is available only with Premium plans.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listLogs</span><span class="p">(</span>
+    <span class="nv">assistantID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">filter</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">pageLimit</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">cursor</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11AssistantV214WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/LogCollection.html">LogCollection</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11AssistantV211WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>assistantID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Unique identifier of the assistant. To find the assistant ID in the Watson Assistant
+user interface, open the assistant settings and click <strong>API Details</strong>. For information about creating assistants,
+see the <a href="https://cloud.ibm.com/docs/assistant?topic=assistant-assistant-add#assistant-add-task">documentation</a>.
+<strong>Note:</strong> Currently, the v2 API does not support creating assistants.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sort</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>How to sort the returned log events. You can sort by <strong>request_timestamp</strong>. To reverse the sort
+order, prefix the parameter value with a minus sign (<code>-</code>).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>filter</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A cacheable parameter that limits the results to those matching the specified filter. For
+more information, see the
+<a href="https://cloud.ibm.com/docs/assistant?topic=assistant-filter-reference#filter-reference">documentation</a>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>pageLimit</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The number of records to return in each page of results.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>cursor</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A token identifying the page of results to retrieve.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV20A0C14deleteUserData10customerID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AJ0M5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/deleteUserData(customerID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV20A0C14deleteUserData10customerID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AJ0M5ErrorOSgtctF">deleteUserData(customerID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete labeled data.</p>
+
+<p>Deletes all data associated with a specified customer ID. The method has no effect if no data is associated with
+the customer ID.
+You associate a customer ID with data by passing the <code>X-Watson-Metadata</code> header with a request that passes data.
+For more information about personal data and customer IDs, see <a href="https://cloud.ibm.com/docs/assistant?topic=assistant-information-security#information-security">Information
+security</a>.
+This operation is limited to 4 requests per minute. For more information, see <strong>Rate limiting</strong>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteUserData</span><span class="p">(</span>
+    <span class="nv">customerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11AssistantV214WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11AssistantV211WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>customerID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The customer ID for which all data is to be deleted.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
           </section>
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

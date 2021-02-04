@@ -8,13 +8,21 @@
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
     
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a title="AssistantV2  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">AssistantV2 3.5.0 Docs</a> (78% documented)</p>
+        <p><a href="index.html">AssistantV2 4.1.0 Docs</a> (80% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -36,6 +44,14 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/RuntimeResponseGeneric.html">RuntimeResponseGeneric</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a href="Extensions.html">Extensions</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
@@ -49,6 +65,18 @@
           <li class="nav-group-name">
             <a href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/AgentAvailabilityMessage.html">AgentAvailabilityMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/BulkClassifyOutput.html">BulkClassifyOutput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/BulkClassifyResponse.html">BulkClassifyResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/BulkClassifyUtterance.html">BulkClassifyUtterance</a>
+              </li>
               <li class="nav-group-task">
                 <a href="Structs/CaptureGroup.html">CaptureGroup</a>
               </li>
@@ -65,6 +93,9 @@
                 <a href="Structs/DialogNodeAction/TypeEnum.html">– TypeEnum</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/DialogNodeOutputConnectToAgentTransferInfo.html">DialogNodeOutputConnectToAgentTransferInfo</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/DialogNodeOutputOptionsElement.html">DialogNodeOutputOptionsElement</a>
               </li>
               <li class="nav-group-task">
@@ -78,6 +109,15 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/DialogSuggestionValue.html">DialogSuggestionValue</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Log.html">Log</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LogCollection.html">LogCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LogPagination.html">LogPagination</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/MessageContext.html">MessageContext</a>
@@ -99,9 +139,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/MessageContextSkillSystem.html">MessageContextSkillSystem</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/MessageContextSkills.html">MessageContextSkills</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/MessageContextStateless.html">MessageContextStateless</a>
@@ -140,6 +177,9 @@
                 <a href="Structs/MessageOutputSpelling.html">MessageOutputSpelling</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/MessageRequest.html">MessageRequest</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/MessageResponse.html">MessageResponse</a>
               </li>
               <li class="nav-group-task">
@@ -167,13 +207,49 @@
                 <a href="Structs/RuntimeIntent.html">RuntimeIntent</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/RuntimeResponseGeneric.html">RuntimeResponseGeneric</a>
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeConnectToAgent.html">RuntimeResponseGenericRuntimeResponseTypeConnectToAgent</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/RuntimeResponseGeneric/ResponseType.html">– ResponseType</a>
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeConnectToAgent/ResponseType.html">– ResponseType</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/RuntimeResponseGeneric/Preference.html">– Preference</a>
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeImage.html">RuntimeResponseGenericRuntimeResponseTypeImage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeImage/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeOption.html">RuntimeResponseGenericRuntimeResponseTypeOption</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeOption/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeOption/Preference.html">– Preference</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypePause.html">RuntimeResponseGenericRuntimeResponseTypePause</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypePause/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeSearch.html">RuntimeResponseGenericRuntimeResponseTypeSearch</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeSearch/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeSuggestion.html">RuntimeResponseGenericRuntimeResponseTypeSuggestion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeSuggestion/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeText.html">RuntimeResponseGenericRuntimeResponseTypeText</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeText/ResponseType.html">– ResponseType</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/SearchResult.html">SearchResult</a>
@@ -235,7 +311,7 @@
 <ul>
 <li><a href="https://cloud.ibm.com/apidocs/assistant/assistant-v2?code=swift">IBM Watson Assistant V2 - API Reference</a></li>
 <li><a href="https://www.ibm.com/cloud/watson-assistant/">IBM Watson Assistant V2 - Service Page</a></li>
-<li><a href="https://cloud.ibm.com/docs/services/assistant/index.html#about">IBM Watson Assistant V2 - Documentation</a></li>
+<li><a href="https://cloud.ibm.com/docs/assistant/index.html#about">IBM Watson Assistant V2 - Documentation</a></li>
 </ul>
 
 <p>With the IBM Watson Assistant service you can create cognitive agents &ndash; virtual agents
@@ -271,7 +347,7 @@ that combine machine learning, natural language understanding, and integrated di
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

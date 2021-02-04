@@ -8,14 +8,22 @@
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
     
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Section/Enumerations" class="dashAnchor"></a>
     <a title="Enumerations  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">DiscoveryV2 3.5.0 Docs</a> (85% documented)</p>
+        <p><a href="index.html">DiscoveryV2 4.1.0 Docs</a> (85% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -48,7 +56,19 @@
             <a href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="Structs/AnalyzedDocument.html">AnalyzedDocument</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/AnalyzedResult.html">AnalyzedResult</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/Collection.html">Collection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CollectionDetails.html">CollectionDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CollectionEnrichment.html">CollectionEnrichment</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/Completions.html">Completions</a>
@@ -72,6 +92,24 @@
                 <a href="Structs/ComponentSettingsResponse.html">ComponentSettingsResponse</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/CreateEnrichment.html">CreateEnrichment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CreateEnrichment/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DefaultQueryParams.html">DefaultQueryParams</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DefaultQueryParamsPassages.html">DefaultQueryParamsPassages</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DefaultQueryParamsSuggestedRefinements.html">DefaultQueryParamsSuggestedRefinements</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DefaultQueryParamsTableResults.html">DefaultQueryParamsTableResults</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/DeleteDocumentResponse.html">DeleteDocumentResponse</a>
               </li>
               <li class="nav-group-task">
@@ -85,6 +123,18 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/DocumentAttribute.html">DocumentAttribute</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Enrichment.html">Enrichment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Enrichment/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/EnrichmentOptions.html">EnrichmentOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Enrichments.html">Enrichments</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/Field.html">Field</a>
@@ -102,16 +152,40 @@
                 <a href="Structs/ListFieldsResponse.html">ListFieldsResponse</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/ListProjectsResponse.html">ListProjectsResponse</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/Notice.html">Notice</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/Notice/Severity.html">– Severity</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/ProjectDetails.html">ProjectDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ProjectDetails/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ProjectListDetails.html">ProjectListDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ProjectListDetails/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ProjectListDetailsRelevancyTrainingStatus.html">ProjectListDetailsRelevancyTrainingStatus</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/QueryCalculationAggregation.html">QueryCalculationAggregation</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/QueryFilterAggregation.html">QueryFilterAggregation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/QueryGroupByAggregation.html">QueryGroupByAggregation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/QueryGroupByAggregationResult.html">QueryGroupByAggregationResult</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/QueryHistogramAggregation.html">QueryHistogramAggregation</a>
@@ -135,13 +209,10 @@
                 <a href="Structs/QueryNoticesResponse.html">QueryNoticesResponse</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/QueryNoticesResult.html">QueryNoticesResult</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/QueryNoticesResult/FileType.html">– FileType</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Structs/QueryResponse.html">QueryResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/QueryResponsePassage.html">QueryResponsePassage</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/QueryResult.html">QueryResult</a>
@@ -304,7 +375,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An aggregation produced by the Discovery service to analyze the input provided.</p>
+                        <p>An abstract aggregation type produced by Discovery to analyze the input provided.</p>
 
                         <a href="Enums/QueryAggregation.html" class="slightly-smaller">See more</a>
                       </div>
@@ -325,7 +396,7 @@
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

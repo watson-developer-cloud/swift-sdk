@@ -8,14 +8,22 @@
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
     
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Section/Structures" class="dashAnchor"></a>
     <a title="Structures  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">VisualRecognitionV4 3.5.0 Docs</a> (83% documented)</p>
+        <p><a href="index.html">VisualRecognitionV4 4.1.0 Docs</a> (84% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -47,6 +55,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/CollectionObjects.html">CollectionObjects</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/CollectionTrainingStatus.html">CollectionTrainingStatus</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/CollectionsList.html">CollectionsList</a>
@@ -98,6 +109,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/ObjectDetail.html">ObjectDetail</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ObjectDetailLocation.html">ObjectDetailLocation</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/ObjectMetadata.html">ObjectMetadata</a>
@@ -265,6 +279,34 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CollectionObjects</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19VisualRecognitionV424CollectionTrainingStatusV"></a>
+                    <a name="//apple_ref/swift/Struct/CollectionTrainingStatus" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV424CollectionTrainingStatusV">CollectionTrainingStatus</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Training status information for the collection.</p>
+
+                        <a href="Structs/CollectionTrainingStatus.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CollectionTrainingStatus</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -666,6 +708,34 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:19VisualRecognitionV420ObjectDetailLocationV"></a>
+                    <a name="//apple_ref/swift/Struct/ObjectDetailLocation" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19VisualRecognitionV420ObjectDetailLocationV">ObjectDetailLocation</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Defines the location of the bounding box around the object.</p>
+
+                        <a href="Structs/ObjectDetailLocation.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ObjectDetailLocation</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:19VisualRecognitionV414ObjectMetadataV"></a>
                     <a name="//apple_ref/swift/Struct/ObjectMetadata" class="dashAnchor"></a>
                     <a class="token" href="#/s:19VisualRecognitionV414ObjectMetadataV">ObjectMetadata</a>
@@ -949,7 +1019,7 @@
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

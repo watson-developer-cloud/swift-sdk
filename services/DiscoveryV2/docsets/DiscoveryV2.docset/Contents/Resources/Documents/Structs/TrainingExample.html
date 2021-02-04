@@ -8,14 +8,22 @@
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Struct/TrainingExample" class="dashAnchor"></a>
     <a title="TrainingExample Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">DiscoveryV2 3.5.0 Docs</a> (85% documented)</p>
+        <p><a href="../index.html">DiscoveryV2 4.1.0 Docs</a> (85% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -48,7 +56,19 @@
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Structs/AnalyzedDocument.html">AnalyzedDocument</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AnalyzedResult.html">AnalyzedResult</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/Collection.html">Collection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CollectionDetails.html">CollectionDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CollectionEnrichment.html">CollectionEnrichment</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Completions.html">Completions</a>
@@ -72,6 +92,24 @@
                 <a href="../Structs/ComponentSettingsResponse.html">ComponentSettingsResponse</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/CreateEnrichment.html">CreateEnrichment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateEnrichment/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DefaultQueryParams.html">DefaultQueryParams</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DefaultQueryParamsPassages.html">DefaultQueryParamsPassages</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DefaultQueryParamsSuggestedRefinements.html">DefaultQueryParamsSuggestedRefinements</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DefaultQueryParamsTableResults.html">DefaultQueryParamsTableResults</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/DeleteDocumentResponse.html">DeleteDocumentResponse</a>
               </li>
               <li class="nav-group-task">
@@ -85,6 +123,18 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/DocumentAttribute.html">DocumentAttribute</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Enrichment.html">Enrichment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Enrichment/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/EnrichmentOptions.html">EnrichmentOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Enrichments.html">Enrichments</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Field.html">Field</a>
@@ -102,16 +152,40 @@
                 <a href="../Structs/ListFieldsResponse.html">ListFieldsResponse</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/ListProjectsResponse.html">ListProjectsResponse</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/Notice.html">Notice</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Notice/Severity.html">– Severity</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/ProjectDetails.html">ProjectDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ProjectDetails/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ProjectListDetails.html">ProjectListDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ProjectListDetails/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ProjectListDetailsRelevancyTrainingStatus.html">ProjectListDetailsRelevancyTrainingStatus</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/QueryCalculationAggregation.html">QueryCalculationAggregation</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/QueryFilterAggregation.html">QueryFilterAggregation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryGroupByAggregation.html">QueryGroupByAggregation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryGroupByAggregationResult.html">QueryGroupByAggregationResult</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/QueryHistogramAggregation.html">QueryHistogramAggregation</a>
@@ -135,13 +209,10 @@
                 <a href="../Structs/QueryNoticesResponse.html">QueryNoticesResponse</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/QueryNoticesResult.html">QueryNoticesResult</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/QueryNoticesResult/FileType.html">– FileType</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/QueryResponse.html">QueryResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryResponsePassage.html">QueryResponsePassage</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/QueryResult.html">QueryResult</a>
@@ -287,6 +358,7 @@
             <h1>TrainingExample</h1>
               <div class="declaration">
                 <div class="language">
+                  
                   <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">TrainingExample</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                 </div>
@@ -435,9 +507,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV215TrainingExampleV10documentID010collectionF09relevance7created7updatedACSS_SSSi10Foundation4DateVSgALtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(documentID:collectionID:relevance:created:updated:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV215TrainingExampleV10documentID010collectionF09relevance7created7updatedACSS_SSSi10Foundation4DateVSgALtcfc">init(documentID:<wbr>collectionID:<wbr>relevance:<wbr>created:<wbr>updated:<wbr>)</a>
+                    <a name="/s:11DiscoveryV215TrainingExampleV10documentID010collectionF09relevanceACSS_SSSitcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(documentID:collectionID:relevance:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV215TrainingExampleV10documentID010collectionF09relevanceACSS_SSSitcfc">init(documentID:<wbr>collectionID:<wbr>relevance:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -455,9 +527,7 @@
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
     <span class="nv">documentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">relevance</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span>
-    <span class="nv">created</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">updated</span><span class="p">:</span> <span class="kt">Date</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+    <span class="nv">relevance</span><span class="p">:</span> <span class="kt">Int</span>
 <span class="p">)</span></code></pre>
 
                         </div>
@@ -502,30 +572,6 @@
                                 </div>
                               </td>
                             </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>created</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The date and time the example was created.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>updated</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The date and time the example was updated.</p>
-                                </div>
-                              </td>
-                            </tr>
                           </tbody>
                         </table>
                       </div>
@@ -542,7 +588,7 @@
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

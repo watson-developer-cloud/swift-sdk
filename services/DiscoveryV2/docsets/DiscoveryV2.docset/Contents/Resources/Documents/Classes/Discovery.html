@@ -8,14 +8,22 @@
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Class/Discovery" class="dashAnchor"></a>
     <a title="Discovery Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">DiscoveryV2 3.5.0 Docs</a> (85% documented)</p>
+        <p><a href="../index.html">DiscoveryV2 4.1.0 Docs</a> (85% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -48,7 +56,19 @@
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Structs/AnalyzedDocument.html">AnalyzedDocument</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/AnalyzedResult.html">AnalyzedResult</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/Collection.html">Collection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CollectionDetails.html">CollectionDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CollectionEnrichment.html">CollectionEnrichment</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Completions.html">Completions</a>
@@ -72,6 +92,24 @@
                 <a href="../Structs/ComponentSettingsResponse.html">ComponentSettingsResponse</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/CreateEnrichment.html">CreateEnrichment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CreateEnrichment/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DefaultQueryParams.html">DefaultQueryParams</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DefaultQueryParamsPassages.html">DefaultQueryParamsPassages</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DefaultQueryParamsSuggestedRefinements.html">DefaultQueryParamsSuggestedRefinements</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/DefaultQueryParamsTableResults.html">DefaultQueryParamsTableResults</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/DeleteDocumentResponse.html">DeleteDocumentResponse</a>
               </li>
               <li class="nav-group-task">
@@ -85,6 +123,18 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/DocumentAttribute.html">DocumentAttribute</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Enrichment.html">Enrichment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Enrichment/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/EnrichmentOptions.html">EnrichmentOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Enrichments.html">Enrichments</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Field.html">Field</a>
@@ -102,16 +152,40 @@
                 <a href="../Structs/ListFieldsResponse.html">ListFieldsResponse</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/ListProjectsResponse.html">ListProjectsResponse</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/Notice.html">Notice</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Notice/Severity.html">– Severity</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/ProjectDetails.html">ProjectDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ProjectDetails/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ProjectListDetails.html">ProjectListDetails</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ProjectListDetails/TypeEnum.html">– TypeEnum</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ProjectListDetailsRelevancyTrainingStatus.html">ProjectListDetailsRelevancyTrainingStatus</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/QueryCalculationAggregation.html">QueryCalculationAggregation</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/QueryFilterAggregation.html">QueryFilterAggregation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryGroupByAggregation.html">QueryGroupByAggregation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryGroupByAggregationResult.html">QueryGroupByAggregationResult</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/QueryHistogramAggregation.html">QueryHistogramAggregation</a>
@@ -135,13 +209,10 @@
                 <a href="../Structs/QueryNoticesResponse.html">QueryNoticesResponse</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/QueryNoticesResult.html">QueryNoticesResult</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/QueryNoticesResult/FileType.html">– FileType</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/QueryResponse.html">QueryResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/QueryResponsePassage.html">QueryResponsePassage</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/QueryResult.html">QueryResult</a>
@@ -287,14 +358,15 @@
             <h1>Discovery</h1>
               <div class="declaration">
                 <div class="language">
+                  
                   <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Discovery</span></code></pre>
 
                 </div>
               </div>
-            <p>IBM Watson&trade; Discovery for IBM Cloud Pak for Data is a cognitive search and content analytics engine that you can
-add to applications to identify patterns, trends and actionable insights to drive better decision-making. Securely
-unify structured and unstructured data with pre-enriched content, and use a simplified query language to eliminate the
-need for manual filtering of results.</p>
+            <p>IBM Watson&trade; Discovery is a cognitive search and content analytics engine that you can add to applications to
+identify patterns, trends and actionable insights to drive better decision-making. Securely unify structured and
+unstructured data with pre-enriched content, and use a simplified query language to eliminate the need for manual
+filtering of results.</p>
 
           </section>
           <section class="section task-group-section">
@@ -321,6 +393,61 @@ need for manual filtering of results.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">serviceURL</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV20A0C7versionSSvp"></a>
+                    <a name="//apple_ref/swift/Property/version" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV20A0C7versionSSvp">version</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Release date of the version of the API you want to use. Specify dates in YYYY-MM-DD format. The current version
+is <code>2019-11-22</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">version</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV20A0C18defaultServiceNameSSvpZ"></a>
+                    <a name="//apple_ref/swift/Variable/defaultServiceName" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV20A0C18defaultServiceNameSSvpZ">defaultServiceName</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Service identifiers</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="k">let</span> <span class="nv">defaultServiceName</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -385,8 +512,8 @@ need for manual filtering of results.</p>
                   <div>
                     <code>
                     <a name="/"></a>
-                    <a name="//apple_ref/swift/Method/init(version:)" class="dashAnchor"></a>
-                    <a class="token" href="#/">init(version:<wbr>)</a>
+                    <a name="//apple_ref/swift/Method/init(version:authenticator:serviceName:)" class="dashAnchor"></a>
+                    <a class="token" href="#/">init(version:<wbr>authenticator:<wbr>serviceName:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -396,12 +523,18 @@ need for manual filtering of results.</p>
                       <div class="abstract">
                         <p>Create a <code>Discovery</code> object.</p>
 
-<p>This initializer will retrieve credentials from the environment or a local credentials file.
+<p>If an authenticator is not supplied, the initializer will retrieve credentials from the environment or
+a local credentials file and construct an appropriate authenticator using these credentials.
 The credentials file can be downloaded from your service instance on IBM Cloud as ibm-credentials.env.
 Make sure to add the credentials file to your project so that it can be loaded at runtime.</p>
 
-<p>If credentials are not available in the environment or a local credentials file, initialization will fail.
+<p>If an authenticator is not supplied and credentials are not available in the environment or a local
+credentials file, initialization will fail by throwing an exception.
 In that case, try another initializer that directly passes in the credentials.</p>
+
+<ul>
+<li>serviceName: String = defaultServiceName</li>
+</ul>
 
                       </div>
                     </section>
@@ -443,8 +576,8 @@ In that case, try another initializer that directly passes in the credentials.</
                               </td>
                               <td>
                                 <div>
-                                  <p>The release date of the version of the API to use. Specify the date
-in &ldquo;YYYY-MM-DD&rdquo; format.</p>
+                                  <p>Release date of the version of the API you want to use. Specify dates in YYYY-MM-DD format.
+The current version is <code>2019-11-22</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -573,6 +706,441 @@ administrative tooling.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:11DiscoveryV20A0C16createCollection9projectID4name11description8language11enrichments7headers17completionHandlerySS_S2SSgALSayAA0D10EnrichmentVGSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D7DetailsVGSg_AS0Q5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/createCollection(projectID:name:description:language:enrichments:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV20A0C16createCollection9projectID4name11description8language11enrichments7headers17completionHandlerySS_S2SSgALSayAA0D10EnrichmentVGSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D7DetailsVGSg_AS0Q5ErrorOSgtctF">createCollection(projectID:<wbr>name:<wbr>description:<wbr>language:<wbr>enrichments:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a collection.</p>
+
+<p>Create a new collection in the specified project.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createCollection</span><span class="p">(</span>
+    <span class="nv">projectID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">enrichments</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/CollectionEnrichment.html">CollectionEnrichment</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV214WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/CollectionDetails.html">CollectionDetails</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV211WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>projectID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the project. This information can be found from the deploy page of the Discovery
+administrative tooling.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the collection.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>description</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A description of the collection.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>language</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The language of the collection.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>enrichments</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of enrichments that are applied to this collection.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV20A0C13getCollection9projectID010collectionF07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D7DetailsVGSg_AK0M5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/getCollection(projectID:collectionID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV20A0C13getCollection9projectID010collectionF07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D7DetailsVGSg_AK0M5ErrorOSgtctF">getCollection(projectID:<wbr>collectionID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get collection.</p>
+
+<p>Get details about the specified collection.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getCollection</span><span class="p">(</span>
+    <span class="nv">projectID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV214WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/CollectionDetails.html">CollectionDetails</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV211WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>projectID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the project. This information can be found from the deploy page of the Discovery
+administrative tooling.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>collectionID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the collection.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV20A0C16updateCollection9projectID010collectionF04name11description11enrichments7headers17completionHandlerySS_S2SSgALSayAA0D10EnrichmentVGSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D7DetailsVGSg_AS0Q5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/updateCollection(projectID:collectionID:name:description:enrichments:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV20A0C16updateCollection9projectID010collectionF04name11description11enrichments7headers17completionHandlerySS_S2SSgALSayAA0D10EnrichmentVGSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D7DetailsVGSg_AS0Q5ErrorOSgtctF">updateCollection(projectID:<wbr>collectionID:<wbr>name:<wbr>description:<wbr>enrichments:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Update a collection.</p>
+
+<p>Updates the specified collection&rsquo;s name, description, and enrichments.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateCollection</span><span class="p">(</span>
+    <span class="nv">projectID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">enrichments</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/CollectionEnrichment.html">CollectionEnrichment</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV214WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/CollectionDetails.html">CollectionDetails</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV211WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>projectID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the project. This information can be found from the deploy page of the Discovery
+administrative tooling.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>collectionID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the collection.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the collection.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>description</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A description of the collection.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>enrichments</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An array of enrichments that are applied to this collection.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV20A0C16deleteCollection9projectID010collectionF07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AK0M5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/deleteCollection(projectID:collectionID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV20A0C16deleteCollection9projectID010collectionF07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AK0M5ErrorOSgtctF">deleteCollection(projectID:<wbr>collectionID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete a collection.</p>
+
+<p>Deletes the specified collection from the project. All documents stored in the specified collection and not shared
+is also deleted.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteCollection</span><span class="p">(</span>
+    <span class="nv">projectID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV214WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV211WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>projectID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the project. This information can be found from the deploy page of the Discovery
+administrative tooling.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>collectionID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the collection.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:11DiscoveryV20A0C5query9projectID13collectionIDs6filterAD20naturalLanguageQuery11aggregation5count6return6offset4sort9highlight19spellingSuggestions12tableResults20suggestedRefinements8passages7headers17completionHandlerySS_SaySSGSgSSSgA3WSiSgAvxWSbSgAyA0k10LargeTableU0VSgAA0k14LargeSuggestedW0VSgAA0K13LargePassagesVSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0K8ResponseVGSg_A9_9RestErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/query(projectID:collectionIDs:filter:query:naturalLanguageQuery:aggregation:count:return:offset:sort:highlight:spellingSuggestions:tableResults:suggestedRefinements:passages:headers:completionHandler:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:11DiscoveryV20A0C5query9projectID13collectionIDs6filterAD20naturalLanguageQuery11aggregation5count6return6offset4sort9highlight19spellingSuggestions12tableResults20suggestedRefinements8passages7headers17completionHandlerySS_SaySSGSgSSSgA3WSiSgAvxWSbSgAyA0k10LargeTableU0VSgAA0k14LargeSuggestedW0VSgAA0K13LargePassagesVSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0K8ResponseVGSg_A9_9RestErrorOSgtctF">query(projectID:<wbr>collectionIDs:<wbr>filter:<wbr>query:<wbr>naturalLanguageQuery:<wbr>aggregation:<wbr>count:<wbr>return:<wbr>offset:<wbr>sort:<wbr>highlight:<wbr>spellingSuggestions:<wbr>tableResults:<wbr>suggestedRefinements:<wbr>passages:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
@@ -586,7 +1154,11 @@ administrative tooling.</p>
                         <p>Query a project.</p>
 
 <p>By using this method, you can construct queries. For details, see the <a href="https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-query-concepts">Discovery
-documentation</a>.</p>
+documentation</a>. The default query
+parameters are defined by the settings for this project, see the <a href="https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-project-defaults">Discovery
+documentation</a> for an overview of
+the standard default settings, and see <a href="#create-project">the Projects API documentation</a> for details about how to
+set custom default query settings.</p>
 
                       </div>
                       <div class="declaration">
@@ -601,7 +1173,7 @@ documentation</a>.</p>
     <span class="nv">naturalLanguageQuery</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">aggregation</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="p">`</span><span class="nv">return</span><span class="p">`:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="err">`</span><span class="k">return</span><span class="err">`</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">offset</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">sort</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">highlight</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -853,7 +1425,7 @@ match the query with <code>&lt;em&gt;&lt;/em&gt;</code> tags around the matching
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getAutocompletion</span><span class="p">(</span>
     <span class="nv">projectID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="p">`</span><span class="nv">prefix</span><span class="p">`:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="err">`</span><span class="k">prefix</span><span class="err">`</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">collectionIDs</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">field</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -1197,7 +1769,7 @@ collections in the project are used.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Configuration settings for components.</p>
+                        <p>List component settings.</p>
 
 <p>Returns default configuration settings for components.</p>
 
@@ -1390,7 +1962,8 @@ larger than the supported size are rejected.</p>
                               <td>
                                 <div>
                                   <p>The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are
-rejected. Example:  <code>{
+rejected.
+Example:  <code>{
 &quot;Creator&quot;: &quot;Johnny Appleseed&quot;,
 &quot;Subject&quot;: &quot;Apples&quot;
 }</code>.</p>
@@ -1573,7 +2146,8 @@ larger than the supported size are rejected.</p>
                               <td>
                                 <div>
                                   <p>The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are
-rejected. Example:  <code>{
+rejected.
+Example:  <code>{
 &quot;Creator&quot;: &quot;Johnny Appleseed&quot;,
 &quot;Subject&quot;: &quot;Apples&quot;
 }</code>.</p>
@@ -2228,13 +2802,1122 @@ administrative tooling.</p>
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV20A0C15analyzeDocument9projectID010collectionF04file8filename0H11ContentType8metadata7headers17completionHandlerySS_SS10Foundation4DataVSgSSSgSSAQSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA08AnalyzedD0VGSg_AT0T5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/analyzeDocument(projectID:collectionID:file:filename:fileContentType:metadata:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV20A0C15analyzeDocument9projectID010collectionF04file8filename0H11ContentType8metadata7headers17completionHandlerySS_SS10Foundation4DataVSgSSSgSSAQSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA08AnalyzedD0VGSg_AT0T5ErrorOSgtctF">analyzeDocument(projectID:<wbr>collectionID:<wbr>file:<wbr>filename:<wbr>fileContentType:<wbr>metadata:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Analyze a Document.</p>
+
+<p>Process a document using the specified collection&rsquo;s settings and return it for realtime use.
+<strong>Note:</strong> Documents processed using this method are not added to the specified collection.
+<strong>Note:</strong> This method is only supported on IBM Cloud Pak for Data instances of Discovery.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">analyzeDocument</span><span class="p">(</span>
+    <span class="nv">projectID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">collectionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">filename</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">fileContentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">metadata</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV214WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/AnalyzedDocument.html">AnalyzedDocument</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV211WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>projectID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the project. This information can be found from the deploy page of the Discovery
+administrative tooling.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>collectionID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the collection.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The content of the document to ingest. The maximum supported file size when adding a file to a
+collection is 50 megabytes, the maximum supported file size when testing a configuration is 1 megabyte. Files
+larger than the supported size are rejected.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>filename</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The filename for file.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>fileContentType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The content type of file.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>metadata</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are
+rejected.
+Example:  <code>{
+&quot;Creator&quot;: &quot;Johnny Appleseed&quot;,
+&quot;Subject&quot;: &quot;Apples&quot;
+}</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV20A0C15listEnrichments9projectID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AJ0L5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/listEnrichments(projectID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV20A0C15listEnrichments9projectID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AJ0L5ErrorOSgtctF">listEnrichments(projectID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List Enrichments.</p>
+
+<p>List the enrichments available to this project.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listEnrichments</span><span class="p">(</span>
+    <span class="nv">projectID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV214WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Enrichments.html">Enrichments</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV211WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>projectID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the project. This information can be found from the deploy page of the Discovery
+administrative tooling.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV20A0C16createEnrichment9projectID10enrichment4file0H11ContentType7headers17completionHandlerySS_AA06CreateD0V10Foundation4DataVSgSSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AS0S5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/createEnrichment(projectID:enrichment:file:fileContentType:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV20A0C16createEnrichment9projectID10enrichment4file0H11ContentType7headers17completionHandlerySS_AA06CreateD0V10Foundation4DataVSgSSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AS0S5ErrorOSgtctF">createEnrichment(projectID:<wbr>enrichment:<wbr>file:<wbr>fileContentType:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create an enrichment.</p>
+
+<p>Create an enrichment for use with the specified project/.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createEnrichment</span><span class="p">(</span>
+    <span class="nv">projectID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">enrichment</span><span class="p">:</span> <span class="kt"><a href="../Structs/CreateEnrichment.html">CreateEnrichment</a></span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">Data</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">fileContentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV214WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Enrichment.html">Enrichment</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV211WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>projectID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the project. This information can be found from the deploy page of the Discovery
+administrative tooling.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>enrichment</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p></p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The enrichment file to upload.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV20A0C13getEnrichment9projectID010enrichmentF07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AK0M5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/getEnrichment(projectID:enrichmentID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV20A0C13getEnrichment9projectID010enrichmentF07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AK0M5ErrorOSgtctF">getEnrichment(projectID:<wbr>enrichmentID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get enrichment.</p>
+
+<p>Get details about a specific enrichment.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getEnrichment</span><span class="p">(</span>
+    <span class="nv">projectID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">enrichmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV214WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Enrichment.html">Enrichment</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV211WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>projectID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the project. This information can be found from the deploy page of the Discovery
+administrative tooling.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>enrichmentID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the enrichment.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV20A0C16updateEnrichment9projectID010enrichmentF04name11description7headers17completionHandlerySS_S3SSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AN0O5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/updateEnrichment(projectID:enrichmentID:name:description:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV20A0C16updateEnrichment9projectID010enrichmentF04name11description7headers17completionHandlerySS_S3SSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AN0O5ErrorOSgtctF">updateEnrichment(projectID:<wbr>enrichmentID:<wbr>name:<wbr>description:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Update an enrichment.</p>
+
+<p>Updates an existing enrichment&rsquo;s name and description.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateEnrichment</span><span class="p">(</span>
+    <span class="nv">projectID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">enrichmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV214WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Enrichment.html">Enrichment</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV211WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>projectID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the project. This information can be found from the deploy page of the Discovery
+administrative tooling.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>enrichmentID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the enrichment.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A new name for the enrichment.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>description</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A new description for the enrichment.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV20A0C16deleteEnrichment9projectID010enrichmentF07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AK0M5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/deleteEnrichment(projectID:enrichmentID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV20A0C16deleteEnrichment9projectID010enrichmentF07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AK0M5ErrorOSgtctF">deleteEnrichment(projectID:<wbr>enrichmentID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete an enrichment.</p>
+
+<p>Deletes an existing enrichment from the specified project.
+<strong>Note:</strong> Only enrichments that have been manually created can be deleted.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteEnrichment</span><span class="p">(</span>
+    <span class="nv">projectID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">enrichmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV214WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV211WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>projectID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the project. This information can be found from the deploy page of the Discovery
+administrative tooling.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>enrichmentID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the enrichment.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV20A0C12listProjects7headers17completionHandlerySDyS2SGSg_y15IBMSwiftSDKCore12RestResponseVyAA04ListdK0VGSg_AI0J5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/listProjects(headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV20A0C12listProjects7headers17completionHandlerySDyS2SGSg_y15IBMSwiftSDKCore12RestResponseVyAA04ListdK0VGSg_AI0J5ErrorOSgtctF">listProjects(headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List projects.</p>
+
+<p>Lists existing projects for this instance.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listProjects</span><span class="p">(</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV214WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/ListProjectsResponse.html">ListProjectsResponse</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV211WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV20A0C13createProject4name4type22defaultQueryParameters7headers17completionHandlerySS_SSAA07DefaultH6ParamsVSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D7DetailsVGSg_AO0Q5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/createProject(name:type:defaultQueryParameters:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV20A0C13createProject4name4type22defaultQueryParameters7headers17completionHandlerySS_SSAA07DefaultH6ParamsVSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D7DetailsVGSg_AO0Q5ErrorOSgtctF">createProject(name:<wbr>type:<wbr>defaultQueryParameters:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a Project.</p>
+
+<p>Create a new project for this instance.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createProject</span><span class="p">(</span>
+    <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">type</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="n">defaultQueryParameters</span><span class="p">:</span> <span class="kt"><a href="../Structs/DefaultQueryParams.html">DefaultQueryParams</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV214WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/ProjectDetails.html">ProjectDetails</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV211WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The human readable name of this project.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>type</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The project type of this project.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>defaultQueryParameters</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Default query parameters for this project.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV20A0C10getProject9projectID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D7DetailsVGSg_AJ0L5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/getProject(projectID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV20A0C10getProject9projectID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D7DetailsVGSg_AJ0L5ErrorOSgtctF">getProject(projectID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get project.</p>
+
+<p>Get details on the specified project.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getProject</span><span class="p">(</span>
+    <span class="nv">projectID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV214WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/ProjectDetails.html">ProjectDetails</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV211WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>projectID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the project. This information can be found from the deploy page of the Discovery
+administrative tooling.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV20A0C13updateProject9projectID4name7headers17completionHandlerySS_SSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D7DetailsVGSg_AL0M5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/updateProject(projectID:name:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV20A0C13updateProject9projectID4name7headers17completionHandlerySS_SSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D7DetailsVGSg_AL0M5ErrorOSgtctF">updateProject(projectID:<wbr>name:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Update a project.</p>
+
+<p>Update the specified project&rsquo;s name.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateProject</span><span class="p">(</span>
+    <span class="nv">projectID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV214WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/ProjectDetails.html">ProjectDetails</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV211WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>projectID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the project. This information can be found from the deploy page of the Discovery
+administrative tooling.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The new name to give this project.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV20A0C13deleteProject9projectID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AJ0L5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/deleteProject(projectID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV20A0C13deleteProject9projectID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AJ0L5ErrorOSgtctF">deleteProject(projectID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete a project.</p>
+
+<p>Deletes the specified project.
+<strong>Important:</strong> Deleting a project deletes everything that is part of the specified project, including all
+collections.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteProject</span><span class="p">(</span>
+    <span class="nv">projectID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV214WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV211WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>projectID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The ID of the project. This information can be found from the deploy page of the Discovery
+administrative tooling.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV20A0C14deleteUserData10customerID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AJ0M5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/deleteUserData(customerID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV20A0C14deleteUserData10customerID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AJ0M5ErrorOSgtctF">deleteUserData(customerID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete labeled data.</p>
+
+<p>Deletes all data associated with a specified customer ID. The method has no effect if no data is associated with
+the customer ID.
+You associate a customer ID with data by passing the <strong>X-Watson-Metadata</strong> header with a request that passes data.
+For more information about personal data and customer IDs, see <a href="https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-information-security#information-security">Information
+security</a>.
+<strong>Note:</strong> This method is only supported on IBM Cloud instances of Discovery.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteUserData</span><span class="p">(</span>
+    <span class="nv">customerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV214WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV211WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>customerID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The customer ID for which all data is to be deleted.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
           </section>
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

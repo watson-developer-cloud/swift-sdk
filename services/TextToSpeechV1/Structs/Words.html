@@ -8,14 +8,22 @@
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Struct/Words" class="dashAnchor"></a>
     <a title="Words Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">TextToSpeechV1 3.5.0 Docs</a> (57% documented)</p>
+        <p><a href="../index.html">TextToSpeechV1 4.1.0 Docs</a> (57% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -40,6 +48,12 @@
             <a href="../Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a href="../Structs/CustomModel.html">CustomModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CustomModels.html">CustomModels</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/Pronunciation.html">Pronunciation</a>
               </li>
               <li class="nav-group-task">
@@ -53,12 +67,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Voice.html">Voice</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/VoiceModel.html">VoiceModel</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/VoiceModels.html">VoiceModels</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Voices.html">Voices</a>
@@ -117,13 +125,14 @@
             <h1>Words</h1>
               <div class="declaration">
                 <div class="language">
+                  
                   <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Words</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                 </div>
               </div>
-            <p>For the <strong>Add custom words</strong> method, one or more words that are to be added or updated for the custom voice model and
-the translation for each specified word.
-For the <strong>List custom words</strong> method, the words and their translations from the custom voice model.</p>
+            <p>For the <strong>Add custom words</strong> method, one or more words that are to be added or updated for the custom model and the
+translation for each specified word.
+For the <strong>List custom words</strong> method, the words and their translations from the custom model.</p>
 
           </section>
           <section class="section task-group-section">
@@ -143,10 +152,10 @@ For the <strong>List custom words</strong> method, the words and their translati
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>The <strong>Add custom words</strong> method accepts an array of <code><a href="../Structs/Word.html">Word</a></code> objects. Each object provides a word that is to be added
-or updated for the custom voice model and the word&rsquo;s translation.
+or updated for the custom model and the word&rsquo;s translation.
 The <strong>List custom words</strong> method returns an array of <code><a href="../Structs/Word.html">Word</a></code> objects. Each object shows a word and its translation
-from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before
-lowercase letters. The array is empty if the custom model contains no words.</p>
+from the custom model. The words are listed in alphabetical order, with uppercase letters listed before lowercase
+letters. The array is empty if the custom model contains no words.</p>
 
                       </div>
                       <div class="declaration">
@@ -199,10 +208,10 @@ lowercase letters. The array is empty if the custom model contains no words.</p>
                               <td>
                                 <div>
                                   <p>The <strong>Add custom words</strong> method accepts an array of <code><a href="../Structs/Word.html">Word</a></code> objects. Each object provides a
-word that is to be added or updated for the custom voice model and the word&rsquo;s translation.
+word that is to be added or updated for the custom model and the word&rsquo;s translation.
 The <strong>List custom words</strong> method returns an array of <code><a href="../Structs/Word.html">Word</a></code> objects. Each object shows a word and its translation
-from the custom voice model. The words are listed in alphabetical order, with uppercase letters listed before
-lowercase letters. The array is empty if the custom model contains no words.</p>
+from the custom model. The words are listed in alphabetical order, with uppercase letters listed before lowercase
+letters. The array is empty if the custom model contains no words.</p>
                                 </div>
                               </td>
                             </tr>
@@ -222,7 +231,7 @@ lowercase letters. The array is empty if the custom model contains no words.</p>
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

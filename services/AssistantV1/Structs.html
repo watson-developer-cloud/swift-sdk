@@ -8,14 +8,22 @@
     <script src="js/jquery.min.js" defer></script>
     <script src="js/jazzy.js" defer></script>
     
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
   </head>
   <body>
     <a name="//apple_ref/swift/Section/Structures" class="dashAnchor"></a>
     <a title="Structures  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">AssistantV1 3.5.0 Docs</a> (81% documented)</p>
+        <p><a href="index.html">AssistantV1 4.1.0 Docs</a> (82% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -37,8 +45,31 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/DialogNodeOutputGeneric.html">DialogNodeOutputGeneric</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Enums/RuntimeResponseGeneric.html">RuntimeResponseGeneric</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Structs/AgentAvailabilityMessage.html">AgentAvailabilityMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/BulkClassifyOutput.html">BulkClassifyOutput</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/BulkClassifyResponse.html">BulkClassifyResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/BulkClassifyUtterance.html">BulkClassifyUtterance</a>
+              </li>
               <li class="nav-group-task">
                 <a href="Structs/CaptureGroup.html">CaptureGroup</a>
               </li>
@@ -91,6 +122,9 @@
                 <a href="Structs/DialogNodeCollection.html">DialogNodeCollection</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/DialogNodeContext.html">DialogNodeContext</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/DialogNodeNextStep.html">DialogNodeNextStep</a>
               </li>
               <li class="nav-group-task">
@@ -103,19 +137,52 @@
                 <a href="Structs/DialogNodeOutput.html">DialogNodeOutput</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/DialogNodeOutputGeneric.html">DialogNodeOutputGeneric</a>
+                <a href="Structs/DialogNodeOutputConnectToAgentTransferInfo.html">DialogNodeOutputConnectToAgentTransferInfo</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/DialogNodeOutputGeneric/ResponseType.html">– ResponseType</a>
+                <a href="Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeConnectToAgent.html">DialogNodeOutputGenericDialogNodeOutputResponseTypeConnectToAgent</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/DialogNodeOutputGeneric/SelectionPolicy.html">– SelectionPolicy</a>
+                <a href="Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeConnectToAgent/ResponseType.html">– ResponseType</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/DialogNodeOutputGeneric/Preference.html">– Preference</a>
+                <a href="Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeImage.html">DialogNodeOutputGenericDialogNodeOutputResponseTypeImage</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/DialogNodeOutputGeneric/QueryType.html">– QueryType</a>
+                <a href="Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeImage/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeOption.html">DialogNodeOutputGenericDialogNodeOutputResponseTypeOption</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeOption/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeOption/Preference.html">– Preference</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypePause.html">DialogNodeOutputGenericDialogNodeOutputResponseTypePause</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypePause/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill.html">DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill/QueryType.html">– QueryType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeText.html">DialogNodeOutputGenericDialogNodeOutputResponseTypeText</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeText/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeText/SelectionPolicy.html">– SelectionPolicy</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/DialogNodeOutputModifiers.html">DialogNodeOutputModifiers</a>
@@ -134,18 +201,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/DialogSuggestion.html">DialogSuggestion</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/DialogSuggestionOutput.html">DialogSuggestionOutput</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/DialogSuggestionResponseGeneric.html">DialogSuggestionResponseGeneric</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/DialogSuggestionResponseGeneric/ResponseType.html">– ResponseType</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/DialogSuggestionResponseGeneric/Preference.html">– Preference</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/DialogSuggestionValue.html">DialogSuggestionValue</a>
@@ -232,22 +287,49 @@
                 <a href="Structs/RuntimeIntent.html">RuntimeIntent</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/RuntimeResponseGeneric.html">RuntimeResponseGeneric</a>
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeConnectToAgent.html">RuntimeResponseGenericRuntimeResponseTypeConnectToAgent</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/RuntimeResponseGeneric/ResponseType.html">– ResponseType</a>
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeConnectToAgent/ResponseType.html">– ResponseType</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/RuntimeResponseGeneric/Preference.html">– Preference</a>
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeImage.html">RuntimeResponseGenericRuntimeResponseTypeImage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeImage/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeOption.html">RuntimeResponseGenericRuntimeResponseTypeOption</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeOption/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeOption/Preference.html">– Preference</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypePause.html">RuntimeResponseGenericRuntimeResponseTypePause</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypePause/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeSuggestion.html">RuntimeResponseGenericRuntimeResponseTypeSuggestion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeSuggestion/ResponseType.html">– ResponseType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeText.html">RuntimeResponseGenericRuntimeResponseTypeText</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeText/ResponseType.html">– ResponseType</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/Synonym.html">Synonym</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/SynonymCollection.html">SynonymCollection</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/SystemResponse.html">SystemResponse</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/Value.html">Value</a>
@@ -340,6 +422,118 @@
           <section class="section task-group-section">
             <div class="task-group">
               <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV124AgentAvailabilityMessageV"></a>
+                    <a name="//apple_ref/swift/Struct/AgentAvailabilityMessage" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV124AgentAvailabilityMessageV">AgentAvailabilityMessage</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>AgentAvailabilityMessage.</p>
+
+                        <a href="Structs/AgentAvailabilityMessage.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">AgentAvailabilityMessage</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV118BulkClassifyOutputV"></a>
+                    <a name="//apple_ref/swift/Struct/BulkClassifyOutput" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV118BulkClassifyOutputV">BulkClassifyOutput</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>BulkClassifyOutput.</p>
+
+                        <a href="Structs/BulkClassifyOutput.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">BulkClassifyOutput</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV120BulkClassifyResponseV"></a>
+                    <a name="//apple_ref/swift/Struct/BulkClassifyResponse" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV120BulkClassifyResponseV">BulkClassifyResponse</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>BulkClassifyResponse.</p>
+
+                        <a href="Structs/BulkClassifyResponse.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">BulkClassifyResponse</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV121BulkClassifyUtteranceV"></a>
+                    <a name="//apple_ref/swift/Struct/BulkClassifyUtterance" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV121BulkClassifyUtteranceV">BulkClassifyUtterance</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The user input utterance to classify.</p>
+
+                        <a href="Structs/BulkClassifyUtterance.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">BulkClassifyUtterance</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
                 <li class="item">
                   <div>
                     <code>
@@ -623,6 +817,34 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:11AssistantV117DialogNodeContextV"></a>
+                    <a name="//apple_ref/swift/Struct/DialogNodeContext" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV117DialogNodeContextV">DialogNodeContext</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The context for the dialog node.</p>
+
+                        <a href="Structs/DialogNodeContext.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DialogNodeContext</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:11AssistantV118DialogNodeNextStepV"></a>
                     <a name="//apple_ref/swift/Struct/DialogNodeNextStep" class="dashAnchor"></a>
                     <a class="token" href="#/s:11AssistantV118DialogNodeNextStepV">DialogNodeNextStep</a>
@@ -680,9 +902,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV123DialogNodeOutputGenericV"></a>
-                    <a name="//apple_ref/swift/Struct/DialogNodeOutputGeneric" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV123DialogNodeOutputGenericV">DialogNodeOutputGeneric</a>
+                    <a name="/s:11AssistantV142DialogNodeOutputConnectToAgentTransferInfoV"></a>
+                    <a name="//apple_ref/swift/Struct/DialogNodeOutputConnectToAgentTransferInfo" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV142DialogNodeOutputConnectToAgentTransferInfoV">DialogNodeOutputConnectToAgentTransferInfo</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -690,15 +912,201 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>DialogNodeOutputGeneric.</p>
+                        <p>Routing or other contextual information to be used by target service desk systems.</p>
 
-                        <a href="Structs/DialogNodeOutputGeneric.html" class="slightly-smaller">See more</a>
+                        <a href="Structs/DialogNodeOutputConnectToAgentTransferInfo.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DialogNodeOutputGeneric</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DialogNodeOutputConnectToAgentTransferInfo</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV1023DialogNodeOutputGenericcdE26ResponseTypeConnectToAgentV"></a>
+                    <a name="//apple_ref/swift/Struct/DialogNodeOutputGenericDialogNodeOutputResponseTypeConnectToAgent" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV1023DialogNodeOutputGenericcdE26ResponseTypeConnectToAgentV">DialogNodeOutputGenericDialogNodeOutputResponseTypeConnectToAgent</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An object that describes a response with response type <code>connect_to_agent</code>.</p>
+
+<p>Enums with an associated value of DialogNodeOutputGenericDialogNodeOutputResponseTypeConnectToAgent:
+   DialogNodeOutputGeneric</p>
+
+                        <a href="Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeConnectToAgent.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DialogNodeOutputGenericDialogNodeOutputResponseTypeConnectToAgent</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV1023DialogNodeOutputGenericcdE17ResponseTypeImageV"></a>
+                    <a name="//apple_ref/swift/Struct/DialogNodeOutputGenericDialogNodeOutputResponseTypeImage" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV1023DialogNodeOutputGenericcdE17ResponseTypeImageV">DialogNodeOutputGenericDialogNodeOutputResponseTypeImage</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An object that describes a response with response type <code>image</code>.</p>
+
+<p>Enums with an associated value of DialogNodeOutputGenericDialogNodeOutputResponseTypeImage:
+   DialogNodeOutputGeneric</p>
+
+                        <a href="Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeImage.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DialogNodeOutputGenericDialogNodeOutputResponseTypeImage</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV1023DialogNodeOutputGenericcdE18ResponseTypeOptionV"></a>
+                    <a name="//apple_ref/swift/Struct/DialogNodeOutputGenericDialogNodeOutputResponseTypeOption" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV1023DialogNodeOutputGenericcdE18ResponseTypeOptionV">DialogNodeOutputGenericDialogNodeOutputResponseTypeOption</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An object that describes a response with response type <code>option</code>.</p>
+
+<p>Enums with an associated value of DialogNodeOutputGenericDialogNodeOutputResponseTypeOption:
+   DialogNodeOutputGeneric</p>
+
+                        <a href="Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeOption.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DialogNodeOutputGenericDialogNodeOutputResponseTypeOption</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV1023DialogNodeOutputGenericcdE17ResponseTypePauseV"></a>
+                    <a name="//apple_ref/swift/Struct/DialogNodeOutputGenericDialogNodeOutputResponseTypePause" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV1023DialogNodeOutputGenericcdE17ResponseTypePauseV">DialogNodeOutputGenericDialogNodeOutputResponseTypePause</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An object that describes a response with response type <code>pause</code>.</p>
+
+<p>Enums with an associated value of DialogNodeOutputGenericDialogNodeOutputResponseTypePause:
+   DialogNodeOutputGeneric</p>
+
+                        <a href="Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypePause.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DialogNodeOutputGenericDialogNodeOutputResponseTypePause</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV1023DialogNodeOutputGenericcdE23ResponseTypeSearchSkillV"></a>
+                    <a name="//apple_ref/swift/Struct/DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV1023DialogNodeOutputGenericcdE23ResponseTypeSearchSkillV">DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An object that describes a response with response type <code>search_skill</code>.</p>
+
+<p>Enums with an associated value of DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill:
+   DialogNodeOutputGeneric</p>
+
+                        <a href="Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV1023DialogNodeOutputGenericcdE16ResponseTypeTextV"></a>
+                    <a name="//apple_ref/swift/Struct/DialogNodeOutputGenericDialogNodeOutputResponseTypeText" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV1023DialogNodeOutputGenericcdE16ResponseTypeTextV">DialogNodeOutputGenericDialogNodeOutputResponseTypeText</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An object that describes a response with response type <code>text</code>.</p>
+
+<p>Enums with an associated value of DialogNodeOutputGenericDialogNodeOutputResponseTypeText:
+   DialogNodeOutputGeneric</p>
+
+                        <a href="Structs/DialogNodeOutputGenericDialogNodeOutputResponseTypeText.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DialogNodeOutputGenericDialogNodeOutputResponseTypeText</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -868,62 +1276,6 @@ option.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DialogSuggestion</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11AssistantV122DialogSuggestionOutputV"></a>
-                    <a name="//apple_ref/swift/Struct/DialogSuggestionOutput" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV122DialogSuggestionOutputV">DialogSuggestionOutput</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The dialog output that will be returned from the Watson Assistant service if the user selects the corresponding option.</p>
-
-                        <a href="Structs/DialogSuggestionOutput.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DialogSuggestionOutput</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11AssistantV131DialogSuggestionResponseGenericV"></a>
-                    <a name="//apple_ref/swift/Struct/DialogSuggestionResponseGeneric" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV131DialogSuggestionResponseGenericV">DialogSuggestionResponseGeneric</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>DialogSuggestionResponseGeneric.</p>
-
-                        <a href="Structs/DialogSuggestionResponseGeneric.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">DialogSuggestionResponseGeneric</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1636,9 +1988,9 @@ the user input. This property is included only if the new system entities are en
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV122RuntimeResponseGenericV"></a>
-                    <a name="//apple_ref/swift/Struct/RuntimeResponseGeneric" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV122RuntimeResponseGenericV">RuntimeResponseGeneric</a>
+                    <a name="/s:11AssistantV1022RuntimeResponseGenericcD18TypeConnectToAgentV"></a>
+                    <a name="//apple_ref/swift/Struct/RuntimeResponseGenericRuntimeResponseTypeConnectToAgent" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV1022RuntimeResponseGenericcD18TypeConnectToAgentV">RuntimeResponseGenericRuntimeResponseTypeConnectToAgent</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -1646,15 +1998,173 @@ the user input. This property is included only if the new system entities are en
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>RuntimeResponseGeneric.</p>
+                        <p>An object that describes a response with response type <code>connect_to_agent</code>.</p>
 
-                        <a href="Structs/RuntimeResponseGeneric.html" class="slightly-smaller">See more</a>
+<p>Enums with an associated value of RuntimeResponseGenericRuntimeResponseTypeConnectToAgent:
+   RuntimeResponseGeneric</p>
+
+                        <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeConnectToAgent.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RuntimeResponseGeneric</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RuntimeResponseGenericRuntimeResponseTypeConnectToAgent</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV1022RuntimeResponseGenericcD9TypeImageV"></a>
+                    <a name="//apple_ref/swift/Struct/RuntimeResponseGenericRuntimeResponseTypeImage" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV1022RuntimeResponseGenericcD9TypeImageV">RuntimeResponseGenericRuntimeResponseTypeImage</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An object that describes a response with response type <code>image</code>.</p>
+
+<p>Enums with an associated value of RuntimeResponseGenericRuntimeResponseTypeImage:
+   RuntimeResponseGeneric</p>
+
+                        <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeImage.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RuntimeResponseGenericRuntimeResponseTypeImage</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV1022RuntimeResponseGenericcD10TypeOptionV"></a>
+                    <a name="//apple_ref/swift/Struct/RuntimeResponseGenericRuntimeResponseTypeOption" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV1022RuntimeResponseGenericcD10TypeOptionV">RuntimeResponseGenericRuntimeResponseTypeOption</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An object that describes a response with response type <code>option</code>.</p>
+
+<p>Enums with an associated value of RuntimeResponseGenericRuntimeResponseTypeOption:
+   RuntimeResponseGeneric</p>
+
+                        <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeOption.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RuntimeResponseGenericRuntimeResponseTypeOption</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV1022RuntimeResponseGenericcD9TypePauseV"></a>
+                    <a name="//apple_ref/swift/Struct/RuntimeResponseGenericRuntimeResponseTypePause" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV1022RuntimeResponseGenericcD9TypePauseV">RuntimeResponseGenericRuntimeResponseTypePause</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An object that describes a response with response type <code>pause</code>.</p>
+
+<p>Enums with an associated value of RuntimeResponseGenericRuntimeResponseTypePause:
+   RuntimeResponseGeneric</p>
+
+                        <a href="Structs/RuntimeResponseGenericRuntimeResponseTypePause.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RuntimeResponseGenericRuntimeResponseTypePause</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV1022RuntimeResponseGenericcD14TypeSuggestionV"></a>
+                    <a name="//apple_ref/swift/Struct/RuntimeResponseGenericRuntimeResponseTypeSuggestion" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV1022RuntimeResponseGenericcD14TypeSuggestionV">RuntimeResponseGenericRuntimeResponseTypeSuggestion</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An object that describes a response with response type <code>suggestion</code>.</p>
+
+<p>Enums with an associated value of RuntimeResponseGenericRuntimeResponseTypeSuggestion:
+   RuntimeResponseGeneric</p>
+
+                        <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeSuggestion.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RuntimeResponseGenericRuntimeResponseTypeSuggestion</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV1022RuntimeResponseGenericcD8TypeTextV"></a>
+                    <a name="//apple_ref/swift/Struct/RuntimeResponseGenericRuntimeResponseTypeText" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV1022RuntimeResponseGenericcD8TypeTextV">RuntimeResponseGenericRuntimeResponseTypeText</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An object that describes a response with response type <code>text</code>.</p>
+
+<p>Enums with an associated value of RuntimeResponseGenericRuntimeResponseTypeText:
+   RuntimeResponseGeneric</p>
+
+                        <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeText.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RuntimeResponseGenericRuntimeResponseTypeText</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1711,34 +2221,6 @@ the user input. This property is included only if the new system entities are en
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SynonymCollection</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:11AssistantV114SystemResponseV"></a>
-                    <a name="//apple_ref/swift/Struct/SystemResponse" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV114SystemResponseV">SystemResponse</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>For internal use only.</p>
-
-                        <a href="Structs/SystemResponse.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SystemResponse</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1955,8 +2437,7 @@ the user input. This property is included only if the new system entities are en
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Workspace settings related to the disambiguation feature.
-<strong>Note:</strong> This feature is available only to Plus and Premium users.</p>
+                        <p>Workspace settings related to the disambiguation feature.</p>
 
                         <a href="Structs/WorkspaceSystemSettingsDisambiguation.html" class="slightly-smaller">See more</a>
                       </div>
@@ -2061,7 +2542,7 @@ the user input. This property is included only if the new system entities are en
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.4</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

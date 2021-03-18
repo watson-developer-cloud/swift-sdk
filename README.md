@@ -52,7 +52,7 @@ This SDK provides classes and methods to access the following Watson services.
 * [Tone Analyzer](https://www.ibm.com/watson/services/tone-analyzer)
 * [Visual Recognition](https://www.ibm.com/watson/services/visual-recognition) *deprecated in favor of Maximo Visual Inspection
 
-## ANNOUNCEMENTS!
+## Announcements
 ### Updating endpoint URLs from watsonplatform.net
 Watson API endpoint URLs at watsonplatform.net are changing and will not work after 26 May 2021. Update your calls to use the newer endpoint URLs. For more information, see https://cloud.ibm.com/docs/watson?topic=watson-endpoint-change.
 

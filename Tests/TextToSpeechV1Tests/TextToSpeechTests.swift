@@ -23,6 +23,7 @@ import TextToSpeechV1
 class TextToSpeechTests: XCTestCase {
 
     private var textToSpeech: TextToSpeech!
+    private var customizationID: String!
     private let text = "Swift at IBM is awesome. You should try it!"
     private let allVoices = [
         "en-US_AllisonVoice",
@@ -68,6 +69,8 @@ class TextToSpeechTests: XCTestCase {
             ("testDeleteWordWithBadIDs", testDeleteWordWithBadIDs),
             ("testGetWordWithBadIDs", testGetWordWithBadIDs),
             ("testAddWordWithBadIDs", testAddWordWithBadIDs),
+            ("testCustomPromptsCRUD", testCustomPromptsCRUD),
+            ("testSpeakerModelsCRUD", testSpeakerModelsCRUD),
         ]
     }
 
@@ -78,6 +81,7 @@ class TextToSpeechTests: XCTestCase {
         continueAfterFailure = false
         instantiateTextToSpeech()
         deleteCustomizations()
+        createCustomization()
     }
 
     /** Instantiate Text to Speech instance. */
@@ -90,6 +94,30 @@ class TextToSpeechTests: XCTestCase {
         }
         textToSpeech.defaultHeaders["X-Watson-Learning-Opt-Out"] = "true"
         textToSpeech.defaultHeaders["X-Watson-Test"] = "true"
+    }
+    
+    /**Create customization. */
+    func createCustomization() {
+        let expectation = self.expectation(description: "Create custom model")
+        
+        textToSpeech.createCustomModel(name: "Swift SDK Test Custom Voice Model") {
+            response, error in
+            if let error = error {
+                if !error.localizedDescription.contains(self.litePlanMessage) {
+                    XCTFail(unexpectedErrorMessage(error))
+                }
+                expectation.fulfill()
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+            XCTAssert(!result.customizationID.isEmpty)
+            self.customizationID = result.customizationID
+            expectation.fulfill()
+        }
+        waitForExpectations()
     }
 
     /** Delete all customizations. */
@@ -118,7 +146,7 @@ class TextToSpeechTests: XCTestCase {
     }
 
     /** Wait for expectations. */
-    func waitForExpectations(timeout: TimeInterval = 5.0) {
+    func waitForExpectations(timeout: TimeInterval = 10.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
@@ -637,6 +665,190 @@ class TextToSpeechTests: XCTestCase {
                 XCTFail(missingErrorMessage)
             }
             expectation.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testCustomPromptsCRUD() {
+        let promptID = "hello"
+        
+        //Create request
+        let expectation1 = self.expectation(description: "Create custom prompt")
+        var prompt: Prompt!
+        let promptMetadata = PromptMetadata(promptText: "Hello, how are you today?")
+        let file = Bundle(for: type(of: self)).url(forResource: "custom_prompt_audio", withExtension: "wav")!
+        let fileData = try! Data(contentsOf: file)
+        let filename = "custom_prompt_audio.wav"
+        textToSpeech.addCustomPrompt(customizationID: customizationID, promptID: promptID, metadata: promptMetadata, file: fileData, filename: filename) {
+            response, error in
+            if let error = error {
+                if !error.localizedDescription.contains(self.litePlanMessage) {
+                    XCTFail(unexpectedErrorMessage(error))
+                }
+                expectation1.fulfill()
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+            prompt = result
+            XCTAssert(!prompt.promptID.isEmpty)
+            expectation1.fulfill()
+        }
+        waitForExpectations()
+
+        // If the create request failed, skip the rest of the test.
+        guard prompt != nil else {
+            return
+        }
+        
+        //List Request
+        let expectation2 = self.expectation(description: "List custom prompts")
+        textToSpeech.listCustomPrompts (customizationID: customizationID) {
+            response, error in
+            if let error = error {
+                if !error.localizedDescription.contains(self.litePlanMessage) {
+                    XCTFail(unexpectedErrorMessage(error))
+                }
+                expectation2.fulfill()
+                return
+            }
+            guard let prompts = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+            XCTAssert(!prompts.prompts.isEmpty)
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+        
+        //Get Request
+        let expectation3 = self.expectation(description: "Get custom prompts")
+        textToSpeech.getCustomPrompt(customizationID: customizationID, promptID: promptID) {
+            response, error in
+            if let error = error {
+                if !error.localizedDescription.contains(self.litePlanMessage) {
+                    XCTFail(unexpectedErrorMessage(error))
+                }
+                expectation3.fulfill()
+                return
+            }
+            guard let prompt = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+            XCTAssertEqual(prompt.promptID, promptID)
+            expectation3.fulfill()
+        }
+        waitForExpectations()
+        
+        //Delete Request
+        let expectation4 = self.expectation(description: "Delete custom prompts")
+        textToSpeech.deleteCustomPrompt(customizationID: customizationID, promptID: promptID) {
+            response, error in
+            if let error = error {
+                if !error.localizedDescription.contains(self.litePlanMessage) {
+                    XCTFail(unexpectedErrorMessage(error))
+                }
+                expectation4.fulfill()
+                return
+            }
+            XCTAssertNotNil(response?.result)
+            expectation4.fulfill()
+        }
+        waitForExpectations()
+        
+    }
+    
+    func testSpeakerModelsCRUD() {
+        var speakerID: String!
+        
+        //Create Request
+        let expectation1 = self.expectation(description: "Create speaker models")
+        var speakerModel: SpeakerModel!
+        let file = Bundle(for: type(of: self)).url(forResource: "custom_prompt_audio", withExtension: "wav")!
+        let fileData = try! Data(contentsOf: file)
+        
+        textToSpeech.createSpeakerModel(speakerName: "Angelo2", audio: fileData) {
+            response, error in
+            if let error = error {
+                if !error.localizedDescription.contains(self.litePlanMessage) {
+                    XCTFail(unexpectedErrorMessage(error))
+                }
+                expectation1.fulfill()
+                return
+            }
+            guard let result = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+            
+            speakerModel = result
+            XCTAssert(!speakerModel.speakerID.isEmpty)
+            speakerID = speakerModel.speakerID
+            expectation1.fulfill()
+        }
+        waitForExpectations()
+        
+        // If the create request failed, skip the rest of the test.
+        guard speakerModel != nil else {
+            return
+        }
+        
+        //List Request
+        let expectation2 = self.expectation(description: "List speaker models")
+        textToSpeech.listSpeakerModels() {
+            response, error in
+            if let error = error {
+                if !error.localizedDescription.contains(self.litePlanMessage) {
+                    XCTFail(unexpectedErrorMessage(error))
+                }
+                expectation2.fulfill()
+                return
+            }
+            guard let speakerModels = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+            XCTAssert(!speakerModels.speakers.isEmpty)
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+        
+        //Get Request
+        let expectation3 = self.expectation(description: "Get speaker model")
+        textToSpeech.getSpeakerModel(speakerID: speakerID) {
+            response, error in
+            if let error = error {
+                if !error.localizedDescription.contains(self.litePlanMessage) {
+                    XCTFail(unexpectedErrorMessage(error))
+                }
+                expectation3.fulfill()
+                return
+            }
+            guard let speakerModel = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+            XCTAssertNotNil(speakerModel)
+            expectation3.fulfill()
+        }
+        waitForExpectations()
+        
+        //Delete Request
+        let expectation4 = self.expectation(description: "Delete speaker model")
+        textToSpeech.deleteSpeakerModel(speakerID: speakerID) {
+            response, error in
+            if let error = error {
+                if !error.localizedDescription.contains(self.litePlanMessage) {
+                    XCTFail(unexpectedErrorMessage(error))
+                }
+                expectation4.fulfill()
+                return
+            }
+            XCTAssertNotNil(response)
+            expectation4.fulfill()
         }
         waitForExpectations()
     }

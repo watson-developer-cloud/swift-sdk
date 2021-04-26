@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,10 +33,19 @@ public struct SentimentOptions: Codable, Equatable {
      */
     public var targets: [String]?
 
+    /**
+     (Beta) Enter a [custom
+     model](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-customizing)
+     ID to override the standard sentiment model for all sentiment analysis operations in the request, including
+     targeted sentiment for entities and keywords.
+     */
+    public var model: String?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case document = "document"
         case targets = "targets"
+        case model = "model"
     }
 
     /**
@@ -44,16 +53,22 @@ public struct SentimentOptions: Codable, Equatable {
 
       - parameter document: Set this to `false` to hide document-level sentiment results.
       - parameter targets: Sentiment results will be returned for each target string that is found in the document.
+      - parameter model: (Beta) Enter a [custom
+        model](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-customizing)
+        ID to override the standard sentiment model for all sentiment analysis operations in the request, including
+        targeted sentiment for entities and keywords.
 
       - returns: An initialized `SentimentOptions`.
      */
     public init(
         document: Bool? = nil,
-        targets: [String]? = nil
+        targets: [String]? = nil,
+        model: String? = nil
     )
     {
         self.document = document
         self.targets = targets
+        self.model = model
     }
 
 }

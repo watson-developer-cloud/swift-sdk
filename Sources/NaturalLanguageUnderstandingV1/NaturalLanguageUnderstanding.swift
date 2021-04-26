@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  **/
 
 /**
- * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-36b26b63-20201028-122900
+ * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-bd714324-20210419-134238
  **/
 
 // swiftlint:disable file_length
@@ -42,7 +42,7 @@ public class NaturalLanguageUnderstanding {
     public var serviceURL: String? = "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com"
 
     /// Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The current version is
-    /// `2020-08-01`.
+    /// `2021-03-25`.
     public var version: String
 
     /// Service identifiers
@@ -72,7 +72,7 @@ public class NaturalLanguageUnderstanding {
      In that case, try another initializer that directly passes in the credentials.
 
      - parameter version: Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The
-       current version is `2020-08-01`.
+       current version is `2021-03-25`.
      - parameter authenticator: The Authenticator object used to authenticate requests to the service
      - serviceName: String = defaultServiceName
      */
@@ -89,7 +89,7 @@ public class NaturalLanguageUnderstanding {
      Create a `NaturalLanguageUnderstanding` object.
 
      - parameter version: Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The
-       current version is `2020-08-01`.
+       current version is `2021-03-25`.
      - parameter authenticator: The Authenticator object used to authenticate requests to the service
      */
     public init(version: String, authenticator: Authenticator) {
@@ -149,6 +149,7 @@ public class NaturalLanguageUnderstanding {
 
      Analyzes text, HTML, or a public webpage for the following features:
      - Categories
+     - Classifications
      - Concepts
      - Emotion
      - Entities
@@ -346,6 +347,1142 @@ public class NaturalLanguageUnderstanding {
 
         // construct REST request
         let path = "/v1/models/\(modelID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "DELETE",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Create sentiment model.
+
+     (Beta) Creates a custom sentiment model by uploading training data and associated metadata. The model begins the
+     training and deploying process and is ready to use when the `status` is `available`.
+
+     - parameter language: The 2-letter language code of this model.
+     - parameter trainingData: Training data in CSV format. For more information, see [Sentiment training data
+       requirements](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-custom-sentiment#sentiment-training-data-requirements).
+     - parameter name: An optional name for the model.
+     - parameter description: An optional description of the model.
+     - parameter modelVersion: An optional version string.
+     - parameter version: Deprecated — use `model_version`.
+     - parameter workspaceID: ID of the Watson Knowledge Studio workspace that deployed this model to Natural Language
+       Understanding.
+     - parameter versionDescription: The description of the version.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func createSentimentModel(
+        language: String,
+        trainingData: Data,
+        name: String? = nil,
+        description: String? = nil,
+        modelVersion: String? = nil,
+        version: String? = nil,
+        workspaceID: String? = nil,
+        versionDescription: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<SentimentModel>?, WatsonError?) -> Void)
+    {
+        // construct body
+        let multipartFormData = MultipartFormData()
+        if let languageData = language.data(using: .utf8) {
+            multipartFormData.append(languageData, withName: "language")
+        }
+        multipartFormData.append(trainingData, withName: "training_data", fileName: "filename")
+        if let name = name {
+            if let nameData = name.data(using: .utf8) {
+                multipartFormData.append(nameData, withName: "name")
+            }
+        }
+        if let description = description {
+            if let descriptionData = description.data(using: .utf8) {
+                multipartFormData.append(descriptionData, withName: "description")
+            }
+        }
+        if let modelVersion = modelVersion {
+            if let modelVersionData = modelVersion.data(using: .utf8) {
+                multipartFormData.append(modelVersionData, withName: "model_version")
+            }
+        }
+        if let version = version {
+            if let versionData = version.data(using: .utf8) {
+                multipartFormData.append(versionData, withName: "version")
+            }
+        }
+        if let workspaceID = workspaceID {
+            if let workspaceIDData = workspaceID.data(using: .utf8) {
+                multipartFormData.append(workspaceIDData, withName: "workspace_id")
+            }
+        }
+        if let versionDescription = versionDescription {
+            if let versionDescriptionData = versionDescription.data(using: .utf8) {
+                multipartFormData.append(versionDescriptionData, withName: "version_description")
+            }
+        }
+        guard let body = try? multipartFormData.toData() else {
+            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createSentimentModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = multipartFormData.contentType
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "POST",
+            url: serviceEndpoint + "/v1/models/sentiment",
+            headerParameters: headerParameters,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     List sentiment models.
+
+     (Beta) Returns all custom sentiment models associated with this service instance.
+
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func listSentimentModels(
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<ListSentimentModelsResponse>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listSentimentModels")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceEndpoint + "/v1/models/sentiment",
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Get sentiment model details.
+
+     (Beta) Returns the status of the sentiment model with the given model ID.
+
+     - parameter modelID: ID of the model.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func getSentimentModel(
+        modelID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<SentimentModel>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getSentimentModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct REST request
+        let path = "/v1/models/sentiment/\(modelID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Update sentiment model.
+
+     (Beta) Overwrites the training data associated with this custom sentiment model and retrains the model. The new
+     model replaces the current deployment.
+
+     - parameter modelID: ID of the model.
+     - parameter language: The 2-letter language code of this model.
+     - parameter trainingData: Training data in CSV format. For more information, see [Sentiment training data
+       requirements](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-custom-sentiment#sentiment-training-data-requirements).
+     - parameter name: An optional name for the model.
+     - parameter description: An optional description of the model.
+     - parameter modelVersion: An optional version string.
+     - parameter version: Deprecated — use `model_version`.
+     - parameter workspaceID: ID of the Watson Knowledge Studio workspace that deployed this model to Natural Language
+       Understanding.
+     - parameter versionDescription: The description of the version.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func updateSentimentModel(
+        modelID: String,
+        language: String,
+        trainingData: Data,
+        name: String? = nil,
+        description: String? = nil,
+        modelVersion: String? = nil,
+        version: String? = nil,
+        workspaceID: String? = nil,
+        versionDescription: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<SentimentModel>?, WatsonError?) -> Void)
+    {
+        // construct body
+        let multipartFormData = MultipartFormData()
+        if let languageData = language.data(using: .utf8) {
+            multipartFormData.append(languageData, withName: "language")
+        }
+        multipartFormData.append(trainingData, withName: "training_data", fileName: "filename")
+        if let name = name {
+            if let nameData = name.data(using: .utf8) {
+                multipartFormData.append(nameData, withName: "name")
+            }
+        }
+        if let description = description {
+            if let descriptionData = description.data(using: .utf8) {
+                multipartFormData.append(descriptionData, withName: "description")
+            }
+        }
+        if let modelVersion = modelVersion {
+            if let modelVersionData = modelVersion.data(using: .utf8) {
+                multipartFormData.append(modelVersionData, withName: "model_version")
+            }
+        }
+        if let version = version {
+            if let versionData = version.data(using: .utf8) {
+                multipartFormData.append(versionData, withName: "version")
+            }
+        }
+        if let workspaceID = workspaceID {
+            if let workspaceIDData = workspaceID.data(using: .utf8) {
+                multipartFormData.append(workspaceIDData, withName: "workspace_id")
+            }
+        }
+        if let versionDescription = versionDescription {
+            if let versionDescriptionData = versionDescription.data(using: .utf8) {
+                multipartFormData.append(versionDescriptionData, withName: "version_description")
+            }
+        }
+        guard let body = try? multipartFormData.toData() else {
+            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateSentimentModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = multipartFormData.contentType
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct REST request
+        let path = "/v1/models/sentiment/\(modelID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "PUT",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Delete sentiment model.
+
+     (Beta) Un-deploys the custom sentiment model with the given model ID and deletes all associated customer data,
+     including any training data or binary artifacts.
+
+     - parameter modelID: ID of the model.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func deleteSentimentModel(
+        modelID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<DeleteModelResults>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteSentimentModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct REST request
+        let path = "/v1/models/sentiment/\(modelID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "DELETE",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Create categories model.
+
+     (Beta) Creates a custom categories model by uploading training data and associated metadata. The model begins the
+     training and deploying process and is ready to use when the `status` is `available`.
+
+     - parameter language: The 2-letter language code of this model.
+     - parameter trainingData: Training data in JSON format. For more information, see [Categories training data
+       requirements](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-categories##categories-training-data-requirements).
+     - parameter trainingDataContentType: The content type of trainingData.
+     - parameter name: An optional name for the model.
+     - parameter description: An optional description of the model.
+     - parameter modelVersion: An optional version string.
+     - parameter version: Deprecated — use `model_version`.
+     - parameter workspaceID: ID of the Watson Knowledge Studio workspace that deployed this model to Natural Language
+       Understanding.
+     - parameter versionDescription: The description of the version.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func createCategoriesModel(
+        language: String,
+        trainingData: Data,
+        trainingDataContentType: String? = nil,
+        name: String? = nil,
+        description: String? = nil,
+        modelVersion: String? = nil,
+        version: String? = nil,
+        workspaceID: String? = nil,
+        versionDescription: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<CategoriesModel>?, WatsonError?) -> Void)
+    {
+        // construct body
+        let multipartFormData = MultipartFormData()
+        if let languageData = language.data(using: .utf8) {
+            multipartFormData.append(languageData, withName: "language")
+        }
+        multipartFormData.append(trainingData, withName: "training_data", mimeType: trainingDataContentType, fileName: "filename")
+        if let name = name {
+            if let nameData = name.data(using: .utf8) {
+                multipartFormData.append(nameData, withName: "name")
+            }
+        }
+        if let description = description {
+            if let descriptionData = description.data(using: .utf8) {
+                multipartFormData.append(descriptionData, withName: "description")
+            }
+        }
+        if let modelVersion = modelVersion {
+            if let modelVersionData = modelVersion.data(using: .utf8) {
+                multipartFormData.append(modelVersionData, withName: "model_version")
+            }
+        }
+        if let version = version {
+            if let versionData = version.data(using: .utf8) {
+                multipartFormData.append(versionData, withName: "version")
+            }
+        }
+        if let workspaceID = workspaceID {
+            if let workspaceIDData = workspaceID.data(using: .utf8) {
+                multipartFormData.append(workspaceIDData, withName: "workspace_id")
+            }
+        }
+        if let versionDescription = versionDescription {
+            if let versionDescriptionData = versionDescription.data(using: .utf8) {
+                multipartFormData.append(versionDescriptionData, withName: "version_description")
+            }
+        }
+        guard let body = try? multipartFormData.toData() else {
+            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createCategoriesModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = multipartFormData.contentType
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "POST",
+            url: serviceEndpoint + "/v1/models/categories",
+            headerParameters: headerParameters,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     List categories models.
+
+     (Beta) Returns all custom categories models associated with this service instance.
+
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func listCategoriesModels(
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<ListCategoriesModelsResponse>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listCategoriesModels")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceEndpoint + "/v1/models/categories",
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Get categories model details.
+
+     (Beta) Returns the status of the categories model with the given model ID.
+
+     - parameter modelID: ID of the model.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func getCategoriesModel(
+        modelID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<CategoriesModel>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getCategoriesModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/models/categories/\(modelID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Update categories model.
+
+     (Beta) Overwrites the training data associated with this custom categories model and retrains the model. The new
+     model replaces the current deployment.
+
+     - parameter modelID: ID of the model.
+     - parameter language: The 2-letter language code of this model.
+     - parameter trainingData: Training data in JSON format. For more information, see [Categories training data
+       requirements](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-categories##categories-training-data-requirements).
+     - parameter trainingDataContentType: The content type of trainingData.
+     - parameter name: An optional name for the model.
+     - parameter description: An optional description of the model.
+     - parameter modelVersion: An optional version string.
+     - parameter version: Deprecated — use `model_version`.
+     - parameter workspaceID: ID of the Watson Knowledge Studio workspace that deployed this model to Natural Language
+       Understanding.
+     - parameter versionDescription: The description of the version.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func updateCategoriesModel(
+        modelID: String,
+        language: String,
+        trainingData: Data,
+        trainingDataContentType: String? = nil,
+        name: String? = nil,
+        description: String? = nil,
+        modelVersion: String? = nil,
+        version: String? = nil,
+        workspaceID: String? = nil,
+        versionDescription: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<CategoriesModel>?, WatsonError?) -> Void)
+    {
+        // construct body
+        let multipartFormData = MultipartFormData()
+        if let languageData = language.data(using: .utf8) {
+            multipartFormData.append(languageData, withName: "language")
+        }
+        multipartFormData.append(trainingData, withName: "training_data", mimeType: trainingDataContentType, fileName: "filename")
+        if let name = name {
+            if let nameData = name.data(using: .utf8) {
+                multipartFormData.append(nameData, withName: "name")
+            }
+        }
+        if let description = description {
+            if let descriptionData = description.data(using: .utf8) {
+                multipartFormData.append(descriptionData, withName: "description")
+            }
+        }
+        if let modelVersion = modelVersion {
+            if let modelVersionData = modelVersion.data(using: .utf8) {
+                multipartFormData.append(modelVersionData, withName: "model_version")
+            }
+        }
+        if let version = version {
+            if let versionData = version.data(using: .utf8) {
+                multipartFormData.append(versionData, withName: "version")
+            }
+        }
+        if let workspaceID = workspaceID {
+            if let workspaceIDData = workspaceID.data(using: .utf8) {
+                multipartFormData.append(workspaceIDData, withName: "workspace_id")
+            }
+        }
+        if let versionDescription = versionDescription {
+            if let versionDescriptionData = versionDescription.data(using: .utf8) {
+                multipartFormData.append(versionDescriptionData, withName: "version_description")
+            }
+        }
+        guard let body = try? multipartFormData.toData() else {
+            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateCategoriesModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = multipartFormData.contentType
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/models/categories/\(modelID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "PUT",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Delete categories model.
+
+     (Beta) Un-deploys the custom categories model with the given model ID and deletes all associated customer data,
+     including any training data or binary artifacts.
+
+     - parameter modelID: ID of the model.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func deleteCategoriesModel(
+        modelID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<DeleteModelResults>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteCategoriesModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/models/categories/\(modelID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "DELETE",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Create classifications model.
+
+     (Beta) Creates a custom classifications model by uploading training data and associated metadata. The model begins
+     the training and deploying process and is ready to use when the `status` is `available`.
+
+     - parameter language: The 2-letter language code of this model.
+     - parameter trainingData: Training data in JSON format. For more information, see [Classifications training data
+       requirements](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-classifications#classification-training-data-requirements).
+     - parameter trainingDataContentType: The content type of trainingData.
+     - parameter name: An optional name for the model.
+     - parameter description: An optional description of the model.
+     - parameter modelVersion: An optional version string.
+     - parameter version: Deprecated — use `model_version`.
+     - parameter workspaceID: ID of the Watson Knowledge Studio workspace that deployed this model to Natural Language
+       Understanding.
+     - parameter versionDescription: The description of the version.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func createClassificationsModel(
+        language: String,
+        trainingData: Data,
+        trainingDataContentType: String? = nil,
+        name: String? = nil,
+        description: String? = nil,
+        modelVersion: String? = nil,
+        version: String? = nil,
+        workspaceID: String? = nil,
+        versionDescription: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<ClassificationsModel>?, WatsonError?) -> Void)
+    {
+        // construct body
+        let multipartFormData = MultipartFormData()
+        if let languageData = language.data(using: .utf8) {
+            multipartFormData.append(languageData, withName: "language")
+        }
+        multipartFormData.append(trainingData, withName: "training_data", mimeType: trainingDataContentType, fileName: "filename")
+        if let name = name {
+            if let nameData = name.data(using: .utf8) {
+                multipartFormData.append(nameData, withName: "name")
+            }
+        }
+        if let description = description {
+            if let descriptionData = description.data(using: .utf8) {
+                multipartFormData.append(descriptionData, withName: "description")
+            }
+        }
+        if let modelVersion = modelVersion {
+            if let modelVersionData = modelVersion.data(using: .utf8) {
+                multipartFormData.append(modelVersionData, withName: "model_version")
+            }
+        }
+        if let version = version {
+            if let versionData = version.data(using: .utf8) {
+                multipartFormData.append(versionData, withName: "version")
+            }
+        }
+        if let workspaceID = workspaceID {
+            if let workspaceIDData = workspaceID.data(using: .utf8) {
+                multipartFormData.append(workspaceIDData, withName: "workspace_id")
+            }
+        }
+        if let versionDescription = versionDescription {
+            if let versionDescriptionData = versionDescription.data(using: .utf8) {
+                multipartFormData.append(versionDescriptionData, withName: "version_description")
+            }
+        }
+        guard let body = try? multipartFormData.toData() else {
+            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createClassificationsModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = multipartFormData.contentType
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "POST",
+            url: serviceEndpoint + "/v1/models/classifications",
+            headerParameters: headerParameters,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     List classifications models.
+
+     (Beta) Returns all custom classifications models associated with this service instance.
+
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func listClassificationsModels(
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<ListClassificationsModelsResponse>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listClassificationsModels")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceEndpoint + "/v1/models/classifications",
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Get classifications model details.
+
+     (Beta) Returns the status of the classifications model with the given model ID.
+
+     - parameter modelID: ID of the model.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func getClassificationsModel(
+        modelID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<ClassificationsModel>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getClassificationsModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/models/classifications/\(modelID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Update classifications model.
+
+     (Beta) Overwrites the training data associated with this custom classifications model and retrains the model. The
+     new model replaces the current deployment.
+
+     - parameter modelID: ID of the model.
+     - parameter language: The 2-letter language code of this model.
+     - parameter trainingData: Training data in JSON format. For more information, see [Classifications training data
+       requirements](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-classifications#classification-training-data-requirements).
+     - parameter trainingDataContentType: The content type of trainingData.
+     - parameter name: An optional name for the model.
+     - parameter description: An optional description of the model.
+     - parameter modelVersion: An optional version string.
+     - parameter version: Deprecated — use `model_version`.
+     - parameter workspaceID: ID of the Watson Knowledge Studio workspace that deployed this model to Natural Language
+       Understanding.
+     - parameter versionDescription: The description of the version.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func updateClassificationsModel(
+        modelID: String,
+        language: String,
+        trainingData: Data,
+        trainingDataContentType: String? = nil,
+        name: String? = nil,
+        description: String? = nil,
+        modelVersion: String? = nil,
+        version: String? = nil,
+        workspaceID: String? = nil,
+        versionDescription: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<ClassificationsModel>?, WatsonError?) -> Void)
+    {
+        // construct body
+        let multipartFormData = MultipartFormData()
+        if let languageData = language.data(using: .utf8) {
+            multipartFormData.append(languageData, withName: "language")
+        }
+        multipartFormData.append(trainingData, withName: "training_data", mimeType: trainingDataContentType, fileName: "filename")
+        if let name = name {
+            if let nameData = name.data(using: .utf8) {
+                multipartFormData.append(nameData, withName: "name")
+            }
+        }
+        if let description = description {
+            if let descriptionData = description.data(using: .utf8) {
+                multipartFormData.append(descriptionData, withName: "description")
+            }
+        }
+        if let modelVersion = modelVersion {
+            if let modelVersionData = modelVersion.data(using: .utf8) {
+                multipartFormData.append(modelVersionData, withName: "model_version")
+            }
+        }
+        if let version = version {
+            if let versionData = version.data(using: .utf8) {
+                multipartFormData.append(versionData, withName: "version")
+            }
+        }
+        if let workspaceID = workspaceID {
+            if let workspaceIDData = workspaceID.data(using: .utf8) {
+                multipartFormData.append(workspaceIDData, withName: "workspace_id")
+            }
+        }
+        if let versionDescription = versionDescription {
+            if let versionDescriptionData = versionDescription.data(using: .utf8) {
+                multipartFormData.append(versionDescriptionData, withName: "version_description")
+            }
+        }
+        guard let body = try? multipartFormData.toData() else {
+            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateClassificationsModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = multipartFormData.contentType
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/models/classifications/\(modelID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "PUT",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Delete classifications model.
+
+     (Beta) Un-deploys the custom classifications model with the given model ID and deletes all associated customer
+     data, including any training data or binary artifacts.
+
+     - parameter modelID: ID of the model.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func deleteClassificationsModel(
+        modelID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<DeleteModelResults>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteClassificationsModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v1/models/classifications/\(modelID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
             completionHandler(nil, RestError.urlEncoding(path: path))
             return

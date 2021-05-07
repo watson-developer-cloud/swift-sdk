@@ -633,14 +633,14 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
     
     func testSentimentModelCRUD() {
         var modelID: String!
-        let name = "testName"
+        let name = "testName2"
         
         //create sentiment model
         let expectation1 = self.expectation(description: "Create sentiment model")
         let createFile = Bundle(for: type(of: self)).url(forResource: "nlu_training_data", withExtension: "csv")!
         let createFileData = try! Data(contentsOf: createFile)
         
-        naturalLanguageUnderstanding.createSentimentModel(language: "en", trainingData: createFileData, name: name) {
+        naturalLanguageUnderstanding.createSentimentModel(language: "en", trainingData: createFileData, name: name, modelVersion: "2021-02-23") {
             response, error in
 
             if let error = error {

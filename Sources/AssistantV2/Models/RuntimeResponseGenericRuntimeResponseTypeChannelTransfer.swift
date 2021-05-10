@@ -17,12 +17,12 @@
 import Foundation
 
 /**
- RuntimeResponseGenericRuntimeResponseTypeConnectToAgent.
+ RuntimeResponseGenericRuntimeResponseTypeChannelTransfer.
 
- Enums with an associated value of RuntimeResponseGenericRuntimeResponseTypeConnectToAgent:
+ Enums with an associated value of RuntimeResponseGenericRuntimeResponseTypeChannelTransfer:
     RuntimeResponseGeneric
  */
-public struct RuntimeResponseGenericRuntimeResponseTypeConnectToAgent: Codable, Equatable {
+public struct RuntimeResponseGenericRuntimeResponseTypeChannelTransfer: Codable, Equatable {
 
     /**
      The type of response returned by the dialog node. The specified response type must be supported by the client
@@ -31,32 +31,14 @@ public struct RuntimeResponseGenericRuntimeResponseTypeConnectToAgent: Codable, 
     public var responseType: String
 
     /**
-     A message to be sent to the human agent who will be taking over the conversation.
+     The message to display to the user when initiating a channel transfer.
      */
-    public var messageToHumanAgent: String?
+    public var messageToUser: String
 
     /**
-     An optional message to be displayed to the user to indicate that the conversation will be transferred to the next
-     available agent.
+     Information used by an integration to transfer the conversation to a different channel.
      */
-    public var agentAvailable: AgentAvailabilityMessage?
-
-    /**
-     An optional message to be displayed to the user to indicate that no online agent is available to take over the
-     conversation.
-     */
-    public var agentUnavailable: AgentAvailabilityMessage?
-
-    /**
-     Routing or other contextual information to be used by target service desk systems.
-     */
-    public var transferInfo: DialogNodeOutputConnectToAgentTransferInfo?
-
-    /**
-     A label identifying the topic of the conversation, derived from the **title** property of the relevant node or the
-     **topic** property of the dialog node response.
-     */
-    public var topic: String?
+    public var transferInfo: ChannelTransferInfo
 
     /**
      An array of objects specifying channels for which the response is intended. If **channels** is present, the
@@ -67,11 +49,8 @@ public struct RuntimeResponseGenericRuntimeResponseTypeConnectToAgent: Codable, 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case responseType = "response_type"
-        case messageToHumanAgent = "message_to_human_agent"
-        case agentAvailable = "agent_available"
-        case agentUnavailable = "agent_unavailable"
+        case messageToUser = "message_to_user"
         case transferInfo = "transfer_info"
-        case topic = "topic"
         case channels = "channels"
     }
 

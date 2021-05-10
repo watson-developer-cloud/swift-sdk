@@ -15,14 +15,15 @@
  **/
 
 import Foundation
+import IBMSwiftSDKCore
 
 /**
- RuntimeResponseGenericRuntimeResponseTypeImage.
+ RuntimeResponseGenericRuntimeResponseTypeUserDefined.
 
- Enums with an associated value of RuntimeResponseGenericRuntimeResponseTypeImage:
+ Enums with an associated value of RuntimeResponseGenericRuntimeResponseTypeUserDefined:
     RuntimeResponseGeneric
  */
-public struct RuntimeResponseGenericRuntimeResponseTypeImage: Codable, Equatable {
+public struct RuntimeResponseGenericRuntimeResponseTypeUserDefined: Codable, Equatable {
 
     /**
      The type of response returned by the dialog node. The specified response type must be supported by the client
@@ -31,19 +32,9 @@ public struct RuntimeResponseGenericRuntimeResponseTypeImage: Codable, Equatable
     public var responseType: String
 
     /**
-     The URL of the image.
+     An object containing any properties for the user-defined response type.
      */
-    public var source: String
-
-    /**
-     The title to show before the response.
-     */
-    public var title: String?
-
-    /**
-     The description to show with the the response.
-     */
-    public var description: String?
+    public var userDefined: [String: JSON]
 
     /**
      An array of objects specifying channels for which the response is intended. If **channels** is present, the
@@ -54,9 +45,7 @@ public struct RuntimeResponseGenericRuntimeResponseTypeImage: Codable, Equatable
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case responseType = "response_type"
-        case source = "source"
-        case title = "title"
-        case description = "description"
+        case userDefined = "user_defined"
         case channels = "channels"
     }
 

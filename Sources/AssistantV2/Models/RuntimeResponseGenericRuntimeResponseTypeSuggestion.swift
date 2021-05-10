@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,20 +17,12 @@
 import Foundation
 
 /**
- An object that describes a response with response type `suggestion`.
+ RuntimeResponseGenericRuntimeResponseTypeSuggestion.
 
  Enums with an associated value of RuntimeResponseGenericRuntimeResponseTypeSuggestion:
     RuntimeResponseGeneric
  */
 public struct RuntimeResponseGenericRuntimeResponseTypeSuggestion: Codable, Equatable {
-
-    /**
-     The type of response returned by the dialog node. The specified response type must be supported by the client
-     application or channel.
-     */
-    public enum ResponseType: String {
-        case suggestion = "suggestion"
-    }
 
     /**
      The type of response returned by the dialog node. The specified response type must be supported by the client
@@ -48,11 +40,18 @@ public struct RuntimeResponseGenericRuntimeResponseTypeSuggestion: Codable, Equa
      */
     public var suggestions: [DialogSuggestion]
 
+    /**
+     An array of objects specifying channels for which the response is intended. If **channels** is present, the
+     response is intended for a built-in integration and should not be handled by an API client.
+     */
+    public var channels: [ResponseGenericChannel]?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case responseType = "response_type"
         case title = "title"
         case suggestions = "suggestions"
+        case channels = "channels"
     }
 
 }

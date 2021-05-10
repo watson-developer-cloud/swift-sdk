@@ -17,25 +17,18 @@
 import Foundation
 
 /**
- An object containing search result metadata from the Discovery service.
+ ResponseGenericChannel.
  */
-public struct SearchResultMetadata: Codable, Equatable {
+public struct ResponseGenericChannel: Codable, Equatable {
 
     /**
-     The confidence score for the given result, as returned by the Discovery service.
+     A channel for which the response is intended.
      */
-    public var confidence: Double?
-
-    /**
-     An unbounded measure of the relevance of a particular result, dependent on the query and matching document. A
-     higher score indicates a greater match to the query parameters.
-     */
-    public var score: Double?
+    public var channel: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case confidence = "confidence"
-        case score = "score"
+        case channel = "channel"
     }
 
 }

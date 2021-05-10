@@ -17,25 +17,20 @@
 import Foundation
 
 /**
- An object containing search result metadata from the Discovery service.
+ Information used by an integration to transfer the conversation to a different channel.
  */
-public struct SearchResultMetadata: Codable, Equatable {
+public struct ChannelTransferInfo: Codable, Equatable {
 
     /**
-     The confidence score for the given result, as returned by the Discovery service.
+     An object specifying target channels available for the transfer. Each property of this object represents an
+     available transfer target. Currently, the only supported property is **chat**, representing the web chat
+     integration.
      */
-    public var confidence: Double?
-
-    /**
-     An unbounded measure of the relevance of a particular result, dependent on the query and matching document. A
-     higher score indicates a greater match to the query parameters.
-     */
-    public var score: Double?
+    public var target: ChannelTransferTarget
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case confidence = "confidence"
-        case score = "score"
+        case target = "target"
     }
 
 }

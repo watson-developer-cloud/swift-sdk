@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,10 +32,21 @@ public struct MessageResponseStateless: Codable, Equatable {
      */
     public var context: MessageContextStateless
 
+    /**
+     A string value that identifies the user who is interacting with the assistant. The client must provide a unique
+     identifier for each individual end user who accesses the application. For user-based plans, this user ID is used to
+     identify unique users for billing purposes. This string cannot contain carriage return, newline, or tab characters.
+     If no value is specified in the input, **user_id** is automatically set to the value of
+     **context.global.session_id**.
+     **Note:** This property is the same as the **user_id** property in the global system context.
+     */
+    public var userID: String?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case output = "output"
         case context = "context"
+        case userID = "user_id"
     }
 
 }

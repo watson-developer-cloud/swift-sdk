@@ -17,45 +17,39 @@
 import Foundation
 
 /**
- Dialog log message details.
+ An object that identifies the dialog element that generated the error message.
+
+ Enums with an associated value of LogMessageSourceHandler:
+    LogMessageSource
  */
-public struct DialogLogMessage: Codable, Equatable {
+public struct LogMessageSourceHandler: Codable, Equatable {
 
     /**
-     The severity of the log message.
+     A string that indicates the type of dialog element that generated the error message.
      */
-    public enum Level: String {
-        case info = "info"
-        case error = "error"
-        case warn = "warn"
-    }
+    public var type: String
 
     /**
-     The severity of the log message.
+     The unique identifier of the action that generated the error message.
      */
-    public var level: String
+    public var action: String
 
     /**
-     The text of the log message.
+     The unique identifier of the step that generated the error message.
      */
-    public var message: String
+    public var step: String?
 
     /**
-     A code that indicates the category to which the error message belongs.
+     The unique identifier of the handler that generated the error message.
      */
-    public var code: String
-
-    /**
-     An object that identifies the dialog element that generated the error message.
-     */
-    public var source: LogMessageSource?
+    public var handler: String
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case level = "level"
-        case message = "message"
-        case code = "code"
-        case source = "source"
+        case type = "type"
+        case action = "action"
+        case step = "step"
+        case handler = "handler"
     }
 
 }

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,20 +17,12 @@
 import Foundation
 
 /**
- An object that describes a response with response type `text`.
+ DialogNodeOutputGenericDialogNodeOutputResponseTypeText.
 
  Enums with an associated value of DialogNodeOutputGenericDialogNodeOutputResponseTypeText:
     DialogNodeOutputGeneric
  */
 public struct DialogNodeOutputGenericDialogNodeOutputResponseTypeText: Codable, Equatable {
-
-    /**
-     The type of response returned by the dialog node. The specified response type must be supported by the client
-     application or channel.
-     */
-    public enum ResponseType: String {
-        case text = "text"
-    }
 
     /**
      How a response is selected from the list, if more than one response is specified.
@@ -62,12 +54,18 @@ public struct DialogNodeOutputGenericDialogNodeOutputResponseTypeText: Codable, 
      */
     public var delimiter: String?
 
+    /**
+     An array of objects specifying channels for which the response is intended.
+     */
+    public var channels: [ResponseGenericChannel]?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case responseType = "response_type"
         case values = "values"
         case selectionPolicy = "selection_policy"
         case delimiter = "delimiter"
+        case channels = "channels"
     }
 
     /**
@@ -79,6 +77,7 @@ public struct DialogNodeOutputGenericDialogNodeOutputResponseTypeText: Codable, 
       - parameter selectionPolicy: How a response is selected from the list, if more than one response is specified.
       - parameter delimiter: The delimiter to use as a separator between responses when
         `selection_policy`=`multiline`.
+      - parameter channels: An array of objects specifying channels for which the response is intended.
 
       - returns: An initialized `DialogNodeOutputGenericDialogNodeOutputResponseTypeText`.
      */
@@ -86,13 +85,15 @@ public struct DialogNodeOutputGenericDialogNodeOutputResponseTypeText: Codable, 
         responseType: String,
         values: [DialogNodeOutputTextValuesElement],
         selectionPolicy: String? = nil,
-        delimiter: String? = nil
+        delimiter: String? = nil,
+        channels: [ResponseGenericChannel]? = nil
     )
     {
         self.responseType = responseType
         self.values = values
         self.selectionPolicy = selectionPolicy
         self.delimiter = delimiter
+        self.channels = channels
     }
 
 }

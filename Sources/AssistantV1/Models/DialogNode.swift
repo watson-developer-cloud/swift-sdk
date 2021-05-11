@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -77,8 +77,9 @@ public struct DialogNode: Codable, Equatable {
     }
 
     /**
-     The dialog node ID. This string must conform to the following restrictions:
-     - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
+     The unique ID of the dialog node. This is an internal identifier used to refer to the dialog node from other dialog
+     nodes and in the diagnostic information included with message responses.
+     This string can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
      */
     public var dialogNode: String
 
@@ -94,12 +95,13 @@ public struct DialogNode: Codable, Equatable {
     public var conditions: String?
 
     /**
-     The ID of the parent dialog node. This property is omitted if the dialog node has no parent.
+     The unique ID of the parent dialog node. This property is omitted if the dialog node has no parent.
      */
     public var parent: String?
 
     /**
-     The ID of the previous sibling dialog node. This property is omitted if the dialog node has no previous sibling.
+     The unique ID of the previous sibling dialog node. This property is omitted if the dialog node has no previous
+     sibling.
      */
     public var previousSibling: String?
 
@@ -125,8 +127,11 @@ public struct DialogNode: Codable, Equatable {
     public var nextStep: DialogNodeNextStep?
 
     /**
-     The alias used to identify the dialog node. This string must conform to the following restrictions:
-     - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
+     A human-readable name for the dialog node. If the node is included in disambiguation, this title is used to
+     populate the **label** property of the corresponding suggestion in the `suggestion` response type (unless it is
+     overridden by the **user_label** property). The title is also used to populate the **topic** property in the
+     `connect_to_agent` response type.
+     This string can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
      */
     public var title: String?
 
@@ -166,7 +171,8 @@ public struct DialogNode: Codable, Equatable {
     public var digressOutSlots: String?
 
     /**
-     A label that can be displayed externally to describe the purpose of the node to users.
+     A label that can be displayed externally to describe the purpose of the node to users. If set, this label is used
+     to identify the node in disambiguation responses (overriding the value of the **title** property).
      */
     public var userLabel: String?
 
@@ -220,24 +226,28 @@ public struct DialogNode: Codable, Equatable {
     /**
       Initialize a `DialogNode` with member variables.
 
-      - parameter dialogNode: The dialog node ID. This string must conform to the following restrictions:
-        - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
+      - parameter dialogNode: The unique ID of the dialog node. This is an internal identifier used to refer to the
+        dialog node from other dialog nodes and in the diagnostic information included with message responses.
+        This string can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
       - parameter description: The description of the dialog node. This string cannot contain carriage return,
         newline, or tab characters.
       - parameter conditions: The condition that will trigger the dialog node. This string cannot contain carriage
         return, newline, or tab characters.
-      - parameter parent: The ID of the parent dialog node. This property is omitted if the dialog node has no parent.
-      - parameter previousSibling: The ID of the previous sibling dialog node. This property is omitted if the dialog
-        node has no previous sibling.
+      - parameter parent: The unique ID of the parent dialog node. This property is omitted if the dialog node has no
+        parent.
+      - parameter previousSibling: The unique ID of the previous sibling dialog node. This property is omitted if the
+        dialog node has no previous sibling.
       - parameter output: The output of the dialog node. For more information about how to specify dialog node output,
         see the
         [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
       - parameter context: The context for the dialog node.
       - parameter metadata: The metadata for the dialog node.
       - parameter nextStep: The next step to execute following this dialog node.
-      - parameter title: The alias used to identify the dialog node. This string must conform to the following
-        restrictions:
-        - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
+      - parameter title: A human-readable name for the dialog node. If the node is included in disambiguation, this
+        title is used to populate the **label** property of the corresponding suggestion in the `suggestion` response
+        type (unless it is overridden by the **user_label** property). The title is also used to populate the **topic**
+        property in the `connect_to_agent` response type.
+        This string can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
       - parameter type: How the dialog node is processed.
       - parameter eventName: How an `event_handler` node is processed.
       - parameter variable: The location in the dialog context where output is stored.
@@ -245,7 +255,9 @@ public struct DialogNode: Codable, Equatable {
       - parameter digressIn: Whether this top-level dialog node can be digressed into.
       - parameter digressOut: Whether this dialog node can be returned to after a digression.
       - parameter digressOutSlots: Whether the user can digress to top-level nodes while filling out slots.
-      - parameter userLabel: A label that can be displayed externally to describe the purpose of the node to users.
+      - parameter userLabel: A label that can be displayed externally to describe the purpose of the node to users. If
+        set, this label is used to identify the node in disambiguation responses (overriding the value of the **title**
+        property).
       - parameter disambiguationOptOut: Whether the dialog node should be excluded from disambiguation suggestions.
         Valid only when **type**=`standard` or `frame`.
 

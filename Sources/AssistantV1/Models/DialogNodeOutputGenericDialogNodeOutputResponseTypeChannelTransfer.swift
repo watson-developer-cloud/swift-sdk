@@ -17,12 +17,12 @@
 import Foundation
 
 /**
- DialogNodeOutputGenericDialogNodeOutputResponseTypePause.
+ DialogNodeOutputGenericDialogNodeOutputResponseTypeChannelTransfer.
 
- Enums with an associated value of DialogNodeOutputGenericDialogNodeOutputResponseTypePause:
+ Enums with an associated value of DialogNodeOutputGenericDialogNodeOutputResponseTypeChannelTransfer:
     DialogNodeOutputGeneric
  */
-public struct DialogNodeOutputGenericDialogNodeOutputResponseTypePause: Codable, Equatable {
+public struct DialogNodeOutputGenericDialogNodeOutputResponseTypeChannelTransfer: Codable, Equatable {
 
     /**
      The type of response returned by the dialog node. The specified response type must be supported by the client
@@ -31,14 +31,14 @@ public struct DialogNodeOutputGenericDialogNodeOutputResponseTypePause: Codable,
     public var responseType: String
 
     /**
-     How long to pause, in milliseconds. The valid values are from 0 to 10000.
+     The message to display to the user when initiating a channel transfer.
      */
-    public var time: Int
+    public var messageToUser: String
 
     /**
-     Whether to send a "user is typing" event during the pause. Ignored if the channel does not support this event.
+     Information used by an integration to transfer the conversation to a different channel.
      */
-    public var typing: Bool?
+    public var transferInfo: ChannelTransferInfo
 
     /**
      An array of objects specifying channels for which the response is intended.
@@ -48,33 +48,33 @@ public struct DialogNodeOutputGenericDialogNodeOutputResponseTypePause: Codable,
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case responseType = "response_type"
-        case time = "time"
-        case typing = "typing"
+        case messageToUser = "message_to_user"
+        case transferInfo = "transfer_info"
         case channels = "channels"
     }
 
     /**
-      Initialize a `DialogNodeOutputGenericDialogNodeOutputResponseTypePause` with member variables.
+      Initialize a `DialogNodeOutputGenericDialogNodeOutputResponseTypeChannelTransfer` with member variables.
 
       - parameter responseType: The type of response returned by the dialog node. The specified response type must be
         supported by the client application or channel.
-      - parameter time: How long to pause, in milliseconds. The valid values are from 0 to 10000.
-      - parameter typing: Whether to send a "user is typing" event during the pause. Ignored if the channel does not
-        support this event.
+      - parameter messageToUser: The message to display to the user when initiating a channel transfer.
+      - parameter transferInfo: Information used by an integration to transfer the conversation to a different
+        channel.
       - parameter channels: An array of objects specifying channels for which the response is intended.
 
-      - returns: An initialized `DialogNodeOutputGenericDialogNodeOutputResponseTypePause`.
+      - returns: An initialized `DialogNodeOutputGenericDialogNodeOutputResponseTypeChannelTransfer`.
      */
     public init(
         responseType: String,
-        time: Int,
-        typing: Bool? = nil,
+        messageToUser: String,
+        transferInfo: ChannelTransferInfo,
         channels: [ResponseGenericChannel]? = nil
     )
     {
         self.responseType = responseType
-        self.time = time
-        self.typing = typing
+        self.messageToUser = messageToUser
+        self.transferInfo = transferInfo
         self.channels = channels
     }
 

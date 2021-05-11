@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019, 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,18 +15,21 @@
  **/
 
 import Foundation
+import IBMSwiftSDKCore
 
 /**
  RuntimeResponseGeneric.
  */
 public enum RuntimeResponseGeneric: Codable, Equatable {
 
+    case channelTransfer(RuntimeResponseGenericRuntimeResponseTypeChannelTransfer)
     case connectToAgent(RuntimeResponseGenericRuntimeResponseTypeConnectToAgent)
     case image(RuntimeResponseGenericRuntimeResponseTypeImage)
     case option(RuntimeResponseGenericRuntimeResponseTypeOption)
     case suggestion(RuntimeResponseGenericRuntimeResponseTypeSuggestion)
     case pause(RuntimeResponseGenericRuntimeResponseTypePause)
     case text(RuntimeResponseGenericRuntimeResponseTypeText)
+    case userDefined(RuntimeResponseGenericRuntimeResponseTypeUserDefined)
 
     private struct GenericRuntimeResponseGeneric: Codable, Equatable {
 
@@ -42,6 +45,11 @@ public enum RuntimeResponseGeneric: Codable, Equatable {
         let container = try decoder.singleValueContainer()
         if let genericInstance = try? container.decode(GenericRuntimeResponseGeneric.self) {
             switch genericInstance.responseType {
+            case "channel_transfer":
+                if let val = try? container.decode(RuntimeResponseGenericRuntimeResponseTypeChannelTransfer.self) {
+                    self = .channelTransfer(val)
+                    return
+                }
             case "connect_to_agent":
                 if let val = try? container.decode(RuntimeResponseGenericRuntimeResponseTypeConnectToAgent.self) {
                     self = .connectToAgent(val)
@@ -72,6 +80,11 @@ public enum RuntimeResponseGeneric: Codable, Equatable {
                     self = .text(val)
                     return
                 }
+            case "user_defined":
+                if let val = try? container.decode(RuntimeResponseGenericRuntimeResponseTypeUserDefined.self) {
+                    self = .userDefined(val)
+                    return
+                }
             default:
                 // falling through to throw decoding error
                 break
@@ -85,6 +98,8 @@ public enum RuntimeResponseGeneric: Codable, Equatable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         switch self {
+        case .channelTransfer(let channel_transfer):
+            try container.encode(channel_transfer)
         case .connectToAgent(let connect_to_agent):
             try container.encode(connect_to_agent)
         case .image(let image):
@@ -97,6 +112,8 @@ public enum RuntimeResponseGeneric: Codable, Equatable {
             try container.encode(pause)
         case .text(let text):
             try container.encode(text)
+        case .userDefined(let user_defined):
+            try container.encode(user_defined)
         }
     }
 }

@@ -17,12 +17,12 @@
 import Foundation
 
 /**
- RuntimeResponseGenericRuntimeResponseTypeImage.
+ RuntimeResponseGenericRuntimeResponseTypeChannelTransfer.
 
- Enums with an associated value of RuntimeResponseGenericRuntimeResponseTypeImage:
+ Enums with an associated value of RuntimeResponseGenericRuntimeResponseTypeChannelTransfer:
     RuntimeResponseGeneric
  */
-public struct RuntimeResponseGenericRuntimeResponseTypeImage: Codable, Equatable {
+public struct RuntimeResponseGenericRuntimeResponseTypeChannelTransfer: Codable, Equatable {
 
     /**
      The type of response returned by the dialog node. The specified response type must be supported by the client
@@ -31,61 +31,53 @@ public struct RuntimeResponseGenericRuntimeResponseTypeImage: Codable, Equatable
     public var responseType: String
 
     /**
-     The URL of the image.
+     The message to display to the user when initiating a channel transfer.
      */
-    public var source: String
+    public var messageToUser: String
 
     /**
-     The title or introductory text to show before the response.
+     Information used by an integration to transfer the conversation to a different channel.
      */
-    public var title: String?
-
-    /**
-     The description to show with the the response.
-     */
-    public var description: String?
+    public var transferInfo: ChannelTransferInfo
 
     /**
      An array of objects specifying channels for which the response is intended. If **channels** is present, the
-     response is intended for a built-in integration and should not be handled by an API client.
+     response is intended only for a built-in integration and should not be handled by an API client.
      */
     public var channels: [ResponseGenericChannel]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case responseType = "response_type"
-        case source = "source"
-        case title = "title"
-        case description = "description"
+        case messageToUser = "message_to_user"
+        case transferInfo = "transfer_info"
         case channels = "channels"
     }
 
     /**
-      Initialize a `RuntimeResponseGenericRuntimeResponseTypeImage` with member variables.
+      Initialize a `RuntimeResponseGenericRuntimeResponseTypeChannelTransfer` with member variables.
 
       - parameter responseType: The type of response returned by the dialog node. The specified response type must be
         supported by the client application or channel.
-      - parameter source: The URL of the image.
-      - parameter title: The title or introductory text to show before the response.
-      - parameter description: The description to show with the the response.
+      - parameter messageToUser: The message to display to the user when initiating a channel transfer.
+      - parameter transferInfo: Information used by an integration to transfer the conversation to a different
+        channel.
       - parameter channels: An array of objects specifying channels for which the response is intended. If
-        **channels** is present, the response is intended for a built-in integration and should not be handled by an API
-        client.
+        **channels** is present, the response is intended only for a built-in integration and should not be handled by an
+        API client.
 
-      - returns: An initialized `RuntimeResponseGenericRuntimeResponseTypeImage`.
+      - returns: An initialized `RuntimeResponseGenericRuntimeResponseTypeChannelTransfer`.
      */
     public init(
         responseType: String,
-        source: String,
-        title: String? = nil,
-        description: String? = nil,
+        messageToUser: String,
+        transferInfo: ChannelTransferInfo,
         channels: [ResponseGenericChannel]? = nil
     )
     {
         self.responseType = responseType
-        self.source = source
-        self.title = title
-        self.description = description
+        self.messageToUser = messageToUser
+        self.transferInfo = transferInfo
         self.channels = channels
     }
 

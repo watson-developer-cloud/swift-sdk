@@ -15,14 +15,15 @@
  **/
 
 import Foundation
+import IBMSwiftSDKCore
 
 /**
- DialogNodeOutputGenericDialogNodeOutputResponseTypePause.
+ DialogNodeOutputGenericDialogNodeOutputResponseTypeUserDefined.
 
- Enums with an associated value of DialogNodeOutputGenericDialogNodeOutputResponseTypePause:
+ Enums with an associated value of DialogNodeOutputGenericDialogNodeOutputResponseTypeUserDefined:
     DialogNodeOutputGeneric
  */
-public struct DialogNodeOutputGenericDialogNodeOutputResponseTypePause: Codable, Equatable {
+public struct DialogNodeOutputGenericDialogNodeOutputResponseTypeUserDefined: Codable, Equatable {
 
     /**
      The type of response returned by the dialog node. The specified response type must be supported by the client
@@ -31,14 +32,10 @@ public struct DialogNodeOutputGenericDialogNodeOutputResponseTypePause: Codable,
     public var responseType: String
 
     /**
-     How long to pause, in milliseconds. The valid values are from 0 to 10000.
+     An object containing any properties for the user-defined response type. The total size of this object cannot exceed
+     5000 bytes.
      */
-    public var time: Int
-
-    /**
-     Whether to send a "user is typing" event during the pause. Ignored if the channel does not support this event.
-     */
-    public var typing: Bool?
+    public var userDefined: [String: JSON]
 
     /**
      An array of objects specifying channels for which the response is intended.
@@ -48,33 +45,29 @@ public struct DialogNodeOutputGenericDialogNodeOutputResponseTypePause: Codable,
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case responseType = "response_type"
-        case time = "time"
-        case typing = "typing"
+        case userDefined = "user_defined"
         case channels = "channels"
     }
 
     /**
-      Initialize a `DialogNodeOutputGenericDialogNodeOutputResponseTypePause` with member variables.
+      Initialize a `DialogNodeOutputGenericDialogNodeOutputResponseTypeUserDefined` with member variables.
 
       - parameter responseType: The type of response returned by the dialog node. The specified response type must be
         supported by the client application or channel.
-      - parameter time: How long to pause, in milliseconds. The valid values are from 0 to 10000.
-      - parameter typing: Whether to send a "user is typing" event during the pause. Ignored if the channel does not
-        support this event.
+      - parameter userDefined: An object containing any properties for the user-defined response type. The total size
+        of this object cannot exceed 5000 bytes.
       - parameter channels: An array of objects specifying channels for which the response is intended.
 
-      - returns: An initialized `DialogNodeOutputGenericDialogNodeOutputResponseTypePause`.
+      - returns: An initialized `DialogNodeOutputGenericDialogNodeOutputResponseTypeUserDefined`.
      */
     public init(
         responseType: String,
-        time: Int,
-        typing: Bool? = nil,
+        userDefined: [String: JSON],
         channels: [ResponseGenericChannel]? = nil
     )
     {
         self.responseType = responseType
-        self.time = time
-        self.typing = typing
+        self.userDefined = userDefined
         self.channels = channels
     }
 

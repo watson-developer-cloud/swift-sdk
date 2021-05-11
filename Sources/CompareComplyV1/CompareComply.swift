@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2018, 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  **/
 
 /**
- * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-36b26b63-20201028-122900
+ * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-902c9336-20210507-162723
  **/
 
 // swiftlint:disable file_length
@@ -29,8 +29,12 @@ import IBMSwiftSDKCore
 public typealias WatsonError = RestError
 public typealias WatsonResponse = RestResponse
 /**
- IBM Watson&trade; Compare and Comply analyzes governing documents to provide details about critical aspects of the
- documents.
+ IBM Watson&trade; Compare and Comply is discontinued. Existing instances are supported until 30 November 2021, but as
+ of 1 December 2020, you can't create instances. Any instance that exists on 30 November 2021 will be deleted. Consider
+ migrating to Watson Discovery Premium on IBM Cloud for your Compare and Comply use cases. To start the migration
+ process, visit [https://ibm.biz/contact-wdc-premium](https://ibm.biz/contact-wdc-premium).
+ {: deprecated}
+ Compare and Comply analyzes governing documents to provide details about critical aspects of the documents.
  */
 public class CompareComply {
 
@@ -829,14 +833,14 @@ public class CompareComply {
     {
         // construct body
         let multipartFormData = MultipartFormData()
-        multipartFormData.append(inputCredentialsFile, withName: "input_credentials_file", fileName: "filename")
+        multipartFormData.append(inputCredentialsFile, withName: "input_credentials_file", mimeType: "application/json", fileName: "filename")
         if let inputBucketLocationData = inputBucketLocation.data(using: .utf8) {
             multipartFormData.append(inputBucketLocationData, withName: "input_bucket_location")
         }
         if let inputBucketNameData = inputBucketName.data(using: .utf8) {
             multipartFormData.append(inputBucketNameData, withName: "input_bucket_name")
         }
-        multipartFormData.append(outputCredentialsFile, withName: "output_credentials_file", fileName: "filename")
+        multipartFormData.append(outputCredentialsFile, withName: "output_credentials_file", mimeType: "application/json", fileName: "filename")
         if let outputBucketLocationData = outputBucketLocation.data(using: .utf8) {
             multipartFormData.append(outputBucketLocationData, withName: "output_bucket_location")
         }

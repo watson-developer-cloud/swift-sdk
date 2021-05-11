@@ -17,48 +17,36 @@
 import Foundation
 
 /**
- A passage query result.
+ Object containing a potential answer to the specified query.
  */
-public struct QueryResultPassage: Codable, Equatable {
+public struct ResultPassageAnswer: Codable, Equatable {
 
     /**
-     The content of the extracted passage.
+     Answer text for the specified query as identified by Discovery.
      */
-    public var passageText: String?
+    public var answerText: String?
 
     /**
-     The position of the first character of the extracted passage in the originating field.
+     The position of the first character of the extracted answer in the originating field.
      */
     public var startOffset: Int?
 
     /**
-     The position of the last character of the extracted passage in the originating field.
+     The position of the last character of the extracted answer in the originating field.
      */
     public var endOffset: Int?
 
     /**
-     The label of the field from which the passage has been extracted.
-     */
-    public var field: String?
-
-    /**
-     Estimate of the probability that the passage is relevant.
+     An estimate of the probability that the answer is relevant.
      */
     public var confidence: Double?
 
-    /**
-     An arry of extracted answers to the specified query.
-     */
-    public var answers: [ResultPassageAnswer]?
-
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case passageText = "passage_text"
+        case answerText = "answer_text"
         case startOffset = "start_offset"
         case endOffset = "end_offset"
-        case field = "field"
         case confidence = "confidence"
-        case answers = "answers"
     }
 
 }

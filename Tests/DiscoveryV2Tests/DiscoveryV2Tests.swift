@@ -594,6 +594,30 @@ class DiscoveryTests: XCTestCase {
 
         waitForExpectations(timeout: timeout)
     }
+    
+    // MARK: - Collection Noticies
+
+    func testQueryCollectionNoticies() {
+        let expectation = self.expectation(description: "queryProjectWithNaturalLanguage")
+        discovery.queryCollectionNotices(projectID: projectID, collectionID: collectionID, naturalLanguageQuery: "warning") { response, error in
+            if let error = error {
+                debugPrint(error.localizedDescription)
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+
+            guard let results = response?.result else {
+                XCTFail("No response")
+                return
+            }
+
+            XCTAssertNotNil(results.notices)
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations(timeout: timeout)
+    }
 
     // MARK: - List Fields
 
@@ -804,6 +828,19 @@ class DiscoveryTests: XCTestCase {
         }
 
         waitForExpectations(timeout: timeout)
+        
+        let deleteTrainingQueryExpectation = self.expectation(description: "deleteTrainingQuery")
+        discovery.deleteTrainingQuery(projectID: projectID, queryID: queryID, headers: nil) { response, error in
+            if let error = error {
+                debugPrint(error.localizedDescription)
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+
+            deleteTrainingQueryExpectation.fulfill()
+        }
+
+        waitForExpectations(timeout: timeout)
 
         let deleteTrainingQueriesExpectation = self.expectation(description: "deleteTrainingQueries")
         discovery.deleteTrainingQueries(projectID: projectID, headers: nil) { _, error in
@@ -919,7 +956,7 @@ class DiscoveryTests: XCTestCase {
         let enrichmentData = loadDocument(name: "TestEnrichments", ext: "csv")
         let enrichmentOptions = EnrichmentOptions(languages: ["en"], entityType: "keyword", regularExpression: nil, resultField: nil)
         let enrichment = CreateEnrichment(name: "Dictionary", description: "test dictionary", type: "dictionary", options: enrichmentOptions)
-        discovery.createEnrichment(projectID: projectID, enrichment: enrichment, file: enrichmentData, fileContentType: "text/csv") {
+        discovery.createEnrichment(projectID: projectID, enrichment: enrichment, file: enrichmentData) {
             response, error in
 
             if let error = error {

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,11 +62,17 @@ public struct CustomModel: Codable, Equatable {
 
     /**
      An array of `Word` objects that lists the words and their translations from the custom model. The words are listed
-     in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if the custom
-     model contains no words. This field is returned only by the **Get a voice** method and only when you specify the
-     customization ID of a custom model.
+     in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if no words are
+     defined for the custom model. This field is returned only by the **Get a custom model** method.
      */
     public var words: [Word]?
+
+    /**
+     An array of `Prompt` objects that provides information about the prompts that are defined for the specified custom
+     model. The array is empty if no prompts are defined for the custom model. This field is returned only by the **Get
+     a custom model** method.
+     */
+    public var prompts: [Prompt]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
@@ -78,6 +84,7 @@ public struct CustomModel: Codable, Equatable {
         case lastModified = "last_modified"
         case description = "description"
         case words = "words"
+        case prompts = "prompts"
     }
 
 }

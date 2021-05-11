@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,10 +35,17 @@ public struct SupportedFeatures: Codable, Equatable {
      */
     public var speakerLabels: Bool
 
+    /**
+     Indicates whether the `low_latency` parameter can be used with a next-generation language model. The field is
+     returned only for next-generation models. Previous-generation models do not support the `low_latency` parameter.
+     */
+    public var lowLatency: Bool?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case customLanguageModel = "custom_language_model"
         case speakerLabels = "speaker_labels"
+        case lowLatency = "low_latency"
     }
 
 }

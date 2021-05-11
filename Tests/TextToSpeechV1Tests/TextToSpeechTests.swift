@@ -754,7 +754,7 @@ class TextToSpeechTests: XCTestCase {
                 expectation4.fulfill()
                 return
             }
-            XCTAssertNotNil(response?.result)
+            XCTAssertNotNil(response)
             expectation4.fulfill()
         }
         waitForExpectations()

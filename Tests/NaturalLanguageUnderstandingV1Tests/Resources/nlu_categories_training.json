@@ -1,0 +1,22 @@
+[
+   {
+       "labels": [
+           "level1"
+       ],
+       "key_phrases": [
+           "key phrase",
+           "key phrase 2"
+       ]
+   },
+   {
+       "labels": [
+           "level1",
+           "level2"
+       ],
+       "key_phrases": [
+           "key phrase 3",
+           "key phrase 4"
+       ]
+   }
+]
+

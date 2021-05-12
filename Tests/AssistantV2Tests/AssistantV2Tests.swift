@@ -43,6 +43,7 @@ class AssistantV2Tests: XCTestCase {
             ("testMessage", testMessage),
             ("testMessageStateless", testMessageStateless),
             ("testMessageWithInvalidSessionID", testMessageWithInvalidSessionID),
+            ("testBulkClassify", testBulkClassify),
         ]
     }
 
@@ -607,6 +608,30 @@ class AssistantV2Tests: XCTestCase {
             }
 
             XCTAssertNotNil(logsCollection.logs)
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations()
+    }
+    
+    func testBulkClassify() {
+        // User responds to the bot
+        let description = "Continue a conversation."
+        let expectation = self.expectation(description: description)
+        
+        let bulkClassifyOptions1 = [BulkClassifyUtterance(text: "hello"), BulkClassifyUtterance(text: "ugh")]
+        let bulkClassifyOptions2 = BulkClassifyUtterance(text: "goodbye")
+
+        assistant.bulkClassify(skillID: "123456", input: bulkClassifyOptions2) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            
+            print(response?.result)
 
             expectation.fulfill()
         }

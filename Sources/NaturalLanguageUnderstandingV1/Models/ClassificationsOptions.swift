@@ -17,56 +17,36 @@
 import Foundation
 
 /**
- Returns a five-level taxonomy of the content. The top three categories are returned.
- Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
+ Returns text classifications for the content.
+ Supported languages: English only.
  */
-public struct CategoriesOptions: Codable, Equatable {
-
-    /**
-     Set this to `true` to return explanations for each categorization. **This is available only for English
-     categories.**.
-     */
-    public var explanation: Bool?
-
-    /**
-     Maximum number of categories to return.
-     */
-    public var limit: Int?
+public struct ClassificationsOptions: Codable, Equatable {
 
     /**
      (Beta) Enter a [custom
      model](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-customizing)
-     ID to override the standard categories model. **This is available only for English categories.**.
+     ID of the classification model to be used.
      */
     public var model: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case explanation = "explanation"
-        case limit = "limit"
         case model = "model"
     }
 
     /**
-      Initialize a `CategoriesOptions` with member variables.
+      Initialize a `ClassificationsOptions` with member variables.
 
-      - parameter explanation: Set this to `true` to return explanations for each categorization. **This is available
-        only for English categories.**.
-      - parameter limit: Maximum number of categories to return.
       - parameter model: (Beta) Enter a [custom
         model](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-customizing)
-        ID to override the standard categories model. **This is available only for English categories.**.
+        ID of the classification model to be used.
 
-      - returns: An initialized `CategoriesOptions`.
+      - returns: An initialized `ClassificationsOptions`.
      */
     public init(
-        explanation: Bool? = nil,
-        limit: Int? = nil,
         model: String? = nil
     )
     {
-        self.explanation = explanation
-        self.limit = limit
         self.model = model
     }
 

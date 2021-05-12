@@ -53,6 +53,9 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             ("testCustomModel", testCustomModel),
             ("testDeleteModel", testDeleteModel),
             ("testListModels", testListModels),
+            ("testSentimentModelCRUD", testSentimentModelCRUD),
+            ("testCategoriesModelCRUD", testCategoriesModelCRUD),
+            ("testClassificationModelCRUD", testClassificationModelCRUD)
         ]
     }
 
@@ -83,7 +86,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
     }
 
     /** Wait for expectations. */
-    func waitForExpectations(timeout: TimeInterval = 5.0) {
+    func waitForExpectations(timeout: TimeInterval = 10.0) {
         waitForExpectations(timeout: timeout) { error in
             XCTAssertNil(error, "Timeout")
         }
@@ -563,14 +566,14 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         let description = "Test a custom model."
         let expectation = self.expectation(description: description)
         let features = Features(
+            categories: CategoriesOptions(),
             concepts: ConceptsOptions(limit: 5),
             emotion: EmotionOptions(document: true, targets: ["happy"]),
             entities: EntitiesOptions(limit: 5, mentions: true, model: "en-news", sentiment: true, emotion: true),
             keywords: KeywordsOptions(limit: 5, sentiment: true, emotion: true),
             relations: RelationsOptions(model: "en-news"),
             semanticRoles: SemanticRolesOptions(limit: 5, keywords: true, entities: true),
-            sentiment: SentimentOptions(document: true, targets: ["happy"]),
-            categories: CategoriesOptions()
+            sentiment: SentimentOptions(document: true, targets: ["happy"])
         )
         naturalLanguageUnderstanding.analyze(features: features, text: text, returnAnalyzedText: true) {
             response, error in
@@ -626,5 +629,330 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             expectation.fulfill()
         }
         waitForExpectations(timeout: 20)
+    }
+    
+    func testSentimentModelCRUD() {
+        var modelID: String!
+        let name = "testName2"
+        
+        //create sentiment model
+        let expectation1 = self.expectation(description: "Create sentiment model")
+        let createFile = Bundle(for: type(of: self)).url(forResource: "nlu_training_data", withExtension: "csv")!
+        let createFileData = try! Data(contentsOf: createFile)
+        
+        naturalLanguageUnderstanding.createSentimentModel(language: "en", trainingData: createFileData, name: name, modelVersion: "2021-02-23") {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let results = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            modelID = results.modelID
+            XCTAssertNotNil(modelID)
+            expectation1.fulfill()
+        }
+        waitForExpectations()
+        
+        guard modelID != nil else {
+            return
+        }
+        
+        //list sentiment models
+        let expectation2 = self.expectation(description: "List sentiment models")
+        naturalLanguageUnderstanding.listSentimentModels {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let results = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssert(!results.models!.isEmpty)
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+        
+        //get sentiment model
+        let expectation3 = self.expectation(description: "Get sentiment model")
+        naturalLanguageUnderstanding.getSentimentModel(modelID: modelID) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let results = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssertNotNil(results.modelID)
+            expectation3.fulfill()
+        }
+        waitForExpectations()
+        
+        //update sentiment model
+        let expectation4 = self.expectation(description: "Update sentiment model")
+        let updateFile = Bundle(for: type(of: self)).url(forResource: "nlu_training_data", withExtension: "csv")!
+        let updateFileData = try! Data(contentsOf: updateFile)
+        
+        naturalLanguageUnderstanding.createSentimentModel(language: "en", trainingData: updateFileData, name: "testName2") {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let results = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssertEqual(results.name, name)
+            XCTAssertEqual(results.modelID, modelID)
+            expectation4.fulfill()
+        }
+        
+        //delete sentiment model
+        let expectation5 = self.expectation(description: "Delete sentiment model")
+        naturalLanguageUnderstanding.getSentimentModel(modelID: modelID) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+
+            XCTAssertNotNil(response)
+            expectation5.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testCategoriesModelCRUD() {
+        var modelID: String!
+        let name = "testName"
+        
+        //create categories model
+        let expectation1 = self.expectation(description: "Create categories model")
+        let createFile = Bundle(for: type(of: self)).url(forResource: "nlu_categories_training", withExtension: "json")!
+        let createFileData = try! Data(contentsOf: createFile)
+        
+        naturalLanguageUnderstanding.createSentimentModel(language: "en", trainingData: createFileData, name: name) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let results = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            modelID = results.modelID
+            XCTAssertNotNil(modelID)
+            expectation1.fulfill()
+        }
+        waitForExpectations()
+        
+        //If creation operation fails stop test
+        guard modelID != nil else {
+            return
+        }
+        
+        //list categories models
+        let expectation2 = self.expectation(description: "List categories models")
+        naturalLanguageUnderstanding.listSentimentModels {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let results = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssert(!results.models!.isEmpty)
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+        
+        //get categories model
+        let expectation3 = self.expectation(description: "Get categories model")
+        naturalLanguageUnderstanding.getSentimentModel(modelID: modelID) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let results = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssertNotNil(results.modelID)
+            XCTAssertEqual(results.name, name)
+            expectation3.fulfill()
+        }
+        waitForExpectations()
+        
+        //update categories model
+        let expectation4 = self.expectation(description: "Update categories model")
+        let updateFile = Bundle(for: type(of: self)).url(forResource: "nlu_categories_training", withExtension: "json")!
+        let updateFileData = try! Data(contentsOf: updateFile)
+        
+        naturalLanguageUnderstanding.createSentimentModel(language: "en", trainingData: updateFileData, name: "testName2") {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let results = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssertEqual(results.name, name)
+            XCTAssertEqual(results.modelID, modelID)
+            expectation4.fulfill()
+        }
+        
+        //delete categories model
+        let expectation5 = self.expectation(description: "Delete categories model")
+        naturalLanguageUnderstanding.getSentimentModel(modelID: modelID) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+
+            XCTAssertNotNil(response)
+            expectation5.fulfill()
+        }
+        waitForExpectations()
+    }
+    
+    func testClassificationModelCRUD() {
+        var modelID: String!
+        let name = "testName"
+        
+        //create classification model
+        let expectation1 = self.expectation(description: "Create classification model")
+        let createFile = Bundle(for: type(of: self)).url(forResource: "nlu_classifications_training", withExtension: "json")!
+        let createFileData = try! Data(contentsOf: createFile)
+        
+        naturalLanguageUnderstanding.createSentimentModel(language: "en", trainingData: createFileData, name: name) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let results = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            modelID = results.modelID
+            XCTAssertNotNil(modelID)
+            expectation1.fulfill()
+        }
+        waitForExpectations()
+        
+        //If creation operation fails stop test
+        guard modelID != nil else {
+            return
+        }
+        
+        //list classification models
+        let expectation2 = self.expectation(description: "List classification models")
+        naturalLanguageUnderstanding.listSentimentModels {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let results = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssert(!results.models!.isEmpty)
+            expectation2.fulfill()
+        }
+        waitForExpectations()
+        
+        //get classification model
+        let expectation3 = self.expectation(description: "Get classification model")
+        naturalLanguageUnderstanding.getSentimentModel(modelID: modelID) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let results = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssertNotNil(results.modelID)
+            XCTAssertEqual(results.name, name)
+            expectation3.fulfill()
+        }
+        waitForExpectations()
+        
+        //update classification model
+        let expectation4 = self.expectation(description: "Update classification model")
+        let updateFile = Bundle(for: type(of: self)).url(forResource: "nlu_classifications_training", withExtension: "json")!
+        let updateFileData = try! Data(contentsOf: updateFile)
+        
+        naturalLanguageUnderstanding.createSentimentModel(language: "en", trainingData: updateFileData, name: "testName2") {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let results = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+
+            XCTAssertEqual(results.name, name)
+            XCTAssertEqual(results.modelID, modelID)
+            expectation4.fulfill()
+        }
+        
+        //delete classification model
+        let expectation5 = self.expectation(description: "Delete classification model")
+        naturalLanguageUnderstanding.getSentimentModel(modelID: modelID) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+
+            XCTAssertNotNil(response)
+            expectation5.fulfill()
+        }
+        waitForExpectations()
     }
 }

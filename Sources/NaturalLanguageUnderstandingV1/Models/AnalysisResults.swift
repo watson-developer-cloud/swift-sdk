@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2020.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,6 +62,11 @@ public struct AnalysisResults: Codable, Equatable {
     public var categories: [CategoriesResult]?
 
     /**
+     The classifications assigned to the analyzed text.
+     */
+    public var classifications: [ClassificationsResult]?
+
+    /**
      The anger, disgust, fear, joy, or sadness conveyed by the content.
      */
     public var emotion: EmotionResult?
@@ -101,6 +106,7 @@ public struct AnalysisResults: Codable, Equatable {
         case entities = "entities"
         case keywords = "keywords"
         case categories = "categories"
+        case classifications = "classifications"
         case emotion = "emotion"
         case metadata = "metadata"
         case relations = "relations"

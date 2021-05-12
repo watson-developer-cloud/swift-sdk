@@ -60,11 +60,6 @@ public struct ClassificationsModel: Codable, Equatable {
     public var modelVersion: String?
 
     /**
-     Deprecated — use `model_version`.
-     */
-    public var version: String?
-
-    /**
      ID of the Watson Knowledge Studio workspace that deployed this model to Natural Language Understanding.
      */
     public var workspaceID: String?
@@ -94,6 +89,8 @@ public struct ClassificationsModel: Codable, Equatable {
      */
     public var created: Date
 
+    public var notices: [Notice]?
+
     /**
      dateTime of last successful model training.
      */
@@ -111,13 +108,13 @@ public struct ClassificationsModel: Codable, Equatable {
         case language = "language"
         case description = "description"
         case modelVersion = "model_version"
-        case version = "version"
         case workspaceID = "workspace_id"
         case versionDescription = "version_description"
         case features = "features"
         case status = "status"
         case modelID = "model_id"
         case created = "created"
+        case notices = "notices"
         case lastTrained = "last_trained"
         case lastDeployed = "last_deployed"
     }

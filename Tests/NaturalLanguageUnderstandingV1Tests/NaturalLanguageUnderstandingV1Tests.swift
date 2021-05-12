@@ -633,7 +633,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
     
     func testSentimentModelCRUD() {
         var modelID: String!
-        let name = "testName2"
+        var name = "testName"
         
         //create sentiment model
         let expectation1 = self.expectation(description: "Create sentiment model")
@@ -704,8 +704,9 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         let expectation4 = self.expectation(description: "Update sentiment model")
         let updateFile = Bundle(for: type(of: self)).url(forResource: "nlu_training_data", withExtension: "csv")!
         let updateFileData = try! Data(contentsOf: updateFile)
+        name = "testName2"
         
-        naturalLanguageUnderstanding.createSentimentModel(language: "en", trainingData: updateFileData, name: "testName2") {
+        naturalLanguageUnderstanding.updateSentimentModel(modelID: modelID, language: "en", trainingData: updateFileData, name:name) {
             response, error in
 
             if let error = error {
@@ -721,10 +722,11 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             XCTAssertEqual(results.modelID, modelID)
             expectation4.fulfill()
         }
+        waitForExpectations()
         
         //delete sentiment model
         let expectation5 = self.expectation(description: "Delete sentiment model")
-        naturalLanguageUnderstanding.getSentimentModel(modelID: modelID) {
+        naturalLanguageUnderstanding.deleteSentimentModel(modelID: modelID) {
             response, error in
 
             if let error = error {
@@ -740,14 +742,14 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
     
     func testCategoriesModelCRUD() {
         var modelID: String!
-        let name = "testName"
+        var name = "testName"
         
         //create categories model
         let expectation1 = self.expectation(description: "Create categories model")
         let createFile = Bundle(for: type(of: self)).url(forResource: "nlu_categories_training", withExtension: "json")!
         let createFileData = try! Data(contentsOf: createFile)
         
-        naturalLanguageUnderstanding.createSentimentModel(language: "en", trainingData: createFileData, name: name) {
+        naturalLanguageUnderstanding.createCategoriesModel(language: "en", trainingData: createFileData, trainingDataContentType: "application/json", name: name) {
             response, error in
 
             if let error = error {
@@ -772,7 +774,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         
         //list categories models
         let expectation2 = self.expectation(description: "List categories models")
-        naturalLanguageUnderstanding.listSentimentModels {
+        naturalLanguageUnderstanding.listCategoriesModels {
             response, error in
 
             if let error = error {
@@ -791,7 +793,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         
         //get categories model
         let expectation3 = self.expectation(description: "Get categories model")
-        naturalLanguageUnderstanding.getSentimentModel(modelID: modelID) {
+        naturalLanguageUnderstanding.getCategoriesModel(modelID: modelID) {
             response, error in
 
             if let error = error {
@@ -813,8 +815,9 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         let expectation4 = self.expectation(description: "Update categories model")
         let updateFile = Bundle(for: type(of: self)).url(forResource: "nlu_categories_training", withExtension: "json")!
         let updateFileData = try! Data(contentsOf: updateFile)
+        name = "testName2"
         
-        naturalLanguageUnderstanding.createSentimentModel(language: "en", trainingData: updateFileData, name: "testName2") {
+        naturalLanguageUnderstanding.updateCategoriesModel(modelID: modelID, language: "en", trainingData: updateFileData, trainingDataContentType: "application/json", name: "testName2") {
             response, error in
 
             if let error = error {
@@ -830,10 +833,11 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             XCTAssertEqual(results.modelID, modelID)
             expectation4.fulfill()
         }
+        waitForExpectations()
         
         //delete categories model
         let expectation5 = self.expectation(description: "Delete categories model")
-        naturalLanguageUnderstanding.getSentimentModel(modelID: modelID) {
+        naturalLanguageUnderstanding.deleteCategoriesModel(modelID: modelID) {
             response, error in
 
             if let error = error {
@@ -849,14 +853,14 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
     
     func testClassificationModelCRUD() {
         var modelID: String!
-        let name = "testName"
+        var name = "testName"
         
         //create classification model
         let expectation1 = self.expectation(description: "Create classification model")
         let createFile = Bundle(for: type(of: self)).url(forResource: "nlu_classifications_training", withExtension: "json")!
         let createFileData = try! Data(contentsOf: createFile)
         
-        naturalLanguageUnderstanding.createSentimentModel(language: "en", trainingData: createFileData, name: name) {
+        naturalLanguageUnderstanding.createClassificationsModel(language: "en", trainingData: createFileData, trainingDataContentType: "application/json", name: name) {
             response, error in
 
             if let error = error {
@@ -881,7 +885,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         
         //list classification models
         let expectation2 = self.expectation(description: "List classification models")
-        naturalLanguageUnderstanding.listSentimentModels {
+        naturalLanguageUnderstanding.listClassificationsModels {
             response, error in
 
             if let error = error {
@@ -900,7 +904,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         
         //get classification model
         let expectation3 = self.expectation(description: "Get classification model")
-        naturalLanguageUnderstanding.getSentimentModel(modelID: modelID) {
+        naturalLanguageUnderstanding.getClassificationsModel(modelID: modelID) {
             response, error in
 
             if let error = error {
@@ -922,8 +926,9 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         let expectation4 = self.expectation(description: "Update classification model")
         let updateFile = Bundle(for: type(of: self)).url(forResource: "nlu_classifications_training", withExtension: "json")!
         let updateFileData = try! Data(contentsOf: updateFile)
+        name = "testName2"
         
-        naturalLanguageUnderstanding.createSentimentModel(language: "en", trainingData: updateFileData, name: "testName2") {
+        naturalLanguageUnderstanding.updateClassificationsModel(modelID: modelID, language: "en", trainingData: updateFileData, trainingDataContentType: "application/json", name: "testName2") {
             response, error in
 
             if let error = error {
@@ -939,10 +944,11 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
             XCTAssertEqual(results.modelID, modelID)
             expectation4.fulfill()
         }
+        waitForExpectations()
         
         //delete classification model
         let expectation5 = self.expectation(description: "Delete classification model")
-        naturalLanguageUnderstanding.getSentimentModel(modelID: modelID) {
+        naturalLanguageUnderstanding.deleteClassificationsModel(modelID: modelID) {
             response, error in
 
             if let error = error {

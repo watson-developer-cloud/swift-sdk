@@ -89,10 +89,7 @@ public struct SentimentModel: Codable, Equatable {
      */
     public var modelVersion: String?
 
-    /**
-     Deprecated — use `model_version`.
-     */
-    public var version: String?
+    public var notices: [Notice]?
 
     /**
      ID of the Watson Knowledge Studio workspace that deployed this model to Natural Language Understanding.
@@ -117,7 +114,7 @@ public struct SentimentModel: Codable, Equatable {
         case language = "language"
         case description = "description"
         case modelVersion = "model_version"
-        case version = "version"
+        case notices = "notices"
         case workspaceID = "workspace_id"
         case versionDescription = "version_description"
     }

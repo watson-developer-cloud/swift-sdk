@@ -15,7 +15,7 @@
  **/
 
 /**
- * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-bd714324-20210419-134238
+ * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-902c9336-20210507-162723
  **/
 
 // swiftlint:disable file_length
@@ -384,7 +384,6 @@ public class NaturalLanguageUnderstanding {
      - parameter name: An optional name for the model.
      - parameter description: An optional description of the model.
      - parameter modelVersion: An optional version string.
-     - parameter version: Deprecated — use `model_version`.
      - parameter workspaceID: ID of the Watson Knowledge Studio workspace that deployed this model to Natural Language
        Understanding.
      - parameter versionDescription: The description of the version.
@@ -397,7 +396,6 @@ public class NaturalLanguageUnderstanding {
         name: String? = nil,
         description: String? = nil,
         modelVersion: String? = nil,
-        version: String? = nil,
         workspaceID: String? = nil,
         versionDescription: String? = nil,
         headers: [String: String]? = nil,
@@ -408,7 +406,7 @@ public class NaturalLanguageUnderstanding {
         if let languageData = language.data(using: .utf8) {
             multipartFormData.append(languageData, withName: "language")
         }
-        multipartFormData.append(trainingData, withName: "training_data", fileName: "filename")
+        multipartFormData.append(trainingData, withName: "training_data", mimeType: "text/csv", fileName: "filename")
         if let name = name {
             if let nameData = name.data(using: .utf8) {
                 multipartFormData.append(nameData, withName: "name")
@@ -422,11 +420,6 @@ public class NaturalLanguageUnderstanding {
         if let modelVersion = modelVersion {
             if let modelVersionData = modelVersion.data(using: .utf8) {
                 multipartFormData.append(modelVersionData, withName: "model_version")
-            }
-        }
-        if let version = version {
-            if let versionData = version.data(using: .utf8) {
-                multipartFormData.append(versionData, withName: "version")
             }
         }
         if let workspaceID = workspaceID {
@@ -551,6 +544,10 @@ public class NaturalLanguageUnderstanding {
             headerParameters.merge(headers) { (_, new) in new }
         }
 
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
         // construct REST request
         let path = "/v1/models/sentiment/\(modelID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
@@ -570,7 +567,8 @@ public class NaturalLanguageUnderstanding {
             errorResponseDecoder: errorResponseDecoder,
             method: "GET",
             url: serviceEndpoint + encodedPath,
-            headerParameters: headerParameters
+            headerParameters: headerParameters,
+            queryItems: queryParameters
         )
 
         // execute REST request
@@ -590,7 +588,6 @@ public class NaturalLanguageUnderstanding {
      - parameter name: An optional name for the model.
      - parameter description: An optional description of the model.
      - parameter modelVersion: An optional version string.
-     - parameter version: Deprecated — use `model_version`.
      - parameter workspaceID: ID of the Watson Knowledge Studio workspace that deployed this model to Natural Language
        Understanding.
      - parameter versionDescription: The description of the version.
@@ -604,7 +601,6 @@ public class NaturalLanguageUnderstanding {
         name: String? = nil,
         description: String? = nil,
         modelVersion: String? = nil,
-        version: String? = nil,
         workspaceID: String? = nil,
         versionDescription: String? = nil,
         headers: [String: String]? = nil,
@@ -615,7 +611,7 @@ public class NaturalLanguageUnderstanding {
         if let languageData = language.data(using: .utf8) {
             multipartFormData.append(languageData, withName: "language")
         }
-        multipartFormData.append(trainingData, withName: "training_data", fileName: "filename")
+        multipartFormData.append(trainingData, withName: "training_data", mimeType: "text/csv", fileName: "filename")
         if let name = name {
             if let nameData = name.data(using: .utf8) {
                 multipartFormData.append(nameData, withName: "name")
@@ -629,11 +625,6 @@ public class NaturalLanguageUnderstanding {
         if let modelVersion = modelVersion {
             if let modelVersionData = modelVersion.data(using: .utf8) {
                 multipartFormData.append(modelVersionData, withName: "model_version")
-            }
-        }
-        if let version = version {
-            if let versionData = version.data(using: .utf8) {
-                multipartFormData.append(versionData, withName: "version")
             }
         }
         if let workspaceID = workspaceID {
@@ -661,6 +652,10 @@ public class NaturalLanguageUnderstanding {
             headerParameters.merge(headers) { (_, new) in new }
         }
 
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
         // construct REST request
         let path = "/v1/models/sentiment/\(modelID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
@@ -681,6 +676,7 @@ public class NaturalLanguageUnderstanding {
             method: "PUT",
             url: serviceEndpoint + encodedPath,
             headerParameters: headerParameters,
+            queryItems: queryParameters,
             messageBody: body
         )
 
@@ -712,6 +708,10 @@ public class NaturalLanguageUnderstanding {
             headerParameters.merge(headers) { (_, new) in new }
         }
 
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
         // construct REST request
         let path = "/v1/models/sentiment/\(modelID)"
         guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
@@ -731,7 +731,8 @@ public class NaturalLanguageUnderstanding {
             errorResponseDecoder: errorResponseDecoder,
             method: "DELETE",
             url: serviceEndpoint + encodedPath,
-            headerParameters: headerParameters
+            headerParameters: headerParameters,
+            queryItems: queryParameters
         )
 
         // execute REST request
@@ -751,7 +752,6 @@ public class NaturalLanguageUnderstanding {
      - parameter name: An optional name for the model.
      - parameter description: An optional description of the model.
      - parameter modelVersion: An optional version string.
-     - parameter version: Deprecated — use `model_version`.
      - parameter workspaceID: ID of the Watson Knowledge Studio workspace that deployed this model to Natural Language
        Understanding.
      - parameter versionDescription: The description of the version.
@@ -765,7 +765,6 @@ public class NaturalLanguageUnderstanding {
         name: String? = nil,
         description: String? = nil,
         modelVersion: String? = nil,
-        version: String? = nil,
         workspaceID: String? = nil,
         versionDescription: String? = nil,
         headers: [String: String]? = nil,
@@ -790,11 +789,6 @@ public class NaturalLanguageUnderstanding {
         if let modelVersion = modelVersion {
             if let modelVersionData = modelVersion.data(using: .utf8) {
                 multipartFormData.append(modelVersionData, withName: "model_version")
-            }
-        }
-        if let version = version {
-            if let versionData = version.data(using: .utf8) {
-                multipartFormData.append(versionData, withName: "version")
             }
         }
         if let workspaceID = workspaceID {
@@ -964,7 +958,6 @@ public class NaturalLanguageUnderstanding {
      - parameter name: An optional name for the model.
      - parameter description: An optional description of the model.
      - parameter modelVersion: An optional version string.
-     - parameter version: Deprecated — use `model_version`.
      - parameter workspaceID: ID of the Watson Knowledge Studio workspace that deployed this model to Natural Language
        Understanding.
      - parameter versionDescription: The description of the version.
@@ -979,7 +972,6 @@ public class NaturalLanguageUnderstanding {
         name: String? = nil,
         description: String? = nil,
         modelVersion: String? = nil,
-        version: String? = nil,
         workspaceID: String? = nil,
         versionDescription: String? = nil,
         headers: [String: String]? = nil,
@@ -1004,11 +996,6 @@ public class NaturalLanguageUnderstanding {
         if let modelVersion = modelVersion {
             if let modelVersionData = modelVersion.data(using: .utf8) {
                 multipartFormData.append(modelVersionData, withName: "model_version")
-            }
-        }
-        if let version = version {
-            if let versionData = version.data(using: .utf8) {
-                multipartFormData.append(versionData, withName: "version")
             }
         }
         if let workspaceID = workspaceID {
@@ -1136,7 +1123,6 @@ public class NaturalLanguageUnderstanding {
      - parameter name: An optional name for the model.
      - parameter description: An optional description of the model.
      - parameter modelVersion: An optional version string.
-     - parameter version: Deprecated — use `model_version`.
      - parameter workspaceID: ID of the Watson Knowledge Studio workspace that deployed this model to Natural Language
        Understanding.
      - parameter versionDescription: The description of the version.
@@ -1150,7 +1136,6 @@ public class NaturalLanguageUnderstanding {
         name: String? = nil,
         description: String? = nil,
         modelVersion: String? = nil,
-        version: String? = nil,
         workspaceID: String? = nil,
         versionDescription: String? = nil,
         headers: [String: String]? = nil,
@@ -1175,11 +1160,6 @@ public class NaturalLanguageUnderstanding {
         if let modelVersion = modelVersion {
             if let modelVersionData = modelVersion.data(using: .utf8) {
                 multipartFormData.append(modelVersionData, withName: "model_version")
-            }
-        }
-        if let version = version {
-            if let versionData = version.data(using: .utf8) {
-                multipartFormData.append(versionData, withName: "version")
             }
         }
         if let workspaceID = workspaceID {
@@ -1349,7 +1329,6 @@ public class NaturalLanguageUnderstanding {
      - parameter name: An optional name for the model.
      - parameter description: An optional description of the model.
      - parameter modelVersion: An optional version string.
-     - parameter version: Deprecated — use `model_version`.
      - parameter workspaceID: ID of the Watson Knowledge Studio workspace that deployed this model to Natural Language
        Understanding.
      - parameter versionDescription: The description of the version.
@@ -1364,7 +1343,6 @@ public class NaturalLanguageUnderstanding {
         name: String? = nil,
         description: String? = nil,
         modelVersion: String? = nil,
-        version: String? = nil,
         workspaceID: String? = nil,
         versionDescription: String? = nil,
         headers: [String: String]? = nil,
@@ -1389,11 +1367,6 @@ public class NaturalLanguageUnderstanding {
         if let modelVersion = modelVersion {
             if let modelVersionData = modelVersion.data(using: .utf8) {
                 multipartFormData.append(modelVersionData, withName: "model_version")
-            }
-        }
-        if let version = version {
-            if let versionData = version.data(using: .utf8) {
-                multipartFormData.append(versionData, withName: "version")
             }
         }
         if let workspaceID = workspaceID {

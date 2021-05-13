@@ -620,10 +620,9 @@ class AssistantV2Tests: XCTestCase {
         let description = "Continue a conversation."
         let expectation = self.expectation(description: description)
         
-        let bulkClassifyOptions1 = [BulkClassifyUtterance(text: "hello"), BulkClassifyUtterance(text: "ugh")]
-        let bulkClassifyOptions2 = BulkClassifyUtterance(text: "goodbye")
+        let bulkClassifyOptions = [BulkClassifyUtterance(text: "hello"), BulkClassifyUtterance(text: "goodbye")]
 
-        assistant.bulkClassify(skillID: "123456", input: bulkClassifyOptions2) {
+        assistant.bulkClassify(skillID: "main skill", input: bulkClassifyOptions) {
             response, error in
 
             if let error = error {

@@ -853,7 +853,7 @@ public class NaturalLanguageUnderstanding {
      */
     public func listCategoriesModels(
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ListCategoriesModelsResponse>?, WatsonError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<CategoriesModelList>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders

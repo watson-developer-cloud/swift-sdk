@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2018, 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -85,7 +85,7 @@ public struct DialogNodeNextStep: Codable, Equatable {
     public var behavior: String
 
     /**
-     The ID of the dialog node to process next. This parameter is required if **behavior**=`jump_to`.
+     The unique ID of the dialog node to process next. This parameter is required if **behavior**=`jump_to`.
      */
     public var dialogNode: String?
 
@@ -123,7 +123,7 @@ public struct DialogNodeNextStep: Codable, Equatable {
             - `skip_slot`
             - `skip_all_slots`
              If you specify `jump_to`, then you must also specify a value for the `dialog_node` property.
-      - parameter dialogNode: The ID of the dialog node to process next. This parameter is required if
+      - parameter dialogNode: The unique ID of the dialog node to process next. This parameter is required if
         **behavior**=`jump_to`.
       - parameter selector: Which part of the dialog node to process next.
 

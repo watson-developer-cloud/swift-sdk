@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2019.
+ * (C) Copyright IBM Corp. 2016, 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,8 +28,7 @@ let face1: Data = loadResource(name: "face1", ext: "jpg")
 let obama: Data = loadResource(name: "obama", ext: "jpg")
 let sign: Data = loadResource(name: "sign", ext: "jpg")
 
-let obamaURL = "https://www.whitehouse.gov/sites/whitehouse.gov/files/images/" +
-    "Administration/People/president_official_portrait_lores.jpg"
+let obamaURL = "https://whitehouse.gov1.info/photos/obama-head-back.jpg"
 let carURL = "https://raw.githubusercontent.com/watson-developer-cloud/java-sdk/master/visual-recognition/src/test/resources/visual_recognition/v4/turtle_to_classify.jpg"
 let signURL = "https://raw.githubusercontent.com/watson-developer-cloud/java-sdk/master/visual-recognition/src/test/resources/visual_recognition/v4/turtle_to_classify.jpg"
 

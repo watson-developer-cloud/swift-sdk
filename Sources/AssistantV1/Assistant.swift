@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2018, 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  **/
 
 /**
- * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-be3b4618-20201221-123327
+ * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-902c9336-20210507-162723
  **/
 
 // swiftlint:disable file_length
@@ -161,6 +161,13 @@ public class Assistant {
        previous response.
      - parameter output: An output object that includes the response to the user, the dialog nodes that were
        triggered, and messages from the log.
+     - parameter userID: A string value that identifies the user who is interacting with the workspace. The client
+       must provide a unique identifier for each individual end user who accesses the application. For user-based plans,
+       this user ID is used to identify unique users for billing purposes. This string cannot contain carriage return,
+       newline, or tab characters. If no value is specified in the input, **user_id** is automatically set to the value
+       of **context.conversation_id**.
+       **Note:** This property is the same as the **user_id** property in the context metadata. If **user_id** is
+       specified in both locations in a message request, the value specified at the root is used.
      - parameter nodesVisitedDetails: Whether to include additional diagnostic information about the dialog nodes that
        were visited during processing of the message.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -174,6 +181,7 @@ public class Assistant {
         alternateIntents: Bool? = nil,
         context: Context? = nil,
         output: OutputData? = nil,
+        userID: String? = nil,
         nodesVisitedDetails: Bool? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<MessageResponse>?, WatsonError?) -> Void)
@@ -185,7 +193,8 @@ public class Assistant {
             entities: entities,
             alternate_intents: alternateIntents,
             context: context,
-            output: output)
+            output: output,
+            user_id: userID)
         let body: Data?
         do {
             body = try JSON.encoder.encodeIfPresent(messageRequest)
@@ -249,8 +258,9 @@ public class Assistant {
         let alternate_intents: Bool?
         let context: Context?
         let output: OutputData?
-        init? (input: MessageInput? = nil, intents: [RuntimeIntent]? = nil, entities: [RuntimeEntity]? = nil, alternate_intents: Bool? = nil, context: Context? = nil, output: OutputData? = nil) {
-            if input == nil && intents == nil && entities == nil && alternate_intents == nil && context == nil && output == nil {
+        let user_id: String?
+        init? (input: MessageInput? = nil, intents: [RuntimeIntent]? = nil, entities: [RuntimeEntity]? = nil, alternate_intents: Bool? = nil, context: Context? = nil, output: OutputData? = nil, user_id: String? = nil) {
+            if input == nil && intents == nil && entities == nil && alternate_intents == nil && context == nil && output == nil && user_id == nil {
                 return nil
             }
             self.input = input
@@ -259,6 +269,7 @@ public class Assistant {
             self.alternate_intents = alternate_intents
             self.context = context
             self.output = output
+            self.user_id = user_id
         }
         // swiftlint:enable identifier_name
     }
@@ -268,7 +279,7 @@ public class Assistant {
 
      Send multiple user inputs to a workspace in a single request and receive information about the intents and entities
      recognized in each input. This method is useful for testing and comparing the performance of different workspaces.
-     This method is available only with Premium plans.
+     This method is available only with Enterprise with Data Isolation plans.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter input: An array of input utterances to classify.
@@ -3512,24 +3523,28 @@ public class Assistant {
      workspace](#update-workspace)** method instead.
 
      - parameter workspaceID: Unique identifier of the workspace.
-     - parameter dialogNode: The dialog node ID. This string must conform to the following restrictions:
-       - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
+     - parameter dialogNode: The unique ID of the dialog node. This is an internal identifier used to refer to the
+       dialog node from other dialog nodes and in the diagnostic information included with message responses.
+       This string can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
      - parameter description: The description of the dialog node. This string cannot contain carriage return, newline,
        or tab characters.
      - parameter conditions: The condition that will trigger the dialog node. This string cannot contain carriage
        return, newline, or tab characters.
-     - parameter parent: The ID of the parent dialog node. This property is omitted if the dialog node has no parent.
-     - parameter previousSibling: The ID of the previous sibling dialog node. This property is omitted if the dialog
-       node has no previous sibling.
+     - parameter parent: The unique ID of the parent dialog node. This property is omitted if the dialog node has no
+       parent.
+     - parameter previousSibling: The unique ID of the previous sibling dialog node. This property is omitted if the
+       dialog node has no previous sibling.
      - parameter output: The output of the dialog node. For more information about how to specify dialog node output,
        see the
        [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
      - parameter context: The context for the dialog node.
      - parameter metadata: The metadata for the dialog node.
      - parameter nextStep: The next step to execute following this dialog node.
-     - parameter title: The alias used to identify the dialog node. This string must conform to the following
-       restrictions:
-       - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
+     - parameter title: A human-readable name for the dialog node. If the node is included in disambiguation, this
+       title is used to populate the **label** property of the corresponding suggestion in the `suggestion` response
+       type (unless it is overridden by the **user_label** property). The title is also used to populate the **topic**
+       property in the `connect_to_agent` response type.
+       This string can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
      - parameter type: How the dialog node is processed.
      - parameter eventName: How an `event_handler` node is processed.
      - parameter variable: The location in the dialog context where output is stored.
@@ -3537,7 +3552,9 @@ public class Assistant {
      - parameter digressIn: Whether this top-level dialog node can be digressed into.
      - parameter digressOut: Whether this dialog node can be returned to after a digression.
      - parameter digressOutSlots: Whether the user can digress to top-level nodes while filling out slots.
-     - parameter userLabel: A label that can be displayed externally to describe the purpose of the node to users.
+     - parameter userLabel: A label that can be displayed externally to describe the purpose of the node to users. If
+       set, this label is used to identify the node in disambiguation responses (overriding the value of the **title**
+       property).
      - parameter disambiguationOptOut: Whether the dialog node should be excluded from disambiguation suggestions.
        Valid only when **type**=`standard` or `frame`.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
@@ -3673,7 +3690,7 @@ public class Assistant {
      Get information about a dialog node.
 
      - parameter workspaceID: Unique identifier of the workspace.
-     - parameter dialogNode: The dialog node ID (for example, `get_order`).
+     - parameter dialogNode: The dialog node ID (for example, `node_1_1479323581900`).
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
        response.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -3738,26 +3755,29 @@ public class Assistant {
      workspace](#update-workspace)** method instead.
 
      - parameter workspaceID: Unique identifier of the workspace.
-     - parameter dialogNode: The dialog node ID (for example, `get_order`).
-     - parameter newDialogNode: The dialog node ID. This string must conform to the following restrictions:
-       - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
+     - parameter dialogNode: The dialog node ID (for example, `node_1_1479323581900`).
+     - parameter newDialogNode: The unique ID of the dialog node. This is an internal identifier used to refer to the
+       dialog node from other dialog nodes and in the diagnostic information included with message responses.
+       This string can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
      - parameter newDescription: The description of the dialog node. This string cannot contain carriage return,
        newline, or tab characters.
      - parameter newConditions: The condition that will trigger the dialog node. This string cannot contain carriage
        return, newline, or tab characters.
-     - parameter newParent: The ID of the parent dialog node. This property is omitted if the dialog node has no
-       parent.
-     - parameter newPreviousSibling: The ID of the previous sibling dialog node. This property is omitted if the
-       dialog node has no previous sibling.
+     - parameter newParent: The unique ID of the parent dialog node. This property is omitted if the dialog node has
+       no parent.
+     - parameter newPreviousSibling: The unique ID of the previous sibling dialog node. This property is omitted if
+       the dialog node has no previous sibling.
      - parameter newOutput: The output of the dialog node. For more information about how to specify dialog node
        output, see the
        [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-dialog-overview#dialog-overview-responses).
      - parameter newContext: The context for the dialog node.
      - parameter newMetadata: The metadata for the dialog node.
      - parameter newNextStep: The next step to execute following this dialog node.
-     - parameter newTitle: The alias used to identify the dialog node. This string must conform to the following
-       restrictions:
-       - It can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
+     - parameter newTitle: A human-readable name for the dialog node. If the node is included in disambiguation, this
+       title is used to populate the **label** property of the corresponding suggestion in the `suggestion` response
+       type (unless it is overridden by the **user_label** property). The title is also used to populate the **topic**
+       property in the `connect_to_agent` response type.
+       This string can contain only Unicode alphanumeric, space, underscore, hyphen, and dot characters.
      - parameter newType: How the dialog node is processed.
      - parameter newEventName: How an `event_handler` node is processed.
      - parameter newVariable: The location in the dialog context where output is stored.
@@ -3766,6 +3786,8 @@ public class Assistant {
      - parameter newDigressOut: Whether this dialog node can be returned to after a digression.
      - parameter newDigressOutSlots: Whether the user can digress to top-level nodes while filling out slots.
      - parameter newUserLabel: A label that can be displayed externally to describe the purpose of the node to users.
+       If set, this label is used to identify the node in disambiguation responses (overriding the value of the
+       **title** property).
      - parameter newDisambiguationOptOut: Whether the dialog node should be excluded from disambiguation suggestions.
        Valid only when **type**=`standard` or `frame`.
      - parameter includeAudit: Whether to include the audit properties (`created` and `updated` timestamps) in the
@@ -3902,7 +3924,7 @@ public class Assistant {
      Delete a dialog node from a workspace.
 
      - parameter workspaceID: Unique identifier of the workspace.
-     - parameter dialogNode: The dialog node ID (for example, `get_order`).
+     - parameter dialogNode: The dialog node ID (for example, `node_1_1479323581900`).
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -3956,6 +3978,7 @@ public class Assistant {
      List log events in a workspace.
 
      List the events from the log of a specific workspace.
+     This method requires Manager access.
 
      - parameter workspaceID: Unique identifier of the workspace.
      - parameter sort: How to sort the returned log events. You can sort by **request_timestamp**. To reverse the sort
@@ -4114,6 +4137,10 @@ public class Assistant {
      You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request that passes data.
      For more information about personal data and customer IDs, see [Information
      security](https://cloud.ibm.com/docs/assistant?topic=assistant-information-security#information-security).
+     **Note:** This operation is intended only for deleting data associated with a single specific customer, not for
+     deleting data associated with multiple customers or for any other purpose. For more information, see [Labeling and
+     deleting data in Watson
+     Assistant](https://cloud.ibm.com/docs/assistant?topic=assistant-information-security#information-security-gdpr-wa).
 
      - parameter customerID: The customer ID for which all data is to be deleted.
      - parameter headers: A dictionary of request headers to be sent with this request.

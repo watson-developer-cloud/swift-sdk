@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2020.
+ * (C) Copyright IBM Corp. 2016, 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -173,6 +173,7 @@ class AssistantTests: XCTestCase {
         var entities: [RuntimeEntity]?
         var intents: [RuntimeIntent]?
         var output: OutputData?
+        var userID: String?
 
         assistant.message(workspaceID: workspaceID) {
             response, error in
@@ -190,6 +191,7 @@ class AssistantTests: XCTestCase {
             entities = message.entities
             intents = message.intents
             output = message.output
+            userID = message.userID
             expectation1.fulfill()
         }
         waitForExpectations()
@@ -204,7 +206,8 @@ class AssistantTests: XCTestCase {
             intents: intents,
             entities: entities,
             context: context,
-            output: output) {
+            output: output,
+            userID: userID) {
                 response, error in
 
                 if let error = error {
@@ -220,6 +223,7 @@ class AssistantTests: XCTestCase {
                 XCTAssertNotNil(entities)
                 XCTAssertNotNil(intents)
                 XCTAssertNotNil(output)
+                XCTAssertNotNil(userID)
 
                 // verify intents are equal
                 for index in 0..<message.intents.count {

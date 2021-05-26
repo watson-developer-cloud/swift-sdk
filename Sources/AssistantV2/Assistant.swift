@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2018, 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  **/
 
 /**
- * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-be3b4618-20201221-123327
+ * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-902c9336-20210507-162723
  **/
 
 // swiftlint:disable file_length
@@ -40,7 +40,7 @@ public class Assistant {
     public var serviceURL: String? = "https://api.us-south.assistant.watson.cloud.ibm.com"
 
     /// Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The current version is
-    /// `2020-04-01`.
+    /// `2020-09-24`.
     public var version: String
 
     /// Service identifiers
@@ -70,7 +70,7 @@ public class Assistant {
      In that case, try another initializer that directly passes in the credentials.
 
      - parameter version: Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The
-       current version is `2020-04-01`.
+       current version is `2020-09-24`.
      - parameter authenticator: The Authenticator object used to authenticate requests to the service
      - serviceName: String = defaultServiceName
      */
@@ -87,7 +87,7 @@ public class Assistant {
      Create a `Assistant` object.
 
      - parameter version: Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The
-       current version is `2020-04-01`.
+       current version is `2020-09-24`.
      - parameter authenticator: The Authenticator object used to authenticate requests to the service
      */
     public init(version: String, authenticator: Authenticator) {
@@ -278,6 +278,13 @@ public class Assistant {
        variables, which can also be accessed by dialog nodes. The context is stored by the assistant on a per-session
        basis.
        **Note:** The total size of the context data stored for a stateful session cannot exceed 100KB.
+     - parameter userID: A string value that identifies the user who is interacting with the assistant. The client
+       must provide a unique identifier for each individual end user who accesses the application. For user-based plans,
+       this user ID is used to identify unique users for billing purposes. This string cannot contain carriage return,
+       newline, or tab characters. If no value is specified in the input, **user_id** is automatically set to the value
+       of **context.global.session_id**.
+       **Note:** This property is the same as the **user_id** property in the global system context. If **user_id** is
+       specified in both locations, the value specified at the root is used.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -286,13 +293,15 @@ public class Assistant {
         sessionID: String,
         input: MessageInput? = nil,
         context: MessageContext? = nil,
+        userID: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<MessageResponse>?, WatsonError?) -> Void)
     {
         // construct body
         let messageRequest = MessageRequest(
             input: input,
-            context: context)
+            context: context,
+            user_id: userID)
         let body: Data?
         do {
             body = try JSON.encoder.encodeIfPresent(messageRequest)
@@ -348,12 +357,14 @@ public class Assistant {
         // swiftlint:disable identifier_name
         let input: MessageInput?
         let context: MessageContext?
-        init? (input: MessageInput? = nil, context: MessageContext? = nil) {
-            if input == nil && context == nil {
+        let user_id: String?
+        init? (input: MessageInput? = nil, context: MessageContext? = nil, user_id: String? = nil) {
+            if input == nil && context == nil && user_id == nil {
                 return nil
             }
             self.input = input
             self.context = context
+            self.user_id = user_id
         }
         // swiftlint:enable identifier_name
     }
@@ -373,6 +384,13 @@ public class Assistant {
        variables, which can also be accessed by dialog nodes. The context is not stored by the assistant. To maintain
        session state, include the context from the previous response.
        **Note:** The total size of the context data for a stateless session cannot exceed 250KB.
+     - parameter userID: A string value that identifies the user who is interacting with the assistant. The client
+       must provide a unique identifier for each individual end user who accesses the application. For user-based plans,
+       this user ID is used to identify unique users for billing purposes. This string cannot contain carriage return,
+       newline, or tab characters. If no value is specified in the input, **user_id** is automatically set to the value
+       of **context.global.session_id**.
+       **Note:** This property is the same as the **user_id** property in the global system context. If **user_id** is
+       specified in both locations in a message request, the value specified at the root is used.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -380,13 +398,15 @@ public class Assistant {
         assistantID: String,
         input: MessageInputStateless? = nil,
         context: MessageContextStateless? = nil,
+        userID: String? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<MessageResponseStateless>?, WatsonError?) -> Void)
     {
         // construct body
         let messageStatelessRequest = MessageStatelessRequest(
             input: input,
-            context: context)
+            context: context,
+            user_id: userID)
         let body: Data?
         do {
             body = try JSON.encoder.encodeIfPresent(messageStatelessRequest)
@@ -442,12 +462,14 @@ public class Assistant {
         // swiftlint:disable identifier_name
         let input: MessageInputStateless?
         let context: MessageContextStateless?
-        init? (input: MessageInputStateless? = nil, context: MessageContextStateless? = nil) {
-            if input == nil && context == nil {
+        let user_id: String?
+        init? (input: MessageInputStateless? = nil, context: MessageContextStateless? = nil, user_id: String? = nil) {
+            if input == nil && context == nil && user_id == nil {
                 return nil
             }
             self.input = input
             self.context = context
+            self.user_id = user_id
         }
         // swiftlint:enable identifier_name
     }
@@ -458,7 +480,7 @@ public class Assistant {
      Send multiple user inputs to a dialog skill in a single request and receive information about the intents and
      entities recognized in each input. This method is useful for testing and comparing the performance of different
      skills or skill versions.
-     This method is available only with Premium plans.
+     This method is available only with Enterprise with Data Isolation plans.
 
      - parameter skillID: Unique identifier of the skill. To find the skill ID in the Watson Assistant user interface,
        open the skill settings and click **API Details**.
@@ -542,7 +564,7 @@ public class Assistant {
      List log events for an assistant.
 
      List the events from the log of an assistant.
-     This method is available only with Premium plans.
+     This method requires Manager access, and is available only with Enterprise plans.
 
      - parameter assistantID: Unique identifier of the assistant. To find the assistant ID in the Watson Assistant
        user interface, open the assistant settings and click **API Details**. For information about creating assistants,
@@ -631,7 +653,10 @@ public class Assistant {
      You associate a customer ID with data by passing the `X-Watson-Metadata` header with a request that passes data.
      For more information about personal data and customer IDs, see [Information
      security](https://cloud.ibm.com/docs/assistant?topic=assistant-information-security#information-security).
-     This operation is limited to 4 requests per minute. For more information, see **Rate limiting**.
+     **Note:** This operation is intended only for deleting data associated with a single specific customer, not for
+     deleting data associated with multiple customers or for any other purpose. For more information, see [Labeling and
+     deleting data in Watson
+     Assistant](https://cloud.ibm.com/docs/assistant?topic=assistant-information-security#information-security-gdpr-wa).
 
      - parameter customerID: The customer ID for which all data is to be deleted.
      - parameter headers: A dictionary of request headers to be sent with this request.

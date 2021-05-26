@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2020, 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,6 +56,16 @@ public struct QueryResponsePassage: Codable, Equatable {
      */
     public var field: String?
 
+    /**
+     An estimate of the probability that the passage is relevant.
+     */
+    public var confidence: Double?
+
+    /**
+     An array of extracted answers to the specified query.
+     */
+    public var answers: [ResultPassageAnswer]?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case passageText = "passage_text"
@@ -65,6 +75,8 @@ public struct QueryResponsePassage: Codable, Equatable {
         case startOffset = "start_offset"
         case endOffset = "end_offset"
         case field = "field"
+        case confidence = "confidence"
+        case answers = "answers"
     }
 
 }

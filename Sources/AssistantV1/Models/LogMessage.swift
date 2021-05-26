@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2018, 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,10 +40,22 @@ public struct LogMessage: Codable, Equatable {
      */
     public var msg: String
 
+    /**
+     A code that indicates the category to which the error message belongs.
+     */
+    public var code: String
+
+    /**
+     An object that identifies the dialog element that generated the error message.
+     */
+    public var source: LogMessageSource?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case level = "level"
         case msg = "msg"
+        case code = "code"
+        case source = "source"
     }
 
     /**
@@ -51,16 +63,22 @@ public struct LogMessage: Codable, Equatable {
 
       - parameter level: The severity of the log message.
       - parameter msg: The text of the log message.
+      - parameter code: A code that indicates the category to which the error message belongs.
+      - parameter source: An object that identifies the dialog element that generated the error message.
 
       - returns: An initialized `LogMessage`.
      */
     public init(
         level: String,
-        msg: String
+        msg: String,
+        code: String,
+        source: LogMessageSource? = nil
     )
     {
         self.level = level
         self.msg = msg
+        self.code = code
+        self.source = source
     }
 
 }

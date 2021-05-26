@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2020.
+ * (C) Copyright IBM Corp. 2016, 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  **/
 
 /**
- * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-36b26b63-20201028-122900
+ * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-902c9336-20210507-162723
  **/
 
 // swiftlint:disable file_length
@@ -294,8 +294,8 @@ public class NaturalLanguageClassifier {
     {
         // construct body
         let multipartFormData = MultipartFormData()
-        multipartFormData.append(trainingMetadata, withName: "training_metadata", fileName: "filename")
-        multipartFormData.append(trainingData, withName: "training_data", fileName: "filename")
+        multipartFormData.append(trainingMetadata, withName: "training_metadata", mimeType: "application/json", fileName: "filename")
+        multipartFormData.append(trainingData, withName: "training_data", mimeType: "text/csv", fileName: "filename")
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, RestError.serialization(values: "request multipart form data"))
             return

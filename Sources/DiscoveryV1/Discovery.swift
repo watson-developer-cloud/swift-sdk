@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2020.
+ * (C) Copyright IBM Corp. 2016, 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  **/
 
 /**
- * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-be3b4618-20201201-153403
+ * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-902c9336-20210507-162723
  **/
 
 // swiftlint:disable file_length
@@ -1752,7 +1752,7 @@ public class Discovery {
     {
         // construct body
         let multipartFormData = MultipartFormData()
-        multipartFormData.append(stopwordFile, withName: "stopword_file", fileName: stopwordFilename)
+        multipartFormData.append(stopwordFile, withName: "stopword_file", mimeType: "application/octet-stream", fileName: stopwordFilename)
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, RestError.serialization(values: "request multipart form data"))
             return
@@ -2219,7 +2219,7 @@ public class Discovery {
        values closer to the current date. When a **number** type field is specified, returned results are biased towards
        higher field values. This parameter cannot be used in the same query as the **sort** parameter.
      - parameter spellingSuggestions: When `true` and the **natural_language_query** parameter is used, the
-       **natural_languge_query** parameter is spell checked. The most likely correction is retunred in the
+       **natural_languge_query** parameter is spell checked. The most likely correction is returned in the
        **suggested_query** field of the response (if one exists).
        **Important:** this parameter is only valid when using the Cloud Pak version of Discovery.
      - parameter xWatsonLoggingOptOut: If `true`, queries are not stored in the Discovery **Logs** endpoint.

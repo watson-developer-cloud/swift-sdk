@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2020.
+ * (C) Copyright IBM Corp. 2016, 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,6 +52,7 @@ class SpeechToTextTests: XCTestCase {
             ("testListModels", testListModels),
             ("testGetModel", testGetModel),
             ("testRecognizeSessionless", testRecognizeSessionless),
+            ("testRecognizeNextGeneration", testRecognizeNextGeneration),
             ("testAsynchronous", testAsynchronous),
             ("testLanguageModels", testLanguageModels),
             ("testCustomCorpora", testCustomCorpora),
@@ -326,6 +327,31 @@ class SpeechToTextTests: XCTestCase {
         let expectation = self.expectation(description: "recognizeSessionless")
         let audio = try! Data(contentsOf: Bundle(for: type(of: self)).url(forResource: "SpeechSample", withExtension: "wav")!)
         speechToText.recognize(audio: audio, contentType: "audio/wav", model: "en-US_BroadbandModel", endOfPhraseSilenceTime: 5.0, splitTranscriptAtPhraseEnd: true) {
+            response, error in
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            guard let recognitionResults = response?.result else {
+                XCTFail(missingResultMessage)
+                return
+            }
+            XCTAssertNotNil(recognitionResults.results)
+            XCTAssertGreaterThan(recognitionResults.results!.count, 0)
+            XCTAssertTrue(recognitionResults.results!.first!.final)
+            XCTAssertGreaterThan(recognitionResults.results!.first!.alternatives.count, 0)
+            XCTAssertTrue(recognitionResults.results!.first!.alternatives.first!.transcript.contains("tornadoes"))
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: timeout)
+    }
+    
+    // MARK: - NextGeneration
+    
+    func testRecognizeNextGeneration() {
+        let expectation = self.expectation(description: "recognizeNextGeneration")
+        let audio = try! Data(contentsOf: Bundle(for: type(of: self)).url(forResource: "SpeechSample", withExtension: "wav")!)
+        speechToText.recognize(audio: audio, contentType: "audio/wav", model: "en-US_Telephony", endOfPhraseSilenceTime: 5.0, splitTranscriptAtPhraseEnd: true, lowLatency: true) {
             response, error in
             if let error = error {
                 XCTFail(unexpectedErrorMessage(error))

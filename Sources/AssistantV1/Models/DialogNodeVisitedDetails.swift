@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2018, 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import Foundation
 public struct DialogNodeVisitedDetails: Codable, Equatable {
 
     /**
-     A dialog node that was triggered during processing of the input message.
+     The unique ID of a dialog node that was triggered during processing of the input message.
      */
     public var dialogNode: String?
 
@@ -46,7 +46,8 @@ public struct DialogNodeVisitedDetails: Codable, Equatable {
     /**
       Initialize a `DialogNodeVisitedDetails` with member variables.
 
-      - parameter dialogNode: A dialog node that was triggered during processing of the input message.
+      - parameter dialogNode: The unique ID of a dialog node that was triggered during processing of the input
+        message.
       - parameter title: The title of the dialog node.
       - parameter conditions: The conditions that trigger the dialog node.
 

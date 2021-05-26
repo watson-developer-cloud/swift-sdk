@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2018, 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  **/
 
 /**
- * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-36b26b63-20201028-122900
+ * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-902c9336-20210507-162723
  **/
 
 // swiftlint:disable file_length
@@ -543,10 +543,10 @@ public class LanguageTranslator {
         // construct body
         let multipartFormData = MultipartFormData()
         if let forcedGlossary = forcedGlossary {
-            multipartFormData.append(forcedGlossary, withName: "forced_glossary", fileName: "filename")
+            multipartFormData.append(forcedGlossary, withName: "forced_glossary", mimeType: "application/octet-stream", fileName: "filename")
         }
         if let parallelCorpus = parallelCorpus {
-            multipartFormData.append(parallelCorpus, withName: "parallel_corpus", fileName: "filename")
+            multipartFormData.append(parallelCorpus, withName: "parallel_corpus", mimeType: "application/octet-stream", fileName: "filename")
         }
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, RestError.serialization(values: "request multipart form data"))

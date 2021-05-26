@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019, 2020.
+ * (C) Copyright IBM Corp. 2019, 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,6 +53,27 @@ public struct QueryLargePassages: Codable, Equatable {
      */
     public var characters: Int?
 
+    /**
+     When true, `answer` objects are returned as part of each passage in the query results. The primary difference
+     between an `answer` and a `passage` is that the length of a passage is defined by the query, where the length of an
+     `answer` is calculated by Discovery based on how much text is needed to answer the question./n/nThis parameter is
+     ignored if passages are not enabled for the query, or no **natural_language_query** is specified./n/nIf the
+     **find_answers** parameter is set to `true` and **per_document** parameter is also set to `true`, then the document
+     search results and the passage search results within each document are reordered using the answer confidences. The
+     goal of this reordering is to do as much as possible to make sure that the first answer of the first passage of the
+     first document is the best answer. Similarly, if the **find_answers** parameter is set to `true` and
+     **per_document** parameter is set to `false`, then the passage search results are reordered in decreasing order of
+     the highest confidence answer for each document and passage./n/nThe **find_answers** parameter is **beta**
+     functionality available only on managed instances and should not be used in a production environment. This
+     parameter is not available on installed instances of Discovery.
+     */
+    public var findAnswers: Bool?
+
+    /**
+     The number of `answer` objects to return per passage if the **find_answers** parmeter is specified as `true`.
+     */
+    public var maxAnswersPerPassage: Int?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case enabled = "enabled"
@@ -61,6 +82,8 @@ public struct QueryLargePassages: Codable, Equatable {
         case fields = "fields"
         case count = "count"
         case characters = "characters"
+        case findAnswers = "find_answers"
+        case maxAnswersPerPassage = "max_answers_per_passage"
     }
 
     /**
@@ -74,6 +97,21 @@ public struct QueryLargePassages: Codable, Equatable {
       - parameter count: The maximum number of passages to return. The search returns fewer passages if the requested
         total is not found. The maximum is `100`.
       - parameter characters: The approximate number of characters that any one passage will have.
+      - parameter findAnswers: When true, `answer` objects are returned as part of each passage in the query results.
+        The primary difference between an `answer` and a `passage` is that the length of a passage is defined by the
+        query, where the length of an `answer` is calculated by Discovery based on how much text is needed to answer the
+        question./n/nThis parameter is ignored if passages are not enabled for the query, or no
+        **natural_language_query** is specified./n/nIf the **find_answers** parameter is set to `true` and
+        **per_document** parameter is also set to `true`, then the document search results and the passage search results
+        within each document are reordered using the answer confidences. The goal of this reordering is to do as much as
+        possible to make sure that the first answer of the first passage of the first document is the best answer.
+        Similarly, if the **find_answers** parameter is set to `true` and **per_document** parameter is set to `false`,
+        then the passage search results are reordered in decreasing order of the highest confidence answer for each
+        document and passage./n/nThe **find_answers** parameter is **beta** functionality available only on managed
+        instances and should not be used in a production environment. This parameter is not available on installed
+        instances of Discovery.
+      - parameter maxAnswersPerPassage: The number of `answer` objects to return per passage if the **find_answers**
+        parmeter is specified as `true`.
 
       - returns: An initialized `QueryLargePassages`.
      */
@@ -83,7 +121,9 @@ public struct QueryLargePassages: Codable, Equatable {
         maxPerDocument: Int? = nil,
         fields: [String]? = nil,
         count: Int? = nil,
-        characters: Int? = nil
+        characters: Int? = nil,
+        findAnswers: Bool? = nil,
+        maxAnswersPerPassage: Int? = nil
     )
     {
         self.enabled = enabled
@@ -92,6 +132,8 @@ public struct QueryLargePassages: Codable, Equatable {
         self.fields = fields
         self.count = count
         self.characters = characters
+        self.findAnswers = findAnswers
+        self.maxAnswersPerPassage = maxAnswersPerPassage
     }
 
 }

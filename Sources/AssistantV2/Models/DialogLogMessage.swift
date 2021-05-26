@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2018, 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,10 +40,22 @@ public struct DialogLogMessage: Codable, Equatable {
      */
     public var message: String
 
+    /**
+     A code that indicates the category to which the error message belongs.
+     */
+    public var code: String
+
+    /**
+     An object that identifies the dialog element that generated the error message.
+     */
+    public var source: LogMessageSource?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case level = "level"
         case message = "message"
+        case code = "code"
+        case source = "source"
     }
 
 }

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2020, 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,20 +17,12 @@
 import Foundation
 
 /**
- An object that describes a response with response type `pause`.
+ DialogNodeOutputGenericDialogNodeOutputResponseTypePause.
 
  Enums with an associated value of DialogNodeOutputGenericDialogNodeOutputResponseTypePause:
     DialogNodeOutputGeneric
  */
 public struct DialogNodeOutputGenericDialogNodeOutputResponseTypePause: Codable, Equatable {
-
-    /**
-     The type of response returned by the dialog node. The specified response type must be supported by the client
-     application or channel.
-     */
-    public enum ResponseType: String {
-        case pause = "pause"
-    }
 
     /**
      The type of response returned by the dialog node. The specified response type must be supported by the client
@@ -48,11 +40,17 @@ public struct DialogNodeOutputGenericDialogNodeOutputResponseTypePause: Codable,
      */
     public var typing: Bool?
 
+    /**
+     An array of objects specifying channels for which the response is intended.
+     */
+    public var channels: [ResponseGenericChannel]?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case responseType = "response_type"
         case time = "time"
         case typing = "typing"
+        case channels = "channels"
     }
 
     /**
@@ -63,18 +61,21 @@ public struct DialogNodeOutputGenericDialogNodeOutputResponseTypePause: Codable,
       - parameter time: How long to pause, in milliseconds. The valid values are from 0 to 10000.
       - parameter typing: Whether to send a "user is typing" event during the pause. Ignored if the channel does not
         support this event.
+      - parameter channels: An array of objects specifying channels for which the response is intended.
 
       - returns: An initialized `DialogNodeOutputGenericDialogNodeOutputResponseTypePause`.
      */
     public init(
         responseType: String,
         time: Int,
-        typing: Bool? = nil
+        typing: Bool? = nil,
+        channels: [ResponseGenericChannel]? = nil
     )
     {
         self.responseType = responseType
         self.time = time
         self.typing = typing
+        self.channels = channels
     }
 
 }

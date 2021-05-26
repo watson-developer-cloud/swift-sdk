@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2020, 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,20 +17,12 @@
 import Foundation
 
 /**
- An object that describes a response with response type `option`.
+ DialogNodeOutputGenericDialogNodeOutputResponseTypeOption.
 
  Enums with an associated value of DialogNodeOutputGenericDialogNodeOutputResponseTypeOption:
     DialogNodeOutputGeneric
  */
 public struct DialogNodeOutputGenericDialogNodeOutputResponseTypeOption: Codable, Equatable {
-
-    /**
-     The type of response returned by the dialog node. The specified response type must be supported by the client
-     application or channel.
-     */
-    public enum ResponseType: String {
-        case option = "option"
-    }
 
     /**
      The preferred type of control to display, if supported by the channel.
@@ -66,6 +58,11 @@ public struct DialogNodeOutputGenericDialogNodeOutputResponseTypeOption: Codable
      */
     public var options: [DialogNodeOutputOptionsElement]
 
+    /**
+     An array of objects specifying channels for which the response is intended.
+     */
+    public var channels: [ResponseGenericChannel]?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case responseType = "response_type"
@@ -73,6 +70,7 @@ public struct DialogNodeOutputGenericDialogNodeOutputResponseTypeOption: Codable
         case description = "description"
         case preference = "preference"
         case options = "options"
+        case channels = "channels"
     }
 
     /**
@@ -85,6 +83,7 @@ public struct DialogNodeOutputGenericDialogNodeOutputResponseTypeOption: Codable
         up to 20 options.
       - parameter description: An optional description to show with the response.
       - parameter preference: The preferred type of control to display, if supported by the channel.
+      - parameter channels: An array of objects specifying channels for which the response is intended.
 
       - returns: An initialized `DialogNodeOutputGenericDialogNodeOutputResponseTypeOption`.
      */
@@ -93,7 +92,8 @@ public struct DialogNodeOutputGenericDialogNodeOutputResponseTypeOption: Codable
         title: String,
         options: [DialogNodeOutputOptionsElement],
         description: String? = nil,
-        preference: String? = nil
+        preference: String? = nil,
+        channels: [ResponseGenericChannel]? = nil
     )
     {
         self.responseType = responseType
@@ -101,6 +101,7 @@ public struct DialogNodeOutputGenericDialogNodeOutputResponseTypeOption: Codable
         self.options = options
         self.description = description
         self.preference = preference
+        self.channels = channels
     }
 
 }

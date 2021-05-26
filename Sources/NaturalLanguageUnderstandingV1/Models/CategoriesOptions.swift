@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2020.
+ * (C) Copyright IBM Corp. 2017, 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,13 +34,9 @@ public struct CategoriesOptions: Codable, Equatable {
     public var limit: Int?
 
     /**
-     Enter a [custom
+     (Beta) Enter a [custom
      model](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-customizing)
-     ID to override the standard categories model.
-     The custom categories experimental feature will be retired on 19 December 2019. On that date, deployed custom
-     categories models will no longer be accessible in Natural Language Understanding. The feature will be removed from
-     Knowledge Studio on an earlier date. Custom categories models will no longer be accessible in Knowledge Studio on
-     17 December 2019.
+     ID to override the standard categories model. **This is available only for English categories.**.
      */
     public var model: String?
 
@@ -57,13 +53,9 @@ public struct CategoriesOptions: Codable, Equatable {
       - parameter explanation: Set this to `true` to return explanations for each categorization. **This is available
         only for English categories.**.
       - parameter limit: Maximum number of categories to return.
-      - parameter model: Enter a [custom
+      - parameter model: (Beta) Enter a [custom
         model](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-customizing)
-        ID to override the standard categories model.
-        The custom categories experimental feature will be retired on 19 December 2019. On that date, deployed custom
-        categories models will no longer be accessible in Natural Language Understanding. The feature will be removed
-        from Knowledge Studio on an earlier date. Custom categories models will no longer be accessible in Knowledge
-        Studio on 17 December 2019.
+        ID to override the standard categories model. **This is available only for English categories.**.
 
       - returns: An initialized `CategoriesOptions`.
      */

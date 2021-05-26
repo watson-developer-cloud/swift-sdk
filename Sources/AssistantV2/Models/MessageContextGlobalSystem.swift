@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2018, 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,9 +52,12 @@ public struct MessageContextGlobalSystem: Codable, Equatable {
 
     /**
      A string value that identifies the user who is interacting with the assistant. The client must provide a unique
-     identifier for each individual end user who accesses the application. For Plus and Premium plans, this user ID is
-     used to identify unique users for billing purposes. This string cannot contain carriage return, newline, or tab
-     characters.
+     identifier for each individual end user who accesses the application. For user-based plans, this user ID is used to
+     identify unique users for billing purposes. This string cannot contain carriage return, newline, or tab characters.
+     If no value is specified in the input, **user_id** is automatically set to the value of
+     **context.global.session_id**.
+     **Note:** This property is the same as the **user_id** property at the root of the message body. If **user_id** is
+     specified in both locations in a message request, the value specified at the root is used.
      */
     public var userID: String?
 
@@ -99,9 +102,12 @@ public struct MessageContextGlobalSystem: Codable, Equatable {
       - parameter timezone: The user time zone. The assistant uses the time zone to correctly resolve relative time
         references.
       - parameter userID: A string value that identifies the user who is interacting with the assistant. The client
-        must provide a unique identifier for each individual end user who accesses the application. For Plus and Premium
-        plans, this user ID is used to identify unique users for billing purposes. This string cannot contain carriage
-        return, newline, or tab characters.
+        must provide a unique identifier for each individual end user who accesses the application. For user-based plans,
+        this user ID is used to identify unique users for billing purposes. This string cannot contain carriage return,
+        newline, or tab characters. If no value is specified in the input, **user_id** is automatically set to the value
+        of **context.global.session_id**.
+        **Note:** This property is the same as the **user_id** property at the root of the message body. If **user_id**
+        is specified in both locations in a message request, the value specified at the root is used.
       - parameter turnCount: A counter that is automatically incremented with each turn of the conversation. A value
         of 1 indicates that this is the the first turn of a new conversation, which can affect the behavior of some
         skills (for example, triggering the start node of a dialog).

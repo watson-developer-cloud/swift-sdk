@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2020.
+ * (C) Copyright IBM Corp. 2016, 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,6 +43,7 @@ class AssistantV2Tests: XCTestCase {
             ("testMessage", testMessage),
             ("testMessageStateless", testMessageStateless),
             ("testMessageWithInvalidSessionID", testMessageWithInvalidSessionID),
+            ("testBulkClassify", testBulkClassify),
         ]
     }
 
@@ -607,6 +608,29 @@ class AssistantV2Tests: XCTestCase {
             }
 
             XCTAssertNotNil(logsCollection.logs)
+
+            expectation.fulfill()
+        }
+
+        waitForExpectations()
+    }
+    
+    func testBulkClassify() {
+        // User responds to the bot
+        let description = "Continue a conversation."
+        let expectation = self.expectation(description: description)
+        
+        let bulkClassifyOptions = [BulkClassifyUtterance(text: "hello"), BulkClassifyUtterance(text: "goodbye")]
+
+        assistant.bulkClassify(skillID: "main skill", input: bulkClassifyOptions) {
+            response, error in
+
+            if let error = error {
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+            
+            print(response?.result)
 
             expectation.fulfill()
         }

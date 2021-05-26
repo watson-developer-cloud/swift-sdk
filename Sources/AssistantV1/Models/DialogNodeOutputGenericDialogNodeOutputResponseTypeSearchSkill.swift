@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2020, 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,21 +17,12 @@
 import Foundation
 
 /**
- An object that describes a response with response type `search_skill`.
+ DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill.
 
  Enums with an associated value of DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill:
     DialogNodeOutputGeneric
  */
 public struct DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill: Codable, Equatable {
-
-    /**
-     The type of response returned by the dialog node. The specified response type must be supported by the client
-     application or channel.
-     **Note:** The **search_skill** response type is used only by the v2 runtime API.
-     */
-    public enum ResponseType: String {
-        case searchSkill = "search_skill"
-    }
 
     /**
      The type of the search query.
@@ -72,6 +63,11 @@ public struct DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill: Co
      */
     public var discoveryVersion: String?
 
+    /**
+     An array of objects specifying channels for which the response is intended.
+     */
+    public var channels: [ResponseGenericChannel]?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case responseType = "response_type"
@@ -79,6 +75,7 @@ public struct DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill: Co
         case queryType = "query_type"
         case filter = "filter"
         case discoveryVersion = "discovery_version"
+        case channels = "channels"
     }
 
     /**
@@ -96,6 +93,7 @@ public struct DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill: Co
         see the [Discovery service documentation]([Discovery service
         documentation](https://cloud.ibm.com/docs/discovery?topic=discovery-query-parameters#filter).
       - parameter discoveryVersion: The version of the Discovery service API to use for the query.
+      - parameter channels: An array of objects specifying channels for which the response is intended.
 
       - returns: An initialized `DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill`.
      */
@@ -104,7 +102,8 @@ public struct DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill: Co
         query: String,
         queryType: String,
         filter: String? = nil,
-        discoveryVersion: String? = nil
+        discoveryVersion: String? = nil,
+        channels: [ResponseGenericChannel]? = nil
     )
     {
         self.responseType = responseType
@@ -112,6 +111,7 @@ public struct DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill: Co
         self.queryType = queryType
         self.filter = filter
         self.discoveryVersion = discoveryVersion
+        self.channels = channels
     }
 
 }

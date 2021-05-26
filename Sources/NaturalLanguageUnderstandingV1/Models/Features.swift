@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2020.
+ * (C) Copyright IBM Corp. 2017, 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,18 @@ import IBMSwiftSDKCore
  Analysis features and options.
  */
 public struct Features: Codable, Equatable {
+
+    /**
+     Returns a five-level taxonomy of the content. The top three categories are returned.
+     Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
+     */
+    public var categories: CategoriesOptions?
+
+    /**
+     Returns text classifications for the content.
+     Supported languages: English only.
+     */
+    public var classifications: ClassificationsOptions?
 
     /**
      Returns high-level concepts in the content. For example, a research paper about deep learning might return the
@@ -81,10 +93,10 @@ public struct Features: Codable, Equatable {
     public var sentiment: SentimentOptions?
 
     /**
-     Returns a five-level taxonomy of the content. The top three categories are returned.
-     Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
+     (Experimental) Returns a summary of content.
+     Supported languages: English only.
      */
-    public var categories: CategoriesOptions?
+    public var summarization: SummarizationOptions?
 
     /**
      Returns tokens and sentences from the input text.
@@ -93,6 +105,8 @@ public struct Features: Codable, Equatable {
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
+        case categories = "categories"
+        case classifications = "classifications"
         case concepts = "concepts"
         case emotion = "emotion"
         case entities = "entities"
@@ -101,13 +115,17 @@ public struct Features: Codable, Equatable {
         case relations = "relations"
         case semanticRoles = "semantic_roles"
         case sentiment = "sentiment"
-        case categories = "categories"
+        case summarization = "summarization"
         case syntax = "syntax"
     }
 
     /**
       Initialize a `Features` with member variables.
 
+      - parameter categories: Returns a five-level taxonomy of the content. The top three categories are returned.
+        Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
+      - parameter classifications: Returns text classifications for the content.
+        Supported languages: English only.
       - parameter concepts: Returns high-level concepts in the content. For example, a research paper about deep
         learning might return the concept, "Artificial Intelligence" although the term is not mentioned.
         Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
@@ -136,13 +154,15 @@ public struct Features: Codable, Equatable {
         phrases. You can analyze sentiment for detected entities with `entities.sentiment` and for keywords with
         `keywords.sentiment`.
          Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish.
-      - parameter categories: Returns a five-level taxonomy of the content. The top three categories are returned.
-        Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
+      - parameter summarization: (Experimental) Returns a summary of content.
+        Supported languages: English only.
       - parameter syntax: Returns tokens and sentences from the input text.
 
       - returns: An initialized `Features`.
      */
     public init(
+        categories: CategoriesOptions? = nil,
+        classifications: ClassificationsOptions? = nil,
         concepts: ConceptsOptions? = nil,
         emotion: EmotionOptions? = nil,
         entities: EntitiesOptions? = nil,
@@ -151,10 +171,12 @@ public struct Features: Codable, Equatable {
         relations: RelationsOptions? = nil,
         semanticRoles: SemanticRolesOptions? = nil,
         sentiment: SentimentOptions? = nil,
-        categories: CategoriesOptions? = nil,
+        summarization: SummarizationOptions? = nil,
         syntax: SyntaxOptions? = nil
     )
     {
+        self.categories = categories
+        self.classifications = classifications
         self.concepts = concepts
         self.emotion = emotion
         self.entities = entities
@@ -163,7 +185,7 @@ public struct Features: Codable, Equatable {
         self.relations = relations
         self.semanticRoles = semanticRoles
         self.sentiment = sentiment
-        self.categories = categories
+        self.summarization = summarization
         self.syntax = syntax
     }
 

@@ -167,6 +167,19 @@ public struct RecognitionSettings: Codable, Equatable {
     /// Detection](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-input#detection).
     public var backgroundAudioSuppression: Double?
 
+    // If `true` for next-generation `Multimedia` and `Telephony` models that support low
+    // latency, directs the service to produce results even more quickly than it usually does. Next-generation models
+    // produce transcription results faster than previous-generation models. The `low_latency` parameter causes the
+    // models to produce results even more quickly, though the results might be less accurate when the parameter is used.
+    // **Note:** The parameter is beta functionality. It is not available for previous-generation `Broadband` and
+    // `Narrowband` models. It is available only for some next-generation models.
+    // * For a list of next-generation models that support low latency, see [Supported language
+    // models](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-models-ng#models-ng-supported) for
+    // next-generation models.
+    // * For more information about the `low_latency` parameter, see [Low
+    // latency](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-interim#low-latency).
+    public var lowLatency: Bool?
+
     /**
      Initialize a `RecognitionSettings` object to set the parameters of a Watson Speech to
      Text recognition request.
@@ -201,5 +214,10 @@ public struct RecognitionSettings: Codable, Equatable {
         case processingMetrics = "processing_metrics"
         case processingMetricsInterval = "processing_metrics_interval"
         case audioMetrics = "audio_metrics"
+        case endOfPhraseSilenceTime = "end_of_phrase_silence_time"
+        case splitTranscriptAtPhraseEnd = "split_transcript_at_phrase_end"
+        case speechDetectorSensitivity = "speech_detector_sensitivity"
+        case backgroundAudioSuppression = "background_audio_suppression"
+        case lowLatency = "low_latency"
     }
 }

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2018, 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -70,7 +70,7 @@ class AssistantV1UnitTests: XCTestCase {
         let context = Context(conversationID: "Hi, how are you?")
         let entities = [RuntimeEntity(entity: "entity", location: [0], value: "whatever")]
         let intents = [RuntimeIntent(intent: "intent", confidence: 1.0)]
-        let output = OutputData(logMessages: [LogMessage(level: "SEVERE", msg: "shit's broken")], text: ["just kidding"])
+        let output = OutputData(logMessages: [LogMessage(level: "SEVERE", msg: "shit's broken", code: "500")], text: ["just kidding"])
 
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")

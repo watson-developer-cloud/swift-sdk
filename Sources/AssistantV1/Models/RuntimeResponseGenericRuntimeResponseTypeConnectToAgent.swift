@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2020, 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,20 +17,12 @@
 import Foundation
 
 /**
- An object that describes a response with response type `connect_to_agent`.
+ RuntimeResponseGenericRuntimeResponseTypeConnectToAgent.
 
  Enums with an associated value of RuntimeResponseGenericRuntimeResponseTypeConnectToAgent:
     RuntimeResponseGeneric
  */
 public struct RuntimeResponseGenericRuntimeResponseTypeConnectToAgent: Codable, Equatable {
-
-    /**
-     The type of response returned by the dialog node. The specified response type must be supported by the client
-     application or channel.
-     */
-    public enum ResponseType: String {
-        case connectToAgent = "connect_to_agent"
-    }
 
     /**
      The type of response returned by the dialog node. The specified response type must be supported by the client
@@ -67,10 +59,16 @@ public struct RuntimeResponseGenericRuntimeResponseTypeConnectToAgent: Codable, 
     public var topic: String?
 
     /**
-     The ID of the dialog node that the **topic** property is taken from. The **topic** property is populated using the
-     value of the dialog node's **title** property.
+     The unique ID of the dialog node that the **topic** property is taken from. The **topic** property is populated
+     using the value of the dialog node's **title** property.
      */
     public var dialogNode: String?
+
+    /**
+     An array of objects specifying channels for which the response is intended. If **channels** is present, the
+     response is intended for a built-in integration and should not be handled by an API client.
+     */
+    public var channels: [ResponseGenericChannel]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
@@ -81,6 +79,7 @@ public struct RuntimeResponseGenericRuntimeResponseTypeConnectToAgent: Codable, 
         case transferInfo = "transfer_info"
         case topic = "topic"
         case dialogNode = "dialog_node"
+        case channels = "channels"
     }
 
     /**
@@ -97,8 +96,11 @@ public struct RuntimeResponseGenericRuntimeResponseTypeConnectToAgent: Codable, 
       - parameter transferInfo: Routing or other contextual information to be used by target service desk systems.
       - parameter topic: A label identifying the topic of the conversation, derived from the **title** property of the
         relevant node or the **topic** property of the dialog node response.
-      - parameter dialogNode: The ID of the dialog node that the **topic** property is taken from. The **topic**
-        property is populated using the value of the dialog node's **title** property.
+      - parameter dialogNode: The unique ID of the dialog node that the **topic** property is taken from. The
+        **topic** property is populated using the value of the dialog node's **title** property.
+      - parameter channels: An array of objects specifying channels for which the response is intended. If
+        **channels** is present, the response is intended for a built-in integration and should not be handled by an API
+        client.
 
       - returns: An initialized `RuntimeResponseGenericRuntimeResponseTypeConnectToAgent`.
      */
@@ -109,7 +111,8 @@ public struct RuntimeResponseGenericRuntimeResponseTypeConnectToAgent: Codable, 
         agentUnavailable: AgentAvailabilityMessage? = nil,
         transferInfo: DialogNodeOutputConnectToAgentTransferInfo? = nil,
         topic: String? = nil,
-        dialogNode: String? = nil
+        dialogNode: String? = nil,
+        channels: [ResponseGenericChannel]? = nil
     )
     {
         self.responseType = responseType
@@ -119,6 +122,7 @@ public struct RuntimeResponseGenericRuntimeResponseTypeConnectToAgent: Codable, 
         self.transferInfo = transferInfo
         self.topic = topic
         self.dialogNode = dialogNode
+        self.channels = channels
     }
 
 }

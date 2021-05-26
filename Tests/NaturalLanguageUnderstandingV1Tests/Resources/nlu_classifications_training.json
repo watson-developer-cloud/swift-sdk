@@ -1,0 +1,42 @@
+ [
+    {
+        "text": "Example 1",
+        "labels": ["label1"]
+    },
+    {
+        "text": "Example 2",
+        "labels": ["label1", "label2"]
+    },
+    {
+        "text": "Example 3",
+        "labels": ["label1"]
+    },
+    {
+        "text": "Example 4",
+        "labels": ["label1", "label2"]
+    },
+    {
+        "text": "Example 5",
+        "labels": ["label1"]
+    },
+    {
+        "text": "Example 6",
+        "labels": ["label1", "label2"]
+    },
+    {
+        "text": "Example 7",
+        "labels": ["label1"]
+    },
+    {
+        "text": "Example 8",
+        "labels": ["label1", "label2"]
+    },
+    {
+        "text": "Example 9",
+        "labels": ["label1"]
+    },
+    {
+        "text": "Example 10",
+        "labels": ["label1", "label2"]
+    }
+]

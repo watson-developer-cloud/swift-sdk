@@ -17,7 +17,7 @@
     <a title="NaturalLanguageUnderstanding Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">NaturalLanguageUnderstandingV1 4.1.0 Docs</a> (85% documented)</p>
+        <p><a href="../index.html">NaturalLanguageUnderstandingV1 4.1.0 Docs</a> (83% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../search.json">
@@ -57,6 +57,15 @@
                 <a href="../Structs/Author.html">Author</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/CategoriesModel.html">CategoriesModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CategoriesModel/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CategoriesModelList.html">CategoriesModelList</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/CategoriesOptions.html">CategoriesOptions</a>
               </li>
               <li class="nav-group-task">
@@ -67,6 +76,21 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/CategoriesResultExplanation.html">CategoriesResultExplanation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ClassificationsModel.html">ClassificationsModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ClassificationsModel/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ClassificationsModelList.html">ClassificationsModelList</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ClassificationsOptions.html">ClassificationsOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ClassificationsResult.html">ClassificationsResult</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/ConceptsOptions.html">ConceptsOptions</a>
@@ -123,13 +147,22 @@
                 <a href="../Structs/KeywordsResult.html">KeywordsResult</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/ListClassificationsModelsResponse.html">ListClassificationsModelsResponse</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/ListModelsResults.html">ListModelsResults</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ListSentimentModelsResponse.html">ListSentimentModelsResponse</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Model.html">Model</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Model/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Notice.html">Notice</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/RelationArgument.html">RelationArgument</a>
@@ -171,10 +204,19 @@
                 <a href="../Structs/SentenceResult.html">SentenceResult</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/SentimentModel.html">SentimentModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SentimentModel/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/SentimentOptions.html">SentimentOptions</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/SentimentResult.html">SentimentResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SummarizationOptions.html">SummarizationOptions</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/SyntaxOptions.html">SyntaxOptions</a>
@@ -299,7 +341,7 @@ with Watson Knowledge Studio to detect custom entities and relations in Natural 
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The current version is
-<code>2020-08-01</code>.</p>
+<code>2021-03-25</code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -463,7 +505,7 @@ In that case, try another initializer that directly passes in the credentials.</
                               <td>
                                 <div>
                                   <p>Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The
-current version is <code>2020-08-01</code>.</p>
+current version is <code>2021-03-25</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -532,6 +574,7 @@ current version is <code>2020-08-01</code>.</p>
 
 <ul>
 <li>Categories</li>
+<li>Classifications</li>
 <li>Concepts</li>
 <li>Emotion</li>
 <li>Entities</li>
@@ -869,13 +912,1679 @@ that are deployed to your Natural Language Understanding service.</p>
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV10abC0C20createSentimentModel8language12trainingData4name11description12modelVersion11workspaceID18versionDescription7headers17completionHandlerySS_10Foundation0J0VSSSgA4QSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AT0Y5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/createSentimentModel(language:trainingData:name:description:modelVersion:workspaceID:versionDescription:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV10abC0C20createSentimentModel8language12trainingData4name11description12modelVersion11workspaceID18versionDescription7headers17completionHandlerySS_10Foundation0J0VSSSgA4QSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AT0Y5ErrorOSgtctF">createSentimentModel(language:<wbr>trainingData:<wbr>name:<wbr>description:<wbr>modelVersion:<wbr>workspaceID:<wbr>versionDescription:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create sentiment model.</p>
+
+<p>(Beta) Creates a custom sentiment model by uploading training data and associated metadata. The model begins the
+training and deploying process and is ready to use when the <code>status</code> is <code>available</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createSentimentModel</span><span class="p">(</span>
+    <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">trainingData</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
+    <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">modelVersion</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">versionDescription</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SentimentModel.html">SentimentModel</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>language</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The 2-letter language code of this model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>trainingData</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Training data in CSV format. For more information, see <a href="https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-custom-sentiment#sentiment-training-data-requirements">Sentiment training data
+requirements</a>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An optional name for the model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>description</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An optional description of the model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>modelVersion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An optional version string.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>workspaceID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the Watson Knowledge Studio workspace that deployed this model to Natural Language
+Understanding.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>versionDescription</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The description of the version.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV10abC0C19listSentimentModels7headers17completionHandlerySDyS2SGSg_y15IBMSwiftSDKCore12RestResponseVyAA04ListfgN0VGSg_AI0M5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/listSentimentModels(headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV10abC0C19listSentimentModels7headers17completionHandlerySDyS2SGSg_y15IBMSwiftSDKCore12RestResponseVyAA04ListfgN0VGSg_AI0M5ErrorOSgtctF">listSentimentModels(headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List sentiment models.</p>
+
+<p>(Beta) Returns all custom sentiment models associated with this service instance.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listSentimentModels</span><span class="p">(</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/ListSentimentModelsResponse.html">ListSentimentModelsResponse</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV10abC0C17getSentimentModel7modelID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AJ0O5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/getSentimentModel(modelID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV10abC0C17getSentimentModel7modelID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AJ0O5ErrorOSgtctF">getSentimentModel(modelID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get sentiment model details.</p>
+
+<p>(Beta) Returns the status of the sentiment model with the given model ID.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getSentimentModel</span><span class="p">(</span>
+    <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SentimentModel.html">SentimentModel</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>modelID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV10abC0C20updateSentimentModel7modelID8language12trainingData4name11description0H7Version09workspaceI018versionDescription7headers17completionHandlerySS_SS10Foundation0L0VSSSgA4RSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AU0Y5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/updateSentimentModel(modelID:language:trainingData:name:description:modelVersion:workspaceID:versionDescription:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV10abC0C20updateSentimentModel7modelID8language12trainingData4name11description0H7Version09workspaceI018versionDescription7headers17completionHandlerySS_SS10Foundation0L0VSSSgA4RSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AU0Y5ErrorOSgtctF">updateSentimentModel(modelID:<wbr>language:<wbr>trainingData:<wbr>name:<wbr>description:<wbr>modelVersion:<wbr>workspaceID:<wbr>versionDescription:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Update sentiment model.</p>
+
+<p>(Beta) Overwrites the training data associated with this custom sentiment model and retrains the model. The new
+model replaces the current deployment.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateSentimentModel</span><span class="p">(</span>
+    <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">trainingData</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
+    <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">modelVersion</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">versionDescription</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SentimentModel.html">SentimentModel</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>modelID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>language</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The 2-letter language code of this model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>trainingData</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Training data in CSV format. For more information, see <a href="https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-custom-sentiment#sentiment-training-data-requirements">Sentiment training data
+requirements</a>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An optional name for the model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>description</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An optional description of the model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>modelVersion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An optional version string.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>workspaceID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the Watson Knowledge Studio workspace that deployed this model to Natural Language
+Understanding.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>versionDescription</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The description of the version.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV10abC0C20deleteSentimentModel7modelID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA06DeleteG7ResultsVGSg_AJ0O5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/deleteSentimentModel(modelID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV10abC0C20deleteSentimentModel7modelID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA06DeleteG7ResultsVGSg_AJ0O5ErrorOSgtctF">deleteSentimentModel(modelID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete sentiment model.</p>
+
+<p>(Beta) Un-deploys the custom sentiment model with the given model ID and deletes all associated customer data,
+including any training data or binary artifacts.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteSentimentModel</span><span class="p">(</span>
+    <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/DeleteModelResults.html">DeleteModelResults</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>modelID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV10abC0C21createCategoriesModel8language12trainingData0iJ11ContentType4name11description12modelVersion11workspaceID18versionDescription7headers17completionHandlerySS_10Foundation0J0VSSSgA5RSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AU9RestErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/createCategoriesModel(language:trainingData:trainingDataContentType:name:description:modelVersion:workspaceID:versionDescription:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV10abC0C21createCategoriesModel8language12trainingData0iJ11ContentType4name11description12modelVersion11workspaceID18versionDescription7headers17completionHandlerySS_10Foundation0J0VSSSgA5RSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AU9RestErrorOSgtctF">createCategoriesModel(language:<wbr>trainingData:<wbr>trainingDataContentType:<wbr>name:<wbr>description:<wbr>modelVersion:<wbr>workspaceID:<wbr>versionDescription:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create categories model.</p>
+
+<p>(Beta) Creates a custom categories model by uploading training data and associated metadata. The model begins the
+training and deploying process and is ready to use when the <code>status</code> is <code>available</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createCategoriesModel</span><span class="p">(</span>
+    <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">trainingData</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
+    <span class="nv">trainingDataContentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">modelVersion</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">versionDescription</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/CategoriesModel.html">CategoriesModel</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>language</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The 2-letter language code of this model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>trainingData</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Training data in JSON format. For more information, see <a href="https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-categories##categories-training-data-requirements">Categories training data
+requirements</a>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>trainingDataContentType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The content type of trainingData.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An optional name for the model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>description</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An optional description of the model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>modelVersion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An optional version string.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>workspaceID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the Watson Knowledge Studio workspace that deployed this model to Natural Language
+Understanding.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>versionDescription</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The description of the version.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV10abC0C20listCategoriesModels7headers17completionHandlerySDyS2SGSg_y15IBMSwiftSDKCore12RestResponseVyAA0F9ModelListVGSg_AI0M5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/listCategoriesModels(headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV10abC0C20listCategoriesModels7headers17completionHandlerySDyS2SGSg_y15IBMSwiftSDKCore12RestResponseVyAA0F9ModelListVGSg_AI0M5ErrorOSgtctF">listCategoriesModels(headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List categories models.</p>
+
+<p>(Beta) Returns all custom categories models associated with this service instance.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listCategoriesModels</span><span class="p">(</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/CategoriesModelList.html">CategoriesModelList</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV10abC0C18getCategoriesModel7modelID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AJ0O5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/getCategoriesModel(modelID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV10abC0C18getCategoriesModel7modelID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AJ0O5ErrorOSgtctF">getCategoriesModel(modelID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get categories model details.</p>
+
+<p>(Beta) Returns the status of the categories model with the given model ID.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getCategoriesModel</span><span class="p">(</span>
+    <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/CategoriesModel.html">CategoriesModel</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>modelID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV10abC0C21updateCategoriesModel7modelID8language12trainingData0kL11ContentType4name11description0H7Version09workspaceI018versionDescription7headers17completionHandlerySS_SS10Foundation0L0VSSSgA5SSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AV9RestErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/updateCategoriesModel(modelID:language:trainingData:trainingDataContentType:name:description:modelVersion:workspaceID:versionDescription:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV10abC0C21updateCategoriesModel7modelID8language12trainingData0kL11ContentType4name11description0H7Version09workspaceI018versionDescription7headers17completionHandlerySS_SS10Foundation0L0VSSSgA5SSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AV9RestErrorOSgtctF">updateCategoriesModel(modelID:<wbr>language:<wbr>trainingData:<wbr>trainingDataContentType:<wbr>name:<wbr>description:<wbr>modelVersion:<wbr>workspaceID:<wbr>versionDescription:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Update categories model.</p>
+
+<p>(Beta) Overwrites the training data associated with this custom categories model and retrains the model. The new
+model replaces the current deployment.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateCategoriesModel</span><span class="p">(</span>
+    <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">trainingData</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
+    <span class="nv">trainingDataContentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">modelVersion</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">versionDescription</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/CategoriesModel.html">CategoriesModel</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>modelID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>language</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The 2-letter language code of this model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>trainingData</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Training data in JSON format. For more information, see <a href="https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-categories##categories-training-data-requirements">Categories training data
+requirements</a>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>trainingDataContentType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The content type of trainingData.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An optional name for the model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>description</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An optional description of the model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>modelVersion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An optional version string.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>workspaceID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the Watson Knowledge Studio workspace that deployed this model to Natural Language
+Understanding.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>versionDescription</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The description of the version.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV10abC0C21deleteCategoriesModel7modelID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA06DeleteG7ResultsVGSg_AJ0O5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/deleteCategoriesModel(modelID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV10abC0C21deleteCategoriesModel7modelID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA06DeleteG7ResultsVGSg_AJ0O5ErrorOSgtctF">deleteCategoriesModel(modelID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete categories model.</p>
+
+<p>(Beta) Un-deploys the custom categories model with the given model ID and deletes all associated customer data,
+including any training data or binary artifacts.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteCategoriesModel</span><span class="p">(</span>
+    <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/DeleteModelResults.html">DeleteModelResults</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>modelID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV10abC0C26createClassificationsModel8language12trainingData0iJ11ContentType4name11description12modelVersion11workspaceID18versionDescription7headers17completionHandlerySS_10Foundation0J0VSSSgA5RSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AU9RestErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/createClassificationsModel(language:trainingData:trainingDataContentType:name:description:modelVersion:workspaceID:versionDescription:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV10abC0C26createClassificationsModel8language12trainingData0iJ11ContentType4name11description12modelVersion11workspaceID18versionDescription7headers17completionHandlerySS_10Foundation0J0VSSSgA5RSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AU9RestErrorOSgtctF">createClassificationsModel(language:<wbr>trainingData:<wbr>trainingDataContentType:<wbr>name:<wbr>description:<wbr>modelVersion:<wbr>workspaceID:<wbr>versionDescription:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create classifications model.</p>
+
+<p>(Beta) Creates a custom classifications model by uploading training data and associated metadata. The model begins
+the training and deploying process and is ready to use when the <code>status</code> is <code>available</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createClassificationsModel</span><span class="p">(</span>
+    <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">trainingData</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
+    <span class="nv">trainingDataContentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">modelVersion</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">versionDescription</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/ClassificationsModel.html">ClassificationsModel</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>language</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The 2-letter language code of this model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>trainingData</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Training data in JSON format. For more information, see <a href="https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-classifications#classification-training-data-requirements">Classifications training data
+requirements</a>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>trainingDataContentType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The content type of trainingData.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An optional name for the model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>description</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An optional description of the model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>modelVersion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An optional version string.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>workspaceID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the Watson Knowledge Studio workspace that deployed this model to Natural Language
+Understanding.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>versionDescription</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The description of the version.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV10abC0C25listClassificationsModels7headers17completionHandlerySDyS2SGSg_y15IBMSwiftSDKCore12RestResponseVyAA04ListfgN0VGSg_AI0M5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/listClassificationsModels(headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV10abC0C25listClassificationsModels7headers17completionHandlerySDyS2SGSg_y15IBMSwiftSDKCore12RestResponseVyAA04ListfgN0VGSg_AI0M5ErrorOSgtctF">listClassificationsModels(headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List classifications models.</p>
+
+<p>(Beta) Returns all custom classifications models associated with this service instance.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listClassificationsModels</span><span class="p">(</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/ListClassificationsModelsResponse.html">ListClassificationsModelsResponse</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV10abC0C23getClassificationsModel7modelID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AJ0O5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/getClassificationsModel(modelID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV10abC0C23getClassificationsModel7modelID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AJ0O5ErrorOSgtctF">getClassificationsModel(modelID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get classifications model details.</p>
+
+<p>(Beta) Returns the status of the classifications model with the given model ID.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getClassificationsModel</span><span class="p">(</span>
+    <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/ClassificationsModel.html">ClassificationsModel</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>modelID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV10abC0C26updateClassificationsModel7modelID8language12trainingData0kL11ContentType4name11description0H7Version09workspaceI018versionDescription7headers17completionHandlerySS_SS10Foundation0L0VSSSgA5SSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AV9RestErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/updateClassificationsModel(modelID:language:trainingData:trainingDataContentType:name:description:modelVersion:workspaceID:versionDescription:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV10abC0C26updateClassificationsModel7modelID8language12trainingData0kL11ContentType4name11description0H7Version09workspaceI018versionDescription7headers17completionHandlerySS_SS10Foundation0L0VSSSgA5SSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AV9RestErrorOSgtctF">updateClassificationsModel(modelID:<wbr>language:<wbr>trainingData:<wbr>trainingDataContentType:<wbr>name:<wbr>description:<wbr>modelVersion:<wbr>workspaceID:<wbr>versionDescription:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Update classifications model.</p>
+
+<p>(Beta) Overwrites the training data associated with this custom classifications model and retrains the model. The
+new model replaces the current deployment.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateClassificationsModel</span><span class="p">(</span>
+    <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">language</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">trainingData</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
+    <span class="nv">trainingDataContentType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">description</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">modelVersion</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">workspaceID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">versionDescription</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/ClassificationsModel.html">ClassificationsModel</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>modelID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>language</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The 2-letter language code of this model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>trainingData</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Training data in JSON format. For more information, see <a href="https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-classifications#classification-training-data-requirements">Classifications training data
+requirements</a>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>trainingDataContentType</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The content type of trainingData.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An optional name for the model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>description</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An optional description of the model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>modelVersion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An optional version string.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>workspaceID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the Watson Knowledge Studio workspace that deployed this model to Natural Language
+Understanding.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>versionDescription</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The description of the version.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV10abC0C26deleteClassificationsModel7modelID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA06DeleteG7ResultsVGSg_AJ0O5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/deleteClassificationsModel(modelID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV10abC0C26deleteClassificationsModel7modelID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA06DeleteG7ResultsVGSg_AJ0O5ErrorOSgtctF">deleteClassificationsModel(modelID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete classifications model.</p>
+
+<p>(Beta) Un-deploys the custom classifications model with the given model ID and deletes all associated customer
+data, including any training data or binary artifacts.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteClassificationsModel</span><span class="p">(</span>
+    <span class="nv">modelID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/DeleteModelResults.html">DeleteModelResults</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>modelID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
           </section>
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

@@ -17,7 +17,7 @@
     <a title="BulkClassifyOutput Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">AssistantV2 4.1.0 Docs</a> (80% documented)</p>
+        <p><a href="../index.html">AssistantV2 4.1.0 Docs</a> (82% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../search.json">
@@ -47,6 +47,9 @@
           <li class="nav-group-name">
             <a href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/LogMessageSource.html">LogMessageSource</a>
+              </li>
               <li class="nav-group-task">
                 <a href="../Enums/RuntimeResponseGeneric.html">RuntimeResponseGeneric</a>
               </li>
@@ -80,6 +83,15 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/CaptureGroup.html">CaptureGroup</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ChannelTransferInfo.html">ChannelTransferInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ChannelTransferTarget.html">ChannelTransferTarget</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ChannelTransferTargetChat.html">ChannelTransferTargetChat</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/DialogLogMessage.html">DialogLogMessage</a>
@@ -116,6 +128,18 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/LogCollection.html">LogCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogMessageSourceAction.html">LogMessageSourceAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogMessageSourceDialogNode.html">LogMessageSourceDialogNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogMessageSourceHandler.html">LogMessageSourceHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogMessageSourceStep.html">LogMessageSourceStep</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/LogPagination.html">LogPagination</a>
@@ -187,6 +211,9 @@
                 <a href="../Structs/MessageResponseStateless.html">MessageResponseStateless</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/ResponseGenericChannel.html">ResponseGenericChannel</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/RuntimeEntity.html">RuntimeEntity</a>
               </li>
               <li class="nav-group-task">
@@ -208,22 +235,16 @@
                 <a href="../Structs/RuntimeIntent.html">RuntimeIntent</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeConnectToAgent.html">RuntimeResponseGenericRuntimeResponseTypeConnectToAgent</a>
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeChannelTransfer.html">RuntimeResponseGenericRuntimeResponseTypeChannelTransfer</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeConnectToAgent/ResponseType.html">– ResponseType</a>
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeConnectToAgent.html">RuntimeResponseGenericRuntimeResponseTypeConnectToAgent</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeImage.html">RuntimeResponseGenericRuntimeResponseTypeImage</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeImage/ResponseType.html">– ResponseType</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeOption.html">RuntimeResponseGenericRuntimeResponseTypeOption</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeOption/ResponseType.html">– ResponseType</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeOption/Preference.html">– Preference</a>
@@ -232,25 +253,16 @@
                 <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypePause.html">RuntimeResponseGenericRuntimeResponseTypePause</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypePause/ResponseType.html">– ResponseType</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeSearch.html">RuntimeResponseGenericRuntimeResponseTypeSearch</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeSearch/ResponseType.html">– ResponseType</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeSuggestion.html">RuntimeResponseGenericRuntimeResponseTypeSuggestion</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeSuggestion/ResponseType.html">– ResponseType</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeText.html">RuntimeResponseGenericRuntimeResponseTypeText</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeText/ResponseType.html">– ResponseType</a>
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeUserDefined.html">RuntimeResponseGenericRuntimeResponseTypeUserDefined</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/SearchResult.html">SearchResult</a>
@@ -407,7 +419,7 @@
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

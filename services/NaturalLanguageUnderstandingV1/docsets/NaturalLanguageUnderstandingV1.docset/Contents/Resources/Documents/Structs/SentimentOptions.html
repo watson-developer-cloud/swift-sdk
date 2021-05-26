@@ -17,7 +17,7 @@
     <a title="SentimentOptions Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">NaturalLanguageUnderstandingV1 4.1.0 Docs</a> (85% documented)</p>
+        <p><a href="../index.html">NaturalLanguageUnderstandingV1 4.1.0 Docs</a> (83% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../search.json">
@@ -57,6 +57,15 @@
                 <a href="../Structs/Author.html">Author</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/CategoriesModel.html">CategoriesModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CategoriesModel/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CategoriesModelList.html">CategoriesModelList</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/CategoriesOptions.html">CategoriesOptions</a>
               </li>
               <li class="nav-group-task">
@@ -67,6 +76,21 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/CategoriesResultExplanation.html">CategoriesResultExplanation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ClassificationsModel.html">ClassificationsModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ClassificationsModel/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ClassificationsModelList.html">ClassificationsModelList</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ClassificationsOptions.html">ClassificationsOptions</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ClassificationsResult.html">ClassificationsResult</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/ConceptsOptions.html">ConceptsOptions</a>
@@ -123,13 +147,22 @@
                 <a href="../Structs/KeywordsResult.html">KeywordsResult</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/ListClassificationsModelsResponse.html">ListClassificationsModelsResponse</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/ListModelsResults.html">ListModelsResults</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ListSentimentModelsResponse.html">ListSentimentModelsResponse</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Model.html">Model</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Model/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Notice.html">Notice</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/RelationArgument.html">RelationArgument</a>
@@ -171,10 +204,19 @@
                 <a href="../Structs/SentenceResult.html">SentenceResult</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/SentimentModel.html">SentimentModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SentimentModel/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/SentimentOptions.html">SentimentOptions</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/SentimentResult.html">SentimentResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SummarizationOptions.html">SummarizationOptions</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/SyntaxOptions.html">SyntaxOptions</a>
@@ -312,9 +354,39 @@ sentiment for detected entities with <code>entities.sentiment</code> and for key
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:30NaturalLanguageUnderstandingV116SentimentOptionsV8document7targetsACSbSg_SaySSGSgtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(document:targets:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV116SentimentOptionsV8document7targetsACSbSg_SaySSGSgtcfc">init(document:<wbr>targets:<wbr>)</a>
+                    <a name="/s:30NaturalLanguageUnderstandingV116SentimentOptionsV5modelSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/model" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV116SentimentOptionsV5modelSSSgvp">model</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>(Beta) Enter a <a href="https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-customizing">custom
+model</a>
+ID to override the standard sentiment model for all sentiment analysis operations in the request, including
+targeted sentiment for entities and keywords.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">model</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:30NaturalLanguageUnderstandingV116SentimentOptionsV8document7targets5modelACSbSg_SaySSGSgSSSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(document:targets:model:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV116SentimentOptionsV8document7targets5modelACSbSg_SaySSGSgSSSgtcfc">init(document:<wbr>targets:<wbr>model:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -331,7 +403,8 @@ sentiment for detected entities with <code>entities.sentiment</code> and for key
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
     <span class="nv">document</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">targets</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span>
+    <span class="nv">targets</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">model</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
 <span class="p">)</span></code></pre>
 
                         </div>
@@ -364,6 +437,21 @@ sentiment for detected entities with <code>entities.sentiment</code> and for key
                                 </div>
                               </td>
                             </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>model</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>(Beta) Enter a <a href="https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-customizing">custom
+model</a>
+ID to override the standard sentiment model for all sentiment analysis operations in the request, including
+targeted sentiment for entities and keywords.</p>
+                                </div>
+                              </td>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
@@ -380,7 +468,7 @@ sentiment for detected entities with <code>entities.sentiment</code> and for key
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

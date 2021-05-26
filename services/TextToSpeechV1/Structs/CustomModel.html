@@ -17,7 +17,7 @@
     <a title="CustomModel Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">TextToSpeechV1 4.1.0 Docs</a> (57% documented)</p>
+        <p><a href="../index.html">TextToSpeechV1 4.1.0 Docs</a> (68% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../search.json">
@@ -54,7 +54,34 @@
                 <a href="../Structs/CustomModels.html">CustomModels</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/Prompt.html">Prompt</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PromptMetadata.html">PromptMetadata</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Prompts.html">Prompts</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/Pronunciation.html">Pronunciation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Speaker.html">Speaker</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeakerCustomModel.html">SpeakerCustomModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeakerCustomModels.html">SpeakerCustomModels</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeakerModel.html">SpeakerModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeakerPrompt.html">SpeakerPrompt</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Speakers.html">Speakers</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/SupportedFeatures.html">SupportedFeatures</a>
@@ -343,9 +370,8 @@ ISO 8601 format (<code>YYYY-MM-DDThh:mm:ss.sTZD</code>).</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>An array of <code><a href="../Structs/Word.html">Word</a></code> objects that lists the words and their translations from the custom model. The words are listed
-in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if the custom
-model contains no words. This field is returned only by the <strong>Get a voice</strong> method and only when you specify the
-customization ID of a custom model.</p>
+in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if no words are
+defined for the custom model. This field is returned only by the <strong>Get a custom model</strong> method.</p>
 
                       </div>
                       <div class="declaration">
@@ -359,13 +385,42 @@ customization ID of a custom model.</p>
                     </section>
                   </div>
                 </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14TextToSpeechV111CustomModelV7promptsSayAA6PromptVGSgvp"></a>
+                    <a name="//apple_ref/swift/Property/prompts" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV111CustomModelV7promptsSayAA6PromptVGSgvp">prompts</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An array of <code><a href="../Structs/Prompt.html">Prompt</a></code> objects that provides information about the prompts that are defined for the specified custom
+model. The array is empty if no prompts are defined for the custom model. This field is returned only by the <strong>Get
+a custom model</strong> method.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">prompts</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/Prompt.html">Prompt</a></span><span class="p">]?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
               </ul>
             </div>
           </section>
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

@@ -17,7 +17,7 @@
     <a title="Assistant Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">AssistantV2 4.1.0 Docs</a> (80% documented)</p>
+        <p><a href="../index.html">AssistantV2 4.1.0 Docs</a> (82% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../search.json">
@@ -47,6 +47,9 @@
           <li class="nav-group-name">
             <a href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/LogMessageSource.html">LogMessageSource</a>
+              </li>
               <li class="nav-group-task">
                 <a href="../Enums/RuntimeResponseGeneric.html">RuntimeResponseGeneric</a>
               </li>
@@ -80,6 +83,15 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/CaptureGroup.html">CaptureGroup</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ChannelTransferInfo.html">ChannelTransferInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ChannelTransferTarget.html">ChannelTransferTarget</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ChannelTransferTargetChat.html">ChannelTransferTargetChat</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/DialogLogMessage.html">DialogLogMessage</a>
@@ -116,6 +128,18 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/LogCollection.html">LogCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogMessageSourceAction.html">LogMessageSourceAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogMessageSourceDialogNode.html">LogMessageSourceDialogNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogMessageSourceHandler.html">LogMessageSourceHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/LogMessageSourceStep.html">LogMessageSourceStep</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/LogPagination.html">LogPagination</a>
@@ -187,6 +211,9 @@
                 <a href="../Structs/MessageResponseStateless.html">MessageResponseStateless</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/ResponseGenericChannel.html">ResponseGenericChannel</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/RuntimeEntity.html">RuntimeEntity</a>
               </li>
               <li class="nav-group-task">
@@ -208,22 +235,16 @@
                 <a href="../Structs/RuntimeIntent.html">RuntimeIntent</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeConnectToAgent.html">RuntimeResponseGenericRuntimeResponseTypeConnectToAgent</a>
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeChannelTransfer.html">RuntimeResponseGenericRuntimeResponseTypeChannelTransfer</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeConnectToAgent/ResponseType.html">– ResponseType</a>
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeConnectToAgent.html">RuntimeResponseGenericRuntimeResponseTypeConnectToAgent</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeImage.html">RuntimeResponseGenericRuntimeResponseTypeImage</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeImage/ResponseType.html">– ResponseType</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeOption.html">RuntimeResponseGenericRuntimeResponseTypeOption</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeOption/ResponseType.html">– ResponseType</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeOption/Preference.html">– Preference</a>
@@ -232,25 +253,16 @@
                 <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypePause.html">RuntimeResponseGenericRuntimeResponseTypePause</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypePause/ResponseType.html">– ResponseType</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeSearch.html">RuntimeResponseGenericRuntimeResponseTypeSearch</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeSearch/ResponseType.html">– ResponseType</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeSuggestion.html">RuntimeResponseGenericRuntimeResponseTypeSuggestion</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeSuggestion/ResponseType.html">– ResponseType</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeText.html">RuntimeResponseGenericRuntimeResponseTypeText</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeText/ResponseType.html">– ResponseType</a>
+                <a href="../Structs/RuntimeResponseGenericRuntimeResponseTypeUserDefined.html">RuntimeResponseGenericRuntimeResponseTypeUserDefined</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/SearchResult.html">SearchResult</a>
@@ -364,7 +376,7 @@ receive a response.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The current version is
-<code>2020-04-01</code>.</p>
+<code>2020-09-24</code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -528,7 +540,7 @@ In that case, try another initializer that directly passes in the credentials.</
                               <td>
                                 <div>
                                   <p>Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The
-current version is <code>2020-04-01</code>.</p>
+current version is <code>2020-09-24</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -754,9 +766,9 @@ see the <a href="https://cloud.ibm.com/docs/assistant?topic=assistant-assistant-
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV20A0C7message11assistantID07sessionE05input7context7headers17completionHandlerySS_SSAA12MessageInputVSgAA0L7ContextVSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0lR0VGSg_AS0Q5ErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/message(assistantID:sessionID:input:context:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV20A0C7message11assistantID07sessionE05input7context7headers17completionHandlerySS_SSAA12MessageInputVSgAA0L7ContextVSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0lR0VGSg_AS0Q5ErrorOSgtctF">message(assistantID:<wbr>sessionID:<wbr>input:<wbr>context:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    <a name="/s:11AssistantV20A0C7message11assistantID07sessionE05input7context04userE07headers17completionHandlerySS_SSAA12MessageInputVSgAA0M7ContextVSgSSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0mS0VGSg_AU0R5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/message(assistantID:sessionID:input:context:userID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV20A0C7message11assistantID07sessionE05input7context04userE07headers17completionHandlerySS_SSAA12MessageInputVSgAA0M7ContextVSgSSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0mS0VGSg_AU0R5ErrorOSgtctF">message(assistantID:<wbr>sessionID:<wbr>input:<wbr>context:<wbr>userID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -779,6 +791,7 @@ Watson Assistant for the duration of the session.</p>
     <span class="nv">sessionID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">input</span><span class="p">:</span> <span class="kt"><a href="../Structs/MessageInput.html">MessageInput</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">context</span><span class="p">:</span> <span class="kt"><a href="../Structs/MessageContext.html">MessageContext</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">userID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11AssistantV214WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/MessageResponse.html">MessageResponse</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11AssistantV211WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -845,6 +858,24 @@ basis.
                             <tr>
                               <td>
                                 <code>
+                                <em>userID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A string value that identifies the user who is interacting with the assistant. The client
+must provide a unique identifier for each individual end user who accesses the application. For user-based plans,
+this user ID is used to identify unique users for billing purposes. This string cannot contain carriage return,
+newline, or tab characters. If no value is specified in the input, <strong>user_id</strong> is automatically set to the value
+of <strong>context.global.session_id</strong>.
+<strong>Note:</strong> This property is the same as the <strong>user_id</strong> property in the global system context. If <strong>user_id</strong> is
+specified in both locations, the value specified at the root is used.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>headers</em>
                                 </code>
                               </td>
@@ -875,9 +906,9 @@ basis.
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV20A0C16messageStateless11assistantID5input7context7headers17completionHandlerySS_AA012MessageInputD0VSgAA0l7ContextD0VSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0lrD0VGSg_AR0Q5ErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/messageStateless(assistantID:input:context:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV20A0C16messageStateless11assistantID5input7context7headers17completionHandlerySS_AA012MessageInputD0VSgAA0l7ContextD0VSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0lrD0VGSg_AR0Q5ErrorOSgtctF">messageStateless(assistantID:<wbr>input:<wbr>context:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    <a name="/s:11AssistantV20A0C16messageStateless11assistantID5input7context04userF07headers17completionHandlerySS_AA012MessageInputD0VSgAA0m7ContextD0VSgSSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0msD0VGSg_AT0R5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/messageStateless(assistantID:input:context:userID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV20A0C16messageStateless11assistantID5input7context04userF07headers17completionHandlerySS_AA012MessageInputD0VSgAA0m7ContextD0VSgSSSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0msD0VGSg_AT0R5ErrorOSgtctF">messageStateless(assistantID:<wbr>input:<wbr>context:<wbr>userID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -899,6 +930,7 @@ your application.</p>
     <span class="nv">assistantID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">input</span><span class="p">:</span> <span class="kt"><a href="../Structs/MessageInputStateless.html">MessageInputStateless</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">context</span><span class="p">:</span> <span class="kt"><a href="../Structs/MessageContextStateless.html">MessageContextStateless</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">userID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11AssistantV214WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/MessageResponseStateless.html">MessageResponseStateless</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11AssistantV211WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -953,6 +985,24 @@ session state, include the context from the previous response.
                             <tr>
                               <td>
                                 <code>
+                                <em>userID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A string value that identifies the user who is interacting with the assistant. The client
+must provide a unique identifier for each individual end user who accesses the application. For user-based plans,
+this user ID is used to identify unique users for billing purposes. This string cannot contain carriage return,
+newline, or tab characters. If no value is specified in the input, <strong>user_id</strong> is automatically set to the value
+of <strong>context.global.session_id</strong>.
+<strong>Note:</strong> This property is the same as the <strong>user_id</strong> property in the global system context. If <strong>user_id</strong> is
+specified in both locations in a message request, the value specified at the root is used.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>headers</em>
                                 </code>
                               </td>
@@ -998,7 +1048,7 @@ session state, include the context from the previous response.
 <p>Send multiple user inputs to a dialog skill in a single request and receive information about the intents and
 entities recognized in each input. This method is useful for testing and comparing the performance of different
 skills or skill versions.
-This method is available only with Premium plans.</p>
+This method is available only with Enterprise with Data Isolation plans.</p>
 
                       </div>
                       <div class="declaration">
@@ -1088,7 +1138,7 @@ open the skill settings and click <strong>API Details</strong>.</p>
                         <p>List log events for an assistant.</p>
 
 <p>List the events from the log of an assistant.
-This method is available only with Premium plans.</p>
+This method requires Manager access, and is available only with Enterprise plans.</p>
 
                       </div>
                       <div class="declaration">
@@ -1226,7 +1276,10 @@ the customer ID.
 You associate a customer ID with data by passing the <code>X-Watson-Metadata</code> header with a request that passes data.
 For more information about personal data and customer IDs, see <a href="https://cloud.ibm.com/docs/assistant?topic=assistant-information-security#information-security">Information
 security</a>.
-This operation is limited to 4 requests per minute. For more information, see <strong>Rate limiting</strong>.</p>
+<strong>Note:</strong> This operation is intended only for deleting data associated with a single specific customer, not for
+deleting data associated with multiple customers or for any other purpose. For more information, see <a href="https://cloud.ibm.com/docs/assistant?topic=assistant-information-security#information-security-gdpr-wa">Labeling and
+deleting data in Watson
+Assistant</a>.</p>
 
                       </div>
                       <div class="declaration">
@@ -1292,7 +1345,7 @@ This operation is limited to 4 requests per minute. For more information, see <s
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

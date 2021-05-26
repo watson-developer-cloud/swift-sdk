@@ -17,7 +17,7 @@
     <a title="Structures  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">TextToSpeechV1 4.1.0 Docs</a> (57% documented)</p>
+        <p><a href="index.html">TextToSpeechV1 4.1.0 Docs</a> (68% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="search.json">
@@ -54,7 +54,34 @@
                 <a href="Structs/CustomModels.html">CustomModels</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/Prompt.html">Prompt</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/PromptMetadata.html">PromptMetadata</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Prompts.html">Prompts</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/Pronunciation.html">Pronunciation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Speaker.html">Speaker</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SpeakerCustomModel.html">SpeakerCustomModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SpeakerCustomModels.html">SpeakerCustomModels</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SpeakerModel.html">SpeakerModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/SpeakerPrompt.html">SpeakerPrompt</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/Speakers.html">Speakers</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/SupportedFeatures.html">SupportedFeatures</a>
@@ -188,6 +215,92 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:14TextToSpeechV16PromptV"></a>
+                    <a name="//apple_ref/swift/Struct/Prompt" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV16PromptV">Prompt</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Information about a custom prompt.</p>
+
+                        <a href="Structs/Prompt.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Prompt</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14TextToSpeechV114PromptMetadataV"></a>
+                    <a name="//apple_ref/swift/Struct/PromptMetadata" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV114PromptMetadataV">PromptMetadata</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Information about the prompt that is to be added to a custom model. The following example of a <code>PromptMetadata</code> object
+includes both the required prompt text and an optional speaker model ID:
+<code>{ &quot;prompt_text&quot;: &quot;Thank you and good-bye!&quot;, &quot;speaker_id&quot;: &quot;823068b2-ed4e-11ea-b6e0-7b6456aa95cc&quot; }</code>.</p>
+
+                        <a href="Structs/PromptMetadata.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">PromptMetadata</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14TextToSpeechV17PromptsV"></a>
+                    <a name="//apple_ref/swift/Struct/Prompts" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV17PromptsV">Prompts</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Information about the custom prompts that are defined for a custom model.</p>
+
+                        <a href="Structs/Prompts.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Prompts</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:14TextToSpeechV113PronunciationV"></a>
                     <a name="//apple_ref/swift/Struct/Pronunciation" class="dashAnchor"></a>
                     <a class="token" href="#/s:14TextToSpeechV113PronunciationV">Pronunciation</a>
@@ -207,6 +320,174 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Pronunciation</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14TextToSpeechV17SpeakerV"></a>
+                    <a name="//apple_ref/swift/Struct/Speaker" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV17SpeakerV">Speaker</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Information about a speaker model.</p>
+
+                        <a href="Structs/Speaker.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Speaker</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14TextToSpeechV118SpeakerCustomModelV"></a>
+                    <a name="//apple_ref/swift/Struct/SpeakerCustomModel" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV118SpeakerCustomModelV">SpeakerCustomModel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A custom models for which the speaker has defined prompts.</p>
+
+                        <a href="Structs/SpeakerCustomModel.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SpeakerCustomModel</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14TextToSpeechV119SpeakerCustomModelsV"></a>
+                    <a name="//apple_ref/swift/Struct/SpeakerCustomModels" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV119SpeakerCustomModelsV">SpeakerCustomModels</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Custom models for which the speaker has defined prompts.</p>
+
+                        <a href="Structs/SpeakerCustomModels.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SpeakerCustomModels</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14TextToSpeechV112SpeakerModelV"></a>
+                    <a name="//apple_ref/swift/Struct/SpeakerModel" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV112SpeakerModelV">SpeakerModel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The speaker ID of the speaker model.</p>
+
+                        <a href="Structs/SpeakerModel.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SpeakerModel</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14TextToSpeechV113SpeakerPromptV"></a>
+                    <a name="//apple_ref/swift/Struct/SpeakerPrompt" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV113SpeakerPromptV">SpeakerPrompt</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A prompt that a speaker has defined for a custom model.</p>
+
+                        <a href="Structs/SpeakerPrompt.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">SpeakerPrompt</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14TextToSpeechV18SpeakersV"></a>
+                    <a name="//apple_ref/swift/Struct/Speakers" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV18SpeakersV">Speakers</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Information about all speaker models for the service instance.</p>
+
+                        <a href="Structs/Speakers.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Speakers</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -389,7 +670,7 @@ For the <strong>List custom words</strong> method, the words and their translati
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

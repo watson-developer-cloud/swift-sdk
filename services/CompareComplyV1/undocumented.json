@@ -16,7 +16,7 @@
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/CompareComplyV1/CompareComply.swift",
-      "line": 55,
+      "line": 59,
       "symbol": "CompareComply.authenticator",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"

@@ -17,7 +17,7 @@
     <a title="QueryLargePassages Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">DiscoveryV2 4.1.0 Docs</a> (85% documented)</p>
+        <p><a href="../index.html">DiscoveryV2 4.1.0 Docs</a> (86% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../search.json">
@@ -249,6 +249,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/QueryTopHitsAggregationResult.html">QueryTopHitsAggregationResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/ResultPassageAnswer.html">ResultPassageAnswer</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/RetrievalDetails.html">RetrievalDetails</a>
@@ -536,9 +539,74 @@ The maximum is <code>100</code>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV218QueryLargePassagesV7enabled11perDocument06maxPerH06fields5count10charactersACSbSg_AJSiSgSaySSGSgA2Ktcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(enabled:perDocument:maxPerDocument:fields:count:characters:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV218QueryLargePassagesV7enabled11perDocument06maxPerH06fields5count10charactersACSbSg_AJSiSgSaySSGSgA2Ktcfc">init(enabled:<wbr>perDocument:<wbr>maxPerDocument:<wbr>fields:<wbr>count:<wbr>characters:<wbr>)</a>
+                    <a name="/s:11DiscoveryV218QueryLargePassagesV11findAnswersSbSgvp"></a>
+                    <a name="//apple_ref/swift/Property/findAnswers" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV218QueryLargePassagesV11findAnswersSbSgvp">findAnswers</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>When true, <code>answer</code> objects are returned as part of each passage in the query results. The primary difference
+between an <code>answer</code> and a <code>passage</code> is that the length of a passage is defined by the query, where the length of an
+<code>answer</code> is calculated by Discovery based on how much text is needed to answer the question./n/nThis parameter is
+ignored if passages are not enabled for the query, or no <strong>natural_language_query</strong> is specified./n/nIf the
+<strong>find_answers</strong> parameter is set to <code>true</code> and <strong>per_document</strong> parameter is also set to <code>true</code>, then the document
+search results and the passage search results within each document are reordered using the answer confidences. The
+goal of this reordering is to do as much as possible to make sure that the first answer of the first passage of the
+first document is the best answer. Similarly, if the <strong>find_answers</strong> parameter is set to <code>true</code> and
+<strong>per_document</strong> parameter is set to <code>false</code>, then the passage search results are reordered in decreasing order of
+the highest confidence answer for each document and passage./n/nThe <strong>find_answers</strong> parameter is <strong>beta</strong>
+functionality available only on managed instances and should not be used in a production environment. This
+parameter is not available on installed instances of Discovery.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">findAnswers</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV218QueryLargePassagesV20maxAnswersPerPassageSiSgvp"></a>
+                    <a name="//apple_ref/swift/Property/maxAnswersPerPassage" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV218QueryLargePassagesV20maxAnswersPerPassageSiSgvp">maxAnswersPerPassage</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The number of <code>answer</code> objects to return per passage if the <strong>find_answers</strong> parmeter is specified as <code>true</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">maxAnswersPerPassage</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11DiscoveryV218QueryLargePassagesV7enabled11perDocument06maxPerH06fields5count10characters11findAnswers0ioJ7PassageACSbSg_ALSiSgSaySSGSgA2mlMtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(enabled:perDocument:maxPerDocument:fields:count:characters:findAnswers:maxAnswersPerPassage:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11DiscoveryV218QueryLargePassagesV7enabled11perDocument06maxPerH06fields5count10characters11findAnswers0ioJ7PassageACSbSg_ALSiSgSaySSGSgA2mlMtcfc">init(enabled:<wbr>perDocument:<wbr>maxPerDocument:<wbr>fields:<wbr>count:<wbr>characters:<wbr>findAnswers:<wbr>maxAnswersPerPassage:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -559,7 +627,9 @@ The maximum is <code>100</code>.</p>
     <span class="nv">maxPerDocument</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">fields</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">count</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">characters</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+    <span class="nv">characters</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">findAnswers</span><span class="p">:</span> <span class="kt">Bool</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">maxAnswersPerPassage</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
 <span class="p">)</span></code></pre>
 
                         </div>
@@ -642,6 +712,43 @@ total is not found. The maximum is <code>100</code>.</p>
                                 </div>
                               </td>
                             </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>findAnswers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>When true, <code>answer</code> objects are returned as part of each passage in the query results.
+The primary difference between an <code>answer</code> and a <code>passage</code> is that the length of a passage is defined by the
+query, where the length of an <code>answer</code> is calculated by Discovery based on how much text is needed to answer the
+question./n/nThis parameter is ignored if passages are not enabled for the query, or no
+<strong>natural_language_query</strong> is specified./n/nIf the <strong>find_answers</strong> parameter is set to <code>true</code> and
+<strong>per_document</strong> parameter is also set to <code>true</code>, then the document search results and the passage search results
+within each document are reordered using the answer confidences. The goal of this reordering is to do as much as
+possible to make sure that the first answer of the first passage of the first document is the best answer.
+Similarly, if the <strong>find_answers</strong> parameter is set to <code>true</code> and <strong>per_document</strong> parameter is set to <code>false</code>,
+then the passage search results are reordered in decreasing order of the highest confidence answer for each
+document and passage./n/nThe <strong>find_answers</strong> parameter is <strong>beta</strong> functionality available only on managed
+instances and should not be used in a production environment. This parameter is not available on installed
+instances of Discovery.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>maxAnswersPerPassage</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The number of <code>answer</code> objects to return per passage if the <strong>find_answers</strong>
+parmeter is specified as <code>true</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
                           </tbody>
                         </table>
                       </div>
@@ -658,7 +765,7 @@ total is not found. The maximum is <code>100</code>.</p>
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

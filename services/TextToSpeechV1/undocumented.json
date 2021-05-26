@@ -310,7 +310,7 @@
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/TextToSpeechV1/TextToSpeech.swift",
-      "line": 61,
+      "line": 64,
       "symbol": "TextToSpeech.authenticator",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"

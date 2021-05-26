@@ -781,7 +781,7 @@
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/TextToSpeechV1/TextToSpeech.swift",
-      "line": 61,
+      "line": 64,
       "symbol": "TextToSpeech.authenticator",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -1108,7 +1108,7 @@
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/SpeechToText.swift",
-      "line": 64,
+      "line": 68,
       "symbol": "SpeechToText.authenticator",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -1131,6 +1131,13 @@
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/WebSockets/RecognitionSettings.swift",
       "line": 125,
       "symbol": "RecognitionSettings.audioMetrics",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/WebSockets/RecognitionSettings.swift",
+      "line": 181,
+      "symbol": "RecognitionSettings.lowLatency",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
@@ -1379,7 +1386,7 @@
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/PersonalityInsightsV3/PersonalityInsights.swift",
-      "line": 74,
+      "line": 76,
       "symbol": "PersonalityInsights.authenticator",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -1446,6 +1453,118 @@
 	{
   "warnings": [
     {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/CategoriesModel.swift",
+      "line": 29,
+      "symbol": "CategoriesModel.Status.starting",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/CategoriesModel.swift",
+      "line": 30,
+      "symbol": "CategoriesModel.Status.training",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/CategoriesModel.swift",
+      "line": 31,
+      "symbol": "CategoriesModel.Status.deploying",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/CategoriesModel.swift",
+      "line": 32,
+      "symbol": "CategoriesModel.Status.available",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/CategoriesModel.swift",
+      "line": 33,
+      "symbol": "CategoriesModel.Status.error",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/CategoriesModel.swift",
+      "line": 34,
+      "symbol": "CategoriesModel.Status.deleted",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/CategoriesModel.swift",
+      "line": 92,
+      "symbol": "CategoriesModel.notices",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/ClassificationsModel.swift",
+      "line": 29,
+      "symbol": "ClassificationsModel.Status.starting",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/ClassificationsModel.swift",
+      "line": 30,
+      "symbol": "ClassificationsModel.Status.training",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/ClassificationsModel.swift",
+      "line": 31,
+      "symbol": "ClassificationsModel.Status.deploying",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/ClassificationsModel.swift",
+      "line": 32,
+      "symbol": "ClassificationsModel.Status.available",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/ClassificationsModel.swift",
+      "line": 33,
+      "symbol": "ClassificationsModel.Status.error",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/ClassificationsModel.swift",
+      "line": 34,
+      "symbol": "ClassificationsModel.Status.deleted",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/ClassificationsModel.swift",
+      "line": 92,
+      "symbol": "ClassificationsModel.notices",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/ListClassificationsModelsResponse.swift",
+      "line": 24,
+      "symbol": "ListClassificationsModelsResponse.models",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/ListSentimentModelsResponse.swift",
+      "line": 24,
+      "symbol": "ListSentimentModelsResponse.models",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/Model.swift",
       "line": 28,
       "symbol": "Model.Status.starting",
@@ -1491,6 +1610,55 @@
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/SemanticRolesResultAction.swift",
       "line": 34,
       "symbol": "SemanticRolesResultAction.verb",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/SentimentModel.swift",
+      "line": 29,
+      "symbol": "SentimentModel.Status.starting",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/SentimentModel.swift",
+      "line": 30,
+      "symbol": "SentimentModel.Status.training",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/SentimentModel.swift",
+      "line": 31,
+      "symbol": "SentimentModel.Status.deploying",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/SentimentModel.swift",
+      "line": 32,
+      "symbol": "SentimentModel.Status.available",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/SentimentModel.swift",
+      "line": 33,
+      "symbol": "SentimentModel.Status.error",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/SentimentModel.swift",
+      "line": 34,
+      "symbol": "SentimentModel.Status.deleted",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/SentimentModel.swift",
+      "line": 92,
+      "symbol": "SentimentModel.notices",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
@@ -3509,7 +3677,7 @@
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/CompareComplyV1/CompareComply.swift",
-      "line": 55,
+      "line": 59,
       "symbol": "CompareComply.authenticator",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -4297,6 +4465,34 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV2/Models/LogMessageSource.swift",
+      "line": 24,
+      "symbol": "LogMessageSource.dialogNode(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV2/Models/LogMessageSource.swift",
+      "line": 25,
+      "symbol": "LogMessageSource.action(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV2/Models/LogMessageSource.swift",
+      "line": 26,
+      "symbol": "LogMessageSource.step(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV2/Models/LogMessageSource.swift",
+      "line": 27,
+      "symbol": "LogMessageSource.handler(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV2/Models/MessageContextGlobalSystem.swift",
       "line": 31,
       "symbol": "MessageContextGlobalSystem.Locale.enUs",
@@ -4550,113 +4746,78 @@
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV2/Models/RuntimeResponseGeneric.swift",
-      "line": 24,
-      "symbol": "RuntimeResponseGeneric.connectToAgent(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV2/Models/RuntimeResponseGeneric.swift",
       "line": 25,
-      "symbol": "RuntimeResponseGeneric.image(_:)",
+      "symbol": "RuntimeResponseGeneric.channelTransfer(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV2/Models/RuntimeResponseGeneric.swift",
       "line": 26,
-      "symbol": "RuntimeResponseGeneric.option(_:)",
+      "symbol": "RuntimeResponseGeneric.connectToAgent(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV2/Models/RuntimeResponseGeneric.swift",
       "line": 27,
-      "symbol": "RuntimeResponseGeneric.suggestion(_:)",
+      "symbol": "RuntimeResponseGeneric.image(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV2/Models/RuntimeResponseGeneric.swift",
       "line": 28,
-      "symbol": "RuntimeResponseGeneric.pause(_:)",
+      "symbol": "RuntimeResponseGeneric.option(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV2/Models/RuntimeResponseGeneric.swift",
       "line": 29,
-      "symbol": "RuntimeResponseGeneric.search(_:)",
+      "symbol": "RuntimeResponseGeneric.suggestion(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV2/Models/RuntimeResponseGeneric.swift",
       "line": 30,
+      "symbol": "RuntimeResponseGeneric.pause(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV2/Models/RuntimeResponseGeneric.swift",
+      "line": 31,
+      "symbol": "RuntimeResponseGeneric.search(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV2/Models/RuntimeResponseGeneric.swift",
+      "line": 32,
       "symbol": "RuntimeResponseGeneric.text(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV2/Models/RuntimeResponseGenericRuntimeResponseTypeConnectToAgent.swift",
-      "line": 32,
-      "symbol": "RuntimeResponseGenericRuntimeResponseTypeConnectToAgent.ResponseType.connectToAgent",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV2/Models/RuntimeResponseGenericRuntimeResponseTypeImage.swift",
-      "line": 32,
-      "symbol": "RuntimeResponseGenericRuntimeResponseTypeImage.ResponseType.image",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV2/Models/RuntimeResponseGeneric.swift",
+      "line": 33,
+      "symbol": "RuntimeResponseGeneric.userDefined(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV2/Models/RuntimeResponseGenericRuntimeResponseTypeOption.swift",
-      "line": 32,
-      "symbol": "RuntimeResponseGenericRuntimeResponseTypeOption.ResponseType.option",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV2/Models/RuntimeResponseGenericRuntimeResponseTypeOption.swift",
-      "line": 39,
+      "line": 31,
       "symbol": "RuntimeResponseGenericRuntimeResponseTypeOption.Preference.dropdown",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV2/Models/RuntimeResponseGenericRuntimeResponseTypeOption.swift",
-      "line": 40,
+      "line": 32,
       "symbol": "RuntimeResponseGenericRuntimeResponseTypeOption.Preference.button",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV2/Models/RuntimeResponseGenericRuntimeResponseTypePause.swift",
-      "line": 32,
-      "symbol": "RuntimeResponseGenericRuntimeResponseTypePause.ResponseType.pause",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV2/Models/RuntimeResponseGenericRuntimeResponseTypeSearch.swift",
-      "line": 32,
-      "symbol": "RuntimeResponseGenericRuntimeResponseTypeSearch.ResponseType.search",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV2/Models/RuntimeResponseGenericRuntimeResponseTypeSuggestion.swift",
-      "line": 32,
-      "symbol": "RuntimeResponseGenericRuntimeResponseTypeSuggestion.ResponseType.suggestion",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV2/Models/RuntimeResponseGenericRuntimeResponseTypeText.swift",
-      "line": 32,
-      "symbol": "RuntimeResponseGenericRuntimeResponseTypeText.ResponseType.text",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
@@ -5038,133 +5199,105 @@
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/DialogNodeOutputGeneric.swift",
-      "line": 24,
-      "symbol": "DialogNodeOutputGeneric.connectToAgent(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/DialogNodeOutputGeneric.swift",
       "line": 25,
-      "symbol": "DialogNodeOutputGeneric.image(_:)",
+      "symbol": "DialogNodeOutputGeneric.channelTransfer(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/DialogNodeOutputGeneric.swift",
       "line": 26,
-      "symbol": "DialogNodeOutputGeneric.option(_:)",
+      "symbol": "DialogNodeOutputGeneric.connectToAgent(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/DialogNodeOutputGeneric.swift",
       "line": 27,
-      "symbol": "DialogNodeOutputGeneric.pause(_:)",
+      "symbol": "DialogNodeOutputGeneric.image(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/DialogNodeOutputGeneric.swift",
       "line": 28,
-      "symbol": "DialogNodeOutputGeneric.searchSkill(_:)",
+      "symbol": "DialogNodeOutputGeneric.option(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/DialogNodeOutputGeneric.swift",
       "line": 29,
+      "symbol": "DialogNodeOutputGeneric.pause(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/DialogNodeOutputGeneric.swift",
+      "line": 30,
+      "symbol": "DialogNodeOutputGeneric.searchSkill(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/DialogNodeOutputGeneric.swift",
+      "line": 31,
       "symbol": "DialogNodeOutputGeneric.text(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/DialogNodeOutputGenericDialogNodeOutputResponseTypeConnectToAgent.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/DialogNodeOutputGeneric.swift",
       "line": 32,
-      "symbol": "DialogNodeOutputGenericDialogNodeOutputResponseTypeConnectToAgent.ResponseType.connectToAgent",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/DialogNodeOutputGenericDialogNodeOutputResponseTypeImage.swift",
-      "line": 32,
-      "symbol": "DialogNodeOutputGenericDialogNodeOutputResponseTypeImage.ResponseType.image",
+      "symbol": "DialogNodeOutputGeneric.userDefined(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/DialogNodeOutputGenericDialogNodeOutputResponseTypeOption.swift",
-      "line": 32,
-      "symbol": "DialogNodeOutputGenericDialogNodeOutputResponseTypeOption.ResponseType.option",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/DialogNodeOutputGenericDialogNodeOutputResponseTypeOption.swift",
-      "line": 39,
+      "line": 31,
       "symbol": "DialogNodeOutputGenericDialogNodeOutputResponseTypeOption.Preference.dropdown",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/DialogNodeOutputGenericDialogNodeOutputResponseTypeOption.swift",
-      "line": 40,
+      "line": 32,
       "symbol": "DialogNodeOutputGenericDialogNodeOutputResponseTypeOption.Preference.button",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/DialogNodeOutputGenericDialogNodeOutputResponseTypePause.swift",
-      "line": 32,
-      "symbol": "DialogNodeOutputGenericDialogNodeOutputResponseTypePause.ResponseType.pause",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill.swift",
-      "line": 33,
-      "symbol": "DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill.ResponseType.searchSkill",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill.swift",
-      "line": 40,
+      "line": 31,
       "symbol": "DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill.QueryType.naturalLanguage",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill.swift",
-      "line": 41,
+      "line": 32,
       "symbol": "DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill.QueryType.discoveryQueryLanguage",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/DialogNodeOutputGenericDialogNodeOutputResponseTypeText.swift",
-      "line": 32,
-      "symbol": "DialogNodeOutputGenericDialogNodeOutputResponseTypeText.ResponseType.text",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/DialogNodeOutputGenericDialogNodeOutputResponseTypeText.swift",
-      "line": 39,
+      "line": 31,
       "symbol": "DialogNodeOutputGenericDialogNodeOutputResponseTypeText.SelectionPolicy.sequential",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/DialogNodeOutputGenericDialogNodeOutputResponseTypeText.swift",
-      "line": 40,
+      "line": 32,
       "symbol": "DialogNodeOutputGenericDialogNodeOutputResponseTypeText.SelectionPolicy.random",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/DialogNodeOutputGenericDialogNodeOutputResponseTypeText.swift",
-      "line": 41,
+      "line": 33,
       "symbol": "DialogNodeOutputGenericDialogNodeOutputResponseTypeText.SelectionPolicy.multiline",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
@@ -5187,6 +5320,62 @@
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/LogMessage.swift",
       "line": 30,
       "symbol": "LogMessage.Level.warn",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/LogMessageSource.swift",
+      "line": 28,
+      "symbol": "LogMessageSource.TypeEnum.dialogNode",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/ResponseGenericChannel.swift",
+      "line": 28,
+      "symbol": "ResponseGenericChannel.Channel.chat",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/ResponseGenericChannel.swift",
+      "line": 29,
+      "symbol": "ResponseGenericChannel.Channel.facebook",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/ResponseGenericChannel.swift",
+      "line": 30,
+      "symbol": "ResponseGenericChannel.Channel.intercom",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/ResponseGenericChannel.swift",
+      "line": 31,
+      "symbol": "ResponseGenericChannel.Channel.slack",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/ResponseGenericChannel.swift",
+      "line": 32,
+      "symbol": "ResponseGenericChannel.Channel.textMessaging",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/ResponseGenericChannel.swift",
+      "line": 33,
+      "symbol": "ResponseGenericChannel.Channel.voiceTelephony",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/ResponseGenericChannel.swift",
+      "line": 34,
+      "symbol": "ResponseGenericChannel.Channel.whatsapp",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
@@ -5311,99 +5500,71 @@
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/RuntimeResponseGeneric.swift",
-      "line": 24,
-      "symbol": "RuntimeResponseGeneric.connectToAgent(_:)",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/RuntimeResponseGeneric.swift",
       "line": 25,
-      "symbol": "RuntimeResponseGeneric.image(_:)",
+      "symbol": "RuntimeResponseGeneric.channelTransfer(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/RuntimeResponseGeneric.swift",
       "line": 26,
-      "symbol": "RuntimeResponseGeneric.option(_:)",
+      "symbol": "RuntimeResponseGeneric.connectToAgent(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/RuntimeResponseGeneric.swift",
       "line": 27,
-      "symbol": "RuntimeResponseGeneric.suggestion(_:)",
+      "symbol": "RuntimeResponseGeneric.image(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/RuntimeResponseGeneric.swift",
       "line": 28,
-      "symbol": "RuntimeResponseGeneric.pause(_:)",
+      "symbol": "RuntimeResponseGeneric.option(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/RuntimeResponseGeneric.swift",
       "line": 29,
+      "symbol": "RuntimeResponseGeneric.suggestion(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/RuntimeResponseGeneric.swift",
+      "line": 30,
+      "symbol": "RuntimeResponseGeneric.pause(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/RuntimeResponseGeneric.swift",
+      "line": 31,
       "symbol": "RuntimeResponseGeneric.text(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/RuntimeResponseGenericRuntimeResponseTypeConnectToAgent.swift",
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/RuntimeResponseGeneric.swift",
       "line": 32,
-      "symbol": "RuntimeResponseGenericRuntimeResponseTypeConnectToAgent.ResponseType.connectToAgent",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/RuntimeResponseGenericRuntimeResponseTypeImage.swift",
-      "line": 32,
-      "symbol": "RuntimeResponseGenericRuntimeResponseTypeImage.ResponseType.image",
+      "symbol": "RuntimeResponseGeneric.userDefined(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/RuntimeResponseGenericRuntimeResponseTypeOption.swift",
-      "line": 32,
-      "symbol": "RuntimeResponseGenericRuntimeResponseTypeOption.ResponseType.option",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/RuntimeResponseGenericRuntimeResponseTypeOption.swift",
-      "line": 39,
+      "line": 31,
       "symbol": "RuntimeResponseGenericRuntimeResponseTypeOption.Preference.dropdown",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/RuntimeResponseGenericRuntimeResponseTypeOption.swift",
-      "line": 40,
+      "line": 32,
       "symbol": "RuntimeResponseGenericRuntimeResponseTypeOption.Preference.button",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/RuntimeResponseGenericRuntimeResponseTypePause.swift",
-      "line": 32,
-      "symbol": "RuntimeResponseGenericRuntimeResponseTypePause.ResponseType.pause",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/RuntimeResponseGenericRuntimeResponseTypeSuggestion.swift",
-      "line": 32,
-      "symbol": "RuntimeResponseGenericRuntimeResponseTypeSuggestion.ResponseType.suggestion",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/AssistantV1/Models/RuntimeResponseGenericRuntimeResponseTypeText.swift",
-      "line": 32,
-      "symbol": "RuntimeResponseGenericRuntimeResponseTypeText.ResponseType.text",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },

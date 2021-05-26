@@ -170,7 +170,7 @@
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/PersonalityInsightsV3/PersonalityInsights.swift",
-      "line": 74,
+      "line": 76,
       "symbol": "PersonalityInsights.authenticator",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"

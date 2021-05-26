@@ -17,7 +17,7 @@
     <a title="Structures  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">AssistantV2 4.1.0 Docs</a> (80% documented)</p>
+        <p><a href="index.html">AssistantV2 4.1.0 Docs</a> (82% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="search.json">
@@ -47,6 +47,9 @@
           <li class="nav-group-name">
             <a href="Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Enums/LogMessageSource.html">LogMessageSource</a>
+              </li>
               <li class="nav-group-task">
                 <a href="Enums/RuntimeResponseGeneric.html">RuntimeResponseGeneric</a>
               </li>
@@ -80,6 +83,15 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/CaptureGroup.html">CaptureGroup</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ChannelTransferInfo.html">ChannelTransferInfo</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ChannelTransferTarget.html">ChannelTransferTarget</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/ChannelTransferTargetChat.html">ChannelTransferTargetChat</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/DialogLogMessage.html">DialogLogMessage</a>
@@ -116,6 +128,18 @@
               </li>
               <li class="nav-group-task">
                 <a href="Structs/LogCollection.html">LogCollection</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LogMessageSourceAction.html">LogMessageSourceAction</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LogMessageSourceDialogNode.html">LogMessageSourceDialogNode</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LogMessageSourceHandler.html">LogMessageSourceHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs/LogMessageSourceStep.html">LogMessageSourceStep</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/LogPagination.html">LogPagination</a>
@@ -187,6 +211,9 @@
                 <a href="Structs/MessageResponseStateless.html">MessageResponseStateless</a>
               </li>
               <li class="nav-group-task">
+                <a href="Structs/ResponseGenericChannel.html">ResponseGenericChannel</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Structs/RuntimeEntity.html">RuntimeEntity</a>
               </li>
               <li class="nav-group-task">
@@ -208,22 +235,16 @@
                 <a href="Structs/RuntimeIntent.html">RuntimeIntent</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeConnectToAgent.html">RuntimeResponseGenericRuntimeResponseTypeConnectToAgent</a>
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeChannelTransfer.html">RuntimeResponseGenericRuntimeResponseTypeChannelTransfer</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeConnectToAgent/ResponseType.html">– ResponseType</a>
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeConnectToAgent.html">RuntimeResponseGenericRuntimeResponseTypeConnectToAgent</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeImage.html">RuntimeResponseGenericRuntimeResponseTypeImage</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeImage/ResponseType.html">– ResponseType</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeOption.html">RuntimeResponseGenericRuntimeResponseTypeOption</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeOption/ResponseType.html">– ResponseType</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeOption/Preference.html">– Preference</a>
@@ -232,25 +253,16 @@
                 <a href="Structs/RuntimeResponseGenericRuntimeResponseTypePause.html">RuntimeResponseGenericRuntimeResponseTypePause</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypePause/ResponseType.html">– ResponseType</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeSearch.html">RuntimeResponseGenericRuntimeResponseTypeSearch</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeSearch/ResponseType.html">– ResponseType</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeSuggestion.html">RuntimeResponseGenericRuntimeResponseTypeSuggestion</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeSuggestion/ResponseType.html">– ResponseType</a>
-              </li>
-              <li class="nav-group-task">
                 <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeText.html">RuntimeResponseGenericRuntimeResponseTypeText</a>
               </li>
               <li class="nav-group-task">
-                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeText/ResponseType.html">– ResponseType</a>
+                <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeUserDefined.html">RuntimeResponseGenericRuntimeResponseTypeUserDefined</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/SearchResult.html">SearchResult</a>
@@ -447,6 +459,91 @@
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">CaptureGroup</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV219ChannelTransferInfoV"></a>
+                    <a name="//apple_ref/swift/Struct/ChannelTransferInfo" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV219ChannelTransferInfoV">ChannelTransferInfo</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Information used by an integration to transfer the conversation to a different channel.</p>
+
+                        <a href="Structs/ChannelTransferInfo.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ChannelTransferInfo</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV221ChannelTransferTargetV"></a>
+                    <a name="//apple_ref/swift/Struct/ChannelTransferTarget" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV221ChannelTransferTargetV">ChannelTransferTarget</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An object specifying target channels available for the transfer. Each property of this object represents an available
+transfer target. Currently, the only supported property is <strong>chat</strong>, representing the web chat integration.</p>
+
+                        <a href="Structs/ChannelTransferTarget.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ChannelTransferTarget</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV225ChannelTransferTargetChatV"></a>
+                    <a name="//apple_ref/swift/Struct/ChannelTransferTargetChat" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV225ChannelTransferTargetChatV">ChannelTransferTargetChat</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Information for transferring to the web chat integration.</p>
+
+                        <a href="Structs/ChannelTransferTargetChat.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ChannelTransferTargetChat</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -728,6 +825,130 @@ option.</p>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">LogCollection</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV222LogMessageSourceActionV"></a>
+                    <a name="//apple_ref/swift/Struct/LogMessageSourceAction" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV222LogMessageSourceActionV">LogMessageSourceAction</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An object that identifies the dialog element that generated the error message.</p>
+
+<p>Enums with an associated value of LogMessageSourceAction:
+   LogMessageSource</p>
+
+                        <a href="Structs/LogMessageSourceAction.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">LogMessageSourceAction</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV226LogMessageSourceDialogNodeV"></a>
+                    <a name="//apple_ref/swift/Struct/LogMessageSourceDialogNode" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV226LogMessageSourceDialogNodeV">LogMessageSourceDialogNode</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An object that identifies the dialog element that generated the error message.</p>
+
+<p>Enums with an associated value of LogMessageSourceDialogNode:
+   LogMessageSource</p>
+
+                        <a href="Structs/LogMessageSourceDialogNode.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">LogMessageSourceDialogNode</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV223LogMessageSourceHandlerV"></a>
+                    <a name="//apple_ref/swift/Struct/LogMessageSourceHandler" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV223LogMessageSourceHandlerV">LogMessageSourceHandler</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An object that identifies the dialog element that generated the error message.</p>
+
+<p>Enums with an associated value of LogMessageSourceHandler:
+   LogMessageSource</p>
+
+                        <a href="Structs/LogMessageSourceHandler.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">LogMessageSourceHandler</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV220LogMessageSourceStepV"></a>
+                    <a name="//apple_ref/swift/Struct/LogMessageSourceStep" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV220LogMessageSourceStepV">LogMessageSourceStep</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An object that identifies the dialog element that generated the error message.</p>
+
+<p>Enums with an associated value of LogMessageSourceStep:
+   LogMessageSource</p>
+
+                        <a href="Structs/LogMessageSourceStep.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">LogMessageSourceStep</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1271,6 +1492,34 @@ configured for the skill.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:11AssistantV222ResponseGenericChannelV"></a>
+                    <a name="//apple_ref/swift/Struct/ResponseGenericChannel" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV222ResponseGenericChannelV">ResponseGenericChannel</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>ResponseGenericChannel.</p>
+
+                        <a href="Structs/ResponseGenericChannel.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">ResponseGenericChannel</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:11AssistantV213RuntimeEntityV"></a>
                     <a name="//apple_ref/swift/Struct/RuntimeEntity" class="dashAnchor"></a>
                     <a class="token" href="#/s:11AssistantV213RuntimeEntityV">RuntimeEntity</a>
@@ -1412,6 +1661,37 @@ the user input. This property is included only if the new system entities are en
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:11AssistantV2022RuntimeResponseGenericcD19TypeChannelTransferV"></a>
+                    <a name="//apple_ref/swift/Struct/RuntimeResponseGenericRuntimeResponseTypeChannelTransfer" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV2022RuntimeResponseGenericcD19TypeChannelTransferV">RuntimeResponseGenericRuntimeResponseTypeChannelTransfer</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>RuntimeResponseGenericRuntimeResponseTypeChannelTransfer.</p>
+
+<p>Enums with an associated value of RuntimeResponseGenericRuntimeResponseTypeChannelTransfer:
+   RuntimeResponseGeneric</p>
+
+                        <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeChannelTransfer.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RuntimeResponseGenericRuntimeResponseTypeChannelTransfer</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:11AssistantV2022RuntimeResponseGenericcD18TypeConnectToAgentV"></a>
                     <a name="//apple_ref/swift/Struct/RuntimeResponseGenericRuntimeResponseTypeConnectToAgent" class="dashAnchor"></a>
                     <a class="token" href="#/s:11AssistantV2022RuntimeResponseGenericcD18TypeConnectToAgentV">RuntimeResponseGenericRuntimeResponseTypeConnectToAgent</a>
@@ -1422,7 +1702,7 @@ the user input. This property is included only if the new system entities are en
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An object that describes a response with response type <code>connect_to_agent</code>.</p>
+                        <p>RuntimeResponseGenericRuntimeResponseTypeConnectToAgent.</p>
 
 <p>Enums with an associated value of RuntimeResponseGenericRuntimeResponseTypeConnectToAgent:
    RuntimeResponseGeneric</p>
@@ -1453,7 +1733,7 @@ the user input. This property is included only if the new system entities are en
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An object that describes a response with response type <code>image</code>.</p>
+                        <p>RuntimeResponseGenericRuntimeResponseTypeImage.</p>
 
 <p>Enums with an associated value of RuntimeResponseGenericRuntimeResponseTypeImage:
    RuntimeResponseGeneric</p>
@@ -1484,7 +1764,7 @@ the user input. This property is included only if the new system entities are en
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An object that describes a response with response type <code>option</code>.</p>
+                        <p>RuntimeResponseGenericRuntimeResponseTypeOption.</p>
 
 <p>Enums with an associated value of RuntimeResponseGenericRuntimeResponseTypeOption:
    RuntimeResponseGeneric</p>
@@ -1515,7 +1795,7 @@ the user input. This property is included only if the new system entities are en
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An object that describes a response with response type <code>pause</code>.</p>
+                        <p>RuntimeResponseGenericRuntimeResponseTypePause.</p>
 
 <p>Enums with an associated value of RuntimeResponseGenericRuntimeResponseTypePause:
    RuntimeResponseGeneric</p>
@@ -1546,7 +1826,7 @@ the user input. This property is included only if the new system entities are en
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An object that describes a response with response type <code>search</code>.</p>
+                        <p>RuntimeResponseGenericRuntimeResponseTypeSearch.</p>
 
 <p>Enums with an associated value of RuntimeResponseGenericRuntimeResponseTypeSearch:
    RuntimeResponseGeneric</p>
@@ -1577,7 +1857,7 @@ the user input. This property is included only if the new system entities are en
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An object that describes a response with response type <code>suggestion</code>.</p>
+                        <p>RuntimeResponseGenericRuntimeResponseTypeSuggestion.</p>
 
 <p>Enums with an associated value of RuntimeResponseGenericRuntimeResponseTypeSuggestion:
    RuntimeResponseGeneric</p>
@@ -1608,7 +1888,7 @@ the user input. This property is included only if the new system entities are en
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An object that describes a response with response type <code>text</code>.</p>
+                        <p>RuntimeResponseGenericRuntimeResponseTypeText.</p>
 
 <p>Enums with an associated value of RuntimeResponseGenericRuntimeResponseTypeText:
    RuntimeResponseGeneric</p>
@@ -1620,6 +1900,37 @@ the user input. This property is included only if the new system entities are en
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RuntimeResponseGenericRuntimeResponseTypeText</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV2022RuntimeResponseGenericcD15TypeUserDefinedV"></a>
+                    <a name="//apple_ref/swift/Struct/RuntimeResponseGenericRuntimeResponseTypeUserDefined" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV2022RuntimeResponseGenericcD15TypeUserDefinedV">RuntimeResponseGenericRuntimeResponseTypeUserDefined</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>RuntimeResponseGenericRuntimeResponseTypeUserDefined.</p>
+
+<p>Enums with an associated value of RuntimeResponseGenericRuntimeResponseTypeUserDefined:
+   RuntimeResponseGeneric</p>
+
+                        <a href="Structs/RuntimeResponseGenericRuntimeResponseTypeUserDefined.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">RuntimeResponseGenericRuntimeResponseTypeUserDefined</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
 
                         </div>
                       </div>
@@ -1744,7 +2055,7 @@ the user input. This property is included only if the new system entities are en
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

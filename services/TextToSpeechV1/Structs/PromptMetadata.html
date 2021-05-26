@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PromptMetadata Structure Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Struct/PromptMetadata" class="dashAnchor"></a>
+    <a title="PromptMetadata Structure Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">TextToSpeechV1 4.1.0 Docs</a> (68% documented)</p>
+        <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
+        <p class="header-right">
+          <form role="search" action="../search.json">
+            <input type="text" placeholder="Search documentation" data-typeahead>
+          </form>
+        </p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">TextToSpeechV1 Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        PromptMetadata Structure Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/TextToSpeech.html">TextToSpeech</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs/CustomModel.html">CustomModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/CustomModels.html">CustomModels</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Prompt.html">Prompt</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PromptMetadata.html">PromptMetadata</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Prompts.html">Prompts</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Pronunciation.html">Pronunciation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Speaker.html">Speaker</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeakerCustomModel.html">SpeakerCustomModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeakerCustomModels.html">SpeakerCustomModels</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeakerModel.html">SpeakerModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeakerPrompt.html">SpeakerPrompt</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Speakers.html">Speakers</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SupportedFeatures.html">SupportedFeatures</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Translation.html">Translation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Translation/PartOfSpeech.html">– PartOfSpeech</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Voice.html">Voice</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Voices.html">Voices</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Word.html">Word</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Word/PartOfSpeech.html">– PartOfSpeech</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Words.html">Words</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Type Aliases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14TextToSpeechV119WatsonAuthenticatora">WatsonAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14TextToSpeechV124WatsonBasicAuthenticatora">WatsonBasicAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14TextToSpeechV130WatsonBearerTokenAuthenticatora">WatsonBearerTokenAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14TextToSpeechV134WatsonCloudPakForDataAuthenticatora">WatsonCloudPakForDataAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14TextToSpeechV122WatsonIAMAuthenticatora">WatsonIAMAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14TextToSpeechV110WatsonJSONa">WatsonJSON</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14TextToSpeechV125WatsonNoAuthAuthenticatora">WatsonNoAuthAuthenticator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:14TextToSpeechV130WatsonTokenSourceAuthenticatora">WatsonTokenSourceAuthenticator</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>PromptMetadata</h1>
+              <div class="declaration">
+                <div class="language">
+                  
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">PromptMetadata</span> <span class="p">:</span> <span class="kt">Codable</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
+
+                </div>
+              </div>
+            <p>Information about the prompt that is to be added to a custom model. The following example of a <code>PromptMetadata</code> object
+includes both the required prompt text and an optional speaker model ID:
+<code>{ &quot;prompt_text&quot;: &quot;Thank you and good-bye!&quot;, &quot;speaker_id&quot;: &quot;823068b2-ed4e-11ea-b6e0-7b6456aa95cc&quot; }</code>.</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14TextToSpeechV114PromptMetadataV06promptA0SSvp"></a>
+                    <a name="//apple_ref/swift/Property/promptText" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV114PromptMetadataV06promptA0SSvp">promptText</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The required written text of the spoken prompt. The length of a prompt&rsquo;s text is limited to a few sentences.
+Speaking one or two sentences of text is the recommended limit. A prompt cannot contain more than 1000 characters
+of text. Escape any XML control characters (double quotes, single quotes, ampersands, angle brackets, and slashes)
+that appear in the text of the prompt.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">promptText</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14TextToSpeechV114PromptMetadataV9speakerIDSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/speakerID" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV114PromptMetadataV9speakerIDSSSgvp">speakerID</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The optional speaker ID (GUID) of a previously defined speaker model that is to be associated with the prompt.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">speakerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14TextToSpeechV114PromptMetadataV06promptA09speakerIDACSS_SSSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(promptText:speakerID:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV114PromptMetadataV06promptA09speakerIDACSS_SSSgtcfc">init(promptText:<wbr>speakerID:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Initialize a <code>PromptMetadata</code> with member variables.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
+    <span class="nv">promptText</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">speakerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+<span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>promptText</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The required written text of the spoken prompt. The length of a prompt&rsquo;s text is limited
+to a few sentences. Speaking one or two sentences of text is the recommended limit. A prompt cannot contain more
+than 1000 characters of text. Escape any XML control characters (double quotes, single quotes, ampersands, angle
+brackets, and slashes) that appear in the text of the prompt.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>speakerID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The optional speaker ID (GUID) of a previously defined speaker model that is to be
+associated with the prompt.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>An initialized <code>PromptMetadata</code>.</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>Copyright 2020 IBM</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

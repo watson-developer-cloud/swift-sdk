@@ -317,7 +317,7 @@
     },
     {
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/SpeechToText.swift",
-      "line": 64,
+      "line": 68,
       "symbol": "SpeechToText.authenticator",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
@@ -340,6 +340,13 @@
       "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/WebSockets/RecognitionSettings.swift",
       "line": 125,
       "symbol": "RecognitionSettings.audioMetrics",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SpeechToTextV1/WebSockets/RecognitionSettings.swift",
+      "line": 181,
+      "symbol": "RecognitionSettings.lowLatency",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },

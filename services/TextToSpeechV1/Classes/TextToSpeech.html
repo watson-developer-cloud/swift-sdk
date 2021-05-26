@@ -17,7 +17,7 @@
     <a title="TextToSpeech Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">TextToSpeechV1 4.1.0 Docs</a> (57% documented)</p>
+        <p><a href="../index.html">TextToSpeechV1 4.1.0 Docs</a> (68% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../search.json">
@@ -54,7 +54,34 @@
                 <a href="../Structs/CustomModels.html">CustomModels</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/Prompt.html">Prompt</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/PromptMetadata.html">PromptMetadata</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Prompts.html">Prompts</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/Pronunciation.html">Pronunciation</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Speaker.html">Speaker</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeakerCustomModel.html">SpeakerCustomModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeakerCustomModels.html">SpeakerCustomModels</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeakerModel.html">SpeakerModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SpeakerPrompt.html">SpeakerPrompt</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/Speakers.html">Speakers</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/SupportedFeatures.html">SupportedFeatures</a>
@@ -141,7 +168,10 @@ The service offers a customization interface that you can use to define sounds-l
 A sounds-like translation consists of one or more words that, when combined, sound like the word. A phonetic
 translation is based on the SSML phoneme format for representing a word. You can specify a phonetic translation in
 standard International Phonetic Alphabet (IPA) representation or in the proprietary IBM Symbolic Phonetic
-Representation (SPR). The Arabic, Chinese, Dutch, Australian English, and Korean languages support only IPA.</p>
+Representation (SPR). The Arabic, Chinese, Dutch, Australian English, and Korean languages support only IPA.
+The service also offers a Tune by Example feature that lets you define custom prompts. You can also define speaker
+models to improve the quality of your custom prompts. The service support custom prompts only for US English custom
+models and voices.</p>
 
           </section>
           <section class="section task-group-section">
@@ -1012,9 +1042,9 @@ create a custom model. Use the <code>ar-MS</code> identifier instead.</p>
                         <p>List custom models.</p>
 
 <p>Lists metadata such as the name and description for all custom models that are owned by an instance of the service.
-Specify a language to list the custom models for that language only. To see the words in addition to the metadata
-for a specific custom model, use the <strong>List a custom model</strong> method. You must use credentials for the instance of
-the service that owns a model to list information about it.
+Specify a language to list the custom models for that language only. To see the words and prompts in addition to
+the metadata for a specific custom model, use the <strong>Get a custom model</strong> method. You must use credentials for the
+instance of the service that owns a model to list information about it.
 <strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customModels#cuModelsQueryAll">Querying all custom
 models</a>.</p>
 
@@ -1228,8 +1258,9 @@ or updated for the custom model. Pass an empty array to make no additions or upd
                         <p>Get a custom model.</p>
 
 <p>Gets all information about a specified custom model. In addition to metadata such as the name and description of
-the custom model, the output includes the words and their translations as defined in the model. To see just the
-metadata for a model, use the <strong>List custom models</strong> method.
+the custom model, the output includes the words and their translations that are defined for the model, as well as
+any prompts that are defined for the model. To see just the metadata for a model, use the <strong>List custom models</strong>
+method.
 <strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-customModels#cuModelsQuery">Querying a custom
 model</a>.</p>
 
@@ -1891,6 +1922,858 @@ credentials for the instance of the service that owns the custom model.</p>
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:14TextToSpeechV10abC0C17listCustomPrompts15customizationID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0G0VGSg_AJ0O5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/listCustomPrompts(customizationID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C17listCustomPrompts15customizationID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0G0VGSg_AJ0O5ErrorOSgtctF">listCustomPrompts(customizationID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List custom prompts.</p>
+
+<p>Lists information about all custom prompts that are defined for a custom model. The information includes the prompt
+ID, prompt text, status, and optional speaker ID for each prompt of the custom model. You must use credentials for
+the instance of the service that owns the custom model. The same information about all of the prompts for a custom
+model is also provided by the <strong>Get a custom model</strong> method. That method provides complete details about a
+specified custom model, including its language, owner, custom words, and more.
+<strong>Beta:</strong> Custom prompts are beta functionality that is supported only for use with US English custom models and
+voices.
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-tbe-custom-prompts#tbe-custom-prompts-list">Listing custom
+prompts</a>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listCustomPrompts</span><span class="p">(</span>
+    <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Prompts.html">Prompts</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>customizationID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The customization ID (GUID) of the custom model. You must make the request with
+credentials for the instance of the service that owns the custom model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14TextToSpeechV10abC0C15addCustomPrompt15customizationID06promptI08metadata4file8filename7headers17completionHandlerySS_SSAA0G8MetadataV10Foundation4DataVSSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0G0VGSg_AS0V5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/addCustomPrompt(customizationID:promptID:metadata:file:filename:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C15addCustomPrompt15customizationID06promptI08metadata4file8filename7headers17completionHandlerySS_SSAA0G8MetadataV10Foundation4DataVSSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0G0VGSg_AS0V5ErrorOSgtctF">addCustomPrompt(customizationID:<wbr>promptID:<wbr>metadata:<wbr>file:<wbr>filename:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Add a custom prompt.</p>
+
+<p>Adds a custom prompt to a custom model. A prompt is defined by the text that is to be spoken, the audio for that
+text, a unique user-specified ID for the prompt, and an optional speaker ID. The information is used to generate
+prosodic data that is not visible to the user. This data is used by the service to produce the synthesized audio
+upon request. You must use credentials for the instance of the service that owns a custom model to add a prompt to
+it. You can add a maximum of 1000 custom prompts to a single custom model.
+You are recommended to assign meaningful values for prompt IDs. For example, use <code>goodbye</code> to identify a prompt
+that speaks a farewell message. Prompt IDs must be unique within a given custom model. You cannot define two
+prompts with the same name for the same custom model. If you provide the ID of an existing prompt, the previously
+uploaded prompt is replaced by the new information. The existing prompt is reprocessed by using the new text and
+audio and, if provided, new speaker model, and the prosody data associated with the prompt is updated.
+The quality of a prompt is undefined if the language of a prompt does not match the language of its custom model.
+This is consistent with any text or SSML that is specified for a speech synthesis request. The service makes a
+best-effort attempt to render the specified text for the prompt; it does not validate that the language of the text
+matches the language of the model.
+Adding a prompt is an asynchronous operation. Although it accepts less audio than speaker enrollment, the service
+must align the audio with the provided text. The time that it takes to process a prompt depends on the prompt
+itself. The processing time for a reasonably sized prompt generally matches the length of the audio (for example,
+it takes 20 seconds to process a 20-second prompt).
+For shorter prompts, you can wait for a reasonable amount of time and then check the status of the prompt with the
+<strong>Get a custom prompt</strong> method. For longer prompts, consider using that method to poll the service every few
+seconds to determine when the prompt becomes available. No prompt can be used for speech synthesis if it is in the
+<code>processing</code> or <code>failed</code> state. Only prompts that are in the <code>available</code> state can be used for speech synthesis.
+When it processes a request, the service attempts to align the text and the audio that are provided for the prompt.
+The text that is passed with a prompt must match the spoken audio as closely as possible. Optimally, the text and
+audio match exactly. The service does its best to align the specified text with the audio, and it can often
+compensate for mismatches between the two. But if the service cannot effectively align the text and the audio,
+possibly because the magnitude of mismatches between the two is too great, processing of the prompt fails.</p>
+<h3 id='evaluating-a-prompt' class='heading'>Evaluating a prompt</h3>
+
+<p>Always listen to and evaluate a prompt to determine its quality before using it in production. To evaluate a
+prompt, include only the single prompt in a speech synthesis request by using the following SSML extension, in this
+case for a prompt whose ID is <code>goodbye</code>:
+<code>&lt;ibm:prompt id=&quot;goodbye&quot;/&gt;</code>
+In some cases, you might need to rerecord and resubmit a prompt as many as five times to address the following
+possible problems:</p>
+
+<ul>
+<li>The service might fail to detect a mismatch between the prompt’s text and audio. The longer the prompt, the
+greater the chance for misalignment between its text and audio. Therefore, multiple shorter prompts are preferable
+to a single long prompt.</li>
+<li>The text of a prompt might include a word that the service does not recognize. In this case, you can create a
+custom word and pronunciation pair to tell the service how to pronounce the word. You must then re-create the
+prompt.</li>
+<li>The quality of the input audio might be insufficient or the service’s processing of the audio might fail to
+detect the intended prosody. Submitting new audio for the prompt can correct these issues.
+If a prompt that is created without a speaker ID does not adequately reflect the intended prosody, enrolling the
+speaker and providing a speaker ID for the prompt is one recommended means of potentially improving the quality of
+the prompt. This is especially important for shorter prompts such as &ldquo;good-bye&rdquo; or &ldquo;thank you,&rdquo; where less audio
+data makes it more difficult to match the prosody of the speaker.
+<strong>Beta:</strong> Custom prompts are beta functionality that is supported only for use with US English custom models and
+voices.
+<strong>See also:</strong></li>
+<li><a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-tbe-create#tbe-create-add-prompt">Add a custom
+prompt</a></li>
+<li><a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-tbe-create#tbe-create-evaluate-prompt">Evaluate a custom
+prompt</a></li>
+<li><p><a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-tbe-rules#tbe-rules-prompts">Rules for creating custom
+prompts</a>.</p></li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">addCustomPrompt</span><span class="p">(</span>
+    <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">promptID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">metadata</span><span class="p">:</span> <span class="kt"><a href="../Structs/PromptMetadata.html">PromptMetadata</a></span><span class="p">,</span>
+    <span class="nv">file</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
+    <span class="nv">filename</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Prompt.html">Prompt</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>customizationID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The customization ID (GUID) of the custom model. You must make the request with
+credentials for the instance of the service that owns the custom model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>promptID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The identifier of the prompt that is to be added to the custom model:</p>
+
+<ul>
+<li>Include a maximum of 49 characters in the ID.</li>
+<li>Include only alphanumeric characters and <code>_</code> (underscores) in the ID.</li>
+<li>Do not include XML sensitive characters (double quotes, single quotes, ampersands, angle brackets, and slashes)
+in the ID.</li>
+<li>To add a new prompt, the ID must be unique for the specified custom model. Otherwise, the new information for
+the prompt overwrites the existing prompt that has that ID.</li>
+</ul>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>metadata</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Information about the prompt that is to be added to a custom model. The following example
+of a <code><a href="../Structs/PromptMetadata.html">PromptMetadata</a></code> object includes both the required prompt text and an optional speaker model ID:
+<code>{ &quot;prompt_text&quot;: &quot;Thank you and good-bye!&quot;, &quot;speaker_id&quot;: &quot;823068b2-ed4e-11ea-b6e0-7b6456aa95cc&quot; }</code>.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>file</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An audio file that speaks the text of the prompt with intonation and prosody that matches how
+you would like the prompt to be spoken.</p>
+
+<ul>
+<li>The prompt audio must be in WAV format and must have a minimum sampling rate of 16 kHz. The service accepts
+audio with higher sampling rates. The service transcodes all audio to 16 kHz before processing it.</li>
+<li>The length of the prompt audio is limited to 30 seconds.</li>
+</ul>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>filename</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The filename for file.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14TextToSpeechV10abC0C15getCustomPrompt15customizationID06promptI07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0G0VGSg_AK0P5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/getCustomPrompt(customizationID:promptID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C15getCustomPrompt15customizationID06promptI07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0G0VGSg_AK0P5ErrorOSgtctF">getCustomPrompt(customizationID:<wbr>promptID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get a custom prompt.</p>
+
+<p>Gets information about a specified custom prompt for a specified custom model. The information includes the prompt
+ID, prompt text, status, and optional speaker ID for each prompt of the custom model. You must use credentials for
+the instance of the service that owns the custom model.
+<strong>Beta:</strong> Custom prompts are beta functionality that is supported only for use with US English custom models and
+voices.
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-tbe-custom-prompts#tbe-custom-prompts-list">Listing custom
+prompts</a>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getCustomPrompt</span><span class="p">(</span>
+    <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">promptID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Prompt.html">Prompt</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>customizationID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The customization ID (GUID) of the custom model. You must make the request with
+credentials for the instance of the service that owns the custom model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>promptID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The identifier (name) of the prompt.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14TextToSpeechV10abC0C18deleteCustomPrompt15customizationID06promptI07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AK0P5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/deleteCustomPrompt(customizationID:promptID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C18deleteCustomPrompt15customizationID06promptI07headers17completionHandlerySS_SSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AK0P5ErrorOSgtctF">deleteCustomPrompt(customizationID:<wbr>promptID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete a custom prompt.</p>
+
+<p>Deletes an existing custom prompt from a custom model. The service deletes the prompt with the specified ID. You
+must use credentials for the instance of the service that owns the custom model from which the prompt is to be
+deleted.
+<strong>Caution:</strong> Deleting a custom prompt elicits a 400 response code from synthesis requests that attempt to use the
+prompt. Make sure that you do not attempt to use a deleted prompt in a production application.
+<strong>Beta:</strong> Custom prompts are beta functionality that is supported only for use with US English custom models and
+voices.
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-tbe-custom-prompts#tbe-custom-prompts-delete">Deleting a custom
+prompt</a>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteCustomPrompt</span><span class="p">(</span>
+    <span class="nv">customizationID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">promptID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>customizationID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The customization ID (GUID) of the custom model. You must make the request with
+credentials for the instance of the service that owns the custom model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>promptID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The identifier (name) of the prompt that is to be deleted.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14TextToSpeechV10abC0C17listSpeakerModels7headers17completionHandlerySDyS2SGSg_y15IBMSwiftSDKCore12RestResponseVyAA8SpeakersVGSg_AI0M5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/listSpeakerModels(headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C17listSpeakerModels7headers17completionHandlerySDyS2SGSg_y15IBMSwiftSDKCore12RestResponseVyAA8SpeakersVGSg_AI0M5ErrorOSgtctF">listSpeakerModels(headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>List speaker models.</p>
+
+<p>Lists information about all speaker models that are defined for a service instance. The information includes the
+speaker ID and speaker name of each defined speaker. You must use credentials for the instance of a service to list
+its speakers.
+<strong>Beta:</strong> Speaker models and the custom prompts with which they are used are beta functionality that is supported
+only for use with US English custom models and voices.
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-tbe-speaker-models#tbe-speaker-models-list">Listing speaker
+models</a>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listSpeakerModels</span><span class="p">(</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Speakers.html">Speakers</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14TextToSpeechV10abC0C18createSpeakerModel11speakerName5audio7headers17completionHandlerySS_10Foundation4DataVSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AN0R5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/createSpeakerModel(speakerName:audio:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C18createSpeakerModel11speakerName5audio7headers17completionHandlerySS_10Foundation4DataVSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0fG0VGSg_AN0R5ErrorOSgtctF">createSpeakerModel(speakerName:<wbr>audio:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a speaker model.</p>
+
+<p>Creates a new speaker model, which is an optional enrollment token for users who are to add prompts to custom
+models. A speaker model contains information about a user&rsquo;s voice. The service extracts this information from a WAV
+audio sample that you pass as the body of the request. Associating a speaker model with a prompt is optional, but
+the information that is extracted from the speaker model helps the service learn about the speaker&rsquo;s voice.
+A speaker model can make an appreciable difference in the quality of prompts, especially short prompts with
+relatively little audio, that are associated with that speaker. A speaker model can help the service produce a
+prompt with more confidence; the lack of a speaker model can potentially compromise the quality of a prompt.
+The gender of the speaker who creates a speaker model does not need to match the gender of a voice that is used
+with prompts that are associated with that speaker model. For example, a speaker model that is created by a male
+speaker can be associated with prompts that are spoken by female voices.
+You create a speaker model for a given instance of the service. The new speaker model is owned by the service
+instance whose credentials are used to create it. That same speaker can then be used to create prompts for all
+custom models within that service instance. No language is associated with a speaker model, but each custom model
+has a single specified language. You can add prompts only to US English models.
+You specify a name for the speaker when you create it. The name must be unique among all speaker names for the
+owning service instance. To re-create a speaker model for an existing speaker name, you must first delete the
+existing speaker model that has that name.
+Speaker enrollment is a synchronous operation. Although it accepts more audio data than a prompt, the process of
+adding a speaker is very fast. The service simply extracts information about the speaker’s voice from the audio.
+Unlike prompts, speaker models neither need nor accept a transcription of the audio. When the call returns, the
+audio is fully processed and the speaker enrollment is complete.
+The service returns a speaker ID with the request. A speaker ID is globally unique identifier (GUID) that you use
+to identify the speaker in subsequent requests to the service.
+<strong>Beta:</strong> Speaker models and the custom prompts with which they are used are beta functionality that is supported
+only for use with US English custom models and voices.
+<strong>See also:</strong></p>
+
+<ul>
+<li><a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-tbe-create#tbe-create-speaker-model">Create a speaker
+model</a></li>
+<li><p><a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-tbe-rules#tbe-rules-speakers">Rules for creating speaker
+models</a>.</p></li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createSpeakerModel</span><span class="p">(</span>
+    <span class="nv">speakerName</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">audio</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SpeakerModel.html">SpeakerModel</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>speakerName</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The name of the speaker that is to be added to the service instance.</p>
+
+<ul>
+<li>Include a maximum of 49 characters in the name.</li>
+<li>Include only alphanumeric characters and <code>_</code> (underscores) in the name.</li>
+<li>Do not include XML sensitive characters (double quotes, single quotes, ampersands, angle brackets, and slashes)
+in the name.</li>
+<li>Do not use the name of an existing speaker that is already defined for the service instance.</li>
+</ul>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>audio</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An enrollment audio file that contains a sample of the speaker’s voice.</p>
+
+<ul>
+<li>The enrollment audio must be in WAV format and must have a minimum sampling rate of 16 kHz. The service accepts
+audio with higher sampling rates. It transcodes all audio to 16 kHz before processing it.</li>
+<li>The length of the enrollment audio is limited to 1 minute. Speaking one or two paragraphs of text that include
+five to ten sentences is recommended.</li>
+</ul>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14TextToSpeechV10abC0C15getSpeakerModel9speakerID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0F12CustomModelsVGSg_AJ0O5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/getSpeakerModel(speakerID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C15getSpeakerModel9speakerID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0F12CustomModelsVGSg_AJ0O5ErrorOSgtctF">getSpeakerModel(speakerID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get a speaker model.</p>
+
+<p>Gets information about all prompts that are defined by a specified speaker for all custom models that are owned by
+a service instance. The information is grouped by the customization IDs of the custom models. For each custom
+model, the information lists information about each prompt that is defined for that custom model by the speaker.
+You must use credentials for the instance of the service that owns a speaker model to list its prompts.
+<strong>Beta:</strong> Speaker models and the custom prompts with which they are used are beta functionality that is supported
+only for use with US English custom models and voices.
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-tbe-speaker-models#tbe-speaker-models-list-prompts">Listing the custom prompts for a speaker
+model</a>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getSpeakerModel</span><span class="p">(</span>
+    <span class="nv">speakerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/SpeakerCustomModels.html">SpeakerCustomModels</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>speakerID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The speaker ID (GUID) of the speaker model. You must make the request with service
+credentials for the instance of the service that owns the speaker model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:14TextToSpeechV10abC0C18deleteSpeakerModel9speakerID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AJ0O5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/deleteSpeakerModel(speakerID:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C18deleteSpeakerModel9speakerID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AJ0O5ErrorOSgtctF">deleteSpeakerModel(speakerID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Delete a speaker model.</p>
+
+<p>Deletes an existing speaker model from the service instance. The service deletes the enrolled speaker with the
+specified speaker ID. You must use credentials for the instance of the service that owns a speaker model to delete
+the speaker.
+Any prompts that are associated with the deleted speaker are not affected by the speaker&rsquo;s deletion. The prosodic
+data that defines the quality of a prompt is established when the prompt is created. A prompt is static and remains
+unaffected by deletion of its associated speaker. However, the prompt cannot be resubmitted or updated with its
+original speaker once that speaker is deleted.
+<strong>Beta:</strong> Speaker models and the custom prompts with which they are used are beta functionality that is supported
+only for use with US English custom models and voices.
+<strong>See also:</strong> <a href="https://cloud.ibm.com/docs/text-to-speech?topic=text-to-speech-tbe-speaker-models#tbe-speaker-models-delete">Deleting a speaker
+model</a>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteSpeakerModel</span><span class="p">(</span>
+    <span class="nv">speakerID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt">Void</span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>speakerID</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The speaker ID (GUID) of the speaker model. You must make the request with service
+credentials for the instance of the service that owns the speaker model.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>headers</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A dictionary of request headers to be sent with this request.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A function executed when the request completes with a successful result or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:14TextToSpeechV10abC0C14deleteUserData10customerID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AJ0O5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/deleteUserData(customerID:headers:completionHandler:)" class="dashAnchor"></a>
                     <a class="token" href="#/s:14TextToSpeechV10abC0C14deleteUserData10customerID7headers17completionHandlerySS_SDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyytGSg_AJ0O5ErrorOSgtctF">deleteUserData(customerID:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
@@ -1978,7 +2861,7 @@ security</a>.</p>
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.6</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

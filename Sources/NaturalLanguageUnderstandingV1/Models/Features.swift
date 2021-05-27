@@ -23,12 +23,6 @@ import IBMSwiftSDKCore
 public struct Features: Codable, Equatable {
 
     /**
-     Returns a five-level taxonomy of the content. The top three categories are returned.
-     Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
-     */
-    public var categories: CategoriesOptions?
-
-    /**
      Returns text classifications for the content.
      Supported languages: English only.
      */
@@ -99,13 +93,18 @@ public struct Features: Codable, Equatable {
     public var summarization: SummarizationOptions?
 
     /**
+     Returns a five-level taxonomy of the content. The top three categories are returned.
+     Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
+     */
+    public var categories: CategoriesOptions?
+
+    /**
      Returns tokens and sentences from the input text.
      */
     public var syntax: SyntaxOptions?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case categories = "categories"
         case classifications = "classifications"
         case concepts = "concepts"
         case emotion = "emotion"
@@ -116,14 +115,13 @@ public struct Features: Codable, Equatable {
         case semanticRoles = "semantic_roles"
         case sentiment = "sentiment"
         case summarization = "summarization"
+        case categories = "categories"
         case syntax = "syntax"
     }
 
     /**
       Initialize a `Features` with member variables.
 
-      - parameter categories: Returns a five-level taxonomy of the content. The top three categories are returned.
-        Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
       - parameter classifications: Returns text classifications for the content.
         Supported languages: English only.
       - parameter concepts: Returns high-level concepts in the content. For example, a research paper about deep
@@ -156,12 +154,13 @@ public struct Features: Codable, Equatable {
          Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish.
       - parameter summarization: (Experimental) Returns a summary of content.
         Supported languages: English only.
+      - parameter categories: Returns a five-level taxonomy of the content. The top three categories are returned.
+        Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
       - parameter syntax: Returns tokens and sentences from the input text.
 
       - returns: An initialized `Features`.
      */
     public init(
-        categories: CategoriesOptions? = nil,
         classifications: ClassificationsOptions? = nil,
         concepts: ConceptsOptions? = nil,
         emotion: EmotionOptions? = nil,
@@ -172,10 +171,10 @@ public struct Features: Codable, Equatable {
         semanticRoles: SemanticRolesOptions? = nil,
         sentiment: SentimentOptions? = nil,
         summarization: SummarizationOptions? = nil,
+        categories: CategoriesOptions? = nil,
         syntax: SyntaxOptions? = nil
     )
     {
-        self.categories = categories
         self.classifications = classifications
         self.concepts = concepts
         self.emotion = emotion
@@ -186,6 +185,7 @@ public struct Features: Codable, Equatable {
         self.semanticRoles = semanticRoles
         self.sentiment = sentiment
         self.summarization = summarization
+        self.categories = categories
         self.syntax = syntax
     }
 

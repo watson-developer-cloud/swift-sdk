@@ -1880,6 +1880,7 @@ public class Discovery {
         projectID: String,
         enrichment: CreateEnrichment,
         file: Data? = nil,
+        fileContentType: String,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Enrichment>?, WatsonError?) -> Void)
     {

@@ -143,18 +143,18 @@ If your project does not yet have a Podfile, use the `pod init` command in the r
 use_frameworks!
 
 target 'MyApp' do
-    pod 'IBMWatsonAssistantV1', '~> 4.1.0'
-    pod 'IBMWatsonAssistantV2', '~> 4.1.0'
-    pod 'IBMWatsonCompareComplyV1', '~> 4.1.0'
-    pod 'IBMWatsonDiscoveryV1', '~> 4.1.0'
-    pod 'IBMWatsonLanguageTranslatorV3', '~> 4.1.0'
-    pod 'IBMWatsonNaturalLanguageClassifierV1', '~> 4.1.0'
-    pod 'IBMWatsonNaturalLanguageUnderstandingV1', '~> 4.1.0'
-    pod 'IBMWatsonPersonalityInsightsV3', '~> 4.1.0'
-    pod 'IBMWatsonSpeechToTextV1', '~> 4.1.0'
-    pod 'IBMWatsonTextToSpeechV1', '~> 4.1.0'
-    pod 'IBMWatsonToneAnalyzerV3', '~> 4.1.0'
-    pod 'IBMWatsonVisualRecognitionV3', '~> 4.1.0'
+    pod 'IBMWatsonAssistantV1', '~> 4.2.0'
+    pod 'IBMWatsonAssistantV2', '~> 4.2.0'
+    pod 'IBMWatsonCompareComplyV1', '~> 4.2.0'
+    pod 'IBMWatsonDiscoveryV1', '~> 4.2.0'
+    pod 'IBMWatsonLanguageTranslatorV3', '~> 4.2.0'
+    pod 'IBMWatsonNaturalLanguageClassifierV1', '~> 4.2.0'
+    pod 'IBMWatsonNaturalLanguageUnderstandingV1', '~> 4.2.0'
+    pod 'IBMWatsonPersonalityInsightsV3', '~> 4.2.0'
+    pod 'IBMWatsonSpeechToTextV1', '~> 4.2.0'
+    pod 'IBMWatsonTextToSpeechV1', '~> 4.2.0'
+    pod 'IBMWatsonToneAnalyzerV3', '~> 4.2.0'
+    pod 'IBMWatsonVisualRecognitionV3', '~> 4.2.0'
 end
 ```
 
@@ -181,7 +181,7 @@ $ brew install carthage
 If your project does not have a Cartfile yet, use the `touch Cartfile` command in the root directory of your project. To install the IBM Watson Swift SDK using Carthage, add the following to your Cartfile.
 
 ```
-github "watson-developer-cloud/swift-sdk" ~> 4.1.0
+github "watson-developer-cloud/swift-sdk" ~> 4.2.0
 ```
 
 Follow the remaining Carthage installation instructions for the XCode 12 workaround [here](https://github.com/Carthage/Carthage/blob/master/Documentation/Xcode12Workaround.md#how-to-make-it-work). Then run the following command to build the dependencies and frameworks: 

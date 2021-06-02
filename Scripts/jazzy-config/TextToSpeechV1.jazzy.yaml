@@ -4,7 +4,7 @@ github_url: https://github.com/watson-developer-cloud/swift-sdk
 clean: true
 output: ../../gh-pages/services/TextToSpeechV1
 module: TextToSpeechV1
-module_version: "4.2.0"
+module_version: "4.2.1"
 documentation: ../../Sources/TextToSpeechV1/README.md
 readme: ../../Sources/TextToSpeechV1/README.md
 build_tool_arguments:

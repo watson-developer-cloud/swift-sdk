@@ -678,8 +678,7 @@ class TextToSpeechTests: XCTestCase {
         let promptMetadata = PromptMetadata(promptText: "Hello, how are you today?")
         let file = Bundle(for: type(of: self)).url(forResource: "custom_prompt_audio", withExtension: "wav")!
         let fileData = try! Data(contentsOf: file)
-        let filename = "custom_prompt_audio.wav"
-        textToSpeech.addCustomPrompt(customizationID: customizationID, promptID: promptID, metadata: promptMetadata, file: fileData, filename: filename) {
+        textToSpeech.addCustomPrompt(customizationID: customizationID, promptID: promptID, metadata: promptMetadata, file: fileData) {
             response, error in
             if let error = error {
                 if !error.localizedDescription.contains(self.litePlanMessage) {

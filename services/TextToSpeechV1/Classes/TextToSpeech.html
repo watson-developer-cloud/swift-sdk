@@ -17,7 +17,7 @@
     <a title="TextToSpeech Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">TextToSpeechV1 4.2.0 Docs</a> (68% documented)</p>
+        <p><a href="../index.html">TextToSpeechV1 4.2.1 Docs</a> (68% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../search.json">
@@ -2006,9 +2006,9 @@ credentials for the instance of the service that owns the custom model.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:14TextToSpeechV10abC0C15addCustomPrompt15customizationID06promptI08metadata4file8filename7headers17completionHandlerySS_SSAA0G8MetadataV10Foundation4DataVSSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0G0VGSg_AS0V5ErrorOSgtctF"></a>
-                    <a name="//apple_ref/swift/Method/addCustomPrompt(customizationID:promptID:metadata:file:filename:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:14TextToSpeechV10abC0C15addCustomPrompt15customizationID06promptI08metadata4file8filename7headers17completionHandlerySS_SSAA0G8MetadataV10Foundation4DataVSSSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0G0VGSg_AS0V5ErrorOSgtctF">addCustomPrompt(customizationID:<wbr>promptID:<wbr>metadata:<wbr>file:<wbr>filename:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    <a name="/s:14TextToSpeechV10abC0C15addCustomPrompt15customizationID06promptI08metadata4file7headers17completionHandlerySS_SSAA0G8MetadataV10Foundation4DataVSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0G0VGSg_AR0U5ErrorOSgtctF"></a>
+                    <a name="//apple_ref/swift/Method/addCustomPrompt(customizationID:promptID:metadata:file:headers:completionHandler:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:14TextToSpeechV10abC0C15addCustomPrompt15customizationID06promptI08metadata4file7headers17completionHandlerySS_SSAA0G8MetadataV10Foundation4DataVSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0G0VGSg_AR0U5ErrorOSgtctF">addCustomPrompt(customizationID:<wbr>promptID:<wbr>metadata:<wbr>file:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2088,7 +2088,6 @@ prompts</a>.</p></li>
     <span class="nv">promptID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">metadata</span><span class="p">:</span> <span class="kt"><a href="../Structs/PromptMetadata.html">PromptMetadata</a></span><span class="p">,</span>
     <span class="nv">file</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span>
-    <span class="nv">filename</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Prompt.html">Prompt</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:14TextToSpeechV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -2162,18 +2161,6 @@ you would like the prompt to be spoken.</p>
 audio with higher sampling rates. The service transcodes all audio to 16 kHz before processing it.</li>
 <li>The length of the prompt audio is limited to 30 seconds.</li>
 </ul>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>filename</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The filename for file.</p>
                                 </div>
                               </td>
                             </tr>

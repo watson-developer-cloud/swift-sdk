@@ -1342,7 +1342,6 @@ public class TextToSpeech {
        * The prompt audio must be in WAV format and must have a minimum sampling rate of 16 kHz. The service accepts
        audio with higher sampling rates. The service transcodes all audio to 16 kHz before processing it.
        * The length of the prompt audio is limited to 30 seconds.
-     - parameter filename: The filename for file.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -1351,7 +1350,6 @@ public class TextToSpeech {
         promptID: String,
         metadata: PromptMetadata,
         file: Data,
-        filename: String,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Prompt>?, WatsonError?) -> Void)
     {
@@ -1363,7 +1361,7 @@ public class TextToSpeech {
         }
         multipartFormData.append(metadataJSON, withName: "metadata", mimeType: "application/json")
 
-        multipartFormData.append(file, withName: "file", mimeType: "audio/wav", fileName: filename)
+        multipartFormData.append(file, withName: "file", mimeType: "audio/wav", fileName: "filename")
         guard let body = try? multipartFormData.toData() else {
             completionHandler(nil, RestError.serialization(values: "request multipart form data"))
             return

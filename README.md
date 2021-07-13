@@ -72,8 +72,8 @@ IBM Watson™ Compare and Comply is discontinued. Existing instances are support
 
 ## Requirements
 
-- Xcode 9.3+
-- Swift 4.2+
+- Xcode 10.2+
+- Swift 5.0+
 - iOS 10.0+
 
 ## Installation

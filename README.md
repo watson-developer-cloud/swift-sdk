@@ -17,32 +17,13 @@ There are many resources to help you build your first cognitive application with
 - Review a [Featured Project](#featured-projects)
 - Browse the [Documentation](https://watson-developer-cloud.github.io/swift-sdk/)
 
-## Contents
-
-### General
-
-* [Before you begin](#before-you-begin)
-* [Requirements](#requirements)
-* [Installation](#installation)
-* [Authentication](#authentication)
-* [Custom Service URLs](#custom-service-urls)
-* [Obtaining Transaction IDs](#obtaining-transaction-ids)
-* [Custom Headers](#custom-headers)
-* [Featured Projects](#featured-projects)
-* [Synchronous Execution](#synchronous-execution)
-* [Handling PNG and CgBI Files in XCode](#How-to-bypass-CgBI-Encoding-for-Resource-Files)
-* [Objective-C Compatibility](#objective-c-compatibility)
-* [Linux Compatibility](#linux-compatibility)
-* [Contributing](#contributing)
-* [License](#license)
-
 ### Services
 
 This SDK provides classes and methods to access the following Watson services.
 
 * [Assistant](https://www.ibm.com/cloud/watson-assistant/)
 * [Compare & Comply](https://www.ibm.com/cloud/compare-and-comply) *deprecated in favor of Discovery
-* [Discovery](https://www.ibm.com/cloud/watson-discovery)
+* [Discovery]: https://www.ibm.com/cloud/watson-discovery
 * [Language Translator V3](https://www.ibm.com/watson/services/language-translator)
 * [Natural Language Classifier](https://www.ibm.com/watson/services/natural-language-classifier)
 * [Natural Language Understanding](https://www.ibm.com/cloud/watson-natural-language-understanding)

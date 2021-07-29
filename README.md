@@ -386,8 +386,6 @@ If you have issues with the APIs or have a question about the Watson services, s
 We love to highlight cool open-source projects that use this SDK! If you'd like to get your project added to the list, feel free to make an issue linking us to it.
 
 * [Simple Chat (Swift)](https://github.com/watson-developer-cloud/simple-chat-swift)
-* [Visual Recognition with Core ML](https://github.com/watson-developer-cloud/visual-recognition-coreml)
-* [Visual Recognition and Discovery with Core ML](https://github.com/watson-developer-cloud/visual-recognition-with-discovery-coreml)
 * [Speech to Text](https://github.com/watson-developer-cloud/speech-to-text-swift)
 * [Text to Speech](https://github.com/watson-developer-cloud/text-to-speech-swift)
 

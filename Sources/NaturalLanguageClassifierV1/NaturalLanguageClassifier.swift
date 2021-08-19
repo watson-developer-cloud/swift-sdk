@@ -29,7 +29,11 @@ import IBMSwiftSDKCore
 public typealias WatsonError = RestError
 public typealias WatsonResponse = RestResponse
 /**
- IBM Watson&trade; Natural Language Classifier uses machine learning algorithms to return the top matching predefined
+ IBM Watson&trade; Natural Language Classifier is discontinued. On 9 August 2021, IBM announced the deprecation of the Natural Language Classifier service.
+ The service will no longer be available from 8 August 2022. As of 9 September 2021, you will not be able to create new instances. 
+ Existing instances will be supported until 8 August 2022. Any instance that still exists on that date will be deleted.
+ {: deprecated}
+ Natural Language Classifier uses machine learning algorithms to return the top matching predefined
  classes for short text input. You create and train a classifier to connect predefined classes to example texts so that
  the service can apply those classes to new inputs.
  */
@@ -68,6 +72,7 @@ public class NaturalLanguageClassifier {
      - serviceName: String = defaultServiceName
      */
     public init(authenticator: Authenticator? = nil, serviceName: String = defaultServiceName) throws {
+        #warning("On 9 August 2021, IBM announced the deprecation of the Natural Language Classifier service.The service will no longer be available from 8 August 2022. As of 9 September 2021, you will not be able to create new instances. Existing instances will be supported until 8 August 2022. Any instance that still exists on that date will be deleted. For more information, see https://github.com/watson-developer-cloud/swift-sdk#natural-language-classifier-deprecation")
         self.authenticator = try authenticator ?? ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceName)
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceName) {
             self.serviceURL = serviceURL

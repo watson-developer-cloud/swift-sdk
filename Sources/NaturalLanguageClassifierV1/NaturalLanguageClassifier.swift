@@ -72,7 +72,7 @@ public class NaturalLanguageClassifier {
      - serviceName: String = defaultServiceName
      */
     public init(authenticator: Authenticator? = nil, serviceName: String = defaultServiceName) throws {
-        #warning("On 9 August 2021, IBM announced the deprecation of the Natural Language Classifier service.The service will no longer be available from 8 August 2022. As of 9 September 2021, you will not be able to create new instances. Existing instances will be supported until 8 August 2022. Any instance that still exists on that date will be deleted. For more information, see https://github.com/watson-developer-cloud/swift-sdk#natural-language-classifier-deprecation")
+        #warning("On 9 August 2021, IBM announced the deprecation of the Natural Language Classifier service. The service will no longer be available from 8 August 2022. As of 9 September 2021, you will not be able to create new instances. Existing instances will be supported until 8 August 2022. Any instance that still exists on that date will be deleted. For more information, see https://github.com/watson-developer-cloud/swift-sdk#natural-language-classifier-deprecation")
         self.authenticator = try authenticator ?? ConfigBasedAuthenticatorFactory.getAuthenticator(credentialPrefix: serviceName)
         if let serviceURL = CredentialUtils.getServiceURL(credentialPrefix: serviceName) {
             self.serviceURL = serviceURL
@@ -86,7 +86,7 @@ public class NaturalLanguageClassifier {
      - parameter authenticator: The Authenticator object used to authenticate requests to the service
      */
     public init(authenticator: Authenticator) {
-        #warning("On 9 August 2021, IBM announced the deprecation of the Natural Language Classifier service.The service will no longer be available from 8 August 2022. As of 9 September 2021, you will not be able to create new instances. Existing instances will be supported until 8 August 2022. Any instance that still exists on that date will be deleted. For more information, see https://github.com/watson-developer-cloud/swift-sdk#natural-language-classifier-deprecation")
+        #warning("On 9 August 2021, IBM announced the deprecation of the Natural Language Classifier service. The service will no longer be available from 8 August 2022. As of 9 September 2021, you will not be able to create new instances. Existing instances will be supported until 8 August 2022. Any instance that still exists on that date will be deleted. For more information, see https://github.com/watson-developer-cloud/swift-sdk#natural-language-classifier-deprecation")
         self.authenticator = authenticator
         RestRequest.userAgent = Shared.userAgent
     }

@@ -22,14 +22,21 @@ import Foundation
 public struct MessageInput: Codable, Equatable {
 
     /**
-     The type of user input. Currently, only text input is supported.
+     The type of the message:
+     - `text`: The user input is processed normally by the assistant.
+     - `search`: Only search results are returned. (Any dialog or actions skill is bypassed.)
+     **Note:** A `search` message results in an error if no search skill is configured for the assistant.
      */
     public enum MessageType: String {
         case text = "text"
+        case search = "search"
     }
 
     /**
-     The type of user input. Currently, only text input is supported.
+     The type of the message:
+     - `text`: The user input is processed normally by the assistant.
+     - `search`: Only search results are returned. (Any dialog or actions skill is bypassed.)
+     **Note:** A `search` message results in an error if no search skill is configured for the assistant.
      */
     public var messageType: String?
 
@@ -73,7 +80,10 @@ public struct MessageInput: Codable, Equatable {
     /**
       Initialize a `MessageInput` with member variables.
 
-      - parameter messageType: The type of user input. Currently, only text input is supported.
+      - parameter messageType: The type of the message:
+        - `text`: The user input is processed normally by the assistant.
+        - `search`: Only search results are returned. (Any dialog or actions skill is bypassed.)
+        **Note:** A `search` message results in an error if no search skill is configured for the assistant.
       - parameter text: The text of the user input. This string cannot contain carriage return, newline, or tab
         characters.
       - parameter intents: Intents to use when evaluating the user input. Include intents from the previous response

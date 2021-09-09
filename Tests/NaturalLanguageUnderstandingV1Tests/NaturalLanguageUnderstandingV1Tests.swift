@@ -566,14 +566,14 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         let description = "Test a custom model."
         let expectation = self.expectation(description: description)
         let features = Features(
-            categories: CategoriesOptions(),
             concepts: ConceptsOptions(limit: 5),
             emotion: EmotionOptions(document: true, targets: ["happy"]),
             entities: EntitiesOptions(limit: 5, mentions: true, model: "en-news", sentiment: true, emotion: true),
             keywords: KeywordsOptions(limit: 5, sentiment: true, emotion: true),
             relations: RelationsOptions(model: "en-news"),
             semanticRoles: SemanticRolesOptions(limit: 5, keywords: true, entities: true),
-            sentiment: SentimentOptions(document: true, targets: ["happy"])
+            sentiment: SentimentOptions(document: true, targets: ["happy"]),
+            categories: CategoriesOptions()
         )
         naturalLanguageUnderstanding.analyze(features: features, text: text, returnAnalyzedText: true) {
             response, error in

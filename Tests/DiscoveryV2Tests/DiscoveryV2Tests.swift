@@ -37,7 +37,8 @@ class DiscoveryTests: XCTestCase {
     }
 
     func instantiateDiscovery() {
-        let authenticator = WatsonIAMAuthenticator(apiKey: WatsonCredentials.DiscoveryV2APIKey)
+        let authenticator = WatsonIAMAuthenticator(apiKey: WatsonCredentials.DiscoveryV2APIKey,
+                                                   url: "https://iam.test.cloud.ibm.com/identity/token")
 
         discovery = Discovery(version: "2020-08-12", authenticator: authenticator)
 

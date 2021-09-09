@@ -58,8 +58,8 @@ public struct Voice: Codable, Equatable {
     public var supportedFeatures: SupportedFeatures
 
     /**
-     Returns information about a specified custom model. This field is returned only by the **Get a voice** method and
-     only when you specify the customization ID of a custom model.
+     Returns information about a specified custom model. This field is returned only by the [Get a voice](#getvoice)
+     method and only when you specify the customization ID of a custom model.
      */
     public var customization: CustomModel?
 

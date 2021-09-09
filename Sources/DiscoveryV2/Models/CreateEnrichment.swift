@@ -48,7 +48,8 @@ public struct CreateEnrichment: Codable, Equatable {
     public var type: String?
 
     /**
-     A object containing options for the current enrichment.
+     An object that contains options for the current enrichment. Starting with version `2020-08-30`, the enrichment
+     options are not included in responses from the List Enrichments method.
      */
     public var options: EnrichmentOptions?
 
@@ -66,7 +67,8 @@ public struct CreateEnrichment: Codable, Equatable {
       - parameter name: The human readable name for this enrichment.
       - parameter description: The description of this enrichment.
       - parameter type: The type of this enrichment.
-      - parameter options: A object containing options for the current enrichment.
+      - parameter options: An object that contains options for the current enrichment. Starting with version
+        `2020-08-30`, the enrichment options are not included in responses from the List Enrichments method.
 
       - returns: An initialized `CreateEnrichment`.
      */

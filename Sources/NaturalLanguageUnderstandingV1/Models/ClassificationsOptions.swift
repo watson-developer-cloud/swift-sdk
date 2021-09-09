@@ -23,7 +23,7 @@ import Foundation
 public struct ClassificationsOptions: Codable, Equatable {
 
     /**
-     (Beta) Enter a [custom
+     Enter a [custom
      model](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-customizing)
      ID of the classification model to be used.
      */
@@ -37,7 +37,7 @@ public struct ClassificationsOptions: Codable, Equatable {
     /**
       Initialize a `ClassificationsOptions` with member variables.
 
-      - parameter model: (Beta) Enter a [custom
+      - parameter model: Enter a [custom
         model](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-customizing)
         ID of the classification model to be used.
 

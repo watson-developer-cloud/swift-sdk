@@ -56,7 +56,8 @@ public struct Enrichment: Codable, Equatable {
     public var type: String?
 
     /**
-     A object containing options for the current enrichment.
+     An object that contains options for the current enrichment. Starting with version `2020-08-30`, the enrichment
+     options are not included in responses from the List Enrichments method.
      */
     public var options: EnrichmentOptions?
 

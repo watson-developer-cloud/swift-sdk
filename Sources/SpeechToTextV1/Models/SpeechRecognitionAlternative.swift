@@ -27,8 +27,8 @@ public struct SpeechRecognitionAlternative: Codable, Equatable {
     public var transcript: String
 
     /**
-     A score that indicates the service's confidence in the transcript in the range of 0.0 to 1.0. A confidence score is
-     returned only for the best alternative and only with results marked as final.
+     A score that indicates the service's confidence in the transcript in the range of 0.0 to 1.0. The service returns a
+     confidence score only for the best alternative and only with results marked as final.
      */
     public var confidence: Double?
 

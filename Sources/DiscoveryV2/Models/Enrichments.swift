@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- An object containing an array of enrichment definitions.
+ An object that contains an array of enrichment definitions.
  */
 public struct Enrichments: Codable, Equatable {
 

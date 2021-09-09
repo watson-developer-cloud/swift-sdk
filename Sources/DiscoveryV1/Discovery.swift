@@ -15,7 +15,7 @@
  **/
 
 /**
- * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-902c9336-20210507-162723
+ * IBM OpenAPI SDK Code Generator Version: 3.38.0-07189efd-20210827-205025
  **/
 
 // swiftlint:disable file_length
@@ -2948,7 +2948,7 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter collectionID: The ID of the collection.
      - parameter `prefix`: The prefix to use for autocompletion. For example, the prefix `Ho` could autocomplete to
-       `Hot`, `Housing`, or `How do I upgrade`. Possible completions are.
+       `hot`, `housing`, or `how`.
      - parameter field: The field in the result documents that autocompletion suggestions are identified from.
      - parameter count: The number of autocompletion suggestions to return.
      - parameter headers: A dictionary of request headers to be sent with this request.

@@ -17,8 +17,8 @@
 import Foundation
 
 /**
- A restriction that alter the document set used for sub aggregations it precedes to nested documents found in the field
- specified.
+ A restriction that alters the document set that is used for sub-aggregations it precedes to nested documents found in
+ the field specified.
 
  Enums with an associated value of QueryNestedAggregation:
     QueryAggregation
@@ -32,7 +32,7 @@ public struct QueryNestedAggregation: Codable, Equatable {
     public var type: String
 
     /**
-     The path to the document field to scope sub aggregations to.
+     The path to the document field to scope sub-aggregations to.
      */
     public var path: String
 
@@ -42,7 +42,7 @@ public struct QueryNestedAggregation: Codable, Equatable {
     public var matchingResults: Int
 
     /**
-     An array of sub aggregations.
+     An array of sub-aggregations.
      */
     public var aggregations: [QueryAggregation]?
 

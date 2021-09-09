@@ -32,7 +32,7 @@ public struct QueryResultPassage: Codable, Equatable {
     public var startOffset: Int?
 
     /**
-     The position of the last character of the extracted passage in the originating field.
+     The position after the last character of the extracted passage in the originating field.
      */
     public var endOffset: Int?
 

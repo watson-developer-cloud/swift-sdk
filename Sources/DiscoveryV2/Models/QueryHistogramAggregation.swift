@@ -37,7 +37,7 @@ public struct QueryHistogramAggregation: Codable, Equatable {
     public var field: String
 
     /**
-     The size of the sections the results are split into.
+     The size of the sections that the results are split into.
      */
     public var interval: Int
 

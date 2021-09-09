@@ -32,7 +32,7 @@ public struct QueryHistogramAggregationResult: Codable, Equatable {
     public var matchingResults: Int
 
     /**
-     An array of sub aggregations.
+     An array of sub-aggregations.
      */
     public var aggregations: [QueryAggregation]?
 

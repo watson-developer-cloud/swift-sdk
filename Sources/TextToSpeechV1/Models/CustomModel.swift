@@ -22,8 +22,8 @@ import Foundation
 public struct CustomModel: Codable, Equatable {
 
     /**
-     The customization ID (GUID) of the custom model. The **Create a custom model** method returns only this field. It
-     does not not return the other fields of this object.
+     The customization ID (GUID) of the custom model. The [Create a custom model](#createcustommodel) method returns
+     only this field. It does not not return the other fields of this object.
      */
     public var customizationID: String
 
@@ -63,14 +63,14 @@ public struct CustomModel: Codable, Equatable {
     /**
      An array of `Word` objects that lists the words and their translations from the custom model. The words are listed
      in alphabetical order, with uppercase letters listed before lowercase letters. The array is empty if no words are
-     defined for the custom model. This field is returned only by the **Get a custom model** method.
+     defined for the custom model. This field is returned only by the [Get a custom model](#getcustommodel) method.
      */
     public var words: [Word]?
 
     /**
      An array of `Prompt` objects that provides information about the prompts that are defined for the specified custom
-     model. The array is empty if no prompts are defined for the custom model. This field is returned only by the **Get
-     a custom model** method.
+     model. The array is empty if no prompts are defined for the custom model. This field is returned only by the [Get a
+     custom model](#getcustommodel) method.
      */
     public var prompts: [Prompt]?
 

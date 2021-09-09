@@ -42,8 +42,8 @@ public struct LanguageModel: Codable, Equatable {
     }
 
     /**
-     The customization ID (GUID) of the custom language model. The **Create a custom language model** method returns
-     only this field of the object; it does not return the other fields.
+     The customization ID (GUID) of the custom language model. The [Create a custom language
+     model](#createlanguagemodel) method returns only this field of the object; it does not return the other fields.
      */
     public var customizationID: String
 
@@ -77,9 +77,12 @@ public struct LanguageModel: Codable, Equatable {
     public var dialect: String?
 
     /**
-     A list of the available versions of the custom language model. Each element of the array indicates a version of the
-     base model with which the custom model can be used. Multiple versions exist only if the custom model has been
-     upgraded; otherwise, only a single version is shown.
+     _For custom models that are based on previous-generation models_, a list of the available versions of the custom
+     language model. Each element of the array indicates a version of the base model with which the custom model can be
+     used. Multiple versions exist only if the custom model has been upgraded; otherwise, only a single version is
+     shown.
+     _For custom models that are based on next-generation models_, a single version of the custom model. Only one
+     version of a custom model that is based on a next-generation model is ever available, and upgrading does not apply.
      */
     public var versions: [String]?
 

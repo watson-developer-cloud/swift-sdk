@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- Configuration for suggested refinements.
+ Configuration for suggested refinements. Available with Premium plans only.
  */
 public struct QueryLargeSuggestedRefinements: Codable, Equatable {
 

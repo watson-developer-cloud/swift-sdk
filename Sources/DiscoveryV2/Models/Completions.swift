@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- An object containing an array of autocompletion suggestions.
+ An object that contains an array of autocompletion suggestions.
  */
 public struct Completions: Codable, Equatable {
 

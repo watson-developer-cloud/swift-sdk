@@ -24,8 +24,8 @@ public struct RetrievalDetails: Codable, Equatable {
     /**
      Identifies the document retrieval strategy used for this query. `relevancy_training` indicates that the results
      were returned using a relevancy trained model.
-      **Note**: In the event of trained collections being queried, but the trained model is not used to return results,
-     the **document_retrieval_strategy** will be listed as `untrained`.
+     **Note**: In the event of trained collections being queried, but the trained model is not used to return results,
+     the **document_retrieval_strategy** is listed as `untrained`.
      */
     public enum DocumentRetrievalStrategy: String {
         case untrained = "untrained"
@@ -35,8 +35,8 @@ public struct RetrievalDetails: Codable, Equatable {
     /**
      Identifies the document retrieval strategy used for this query. `relevancy_training` indicates that the results
      were returned using a relevancy trained model.
-      **Note**: In the event of trained collections being queried, but the trained model is not used to return results,
-     the **document_retrieval_strategy** will be listed as `untrained`.
+     **Note**: In the event of trained collections being queried, but the trained model is not used to return results,
+     the **document_retrieval_strategy** is listed as `untrained`.
      */
     public var documentRetrievalStrategy: String?
 

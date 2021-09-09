@@ -38,7 +38,7 @@ public struct QueryResult: Codable, Equatable {
     public var resultMetadata: QueryResultMetadata
 
     /**
-     Passages returned by Discovery.
+     Passages from the document that best matches the query.
      */
     public var documentPassages: [QueryResultPassage]?
 

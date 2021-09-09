@@ -18,7 +18,7 @@ import Foundation
 import IBMSwiftSDKCore
 
 /**
- A query response containing the matching documents for the preceding aggregations.
+ A query response that contains the matching documents for the preceding aggregations.
  */
 public struct QueryTopHitsAggregationResult: Codable, Equatable {
 

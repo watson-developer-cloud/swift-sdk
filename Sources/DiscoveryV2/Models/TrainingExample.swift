@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- Object containing example response details for a training query.
+ Object that contains example response details for a training query.
  */
 public struct TrainingExample: Codable, Equatable {
 

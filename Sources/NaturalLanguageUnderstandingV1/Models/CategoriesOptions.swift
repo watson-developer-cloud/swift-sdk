@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- Returns a five-level taxonomy of the content. The top three categories are returned.
+ Returns a hierarchical taxonomy of the content. The top three categories are returned by default.
  Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
  */
 public struct CategoriesOptions: Codable, Equatable {

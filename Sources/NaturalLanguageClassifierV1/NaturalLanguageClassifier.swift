@@ -15,7 +15,7 @@
  **/
 
 /**
- * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-902c9336-20210507-162723
+ * IBM OpenAPI SDK Code Generator Version: 3.38.0-07189efd-20210827-205025
  **/
 
 // swiftlint:disable file_length
@@ -29,9 +29,15 @@ import IBMSwiftSDKCore
 public typealias WatsonError = RestError
 public typealias WatsonResponse = RestResponse
 /**
- IBM Watson&trade; Natural Language Classifier uses machine learning algorithms to return the top matching predefined
- classes for short text input. You create and train a classifier to connect predefined classes to example texts so that
- the service can apply those classes to new inputs.
+ On 9 August 2021, IBM announced the deprecation of IBM Watson&trade; Natural Language Classifier. As of 9 September
+ 2021, you cannot create new instances. However, existing instances are supported until 8 August 2022. The service will
+ no longer be available on 8 August 2022.<br/><br/>As an alternative, consider migrating to IBM Watson Natural Language
+ Understanding. For more information, see [Migrating to Natural Language
+ Understanding](https://cloud.ibm.com/docs/natural-language-classifier?topic=natural-language-classifier-migrating).
+ {: deprecated}
+ Natural Language Classifier uses machine learning algorithms to return the top matching predefined classes for short
+ text input. You create and train a classifier to connect predefined classes to example texts so that the service can
+ apply those classes to new inputs.
  */
 public class NaturalLanguageClassifier {
 

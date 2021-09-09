@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- Object containing a potential answer to the specified query.
+ Object that contains a potential answer to the specified query.
  */
 public struct ResultPassageAnswer: Codable, Equatable {
 
@@ -32,7 +32,7 @@ public struct ResultPassageAnswer: Codable, Equatable {
     public var startOffset: Int?
 
     /**
-     The position of the last character of the extracted answer in the originating field.
+     The position after the last character of the extracted answer in the originating field.
      */
     public var endOffset: Int?
 

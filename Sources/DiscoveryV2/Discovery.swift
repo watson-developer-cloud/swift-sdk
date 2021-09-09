@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019, 2021.
+ * (C) Copyright IBM Corp. 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  **/
 
 /**
- * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-902c9336-20210507-162723
+ * IBM OpenAPI SDK Code Generator Version: 3.38.0-07189efd-20210827-205025
  **/
 
 // swiftlint:disable file_length
@@ -40,7 +40,7 @@ public class Discovery {
     public var serviceURL: String? = "https://api.us-south.discovery.watson.cloud.ibm.com"
 
     /// Release date of the version of the API you want to use. Specify dates in YYYY-MM-DD format. The current version
-    /// is `2019-11-22`.
+    /// is `2020-08-30`.
     public var version: String
 
     /// Service identifiers
@@ -70,7 +70,7 @@ public class Discovery {
      In that case, try another initializer that directly passes in the credentials.
 
      - parameter version: Release date of the version of the API you want to use. Specify dates in YYYY-MM-DD format.
-       The current version is `2019-11-22`.
+       The current version is `2020-08-30`.
      - parameter authenticator: The Authenticator object used to authenticate requests to the service
      - serviceName: String = defaultServiceName
      */
@@ -87,7 +87,7 @@ public class Discovery {
      Create a `Discovery` object.
 
      - parameter version: Release date of the version of the API you want to use. Specify dates in YYYY-MM-DD format.
-       The current version is `2019-11-22`.
+       The current version is `2020-08-30`.
      - parameter authenticator: The Authenticator object used to authenticate requests to the service
      */
     public init(version: String, authenticator: Authenticator) {
@@ -147,8 +147,8 @@ public class Discovery {
 
      Lists existing collections for the specified project.
 
-     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
-       administrative tooling.
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -202,8 +202,8 @@ public class Discovery {
 
      Create a new collection in the specified project.
 
-     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
-       administrative tooling.
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
      - parameter name: The name of the collection.
      - parameter description: A description of the collection.
      - parameter language: The language of the collection.
@@ -288,8 +288,8 @@ public class Discovery {
 
      Get details about the specified collection.
 
-     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
-       administrative tooling.
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
      - parameter collectionID: The ID of the collection.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -345,8 +345,8 @@ public class Discovery {
 
      Updates the specified collection's name, description, and enrichments.
 
-     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
-       administrative tooling.
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
      - parameter collectionID: The ID of the collection.
      - parameter name: The name of the collection.
      - parameter description: A description of the collection.
@@ -430,8 +430,8 @@ public class Discovery {
      Deletes the specified collection from the project. All documents stored in the specified collection and not shared
      is also deleted.
 
-     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
-       administrative tooling.
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
      - parameter collectionID: The ID of the collection.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -491,8 +491,8 @@ public class Discovery {
      the standard default settings, and see [the Projects API documentation](#create-project) for details about how to
      set custom default query settings.
 
-     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
-       administrative tooling.
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
      - parameter collectionIDs: A comma-separated list of collection IDs to be queried against.
      - parameter filter: A cacheable query that excludes documents that don't mention the query content. Filter
        searches are better for metadata-type searches and for assessing the concepts in the data set.
@@ -505,20 +505,20 @@ public class Discovery {
        filters. Useful for applications to build lists, tables, and time series. For a full list of possible
        aggregations, see the Query reference.
      - parameter count: Number of results to return.
-     - parameter `return`: A list of the fields in the document hierarchy to return. If this parameter not specified,
-       then all top-level fields are returned.
+     - parameter `return`: A list of the fields in the document hierarchy to return. If this parameter is an empty
+       list, then all fields are returned.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
        results that are returned is 10 and the offset is 8, it returns the last two results.
      - parameter sort: A comma-separated list of fields in the document to sort on. You can optionally specify a sort
        direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort
-       direction if no prefix is specified. This parameter cannot be used in the same query as the **bias** parameter.
+       direction if no prefix is specified.
      - parameter highlight: When `true`, a highlight field is returned for each result which contains the fields which
        match the query with `<em></em>` tags around the matching query terms.
      - parameter spellingSuggestions: When `true` and the **natural_language_query** parameter is used, the
        **natural_language_query** parameter is spell checked. The most likely correction is returned in the
        **suggested_query** field of the response (if one exists).
      - parameter tableResults: Configuration for table retrieval.
-     - parameter suggestedRefinements: Configuration for suggested refinements.
+     - parameter suggestedRefinements: Configuration for suggested refinements. Available with Premium plans only.
      - parameter passages: Configuration for passage retrieval.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -668,10 +668,10 @@ public class Discovery {
 
      Returns completion query suggestions for the specified prefix.
 
-     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
-       administrative tooling.
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
      - parameter `prefix`: The prefix to use for autocompletion. For example, the prefix `Ho` could autocomplete to
-       `Hot`, `Housing`, or `How do I upgrade`. Possible completions are.
+       `hot`, `housing`, or `how`.
      - parameter collectionIDs: Comma separated list of the collection IDs. If this parameter is not specified, all
        collections in the project are used.
      - parameter field: The field in the result documents that autocompletion suggestions are identified from.
@@ -746,8 +746,8 @@ public class Discovery {
 
      Finds collection-level notices (errors and warnings) that are generated when documents are ingested.
 
-     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
-       administrative tooling.
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
      - parameter collectionID: The ID of the collection.
      - parameter filter: A cacheable query that excludes documents that don't mention the query content. Filter
        searches are better for metadata-type searches and for assessing the concepts in the data set.
@@ -840,8 +840,8 @@ public class Discovery {
      Finds project-level notices (errors and warnings). Currently, project-level notices are generated by relevancy
      training.
 
-     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
-       administrative tooling.
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
      - parameter filter: A cacheable query that excludes documents that don't mention the query content. Filter
        searches are better for metadata-type searches and for assessing the concepts in the data set.
      - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
@@ -931,8 +931,8 @@ public class Discovery {
 
      Gets a list of the unique fields (and their types) stored in the the specified collections.
 
-     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
-       administrative tooling.
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
      - parameter collectionIDs: Comma separated list of the collection IDs. If this parameter is not specified, all
        collections in the project are used.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -993,8 +993,8 @@ public class Discovery {
 
      Returns default configuration settings for components.
 
-     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
-       administrative tooling.
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -1047,29 +1047,29 @@ public class Discovery {
      Add a document.
 
      Add a document to a collection with optional metadata.
-      Returns immediately after the system has accepted the document for processing.
+     Returns immediately after the system has accepted the document for processing.
        * The user must provide document content, metadata, or both. If the request is missing both document content and
      metadata, it is rejected.
-       * The user can set the **Content-Type** parameter on the **file** part to indicate the media type of the
-     document. If the **Content-Type** parameter is missing or is one of the generic media types (for example,
+       * You can set the **Content-Type** parameter on the **file** part to indicate the media type of the document. If
+     the **Content-Type** parameter is missing or is one of the generic media types (for example,
      `application/octet-stream`), then the service attempts to automatically detect the document's media type.
-       * The following field names are reserved and will be filtered out if present after normalization: `id`, `score`,
+       * The following field names are reserved and are filtered out if present after normalization: `id`, `score`,
      `highlight`, and any field with the prefix of: `_`, `+`, or `-`
        * Fields with empty name values after normalization are filtered out before indexing.
-       * Fields containing the following characters after normalization are filtered out before indexing: `#` and `,`
-       If the document is uploaded to a collection that has it's data shared with another collection, the
+       * Fields that contain the following characters after normalization are filtered out before indexing: `#` and `,`
+       If the document is uploaded to a collection that shares its data with another collection, the
      **X-Watson-Discovery-Force** header must be set to `true`.
-      **Note:** Documents can be added with a specific **document_id** by using the
-     **_/v2/projects/{project_id}/collections/{collection_id}/documents** method.
-     **Note:** This operation only works on collections created to accept direct file uploads. It cannot be used to
-     modify a collection that connects to an external source such as Microsoft SharePoint.
+     **Note:** You can assign an ID to a document that you add by appending the ID to the endpoint
+     (`/v2/projects/{project_id}/collections/{collection_id}/documents/{document_id}`). If a document already exists
+     with the specified ID, it is replaced.
+     **Note:** This operation works with a file upload collection. It cannot be used to modify a collection that crawls
+     an external data source.
 
-     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
-       administrative tooling.
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
      - parameter collectionID: The ID of the collection.
-     - parameter file: The content of the document to ingest. The maximum supported file size when adding a file to a
-       collection is 50 megabytes, the maximum supported file size when testing a configuration is 1 megabyte. Files
-       larger than the supported size are rejected.
+     - parameter file: The content of the document to ingest. For maximum supported file size limits, see [the
+       documentation](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-collections#collections-doc-limits).
      - parameter filename: The filename for file.
      - parameter fileContentType: The content type of file.
      - parameter metadata: The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are
@@ -1159,22 +1159,21 @@ public class Discovery {
 
      Replace an existing document or add a document with a specified **document_id**. Starts ingesting a document with
      optional metadata.
-     If the document is uploaded to a collection that has it's data shared with another collection, the
+     If the document is uploaded to a collection that shares its data with another collection, the
      **X-Watson-Discovery-Force** header must be set to `true`.
      **Note:** When uploading a new document with this method it automatically replaces any document stored with the
      same **document_id** if it exists.
      **Note:** This operation only works on collections created to accept direct file uploads. It cannot be used to
      modify a collection that connects to an external source such as Microsoft SharePoint.
-     **Note:** If an uploaded document is segmented, all segments will be overwritten, even if the updated version of
-     the document has fewer segments.
+     **Note:** If an uploaded document is segmented, all segments are overwritten, even if the updated version of the
+     document has fewer segments.
 
-     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
-       administrative tooling.
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
      - parameter collectionID: The ID of the collection.
      - parameter documentID: The ID of the document.
-     - parameter file: The content of the document to ingest. The maximum supported file size when adding a file to a
-       collection is 50 megabytes, the maximum supported file size when testing a configuration is 1 megabyte. Files
-       larger than the supported size are rejected.
+     - parameter file: The content of the document to ingest. For maximum supported file size limits, see [the
+       documentation](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-collections#collections-doc-limits).
      - parameter filename: The filename for file.
      - parameter fileContentType: The content type of file.
      - parameter metadata: The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are
@@ -1270,8 +1269,8 @@ public class Discovery {
      **Note:** Segments of an uploaded document cannot be deleted individually. Delete all segments by deleting using
      the `parent_document_id` of a segment result.
 
-     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
-       administrative tooling.
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
      - parameter collectionID: The ID of the collection.
      - parameter documentID: The ID of the document.
      - parameter xWatsonDiscoveryForce: When `true`, the uploaded document is added to the collection even if the data
@@ -1335,8 +1334,8 @@ public class Discovery {
 
      List the training queries for the specified project.
 
-     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
-       administrative tooling.
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -1390,8 +1389,8 @@ public class Discovery {
 
      Removes all training queries for the specified project.
 
-     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
-       administrative tooling.
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -1444,8 +1443,8 @@ public class Discovery {
 
      Add a query to the training data for this project. The query can contain a filter and natural language query.
 
-     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
-       administrative tooling.
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
      - parameter naturalLanguageQuery: The natural text query for the training query.
      - parameter examples: Array of training examples.
      - parameter filter: The filter used on the collection before the **natural_language_query** is applied.
@@ -1526,8 +1525,8 @@ public class Discovery {
 
      Get details for a specific training data query, including the query string and all examples.
 
-     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
-       administrative tooling.
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
      - parameter queryID: The ID of the query used for training.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -1583,8 +1582,8 @@ public class Discovery {
 
      Updates an existing training query and it's examples.
 
-     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
-       administrative tooling.
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
      - parameter queryID: The ID of the query used for training.
      - parameter naturalLanguageQuery: The natural text query for the training query.
      - parameter examples: Array of training examples.
@@ -1667,8 +1666,8 @@ public class Discovery {
 
      Removes details from a training data query, including the query string and all examples.
 
-     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
-       administrative tooling.
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
      - parameter queryID: The ID of the query used for training.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -1721,16 +1720,15 @@ public class Discovery {
     /**
      Analyze a Document.
 
-     Process a document using the specified collection's settings and return it for realtime use.
-     **Note:** Documents processed using this method are not added to the specified collection.
-     **Note:** This method is only supported on IBM Cloud Pak for Data instances of Discovery.
+     Process a document and return it for realtime use. Supports JSON files only.
+     The document is processed according to the collection's configuration settings but is not stored in the collection.
+     **Note:** This method is supported on installed instances of Discovery only.
 
-     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
-       administrative tooling.
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
      - parameter collectionID: The ID of the collection.
-     - parameter file: The content of the document to ingest. The maximum supported file size when adding a file to a
-       collection is 50 megabytes, the maximum supported file size when testing a configuration is 1 megabyte. Files
-       larger than the supported size are rejected.
+     - parameter file: The content of the document to ingest. For maximum supported file size limits, see [the
+       documentation](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-collections#collections-doc-limits).
      - parameter filename: The filename for file.
      - parameter fileContentType: The content type of file.
      - parameter metadata: The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are
@@ -1812,10 +1810,11 @@ public class Discovery {
     /**
      List Enrichments.
 
-     List the enrichments available to this project.
+     Lists the enrichments available to this project. The *Part of Speech* and *Sentiment of Phrases* enrichments might
+     be listed, but are reserved for internal use only.
 
-     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
-       administrative tooling.
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -1867,10 +1866,10 @@ public class Discovery {
     /**
      Create an enrichment.
 
-     Create an enrichment for use with the specified project/.
+     Create an enrichment for use with the specified project.
 
-     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
-       administrative tooling.
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
      - parameter enrichment: Information about a specific enrichment.
      - parameter file: The enrichment file to upload.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -1947,8 +1946,8 @@ public class Discovery {
 
      Get details about a specific enrichment.
 
-     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
-       administrative tooling.
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
      - parameter enrichmentID: The ID of the enrichment.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -2004,8 +2003,8 @@ public class Discovery {
 
      Updates an existing enrichment's name and description.
 
-     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
-       administrative tooling.
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
      - parameter enrichmentID: The ID of the enrichment.
      - parameter name: A new name for the enrichment.
      - parameter description: A new description for the enrichment.
@@ -2085,8 +2084,8 @@ public class Discovery {
      Deletes an existing enrichment from the specified project.
      **Note:** Only enrichments that have been manually created can be deleted.
 
-     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
-       administrative tooling.
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
      - parameter enrichmentID: The ID of the enrichment.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -2189,7 +2188,11 @@ public class Discovery {
      Create a new project for this instance.
 
      - parameter name: The human readable name of this project.
-     - parameter type: The project type of this project.
+     - parameter type: The type of project.
+       The `content_intelligence` type is a *Document Retrieval for Contracts* project and the `other` type is a
+       *Custom* project.
+       The `content_mining` and `content_intelligence` types are available with Premium plan managed deployments and
+       installed deployments only.
      - parameter defaultQueryParameters: Default query parameters for this project.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -2262,8 +2265,8 @@ public class Discovery {
 
      Get details on the specified project.
 
-     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
-       administrative tooling.
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -2317,8 +2320,8 @@ public class Discovery {
 
      Update the specified project's name.
 
-     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
-       administrative tooling.
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
      - parameter name: The new name to give this project.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
@@ -2402,8 +2405,8 @@ public class Discovery {
      **Important:** Deleting a project deletes everything that is part of the specified project, including all
      collections.
 
-     - parameter projectID: The ID of the project. This information can be found from the deploy page of the Discovery
-       administrative tooling.
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */

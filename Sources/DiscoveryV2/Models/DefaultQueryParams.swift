@@ -42,7 +42,7 @@ public struct DefaultQueryParams: Codable, Equatable {
     public var aggregation: String?
 
     /**
-     Object containing suggested refinement settings.
+     Object that contains suggested refinement settings. Available with Premium plans only.
      */
     public var suggestedRefinements: DefaultQueryParamsSuggestedRefinements?
 
@@ -93,7 +93,8 @@ public struct DefaultQueryParams: Codable, Equatable {
       - parameter passages: Default settings configuration for passage search options.
       - parameter tableResults: Default project query settings for table results.
       - parameter aggregation: A string representing the default aggregation query for the project.
-      - parameter suggestedRefinements: Object containing suggested refinement settings.
+      - parameter suggestedRefinements: Object that contains suggested refinement settings. Available with Premium
+        plans only.
       - parameter spellingSuggestions: When `true`, a spelling suggestions for the query are returned by default.
       - parameter highlight: When `true`, a highlights for the query are returned by default.
       - parameter count: The number of document results returned by default.

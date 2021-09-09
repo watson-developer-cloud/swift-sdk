@@ -17,12 +17,12 @@
 import Foundation
 
 /**
- Object containing suggested refinement settings.
+ Object that contains suggested refinement settings. Available with Premium plans only.
  */
 public struct DefaultQueryParamsSuggestedRefinements: Codable, Equatable {
 
     /**
-     When `true`, a suggested refinements for the query are returned by default.
+     When `true`, suggested refinements for the query are returned by default.
      */
     public var enabled: Bool?
 
@@ -40,7 +40,7 @@ public struct DefaultQueryParamsSuggestedRefinements: Codable, Equatable {
     /**
       Initialize a `DefaultQueryParamsSuggestedRefinements` with member variables.
 
-      - parameter enabled: When `true`, a suggested refinements for the query are returned by default.
+      - parameter enabled: When `true`, suggested refinements for the query are returned by default.
       - parameter count: The number of suggested refinements to return by default.
 
       - returns: An initialized `DefaultQueryParamsSuggestedRefinements`.

@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- Object containing field details.
+ Object that contains field details.
  */
 public struct Field: Codable, Equatable {
 

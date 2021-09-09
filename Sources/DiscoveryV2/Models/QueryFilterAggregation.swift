@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- A modifier that will narrow down the document set of the sub aggregations it precedes.
+ A modifier that narrows the document set of the sub-aggregations it precedes.
 
  Enums with an associated value of QueryFilterAggregation:
     QueryAggregation
@@ -31,17 +31,18 @@ public struct QueryFilterAggregation: Codable, Equatable {
     public var type: String
 
     /**
-     The filter written in Discovery Query Language syntax applied to the documents before sub aggregations are run.
+     The filter that is written in Discovery Query Language syntax and is applied to the documents before
+     sub-aggregations are run.
      */
     public var match: String
 
     /**
-     Number of documents matching the filter.
+     Number of documents that match the filter.
      */
     public var matchingResults: Int
 
     /**
-     An array of sub aggregations.
+     An array of sub-aggregations.
      */
     public var aggregations: [QueryAggregation]?
 

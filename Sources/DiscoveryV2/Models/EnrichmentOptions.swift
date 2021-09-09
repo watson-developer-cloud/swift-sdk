@@ -17,30 +17,32 @@
 import Foundation
 
 /**
- A object containing options for the current enrichment.
+ An object that contains options for the current enrichment. Starting with version `2020-08-30`, the enrichment options
+ are not included in responses from the List Enrichments method.
  */
 public struct EnrichmentOptions: Codable, Equatable {
 
     /**
-     An array of supported languages for this enrichment.
+     An array of supported languages for this enrichment. Required when `type` is `dictionary`. Optional when `type` is
+     `rule_based`. Not valid when creating any other type of enrichment.
      */
     public var languages: [String]?
 
     /**
-     The type of entity. Required when creating `dictionary` and `regular_expression` **type** enrichment. Not valid
-     when creating any other type of enrichment.
+     The name of the entity type. This value is used as the field name in the index. Required when `type` is
+     `dictionary` or `regular_expression`. Not valid when creating any other type of enrichment.
      */
     public var entityType: String?
 
     /**
-     The regular expression to apply for this enrichment. Required only when the **type** of enrichment being created is
-     a `regular_expression`. Not valid when creating any other type of enrichment.
+     The regular expression to apply for this enrichment. Required when `type` is `regular_expression`. Not valid when
+     creating any other type of enrichment.
      */
     public var regularExpression: String?
 
     /**
-     The name of the result document field that this enrichment creates. Required only when the enrichment **type** is
-     `rule_based`. Not valid when creating any other type of enrichment.
+     The name of the result document field that this enrichment creates. Required when `type` is `rule_based`. Not valid
+     when creating any other type of enrichment.
      */
     public var resultField: String?
 
@@ -55,14 +57,14 @@ public struct EnrichmentOptions: Codable, Equatable {
     /**
       Initialize a `EnrichmentOptions` with member variables.
 
-      - parameter languages: An array of supported languages for this enrichment.
-      - parameter entityType: The type of entity. Required when creating `dictionary` and `regular_expression`
-        **type** enrichment. Not valid when creating any other type of enrichment.
-      - parameter regularExpression: The regular expression to apply for this enrichment. Required only when the
-        **type** of enrichment being created is a `regular_expression`. Not valid when creating any other type of
-        enrichment.
-      - parameter resultField: The name of the result document field that this enrichment creates. Required only when
-        the enrichment **type** is `rule_based`. Not valid when creating any other type of enrichment.
+      - parameter languages: An array of supported languages for this enrichment. Required when `type` is
+        `dictionary`. Optional when `type` is `rule_based`. Not valid when creating any other type of enrichment.
+      - parameter entityType: The name of the entity type. This value is used as the field name in the index. Required
+        when `type` is `dictionary` or `regular_expression`. Not valid when creating any other type of enrichment.
+      - parameter regularExpression: The regular expression to apply for this enrichment. Required when `type` is
+        `regular_expression`. Not valid when creating any other type of enrichment.
+      - parameter resultField: The name of the result document field that this enrichment creates. Required when
+        `type` is `rule_based`. Not valid when creating any other type of enrichment.
 
       - returns: An initialized `EnrichmentOptions`.
      */

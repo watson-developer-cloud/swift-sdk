@@ -22,7 +22,7 @@ import Foundation
 public struct AudioListing: Codable, Equatable {
 
     /**
-     **For an audio-type resource,** the status of the resource:
+     _For an audio-type resource_, the status of the resource:
      * `ok`: The service successfully analyzed the audio data. The data can be used to train the custom model.
      * `being_processed`: The service is still analyzing the audio data. The service cannot accept requests to add new
      audio resources or to train the custom model until its analysis is complete.
@@ -37,23 +37,23 @@ public struct AudioListing: Codable, Equatable {
     }
 
     /**
-     **For an audio-type resource,**  the total seconds of audio in the resource. Omitted for an archive-type resource.
+     _For an audio-type resource_, the total seconds of audio in the resource. Omitted for an archive-type resource.
      */
     public var duration: Int?
 
     /**
-     **For an audio-type resource,** the user-specified name of the resource. Omitted for an archive-type resource.
+     _For an audio-type resource_, the user-specified name of the resource. Omitted for an archive-type resource.
      */
     public var name: String?
 
     /**
-     **For an audio-type resource,** an `AudioDetails` object that provides detailed information about the resource. The
+     _For an audio-type resource_, an `AudioDetails` object that provides detailed information about the resource. The
      object is empty until the service finishes processing the audio. Omitted for an archive-type resource.
      */
     public var details: AudioDetails?
 
     /**
-     **For an audio-type resource,** the status of the resource:
+     _For an audio-type resource_, the status of the resource:
      * `ok`: The service successfully analyzed the audio data. The data can be used to train the custom model.
      * `being_processed`: The service is still analyzing the audio data. The service cannot accept requests to add new
      audio resources or to train the custom model until its analysis is complete.
@@ -64,14 +64,14 @@ public struct AudioListing: Codable, Equatable {
     public var status: String?
 
     /**
-     **For an archive-type resource,** an object of type `AudioResource` that provides information about the resource.
+     _For an archive-type resource_, an object of type `AudioResource` that provides information about the resource.
      Omitted for an audio-type resource.
      */
     public var container: AudioResource?
 
     /**
-     **For an archive-type resource,** an array of `AudioResource` objects that provides information about the
-     audio-type resources that are contained in the resource. Omitted for an audio-type resource.
+     _For an archive-type resource_, an array of `AudioResource` objects that provides information about the audio-type
+     resources that are contained in the resource. Omitted for an audio-type resource.
      */
     public var audio: [AudioResource]?
 

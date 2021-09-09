@@ -47,7 +47,10 @@ public struct Corpus: Codable, Equatable {
     public var totalWords: Int
 
     /**
-     The number of OOV words in the corpus. The value is `0` while the corpus is being processed.
+     _For custom models that are based on previous-generation models_, the number of OOV words extracted from the
+     corpus. The value is `0` while the corpus is being processed.
+     _For custom models that are based on next-generation models_, no OOV words are extracted from corpora, so the value
+     is always `0`.
      */
     public var outOfVocabularyWords: Int
 

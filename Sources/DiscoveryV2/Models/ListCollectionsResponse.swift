@@ -17,12 +17,12 @@
 import Foundation
 
 /**
- Response object containing an array of collection details.
+ Response object that contains an array of collection details.
  */
 public struct ListCollectionsResponse: Codable, Equatable {
 
     /**
-     An array containing information about each collection in the project.
+     An array that contains information about each collection in the project.
      */
     public var collections: [Collection]?
 

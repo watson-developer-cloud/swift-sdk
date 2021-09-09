@@ -28,6 +28,8 @@ public struct CollectionEnrichment: Codable, Equatable {
 
     /**
      An array of field names that the enrichment is applied to.
+     If you apply an enrichment to a field from a JSON file, the data is converted to an array automatically, even if
+     the field contains a single value.
      */
     public var fields: [String]?
 
@@ -42,6 +44,8 @@ public struct CollectionEnrichment: Codable, Equatable {
 
       - parameter enrichmentID: The unique identifier of this enrichment.
       - parameter fields: An array of field names that the enrichment is applied to.
+        If you apply an enrichment to a field from a JSON file, the data is converted to an array automatically, even if
+        the field contains a single value.
 
       - returns: An initialized `CollectionEnrichment`.
      */

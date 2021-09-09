@@ -22,7 +22,7 @@ import Foundation
 public struct CategoriesResult: Codable, Equatable {
 
     /**
-     The path to the category through the 5-level taxonomy hierarchy. For more information about the categories, see
+     The path to the category through the multi-level taxonomy hierarchy. For more information about the categories, see
      [Categories
      hierarchy](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-categories#categories-hierarchy).
      */

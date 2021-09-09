@@ -65,26 +65,26 @@ public struct RecognitionJob: Codable, Equatable {
 
     /**
      The date and time in Coordinated Universal Time (UTC) at which the job was last updated by the service. The value
-     is provided in full ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`). This field is returned only by the **Check jobs**
-     and **Check a job** methods.
+     is provided in full ISO 8601 format (`YYYY-MM-DDThh:mm:ss.sTZD`). This field is returned only by the [Check
+     jobs](#checkjobs) and [Check a job[(#checkjob) methods.
      */
     public var updated: String?
 
     /**
-     The URL to use to request information about the job with the **Check a job** method. This field is returned only by
-     the **Create a job** method.
+     The URL to use to request information about the job with the [Check a job](#checkjob) method. This field is
+     returned only by the [Create a job](#createjob) method.
      */
     public var url: String?
 
     /**
      The user token associated with a job that was created with a callback URL and a user token. This field can be
-     returned only by the **Check jobs** method.
+     returned only by the [Check jobs](#checkjobs) method.
      */
     public var userToken: String?
 
     /**
      If the status is `completed`, the results of the recognition request as an array that includes a single instance of
-     a `SpeechRecognitionResults` object. This field is returned only by the **Check a job** method.
+     a `SpeechRecognitionResults` object. This field is returned only by the [Check a job](#checkjob) method.
      */
     public var results: [SpeechRecognitionResults]?
 
@@ -92,7 +92,7 @@ public struct RecognitionJob: Codable, Equatable {
      An array of warning messages about invalid parameters included with the request. Each warning includes a
      descriptive message and a list of invalid argument strings, for example, `"unexpected query parameter 'user_token',
      query parameter 'callback_url' was not specified"`. The request succeeds despite the warnings. This field can be
-     returned only by the **Create a job** method.
+     returned only by the [Create a job](#createjob) method.
      */
     public var warnings: [String]?
 

@@ -27,7 +27,7 @@ public struct QueryTermAggregationResult: Codable, Equatable {
     public var key: String
 
     /**
-     Number of documents containing the 'key'.
+     Number of documents that contain the 'key'.
      */
     public var matchingResults: Int
 
@@ -49,7 +49,7 @@ public struct QueryTermAggregationResult: Codable, Equatable {
     public var estimatedMatchingDocuments: Int?
 
     /**
-     An array of sub aggregations.
+     An array of sub-aggregations.
      */
     public var aggregations: [QueryAggregation]?
 

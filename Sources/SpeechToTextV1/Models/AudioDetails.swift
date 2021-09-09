@@ -35,7 +35,7 @@ public struct AudioDetails: Codable, Equatable {
     }
 
     /**
-     **For an archive-type resource,** the format of the compressed archive:
+     _For an archive-type resource_, the format of the compressed archive:
      * `zip` for a **.zip** file
      * `gzip` for a **.tar.gz** file
      Omitted for an audio-type resource.
@@ -55,18 +55,18 @@ public struct AudioDetails: Codable, Equatable {
     public var type: String?
 
     /**
-     **For an audio-type resource,** the codec in which the audio is encoded. Omitted for an archive-type resource.
+     _For an audio-type resource_, the codec in which the audio is encoded. Omitted for an archive-type resource.
      */
     public var codec: String?
 
     /**
-     **For an audio-type resource,** the sampling rate of the audio in Hertz (samples per second). Omitted for an
+     _For an audio-type resource_, the sampling rate of the audio in Hertz (samples per second). Omitted for an
      archive-type resource.
      */
     public var frequency: Int?
 
     /**
-     **For an archive-type resource,** the format of the compressed archive:
+     _For an archive-type resource_, the format of the compressed archive:
      * `zip` for a **.zip** file
      * `gzip` for a **.tar.gz** file
      Omitted for an audio-type resource.

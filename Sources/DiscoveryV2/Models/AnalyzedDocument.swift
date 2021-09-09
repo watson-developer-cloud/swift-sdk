@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- An object containing the converted document and any identified enrichments.
+ An object that contains the converted document and any identified enrichments.
  */
 public struct AnalyzedDocument: Codable, Equatable {
 

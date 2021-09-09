@@ -15,7 +15,7 @@
  **/
 
 /**
- * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-902c9336-20210507-162723
+ * IBM OpenAPI SDK Code Generator Version: 3.38.0-07189efd-20210827-205025
  **/
 
 // swiftlint:disable file_length
@@ -40,7 +40,7 @@ public class Assistant {
     public var serviceURL: String? = "https://api.us-south.assistant.watson.cloud.ibm.com"
 
     /// Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The current version is
-    /// `2020-09-24`.
+    /// `2021-06-14`.
     public var version: String
 
     /// Service identifiers
@@ -70,7 +70,7 @@ public class Assistant {
      In that case, try another initializer that directly passes in the credentials.
 
      - parameter version: Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The
-       current version is `2020-09-24`.
+       current version is `2021-06-14`.
      - parameter authenticator: The Authenticator object used to authenticate requests to the service
      - serviceName: String = defaultServiceName
      */
@@ -87,7 +87,7 @@ public class Assistant {
      Create a `Assistant` object.
 
      - parameter version: Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The
-       current version is `2020-09-24`.
+       current version is `2021-06-14`.
      - parameter authenticator: The Authenticator object used to authenticate requests to the service
      */
     public init(version: String, authenticator: Authenticator) {

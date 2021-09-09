@@ -42,8 +42,8 @@ public struct AcousticModel: Codable, Equatable {
     }
 
     /**
-     The customization ID (GUID) of the custom acoustic model. The **Create a custom acoustic model** method returns
-     only this field of the object; it does not return the other fields.
+     The customization ID (GUID) of the custom acoustic model. The [Create a custom acoustic
+     model](#createacousticmodel) method returns only this field of the object; it does not return the other fields.
      */
     public var customizationID: String
 

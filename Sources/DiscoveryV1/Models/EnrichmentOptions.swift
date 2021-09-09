@@ -53,7 +53,8 @@ public struct EnrichmentOptions: Codable, Equatable {
     public var language: String?
 
     /**
-     *For use with `elements` enrichments only.* The element extraction model to use. Models available are: `contract`.
+     For use with `elements` enrichments only. The element extraction model to use. The only model available is
+     `contract`.
      */
     public var model: String?
 
@@ -72,8 +73,8 @@ public struct EnrichmentOptions: Codable, Equatable {
         automatic language detection performed by the service. Valid codes are `ar` (Arabic), `en` (English), `fr`
         (French), `de` (German), `it` (Italian), `pt` (Portuguese), `ru` (Russian), `es` (Spanish), and `sv` (Swedish).
         **Note:** Not all features support all languages, automatic detection is recommended.
-      - parameter model: *For use with `elements` enrichments only.* The element extraction model to use. Models
-        available are: `contract`.
+      - parameter model: For use with `elements` enrichments only. The element extraction model to use. The only model
+        available is `contract`.
 
       - returns: An initialized `EnrichmentOptions`.
      */

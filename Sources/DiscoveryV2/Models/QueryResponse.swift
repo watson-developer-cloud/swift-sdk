@@ -17,12 +17,13 @@
 import Foundation
 
 /**
- A response containing the documents and aggregations for the query.
+ A response that contains the documents and aggregations for the query.
  */
 public struct QueryResponse: Codable, Equatable {
 
     /**
-     The number of matching results for the query.
+     The number of matching results for the query. Results that match due to a curation only are not counted in the
+     total.
      */
     public var matchingResults: Int?
 
@@ -57,7 +58,7 @@ public struct QueryResponse: Codable, Equatable {
     public var tableResults: [QueryTableResult]?
 
     /**
-     Passages returned by Discovery.
+     Passages that best match the query from across all of the collections in the project.
      */
     public var passages: [QueryResponsePassage]?
 

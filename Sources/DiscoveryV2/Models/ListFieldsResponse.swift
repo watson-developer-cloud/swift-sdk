@@ -27,7 +27,7 @@ import Foundation
 public struct ListFieldsResponse: Codable, Equatable {
 
     /**
-     An array containing information about each field in the collections.
+     An array that contains information about each field in the collections.
      */
     public var fields: [Field]?
 

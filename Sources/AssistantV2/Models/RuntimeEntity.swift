@@ -31,7 +31,7 @@ public struct RuntimeEntity: Codable, Equatable {
      An array of zero-based character offsets that indicate where the detected entity values begin and end in the input
      text.
      */
-    public var location: [Int]
+    public var location: [Int]?
 
     /**
      The term in the input text that was recognized as an entity value.
@@ -44,7 +44,9 @@ public struct RuntimeEntity: Codable, Equatable {
     public var confidence: Double?
 
     /**
-     Any metadata for the entity.
+     **Deprecated.** Any metadata for the entity.
+     Beginning with the `2021-06-14` API version, the `metadata` property is no longer returned. For information about
+     system entities recognized in the user input, see the `interpretation` property.
      */
     public var metadata: [String: JSON]?
 
@@ -92,11 +94,13 @@ public struct RuntimeEntity: Codable, Equatable {
       Initialize a `RuntimeEntity` with member variables.
 
       - parameter entity: An entity detected in the input.
+      - parameter value: The term in the input text that was recognized as an entity value.
       - parameter location: An array of zero-based character offsets that indicate where the detected entity values
         begin and end in the input text.
-      - parameter value: The term in the input text that was recognized as an entity value.
       - parameter confidence: A decimal percentage that represents Watson's confidence in the recognized entity.
-      - parameter metadata: Any metadata for the entity.
+      - parameter metadata: **Deprecated.** Any metadata for the entity.
+        Beginning with the `2021-06-14` API version, the `metadata` property is no longer returned. For information about
+        system entities recognized in the user input, see the `interpretation` property.
       - parameter groups: The recognized capture groups for the entity, as defined by the entity pattern.
       - parameter interpretation: An object containing detailed information about the entity recognized in the user
         input. This property is included only if the new system entities are enabled for the skill.
@@ -114,8 +118,8 @@ public struct RuntimeEntity: Codable, Equatable {
      */
     public init(
         entity: String,
-        location: [Int],
         value: String,
+        location: [Int]? = nil,
         confidence: Double? = nil,
         metadata: [String: JSON]? = nil,
         groups: [CaptureGroup]? = nil,
@@ -125,8 +129,8 @@ public struct RuntimeEntity: Codable, Equatable {
     )
     {
         self.entity = entity
-        self.location = location
         self.value = value
+        self.location = location
         self.confidence = confidence
         self.metadata = metadata
         self.groups = groups

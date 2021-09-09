@@ -81,11 +81,29 @@ public struct MessageContextGlobalSystem: Codable, Equatable {
      current server time, and is used to calculate times mentioned in relative terms such as `now` or `tomorrow`. This
      can be useful for simulating past or future times for testing purposes, or when analyzing documents such as news
      articles.
-     This value must be a UTC time value formatted according to ISO 8601 (for example, `2019-06-26T12:00:00Z` for noon
-     on 26 June 2019.
+     This value must be a UTC time value formatted according to ISO 8601 (for example, `2021-06-26T12:00:00Z` for noon
+     UTC on 26 June 2021).
      This property is included only if the new system entities are enabled for the skill.
      */
     public var referenceTime: String?
+
+    /**
+     The time at which the session started. With the stateful `message` method, the start time is always present, and is
+     set by the service based on the time the session was created. With the stateless `message` method, the start time
+     is set by the service in the response to the first message, and should be returned as part of the context with each
+     subsequent message in the session.
+     This value is a UTC time value formatted according to ISO 8601 (for example, `2021-06-26T12:00:00Z` for noon UTC on
+     26 June 2021).
+     */
+    public var sessionStartTime: String?
+
+    /**
+     An encoded string that represents the configuration state of the assistant at the beginning of the conversation. If
+     you are using the stateless `message` method, save this value and then send it in the context of the subsequent
+     message request to avoid disruptions if there are configuration changes during the conversation (such as a change
+     to a skill the assistant uses).
+     */
+    public var state: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
@@ -94,6 +112,8 @@ public struct MessageContextGlobalSystem: Codable, Equatable {
         case turnCount = "turn_count"
         case locale = "locale"
         case referenceTime = "reference_time"
+        case sessionStartTime = "session_start_time"
+        case state = "state"
     }
 
     /**
@@ -119,9 +139,19 @@ public struct MessageContextGlobalSystem: Codable, Equatable {
         specified time overrides the current server time, and is used to calculate times mentioned in relative terms such
         as `now` or `tomorrow`. This can be useful for simulating past or future times for testing purposes, or when
         analyzing documents such as news articles.
-        This value must be a UTC time value formatted according to ISO 8601 (for example, `2019-06-26T12:00:00Z` for noon
-        on 26 June 2019.
+        This value must be a UTC time value formatted according to ISO 8601 (for example, `2021-06-26T12:00:00Z` for noon
+        UTC on 26 June 2021).
         This property is included only if the new system entities are enabled for the skill.
+      - parameter sessionStartTime: The time at which the session started. With the stateful `message` method, the
+        start time is always present, and is set by the service based on the time the session was created. With the
+        stateless `message` method, the start time is set by the service in the response to the first message, and should
+        be returned as part of the context with each subsequent message in the session.
+        This value is a UTC time value formatted according to ISO 8601 (for example, `2021-06-26T12:00:00Z` for noon UTC
+        on 26 June 2021).
+      - parameter state: An encoded string that represents the configuration state of the assistant at the beginning
+        of the conversation. If you are using the stateless `message` method, save this value and then send it in the
+        context of the subsequent message request to avoid disruptions if there are configuration changes during the
+        conversation (such as a change to a skill the assistant uses).
 
       - returns: An initialized `MessageContextGlobalSystem`.
      */
@@ -130,7 +160,9 @@ public struct MessageContextGlobalSystem: Codable, Equatable {
         userID: String? = nil,
         turnCount: Int? = nil,
         locale: String? = nil,
-        referenceTime: String? = nil
+        referenceTime: String? = nil,
+        sessionStartTime: String? = nil,
+        state: String? = nil
     )
     {
         self.timezone = timezone
@@ -138,6 +170,8 @@ public struct MessageContextGlobalSystem: Codable, Equatable {
         self.turnCount = turnCount
         self.locale = locale
         self.referenceTime = referenceTime
+        self.sessionStartTime = sessionStartTime
+        self.state = state
     }
 
 }

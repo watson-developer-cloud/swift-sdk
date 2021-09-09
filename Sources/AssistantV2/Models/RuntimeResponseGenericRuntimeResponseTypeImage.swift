@@ -31,7 +31,7 @@ public struct RuntimeResponseGenericRuntimeResponseTypeImage: Codable, Equatable
     public var responseType: String
 
     /**
-     The URL of the image.
+     The `https:` URL of the image.
      */
     public var source: String
 
@@ -51,6 +51,11 @@ public struct RuntimeResponseGenericRuntimeResponseTypeImage: Codable, Equatable
      */
     public var channels: [ResponseGenericChannel]?
 
+    /**
+     Descriptive text that can be used for screen readers or other situations where the image cannot be seen.
+     */
+    public var altText: String?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case responseType = "response_type"
@@ -58,6 +63,7 @@ public struct RuntimeResponseGenericRuntimeResponseTypeImage: Codable, Equatable
         case title = "title"
         case description = "description"
         case channels = "channels"
+        case altText = "alt_text"
     }
 
 }

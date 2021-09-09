@@ -15,7 +15,7 @@
  **/
 
 /**
- * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-902c9336-20210507-162723
+ * IBM OpenAPI SDK Code Generator Version: 3.38.0-07189efd-20210827-205025
  **/
 
 // swiftlint:disable file_length
@@ -42,7 +42,7 @@ public class NaturalLanguageUnderstanding {
     public var serviceURL: String? = "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com"
 
     /// Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The current version is
-    /// `2021-03-25`.
+    /// `2021-08-01`.
     public var version: String
 
     /// Service identifiers
@@ -72,7 +72,7 @@ public class NaturalLanguageUnderstanding {
      In that case, try another initializer that directly passes in the credentials.
 
      - parameter version: Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The
-       current version is `2021-03-25`.
+       current version is `2021-08-01`.
      - parameter authenticator: The Authenticator object used to authenticate requests to the service
      - serviceName: String = defaultServiceName
      */
@@ -89,7 +89,7 @@ public class NaturalLanguageUnderstanding {
      Create a `NaturalLanguageUnderstanding` object.
 
      - parameter version: Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The
-       current version is `2021-03-25`.
+       current version is `2021-08-01`.
      - parameter authenticator: The Authenticator object used to authenticate requests to the service
      */
     public init(version: String, authenticator: Authenticator) {
@@ -1113,8 +1113,8 @@ public class NaturalLanguageUnderstanding {
     /**
      Create classifications model.
 
-     (Beta) Creates a custom classifications model by uploading training data and associated metadata. The model begins
-     the training and deploying process and is ready to use when the `status` is `available`.
+     Creates a custom classifications model by uploading training data and associated metadata. The model begins the
+     training and deploying process and is ready to use when the `status` is `available`.
 
      - parameter language: The 2-letter language code of this model.
      - parameter trainingData: Training data in JSON format. For more information, see [Classifications training data
@@ -1217,14 +1217,14 @@ public class NaturalLanguageUnderstanding {
     /**
      List classifications models.
 
-     (Beta) Returns all custom classifications models associated with this service instance.
+     Returns all custom classifications models associated with this service instance.
 
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
     public func listClassificationsModels(
         headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<ListClassificationsModelsResponse>?, WatsonError?) -> Void)
+        completionHandler: @escaping (WatsonResponse<ClassificationsModelList>?, WatsonError?) -> Void)
     {
         // construct header parameters
         var headerParameters = defaultHeaders
@@ -1264,7 +1264,7 @@ public class NaturalLanguageUnderstanding {
     /**
      Get classifications model details.
 
-     (Beta) Returns the status of the classifications model with the given model ID.
+     Returns the status of the classifications model with the given model ID.
 
      - parameter modelID: ID of the model.
      - parameter headers: A dictionary of request headers to be sent with this request.
@@ -1318,8 +1318,8 @@ public class NaturalLanguageUnderstanding {
     /**
      Update classifications model.
 
-     (Beta) Overwrites the training data associated with this custom classifications model and retrains the model. The
-     new model replaces the current deployment.
+     Overwrites the training data associated with this custom classifications model and retrains the model. The new
+     model replaces the current deployment.
 
      - parameter modelID: ID of the model.
      - parameter language: The 2-letter language code of this model.
@@ -1429,8 +1429,8 @@ public class NaturalLanguageUnderstanding {
     /**
      Delete classifications model.
 
-     (Beta) Un-deploys the custom classifications model with the given model ID and deletes all associated customer
-     data, including any training data or binary artifacts.
+     Un-deploys the custom classifications model with the given model ID and deletes all associated customer data,
+     including any training data or binary artifacts.
 
      - parameter modelID: ID of the model.
      - parameter headers: A dictionary of request headers to be sent with this request.

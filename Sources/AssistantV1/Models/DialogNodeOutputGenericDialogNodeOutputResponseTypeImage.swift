@@ -31,7 +31,7 @@ public struct DialogNodeOutputGenericDialogNodeOutputResponseTypeImage: Codable,
     public var responseType: String
 
     /**
-     The URL of the image.
+     The `https:` URL of the image.
      */
     public var source: String
 
@@ -50,6 +50,11 @@ public struct DialogNodeOutputGenericDialogNodeOutputResponseTypeImage: Codable,
      */
     public var channels: [ResponseGenericChannel]?
 
+    /**
+     Descriptive text that can be used for screen readers or other situations where the image cannot be seen.
+     */
+    public var altText: String?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case responseType = "response_type"
@@ -57,6 +62,7 @@ public struct DialogNodeOutputGenericDialogNodeOutputResponseTypeImage: Codable,
         case title = "title"
         case description = "description"
         case channels = "channels"
+        case altText = "alt_text"
     }
 
     /**
@@ -64,10 +70,12 @@ public struct DialogNodeOutputGenericDialogNodeOutputResponseTypeImage: Codable,
 
       - parameter responseType: The type of response returned by the dialog node. The specified response type must be
         supported by the client application or channel.
-      - parameter source: The URL of the image.
+      - parameter source: The `https:` URL of the image.
       - parameter title: An optional title to show before the response.
       - parameter description: An optional description to show with the response.
       - parameter channels: An array of objects specifying channels for which the response is intended.
+      - parameter altText: Descriptive text that can be used for screen readers or other situations where the image
+        cannot be seen.
 
       - returns: An initialized `DialogNodeOutputGenericDialogNodeOutputResponseTypeImage`.
      */
@@ -76,7 +84,8 @@ public struct DialogNodeOutputGenericDialogNodeOutputResponseTypeImage: Codable,
         source: String,
         title: String? = nil,
         description: String? = nil,
-        channels: [ResponseGenericChannel]? = nil
+        channels: [ResponseGenericChannel]? = nil,
+        altText: String? = nil
     )
     {
         self.responseType = responseType
@@ -84,6 +93,7 @@ public struct DialogNodeOutputGenericDialogNodeOutputResponseTypeImage: Codable,
         self.title = title
         self.description = description
         self.channels = channels
+        self.altText = altText
     }
 
 }

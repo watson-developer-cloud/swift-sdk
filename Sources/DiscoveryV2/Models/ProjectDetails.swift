@@ -22,12 +22,17 @@ import Foundation
 public struct ProjectDetails: Codable, Equatable {
 
     /**
-     The project type of this project.
+     The type of project.
+     The `content_intelligence` type is a *Document Retrieval for Contracts* project and the `other` type is a *Custom*
+     project.
+     The `content_mining` and `content_intelligence` types are available with Premium plan managed deployments and
+     installed deployments only.
      */
     public enum TypeEnum: String {
         case documentRetrieval = "document_retrieval"
-        case answerRetrieval = "answer_retrieval"
+        case conversationalSearch = "conversational_search"
         case contentMining = "content_mining"
+        case contentIntelligence = "content_intelligence"
         case other = "other"
     }
 
@@ -42,7 +47,11 @@ public struct ProjectDetails: Codable, Equatable {
     public var name: String?
 
     /**
-     The project type of this project.
+     The type of project.
+     The `content_intelligence` type is a *Document Retrieval for Contracts* project and the `other` type is a *Custom*
+     project.
+     The `content_mining` and `content_intelligence` types are available with Premium plan managed deployments and
+     installed deployments only.
      */
     public var type: String?
 

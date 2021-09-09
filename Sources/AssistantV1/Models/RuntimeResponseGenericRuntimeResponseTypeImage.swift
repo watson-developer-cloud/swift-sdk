@@ -31,7 +31,7 @@ public struct RuntimeResponseGenericRuntimeResponseTypeImage: Codable, Equatable
     public var responseType: String
 
     /**
-     The URL of the image.
+     The `https:` URL of the image.
      */
     public var source: String
 
@@ -51,6 +51,11 @@ public struct RuntimeResponseGenericRuntimeResponseTypeImage: Codable, Equatable
      */
     public var channels: [ResponseGenericChannel]?
 
+    /**
+     Descriptive text that can be used for screen readers or other situations where the image cannot be seen.
+     */
+    public var altText: String?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case responseType = "response_type"
@@ -58,6 +63,7 @@ public struct RuntimeResponseGenericRuntimeResponseTypeImage: Codable, Equatable
         case title = "title"
         case description = "description"
         case channels = "channels"
+        case altText = "alt_text"
     }
 
     /**
@@ -65,12 +71,14 @@ public struct RuntimeResponseGenericRuntimeResponseTypeImage: Codable, Equatable
 
       - parameter responseType: The type of response returned by the dialog node. The specified response type must be
         supported by the client application or channel.
-      - parameter source: The URL of the image.
+      - parameter source: The `https:` URL of the image.
       - parameter title: The title or introductory text to show before the response.
       - parameter description: The description to show with the the response.
       - parameter channels: An array of objects specifying channels for which the response is intended. If
         **channels** is present, the response is intended for a built-in integration and should not be handled by an API
         client.
+      - parameter altText: Descriptive text that can be used for screen readers or other situations where the image
+        cannot be seen.
 
       - returns: An initialized `RuntimeResponseGenericRuntimeResponseTypeImage`.
      */
@@ -79,7 +87,8 @@ public struct RuntimeResponseGenericRuntimeResponseTypeImage: Codable, Equatable
         source: String,
         title: String? = nil,
         description: String? = nil,
-        channels: [ResponseGenericChannel]? = nil
+        channels: [ResponseGenericChannel]? = nil,
+        altText: String? = nil
     )
     {
         self.responseType = responseType
@@ -87,6 +96,7 @@ public struct RuntimeResponseGenericRuntimeResponseTypeImage: Codable, Equatable
         self.title = title
         self.description = description
         self.channels = channels
+        self.altText = altText
     }
 
 }

@@ -22,12 +22,16 @@ import Foundation
 public struct WorkspaceSystemSettingsDisambiguation: Codable, Equatable {
 
     /**
-     The sensitivity of the disambiguation feature to intent detection conflicts. Set to **high** if you want the
-     disambiguation feature to be triggered more often. This can be useful for testing or demonstration purposes.
+     The sensitivity of the disambiguation feature to intent detection uncertainty. Higher sensitivity means that the
+     disambiguation feature is triggered more often and includes more choices.
      */
     public enum Sensitivity: String {
         case auto = "auto"
         case high = "high"
+        case mediumHigh = "medium_high"
+        case medium = "medium"
+        case mediumLow = "medium_low"
+        case low = "low"
     }
 
     /**
@@ -47,8 +51,8 @@ public struct WorkspaceSystemSettingsDisambiguation: Codable, Equatable {
     public var enabled: Bool?
 
     /**
-     The sensitivity of the disambiguation feature to intent detection conflicts. Set to **high** if you want the
-     disambiguation feature to be triggered more often. This can be useful for testing or demonstration purposes.
+     The sensitivity of the disambiguation feature to intent detection uncertainty. Higher sensitivity means that the
+     disambiguation feature is triggered more often and includes more choices.
      */
     public var sensitivity: String?
 
@@ -87,9 +91,8 @@ public struct WorkspaceSystemSettingsDisambiguation: Codable, Equatable {
       - parameter noneOfTheAbovePrompt: The user-facing label for the option users can select if none of the suggested
         options is correct. If no value is specified for this property, this option does not appear.
       - parameter enabled: Whether the disambiguation feature is enabled for the workspace.
-      - parameter sensitivity: The sensitivity of the disambiguation feature to intent detection conflicts. Set to
-        **high** if you want the disambiguation feature to be triggered more often. This can be useful for testing or
-        demonstration purposes.
+      - parameter sensitivity: The sensitivity of the disambiguation feature to intent detection uncertainty. Higher
+        sensitivity means that the disambiguation feature is triggered more often and includes more choices.
       - parameter randomize: Whether the order in which disambiguation suggestions are presented should be randomized
         (but still influenced by relative confidence).
       - parameter maxSuggestions: The maximum number of disambigation suggestions that can be included in a

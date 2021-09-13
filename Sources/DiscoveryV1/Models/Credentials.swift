@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2018, 2021.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,16 +38,6 @@ public struct Credentials: Codable, Equatable {
     }
 
     /**
-     The current status of this set of credentials. `connected` indicates that the credentials are available to use with
-     the source configuration of a collection. `invalid` refers to the credentials (for example, the password provided
-     has expired) and must be corrected before they can be used with a collection.
-     */
-    public enum Status: String {
-        case connected = "connected"
-        case invalid = "invalid"
-    }
-
-    /**
      Unique identifier for this set of credentials.
      */
     public var credentialID: String?
@@ -69,11 +59,9 @@ public struct Credentials: Codable, Equatable {
     public var credentialDetails: CredentialDetails?
 
     /**
-     The current status of this set of credentials. `connected` indicates that the credentials are available to use with
-     the source configuration of a collection. `invalid` refers to the credentials (for example, the password provided
-     has expired) and must be corrected before they can be used with a collection.
+     Object that contains details about the status of the authentication process.
      */
-    public var status: String?
+    public var status: StatusDetails?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
@@ -94,16 +82,14 @@ public struct Credentials: Codable, Equatable {
         =  `cloud_object_storage` indicates the credentials are used to connect to an IBM Cloud Object Store.
       - parameter credentialDetails: Object containing details of the stored credentials.
         Obtain credentials for your source from the administrator of the source.
-      - parameter status: The current status of this set of credentials. `connected` indicates that the credentials
-        are available to use with the source configuration of a collection. `invalid` refers to the credentials (for
-        example, the password provided has expired) and must be corrected before they can be used with a collection.
+      - parameter status: Object that contains details about the status of the authentication process.
 
       - returns: An initialized `Credentials`.
      */
     public init(
         sourceType: String? = nil,
         credentialDetails: CredentialDetails? = nil,
-        status: String? = nil
+        status: StatusDetails? = nil
     )
     {
         self.sourceType = sourceType

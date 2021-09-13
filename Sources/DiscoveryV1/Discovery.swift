@@ -4291,9 +4291,7 @@ public class Discovery {
        =  `cloud_object_storage` indicates the credentials are used to connect to an IBM Cloud Object Store.
      - parameter credentialDetails: Object containing details of the stored credentials.
        Obtain credentials for your source from the administrator of the source.
-     - parameter status: The current status of this set of credentials. `connected` indicates that the credentials are
-       available to use with the source configuration of a collection. `invalid` refers to the credentials (for example,
-       the password provided has expired) and must be corrected before they can be used with a collection.
+     - parameter status: Object that contains details about the status of the authentication process.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -4301,7 +4299,7 @@ public class Discovery {
         environmentID: String,
         sourceType: String? = nil,
         credentialDetails: CredentialDetails? = nil,
-        status: String? = nil,
+        status: StatusDetails? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Credentials>?, WatsonError?) -> Void)
     {
@@ -4362,7 +4360,7 @@ public class Discovery {
         // swiftlint:disable identifier_name
         let source_type: String?
         let credential_details: CredentialDetails?
-        let status: String?
+        let status: StatusDetails?
         // swiftlint:enable identifier_name
     }
 
@@ -4440,9 +4438,7 @@ public class Discovery {
        =  `cloud_object_storage` indicates the credentials are used to connect to an IBM Cloud Object Store.
      - parameter credentialDetails: Object containing details of the stored credentials.
        Obtain credentials for your source from the administrator of the source.
-     - parameter status: The current status of this set of credentials. `connected` indicates that the credentials are
-       available to use with the source configuration of a collection. `invalid` refers to the credentials (for example,
-       the password provided has expired) and must be corrected before they can be used with a collection.
+     - parameter status: Object that contains details about the status of the authentication process.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */
@@ -4451,7 +4447,7 @@ public class Discovery {
         credentialID: String,
         sourceType: String? = nil,
         credentialDetails: CredentialDetails? = nil,
-        status: String? = nil,
+        status: StatusDetails? = nil,
         headers: [String: String]? = nil,
         completionHandler: @escaping (WatsonResponse<Credentials>?, WatsonError?) -> Void)
     {
@@ -4512,7 +4508,7 @@ public class Discovery {
         // swiftlint:disable identifier_name
         let source_type: String?
         let credential_details: CredentialDetails?
-        let status: String?
+        let status: StatusDetails?
         // swiftlint:enable identifier_name
     }
 

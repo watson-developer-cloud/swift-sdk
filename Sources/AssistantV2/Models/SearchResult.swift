@@ -56,6 +56,14 @@ public struct SearchResult: Codable, Equatable {
      */
     public var highlight: SearchResultHighlight?
 
+    /**
+     An array specifying segments of text within the result that were identified as direct answers to the search query.
+     Currently, only the single answer with the highest confidence (if any) is returned.
+     **Note:** This property uses the answer finding beta feature, and is available only if the search skill is
+     connected to a Discovery v2 service instance.
+     */
+    public var answers: [SearchResultAnswer]?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case id = "id"
@@ -64,6 +72,7 @@ public struct SearchResult: Codable, Equatable {
         case title = "title"
         case url = "url"
         case highlight = "highlight"
+        case answers = "answers"
     }
 
 }

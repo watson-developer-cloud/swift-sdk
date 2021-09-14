@@ -24,34 +24,34 @@ public struct StatusDetails: Codable, Equatable {
     /**
      Indicates whether the credential is accepted by the target data source.
      */
-    public var authentication: Bool?
+    public var authenticated: Bool?
 
     /**
-     If `authentication` is `false`, a message describes why the authentication was unsuccessful.
+     If `authenticated` is `false`, a message describes why the authentication was unsuccessful.
      */
     public var errorMessage: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case authentication = "authentication"
+        case authenticated = "authenticated"
         case errorMessage = "error_message"
     }
 
     /**
       Initialize a `StatusDetails` with member variables.
 
-      - parameter authentication: Indicates whether the credential is accepted by the target data source.
-      - parameter errorMessage: If `authentication` is `false`, a message describes why the authentication was
+      - parameter authenticated: Indicates whether the credential is accepted by the target data source.
+      - parameter errorMessage: If `authenticated` is `false`, a message describes why the authentication was
         unsuccessful.
 
       - returns: An initialized `StatusDetails`.
      */
     public init(
-        authentication: Bool? = nil,
+        authenticated: Bool? = nil,
         errorMessage: String? = nil
     )
     {
-        self.authentication = authentication
+        self.authenticated = authenticated
         self.errorMessage = errorMessage
     }
 

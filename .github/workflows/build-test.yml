@@ -28,7 +28,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Set up Swift
-      uses: fwal/setup-swift@@v2
+      uses: fwal/setup-swift@v1
       with:
         swift-version: ${{ matrix.swift-version }}
 

@@ -22,6 +22,7 @@ xcuserdata/
 .DS_Store
 *.moved-aside
 *.xcuserstate
+.idea
 
 # Obj-C/Swift specific
 *.hmap

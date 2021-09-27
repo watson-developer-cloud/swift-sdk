@@ -1,12 +1,14 @@
 # Watson Developer Cloud Swift SDK
-
-[![Build Status](https://travis-ci.org/watson-developer-cloud/swift-sdk.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/swift-sdk)
+[![Build and Test](https://github.com/watson-developer-cloud/swift-sdk/actions/workflows/build-test.yml/badge.svg)](https://github.com/watson-developer-cloud/swift-sdk/actions/workflows/build-test.yml)
+[![Deploy and Publish](https://github.com/watson-developer-cloud/swift-sdk/actions/workflows/deploy.yml/badge.svg)](https://github.com/watson-developer-cloud/swift-sdk/actions/workflows/deploy.yml)
 ![](https://img.shields.io/badge/platform-iOS,%20Linux-blue.svg?style=flat)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Documentation](https://img.shields.io/badge/Documentation-API-blue.svg)](http://watson-developer-cloud.github.io/swift-sdk)
 [![CLA assistant](https://cla-assistant.io/readme/badge/watson-developer-cloud/swift-sdk)](https://cla-assistant.io/watson-developer-cloud/swift-sdk)
 [![wdc-community.slack.com](https://wdc-slack-inviter.mybluemix.net/badge.svg)](http://wdc-slack-inviter.mybluemix.net/)
 
+## Deprecated builds
+[![Build Status](https://travis-ci.org/watson-developer-cloud/swift-sdk.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/swift-sdk)
 
 ## Overview
 

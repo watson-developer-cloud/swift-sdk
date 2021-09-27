@@ -17,17 +17,16 @@ on:
 
 jobs:
   build_test:
-    name: Build and Test on Swift ${{ matrix.swift-version }} and ${{ matrix.os }}
+    name: Build and Test on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        swift-version: ['5.3']
         os: [macos-latest]
 
     steps:
     - uses: actions/checkout@v2
 
-    - name: Get swift version
+    - name: Display versions
       env:
         DEVELOPER_DIR: /Applications/Xcode_12.3.app/Contents/Developer
       run: |

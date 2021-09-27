@@ -27,15 +27,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Set up Swift
-      uses: fwal/setup-swift@v1
-      with:
-        swift-version: ${{ matrix.swift-version }}
-
     - name: Get swift version
+      env:
+        DEVELOPER_DIR: /Applications/Xcode_12.3.app/Contents/Developer
       run: |
          swift --version
          xcodebuild -version
 
     - name: Validate Pods
+      env:
+        DEVELOPER_DIR: /Applications/Xcode_12.3.app/Contents/Developer
       run: Scripts/pod-lint.sh

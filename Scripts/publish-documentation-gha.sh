@@ -25,6 +25,6 @@ printf "\n>>>>> Committing new javadoc for version: %s\n" ${latestVersion}
 
 pushd gh-pages
 git add -f .
-git commit -m "chore: SDK docs for release ${latestVersion}"
+git commit -m "chore: [skip ci] SDK docs for release ${latestVersion}"
 git push -f origin gh-pages
 popd

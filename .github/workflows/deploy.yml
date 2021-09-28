@@ -61,6 +61,13 @@ jobs:
       run: npx semantic-release --dry-run --branches 9738_gha
 
     - name: Publish Documentation
+      if: ${{ steps.is_new_release.outputs.IS_NEW_RELEASE == '1' }}
+      env:
+        COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
+      run: Scripts/deploy-to-cocoapods-gha.sh
+
+    - name: Publish Documentation
+      if: ${{ steps.is_new_release.outputs.IS_NEW_RELEASE == '1' }}
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -56,13 +56,16 @@ jobs:
         echo "The full TAG - ${{ github.ref }}"
 
     - name: Validate Pods
-      run: |
-        xcodebuild -version
-        Scripts/pod-lint.sh
+      run: Scripts/pod-lint.sh
 
     - name: Publish to Git Releases and Tags
-      if:  ${{ steps.is_new_release.outputs.IS_NEW_RELEASE == '1' }}
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       run: npx semantic-release --dry-run --branches 9738_gha
+
+    - name: Publish Documentation
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      run: Scripts/publish-documentation-gha.sh

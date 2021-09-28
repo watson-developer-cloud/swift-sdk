@@ -17,7 +17,7 @@
     <a title="CustomWord Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">SpeechToTextV1 4.2.1 Docs</a> (83% documented)</p>
+        <p><a href="../index.html">SpeechToTextV1 4.3.0 Docs</a> (83% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../search.json">
@@ -278,10 +278,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>For the <strong>Add custom words</strong> method, you must specify the custom word that is to be added to or updated in the
-custom model. Do not include spaces in the word. Use a <code>-</code> (dash) or <code>_</code> (underscore) to connect the tokens of
+                        <p>For the <a href="#addwords">Add custom words</a> method, you must specify the custom word that is to be added to or updated in
+the custom model. Do not include spaces in the word. Use a <code>-</code> (dash) or <code>_</code> (underscore) to connect the tokens of
 compound words.
-Omit this parameter for the <strong>Add a custom word</strong> method.</p>
+Omit this parameter for the <a href="#addword">Add a custom word</a> method.</p>
 
                       </div>
                       <div class="declaration">
@@ -308,8 +308,9 @@ Omit this parameter for the <strong>Add a custom word</strong> method.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An array of sounds-like pronunciations for the custom word. Specify how words that are difficult to pronounce,
-foreign words, acronyms, and so on can be pronounced by users.</p>
+                        <p><em>For a custom model that is based on a previous-generation model</em>, an array of sounds-like pronunciations for the
+custom word. Specify how words that are difficult to pronounce, foreign words, acronyms, and so on can be
+pronounced by users.</p>
 
 <ul>
 <li>For a word that is not in the service&rsquo;s base vocabulary, omit the parameter to have the service automatically
@@ -318,7 +319,9 @@ generate a sounds-like pronunciation for the word.</li>
 the word. You cannot override the default pronunciation of a word; pronunciations you add augment the pronunciation
 from the base vocabulary.
 A word can have at most five sounds-like pronunciations. A pronunciation can include at most 40 characters not
-including spaces.</li>
+including spaces.
+<em>For a custom model that is based on a next-generation model</em>, omit this field. Custom models based on
+next-generation models do not support the <code>sounds_like</code> field. The service ignores the field.</li>
 </ul>
 
                       </div>
@@ -402,10 +405,10 @@ data.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>For the <strong>Add custom words</strong> method, you must specify the custom word that is to be added to
-or updated in the custom model. Do not include spaces in the word. Use a <code>-</code> (dash) or <code>_</code> (underscore) to
-connect the tokens of compound words.
-Omit this parameter for the <strong>Add a custom word</strong> method.</p>
+                                  <p>For the <a href="#addwords">Add custom words</a> method, you must specify the custom word that is to be
+added to or updated in the custom model. Do not include spaces in the word. Use a <code>-</code> (dash) or <code>_</code> (underscore)
+to connect the tokens of compound words.
+Omit this parameter for the <a href="#addword">Add a custom word</a> method.</p>
                                 </div>
                               </td>
                             </tr>
@@ -417,8 +420,9 @@ Omit this parameter for the <strong>Add a custom word</strong> method.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>An array of sounds-like pronunciations for the custom word. Specify how words that are
-difficult to pronounce, foreign words, acronyms, and so on can be pronounced by users.
+                                  <p><em>For a custom model that is based on a previous-generation model</em>, an array of
+sounds-like pronunciations for the custom word. Specify how words that are difficult to pronounce, foreign words,
+acronyms, and so on can be pronounced by users.
 
 <ul>
 <li>For a word that is not in the service&rsquo;s base vocabulary, omit the parameter to have the service automatically
@@ -427,7 +431,9 @@ generate a sounds-like pronunciation for the word.</li>
 the word. You cannot override the default pronunciation of a word; pronunciations you add augment the
 pronunciation from the base vocabulary.
 A word can have at most five sounds-like pronunciations. A pronunciation can include at most 40 characters not
-including spaces.</li>
+including spaces.
+<em>For a custom model that is based on a next-generation model</em>, omit this field. Custom models based on
+next-generation models do not support the <code>sounds_like</code> field. The service ignores the field.</li>
 </ul></p>
                                 </div>
                               </td>
@@ -462,7 +468,7 @@ spelling in corpora training data.</p>
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="noopener" rel="external">jazzy ♪♫ v0.14.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="noopener" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

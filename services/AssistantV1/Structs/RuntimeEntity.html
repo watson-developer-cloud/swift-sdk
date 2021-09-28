@@ -17,7 +17,7 @@
     <a title="RuntimeEntity Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">AssistantV1 4.2.1 Docs</a> (83% documented)</p>
+        <p><a href="../index.html">AssistantV1 4.3.0 Docs</a> (82% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../search.json">
@@ -456,9 +456,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV113RuntimeEntityV8locationSaySiGvp"></a>
+                    <a name="/s:11AssistantV113RuntimeEntityV8locationSaySiGSgvp"></a>
                     <a name="//apple_ref/swift/Property/location" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV113RuntimeEntityV8locationSaySiGvp">location</a>
+                    <a class="token" href="#/s:11AssistantV113RuntimeEntityV8locationSaySiGSgvp">location</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -474,7 +474,7 @@ text.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">location</span><span class="p">:</span> <span class="p">[</span><span class="kt">Int</span><span class="p">]</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">location</span><span class="p">:</span> <span class="p">[</span><span class="kt">Int</span><span class="p">]?</span></code></pre>
 
                         </div>
                       </div>
@@ -548,7 +548,9 @@ text.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Any metadata for the entity.</p>
+                        <p><strong>Deprecated.</strong> Any metadata for the entity.
+Beginning with the <code>2021-06-14</code> API version, the <code>metadata</code> property is no longer returned. For information about
+system entities recognized in the user input, see the <code><a href="../Structs/RuntimeEntity.html#/s:11AssistantV113RuntimeEntityV14interpretationAA0cD14InterpretationVSgvp">interpretation</a></code> property.</p>
 
                       </div>
                       <div class="declaration">
@@ -680,9 +682,9 @@ workspace.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV113RuntimeEntityV6entity8location5value10confidence8metadata6groups14interpretation12alternatives4roleACSS_SaySiGSSSdSgSDySS15IBMSwiftSDKCore4JSONOGSgSayAA12CaptureGroupVGSgAA0cD14InterpretationVSgSayAA0cD11AlternativeVGSgAA0cD4RoleVSgtcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(entity:location:value:confidence:metadata:groups:interpretation:alternatives:role:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV113RuntimeEntityV6entity8location5value10confidence8metadata6groups14interpretation12alternatives4roleACSS_SaySiGSSSdSgSDySS15IBMSwiftSDKCore4JSONOGSgSayAA12CaptureGroupVGSgAA0cD14InterpretationVSgSayAA0cD11AlternativeVGSgAA0cD4RoleVSgtcfc">init(entity:<wbr>location:<wbr>value:<wbr>confidence:<wbr>metadata:<wbr>groups:<wbr>interpretation:<wbr>alternatives:<wbr>role:<wbr>)</a>
+                    <a name="/s:11AssistantV113RuntimeEntityV6entity5value8location10confidence8metadata6groups14interpretation12alternatives4roleACSS_SSSaySiGSgSdSgSDySS15IBMSwiftSDKCore4JSONOGSgSayAA12CaptureGroupVGSgAA0cD14InterpretationVSgSayAA0cD11AlternativeVGSgAA0cD4RoleVSgtcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(entity:value:location:confidence:metadata:groups:interpretation:alternatives:role:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV113RuntimeEntityV6entity5value8location10confidence8metadata6groups14interpretation12alternatives4roleACSS_SSSaySiGSgSdSgSDySS15IBMSwiftSDKCore4JSONOGSgSayAA12CaptureGroupVGSgAA0cD14InterpretationVSgSayAA0cD11AlternativeVGSgAA0cD4RoleVSgtcfc">init(entity:<wbr>value:<wbr>location:<wbr>confidence:<wbr>metadata:<wbr>groups:<wbr>interpretation:<wbr>alternatives:<wbr>role:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -699,8 +701,8 @@ workspace.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span>
     <span class="nv">entity</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-    <span class="nv">location</span><span class="p">:</span> <span class="p">[</span><span class="kt">Int</span><span class="p">],</span>
     <span class="nv">value</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+    <span class="nv">location</span><span class="p">:</span> <span class="p">[</span><span class="kt">Int</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">confidence</span><span class="p">:</span> <span class="kt">Double</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">metadata</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">JSON</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">groups</span><span class="p">:</span> <span class="p">[</span><span class="kt"><a href="../Structs/CaptureGroup.html">CaptureGroup</a></span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
@@ -730,6 +732,18 @@ workspace.</p>
                             <tr>
                               <td>
                                 <code>
+                                <em>value</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The entity value that was recognized in the user input.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
                                 <em>location</em>
                                 </code>
                               </td>
@@ -737,18 +751,6 @@ workspace.</p>
                                 <div>
                                   <p>An array of zero-based character offsets that indicate where the detected entity values
 begin and end in the input text.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>value</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The entity value that was recognized in the user input.</p>
                                 </div>
                               </td>
                             </tr>
@@ -772,7 +774,9 @@ begin and end in the input text.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Any metadata for the entity.</p>
+                                  <p><strong>Deprecated.</strong> Any metadata for the entity.
+Beginning with the <code>2021-06-14</code> API version, the <code><a href="../Structs/RuntimeEntity.html#/s:11AssistantV113RuntimeEntityV8metadataSDySS15IBMSwiftSDKCore4JSONOGSgvp">metadata</a></code> property is no longer returned. For information about
+system entities recognized in the user input, see the <code><a href="../Structs/RuntimeEntity.html#/s:11AssistantV113RuntimeEntityV14interpretationAA0cD14InterpretationVSgvp">interpretation</a></code> property.</p>
                                 </div>
                               </td>
                             </tr>
@@ -848,7 +852,7 @@ for the workspace.</p>
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="noopener" rel="external">jazzy ♪♫ v0.14.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="noopener" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

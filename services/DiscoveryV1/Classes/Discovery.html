@@ -17,7 +17,7 @@
     <a title="Discovery Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">DiscoveryV1 4.2.1 Docs</a> (81% documented)</p>
+        <p><a href="../index.html">DiscoveryV1 4.3.0 Docs</a> (82% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../search.json">
@@ -105,9 +105,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Credentials/SourceType.html">– SourceType</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/Credentials/Status.html">– Status</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/CredentialsList.html">CredentialsList</a>
@@ -405,6 +402,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/SourceStatus/Status.html">– Status</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/StatusDetails.html">StatusDetails</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/Term.html">Term</a>
@@ -7314,9 +7314,9 @@ any one query is <strong>10000</strong>.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C17createCredentials13environmentID10sourceType17credentialDetails6status7headers17completionHandlerySS_SSSgAA010CredentialJ0VSgAKSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AQ0R5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C17createCredentials13environmentID10sourceType17credentialDetails6status7headers17completionHandlerySS_SSSgAA010CredentialJ0VSgAA06StatusJ0VSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AT0S5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/createCredentials(environmentID:sourceType:credentialDetails:status:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C17createCredentials13environmentID10sourceType17credentialDetails6status7headers17completionHandlerySS_SSSgAA010CredentialJ0VSgAKSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AQ0R5ErrorOSgtctF">createCredentials(environmentID:<wbr>sourceType:<wbr>credentialDetails:<wbr>status:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C17createCredentials13environmentID10sourceType17credentialDetails6status7headers17completionHandlerySS_SSSgAA010CredentialJ0VSgAA06StatusJ0VSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AT0S5ErrorOSgtctF">createCredentials(environmentID:<wbr>sourceType:<wbr>credentialDetails:<wbr>status:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -7339,7 +7339,7 @@ associate a collection with the remote source.
     <span class="nv">environmentID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">sourceType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">credentialDetails</span><span class="p">:</span> <span class="kt"><a href="../Structs/CredentialDetails.html">CredentialDetails</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">status</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">status</span><span class="p">:</span> <span class="kt"><a href="../Structs/StatusDetails.html">StatusDetails</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Credentials.html">Credentials</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -7402,9 +7402,7 @@ Obtain credentials for your source from the administrator of the source.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The current status of this set of credentials. <code>connected</code> indicates that the credentials are
-available to use with the source configuration of a collection. <code>invalid</code> refers to the credentials (for example,
-the password provided has expired) and must be corrected before they can be used with a collection.</p>
+                                  <p>Object that contains details about the status of the authentication process.</p>
                                 </div>
                               </td>
                             </tr>
@@ -7531,9 +7529,9 @@ the source system.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11DiscoveryV10A0C17updateCredentials13environmentID010credentialF010sourceType0G7Details6status7headers17completionHandlerySS_S2SSgAA010CredentialJ0VSgALSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AR0R5ErrorOSgtctF"></a>
+                    <a name="/s:11DiscoveryV10A0C17updateCredentials13environmentID010credentialF010sourceType0G7Details6status7headers17completionHandlerySS_S2SSgAA010CredentialJ0VSgAA06StatusJ0VSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AU0S5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/updateCredentials(environmentID:credentialID:sourceType:credentialDetails:status:headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11DiscoveryV10A0C17updateCredentials13environmentID010credentialF010sourceType0G7Details6status7headers17completionHandlerySS_S2SSgAA010CredentialJ0VSgALSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AR0R5ErrorOSgtctF">updateCredentials(environmentID:<wbr>credentialID:<wbr>sourceType:<wbr>credentialDetails:<wbr>status:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
+                    <a class="token" href="#/s:11DiscoveryV10A0C17updateCredentials13environmentID010credentialF010sourceType0G7Details6status7headers17completionHandlerySS_S2SSgAA010CredentialJ0VSgAA06StatusJ0VSgSDyS2SGSgy15IBMSwiftSDKCore12RestResponseVyAA0D0VGSg_AU0S5ErrorOSgtctF">updateCredentials(environmentID:<wbr>credentialID:<wbr>sourceType:<wbr>credentialDetails:<wbr>status:<wbr>headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -7556,7 +7554,7 @@ the source system.</p>
     <span class="nv">credentialID</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
     <span class="nv">sourceType</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">credentialDetails</span><span class="p">:</span> <span class="kt"><a href="../Structs/CredentialDetails.html">CredentialDetails</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">status</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">status</span><span class="p">:</span> <span class="kt"><a href="../Structs/StatusDetails.html">StatusDetails</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Credentials.html">Credentials</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:11DiscoveryV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
@@ -7631,9 +7629,7 @@ Obtain credentials for your source from the administrator of the source.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The current status of this set of credentials. <code>connected</code> indicates that the credentials are
-available to use with the source configuration of a collection. <code>invalid</code> refers to the credentials (for example,
-the password provided has expired) and must be corrected before they can be used with a collection.</p>
+                                  <p>Object that contains details about the status of the authentication process.</p>
                                 </div>
                               </td>
                             </tr>
@@ -8100,7 +8096,7 @@ the password provided has expired) and must be corrected before they can be used
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="noopener" rel="external">jazzy ♪♫ v0.14.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="noopener" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

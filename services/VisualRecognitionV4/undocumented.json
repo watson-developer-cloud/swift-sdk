@@ -1,208 +1,208 @@
 {
   "warnings": [
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SupportingFiles/Shared.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/SupportingFiles/Shared.swift",
       "line": 21,
       "symbol": "WatsonJSON",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SupportingFiles/Shared.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/SupportingFiles/Shared.swift",
       "line": 24,
       "symbol": "WatsonAuthenticator",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SupportingFiles/Shared.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/SupportingFiles/Shared.swift",
       "line": 25,
       "symbol": "WatsonIAMAuthenticator",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SupportingFiles/Shared.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/SupportingFiles/Shared.swift",
       "line": 26,
       "symbol": "WatsonBasicAuthenticator",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SupportingFiles/Shared.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/SupportingFiles/Shared.swift",
       "line": 27,
       "symbol": "WatsonCloudPakForDataAuthenticator",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SupportingFiles/Shared.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/SupportingFiles/Shared.swift",
       "line": 28,
       "symbol": "WatsonTokenSourceAuthenticator",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SupportingFiles/Shared.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/SupportingFiles/Shared.swift",
       "line": 29,
       "symbol": "WatsonBearerTokenAuthenticator",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SupportingFiles/Shared.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/SupportingFiles/Shared.swift",
       "line": 30,
       "symbol": "WatsonNoAuthAuthenticator",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/VisualRecognitionV4/Models/Error.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/VisualRecognitionV4/Models/Error.swift",
       "line": 28,
       "symbol": "Error.Code.invalidField",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/VisualRecognitionV4/Models/Error.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/VisualRecognitionV4/Models/Error.swift",
       "line": 29,
       "symbol": "Error.Code.invalidHeader",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/VisualRecognitionV4/Models/Error.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/VisualRecognitionV4/Models/Error.swift",
       "line": 30,
       "symbol": "Error.Code.invalidMethod",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/VisualRecognitionV4/Models/Error.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/VisualRecognitionV4/Models/Error.swift",
       "line": 31,
       "symbol": "Error.Code.missingField",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/VisualRecognitionV4/Models/Error.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/VisualRecognitionV4/Models/Error.swift",
       "line": 32,
       "symbol": "Error.Code.serverError",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/VisualRecognitionV4/Models/ErrorTarget.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/VisualRecognitionV4/Models/ErrorTarget.swift",
       "line": 28,
       "symbol": "ErrorTarget.TypeEnum.field",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/VisualRecognitionV4/Models/ErrorTarget.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/VisualRecognitionV4/Models/ErrorTarget.swift",
       "line": 29,
       "symbol": "ErrorTarget.TypeEnum.parameter",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/VisualRecognitionV4/Models/ErrorTarget.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/VisualRecognitionV4/Models/ErrorTarget.swift",
       "line": 30,
       "symbol": "ErrorTarget.TypeEnum.header",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/VisualRecognitionV4/Models/ImageSource.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/VisualRecognitionV4/Models/ImageSource.swift",
       "line": 28,
       "symbol": "ImageSource.TypeEnum.file",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/VisualRecognitionV4/Models/ImageSource.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/VisualRecognitionV4/Models/ImageSource.swift",
       "line": 29,
       "symbol": "ImageSource.TypeEnum.url",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/VisualRecognitionV4/Models/TrainingEvent.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/VisualRecognitionV4/Models/TrainingEvent.swift",
       "line": 28,
       "symbol": "TrainingEvent.TypeEnum.objects",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/VisualRecognitionV4/Models/TrainingEvent.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/VisualRecognitionV4/Models/TrainingEvent.swift",
       "line": 35,
       "symbol": "TrainingEvent.Status.failed",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/VisualRecognitionV4/Models/TrainingEvent.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/VisualRecognitionV4/Models/TrainingEvent.swift",
       "line": 36,
       "symbol": "TrainingEvent.Status.succeeded",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/VisualRecognitionV4/Models/Warning.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/VisualRecognitionV4/Models/Warning.swift",
       "line": 28,
       "symbol": "Warning.Code.invalidField",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/VisualRecognitionV4/Models/Warning.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/VisualRecognitionV4/Models/Warning.swift",
       "line": 29,
       "symbol": "Warning.Code.invalidHeader",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/VisualRecognitionV4/Models/Warning.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/VisualRecognitionV4/Models/Warning.swift",
       "line": 30,
       "symbol": "Warning.Code.invalidMethod",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/VisualRecognitionV4/Models/Warning.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/VisualRecognitionV4/Models/Warning.swift",
       "line": 31,
       "symbol": "Warning.Code.missingField",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/VisualRecognitionV4/Models/Warning.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/VisualRecognitionV4/Models/Warning.swift",
       "line": 32,
       "symbol": "Warning.Code.serverError",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/VisualRecognitionV4/VisualRecognition.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/VisualRecognitionV4/VisualRecognition.swift",
       "line": 29,
       "symbol": "WatsonError",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/VisualRecognitionV4/VisualRecognition.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/VisualRecognitionV4/VisualRecognition.swift",
       "line": 30,
       "symbol": "WatsonResponse",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/VisualRecognitionV4/VisualRecognition.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/VisualRecognitionV4/VisualRecognition.swift",
       "line": 58,
       "symbol": "VisualRecognition.authenticator",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     }
   ],
-  "source_directory": "/Users/travis/build/watson-developer-cloud/swift-sdk"
+  "source_directory": "/Users/runner/work/swift-sdk/swift-sdk"
 }

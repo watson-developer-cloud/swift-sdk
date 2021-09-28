@@ -17,7 +17,7 @@
     <a title="EnrichmentOptions Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">DiscoveryV2 4.2.1 Docs</a> (86% documented)</p>
+        <p><a href="../index.html">DiscoveryV2 4.3.0 Docs</a> (85% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../search.json">
@@ -366,7 +366,8 @@
 
                 </div>
               </div>
-            <p>A object containing options for the current enrichment.</p>
+            <p>An object that contains options for the current enrichment. Starting with version <code>2020-08-30</code>, the enrichment options
+are not included in responses from the List Enrichments method.</p>
 
           </section>
           <section class="section task-group-section">
@@ -385,7 +386,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>An array of supported languages for this enrichment.</p>
+                        <p>An array of supported languages for this enrichment. Required when <code>type</code> is <code>dictionary</code>. Optional when <code>type</code> is
+<code>rule_based</code>. Not valid when creating any other type of enrichment.</p>
 
                       </div>
                       <div class="declaration">
@@ -412,8 +414,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The type of entity. Required when creating <code>dictionary</code> and <code>regular_expression</code> <strong>type</strong> enrichment. Not valid
-when creating any other type of enrichment.</p>
+                        <p>The name of the entity type. This value is used as the field name in the index. Required when <code>type</code> is
+<code>dictionary</code> or <code>regular_expression</code>. Not valid when creating any other type of enrichment.</p>
 
                       </div>
                       <div class="declaration">
@@ -440,8 +442,8 @@ when creating any other type of enrichment.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The regular expression to apply for this enrichment. Required only when the <strong>type</strong> of enrichment being created is
-a <code>regular_expression</code>. Not valid when creating any other type of enrichment.</p>
+                        <p>The regular expression to apply for this enrichment. Required when <code>type</code> is <code>regular_expression</code>. Not valid when
+creating any other type of enrichment.</p>
 
                       </div>
                       <div class="declaration">
@@ -468,8 +470,8 @@ a <code>regular_expression</code>. Not valid when creating any other type of enr
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The name of the result document field that this enrichment creates. Required only when the enrichment <strong>type</strong> is
-<code>rule_based</code>. Not valid when creating any other type of enrichment.</p>
+                        <p>The name of the result document field that this enrichment creates. Required when <code>type</code> is <code>rule_based</code>. Not valid
+when creating any other type of enrichment.</p>
 
                       </div>
                       <div class="declaration">
@@ -524,7 +526,8 @@ a <code>regular_expression</code>. Not valid when creating any other type of enr
                               </td>
                               <td>
                                 <div>
-                                  <p>An array of supported languages for this enrichment.</p>
+                                  <p>An array of supported languages for this enrichment. Required when <code>type</code> is
+<code>dictionary</code>. Optional when <code>type</code> is <code>rule_based</code>. Not valid when creating any other type of enrichment.</p>
                                 </div>
                               </td>
                             </tr>
@@ -536,8 +539,8 @@ a <code>regular_expression</code>. Not valid when creating any other type of enr
                               </td>
                               <td>
                                 <div>
-                                  <p>The type of entity. Required when creating <code>dictionary</code> and <code>regular_expression</code>
-<strong>type</strong> enrichment. Not valid when creating any other type of enrichment.</p>
+                                  <p>The name of the entity type. This value is used as the field name in the index. Required
+when <code>type</code> is <code>dictionary</code> or <code>regular_expression</code>. Not valid when creating any other type of enrichment.</p>
                                 </div>
                               </td>
                             </tr>
@@ -549,9 +552,8 @@ a <code>regular_expression</code>. Not valid when creating any other type of enr
                               </td>
                               <td>
                                 <div>
-                                  <p>The regular expression to apply for this enrichment. Required only when the
-<strong>type</strong> of enrichment being created is a <code>regular_expression</code>. Not valid when creating any other type of
-enrichment.</p>
+                                  <p>The regular expression to apply for this enrichment. Required when <code>type</code> is
+<code>regular_expression</code>. Not valid when creating any other type of enrichment.</p>
                                 </div>
                               </td>
                             </tr>
@@ -563,8 +565,8 @@ enrichment.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The name of the result document field that this enrichment creates. Required only when
-the enrichment <strong>type</strong> is <code>rule_based</code>. Not valid when creating any other type of enrichment.</p>
+                                  <p>The name of the result document field that this enrichment creates. Required when
+<code>type</code> is <code>rule_based</code>. Not valid when creating any other type of enrichment.</p>
                                 </div>
                               </td>
                             </tr>
@@ -584,7 +586,7 @@ the enrichment <strong>type</strong> is <code>rule_based</code>. Not valid when 
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="noopener" rel="external">jazzy ♪♫ v0.14.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="noopener" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

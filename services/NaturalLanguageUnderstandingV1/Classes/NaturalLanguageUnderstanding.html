@@ -17,7 +17,7 @@
     <a title="NaturalLanguageUnderstanding Class Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">NaturalLanguageUnderstandingV1 4.2.1 Docs</a> (83% documented)</p>
+        <p><a href="../index.html">NaturalLanguageUnderstandingV1 4.3.0 Docs</a> (83% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../search.json">
@@ -145,9 +145,6 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/KeywordsResult.html">KeywordsResult</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Structs/ListClassificationsModelsResponse.html">ListClassificationsModelsResponse</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Structs/ListModelsResults.html">ListModelsResults</a>
@@ -341,7 +338,7 @@ with Watson Knowledge Studio to detect custom entities and relations in Natural 
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The current version is
-<code>2021-03-25</code>.</p>
+<code>2021-08-01</code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -505,7 +502,7 @@ In that case, try another initializer that directly passes in the credentials.</
                               <td>
                                 <div>
                                   <p>Release date of the API version you want to use. Specify dates in YYYY-MM-DD format. The
-current version is <code>2021-03-25</code>.</p>
+current version is <code>2021-08-01</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -2029,8 +2026,8 @@ including any training data or binary artifacts.</p>
                       <div class="abstract">
                         <p>Create classifications model.</p>
 
-<p>(Beta) Creates a custom classifications model by uploading training data and associated metadata. The model begins
-the training and deploying process and is ready to use when the <code>status</code> is <code>available</code>.</p>
+<p>Creates a custom classifications model by uploading training data and associated metadata. The model begins the
+training and deploying process and is ready to use when the <code>status</code> is <code>available</code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -2186,9 +2183,9 @@ Understanding.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:30NaturalLanguageUnderstandingV10abC0C25listClassificationsModels7headers17completionHandlerySDyS2SGSg_y15IBMSwiftSDKCore12RestResponseVyAA04ListfgN0VGSg_AI0M5ErrorOSgtctF"></a>
+                    <a name="/s:30NaturalLanguageUnderstandingV10abC0C25listClassificationsModels7headers17completionHandlerySDyS2SGSg_y15IBMSwiftSDKCore12RestResponseVyAA0F9ModelListVGSg_AI0M5ErrorOSgtctF"></a>
                     <a name="//apple_ref/swift/Method/listClassificationsModels(headers:completionHandler:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV10abC0C25listClassificationsModels7headers17completionHandlerySDyS2SGSg_y15IBMSwiftSDKCore12RestResponseVyAA04ListfgN0VGSg_AI0M5ErrorOSgtctF">listClassificationsModels(headers:<wbr>completionHandler:<wbr>)</a>
+                    <a class="token" href="#/s:30NaturalLanguageUnderstandingV10abC0C25listClassificationsModels7headers17completionHandlerySDyS2SGSg_y15IBMSwiftSDKCore12RestResponseVyAA0F9ModelListVGSg_AI0M5ErrorOSgtctF">listClassificationsModels(headers:<wbr>completionHandler:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -2198,7 +2195,7 @@ Understanding.</p>
                       <div class="abstract">
                         <p>List classifications models.</p>
 
-<p>(Beta) Returns all custom classifications models associated with this service instance.</p>
+<p>Returns all custom classifications models associated with this service instance.</p>
 
                       </div>
                       <div class="declaration">
@@ -2207,7 +2204,7 @@ Understanding.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listClassificationsModels</span><span class="p">(</span>
     <span class="nv">headers</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">String</span><span class="p">]?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/ListClassificationsModelsResponse.html">ListClassificationsModelsResponse</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
+    <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV114WatsonResponsea">WatsonResponse</a></span><span class="o">&lt;</span><span class="kt"><a href="../Structs/ClassificationsModelList.html">ClassificationsModelList</a></span><span class="o">&gt;</span><span class="p">?,</span> <span class="kt"><a href="../Typealiases.html#/s:30NaturalLanguageUnderstandingV111WatsonErrora">WatsonError</a></span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -2260,7 +2257,7 @@ Understanding.</p>
                       <div class="abstract">
                         <p>Get classifications model details.</p>
 
-<p>(Beta) Returns the status of the classifications model with the given model ID.</p>
+<p>Returns the status of the classifications model with the given model ID.</p>
 
                       </div>
                       <div class="declaration">
@@ -2335,8 +2332,8 @@ Understanding.</p>
                       <div class="abstract">
                         <p>Update classifications model.</p>
 
-<p>(Beta) Overwrites the training data associated with this custom classifications model and retrains the model. The
-new model replaces the current deployment.</p>
+<p>Overwrites the training data associated with this custom classifications model and retrains the model. The new
+model replaces the current deployment.</p>
 
                       </div>
                       <div class="declaration">
@@ -2517,8 +2514,8 @@ Understanding.</p>
                       <div class="abstract">
                         <p>Delete classifications model.</p>
 
-<p>(Beta) Un-deploys the custom classifications model with the given model ID and deletes all associated customer
-data, including any training data or binary artifacts.</p>
+<p>Un-deploys the custom classifications model with the given model ID and deletes all associated customer data,
+including any training data or binary artifacts.</p>
 
                       </div>
                       <div class="declaration">
@@ -2584,7 +2581,7 @@ data, including any training data or binary artifacts.</p>
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="noopener" rel="external">jazzy ♪♫ v0.14.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="noopener" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

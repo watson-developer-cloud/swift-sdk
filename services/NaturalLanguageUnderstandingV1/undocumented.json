@@ -1,425 +1,418 @@
 {
   "warnings": [
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/CategoriesModel.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/CategoriesModel.swift",
       "line": 29,
       "symbol": "CategoriesModel.Status.starting",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/CategoriesModel.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/CategoriesModel.swift",
       "line": 30,
       "symbol": "CategoriesModel.Status.training",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/CategoriesModel.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/CategoriesModel.swift",
       "line": 31,
       "symbol": "CategoriesModel.Status.deploying",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/CategoriesModel.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/CategoriesModel.swift",
       "line": 32,
       "symbol": "CategoriesModel.Status.available",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/CategoriesModel.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/CategoriesModel.swift",
       "line": 33,
       "symbol": "CategoriesModel.Status.error",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/CategoriesModel.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/CategoriesModel.swift",
       "line": 34,
       "symbol": "CategoriesModel.Status.deleted",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/CategoriesModel.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/CategoriesModel.swift",
       "line": 92,
       "symbol": "CategoriesModel.notices",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/ClassificationsModel.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/ClassificationsModel.swift",
       "line": 29,
       "symbol": "ClassificationsModel.Status.starting",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/ClassificationsModel.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/ClassificationsModel.swift",
       "line": 30,
       "symbol": "ClassificationsModel.Status.training",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/ClassificationsModel.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/ClassificationsModel.swift",
       "line": 31,
       "symbol": "ClassificationsModel.Status.deploying",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/ClassificationsModel.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/ClassificationsModel.swift",
       "line": 32,
       "symbol": "ClassificationsModel.Status.available",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/ClassificationsModel.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/ClassificationsModel.swift",
       "line": 33,
       "symbol": "ClassificationsModel.Status.error",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/ClassificationsModel.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/ClassificationsModel.swift",
       "line": 34,
       "symbol": "ClassificationsModel.Status.deleted",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/ClassificationsModel.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/ClassificationsModel.swift",
       "line": 92,
       "symbol": "ClassificationsModel.notices",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/ListClassificationsModelsResponse.swift",
-      "line": 24,
-      "symbol": "ListClassificationsModelsResponse.models",
-      "symbol_kind": "source.lang.swift.decl.var.instance",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/ListSentimentModelsResponse.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/ListSentimentModelsResponse.swift",
       "line": 24,
       "symbol": "ListSentimentModelsResponse.models",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/Model.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/Model.swift",
       "line": 28,
       "symbol": "Model.Status.starting",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/Model.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/Model.swift",
       "line": 29,
       "symbol": "Model.Status.training",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/Model.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/Model.swift",
       "line": 30,
       "symbol": "Model.Status.deploying",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/Model.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/Model.swift",
       "line": 31,
       "symbol": "Model.Status.available",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/Model.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/Model.swift",
       "line": 32,
       "symbol": "Model.Status.error",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/Model.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/Model.swift",
       "line": 33,
       "symbol": "Model.Status.deleted",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/SemanticRolesResultAction.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/SemanticRolesResultAction.swift",
       "line": 34,
       "symbol": "SemanticRolesResultAction.verb",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/SentimentModel.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/SentimentModel.swift",
       "line": 29,
       "symbol": "SentimentModel.Status.starting",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/SentimentModel.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/SentimentModel.swift",
       "line": 30,
       "symbol": "SentimentModel.Status.training",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/SentimentModel.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/SentimentModel.swift",
       "line": 31,
       "symbol": "SentimentModel.Status.deploying",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/SentimentModel.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/SentimentModel.swift",
       "line": 32,
       "symbol": "SentimentModel.Status.available",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/SentimentModel.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/SentimentModel.swift",
       "line": 33,
       "symbol": "SentimentModel.Status.error",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/SentimentModel.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/SentimentModel.swift",
       "line": 34,
       "symbol": "SentimentModel.Status.deleted",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/SentimentModel.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/SentimentModel.swift",
       "line": 92,
       "symbol": "SentimentModel.notices",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/SyntaxResult.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/SyntaxResult.swift",
       "line": 24,
       "symbol": "SyntaxResult.tokens",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/SyntaxResult.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/SyntaxResult.swift",
       "line": 26,
       "symbol": "SyntaxResult.sentences",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
       "line": 29,
       "symbol": "TokenResult.PartOfSpeech.adj",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
       "line": 30,
       "symbol": "TokenResult.PartOfSpeech.adp",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
       "line": 31,
       "symbol": "TokenResult.PartOfSpeech.adv",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
       "line": 32,
       "symbol": "TokenResult.PartOfSpeech.aux",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
       "line": 33,
       "symbol": "TokenResult.PartOfSpeech.cconj",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
       "line": 34,
       "symbol": "TokenResult.PartOfSpeech.det",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
       "line": 35,
       "symbol": "TokenResult.PartOfSpeech.intj",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
       "line": 36,
       "symbol": "TokenResult.PartOfSpeech.noun",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
       "line": 37,
       "symbol": "TokenResult.PartOfSpeech.num",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
       "line": 38,
       "symbol": "TokenResult.PartOfSpeech.part",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
       "line": 39,
       "symbol": "TokenResult.PartOfSpeech.pron",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
       "line": 40,
       "symbol": "TokenResult.PartOfSpeech.propn",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
       "line": 41,
       "symbol": "TokenResult.PartOfSpeech.punct",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
       "line": 42,
       "symbol": "TokenResult.PartOfSpeech.sconj",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
       "line": 43,
       "symbol": "TokenResult.PartOfSpeech.sym",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
       "line": 44,
       "symbol": "TokenResult.PartOfSpeech.verb",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/Models/TokenResult.swift",
       "line": 45,
       "symbol": "TokenResult.PartOfSpeech.x",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/NaturalLanguageUnderstanding.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/NaturalLanguageUnderstanding.swift",
       "line": 29,
       "symbol": "WatsonError",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/NaturalLanguageUnderstanding.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/NaturalLanguageUnderstanding.swift",
       "line": 30,
       "symbol": "WatsonResponse",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/NaturalLanguageUnderstandingV1/NaturalLanguageUnderstanding.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/NaturalLanguageUnderstandingV1/NaturalLanguageUnderstanding.swift",
       "line": 59,
       "symbol": "NaturalLanguageUnderstanding.authenticator",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SupportingFiles/Shared.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/SupportingFiles/Shared.swift",
       "line": 21,
       "symbol": "WatsonJSON",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SupportingFiles/Shared.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/SupportingFiles/Shared.swift",
       "line": 24,
       "symbol": "WatsonAuthenticator",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SupportingFiles/Shared.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/SupportingFiles/Shared.swift",
       "line": 25,
       "symbol": "WatsonIAMAuthenticator",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SupportingFiles/Shared.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/SupportingFiles/Shared.swift",
       "line": 26,
       "symbol": "WatsonBasicAuthenticator",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SupportingFiles/Shared.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/SupportingFiles/Shared.swift",
       "line": 27,
       "symbol": "WatsonCloudPakForDataAuthenticator",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SupportingFiles/Shared.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/SupportingFiles/Shared.swift",
       "line": 28,
       "symbol": "WatsonTokenSourceAuthenticator",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SupportingFiles/Shared.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/SupportingFiles/Shared.swift",
       "line": 29,
       "symbol": "WatsonBearerTokenAuthenticator",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     },
     {
-      "file": "/Users/travis/build/watson-developer-cloud/swift-sdk/Sources/SupportingFiles/Shared.swift",
+      "file": "/Users/runner/work/swift-sdk/swift-sdk/Sources/SupportingFiles/Shared.swift",
       "line": 30,
       "symbol": "WatsonNoAuthAuthenticator",
       "symbol_kind": "source.lang.swift.decl.typealias",
       "warning": "undocumented"
     }
   ],
-  "source_directory": "/Users/travis/build/watson-developer-cloud/swift-sdk"
+  "source_directory": "/Users/runner/work/swift-sdk/swift-sdk"
 }

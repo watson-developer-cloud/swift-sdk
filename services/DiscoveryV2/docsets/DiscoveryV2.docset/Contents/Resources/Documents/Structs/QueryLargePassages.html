@@ -17,7 +17,7 @@
     <a title="QueryLargePassages Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">DiscoveryV2 4.2.1 Docs</a> (86% documented)</p>
+        <p><a href="../index.html">DiscoveryV2 4.3.0 Docs</a> (85% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../search.json">
@@ -412,7 +412,10 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>When <code>true</code>, passages will be returned within their respective result.</p>
+                        <p>If <code>true</code>, ranks the documents by document quality, and then returns the highest-ranked passages per document in a
+<code>document_passages</code> field for each document entry in the results list of the response.
+If <code>false</code>, ranks the passages from all of the documents by passage quality regardless of the document quality and
+returns them in a separate <code>passages</code> field in the response.</p>
 
                       </div>
                       <div class="declaration">
@@ -439,7 +442,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Maximum number of passages to return per result.</p>
+                        <p>Maximum number of passages to return per document in the result. Ignored if <code>passages.per_document</code> is <code>false</code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -466,7 +469,7 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A list of fields that passages are drawn from. If this parameter not specified, then all top-level fields are
+                        <p>A list of fields to extract passages from. If this parameter is an empty list, then all root-level fields are
 included.</p>
 
                       </div>
@@ -494,8 +497,7 @@ included.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The maximum number of passages to return. The search returns fewer passages if the requested total is not found.
-The maximum is <code>100</code>.</p>
+                        <p>The maximum number of passages to return. Ignored if <code>passages.per_document</code> is <code>true</code>.</p>
 
                       </div>
                       <div class="declaration">
@@ -551,16 +553,15 @@ The maximum is <code>100</code>.</p>
                       <div class="abstract">
                         <p>When true, <code>answer</code> objects are returned as part of each passage in the query results. The primary difference
 between an <code>answer</code> and a <code>passage</code> is that the length of a passage is defined by the query, where the length of an
-<code>answer</code> is calculated by Discovery based on how much text is needed to answer the question./n/nThis parameter is
-ignored if passages are not enabled for the query, or no <strong>natural_language_query</strong> is specified./n/nIf the
-<strong>find_answers</strong> parameter is set to <code>true</code> and <strong>per_document</strong> parameter is also set to <code>true</code>, then the document
-search results and the passage search results within each document are reordered using the answer confidences. The
-goal of this reordering is to do as much as possible to make sure that the first answer of the first passage of the
-first document is the best answer. Similarly, if the <strong>find_answers</strong> parameter is set to <code>true</code> and
-<strong>per_document</strong> parameter is set to <code>false</code>, then the passage search results are reordered in decreasing order of
-the highest confidence answer for each document and passage./n/nThe <strong>find_answers</strong> parameter is <strong>beta</strong>
-functionality available only on managed instances and should not be used in a production environment. This
-parameter is not available on installed instances of Discovery.</p>
+<code>answer</code> is calculated by Discovery based on how much text is needed to answer the question.
+This parameter is ignored if passages are not enabled for the query, or no <strong>natural_language_query</strong> is specified.
+If the <strong>find_answers</strong> parameter is set to <code>true</code> and <strong>per_document</strong> parameter is also set to <code>true</code>, then the
+document search results and the passage search results within each document are reordered using the answer
+confidences. The goal of this reordering is to place the best answer as the first answer of the first passage of
+the first document. Similarly, if the <strong>find_answers</strong> parameter is set to <code>true</code> and <strong>per_document</strong> parameter is
+set to <code>false</code>, then the passage search results are reordered in decreasing order of the highest confidence answer
+for each document and passage.
+The <strong>find_answers</strong> parameter is available only on managed instances of Discovery.</p>
 
                       </div>
                       <div class="declaration">
@@ -658,7 +659,10 @@ parameter is not available on installed instances of Discovery.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>When <code>true</code>, passages will be returned within their respective result.</p>
+                                  <p>If <code>true</code>, ranks the documents by document quality, and then returns the highest-ranked
+passages per document in a <code>document_passages</code> field for each document entry in the results list of the response.
+If <code>false</code>, ranks the passages from all of the documents by passage quality regardless of the document quality
+and returns them in a separate <code>passages</code> field in the response.</p>
                                 </div>
                               </td>
                             </tr>
@@ -670,7 +674,8 @@ parameter is not available on installed instances of Discovery.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>Maximum number of passages to return per result.</p>
+                                  <p>Maximum number of passages to return per document in the result. Ignored if
+<code>passages.per_document</code> is <code>false</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -682,8 +687,8 @@ parameter is not available on installed instances of Discovery.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>A list of fields that passages are drawn from. If this parameter not specified, then all
-top-level fields are included.</p>
+                                  <p>A list of fields to extract passages from. If this parameter is an empty list, then all
+root-level fields are included.</p>
                                 </div>
                               </td>
                             </tr>
@@ -695,8 +700,7 @@ top-level fields are included.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The maximum number of passages to return. The search returns fewer passages if the requested
-total is not found. The maximum is <code>100</code>.</p>
+                                  <p>The maximum number of passages to return. Ignored if <code>passages.per_document</code> is <code>true</code>.</p>
                                 </div>
                               </td>
                             </tr>
@@ -723,16 +727,16 @@ total is not found. The maximum is <code>100</code>.</p>
                                   <p>When true, <code>answer</code> objects are returned as part of each passage in the query results.
 The primary difference between an <code>answer</code> and a <code>passage</code> is that the length of a passage is defined by the
 query, where the length of an <code>answer</code> is calculated by Discovery based on how much text is needed to answer the
-question./n/nThis parameter is ignored if passages are not enabled for the query, or no
-<strong>natural_language_query</strong> is specified./n/nIf the <strong>find_answers</strong> parameter is set to <code>true</code> and
-<strong>per_document</strong> parameter is also set to <code>true</code>, then the document search results and the passage search results
-within each document are reordered using the answer confidences. The goal of this reordering is to do as much as
-possible to make sure that the first answer of the first passage of the first document is the best answer.
-Similarly, if the <strong>find_answers</strong> parameter is set to <code>true</code> and <strong>per_document</strong> parameter is set to <code>false</code>,
-then the passage search results are reordered in decreasing order of the highest confidence answer for each
-document and passage./n/nThe <strong>find_answers</strong> parameter is <strong>beta</strong> functionality available only on managed
-instances and should not be used in a production environment. This parameter is not available on installed
-instances of Discovery.</p>
+question.
+This parameter is ignored if passages are not enabled for the query, or no <strong>natural_language_query</strong> is
+specified.
+If the <strong>find_answers</strong> parameter is set to <code>true</code> and <strong>per_document</strong> parameter is also set to <code>true</code>, then the
+document search results and the passage search results within each document are reordered using the answer
+confidences. The goal of this reordering is to place the best answer as the first answer of the first passage of
+the first document. Similarly, if the <strong>find_answers</strong> parameter is set to <code>true</code> and <strong>per_document</strong> parameter
+is set to <code>false</code>, then the passage search results are reordered in decreasing order of the highest confidence
+answer for each document and passage.
+The <strong>find_answers</strong> parameter is available only on managed instances of Discovery.</p>
                                 </div>
                               </td>
                             </tr>
@@ -765,7 +769,7 @@ parmeter is specified as <code>true</code>.</p>
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="noopener" rel="external">jazzy ♪♫ v0.14.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="noopener" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

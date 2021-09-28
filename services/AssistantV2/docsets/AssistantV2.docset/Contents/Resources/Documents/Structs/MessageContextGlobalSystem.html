@@ -17,7 +17,7 @@
     <a title="MessageContextGlobalSystem Structure Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">AssistantV2 4.2.1 Docs</a> (82% documented)</p>
+        <p><a href="../index.html">AssistantV2 4.3.0 Docs</a> (82% documented)</p>
         <p class="header-right"><a href="https://github.com/watson-developer-cloud/swift-sdk"><img src="../img/gh.png"/>View on GitHub</a></p>
         <p class="header-right">
           <form role="search" action="../search.json">
@@ -268,6 +268,9 @@
                 <a href="../Structs/SearchResult.html">SearchResult</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Structs/SearchResultAnswer.html">SearchResultAnswer</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Structs/SearchResultHighlight.html">SearchResultHighlight</a>
               </li>
               <li class="nav-group-task">
@@ -499,8 +502,8 @@ interpreted either as April 3 or March 4, depending on the locale.
 current server time, and is used to calculate times mentioned in relative terms such as <code>now</code> or <code>tomorrow</code>. This
 can be useful for simulating past or future times for testing purposes, or when analyzing documents such as news
 articles.
-This value must be a UTC time value formatted according to ISO 8601 (for example, <code>2019-06-26T12:00:00Z</code> for noon
-on 26 June 2019.
+This value must be a UTC time value formatted according to ISO 8601 (for example, <code>2021-06-26T12:00:00Z</code> for noon
+UTC on 26 June 2021).
 This property is included only if the new system entities are enabled for the skill.</p>
 
                       </div>
@@ -518,9 +521,71 @@ This property is included only if the new system entities are enabled for the sk
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:11AssistantV226MessageContextGlobalSystemV8timezone6userID9turnCount6locale13referenceTimeACSSSg_AISiSgA2Itcfc"></a>
-                    <a name="//apple_ref/swift/Method/init(timezone:userID:turnCount:locale:referenceTime:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:11AssistantV226MessageContextGlobalSystemV8timezone6userID9turnCount6locale13referenceTimeACSSSg_AISiSgA2Itcfc">init(timezone:<wbr>userID:<wbr>turnCount:<wbr>locale:<wbr>referenceTime:<wbr>)</a>
+                    <a name="/s:11AssistantV226MessageContextGlobalSystemV16sessionStartTimeSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/sessionStartTime" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV226MessageContextGlobalSystemV16sessionStartTimeSSSgvp">sessionStartTime</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The time at which the session started. With the stateful <code>message</code> method, the start time is always present, and is
+set by the service based on the time the session was created. With the stateless <code>message</code> method, the start time
+is set by the service in the response to the first message, and should be returned as part of the context with each
+subsequent message in the session.
+This value is a UTC time value formatted according to ISO 8601 (for example, <code>2021-06-26T12:00:00Z</code> for noon UTC on
+26 June 2021).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">sessionStartTime</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV226MessageContextGlobalSystemV5stateSSSgvp"></a>
+                    <a name="//apple_ref/swift/Property/state" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV226MessageContextGlobalSystemV5stateSSSgvp">state</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>An encoded string that represents the configuration state of the assistant at the beginning of the conversation. If
+you are using the stateless <code>message</code> method, save this value and then send it in the context of the subsequent
+message request to avoid disruptions if there are configuration changes during the conversation (such as a change
+to a skill the assistant uses).</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">state</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:11AssistantV226MessageContextGlobalSystemV8timezone6userID9turnCount6locale13referenceTime012sessionStartN05stateACSSSg_AKSiSgA4Ktcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(timezone:userID:turnCount:locale:referenceTime:sessionStartTime:state:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:11AssistantV226MessageContextGlobalSystemV8timezone6userID9turnCount6locale13referenceTime012sessionStartN05stateACSSSg_AKSiSgA4Ktcfc">init(timezone:<wbr>userID:<wbr>turnCount:<wbr>locale:<wbr>referenceTime:<wbr>sessionStartTime:<wbr>state:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -540,7 +605,9 @@ This property is included only if the new system entities are enabled for the sk
     <span class="nv">userID</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">turnCount</span><span class="p">:</span> <span class="kt">Int</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
     <span class="nv">locale</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
-    <span class="nv">referenceTime</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
+    <span class="nv">referenceTime</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">sessionStartTime</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+    <span class="nv">state</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span>
 <span class="p">)</span></code></pre>
 
                         </div>
@@ -621,9 +688,41 @@ This property is included only if the new system entities are enabled for the sk
 specified time overrides the current server time, and is used to calculate times mentioned in relative terms such
 as <code>now</code> or <code>tomorrow</code>. This can be useful for simulating past or future times for testing purposes, or when
 analyzing documents such as news articles.
-This value must be a UTC time value formatted according to ISO 8601 (for example, <code>2019-06-26T12:00:00Z</code> for noon
-on 26 June 2019.
+This value must be a UTC time value formatted according to ISO 8601 (for example, <code>2021-06-26T12:00:00Z</code> for noon
+UTC on 26 June 2021).
 This property is included only if the new system entities are enabled for the skill.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sessionStartTime</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The time at which the session started. With the stateful <code>message</code> method, the
+start time is always present, and is set by the service based on the time the session was created. With the
+stateless <code>message</code> method, the start time is set by the service in the response to the first message, and should
+be returned as part of the context with each subsequent message in the session.
+This value is a UTC time value formatted according to ISO 8601 (for example, <code>2021-06-26T12:00:00Z</code> for noon UTC
+on 26 June 2021).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>state</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>An encoded string that represents the configuration state of the assistant at the beginning
+of the conversation. If you are using the stateless <code>message</code> method, save this value and then send it in the
+context of the subsequent message request to avoid disruptions if there are configuration changes during the
+conversation (such as a change to a skill the assistant uses).</p>
                                 </div>
                               </td>
                             </tr>
@@ -643,7 +742,7 @@ This property is included only if the new system entities are enabled for the sk
         </section>
         <section id="footer">
           <p>Copyright 2020 IBM</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="noopener" rel="external">jazzy ♪♫ v0.14.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="noopener" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

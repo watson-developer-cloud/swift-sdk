@@ -30,11 +30,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Setup Node
-      uses: actions/setup-node@v1
-      with:
-        node-version: 12
-
     - name: Install Semantic Release dependencies
       run: |
         pip3 install --user bump2version
@@ -55,8 +50,8 @@ jobs:
         echo ::set-output name=IS_NEW_RELEASE::$(npx semantic-release --dry-run | grep -c -i "Published release")
         echo "The full TAG - ${{ github.ref }}"
 
-    - name: Validate Pods
-      run: Scripts/pod-lint.sh
+    # - name: Validate Pods
+    #   run: Scripts/pod-lint.sh
 
     - name: Publish to Git Releases and Tags
       env:

@@ -62,6 +62,6 @@ jobs:
 
     - name: Publish Documentation
       env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       run: Scripts/publish-documentation-gha.sh

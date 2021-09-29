@@ -50,8 +50,8 @@ jobs:
         echo ::set-output name=IS_NEW_RELEASE::$(npx semantic-release --dry-run | grep -c -i "Published release")
         echo "The full TAG - ${{ github.ref }}"
 
-    # - name: Validate Pods
-    #   run: Scripts/pod-lint.sh
+    - name: Validate Pods
+      run: Scripts/pod-lint.sh
 
     - name: Publish to Git Releases and Tags
       if: ${{ steps.is_new_release.outputs.IS_NEW_RELEASE == '1' }}
@@ -61,7 +61,8 @@ jobs:
       run: npx semantic-release --dry-run --branches 9738_gha
 
     - name: Publish to Cocoapods
-      continue-on-error: true # Do not fail on: Unable to accept duplicate entry
+      if: ${{ steps.is_new_release.outputs.IS_NEW_RELEASE == '1' }}
+      continue-on-error: true # Do not fail on: Unable to accept duplicate entry on pod push
       env:
         COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
       run: Scripts/deploy-to-cocoapods-gha.sh

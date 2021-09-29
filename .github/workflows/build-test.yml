@@ -34,5 +34,5 @@ jobs:
          swift --version
          xcodebuild -version
 
-    # - name: Validate Pods
-    #   run: Scripts/pod-lint.sh
+    - name: Validate Pods
+      run: Scripts/pod-lint.sh

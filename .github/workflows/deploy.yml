@@ -12,7 +12,7 @@ on:
   pull_request:
     branches: [ master ]
 
-  # Allows you to run this workflow manually from the Actions tab 
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
@@ -61,6 +61,7 @@ jobs:
       run: npx semantic-release --dry-run --branches 9738_gha
 
     - name: Publish to Cocoapods
+      continue-on-error: true # Do not fail on: Unable to accept duplicate entry
       env:
         COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
       run: Scripts/deploy-to-cocoapods-gha.sh

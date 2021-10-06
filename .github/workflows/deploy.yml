@@ -7,10 +7,11 @@
 name: Deploy and Publish
 
 on:
-  push:
-    branches: [ '**' ]
-  pull_request:
+  workflow_run:
+    workflows: ["Build and Test"]
     branches: [ master ]
+    types:
+      - completed
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -58,7 +59,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      run: npx semantic-release --dry-run --branches 9739_gha
+      run: npx semantic-release # --dry-run --branches 9739_gha
 
     - name: Publish to Cocoapods
       if: ${{ steps.is_new_release.outputs.IS_NEW_RELEASE == '1' }}

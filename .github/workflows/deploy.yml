@@ -1,0 +1,76 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support documentation.
+# This workflow will do a clean install of swift dependencies, build the source code and deploy/publish a new release
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-swift
+
+name: Deploy and Publish
+
+on:
+  workflow_run:
+    workflows: ["Build and Test"]
+    branches: [ master ]
+    types:
+      - completed
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_12.3.app/Contents/Developer
+
+    name: Deploy and Publish
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install Semantic Release dependencies
+      run: |
+        pip3 install --user bump2version
+        npm install -g semantic-release
+        npm install -g @semantic-release/changelog
+        npm install -g @semantic-release/exec
+        npm install -g @semantic-release/git
+        npm install -g @semantic-release/github
+        npm install -g @semantic-release/commit-analyzer
+        npm install -g @semantic-release/release-notes-generator
+
+    - name: Check if semantic release generated a release
+      id: is_new_release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      run: |
+        echo ::set-output name=IS_NEW_RELEASE::$(npx semantic-release --dry-run | grep -c -i "Published release")
+        echo "The full TAG - ${{ github.ref }}"
+
+    - name: Validate Pods
+      run: Scripts/pod-lint.sh
+
+    - name: Publish to Git Releases and Tags
+      if: ${{ steps.is_new_release.outputs.IS_NEW_RELEASE == '1' }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      run: npx semantic-release # --dry-run --branches 9739_gha
+
+    - name: Publish to Cocoapods
+      if: ${{ steps.is_new_release.outputs.IS_NEW_RELEASE == '1' }}
+      continue-on-error: true # Do not fail on: Unable to accept duplicate entry on pod push
+      env:
+        COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
+      run: Scripts/deploy-to-cocoapods-gha.sh
+
+    - name: Publish Documentation
+      if: ${{ steps.is_new_release.outputs.IS_NEW_RELEASE == '1' }}
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      run: Scripts/publish-documentation-gha.sh

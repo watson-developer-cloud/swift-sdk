@@ -15,7 +15,7 @@ on:
 jobs:
   integration_test:
     env:
-      DEVELOPER_DIR: /Applications/Xcode_12.3.app/Contents/Developer
+      DEVELOPER_DIR: /Applications/Xcode_12.5.app/Contents/Developer
 
     name: Build and Run Integration Tests on Swift ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
@@ -28,7 +28,7 @@ jobs:
 
     - uses: maxim-lobanov/setup-xcode@v1
       with:
-        xcode-version: '12.3'
+        xcode-version: '12.5'
 
     - name: Display versions
       run: |

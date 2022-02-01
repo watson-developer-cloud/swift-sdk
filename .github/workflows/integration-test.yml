@@ -14,8 +14,6 @@ on:
 
 jobs:
   integration_test:
-    env:
-      DEVELOPER_DIR: /Applications/Xcode_12.5.app/Contents/Developer
 
     name: Build and Run Integration Tests on Swift ${{ matrix.os }}
     runs-on: ${{ matrix.os }}

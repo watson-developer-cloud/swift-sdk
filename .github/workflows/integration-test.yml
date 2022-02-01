@@ -1,0 +1,61 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support documentation.
+# This workflow will download a prebuilt Swift version, install dependencies and run integration tests
+
+name: Run Integration Tests
+
+on:
+  push:
+    branches: [ '**' ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  integration_test:
+    env:
+      DEVELOPER_DIR: /Applications/Xcode_12.3.app/Contents/Developer
+
+    name: Build and Run Integration Tests on Swift ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Display versions
+      run: |
+        swift --version
+        xcodebuild -version
+
+    - name: Execute Swift integration tests
+      # continue-on-error: true
+      env:
+        NATURAL_LANGUAGE_CLASSIFIER_APIKEY: ${{ secrets.NLC_APIKEY }}
+        NATURAL_LANGUAGE_CLASSIFIER_URL: "https://api.us-south.natural-language-classifier.watson.cloud.ibm.com"
+        LANGUAGE_TRANSLATOR_APIKEY: ${{ secrets.LT_APIKEY }}
+        LANGUAGE_TRANSLATOR_URL: "https://api.us-south.language-translator.watson.cloud.ibm.com"
+        NATURAL_LANGUAGE_UNDERSTANDING_APIKEY: ${{ secrets.NLU_APIKEY }}
+        NATURAL_LANGUAGE_UNDERSTANDING_URL: "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com"
+        TONE_ANALYZER_APIKEY: ${{ secrets.TA_APIKEY }}
+        TONE_ANALYZER_URL: "https://api.us-south.tone-analyzer.watson.cloud.ibm.com"
+        SPEECH_TO_TEXT_APIKEY: ${{ secrets.STT_APIKEY }}
+        SPEECH_TO_TEXT_URL: "https://api.us-south.speech-to-text.watson.cloud.ibm.com"
+        TEXT_TO_SPEECH_APIKEY: ${{ secrets.TTS_APIKEY }}
+        TEXT_TO_SPEECH_URL: "https://api.us-south.text-to-speech.watson.cloud.ibm.com"
+        ASSISTANT_APIKEY: ${{ secrets.WA_APIKEY }}
+        ASSISTANT_WORKSPACE_ID: ${{ secrets.WA_WORKSPACE_ID }}
+        ASSISTANT_ASSISTANT_ID: ${{ secrets.WA_ASSISTANT_ID }}
+        ASSISTANT_URL: "https://api.us-south.assistant.watson.cloud.ibm.com"
+        DISCOVERY_APIKEY: ${{ secrets.D1_APIKEY }}
+        DISCOVERY_ENVIRONMENT_ID: ${{ secrets.D1_ENVIRONMENT_ID }}
+        DISCOVERY_COLLECTION_ID: ${{ secrets.D1_COLLECTION_ID }}
+        DISCOVERY_URL: "https://api.us-south.discovery.watson.cloud.ibm.com"
+        DISCOVERY_V2_APIKEY: ${{ secrets.D2_APIKEY }}
+        DISCOVERY_V2_PROJECT_ID: ${{ secrets.D2_PROJECT_ID }}
+        DISCOVERY_V2_COLLECTION_ID: ${{ secrets.D2_COLLECTION_ID }}
+        DISCOVERY_V2_URL: "https://api.us-south.discovery.watson.cloud.ibm.com"
+      run: Scripts/pod-lint.sh

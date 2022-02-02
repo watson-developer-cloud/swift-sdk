@@ -35,9 +35,7 @@ jobs:
         ls /Applications | grep Xcode
 
     - name: Swift Build
-      run: |
-        carthage bootstrap --platform iOS
-        Scripts/pod-lint.sh
+      run: Scripts/pod-lint.sh
 
     - name: Execute Swift integration tests
       # continue-on-error: true

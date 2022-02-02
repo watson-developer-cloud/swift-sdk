@@ -32,6 +32,12 @@ jobs:
       run: |
         swift --version
         xcodebuild -version
+        ls /Applications | grep Xcode
+
+    - name: Swift Build
+      run: |
+        carthage bootstrap --platform iOS
+        Scripts/pod-lint.sh
 
     - name: Execute Swift integration tests
       # continue-on-error: true
@@ -60,4 +66,5 @@ jobs:
         DISCOVERY_V2_PROJECT_ID: ${{ secrets.D2_PROJECT_ID }}
         DISCOVERY_V2_COLLECTION_ID: ${{ secrets.D2_COLLECTION_ID }}
         DISCOVERY_V2_URL: "https://api.us-south.discovery.watson.cloud.ibm.com"
-      run: Scripts/pod-lint.sh
+      run: xcodebuild test -scheme NaturalLanguageUnderstandingV1 -destination "OS=latest,name=iPhone 12"
+

@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  **/
+import Foundation
 
 struct WatsonCredentials {
     static let AssistantAPIKey: String? = "your-api-key-here" // set to nil to use basic auth

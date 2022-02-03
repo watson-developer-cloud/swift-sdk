@@ -64,5 +64,7 @@ jobs:
         DISCOVERY_V2_PROJECT_ID: ${{ secrets.D2_PROJECT_ID }}
         DISCOVERY_V2_COLLECTION_ID: ${{ secrets.D2_COLLECTION_ID }}
         DISCOVERY_V2_URL: "https://api.us-south.discovery.watson.cloud.ibm.com"
-      run: xcodebuild test -scheme NaturalLanguageUnderstandingV1 -destination "OS=latest,name=iPhone 12"
+      run: |
+        cp Source/SupportingFiles/WatsonCredentialsExample.swift Source/SupportingFiles/WatsonCredentials.swift
+        xcodebuild test -scheme NaturalLanguageUnderstandingV1 -destination "OS=latest,name=iPhone 12"
 

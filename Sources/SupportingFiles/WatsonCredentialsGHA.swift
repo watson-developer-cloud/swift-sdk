@@ -48,7 +48,7 @@ struct WatsonCredentials {
     static let NaturalLanguageClassifierPassword = "your-password-here"
     static let NaturalLanguageClassifierURL: String? = "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com"
 
-    static let NaturalLanguageUnderstandingAPIKey = getenv("NATURAL_LANGUAGE_UNDERSTANDING_APIKEY")
+    static let NaturalLanguageUnderstandingAPIKey = ProcessInfo.processInfo.environment["NATURAL_LANGUAGE_UNDERSTANDING_APIKEY"]
     static let NaturalLanguageUnderstandingUsername = "your-username-here"
     static let NaturalLanguageUnderstandingPassword = "your-password-here"
     static let NaturalLanguageUnderstandingURL: String? = "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com"

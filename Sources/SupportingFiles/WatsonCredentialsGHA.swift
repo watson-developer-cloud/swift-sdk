@@ -48,10 +48,10 @@ struct WatsonCredentials {
     static let NaturalLanguageClassifierPassword = "your-password-here"
     static let NaturalLanguageClassifierURL: String? = "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com"
 
-    static let NaturalLanguageUnderstandingAPIKey: String? = "i9H3JaifgrMeVZbCad9WSZOI_WDcrHbd5ynSAtOpd_p4" // set to nil to use basic auth
+    static let NaturalLanguageUnderstandingAPIKey = "i9H3JaifgrMeVZbCad9WSZOI_WDcrHbd5ynSAtOpd_p4" // set to nil to use basic auth
     static let NaturalLanguageUnderstandingUsername = "your-username-here"
     static let NaturalLanguageUnderstandingPassword = "your-password-here"
-    static let NaturalLanguageUnderstandingURL: String? = "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com"
+    static let NaturalLanguageUnderstandingURL = "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com"
 
     static let PersonalityInsightsAPIKey: String? = "your-api-key-here" // set to nil to use basic auth
     static let PersonalityInsightsUsername = "your-username-here"

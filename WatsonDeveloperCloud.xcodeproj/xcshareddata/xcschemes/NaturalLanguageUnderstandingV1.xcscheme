@@ -101,6 +101,11 @@
             value = "disable"
             isEnabled = "YES">
          </EnvironmentVariable>
+        <EnvironmentVariable
+            key = "NATURAL_LANGUAGE_UNDERSTANDING_APIKEY"
+            value = "$NATURAL_LANGUAGE_UNDERSTANDING_APIKEY"
+            isEnabled = "YES">
+         </EnvironmentVariable>
       </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>

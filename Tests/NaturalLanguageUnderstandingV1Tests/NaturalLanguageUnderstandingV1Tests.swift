@@ -65,8 +65,6 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
         // print(WatsonCredentials.NaturalLanguageUnderstandingAPIKey)
         print("testtttttttttttttt")
         print(ProcessInfo.processInfo.environment["NATURAL_LANGUAGE_UNDERSTANDING_APIKEY"])
-        print(ProcessInfo.processInfo.environment["OS_ACTIVITY_MODE"])
-        print(ProcessInfo.processInfo.environment["NATURAL_SHIT"])
         naturalLanguageUnderstanding = NaturalLanguageUnderstanding(version: versionDate, authenticator: authenticator)
 
         if let url = WatsonCredentials.NaturalLanguageUnderstandingURL {

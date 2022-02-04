@@ -62,6 +62,7 @@ class NaturalLanguageUnderstandingTests: XCTestCase {
     /** Instantiate Natural Language Understanding instance. */
     func instantiateNaturalLanguageUnderstanding() {
         let authenticator = WatsonIAMAuthenticator.init(apiKey: WatsonCredentials.NaturalLanguageUnderstandingAPIKey)
+        print(WatsonCredentials.NaturalLanguageUnderstandingAPIKey)
         naturalLanguageUnderstanding = NaturalLanguageUnderstanding(version: versionDate, authenticator: authenticator)
 
         if let url = WatsonCredentials.NaturalLanguageUnderstandingURL {

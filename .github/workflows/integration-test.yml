@@ -34,9 +34,6 @@ jobs:
         xcodebuild -version
         ls /Applications | grep Xcode
 
-    - name: Swift Build
-      run: echo "Scripts/pod-lint.sh"
-
     - name: Execute Swift integration tests
       # continue-on-error: true
       env:
@@ -66,4 +63,4 @@ jobs:
         DISCOVERY_V2_URL: "https://api.us-south.discovery.watson.cloud.ibm.com"
       run: |
         cp Sources/SupportingFiles/WatsonCredentialsGHA.swift Sources/SupportingFiles/WatsonCredentials.swift
-        xcodebuild test -scheme NaturalLanguageUnderstandingV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12"
+        xcodebuild test -scheme NaturalLanguageUnderstandingV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty

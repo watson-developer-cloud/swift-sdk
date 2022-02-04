@@ -27,10 +27,6 @@ struct WatsonCredentials {
     static let AssistantV2URL: String? = nil
     static let AssistantV2ID = "cognitive-car-sample-id"
 
-    static let ConversationUsername = "your-username-here"
-    static let ConversationPassword = "your-password-here"
-    static let ConversationWorkspace = "cogntive-car-sample-workspace"
-
     static let DiscoveryAPIKey: String? = "your-api-key-here" // set to nil to use basic auth
     static let DiscoveryUsername = "your-username-here"
     static let DiscoveryPassword = "your-password-here"
@@ -38,7 +34,6 @@ struct WatsonCredentials {
 
     static let LanguageTranslatorUsername = "your-username-here"
     static let LanguageTranslatorPassword = "your-password-here"
-
     static let LanguageTranslatorV3APIKey: String? = "your-api-key-here" // set to nil to use basic auth
     static let LanguageTranslatorV3Username = "your-username-here"
     static let LanguageTranslatorV3Password = "your-password-here"
@@ -54,11 +49,6 @@ struct WatsonCredentials {
     static let NaturalLanguageUnderstandingPassword = "your-password-here"
     static let NaturalLanguageUnderstandingURL = ProcessInfo.processInfo.environment["NATURAL_LANGUAGE_UNDERSTANDING_URL"]
 
-    static let PersonalityInsightsAPIKey: String? = "your-api-key-here" // set to nil to use basic auth
-    static let PersonalityInsightsUsername = "your-username-here"
-    static let PersonalityInsightsPassword = "your-password-here"
-    static let PersonalityInsightsV3URL: String? = nil
-
     static let SpeechToTextAPIKey: String? = "your-api-key-here" // set to nil to use basic auth
     static let SpeechToTextUsername = "your-username-here"
     static let SpeechToTextPassword = "your-password-here"
@@ -73,9 +63,4 @@ struct WatsonCredentials {
     static let ToneAnalyzerUsername = "your-username-here"
     static let ToneAnalyzerPassword = "your-password-here"
     static let ToneAnalyzerURL: String? = nil
-
-    static let VisualRecognitionAPIKey: String? = "your-api-key-here" // set to nil to use Legacy API Key
-    static let VisualRecognitionLegacyAPIKey = "your-api-key-here"
-    static let VisualRecognitionURL: String? = nil
-    static let VisualRecognitionClassifierID = "carsvstrucks-classifier"
 }

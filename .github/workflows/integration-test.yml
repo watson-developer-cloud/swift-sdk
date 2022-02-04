@@ -66,5 +66,4 @@ jobs:
         DISCOVERY_V2_URL: "https://api.us-south.discovery.watson.cloud.ibm.com"
       run: |
         cp Sources/SupportingFiles/WatsonCredentialsGHA.swift Sources/SupportingFiles/WatsonCredentials.swift
-        OS_ACTIVITY_MODE=shitttttt xcodebuild test -scheme NaturalLanguageUnderstandingV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12"
-
+        xcodebuild test -scheme NaturalLanguageUnderstandingV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" OS_ACTIVITY_MODE=shitttttt

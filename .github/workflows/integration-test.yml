@@ -66,5 +66,5 @@ jobs:
         DISCOVERY_V2_URL: "https://api.us-south.discovery.watson.cloud.ibm.com"
       run: |
         cp Sources/SupportingFiles/WatsonCredentialsGHA.swift Sources/SupportingFiles/WatsonCredentials.swift
-        xcodebuild test -scheme NaturalLanguageUnderstandingV1 -destination "OS=latest,name=iPhone 12"
+        xcodebuild test -scheme NaturalLanguageUnderstandingV1 -destination "OS=latest,name=iPhone 12" NATURAL_LANGUAGE_UNDERSTANDING_APIKEY="shitttttt"
 

@@ -52,7 +52,7 @@ struct WatsonCredentials {
     static let NaturalLanguageUnderstandingAPIKey = ProcessInfo.processInfo.environment["NATURAL_LANGUAGE_UNDERSTANDING_APIKEY"] ?? "<no_apikey>"
     static let NaturalLanguageUnderstandingUsername = "your-username-here"
     static let NaturalLanguageUnderstandingPassword = "your-password-here"
-    static let NaturalLanguageUnderstandingURL: String? = "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com"
+    static let NaturalLanguageUnderstandingURL = ProcessInfo.processInfo.environment["NATURAL_LANGUAGE_UNDERSTANDING_URL"] ?? "<no_url>"
 
     static let PersonalityInsightsAPIKey: String? = "your-api-key-here" // set to nil to use basic auth
     static let PersonalityInsightsUsername = "your-username-here"

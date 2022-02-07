@@ -49,15 +49,15 @@ struct WatsonCredentials {
     static let NaturalLanguageUnderstandingPassword = "your-password-here"
     static let NaturalLanguageUnderstandingURL = ProcessInfo.processInfo.environment["NATURAL_LANGUAGE_UNDERSTANDING_URL"]
 
-    static let SpeechToTextAPIKey: String? = "your-api-key-here" // set to nil to use basic auth
+    static let SpeechToTextAPIKey = ProcessInfo.processInfo.environment["SPEECH_TO_TEXT_APIKEY"] ?? "<no_apikey>"
     static let SpeechToTextUsername = "your-username-here"
     static let SpeechToTextPassword = "your-password-here"
-    static let SpeechToTextURL: String? = nil
+    static let SpeechToTextURL = ProcessInfo.processInfo.environment["SPEECH_TO_TEXT_URL"]
 
-    static let TextToSpeechAPIKey: String? = "your-api-key-here" // set to nil to use basic auth
+    static let TextToSpeechAPIKey = ProcessInfo.processInfo.environment["TEXT_TO_SPEECH_APIKEY"] ?? "<no_apikey>"
     static let TextToSpeechUsername = "your-username-here"
     static let TextToSpeechPassword = "your-password-here"
-    static let TextToSpeechURL: String? = nil
+    static let TextToSpeechURL = ProcessInfo.processInfo.environment["TEXT_TO_SPEECH_URL"]
 
     static let ToneAnalyzerAPIKey = ProcessInfo.processInfo.environment["TONE_ANALYZER_APIKEY"] ?? "<no_apikey>"
     static let ToneAnalyzerUsername = "your-username-here"

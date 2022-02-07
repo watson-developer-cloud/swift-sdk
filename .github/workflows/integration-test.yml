@@ -67,3 +67,5 @@ jobs:
         set -o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme NaturalLanguageClassifierV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
         set -o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme NaturalLanguageUnderstandingV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
         set -o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme ToneAnalyzerV3 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+        set -o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme SpeechToTextV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+        set -o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme TextToSpeechV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty

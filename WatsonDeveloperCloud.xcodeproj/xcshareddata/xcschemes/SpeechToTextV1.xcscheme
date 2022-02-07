@@ -87,6 +87,16 @@
             value = "disable"
             isEnabled = "YES">
          </EnvironmentVariable>
+        <EnvironmentVariable
+            key = "SPEECH_TO_TEXT_APIKEY"
+            value = "$SPEECH_TO_TEXT_APIKEY"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+        <EnvironmentVariable
+            key = "SPEECH_TO_TEXT_APIKEY"
+            value = "$SPEECH_TO_TEXT_URL"
+            isEnabled = "YES">
+         </EnvironmentVariable>
       </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>

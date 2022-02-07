@@ -34,15 +34,15 @@ struct WatsonCredentials {
 
     static let LanguageTranslatorUsername = "your-username-here"
     static let LanguageTranslatorPassword = "your-password-here"
-    static let LanguageTranslatorV3APIKey: String? = "your-api-key-here" // set to nil to use basic auth
+    static let LanguageTranslatorV3APIKey = ProcessInfo.processInfo.environment["LANGUAGE_TRANSLATOR_APIKEY"] ?? "<no_apikey>"
     static let LanguageTranslatorV3Username = "your-username-here"
     static let LanguageTranslatorV3Password = "your-password-here"
-    static let LanguageTranslatorV3URL: String? = "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com"
+    static let LanguageTranslatorV3URL = ProcessInfo.processInfo.environment["LANGUAGE_TRANSLATOR_URL"]
 
-    static let NaturalLanguageClassifierAPIKey: String? = "your-api-key-here" // set to nil to use basic auth
+    static let NaturalLanguageClassifierAPIKey = ProcessInfo.processInfo.environment["NATURAL_LANGUAGE_CLASSIFIER_APIKEY"] ?? "<no_apikey>"
     static let NaturalLanguageClassifierUsername = "your-username-here"
     static let NaturalLanguageClassifierPassword = "your-password-here"
-    static let NaturalLanguageClassifierURL: String? = "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com"
+    static let NaturalLanguageClassifierURL = ProcessInfo.processInfo.environment["NATURAL_LANGUAGE_CLASSIFIER_URL"]
 
     static let NaturalLanguageUnderstandingAPIKey = ProcessInfo.processInfo.environment["NATURAL_LANGUAGE_UNDERSTANDING_APIKEY"] ?? "<no_apikey>"
     static let NaturalLanguageUnderstandingUsername = "your-username-here"
@@ -59,8 +59,8 @@ struct WatsonCredentials {
     static let TextToSpeechPassword = "your-password-here"
     static let TextToSpeechURL: String? = nil
 
-    static let ToneAnalyzerAPIKey: String? = "your-api-key-here" // set to nil to use basic auth
+    static let ToneAnalyzerAPIKey = ProcessInfo.processInfo.environment["TONE_ANALYZER_APIKEY"] ?? "<no_apikey>"
     static let ToneAnalyzerUsername = "your-username-here"
     static let ToneAnalyzerPassword = "your-password-here"
-    static let ToneAnalyzerURL: String? = nil
+    static let ToneAnalyzerURL = ProcessInfo.processInfo.environment["TONE_ANALYZER_URL"]
 }

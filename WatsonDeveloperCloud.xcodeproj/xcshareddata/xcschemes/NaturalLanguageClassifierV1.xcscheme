@@ -87,6 +87,16 @@
             value = "disable"
             isEnabled = "YES">
          </EnvironmentVariable>
+        <EnvironmentVariable
+            key = "NATURAL_LANGUAGE_CLASSIFIER_APIKEY"
+            value = "$NATURAL_LANGUAGE_CLASSIFIER_APIKEY"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+        <EnvironmentVariable
+            key = "NATURAL_LANGUAGE_CLASSIFIER_URL"
+            value = "$NATURAL_LANGUAGE_CLASSIFIER_URL"
+            isEnabled = "YES">
+         </EnvironmentVariable>
       </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>

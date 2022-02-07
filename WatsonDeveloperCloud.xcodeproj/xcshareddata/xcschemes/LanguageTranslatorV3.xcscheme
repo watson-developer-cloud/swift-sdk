@@ -81,6 +81,18 @@
             ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+      <EnvironmentVariables>
+        <EnvironmentVariable
+            key = "LANGUAGE_TRANSLATOR_APIKEY"
+            value = "$LANGUAGE_TRANSLATOR_APIKEY"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+        <EnvironmentVariable
+            key = "LANGUAGE_TRANSLATOR_URL"
+            value = "$LANGUAGE_TRANSLATOR_URL"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

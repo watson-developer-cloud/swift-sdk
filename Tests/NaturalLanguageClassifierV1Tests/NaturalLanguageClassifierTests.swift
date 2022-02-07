@@ -28,7 +28,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
 
     private var naturalLanguageClassifier: NaturalLanguageClassifier!
     private let trainedClassifierId = "084b83x538-nlc-558"
-    private let trainedClassifierName = "swift-sdk-test-classifier - DO NOT DELETE"
+    private let trainedClassifierName = "My Classifier"
     private let temporaryClassifierName = "swift-sdk-temporary-classifier"
 
     private var metadataFile: Data!

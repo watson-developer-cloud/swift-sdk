@@ -27,7 +27,7 @@ class NaturalLanguageClassifierTests: XCTestCase {
     // to update the `trainedClassifierId` property below!
 
     private var naturalLanguageClassifier: NaturalLanguageClassifier!
-    private let trainedClassifierId = "0af6f2x556-nlc-473"
+    private let trainedClassifierId = "084b83x538-nlc-558"
     private let trainedClassifierName = "swift-sdk-test-classifier - DO NOT DELETE"
     private let temporaryClassifierName = "swift-sdk-temporary-classifier"
 

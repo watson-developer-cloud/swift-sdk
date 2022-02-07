@@ -16,10 +16,10 @@
 import Foundation
 
 struct WatsonCredentials {
-    static let AssistantAPIKey: String? = "your-api-key-here" // set to nil to use basic auth
+    static let AssistantAPIKey = ProcessInfo.processInfo.environment["ASSISTANT_APIKEY"] ?? "<no_apikey>"
     static let AssistantUsername = "your-username-here"
     static let AssistantPassword = "your-password-here"
-    static let AssistantURL: String? = nil
+    static let AssistantURL = ProcessInfo.processInfo.environment["ASSISTANT_URL"]
     static let AssistantWorkspace = "cogntive-car-sample-workspace"
 
     static let AssistantV2Username = "your-username-here"

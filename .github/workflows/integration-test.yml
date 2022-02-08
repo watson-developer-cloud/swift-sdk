@@ -63,11 +63,4 @@ jobs:
         DISCOVERY_V2_URL: "https://api.us-south.discovery.watson.cloud.ibm.com"
       run: |
         cp Sources/SupportingFiles/WatsonCredentialsGHA.swift Sources/SupportingFiles/WatsonCredentials.swift
-        echo "set -o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme AssistantV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty"
-        set -o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme AssistantV2 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
-        echo set -o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme LanguageTranslatorV3 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
-        echo set -o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme NaturalLanguageClassifierV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
-        echo set -o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme NaturalLanguageUnderstandingV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
-        echo set -o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme ToneAnalyzerV3 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
-        echo set -o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme SpeechToTextV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
-        echo set -o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme TextToSpeechV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+        set -o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme AssistantV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty

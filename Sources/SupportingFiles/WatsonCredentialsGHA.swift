@@ -27,8 +27,8 @@ struct WatsonCredentials {
     static let AssistantV2URL: String? = nil
     static let AssistantV2ID = "cognitive-car-sample-id"
     static let AssistantV2PremiumAPIKey: String? = nil
-    static let AssistantV2PremiumURL String? = nil
-    static let AssistantV2PremiumAssistantID! String? = nil
+    static let AssistantV2PremiumURL: String? = nil
+    static let AssistantV2PremiumAssistantID: String? = nil
 
     static let DiscoveryAPIKey: String? = "your-api-key-here" // set to nil to use basic auth
     static let DiscoveryUsername = "your-username-here"

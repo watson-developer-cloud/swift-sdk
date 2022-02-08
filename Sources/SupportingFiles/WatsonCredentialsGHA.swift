@@ -30,10 +30,15 @@ struct WatsonCredentials {
     static let AssistantV2PremiumURL: String? = nil
     static let AssistantV2PremiumAssistantID: String? = nil
 
-    static let DiscoveryAPIKey: String? = "your-api-key-here" // set to nil to use basic auth
+    static let DiscoveryAPIKey = ProcessInfo.processInfo.environment["DISCOVERY_APIKEY"] ?? "<no_apikey>"
     static let DiscoveryUsername = "your-username-here"
     static let DiscoveryPassword = "your-password-here"
-    static let DiscoveryURL: String? = nil
+    static let DiscoveryURL = ProcessInfo.processInfo.environment["DISCOVERY_URL"]
+
+    static let DiscoveryV2APIKey = ProcessInfo.processInfo.environment["DISCOVERY_V2_APIKEY"] ?? "<no_apikey>"
+    static let DiscoveryV2ServiceURL = ProcessInfo.processInfo.environment["DISCOVERY_V2_URL"]
+    static let DiscoveryV2ProjectID = ProcessInfo.processInfo.environment["DISCOVERY_V2_PROJECT_ID"]
+    static let DiscoveryV2CollectionID = ProcessInfo.processInfo.environment["DISCOVERY_V2_COLLECTION_ID"]
 
     static let LanguageTranslatorUsername = "your-username-here"
     static let LanguageTranslatorPassword = "your-password-here"

@@ -63,4 +63,4 @@ jobs:
         DISCOVERY_V2_URL: "https://api.us-south.discovery.watson.cloud.ibm.com"
       run: |
         cp Sources/SupportingFiles/WatsonCredentialsGHA.swift Sources/SupportingFiles/WatsonCredentials.swift
-        set -o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme SpeechToTextV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+        set -o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme TextToSpeechV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty

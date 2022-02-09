@@ -92,6 +92,11 @@
             value = "$ASSISTANT_URL"
             isEnabled = "YES">
          </EnvironmentVariable>
+        <EnvironmentVariable
+            key = "ASSISTANT_ASSISTANT_ID"
+            value = "$ASSISTANT_ASSISTANT_ID"
+            isEnabled = "YES">
+         </EnvironmentVariable>
       </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>

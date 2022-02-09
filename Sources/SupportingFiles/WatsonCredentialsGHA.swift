@@ -24,8 +24,8 @@ struct WatsonCredentials {
 
     static let AssistantV2Username = "your-username-here"
     static let AssistantV2Password = "your-password-here"
-    static let AssistantV2URL: String? = nil
-    static let AssistantV2ID = "cognitive-car-sample-id"
+    static let AssistantV2URL = ProcessInfo.processInfo.environment["ASSISTANT_URL"]
+    static let AssistantV2ID = ProcessInfo.processInfo.environment["ASSISTANT_ASSISTANT_ID"]
     static let AssistantV2PremiumAPIKey: String? = nil
     static let AssistantV2PremiumURL: String? = nil
     static let AssistantV2PremiumAssistantID: String? = nil

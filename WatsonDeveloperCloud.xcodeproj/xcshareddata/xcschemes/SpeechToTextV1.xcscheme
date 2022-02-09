@@ -93,7 +93,7 @@
             isEnabled = "YES">
          </EnvironmentVariable>
         <EnvironmentVariable
-            key = "SPEECH_TO_TEXT_APIKEY"
+            key = "SPEECH_TO_TEXT_URL"
             value = "$SPEECH_TO_TEXT_URL"
             isEnabled = "YES">
          </EnvironmentVariable>

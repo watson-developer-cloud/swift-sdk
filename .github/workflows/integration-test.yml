@@ -78,7 +78,7 @@ jobs:
         echo -e "\n\033[0;35mCommand: Run NaturalLanguageUnderstandingV1 Integration tests"
         set -o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme NaturalLanguageUnderstandingV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
         echo -e "\n\033[0;35mCommand: Run SpeechToTextV1 Integration tests"
-        set +o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme SpeechToTextV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+        set +o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme SpeechToTextV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" -only-testing "SpeechToTextV1Tests/SpeechToTextTests" | xcpretty
         echo -e "\n\033[0;35mCommand: Run TextToSpeechV1 Integration tests"
         set +o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme TextToSpeechV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
         echo -e "\n\033[0;35mCommand: Run ToneAnalyzerV3 Integration tests"

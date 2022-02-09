@@ -40,6 +40,13 @@ struct WatsonCredentials {
     static let DiscoveryV2ProjectID = ProcessInfo.processInfo.environment["DISCOVERY_V2_PROJECT_ID"]
     static let DiscoveryV2CollectionID = ProcessInfo.processInfo.environment["DISCOVERY_V2_COLLECTION_ID"]
 
+    static let DiscoveryV2CPDUsername = "your-username-here"
+    static let DiscoveryV2CPDPassword = "your-password-here"
+    static let DiscoveryV2CPDURL = "your-url-here"
+    static let DiscoveryV2CPDServiceURL = "your-serviceurl-here"
+    static let DiscoveryV2CPDTestProjectID = "your-projectid-here"
+    static let DiscoveryV2CPDTestCollectionID = "your-collectioid-here"
+
     static let LanguageTranslatorUsername = "your-username-here"
     static let LanguageTranslatorPassword = "your-password-here"
     static let LanguageTranslatorV3APIKey = ProcessInfo.processInfo.environment["LANGUAGE_TRANSLATOR_APIKEY"] ?? "<no_apikey>"

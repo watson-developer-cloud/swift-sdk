@@ -81,6 +81,23 @@
             ReferencedContainer = "container:WatsonDeveloperCloud.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
+      <EnvironmentVariables>
+        <EnvironmentVariable
+            key = "ASSISTANT_APIKEY"
+            value = "$ASSISTANT_APIKEY"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+        <EnvironmentVariable
+            key = "ASSISTANT_URL"
+            value = "$ASSISTANT_URL"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+        <EnvironmentVariable
+            key = "ASSISTANT_ASSISTANT_ID"
+            value = "$ASSISTANT_ASSISTANT_ID"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

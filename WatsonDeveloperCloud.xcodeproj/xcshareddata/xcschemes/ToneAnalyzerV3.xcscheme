@@ -87,6 +87,16 @@
             value = "disable"
             isEnabled = "YES">
          </EnvironmentVariable>
+        <EnvironmentVariable
+            key = "TONE_ANALYZER_APIKEY"
+            value = "$TONE_ANALYZER_APIKEY"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+        <EnvironmentVariable
+            key = "TONE_ANALYZER_URL"
+            value = "$TONE_ANALYZER_URL"
+            isEnabled = "YES">
+         </EnvironmentVariable>
       </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>

@@ -109,6 +109,16 @@
             value = "disable"
             isEnabled = "YES">
          </EnvironmentVariable>
+        <EnvironmentVariable
+            key = "ASSISTANT_APIKEY"
+            value = "$ASSISTANT_APIKEY"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+        <EnvironmentVariable
+            key = "ASSISTANT_URL"
+            value = "$ASSISTANT_URL"
+            isEnabled = "YES">
+         </EnvironmentVariable>
       </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>

@@ -64,6 +64,28 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <EnvironmentVariables>
+        <EnvironmentVariable
+            key = "DISCOVERY_V2_APIKEY"
+            value = "$DISCOVERY_V2_APIKEY"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+        <EnvironmentVariable
+            key = "DISCOVERY_V2_URL"
+            value = "$DISCOVERY_V2_URL"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+        <EnvironmentVariable
+            key = "DISCOVERY_V2_PROJECT_ID"
+            value = "$DISCOVERY_V2_PROJECT_ID"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+        <EnvironmentVariable
+            key = "DISCOVERY_V2_COLLECTION_ID"
+            value = "$DISCOVERY_V2_COLLECTION_ID"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

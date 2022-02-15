@@ -107,6 +107,16 @@
             value = "disable"
             isEnabled = "YES">
          </EnvironmentVariable>
+        <EnvironmentVariable
+            key = "DISCOVERY_APIKEY"
+            value = "$DISCOVERY_APIKEY"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+        <EnvironmentVariable
+            key = "DISCOVERY_URL"
+            value = "$DISCOVERY_URL"
+            isEnabled = "YES">
+         </EnvironmentVariable>
       </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction

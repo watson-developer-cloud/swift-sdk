@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2018, 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ public struct SpeechModel: Codable, Equatable {
     public var url: String
 
     /**
-     Additional service features that are supported with the model.
+     Indicates whether select service features are supported with the model.
      */
     public var supportedFeatures: SupportedFeatures
 

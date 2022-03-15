@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2020.
+ * (C) Copyright IBM Corp. 2016, 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,14 +24,19 @@ public struct SpeechRecognitionResults: Codable, Equatable {
     /**
      An array of `SpeechRecognitionResult` objects that can include interim and final results (interim results are
      returned only if supported by the method). Final results are guaranteed not to change; interim results might be
-     replaced by further interim results and final results. The service periodically sends updates to the results list;
-     the `result_index` is set to the lowest index in the array that has changed; it is incremented for new results.
+     replaced by further interim results and eventually final results.
+     For the HTTP interfaces, all results arrive at the same time. For the WebSocket interface, results can be sent as
+     multiple separate responses. The service periodically sends updates to the results list. The `result_index` is
+     incremented to the lowest index in the array that has changed for new results.
+     For more information, see [Understanding speech recognition
+     results](https://cloud.ibm.com/docs/speech-to-text?topic=speech-to-text-basic-response).
      */
     public var results: [SpeechRecognitionResult]?
 
     /**
-     An index that indicates a change point in the `results` array. The service increments the index only for additional
-     results that it sends for new audio for the same request.
+     An index that indicates a change point in the `results` array. The service increments the index for additional
+     results that it sends for new audio for the same request. All results with the same index are delivered at the same
+     time. The same index can include multiple final results that are delivered with the same response.
      */
     public var resultIndex: Int?
 

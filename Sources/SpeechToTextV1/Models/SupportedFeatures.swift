@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2021.
+ * (C) Copyright IBM Corp. 2018, 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 import Foundation
 
 /**
- Additional service features that are supported with the model.
+ Indicates whether select service features are supported with the model.
  */
 public struct SupportedFeatures: Codable, Equatable {
 
@@ -28,14 +28,21 @@ public struct SupportedFeatures: Codable, Equatable {
     public var customLanguageModel: Bool
 
     /**
+     Indicates whether the customization interface can be used to create a custom acoustic model based on the language
+     model.
+     */
+    public var customAcousticModel: Bool
+
+    /**
      Indicates whether the `speaker_labels` parameter can be used with the language model.
-     **Note:** The field returns `true` for all models. However, speaker labels are supported as beta functionality only
-     for the following languages and models:
-     * For previous-generation models, the parameter can be used for Australian English, US English, German, Japanese,
-     Korean, and Spanish (both broadband and narrowband models) and UK English (narrowband model) transcription only.
-     * For next-generation models, the parameter can be used for English (Australian, Indian, UK, and US), German,
-     Japanese, Korean, and Spanish transcription only.
-     Speaker labels are not supported for any other models.
+     **Note:** The field returns `true` for all models. However, speaker labels are supported for use only with the
+     following languages and models:
+     * _For previous-generation models,_ the parameter can be used with Australian English, US English, German,
+     Japanese, Korean, and Spanish (both broadband and narrowband models) and UK English (narrowband model)
+     transcription only.
+     * _For next-generation models,_ the parameter can be used with Czech, English (Australian, Indian, UK, and US),
+     German, Japanese, Korean, and Spanish transcription only.
+     Speaker labels are not supported for use with any other languages or models.
      */
     public var speakerLabels: Bool
 
@@ -48,6 +55,7 @@ public struct SupportedFeatures: Codable, Equatable {
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case customLanguageModel = "custom_language_model"
+        case customAcousticModel = "custom_acoustic_model"
         case speakerLabels = "speaker_labels"
         case lowLatency = "low_latency"
     }

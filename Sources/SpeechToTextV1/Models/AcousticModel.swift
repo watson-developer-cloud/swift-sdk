@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2018, 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -68,7 +68,7 @@ public struct AcousticModel: Codable, Equatable {
     /**
      A list of the available versions of the custom acoustic model. Each element of the array indicates a version of the
      base model with which the custom model can be used. Multiple versions exist only if the custom model has been
-     upgraded; otherwise, only a single version is shown.
+     upgraded to a new version of its base model. Otherwise, only a single version is shown.
      */
     public var versions: [String]?
 

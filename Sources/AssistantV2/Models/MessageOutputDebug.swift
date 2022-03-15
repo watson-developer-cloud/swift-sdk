@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import Foundation
 public struct MessageOutputDebug: Codable, Equatable {
 
     /**
-     When `branch_exited` is set to `true` by the Assistant, the `branch_exited_reason` specifies whether the dialog
+     When `branch_exited` is set to `true` by the assistant, the `branch_exited_reason` specifies whether the dialog
      completed by itself or got interrupted.
      */
     public enum BranchExitedReason: String {
@@ -31,10 +31,10 @@ public struct MessageOutputDebug: Codable, Equatable {
     }
 
     /**
-     An array of objects containing detailed diagnostic information about the nodes that were triggered during
+     An array of objects containing detailed diagnostic information about dialog nodes that were triggered during
      processing of the input message.
      */
-    public var nodesVisited: [DialogNodesVisited]?
+    public var nodesVisited: [DialogNodeVisited]?
 
     /**
      An array of up to 50 messages logged with the request.
@@ -47,7 +47,7 @@ public struct MessageOutputDebug: Codable, Equatable {
     public var branchExited: Bool?
 
     /**
-     When `branch_exited` is set to `true` by the Assistant, the `branch_exited_reason` specifies whether the dialog
+     When `branch_exited` is set to `true` by the assistant, the `branch_exited_reason` specifies whether the dialog
      completed by itself or got interrupted.
      */
     public var branchExitedReason: String?

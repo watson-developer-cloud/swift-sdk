@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  **/
 
 import Foundation
-import IBMSwiftSDKCore
 
 /**
  The entity value that was recognized in the user input.
@@ -42,13 +41,6 @@ public struct RuntimeEntity: Codable, Equatable {
      A decimal percentage that represents Watson's confidence in the recognized entity.
      */
     public var confidence: Double?
-
-    /**
-     **Deprecated.** Any metadata for the entity.
-     Beginning with the `2021-06-14` API version, the `metadata` property is no longer returned. For information about
-     system entities recognized in the user input, see the `interpretation` property.
-     */
-    public var metadata: [String: JSON]?
 
     /**
      The recognized capture groups for the entity, as defined by the entity pattern.
@@ -83,7 +75,6 @@ public struct RuntimeEntity: Codable, Equatable {
         case location = "location"
         case value = "value"
         case confidence = "confidence"
-        case metadata = "metadata"
         case groups = "groups"
         case interpretation = "interpretation"
         case alternatives = "alternatives"
@@ -98,9 +89,6 @@ public struct RuntimeEntity: Codable, Equatable {
       - parameter location: An array of zero-based character offsets that indicate where the detected entity values
         begin and end in the input text.
       - parameter confidence: A decimal percentage that represents Watson's confidence in the recognized entity.
-      - parameter metadata: **Deprecated.** Any metadata for the entity.
-        Beginning with the `2021-06-14` API version, the `metadata` property is no longer returned. For information about
-        system entities recognized in the user input, see the `interpretation` property.
       - parameter groups: The recognized capture groups for the entity, as defined by the entity pattern.
       - parameter interpretation: An object containing detailed information about the entity recognized in the user
         input. This property is included only if the new system entities are enabled for the skill.
@@ -121,7 +109,6 @@ public struct RuntimeEntity: Codable, Equatable {
         value: String,
         location: [Int]? = nil,
         confidence: Double? = nil,
-        metadata: [String: JSON]? = nil,
         groups: [CaptureGroup]? = nil,
         interpretation: RuntimeEntityInterpretation? = nil,
         alternatives: [RuntimeEntityAlternative]? = nil,
@@ -132,7 +119,6 @@ public struct RuntimeEntity: Codable, Equatable {
         self.value = value
         self.location = location
         self.confidence = confidence
-        self.metadata = metadata
         self.groups = groups
         self.interpretation = interpretation
         self.alternatives = alternatives

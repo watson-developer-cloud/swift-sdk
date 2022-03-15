@@ -17,38 +17,41 @@
 import Foundation
 
 /**
- Session context data that is shared by all skills used by the assistant.
+ A reference to a media file to be sent as an attachment with the message.
  */
-public struct MessageContextGlobal: Codable, Equatable {
+public struct MessageInputAttachment: Codable, Equatable {
 
     /**
-     Built-in system properties that apply to all skills used by the assistant.
+     The URL of the media file.
      */
-    public var system: MessageContextGlobalSystem?
+    public var url: String
 
     /**
-     The session ID.
+     The media content type (such as a MIME type) of the attachment.
      */
-    public var sessionID: String?
+    public var mediaType: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case system = "system"
-        case sessionID = "session_id"
+        case url = "url"
+        case mediaType = "media_type"
     }
 
     /**
-      Initialize a `MessageContextGlobal` with member variables.
+      Initialize a `MessageInputAttachment` with member variables.
 
-      - parameter system: Built-in system properties that apply to all skills used by the assistant.
+      - parameter url: The URL of the media file.
+      - parameter mediaType: The media content type (such as a MIME type) of the attachment.
 
-      - returns: An initialized `MessageContextGlobal`.
+      - returns: An initialized `MessageInputAttachment`.
      */
     public init(
-        system: MessageContextGlobalSystem? = nil
+        url: String,
+        mediaType: String? = nil
     )
     {
-        self.system = system
+        self.url = url
+        self.mediaType = mediaType
     }
 
 }

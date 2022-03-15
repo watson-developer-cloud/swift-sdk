@@ -296,7 +296,7 @@ class AssistantV2Tests: XCTestCase {
         let description = "Test message stateless"
         let statelessMessageExpectation = self.expectation(description: description)
 
-        let testInput: MessageInputStateless = MessageInputStateless(messageType: "text", text: "This is a test", intents: nil, entities: nil, suggestionID: nil, options: nil)
+        let testInput: MessageInputStateless = MessageInputStateless(messageType: "text", text: "This is a test", intents: nil, entities: nil, suggestionID: nil, attachments: nil, options: nil)
 
         let testGlobalContext: MessageContextGlobalStateless = MessageContextGlobalStateless(system: nil, sessionID: nil)
         let testContext: MessageContextStateless = MessageContextStateless(global: testGlobalContext, skills: nil)
@@ -428,7 +428,7 @@ class AssistantV2Tests: XCTestCase {
 
         let context = MessageContext(global: global, skills: skills)
 
-        let input = MessageInput(messageType: "text", text: "Hello", options: MessageInputOptions(returnContext: true))
+        let input = MessageInput(messageType: "text", text: "Hello", attachments: [MessageInputAttachment(url: "https://api.time.com/wp-content/uploads/2021/02/Demon-Slayer.jpg")], options: MessageInputOptions(returnContext: true))
 
         // Start conversation with a non-empty context
         let expectation2 = self.expectation(description: "Start a conversation.")

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2017, 2021.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ public struct Features: Codable, Equatable {
 
     /**
      Returns text classifications for the content.
-     Supported languages: English only.
      */
     public var classifications: ClassificationsOptions?
 
@@ -93,7 +92,7 @@ public struct Features: Codable, Equatable {
     public var summarization: SummarizationOptions?
 
     /**
-     Returns a five-level taxonomy of the content. The top three categories are returned.
+     Returns a hierarchical taxonomy of the content. The top three categories are returned by default.
      Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
      */
     public var categories: CategoriesOptions?
@@ -123,7 +122,6 @@ public struct Features: Codable, Equatable {
       Initialize a `Features` with member variables.
 
       - parameter classifications: Returns text classifications for the content.
-        Supported languages: English only.
       - parameter concepts: Returns high-level concepts in the content. For example, a research paper about deep
         learning might return the concept, "Artificial Intelligence" although the term is not mentioned.
         Supported languages: English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
@@ -154,7 +152,8 @@ public struct Features: Codable, Equatable {
          Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Russian, Spanish.
       - parameter summarization: (Experimental) Returns a summary of content.
         Supported languages: English only.
-      - parameter categories: Returns a five-level taxonomy of the content. The top three categories are returned.
+      - parameter categories: Returns a hierarchical taxonomy of the content. The top three categories are returned by
+        default.
         Supported languages: Arabic, English, French, German, Italian, Japanese, Korean, Portuguese, Spanish.
       - parameter syntax: Returns tokens and sentences from the input text.
 

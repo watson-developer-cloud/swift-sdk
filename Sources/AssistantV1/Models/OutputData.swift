@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,11 +42,6 @@ public struct OutputData: Codable, Equatable {
     public var logMessages: [LogMessage]
 
     /**
-     An array of responses to the user.
-     */
-    public var text: [String]
-
-    /**
      Output intended for any channel. It is the responsibility of the client application to implement the supported
      response types.
      */
@@ -60,16 +55,14 @@ public struct OutputData: Codable, Equatable {
         case nodesVisited = "nodes_visited"
         case nodesVisitedDetails = "nodes_visited_details"
         case logMessages = "log_messages"
-        case text = "text"
         case generic = "generic"
-        static let allValues = [nodesVisited, nodesVisitedDetails, logMessages, text, generic]
+        static let allValues = [nodesVisited, nodesVisitedDetails, logMessages, generic]
     }
 
     /**
       Initialize a `OutputData` with member variables.
 
       - parameter logMessages: An array of up to 50 messages logged with the request.
-      - parameter text: An array of responses to the user.
       - parameter nodesVisited: An array of the nodes that were triggered to create the response, in the order in
         which they were visited. This information is useful for debugging and for tracing the path taken through the node
         tree.
@@ -83,7 +76,6 @@ public struct OutputData: Codable, Equatable {
      */
     public init(
         logMessages: [LogMessage],
-        text: [String],
         nodesVisited: [String]? = nil,
         nodesVisitedDetails: [DialogNodeVisitedDetails]? = nil,
         generic: [RuntimeResponseGeneric]? = nil,
@@ -91,7 +83,6 @@ public struct OutputData: Codable, Equatable {
     )
     {
         self.logMessages = logMessages
-        self.text = text
         self.nodesVisited = nodesVisited
         self.nodesVisitedDetails = nodesVisitedDetails
         self.generic = generic
@@ -103,7 +94,6 @@ public struct OutputData: Codable, Equatable {
         nodesVisited = try container.decodeIfPresent([String].self, forKey: .nodesVisited)
         nodesVisitedDetails = try container.decodeIfPresent([DialogNodeVisitedDetails].self, forKey: .nodesVisitedDetails)
         logMessages = try container.decode([LogMessage].self, forKey: .logMessages)
-        text = try container.decode([String].self, forKey: .text)
         generic = try container.decodeIfPresent([RuntimeResponseGeneric].self, forKey: .generic)
         let dynamicContainer = try decoder.container(keyedBy: DynamicKeys.self)
         additionalProperties = try dynamicContainer.decode([String: JSON].self, excluding: CodingKeys.allValues)
@@ -114,7 +104,6 @@ public struct OutputData: Codable, Equatable {
         try container.encodeIfPresent(nodesVisited, forKey: .nodesVisited)
         try container.encodeIfPresent(nodesVisitedDetails, forKey: .nodesVisitedDetails)
         try container.encode(logMessages, forKey: .logMessages)
-        try container.encode(text, forKey: .text)
         try container.encodeIfPresent(generic, forKey: .generic)
         var dynamicContainer = encoder.container(keyedBy: DynamicKeys.self)
         try dynamicContainer.encodeIfPresent(additionalProperties)

@@ -127,7 +127,6 @@ class AssistantTests: XCTestCase {
         let description1 = "Start a conversation."
         let expectation1 = self.expectation(description: description1)
 
-        let result1 = ["Hello, I’m a demo customer care virtual assistant to show you the basics.  I can help with directions to my store, hours of operation and booking an in-store appointment"]
 
         assistant.message(workspaceID: workspaceID, nodesVisitedDetails: true) {
             response, error in
@@ -159,7 +158,6 @@ class AssistantTests: XCTestCase {
 
             // verify output
             XCTAssertTrue(message.output.logMessages.isEmpty)
-            XCTAssertEqual(message.output.text, result1)
             expectation1.fulfill()
         }
         waitForExpectations()
@@ -238,8 +236,8 @@ class AssistantTests: XCTestCase {
                     let entity1 = entities![index]
                     let entity2 = message.entities[index]
                     XCTAssertEqual(entity1.entity, entity2.entity)
-                    XCTAssertEqual(entity1.location[0], entity2.location[0])
-                    XCTAssertEqual(entity1.location[1], entity2.location[1])
+                    XCTAssertEqual(entity1.location?[0], entity2.location?[0])
+                    XCTAssertEqual(entity1.location?[1], entity2.location?[1])
                     XCTAssertEqual(entity1.value, entity2.value)
                 }
 
@@ -344,8 +342,8 @@ class AssistantTests: XCTestCase {
                     let entity1 = entities![index]
                     let entity2 = message.entities[index]
                     XCTAssertEqual(entity1.entity, entity2.entity)
-                    XCTAssertEqual(entity1.location[0], entity2.location[0])
-                    XCTAssertEqual(entity1.location[1], entity2.location[1])
+                    XCTAssertEqual(entity1.location?[0], entity2.location?[0])
+                    XCTAssertEqual(entity1.location?[1], entity2.location?[1])
                     XCTAssertEqual(entity1.value, entity2.value)
                 }
 
@@ -555,7 +553,6 @@ class AssistantTests: XCTestCase {
                 XCTAssertEqual(workspace.name, workspaceName)
                 XCTAssertEqual(workspace.description, workspaceDescription)
                 XCTAssertEqual(workspace.language, workspaceLanguage)
-                XCTAssertNotNil(workspace.workspaceID)
 
                 newWorkspace = workspace.workspaceID
                 expectation1.fulfill()
@@ -688,7 +685,6 @@ class AssistantTests: XCTestCase {
             XCTAssertEqual(workspace.description, workspaceDescription)
             XCTAssertEqual(workspace.language, workspaceLanguage)
             XCTAssertEqual(workspace.webhooks, [webhook])
-            XCTAssertNotNil(workspace.workspaceID)
 
             newWorkspace = workspace.workspaceID
             expectation1.fulfill()

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2021.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,14 +22,17 @@ import IBMSwiftSDKCore
  */
 public enum DialogNodeOutputGeneric: Codable, Equatable {
 
+    case audio(DialogNodeOutputGenericDialogNodeOutputResponseTypeAudio)
     case channelTransfer(DialogNodeOutputGenericDialogNodeOutputResponseTypeChannelTransfer)
     case connectToAgent(DialogNodeOutputGenericDialogNodeOutputResponseTypeConnectToAgent)
+    case iframe(DialogNodeOutputGenericDialogNodeOutputResponseTypeIframe)
     case image(DialogNodeOutputGenericDialogNodeOutputResponseTypeImage)
     case option(DialogNodeOutputGenericDialogNodeOutputResponseTypeOption)
     case pause(DialogNodeOutputGenericDialogNodeOutputResponseTypePause)
     case searchSkill(DialogNodeOutputGenericDialogNodeOutputResponseTypeSearchSkill)
     case text(DialogNodeOutputGenericDialogNodeOutputResponseTypeText)
     case userDefined(DialogNodeOutputGenericDialogNodeOutputResponseTypeUserDefined)
+    case video(DialogNodeOutputGenericDialogNodeOutputResponseTypeVideo)
 
     private struct GenericDialogNodeOutputGeneric: Codable, Equatable {
 
@@ -45,6 +48,11 @@ public enum DialogNodeOutputGeneric: Codable, Equatable {
         let container = try decoder.singleValueContainer()
         if let genericInstance = try? container.decode(GenericDialogNodeOutputGeneric.self) {
             switch genericInstance.responseType {
+            case "audio":
+                if let val = try? container.decode(DialogNodeOutputGenericDialogNodeOutputResponseTypeAudio.self) {
+                    self = .audio(val)
+                    return
+                }
             case "channel_transfer":
                 if let val = try? container.decode(DialogNodeOutputGenericDialogNodeOutputResponseTypeChannelTransfer.self) {
                     self = .channelTransfer(val)
@@ -53,6 +61,11 @@ public enum DialogNodeOutputGeneric: Codable, Equatable {
             case "connect_to_agent":
                 if let val = try? container.decode(DialogNodeOutputGenericDialogNodeOutputResponseTypeConnectToAgent.self) {
                     self = .connectToAgent(val)
+                    return
+                }
+            case "iframe":
+                if let val = try? container.decode(DialogNodeOutputGenericDialogNodeOutputResponseTypeIframe.self) {
+                    self = .iframe(val)
                     return
                 }
             case "image":
@@ -85,6 +98,11 @@ public enum DialogNodeOutputGeneric: Codable, Equatable {
                     self = .userDefined(val)
                     return
                 }
+            case "video":
+                if let val = try? container.decode(DialogNodeOutputGenericDialogNodeOutputResponseTypeVideo.self) {
+                    self = .video(val)
+                    return
+                }
             default:
                 // falling through to throw decoding error
                 break
@@ -98,10 +116,14 @@ public enum DialogNodeOutputGeneric: Codable, Equatable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         switch self {
+        case .audio(let audio):
+            try container.encode(audio)
         case .channelTransfer(let channel_transfer):
             try container.encode(channel_transfer)
         case .connectToAgent(let connect_to_agent):
             try container.encode(connect_to_agent)
+        case .iframe(let iframe):
+            try container.encode(iframe)
         case .image(let image):
             try container.encode(image)
         case .option(let option):
@@ -114,6 +136,8 @@ public enum DialogNodeOutputGeneric: Codable, Equatable {
             try container.encode(text)
         case .userDefined(let user_defined):
             try container.encode(user_defined)
+        case .video(let video):
+            try container.encode(video)
         }
     }
 }

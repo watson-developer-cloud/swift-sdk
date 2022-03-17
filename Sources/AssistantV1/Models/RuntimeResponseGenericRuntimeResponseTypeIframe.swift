@@ -41,7 +41,7 @@ public struct RuntimeResponseGenericRuntimeResponseTypeIframe: Codable, Equatabl
     public var title: String?
 
     /**
-     The description to show with the the response.
+     The description to show with the response.
      */
     public var description: String?
 
@@ -73,7 +73,7 @@ public struct RuntimeResponseGenericRuntimeResponseTypeIframe: Codable, Equatabl
         supported by the client application or channel.
       - parameter source: The `https:` URL of the embeddable content.
       - parameter title: The title or introductory text to show before the response.
-      - parameter description: The description to show with the the response.
+      - parameter description: The description to show with the response.
       - parameter imageURL: The URL of an image that shows a preview of the embedded content.
       - parameter channels: An array of objects specifying channels for which the response is intended. If
         **channels** is present, the response is intended for a built-in integration and should not be handled by an API

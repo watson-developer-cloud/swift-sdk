@@ -15,14 +15,15 @@
  **/
 
 import Foundation
+import IBMSwiftSDKCore
 
 /**
- RuntimeResponseGenericRuntimeResponseTypeImage.
+ DialogNodeOutputGenericDialogNodeOutputResponseTypeVideo.
 
- Enums with an associated value of RuntimeResponseGenericRuntimeResponseTypeImage:
-    RuntimeResponseGeneric
+ Enums with an associated value of DialogNodeOutputGenericDialogNodeOutputResponseTypeVideo:
+    DialogNodeOutputGeneric
  */
-public struct RuntimeResponseGenericRuntimeResponseTypeImage: Codable, Equatable {
+public struct DialogNodeOutputGenericDialogNodeOutputResponseTypeVideo: Codable, Equatable {
 
     /**
      The type of response returned by the dialog node. The specified response type must be supported by the client
@@ -31,17 +32,17 @@ public struct RuntimeResponseGenericRuntimeResponseTypeImage: Codable, Equatable
     public var responseType: String
 
     /**
-     The `https:` URL of the image.
+     The `https:` URL of the video.
      */
     public var source: String
 
     /**
-     The title or introductory text to show before the response.
+     An optional title to show before the response.
      */
     public var title: String?
 
     /**
-     The description to show with the response.
+     An optional description to show with the response.
      */
     public var description: String?
 
@@ -52,7 +53,12 @@ public struct RuntimeResponseGenericRuntimeResponseTypeImage: Codable, Equatable
     public var channels: [ResponseGenericChannel]?
 
     /**
-     Descriptive text that can be used for screen readers or other situations where the image cannot be seen.
+     For internal use only.
+     */
+    public var channelOptions: [String: JSON]?
+
+    /**
+     Descriptive text that can be used for screen readers or other situations where the video cannot be seen.
      */
     public var altText: String?
 
@@ -63,24 +69,26 @@ public struct RuntimeResponseGenericRuntimeResponseTypeImage: Codable, Equatable
         case title = "title"
         case description = "description"
         case channels = "channels"
+        case channelOptions = "channel_options"
         case altText = "alt_text"
     }
 
     /**
-      Initialize a `RuntimeResponseGenericRuntimeResponseTypeImage` with member variables.
+      Initialize a `DialogNodeOutputGenericDialogNodeOutputResponseTypeVideo` with member variables.
 
       - parameter responseType: The type of response returned by the dialog node. The specified response type must be
         supported by the client application or channel.
-      - parameter source: The `https:` URL of the image.
-      - parameter title: The title or introductory text to show before the response.
-      - parameter description: The description to show with the response.
+      - parameter source: The `https:` URL of the video.
+      - parameter title: An optional title to show before the response.
+      - parameter description: An optional description to show with the response.
       - parameter channels: An array of objects specifying channels for which the response is intended. If
         **channels** is present, the response is intended for a built-in integration and should not be handled by an API
         client.
-      - parameter altText: Descriptive text that can be used for screen readers or other situations where the image
+      - parameter channelOptions: For internal use only.
+      - parameter altText: Descriptive text that can be used for screen readers or other situations where the video
         cannot be seen.
 
-      - returns: An initialized `RuntimeResponseGenericRuntimeResponseTypeImage`.
+      - returns: An initialized `DialogNodeOutputGenericDialogNodeOutputResponseTypeVideo`.
      */
     public init(
         responseType: String,
@@ -88,6 +96,7 @@ public struct RuntimeResponseGenericRuntimeResponseTypeImage: Codable, Equatable
         title: String? = nil,
         description: String? = nil,
         channels: [ResponseGenericChannel]? = nil,
+        channelOptions: [String: JSON]? = nil,
         altText: String? = nil
     )
     {
@@ -96,6 +105,7 @@ public struct RuntimeResponseGenericRuntimeResponseTypeImage: Codable, Equatable
         self.title = title
         self.description = description
         self.channels = channels
+        self.channelOptions = channelOptions
         self.altText = altText
     }
 

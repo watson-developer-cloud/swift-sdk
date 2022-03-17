@@ -17,12 +17,12 @@
 import Foundation
 
 /**
- RuntimeResponseGenericRuntimeResponseTypeImage.
+ DialogNodeOutputGenericDialogNodeOutputResponseTypeIframe.
 
- Enums with an associated value of RuntimeResponseGenericRuntimeResponseTypeImage:
-    RuntimeResponseGeneric
+ Enums with an associated value of DialogNodeOutputGenericDialogNodeOutputResponseTypeIframe:
+    DialogNodeOutputGeneric
  */
-public struct RuntimeResponseGenericRuntimeResponseTypeImage: Codable, Equatable {
+public struct DialogNodeOutputGenericDialogNodeOutputResponseTypeIframe: Codable, Equatable {
 
     /**
      The type of response returned by the dialog node. The specified response type must be supported by the client
@@ -31,19 +31,24 @@ public struct RuntimeResponseGenericRuntimeResponseTypeImage: Codable, Equatable
     public var responseType: String
 
     /**
-     The `https:` URL of the image.
+     The `https:` URL of the embeddable content.
      */
     public var source: String
 
     /**
-     The title or introductory text to show before the response.
+     An optional title to show before the response.
      */
     public var title: String?
 
     /**
-     The description to show with the response.
+     An optional description to show with the response.
      */
     public var description: String?
+
+    /**
+     The URL of an image that shows a preview of the embedded content.
+     */
+    public var imageURL: String?
 
     /**
      An array of objects specifying channels for which the response is intended. If **channels** is present, the
@@ -51,52 +56,46 @@ public struct RuntimeResponseGenericRuntimeResponseTypeImage: Codable, Equatable
      */
     public var channels: [ResponseGenericChannel]?
 
-    /**
-     Descriptive text that can be used for screen readers or other situations where the image cannot be seen.
-     */
-    public var altText: String?
-
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case responseType = "response_type"
         case source = "source"
         case title = "title"
         case description = "description"
+        case imageURL = "image_url"
         case channels = "channels"
-        case altText = "alt_text"
     }
 
     /**
-      Initialize a `RuntimeResponseGenericRuntimeResponseTypeImage` with member variables.
+      Initialize a `DialogNodeOutputGenericDialogNodeOutputResponseTypeIframe` with member variables.
 
       - parameter responseType: The type of response returned by the dialog node. The specified response type must be
         supported by the client application or channel.
-      - parameter source: The `https:` URL of the image.
-      - parameter title: The title or introductory text to show before the response.
-      - parameter description: The description to show with the response.
+      - parameter source: The `https:` URL of the embeddable content.
+      - parameter title: An optional title to show before the response.
+      - parameter description: An optional description to show with the response.
+      - parameter imageURL: The URL of an image that shows a preview of the embedded content.
       - parameter channels: An array of objects specifying channels for which the response is intended. If
         **channels** is present, the response is intended for a built-in integration and should not be handled by an API
         client.
-      - parameter altText: Descriptive text that can be used for screen readers or other situations where the image
-        cannot be seen.
 
-      - returns: An initialized `RuntimeResponseGenericRuntimeResponseTypeImage`.
+      - returns: An initialized `DialogNodeOutputGenericDialogNodeOutputResponseTypeIframe`.
      */
     public init(
         responseType: String,
         source: String,
         title: String? = nil,
         description: String? = nil,
-        channels: [ResponseGenericChannel]? = nil,
-        altText: String? = nil
+        imageURL: String? = nil,
+        channels: [ResponseGenericChannel]? = nil
     )
     {
         self.responseType = responseType
         self.source = source
         self.title = title
         self.description = description
+        self.imageURL = imageURL
         self.channels = channels
-        self.altText = altText
     }
 
 }

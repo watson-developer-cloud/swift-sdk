@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2021.
+ * (C) Copyright IBM Corp. 2016, 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  **/
 
 /**
- * IBM OpenAPI SDK Code Generator Version: 3.38.0-07189efd-20210827-205025
+ * IBM OpenAPI SDK Code Generator Version: 3.46.0-a4e29da0-20220224-210428
  **/
 
 // swiftlint:disable file_length
@@ -333,8 +333,8 @@ public class Discovery {
      - parameter environmentID: The ID of the environment.
      - parameter name: Name that identifies the environment.
      - parameter description: Description of the environment.
-     - parameter size: Size that the environment should be increased to. Environment size cannot be modified when
-       using a Lite plan. Environment size can only increased and not decreased.
+     - parameter size: Size to change the environment to. **Note:** Lite plan users cannot change the environment
+       size.
      - parameter headers: A dictionary of request headers to be sent with this request.
      - parameter completionHandler: A function executed when the request completes with a successful result or error
      */

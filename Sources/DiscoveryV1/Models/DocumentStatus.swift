@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2018, 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,7 +45,7 @@ public struct DocumentStatus: Codable, Equatable {
     /**
      The unique identifier of the document.
      */
-    public var documentID: String
+    public var documentID: String?
 
     /**
      The unique identifier for the configuration.
@@ -55,12 +55,12 @@ public struct DocumentStatus: Codable, Equatable {
     /**
      Status of the document in the ingestion process.
      */
-    public var status: String
+    public var status: String?
 
     /**
      Description of the document status.
      */
-    public var statusDescription: String
+    public var statusDescription: String?
 
     /**
      Name of the original source file (if available).
@@ -80,7 +80,7 @@ public struct DocumentStatus: Codable, Equatable {
     /**
      Array of notices produced by the document-ingestion process.
      */
-    public var notices: [Notice]
+    public var notices: [Notice]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {

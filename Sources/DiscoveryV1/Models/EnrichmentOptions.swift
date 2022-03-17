@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2018, 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,10 @@
 import Foundation
 
 /**
- Options which are specific to a particular enrichment.
+ Options that are specific to a particular enrichment.
+ The `elements` enrichment type is deprecated. Use the [Create a
+ project](https://cloud.ibm.com/apidocs/discovery-data#createproject) method of the Discovery v2 API to create a
+ `content_intelligence` project type instead.
  */
 public struct EnrichmentOptions: Codable, Equatable {
 
@@ -53,8 +56,7 @@ public struct EnrichmentOptions: Codable, Equatable {
     public var language: String?
 
     /**
-     For use with `elements` enrichments only. The element extraction model to use. The only model available is
-     `contract`.
+     The element extraction model to use, which can be `contract` only. The `elements` enrichment is deprecated.
      */
     public var model: String?
 
@@ -73,8 +75,8 @@ public struct EnrichmentOptions: Codable, Equatable {
         automatic language detection performed by the service. Valid codes are `ar` (Arabic), `en` (English), `fr`
         (French), `de` (German), `it` (Italian), `pt` (Portuguese), `ru` (Russian), `es` (Spanish), and `sv` (Swedish).
         **Note:** Not all features support all languages, automatic detection is recommended.
-      - parameter model: For use with `elements` enrichments only. The element extraction model to use. The only model
-        available is `contract`.
+      - parameter model: The element extraction model to use, which can be `contract` only. The `elements` enrichment
+        is deprecated.
 
       - returns: An initialized `EnrichmentOptions`.
      */

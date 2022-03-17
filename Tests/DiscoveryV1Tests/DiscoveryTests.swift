@@ -1071,10 +1071,10 @@ class DiscoveryTests: XCTestCase {
 
                 XCTAssertEqual(result.documentID, documentID)
                 XCTAssert(result.status == "processing" || result.status == "available")
-                XCTAssertGreaterThan(result.statusDescription.count, 0)
+                XCTAssertGreaterThan(result.statusDescription!.count, 0)
                 XCTAssert(result.filename == nil || result.filename == "KennedySpeech.html")
                 XCTAssertEqual(result.fileType, "html")
-                XCTAssertEqual(result.notices.count, 0)
+                XCTAssertEqual(result.notices!.count, 0)
                 expectation2.fulfill()
         }
         waitForExpectations(timeout: timeout)
@@ -1292,7 +1292,7 @@ class DiscoveryTests: XCTestCase {
                 XCTAssertNotNil(term.results!.first!.key)
                 XCTAssertEqual(term.results!.first!.key, "Cloud computing")
                 XCTAssertNotNil(term.results!.first!.matchingResults)
-                XCTAssertGreaterThan(term.results!.first!.matchingResults!, 0)
+                XCTAssertGreaterThan(term.results!.first!.matchingResults, 0)
                 expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
@@ -1327,7 +1327,7 @@ class DiscoveryTests: XCTestCase {
                 XCTAssertEqual(filter.type, "filter")
                 XCTAssertEqual(filter.match, "enriched_text.concepts.text:\"cloud computing\"")
                 XCTAssertNotNil(filter.matchingResults)
-                XCTAssertGreaterThan(filter.matchingResults!, 0)
+                XCTAssertGreaterThan(filter.matchingResults, 0)
                 expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
@@ -1362,7 +1362,7 @@ class DiscoveryTests: XCTestCase {
                 XCTAssertEqual(nested.type, "nested")
                 XCTAssertEqual(nested.path, "enriched_text.entities")
                 XCTAssertNotNil(nested.matchingResults)
-                XCTAssertGreaterThan(nested.matchingResults!, 0)
+                XCTAssertGreaterThan(nested.matchingResults, 0)
                 expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
@@ -1400,9 +1400,8 @@ class DiscoveryTests: XCTestCase {
                 XCTAssertNotNil(histogram.results)
                 XCTAssertGreaterThan(histogram.results!.count, 0)
                 XCTAssertNotNil(histogram.results!.first!.key)
-                XCTAssertEqual(histogram.results!.first!.key!, "0")
                 XCTAssertNotNil(histogram.results!.first!.matchingResults)
-                XCTAssertGreaterThan(histogram.results!.first!.matchingResults!, 0)
+                XCTAssertGreaterThan(histogram.results!.first!.matchingResults, 0)
                 expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
@@ -1441,7 +1440,7 @@ class DiscoveryTests: XCTestCase {
                 XCTAssertGreaterThan(timeslice.results!.count, 0)
                 XCTAssertNotNil(timeslice.results!.first!.key)
                 XCTAssertNotNil(timeslice.results!.first!.matchingResults)
-                XCTAssertGreaterThan(timeslice.results!.first!.matchingResults!, 0)
+                XCTAssertGreaterThan(timeslice.results!.first!.matchingResults, 0)
                 expectation.fulfill()
         }
         waitForExpectations(timeout: timeout)
@@ -1477,7 +1476,7 @@ class DiscoveryTests: XCTestCase {
                 XCTAssertEqual(topHits.size, 1)
                 XCTAssertNotNil(topHits.hits)
                 XCTAssertNotNil(topHits.hits!.matchingResults)
-                XCTAssertGreaterThan(topHits.hits!.matchingResults!, 0)
+                XCTAssertGreaterThan(topHits.hits!.matchingResults, 0)
                 XCTAssertNotNil(topHits.hits!.hits)
                 XCTAssertGreaterThan(topHits.hits!.hits!.count, 0)
                 expectation.fulfill()

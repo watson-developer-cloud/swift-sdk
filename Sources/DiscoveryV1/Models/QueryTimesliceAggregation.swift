@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,51 +17,45 @@
 import Foundation
 
 /**
- Histogram.
+ A specialized histogram aggregation that uses dates to create interval segments.
 
- Enums with an associated value of Histogram:
+ Enums with an associated value of QueryTimesliceAggregation:
     QueryAggregation
  */
-public struct Histogram: Codable, Equatable {
+public struct QueryTimesliceAggregation: Codable, Equatable {
 
     /**
      The type of aggregation command used. For example: term, filter, max, min, etc.
      */
-    public var type: String?
+    public var type: String
+
+    /**
+     The date field name used to create the timeslice.
+     */
+    public var field: String
+
+    /**
+     The date interval value. Valid values are seconds, minutes, hours, days, weeks, and years.
+     */
+    public var interval: String
+
+    /**
+     Identifier specified in the query request of this aggregation.
+     */
+    public var name: String?
 
     /**
      Array of aggregation results.
      */
-    public var results: [AggregationResult]?
-
-    /**
-     Number of matching results.
-     */
-    public var matchingResults: Int?
-
-    /**
-     Aggregations returned by Discovery.
-     */
-    public var aggregations: [QueryAggregation]?
-
-    /**
-     The field where the aggregation is located in the document.
-     */
-    public var field: String?
-
-    /**
-     Interval of the aggregation. (For 'histogram' type).
-     */
-    public var interval: Int?
+    public var results: [QueryTimesliceAggregationResult]?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case type = "type"
-        case results = "results"
-        case matchingResults = "matching_results"
-        case aggregations = "aggregations"
         case field = "field"
         case interval = "interval"
+        case name = "name"
+        case results = "results"
     }
 
 }

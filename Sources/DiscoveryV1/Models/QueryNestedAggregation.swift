@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,45 +17,40 @@
 import Foundation
 
 /**
- Filter.
+ A restriction that alters the document set that is used for sub-aggregations it precedes to nested documents found in
+ the field specified.
 
- Enums with an associated value of Filter:
+ Enums with an associated value of QueryNestedAggregation:
     QueryAggregation
  */
-public struct Filter: Codable, Equatable {
+public struct QueryNestedAggregation: Codable, Equatable {
 
     /**
      The type of aggregation command used. For example: term, filter, max, min, etc.
      */
-    public var type: String?
+    public var type: String
 
     /**
-     Array of aggregation results.
+     The path to the document field to scope sub-aggregations to.
      */
-    public var results: [AggregationResult]?
+    public var path: String
 
     /**
-     Number of matching results.
+     Number of nested documents found in the specified field.
      */
-    public var matchingResults: Int?
+    public var matchingResults: Int
 
     /**
-     Aggregations returned by Discovery.
+     An array of sub-aggregations.
      */
     public var aggregations: [QueryAggregation]?
-
-    /**
-     The match the aggregated results queried for.
-     */
-    public var match: String?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case type = "type"
-        case results = "results"
+        case path = "path"
         case matchingResults = "matching_results"
         case aggregations = "aggregations"
-        case match = "match"
     }
 
 }

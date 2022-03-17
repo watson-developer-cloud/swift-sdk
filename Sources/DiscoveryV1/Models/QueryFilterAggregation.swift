@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,59 +17,40 @@
 import Foundation
 
 /**
- Timeslice.
+ A modifier that narrows the document set of the sub-aggregations it precedes.
 
- Enums with an associated value of Timeslice:
+ Enums with an associated value of QueryFilterAggregation:
     QueryAggregation
  */
-public struct Timeslice: Codable, Equatable {
+public struct QueryFilterAggregation: Codable, Equatable {
 
     /**
      The type of aggregation command used. For example: term, filter, max, min, etc.
      */
-    public var type: String?
+    public var type: String
 
     /**
-     Array of aggregation results.
+     The filter that is written in Discovery Query Language syntax and is applied to the documents before
+     sub-aggregations are run.
      */
-    public var results: [AggregationResult]?
+    public var match: String
 
     /**
-     Number of matching results.
+     Number of documents that match the filter.
      */
-    public var matchingResults: Int?
+    public var matchingResults: Int
 
     /**
-     Aggregations returned by Discovery.
+     An array of sub-aggregations.
      */
     public var aggregations: [QueryAggregation]?
-
-    /**
-     The field where the aggregation is located in the document.
-     */
-    public var field: String?
-
-    /**
-     Interval of the aggregation. Valid date interval values are second/seconds minute/minutes, hour/hours, day/days,
-     week/weeks, month/months, and year/years.
-     */
-    public var interval: String?
-
-    /**
-     Used to indicate that anomaly detection should be performed. Anomaly detection is used to locate unusual datapoints
-     within a time series.
-     */
-    public var anomaly: Bool?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case type = "type"
-        case results = "results"
+        case match = "match"
         case matchingResults = "matching_results"
         case aggregations = "aggregations"
-        case field = "field"
-        case interval = "interval"
-        case anomaly = "anomaly"
     }
 
 }

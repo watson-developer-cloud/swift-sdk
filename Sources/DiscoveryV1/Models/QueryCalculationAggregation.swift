@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,48 +17,34 @@
 import Foundation
 
 /**
- TopHits.
+ Returns a scalar calculation across all documents for the field specified. Possible calculations include min, max, sum,
+ average, and unique_count.
 
- Enums with an associated value of TopHits:
+ Enums with an associated value of QueryCalculationAggregation:
     QueryAggregation
  */
-public struct TopHits: Codable, Equatable {
+public struct QueryCalculationAggregation: Codable, Equatable {
 
     /**
      The type of aggregation command used. For example: term, filter, max, min, etc.
      */
-    public var type: String?
+    public var type: String
 
     /**
-     Array of aggregation results.
+     The field to perform the calculation on.
      */
-    public var results: [AggregationResult]?
+    public var field: String
 
     /**
-     Number of matching results.
+     The value of the calculation.
      */
-    public var matchingResults: Int?
-
-    /**
-     Aggregations returned by Discovery.
-     */
-    public var aggregations: [QueryAggregation]?
-
-    /**
-     Number of top hits returned by the aggregation.
-     */
-    public var size: Int?
-
-    public var hits: TopHitsResults?
+    public var value: Double?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case type = "type"
-        case results = "results"
-        case matchingResults = "matching_results"
-        case aggregations = "aggregations"
-        case size = "size"
-        case hits = "hits"
+        case field = "field"
+        case value = "value"
     }
 
 }

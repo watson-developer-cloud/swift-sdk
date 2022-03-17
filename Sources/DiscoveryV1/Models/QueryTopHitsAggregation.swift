@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,45 +17,36 @@
 import Foundation
 
 /**
- Nested.
+ Returns the top documents ranked by the score of the query.
 
- Enums with an associated value of Nested:
+ Enums with an associated value of QueryTopHitsAggregation:
     QueryAggregation
  */
-public struct Nested: Codable, Equatable {
+public struct QueryTopHitsAggregation: Codable, Equatable {
 
     /**
      The type of aggregation command used. For example: term, filter, max, min, etc.
      */
-    public var type: String?
+    public var type: String
 
     /**
-     Array of aggregation results.
+     The number of documents to return.
      */
-    public var results: [AggregationResult]?
+    public var size: Int
 
     /**
-     Number of matching results.
+     Identifier specified in the query request of this aggregation.
      */
-    public var matchingResults: Int?
+    public var name: String?
 
-    /**
-     Aggregations returned by Discovery.
-     */
-    public var aggregations: [QueryAggregation]?
-
-    /**
-     The area of the results the aggregation was restricted to.
-     */
-    public var path: String?
+    public var hits: QueryTopHitsAggregationResult?
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case type = "type"
-        case results = "results"
-        case matchingResults = "matching_results"
-        case aggregations = "aggregations"
-        case path = "path"
+        case size = "size"
+        case name = "name"
+        case hits = "hits"
     }
 
 }

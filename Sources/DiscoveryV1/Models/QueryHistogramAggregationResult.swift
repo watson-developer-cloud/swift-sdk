@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,51 +17,30 @@
 import Foundation
 
 /**
- Term.
-
- Enums with an associated value of Term:
-    QueryAggregation
+ Histogram numeric interval result.
  */
-public struct Term: Codable, Equatable {
+public struct QueryHistogramAggregationResult: Codable, Equatable {
 
     /**
-     The type of aggregation command used. For example: term, filter, max, min, etc.
+     The value of the upper bound for the numeric segment.
      */
-    public var type: String?
+    public var key: Int
 
     /**
-     Array of aggregation results.
+     Number of documents with the specified key as the upper bound.
      */
-    public var results: [AggregationResult]?
+    public var matchingResults: Int
 
     /**
-     Number of matching results.
-     */
-    public var matchingResults: Int?
-
-    /**
-     Aggregations returned by Discovery.
+     An array of sub-aggregations.
      */
     public var aggregations: [QueryAggregation]?
 
-    /**
-     The field where the aggregation is located in the document.
-     */
-    public var field: String?
-
-    /**
-     The number of terms identified.
-     */
-    public var count: Int?
-
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case type = "type"
-        case results = "results"
+        case key = "key"
         case matchingResults = "matching_results"
         case aggregations = "aggregations"
-        case field = "field"
-        case count = "count"
     }
 
 }

@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,51 +17,36 @@
 import Foundation
 
 /**
- Calculation.
-
- Enums with an associated value of Calculation:
-    QueryAggregation
+ A timeslice interval segment.
  */
-public struct Calculation: Codable, Equatable {
+public struct QueryTimesliceAggregationResult: Codable, Equatable {
 
     /**
-     The type of aggregation command used. For example: term, filter, max, min, etc.
+     String date value of the upper bound for the timeslice interval in ISO-8601 format.
      */
-    public var type: String?
+    public var keyAsString: String
 
     /**
-     Array of aggregation results.
+     Numeric date value of the upper bound for the timeslice interval in UNIX milliseconds since epoch.
      */
-    public var results: [AggregationResult]?
+    public var key: Int
 
     /**
-     Number of matching results.
+     Number of documents with the specified key as the upper bound.
      */
-    public var matchingResults: Int?
+    public var matchingResults: Int
 
     /**
-     Aggregations returned by Discovery.
+     An array of sub-aggregations.
      */
     public var aggregations: [QueryAggregation]?
 
-    /**
-     The field where the aggregation is located in the document.
-     */
-    public var field: String?
-
-    /**
-     Value of the aggregation.
-     */
-    public var value: Double?
-
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
-        case type = "type"
-        case results = "results"
+        case keyAsString = "key_as_string"
+        case key = "key"
         case matchingResults = "matching_results"
         case aggregations = "aggregations"
-        case field = "field"
-        case value = "value"
     }
 
 }

@@ -26,7 +26,7 @@ class DiscoveryTests: XCTestCase {
     private var discovery: Discovery!
     private var projectID: String!
     private var collectionID: String!
-    private let timeout: TimeInterval = 30.0
+    private let timeout: TimeInterval = 90.0
 
     // MARK: - Test Configuration
 
@@ -37,8 +37,7 @@ class DiscoveryTests: XCTestCase {
     }
 
     func instantiateDiscovery() {
-        let authenticator = WatsonIAMAuthenticator(apiKey: WatsonCredentials.DiscoveryV2APIKey,
-                                                   url: "https://iam.test.cloud.ibm.com/identity/token")
+        let authenticator = WatsonIAMAuthenticator(apiKey: WatsonCredentials.DiscoveryV2APIKey)
 
         discovery = Discovery(version: "2020-08-12", authenticator: authenticator)
 
@@ -1134,5 +1133,202 @@ class DiscoveryTests: XCTestCase {
         }
 
         waitForExpectations(timeout: timeout)
+    }
+    
+    func testDocumentClassifierCRUD() {
+        let createExpectation = self.expectation(description: "createDocumentClassifier")
+        var generatedClassifierID: String!
+        var generatedModelID: String!
+        
+        let classifierData = loadDocument(name: "TestClassifiers", ext: "csv")!
+        
+        let documentClassifier = CreateDocumentClassifier(name: "first-classifier", language: "en", answerField: "label_answer")
+
+        discovery.createDocumentClassifier(projectID: projectID, trainingData: classifierData, classifier: documentClassifier, testData: nil, headers: nil) {
+            response, error in
+
+            if let error = error {
+                debugPrint(error.localizedDescription)
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+
+            guard let result = response?.result else {
+                XCTFail("No response")
+                return
+            }
+
+            XCTAssertNotNil(result.name)
+            XCTAssertEqual(result.name, "first-classifier")
+
+            generatedClassifierID = result.classifierID
+
+            createExpectation.fulfill()
+        }
+
+        waitForExpectations(timeout: timeout)
+
+        let getExpectation = self.expectation(description: "getDocumentClassifier")
+
+        discovery.getDocumentClassifier(projectID: projectID, classifierID: generatedClassifierID) {
+            response, error in
+
+            if let error = error {
+                debugPrint(error.localizedDescription)
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+
+            guard let result = response?.result else {
+                XCTFail("No response")
+                return
+            }
+
+            XCTAssertNotNil(result.name)
+            XCTAssertEqual(result.name, "first-classifier")
+
+            getExpectation.fulfill()
+        }
+
+        waitForExpectations(timeout: timeout)
+
+        let updateExpectation = self.expectation(description: "updateDocumentClassifier")
+        
+        let updateDocumentClassifier = UpdateDocumentClassifier(name: "updated-classifier", description: "A new description")
+
+        discovery.updateDocumentClassifier(projectID: projectID, classifierID: generatedClassifierID, classifier: updateDocumentClassifier, trainingData: nil, testData: nil, headers: nil) {
+            response, error in
+
+            if let error = error {
+                debugPrint(error.localizedDescription)
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+
+            guard let result = response?.result else {
+                XCTFail("No response")
+                return
+            }
+
+            XCTAssertEqual(result.name, "updated-classifier")
+            XCTAssertEqual(result.description, "A new description")
+
+            updateExpectation.fulfill()
+        }
+
+        waitForExpectations(timeout: timeout)
+        
+        let createModelExpectation = self.expectation(description: "createDocumentClassifierModel")
+
+        discovery.trainDocumentClassifierModel(projectID: projectID, classifierID: generatedClassifierID, name: "first-classifier-model") {
+            response, error in
+
+            if let error = error {
+                debugPrint(error.localizedDescription)
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+
+            guard let result = response?.result else {
+                XCTFail("No response")
+                return
+            }
+
+            XCTAssertNotNil(result.modelID)
+            XCTAssertNotNil(result.name)
+            XCTAssertEqual(result.name, "first-classifier-model")
+
+            generatedModelID = result.modelID
+
+            createModelExpectation.fulfill()
+        }
+
+        waitForExpectations(timeout: timeout)
+        
+        let getModelExpectation = self.expectation(description: "getDocumentClassifierModel")
+
+        discovery.getDocumentClassifierModel(projectID: projectID, classifierID: generatedClassifierID, modelID: generatedModelID) {
+            response, error in
+
+            if let error = error {
+                debugPrint(error.localizedDescription)
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+
+            guard let result = response?.result else {
+                XCTFail("No response")
+                return
+            }
+
+            XCTAssertNotNil(result.name)
+            XCTAssertEqual(result.name, "first-classifier-model")
+
+            getModelExpectation.fulfill()
+        }
+
+        waitForExpectations(timeout: timeout)
+
+        let updateModelExpectation = self.expectation(description: "updateDocumentClassifierModel")
+
+        discovery.updateDocumentClassifierModel(projectID: projectID, classifierID: generatedClassifierID, modelID: generatedModelID, name: "updated-classifier-model", description: "A new description") {
+            response, error in
+
+            if let error = error {
+                debugPrint(error.localizedDescription)
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+
+            guard let result = response?.result else {
+                XCTFail("No response")
+                return
+            }
+
+            XCTAssertEqual(result.name, "updated-classifier-model")
+            XCTAssertEqual(result.description, "A new description")
+
+            updateModelExpectation.fulfill()
+        }
+
+        waitForExpectations(timeout: timeout)
+
+        let deleteModelExpectation = self.expectation(description: "deleteDocumentClassifierModel")
+
+        discovery.deleteDocumentClassifierModel(projectID: projectID, classifierID: generatedClassifierID, modelID: generatedModelID) {
+            _, error in
+
+            if let error = error {
+                debugPrint(error.localizedDescription)
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+
+            deleteModelExpectation.fulfill()
+        }
+
+        waitForExpectations(timeout: timeout)
+
+        let deleteExpectation = self.expectation(description: "deleteDocumentClassifier")
+
+        discovery.deleteDocumentClassifier(projectID: projectID, classifierID: generatedClassifierID) {
+            _, error in
+
+            if let error = error {
+                debugPrint(error.localizedDescription)
+                XCTFail(unexpectedErrorMessage(error))
+                return
+            }
+
+            deleteExpectation.fulfill()
+        }
+
+        waitForExpectations(timeout: timeout)
+    }
+    
+    func testDocumentClassifierModelCRUD() {
+        
+
+        
     }
 }

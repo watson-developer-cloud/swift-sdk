@@ -1058,7 +1058,6 @@
 		7A0F95B81C23288E004C01C0 /* Info-Release.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Release.plist"; sourceTree = "<group>"; };
 		7A0F95C41C23288E004C01C0 /* Info-Tests.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Tests.plist"; sourceTree = "<group>"; };
 		7A31CA8D1DD3A31C0001D469 /* StockAnnouncement.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = StockAnnouncement.wav; sourceTree = "<group>"; };
-		7A6711821DD0EEEB0070CA9D /* PersonalityInsightsV3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersonalityInsightsV3.h; sourceTree = "<group>"; };
 		7A6C7B3C1D8C960300CD97FA /* WatsonCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WatsonCredentials.swift; sourceTree = "<group>"; };
 		7AAA9A1D1CEE3026002C9564 /* SpeechToText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToText.swift; sourceTree = "<group>"; };
 		7AAA9A221CEE3026002C9564 /* SpeechSample.flac */ = {isa = PBXFileReference; lastKnownFileType = file; path = SpeechSample.flac; sourceTree = "<group>"; };
@@ -1067,11 +1066,8 @@
 		7AAA9A251CEE3026002C9564 /* SpeechToTextTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechToTextTests.swift; sourceTree = "<group>"; };
 		7AAAF44E1CEE9F8800B74848 /* SpeechToTextV1.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SpeechToTextV1.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AAAF4571CEE9F8800B74848 /* SpeechToTextV1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpeechToTextV1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7AAAF5B01CEEA62C00B74848 /* NaturalLanguageClassifierV1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NaturalLanguageClassifierV1.h; sourceTree = "<group>"; };
 		7AAAF5B31CEEA62C00B74848 /* SpeechToTextV1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpeechToTextV1.h; sourceTree = "<group>"; };
 		7AAAF5B41CEEA62C00B74848 /* TextToSpeechV1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextToSpeechV1.h; sourceTree = "<group>"; };
-		7AAAF5B51CEEA62C00B74848 /* ToneAnalyzerV3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ToneAnalyzerV3.h; sourceTree = "<group>"; };
-		7AAAF5B61CEEA62C00B74848 /* VisualRecognitionV3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VisualRecognitionV3.h; sourceTree = "<group>"; };
 		7E0DACE824E578620032E040 /* analyzeDocument.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = analyzeDocument.txt; sourceTree = "<group>"; };
 		7E0DACEA24E579720032E040 /* Jeopardy.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Jeopardy.html; sourceTree = "<group>"; };
 		7E12A8CE23477FD00008906B /* DiscoveryTest+CPD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiscoveryTest+CPD.swift"; sourceTree = "<group>"; };
@@ -1236,7 +1232,6 @@
 		928204C42124BC1F0013315B /* MetricAggregation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricAggregation.swift; sourceTree = "<group>"; };
 		928204C52124BC200013315B /* MetricTokenAggregation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MetricTokenAggregation.swift; sourceTree = "<group>"; };
 		928204C62124BC200013315B /* LogQueryResponseResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogQueryResponseResult.swift; sourceTree = "<group>"; };
-		928661A82191109C0064C6FD /* CompareComplyV1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompareComplyV1.h; sourceTree = "<group>"; };
 		929A23E521123E7E00E4C78A /* TestUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TestUtilities.swift; path = ../../Tests/TestUtilities.swift; sourceTree = "<group>"; };
 		92B470672194F225006C3333 /* AssistantV1UnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistantV1UnitTests.swift; sourceTree = "<group>"; };
 		92BF69AD213F129A00FE6325 /* Shared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
@@ -1935,19 +1930,14 @@
 				CA03C886229C1918009503B9 /* InsecureConnection.swift */,
 				6800FC9C2056D7340078788A /* AssistantV1.h */,
 				924EE77D21505C2C0048C0E5 /* AssistantV2.h */,
-				928661A82191109C0064C6FD /* CompareComplyV1.h */,
 				12F800421DF71921006851D6 /* DiscoveryV1.h */,
 				7EC4FF992379E4F500F9A970 /* DiscoveryV2.h */,
 				7A0F95B81C23288E004C01C0 /* Info-Release.plist */,
 				7A0F95C41C23288E004C01C0 /* Info-Tests.plist */,
 				CAD2687B20CB0195002BA2C4 /* LanguageTranslatorV3.h */,
-				7AAAF5B01CEEA62C00B74848 /* NaturalLanguageClassifierV1.h */,
 				1241DFCC1E3810BF00B8B33E /* NaturalLanguageUnderstandingV1.h */,
-				7A6711821DD0EEEB0070CA9D /* PersonalityInsightsV3.h */,
 				7AAAF5B31CEEA62C00B74848 /* SpeechToTextV1.h */,
 				7AAAF5B41CEEA62C00B74848 /* TextToSpeechV1.h */,
-				7AAAF5B51CEEA62C00B74848 /* ToneAnalyzerV3.h */,
-				7AAAF5B61CEEA62C00B74848 /* VisualRecognitionV3.h */,
 				929A23E521123E7E00E4C78A /* TestUtilities.swift */,
 				7A6C7B3C1D8C960300CD97FA /* WatsonCredentials.swift */,
 				92BF69AD213F129A00FE6325 /* Shared.swift */,

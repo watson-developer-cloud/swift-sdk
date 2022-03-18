@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019, 2020.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ public struct Notice: Codable, Equatable {
      `missing_model`, `unsupported_model`, `smart_document_understanding_failed_incompatible_field`,
      `smart_document_understanding_failed_internal_error`, `smart_document_understanding_failed_internal_error`,
      `smart_document_understanding_failed_warning`, `smart_document_understanding_page_error`,
-     `smart_document_understanding_page_warning`. **Note:** This is not a complete list, other values might be returned.
+     `smart_document_understanding_page_warning`. **Note:** This is not a complete list. Other values might be returned.
      */
     public var noticeID: String?
 

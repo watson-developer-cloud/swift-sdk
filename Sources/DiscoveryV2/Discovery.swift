@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  **/
 
 /**
- * IBM OpenAPI SDK Code Generator Version: 3.38.0-07189efd-20210827-205025
+ * IBM OpenAPI SDK Code Generator Version: 3.46.0-a4e29da0-20220224-210428
  **/
 
 // swiftlint:disable file_length
@@ -484,26 +484,31 @@ public class Discovery {
     /**
      Query a project.
 
-     By using this method, you can construct queries. For details, see the [Discovery
+     Search your data by submitting queries that are written in natural language or formatted in the Discovery Query
+     Language. For more information, see the [Discovery
      documentation](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-query-concepts). The default query
-     parameters are defined by the settings for this project, see the [Discovery
-     documentation](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-project-defaults) for an overview of
-     the standard default settings, and see [the Projects API documentation](#create-project) for details about how to
-     set custom default query settings.
+     parameters differ by project type. For more information about the project default settings, see the [Discovery
+     documentation](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-query-defaults). See [the Projects
+     API documentation](#create-project) for details about how to set custom default query settings.
+     The length of the UTF-8 encoding of the POST body cannot exceed 10,000 bytes, which is roughly equivalent to 10,000
+     characters in English.
 
      - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
        in Discovery.
      - parameter collectionIDs: A comma-separated list of collection IDs to be queried against.
-     - parameter filter: A cacheable query that excludes documents that don't mention the query content. Filter
-       searches are better for metadata-type searches and for assessing the concepts in the data set.
-     - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
-       with the most relevant documents listed first. Use a query search when you want to find the most relevant search
-       results.
-     - parameter naturalLanguageQuery: A natural language query that returns relevant documents by utilizing training
-       data and natural language understanding.
+     - parameter filter: Searches for documents that match the Discovery Query Language criteria that is specified as
+       input. Filter calls are cached and are faster than query calls because the results are not ordered by relevance.
+       When used with the `aggregation`, `query`, or `natural_language_query` parameters, the `filter` parameter runs
+       first. This parameter is useful for limiting results to those that contain specific metadata values.
+     - parameter query: A query search that is written in the Discovery Query Language and returns all matching
+       documents in your data set with full enrichments and full text, and with the most relevant documents listed
+       first. Use a query search when you want to find the most relevant search results.
+     - parameter naturalLanguageQuery: A natural language query that returns relevant documents by using training data
+       and natural language understanding.
      - parameter aggregation: An aggregation search that returns an exact answer by combining query search with
-       filters. Useful for applications to build lists, tables, and time series. For a full list of possible
-       aggregations, see the Query reference.
+       filters. Useful for applications to build lists, tables, and time series. For more information about the
+       supported types of aggregations, see the [Discovery
+       documentation](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-query-aggregations).
      - parameter count: Number of results to return.
      - parameter `return`: A list of the fields in the document hierarchy to return. If this parameter is an empty
        list, then all fields are returned.
@@ -512,8 +517,10 @@ public class Discovery {
      - parameter sort: A comma-separated list of fields in the document to sort on. You can optionally specify a sort
        direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort
        direction if no prefix is specified.
-     - parameter highlight: When `true`, a highlight field is returned for each result which contains the fields which
-       match the query with `<em></em>` tags around the matching query terms.
+     - parameter highlight: When `true`, a highlight field is returned for each result that contains fields that match
+       the query. The matching query terms are emphasized with surrounding `<em></em>` tags. This parameter is ignored
+       if `passages.enabled` and `passages.per_document` are `true`, in which case passages are returned for each
+       document instead of highlights.
      - parameter spellingSuggestions: When `true` and the **natural_language_query** parameter is used, the
        **natural_language_query** parameter is spell checked. The most likely correction is returned in the
        **suggested_query** field of the response (if one exists).
@@ -749,14 +756,17 @@ public class Discovery {
      - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
        in Discovery.
      - parameter collectionID: The ID of the collection.
-     - parameter filter: A cacheable query that excludes documents that don't mention the query content. Filter
-       searches are better for metadata-type searches and for assessing the concepts in the data set.
-     - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
-       with the most relevant documents listed first.
-     - parameter naturalLanguageQuery: A natural language query that returns relevant documents by utilizing training
-       data and natural language understanding.
+     - parameter filter: Searches for documents that match the Discovery Query Language criteria that is specified as
+       input. Filter calls are cached and are faster than query calls because the results are not ordered by relevance.
+       When used with the `aggregation`, `query`, or `natural_language_query` parameters, the `filter` parameter runs
+       first. This parameter is useful for limiting results to those that contain specific metadata values.
+     - parameter query: A query search that is written in the Discovery Query Language and returns all matching
+       documents in your data set with full enrichments and full text, and with the most relevant documents listed
+       first.
+     - parameter naturalLanguageQuery: A natural language query that returns relevant documents by using training data
+       and natural language understanding.
      - parameter count: Number of results to return. The maximum for the **count** and **offset** values together in
-       any one query is **10000**.
+       any one query is **10,000**.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
        results that are returned is 10 and the offset is 8, it returns the last two results. The maximum for the
        **count** and **offset** values together in any one query is **10000**.
@@ -842,14 +852,17 @@ public class Discovery {
 
      - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
        in Discovery.
-     - parameter filter: A cacheable query that excludes documents that don't mention the query content. Filter
-       searches are better for metadata-type searches and for assessing the concepts in the data set.
-     - parameter query: A query search returns all documents in your data set with full enrichments and full text, but
-       with the most relevant documents listed first.
-     - parameter naturalLanguageQuery: A natural language query that returns relevant documents by utilizing training
-       data and natural language understanding.
+     - parameter filter: Searches for documents that match the Discovery Query Language criteria that is specified as
+       input. Filter calls are cached and are faster than query calls because the results are not ordered by relevance.
+       When used with the `aggregation`, `query`, or `natural_language_query` parameters, the `filter` parameter runs
+       first. This parameter is useful for limiting results to those that contain specific metadata values.
+     - parameter query: A query search that is written in the Discovery Query Language and returns all matching
+       documents in your data set with full enrichments and full text, and with the most relevant documents listed
+       first.
+     - parameter naturalLanguageQuery: A natural language query that returns relevant documents by using training data
+       and natural language understanding.
      - parameter count: Number of results to return. The maximum for the **count** and **offset** values together in
-       any one query is **10000**.
+       any one query is **10,000**.
      - parameter offset: The number of query results to skip at the beginning. For example, if the total number of
        results that are returned is 10 and the offset is 8, it returns the last two results. The maximum for the
        **count** and **offset** values together in any one query is **10000**.
@@ -1054,14 +1067,14 @@ public class Discovery {
      the **Content-Type** parameter is missing or is one of the generic media types (for example,
      `application/octet-stream`), then the service attempts to automatically detect the document's media type.
        * The following field names are reserved and are filtered out if present after normalization: `id`, `score`,
-     `highlight`, and any field with the prefix of: `_`, `+`, or `-`
+     `highlight`, and any field with the characters `_`, `+`, or `-` as a prefix.
        * Fields with empty name values after normalization are filtered out before indexing.
-       * Fields that contain the following characters after normalization are filtered out before indexing: `#` and `,`
+       * Fields that contain the characters `#` or `,` after normalization are filtered out before indexing.
        If the document is uploaded to a collection that shares its data with another collection, the
      **X-Watson-Discovery-Force** header must be set to `true`.
-     **Note:** You can assign an ID to a document that you add by appending the ID to the endpoint
-     (`/v2/projects/{project_id}/collections/{collection_id}/documents/{document_id}`). If a document already exists
-     with the specified ID, it is replaced.
+     **Note:** In curl requests only, you can assign an ID to a document that you add by appending the ID to the
+     endpoint (`/v2/projects/{project_id}/collections/{collection_id}/documents/{document_id}`). If a document already
+     exists with the specified ID, it is replaced.
      **Note:** This operation works with a file upload collection. It cannot be used to modify a collection that crawls
      an external data source.
 
@@ -1163,8 +1176,8 @@ public class Discovery {
      **X-Watson-Discovery-Force** header must be set to `true`.
      **Note:** When uploading a new document with this method it automatically replaces any document stored with the
      same **document_id** if it exists.
-     **Note:** This operation only works on collections created to accept direct file uploads. It cannot be used to
-     modify a collection that connects to an external source such as Microsoft SharePoint.
+     **Note:** This operation works with a file upload collection. It cannot be used to modify a collection that crawls
+     an external data source.
      **Note:** If an uploaded document is segmented, all segments are overwritten, even if the updated version of the
      document has fewer segments.
 
@@ -1718,424 +1731,6 @@ public class Discovery {
     }
 
     /**
-     Analyze a Document.
-
-     Process a document and return it for realtime use. Supports JSON files only.
-     The document is processed according to the collection's configuration settings but is not stored in the collection.
-     **Note:** This method is supported on installed instances of Discovery only.
-
-     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
-       in Discovery.
-     - parameter collectionID: The ID of the collection.
-     - parameter file: The content of the document to ingest. For maximum supported file size limits, see [the
-       documentation](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-collections#collections-doc-limits).
-     - parameter filename: The filename for file.
-     - parameter fileContentType: The content type of file.
-     - parameter metadata: The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are
-       rejected.
-       Example:  ``` {
-         "Creator": "Johnny Appleseed",
-         "Subject": "Apples"
-       } ```.
-     - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter completionHandler: A function executed when the request completes with a successful result or error
-     */
-    public func analyzeDocument(
-        projectID: String,
-        collectionID: String,
-        file: Data? = nil,
-        filename: String? = nil,
-        fileContentType: String,
-        metadata: String? = nil,
-        headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<AnalyzedDocument>?, WatsonError?) -> Void)
-    {
-        // construct body
-        let multipartFormData = MultipartFormData()
-        if let file = file {
-            multipartFormData.append(file, withName: "file", mimeType: fileContentType, fileName: filename ?? "filename")
-        }
-        if let metadata = metadata {
-            if let metadataData = metadata.data(using: .utf8) {
-                multipartFormData.append(metadataData, withName: "metadata")
-            }
-        }
-        guard let body = try? multipartFormData.toData() else {
-            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
-            return
-        }
-
-        // construct header parameters
-        var headerParameters = defaultHeaders
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "analyzeDocument")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
-        headerParameters["Accept"] = "application/json"
-        headerParameters["Content-Type"] = multipartFormData.contentType
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v2/projects/\(projectID)/collections/\(collectionID)/analyze"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
-            return
-        }
-
-        // ensure that serviceURL is set
-        guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, RestError.noEndpoint)
-            return
-        }
-
-        let request = RestRequest(
-            session: session,
-            authenticator: authenticator,
-            errorResponseDecoder: errorResponseDecoder,
-            method: "POST",
-            url: serviceEndpoint + encodedPath,
-            headerParameters: headerParameters,
-            queryItems: queryParameters,
-            messageBody: body
-        )
-
-        // execute REST request
-        request.responseObject(completionHandler: completionHandler)
-    }
-
-    /**
-     List Enrichments.
-
-     Lists the enrichments available to this project. The *Part of Speech* and *Sentiment of Phrases* enrichments might
-     be listed, but are reserved for internal use only.
-
-     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
-       in Discovery.
-     - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter completionHandler: A function executed when the request completes with a successful result or error
-     */
-    public func listEnrichments(
-        projectID: String,
-        headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Enrichments>?, WatsonError?) -> Void)
-    {
-        // construct header parameters
-        var headerParameters = defaultHeaders
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listEnrichments")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
-        headerParameters["Accept"] = "application/json"
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v2/projects/\(projectID)/enrichments"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
-            return
-        }
-
-        // ensure that serviceURL is set
-        guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, RestError.noEndpoint)
-            return
-        }
-
-        let request = RestRequest(
-            session: session,
-            authenticator: authenticator,
-            errorResponseDecoder: errorResponseDecoder,
-            method: "GET",
-            url: serviceEndpoint + encodedPath,
-            headerParameters: headerParameters,
-            queryItems: queryParameters
-        )
-
-        // execute REST request
-        request.responseObject(completionHandler: completionHandler)
-    }
-
-    /**
-     Create an enrichment.
-
-     Create an enrichment for use with the specified project.
-
-     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
-       in Discovery.
-     - parameter enrichment: Information about a specific enrichment.
-     - parameter file: The enrichment file to upload.
-     - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter completionHandler: A function executed when the request completes with a successful result or error
-     */
-    public func createEnrichment(
-        projectID: String,
-        enrichment: CreateEnrichment,
-        file: Data? = nil,
-        fileContentType: String,
-        headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Enrichment>?, WatsonError?) -> Void)
-    {
-        // construct body
-        let multipartFormData = MultipartFormData()
-        guard let enrichmentJSON = try? JSON.encoder.encode(enrichment) else {
-            completionHandler(nil, RestError.serialization(values: "enrichment"))
-            return
-        }
-        multipartFormData.append(enrichmentJSON, withName: "enrichment", mimeType: "application/json")
-
-        if let file = file {
-            multipartFormData.append(file, withName: "file", mimeType: "application/octet-stream", fileName: "filename")
-        }
-        guard let body = try? multipartFormData.toData() else {
-            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
-            return
-        }
-
-        // construct header parameters
-        var headerParameters = defaultHeaders
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createEnrichment")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
-        headerParameters["Accept"] = "application/json"
-        headerParameters["Content-Type"] = multipartFormData.contentType
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v2/projects/\(projectID)/enrichments"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
-            return
-        }
-
-        // ensure that serviceURL is set
-        guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, RestError.noEndpoint)
-            return
-        }
-
-        let request = RestRequest(
-            session: session,
-            authenticator: authenticator,
-            errorResponseDecoder: errorResponseDecoder,
-            method: "POST",
-            url: serviceEndpoint + encodedPath,
-            headerParameters: headerParameters,
-            queryItems: queryParameters,
-            messageBody: body
-        )
-
-        // execute REST request
-        request.responseObject(completionHandler: completionHandler)
-    }
-
-    /**
-     Get enrichment.
-
-     Get details about a specific enrichment.
-
-     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
-       in Discovery.
-     - parameter enrichmentID: The ID of the enrichment.
-     - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter completionHandler: A function executed when the request completes with a successful result or error
-     */
-    public func getEnrichment(
-        projectID: String,
-        enrichmentID: String,
-        headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Enrichment>?, WatsonError?) -> Void)
-    {
-        // construct header parameters
-        var headerParameters = defaultHeaders
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getEnrichment")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
-        headerParameters["Accept"] = "application/json"
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v2/projects/\(projectID)/enrichments/\(enrichmentID)"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
-            return
-        }
-
-        // ensure that serviceURL is set
-        guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, RestError.noEndpoint)
-            return
-        }
-
-        let request = RestRequest(
-            session: session,
-            authenticator: authenticator,
-            errorResponseDecoder: errorResponseDecoder,
-            method: "GET",
-            url: serviceEndpoint + encodedPath,
-            headerParameters: headerParameters,
-            queryItems: queryParameters
-        )
-
-        // execute REST request
-        request.responseObject(completionHandler: completionHandler)
-    }
-
-    /**
-     Update an enrichment.
-
-     Updates an existing enrichment's name and description.
-
-     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
-       in Discovery.
-     - parameter enrichmentID: The ID of the enrichment.
-     - parameter name: A new name for the enrichment.
-     - parameter description: A new description for the enrichment.
-     - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter completionHandler: A function executed when the request completes with a successful result or error
-     */
-    public func updateEnrichment(
-        projectID: String,
-        enrichmentID: String,
-        name: String,
-        description: String? = nil,
-        headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Enrichment>?, WatsonError?) -> Void)
-    {
-        // construct body
-        let updateEnrichmentRequest = UpdateEnrichmentRequest(
-            name: name,
-            description: description)
-        guard let body = try? JSON.encoder.encode(updateEnrichmentRequest) else {
-            completionHandler(nil, RestError.serialization(values: "request body"))
-            return
-        }
-
-        // construct header parameters
-        var headerParameters = defaultHeaders
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateEnrichment")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
-        headerParameters["Accept"] = "application/json"
-        headerParameters["Content-Type"] = "application/json"
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v2/projects/\(projectID)/enrichments/\(enrichmentID)"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
-            return
-        }
-
-        // ensure that serviceURL is set
-        guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, RestError.noEndpoint)
-            return
-        }
-
-        let request = RestRequest(
-            session: session,
-            authenticator: authenticator,
-            errorResponseDecoder: errorResponseDecoder,
-            method: "POST",
-            url: serviceEndpoint + encodedPath,
-            headerParameters: headerParameters,
-            queryItems: queryParameters,
-            messageBody: body
-        )
-
-        // execute REST request
-        request.responseObject(completionHandler: completionHandler)
-    }
-
-    // Private struct for the updateEnrichment request body
-    private struct UpdateEnrichmentRequest: Encodable {
-        // swiftlint:disable identifier_name
-        let name: String
-        let description: String?
-        // swiftlint:enable identifier_name
-    }
-
-    /**
-     Delete an enrichment.
-
-     Deletes an existing enrichment from the specified project.
-     **Note:** Only enrichments that have been manually created can be deleted.
-
-     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
-       in Discovery.
-     - parameter enrichmentID: The ID of the enrichment.
-     - parameter headers: A dictionary of request headers to be sent with this request.
-     - parameter completionHandler: A function executed when the request completes with a successful result or error
-     */
-    public func deleteEnrichment(
-        projectID: String,
-        enrichmentID: String,
-        headers: [String: String]? = nil,
-        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
-    {
-        // construct header parameters
-        var headerParameters = defaultHeaders
-        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteEnrichment")
-        headerParameters.merge(sdkHeaders) { (_, new) in new }
-        if let headers = headers {
-            headerParameters.merge(headers) { (_, new) in new }
-        }
-
-        // construct query parameters
-        var queryParameters = [URLQueryItem]()
-        queryParameters.append(URLQueryItem(name: "version", value: version))
-
-        // construct REST request
-        let path = "/v2/projects/\(projectID)/enrichments/\(enrichmentID)"
-        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
-            completionHandler(nil, RestError.urlEncoding(path: path))
-            return
-        }
-
-        // ensure that serviceURL is set
-        guard let serviceEndpoint = serviceURL else {
-            completionHandler(nil, RestError.noEndpoint)
-            return
-        }
-
-        let request = RestRequest(
-            session: session,
-            authenticator: authenticator,
-            errorResponseDecoder: errorResponseDecoder,
-            method: "DELETE",
-            url: serviceEndpoint + encodedPath,
-            headerParameters: headerParameters,
-            queryItems: queryParameters
-        )
-
-        // execute REST request
-        request.response(completionHandler: completionHandler)
-    }
-
-    /**
      List projects.
 
      Lists existing projects for this instance.
@@ -2183,7 +1778,7 @@ public class Discovery {
     }
 
     /**
-     Create a Project.
+     Create a project.
 
      Create a new project for this instance.
 
@@ -2452,6 +2047,1138 @@ public class Discovery {
 
         // execute REST request
         request.response(completionHandler: completionHandler)
+    }
+
+    /**
+     List enrichments.
+
+     Lists the enrichments available to this project. The *Part of Speech* and *Sentiment of Phrases* enrichments might
+     be listed, but are reserved for internal use only.
+
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func listEnrichments(
+        projectID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Enrichments>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listEnrichments")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v2/projects/\(projectID)/enrichments"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Create an enrichment.
+
+     Create an enrichment for use with the specified project.
+
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
+     - parameter enrichment: Information about a specific enrichment.
+     - parameter file: The enrichment file to upload. Expected file types per enrichment are as follows:
+       * CSV for `dictionary`
+       * PEAR for `uima_annotator` and `rule_based` (Explorer)
+       * ZIP for `watson_knowledge_studio_model` and `rule_based` (Studio Advanced Rule Editor).
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func createEnrichment(
+        projectID: String,
+        enrichment: CreateEnrichment,
+        file: Data? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Enrichment>?, WatsonError?) -> Void)
+    {
+        // construct body
+        let multipartFormData = MultipartFormData()
+        guard let enrichmentJSON = try? JSON.encoder.encode(enrichment) else {
+            completionHandler(nil, RestError.serialization(values: "enrichment"))
+            return
+        }
+        multipartFormData.append(enrichmentJSON, withName: "enrichment", mimeType: "application/json")
+
+        if let file = file {
+            multipartFormData.append(file, withName: "file", mimeType: "application/octet-stream", fileName: "filename")
+        }
+        guard let body = try? multipartFormData.toData() else {
+            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createEnrichment")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = multipartFormData.contentType
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v2/projects/\(projectID)/enrichments"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "POST",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Get enrichment.
+
+     Get details about a specific enrichment.
+
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
+     - parameter enrichmentID: The ID of the enrichment.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func getEnrichment(
+        projectID: String,
+        enrichmentID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Enrichment>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getEnrichment")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v2/projects/\(projectID)/enrichments/\(enrichmentID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Update an enrichment.
+
+     Updates an existing enrichment's name and description.
+
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
+     - parameter enrichmentID: The ID of the enrichment.
+     - parameter name: A new name for the enrichment.
+     - parameter description: A new description for the enrichment.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func updateEnrichment(
+        projectID: String,
+        enrichmentID: String,
+        name: String,
+        description: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Enrichment>?, WatsonError?) -> Void)
+    {
+        // construct body
+        let updateEnrichmentRequest = UpdateEnrichmentRequest(
+            name: name,
+            description: description)
+        guard let body = try? JSON.encoder.encode(updateEnrichmentRequest) else {
+            completionHandler(nil, RestError.serialization(values: "request body"))
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateEnrichment")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v2/projects/\(projectID)/enrichments/\(enrichmentID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "POST",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the updateEnrichment request body
+    private struct UpdateEnrichmentRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let name: String
+        let description: String?
+        // swiftlint:enable identifier_name
+    }
+
+    /**
+     Delete an enrichment.
+
+     Deletes an existing enrichment from the specified project.
+     **Note:** Only enrichments that have been manually created can be deleted.
+
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
+     - parameter enrichmentID: The ID of the enrichment.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func deleteEnrichment(
+        projectID: String,
+        enrichmentID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteEnrichment")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v2/projects/\(projectID)/enrichments/\(enrichmentID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "DELETE",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.response(completionHandler: completionHandler)
+    }
+
+    /**
+     List document classifiers.
+
+     Get a list of the document classifiers in a project.
+
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func listDocumentClassifiers(
+        projectID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<DocumentClassifiers>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listDocumentClassifiers")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v2/projects/\(projectID)/document_classifiers"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Create a document classifier.
+
+     Create a document classifier. You can create a document classifier for any project type from the API. From the
+     product user interface, you can create and work with a document classifier from a Content Mining project only.
+     After you create a document classifier, use the Enrichments API to deploy it. (The enrichment type is
+     `classifier`).
+
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
+     - parameter trainingData: The training data CSV file to upload. The CSV file must have headers. The file must
+       include a field that contains the text you want to classify and a field that contains the classification labels
+       that you want to use to classify your data. If you want to specify multiple values in a single field, use a
+       semicolon as the value separator.
+     - parameter classifier: An object that manages the settings and data that is required to train a document
+       classification model.
+     - parameter testData: The CSV with test data to upload. The column values in the test file must be the same as
+       the column values in the training data file. If no test data is provided, the training data is split into two
+       separate groups of training and test data.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func createDocumentClassifier(
+        projectID: String,
+        trainingData: Data,
+        classifier: CreateDocumentClassifier,
+        testData: Data? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<DocumentClassifier>?, WatsonError?) -> Void)
+    {
+        // construct body
+        let multipartFormData = MultipartFormData()
+        multipartFormData.append(trainingData, withName: "training_data", mimeType: "text/csv", fileName: "filename")
+        guard let classifierJSON = try? JSON.encoder.encode(classifier) else {
+            completionHandler(nil, RestError.serialization(values: "classifier"))
+            return
+        }
+        multipartFormData.append(classifierJSON, withName: "classifier", mimeType: "application/json")
+
+        if let testData = testData {
+            multipartFormData.append(testData, withName: "test_data", mimeType: "text/csv", fileName: "filename")
+        }
+        guard let body = try? multipartFormData.toData() else {
+            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createDocumentClassifier")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = multipartFormData.contentType
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v2/projects/\(projectID)/document_classifiers"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "POST",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Get a document classifier.
+
+     Get details about a specific document classifier.
+
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
+     - parameter classifierID: The ID of the classifier.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func getDocumentClassifier(
+        projectID: String,
+        classifierID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<DocumentClassifier>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getDocumentClassifier")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v2/projects/\(projectID)/document_classifiers/\(classifierID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Update a document classifier.
+
+     Update the document classifier name or description, update the training data, or add or update the test data.
+
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
+     - parameter classifierID: The ID of the classifier.
+     - parameter classifier: An object that contains a new name or description for a classifier, updated training
+       data, or new or updated test data.
+     - parameter trainingData: The training data CSV file to upload. The CSV file must have headers. The file must
+       include a field that contains the text you want to classify and a field that contains the classification labels
+       that you want to use to classify your data. If you want to specify multiple values in a single column, use a
+       semicolon as the value separator.
+     - parameter testData: The CSV with test data to upload. The column values in the test file must be the same as
+       the column values in the training data file. If no test data is provided, the training data is split into two
+       separate groups of training and test data.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func updateDocumentClassifier(
+        projectID: String,
+        classifierID: String,
+        classifier: UpdateDocumentClassifier,
+        trainingData: Data? = nil,
+        testData: Data? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<DocumentClassifier>?, WatsonError?) -> Void)
+    {
+        // construct body
+        let multipartFormData = MultipartFormData()
+        guard let classifierJSON = try? JSON.encoder.encode(classifier) else {
+            completionHandler(nil, RestError.serialization(values: "classifier"))
+            return
+        }
+        multipartFormData.append(classifierJSON, withName: "classifier", mimeType: "application/json")
+
+        if let trainingData = trainingData {
+            multipartFormData.append(trainingData, withName: "training_data", mimeType: "text/csv", fileName: "filename")
+        }
+        if let testData = testData {
+            multipartFormData.append(testData, withName: "test_data", mimeType: "text/csv", fileName: "filename")
+        }
+        guard let body = try? multipartFormData.toData() else {
+            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateDocumentClassifier")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = multipartFormData.contentType
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v2/projects/\(projectID)/document_classifiers/\(classifierID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "POST",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Delete a document classifier.
+
+     Deletes an existing document classifier from the specified project.
+
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
+     - parameter classifierID: The ID of the classifier.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func deleteDocumentClassifier(
+        projectID: String,
+        classifierID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteDocumentClassifier")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v2/projects/\(projectID)/document_classifiers/\(classifierID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "DELETE",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.response(completionHandler: completionHandler)
+    }
+
+    /**
+     List document classifier models.
+
+     Get a list of the trained document classifier models in a project.
+
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
+     - parameter classifierID: The ID of the classifier.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func listDocumentClassifierModels(
+        projectID: String,
+        classifierID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<DocumentClassifierModels>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "listDocumentClassifierModels")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v2/projects/\(projectID)/document_classifiers/\(classifierID)/models"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Create a document classifier model.
+
+     Create a document classifier model.
+
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
+     - parameter classifierID: The ID of the classifier.
+     - parameter name: The name of the document classifier model.
+     - parameter description: A description of the document classifier model.
+     - parameter learningRate: A tuning parameter in an optimization algorithm that determines the step size at each
+       iteration of the training process. It influences how much of any newly acquired information overrides the
+       existing information, and therefore is said to represent the speed at which a machine learning model learns. The
+       default value is `0.1`.
+     - parameter l1RegularizationStrengths: Avoids overfitting by shrinking the coefficient of less important features
+       to zero, which removes some features altogether. You can specify many values for hyper-parameter optimization.
+       The default value is `0.000001`.
+     - parameter l2RegularizationStrengths: A method you can apply to avoid overfitting your model on the training
+       data. You can specify many values for hyper-parameter optimization. The default value is `0.000001`.
+     - parameter trainingMaxSteps: Maximum number of training steps to complete. This setting is useful if you need
+       the training process to finish in a specific time frame to fit into an automated process. The default value is
+       ten million.
+     - parameter improvementRatio: Stops the training run early if the improvement ratio is not met by the time the
+       process reaches a certain point. The default value is `0.00001`.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func createDocumentClassifierModel(
+        projectID: String,
+        classifierID: String,
+        name: String,
+        description: String? = nil,
+        learningRate: Double? = nil,
+        l1RegularizationStrengths: [Double]? = nil,
+        l2RegularizationStrengths: [Double]? = nil,
+        trainingMaxSteps: Int? = nil,
+        improvementRatio: Double? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<DocumentClassifierModel>?, WatsonError?) -> Void)
+    {
+        // construct body
+        let createDocumentClassifierModelRequest = CreateDocumentClassifierModelRequest(
+            name: name,
+            description: description,
+            learning_rate: learningRate,
+            l1_regularization_strengths: l1RegularizationStrengths,
+            l2_regularization_strengths: l2RegularizationStrengths,
+            training_max_steps: trainingMaxSteps,
+            improvement_ratio: improvementRatio)
+        guard let body = try? JSON.encoder.encode(createDocumentClassifierModelRequest) else {
+            completionHandler(nil, RestError.serialization(values: "request body"))
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "createDocumentClassifierModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v2/projects/\(projectID)/document_classifiers/\(classifierID)/models"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "POST",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the createDocumentClassifierModel request body
+    private struct CreateDocumentClassifierModelRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let name: String
+        let description: String?
+        let learning_rate: Double?
+        let l1_regularization_strengths: [Double]?
+        let l2_regularization_strengths: [Double]?
+        let training_max_steps: Int?
+        let improvement_ratio: Double?
+        // swiftlint:enable identifier_name
+    }
+
+    /**
+     Get a document classifier model.
+
+     Get details about a specific document classifier model.
+
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
+     - parameter classifierID: The ID of the classifier.
+     - parameter modelID: The ID of the classifier model.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func getDocumentClassifierModel(
+        projectID: String,
+        classifierID: String,
+        modelID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<DocumentClassifierModel>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "getDocumentClassifierModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v2/projects/\(projectID)/document_classifiers/\(classifierID)/models/\(modelID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "GET",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    /**
+     Update a document classifier model.
+
+     Update the document classifier model name or description.
+
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
+     - parameter classifierID: The ID of the classifier.
+     - parameter modelID: The ID of the classifier model.
+     - parameter name: A new name for the enrichment.
+     - parameter description: A new description for the enrichment.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func updateDocumentClassifierModel(
+        projectID: String,
+        classifierID: String,
+        modelID: String,
+        name: String? = nil,
+        description: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<DocumentClassifierModel>?, WatsonError?) -> Void)
+    {
+        // construct body
+        let updateDocumentClassifierModelRequest = UpdateDocumentClassifierModelRequest(
+            name: name,
+            description: description)
+        guard let body = try? JSON.encoder.encode(updateDocumentClassifierModelRequest) else {
+            completionHandler(nil, RestError.serialization(values: "request body"))
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "updateDocumentClassifierModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = "application/json"
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v2/projects/\(projectID)/document_classifiers/\(classifierID)/models/\(modelID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "POST",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
+    }
+
+    // Private struct for the updateDocumentClassifierModel request body
+    private struct UpdateDocumentClassifierModelRequest: Encodable {
+        // swiftlint:disable identifier_name
+        let name: String?
+        let description: String?
+        // swiftlint:enable identifier_name
+    }
+
+    /**
+     Delete a document classifier model.
+
+     Deletes an existing document classifier model from the specified project.
+
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
+     - parameter classifierID: The ID of the classifier.
+     - parameter modelID: The ID of the classifier model.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func deleteDocumentClassifierModel(
+        projectID: String,
+        classifierID: String,
+        modelID: String,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<Void>?, WatsonError?) -> Void)
+    {
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "deleteDocumentClassifierModel")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v2/projects/\(projectID)/document_classifiers/\(classifierID)/models/\(modelID)"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "DELETE",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters
+        )
+
+        // execute REST request
+        request.response(completionHandler: completionHandler)
+    }
+
+    /**
+     Analyze a Document.
+
+     Process a document and return it for realtime use. Supports JSON files only.
+     The document is processed according to the collection's configuration settings but is not stored in the collection.
+     **Note:** This method is supported on installed instances of Discovery only.
+
+     - parameter projectID: The ID of the project. This information can be found from the *Integrate and Deploy* page
+       in Discovery.
+     - parameter collectionID: The ID of the collection.
+     - parameter file: The content of the document to ingest. For maximum supported file size limits, see [the
+       documentation](https://cloud.ibm.com/docs/discovery-data?topic=discovery-data-collections#collections-doc-limits).
+     - parameter filename: The filename for file.
+     - parameter fileContentType: The content type of file.
+     - parameter metadata: The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are
+       rejected.
+       Example:  ``` {
+         "Creator": "Johnny Appleseed",
+         "Subject": "Apples"
+       } ```.
+     - parameter headers: A dictionary of request headers to be sent with this request.
+     - parameter completionHandler: A function executed when the request completes with a successful result or error
+     */
+    public func analyzeDocument(
+        projectID: String,
+        collectionID: String,
+        file: Data? = nil,
+        filename: String? = nil,
+        fileContentType: String? = nil,
+        metadata: String? = nil,
+        headers: [String: String]? = nil,
+        completionHandler: @escaping (WatsonResponse<AnalyzedDocument>?, WatsonError?) -> Void)
+    {
+        // construct body
+        let multipartFormData = MultipartFormData()
+        if let file = file {
+            multipartFormData.append(file, withName: "file", mimeType: fileContentType, fileName: filename ?? "filename")
+        }
+        if let metadata = metadata {
+            if let metadataData = metadata.data(using: .utf8) {
+                multipartFormData.append(metadataData, withName: "metadata")
+            }
+        }
+        guard let body = try? multipartFormData.toData() else {
+            completionHandler(nil, RestError.serialization(values: "request multipart form data"))
+            return
+        }
+
+        // construct header parameters
+        var headerParameters = defaultHeaders
+        let sdkHeaders = Shared.getSDKHeaders(serviceName: serviceName, serviceVersion: serviceVersion, methodName: "analyzeDocument")
+        headerParameters.merge(sdkHeaders) { (_, new) in new }
+        headerParameters["Accept"] = "application/json"
+        headerParameters["Content-Type"] = multipartFormData.contentType
+        if let headers = headers {
+            headerParameters.merge(headers) { (_, new) in new }
+        }
+
+        // construct query parameters
+        var queryParameters = [URLQueryItem]()
+        queryParameters.append(URLQueryItem(name: "version", value: version))
+
+        // construct REST request
+        let path = "/v2/projects/\(projectID)/collections/\(collectionID)/analyze"
+        guard let encodedPath = path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            completionHandler(nil, RestError.urlEncoding(path: path))
+            return
+        }
+
+        // ensure that serviceURL is set
+        guard let serviceEndpoint = serviceURL else {
+            completionHandler(nil, RestError.noEndpoint)
+            return
+        }
+
+        let request = RestRequest(
+            session: session,
+            authenticator: authenticator,
+            errorResponseDecoder: errorResponseDecoder,
+            method: "POST",
+            url: serviceEndpoint + encodedPath,
+            headerParameters: headerParameters,
+            queryItems: queryParameters,
+            messageBody: body
+        )
+
+        // execute REST request
+        request.responseObject(completionHandler: completionHandler)
     }
 
     /**

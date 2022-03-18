@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,21 @@
  * limitations under the License.
  **/
 
-#import <UIKit/UIKit.h>
+import Foundation
 
-//! Project version number for CompareComplyV1.
-FOUNDATION_EXPORT double CompareComplyV1VersionNumber;
+/**
+ An object that contains a list of document classifier definitions.
+ */
+public struct DocumentClassifiers: Codable, Equatable {
 
-//! Project version string for CompareComplyV1.
-FOUNDATION_EXPORT const unsigned char CompareComplyV1VersionString[];
+    /**
+     An array of document classifier definitions.
+     */
+    public var classifiers: [DocumentClassifier]?
 
-// In this header, you should import all the public headers of your framework using statements like #import <CompareComplyV1/PublicHeader.h>
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case classifiers = "classifiers"
+    }
 
-
+}

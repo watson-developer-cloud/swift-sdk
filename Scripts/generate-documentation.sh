@@ -10,18 +10,12 @@ outdir=${1:-gh-pages}
 services=(
   AssistantV1
   AssistantV2
-  CompareComplyV1
   DiscoveryV1
   DiscoveryV2
   LanguageTranslatorV3
-  NaturalLanguageClassifierV1
   NaturalLanguageUnderstandingV1
-  PersonalityInsightsV3
   SpeechToTextV1
   TextToSpeechV1
-  ToneAnalyzerV3
-  VisualRecognitionV3
-  VisualRecognitionV4
 )
 
 ################################################################################

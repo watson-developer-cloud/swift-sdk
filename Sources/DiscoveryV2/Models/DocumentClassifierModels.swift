@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2016, 2020.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,21 @@
  * limitations under the License.
  **/
 
-#import <UIKit/UIKit.h>
+import Foundation
 
-//! Project version number for NaturalLanguageClassifierV1.
-FOUNDATION_EXPORT double NaturalLanguageClassifierV1VersionNumber;
+/**
+ An object that contains a list of document classifier model definitions.
+ */
+public struct DocumentClassifierModels: Codable, Equatable {
 
-//! Project version string for NaturalLanguageClassifierV1.
-FOUNDATION_EXPORT const unsigned char NaturalLanguageClassifierV1VersionString[];
+    /**
+     An array of document classifier model definitions.
+     */
+    public var models: [DocumentClassifierModel]?
 
-// In this header, you should import all the public headers of your framework using statements like #import <NaturalLanguageClassifierV1/PublicHeader.h>
+    // Map each property name to the key that shall be used for encoding/decoding.
+    private enum CodingKeys: String, CodingKey {
+        case models = "models"
+    }
 
-
+}

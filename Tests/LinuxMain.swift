@@ -2,15 +2,9 @@ import XCTest
 
 @testable import AssistantV1Tests
 @testable import AssistantV2Tests
-@testable import CompareComplyV1Tests
 @testable import DiscoveryV1Tests
 @testable import LanguageTranslatorV3Tests
-@testable import NaturalLanguageClassifierV1Tests
 @testable import NaturalLanguageUnderstandingV1Tests
-@testable import PersonalityInsightsV3Tests
-@testable import ToneAnalyzerV3Tests
-@testable import VisualRecognitionV3Tests
-@testable import VisualRecognitionV4Tests
 
 // the following tests are currently disabled becuase
 // their dependencies do not build with Swift Package Manager
@@ -21,17 +15,10 @@ XCTMain([
     testCase(AssistantTests.allTests),
     testCase(AssistantV1UnitTests.allTests),
     testCase(AssistantV2Tests.allTests),
-    testCase(CompareComplyTests.allTests),
     testCase(DiscoveryTests.allTests),
     testCase(DiscoveryUnitTests.allTests),
     testCase(LanguageTranslatorTests.allTests),
-    testCase(NaturalLanguageClassifierTests.allTests),
     testCase(NaturalLanguageUnderstandingTests.allTests),
-    testCase(PersonalityInsightsTests.allTests),
-    testCase(ToneAnalyzerTests.allTests),
-    testCase(VisualRecognitionTests.allTests),
-    testCase(VisualRecognitionUnitTests.allTests),
-    testCase(VisualRecognitionV4Tests.allTests),
 
     // the following tests are currently disabled because their
     // dependencies do not build with Swift Package Manager

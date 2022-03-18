@@ -25,7 +25,7 @@ The service streams the results back to the client with minimal delay.
                             '**/config_types.h'
 
   s.swift_version         = ['4.2', '5.0', '5.1']
-  s.dependency              'IBMSwiftSDKCore', '~> 1.0.0'
+  s.dependency              'IBMSwiftSDKCore', '~> 1.2.1'
   s.vendored_libraries    = 'Sources/SupportingFiles/Dependencies/Libraries/*.a'
 
   # This is necessary for the time being as we do not support the

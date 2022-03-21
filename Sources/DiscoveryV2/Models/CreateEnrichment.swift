@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ public struct CreateEnrichment: Codable, Equatable {
      The type of this enrichment.
      */
     public enum TypeEnum: String {
+        case classifier = "classifier"
         case dictionary = "dictionary"
         case regularExpression = "regular_expression"
         case uimaAnnotator = "uima_annotator"

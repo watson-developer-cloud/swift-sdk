@@ -924,11 +924,12 @@ class SpeechToTextTests: XCTestCase {
 
         let customizationID = languageModel.customizationID
         let grammarName = "swift-sdk-test-grammar"
-        let grammarFile = Bundle(for: type(of: self)).url(forResource: "confirm", withExtension: "abnf")!
+        let url = Bundle(for: type(of: self)).url(forResource: "confirm", withExtension: "abnf")!
+        let grammarFile = try? Data(contentsOf: url)
         speechToText.addGrammar(
             customizationID: customizationID,
             grammarName: grammarName,
-            grammarFile: grammarFile.absoluteString,
+            grammarFile: grammarFile!,
             contentType: "application/srgs",
             allowOverwrite: true) {
                 _, error in

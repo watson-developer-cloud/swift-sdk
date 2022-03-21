@@ -1,7 +1,6 @@
 # Custom
 Sources/SupportingFiles/Credentials.swift
 Sources/SupportingFiles/WatsonCredentials.swift
-Tests/CompareComplyV1Tests/Resources/cloud-object-storage-credentials*
 
 # Build generated
 build/
@@ -47,7 +46,6 @@ Carthage/
 
 # ignore detect secrets files
 .pre-commit-config.yaml
-.secrets.baseline
 
 # swift package manager
 .swiftpm/

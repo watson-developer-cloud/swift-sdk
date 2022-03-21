@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2018, 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,13 +47,9 @@ public struct Enrichment: Codable, Equatable {
     public var overwrite: Bool?
 
     /**
-     Name of the enrichment service to call. Current options are `natural_language_understanding` and `elements`.
-      When using `natual_language_understanding`, the **options** object must contain Natural Language Understanding
-     options.
-     When using `elements` the **options** object must contain Element Classification options. Additionally, when using
-     the `elements` enrichment the configuration specified and files ingested must meet all the criteria specified in
-     [the
-     documentation](https://cloud.ibm.com/docs/discovery?topic=discovery-element-classification#element-classification).
+     Name of the enrichment service to call. The only supported option is `natural_language_understanding`. The
+     `elements` option is deprecated and support ended on 10 July 2020.
+      The **options** object must contain Natural Language Understanding options.
      */
     public var enrichment: String
 
@@ -64,7 +60,10 @@ public struct Enrichment: Codable, Equatable {
     public var ignoreDownstreamErrors: Bool?
 
     /**
-     Options which are specific to a particular enrichment.
+     Options that are specific to a particular enrichment.
+     The `elements` enrichment type is deprecated. Use the [Create a
+     project](https://cloud.ibm.com/apidocs/discovery-data#createproject) method of the Discovery v2 API to create a
+     `content_intelligence` project type instead.
      */
     public var options: EnrichmentOptions?
 
@@ -88,20 +87,18 @@ public struct Enrichment: Codable, Equatable {
       - parameter sourceField: Field to be enriched.
         Arrays can be specified as the **source_field** if the **enrichment** service for this enrichment is set to
         `natural_language_undstanding`.
-      - parameter enrichment: Name of the enrichment service to call. Current options are
-        `natural_language_understanding` and `elements`.
-         When using `natual_language_understanding`, the **options** object must contain Natural Language Understanding
-        options.
-        When using `elements` the **options** object must contain Element Classification options. Additionally, when
-        using the `elements` enrichment the configuration specified and files ingested must meet all the criteria
-        specified in [the
-        documentation](https://cloud.ibm.com/docs/discovery?topic=discovery-element-classification#element-classification).
+      - parameter enrichment: Name of the enrichment service to call. The only supported option is
+        `natural_language_understanding`. The `elements` option is deprecated and support ended on 10 July 2020.
+         The **options** object must contain Natural Language Understanding options.
       - parameter description: Describes what the enrichment step does.
       - parameter overwrite: Indicates that the enrichments will overwrite the destination_field field if it already
         exists.
       - parameter ignoreDownstreamErrors: If true, then most errors generated during the enrichment process will be
         treated as warnings and will not cause the document to fail processing.
-      - parameter options: Options which are specific to a particular enrichment.
+      - parameter options: Options that are specific to a particular enrichment.
+        The `elements` enrichment type is deprecated. Use the [Create a
+        project](https://cloud.ibm.com/apidocs/discovery-data#createproject) method of the Discovery v2 API to create a
+        `content_intelligence` project type instead.
 
       - returns: An initialized `Enrichment`.
      */

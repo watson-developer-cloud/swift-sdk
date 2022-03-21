@@ -6,13 +6,11 @@
 name: Run Integration Tests
 
 on:
-
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
   integration_test:
-
     name: Build and Run Integration Tests on Swift ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
@@ -20,64 +18,56 @@ jobs:
         os: [macos-latest]
 
     steps:
-    - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-    - uses: maxim-lobanov/setup-xcode@v1
-      with:
-        xcode-version: '12.5'
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: "12.5"
 
-    - name: Display versions
-      run: |
-        swift --version
-        xcodebuild -version
-        ls /Applications | grep Xcode
+      - name: Display versions
+        run: |
+          swift --version
+          xcodebuild -version
+          ls /Applications | grep Xcode
 
-    - name: Execute Swift integration tests
-      # continue-on-error: true
-      env:
-        NATURAL_LANGUAGE_CLASSIFIER_APIKEY: ${{ secrets.NLC_APIKEY }}
-        NATURAL_LANGUAGE_CLASSIFIER_URL: "https://api.us-south.natural-language-classifier.watson.cloud.ibm.com"
-        LANGUAGE_TRANSLATOR_APIKEY: ${{ secrets.LT_APIKEY }}
-        LANGUAGE_TRANSLATOR_URL: "https://api.us-south.language-translator.watson.cloud.ibm.com"
-        NATURAL_LANGUAGE_UNDERSTANDING_APIKEY: ${{ secrets.NLU_APIKEY }}
-        NATURAL_LANGUAGE_UNDERSTANDING_URL: "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com"
-        TONE_ANALYZER_APIKEY: ${{ secrets.TA_APIKEY }}
-        TONE_ANALYZER_URL: "https://api.us-south.tone-analyzer.watson.cloud.ibm.com"
-        SPEECH_TO_TEXT_APIKEY: ${{ secrets.STT_APIKEY }}
-        SPEECH_TO_TEXT_URL: "https://api.us-south.speech-to-text.watson.cloud.ibm.com"
-        TEXT_TO_SPEECH_APIKEY: ${{ secrets.TTS_APIKEY }}
-        TEXT_TO_SPEECH_URL: "https://api.us-south.text-to-speech.watson.cloud.ibm.com"
-        ASSISTANT_APIKEY: ${{ secrets.WA_APIKEY }}
-        ASSISTANT_WORKSPACE_ID: ${{ secrets.WA_WORKSPACE_ID }}
-        ASSISTANT_ASSISTANT_ID: ${{ secrets.WA_ASSISTANT_ID }}
-        ASSISTANT_URL: "https://api.us-south.assistant.watson.cloud.ibm.com"
-        DISCOVERY_APIKEY: ${{ secrets.D1_APIKEY }}
-        DISCOVERY_ENVIRONMENT_ID: ${{ secrets.D1_ENVIRONMENT_ID }}
-        DISCOVERY_COLLECTION_ID: ${{ secrets.D1_COLLECTION_ID }}
-        DISCOVERY_URL: "https://api.us-south.discovery.watson.cloud.ibm.com"
-        DISCOVERY_V2_APIKEY: ${{ secrets.D2_APIKEY }}
-        DISCOVERY_V2_PROJECT_ID: ${{ secrets.D2_PROJECT_ID }}
-        DISCOVERY_V2_COLLECTION_ID: ${{ secrets.D2_COLLECTION_ID }}
-        DISCOVERY_V2_URL: "https://api.us-south.discovery.watson.cloud.ibm.com"
-      run: |
-        cp Sources/SupportingFiles/WatsonCredentialsGHA.swift Sources/SupportingFiles/WatsonCredentials.swift
-        echo -e "\n\033[0;35mCommand: Run AssistantV1 Integration tests"
-        set +o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme AssistantV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" -only-testing "AssistantV1Tests/AssistantTests" | xcpretty
-        echo -e "\n\033[0;35mCommand: Run AssistantV2 Integration tests"
-        set +o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme AssistantV2 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
-        echo -e "\n\033[0;35mCommand: Run DiscoveryV1 Integration tests"
-        set +o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme DiscoveryV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" -only-testing "DiscoveryV1Tests/DiscoveryTests" | xcpretty
-        echo -e "\n\033[0;35mCommand: Run DiscoveryV2 Integration tests"
-        set +o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme DiscoveryV2 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" -only-testing "DiscoveryV2Tests/DiscoveryV2Tests" | xcpretty
-        echo -e "\n\033[0;35mCommand: Run LanguageTranslatorV3 Integration tests"
-        set -o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme LanguageTranslatorV3 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
-        echo -e "\n\033[0;35mCommand: Run NaturalLanguageClassifierV1 Integration tests"
-        set -o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme NaturalLanguageClassifierV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
-        echo -e "\n\033[0;35mCommand: Run NaturalLanguageUnderstandingV1 Integration tests"
-        set -o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme NaturalLanguageUnderstandingV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
-        echo -e "\n\033[0;35mCommand: Run SpeechToTextV1 Integration tests"
-        set +o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme SpeechToTextV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" -only-testing "SpeechToTextV1Tests/SpeechToTextTests" | xcpretty
-        echo -e "\n\033[0;35mCommand: Run TextToSpeechV1 Integration tests"
-        set +o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme TextToSpeechV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
-        echo -e "\n\033[0;35mCommand: Run ToneAnalyzerV3 Integration tests"
-        set -o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme ToneAnalyzerV3 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+      - name: Execute Swift integration tests
+        # continue-on-error: true
+        env:
+          LANGUAGE_TRANSLATOR_APIKEY: ${{ secrets.LT_APIKEY }}
+          LANGUAGE_TRANSLATOR_URL: "https://api.us-south.language-translator.watson.cloud.ibm.com"
+          NATURAL_LANGUAGE_UNDERSTANDING_APIKEY: ${{ secrets.NLU_APIKEY }}
+          NATURAL_LANGUAGE_UNDERSTANDING_URL: "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com"
+          SPEECH_TO_TEXT_APIKEY: ${{ secrets.STT_APIKEY }}
+          SPEECH_TO_TEXT_URL: "https://api.us-south.speech-to-text.watson.cloud.ibm.com"
+          TEXT_TO_SPEECH_APIKEY: ${{ secrets.TTS_APIKEY }}
+          TEXT_TO_SPEECH_URL: "https://api.us-south.text-to-speech.watson.cloud.ibm.com"
+          ASSISTANT_APIKEY: ${{ secrets.WA_APIKEY }}
+          ASSISTANT_WORKSPACE_ID: ${{ secrets.WA_WORKSPACE_ID }}
+          ASSISTANT_ASSISTANT_ID: ${{ secrets.WA_ASSISTANT_ID }}
+          ASSISTANT_URL: "https://api.us-south.assistant.watson.cloud.ibm.com"
+          DISCOVERY_APIKEY: ${{ secrets.D1_APIKEY }}
+          DISCOVERY_ENVIRONMENT_ID: ${{ secrets.D1_ENVIRONMENT_ID }}
+          DISCOVERY_COLLECTION_ID: ${{ secrets.D1_COLLECTION_ID }}
+          DISCOVERY_URL: "https://api.us-south.discovery.watson.cloud.ibm.com"
+          DISCOVERY_V2_APIKEY: ${{ secrets.D2_APIKEY }}
+          DISCOVERY_V2_PROJECT_ID: ${{ secrets.D2_PROJECT_ID }}
+          DISCOVERY_V2_COLLECTION_ID: ${{ secrets.D2_COLLECTION_ID }}
+          DISCOVERY_V2_URL: "https://api.us-south.discovery.watson.cloud.ibm.com"
+        run: |
+          cp Sources/SupportingFiles/WatsonCredentialsGHA.swift Sources/SupportingFiles/WatsonCredentials.swift
+          echo -e "\n\033[0;35mCommand: Run AssistantV1 Integration tests"
+          set +o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme AssistantV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" -only-testing "AssistantV1Tests/AssistantTests" | xcpretty
+          echo -e "\n\033[0;35mCommand: Run AssistantV2 Integration tests"
+          set +o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme AssistantV2 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+          echo -e "\n\033[0;35mCommand: Run DiscoveryV1 Integration tests"
+          set +o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme DiscoveryV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" -only-testing "DiscoveryV1Tests/DiscoveryTests" | xcpretty
+          echo -e "\n\033[0;35mCommand: Run DiscoveryV2 Integration tests"
+          set +o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme DiscoveryV2 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" -only-testing "DiscoveryV2Tests/DiscoveryV2Tests" | xcpretty
+          echo -e "\n\033[0;35mCommand: Run LanguageTranslatorV3 Integration tests"
+          set -o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme LanguageTranslatorV3 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+          echo -e "\n\033[0;35mCommand: Run NaturalLanguageUnderstandingV1 Integration tests"
+          set -o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme NaturalLanguageUnderstandingV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty
+          echo -e "\n\033[0;35mCommand: Run SpeechToTextV1 Integration tests"
+          set +o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme SpeechToTextV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" -only-testing "SpeechToTextV1Tests/SpeechToTextTests" | xcpretty
+          echo -e "\n\033[0;35mCommand: Run TextToSpeechV1 Integration tests"
+          set +o pipefail && env NSUnbufferedIO=YES xcodebuild test -scheme TextToSpeechV1 -destination "platform=iOS Simulator,OS=latest,name=iPhone 12" | xcpretty

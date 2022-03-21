@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,74 +22,74 @@ import Foundation
 public enum QueryAggregation: Codable, Equatable {
 
     case queryAggregation(GenericQueryAggregation)
-    case histogram(Histogram)
-    case max(Calculation)
-    case min(Calculation)
-    case average(Calculation)
-    case sum(Calculation)
-    case uniqueCount(Calculation)
-    case term(Term)
-    case filter(Filter)
-    case nested(Nested)
-    case timeslice(Timeslice)
-    case topHits(TopHits)
+    case histogram(QueryHistogramAggregation)
+    case max(QueryCalculationAggregation)
+    case min(QueryCalculationAggregation)
+    case average(QueryCalculationAggregation)
+    case sum(QueryCalculationAggregation)
+    case uniqueCount(QueryCalculationAggregation)
+    case term(QueryTermAggregation)
+    case filter(QueryFilterAggregation)
+    case nested(QueryNestedAggregation)
+    case timeslice(QueryTimesliceAggregation)
+    case topHits(QueryTopHitsAggregation)
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let genericInstance = try? container.decode(GenericQueryAggregation.self) {
             switch genericInstance.type {
             case "histogram":
-                if let val = try? container.decode(Histogram.self) {
+                if let val = try? container.decode(QueryHistogramAggregation.self) {
                     self = .histogram(val)
                     return
                 }
             case "max":
-                if let val = try? container.decode(Calculation.self) {
+                if let val = try? container.decode(QueryCalculationAggregation.self) {
                     self = .max(val)
                     return
                 }
             case "min":
-                if let val = try? container.decode(Calculation.self) {
+                if let val = try? container.decode(QueryCalculationAggregation.self) {
                     self = .min(val)
                     return
                 }
             case "average":
-                if let val = try? container.decode(Calculation.self) {
+                if let val = try? container.decode(QueryCalculationAggregation.self) {
                     self = .average(val)
                     return
                 }
             case "sum":
-                if let val = try? container.decode(Calculation.self) {
+                if let val = try? container.decode(QueryCalculationAggregation.self) {
                     self = .sum(val)
                     return
                 }
             case "unique_count":
-                if let val = try? container.decode(Calculation.self) {
+                if let val = try? container.decode(QueryCalculationAggregation.self) {
                     self = .uniqueCount(val)
                     return
                 }
             case "term":
-                if let val = try? container.decode(Term.self) {
+                if let val = try? container.decode(QueryTermAggregation.self) {
                     self = .term(val)
                     return
                 }
             case "filter":
-                if let val = try? container.decode(Filter.self) {
+                if let val = try? container.decode(QueryFilterAggregation.self) {
                     self = .filter(val)
                     return
                 }
             case "nested":
-                if let val = try? container.decode(Nested.self) {
+                if let val = try? container.decode(QueryNestedAggregation.self) {
                     self = .nested(val)
                     return
                 }
             case "timeslice":
-                if let val = try? container.decode(Timeslice.self) {
+                if let val = try? container.decode(QueryTimesliceAggregation.self) {
                     self = .timeslice(val)
                     return
                 }
             case "top_hits":
-                if let val = try? container.decode(TopHits.self) {
+                if let val = try? container.decode(QueryTopHitsAggregation.self) {
                     self = .topHits(val)
                     return
                 }
@@ -141,29 +141,11 @@ public struct GenericQueryAggregation: Codable, Equatable {
     /**
      The type of aggregation command used. For example: term, filter, max, min, etc.
      */
-    public var type: String?
-
-    /**
-     Array of aggregation results.
-     */
-    public var results: [AggregationResult]?
-
-    /**
-     Number of matching results.
-     */
-    public var matchingResults: Int?
-
-    /**
-     Aggregations returned by Discovery.
-     */
-    public var aggregations: [QueryAggregation]?
+    public var type: String
 
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case type = "type"
-        case results = "results"
-        case matchingResults = "matching_results"
-        case aggregations = "aggregations"
     }
 
 }

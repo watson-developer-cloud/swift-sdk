@@ -26,10 +26,6 @@ struct WatsonCredentials {
     static let AssistantV2URL: String? = nil
     static let AssistantV2ID = "cognitive-car-sample-id"
 
-    static let ConversationUsername = "your-username-here"
-    static let ConversationPassword = "your-password-here"
-    static let ConversationWorkspace = "cogntive-car-sample-workspace"
-
     static let DiscoveryAPIKey: String? = "your-api-key-here" // set to nil to use basic auth
     static let DiscoveryUsername = "your-username-here"
     static let DiscoveryPassword = "your-password-here"
@@ -43,20 +39,10 @@ struct WatsonCredentials {
     static let LanguageTranslatorV3Password = "your-password-here"
     static let LanguageTranslatorV3URL: String? = nil
 
-    static let NaturalLanguageClassifierAPIKey: String? = "your-api-key-here" // set to nil to use basic auth
-    static let NaturalLanguageClassifierUsername = "your-username-here"
-    static let NaturalLanguageClassifierPassword = "your-password-here"
-    static let NaturalLanguageClassifierURL: String? = nil
-
     static let NaturalLanguageUnderstandingAPIKey: String? = "your-api-key-here" // set to nil to use basic auth
     static let NaturalLanguageUnderstandingUsername = "your-username-here"
     static let NaturalLanguageUnderstandingPassword = "your-password-here"
     static let NaturalLanguageUnderstandingURL: String? = nil
-
-    static let PersonalityInsightsAPIKey: String? = "your-api-key-here" // set to nil to use basic auth
-    static let PersonalityInsightsUsername = "your-username-here"
-    static let PersonalityInsightsPassword = "your-password-here"
-    static let PersonalityInsightsV3URL: String? = nil
 
     static let SpeechToTextAPIKey: String? = "your-api-key-here" // set to nil to use basic auth
     static let SpeechToTextUsername = "your-username-here"
@@ -67,14 +53,4 @@ struct WatsonCredentials {
     static let TextToSpeechUsername = "your-username-here"
     static let TextToSpeechPassword = "your-password-here"
     static let TextToSpeechURL: String? = nil
-
-    static let ToneAnalyzerAPIKey: String? = "your-api-key-here" // set to nil to use basic auth
-    static let ToneAnalyzerUsername = "your-username-here"
-    static let ToneAnalyzerPassword = "your-password-here"
-    static let ToneAnalyzerURL: String? = nil
-
-    static let VisualRecognitionAPIKey: String? = "your-api-key-here" // set to nil to use Legacy API Key
-    static let VisualRecognitionLegacyAPIKey = "your-api-key-here"
-    static let VisualRecognitionURL: String? = nil
-    static let VisualRecognitionClassifierID = "carsvstrucks-classifier"
 }

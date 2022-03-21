@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2021, 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ public struct StatusDetails: Codable, Equatable {
     public var authenticated: Bool?
 
     /**
-     If `authenticated` is `false`, a message describes why the authentication was unsuccessful.
+     If `authenticated` is `false`, a message describes why authentication is unsuccessful.
      */
     public var errorMessage: String?
 
@@ -41,8 +41,7 @@ public struct StatusDetails: Codable, Equatable {
       Initialize a `StatusDetails` with member variables.
 
       - parameter authenticated: Indicates whether the credential is accepted by the target data source.
-      - parameter errorMessage: If `authenticated` is `false`, a message describes why the authentication was
-        unsuccessful.
+      - parameter errorMessage: If `authenticated` is `false`, a message describes why authentication is unsuccessful.
 
       - returns: An initialized `StatusDetails`.
      */

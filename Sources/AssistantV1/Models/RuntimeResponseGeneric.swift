@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2019, 2021.
+ * (C) Copyright IBM Corp. 2019, 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,14 +22,17 @@ import IBMSwiftSDKCore
  */
 public enum RuntimeResponseGeneric: Codable, Equatable {
 
+    case audio(RuntimeResponseGenericRuntimeResponseTypeAudio)
     case channelTransfer(RuntimeResponseGenericRuntimeResponseTypeChannelTransfer)
     case connectToAgent(RuntimeResponseGenericRuntimeResponseTypeConnectToAgent)
+    case iframe(RuntimeResponseGenericRuntimeResponseTypeIframe)
     case image(RuntimeResponseGenericRuntimeResponseTypeImage)
     case option(RuntimeResponseGenericRuntimeResponseTypeOption)
     case suggestion(RuntimeResponseGenericRuntimeResponseTypeSuggestion)
     case pause(RuntimeResponseGenericRuntimeResponseTypePause)
     case text(RuntimeResponseGenericRuntimeResponseTypeText)
     case userDefined(RuntimeResponseGenericRuntimeResponseTypeUserDefined)
+    case video(RuntimeResponseGenericRuntimeResponseTypeVideo)
 
     private struct GenericRuntimeResponseGeneric: Codable, Equatable {
 
@@ -45,6 +48,11 @@ public enum RuntimeResponseGeneric: Codable, Equatable {
         let container = try decoder.singleValueContainer()
         if let genericInstance = try? container.decode(GenericRuntimeResponseGeneric.self) {
             switch genericInstance.responseType {
+            case "audio":
+                if let val = try? container.decode(RuntimeResponseGenericRuntimeResponseTypeAudio.self) {
+                    self = .audio(val)
+                    return
+                }
             case "channel_transfer":
                 if let val = try? container.decode(RuntimeResponseGenericRuntimeResponseTypeChannelTransfer.self) {
                     self = .channelTransfer(val)
@@ -53,6 +61,11 @@ public enum RuntimeResponseGeneric: Codable, Equatable {
             case "connect_to_agent":
                 if let val = try? container.decode(RuntimeResponseGenericRuntimeResponseTypeConnectToAgent.self) {
                     self = .connectToAgent(val)
+                    return
+                }
+            case "iframe":
+                if let val = try? container.decode(RuntimeResponseGenericRuntimeResponseTypeIframe.self) {
+                    self = .iframe(val)
                     return
                 }
             case "image":
@@ -85,6 +98,11 @@ public enum RuntimeResponseGeneric: Codable, Equatable {
                     self = .userDefined(val)
                     return
                 }
+            case "video":
+                if let val = try? container.decode(RuntimeResponseGenericRuntimeResponseTypeVideo.self) {
+                    self = .video(val)
+                    return
+                }
             default:
                 // falling through to throw decoding error
                 break
@@ -98,10 +116,14 @@ public enum RuntimeResponseGeneric: Codable, Equatable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         switch self {
+        case .audio(let audio):
+            try container.encode(audio)
         case .channelTransfer(let channel_transfer):
             try container.encode(channel_transfer)
         case .connectToAgent(let connect_to_agent):
             try container.encode(connect_to_agent)
+        case .iframe(let iframe):
+            try container.encode(iframe)
         case .image(let image):
             try container.encode(image)
         case .option(let option):
@@ -114,6 +136,8 @@ public enum RuntimeResponseGeneric: Codable, Equatable {
             try container.encode(text)
         case .userDefined(let user_defined):
             try container.encode(user_defined)
+        case .video(let video):
+            try container.encode(video)
         }
     }
 }

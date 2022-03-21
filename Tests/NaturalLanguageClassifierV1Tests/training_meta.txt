@@ -1,4 +1,0 @@
-{
-    "language": "en",
-    "name": "swift-sdk-temporary-classifier"
-}

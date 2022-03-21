@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,7 +52,7 @@ public struct DefaultQueryParams: Codable, Equatable {
     public var spellingSuggestions: Bool?
 
     /**
-     When `true`, a highlights for the query are returned by default.
+     When `true`, highlights for the query are returned by default.
      */
     public var highlight: Bool?
 
@@ -96,7 +96,7 @@ public struct DefaultQueryParams: Codable, Equatable {
       - parameter suggestedRefinements: Object that contains suggested refinement settings. Available with Premium
         plans only.
       - parameter spellingSuggestions: When `true`, a spelling suggestions for the query are returned by default.
-      - parameter highlight: When `true`, a highlights for the query are returned by default.
+      - parameter highlight: When `true`, highlights for the query are returned by default.
       - parameter count: The number of document results returned by default.
       - parameter sort: A comma separated list of document fields to sort results by default.
       - parameter `return`: An array of field names to return in document results if present by default.

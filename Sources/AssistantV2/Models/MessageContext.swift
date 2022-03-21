@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2020.
+ * (C) Copyright IBM Corp. 2018, 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
  **/
 
 import Foundation
+import IBMSwiftSDKCore
 
 /**
  MessageContext.
@@ -22,7 +23,7 @@ import Foundation
 public struct MessageContext: Codable, Equatable {
 
     /**
-     Session context data that is shared by all skills used by the Assistant.
+     Session context data that is shared by all skills used by the assistant.
      */
     public var global: MessageContextGlobal?
 
@@ -33,29 +34,41 @@ public struct MessageContext: Codable, Equatable {
      */
     public var skills: [String: MessageContextSkill]?
 
+    /**
+     An object containing context data that is specific to particular integrations. For more information, see the
+     [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-dialog-integrations).
+     */
+    public var integrations: [String: JSON]?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case global = "global"
         case skills = "skills"
+        case integrations = "integrations"
     }
 
     /**
       Initialize a `MessageContext` with member variables.
 
-      - parameter global: Session context data that is shared by all skills used by the Assistant.
+      - parameter global: Session context data that is shared by all skills used by the assistant.
       - parameter skills: Information specific to particular skills used by the assistant.
         **Note:** Currently, only a single child property is supported, containing variables that apply to the dialog
         skill used by the assistant.
+      - parameter integrations: An object containing context data that is specific to particular integrations. For
+        more information, see the
+        [documentation](https://cloud.ibm.com/docs/assistant?topic=assistant-dialog-integrations).
 
       - returns: An initialized `MessageContext`.
      */
     public init(
         global: MessageContextGlobal? = nil,
-        skills: [String: MessageContextSkill]? = nil
+        skills: [String: MessageContextSkill]? = nil,
+        integrations: [String: JSON]? = nil
     )
     {
         self.global = global
         self.skills = skills
+        self.integrations = integrations
     }
 
 }

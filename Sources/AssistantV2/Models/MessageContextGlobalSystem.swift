@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2018, 2021.
+ * (C) Copyright IBM Corp. 2018, 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -105,6 +105,11 @@ public struct MessageContextGlobalSystem: Codable, Equatable {
      */
     public var state: String?
 
+    /**
+     For internal use only.
+     */
+    public var skipUserInput: Bool?
+
     // Map each property name to the key that shall be used for encoding/decoding.
     private enum CodingKeys: String, CodingKey {
         case timezone = "timezone"
@@ -114,6 +119,7 @@ public struct MessageContextGlobalSystem: Codable, Equatable {
         case referenceTime = "reference_time"
         case sessionStartTime = "session_start_time"
         case state = "state"
+        case skipUserInput = "skip_user_input"
     }
 
     /**
@@ -152,6 +158,7 @@ public struct MessageContextGlobalSystem: Codable, Equatable {
         of the conversation. If you are using the stateless `message` method, save this value and then send it in the
         context of the subsequent message request to avoid disruptions if there are configuration changes during the
         conversation (such as a change to a skill the assistant uses).
+      - parameter skipUserInput: For internal use only.
 
       - returns: An initialized `MessageContextGlobalSystem`.
      */
@@ -162,7 +169,8 @@ public struct MessageContextGlobalSystem: Codable, Equatable {
         locale: String? = nil,
         referenceTime: String? = nil,
         sessionStartTime: String? = nil,
-        state: String? = nil
+        state: String? = nil,
+        skipUserInput: Bool? = nil
     )
     {
         self.timezone = timezone
@@ -172,6 +180,7 @@ public struct MessageContextGlobalSystem: Codable, Equatable {
         self.referenceTime = referenceTime
         self.sessionStartTime = sessionStartTime
         self.state = state
+        self.skipUserInput = skipUserInput
     }
 
 }

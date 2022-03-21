@@ -57,11 +57,6 @@ struct WatsonCredentials {
     static let LanguageTranslatorV3Password = "your-password-here"
     static let LanguageTranslatorV3URL = ProcessInfo.processInfo.environment["LANGUAGE_TRANSLATOR_URL"]
 
-    static let NaturalLanguageClassifierAPIKey = ProcessInfo.processInfo.environment["NATURAL_LANGUAGE_CLASSIFIER_APIKEY"] ?? "<no_apikey>"
-    static let NaturalLanguageClassifierUsername = "your-username-here"
-    static let NaturalLanguageClassifierPassword = "your-password-here"
-    static let NaturalLanguageClassifierURL = ProcessInfo.processInfo.environment["NATURAL_LANGUAGE_CLASSIFIER_URL"]
-
     static let NaturalLanguageUnderstandingAPIKey = ProcessInfo.processInfo.environment["NATURAL_LANGUAGE_UNDERSTANDING_APIKEY"] ?? "<no_apikey>"
     static let NaturalLanguageUnderstandingUsername = "your-username-here"
     static let NaturalLanguageUnderstandingPassword = "your-password-here"
@@ -76,9 +71,4 @@ struct WatsonCredentials {
     static let TextToSpeechUsername = "your-username-here"
     static let TextToSpeechPassword = "your-password-here"
     static let TextToSpeechURL = ProcessInfo.processInfo.environment["TEXT_TO_SPEECH_URL"]
-
-    static let ToneAnalyzerAPIKey = ProcessInfo.processInfo.environment["TONE_ANALYZER_APIKEY"] ?? "<no_apikey>"
-    static let ToneAnalyzerUsername = "your-username-here"
-    static let ToneAnalyzerPassword = "your-password-here"
-    static let ToneAnalyzerURL = ProcessInfo.processInfo.environment["TONE_ANALYZER_URL"]
 }

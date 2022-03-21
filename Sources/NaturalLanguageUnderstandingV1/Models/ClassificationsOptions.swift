@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2021.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,14 +18,16 @@ import Foundation
 
 /**
  Returns text classifications for the content.
- Supported languages: English only.
  */
 public struct ClassificationsOptions: Codable, Equatable {
 
     /**
      Enter a [custom
      model](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-customizing)
-     ID of the classification model to be used.
+     ID of the classifications model to be used.
+     You can analyze tone by using a language-specific model ID. See [Tone analytics
+     (Classifications)](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-tone_analytics)
+     for more information.
      */
     public var model: String?
 
@@ -39,7 +41,10 @@ public struct ClassificationsOptions: Codable, Equatable {
 
       - parameter model: Enter a [custom
         model](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-customizing)
-        ID of the classification model to be used.
+        ID of the classifications model to be used.
+        You can analyze tone by using a language-specific model ID. See [Tone analytics
+        (Classifications)](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-tone_analytics)
+        for more information.
 
       - returns: An initialized `ClassificationsOptions`.
      */

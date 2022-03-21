@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2020, 2021.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,7 +44,7 @@ public struct RuntimeResponseGenericRuntimeResponseTypeOption: Codable, Equatabl
     public var title: String
 
     /**
-     The description to show with the the response.
+     The description to show with the response.
      */
     public var description: String?
 
@@ -81,7 +81,7 @@ public struct RuntimeResponseGenericRuntimeResponseTypeOption: Codable, Equatabl
         supported by the client application or channel.
       - parameter title: The title or introductory text to show before the response.
       - parameter options: An array of objects describing the options from which the user can choose.
-      - parameter description: The description to show with the the response.
+      - parameter description: The description to show with the response.
       - parameter preference: The preferred type of control to display.
       - parameter channels: An array of objects specifying channels for which the response is intended. If
         **channels** is present, the response is intended for a built-in integration and should not be handled by an API

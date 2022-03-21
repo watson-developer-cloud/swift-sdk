@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ public struct Enrichment: Codable, Equatable {
         case uimaAnnotator = "uima_annotator"
         case ruleBased = "rule_based"
         case watsonKnowledgeStudioModel = "watson_knowledge_studio_model"
+        case classifier = "classifier"
     }
 
     /**

@@ -68,9 +68,9 @@ class AssistantV1UnitTests: XCTestCase {
         let input = MessageInput(text: "asdf")
         let alternateIntents = true
         let context = Context(conversationID: "Hi, how are you?")
-        let entities = [RuntimeEntity(entity: "entity", location: [0], value: "whatever")]
+        let entities = [RuntimeEntity(entity: "entity", value: "whatever", location: [0])]
         let intents = [RuntimeIntent(intent: "intent", confidence: 1.0)]
-        let output = OutputData(logMessages: [LogMessage(level: "SEVERE", msg: "shit's broken", code: "500")], text: ["just kidding"])
+        let output = OutputData(logMessages: [LogMessage(level: "SEVERE", msg: "shit's broken", code: "500")])
 
         MockURLProtocol.requestHandler = { request in
             XCTAssertEqual(request.httpMethod, "POST")

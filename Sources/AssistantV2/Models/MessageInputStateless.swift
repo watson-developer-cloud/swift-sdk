@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2020.
+ * (C) Copyright IBM Corp. 2020, 2022.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -63,6 +63,12 @@ public struct MessageInputStateless: Codable, Equatable {
     public var suggestionID: String?
 
     /**
+     An array of multimedia attachments to be sent with the message.
+     **Note:** Attachments are not processed by the assistant itself, but can be sent to external services by webhooks.
+     */
+    public var attachments: [MessageInputAttachment]?
+
+    /**
      Optional properties that control how the assistant responds.
      */
     public var options: MessageInputOptionsStateless?
@@ -74,6 +80,7 @@ public struct MessageInputStateless: Codable, Equatable {
         case intents = "intents"
         case entities = "entities"
         case suggestionID = "suggestion_id"
+        case attachments = "attachments"
         case options = "options"
     }
 
@@ -91,6 +98,9 @@ public struct MessageInputStateless: Codable, Equatable {
       - parameter entities: Entities to use when evaluating the message. Include entities from the previous response
         to continue using those entities rather than detecting entities in the new input.
       - parameter suggestionID: For internal use only.
+      - parameter attachments: An array of multimedia attachments to be sent with the message.
+        **Note:** Attachments are not processed by the assistant itself, but can be sent to external services by
+        webhooks.
       - parameter options: Optional properties that control how the assistant responds.
 
       - returns: An initialized `MessageInputStateless`.
@@ -101,6 +111,7 @@ public struct MessageInputStateless: Codable, Equatable {
         intents: [RuntimeIntent]? = nil,
         entities: [RuntimeEntity]? = nil,
         suggestionID: String? = nil,
+        attachments: [MessageInputAttachment]? = nil,
         options: MessageInputOptionsStateless? = nil
     )
     {
@@ -109,6 +120,7 @@ public struct MessageInputStateless: Codable, Equatable {
         self.intents = intents
         self.entities = entities
         self.suggestionID = suggestionID
+        self.attachments = attachments
         self.options = options
     }
 

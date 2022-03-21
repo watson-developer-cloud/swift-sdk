@@ -46,7 +46,6 @@ Carthage/
 
 # ignore detect secrets files
 .pre-commit-config.yaml
-.secrets.baseline
 
 # swift package manager
 .swiftpm/

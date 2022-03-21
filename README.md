@@ -1,4 +1,5 @@
 # Watson Developer Cloud Swift SDK
+
 [![Build and Test](https://github.com/watson-developer-cloud/swift-sdk/actions/workflows/build-test.yml/badge.svg)](https://github.com/watson-developer-cloud/swift-sdk/actions/workflows/build-test.yml)
 [![Deploy and Publish](https://github.com/watson-developer-cloud/swift-sdk/actions/workflows/deploy.yml/badge.svg)](https://github.com/watson-developer-cloud/swift-sdk/actions/workflows/deploy.yml)
 ![](https://img.shields.io/badge/platform-iOS,%20Linux-blue.svg?style=flat)
@@ -8,6 +9,7 @@
 [![wdc-community.slack.com](https://wdc-slack-inviter.mybluemix.net/badge.svg)](http://wdc-slack-inviter.mybluemix.net/)
 
 ## Deprecated builds
+
 [![Build Status](https://travis-ci.org/watson-developer-cloud/swift-sdk.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/swift-sdk)
 
 ## Overview
@@ -23,40 +25,34 @@ There are many resources to help you build your first cognitive application with
 
 This SDK provides classes and methods to access the following Watson services.
 
-* [Assistant](https://www.ibm.com/cloud/watson-assistant/)
-* [Compare & Comply](https://www.ibm.com/cloud/compare-and-comply) *deprecated in favor of Discovery
-* [Discovery](https://www.ibm.com/cloud/watson-discovery)
-* [Language Translator V3](https://www.ibm.com/watson/services/language-translator)
-* [Natural Language Classifier](https://www.ibm.com/watson/services/natural-language-classifier)
-* [Natural Language Understanding](https://www.ibm.com/cloud/watson-natural-language-understanding)
-* [Personality Insights](https://www.ibm.com/watson/services/personality-insights) *deprecated in favor of Natural Language Understanding
-* [Speech to Text](https://www.ibm.com/cloud/watson-speech-to-text)
-* [Text to Speech](https://www.ibm.com/cloud/watson-text-to-speech)
-* [Tone Analyzer](https://www.ibm.com/watson/services/tone-analyzer)
-* [Visual Recognition](https://www.ibm.com/watson/services/visual-recognition) *deprecated in favor of Maximo Visual Inspection
+- [Assistant](https://www.ibm.com/cloud/watson-assistant/)
+- [Discovery](https://www.ibm.com/cloud/watson-discovery)
+- [Language Translator V3](https://www.ibm.com/watson/services/language-translator)
+- [Natural Language Understanding](https://www.ibm.com/cloud/watson-natural-language-understanding)
+- [Speech to Text](https://www.ibm.com/cloud/watson-speech-to-text)
+- [Text to Speech](https://www.ibm.com/cloud/watson-text-to-speech)
 
 ## Announcements
-### Natural Language Classifier deprecation
+
+### Tone Analyzer Deprecation
+
+As of this major release, 5.0.0, the Tone Analyzer api has been removed in preparation for deprecation. If you wish to continue using this sdk to make calls to Tone Analyzer until its final deprecation, you will have to use a previous version.
+
+On 24 February 2022, IBM announced the deprecation of the Tone Analyzer service. The service will no longer be available as of 24 February 2023. As of 24 February 2022, you will not be able to create new instances. Existing instances will be supported until 24 February 2023.
+
+As an alternative, we encourage you to consider migrating to the Natural Language Understanding service on IBM Cloud. With Natural Language Understanding, tone analysis is done by using a pre-built classifications model, which provides an easy way to detect language tones in written text. For more information, see [Migrating from Watson Tone Analyzer Customer Engagement endpoint to Natural Language Understanding](https://cloud.ibm.com/docs/natural-language-understanding?topic=natural-language-understanding-tone_analytics).
+
+### Natural Language Classifier Deprecation
+
+As of this major release, 5.0.0, the NLC api has been removed in preparation for deprecation. If you wish to continue using this sdk to make calls to NLC until its final deprecation, you will have to use a previous version.
+
 On 9 August 2021, IBM announced the deprecation of the Natural Language Classifier service. The service will no longer be available from 8 August 2022. As of 9 September 2021, you will not be able to create new instances. Existing instances will be supported until 8 August 2022. Any instance that still exists on that date will be deleted.
 
 As an alternative, we encourage you to consider migrating to the Natural Language Understanding service on IBM Cloud that uses deep learning to extract data and insights from text such as keywords, categories, sentiment, emotion, and syntax, along with advanced multi-label text classification capabilities, to provide even richer insights for your business or industry. For more information, see [Migrating to Natural Language Understanding](https://cloud.ibm.com/docs/natural-language-classifier?topic=natural-language-classifier-migrating).
 
-### Updating endpoint URLs from watsonplatform.net
-Watson API endpoint URLs at watsonplatform.net are changing and will not work after 26 May 2021. Update your calls to use the newer endpoint URLs. For more information, see https://cloud.ibm.com/docs/watson?topic=watson-endpoint-change.
-
-### Personality Insights deprecation
-IBM Watson™ Personality Insights is discontinued. For a period of one year from 1 December 2020, you will still be able to use Watson Personality Insights. However, as of 1 December 2021, the offering will no longer be available.
-
-As an alternative, we encourage you to consider migrating to IBM Watson™ [Natural Language Understanding](https://cloud.ibm.com/docs/natural-language-understanding), a service on IBM Cloud® that uses deep learning to extract data and insights from text such as keywords, categories, sentiment, emotion, and syntax to provide insights for your business or industry. For more information, see About Natural Language Understanding.
-
-### Visual Recognition deprecation
-IBM Watson™ Visual Recognition is discontinued. Existing instances are supported until 1 December 2021, but as of 7 January 2021, you can't create instances. Any instance that is provisioned on 1 December 2021 will be deleted.
-
-### Compare and Comply deprecation
-IBM Watson™ Compare and Comply is discontinued. Existing instances are supported until 30 November 2021, but as of 1 December 2020, you can't create instances. Any instance that exists on 30 November 2021 will be deleted. Consider migrating to Watson Discovery Premium on IBM Cloud for your Compare and Comply use cases. To start the migration process, visit https://ibm.biz/contact-wdc-premium.
-
 ## Before you begin
-* You need an [IBM Cloud][ibm-cloud-onboarding] account.
+
+- You need an [IBM Cloud][ibm-cloud-onboarding] account.
 
 ## Requirements
 
@@ -69,11 +65,13 @@ IBM Watson™ Compare and Comply is discontinued. Existing instances are support
 The IBM Watson Swift SDK can be installed with [Swift Package Manager](https://swift.org/package-manager/), [Cocoapods](http://cocoapods.org/), or [Carthage](https://github.com/Carthage/Carthage).
 
 ### Swift Package Manager
+
 New in version 4.0.2, the Watson Developer Cloud Swift SDK now supports all services through Swift Package Manager.
 
 On the XCode menu bar at the top of your screen click `File -> Swift Packages -> Add Package Dependencies`, follow the prompts by pasting the github url `https://github.com/watson-developer-cloud/swift-sdk` and using the most recent major version if appropriate. Make sure to only click on the services you plan on using otherwise you may face long build times
 
 To import a service into your project:
+
 ```swift
 import AssistantV2
 import DiscoveryV2
@@ -82,36 +80,39 @@ import DiscoveryV2
 .
 ```
 
-
-
 **(Speech To Text and Text To Speech only)**
-The use of the `libogg` and `opus` libraries by these services requires extra steps to be taken BEFORE the package is installed. 
+The use of the `libogg` and `opus` libraries by these services requires extra steps to be taken BEFORE the package is installed.
+
 1. You will need [Homebrew](http://brew.sh/) installed
 2. Install `libogg` and `opus`
-    ```bash
-    $ brew install libogg opus
-    ```
+   ```bash
+   $ brew install libogg opus
+   ```
 3. Packaged dynamic libraries must be removed according to current library versions.
 
-    libogg version as of writing: 1.3.4. 
-    
-    opus version as of writing: 1.3.1
+   libogg version as of writing: 1.3.4.
 
-    ```bash
-    $ rm -f /usr/local/Cellar/libogg/1.3.4/lib/*.dylib
-    ```
-    ```bash
-    $ rm -f /usr/local/Cellar/opus/1.3.1/lib/*.dylib
-    ```
+   opus version as of writing: 1.3.1
+
+   ```bash
+   $ rm -f /usr/local/Cellar/libogg/1.3.4/lib/*.dylib
+   ```
+
+   ```bash
+   $ rm -f /usr/local/Cellar/opus/1.3.1/lib/*.dylib
+   ```
+
 4. The static libraries installed must be replaced with libraries compiled for multiple architectures. These libraries can be downloaded from this github repo for libogg [here](https://github.com/watson-developer-cloud/swift-sdk/blob/master/Sources/SupportingFiles/Dependencies/Libraries/libogg.a) and opus [here](https://github.com/watson-developer-cloud/swift-sdk/blob/master/Sources/SupportingFiles/Dependencies/Libraries/libopus.a)
 
 5. Replace the currently installed `libogg` and `libopus` libraries
-    ```bash
-    rm -f /usr/local/Cellar/libogg/1.3.4/lib/libogg.a && cp ~/Downloads/libogg.a /usr/local/Cellar/libogg/1.3.4/lib
-    ```
-    ```bash
-    rm -f /usr/local/Cellar/opus/1.3.1/lib/libopus.a && cp ~/Downloads/libopus.a /usr/local/Cellar/opus/1.3.1/lib
-    ```
+
+   ```bash
+   rm -f /usr/local/Cellar/libogg/1.3.4/lib/libogg.a && cp ~/Downloads/libogg.a /usr/local/Cellar/libogg/1.3.4/lib
+   ```
+
+   ```bash
+   rm -f /usr/local/Cellar/opus/1.3.1/lib/libopus.a && cp ~/Downloads/libopus.a /usr/local/Cellar/opus/1.3.1/lib
+   ```
 
 6. If you run into any build errors or imported the package before performing the above steps, the project may need to be reindexed. Remove the `WatsonDeveloperCloud` package from your XCode project file under `Swift Packages`; then, from the XCode menu bar on the top of the screen click `Product -> Clean Build Folder` and lastly reinstall the package.
 
@@ -133,16 +134,11 @@ use_frameworks!
 target 'MyApp' do
     pod 'IBMWatsonAssistantV1', '~> 4.3.0'
     pod 'IBMWatsonAssistantV2', '~> 4.3.0'
-    pod 'IBMWatsonCompareComplyV1', '~> 4.3.0'
     pod 'IBMWatsonDiscoveryV1', '~> 4.3.0'
     pod 'IBMWatsonLanguageTranslatorV3', '~> 4.3.0'
-    pod 'IBMWatsonNaturalLanguageClassifierV1', '~> 4.3.0'
     pod 'IBMWatsonNaturalLanguageUnderstandingV1', '~> 4.3.0'
-    pod 'IBMWatsonPersonalityInsightsV3', '~> 4.3.0'
     pod 'IBMWatsonSpeechToTextV1', '~> 4.3.0'
     pod 'IBMWatsonTextToSpeechV1', '~> 4.3.0'
-    pod 'IBMWatsonToneAnalyzerV3', '~> 4.3.0'
-    pod 'IBMWatsonVisualRecognitionV3', '~> 4.3.0'
 end
 ```
 
@@ -151,7 +147,6 @@ Run the `pod install` command, and open the generated `.xcworkspace` file. To up
 When importing the frameworks in source files, exclude the `IBMWatson` prefix and the version suffix. For example, after installing `IBMWatsonAssistantV1`, import it in your source files as `import Assistant`.
 
 For more information on using Cocoapods, refer to the [Cocoapods Guides](https://guides.cocoapods.org/using/index.html).
-
 
 ### Carthage
 
@@ -172,7 +167,8 @@ If your project does not have a Cartfile yet, use the `touch Cartfile` command i
 github "watson-developer-cloud/swift-sdk" ~> 4.3.0
 ```
 
-Follow the remaining Carthage installation instructions for the XCode 12 workaround [here](https://github.com/Carthage/Carthage/blob/master/Documentation/Xcode12Workaround.md#how-to-make-it-work). Then run the following command to build the dependencies and frameworks: 
+Follow the remaining Carthage installation instructions for the XCode 12 workaround [here](https://github.com/Carthage/Carthage/blob/master/Documentation/Xcode12Workaround.md#how-to-make-it-work). Then run the following command to build the dependencies and frameworks:
+
 ```bash
 $ carthage.sh bootstrap --platform iOS
 ```
@@ -181,33 +177,33 @@ Note that the above command will download and build all of the services in the I
 
 Follow the next steps to link the frameworks to your XCode project:
 
- 
- 1. Make sure to drag-and-drop the built frameworks (only for the services your app requires) into your app target under `General -> Frameworks, Libraries, and Embedded Content` (XCode <= 10.x: `General -> Linked Frameworks and Libraries` ) and import them in the source files that require them. You will find the .framework files under `./Carthage/Build/iOS` from your source directory. 
- 
- 2. The following frameworks need to be added to your app:
+1.  Make sure to drag-and-drop the built frameworks (only for the services your app requires) into your app target under `General -> Frameworks, Libraries, and Embedded Content` (XCode <= 10.x: `General -> Linked Frameworks and Libraries` ) and import them in the source files that require them. You will find the .framework files under `./Carthage/Build/iOS` from your source directory.
+
+2.  The following frameworks need to be added to your app:
     `IBMSwiftSDKCore.framework`
-    
+
     Whichever services your app will be using (`AssistantV1.framework`, `DiscoveryV1.framework`, etc.)
-    
+
     (**Speech to Text only**) `Starscream.framework`. Be sure to add this framework to your `input.xcfilelist` and `output.xcfilelist` which will be detailed below
 
-3. XCode 12 only: Under the `Embed` column make sure each framework is set to `Do Not Embed`
+3.  XCode 12 only: Under the `Embed` column make sure each framework is set to `Do Not Embed`
 
-4. On your application targets’ Build Phases settings tab, click the + icon and choose New Run Script Phase. Create a Run Script in which you specify your shell (ex: /bin/sh), add the following contents to the script area below the shell:
+4.  On your application targets’ Build Phases settings tab, click the + icon and choose New Run Script Phase. Create a Run Script in which you specify your shell (ex: /bin/sh), add the following contents to the script area below the shell:
+
     ```
     /usr/local/bin/carthage copy-frameworks
     ```
 
-5. Create a file named `input.xcfilelist` and a file named `output.xcfilelist`
+5.  Create a file named `input.xcfilelist` and a file named `output.xcfilelist`
 
-6. Add the paths to the frameworks you want to use to your `input.xcfilelist`. For example:
+6.  Add the paths to the frameworks you want to use to your `input.xcfilelist`. For example:
 
     ```
     $(SRCROOT)/Carthage/Build/iOS/IBMSwiftSDKCore.framework
     $(SRCROOT)/Carthage/Build/iOS/DiscoveryV1.framework
     ```
 
-7. Add the paths to the copied frameworks to the `output.xcfilelist`. For example:
+7.  Add the paths to the copied frameworks to the `output.xcfilelist`. For example:
 
     ```
     $(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/IBMSwiftSDKCore.framework
@@ -216,8 +212,8 @@ Follow the next steps to link the frameworks to your XCode project:
 
     With output files specified alongside the input files, XCode only needs to run the script when the input files have changed or the output files are missing. This means dirty builds will be faster when you haven't rebuilt frameworks with Carthage.
 
-8. Add the path to `input.xcfilelist` to the "Input File Lists" section of the Carthage run script phase. This will usually be `$(SRCROOT)/input.xcfilelist`
-9. Add the path to `output.xcfilelist` to the "Output File Lists" section of the Carthage run script phase. This will usually be `$(SRCROOT)/output.xcfilelist`
+8.  Add the path to `input.xcfilelist` to the "Input File Lists" section of the Carthage run script phase. This will usually be `$(SRCROOT)/input.xcfilelist`
+9.  Add the path to `output.xcfilelist` to the "Output File Lists" section of the Carthage run script phase. This will usually be `$(SRCROOT)/output.xcfilelist`
 
 If your app fails to build because it is built with a different version of Swift than the downloaded SDK, then re-run the `carthage.sh bootstrap` command with the `--no-use-binaries` flag added.
 
@@ -226,6 +222,7 @@ If your app fails to build because it is built with a different version of Swift
 In order to use an IBM Watson service in a Swift application, you will need to authenticate. The following describes the typical path you need to take to do so.
 
 ### Step 1: Getting credentials
+
 Credentials to use an IBM Watson service are obtained via IBM Cloud. You will need an active account and a service instance for the service that you wish to use prior to authenticating in your Swift app.
 
 You can access the service credentials for your instance by taking the following steps:
@@ -301,7 +298,7 @@ To see further details and additional, but less common, forms of authentication,
 
 ## Custom Service URLs
 
-You can set a custom service URL by modifying the `serviceURL` property. A custom service URL may be required when running an  instance in a particular region or connecting through a proxy.
+You can set a custom service URL by modifying the `serviceURL` property. A custom service URL may be required when running an instance in a particular region or connecting through a proxy.
 
 For example, here is how to connect to a Watson Assistant instance that is hosted in Germany:
 
@@ -316,7 +313,7 @@ assistant.serviceURL = "https://api.eu-de.assistant.watson.cloud.ibm.com"
 
 For Watson Cloud Pak for Data (CP4D), you may need to disable SSL hostname verification if you are using self-signed certificates. Each service class has a `disableSSLVerification` method which allows you to do so.
 
-``` swift
+```swift
 let authenticator = WatsonCloudPakForDataAuthenticator(username: "{username}", password: "{password}", url: "https://{cpd_cluster_host}{:port}")
 let assistant = Assistant(version: "{version}", authenticator: authenticator)
 
@@ -371,6 +368,7 @@ assistant.message(workspaceID: "{workspace_id}", input: input, headers: ["X-Glob
 ```
 
 ## Custom Headers
+
 There are different headers that can be sent to the Watson services. For example, Watson services log requests and their results for the purpose of improving the services, but you can include the `X-Watson-Learning-Opt-Out` header to opt out of this.
 
 We have exposed a `defaultHeaders` public property in each class to allow users to easily customize their headers:
@@ -392,9 +390,9 @@ If you have issues with the APIs or have a question about the Watson services, s
 
 We love to highlight cool open-source projects that use this SDK! If you'd like to get your project added to the list, feel free to make an issue linking us to it.
 
-* [Simple Chat (Swift)](https://github.com/watson-developer-cloud/simple-chat-swift)
-* [Speech to Text](https://github.com/watson-developer-cloud/speech-to-text-swift)
-* [Text to Speech](https://github.com/watson-developer-cloud/text-to-speech-swift)
+- [Simple Chat (Swift)](https://github.com/watson-developer-cloud/simple-chat-swift)
+- [Speech to Text](https://github.com/watson-developer-cloud/speech-to-text-swift)
+- [Text to Speech](https://github.com/watson-developer-cloud/text-to-speech-swift)
 
 ## Synchronous Execution
 
@@ -414,11 +412,10 @@ assistant.message(workspaceID: workspaceID) { response, error in
 }
 dispatchGroup.wait(timeout: .distantFuture)
 ```
+
 ## Handling PNG and CgBI Files in XCode
 
 When working with iOS projects, you may need to add PNG images to your XCode resource bundle. By default, XCode converts PNG files to Apple's [CgBI file format](http://iphonedevwiki.net/index.php/CgBI_file_format) as an optimization step.
-
-Watson services that accept PNG images as input files (Visual Recognition, Compare and Comply) are not able to process CgBI files. In some cases passing PNGs that have been encoded as CgBI will result in HTTP errors, and in other cases (Visual Recognition) will result in a `200 Success` with no results.
 
 ### How to bypass CgBI Encoding for Resource Files
 

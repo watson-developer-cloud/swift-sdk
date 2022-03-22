@@ -35,7 +35,7 @@ jobs:
 
     - name: Install Semantic Release dependencies
       run: |
-        pip3 install --user bump2version
+        pip3 install --user bumpversion
         npm install -g semantic-release
         npm install -g @semantic-release/changelog
         npm install -g @semantic-release/exec

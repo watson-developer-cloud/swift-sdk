@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                  = 'IBMWatsonSpeechToTextV1'
-  s.version               = '4.3.0'
+  s.version               = '5.0.0'
   s.summary               = 'Client framework for the IBM Watson Speech to Text service'
   s.description           = <<-DESC
 The IBM® Speech to Text leverages machine intelligence to transcribe the human voice accurately.
@@ -11,7 +11,7 @@ of the audio signal. It continuously returns and retroactively updates a transcr
   s.homepage              = 'https://www.ibm.com/watson/services/speech-to-text/'
   s.license               = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }
   s.authors               = { 'Jeff Arn' => 'jtarn@us.ibm.com',
-                              'Mike Kistler'    => 'mkistler@us.ibm.com' }
+                              'Angelo Paparazzi'    => 'angelo.paparazzi@ibm.com' }
 
   s.module_name           = 'SpeechToText'
   s.ios.deployment_target = '10.0'

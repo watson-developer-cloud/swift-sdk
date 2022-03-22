@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                  = 'IBMWatsonTextToSpeechV1'
-  s.version               = '4.3.0'
+  s.version               = '5.0.0'
   s.summary               = 'Client framework for the IBM Watson Text to Speech service'
   s.description           = <<-DESC
 IBM® Text to Speech uses IBM's speech-synthesis capabilities to convert written text to natural-sounding speech.
@@ -10,7 +10,7 @@ The service streams the results back to the client with minimal delay.
   s.homepage              = 'https://www.ibm.com/watson/services/text-to-speech/'
   s.license               = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }
   s.authors               = { 'Jeff Arn' => 'jtarn@us.ibm.com',
-                              'Mike Kistler'    => 'mkistler@us.ibm.com' }
+                              'Angelo Paparazzi'    => 'angelo.paparazzi@ibm.com' }
 
   s.module_name           = 'TextToSpeech'
   s.ios.deployment_target = '10.0'

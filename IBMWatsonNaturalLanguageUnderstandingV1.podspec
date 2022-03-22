@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                  = 'IBMWatsonNaturalLanguageUnderstandingV1'
-  s.version               = '4.3.0'
+  s.version               = '5.0.0'
   s.summary               = 'Client framework for the IBM Watson Natural Language Understanding service'
   s.description           = <<-DESC
 IBM Watson™ Natural Language Understanding can analyze semantic features of text input,
@@ -10,7 +10,7 @@ including categories, concepts, emotion, entities, keywords, metadata, relations
   s.homepage              = 'https://www.ibm.com/watson/services/natural-language-understanding/'
   s.license               = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }
   s.authors               = { 'Jeff Arn' => 'jtarn@us.ibm.com',
-                              'Mike Kistler'    => 'mkistler@us.ibm.com' }
+                              'Angelo Paparazzi'    => 'angelo.paparazzi@ibm.com' }
 
   s.module_name           = 'NaturalLanguageUnderstanding'
   s.ios.deployment_target = '10.0'

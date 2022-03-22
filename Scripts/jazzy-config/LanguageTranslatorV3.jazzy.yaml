@@ -4,7 +4,7 @@ github_url: https://github.com/watson-developer-cloud/swift-sdk
 clean: true
 output: ../../gh-pages/services/LanguageTranslatorV3
 module: LanguageTranslatorV3
-module_version: "4.3.0"
+module_version: "5.0.0"
 documentation: ../../Sources/LanguageTranslatorV3/README.md
 readme: ../../Sources/LanguageTranslatorV3/README.md
 build_tool_arguments:
@@ -13,4 +13,4 @@ build_tool_arguments:
   - "-scheme"
   - "LanguageTranslatorV3"
   - "-destination"
-  - "platform=iOS Simulator,name=iPhone 11" 
+  - "platform=iOS Simulator,name=iPhone 11"

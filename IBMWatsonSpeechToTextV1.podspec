@@ -11,7 +11,7 @@ of the audio signal. It continuously returns and retroactively updates a transcr
   s.homepage              = 'https://www.ibm.com/watson/services/speech-to-text/'
   s.license               = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }
   s.authors               = { 'Jeff Arn' => 'jtarn@us.ibm.com',
-                              'Mike Kistler'    => 'mkistler@us.ibm.com' }
+                              'Angelo Paparazzi'    => 'angelo.paparazzi@ibm.com' }
 
   s.module_name           = 'SpeechToText'
   s.ios.deployment_target = '10.0'

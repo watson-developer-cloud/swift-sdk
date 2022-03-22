@@ -11,7 +11,7 @@ as well as public and third-party data. IBM Watson™ Discovery V2 is available 
   s.homepage              = 'https://www.ibm.com/watson/services/discovery/'
   s.license               = { :type => 'Apache License, Version 2.0', :file => 'LICENSE' }
   s.authors               = { 'Jeff Arn' => 'jtarn@us.ibm.com',
-                              'Mike Kistler'    => 'mkistler@us.ibm.com' }
+                              'Angelo Paparazzi'    => 'angelo.paparazzi@ibm.com' }
 
   s.module_name           = 'Discovery'
   s.ios.deployment_target = '10.0'

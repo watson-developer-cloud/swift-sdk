@@ -8,9 +8,8 @@
 [![CLA assistant](https://cla-assistant.io/readme/badge/watson-developer-cloud/swift-sdk)](https://cla-assistant.io/watson-developer-cloud/swift-sdk)
 [![wdc-community.slack.com](https://wdc-slack-inviter.mybluemix.net/badge.svg)](http://wdc-slack-inviter.mybluemix.net/)
 
-## Deprecated builds
-
-[![Build Status](https://travis-ci.org/watson-developer-cloud/swift-sdk.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/swift-sdk)
+## Deprecation Notice
+This repo is being deprecated. While this repo will no longer see active support from the IBM team, contributions by the community via PRs are still welcomed and will be reviewed. Keep in mind, updates will no longer be published to spm, Carthage, or CocoaPods and changes made after this update will need to be built independently.
 
 ## Overview
 
